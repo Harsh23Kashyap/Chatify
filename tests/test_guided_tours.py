@@ -17,3 +17,9 @@ class GuidedTours(unittest.TestCase):
   for text in ['@keyframes cc-guide-orb','prefers-reduced-motion','100dvh','max-height:540px',':focus-visible']:self.assertIn(text,css)
  def test_preview_does_not_autostart_main_guide(self):
   s=(W/'app.js').read_text();self.assertLess(s.index('if (PREVIEW) { previewMode(); return; }'),s.index('loadSuggestions(); tour();'))
+ def test_current_tabs_and_honest_save_scopes(self):
+  s=(W/'tour.js').read_text();config=s.split('const configSteps=[')[1].split('const chatSteps=')[0]
+  for text in ['Workspace','Answers','Appearance','Maintenance','Find any setting','Save answer settings','appearance changes save automatically','not prompts, sources or keys','does not change your settings']:
+   self.assertIn(text,config)
+  self.assertNotIn('Configuration, Frontend and App management',config)
+  self.assertNotIn('Presets give you ready-made configurations',config)
