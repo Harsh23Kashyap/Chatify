@@ -124,7 +124,7 @@ function highlight(node, text, terms) {
   return node;
 }
 function sendIcon(name, label) {
-  const send = $("#send"); send.replaceChildren(name === "send" && TV("emoji_send") ? document.createTextNode(TV("emoji_send")) : svg(name)); send.setAttribute("aria-label", label);
+  const send = $("#send"); send.replaceChildren(name === "send" && TV("emoji_send") ? CCEmoji.node(TV("emoji_send"),TV("emoji_send_animated"),"",["calm","none"].includes(TV("motion"))) : svg(name)); send.setAttribute("aria-label", label);
   if (motionAllowed() && send.animate) send.animate([{opacity:.5,transform:"scale(.95)"},{opacity:1,transform:"scale(1)"}],{duration:150,easing:"ease-out"});
 }
 function motionAllowed() { return document.documentElement.dataset.motion !== "none" && !matchMedia("(prefers-reduced-motion: reduce)").matches; }
@@ -316,11 +316,11 @@ function heroView() {
     el("div", { class: "ex" }, exs.map((x) => el("button", { onclick: () => { $("#q").value = x; send(); } }, x))), gettingStarted()));
 }
 function chartCard() {
-  const parts = [["Whole grains", 46, "var(--brand)"], ["Fruit and veg", 31, "var(--lime)"], ["Beans and lentils", 23, "var(--mut)"]];
+  const parts = [["Group A", 46, "var(--brand)"], ["Group B", 31, "var(--lime)"], ["Group C", 23, "var(--mut)"]];
   let off = 0; const C = 2 * Math.PI * 15.9155;
   const ring = parts.map(([n, v, c]) => { const e = '<circle r="15.9155" cx="21" cy="21" fill="none" stroke="' + c + '" stroke-width="6" stroke-dasharray="' + (v * C / 100) + ' ' + C + '" stroke-dashoffset="' + (-off * C / 100) + '" transform="rotate(-90 21 21)"></circle>'; off += v; return e; }).join("");
-  const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg"); svg.setAttribute("viewBox", "0 0 42 42"); svg.setAttribute("class", "donut"); svg.setAttribute("role", "img"); svg.setAttribute("aria-label", "Sample day: fiber by food group"); svg.innerHTML = ring;
-  return el("div", { class: "chartcard" }, el("b", { text: "Sample day: fiber by food group" }), el("div", { class: "chartrow" }, svg, el("ul", {}, parts.map(([n, v, c]) => el("li", {}, el("i", { style: "background:" + c }), n + " " + v + "%")))));
+  const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg"); svg.setAttribute("viewBox", "0 0 42 42"); svg.setAttribute("class", "donut"); svg.setAttribute("role", "img"); svg.setAttribute("aria-label", "Sample chart: groups of documents"); svg.innerHTML = ring;
+  return el("div", { class: "chartcard" }, el("b", { text: "Sample chart: groups of documents" }), el("div", { class: "chartrow" }, svg, el("ul", {}, parts.map(([n, v, c]) => el("li", {}, el("i", { style: "background:" + c }), n + " " + v + "%")))));
 }
 function rdy() { const q = $("#q"), s = $("#send"); if (!q || !s || S.busy) return; const on = !!q.value.trim(); if (on && !s.classList.contains("on")) { s.classList.add("ready"); setTimeout(() => s.classList.remove("ready"), 200); } s.classList.toggle("on", on); }
 function drawThread() {
@@ -630,11 +630,11 @@ function setupResizer() {
   const saved = parseInt(localStorage.getItem("cc_side") || "0", 10); if (saved) document.documentElement.style.setProperty("--side-w", saved + "px");
   r.addEventListener("pointerdown", (e) => {
     e.preventDefault(); r.setPointerCapture(e.pointerId);
-    const move = (ev) => { const w = Math.min(460, Math.max(220, ev.clientX)); document.documentElement.style.setProperty("--side-w", w + "px"); localStorage.setItem("cc_side", String(w)); };
+    const move = (ev) => { const w = Math.min(460, Math.max(200, document.documentElement.dataset.sidebar === "right" ? app.getBoundingClientRect().right - ev.clientX : ev.clientX - app.getBoundingClientRect().left)); document.documentElement.style.setProperty("--side-w", w + "px"); localStorage.setItem("cc_side", String(w)); };
     const up = () => { r.removeEventListener("pointermove", move); r.removeEventListener("pointerup", up); };
     r.addEventListener("pointermove", move); r.addEventListener("pointerup", up);
   });
-  r.addEventListener("dblclick", () => { document.documentElement.style.removeProperty("--side-w"); localStorage.removeItem("cc_side"); });
+  r.addEventListener("dblclick", () => { document.documentElement.style.setProperty("--side-w", (window.CCTheme?.value.sidebar_width || 250) + "px"); localStorage.removeItem("cc_side"); });
 }
 async function accountGate() {
   const post = (p, b) => api("/api/account/" + p, b);
@@ -702,14 +702,10 @@ function previewMode() {
   $("#q").placeholder="Visual preview only";
   $("#q").value="";
   document.documentElement.classList.add("preview");
-  S.turns = [
-    { id: "p1", chat: "p", question: "How much fiber should an adult eat each day?", answer: "What we know: adults are advised to eat about 14 g of fiber per 1,000 kcal, which works out to roughly 25 g a day for women and 38 g for men [1].\n\nWhat we don't know: the supplied sources do not say how much benefit or risk comes with eating more or less than that [1].\n\nWhat to ask a dietitian: how much fiber suits you, and which foods are the best way to reach it.", evidence: [{ n: 1, title: "Health Implications of Dietary Fiber (Academy of Nutrition and Dietetics, 2015)", text: "" }], ledger: [], seconds: 4 },
-    { id: "p2", chat: "p", question: "Which foods contain iron?", answer: "Iron is found in meat, fish, beans, lentils and fortified cereals [1]. Iron from plants is absorbed less well than iron from meat, and vitamin C eaten at the same meal helps [2].", evidence: [{ n: 1, title: "Iron fact sheet for consumers", text: "" }, { n: 2, title: "Iron absorption and diet", text: "" }], ledger: [], seconds: 3 },
-  ];
-  S.turns = [S.turns[1]];S.turns[0].answer="Iron is found in beans, lentils and fortified cereals [1]. Vitamin C helps your body absorb it [2].";
-  S.chat = "p"; drawThread(); pvBottom(); $("#chatTitle").textContent = "Fiber and iron";
-  const list = $("#list"); list.replaceChildren(...["Fiber and iron", "Protein needs", "Hydration"].map((t, i) => el("div", { class: "item" + (i ? "" : " on") }, el("span", { text: t }))));
-  window.addEventListener("message", (e) => { if (e.origin === location.origin && e.data && e.data.ccTheme) { applyWording(); applyIcons(); drawThread(); pvBottom(); $("#chatTitle").textContent = "Fiber and iron"; } });
+  S.turns = [{ id: "p1", chat: "p", question: "How will answers look in this app?", answer: "This is a sample answer with a source citation [1].\n\nAdjust the appearance on the left to see it here. This preview does not contact your model or sources.", evidence: [{ n: 1, title: "Sample source for visual preview", text: "Preview sample only, not a retrieved document." }], ledger: [], seconds: 0 }];
+  S.chat = "p"; drawThread(); pvBottom(); $("#chatTitle").textContent = "Sample conversation";
+  const list = $("#list"); list.replaceChildren(...["Sample conversation", "Another conversation"].map((t, i) => el("div", { class: "item" + (i ? "" : " on") }, el("span", { text: t }))));
+  window.addEventListener("message", (e) => { if (e.origin === location.origin && e.data && e.data.ccTheme) { applyWording(); applyIcons(); drawThread(); pvBottom(); $("#chatTitle").textContent = "Sample conversation"; } });
 }
 function tour(replay=false) {
   CCTour.chat(replay, () => $("#q").focus());

@@ -85,3 +85,41 @@ body.settings-tabs.simple .tile{background:transparent!important}
 }
 /* Keep the caption and preview caveat separated at every width. */
 body.settings-tabs #pvbox .pvnote{display:block;margin-top:6px}
+/* One rail track owns its padding; sheet width follows available space. */
+body.settings-tabs #col{max-width:none!important;min-width:0!important;width:100%!important;box-sizing:border-box!important}
+body.settings-tabs #menu,body.settings-tabs.simple #menu{padding:8px!important;box-sizing:border-box!important;-webkit-mask-image:none!important;mask-image:none!important;overflow-x:hidden!important}
+body.settings-tabs #menu .nav-group a{display:block!important;box-sizing:border-box!important;max-width:100%!important;white-space:normal!important;overflow-wrap:anywhere;min-width:0;padding:10px 8px!important}
+@media(min-width:1101px){body.settings-tabs.settings-preview-hidden .layout{grid-template-columns:130px minmax(0,1fr)!important}}
+@media(max-width:760px){body.settings-tabs #menu .nav-group{display:flex!important;flex-wrap:wrap!important;gap:6px!important}body.settings-tabs #menu .nav-group a{flex:1 1 130px!important}}
+.settings-search{position:relative;padding-right:86px}
+.settings-help-open{position:absolute;right:0;top:22px;padding:9px 11px}
+.settings-help{width:min(560px,calc(100vw - 36px));box-sizing:border-box;max-height:85vh;overflow:auto;border:1px solid var(--st-line);border-radius:14px;background:var(--st-card);color:var(--st-ink);padding:22px}
+.settings-help::backdrop{background:#0008}
+.settings-help textarea{display:block;width:100%;box-sizing:border-box;margin:8px 0 14px}
+.settings-help-consent{display:flex;gap:8px;align-items:flex-start;margin:12px 0}
+.settings-help-consent input{width:auto;flex:none;margin-top:4px}
+.settings-help-actions,#settingsHelpTargets{display:flex;gap:8px;flex-wrap:wrap}
+#settingsHelpAnswer{white-space:pre-wrap;overflow-wrap:anywhere;margin:14px 0}
+dialog.settings-help{position:fixed;inset:0;margin:auto;display:none;background:#fffdf7;color:#17231f;border:1px solid #d9e1dc;box-shadow:0 20px 80px #0005;z-index:2000}
+dialog.settings-help[open]{display:block}
+dialog.settings-help button{padding:9px 12px;border:1px solid #c6d7cd;border-radius:8px;background:#173f35;color:white;font:inherit;cursor:pointer}
+dialog.settings-help button:disabled{opacity:.45;cursor:not-allowed}
+dialog.settings-help textarea{padding:10px;border:1px solid #c6d7cd;border-radius:8px;background:white;color:#17231f;font:inherit}
+dialog.settings-help .settings-help-consent input{appearance:auto;-webkit-appearance:auto;width:18px;height:18px;transform:none}
+dialog.settings-help label.settings-help-consent{display:flex!important;gap:10px;align-items:flex-start;font-weight:400}
+dialog.settings-help .settings-help-consent input{display:block!important;position:static!important;opacity:1!important;margin:4px 0 0!important;padding:0!important;flex:0 0 18px!important}
+/* Pipeline editors are inline now; their legacy mode must not remove preview. */
+body.settings-tabs.editing-pipeline:not(.settings-preview-hidden) #pvbox{display:block!important}
+/* Workspace tools keep their own explanations and review gates in Simple mode. */
+body.settings-tabs.simple.settings-workspace-operation #sec-finish>#workspacePanel{display:block!important}
+body.settings-tabs.simple.settings-workspace-operation #sec-finish>.simple-workspace,body.settings-tabs.simple.settings-workspace-operation #sec-finish>.simple-more{display:none!important}
+body.settings-tabs.simple .settings-search:not(.search-open) .settings-help-open{position:static;display:inline-block;float:right;margin-top:-24px}
+body.settings-tabs.settings-editor-wide:not(.settings-preview-hidden) #pvbox{display:block!important}
+@media(min-width:1101px){body.settings-tabs.settings-editor-wide:not(.settings-preview-hidden) .layout{grid-template-columns:130px minmax(340px,1.1fr) minmax(310px,1fr)!important}}
+body.settings-tabs.simple #sec-budget>*{display:revert!important}
+body.settings-tabs.simple #sec-budget:before{display:none!important}
+body.settings-tabs.simple #sec-budget>.simple-more{display:none!important}
+body.settings-tabs.simple #sec-freshness>*{display:revert!important}
+body.settings-tabs.simple #sec-freshness:after{display:none!important}
+body.settings-tabs.simple #sec-freshness>.simple-more{display:none!important}
+body.settings-tabs.settings-preview-hidden #pvbox{display:none!important}

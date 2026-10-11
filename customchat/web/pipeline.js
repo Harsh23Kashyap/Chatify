@@ -55,7 +55,7 @@ function editorList(section, cards, kind) {
   cards.forEach(card => {
     const title = $("summary b", card)?.textContent || "Editor";
     const button = el("button", {type:"button",class:"editor-choice", "aria-pressed":"false",onclick:()=>choose(card,button)}, el("b", {text:title}));
-    card.hidden = true; list.append(button);
+    button.dataset.stage = card.id.replace(/^st-/, ""); card.hidden = true; list.append(button);
   });
   section.append(list, pane);
   section._editorCards=cards;

@@ -351,6 +351,11 @@ def make_handler(cfg, engine):
                     ok, msg = providers.test_connection(cfg, kind, str(b.get("model") or "")[:120], base)
                     from .management import diagnosis
                     return self._send(200, {'ok':ok,'message':msg} if ok else {'ok':False,**diagnosis(msg)})
+            if path == "/api/settings/guide" and method == "POST":
+                if not can_edit(self):
+                    return self._send(403, {"error": "Only the app owner can use settings help"})
+                from . import settingsguide
+                return self._send(200, settingsguide.guide(engine.provider, cfg, b.get("question"), b.get("consent")))
             if path == "/api/hardware":
                 if not can_edit(self):
                     return self._send(403, {"error": "Only the admin can see this computer's details"})
