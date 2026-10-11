@@ -45,3 +45,43 @@ body.settings-tabs.simple #sec-model #apply{width:100%!important;min-width:0}
 }
 body.settings-tabs.simple #sec-model .testrow{display:flex!important;justify-content:flex-start!important;margin:10px 0 16px!important}body.settings-tabs.simple #sec-model>.keyrow:has(#modelPick):has(select[hidden]){display:none!important}body.settings-tabs.simple #sec-model label[for=modelPick]{margin:12px 0 4px!important}body.settings-tabs.simple #sec-model .two label{row-gap:6px!important}body.settings-tabs.simple #sec-model .two label>input{min-height:24px!important;height:24px!important;margin:4px 0!important}body.settings-tabs.simple #sec-model>.two{margin-top:8px!important}body.settings-tabs.simple #col{min-height:0!important}body.settings-tabs.simple #sec-model .testrow #testres:empty{display:none}
 body.settings-tabs.simple #sec-model #model:not([hidden]){display:block!important}body.settings-tabs.simple #sec-model #model[hidden]{display:none!important}
+
+/* R22 draft: preview-first, narrow section rail, pinned main tabs. */
+body.settings-tabs.simple .card{max-width:1400px!important}
+body.settings-tabs #settingsNavTop{position:sticky;top:0;z-index:45;background:#fffdf7;padding-top:8px}
+body.settings-tabs.simple .layout,body.settings-tabs .layout,body.settings-tabs .layout.resizable-columns{grid-template-columns:152px minmax(300px,1fr) minmax(310px,36%)!important;gap:20px!important}
+body.settings-tabs #menu,body.settings-tabs.simple #menu{grid-column:1!important;grid-row:1!important;width:152px!important;min-width:0!important;display:block!important}
+body.settings-tabs.simple #col,body.settings-tabs #col{grid-column:2!important;grid-row:1!important}
+body.settings-tabs.simple #pvbox,body.settings-tabs #pvbox{grid-column:3!important;grid-row:1!important;position:sticky!important;top:96px;margin-top:0!important;display:block}
+body.settings-tabs.settings-preview-hidden .layout{grid-template-columns:152px minmax(0,1fr)!important}
+body.settings-tabs.settings-preview-hidden #pvbox{display:none!important}
+@media(max-width:1100px){body.settings-tabs.simple .layout,body.settings-tabs .layout,body.settings-tabs .layout.resizable-columns{grid-template-columns:128px minmax(0,1fr)!important}body.settings-tabs #menu,body.settings-tabs.simple #menu{width:128px!important}body.settings-tabs.simple #pvbox,body.settings-tabs #pvbox{grid-column:2!important;grid-row:2!important;position:static!important}}
+@media(max-width:760px){body.settings-tabs.simple .layout,body.settings-tabs .layout,body.settings-tabs .layout.resizable-columns,body.settings-tabs.settings-preview-hidden .layout{grid-template-columns:minmax(0,1fr)!important}body.settings-tabs #menu,body.settings-tabs.simple #menu{width:100%!important;grid-column:1!important;grid-row:1!important}body.settings-tabs.simple #col,body.settings-tabs #col{grid-column:1!important;grid-row:2!important}body.settings-tabs.simple #pvbox,body.settings-tabs #pvbox{grid-column:1!important;grid-row:3!important;display:block!important;position:static!important;height:auto!important;max-height:none!important}body.settings-tabs #pvfab{display:none!important}body.settings-tabs #pvbox iframe#pv{height:480px!important;min-height:480px!important}body.settings-tabs .modebar .preview-toggle{display:block!important}body.settings-tabs #settingsNavTop .category-tabs{grid-template-columns:repeat(2,minmax(0,1fr))!important}}
+@media(max-width:760px){body.settings-tabs .modebar{display:flex!important;flex-wrap:wrap!important;justify-content:space-between!important;gap:8px!important}body.settings-tabs .modebar .preview-toggle{margin-left:0!important}#settingsNavTop .category-tabs button{gap:6px!important;padding:10px 8px!important}#settingsNavTop .category-tabs .tab-copy{overflow-wrap:anywhere}#settingsNavTop .category-tabs .tab-icon{width:20px!important}#settingsNavTop .category-tabs b{font-size:11px!important}}
+@media(max-width:360px){body.settings-tabs .modebar .preview-toggle{width:100%!important}body.settings-tabs #pvbox{margin-left:-12px!important;margin-right:-12px!important;padding:8px!important}body.settings-tabs #pvbox iframe#pv{width:100%!important}}
+@media(max-width:760px){body.settings-tabs.settings-preview-hidden #pvbox{display:none!important}}
+/* Selected direction 7: Outline notebook, with a wider right-side preview. */
+#settingsNavTop .category-tabs{border-bottom:1px solid #d8e1d2;background:transparent!important;gap:4px}
+#settingsNavTop .category-tabs button{background:transparent!important;border:0!important;border-radius:0!important;min-height:56px!important;padding:12px 16px!important}
+#settingsNavTop .category-tabs button[aria-selected=true]{box-shadow:inset 0 -3px #173f35!important}
+#settingsNavTop .category-tabs button:after,#settingsNavTop .tab-icon,#settingsNavTop .category-tabs small{display:none!important}
+body.settings-tabs #menu{background:transparent!important;border:0!important}
+body.settings-tabs #pvbox{border:0!important;box-shadow:none!important;background:transparent!important;padding:0!important}
+@media(min-width:1101px){body.settings-tabs.simple .layout,body.settings-tabs .layout,body.settings-tabs .layout.resizable-columns{grid-template-columns:130px minmax(300px,1fr) minmax(0,1.18fr)!important}body.settings-tabs #menu,body.settings-tabs.simple #menu{width:130px!important}}
+/* Selected Outline variation 5: Split paper sheets. */
+body.settings-tabs #col{
+  background:#faf8f2;
+  border-radius:0;
+  padding:22px!important;
+  border-top:2px solid #173f35;
+}
+body.settings-tabs.simple .tile{background:transparent!important}
+#settingsNavTop .category-tabs button{justify-content:center}
+@media(min-width:1101px){
+  body.settings-tabs #pvbox{padding-left:20px!important;border-left:1px solid #dedbd2!important}
+}
+@media(max-width:760px){
+  body.settings-tabs #col{padding:14px 10px!important}
+}
+/* Keep the caption and preview caveat separated at every width. */
+body.settings-tabs #pvbox .pvnote{display:block;margin-top:6px}

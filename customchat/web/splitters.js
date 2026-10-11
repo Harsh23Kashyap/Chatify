@@ -6,13 +6,13 @@
  const col = document.getElementById('col');
  if (!layout || !menu || !col) return;
  const key = 'cc_settings_columns_v1';
- const previewKey = 'cc_settings_preview_hidden';
+ const previewKey = 'cc_settings_preview_hidden_v2';
  const toggle = document.createElement('button');
  toggle.type = 'button'; toggle.className = 'mini preview-toggle';
  const bar = document.querySelector('.modebar');
  if (bar) bar.append(toggle);
  let previewHidden = false;
- try { previewHidden = localStorage.getItem(previewKey) !== '0'; } catch (_) {}
+ try { previewHidden = localStorage.getItem(previewKey) === '1'; } catch (_) {}
  function togglePreview() {
   document.body.classList.toggle('settings-preview-hidden', previewHidden);
   toggle.textContent = previewHidden ? 'Show chat preview' : 'Hide chat preview';

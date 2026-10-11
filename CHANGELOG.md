@@ -1,3 +1,10 @@
+## 0.1.19 - 2026-10-11
+
+- Split paper sheets configuration: quiet controls sheet, wider right-side preview and slim section rail.
+- Pinned main tabs and a visible-by-default preview with persistent hide/show.
+- Responsive stacked preview on narrow screens and separated preview captions.
+- Updated fresh-start commands to select 0.1.19.
+
 ## 0.1.18 - 2026-10-11
 
 - Browser-style configuration tabs with contextual sections, phone layout, keyboard focus and hover.
