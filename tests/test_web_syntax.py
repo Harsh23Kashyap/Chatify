@@ -16,4 +16,4 @@ class WebSyntax(unittest.TestCase):
   s=(Path(__file__).resolve().parents[1]/'customchat/web/configstate.js').read_text();self.assertIn("path.join('.')==='provider.fallback'",s);self.assertIn('read?read():',s);self.assertIn('if(!enabled.checked)return null',s);self.assertNotIn("input.placeholder='(not filled)'",s)
 
  def test_extension_text_preserves_multiline_and_numbers_are_not_empty_zero(self):
-  s=(Path(__file__).resolve().parents[1]/'customchat/web/configstate.js').read_text();self.assertIn("input=el(typeof value==='string'?'textarea':'input')",s);self.assertIn("number(input,path.join('.'))",s);self.assertIn("if(!input.value.trim()||!Number.isFinite(Number(input.value)))",s)
+  s=(Path(__file__).resolve().parents[1]/'customchat/web/configstate.js').read_text();self.assertIn("input=el(typeof value==='string'&&!['id','language'].includes(path.at(-1))?'textarea':'input')",s);self.assertIn("number(input,path.join('.'))",s);self.assertIn("if(!input.value.trim()||!Number.isFinite(Number(input.value)))",s)

@@ -1,0 +1,47 @@
+/* Browser-style primary tabs, with contextual sections beside the editor. */
+body.settings-tabs.simple .card{max-width:1120px!important}
+body.settings-tabs.simple #menu{display:block!important;border:0;background:transparent;padding:0!important}
+body.settings-tabs.simple .layout{grid-template-columns:174px minmax(0,1fr)!important;gap:28px!important}
+body.settings-tabs.simple #col{grid-column:2!important}
+body.settings-tabs.simple #menu .nav-group{display:flex!important;flex-direction:column;gap:4px}
+body.settings-tabs.simple #menu .nav-group[hidden]{display:none!important}
+body.settings-tabs.simple #menu a{display:block!important;padding:12px 14px!important;min-height:44px;font-size:13px;border-radius:8px}
+body.settings-tabs.simple #menu a::after{display:none}
+body.settings-tabs.simple #menu a.on{background:#eaf1e9;border:0;box-shadow:inset 3px 0 #173f35;font-weight:600}
+body.settings-tabs.simple #sec-model>label[for=modelPick]{display:flex!important;flex-direction:column;margin:14px 0 6px}
+body.settings-tabs.simple #sec-model>.keyrow:has(#modelPick),body.settings-tabs.simple #sec-model>.testrow{display:flex!important;gap:10px;justify-content:flex-start}
+body.settings-tabs.simple #sec-model>.testrow{margin:12px 0 20px!important}
+body.settings-tabs.simple #sec-model>label.check{display:flex!important;gap:12px;align-items:center;margin:18px 0}
+body.settings-tabs.simple #sec-model>label.check input{flex:0 0 40px;width:40px!important;height:24px!important;min-height:24px!important;max-height:24px!important}
+body.settings-tabs.simple #sec-model>.simple-save-scope{display:block!important}
+body.settings-tabs.simple #sec-model>#answerDirty:empty{display:none!important}
+body.settings-tabs.simple #sec-model #apply{width:auto!important;min-width:240px;max-width:100%!important}
+body.settings-tabs.simple #sec-model{padding:12px 4px 24px!important}
+#settingsNavTop{margin:20px 0 26px!important}
+#settingsNavTop .category-tabs{display:grid!important;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px;padding:0 6px;background:transparent;border-radius:0;width:100%;border-bottom:1px solid #b8c9be;overflow:visible}
+#settingsNavTop .category-tabs button{position:relative;display:flex;gap:12px;align-items:center;justify-content:flex-start;text-align:left;background:#f3f5f0;color:#607369;border:1px solid transparent;border-bottom:0;border-radius:12px 12px 0 0;min-height:76px;padding:15px 18px;font:inherit;box-shadow:none;transition:background .15s,color .15s}
+#settingsNavTop .category-tabs .tab-copy{display:grid;gap:5px;min-width:0}
+#settingsNavTop .category-tabs b{font-size:14px;line-height:1.2;font-weight:600}
+#settingsNavTop .category-tabs small{font-size:11px;line-height:1.35;font-weight:400;color:inherit}
+#settingsNavTop .category-tabs .tab-icon{display:grid;place-items:center;flex:none;width:30px;height:30px;color:inherit}
+#settingsNavTop .category-tabs svg{width:23px;height:23px}
+#settingsNavTop .category-tabs button[aria-selected=true]{color:#173f35;background:white;border-color:#b8c9be;box-shadow:0 -3px 0 #173f35,inset 0 -1px white;font-weight:600}
+#settingsNavTop .category-tabs button[aria-selected=true]:after{position:absolute;content:'';left:0;right:0;bottom:-1px;height:2px;background:white}
+#settingsNavTop .category-tabs button:hover:not([aria-selected=true]){background:#e7eee6;color:#173f35}
+#settingsNavTop .category-tabs button:focus-visible{outline:2px solid #173f35;outline-offset:4px;z-index:1}
+@media(max-width:760px){
+body.settings-tabs.simple .layout{grid-template-columns:minmax(0,1fr)!important;gap:18px!important}
+body.settings-tabs.simple #menu{grid-column:1;grid-row:1;overflow:visible}
+body.settings-tabs.simple #menu .nav-group{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr));gap:4px}
+body.settings-tabs.simple #menu .nav-group[hidden]{display:none!important}
+body.settings-tabs.simple #col{grid-column:1!important;grid-row:2!important}
+#settingsNavTop .category-tabs{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:8px;padding:0;border:0}
+#settingsNavTop .category-tabs button{border:1px solid #dbe4dc;border-radius:10px;min-height:72px;padding:12px 10px;gap:8px}
+#settingsNavTop .category-tabs button[aria-selected=true]{border-color:#173f35;box-shadow:inset 0 3px #173f35}
+#settingsNavTop .category-tabs button[aria-selected=true]:after{display:none}
+#settingsNavTop .category-tabs b{font-size:12px}#settingsNavTop .category-tabs small{font-size:10px}
+#settingsNavTop .category-tabs .tab-icon{width:24px;height:24px}#settingsNavTop .category-tabs svg{width:20px;height:20px}
+body.settings-tabs.simple #sec-model #apply{width:100%!important;min-width:0}
+}
+body.settings-tabs.simple #sec-model .testrow{display:flex!important;justify-content:flex-start!important;margin:10px 0 16px!important}body.settings-tabs.simple #sec-model>.keyrow:has(#modelPick):has(select[hidden]){display:none!important}body.settings-tabs.simple #sec-model label[for=modelPick]{margin:12px 0 4px!important}body.settings-tabs.simple #sec-model .two label{row-gap:6px!important}body.settings-tabs.simple #sec-model .two label>input{min-height:24px!important;height:24px!important;margin:4px 0!important}body.settings-tabs.simple #sec-model>.two{margin-top:8px!important}body.settings-tabs.simple #col{min-height:0!important}body.settings-tabs.simple #sec-model .testrow #testres:empty{display:none}
+body.settings-tabs.simple #sec-model #model:not([hidden]){display:block!important}body.settings-tabs.simple #sec-model #model[hidden]{display:none!important}

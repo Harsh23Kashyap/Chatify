@@ -31,14 +31,14 @@ function stageCard(s) {
   const sw = s.optional ? el("label", { class: "check sw" }, el("input", { type: "checkbox", id: "on-" + s.key }), " Use this step") : null;
   if (sw) { $("input", sw).checked = !!s.on; $("input", sw).addEventListener("change", async (e) => { try { await api("/api/prompts/save", { key: s.key, on: e.target.checked }); s.on = e.target.checked; const sm = $("summary small", $("#st-" + s.key)); if (sm) sm.textContent = s.on ? "On" : "Off"; redrawDiagram(); st.textContent = e.target.checked ? "On." : "Off."; } catch (x) { st.textContent = x.message; e.target.checked = !e.target.checked; } }); }
   const save = el("button", { type: "button", class: "go blue", text: "Save", onclick: async () => { try { const txt = area.value.trim() === s.default.trim() ? "" : area.value; const r = await api("/api/prompts/save", { key: s.key, text: txt }); s.text = txt; st.textContent = "Saved. New questions use it."; } catch (x) { st.textContent = x.message; } } });
-  const reset = el("button", { type: "button", class: "go ghost", text: "Use default", onclick: async () => { try { await api("/api/prompts/reset", { key: s.key }); s.text = ""; area.value = s.default; st.textContent = "Back to the default."; } catch (x) { st.textContent = x.message; } } });
+  const reset = el("button", { type: "button", class: "go ghost", text: "Use default",title:"Replace this prompt with the default and save it immediately", onclick: async () => { try { if(area.value!== (s.text || s.default)&&!confirm("Replace unsaved prompt edits with the default?"))return;await api("/api/prompts/reset", { key: s.key }); s.text = ""; area.value = s.default; st.textContent = "Back to the default."; } catch (x) { st.textContent = x.message; } } });
   const gen = el("button", { type: "button", class: "go ghost", text: "Write it with AI", onclick: async () => { gen.disabled = true; st.textContent = "Writing..."; try { const r = await api("/api/prompts/generate", { key: s.key, brief: brief.value, current: area.value }); area.value = r.prompt; st.textContent = r.model_used ? "Written. Review, then save." : "Offline stage draft. Review assumptions, then save.";st.className="testres";why.className="why h";if (r.rationale && r.rationale.length) why.textContent = r.rationale.join(" "); } catch (x) { st.textContent = x.message; } finally {gen.disabled = false} } });
   const why = el("p", { class: "h" });
   return el("details", { class: "stage", id: "st-" + s.key }, el("summary", {}, el("b", { text: s.label }), el("small", { text: s.optional ? (s.on ? "On" : "Off") : "Always on" })), el("div", { class: "sbody" }, el("p", { class: "h", text: s.help }), sw, area, el("div", { class: "keyrow" }, brief, gen), why, el("div", { class: "keyrow" }, save, reset, st)));
 }
 let selected = {},focusSection="";
-function placePrompt(){const layout=$(".layout"),preview=$("#pvbox");if(!layout)return;const desktop=matchMedia("(min-width:1181px)").matches,active=focusSection==="prompts"||focusSection==="code";document.body.classList.toggle("prompt-pane-active",active&&desktop);for(const kind of ["prompts","code"]){const pane=$("#"+kind+"Editor"),section=$("#sec-"+kind);if(!pane||!section)continue;if(focusSection===kind&&desktop){pane.classList.add("prompt-side-editor");layout.insertBefore(pane,preview)}else{pane.classList.remove("prompt-side-editor");const list=$(".editor-list",section);section.insertBefore(pane,focusSection===kind&&!desktop?list:null)}}if(preview)preview.hidden=active&&desktop;}
-window.CCPipelineFocus=section=>{focusSection=section;placePrompt()};window.addEventListener("resize",placePrompt);
+function placePrompt(){const layout=$(".layout"),preview=$("#pvbox");if(!layout)return;const desktop=false,active=focusSection==="prompts"||focusSection==="code";document.body.classList.toggle("prompt-pane-active",active&&desktop);for(const kind of ["prompts","code"]){const pane=$("#"+kind+"Editor"),section=$("#sec-"+kind);if(!pane||!section)continue;if(focusSection===kind&&desktop){pane.classList.add("prompt-side-editor");layout.insertBefore(pane,preview)}else{pane.classList.remove("prompt-side-editor");const list=$(".editor-list",section);section.insertBefore(pane,focusSection===kind&&!desktop?list:null)}}if(preview)preview.hidden=active&&desktop;}
+window.CCPipelineFocus=section=>{focusSection=section;document.body.classList.toggle("settings-editor-wide",section==="prompts"||section==="code");placePrompt()};window.addEventListener("resize",placePrompt);
 
 function editorList(section, cards, kind) {
   const pane = el("div", {class:"pipeline-editor-pane inline-editor",id:kind+"Editor", "aria-label":kind === "prompts" ? "Selected prompt editor" : "Selected code editor"});
@@ -68,7 +68,7 @@ function redrawDiagram() { if (dg) { const n = diagram(); dg.replaceWith(n); dg 
 function codeCard(kind, title, help, ph) {
   const brief = el("textarea", { rows: "3", "aria-label": title + " description", placeholder: ph });
   let recognized = "";
-  const apiKey=el("input",{type:"password",autocomplete:"off",spellcheck:"false","aria-label":"Optional connector API key",placeholder:"Optional API key (never put it in the description)"});
+  const apiKey=el("input",{type:"password",autocomplete:"off",spellcheck:"false","aria-label":"Optional connector API key",placeholder:"Optional key. Never put it in the description."});
   const detected=el("p",{class:"h",role:"status"});
   const infer=async(saveKey=false)=>{const r=await api("/api/codegen/infer",{brief:brief.value,key:apiKey.value,save_key:saveKey});recognized=r.recognized?r.id:"";detected.textContent=r.recognized?"Detected: "+r.name+". Requests go to "+r.endpoint+". Review before testing.":r.message;if(r.recognized&&saveKey){apiKey.value="";detected.textContent+=" Key saved privately."}return r};
   const saveConnectorKey=el("button",{type:"button",class:"go ghost",text:"Save key privately",onclick:async()=>{try{await infer(true)}catch(e){detected.textContent=e.message}}});
@@ -108,11 +108,11 @@ function codeCard(kind, title, help, ph) {
   const pids=Object.keys(connectorKeys).filter(k=>new RegExp("\\b"+k+"\\b","i").test(brief.value));recognized=pids.length===1?pids[0]:"";
   const filled=el("p",{class:"h",role:"status",text:initial?.code?"Existing helper loaded from this workspace.":"(not filled) - no saved helper code in this workspace."});
   if(!brief.value)brief.placeholder="(not filled) - "+ph;
-  if(recognized){apiKey.placeholder=connectorKeys[recognized]?"Saved key available (replace only)":"(not filled) - connector API key";detected.textContent=recognized+": "+(connectorKeys[recognized]?"Key saved privately.":"Not filled (API key).");}else{apiKey.placeholder="(not filled) - optional connector API key";detected.textContent="No connector selected. (not filled)";}
+  if(recognized){apiKey.placeholder=connectorKeys[recognized]?"Saved key available (replace only)":"(not filled) - connector API key";detected.textContent=recognized+": "+(connectorKeys[recognized]?"Key saved privately.":"Not filled (API key).");}else{apiKey.placeholder="Optional connector key";detected.textContent="No connector selected. (not filled)";}
   const saveDraft=el("button",{type:"button",class:"go ghost",text:"Save helper draft",onclick:async()=>{try{await api("/api/codegen/draft",{kind,brief:brief.value,code:code.value});filled.textContent=code.value.trim()?"Helper draft saved in this workspace.":"(not filled) - no saved helper code.";out.textContent="Draft saved in this workspace. Not activated or run.";}catch(e){out.textContent=e.message}}});
   const copy = el("button", { type: "button", class: "go ghost", text: "Copy", onclick: () => { navigator.clipboard && navigator.clipboard.writeText(code.value); out.textContent = "Copied."; } });
   const chk = el("button", { type: "button", class: "go ghost", text: "Check again", onclick: review });
-  return el("details", { class: "sub helper" }, el("summary", {}, el("b", { text: title }), el("small", { text: help })), brief, filled, kind==="search"?el("div",{class:"keyrow"},apiKey,saveConnectorKey,detect):null, kind==="search"?el("p",{class:"h",text:"Key stays private, never in generated code or sent to the writing model. Unknown service? Add its name or docs URL."}):null, kind==="search"?detected:null, live, el("div", { class: "keyrow tight" }, gen, chk, copy, saveDraft), ed ? host : fallback, ed ? el("small", { class: "h", text: "Press Esc, then Tab, to move past the editor." }) : null, out, el("div", { class: "keyrow" }, tq, tryBtn), tres);
+  return el("details", { class: "sub helper" }, el("summary", {}, el("b", { text: title }), el("small", { text: help })), brief, filled, kind==="search"?el("label",{class:"connector-key-label",text:"Connector API key (optional)"},el("div",{class:"keyrow"},apiKey,saveConnectorKey,detect)):null, kind==="search"?el("p",{class:"h",text:"Key stays private, never in generated code or sent to the writing model. Unknown service? Add its name or docs URL."}):null, kind==="search"?detected:null, live,el("h4",{text:"Generate and review"}),el("div", { class: "keyrow tight" }, gen, chk),el("div", { class: "keyrow tight secondary-actions" }, copy, saveDraft), ed ? host : fallback, ed ? el("small", { class: "h", text: "Press Esc, then Tab, to move past the editor." }) : null, out, el("h4",{text:"Try the helper"}),el("p",{class:"h",text:"Enter one sample question. Try it runs code once, not in a security sandbox."}),el("div", { class: "keyrow" }, tq, tryBtn), tres);
 }
 
 function build(col) {
@@ -133,7 +133,7 @@ function build(col) {
   promptCards.forEach(c=>c.remove());codeCards.forEach(c=>c.remove());
   prompts.querySelectorAll(".pgroup").forEach(n=>n.remove());
   editorList(prompts,promptCards,"prompts");editorList(code,codeCards,"code");
-  prompts.querySelector(".help").textContent="Select a stage. Its full saved prompt appears in the editor.";
+  prompts.querySelector(".help").textContent="";
   const m = $("#sec-model"); const anchor = $("#sec-presets");
   col.insertBefore(prompts, anchor); col.insertBefore(code, anchor);
 
@@ -142,6 +142,7 @@ async function init() {
   try { const d = await api("/api/prompts"); stages = d.stages; real = d.real_model; } catch (e) { return; }
   try { const current=await api("/api/configuration-state");helperState=current.helpers||{};connectorKeys=current.connector_keys||{}; } catch(e) {}
   build($("#col"));
+  window.CCSettingsRefreshNavigation?.();
 }
 init();
 })();

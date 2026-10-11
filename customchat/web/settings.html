@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Configuration</title>
-<link rel="stylesheet" href="/settings.css"><link rel="stylesheet" href="/motion.css"><script src="/motion.js" defer></script><link rel="stylesheet" href="/customselect.css"><script src="/customselect.js" defer></script>
+<link rel="stylesheet" href="/settings.css"><link rel="stylesheet" href="/settingstabs.css"><link rel="stylesheet" href="/motion.css"><script src="/motion.js" defer></script><link rel="stylesheet" href="/customselect.css"><script src="/customselect.js" defer></script>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:wght@600;700&display=swap"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap"><link rel="stylesheet" href="/customselect.css"><script src="/customselect.js" defer></script><script src="/emoji.js"></script><link rel="stylesheet" href="/tour.css"><script src="/tour.js"></script><link rel="stylesheet" href="/navigation.css"><link rel="icon" type="image/svg+xml" href="/icons/customchat.svg"></head>
 <body>
 <header class="toolbar"><a class="nav-brand" href="/"><img src="/icons/customchat.svg" alt="">CustomChat</a><nav class="common-nav" aria-label="Main navigation"><a href="/">Chat</a><a href="/about.html">About</a><a href="/settings.html" class="active" aria-current="page">Configuration</a><button type="button" class="cc-guide-replay" id="configGuide" aria-label="Replay guide">Guide</button></nav><div class="nav-status"></div></header>
@@ -15,15 +15,15 @@
   <div class="layout">
     <nav class="menu" id="menu" aria-label="Sections"></nav>
     <div class="col" id="col">
-      <section class="tile" id="sec-presets"><div class="head"><span class="ic green">&#9733;</span><div><b>Presets and saved states</b><small>Start from a ready-made look, or save and reload your own setups</small></div></div>
-        <div class="help">A preset changes colors, fonts, background and shape in one click. You can still adjust anything afterwards. Changes save by themselves.</div>
+      <section class="tile" id="sec-presets"><div class="head"><span class="ic green">&#9733;</span><div><b>Presets and saved setups</b><small>Apply an appearance preset or save your current setup</small></div></div>
+        <div class="help">A preset changes appearance only. Appearance edits save automatically. A named setup also stores model settings; loading it replaces the current appearance and model settings. Prompts, sources and keys are not restored.</div>
         <div class="presets" id="presets"></div>
-        <div class="saved"><b class="sv-t">Saved looks</b>
+        <div class="saved"><b class="sv-t">Saved setups</b>
           <div class="two">
-            <div class="sub"><small>Save the current look under a name</small><input id="sname" placeholder="Look name" aria-label="State name"><button class="go green" id="save">Save look</button></div>
-            <div class="sub"><small>Bring a saved look back</small><select id="states" aria-label="Saved states"></select><div class="row2"><button class="go blue" id="load">Load</button></div></div>
+            <div class="sub"><small>Save appearance and model settings under a name</small><textarea id="sname" rows="2" placeholder="Setup name" aria-label="State name"></textarea><button class="go green" id="save">Save named setup</button></div>
+            <div class="sub"><small>Restore a saved setup (replaces current settings)</small><select id="states" aria-label="Saved states"></select><div class="row2"><button class="go blue" id="load">Load</button></div></div>
           </div>
-          <details class="look-more"><summary>Manage saved looks</summary><div class="look-actions"><div class="look-transfer"><button class="go ghost" id="exp" type="button">Export</button><label class="go ghost filebtn" for="imp">Import<input id="imp" type="file" accept="application/json,.json" hidden></label></div><details class="look-danger"><summary>Remove or reset…</summary><div><button class="go ghost" id="del" type="button">Delete saved look</button><button class="go ghost" type="button" id="resetLink">Reset to default</button></div></details></div></details>
+          <details class="look-more"><summary>Manage saved setups</summary><div class="look-actions"><div class="look-transfer"><button class="go ghost" id="exp" type="button">Export</button><label class="go ghost filebtn" for="imp">Import<input id="imp" type="file" accept="application/json,.json" hidden></label></div><details class="look-danger"><summary>Remove or reset…</summary><div><button class="go ghost" id="del" type="button">Delete saved look</button><button class="go ghost" type="button" id="resetLink">Reset to default</button></div></details></div></details>
         </div>
       </section>
       <section class="tile" id="sec-model"><div class="head"><span class="ic purple">&#9881;</span><div><b>Model</b><small>Where the answers come from</small></div></div>
@@ -39,15 +39,15 @@
         <div class="keyrow testrow"><button type="button" class="go ghost" id="testconn">Test connection</button><span class="testres" id="testres" role="status" aria-live="polite"></span></div>
         <label>Base URL override <em>(optional)</em><span class="h">Leave blank for this provider's default. For a custom server, enter its API address.</span><input id="base" placeholder="http://localhost:11434"></label>
         <div class="two">
-          <label>Temperature <span id="temperatureViz" class="slider-viz thermometer" aria-hidden="true"><i></i></span><output id="tv"></output><span class="h">Low is precise and repeatable. High is more creative.</span><input id="temp" aria-label="Temperature" type="range" min="0" max="2" step="0.05"></label>
-          <label>Sources per answer <span id="sourcesViz" class="slider-viz doc-stack" aria-hidden="true"></span><output id="kv"></output><span class="h">How many passages are shown to the model for each question.</span><input id="topk" aria-label="Sources per answer" type="range" min="1" max="20" step="1"></label>
+          <label><span class="range-setting-label">Temperature</span> <span id="temperatureViz" class="slider-viz thermometer" aria-hidden="true"><i></i></span><output id="tv"></output><span class="h">Low is precise and repeatable. High is more creative.</span><input id="temp" aria-label="Temperature" type="range" min="0" max="2" step="0.05"></label>
+          <label><span class="range-setting-label">Sources per answer</span> <span id="sourcesViz" class="slider-viz doc-stack" aria-hidden="true"></span><output id="kv"></output><span class="h">How many passages are shown to the model for each question.</span><input id="topk" aria-label="Sources per answer" type="range" min="1" max="20" step="1"></label>
         </div>
         <label class="check"><input id="rewrite" type="checkbox"> Rewrite follow-up questions before searching</label>
         <button class="go blue big" id="apply">Apply</button>
       </section>
       <section class="tile" id="sec-portable"><div class="head"><span class="ic green">&#8599;</span><div><b>Load and share Nerds</b><small>Load saved settings, or download a shareable ZIP</small></div></div>
         <div class="help">Export app.yaml, the current model settings, saved look, prompts and configured local documents. Keys, accounts, conversations and personal uploads stay here. Review included documents before sharing. Python plugins and remote services still need their original setup.</div>
-        <div id="nerdDrop" class="nerd-drop" tabindex="0" role="button" aria-label="Choose or drop a Nerd ZIP or YAML"><span class="drop-symbol" aria-hidden="true">&#8593;</span><span class="drop-eyebrow">LOAD A NERD</span><b>Drop your bundle here</b><p>ZIP restores bundled settings, prompts, helper drafts and documents. YAML fills its declared settings; extra files need a ZIP.</p><label class="go ghost filebtn">Choose a file<input id="nerdFile" type="file" accept=".zip,.yaml,.yml,.json" hidden></label><small>1. Choose &nbsp; 2. Review &nbsp; 3. Run</small></div><div id="nerdReview" role="status"></div>
+        <div id="nerdDrop" class="nerd-drop" tabindex="0" role="button" aria-label="Choose or drop a Nerd ZIP or YAML"><span class="drop-symbol" aria-hidden="true">&#8593;</span><span class="drop-eyebrow">LOAD A NERD</span><b>Drop your bundle here</b><p>ZIP restores bundled settings, prompts, helper drafts and documents. YAML fills its declared settings; extra files need a ZIP.</p><label class="go ghost filebtn">Choose a file<input id="nerdFile" type="file" accept=".zip,.yaml,.yml,.json" hidden></label><small>ZIP or YAML. 1. Choose &nbsp; 2. Review included files and code &nbsp; 3. Run</small></div><div id="nerdReview" role="status"></div>
         <div class="export-card"><div><b>Share this Nerd</b><p>Download an importable bundle of this app and its local documents. Keys and chats stay here.</p></div><button type="button" class="go green" id="exportApp"><span aria-hidden="true">&#8595;</span> Download app ZIP</button><span id="exportStatus" role="status" aria-live="polite"></span></div>
       </section>
       <section class="tile" id="sec-freshness"><div class="head"><span class="ic green">&#8635;</span><div><b>Document freshness</b><small>Keep local evidence up to date</small></div></div>
@@ -57,14 +57,14 @@
       </section>
       <section class="tile" id="sec-budget"><div class="head"><span class="ic green">&#9881;</span><div><b>Budget</b><small>Limit public chat usage</small></div></div>
         <div class="help">Daily limits reset at midnight UTC and survive restarts. 0 means no quota. Model-call limits cover answer-pipeline calls, including follow-ups and provider fallback as one invocation. Failed attempts count. Configuration tests/generation and provider-side retries are not counted individually.</div>
-        <label>Questions per day, whole app<input id="budgetQuestions" type="number" min="0" max="10000000" value="0"></label>
+        <p class="h">For question and model-call limits, 0 means no daily limit. Usage resets at midnight UTC.</p><p class="h">No verified provider billing meter is available. A dollar cap blocks non-Demo answer calls; use provider-side billing limits too.</p><label>Questions per day, whole app<input id="budgetQuestions" type="number" min="0" max="10000000" value="0"></label>
         <label>Questions per user per day<input id="budgetUser" type="number" min="0" max="10000000" value="0"></label>
         <label>Model calls per day<input id="budgetCalls" type="number" min="0" max="10000000" value="0"></label>
         <label>Dollar cap (USD)<input id="budgetSpend" type="number" min="0" max="1000000" step="0.01" placeholder="Not set"></label>
         <div class="help">Dollar accounting is not available yet. Setting any dollar cap blocks non-Demo answer-pipeline calls rather than guessing a bill. It does not limit owner-run configuration tests, external search fees or embedding costs. Set provider-side billing limits before publishing.</div>
         <button type="button" class="go green" id="saveBudget">Save budget</button><div id="budgetStatus" role="status" aria-live="polite"></div>
       </section>
-      <section class="tile" id="sec-finish"><div class="head"><span class="ic green">✓</span><div><b>Your Nerd, ready to use</b><small>One setup status page. Every feature is listed in the section directory.</small></div></div>
+      <section class="tile" id="sec-finish"><div class="head"><span class="ic green">✓</span><div><b>Your Nerd, ready to use</b><small>One setup status page. Choose a group and a tab to edit one panel at a time.</small></div></div>
         <div id="workspacePanel"></div><div class="keyrow"><a class="go green" href="/">Open your chat</a></div>
       </section>
       <div id="look"></div>
@@ -78,15 +78,16 @@
       <div id="pvextra" class="pvextra" hidden></div>
     </aside>
   </div>
-  <div class="savebar clean" id="savebar"><span id="dirty">No unsaved changes</span><small class="save-scope">Appearance</small><button class="go blue" id="saveLook" title="Save appearance only. Prompts, helpers and budget use their own Save buttons." aria-label="Save appearance">Save</button><details class="floating-more"><summary aria-label="More look actions">⋯</summary><button class="go ghost" id="resetAll">Reset</button></details></div>
+  <div class="savebar clean" id="savebar"><span id="dirty">No unsaved changes</span><small class="save-scope">Appearance</small><button class="go blue" id="saveLook" title="Save appearance only. Prompts, helpers and budget use their own Save buttons." aria-label="Save appearance">Save appearance</button><details class="floating-more"><summary aria-label="More look actions">⋯</summary><button class="go ghost" id="resetAll">Reset all appearance</button></details></div>
 </main>
 <script src="/brand.js"></script><script src="/settings.js"></script><script src="/pipeline.js" defer></script><script src="/panels.js" defer></script>
 <button type="button" id="pvfab" aria-label="Show live preview" hidden>Preview</button>
 <script>(function(){var b=document.getElementById("pvfab");if(!b)return;b.hidden=false;b.addEventListener("click",function(){var o=document.body.classList.toggle("pvopen");b.textContent=o?"Close preview":"Preview";b.setAttribute("aria-label",o?"Close live preview":"Show live preview")})})()</script>
-<script>(function(){var K="cc_cfg_mode",bar=document.getElementById("cfgmode"),help=document.getElementById("modehelp");if(!bar)return;
+<script>(function(){var K="cc_cfg_mode_v2",bar=document.getElementById("cfgmode"),help=document.getElementById("modehelp");if(!bar)return;
 function set(m){document.body.classList.toggle("simple",m==="simple");[].forEach.call(bar.querySelectorAll("button"),function(b){var on=b.dataset.m===m;b.setAttribute("aria-checked",on?"true":"false");b.classList.toggle("on",on)});
 help.textContent=m==="simple"?"The everyday settings, in plain words.":"Adds design and fine controls.";try{localStorage.setItem(K,m)}catch(e){}}
 var m="simple";try{m=localStorage.getItem(K)||"simple"}catch(e){}set(m);
-bar.addEventListener("click",function(e){var b=e.target.closest("button");if(b)set(b.dataset.m)})})()</script>
-<script src="/configstate.js"></script><script src="/workspace.js"></script><script src="/nerdload.js"></script><script src="/splitters.js"></script><script src="/sourcekeys.js"></script></body>
+window.CCSettingsSetMode=set;
+bar.addEventListener("click",function(e){var b=e.target.closest("button");if(b){set(b.dataset.m);document.dispatchEvent(new CustomEvent("cc-settings-mode"))}})})()</script>
+<script src="/settingsfind.js"></script><script src="/configstate.js"></script><script src="/workspace.js"></script><script src="/nerdload.js"></script><script src="/splitters.js"></script><script src="/sourcekeys.js"></script><script src="/settingssimple.js"></script></body>
                                                                                                                                  </html>

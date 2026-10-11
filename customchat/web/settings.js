@@ -42,16 +42,29 @@ async function provExtras() {
   ollamaPanel();
   await loadModels(false);
 }
+// Shortlist only IDs returned by the provider; never invent a model name.
+function modelShortlist(provider, models) {
+  const all=[...new Set(models)].filter(x=>typeof x==="string");
+  const usable=all.filter(id=>provider==="openai" ? /^gpt-(?:4(?:[.-]|o)|[56](?:[.-]|$))/i.test(id)&&!/(audio|transcribe|tts|realtime|image|search|codex|instruct)/i.test(id) : provider==="gemini" ? /gemini/i.test(id)&&!/(embedding|image|tts|robotics|computer-use)/i.test(id) : provider==="claude" ? /claude/i.test(id) : true);
+  const ranked=usable.sort((a,b)=>{const snapshot=x=>/(?:20\d{2}[-]?\d{2}[-]?\d{2})/.test(x)?1:0;return snapshot(a)-snapshot(b)||b.localeCompare(a,undefined,{numeric:true})});
+  if (provider === "openai") {
+    // Mix latest flagships with smaller models and GPT-4, rather than ten costly variants.
+    const priority=["gpt-6.1-sol","gpt-6-sol","gpt-6-luna","gpt-6-astra","gpt-5.6-sol","gpt-5-mini","gpt-5-nano","gpt-4.1","gpt-4.1-mini","gpt-4o-mini"];
+    const picks=priority.filter(id=>usable.includes(id));
+    return [...picks,...ranked.filter(id=>!picks.includes(id))].slice(0,10);
+  }
+  return ["gemini","claude"].includes(provider) ? ranked.slice(0,10) : all;
+}
 async function loadModels(force) {
   const sel = $("#modelPick"), p = cur.provider; sel.replaceChildren();
   let list = [];
   try { const r = await api("/api/provider/models", { provider: p, base_url: $("#base").value.trim() }); list = r.models || []; modelNote = r.note || ""; } catch (e) { modelNote = e.message; }
-  const m = cur.model || "";
+  const m = cur.model || ""; const available=list.length; list=modelShortlist(p,list);
   for (const n of list) sel.append(el("option", { value: n, text: n }));
   sel.append(el("option", { value: OTHER, text: list.length ? "Other (type a name)" : "Type a name" }));
   sel.value = list.includes(m) ? m : OTHER;
   const demo = p === "mock"; sel.hidden = demo; $("#refreshModels").hidden = demo; { const ml = document.querySelector("label[for=modelPick]"); if (ml) ml.hidden = demo; } { const kr = sel.closest(".keyrow"); if (kr) kr.hidden = demo; } const typed = !demo && sel.value === OTHER; $("#model").hidden = !typed; if (typed) $("#model").value = m;
-  $("#modelh").textContent = demo ? "The demo answers without a model." : list.length ? list.length + (list.length === 1 ? " model found." : " models found.") : (modelNote || "Type the model name your provider uses.");
+  $("#modelh").textContent = demo ? "The demo answers without a model." : list.length ? list.length + " suggested models ("+available+" available). Use Other for any model name." : (modelNote || "Type the model name your provider uses.");
 }
 function sliderVisuals(){
   const t=document.getElementById("temperatureViz"), d=document.getElementById("sourcesViz");
@@ -100,7 +113,7 @@ async function ollamaPanel() {
     cards.append(c);
   });
   box.replaceChildren(head, cards);
-  if (canEdit) { $("#sec-model .ollama-setup")?.remove();const setup=el("section",{class:"ollama-setup"});$("#sec-model").prepend(setup);drawOllamaSetup(setup); }
+  if (canEdit && cur.provider==="ollama") { $("#sec-model .ollama-setup")?.remove();const setup=el("section",{class:"ollama-setup"});$("#sec-model").prepend(setup);drawOllamaSetup(setup); }
   if (r.others && r.others.length) {
     const d = el("details", { class: "grp" }, el("summary", { text: "See other models" }), el("div", { class: "oother" }, r.others.map((o) => el("div", { class: "orow" }, el("span", { class: "fitdot " + o.fit }), el("span", { class: "oname", text: o.name }), el("span", { class: "h", text: o.why })))));
     box.append(d);
@@ -141,10 +154,10 @@ function modelAction(tag, installed) {
   });
   wrap.append(btn, cancel, bar, msg); return wrap;
 }
-function syncDeleteLook(){const name=$("#states").value,btn=$("#del");btn.disabled=!name||!canEdit;btn.textContent=name?'Delete "'+name+'"':'Choose a saved look to delete';}
+function syncDeleteLook(){const name=$("#states").value,btn=$("#del");btn.disabled=!name||!canEdit;$("#load").disabled=!name||!canEdit;btn.textContent=name?'Delete "'+name+'"':'Choose a saved look to delete';}
 async function states() {
   const data = await api("/api/states"), s=data.states; const sel = $("#states"); sel.replaceChildren();
-  sel.append(el("option", { value: "", text: "Current look (not a named snapshot)" })); s.forEach((n) => sel.append(el("option", { value: n, text: n })));sel.value=data.current||"";syncDeleteLook();
+  sel.append(el("option", { value: "", text: "Choose a saved setup…" })); s.forEach((n) => sel.append(el("option", { value: n, text: n })));sel.value=data.current||"";syncDeleteLook();
 }
 
 /* ---------- look: every setting, with a plain explanation ---------- */
@@ -155,7 +168,7 @@ const SECTIONS = [
     { key: "logo", label: "Logo", help: "Optional. Choose a picture; it blends into the page.", type: "logo" },
     { key: "txt_title", label: "App name", help: "Shown in the top bar, the welcome screen and the browser tab.", type: "text", ph: "Blank uses the app default" },
     { key: "txt_tagline", label: "Welcome line", help: "The sentence under the name on an empty chat.", type: "text", ph: "Blank uses the app default" },
-    { key: "txt_examples", label: "Example questions", help: "One per line (up to 8). They appear as buttons on an empty chat.", type: "area" },
+    { key: "txt_examples", label: "Example questions", help: "One per line (up to 8). They appear as buttons on an empty chat.", type: "area", ph: "What is the source for this claim?\nWhich sources disagree, and why?" },
     { key: "txt_placeholder", label: "Question box hint", help: "The grey text inside the question box.", type: "text", ph: "Ask a question" },
     { key: "txt_hint", label: "Small line under the box (left)", help: "A short reminder under the question box.", type: "text" },
     { key: "txt_disclaimer", label: "Small line under the box (right)", help: "For example a disclaimer.", type: "text" },
@@ -175,7 +188,7 @@ const SECTIONS = [
     C("you", "Your avatar", "Background behind your initial."),
     C("danger", "Warning color", "Errors and delete.") ] },
   { id: "background", icon: "\u25A6", tone: "purple", title: "Background", sub: "The page behind the chat", help: "Pick a style, then optionally lay a pattern over it.", fields: [
-    { key: "bg_style", label: "Background style", help: "Plain color is the default. Image needs an https link.", type: "select" },
+    { key: "bg_style", label: "Background style", help: "Plain color is the default. Image accepts a local picture or an HTTPS link.", type: "select" },
     { key: "bg_color2", label: "Gradient second color", help: "Used by the gradient style.", type: "color" },
     { key: "bg_angle", label: "Gradient angle", help: "Direction of the gradient in degrees.", type: "range", unit: "\u00B0" },
     { key: "bg_image", label: "Image link", help: "https link to a picture, shown softly behind everything.", type: "text", ph: "https://..." },
@@ -204,7 +217,7 @@ const SECTIONS = [
   { id: "motion", icon: "\u21BB", tone: "green", title: "Motion", sub: "Animations and speed", help: "Turn animation down if it feels busy. Visitors whose device asks for less motion always get none.", fields: [
     { key: "motion", label: "Amount of motion", help: "Full: all effects. Subtle: quick and quiet. Calm: no decorative motion, stable reading. None: nothing moves. Your device's reduced-motion setting always overrides Full.", type: "select" },
     { key: "entrance", label: "New message effect", help: "How messages appear.", type: "select" },
-    { key: "speed", label: "Animation speed", help: "100 is normal. Higher is faster.", type: "range", unit: "%" },
+    { key: "speed", label: "Animation speed", help: "100% is normal animation speed. Higher percentages play faster.", type: "range", unit: "%" },
     { key: "hover_lift", label: "Lift items on hover", help: "Buttons and chips rise slightly under the mouse.", type: "toggle" } ] },
   { id: "layout", icon: "\u25EB", tone: "blue", title: "Layout", sub: "Where things sit", help: "Arrange the screen to suit how you work.", fields: [
     { key: "sidebar", label: "Sidebar position", help: "Left, right, or hidden until you press the menu button.", type: "select" },
@@ -398,7 +411,7 @@ function control(f) {
   } else if (f.type === "area") {
     input = el("textarea", { id, rows: "4", placeholder: f.ph || "(not filled)" }); input.value = v || ""; input.addEventListener("input", () => setv(f, input.value));
   } else {
-    input = el("input", { type: "text", id, placeholder: f.ph || "(not filled)", maxlength: f.type === "emoji" ? "8" : "300", class: f.type === "emoji" ? "emoji" : "" }); input.value = v || ""; input.addEventListener("input", () => setv(f, input.value)); input.addEventListener("blur", () => { const t = input.value.trim(); if (t !== input.value) { input.value = t; setv(f, t); } });
+    input = el(f.key.startsWith("txt_")&&!["txt_title","txt_placeholder","txt_sidebar"].includes(f.key)?"textarea":"input", { rows:f.key.startsWith("txt_")?"2":undefined,type: "text", id, placeholder: f.ph || "(not filled)", maxlength: f.type === "emoji" ? "8" : "300", class: f.type === "emoji" ? "emoji" : "" }); input.value = v || ""; input.addEventListener("input", () => setv(f, input.value)); input.addEventListener("blur", () => { const t = input.value.trim(); if (t !== input.value) { input.value = t; setv(f, t); } });
   }
   if (!canEdit) { if (input.matches("input,select,textarea,button")) input.disabled=true; input.querySelectorAll("input,select,textarea,button").forEach((x)=>x.disabled=true); }
   if (!canEdit && input.tagName === "SELECT") input.disabled = true;
@@ -437,8 +450,9 @@ function pvExtra() {
   }
 }
 function pvFollow() {
-  // Keep all settings in one continuous document. Navigation only updates preview.
+  // Navigation updates the selected panel and its preview.
   window.CCPipelineFocus?.(activeSec);
+  const setup=$("#sec-model .ollama-setup");if(setup)setup.hidden=cur.provider!=="ollama";
   const m = activeSec === "model", card = $("#pvmodel"), fr = $("#pv"), cap = $("#pvcap");
   const names = { presets: "Whole look", wording: "Wording", colors: "Colors", background: "Background", fonts: "Fonts", shape: "Shape and spacing", emoji: "Icons", motion: "Motion", layout: "Layout", model: "Model" };
   if (cap) cap.textContent = "Showing: " + (names[activeSec] || "Chat");
@@ -474,11 +488,12 @@ function syncColorEditor(sec) {
   }
 }
 function drawLook() {
+  const floating=$("#savebar");if(floating)$("main.card").append(floating);
   const root = $("#look"),extra=new Map([...root.querySelectorAll("section.tile")].map(sec=>[sec.id,[...sec.querySelectorAll(":scope > .workspace-fields")]])); root.replaceChildren();
   for (const s of SECTIONS) {
     const sec = el("section", { class: "tile", id: "sec-" + s.id });
     const head = el("div", { class: "head" }, el("span", { class: "ic " + s.tone, text: s.icon }), el("div", {}, el("b", { text: s.title }), el("small", { text: s.sub })), el("button", { type: "button", class: "mini reset", title: "Put this group back to the defaults", disabled: canEdit ? undefined : "", onclick: () => resetGroup(s) }, "Reset group"));
-    sec.append(head, el("div", { class: "help", text: s.help }));
+    head.querySelector("button.reset")?.remove();sec.append(head, el("div", { class: "help", text: s.help }));
     if (s.modeTabs) {
       const tabs = el("div", { class: "seg mini", role: "radiogroup", "aria-label": "Color set being edited" });
       for (const m of ["light", "dark"]) tabs.append(el("button", { type: "button", "data-m": m, role: "radio", "aria-checked": String(editMode === m), onclick: () => { editMode = m; setPvMode(m); syncColorEditor(sec); pushPreview(); } }, "Editing: " + (m === "light" ? "Light" : "Dark")));
@@ -496,36 +511,44 @@ function drawLook() {
       }
       const rest = s.fields.filter((f) => !used.has(f.key)); if (rest.length) { const g = el("div", { class: "fields" }); rest.forEach((f) => g.append(control(f))); sec.append(el("details", { class: "grp" }, el("summary", { text: "More options" }), g)); }
     }
-    sec.append(el("div", { class: "secfoot" }, el("button", { type: "button", class: "go blue", disabled: canEdit ? undefined : "", onclick: () => saveSection(s) }, "Save " + s.title.toLowerCase()), el("button", { type: "button", class: "go ghost", disabled: canEdit ? undefined : "", onclick: () => resetGroup(s) }, "Reset to default")));
+    sec.append(el("div", { class: "secfoot" }, el("button", { type: "button", class: "go ghost", disabled: canEdit ? undefined : "", onclick: () => resetGroup(s) }, "Reset this section")));
     for(const panel of extra.get(sec.id)||[])sec.append(panel);
     root.append(sec);
   }
   buildMenu();
 }
-function resetGroup(s) { const d = meta.default; for (const f of s.fields) { if (f.colors) theme[editMode][f.key] = d[editMode][f.key]; else theme[f.key] = d[f.key]; } drawLook(); changed(); try { window.ccPulse && window.ccPulse(document.getElementById("sec-" + s.id)); } catch (e) {} }
+function resetGroup(s) { if (!confirm("Reset only " + s.title + " to the default? Other Appearance sections stay unchanged.")) return; const d = meta.default; for (const f of s.fields) { if (f.colors) theme[editMode][f.key] = d[editMode][f.key]; else {theme[f.key] = d[f.key];if(f.type==="emoji")theme[f.key+"_animated"]=d[f.key+"_animated"];} } drawLook(); changed(); try { window.ccPulse && window.ccPulse(document.getElementById("sec-" + s.id)); } catch (e) {} }
 function setPvMode(m) { document.querySelectorAll("#pvmode button").forEach((b) => b.setAttribute("aria-checked", String(b.dataset.m === m))); }
 function buildMenu() {
-  const m = $("#menu"); m.replaceChildren();
-  const groups=[["start","Start and share",[["finish","Setup and workspace"],["portable","Load and share Nerds"]]],["config","Answers and sources",[["model","Model and key"],["search","Sources and APIs"],["prompts","Prompts"],["code","Code helpers"]]],["frontend","Appearance",[["presets","Presets and saved looks"],...SECTIONS.map(s=>[s.id,s.title])]], ["manage","Usage and maintenance",[["freshness","Document freshness"],["budget","Budget"]]]];
-  groups.forEach(([id,title,items])=>{const group=el("div",{class:"nav-group","data-group":id});group.append(el("b",{class:"nav-label",text:title}));items.forEach(([id,t])=>group.append(el("a",{href:"#sec-"+id,text:t})));m.append(group);});
-  const workspaceGroup=m.querySelector('[data-group="start"]');
-  const setupLink=workspaceGroup.querySelector('a[href="#sec-finish"]');setupLink.dataset.workspace="Setup";
-  for(const name of ["Workspace","Changes","Backup","Test questions","Deploy"]){const a=el("a",{href:"#sec-finish",text:name,class:"workspace-directory-link"});a.dataset.workspace=name;workspaceGroup.insertBefore(a,workspaceGroup.querySelector('a[href="#sec-portable"]'));}
-  const search = el("input", {type:"search",placeholder:"Find a section", "aria-label":"Find a configuration section"});
-  const directory = el("div", {class:"settings-directory"}, el("label", {text:"All features"}, search));
-  const results=el("div", {class:"directory-results",role:"status"});directory.append(results);m.prepend(directory);
-  search.addEventListener("input",()=>{const term=search.value.trim().toLowerCase();results.replaceChildren();if(!term)return;
-    const matches=[...m.querySelectorAll(".nav-group a")].filter(a=>{const sec=document.querySelector(a.hash);return (a.textContent+" "+(sec?.innerText||"")).toLowerCase().includes(term)});
-    matches.forEach(a=>{const link=el("a",{href:a.hash,text:a.textContent});if(a.dataset.workspace)link.dataset.workspace=a.dataset.workspace;results.append(link)});if(!matches.length)results.textContent="No matching section. All features remain below.";
-  });
-  m.querySelector(".nav-group a").classList.add("on");
-  let navHoldUntil=0;
-  m.addEventListener("click",e=>{const a=e.target.closest("a");if(!a)return;e.preventDefault();if(a.dataset.workspace)document.dispatchEvent(new CustomEvent("cc-workspace-open",{detail:a.dataset.workspace}));const target=document.querySelector(a.hash);if(target && getComputedStyle(target).display==="none")document.querySelector('#cfgmode [data-m="advanced"]')?.click();activeSec=a.hash.replace("#sec-","");navHoldUntil=Date.now()+1200;pvFollow();history.replaceState(null,"",a.hash);requestAnimationFrame(()=>document.querySelector(a.hash)?.scrollIntoView({block:"start",behavior:"instant"}));m.querySelectorAll("a").forEach(x=>x.classList.toggle("on",x===a))});
-  const col=$("#col");const order=["finish","portable","model","search","prompts","code","presets","look","freshness","budget"];
-  order.forEach(id=>{const sec=id==="look"?$("#look"):$("#sec-"+id);if(sec)col.insertBefore(sec,$("#msg"));});
-  const io = new IntersectionObserver((es) => { for (const e of es) if (e.isIntersecting && Date.now()>navHoldUntil) { activeSec = e.target.id.replace("sec-", ""); pvFollow(); document.querySelectorAll("#menu a").forEach((a) => a.classList.toggle("on", a.getAttribute("href") === "#" + e.target.id)); } }, { rootMargin: "-20% 0px -70% 0px" });
-  const watch = () => document.querySelectorAll("section.tile[id^=sec-]").forEach((n) => io.observe(n)); watch(); setTimeout(watch, 800); setTimeout(watch, 2500);
+ const m=$("#menu");m.replaceChildren();document.body.classList.add("settings-tabs");let top=$("#settingsNavTop");if(!top){top=el("div",{id:"settingsNavTop"});$(".layout").before(top)}top.replaceChildren();
+ const groups=[["start","Workspace",[["finish","Setup","Setup"],["portable","Load and share"],["workspace-list","Imported workspaces","Workspace"],["workspace-changes","Changes","Changes"],["workspace-backup","Backup","Backup"],["workspace-tests","Test questions","Test questions"],["workspace-deploy","Deploy plan","Deploy"]]],["config","Answers",[["model","Model and key"],["search","Sources and APIs"],["prompts","Prompts"],["code","Code helpers"]]],["frontend","Appearance",[["presets","Presets & setups"],...SECTIONS.map(s=>[s.id,s.title])]], ["manage","Maintenance",[["freshness","Document freshness"],["budget","Budget"]]]];
+ const rail=el("div",{class:"category-tabs",role:"tablist","aria-label":"Configuration groups","aria-orientation":"horizontal"});top.append(rail);
+ const panels=el("div",{class:"section-tabs"});m.append(panels);
+ function showSection(id,link){
+  if(document.body.classList.contains('simple')&&!['model','finish','presets','freshness'].includes(id))window.CCSettingsSetMode?.('advanced');
+  document.body.classList.toggle("settings-workspace-operation",id.startsWith("workspace-"));
+  if(id.startsWith("workspace-"))id="finish";
+  document.querySelectorAll("#col>section.tile,#look>section.tile").forEach(n=>{n.classList.toggle("settings-active-panel",n.id==="sec-"+id)});
+  $("#look").classList.toggle("settings-active-look",!!document.querySelector("#look #sec-"+id));
+  document.body.classList.toggle("settings-appearance-active",link.closest(".nav-group").dataset.group==="frontend");
+  const savebar=$("#savebar");$("#sec-"+id)?.append(savebar);
+  document.body.dataset.settingsSection=id;activeSec=id;pvFollow();history.replaceState(null,"",link.hash);
+  m.querySelectorAll("a").forEach(n=>{n.classList.toggle("on",n===link);n.setAttribute("aria-current",n===link?"page":"false")});
+ }
+ function showGroup(id){
+  panels.querySelectorAll(".nav-group").forEach(n=>n.hidden=n.dataset.group!==id);
+  rail.querySelectorAll("button").forEach(n=>{const on=n.dataset.group===id;n.setAttribute("aria-selected",String(on));n.tabIndex=on?0:-1});
+ }
+ for(const [id,title,items] of groups){
+  const panel=el("div",{class:"nav-group","data-group":id,id:"settings-group-"+id,role:"tabpanel"});
+  const tab=el("button",{type:"button",role:"tab","data-group":id,"aria-controls":panel.id,text:title,onclick:()=>{showGroup(id);const entry=document.body.classList.contains("simple")&&id==="config"?panel.querySelector('a[href="#sec-model"]'):panel.querySelector("a");entry.click()}});const tabMeta={start:['Workspace','Your Nerd','M3 3h7v7H3z M14 3h7v7h-7z M3 14h7v7H3z M14 14h7v7h-7z'],config:['Answers','Models & sources','M4 4h16v12H9l-5 4z M8 8h8 M8 12h5'],frontend:['Appearance','Theme & wording','M12 3a9 9 0 1 0 0 18h2a2 2 0 0 0 0-4h-1a2 2 0 0 1 0-4h2a6 6 0 0 0 6-6c0-2-4-4-9-4z M7 8h.01 M11 6h.01 M7 13h.01'],manage:['Maintenance','Documents & limits','M4 11a8 8 0 1 1 2 7 M4 4v7h7 M12 7v5l3 2']}[id];tab.textContent='';const icon=el('span',{class:'tab-icon','aria-hidden':'true'});icon.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="'+tabMeta[2]+'"/></svg>';tab.append(icon,el('span',{class:'tab-copy'},el('b',{text:title}),el('small',{text:tabMeta[1]})));rail.append(tab);
+  for(const [section,label,workspace] of items)panel.append(el("a",{"data-workspace":workspace,href:"#sec-"+section,text:label,onclick:e=>{e.preventDefault();showGroup(id);if(workspace)document.dispatchEvent(new CustomEvent("cc-workspace-open",{detail:workspace}));showSection(section,e.currentTarget)}}));panels.append(panel);
+ }
+ rail.addEventListener("keydown",e=>{if(!["ArrowDown","ArrowUp","ArrowLeft","ArrowRight","Home","End"].includes(e.key))return;e.preventDefault();const tabs=[...rail.querySelectorAll("button")],i=tabs.indexOf(document.activeElement),n=e.key==="Home"?0:e.key==="End"?tabs.length-1:(i+(["ArrowDown","ArrowRight"].includes(e.key)?1:-1)+tabs.length)%tabs.length;tabs[n].focus();tabs[n].click()});
+ const requested=m.querySelector('a[href="'+location.hash+'"]');if(requested&&document.body.classList.contains('simple')&&!['#sec-model','#sec-finish','#sec-presets','#sec-freshness'].includes(requested.hash))window.CCSettingsSetMode?.('advanced');const first=requested||m.querySelector(document.body.classList.contains('simple')?'a[href="#sec-model"]':'a[href="#sec-finish"]');showGroup(first.closest(".nav-group").dataset.group);showSection(first.hash.replace("#sec-",""),first);if(first.dataset.workspace)document.dispatchEvent(new CustomEvent("cc-workspace-open",{detail:first.dataset.workspace}));document.dispatchEvent(new CustomEvent("cc-settings-nav-ready"));
 }
+window.CCSettingsRefreshNavigation=buildMenu;
+window.addEventListener("hashchange",()=>{if(theme)buildMenu()});
 function presetTheme(p){const t=Object.assign(clone(meta.default),clone(p));t.light=Object.assign(clone(meta.default.light),p.light||{});t.dark=Object.assign(clone(meta.default.dark),p.dark||{});return t;}
 function lookSignature(t){const n=clone(t);for(const k of Object.keys(n))if(k.startsWith("txt_")||k.startsWith("logo"))delete n[k];return JSON.stringify(Object.fromEntries(Object.entries(n).sort()));}
 function syncPreset(){if(!theme||!meta)return;const name=Object.entries({...PRESETS,...MORE_PRESETS}).find(([n,p])=>lookSignature(presetTheme(p))===lookSignature(theme))?.[0];document.querySelectorAll("#presets [data-preset]").forEach(b=>{const on=b.dataset.preset===name;b.setAttribute("aria-pressed",String(on));b.classList.toggle("selected",on)});let note=$("#presetCurrent");if(!note){note=el("p",{id:"presetCurrent",class:"h",role:"status"});$("#presets").before(note)}note.textContent=name?"Current preset: "+name:"Current look: Custom";}
@@ -541,7 +564,7 @@ function buildPresets() {
     b.addEventListener("click", () => { const scroll=scrollY; const keep = ["txt_title", "txt_tagline", "txt_examples", "txt_placeholder", "txt_hint", "txt_disclaimer", "txt_sidebar", "txt_footer"]; for (const k of keep) t[k] = theme[k]; theme = t; editMode = theme.mode === "dark" ? "dark" : "light"; setPvMode(editMode); drawLook(); pvPop(); changed();window.scrollTo({top:scroll,behavior:"instant"});requestAnimationFrame(()=>window.scrollTo({top:scroll,behavior:"instant"})); say("Preset \u201c" + name + "\u201d applied to the preview. Press Save look to keep it."); });
     box.append(b);
   }
-  const more = el("button", { type: "button", class: "preset more", "aria-expanded": showMore ? "true" : "false" }, showMore ? "Show fewer" : "Load more");
+  const more = el("button", { type: "button", class: "preset more", "aria-expanded": showMore ? "true" : "false" }, showMore ? "Fewer presets" : "More presets");
   more.addEventListener("click", () => { showMore = !showMore; draw();syncPreset(); });
   box.append(more); };
   draw();syncPreset();
@@ -568,9 +591,9 @@ async function init() {
   $("#keyclear").addEventListener("click", async () => { try { const r = await api("/api/provider/key", { provider: cur.provider, clear: true }); keyInfo[cur.provider] = r.key; await provExtras(); say("Key removed."); } catch (e) { say(e.message, true); } });
   $("#testconn").addEventListener("click", async () => { const t=$("#testres"),provider=cur.provider,model=chosenModel(),base=$("#base").value.trim();t.className="testres busy";t.textContent="Testing...";let ok=false,message="";try{const r=await api("/api/provider/test",{provider,model,base_url:base});ok=r.ok;message=r.message}catch(e){message=e.message}testLog.unshift({p:NAMES[provider]||provider,ok,detail:message,t:new Date().toLocaleTimeString([],{hour:"2-digit",minute:"2-digit"})});testLog.length=Math.min(testLog.length,5);if(cur.provider===provider){t.className="testres "+(ok?"ok":"bad");t.textContent=(ok?"Passed. ":"Failed. ")+message}pvFollow(); });
   $("#apply").addEventListener("click", async () => { try { cur = (await api("/api/settings", { settings: read() })).settings; draw(); localStorage.setItem("cc_config_changed", String(Date.now())); say("Applied. New questions use these settings."); } catch (e) { say(e.message, true); } });
-  $("#save").addEventListener("click", async () => { try { const n = (await api("/api/states/save", { name: $("#sname").value })).name; await states(); say("Saved as \u201c" + n + "\u201d."); } catch (e) { say(e.message, true); } });
+  $("#save").addEventListener("click", async () => { try { theme = (await api("/api/theme", {theme})).theme; saved=clone(theme); changed(); const n = (await api("/api/states/save", { name: $("#sname").value })).name; await states(); say("Saved as \u201c" + n + "\u201d."); } catch (e) { say(e.message, true); } });
   $("#states").addEventListener("change",syncDeleteLook);
-  $("#load").addEventListener("click", async () => { const n = $("#states").value; if (!n) return say("Choose a saved state first", true); try { cur = (await api("/api/states/load", { name: n })).settings; draw(); localStorage.setItem("cc_config_changed", String(Date.now())); say("Loaded \u201c" + n + "\u201d."); } catch (e) { say(e.message, true); } });
+  $("#load").addEventListener("click", async () => { const n = $("#states").value; if (!n) return say("Choose a saved state first", true); try { const restored = (await api("/api/states/load", { name: n })); cur = restored.settings; if(restored.theme){theme=restored.theme;saved=clone(theme);editMode=theme.mode==="dark"?"dark":"light";drawLook();changed();} draw(); localStorage.setItem("cc_config_changed", String(Date.now())); say("Loaded \u201c" + n + "\u201d."); } catch (e) { say(e.message, true); } });
   $("#del").addEventListener("click", async () => { const n = $("#states").value; if (!n) return say("Choose a saved look first", true); if (!confirm("Delete the saved look \"" + n + "\"?")) return; await api("/api/states/delete", { name: n }); await states(); say("Deleted."); });
   $("#saveLook").addEventListener("click", async () => { try { theme = (await api("/api/theme", { theme })).theme; saved = clone(theme); drawLook(); changed(); say("Look saved. The chat now uses it for everyone."); } catch (e) { say(e.message, true); } });
   $("#resetAll").addEventListener("click", () => { if (!confirm("Reset only the look to the default? Prompts, sources, keys and helper drafts stay unchanged.")) return; theme = clone(meta.default); drawLook(); changed(); });
@@ -608,7 +631,7 @@ async function docsFreshness(force) {
   try {
     const result = await api("/api/docs-freshness", force ? {} : undefined);
     box.replaceChildren();
-    if (!result.sources.length) box.textContent = "No local document folders configured.";
+    if (!result.sources.length) box.append(el("p",{text:"No local document folders configured. Add a local_files source in Sources and APIs."}),el("a",{href:"#sec-search",text:"Open Sources and APIs"}));
     for (const source of result.sources) {
       const checked = source.checked_at ? new Date(source.checked_at * 1000).toLocaleString() : "not checked";
       const line=el("div",{class:"status-card"},el("b",{text:source.label}),
@@ -702,6 +725,7 @@ async function pollOllamaSetup(host,id){
 }
 
 init().then(() => { CCTour.config(); if (canEdit) { docsFreshness(false); loadBudget().catch((e) => { $("#budgetStatus").textContent = e.message; }); } updateVis(); setTimeout(updateVis, 500); }).catch((e) => say(e.message, true));
+window.CCSettingsSimple={state:()=>({provider:cur.provider,model:chosenModel(),canEdit,names:NAMES,key:keyInfo[cur.provider]}),select:provider=>{if(canEdit){switchProvider(provider);draw();pvFollow();}}};
 })();
 
 

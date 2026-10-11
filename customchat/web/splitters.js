@@ -12,7 +12,7 @@
  const bar = document.querySelector('.modebar');
  if (bar) bar.append(toggle);
  let previewHidden = false;
- try { previewHidden = localStorage.getItem(previewKey) === '1'; } catch (_) {}
+ try { previewHidden = localStorage.getItem(previewKey) !== '0'; } catch (_) {}
  function togglePreview() {
   document.body.classList.toggle('settings-preview-hidden', previewHidden);
   toggle.textContent = previewHidden ? 'Show chat preview' : 'Hide chat preview';

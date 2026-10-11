@@ -1,0 +1,16 @@
+app:
+  id: keyfixture
+  title: Key fixture
+provider:
+  type: mock
+sources:
+  - id: newsapi
+    type: http_json
+    label: NewsAPI fixture only
+    url: https://newsapi.org/v2/everything?q={query}
+    results_path: articles
+    header_env:
+      X-Api-Key: NEWSAPI_KEY
+    fields:
+      title: title
+      text: description
