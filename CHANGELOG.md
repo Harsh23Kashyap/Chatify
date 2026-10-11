@@ -1,3 +1,11 @@
+## 0.1.18 - 2026-10-11
+
+- Browser-style configuration tabs with contextual sections, phone layout, keyboard focus and hover.
+- Useful everyday model/test/follow-up controls, conditional keys and accurate save-state warnings.
+- Updated eight-step Configuration guide for current navigation, save scopes and bundle privacy.
+- Local regression fixes for exports, conversation navigation, state compatibility and owner isolation.
+- Fresh-start scripts select this release rather than the old 0.1.5 package.
+
 # Changelog
 
 ## 0.1.16 - 2026-10-09

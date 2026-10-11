@@ -23,7 +23,7 @@ class LocalStartTests(unittest.TestCase):
                 command = run.call_args_list[-1].args[0]
                 self.assertIn('--isolated', command)
                 self.assertIn('https://pypi.org/simple', command)
-                self.assertIn('customchat-app==0.1.5', command)
+                self.assertIn('customchat-app==' + S.VERSION, command)
                 self.assertIn('-I', command)
                 self.assertNotIn('--break-system-packages', command)
                 self.assertEqual(call.call_args.args[0][-3:], ['--directory', 'my chat', '--no-browser'])
