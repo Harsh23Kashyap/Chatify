@@ -513,17 +513,24 @@ def make_handler(cfg, engine):
                 return self._send(200, st) if st else self._send(404, {"error": "Unknown download"})
             if path == "/api/states" and method == "GET":
                 names=[n for n in store.states(o) if not n.startswith(("scope-","action-","note-","history-","workspace-"))]
-                matches=[n for n in names if store.get_state(o,n)==settings_view()]
+                matches=[n for n in names if store.get_state(o,n)=={"settings":settings_view(),"theme":themestore.value}]
                 return self._send(200, {"states": names, "current": matches[0] if len(matches)==1 else ""})
             if path == "/api/states/save" and method == "POST":
-                return self._send(200, {"name": store.save_state(o, b.get("name"), settings_view())})
+                if not can_edit(self):return self._send(403,{"error":"Only the admin can save appearance states"})
+                return self._send(200, {"name": store.save_state(o, b.get("name"), {"settings":settings_view(), "theme":themestore.value})})
             if path == "/api/states/load" and method == "POST":
                 if not can_edit(self):
                     return self._send(403, {"error": "Settings can only be changed from this computer or with the access token"})
                 with management.lock:
                     if management.active:raise ValueError('Wait for the workspace test to finish before changing settings')
-                    management.history.record(o,settings_view());apply_settings(store.get_state(o, str(b.get("name", ""))))
-                return self._send(200, {"settings": settings_view()})
+                    state=store.get_state(o, str(b.get("name", "")))
+                    if not isinstance(state,dict):raise ValueError("Saved state must be an object")
+                    settings=state.get("settings",state)
+                    if not isinstance(settings,dict):raise ValueError("Saved settings must be an object")
+                    if "theme" in state and not isinstance(state["theme"],dict):raise ValueError("Saved theme must be an object")
+                    management.history.record(o,settings_view());apply_settings(settings)
+                    if "theme" in state:themestore.save(state["theme"])
+                return self._send(200, {"settings": settings_view(), "theme":themestore.value})
             if path == "/api/states/delete" and method == "POST":
                 store.delete_state(o, str(b.get("name", ""))); return self._send(200, {"ok": True})
             if path == "/api/chats" and method == "GET":
@@ -551,7 +558,7 @@ def make_handler(cfg, engine):
             if path == "/api/stats":
                 return self._send(200, store.stats(o))
             if path == "/api/import" and method == "POST":
-                n = store.import_chats(o, b.get("chats") or [])
+                n = store.import_chats(o, b.get("chats", []))
                 return self._send(200, {"imported": n})
             if path == "/api/export":
                 ch = store.chat(o, qs.get("chat", ""))

@@ -3,14 +3,14 @@ import re, textwrap
 
 
 def _k(e, i):
-    a = (e["authors"][0].split()[-1] if e["authors"] else "anon")
-    return re.sub(r"\W", "", a) + (e["year"] or "nd") + str(i)
+    a = (str(e.get("authors",[])[0]).split()[-1] if e.get("authors") and str(e["authors"][0]).split() else "anon")
+    return re.sub(r"\W", "", a) + str(e.get("year") or "nd") + str(i)
 
 
 def bibtex(evidence):
     out = []
     for i, e in enumerate(evidence, 1):
-        f = {"title": e["title"], "author": " and ".join(e["authors"]), "year": e["year"], "journal": e["venue"], "url": e["url"]}
+        f = {"title": e.get("title",""), "author": " and ".join(map(str,e.get("authors") or [])), "year": str(e.get("year") or ""), "journal": e.get("venue",""), "url": e.get("url","")}
         body = ",\n".join("  %s = {%s}" % (k, re.sub(r"[{}]", "", v)) for k, v in f.items() if v)
         out.append("@article{%s,\n%s\n}" % (_k(e, i), body))
     return "\n\n".join(out) + "\n"
@@ -27,7 +27,7 @@ def snapshot(e):
 def answer_markdown(app,turn):
     out=["# "+app.get("title","Chat"),app.get("tagline",""),"", "## Question",turn['question'],"", "## Answer",turn['answer'],"", "## Sources at answer time"]
     for i,e in enumerate(turn['evidence'],1):
-        out += ["[%d] %s" % (e.get('n',i),e['title']),e.get('url',''),snapshot(e),""]
+        out += ["[%d] %s" % (e.get('n',i),e['title']),e.get('url') or '',snapshot(e),""]
     out += ["Source versions are snapshots at answer time. They are not a guarantee the linked document is unchanged."]
     return "\n".join(out)
 
@@ -35,10 +35,24 @@ def answer_markdown(app,turn):
 def pdf_bytes(title, turn, accent="#173f35", tagline=""):
     # Latin-1 standard fonts; reject unsupported glyphs rather than losing text.
     blocks=[('label','ANSWER NOTE'),('title',title),('muted',tagline),('space',''),('label','YOUR QUESTION'),('question',turn['question']),('space',''),('heading','Answer')]
-    blocks += [('body',p) if p else ('space','') for p in turn['answer'].split('\n')]
+    # Recompose markdown tables into readable labeled rows for narrow PDF pages.
+    lines=turn['answer'].split('\n');i=0
+    cells=lambda line:[x.strip().replace('\\|','|') for x in re.split(r'(?<!\\)\|',line.strip().strip('|'))]
+    while i<len(lines):
+        line=lines[i]
+        if '|' in line and i+1<len(lines) and re.match(r'^\s*\|?\s*:?-{3,}',lines[i+1]):
+            headers=cells(line);i+=2
+            while i<len(lines) and '|' in lines[i]:
+                values=cells(lines[i])
+                # Malformed rows stay literal rather than dropping cells or prose.
+                if len(values)!=len(headers):
+                    blocks.append(('body',lines[i]));i+=1;break
+                blocks.append(('body','; '.join('%s: %s'%(h,values[n]) for n,h in enumerate(headers))));i+=1
+            continue
+        blocks.append(('body',line) if line else ('space',''));i+=1
     blocks += [('space',''),('heading','Sources at answer time')]
     for i,e in enumerate(turn['evidence'],1):
-        blocks += [('source','[%d] %s'%(e.get('n',i),e['title'])),('muted',snapshot(e).replace(' · ',' | ')),('muted',e.get('url','')),('space','')]
+        blocks += [('source','[%d] %s'%(e.get('n',i),e['title'])),('muted',snapshot(e).replace(' · ',' | ')),('muted',e.get('url') or ''),('space','')]
     blocks += [('muted','Source versions are snapshots. Linked documents may change.')]
     try:'\n'.join(v for _,v in blocks).encode('latin-1')
     except UnicodeEncodeError:raise ValueError('PDF font cannot represent this text. Download Markdown for full Unicode.') from None

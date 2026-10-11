@@ -28,3 +28,18 @@ class Export(unittest.TestCase):
   lines=re.findall(rb'\(([^()]*)\) Tj',b)
   self.assertTrue(any(b'W' in row for row in lines))
   self.assertLessEqual(max(len(row) for row in lines if b'WW' in row),70)
+ def test_table_recomposed_as_labeled_rows(self):
+  t=self.turn();t['answer']='| Source | Headline count | Citations |\n| --- | --- | --- |\n| Feed | 2 | [1] |'
+  b=pdf_bytes('Chat',t);self.assertIn(b'Source: Feed; Headline count: 2; Citations: [1]',b);self.assertNotIn(b'| --- |',b)
+ def test_bibtex_missing_optional_metadata(self):
+  from customchat.exports import bibtex
+  self.assertIn('Minimal',bibtex([{'title':'Minimal','url':'https://example.org'}]))
+ def test_null_optional_url_exports(self):
+  t=self.turn();t['evidence'][0]['url']=None
+  self.assertIn('A source',answer_markdown({'title':'Chat'},t));self.assertIn(b'A source',pdf_bytes('Chat',t))
+ def test_table_extra_cells_and_following_pipe_prose_not_lost(self):
+  t=self.turn();t['answer']='| A | B |\n| --- | --- |\n| one | two | EXTRA |\nProse with | pipe'
+  b=pdf_bytes('Chat',t);self.assertIn(b'EXTRA',b);self.assertIn(b'Prose with',b)
+ def test_escaped_pipe_table_label_retained(self):
+  t=self.turn();t['answer']='| Source | Count |\n| --- | --- |\n| A\\|B | 1 |'
+  self.assertIn(b'Source: A|B; Count: 1',pdf_bytes('Chat',t))

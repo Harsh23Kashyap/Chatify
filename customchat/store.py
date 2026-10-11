@@ -157,7 +157,7 @@ class Store:
         return dict(r)
 
     def topics(self, owner):
-        return self.q("SELECT t.id,t.title,t.summary,t.created,(SELECT COUNT(*) FROM turns u WHERE u.topic=t.id) AS turns "
+        return self.q("SELECT t.id,t.title,t.summary,t.created,(SELECT COUNT(*) FROM turns u JOIN chats c ON c.id=u.chat WHERE u.topic=t.id AND c.owner=t.owner AND c.deleted IS NULL AND u.style NOT LIKE 'deleted:%') AS turns "
                       "FROM topics t WHERE t.owner=? ORDER BY t.created DESC", (owner,))
 
     def rename_topic(self, owner, topic, title):
@@ -206,7 +206,7 @@ class Store:
 
     def topic_turns(self, owner, topic, limit=200):
         self.topic(owner, topic)
-        return [self._turn(r) for r in self.q("SELECT * FROM turns WHERE topic=? AND style NOT LIKE 'deleted:%' ORDER BY created DESC LIMIT ?", (topic, limit))][::-1]
+        return [self._turn(r) for r in self.q("SELECT t.* FROM turns t JOIN chats c ON c.id=t.chat WHERE t.topic=? AND c.owner=? AND c.deleted IS NULL AND t.style NOT LIKE 'deleted:%' ORDER BY t.created DESC LIMIT ?", (topic, owner, limit))][::-1]
 
     def turn(self, owner, turn):
         r = self.q("SELECT t.* FROM turns t JOIN chats c ON c.id=t.chat WHERE t.id=? AND c.owner=?", (turn, owner), one=True)
@@ -370,6 +370,29 @@ class Store:
             return False
 
     def import_chats(self, owner, chats):
+        # Validate the whole bounded batch before creating any persistent rows.
+        if not isinstance(chats, list):
+            raise ValueError("Chats must be a list")
+        for c in chats[:200]:
+            if not isinstance(c, dict):
+                continue  # legacy exports may contain non-chat placeholders
+            turns = c.get("turns")
+            if turns is not None and not isinstance(turns, list):
+                raise ValueError("Chat turns must be a list")
+            for t in (turns or [])[:500]:
+                if not isinstance(t, dict) or not t.get("question") or not t.get("answer"):
+                    continue
+                evidence = t.get("evidence")
+                if evidence is not None and (not isinstance(evidence, list) or any(not isinstance(e, dict) for e in evidence)):
+                    raise ValueError("Turn evidence must be a list of objects")
+                for e in evidence or []:
+                    if not isinstance(e.get("title"), str) or not e["title"].strip():
+                        raise ValueError("Evidence needs a title")
+                    for field in ("url", "source", "venue", "document", "section"):
+                        if e.get(field) is not None and not isinstance(e[field], str):
+                            raise ValueError("Evidence " + field + " must be text")
+                    if e.get("authors") is not None and (not isinstance(e["authors"], list) or any(not isinstance(a, str) for a in e["authors"])):
+                        raise ValueError("Evidence authors must be a list of names")
         n = 0
         for c in chats[:200]:
             if not isinstance(c, dict):
