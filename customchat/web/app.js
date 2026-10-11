@@ -28,7 +28,7 @@ const ICON = {
   close: "M6 6l12 12M18 6L6 18",
 };
 const svg = (n) => { const e = document.createElementNS("http://www.w3.org/2000/svg", "svg"); e.setAttribute("viewBox", "0 0 24 24"); e.setAttribute("width", "18"); e.setAttribute("height", "18"); e.setAttribute("fill", "none"); e.setAttribute("stroke", "currentColor"); e.setAttribute("stroke-width", "2"); e.setAttribute("stroke-linecap", "round"); e.setAttribute("stroke-linejoin", "round"); const p = document.createElementNS("http://www.w3.org/2000/svg", "path"); p.setAttribute("d", ICON[n]); e.append(p); return e; };
-const S = { scope: null, suggestions: null, cfg: null, chat: null, topic: null, newTopic: false, tab: "chats", sources: new Set(), turns: [], ratings: {}, temp: false, useProfile: localStorage.getItem("cc_profile_on") === "1", busy: false, token: localStorage.getItem("cc_token") || "" };
+const S = { view: "chat", scope: null, suggestions: null, cfg: null, chat: null, topic: null, newTopic: false, tab: "chats", sources: new Set(), turns: [], ratings: {}, temp: false, useProfile: localStorage.getItem("cc_profile_on") === "1", busy: false, token: localStorage.getItem("cc_token") || "" };
 
 const TV = (k) => ((window.CCTheme && window.CCTheme.value) || {})[k] || "";
 const PREVIEW = !!window.__ccPreview;
@@ -64,15 +64,57 @@ function inline(parent, text, evidence) {
 }
 function renderAnswer(text, evidence) {
   const box = el("div", { class: "a" });
-  let list = null;
-  text.split(/\n/).forEach((line) => {
-    const li = line.match(/^\s*(?:[-*]|\d+[.)])\s+(.*)/), h = line.match(/^#{1,3}\s+(.*)/);
-    if (li) { if (!list) { list = el("ul"); box.append(list); } const x = el("li"); inline(x, li[1], evidence); list.append(x); return; }
-    list = null;
-    if (!line.trim()) return;
-    const p = el(h ? "h4" : "p"); inline(p, h ? h[1] : line, evidence); box.append(p);
-  });
+  let list = null; const lines=text.split(/\n/);
+  const cells=tableCells;
+  for(let i=0;i<lines.length;i++) {
+    const line=lines[i];
+    if(line.includes("|")&&i+1<lines.length&&/^\s*\|?\s*:?-{3,}/.test(lines[i+1])) {
+      list=null;const head=cells(line), table=el("table",{class:"answer-table"}), top=el("tr"),body=el("tbody");
+      head.forEach(t=>{const th=el("th",{scope:"col"});inline(th,t,evidence);top.append(th)});
+      table.append(el("thead",{},top),body);i++;
+      while(i+1<lines.length&&lines[i+1].includes("|")){const row=cells(lines[++i]);const tr=el("tr");head.forEach((_,n)=>{const td=el("td",{"data-label":head[n]});inline(td,row[n]||"",evidence);tr.append(td)});body.append(tr)}
+      box.append(el("div",{class:"answer-table-wrap",tabindex:"0","aria-label":"Answer table"},table));continue;
+    }
+    const li=line.match(/^\s*(?:[-*]|\d+[.)])\s+(.*)/),h=line.match(/^#{1,3}\s+(.*)/);
+    if(li){if(!list){list=el("ul");box.append(list)}const x=el("li");inline(x,li[1],evidence);list.append(x);continue}
+    list=null;if(!line.trim())continue;const p=el(h?"h4":"p");inline(p,h?h[1]:line,evidence);box.append(p);
+  }
   return box;
+}
+// Parse escaped pipes as literal label text, not as another column.
+function tableCells(line) {
+  const text=line.trim().replace(/^\||(?<!\\)\|$/g, "");
+  return text.split(/(?<!\\)\|/).map(x=>x.trim().replace(/\\\|/g,"|"));
+}
+function headlineCounts(evidence) {
+  const counts=new Map(), seen=new Map();
+  evidence.forEach(e=>{
+    const key=String(e.source||"Source"), id=e.url||e.id||String(e.n);
+    if(!seen.has(key))seen.set(key,new Set());
+    if(!seen.get(key).has(id)){seen.get(key).add(id);counts.set(key,(counts.get(key)||0)+1)}
+  });
+  return counts;
+}
+function chartData(answer, evidence) {
+  const lines=answer.split(/\n/), start=lines.findIndex((x,i)=>x.includes("|")&&i+1<lines.length&&/^\s*\|?\s*:?-{3,}/.test(lines[i+1]));
+  if(start<0)return null; // No chart when the answer gives no supported count table.
+  const headers=tableCells(lines[start]), counts=headlineCounts(evidence), rows=[], labels=new Set();
+  if(headers.length!==3||!/^source$/i.test(headers[0])||!/^headline count$/i.test(headers[1])||!/^citations$/i.test(headers[2]))return null;
+  for(let i=start+2;i<lines.length&&lines[i].includes("|");i++){
+    const c=tableCells(lines[i]);
+    if(c.length!==3||!/^\d+$/.test(c[1])||labels.has(c[0])||counts.get(c[0])!==Number(c[1]))return null;
+    const cites=[...c[2].matchAll(/\[(\d+)\]/g)].map(m=>Number(m[1]));
+    if(!cites.length||cites.some(n=>!evidence.some(e=>e.n===n&&String(e.source||"Source")===c[0])))return null;
+    labels.add(c[0]);rows.push({label:c[0],value:Number(c[1])});
+  }
+  return rows.length&&rows.length<=20?rows:null;
+}
+function answerChart(answer, evidence) {
+  const rows=chartData(answer,evidence);if(!rows)return null;
+  const chart=el("figure",{class:"answer-chart","aria-label":"Retrieved headline count by source"}),max=Math.max(...rows.map(r=>r.value),1);
+  chart.append(el("figcaption",{text:"Retrieved headline count by source"}));
+  rows.forEach(r=>chart.append(el("div",{class:"answer-chart-row"},el("span",{text:r.label}),el("div",{class:"answer-chart-track"},el("div",{class:"answer-chart-bar",style:"width:"+(r.value/max*100)+"%"})),el("span",{text:String(r.value)}))));
+  chart.append(el("small",{text:"Counts of unique retrieved headlines only. Not a real-world trend or topic breakdown."}));return chart;
 }
 
 function highlight(node, text, terms) {
@@ -130,6 +172,7 @@ function turnView(t, prev) {
   if (prev && prev.chat !== t.chat) nodes.push(el("div", { class: "divider", text: "Earlier chat" }));
   nodes.push(el("div", { class: "row u" }, avatar("you"), el("div", { class: "bubble ub", text: t.question })));
   const bub = el("div", { class: "bubble bb" + (t.evidence.length ? "" : " none") }, renderAnswer(t.answer, t.evidence));
+  if(/\b(chart|graph|plot)\b/i.test(t.question)){const chart=answerChart(t.answer,t.evidence);if(chart)bub.append(chart);}
   if (!t.evidence.length) {
     const ill = document.createElementNS("http://www.w3.org/2000/svg", "svg"); ill.setAttribute("viewBox", "0 0 96 96"); ill.setAttribute("class", "nf-ill"); ill.setAttribute("aria-hidden", "true");
     ill.innerHTML = '<g fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M26 14h30l14 14v50H26z"/><path d="M56 14v15h14"/><path d="M36 42h24M36 52h18" opacity=".5"/><circle cx="58" cy="62" r="13" class="nf-lens"/><path d="m67 71 12 12"/></g>';
@@ -165,7 +208,7 @@ function turnView(t, prev) {
   meta.append(el("button", { "data-more": "1", class: "chip", onclick: () => branchQuestion(t) }, "Edit + branch"));
   meta.append(el("button", { "data-more": "1", class: "chip del", title: "Delete this answer", onclick: async () => {
     await api("/api/delete-turn", { turn: t.id }); S.turns = S.turns.filter((x) => x.id !== t.id); drawThread();
-    const u = el("div", { class: "toast", onclick: async () => { await api("/api/restore-turn", { turn: t.id }); S.turns = await api("/api/turns?chat=" + S.chat); drawThread(); u.remove(); } }, "Answer deleted. Click to undo"); centerToast(u);
+    const u = el("div", { class: "toast", onclick: async () => { await api("/api/restore-turn", { turn: t.id }); S.turns = await api(S.view === "topic" && S.topic ? "/api/topic-turns?topic=" + S.topic : "/api/turns?chat=" + S.chat); drawThread(); u.remove(); } }, "Answer deleted. Click to undo"); centerToast(u);
     document.body.append(u); setTimeout(() => u.remove(), 6000); } }, "Delete"));
   const more = [...meta.querySelectorAll("[data-more]")];
   if (more.length) { const d = el("details", { class: "more" }, el("summary", { class: "chip", title: "More actions" }, t.evidence.length ? "More" : "Details")); const box = el("div", { class: "more-box" }); more.forEach((b) => box.append(b)); d.append(box); meta.append(d); }
@@ -187,7 +230,7 @@ async function branchQuestion(t) {
 }
 async function download(path, name) {
   const h = S.token ? { Authorization: "Bearer " + S.token } : {};
-  const r = await fetch(path, { headers: h }); if (!r.ok) return toast("Download failed");
+  const r = await fetch(path, { headers: h }); if (!r.ok) { const failure = await r.json().catch(() => ({})); return toast(typeof failure.error === "string" ? failure.error : "Download failed"); }
   const a = el("a", { href: URL.createObjectURL(await r.blob()), download: name }); a.click();
 }
 
@@ -316,12 +359,13 @@ async function loadList() {
       if (!rows.length) list.append(el("div", { class: "empty", text: "Conversations appear after your first question." }));
       rows.forEach((t) => list.append(el("div", { class: "item" + (t.id === S.topic ? " on" : ""), onclick: () => openTopic(t.id) },
         el("span", { class: "t" }, t.title, el("span", { class: "sub", text: (t.summary ? t.summary.slice(0, 70) : t.turns + " question" + (t.turns === 1 ? "" : "s")) })),
-        el("span", { class: "acts" }, el("button", { title: "Rename", "aria-label": "Rename " + c.title, onclick: async (e) => { e.stopPropagation(); const n = prompt("Rename conversation", t.title); if (n) { await api("/api/rename-topic", { topic: t.id, title: n }); loadList(); } } }, svg("edit"))))));
+        el("span", { class: "acts" }, el("button", { title: "Rename", "aria-label": "Rename " + t.title, onclick: async (e) => { e.stopPropagation(); const n = prompt("Rename conversation", t.title); if (n) { await api("/api/rename-topic", { topic: t.id, title: n }); loadList(); } } }, svg("edit"))))));
     }
   } catch (e) { list.append(el("div", { class: "empty", text: e.message })); }
 }
 
 async function openChat(id) {
+  S.view = "chat";
   setTemp(false);
   S.chat = id; S.newTopic = false;
   S.turns = await api("/api/turns?chat=" + id);
@@ -332,12 +376,14 @@ async function openChat(id) {
   $("#app").classList.remove("menu-open", "src"); drawThread(); loadList();
 }
 async function openTopic(id) {
+  S.view = "topic";
+  setTemp(false);
   S.topic = id; S.newTopic = false;
-  if (!S.chat) S.chat = (await api("/api/chats", {})).id;
   S.turns = await api("/api/topic-turns?topic=" + id);
+  S.chat = S.turns.length ? S.turns[S.turns.length - 1].chat : null;
   $("#chatTitle").textContent = "Conversation"; $("#app").classList.remove("menu-open"); drawThread();
 }
-function newChat() { setTemp(false); loadSuggestions(); S.chat = null; S.topic = null; S.newTopic = false; S.turns = []; $("#chatTitle").textContent = "New chat"; $("#app").classList.remove("src", "menu-open"); drawThread(); loadList(); $("#q").focus(); }
+function newChat() { S.view = "chat"; setTemp(false); loadSuggestions(); S.chat = null; S.topic = null; S.newTopic = false; S.turns = []; $("#chatTitle").textContent = "New chat"; $("#app").classList.remove("src", "menu-open"); drawThread(); loadList(); $("#q").focus(); }
 
 let aborter = null;
 async function stream(body, onEvent) {
@@ -572,7 +618,7 @@ function setupSimilar() {
   });
 }
 function jumpQ(dir) {
-  const qs = [...document.querySelectorAll("#thread .q")]; if (!qs.length) return;
+  const qs = [...document.querySelectorAll("#thread .row.u")]; if (!qs.length) return;
   const th = $("#thread"), top = th.getBoundingClientRect().top + 8;
   const idx = qs.findIndex((n) => n.getBoundingClientRect().top > top + 4);
   let target = dir > 0 ? qs[idx === -1 ? qs.length - 1 : idx] : qs[(idx === -1 ? qs.length : idx) - 2] || qs[0];

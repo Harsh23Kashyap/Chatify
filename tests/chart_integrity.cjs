@@ -1,0 +1,7 @@
+const assert=require('assert'),fs=require('fs'),vm=require('vm'),path=require('path');
+const src=fs.readFileSync(path.join(__dirname,'../customchat/web/app.js'),'utf8'),ctx={};vm.createContext(ctx);vm.runInContext(src.slice(src.indexOf('function tableCells('),src.indexOf('function answerChart(')),ctx);
+const ev=[{n:1,source:'Feed',url:'a'},{n:2,source:'Feed',url:'a'},{n:3,source:'Feed',url:'b'},{n:4,source:'Other',url:'c'}];
+const table=(value='2',label='Feed',cite='[1] [3]',header='Headline count')=>`| Source | ${header} | Citations |\n| --- | --- | --- |\n| ${label} | ${value} | ${cite} |`;
+let checks=0;function check(answer,valid,evidence=ev){assert.equal(!!ctx.chartData(answer,evidence),valid,answer);checks++}
+check(table(),true);check(table('3'),false);check(table('2%'),false);check(table('2.0'),false);check(table('-2'),false);check(table('NaN'),false);check(table('2','Feed','[4]'),false);check(table('2','Feed','[9]'),false);check(table('2','Feed',''),false);check(table('2','Feed','[1]','Employment'),false);check('No measured trend is available.',false);check(table()+'\n| Feed | 2 | [1] |',false);check(table('1','__proto__','[1]'),true,[{n:1,source:'__proto__',url:'a'}]);check(table('1','A\\|B','[1]'),true,[{n:1,source:'A|B',url:'a'}]);check(table('1','<script>bad</script>','[1]'),true,[{n:1,source:'<script>bad</script>'}]);
+console.log(`PASS ${checks} production chart parser cases`);
