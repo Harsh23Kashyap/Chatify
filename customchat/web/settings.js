@@ -280,7 +280,7 @@ const GROUPS = {
 const clone = (o) => JSON.parse(JSON.stringify(o));
 const effectiveWording = () => {const a=window.CCLoadedApp?.app||{};return {txt_title:a.title,txt_tagline:a.tagline,txt_examples:(a.examples||[]).join("\n"),txt_footer:a.footer,txt_placeholder:"Ask a question",txt_hint:"Answers cite their sources. Check important facts.",txt_disclaimer:"Not a substitute for professional advice.",txt_sidebar:"Conversations"};};
 const get = (f) => (f.colors ? theme[editMode][f.key] : theme[f.key] || effectiveWording()[f.key] || theme[f.key]);
-const setv = (f, v) => { const empty=document.getElementById("f-"+f.key)?.closest(".field")?.querySelector(".empty-field");if(empty)empty.hidden=!!v; if (f.colors) theme[editMode][f.key] = v; else theme[f.key] = v; changed(); };
+const setv = (f, v) => { const empty=(document.getElementById("f-"+f.key)||document.getElementById("f-"+f.key+"-file"))?.closest(".field")?.querySelector(".empty-field");if(empty)empty.hidden=!!v; if (f.colors) theme[editMode][f.key] = v; else theme[f.key] = v; changed(); };
 let sendTimer = 0;
 function pushPreview() {
   const t = clone(theme); const m = $("#pvmode .seg button[aria-checked=true], #pvmode button[aria-checked=true]"); t.mode = m ? m.dataset.m : t.mode;
@@ -307,7 +307,7 @@ function changed() {
 /* Logo: everything happens in the browser. The picture is shrunk, its plain background can be removed,
    and its edges are feathered so it melts into the page instead of sitting in a hard box. */
 function logoControl(f, current) {
-  let orig = null; const st = { feather: 25, strip: false };
+  let orig = null,logoRequest=0; const st = { feather: 25, strip: false };
   const prev = el("img", { class: "logoprev", alt: "Result", hidden: current ? undefined : "" }); if (current) prev.src = current;
   const before = el("img", { class: "logoprev", alt: "Original", hidden: "" }), onpage = el("div", { class: "logopage", hidden: current ? undefined : "" }), pgimg = el("img", { alt: "" }), pgname = el("span");
   onpage.append(pgimg, pgname); if (current) pgimg.src = current;
@@ -317,7 +317,7 @@ function logoControl(f, current) {
   const file = el("input", { type: "file", accept: ".png,.jpg,.jpeg,.webp,.gif,image/*", id: "f-logo-file", "aria-label": "Choose a logo picture" }); file.style.cssText = "position:absolute;width:1px;height:1px;opacity:0;pointer-events:none"; const fileBtn = el("label", { class: "go ghost filebtn", for: "f-logo-file" }, "Choose a picture");
   const fe = el("input", { type: "range", min: "0", max: "50", value: "25", "aria-label": "Edge softness", disabled: "" });
   const rb = el("input", { type: "checkbox", disabled: "" });
-  const note = el("div", { class: "h", text: current ? "Choose a new picture to adjust it." : "PNG, JPG, WebP or GIF. Stays on this computer." });
+  const note = el("div", { class: "h", text: current ? "Choose a new picture to adjust it. Current logo stays until a replacement is ready." : "PNG, JPG, WebP or GIF. Add a picture to enable background removal and edge softness." });
   const rm = el("button", { type: "button", class: "mini", hidden: current ? undefined : "" }, "Remove");
   function render() {
     if (!orig) return; const max = 256, k = Math.min(1, max / Math.max(orig.width, orig.height));
@@ -339,14 +339,14 @@ function logoControl(f, current) {
   }
   file.addEventListener("change", () => {
     const fl = file.files[0]; if (!fl) return;file.value="";if(fl.size>20000000){note.textContent="That picture is over 20 MB. Choose a smaller one.";say(note.textContent,true);return}note.textContent="Reading "+fl.name+"...";
-    const im = new Image();
-    im.onload = () => { orig = im; before.src = im.src; before.hidden = false; stage.hidden = false; fe.disabled = rb.disabled = false; note.textContent = "Soft edges and background removal run on this computer."; try{render();derive.disabled=false;note.textContent="Added "+fl.name+". Preview updated.";say(note.textContent)}catch(error){note.textContent="Could not process this picture: "+error.message;say(note.textContent,true)}; /* keep the object URL while the Original tile shows it */ };
-    im.onerror=()=>{note.textContent="Could not decode "+fl.name+". Export it as PNG or JPG and try again.";say(note.textContent,true)};
-    const reader=new FileReader();reader.onload=()=>{im.src=reader.result};reader.onerror=()=>{note.textContent="Cannot read "+fl.name+". Download it from iCloud locally, then try again.";say(note.textContent,true)};reader.readAsDataURL(fl);
+    const seq=++logoRequest;const im = new Image();
+    im.onload = () => {if(seq!==logoRequest)return;orig = im; before.src = im.src; before.hidden = false; stage.hidden = false; fe.disabled = rb.disabled = false; note.textContent = "Soft edges and background removal run on this computer."; try{render();derive.disabled=false;note.textContent="Added "+fl.name+". Preview updated.";say(note.textContent)}catch(error){note.textContent="Could not process this picture: "+error.message;say(note.textContent,true)}; /* keep the object URL while the Original tile shows it */ };
+    im.onerror=()=>{if(seq!==logoRequest)return;note.textContent="Could not decode "+fl.name+". Export it as PNG or JPG and try again.";say(note.textContent,true)};
+    const reader=new FileReader();reader.onload=()=>{if(seq===logoRequest)im.src=reader.result};reader.onerror=()=>{if(seq!==logoRequest)return;note.textContent="Cannot read "+fl.name+". Download it from iCloud locally, then try again.";say(note.textContent,true)};reader.readAsDataURL(fl);
   });
   fe.addEventListener("input", () => { st.feather = +fe.value; render(); });
   rb.addEventListener("change", () => { st.strip = rb.checked; render(); });
-  rm.addEventListener("click", () => { orig = null; prev.classList.add("leave"); setTimeout(() => { prev.hidden = true; prev.classList.remove("leave"); }, 180); before.hidden = true; onpage.hidden = true; rm.hidden = true; fe.disabled = rb.disabled = true; file.value = ""; setv(f, ""); });
+  rm.addEventListener("click", () => {if(!confirm("Remove this logo? Other appearance settings stay unchanged."))return;++logoRequest;orig = null;derive.disabled=true;theme.logo_watermark=false; prev.classList.add("leave"); setTimeout(() => { prev.hidden = true; prev.classList.remove("leave"); }, 180); before.hidden = true; onpage.hidden = true; rm.hidden = true; fe.disabled = rb.disabled = true; file.value = ""; setv(f, ""); });
   const derive = el("button", {type:"button",class:"go ghost",disabled:current ? undefined : ""}, "Build colors from logo");
   derive.addEventListener("click", () => {
     if (!prev.src || !window.CCBrand) return;
@@ -356,11 +356,9 @@ function logoControl(f, current) {
       const seed = CCBrand.seed(ctx.getImageData(0,0,64,64).data);
       theme.light = CCBrand.palette(seed,false); theme.dark = CCBrand.palette(seed,true);
       changed(); paintPage();
-      say("Light and dark palettes are ready in the preview. Text contrast is at least 4.5:1 on generated surfaces. Colors remain editable. Save look to keep them.");
+      say("Light and dark palettes are ready in the preview. Text contrast is at least 4.5:1 on generated surfaces. Colors remain editable. Appearance saves automatically.");
     }; image.src = prev.src;
   });
-  file.addEventListener("change", () => { derive.disabled = false; });
-  rm.addEventListener("click", () => { derive.disabled = true; theme.logo_watermark = false; changed(); });
   fe.addEventListener("input",()=>{const out=document.getElementById("logoSoftnessValue");if(out)out.textContent=fe.value});
   const box = el("div", { class: "logobox" });
   const take = (fl) => { if (!fl || !/^image\//.test(fl.type)) { say("Drop a PNG, JPG, WebP or GIF picture.", true); return; } const dt = new DataTransfer(); dt.items.add(fl); file.files = dt.files; file.dispatchEvent(new Event("change")); };
@@ -369,7 +367,7 @@ function logoControl(f, current) {
   box.addEventListener("dragover", (e) => { e.preventDefault(); e.dataTransfer.dropEffect = "copy"; });
   box.addEventListener("dragleave", () => { if (--depth <= 0) { depth = 0; over(false); } });
   box.addEventListener("drop", (e) => { e.preventDefault(); depth = 0; over(false); take(e.dataTransfer.files[0]); });
-  box.append(stage, el("div", { class: "logoctl" }, fileBtn, el("span", { class: "h dropnote", text: "or drag a picture here" }), file, el("label", { class: "check" }, rb, "Remove plain background"), el("label", { class: "h" }, "Edge softness ", el("output",{id:"logoSoftnessValue",text:fe.value}),fe), derive, el("span", {class:"h",text:"Replaces both palettes in the preview. Saves automatically; edit Colors for overrides. Logo also becomes the favicon."}), note, rm));
+  box.append(stage, el("div", { class: "logoctl" }, fileBtn, el("span", { class: "h dropnote", text: "or drag a picture here" }), file, el("label", { class: "check" }, rb, "Remove plain background"), el("label", { class: "h" }, "Edge softness (fades the image edges) ", el("output",{id:"logoSoftnessValue",text:fe.value}),fe), derive, el("span", {class:"h",text:"Replaces both palettes in the preview. Saves automatically; edit Colors for overrides. Logo also becomes the favicon."}), note, rm));
   return box;
 }
 const EMOJI_GROUPS={
