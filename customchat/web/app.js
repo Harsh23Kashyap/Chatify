@@ -154,7 +154,7 @@ function showSources(evidence, hl, trigger) {
   if (types.length > 1) types.forEach((t) => filters.append(el("button", { class: "chip", onclick: (ev) => {
     const on = ev.target.classList.toggle("on"); filters.querySelectorAll(".chip").forEach((c) => c !== ev.target && c.classList.remove("on")); draw(on ? t : null);
   } }, (S.cfg.sources.find((s) => s.id === t) || {}).label || t)));
-  pane.append(el("button", { class: "icon", style: "float:right", "aria-label": "Close", onclick: closeSources }, svg("close")),
+  pane.append(el("button", { class: "icon", style: "float:right", "aria-label": "Close sources", title: "Close sources", onclick: closeSources }, svg("close")),
     el("h3", { text: "Sources" }), el("div", { class: "sub", text: evidence.length + " used for this answer" }), filters, list);
   draw(null);
   if (opening && motionAllowed() && pane.animate) pane.animate([{opacity:0, transform:"translateX(16px)"}, {opacity:1, transform:"translateX(0)"}], {duration:240, easing:"cubic-bezier(.2,.8,.2,1)"});
@@ -191,7 +191,7 @@ function turnView(t, prev) {
   if (t.standalone && t.standalone !== t.question) meta.append(el("span", { class: "chip", title: "Understood as" }, "Understood as: " + t.standalone));
   if (t.scope) meta.append(el("span", {class:"chip scope-used", text:"Scoped: " + (t.scope.document || t.scope.source)}));
   meta.append(el("button", { "data-more": "1", class: "chip", title: "How this answer was built", onclick: () => contextDialog(t) }, "Context"));
-  if (t.evidence.length) meta.append(el("button", { class: "chip copy", onclick: (ev) => { const b = ev.currentTarget; navigator.clipboard.writeText(t.answer).then(() => { toast("Copied"); b.textContent = "Copied"; b.classList.add("done"); setTimeout(() => { b.textContent = "Copy"; b.classList.remove("done"); }, 1600); }); } }, "Copy"));
+  if (t.evidence.length) meta.append(el("button", { class: "chip copy", onclick: async (ev) => { const b = ev.currentTarget; try { if (!navigator.clipboard) throw Error("Clipboard unavailable. Select and copy the answer instead."); await navigator.clipboard.writeText(t.answer); toast("Copied"); b.textContent = "Copied"; b.classList.add("done"); setTimeout(() => { b.textContent = "Copy"; b.classList.remove("done"); }, 1600); } catch (e) { b.textContent = "Copy"; b.classList.remove("done"); toast(e.message || "Could not copy. Select and copy the answer instead."); } } }, "Copy"));
   if (t.evidence.length) {
     meta.append(el("button", { "data-more": "1", class: "chip", onclick: () => download("/api/bibtex?turn=" + t.id, "references.bib") }, "BibTeX"));
     meta.append(el("button", {"data-more":"1",class:"chip",onclick:()=>download("/api/answer-markdown?turn="+t.id,"answer.md")},"Markdown"));
