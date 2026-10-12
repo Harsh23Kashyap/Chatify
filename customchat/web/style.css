@@ -798,3 +798,6 @@ html[data-motion=none] .ephemeral-scene *,html[data-motion=calm] .ephemeral-scen
 .modal.source-add-modal{display:flex;flex-direction:column;overflow:hidden;padding:0}.source-add-modal>h2{padding:20px 22px 12px;margin:0;flex:none}.source-add-content{min-height:0;overflow-y:auto;overscroll-behavior:contain;padding:0 22px 16px}.source-add-modal>.modal-act{position:static;margin:0;padding:12px 22px;flex:none;border-top:1px solid var(--line)}
 .playground .shortcut-label{margin:20px 0 8px;font-size:13px;text-transform:none;letter-spacing:0}.playground-actions{margin-top:0}.playground-action{box-shadow:none!important;background:transparent!important}.playground-action small{font-size:12px!important;line-height:1.5!important}.playground-quiet{margin-top:12px!important}
 .playground-intro:has(.playground-scene:empty){min-height:0!important;margin-bottom:16px!important}.playground .playground-action{min-height:88px!important;padding:12px!important}.playground .playground-action small{min-height:0!important}.playground .shortcut-label{margin-top:16px!important}.playground-actions,.playground-questions{gap:8px!important}
+/* Keep icon targets usable on desktop as well as touch layouts. */
+html body :is(.theme-btn,.jump,.box .icon,.send){min-width:44px!important;min-height:44px!important;flex-shrink:0}
+html body :is(#newChat,#tempPill){min-height:44px!important}
