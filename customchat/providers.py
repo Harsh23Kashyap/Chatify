@@ -78,6 +78,15 @@ def _post(url, payload, headers, timeout, retries=3):
             time.sleep(min(wait, 8) + random.uniform(0, 0.25))
 
 
+def _connection_error(error):
+    reason = getattr(error, "reason", error)
+    if isinstance(reason, TimeoutError) or "timed out" in str(reason).lower():
+        return ProviderError("The model request timed out. Check the connection or try a smaller request.")
+    if isinstance(error, http.client.HTTPException):
+        return ProviderError("The provider connection dropped in the middle of its reply. Try again.")
+    return ProviderError("Could not connect to the model provider. Check the connection address and network, then try again.")
+
+
 def _post_once(url, payload, headers, timeout):
     req = urllib.request.Request(url, data=json.dumps(payload).encode(), headers={"Content-Type": "application/json", **headers})
     try:
@@ -86,9 +95,7 @@ def _post_once(url, payload, headers, timeout):
     except urllib.error.HTTPError as e:
         raise _http_error(e) from None
     except (urllib.error.URLError, TimeoutError, OSError, http.client.HTTPException) as e:
-        if isinstance(e, http.client.HTTPException):
-            raise ProviderError("The provider connection dropped in the middle of its reply") from None
-        raise ProviderError("Provider unreachable: %s" % getattr(e, "reason", e)) from None
+        raise _connection_error(e) from None
     except ValueError:
         raise ProviderError("The provider sent a reply that could not be read", 502) from None
 
@@ -124,9 +131,7 @@ def _stream_once(url, payload, headers, timeout):
     except urllib.error.HTTPError as e:
         raise _http_error(e) from None
     except (urllib.error.URLError, TimeoutError, OSError, http.client.HTTPException) as e:
-        if isinstance(e, http.client.HTTPException):
-            raise ProviderError("The provider connection dropped in the middle of its reply") from None
-        raise ProviderError("Provider unreachable: %s" % getattr(e, "reason", e)) from None
+        raise _connection_error(e) from None
     except ValueError:
         raise ProviderError("The provider sent a reply that could not be read", 502) from None
 
