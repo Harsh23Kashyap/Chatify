@@ -30,3 +30,5 @@ html body.settings-tabs #sec-code #codeEditor{padding:0!important;border:0!impor
 html body.settings-tabs #sec-code #codeEditor details.helper.selected-editor>summary{justify-content:flex-start!important;align-items:flex-start!important}html body.settings-tabs #sec-code #codeEditor summary>b{flex:1;text-align:left!important}html body.settings-tabs #sec-code #codeEditor summary::after{margin-left:auto}
 
 .shape-shortcuts [aria-pressed=true],.background-shortcuts [aria-pressed=true]{outline:2px solid #173f35;outline-offset:2px}
+/* Search results must sit above the following sticky section navigation. */
+html body.settings-tabs .settings-search:has(.settings-search-results:not([hidden])){z-index:200}html body.settings-tabs .settings-search-results{z-index:210;max-height:min(360px,50dvh)}
