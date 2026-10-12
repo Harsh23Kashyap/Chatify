@@ -559,7 +559,7 @@ async function init() {
   document.addEventListener("keydown", (e) => { if (e.key === "Escape") $("#app").classList.remove("src", "menu-open"); });
   const th = $("#thread"), jump = $("#jump");
   th.addEventListener("scroll", () => jump.classList.toggle("show", th.scrollHeight - th.scrollTop - th.clientHeight > 240));
-  jump.addEventListener("click", () => th.scrollTo({ top: th.scrollHeight, behavior: "smooth" }));
+  jump.addEventListener("click", () => th.scrollTo({ top: th.scrollHeight, behavior: motionAllowed()?"smooth":"auto" }));
   $("#menu").replaceChildren(svg("menu")); $("#upload").replaceChildren(svg("clip")); $("#exportChat").replaceChildren(svg("tray")); $("#newTopic").replaceChildren(svg("topic")); $("#newTopic").onclick = () => { S.newTopic = true; S.topic = null; toast("Next question starts a new conversation"); }; $("#send").replaceChildren(svg("send")); $("#jump").replaceChildren(svg("down"));
   $("#upload").addEventListener("click", uploadDialog);
   document.addEventListener("keydown", (e) => { if ((e.metaKey || e.ctrlKey) && e.key === "k") { e.preventDefault(); $("#search").focus(); } });
@@ -647,7 +647,7 @@ function jumpQ(dir) {
   const idx = qs.findIndex((n) => n.getBoundingClientRect().top > top + 4);
   let target = dir > 0 ? qs[idx === -1 ? qs.length - 1 : idx] : qs[(idx === -1 ? qs.length : idx) - 2] || qs[0];
   if (dir < 0 && idx === -1) target = qs[Math.max(0, qs.length - 2)];
-  target.scrollIntoView({ behavior: "smooth", block: "start" });
+  target.scrollIntoView({ behavior: motionAllowed()?"smooth":"auto", block: "start" });
 }
 function setupResizer() {
   const r = $("#resizer"), app = $("#app"); if (!r) return;
