@@ -116,7 +116,7 @@ body.temp .app{border-color:#d97706;box-shadow:0 24px 70px rgba(217,119,6,.14)}b
 .modal.auth{display:flex;flex-direction:column;gap:10px}
 .modal.auth input{padding:11px 14px;border:1px solid var(--line);border-radius:calc(12px*var(--rs,1));background:var(--cream);color:var(--ink);font:inherit}
 .modal.auth input:focus{outline:2px solid var(--brand);outline-offset:1px}
-.auth-err{color:#b42318;font-size:calc(13px*var(--fs,1));min-height:1em}
+.auth-err{color:var(--feedback-ink,#654c2d);font-size:calc(13px*var(--fs,1));min-height:1em}
 .linkbtn{border:none;background:none;color:var(--brand);cursor:pointer;font:inherit;font-size:calc(13px*var(--fs,1));margin-right:auto;padding:0;text-decoration:underline}
 .modal-back [hidden],.acct-menu[hidden]{display:none!important}
 

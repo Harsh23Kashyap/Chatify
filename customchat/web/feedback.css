@@ -1,0 +1,17 @@
+/* Quiet ochre feedback, shared by chat and configuration. Text and symbols carry meaning. */
+:root{--feedback-ink:#654c2d;--feedback-surface:#f7f0e2;--feedback-line:#967444;--feedback-focus:#173f35}
+html[data-theme=dark],html[data-mode=dark],html.dark{--feedback-ink:#f1d4a5;--feedback-surface:#29271f;--feedback-line:#bd9b65;--feedback-focus:#bdd4bb}
+html body [aria-invalid=true]{border-color:var(--feedback-line)!important;background:var(--feedback-surface)!important;box-shadow:inset 3px 0 0 var(--feedback-line)!important}
+html body [aria-invalid=true]:focus-visible{outline:2px solid var(--feedback-focus)!important;outline-offset:3px!important}
+html body .builder-section:has([aria-invalid=true]){border-color:var(--feedback-line);background:#fbf8f0}
+html body .builder-field-error{color:var(--feedback-ink);font-size:12px;line-height:1.5;font-weight:500;text-transform:none;letter-spacing:normal;margin-top:6px;display:block}
+html body .builder-field-error:empty{display:none}
+html body .builder-field-error:not(:empty)::before{content:'!';display:inline-grid;place-items:center;border:1px solid var(--feedback-line);width:15px;height:15px;border-radius:50%;margin-right:6px;font-weight:700;font-size:11px}
+html body [data-feedback=error],html body .review.bad,html body .testres.bad,html body .pvm-badge.bad,html body .builder-job-parts [data-state=error],html body .builder-background[data-state=partial]{color:var(--feedback-ink)!important;background:var(--feedback-surface)!important;border:1px solid var(--feedback-line)!important;border-radius:10px;padding:10px 12px;line-height:1.55;overflow-wrap:anywhere;animation:none!important}
+html body [data-feedback=error]:empty{display:none}
+html body .h.bad,html body .pvm-row.bad,html body .auth-err,html body .fitchip.red,html body .cc .rt.red{color:var(--feedback-ink)!important}
+html body .diff .del{background:var(--feedback-surface);color:var(--feedback-ink)}
+html body .builder-job-parts [data-state=error]{font-weight:500}
+html body .builder-background[data-state=partial]{border-radius:999px}
+
+@media(prefers-color-scheme:dark){html[data-theme=auto]{--feedback-ink:#f1d4a5;--feedback-surface:#29271f;--feedback-line:#bd9b65;--feedback-focus:#bdd4bb}}

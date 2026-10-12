@@ -1,3 +1,11 @@
+## 0.1.23 - 2026-10-12
+
+- Redesign Build with AI as an editorial cream/forest app studio, with a compact running view and explicit per-part Queued, Waiting for model, Draft received and Needs retry states.
+- Replace the three-dot loader with an animated orbit mark and a progress track driven only by completed build areas. Animate real status changes; reduced-motion keeps every state static.
+- Use quiet ochre errors with readable messages, field associations and recovery actions, not alarming red surfaces or shaking.
+- Separate saved YAML and Back to draft buttons, keep review actions readable, and tighten the phone layout at 320/390px. Provider/model disclosure, review-before-save and no calls on typing are unchanged.
+- Browser state tests use controlled model responses; this design release does not claim new live API or model quality coverage.
+
 ## 0.1.22 - 2026-10-12
 
 - Complete background AI build split into isolated settings, appearance, nine prompts, API recommendations and inert helper drafts, followed by merged review.

@@ -1,5 +1,7 @@
 # CustomChat
 
+0.1.23: a redesigned Build with AI app studio, truthful per-part build states, orbit/progress micro-animation with reduced-motion support, calmer field errors and properly spaced saved actions.
+
 0.1.22: background multi-call Build with AI, all nine prompt drafts, appearance and layout, API choices and inert helpers. Request-only activity animations, strict numeric validation, deployment planning, and full YAML/ZIP restore. Keys stay excluded unless explicitly selected for sensitive export.
 
 0.1.21: saved-question history grouping, stale suggestion reset, actual source labels and verbatim evidence excerpts, custom-model persistence, and prompt/entity grounding. The 400-case evidence campaign has 385 ChatGPT scores at 80+ and 15 UI scores at 70-75; those remaining scores are not represented as passes.
