@@ -33,3 +33,4 @@ html body.settings-tabs #sec-code #codeEditor .helper-example>summary{justify-co
 /* A selection boundary remains visible without relying on text color. */
 body.settings-tabs #settingsNavTop .category-tabs button{border:1px solid transparent!important;border-radius:8px!important}
 body.settings-tabs #settingsNavTop .category-tabs button[aria-selected=true]{border-color:var(--ui-ink)!important;background:var(--ui-selected)!important;font-weight:700!important}
+body.settings-tabs .go.copy-done::before{content:'✓';margin-right:6px}
