@@ -130,3 +130,25 @@ Residual risks: models can still follow poisoned content or launder false claims
 Setup uses short, stacked status lines, with full check details behind an expandable section. Workspace tabs wrap in a consistent grid. Action links, including Open your chat, center their labels without underlines or clipped text and grow when text wraps. No provider, prompt or data behavior changes.
 
 0.1.14: full selected prompt in the desktop preview pane; prompt switches use workspace defaults; preset navigation keeps scroll; guides remember their first display across ports; floating Save and red Reset menu; header and welcome illustration follow the palette.
+
+### Build an app with AI
+
+In Configuration, choose your provider and model and save its key, then open
+**Build with AI**. Describe the audience, questions and evidence sources. The
+setup conversation can ask follow-ups and draft the complete `app.yaml` or a
+selected section. It uses the model currently selected, without applying that
+selection to the running chat.
+
+The YAML playground is editable. **Validate and review** shows the complete
+result and which sections change. **Confirm and save reviewed app.yaml** saves
+only after that review. Restart the workspace to apply it. Source paths and URLs,
+credentials, hosted access and generated content still need your review. No
+Python connectors are generated. Model calls need consent and may cost money.
+
+Download YAML or a config-only ZIP, or choose **Drop in a ZIP or YAML instead**
+to open the existing bundle review/import flow. Keys and documents are not in a
+builder ZIP. Use the normal app ZIP export when you want configured local
+source documents included, and review them before sharing.
+
+The About page has one tab per feature, six shown first with **Load more**. SVG
+scenes respect reduced motion and calm/no-motion settings.

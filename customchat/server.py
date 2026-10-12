@@ -351,6 +351,31 @@ def make_handler(cfg, engine):
                     ok, msg = providers.test_connection(cfg, kind, str(b.get("model") or "")[:120], base)
                     from .management import diagnosis
                     return self._send(200, {'ok':ok,'message':msg} if ok else {'ok':False,**diagnosis(msg)})
+            if path.startswith('/api/settings/build/') and method=='POST':
+                if not can_edit(self):raise PermissionError('Only the app owner can build configuration')
+                from . import appbuilder
+                if path.endswith('/talk'):
+                    selected=b.get('selection') or {};kind=selected.get('provider');model=selected.get('model');base=selected.get('base_url','')
+                    if kind not in schema.PROVIDERS or not isinstance(model,str) or not model.strip() or len(model)>120 or not isinstance(base,str) or len(base)>300:raise ValueError('Choose a valid provider and model')
+                    build_cfg=providers._block(cfg,kind,model,base)
+                    return self._send(200,appbuilder.talk(budget.wrap(providers.make(build_cfg)),build_cfg,b))
+                if path.endswith('/review'):
+                    plan=appbuilder.review(cfg,b.get('yaml'),b.get('sections'))
+                    return self._send(200,{**plan,'ticket':management.reviews.put(o,'app-build',plan)})
+                if path.endswith('/download'):
+                    import io,zipfile,yaml
+                    clean=appbuilder.validate(b.get('yaml'))
+                    payload=yaml.safe_dump(clean,sort_keys=False).encode();buf=io.BytesIO()
+                    with zipfile.ZipFile(buf,'w',zipfile.ZIP_DEFLATED) as z:
+                        z.writestr('app.yaml',payload);z.writestr('README.md','Generated app draft. Review app.yaml before loading. Keys and documents are not included. Import using CustomChat Load and share Nerds. No code included.\n')
+                    return self._send(200,buf.getvalue(),'application/zip',{'Content-Disposition':'attachment; filename=customchat-draft.zip'})
+                if path.endswith('/save'):
+                    plan=management.reviews.take(o,'app-build',str(b.get('ticket','')),b.get('confirmed'))
+                    with management.lock:
+                        if management.active:raise ValueError('Wait for the workspace test to finish')
+                        rev=editstate.save_config(cfg,plan['config'],plan['revision'])
+                    return self._send(200,{'revision':rev,'restart_required':True,'message':'Reviewed app.yaml saved. Restart to apply. No new code or service ran.'})
+                raise ValueError('Unknown builder action')
             if path == "/api/settings/guide" and method == "POST":
                 if not can_edit(self):
                     return self._send(403, {"error": "Only the app owner can use settings help"})
@@ -732,7 +757,7 @@ ERR_PAGES = {
 
 # Config lock: CUSTOMCHAT_CONFIG=off serves the chat only. No settings page, no config or key endpoints.
 LOCKED = os.environ.get("CUSTOMCHAT_CONFIG", "").strip().lower() in ("off", "0", "false", "locked", "disabled")
-LOCKED_PAGES = {"/settings.html", "/settings.js", "/settings.css", "/panels.js", "/pipeline.js", "/codeeditor.js", "/codeeditor.LICENSE.txt", "/workspace.js", "/splitters.js", "/sourcekeys.js"}
+LOCKED_PAGES = {"/settings.html", "/appbuilder.js", "/settings.js", "/settings.css", "/panels.js", "/pipeline.js", "/codeeditor.js", "/codeeditor.LICENSE.txt", "/workspace.js", "/splitters.js", "/sourcekeys.js"}
 LOCKED_API = ("/api/source-credentials","/api/budget", "/api/docs-freshness", "/api/app-export", "/api/app-export-check", "/api/settings", "/api/provider", "/api/hardware", "/api/prompts", "/api/codegen", "/api/websearch", "/api/catalog", "/api/ollama", "/api/states", "/api/nerds", "/api/workspace")
 
 

@@ -5,7 +5,7 @@
   document.addEventListener("click", (e) => { if (open.cur && !open.cur.contains(e.target)) close(); });
   document.addEventListener("keydown", (e) => { if (e.key === "Escape") close(); });
   function enhance(sel) {
-    if (sel.dataset.cs || sel.multiple) return; sel.dataset.cs = "1";
+    if (sel.dataset.cs || sel.multiple || sel.dataset.native === 'true') return; sel.dataset.cs = "1";
     const wrap = document.createElement("div"); wrap.className = "cs " + (sel.className || "");
     const btn = document.createElement("button"); btn.type = "button"; btn.className = "cs-btn"; btn.setAttribute("aria-haspopup", "listbox"); btn.setAttribute("aria-expanded", "false");
     btn.setAttribute("aria-label", sel.getAttribute("aria-label") || sel.title || "Choose");

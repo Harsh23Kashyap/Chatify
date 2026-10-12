@@ -186,3 +186,19 @@ body.settings-tabs .settings-search>.settings-search-results:not([hidden]){displ
 @media(max-width:600px){body.settings-tabs .settings-search{grid-template-columns:1fr 1fr}.settings-search>input#settingsFind{grid-column:1/-1}.settings-search .settings-local-search{grid-column:1;grid-row:3}.settings-search .settings-help-open{grid-column:2!important;grid-row:3!important}.settings-search>label{grid-row:1}.settings-search-status{grid-row:4}}
 @media(prefers-reduced-motion:reduce){body.settings-tabs .settings-local-search{transition:none!important;transform:none!important}}
 @media(max-width:600px){body.settings-tabs .settings-search>input#settingsFind{grid-row:2!important;grid-column:1/-1!important}body.settings-tabs .settings-search .settings-local-search{grid-column:1!important;grid-row:3!important}body.settings-tabs .settings-search .settings-help-open{grid-column:2!important;grid-row:3!important}}
+.app-builder-open{appearance:none;min-height:44px;padding:10px 16px;border:1px solid #d2dfd4;border-radius:12px;background:#f1f5ec;color:#173f35;font:600 13px system-ui;margin:12px 0 0;cursor:pointer}
+dialog.app-builder{width:min(780px,calc(100vw - 32px))}
+dialog.app-builder select{width:100%;min-height:44px;background:#fffdf8;border:1px solid #d0dcd3;border-radius:10px;color:#173f35;font:inherit;padding:8px 12px;margin:8px 0 16px}
+.app-builder .settings-help-head small{font-size:10px;letter-spacing:.1em;color:#647765}
+.builder-message{padding:12px 14px;margin:8px 0;border:1px solid #e0e6da;border-radius:12px;background:#f2f5ed}
+.builder-message.user{margin-left:28px;background:#edf3ee}.builder-message small{font-size:10px;letter-spacing:.08em;color:#607964}.builder-message p{margin:5px 0 0!important;white-space:pre-wrap;overflow-wrap:anywhere}
+.builder-tools{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0 16px}
+dialog.app-builder #builderYaml{font:12px/1.6 ui-monospace,monospace;min-height:260px}
+#builderReviewResult pre{white-space:pre-wrap;overflow-wrap:anywhere;max-height:300px;overflow:auto;font:12px/1.6 ui-monospace,monospace;background:#f1f4ed;padding:12px;border-radius:10px}
+dialog.app-builder #builderSave{width:100%;margin-top:12px}dialog.app-builder [hidden]{display:none!important}
+dialog.app-builder #builderConversation{max-height:250px;overflow:auto}
+@media(max-width:600px){.builder-tools button{width:100%}.builder-message.user{margin-left:12px}}
+dialog.app-builder .settings-help-head{position:sticky;top:-28px;padding:12px 0;background:#fffdf7;z-index:5;border-bottom:1px solid #e0e7e1}
+dialog.app-builder #builderProvider{background:#f0f4ed;padding:12px 14px;border:1px solid #dde5de;border-radius:10px;font-size:13px;color:#40584a;margin-top:14px}
+dialog.app-builder .settings-help-consent input::before,dialog.app-builder .settings-help-consent input::after{display:none!important;content:none!important}
+@media(max-width:600px){dialog.app-builder .settings-help-head{top:-20px}dialog.app-builder .settings-help-head h3{font-size:21px}}

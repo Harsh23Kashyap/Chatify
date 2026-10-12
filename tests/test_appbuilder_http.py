@@ -1,0 +1,45 @@
+import json,urllib.error,unittest,yaml
+from unittest.mock import patch
+import test_workspace_api
+from customchat import providers,schema
+class BuilderHTTP(test_workspace_api.WorkspaceAPITests):
+ def test_owner_gate(self):
+  with self.assertRaises(urllib.error.HTTPError) as e:self.call(self.clients[1],'/api/settings/build/talk',{'consent':True})
+  self.assertIn(e.exception.code,(403,404))
+ def test_talk_selected_draft_and_no_state_changes(self):
+  before=json.dumps(self.cfg,sort_keys=True);calls=[]
+  def transport(url,body,headers,timeout):
+   calls.append(body);return {'choices':[{'message':{'content':json.dumps({'message':'Review app','config':{'app':{'title':'New garden'}}})}}]}
+  with patch('customchat.providers._key',return_value='fixture-only'),patch('customchat.providers._post',side_effect=transport):
+   result=self.call(self.clients[0],'/api/settings/build/talk',{'consent':True,'selection':{'provider':'openai','model':'my-specific-model'},'sections':['app'],'messages':[{'role':'user','content':'A garden app'}]})
+  self.assertEqual(calls[0]['model'],'my-specific-model');self.assertEqual(yaml.safe_load(result['yaml'])['app']['title'],'New garden');self.assertEqual(before,json.dumps(self.cfg,sort_keys=True))
+ def test_save_requires_review(self):
+  with self.assertRaises(urllib.error.HTTPError):self.call(self.clients[0],'/api/settings/build/save',{'confirmed':True,'ticket':'missing'})
+ def test_review_then_save_one_use(self):
+  from pathlib import Path
+  path=Path(self.cfg['_dir'])/'app.yaml';path.write_text(yaml.safe_dump({k:self.cfg[k] for k in schema.DEFAULTS}));self.cfg['_path']=str(path)
+  plan=self.call(self.clients[0],'/api/settings/build/review',{'yaml':'app:\n title: Garden app\n','sections':['app']})
+  with self.assertRaises(urllib.error.HTTPError):self.call(self.clients[0],'/api/settings/build/save',{'ticket':plan['ticket'],'confirmed':False})
+  self.assertNotEqual(schema.load(str(path))['app']['title'],'Garden app')
+  r=self.call(self.clients[0],'/api/settings/build/save',{'ticket':plan['ticket'],'confirmed':True});self.assertTrue(r['restart_required']);self.assertEqual(schema.load(str(path))['app']['title'],'Garden app')
+  with self.assertRaises(urllib.error.HTTPError):self.call(self.clients[0],'/api/settings/build/save',{'ticket':plan['ticket'],'confirmed':True})
+
+ def test_download_zip_can_review_and_load(self):
+  import io,zipfile,urllib.request,base64
+  from customchat.nerdload import NerdLoader
+  config=schema.validate({'app':{'title':'Generated garden'}})
+  request=urllib.request.Request('http://127.0.0.1:'+str(self.server.server_port)+'/api/settings/build/download',data=json.dumps({'yaml':yaml.safe_dump(config)}).encode(),headers={'Content-Type':'application/json'})
+  data=self.clients[0].open(request).read()
+  with zipfile.ZipFile(io.BytesIO(data)) as z:self.assertEqual(set(z.namelist()),{'app.yaml','README.md'})
+  loader=NerdLoader(self.tmp.name)
+  try:
+   plan=loader.review('customchat-draft.zip',base64.b64encode(data).decode());self.assertEqual(plan['title'],'Generated garden');self.assertEqual(plan['code'],[])
+   loaded=loader.load(plan['token'],False)
+   self.assertIn('http://127.0.0.1:',loaded['url'])
+   self.assertEqual(json.loads(urllib.request.urlopen(loaded['url']+'/api/health').read())['ok'],True)
+  finally:loader.close()
+ def test_consent_and_bad_selection_no_transport(self):
+  with patch('customchat.providers._post') as transport:
+   for body in ({'selection':{'provider':'openai','model':'fixture'},'consent':False,'messages':[{'role':'user','content':'app'}]}, {'selection':{'provider':'not-a-provider','model':'fixture'},'consent':True}):
+    with self.assertRaises(urllib.error.HTTPError):self.call(self.clients[0],'/api/settings/build/talk',body)
+   self.assertFalse(transport.called)
