@@ -34,3 +34,6 @@ html body.settings-tabs #sec-code #codeEditor .helper-example>summary{justify-co
 body.settings-tabs #settingsNavTop .category-tabs button{border:1px solid transparent!important;border-radius:8px!important}
 body.settings-tabs #settingsNavTop .category-tabs button[aria-selected=true]{border-color:var(--ui-ink)!important;background:var(--ui-selected)!important;font-weight:700!important}
 body.settings-tabs .go.copy-done::before{content:'✓';margin-right:6px}
+/* Native keyboard scrolling leaves room for the single sticky category bar. */
+body.settings-tabs :is(input,textarea,button,select,summary,a){scroll-margin-top:148px;scroll-margin-bottom:24px}
+@media(min-width:761px){body.settings-tabs :is(input,textarea,button,select,summary,a){scroll-margin-top:88px}}

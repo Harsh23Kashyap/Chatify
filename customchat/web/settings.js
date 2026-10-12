@@ -772,3 +772,15 @@ document.addEventListener("click", (e) => { if (e.target && e.target.id === "res
 (function(){var m=document.querySelector('.menu');if(m){var on=function(){m.classList.toggle('end',m.scrollLeft+m.clientWidth>=m.scrollWidth-4)};m.addEventListener('scroll',on,{passive:true});on()}
 
 })();
+
+// Focused controls must not disappear under the sticky category bar.
+document.addEventListener("focusin", e => {
+  const control = e.target;
+  if (!document.body.classList.contains("settings-tabs") || !(control instanceof HTMLElement) || !control.closest("#col") || !control.matches("input,textarea,button,select,summary,a")) return;
+  requestAnimationFrame(() => {
+    const bar = document.getElementById("settingsNavTop");
+    if (!bar || control !== document.activeElement) return;
+    const top = Math.max(0, bar.getBoundingClientRect().bottom) + 12, box = control.getBoundingClientRect();
+    if (box.top < top || box.bottom > innerHeight - 16) control.scrollIntoView({block:"center",behavior:"instant"});
+  });
+});
