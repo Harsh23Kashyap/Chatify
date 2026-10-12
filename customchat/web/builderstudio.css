@@ -143,3 +143,6 @@ html body dialog.app-builder[open].is-closing::backdrop{animation:builder-backdr
 html body dialog.app-builder .builder-draft-library button{background:#fffdf7!important;color:#173f35!important;border:1px solid #b5c8bc!important;box-shadow:none!important;min-height:44px}
 html body dialog.app-builder .builder-draft-library button[aria-pressed=true]{background:#edf2e8!important;border-color:#173f35!important}
 html body dialog.app-builder .builder-draft-library button[aria-busy=true]{background:#edf2e8!important;color:#173f35!important;cursor:wait}
+/* One progress pulse is enough; status rows communicate with labels. */
+.builder-group-board [data-state=running]>span,.builder-job-parts [data-state=running] .builder-part-icon{animation:none!important}
+.builder-step-mark{transition:background .18s ease,border-color .18s ease,color .18s ease}
