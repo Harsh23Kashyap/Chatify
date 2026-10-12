@@ -1,5 +1,7 @@
 # CustomChat
 
+0.1.21: saved-question history grouping, stale suggestion reset, actual source labels and verbatim evidence excerpts, custom-model persistence, and prompt/entity grounding. The 400-case evidence campaign has 385 ChatGPT scores at 80+ and 15 UI scores at 70-75; those remaining scores are not represented as passes.
+
 0.1.20: fuzzy settings search, an explicit-click settings guide, preview and sidebar layout fixes, and bundled emoji persistence after replies. Simple mode exposes the working workspace and freshness controls. The NewsNerd starter release asset has a native NewsAPI mapping and filled prompts/look/helper drafts; add your own OpenAI and NewsAPI keys locally. Live service use is not part of the offline test claim.
 
 0.1.14: Selecting Prompts replaces the desktop chat preview with the full current stage editor. Prompt selection starts at the beginning of its complete text; mobile shows the editor above the stage list. Saved revise toggles match app defaults and explicit overrides. No prompt wording changed.

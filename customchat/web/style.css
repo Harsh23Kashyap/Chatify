@@ -777,3 +777,7 @@ html[data-motion=none] .ephemeral-scene *,html[data-motion=calm] .ephemeral-scen
 /* Tall empty-state content must start inside the scrollport, not center above it. */
 .thread:has(.hero){align-items:flex-start!important;justify-content:flex-start!important}
 .thread:has(.hero)>.wrap{margin-top:0!important;margin-bottom:auto!important}
+
+.similar-history{width:100%;text-align:left}.similar-history summary{min-height:44px;padding:12px 4px;cursor:pointer;font-size:.85rem}.similar-history .pill{display:block;text-align:left;white-space:normal;margin:8px 0}
+
+.source-excerpt{display:block;white-space:normal;color:var(--mut);font-size:.85em;line-height:1.45;margin:6px 0;text-align:left}

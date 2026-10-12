@@ -182,7 +182,7 @@ function turnView(t, prev) {
     bub.append(el("div", { class: "nf-tips" }, tip("Try a different question", () => { $("#q").focus(); }), tip("Use words from your documents", () => { $("#q").focus(); }), tip("See which documents this chat uses", () => { location.href = "/settings.html"; })));
   }
   const srcLabel = (e) => (S.cfg.sources.find((x) => x.id === e.source) || {}).label || e.source || "";
-  const srcs = !t.evidence.length ? null : (el("div", { class: "srcs" }, el("div", { class: "srcs-h", text: "Sources" }), t.evidence.slice(0, 5).map((e) => el("button", { class: "s", title: e.title, onclick: () => showSources(t.evidence, e.n) }, el("span", { class: "n", text: "[" + e.n + "]" }), el("span", { class: "sx" }, el("span", { class: "st", text: e.title }), el("span", { class: "sm", text: [srcLabel(e), e.year, e.page ? "page " + e.page : e.section, e.ocr ? "OCR text, check original" : ""].filter(Boolean).join(" \u00b7 ") })), el("span", { class: "go", "aria-hidden": "true", text: "\u203a" })))));
+  const srcs = !t.evidence.length ? null : (el("div", { class: "srcs" }, el("div", { class: "srcs-h", text: "Evidence for this answer" }), t.evidence.slice(0, 5).map((e) => el("button", { class: "s", title: e.title, onclick: () => showSources(t.evidence, e.n) }, el("span", { class: "n", text: "[" + e.n + "]" }), el("span", { class: "sx" }, el("span", { class: "st", text: srcLabel(e) ? srcLabel(e) + " / " + e.title : e.title }), el("span", {class:"source-excerpt",text:e.text ? e.text.slice(0,240) + (e.text.length>240 ? "…" : "") : "Open source to inspect the evidence"}), el("span", { class: "sm", text: [srcLabel(e), e.year, e.page ? "page " + e.page : e.section, e.ocr ? "OCR text, check original" : ""].filter(Boolean).join(" \u00b7 ") })), el("span", { class: "go", "aria-hidden": "true", text: "\u203a" })))));
   nodes.push(el("div", { class: "row" }, avatar("bot"), bub));
   const meta = el("div", { class: "meta" });
   const weak = (t.ledger || []).filter((l) => !l.supported || (l.overlap !== undefined && l.overlap < 0.35));
@@ -403,7 +403,7 @@ async function send() {
   if (PREVIEW) return;
   const q = $("#q").value.trim(); if (!q || S.busy) return;
   const status = $("#pipelineStatus"); status.hidden = false; status.dataset.state="working"; status.textContent = "Preparing your answer";
-  S.busy = true; sendIcon("stop", "Stop"); $("#q").value = ""; autosize(); S.lastQ = q;
+  S.busy = true; clearTimeout(simTimer); $("#similar").replaceChildren(); sendIcon("stop", "Stop"); $("#q").value = ""; autosize(); S.lastQ = q;
   const w = $("#thread .wrap") || $("#thread");
   w.querySelector(".hero")?.remove();
   const live = el("div", { class: "a", id: "live" });
@@ -612,7 +612,11 @@ function setupSimilar() {
     simTimer = setTimeout(async () => {
       try {
         const r = await api("/api/similar?q=" + encodeURIComponent(q));
-        box.replaceChildren(...r.map((x) => el("button", { class: "pill", title: "Open the chat where you asked this", onclick: () => { box.replaceChildren(); openChat(x.chat); } }, "Asked before: " + x.question.slice(0, 60))));
+        if (S.busy || $("#q").value.trim() !== q) return;
+        if (!r.length) { box.replaceChildren(); return; }
+        const history = el("details", {class:"similar-history"}, el("summary", {text:"Related saved questions (" + r.length + ")"}));
+        history.append(el("p", {class:"mut",text:"From earlier chats. Open one to revisit it; your current question stays separate."}), ...r.map((x) => el("button", {class:"pill", title:"Open the saved chat", onclick:()=>{box.replaceChildren();openChat(x.chat);}},x.question)));
+        box.replaceChildren(history);
       } catch (e) { /* ignore */ }
     }, 500);
   });

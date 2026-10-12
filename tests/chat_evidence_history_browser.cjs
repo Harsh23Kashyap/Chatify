@@ -1,0 +1,25 @@
+const {chromium}=require(process.env.PLAYWRIGHT_MODULE||'/tmp/cc-ui-tools/node_modules/playwright');
+const assert=require('node:assert/strict');
+(async()=>{
+ const browser=await chromium.launch({executablePath:process.env.CHROME_BIN||'/usr/bin/google-chrome',args:['--no-sandbox']});
+ const page=await browser.newPage({viewport:{width:390,height:900}});
+ await page.addInitScript(()=>{localStorage.setItem('cc_tour','1');});
+ const base=process.env.CUSTOMCHAT_URL||'http://127.0.0.1:8190';
+ await page.goto(base);await page.waitForSelector('#q');
+ await page.locator('#q').fill('What files does Cedar accept?');
+ await page.waitForSelector('#similar details');
+ assert.equal(await page.locator('#similar details').getAttribute('open'),null);
+ assert.match(await page.locator('#similar summary').innerText(),/Related saved questions/);
+ await page.locator('#similar summary').click();
+ assert.ok(await page.locator('#similar details button').count()>0);
+ await page.locator('#send').click();
+ await page.waitForFunction(()=>document.querySelector('#send').getAttribute('aria-label')!=='Stop');
+ assert.equal(await page.locator('#similar').innerText(),'');
+ assert.match(await page.locator('.srcs-h').last().innerText(),/Evidence for this answer/i);
+ assert.match(await page.locator('.srcs .st').last().innerText(),/Fixture A/);
+ await page.locator('.cite').last().click();
+ await page.waitForSelector('#sources .src' );
+ assert.ok(await page.locator('#sources').innerText());
+ assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth+1),false);
+ await browser.close();console.log('PASS history preserved, suggestions reset, source labels and citation link');
+})().catch(e=>{console.error(e);process.exit(1)});
