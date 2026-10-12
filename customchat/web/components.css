@@ -30,3 +30,6 @@ body.settings-tabs .helper-example summary::before{content:'+';font-weight:600}
 body.settings-tabs .helper-example[open] summary::before{content:'-'}
 body.settings-tabs .helper-example p{overflow-wrap:anywhere;margin:8px 0}
 html body.settings-tabs #sec-code #codeEditor .helper-example>summary{justify-content:flex-start!important;gap:8px!important;padding:8px 0!important}
+/* A selection boundary remains visible without relying on text color. */
+body.settings-tabs #settingsNavTop .category-tabs button{border:1px solid transparent!important;border-radius:8px!important}
+body.settings-tabs #settingsNavTop .category-tabs button[aria-selected=true]{border-color:var(--ui-ink)!important;background:var(--ui-selected)!important;font-weight:700!important}
