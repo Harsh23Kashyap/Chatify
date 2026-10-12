@@ -1,3 +1,9 @@
+## 0.1.24 - 2026-10-12
+
+- Replace the flat builder step tabs with connected milestone cards, active forest/citrus treatment, completed checkmarks, navigation-driven connector animation and panel transitions.
+- Keep phone Describe/Review/Save labels on one line, full accessible names, clear focus and 44px-plus targets; reduced-motion is static.
+- Clean the README/PyPI description into current features and instructions. Remove per-version introductions and historical feature sections, the Installer tests stub, old test campaigns and stale 0.1.5 install wording. Release history remains in this changelog; current safety limits remain in the README.
+
 ## 0.1.23 - 2026-10-12
 
 - Redesign Build with AI as an editorial cream/forest app studio, with a compact running view and explicit per-part Queued, Waiting for model, Draft received and Needs retry states.

@@ -1,23 +1,5 @@
 # CustomChat
 
-0.1.23: a redesigned Build with AI app studio, truthful per-part build states, orbit/progress micro-animation with reduced-motion support, calmer field errors and properly spaced saved actions.
-
-0.1.22: background multi-call Build with AI, all nine prompt drafts, appearance and layout, API choices and inert helpers. Request-only activity animations, strict numeric validation, deployment planning, and full YAML/ZIP restore. Keys stay excluded unless explicitly selected for sensitive export.
-
-0.1.21: saved-question history grouping, stale suggestion reset, actual source labels and verbatim evidence excerpts, custom-model persistence, and prompt/entity grounding. The 400-case evidence campaign has 385 ChatGPT scores at 80+ and 15 UI scores at 70-75; those remaining scores are not represented as passes.
-
-0.1.20: fuzzy settings search, an explicit-click settings guide, preview and sidebar layout fixes, and bundled emoji persistence after replies. Simple mode exposes the working workspace and freshness controls. The NewsNerd starter release asset has a native NewsAPI mapping and filled prompts/look/helper drafts; add your own OpenAI and NewsAPI keys locally. Live service use is not part of the offline test claim.
-
-0.1.14: Selecting Prompts replaces the desktop chat preview with the full current stage editor. Prompt selection starts at the beginning of its complete text; mobile shows the editor above the stage list. Saved revise toggles match app defaults and explicit overrides. No prompt wording changed.
-
-0.1.13: Configuration hydrates its normal controls, not a raw app-field dump. Active sources are detected by type rather than special IDs, matching presets are selected and custom looks are labeled accurately. App-file branding seeds unsaved theme values. Existing helper drafts and private key presence show in their controls; empty optional fields explicitly say not filled. Saved-state selection reflects the current model settings. No unused source is enabled automatically.
-
-0.1.12: Nerd bundle review uses the full content width and its own static bundle preview, without an unrelated live chat preview. Review cards no longer pin and clip against the viewport top; desktop navigation has a safe inset. All settings remain in the continuous document. Imported Nerds have an explicit Edit configuration link. Configuration includes every app-file field with current values, effective branding text and saved inert code drafts or the active connector source. App-file edits are revision-checked and require restart; helper drafts never activate or run code. Model/retrieval Apply is saved to the app file for reopening. Keys remain private with saved-presence indicators.
-
-0.1.11: Configuration scrolls continuously through every section. Prompt/code editors stay inline; navigation no longer hides neighboring sections. Nerd ZIP imports skip benign metadata, name rejected private files, and explain source-archive versus Nerd-bundle ZIPs. Empty local sources and YAML-only imports open with an empty document folder and a clear setup warning. The export button has its own Share this Nerd card.
-
-[![Installer tests](https://github.com/Harsh23Kashyap/customchat/actions/workflows/installer.yml/badge.svg)](https://github.com/Harsh23Kashyap/customchat/actions/workflows/installer.yml)
-
 A chat app over your documents, set up with one YAML file. Answers cite their sources. Starts in offline Demo mode: no key, account or paid calls.
 
 ## Start
@@ -48,7 +30,7 @@ On Windows use `py -3 -m venv .venv` and `.\.venv\Scripts\python.exe`. The packa
 
 ## macOS with Homebrew Python
 
-From this repository folder, one command installs 0.1.5 in a private environment and opens the app:
+From this repository folder, one command installs the current published package in a private environment and opens the app:
 
 ```sh
 python3 start_local.py
@@ -98,97 +80,35 @@ Open Configuration → Load and share Nerds. Drop a ZIP or app.yaml, read the re
 
 `customchat-app run app.yaml` opens the browser after the server is ready. Use `--no-browser` for servers or terminals without a desktop.
 
-### Private workspace tools (0.1.7)
+### Build with AI
 
-Configuration opens with one Setup and workspace page:
+In Configuration, select your provider and model and save its key, then open **Build with AI**. Describe who the app is for, what it should answer and which sources it should use. It uses the currently selected model for setup without changing the running chat.
 
-- **Setup** shows configuration checks without claiming live availability. Choose model/source checks, review what is sent and possible API budget use, then confirm. Failed checks show categorized, redacted diagnostics.
-- **Workspace** lists imported Nerds. Open, stop or remove one after review. Removal deletes only that imported folder and its local chats. Stopped folders remain discoverable after a restart; reimport the original bundle to start a new reviewed copy.
-- **Changes** keeps the last 30 model/retrieval revisions for the app owner. Compare and restore after review. Concurrent settings changes invalidate the review. Appearance, prompts and credentials are not included in this history.
-- **Backup** downloads a private JSON chat archive for the owner. Restore validates the archive and adds chats instead of overwriting existing chats. It does not back up credentials, profile, uploads, feedback or model files. Chat text and evidence may contain private material: keep this archive private. It is separate from the shareable Nerd ZIP.
-- **Test questions** saves up to 10 questions privately and runs them after service/cost review. Compare current and previous answers and citations. This is not an accuracy score or a correctness claim; test runs do not create chats.
-- **Deploy** prepares an account/audience/cost/rollback plan only. Entered account labels, prices and permissions are not verified. No resource is created and no spending is authorized.
+The App Studio has three connected steps: **Describe**, **Review changes**, **Save**. The active step, completed milestones and transitions stay clear on phones and desktop. Animations have a static reduced-motion fallback. Typing never calls a model.
 
-Imported Python connectors default to `execution: bounded`: a separate process with an environment allowlist, 20-second timeout and output limits. App write actions are disabled for imported Nerds. This is **NOT a security sandbox**. Code can still access host files and the network, and can spawn other processes; read and trust the code before allowing it. On Windows, cancellation kills the main connector process, not guaranteed child processes.
+Complete builds make separate calls for settings, colors, fonts, layout, wording, all nine pipeline prompts, API recommendations and inert helper drafts. Up to three calls run together, with at most 36 calls including final review and an optional logo. Progress shows actual completed areas and queued, waiting, received or retry states, not estimated percentages. Close and reopen the dialog while it works. Retry failed parts only; cancel stops pending work. In-flight calls may finish and cost money. Jobs stay in server memory and are lost on restart.
 
-Ollama setup can cancel its own work and retry after a fresh review. OS installers or their children may still be open; close them on the host. Installed changes are not rolled back. Installer downloads restart, not resume. Model downloads show a host disk/memory review with approximate catalog sizes. The actual Ollama model location and size may differ. Retrying sends a new pull request; only Ollama decides whether partial files can be reused. No real installer or paid model call is required by the offline test suite.
+Inspect the design preview and edit the grouped fields or Advanced YAML. **Validate and review** runs locally, invalidates after edits and makes no model request. Confirm Save separately, then restart to apply. Download the merged YAML or a config-only ZIP. Nothing saves automatically and generated helper code is never installed or executed.
 
-0.1.7 also improves all nine prompt-generation stages and both code helpers. A short idea becomes a detailed reviewable draft with provisional assumptions, exact runtime fields/output contracts, scope examples and evidence boundaries. Generated drafts are never automatically saved; generated code is never automatically run. Unknown API endpoints remain non-operational TODOs. Static and citation-format checks do not prove truth or code safety, and the bounded process is NOT a security sandbox.
+Provider limits still apply. A dollar cap blocks non-Demo calls when verified billing is unavailable. Missing keys, source paths, assets and unknown API endpoints need your review; API recommendations and helpers are drafts, not verified integrations.
 
-### Imported-app static review (0.1.8)
+### Workspace tools
 
-On drop, a local review shows the declared purpose, file/function counts, imports and detected Python call patterns for network, environment, files, processes and dynamic code, with file/line references. No bundle code is imported or executed, no model is called, no destination is contacted and no environment value is read. The review is not a safety verdict: unrelated functions can share these names, and aliases, dynamic calls, dependencies and runtime behavior can evade the scan. No detected pattern does not mean absent or safe. The full code and explicit consent remain before load. Bounded mode is NOT a security sandbox.
+- **Setup:** local readiness checks and explicit model/source checks with a send/cost review.
+- **Workspace:** open, stop or remove imported Nerds after review. Removal affects only that imported workspace.
+- **Changes:** compare and restore the last 30 model/retrieval revisions after review. Concurrent changes invalidate review; appearance, prompts and keys are not included.
+- **Backup:** private JSON chat export and additive restore. Credentials, profiles, uploads, feedback and model files are not backed up. Chat text and evidence may be private.
+- **Test questions:** save up to 10 questions and compare current/previous answers after service/cost review. This is not an accuracy score.
+- **Deploy:** search guidance, prepare a selected-model account/audience/cost/rollback plan or copy a prompt for another AI. No hosting resource is created and nothing deploys automatically.
 
-### Prompt hardening and adversarial fixtures (0.1.9)
+### Portability and safety
 
-Every model pipeline stage appends an application-owned data/instruction boundary, including when the owner has customized its prompt. Generated drafts receive the boundary from the app, not from model output. Questions, source passages, history, summaries, examples and API docs remain untrusted data. The boundary covers role spoofing, encoded/transformed text and persistent summary poisoning without blocking ordinary multilingual or security-research content by keyword. Generator/code inputs use structured JSON; JSON encoding separates structure but does not prevent semantic prompt injection.
+YAML restores configuration, appearance, pipeline prompts, inert helper drafts and API recommendations. Documents and executable connector files require a ZIP. Keys stay excluded by default. Sensitive-key export requires an explicit selection and warning confirmation. Imported key entries move into private workspace storage and are removed from the imported app file. Accounts and conversations are never imported.
 
-Enabled question checks no longer silently approve an unavailable or malformed verdict, including the synchronous API. Rewrite/query/followup/summary outputs get structural checks; malformed summaries are not saved by truncation. Citation IDs remain runtime-owned. Support-check errors show that support was not verified. Static helper review adds exact imports/signatures, reflection/secret-print/env-mutation checks and limits on code executed at import time. Human review remains required before saving prompts or running code.
+Bundle review checks paths, declared files, imports and detected code patterns without running bundle code or contacting its destinations. It is not a safety verdict. Review all Python before allowing it to run. Imported connectors default to a bounded subprocess with an environment allowlist, timeout and output caps; **this is not a security sandbox**. Code can access host files and the network. On Windows, cancellation does not guarantee that child processes stop.
 
-Tests: 13 synthetic attack families across all nine prompt constructions (117 combinations), 26 code-policy/data constructions, runtime/history/failure-path fixtures, nine AST escape samples, eight malformed-label/citation cases and four benign controls. These are deterministic construction/parser/AST checks, not measurements of live-model attack success. ChatGPT supplied a separate simulated attack review; it did not execute this backend. No finite matrix covers every possible attack.
+Model inputs and evidence remain untrusted data. Prompt boundaries and parser/AST checks reduce tested failure paths, not all prompt injection or hallucination. Citation syntax does not prove semantic support. Optional support checks are model-dependent, and streaming may show text before final checks.
 
-Residual risks: models can still follow poisoned content or launder false claims; citation syntax does not prove semantic support. Optional support checks are model-dependent and off by default. Streaming can show text before final checks, so there is no confidentiality guarantee. AST checks do not isolate capabilities or enforce all endpoints; allowed Python can still access host/network resources. Bounded mode is NOT a sandbox. Prompt hardening reduces tested failure paths, not a guarantee against hallucination or jailbreaks.
+The About page has feature tabs, six shown first with Load more. Local examples and previews are not live-service tests. Real providers, external APIs, generated prompts and code need your review.
 
-### Configuration layout fixes (0.1.10)
-
-Setup uses short, stacked status lines, with full check details behind an expandable section. Workspace tabs wrap in a consistent grid. Action links, including Open your chat, center their labels without underlines or clipped text and grow when text wraps. No provider, prompt or data behavior changes.
-
-0.1.14: full selected prompt in the desktop preview pane; prompt switches use workspace defaults; preset navigation keeps scroll; guides remember their first display across ports; floating Save and red Reset menu; header and welcome illustration follow the palette.
-
-### Build an app with AI
-
-In Configuration, choose your provider and model and save its key, then open
-**Build with AI**. Describe the audience, questions and evidence sources. The
-setup conversation can ask follow-ups and draft the complete `app.yaml` or a
-selected section. It uses the model currently selected, without applying that
-selection to the running chat.
-
-The YAML playground is editable. **Validate and review** shows the complete
-result and which sections change. **Confirm and save reviewed app.yaml** saves
-only after that review. Restart the workspace to apply it. Source paths and URLs,
-credentials, hosted access and generated content still need your review. No
-Python connectors are generated. Model calls need consent and may cost money.
-
-Download YAML or a config-only ZIP, or choose **Drop in a ZIP or YAML instead**
-to open the existing bundle review/import flow. Keys and documents are not in a
-builder ZIP. Use the normal app ZIP export when you want configured local
-source documents included, and review them before sharing.
-
-The About page has one tab per feature, six shown first with **Load more**. SVG
-scenes respect reduced motion and calm/no-motion settings.
-
-### Build with AI review flow
-
-Describe your app, review the proposed values and changed fields, then confirm Save.
-The selected setup provider/model is shown before each explicit request. Typing and
-local validation do not call a model. Raw YAML is under Advanced; it shares the same
-draft as the editable fields. An edit invalidates the reviewed save token.
-YAML and ZIP downloads contain the complete merged configuration; ZIP/YAML import
-opens the existing review-before-load workflow. Save writes app.yaml only, requires
-a restart, and never installs code.
-
-
-### Complete Build with AI drafts
-
-Complete app builds run separate calls for settings groups, design, each of the nine
-pipeline prompts, API recommendations and helper drafts. Up to three calls run together;
-API recommendations are ready before helper-code drafting. A build is capped at 36 calls,
-including final review and an optional logo call. Your configured model-call and dollar
-limits still apply. A dollar limit blocks calls when verified billing is unavailable.
-Close the dialog while it works and reopen the status indicator to review progress,
-failed parts or the finished draft. Retry only failed parts; cancel stops pending calls.
-In-flight provider calls may finish and incur charges. Builds are held in server memory,
-so restarting the server loses unfinished jobs. Nothing saves or installs automatically.
-
-YAML supports `appearance`, `pipeline_prompts`, `helper_drafts` and `api_suggestions`
-so an imported app can restore design/layout/fonts, stage prompts, inert helper drafts
-and API recommendations. Documents and executable connector files require a ZIP.
-Generated helper code is draft data, never automatically installed or executed.
-Blank keys, missing assets, unknown source paths, disabled fallback and an unset dollar
-cap are intentional. No guessed credential or endpoint fills those gaps.
-
-Keys stay out of exports by default. Explicit sensitive-key export requires the
-"Include my saved API keys" choice and a warning confirmation. Treat that bundle as a
-credential: anyone receiving it can use the keys. Imported `api_keys` entries are moved
-to private workspace key storage and removed from the imported app file; review shows
-only an entry count, not key values. Accounts and conversations are never imported.
+See [CHANGELOG.md](CHANGELOG.md) for release history.
