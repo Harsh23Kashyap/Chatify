@@ -135,3 +135,11 @@ html body dialog.app-builder[open].is-closing::backdrop{animation:builder-backdr
 @keyframes builder-backdrop-enter{from{opacity:0}to{opacity:1}}
 @keyframes builder-backdrop-exit{from{opacity:1}to{opacity:0}}
 @media(prefers-reduced-motion:reduce){html body dialog.app-builder[open],html body dialog.app-builder[open]::backdrop{animation:none!important;transition:none!important}}
+
+.builder-draft-library button[aria-pressed=true]{border-color:#173f35!important;background:#edf2e8!important;color:#173f35!important}
+.builder-draft-library button{transition:background .18s ease,border-color .18s ease}
+.builder-part-draft[open]>.builder-part-content{animation:studio-step-panel .18s ease-out}
+@media(prefers-reduced-motion:reduce){.builder-draft-library button,.builder-part-content{transition:none!important;animation:none!important}}
+html body dialog.app-builder .builder-draft-library button{background:#fffdf7!important;color:#173f35!important;border:1px solid #b5c8bc!important;box-shadow:none!important;min-height:44px}
+html body dialog.app-builder .builder-draft-library button[aria-pressed=true]{background:#edf2e8!important;border-color:#173f35!important}
+html body dialog.app-builder .builder-draft-library button[aria-busy=true]{background:#edf2e8!important;color:#173f35!important;cursor:wait}
