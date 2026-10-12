@@ -40,7 +40,11 @@ def validate_extras(extras):
   t=extras['helper_drafts']
   if not isinstance(t,dict) or set(t)-{'search','clean_query'}:raise ValueError('Invalid helper draft kind')
   for kind,draft in t.items():
-   if not isinstance(draft,dict) or set(draft)-{'brief','code','review_problems'} or not isinstance(draft.get('brief'),str) or not isinstance(draft.get('code'),str) or len(draft['code'])>12000:raise ValueError('Invalid helper draft')
+   if not isinstance(draft,dict):raise ValueError('Helper draft must contain brief and code string fields')
+   if set(draft)-{'brief','code','review_problems'}:raise ValueError('Helper draft contains unsupported fields')
+   if not isinstance(draft.get('brief'),str):raise ValueError('Helper draft brief field is missing or not text')
+   if not isinstance(draft.get('code'),str):raise ValueError('Helper draft code field is missing or not text')
+   if len(draft['code'])>12000:raise ValueError('Helper draft code is '+str(len(draft['code']))+' characters; limit is 12000')
    ok,problems=generators.review_code(kind,draft['code'])
    draft['review_problems']=problems
  if 'api_suggestions' in extras:

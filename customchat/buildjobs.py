@@ -61,11 +61,11 @@ class BuildJobs:
   if key.startswith('prompt:'):
    spec={'area':'pipeline prompt','stage':key[7:],'output_contract':spec['contract'].get('help',''),'default_prompt':spec['default']}
    instruction=json.dumps(spec)
-   instruction+=' DO NOT echo this metadata. Write the actual tailored prompt, not the literal words complete instruction. Return an object with exactly two keys: text (the full domain-tailored instruction string) and on (a boolean). Preserve the stage output contract; do not echo the input spec. The revise prompt must be filled even when the stage is off.'
+   instruction+=' Keep text between 1 and 6000 characters. DO NOT echo this metadata. Write the actual tailored prompt, not the literal words complete instruction. Return an object with exactly two keys: text (the full domain-tailored instruction string) and on (a boolean). Preserve the stage output contract; do not echo the input spec. The revise prompt must be filled even when the stage is off.'
   elif key.startswith('helper:'):
    spec.pop('starter',None)
    instruction=json.dumps(spec)
-   instruction+=' DO NOT echo input metadata. Return {"brief":"purpose and limitations", "code":"Python code"}. Code is an inert draft. Never install it.'
+   instruction+=' Keep Python code at most 12000 characters. Include both brief and code as strings. DO NOT echo input metadata. Return {"brief":"purpose and limitations", "code":"Python code"}. Code is an inert draft. Never install it.'
   elif key=='api':instruction+=' Return a list of {name,reason,connector,setup,caveat}. Give practical choices, not verified price claims.'
   elif key=='config:sources':instruction+=' Return a JSON list of connector objects, no wrapper. Empty list if no actual source supplied.'
   else:instruction+=' Return an object with exactly the keys shown in defaults; no wrapper.'
@@ -89,7 +89,10 @@ class BuildJobs:
   if key.startswith('appearance:') or key.startswith('config:') and isinstance(spec.get('defaults'),dict):
    if isinstance(result,dict):result={k:v for k,v in result.items() if k in spec['defaults']}
   if key.startswith('prompt:'):
-   if not isinstance(result,dict) or not isinstance(result.get('text'),str) or not result['text'].strip() or len(result['text'])>6000 or result['text'].strip().lower()=='complete instruction':raise ValueError('Prompt text missing or too long')
+   if not isinstance(result,dict):raise ValueError('Prompt output must be an object with text and on fields')
+   if not isinstance(result.get('text'),str) or not result['text'].strip():raise ValueError('Prompt text missing: model did not return a non-empty text field')
+   if len(result['text'])>6000:raise ValueError('Prompt text is '+str(len(result['text']))+' characters; limit is 6000. Retry with a shorter instruction.')
+   if result['text'].strip().lower()=='complete instruction':raise ValueError('Model echoed placeholder text instead of writing a prompt')
    if type(result.get('on',prompts.STAGES[key[7:]]['on']))!=bool:raise ValueError('Invalid stage switch')
   elif key.startswith('helper:'):appbuilder.validate_extras({'helper_drafts':{key[7:]:result}})
   elif key=='api':appbuilder.validate_extras({'api_suggestions':result})
