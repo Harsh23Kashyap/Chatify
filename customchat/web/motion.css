@@ -240,3 +240,14 @@ html[data-sidebar=hidden] .side{transition:transform .28s var(--ease)}
 html.preview body,html.preview .app,html.preview .main,html.preview .bar,html.preview .side,html.preview .box,html.preview .q,html.preview .srcs button.s{transition:background-color 220ms ease-out,color 220ms ease-out,border-color 220ms ease-out,border-radius 240ms ease-out,padding 280ms ease-out,gap 280ms ease-out}
 html[data-motion=none] *,html[data-motion=none] *::before{animation:none!important;transition:none!important;scroll-behavior:auto!important}
 @media(prefers-reduced-motion:reduce){*,*::before{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+/* Short feedback transitions. No perpetual app-wide movement. */
+button,a[role=tab],.preset,.editor-choice,.emoji-tile{transition:background-color .16s ease,color .16s ease,border-color .16s ease,box-shadow .16s ease,transform .14s ease}
+button:not(:disabled):active{transform:translateY(1px)}
+input[type=checkbox]{transition:background-color .16s ease,border-color .16s ease}
+details>summary{transition:color .16s ease,background-color .16s ease}
+.cs-opt{transition:background-color .12s ease,outline-color .12s ease}
+.settings-active-panel{animation:cc-panel-arrive .18s ease-out}
+.testres:not(:empty),.msg:not(:empty),.builder-field-error:not(:empty){animation:cc-feedback-arrive .18s ease-out}
+@keyframes cc-panel-arrive{from{opacity:.75;transform:translateY(3px)}to{opacity:1;transform:none}}
+@keyframes cc-feedback-arrive{from{opacity:.5}to{opacity:1}}
+@media(prefers-reduced-motion:reduce){button,a[role=tab],.preset,.editor-choice,.emoji-tile,input[type=checkbox],details>summary,.cs-opt{transition:none!important;transform:none!important}.settings-active-panel,.testres,.msg,.builder-field-error{animation:none!important}}

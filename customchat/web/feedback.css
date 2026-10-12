@@ -15,3 +15,4 @@ html body .builder-job-parts [data-state=error]{font-weight:500}
 html body .builder-background[data-state=partial]{border-radius:999px}
 
 @media(prefers-color-scheme:dark){html[data-theme=auto]{--feedback-ink:#f1d4a5;--feedback-surface:#29271f;--feedback-line:#bd9b65;--feedback-focus:#bdd4bb}}
+html body [aria-invalid=true]{box-shadow:none!important}

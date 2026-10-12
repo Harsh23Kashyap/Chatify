@@ -242,3 +242,26 @@ dialog.app-builder .builder-saved-download{margin-top:10px}@media(max-width:600p
 dialog.settings-help label.settings-help-consent[hidden]{display:none!important}
 .builder-background{border:1px solid #31775b;border-radius:999px;padding:.5rem .8rem;color:#173f35;background:#eaf4e7;font-weight:700;animation:builderPulse 1.8s ease-in-out infinite}.builder-background[data-state=done]{animation:builderReady .55s ease-out;background:#d8f3c8}.builder-background[data-state=partial]{animation:none;background:#fff0cb}.builder-job-parts{max-height:260px;overflow:auto;border:1px solid var(--line);border-radius:14px;padding:.8rem;margin:.8rem 0}.builder-job-parts p{margin:.3rem 0;font-size:.85rem}.builder-job-parts [data-state=done]{color:#22643b;animation:builderReady .4s ease-out}.builder-job-parts [data-state=error]{color:var(--feedback-ink,#654c2d)}@keyframes builderPulse{50%{box-shadow:0 0 0 5px #31775b18}}@keyframes builderReady{from{opacity:.4;transform:translateY(3px)}to{opacity:1;transform:translateY(0)}}@media(prefers-reduced-motion:reduce){.builder-background,.builder-job-parts [data-state=done]{animation:none}}
 .app-builder button:active,.settings-help button:active,.workspace-deploy-ai button:active{transform:scale(.97)}.ai-working{position:relative}.ai-working::after{content:"";display:block;height:3px;border-radius:99px;background:linear-gradient(90deg,transparent,#93c45c,#245d49,transparent);background-size:200% 100%;animation:builderSweep 1.3s linear infinite;margin-top:.7rem}.app-builder-open:focus-visible,.builder-background:focus-visible{outline:3px solid #a7c980;outline-offset:3px}@keyframes builderSweep{to{background-position:-200% 0}}@media(prefers-reduced-motion:reduce){.ai-working::after{animation:none;background:#527e5c}.app-builder button:active,.settings-help button:active,.workspace-deploy-ai button:active{transform:none}}
+
+/* Local search is live; provider cards are shared in Simple and Advanced. */
+body.settings-tabs .settings-search{grid-template-columns:minmax(0,1fr) auto!important}
+body.settings-tabs .settings-search .settings-help-open{grid-column:2!important;grid-row:2!important}
+body.settings-tabs.simple #sec-model #seg{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;margin-bottom:10px}
+body.settings-tabs #sec-model .simple-provider-note{display:none}
+body.settings-tabs.simple #sec-model .simple-provider-note{display:block;margin-bottom:16px}
+@media(max-width:760px){body.settings-tabs.simple #sec-model #seg{grid-template-columns:repeat(2,minmax(0,1fr))!important}}
+@media(max-width:600px){body.settings-tabs .settings-search{grid-template-columns:minmax(0,1fr)!important}body.settings-tabs .settings-search>input#settingsFind{grid-column:1!important;grid-row:2!important}body.settings-tabs .settings-search .settings-help-open{grid-column:1!important;grid-row:3!important;justify-self:end}body.settings-tabs .settings-search-status{grid-row:4!important}}
+
+.settings-studio-actions{display:flex;align-items:center;justify-content:flex-start;gap:10px;margin:14px 0 8px;min-width:0}
+.settings-studio-actions .app-builder-open{margin:0;display:inline-flex;align-items:center;gap:8px;background:#173f35;color:#fffdf7;border:1px solid #49684e;box-shadow:0 3px 0 #0c2b21;padding:11px 15px}
+.settings-studio-actions .app-builder-open span:first-child{color:#d7ef72}
+/* Remove decorative rules above the editor and selected primary tab. */
+body.settings-tabs #col,body.settings-tabs #look{border-top:0!important}
+body.settings-tabs #settingsNavTop .category-tabs button[aria-selected=true]{box-shadow:none!important}
+body.settings-tabs #settingsNavTop .category-tabs button[aria-selected=true]::after{display:none!important}
+body.settings-tabs #menu a.on,body.settings-tabs .editor-choice[aria-pressed=true]{box-shadow:none!important}body.settings-tabs #pvbox{border-left:0!important}
+body.settings-tabs textarea{min-height:180px;font-size:14px;line-height:1.65;resize:vertical;overflow-y:auto}
+body.settings-tabs .pipeline-editor-pane textarea{min-height:320px!important}
+
+#settingsFind::placeholder{transition:color .18s ease}#settingsFind.placeholder-changing::placeholder{color:transparent}@media(prefers-reduced-motion:reduce){#settingsFind::placeholder{transition:none}}
+html body #seg button{gap:7px;padding-left:8px;padding-right:8px;font-size:13px;overflow-wrap:normal;word-break:normal}

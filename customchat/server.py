@@ -33,7 +33,9 @@ def make_handler(cfg, engine):
     themestore = themes.ThemeStore(os.path.dirname(os.path.abspath(store.path)) if store.path != ":memory:" else "/tmp", cfg["app"],cfg.get("appearance"))
     from . import editstate
     from .buildjobs import BuildJobs
-    build_jobs=BuildJobs()
+    from .builddrafts import BuildDrafts
+    draft_store=BuildDrafts(os.path.dirname(os.path.abspath(store.path)) if store.path != ':memory:' else '/tmp')
+    build_jobs=BuildJobs(draft_store)
     state_folder = os.path.dirname(os.path.abspath(store.path)) if store.path != ":memory:" else "/tmp"
     acc = Accounts(store, bool(cfg["auth"].get("signup", True))) if cfg["auth"]["mode"] == "accounts" else None
 
@@ -357,6 +359,9 @@ def make_handler(cfg, engine):
             if path.startswith('/api/settings/build/') and method in ('POST','GET'):
                 if not can_edit(self):raise PermissionError('Only the app owner can build configuration')
                 from . import appbuilder
+                if path.endswith('/drafts') and method=='GET':return self._send(200,{'drafts':draft_store.list(o)})
+                if path.endswith('/draft') and method=='GET':return self._send(200,draft_store.get(o,qs.get('id','')))
+                if path.endswith('/draft') and method=='POST':return self._send(200,draft_store.put(o,b.get('yaml'),b.get('title',''),b.get('id'),b.get('sections')))
                 if path.endswith('/job') and method=='GET':return self._send(200,build_jobs.view(o,qs.get('id','')))
                 if path.endswith('/cancel'):return self._send(200,build_jobs.cancel(o,str(b.get('id',''))))
                 if path.endswith('/retry'):return self._send(200,build_jobs.retry(o,str(b.get('id',''))))

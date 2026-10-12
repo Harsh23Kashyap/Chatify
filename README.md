@@ -62,7 +62,7 @@ Edit `my-chat/app.yaml`, add documents, and open Configuration to pick a model, 
 - Themes, light/dark, logo, animated emojis and a live preview.
 - Budget limits, document freshness checks and a portable app export.
 
-Demo is the default. Choose and test a live provider in Configuration to use paid or local models.
+Demo is the default. In Configuration, choose a provider card with its icon; Show more reveals the remaining providers. Pick a returned model or type its name, then test the connection. Selecting a card alone does not verify it. Type in Find a setting for free local matches as you type. Ask AI is a separate explicit model request. Guide replays the Configuration walkthrough, including the App Studio, background builds, retry, validation, save/restart and export.
 
 ## Prompts and code helpers
 

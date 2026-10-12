@@ -27,22 +27,22 @@ def run():
                 page.goto(url+'/settings.html');page.wait_for_selector('.cc-tour');bounds();assert page.locator('.cc-tour-label').text_content()=='Configuration guide'
                 initial=page.evaluate('localStorage.getItem("cc_cfg_mode_v2")');page.wait_for_timeout(450);page.screenshot(path='/tmp/tour-config-desktop.png')
                 assert page.locator('.cc-tour h2').inner_text()=='Four tabs, one setup'
-                for i in range(8):
-                    assert page.locator('.cc-tour-count').inner_text()==f'{i+1} / 8';bounds()
+                for i in range(13):
+                    assert page.locator('.cc-tour-count').inner_text()==f'{i+1} / 13';bounds()
                     page.locator('.cc-tour-next').click()
                 assert page.locator('.cc-tour').count()==0;assert page.evaluate('localStorage.getItem("cc_cfg_mode_v2")')==initial
                 page.reload();page.wait_for_selector('#configGuide');page.wait_for_timeout(400);assert page.locator('.cc-tour').count()==0
                 for width,height in [(390,844),(320,568),(820,980),(1280,540)]:
                     page.set_viewport_size({'width':width,'height':height});page.locator('#configGuide').click();page.wait_for_selector('.cc-tour')
-                    for i in range(8):
+                    for i in range(13):
                         bounds()
                         if width==390 and i==5:page.wait_for_timeout(450);page.screenshot(path='/tmp/tour-config-mobile.png')
                         page.locator('.cc-tour-next').click()
                 page.emulate_media(reduced_motion='reduce');page.locator('#configGuide').click();assert page.locator('.cc-tour').evaluate('(e)=>e.getAnimations().length')==0
-                page.keyboard.press('ArrowRight');assert page.locator('.cc-tour-count').inner_text()=='2 / 8';page.keyboard.press('ArrowLeft');assert page.locator('.cc-tour-count').inner_text()=='1 / 8'
+                page.keyboard.press('ArrowRight');assert page.locator('.cc-tour-count').inner_text()=='2 / 13';page.keyboard.press('ArrowLeft');assert page.locator('.cc-tour-count').inner_text()=='1 / 13'
                 page.locator('.cc-tour-skip').click();assert page.locator('#configGuide').evaluate('(e)=>e===document.activeElement')
                 page.evaluate('localStorage.removeItem("cc_cfg_tour_v1")');page.reload();page.wait_for_selector('#configGuide');page.wait_for_timeout(400);assert page.locator('.cc-tour').count()==0;page.reload();page.wait_for_selector('#configGuide');page.wait_for_timeout(400);assert page.locator('.cc-tour').count()==0
                 page.goto(url+'/?preview=1');page.wait_for_selector('#q');assert page.locator('.cc-tour').count()==0
-                assert not errors,errors;print('PASS: independent first-open flags, Skip both guides, eight config steps, replay, Back, Escape/arrows/focus, reduced motion, 4 viewport sizes, no setting changes, no preview guide, no JS errors');browser.close()
+                assert not errors,errors;print('PASS: independent first-open flags, Skip both guides, thirteen config steps, replay, Back, Escape/arrows/focus, reduced motion, 4 viewport sizes, no setting changes, no preview guide, no JS errors');browser.close()
         finally:proc.terminate();proc.wait()
 if __name__=='__main__':run()

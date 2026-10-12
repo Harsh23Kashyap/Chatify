@@ -85,7 +85,7 @@ function buildChips(list) {
   if (!top.includes(cur.provider) && chipList.includes(cur.provider)) top.push(cur.provider);
   const extra = rest.filter(p => !top.includes(p));
   for (const p of top.concat(chipsMore ? extra : [])) { const b = el("button", { type: "button", "data-p": p, role: "radio", "aria-checked": String(p === cur.provider) }, mark(p), NAMES[p] || p); b.addEventListener("click", () => { if (canEdit) { switchProvider(p);$("#testres").textContent="";$("#testres").className="testres"; draw(); pvFollow(); } }); seg.append(b); }
-  if (extra.length) { const m = el("button", { type: "button", class: "chipmore", "aria-expanded": String(chipsMore) }, chipsMore ? "Show fewer" : "Load more"); m.addEventListener("click", () => { chipsMore = !chipsMore; buildChips(); }); seg.append(m); }
+  if (extra.length) { const m = el("button", { type: "button", class: "chipmore", "aria-expanded": String(chipsMore) }, chipsMore ? "Show fewer" : "Show more"); m.addEventListener("click", () => { chipsMore = !chipsMore; buildChips(); }); seg.append(m); }
 }
 /* ---------- local model suggestions (Ollama) ---------- */
 let hwView = "simple";

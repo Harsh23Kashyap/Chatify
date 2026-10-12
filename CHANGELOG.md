@@ -1,3 +1,11 @@
+## 0.1.25
+
+- Expand the Configuration guide, keep provider icon cards in Simple mode, remove redundant Search and top rules, and place Build with AI in its own action row.
+- Use keyboard-friendly custom pickers across the app.
+- Show friendly per-part build status, inspectable draft content, remaining final work, and reduced-motion-safe micro animations.
+- Preview the actual draft chat, show readable API recommendations and long prompts, and use plain-language review/save summaries with color swatches and image thumbnails.
+- Add local saved drafts that survive restart, plus a user checklist with setting jump links. Nothing is applied until validated, saved and restarted.
+
 ## 0.1.24 - 2026-10-12
 
 - Replace the flat builder step tabs with connected milestone cards, active forest/citrus treatment, completed checkmarks, navigation-driven connector animation and panel transitions.

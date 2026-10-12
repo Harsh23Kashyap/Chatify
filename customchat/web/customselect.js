@@ -1,39 +1,11 @@
-/* Replaces native selects with a styled listbox. The real <select> stays in the DOM (hidden) so existing code keeps working. */
-(function () {
-  const open = { cur: null };
-  function close() { if (open.cur) { open.cur.classList.remove("open"); open.cur.querySelector(".cs-btn").setAttribute("aria-expanded", "false"); open.cur = null; } }
-  document.addEventListener("click", (e) => { if (open.cur && !open.cur.contains(e.target)) close(); });
-  document.addEventListener("keydown", (e) => { if (e.key === "Escape") close(); });
-  function enhance(sel) {
-    if (sel.dataset.cs || sel.multiple || sel.dataset.native === 'true') return; sel.dataset.cs = "1";
-    const wrap = document.createElement("div"); wrap.className = "cs " + (sel.className || "");
-    const btn = document.createElement("button"); btn.type = "button"; btn.className = "cs-btn"; btn.setAttribute("aria-haspopup", "listbox"); btn.setAttribute("aria-expanded", "false");
-    btn.setAttribute("aria-label", sel.getAttribute("aria-label") || sel.title || "Choose");
-    const lab = document.createElement("span"); lab.className = "cs-label"; const car = document.createElement("span"); car.className = "cs-car"; car.setAttribute("aria-hidden", "true");
-    btn.append(lab, car);
-    const list = document.createElement("div"); list.className = "cs-list"; list.setAttribute("role", "listbox");
-    sel.parentNode.insertBefore(wrap, sel); wrap.append(btn, list, sel); sel.classList.add("cs-native"); sel.tabIndex = -1; sel.setAttribute("aria-hidden", "true");
-    const sync = () => { const o = sel.options[sel.selectedIndex]; lab.textContent = o ? o.textContent : ""; btn.disabled = sel.disabled; };
-    const build = () => {
-      list.replaceChildren();
-      [...sel.options].forEach((o, i) => {
-        const it = document.createElement("div"); it.className = "cs-opt" + (i === sel.selectedIndex ? " on" : ""); it.setAttribute("role", "option"); it.setAttribute("aria-selected", i === sel.selectedIndex ? "true" : "false"); it.textContent = o.textContent; it.tabIndex = -1;
-        if (o.dataset.description) { const help=document.createElement("small"); help.className="cs-description"; help.textContent=o.dataset.description; it.append(help); it.title=o.dataset.description; it.setAttribute("aria-label",o.textContent+". "+o.dataset.description); }
-        if (o.disabled) it.classList.add("dis");
-        if (sel.dataset.fonts && o.value && o.value !== "custom" && o.value !== "system") { it.style.fontFamily = '"' + o.textContent + '", sans-serif'; if (!window.__csFonts) { window.__csFonts = 1; const l = document.createElement("link"); l.rel = "stylesheet"; l.href = "https://fonts.googleapis.com/css2?" + [...sel.options].filter((x) => x.value && x.value !== "custom" && x.value !== "system").map((x) => "family=" + encodeURIComponent(x.textContent).replace(/%20/g, "+")).join("&") + "&display=swap"; document.head.append(l); } }
-        it.addEventListener("click", () => { if (o.disabled) return; sel.selectedIndex = i; sel.dispatchEvent(new Event("change", { bubbles: true })); sync(); close(); btn.focus(); });
-        list.append(it);
-      }); sync();
-    };
-    btn.addEventListener("click", () => { if (wrap.classList.contains("open")) { close(); return; } close(); build(); wrap.classList.add("open"); btn.setAttribute("aria-expanded", "true"); open.cur = wrap;
-      const r = btn.getBoundingClientRect(); wrap.classList.toggle("up", innerHeight - r.bottom < 240 && r.top > 240); const on = list.querySelector(".on"); if (on) on.scrollIntoView({ block: "nearest" }); });
-    btn.addEventListener("keydown", (e) => { if (e.key === "ArrowDown" || e.key === "ArrowUp") { e.preventDefault(); const d = e.key === "ArrowDown" ? 1 : -1; const n = Math.max(0, Math.min(sel.options.length - 1, sel.selectedIndex + d)); sel.selectedIndex = n; sel.dispatchEvent(new Event("change", { bubbles: true })); sync(); } });
-    sel.addEventListener("change", sync);
-    new MutationObserver(() => { sync(); if (wrap.classList.contains("open")) build(); }).observe(sel, { childList: true, subtree: true, attributes: true });
-    const d = Object.getOwnPropertyDescriptor(HTMLSelectElement.prototype, "value"); Object.defineProperty(sel, "value", { get() { return d.get.call(this); }, set(v) { d.set.call(this, v); sync(); } });
-    sync();
-  }
-  function scan() { document.querySelectorAll("select").forEach(enhance); }
-  new MutationObserver(scan).observe(document.documentElement, { childList: true, subtree: true });
-  if (document.readyState !== "loading") scan(); else document.addEventListener("DOMContentLoaded", scan);
-})();
+/* One accessible picker for every select. Native state stays as the backing model. */
+(()=>{let active=null,serial=0;function close(focus=false){if(!active)return;const {wrap,btn}=active;wrap.classList.remove('open');btn.setAttribute('aria-expanded','false');btn.removeAttribute('aria-activedescendant');active=null;if(focus)btn.focus()}
+function enhance(sel){if(sel.dataset.cs||sel.multiple)return;sel.dataset.cs='1';const wrap=document.createElement('div');wrap.className='cs '+(sel.className||'');const btn=document.createElement('button');btn.type='button';btn.className='cs-btn';btn.setAttribute('role','combobox');btn.setAttribute('aria-haspopup','listbox');btn.setAttribute('aria-expanded','false');const label=document.createElement('span');label.className='cs-label';const icon=document.createElement('span');icon.className='cs-symbol';icon.setAttribute('aria-hidden','true');icon.textContent=sel.dataset.fonts?'Aa':sel.id==='builderScope'?'✦':sel.id==='style'?'◈':'◇';const car=document.createElement('span');car.className='cs-car';car.setAttribute('aria-hidden','true');btn.append(icon,label,car);const list=document.createElement('div');list.className='cs-list';list.id='picker-list-'+(++serial);list.setAttribute('role','listbox');btn.setAttribute('aria-controls',list.id);sel.before(wrap);wrap.append(btn,list,sel);sel.classList.add('cs-native');sel.tabIndex=-1;sel.setAttribute('aria-hidden','true');let cursor=0,typed='',timer;
+function name(){const id=sel.id;const owner=id&&document.querySelector('label[for="'+id+'"]');return sel.getAttribute('aria-label')||owner?.textContent?.trim()||sel.closest('label')?.childNodes[0]?.textContent?.trim()||sel.title||'Choose'}
+function sync(){label.textContent=sel.selectedOptions[0]?.textContent||'Choose';btn.disabled=sel.disabled;wrap.hidden=sel.hidden;btn.setAttribute('aria-label',name());list.setAttribute('aria-label',name());if(sel.disabled&&active?.wrap===wrap)close()}
+function focusItem(){const items=[...list.children];items.forEach((e,i)=>e.classList.toggle('focused',i===cursor));const it=items[cursor];if(it){btn.setAttribute('aria-activedescendant',it.id);it.scrollIntoView({block:'nearest'})}}
+function choose(i){const o=sel.options[i];if(!o||o.disabled)return;sel.selectedIndex=i;sel.dispatchEvent(new Event('change',{bubbles:true}));sync();close(true)}
+function build(){list.replaceChildren();[...sel.options].forEach((o,i)=>{const it=document.createElement('div');it.className='cs-opt'+(o.selected?' on':'')+(o.disabled?' dis':'');it.id=list.id+'-'+i;it.setAttribute('role','option');it.setAttribute('aria-selected',String(o.selected));it.setAttribute('aria-disabled',String(o.disabled));const mark=document.createElement('span');mark.className='cs-choice-mark';mark.setAttribute('aria-hidden','true');mark.textContent=o.selected?'✓':sel.dataset.fonts?'Aa':'·';const copy=document.createElement('span');copy.textContent=o.textContent;if(o.dataset.description){const help=document.createElement('small');help.className='cs-description';help.textContent=o.dataset.description;copy.append(help)}if(sel.dataset.fonts)copy.style.fontFamily='"'+o.textContent+'",sans-serif';it.append(mark,copy);it.onclick=()=>choose(i);list.append(it)});cursor=Math.max(0,sel.selectedIndex);focusItem()}
+function show(){if(btn.disabled||wrap.hidden)return;close();build();wrap.classList.add('open');btn.setAttribute('aria-expanded','true');active={wrap,btn};const r=btn.getBoundingClientRect();const room=innerHeight-r.bottom;wrap.classList.toggle('up',room<220&&r.top>room);list.style.maxHeight=Math.max(96,Math.min(300,(wrap.classList.contains('up')?r.top:room)-20))+'px';focusItem()}
+btn.onclick=()=>active?.wrap===wrap?close():show();btn.onkeydown=e=>{const isOpen=active?.wrap===wrap;if(['ArrowDown','ArrowUp','Home','End','Enter',' '].includes(e.key)){e.preventDefault();if(!isOpen){show();return}if(e.key==='Enter'||e.key===' '){choose(cursor);return}const enabled=[...sel.options].map((o,i)=>o.disabled?-1:i).filter(i=>i>=0);let pos=enabled.indexOf(cursor);if(e.key==='Home')cursor=enabled[0];else if(e.key==='End')cursor=enabled.at(-1);else cursor=enabled[Math.max(0,Math.min(enabled.length-1,pos+(e.key==='ArrowDown'?1:-1)))];focusItem()}else if(e.key==='Escape'){e.preventDefault();close(true)}else if(e.key==='Tab')close();else if(e.key.length===1&&!e.ctrlKey&&!e.metaKey){if(!isOpen)show();typed+=e.key.toLowerCase();clearTimeout(timer);timer=setTimeout(()=>typed='',600);const i=[...sel.options].findIndex(o=>!o.disabled&&o.textContent.toLowerCase().startsWith(typed));if(i>=0){cursor=i;focusItem()}}};sel.addEventListener('change',()=>{sync();if(active?.wrap===wrap)build()});new MutationObserver(()=>{sync();if(active?.wrap===wrap)build()}).observe(sel,{childList:true,subtree:true,attributes:true});const value=Object.getOwnPropertyDescriptor(HTMLSelectElement.prototype,'value');Object.defineProperty(sel,'value',{get(){return value.get.call(this)},set(v){value.set.call(this,v);sync()}});sync()}
+document.addEventListener('click',e=>{if(active&&!active.wrap.contains(e.target))close()});document.addEventListener('keydown',e=>{if(e.key==='Escape')close(true)});function scan(){document.querySelectorAll('select').forEach(enhance)}new MutationObserver(scan).observe(document.documentElement,{childList:true,subtree:true});document.readyState==='loading'?document.addEventListener('DOMContentLoaded',scan):scan();})();
