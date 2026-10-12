@@ -32,3 +32,4 @@ html body.settings-tabs #sec-code #codeEditor details.helper.selected-editor>sum
 .shape-shortcuts [aria-pressed=true],.background-shortcuts [aria-pressed=true]{outline:2px solid #173f35;outline-offset:2px}
 /* Search results must sit above the following sticky section navigation. */
 html body.settings-tabs .settings-search:has(.settings-search-results:not([hidden])){z-index:200}html body.settings-tabs .settings-search-results{z-index:210;max-height:min(360px,50dvh)}
+html body.settings-tabs #sec-code #codeEditor details.helper.selected-editor>textarea.code{font:14px/1.6 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace!important;min-height:240px!important}
