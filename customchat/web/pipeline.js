@@ -117,7 +117,7 @@ function codeCard(kind, title, help, ph) {
 
 function build(col) {
   const prompts = el("section", { class: "tile", id: "sec-prompts" }, el("div", { class: "head" }, el("span", { class: "ic purple", text: "\u2630" }), el("div", {}, el("b", { text: "Prompts" }), el("small", { text: "The instructions behind each step of an answer" }))),
-    el("div", { class: "help", text: "Each question passes through these steps. Open one to edit it." }));
+    el("div", { class: "help", text: "Always-on steps run for each question. Optional checks start off and add model calls when enabled. Select a step to read its purpose and edit its prompt." }));
   dg = diagram(); prompts.append(dg);
   const GROUPS = [["Understand the question", ["question_check", "standalone", "queries"]], ["Find the evidence", ["relevance"]], ["Write and check the answer", ["answer", "faithfulness", "revise", "followups", "summary"]]];
   const used = new Set(); GROUPS.forEach(([t, ks]) => { const list = stages.filter((s) => ks.includes(s.key)); if (!list.length) return; list.forEach((s) => used.add(s.key)); prompts.append(el("div", { class: "pgroup", text: t })); list.forEach((s) => prompts.append(stageCard(s))); });

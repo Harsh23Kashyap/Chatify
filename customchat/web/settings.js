@@ -586,6 +586,8 @@ async function init() {
   $("#temp").addEventListener("input", () => {$("#tv").textContent = (+$("#temp").value).toFixed(2);sliderVisuals()});
   $("#topk").addEventListener("input", () => {$("#kv").textContent = $("#topk").value;sliderVisuals()});
   $("#modelPick").addEventListener("change", pickChanged);
+  // Key actions and Refresh rebuild the picker from cur.model. Keep typed edits.
+  $("#model").addEventListener("input", () => { if ($("#modelPick").value === OTHER) cur.model = $("#model").value.trim(); });
   $("#refreshModels").addEventListener("click", () => loadModels(true));
   $("#keysave").addEventListener("click", async () => { const v = $("#apikey").value.trim(); if (!v) { say("Paste a key first.", true); return; } try { const r = await api("/api/provider/key", { provider: cur.provider, key: v }); keyInfo[cur.provider] = r.key; $("#apikey").value = ""; await provExtras(); say("Key saved on this computer."); } catch (e) { say(e.message, true); } });
   $("#keyclear").addEventListener("click", async () => { try { const r = await api("/api/provider/key", { provider: cur.provider, clear: true }); keyInfo[cur.provider] = r.key; await provExtras(); say("Key removed."); } catch (e) { say(e.message, true); } });
