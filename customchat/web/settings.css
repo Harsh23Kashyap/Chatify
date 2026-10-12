@@ -1118,4 +1118,4 @@ body.settings-tabs .simple-appearance-note{display:none}body.settings-tabs.simpl
 
 .emoji-tabs button[aria-pressed=false]{background:#fffdf7!important;color:#354b3d!important}.emoji-tabs button[aria-pressed=true]{background:#173f35!important;color:#fff!important}
 
-body.settings-tabs #sec-presets .saved>.two{display:grid;grid-template-columns:minmax(0,1fr);gap:22px}body.settings-tabs #sec-presets .saved .cs{width:100%;min-width:0}
+body.settings-tabs #sec-presets .saved>.two{display:grid!important;grid-template-columns:minmax(0,1fr)!important;gap:22px}body.settings-tabs #sec-presets .saved .cs{width:100%;min-width:0}
