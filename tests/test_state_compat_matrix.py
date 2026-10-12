@@ -24,7 +24,7 @@ class StateMatrix(unittest.TestCase):
   self.store.save_state('local','partial-theme',{'settings':{},'theme':{'font':'mono','light':{'brand':'#123456'}}});r=self.api('/api/states/load',{'name':'partial-theme'});self.assertEqual(r['theme']['font'],'mono');self.assertEqual(r['theme']['light']['brand'],'#123456');self.assertTrue(r['theme']['light']['bg'])
  def test_malformed_states_do_not_change_settings_or_theme(self):
   before=self.api('/api/settings')['settings'];theme=self.api('/api/theme')['theme']
-  for i,payload in enumerate([None,[],42,'invalid',{'settings':None},{'settings':[]},{'settings':{'model':'wrong'},'theme':'invalid'}]):
+  for i,payload in enumerate([None,[],42,'invalid',{'settings':None},{'settings':[]},{'settings':{'model':'wrong'},'theme':'invalid'},{'settings':{'model':'wrong'},'theme':{'font_size':-1}},{'settings':{'model':'wrong'},'theme':{'font_size':100.5}}]):
    with self.subTest(payload=payload):
     self.store.save_state('local','bad'+str(i),payload)
     with self.assertRaises(urllib.error.HTTPError) as cm:self.api('/api/states/load',{'name':'bad'+str(i)})

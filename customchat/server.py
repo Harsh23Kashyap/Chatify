@@ -593,8 +593,9 @@ def make_handler(cfg, engine):
                     settings=state.get("settings",state)
                     if not isinstance(settings,dict):raise ValueError("Saved settings must be an object")
                     if "theme" in state and not isinstance(state["theme"],dict):raise ValueError("Saved theme must be an object")
+                    restored_theme=themes.clean(state["theme"]) if "theme" in state else None
                     management.history.record(o,settings_view());apply_settings(settings)
-                    if "theme" in state:themestore.save(state["theme"])
+                    if restored_theme is not None:themestore.save(restored_theme)
                 return self._send(200, {"settings": settings_view(), "theme":themestore.value})
             if path == "/api/states/delete" and method == "POST":
                 store.delete_state(o, str(b.get("name", ""))); return self._send(200, {"ok": True})
