@@ -281,3 +281,54 @@ dialog.settings-help textarea::placeholder{transition:opacity .24s ease}
 dialog.settings-help textarea.ask-swap::placeholder{opacity:0}
 dialog.settings-help #settingsHelpLocalResults button:hover{background:#f4f7f0}
 @media(prefers-reduced-motion:reduce){.ask-dots i{animation:none!important;opacity:.7}#settingsHelpAnswer.arrived{animation:none!important}dialog.settings-help textarea::placeholder{transition:none!important}}
+
+/* 0.1.27: one spacing rhythm for the settings rail, editor and preview. */
+body.settings-tabs .layout{padding-bottom:0!important;gap:24px!important}
+body.settings-tabs #col{padding:20px!important;background:transparent!important}
+body.settings-tabs #menu{padding:0!important;background:transparent!important}
+body.settings-tabs #menu a{padding:12px!important;line-height:1.5!important}
+body.settings-tabs #pvbox{margin-bottom:0!important;padding:0!important;top:96px}
+body.settings-tabs #pvbox iframe#pv{margin-bottom:0!important;height:520px!important;min-height:520px!important}
+body.settings-tabs #pvbox .pvnote{margin:8px 0 0!important;line-height:1.5}
+body.settings-tabs .col>.tile,body.settings-tabs #look>.tile{padding:16px 0!important;background:transparent!important}
+body.settings-tabs .workspace-fields{margin:0!important;padding:0!important;border:0!important;border-top:1px solid #d8e1d2!important}
+body.settings-tabs .workspace-fields>summary{display:flex;align-items:center;gap:8px;min-height:48px!important;padding:12px 0!important;line-height:1.5;cursor:pointer}
+body.settings-tabs .workspace-fields>summary::before{content:'›';display:block;transform:rotate(0deg);width:10px;color:#526650}
+body.settings-tabs .workspace-fields[open]>summary::before{transform:rotate(90deg)}
+body.settings-tabs .workspace-fields>summary{list-style:none}body.settings-tabs .workspace-fields>summary::-webkit-details-marker{display:none}
+body.settings-tabs .workspace-fields>label,body.settings-tabs .workspace-fields fieldset>label{display:flex;flex-direction:column;gap:8px;margin:0 0 20px!important;min-width:0}
+body.settings-tabs .workspace-fields>label:last-child{margin-bottom:20px!important}
+body.settings-tabs .workspace-fields input:not([type=checkbox]),body.settings-tabs .workspace-fields .cs{margin:0!important}
+body.settings-tabs .workspace-fields input:not([type=checkbox]){height:44px;min-height:44px;padding:10px 12px;background:#fff;border:1px solid #c5d0c6;box-shadow:none;font-size:14px}
+body.settings-tabs .workspace-fields textarea{min-height:104px!important;padding:10px 12px;border:1px solid #c5d0c6;border-radius:8px;background:#fff;line-height:1.5}
+body.settings-tabs .workspace-fields .workspace-toggle{display:grid!important;grid-template-columns:minmax(0,1fr) auto;gap:8px 16px!important;align-items:center}
+body.settings-tabs .workspace-toggle>.workspace-field-name{grid-column:1;grid-row:1}
+body.settings-tabs .workspace-toggle>input[type=checkbox]{grid-column:2;grid-row:1;margin:0!important;flex:none}
+body.settings-tabs .workspace-toggle>small{grid-column:1/-1}
+body.settings-tabs .workspace-fields small,body.settings-tabs .config-explanation{margin:0!important;font-size:13px;line-height:1.5;font-weight:400}
+body.settings-tabs .workspace-fields small[hidden]{display:none!important}
+body.settings-tabs .workspace-fields fieldset{margin:0 0 16px!important;padding:12px 0!important;border:0!important}
+body.settings-tabs .workspace-fields fieldset>legend{padding:0 0 8px;font-weight:600}
+body.settings-tabs .workspace-fields-save{padding-top:16px;margin-top:0;display:flex;flex-direction:column;align-items:flex-start;gap:12px}
+body.settings-tabs .workspace-fields-save p:empty{display:none}
+body.settings-tabs .field{gap:8px}.settings-tabs label.check{gap:12px!important}
+body.settings-tabs .sub{margin-bottom:16px;gap:8px}body.settings-tabs .sub small{margin:0;line-height:1.5}
+@media(max-width:760px){body.settings-tabs .layout{gap:16px!important}body.settings-tabs #col{padding:16px 0!important}body.settings-tabs #pvbox iframe#pv{height:480px!important;min-height:480px!important}}
+body.settings-tabs #cfgmode{display:flex!important;width:240px!important;max-width:100%!important;height:44px!important;padding:3px!important;border:1px solid #d5ddd2;border-radius:9px!important;background:#f1f4ed!important;gap:3px;box-shadow:none!important}
+body.settings-tabs #cfgmode button{display:flex;align-items:center;justify-content:center;flex:1;min-width:0;height:36px!important;min-height:36px!important;padding:0 16px!important;font-size:13px!important;font-weight:600!important;line-height:1!important;text-decoration:none!important;border:0!important;border-radius:6px!important;box-shadow:none!important}
+body.settings-tabs #cfgmode button[aria-checked=true]{background:#fff!important;color:#173f35!important}
+body.settings-tabs #cfgmode button[aria-checked=false]{background:transparent!important;color:#526650!important}
+body.settings-tabs .settings-studio-actions{margin:16px 0!important}.settings-studio-actions .app-builder-open{box-shadow:none!important}
+body.settings-tabs .settings-search{margin:16px 0!important}.settings-tabs .settings-search>label{display:block!important;margin-bottom:8px!important}
+body.settings-tabs #seg .chipmore{justify-content:flex-start!important;text-align:left!important;margin:0!important;padding:8px!important}
+body.settings-tabs .workspace-fields input[type=checkbox]{width:40px!important;min-width:40px!important;height:24px!important;min-height:24px!important;max-height:24px!important;align-self:center;padding:0!important}
+body.settings-tabs .workspace-fields>summary{margin-bottom:12px}
+@media(max-width:760px){body.settings-tabs #menu .nav-group{flex-direction:row!important;align-items:stretch;gap:6px!important}body.settings-tabs #menu .nav-group a{flex:1 1 140px!important;min-height:44px!important;padding:10px 12px!important}body.settings-tabs #menu .nav-group[hidden]{display:none!important}}
+body.settings-tabs input[type=checkbox]{height:24px!important;min-height:24px!important;max-height:24px!important;flex-shrink:0}
+@media(prefers-reduced-motion:no-preference){body.settings-tabs button{transition:background-color .16s ease,border-color .16s ease,transform .12s ease}body.settings-tabs button:active:not(:disabled){transform:translateY(1px)}body.settings-tabs .workspace-fields[open]>:not(summary),body.settings-tabs .tile.active{animation:settings-panel-in .18s ease-out}body.settings-tabs #seg button{transition:background-color .16s ease,border-color .16s ease}}
+@keyframes settings-panel-in{from{opacity:.35;transform:translateY(3px)}to{opacity:1;transform:none}}
+@media(prefers-reduced-motion:reduce){body.settings-tabs button,body.settings-tabs .workspace-fields[open]>:not(summary),body.settings-tabs .tile.active{animation:none!important;transition:none!important}}
+#modelSuggestionSources{display:block;font-size:12px;line-height:1.5;margin:6px 0 16px}#modelSuggestionSources:empty{display:none}
+body.settings-tabs #settingsNavTop{background:#fffdf7!important;isolation:isolate}
+body.settings-tabs #settingsNavTop{z-index:150!important}
+@media(max-width:760px){body.settings-tabs .cs.open .cs-list,body.settings-tabs .cs.closing .cs-list{position:absolute!important;right:auto!important;top:calc(100% + 6px)!important;bottom:auto!important;width:var(--picker-width,100%)!important;left:var(--picker-left,0px)!important;max-height:var(--picker-height,300px)!important}body.settings-tabs .cs.up .cs-list{top:auto!important;bottom:calc(100% + 6px)!important}}

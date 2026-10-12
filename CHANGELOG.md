@@ -1,3 +1,14 @@
+## 0.1.27 - 2026-10-12
+
+- Shorten the shared README and PyPI description, with install/configuration steps and clean app screenshots.
+- Simplify shared dropdowns and answer-depth choices, with aligned labels, readable descriptions and viewport-aware placement.
+- Fix settings spacing, mobile navigation link heights, scalar control types, toggle alignment and the Simple/Advanced switch.
+- Keep model lists tied to the selected provider, preserve typed models, and make empty/error states usable.
+- Add Gemini and Claude model-list pagination and base-address normalization; use MiMo's documented api-key header.
+- Include clearly labeled, officially documented model suggestions when live listing fails, without claiming account availability.
+- Refresh pinned installer versions and add small dropdown/button/panel/answer animations, with reduced-motion opt-out.
+- Add Start over after completed builds, keep retained drafts, and confirm before discarding unretained or edited drafts.
+
 ## 0.1.26 - 2026-10-12
 
 - Rework Build with AI and Ask AI after an AI-tell audit: remove sparkle glyphs, the eyebrow badge, gradient buttons, uniform step cards, status dots and the dark ornament loader.

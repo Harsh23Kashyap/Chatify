@@ -488,8 +488,8 @@ async function init() {
   $("#brand").textContent = a.title; $("#sideTitle").textContent = "Conversations"; $("#noteName").textContent = a.title; $("#noteText").textContent = a.footer; $("#tempPill").addEventListener("click", toggleTemp); $("#themeBtn").addEventListener("click", () => { const dark = document.documentElement.dataset.theme === "dark"; localStorage.setItem("cc_mode", dark ? "light" : "dark"); CCTheme.apply(CCTheme.value); });
   updateModelBadge();
   $("#themeBtn").title = "Switch between light and dark theme";
-  const modeHelp={quick:"Short answer: 2 to 4 sentences.",standard:"Balanced answer in short paragraphs.",deep:"Longer answer with sections, caveats and open questions. This changes answer detail, not the model or source quality."};
-  S.cfg.styles.forEach((s) => $("#style").append(el("option", {title:modeHelp[s] || "Answer style: "+s, "data-description":modeHelp[s] || "", value: s === "standard" ? s : s, ...(s === "standard" ? { selected: "" } : {}) }, s[0].toUpperCase() + s.slice(1))));
+  const modeHelp={quick:"2 to 4 sentences.",standard:"Short paragraphs.",deep:"More detail, with sections and caveats."};
+  S.cfg.styles.forEach((s) => $("#style").append(el("option", {title:(modeHelp[s] || "Answer style: "+s)+" Changes answer length, not model or source quality.", "data-description":modeHelp[s] || "", value: s === "standard" ? s : s, ...(s === "standard" ? { selected: "" } : {}) }, s[0].toUpperCase() + s.slice(1))));
   if (S.cfg.sources.length > 1) {
     const f = el("div", { class: "pills" });
     S.cfg.sources.forEach((s) => f.append(el("button", { class: "pill", onclick: (e) => { S.sources.has(s.id) ? S.sources.delete(s.id) : S.sources.add(s.id); e.target.style.opacity = S.sources.has(s.id) || !S.sources.size ? 1 : .45; [...f.children].forEach((c, i) => c.style.opacity = !S.sources.size || S.sources.has(S.cfg.sources[i].id) ? 1 : .45); } }, s.label)));

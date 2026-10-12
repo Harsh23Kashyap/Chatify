@@ -55,16 +55,27 @@ function modelShortlist(provider, models) {
   }
   return ["gemini","claude"].includes(provider) ? ranked.slice(0,10) : all;
 }
+let modelRequest=0;
 async function loadModels(force) {
-  const sel = $("#modelPick"), p = cur.provider; sel.replaceChildren();
-  let list = [];
-  try { const r = await api("/api/provider/models", { provider: p, base_url: $("#base").value.trim() }); list = r.models || []; modelNote = r.note || ""; } catch (e) { modelNote = e.message; }
-  const m = cur.model || ""; const available=list.length; list=modelShortlist(p,list);
-  for (const n of list) sel.append(el("option", { value: n, text: n }));
-  sel.append(el("option", { value: OTHER, text: list.length ? "Other (type a name)" : "Type a name" }));
-  sel.value = list.includes(m) ? m : OTHER;
-  const demo = p === "mock"; sel.hidden = demo; $("#refreshModels").hidden = demo; { const ml = document.querySelector("label[for=modelPick]"); if (ml) ml.hidden = demo; } { const kr = sel.closest(".keyrow"); if (kr) kr.hidden = demo; } const typed = !demo && sel.value === OTHER; $("#model").hidden = !typed; if (typed) $("#model").value = m;
-  $("#modelh").textContent = demo ? "The demo answers without a model." : list.length ? list.length + " suggested models ("+available+" available). Use Other for any model name." : (modelNote || "Type the model name your provider uses.");
+  const request=++modelRequest,sel=$("#modelPick"),p=cur.provider,base=$("#base").value.trim();
+  const m=cur.model||"";let list=[],note="",suggestions=[];
+  $("#modelh").textContent=p==="mock"?"The demo answers without a model.":"Loading model names…";
+  $("#refreshModels").disabled=true;
+  try { const r=await api("/api/provider/models",{provider:p,base_url:base});list=r.models||[];note=r.note||"";suggestions=r.suggestions||[]; } catch(e){note=e.message;}
+  if(request!==modelRequest||p!==cur.provider)return;
+  const help=$("#modelh");let sources=document.getElementById("modelSuggestionSources");if(!sources){sources=el("small",{id:"modelSuggestionSources"});help.after(sources)}sources.replaceChildren();
+  const available=list.length;list=modelShortlist(p,list);const fallback=!list.length&&suggestions.length>0;sel.replaceChildren();
+  for(const n of list)sel.append(el("option",{value:n,text:n}));
+  if(fallback)for(const example of suggestions){if(example.source){const a=el("a",{href:example.source,target:"_blank",rel:"noopener noreferrer",text:"Model documentation"});sources.append(a,document.createTextNode(" · Checked "+example.checked));}const o=el("option",{value:example.id,text:example.id+" (suggested)"});o.dataset.description=example.description;sel.append(o)}
+  sel.append(el("option",{value:OTHER,text:list.length?"Other (type a name)":"Type a model name"}));
+  sel.value=list.includes(m)||fallback&&suggestions.some(x=>x.id===m)?m:OTHER;
+  const demo=p==="mock",typed=!demo&&sel.value===OTHER;
+  sel.hidden=demo||!list.length&&!fallback;$("#refreshModels").hidden=demo;
+  const ml=document.querySelector("label[for=modelPick]");if(ml)ml.hidden=demo;
+  const kr=sel.closest(".keyrow");if(kr)kr.hidden=demo;
+  $("#model").hidden=!typed;if(typed)$("#model").value=m;
+  $("#refreshModels").disabled=!canEdit;modelNote=note;
+  $("#modelh").textContent=demo?"The demo answers without a model.":fallback?(note?note+" ":"")+"Suggested examples, not verified for your account or server. Choose one or type your own model name.":note?note+" You can still enter a model name below.":list.length?list.length+" chat models shown ("+available+" returned). Choose one or enter another name.":"No chat model names were returned. Enter a model name below.";
 }
 function sliderVisuals(){
   const t=document.getElementById("temperatureViz"), d=document.getElementById("sourcesViz");
@@ -89,11 +100,11 @@ function buildChips(list) {
 }
 /* ---------- local model suggestions (Ollama) ---------- */
 let hwView = "simple";
-/* Cloud picks, checked against the providers' own model pages on 5 Oct 2026:
+/* Cloud picks, checked against the providers' own model pages on 12 Oct 2026:
    developers.openai.com/api/docs/models and ai.google.dev/gemini-api/docs/models */
 const CLOUD_PICKS = [
-  { p: "openai", id: "gpt-6.1-sol", name: "GPT-6.1 Sol", why: "Near-Astra performance at a lower cost, for complex coding, computer use and professional work." },
-  { p: "gemini", id: "gemini-3.8-flash", name: "Gemini 3.8 Flash", why: "Google's most intelligent Flash model." },
+  { p: "openai", id: "gpt-4.1-mini", name: "GPT-4.1 mini", why: "Smaller model for everyday text work and coding." },
+  { p: "gemini", id: "gemini-3.5-flash-lite", name: "Gemini 3.5 Flash-Lite", why: "Low-latency model for document parsing and simple extraction." },
 ]; const testLog = [];
 async function ollamaPanel() {
   const box = $("#ollamabox"); if (activeSec !== "model") return; box.hidden = false; box.dataset.loaded = "1";
@@ -473,7 +484,7 @@ function pvFollow() {
     cp.hidden = !m;
     if (m) cp.replaceChildren(el("b", { text: "Suggested cloud models" }), ...CLOUD_PICKS.map((c) => el("div", { class: "cpick" }, mark(c.p), el("div", { class: "cpt" }, el("b", { text: c.name }), el("span", { class: "h", text: c.why })),
       cur.provider === c.p && chosenModel() === c.id ? el("span", { class: "okt", text: "In use" }) : el("button", { type: "button", class: "mini", disabled: canEdit ? undefined : "", onclick: () => { switchProvider(c.p, c.id); draw(); const tr = $("#testres"); if (tr) { tr.textContent = ""; tr.className = ""; } loadModels(false).then(() => { const pk = $("#modelPick"); pk.value = [...pk.options].some((o) => o.value === c.id) ? c.id : OTHER; if (pk.value === OTHER) { $("#model").hidden = false; $("#model").value = c.id; } cur.model = c.id; pvFollow(); }); } }, "Use"))),
-      el("div", { class: "h" }, "Taken from ", el("a", { href: "https://developers.openai.com/api/docs/models", target: "_blank", rel: "noopener" }, "OpenAI"), " and ", el("a", { href: "https://ai.google.dev/gemini-api/docs/models", target: "_blank", rel: "noopener" }, "Google"), " model pages on 5 Oct 2026. Names change, so use Refresh list after adding a key.")); }
+      el("div", { class: "h" }, "Taken from ", el("a", { href: "https://developers.openai.com/api/docs/models", target: "_blank", rel: "noopener" }, "OpenAI"), " and ", el("a", { href: "https://ai.google.dev/gemini-api/docs/models", target: "_blank", rel: "noopener" }, "Google"), " model pages on 12 Oct 2026. Suggestions only, not verified for your account. Use Refresh list after adding a key.")); }
   { const box = $("#ollamabox"); if (box) { const cpn = $("#pvcloud"); if (box.previousElementSibling !== cpn) cpn.after(box); box.hidden = !m; if (m && !box.dataset.loaded) ollamaPanel(); }
     let hist = $("#pvhist"); if (!hist) { hist = el("div", { id: "pvhist", class: "pvhist" }); card.parentNode.append(hist); }
     hist.hidden = !(m && testLog.length); hist.replaceChildren(el("b", { text: "Recent tests" }), ...testLog.map((x) => el("div", { class: "pvh-row" }, el("span", { class: "fitdot " + (x.ok ? "green" : "red") }), el("span", { text: x.p + (x.ok ? " worked" : " failed"),title:x.detail || "" }), el("span", { class: "h", text: x.t })))); }

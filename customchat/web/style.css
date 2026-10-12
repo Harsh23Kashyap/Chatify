@@ -781,3 +781,11 @@ html[data-motion=none] .ephemeral-scene *,html[data-motion=calm] .ephemeral-scen
 .similar-history{width:100%;text-align:left}.similar-history summary{min-height:44px;padding:12px 4px;cursor:pointer;font-size:.85rem}.similar-history .pill{display:block;text-align:left;white-space:normal;margin:8px 0}
 
 .source-excerpt{display:block;white-space:normal;color:var(--mut);font-size:.85em;line-height:1.45;margin:6px 0;text-align:left}
+/* Open pickers sit above the thread instead of behind its illustrations. */
+.main>.bar:has(.cs.open){z-index:150!important}
+.bar .cs{width:auto;flex:none}.bar .cs-btn{min-width:112px}
+@media(max-width:760px){.bar .cs-btn{display:flex!important;min-width:100px;padding:8px!important;font-size:12px}.bar-r{gap:4px}.bar .cs-symbol{display:none}.bar #profileBtn,.bar #exportChat{display:none}}
+/* 0.1.27 interaction motion: small distances, only when motion is allowed. */
+@media(prefers-reduced-motion:no-preference){html:not([data-motion=none]) button{transition:background-color .16s ease,border-color .16s ease,transform .12s ease}html:not([data-motion=none]) button:active:not(:disabled){transform:translateY(1px)}html:not([data-motion=none]) details[open]>:not(summary){animation:cc-panel-in .18s ease-out}html:not([data-motion=none]) .chatitem{animation:cc-panel-in .18s ease-out}html:not([data-motion=none]) .row .a{animation:cc-answer-in .24s ease-out}}
+@keyframes cc-panel-in{from{opacity:.35;transform:translateY(-3px)}to{opacity:1;transform:none}}@keyframes cc-answer-in{from{opacity:.3;transform:translateY(4px)}to{opacity:1;transform:none}}
+@media(prefers-reduced-motion:reduce){button,details[open]>:not(summary),.chatitem,.row .a{animation:none!important;transition:none!important}}

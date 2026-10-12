@@ -102,3 +102,7 @@ dialog.app-builder .builder-steps button[aria-current=step] .builder-step-label 
 dialog.app-builder .builder-steps button[aria-current=step] .builder-step-label{color:#173f35!important}
 .builder-metrics p{color:#5b6d5d}
 .builder-metrics{border-top-color:#ccd7c0}
+.builder-draft-library{margin:16px 0;padding:12px 0;border-top:1px solid var(--studio-rule);border-bottom:1px solid var(--studio-rule)}.builder-draft-library>summary{min-height:28px;cursor:pointer;font-size:13px;line-height:1.5}
+dialog.app-builder #builderStatus{margin:16px 0;line-height:1.65;font-size:13px;max-width:72ch}.builder-logo-note{display:block;margin-top:10px;color:#526650;font-size:12px;line-height:1.5}
+dialog.app-builder #builderFresh{display:block;margin:12px 0 20px;min-height:44px;padding:10px 14px;background:transparent;color:#173f35;border:1px solid #c4d0c0;border-radius:8px;box-shadow:none}
+dialog.app-builder #builderFresh[hidden]{display:none}

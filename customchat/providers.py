@@ -371,26 +371,87 @@ def has_key(kind, env=""):
     return {"needed": kind != "openai_compatible", "has": False, "source": ""}
 
 
+def _model_base(base, default, version):
+    """Accept either the service root or its documented API-version URL."""
+    b = (base or default).rstrip("/")
+    for suffix in ("/models", "/chat/completions"):
+        if b.endswith(suffix):
+            b = b[:-len(suffix)]
+    if version and b.endswith("/" + version):
+        b = b[:-len(version)-1]
+    return b
+
+
 def list_models(cfg, kind, base=""):
-    """Return sorted model ids for the provider. Raises ProviderError with a plain reason."""
-    from .schema import PRESET_PROVIDERS
-    if kind == "mock":
-        return ["demo"]
-    if kind == "ollama":
-        b = (base or "http://localhost:11434").rstrip("/")
-        return sorted(m["name"] for m in _get(b + "/api/tags", {}).get("models", []))
-    if kind == "claude":
-        b = (base or "https://api.anthropic.com").rstrip("/")
-        d = _get(b + "/v1/models?limit=100", {"x-api-key": _key("ANTHROPIC_API_KEY", "claude"), "anthropic-version": "2023-06-01"})
-        return sorted(m["id"] for m in d.get("data", []))
-    if kind == "gemini":
-        b = (base or "https://generativelanguage.googleapis.com").rstrip("/")
-        d = _get(b + "/v1beta/models?pageSize=200", {"x-goog-api-key": _key("GEMINI_API_KEY", "gemini")})
-        return sorted(m["name"].split("/", 1)[-1] for m in d.get("models", []) if "generateContent" in m.get("supportedGenerationMethods", []))
-    pv = OpenAICompatible(_block(cfg, kind, "", base))
-    d = _get(pv.base + "/models", pv._auth())
-    items = d.get("data", d if isinstance(d, list) else [])
-    return sorted({(m.get("id") if isinstance(m, dict) else str(m)) for m in items if m})
+    """Return real model IDs. Listing never generates an answer or charges tokens."""
+    from urllib.parse import urlencode
+    def ids(rows, field):
+        return [m[field] for m in (rows if isinstance(rows, list) else []) if isinstance(m, dict) and isinstance(m.get(field), str) and m[field]]
+    def rows(value):
+        if value is None: return []
+        if not isinstance(value, list):
+            raise ProviderError("The provider returned an invalid model list. Check the service address.")
+        return value
+    def object_response(value):
+        if not isinstance(value, dict):
+            raise ProviderError("The provider returned an invalid model list. Enter a model name or check the service address.")
+        return value
+    try:
+        if kind == "mock":
+            return ["demo"]
+        if kind == "ollama":
+            b = (base or os.environ.get("OLLAMA_BASE_URL") or "http://localhost:11434").rstrip("/")
+            return sorted(set(ids(object_response(_get(b + "/api/tags", {})).get("models", []), "name")))
+        if kind == "claude":
+            b = _model_base(base, "https://api.anthropic.com", "v1")
+            env = cfg["provider"].get("api_key_env", "") if cfg["provider"].get("type") == kind else ""
+            headers = {"x-api-key": _key(env or "ANTHROPIC_API_KEY", kind), "anthropic-version": "2023-06-01"}
+            result, cursor, seen = [], "", set()
+            for _ in range(20):
+                params = {"limit": 100}
+                if cursor: params["after_id"] = cursor
+                d = object_response(_get(b + "/v1/models?" + urlencode(params), headers))
+                result.extend(ids(d.get("data", []), "id"))
+                cursor = d.get("last_id") if d.get("has_more") else ""
+                if not cursor or cursor in seen: break
+                seen.add(cursor)
+            return sorted(set(result))
+        if kind == "gemini":
+            b = _model_base(base, "https://generativelanguage.googleapis.com", "v1beta")
+            if b.endswith("/v1"): b = b[:-3]
+            env = cfg["provider"].get("api_key_env", "") if cfg["provider"].get("type") == kind else ""
+            headers = {"x-goog-api-key": _key(env or "GEMINI_API_KEY", kind)}
+            result, cursor, seen = [], "", set()
+            for _ in range(20):
+                params = {"pageSize": 100}
+                if cursor: params["pageToken"] = cursor
+                d = object_response(_get(b + "/v1beta/models?" + urlencode(params), headers))
+                result.extend(m["name"].removeprefix("models/") for m in rows(d.get("models"))
+                              if isinstance(m, dict) and isinstance(m.get("name"), str)
+                              and "generateContent" in (m.get("supportedGenerationMethods") or []))
+                cursor = d.get("nextPageToken", "")
+                if not cursor or cursor in seen: break
+                seen.add(cursor)
+            return sorted(set(result))
+        pv = OpenAICompatible(_block(cfg, kind, "", base))
+        if cfg["provider"].get("type") == kind:
+            pv.key_env = cfg["provider"].get("api_key_env") or pv.key_env
+        b = _model_base(pv.base, pv.base, "")
+        headers = pv._auth()
+        if kind == "mimo":
+            headers = {"api-key": _key(pv.key_env, kind)}
+        d = _get(b + "/models", headers)
+        rows = d if isinstance(d, list) else object_response(d).get("data", [])
+        return sorted(set(ids(rows, "id")))
+    except ProviderError as e:
+        reasons = {400: "The provider rejected the model-list request. Check the service address and key setup.",
+                   401: "The provider refused this key. Save a valid API key, then refresh the list.",
+                   403: "This key cannot list models. Check the key's access and project permissions.",
+                   404: "This address does not offer a model list. Check the service address.",
+                   429: "The provider's model list is rate limited. Try again later."}
+        message = str(e) if str(e).startswith("No API key yet.") else reasons.get(e.code, str(e))
+        if e.code in reasons and not str(e).startswith("No API key yet."): message += " (HTTP %s)" % e.code
+        raise ProviderError(message, e.code, e.retry_after) from None
 
 
 def test_connection(cfg, kind, model, base=""):

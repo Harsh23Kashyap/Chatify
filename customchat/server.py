@@ -348,10 +348,12 @@ def make_handler(cfg, engine):
                     engine.provider = budget.wrap(providers.make(cfg)); engine._cache.clear()
                     return self._send(200, {"key": providers.has_key(kind)})
                 if path == "/api/provider/models" and method == "POST":
+                    from .modelcatalog import suggestions
+                    examples = suggestions(kind)
                     try:
-                        return self._send(200, {"models": providers.list_models(cfg, kind, base)})
+                        return self._send(200, {"models": providers.list_models(cfg, kind, base), "suggestions": examples})
                     except providers.ProviderError as e:
-                        return self._send(200, {"models": [], "note": str(e)})
+                        return self._send(200, {"models": [], "note": str(e), "suggestions": examples})
                 if path == "/api/provider/test" and method == "POST":
                     ok, msg = providers.test_connection(cfg, kind, str(b.get("model") or "")[:120], base)
                     from .management import diagnosis
