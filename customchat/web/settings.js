@@ -440,7 +440,7 @@ async function saveSection(s) {
   try {
     const base = clone(saved);
     for (const f of s.fields) { if (f.colors) { base.light[f.key] = theme.light[f.key]; base.dark[f.key] = theme.dark[f.key]; } else {base[f.key] = theme[f.key];if(f.type==="emoji")base[f.key+"_animated"]=theme[f.key+"_animated"];} }
-    saved = clone((await api("/api/theme", { theme: base })).theme); changed(); say(s.title + " saved. Other sections keep their last saved values.");
+    saved = clone((await persistAppearance(base)).theme); changed(); say(s.title + " saved. Other sections keep their last saved values.");
   } catch (e) { say(e.message, true); }
 }
 /* the preview follows the section being edited */
