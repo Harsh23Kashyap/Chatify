@@ -4,3 +4,11 @@ body.settings-tabs,body:has(.about-nav){background:var(--ui-page);color:var(--ui
 body.settings-tabs :is(#modehelp,.livetag,.pvnote,.field .h,.empty-field),body:has(.about-nav) .feature-art>small{color:var(--ui-muted)!important}
 body.settings-tabs :is(.rng,.pn,.pn small,.loaded-source-overview small,.editor-choice small,.head small){color:var(--ui-muted)!important}body.settings-tabs .cs-btn{background:var(--ui-surface)!important;color:var(--ui-ink)!important}body.settings-tabs .cs-btn .cs-label{color:var(--ui-ink)!important}body.settings-tabs .typeprev{background:var(--ui-nested)!important;color:var(--ui-ink)!important}body.settings-tabs .typeprev :is(.tp-h,.tp-b){color:var(--ui-ink)!important}
 body.settings-tabs :is(#sec-prompts,#sec-code) summary small{color:var(--ui-muted)!important}
+/* Action sizing is independent of label length. Keep utility and reset actions quiet. */
+body.settings-tabs .go{min-height:44px!important;box-sizing:border-box;padding-inline:16px}
+body.settings-tabs :is(button,input,textarea,select):disabled{opacity:1!important;background:#e8ece7!important;color:var(--ui-disabled)!important;border:1px dashed #99a89e!important;box-shadow:none!important;cursor:not-allowed!important;transform:none!important}
+body.settings-tabs .go:disabled:hover{background:#e8ece7!important}
+body.settings-tabs .look-danger .go{color:#7d4138!important;border-color:#cbb3aa!important}
+body.settings-tabs :is(#apply,#saveLook,#saveBudget,#sec-finish a,button,a,input,textarea,select,summary):focus-visible{outline:2px solid var(--ui-focus)!important;outline-offset:3px!important;box-shadow:0 0 0 2px var(--ui-surface)!important}
+body.settings-tabs #load:disabled{background:#e8ece7!important;color:var(--ui-disabled)!important;border:1px dashed #99a89e!important}
+body.settings-tabs :is(#del,#resetLink):disabled{background:#e8ece7!important;color:var(--ui-disabled)!important;border:1px dashed #99a89e!important}
