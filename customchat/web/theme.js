@@ -64,8 +64,8 @@ document.addEventListener("DOMContentLoaded",()=>{
 
 function apply(t, root = document.documentElement) {
   if (!t || !t.light) return;
-  const local = !window.__ccPreview && localStorage.getItem("cc_mode");
-  const mode = local === "light" || local === "dark" ? local : t.mode;
+  let local=null;try{local=!window.__ccPreview&&localStorage.getItem("cc_mode")}catch{}
+  const mode = window.__ccPreview && !window.__ccPreviewReady ? "light" : ["light","dark","auto"].includes(local)?local:t.mode;
   const dark = mode === "dark" || (mode === "auto" && matchMedia("(prefers-color-scheme:dark)").matches);
   const c = dark ? t.dark : t.light, s = root.style, set = (k, v) => s.setProperty(k, v);
   root.dataset.theme = dark ? "dark" : "light"; root.dataset.branded = t.logo ? "on" : "off";
@@ -109,8 +109,14 @@ function apply(t, root = document.documentElement) {
   window.CCTheme.value = t; queueContrast();
 }
 window.__ccPreview = /[?&]preview=1/.test(location.search);
-window.CCTheme = { apply, value: null, fonts: FONT_STACKS };
+const fontRequests=new Map();
+async function requestFont(key,custom=''){
+ const spec=FONT_STACKS[key];const family=key==='custom'?custom:spec?.[0]?.split(',')[0]?.replaceAll('"','');if(!family)return false;if(spec&&!spec[1])return true;
+ const request=key==='custom'?custom.trim().replaceAll(' ','+')+':wght@400;500;700':spec?.[1];if(!request)return false;if(fontRequests.has(request))return fontRequests.get(request);
+ const work=new Promise(resolve=>{const link=document.createElement('link');link.rel='stylesheet';link.href='https://fonts.googleapis.com/css2?family='+request+'&display=swap';let settled=false;const done=ok=>{if(!settled){settled=true;resolve(ok)}};const timeout=setTimeout(()=>done(false),6500);link.onerror=()=>{clearTimeout(timeout);done(false)};link.onload=async()=>{try{const loaded=await document.fonts.load('16px "'+family+'"');clearTimeout(timeout);done(loaded.length>0)}catch{clearTimeout(timeout);done(false)}};document.head.append(link)});fontRequests.set(request,work);return work
+}
+window.CCTheme = { apply, value: null, fonts: FONT_STACKS, requestFont };
 try { const el = document.getElementById("cc-theme"); if (el) apply(JSON.parse(el.textContent)); } catch (e) { /* keep defaults */ }
 matchMedia("(prefers-color-scheme:dark)").addEventListener("change", () => window.CCTheme.value && apply(window.CCTheme.value));
-window.addEventListener("message", (e) => { if (e.origin === location.origin && e.data && e.data.ccTheme) apply(e.data.ccTheme); });
+window.addEventListener("message", (e) => { if (e.origin === location.origin && e.data && e.data.ccTheme) { window.__ccPreviewReady = true; apply(e.data.ccTheme); } });
 })();
