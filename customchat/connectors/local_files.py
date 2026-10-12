@@ -38,6 +38,7 @@ class LocalFiles:
         self._snapshot = None
         self.checked_at = self.indexed_at = 0
         self.last_error = ""
+        self.last_check = {}
         self.revision = ""
         self.docs = []; self.idf = {}; self.avg = 0
         try: self.refresh(force=True)
@@ -66,8 +67,14 @@ class LocalFiles:
             self.checked_at = time.time()
             try:
                 rows = self._scan()
+                old = dict(self._snapshot or ())
+                current = {name:digest for name,_,digest in rows}
+                old_chunks = len(self.docs)
+                added = len(current.keys()-old.keys()); removed = len(old.keys()-current.keys())
+                changed = sum(old[name] != current[name] for name in old.keys() & current.keys())
                 signature = tuple((name, digest) for name, _, digest in rows)
                 if signature == self._snapshot:
+                    self.last_check = {"state":"unchanged","documents_scanned":len(rows),"added":0,"removed":0,"changed":0,"passages_before":old_chunks,"passages_after":old_chunks}
                     self.last_error = ""
                     return False
                 nxt = LocalFiles.__new__(LocalFiles)
@@ -89,9 +96,11 @@ class LocalFiles:
                 self._snapshot = signature
                 self.revision = hashlib.sha256(json.dumps(signature).encode()).hexdigest()
                 self.indexed_at = time.time(); self.last_error = ""
+                self.last_check = {"state":"updated","documents_scanned":len(rows),"added":added,"removed":removed,"changed":changed,"passages_before":old_chunks,"passages_after":len(self.docs)}
                 return True
-            except (OSError, ValueError):
-                self.last_error = "Local folder check failed. No old passages will be used until it recovers."
+            except (OSError, ValueError) as exc:
+                self.last_check = {"state":"failed"}
+                self.last_error = "Local folder check failed: "+str(exc)+". Check that the folder exists, files are readable and PDF dependencies are installed. No old passages will be used until it recovers."
                 raise OSError("Local source could not be indexed; check PDF dependencies or readability") from None
 
     def status(self):
@@ -99,7 +108,7 @@ class LocalFiles:
             return {"id": self.id, "label": self.label, "documents": len(self._snapshot or ()),
                     "chunks": len(self.docs), "revision": self.revision,
                     "checked_at": self.checked_at, "indexed_at": self.indexed_at,
-                    "refresh_interval": self.refresh_interval, "error": self.last_error}
+                    "refresh_interval": self.refresh_interval, "error": self.last_error, "last_check":dict(self.last_check)}
 
     def _add(self, path, root, data=None, digest="", page=None, ocr=False):
         if data is None:
