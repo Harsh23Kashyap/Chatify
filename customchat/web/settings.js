@@ -672,12 +672,10 @@ $("#checkDocs").addEventListener("click", async function () {
 });
 
 function budgetVisuals(){
- for(const [id,icon] of [["budgetQuestions","?"] ,["budgetUser","1"],["budgetCalls","1"],["budgetSpend","$"]]){
+ for(const id of ["budgetQuestions","budgetUser","budgetCalls","budgetSpend"]){
   const input=document.getElementById(id);if(!input)continue;const label=input.closest("label");
-  let v=label.querySelector(".budget-viz");if(!v){v=el("span",{class:"budget-viz","aria-hidden":"true"});label.append(v)}
-  const count=id==="budgetSpend" ? (input.value===""?0:1) : Math.min(5,Math.max(0,Math.ceil(Math.log10(1+Math.max(0,+input.value))*2)));
-  v.replaceChildren(...Array.from({length:count},()=>el("i",{text:icon})),el("small",{text:id==="budgetSpend"?(input.value===""?"No dollar cap":"Non-Demo answers blocked"):(+input.value===0?"No daily limit":input.value+" per day")}));
-  if(!matchMedia("(prefers-reduced-motion:reduce)").matches&&! ["calm","none"].includes(theme.motion))v.animate([{transform:"translateY(2px)",opacity:.6},{transform:"translateY(0)",opacity:1}],{duration:160});
+  let v=label.querySelector(".budget-viz");if(!v){v=el("small",{class:"budget-viz"});label.append(v)}
+  v.textContent=id==="budgetSpend"?(input.value===""?"No local dollar cap":"Non-Demo model calls blocked"):(+input.value===0?"No daily limit":input.value+" per day");
  }
 }
 for(const id of ["budgetQuestions","budgetUser","budgetCalls","budgetSpend"])document.getElementById(id)?.addEventListener("input",budgetVisuals);
