@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Configuration</title>
 <link rel="stylesheet" href="/settings.css"><link rel="stylesheet" href="/settingstabs.css"><link rel="stylesheet" href="/motion.css"><script src="/motion.js" defer></script><link rel="stylesheet" href="/customselect.css"><script src="/customselect.js" defer></script>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:wght@600;700&display=swap"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap"><script src="/emoji.js"></script><link rel="stylesheet" href="/tour.css"><script src="/tour.js"></script><link rel="stylesheet" href="/navigation.css"><link rel="icon" type="image/svg+xml" href="/icons/customchat.svg"><link rel="stylesheet" href="/feedback.css"><link rel="stylesheet" href="/builderstudio.css"></head>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:wght@600;700&display=swap"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap"><script src="/emoji.js"></script><link rel="stylesheet" href="/tour.css"><script src="/tour.js"></script><link rel="stylesheet" href="/navigation.css"><link rel="icon" type="image/svg+xml" href="/icons/customchat.svg"><link rel="stylesheet" href="/feedback.css"><link rel="stylesheet" href="/builderstudio.css"><link rel="stylesheet" href="/refinements.css"></head>
 <body>
 <header class="toolbar"><a class="nav-brand" href="/"><img src="/icons/customchat.svg" alt="">CustomChat</a><nav class="common-nav" aria-label="Main navigation"><a href="/">Chat</a><a href="/about.html">About</a><a href="/settings.html" class="active" aria-current="page">Configuration</a><button type="button" class="cc-guide-replay" id="configGuide" aria-label="Replay guide">Guide</button></nav><div class="nav-status"></div></header>
 <main class="card">
@@ -15,13 +15,13 @@
   <div class="layout">
     <nav class="menu" id="menu" aria-label="Sections"></nav>
     <div class="col" id="col">
-      <section class="tile" id="sec-presets"><div class="head"><span class="ic green">&#9733;</span><div><b>Presets and saved setups</b><small>Apply an appearance preset or save your current setup</small></div></div>
+      <section class="tile" id="sec-presets"><div class="head"><span class="ic green">&#9733;</span><div><b>Presets and saved setups</b><small>Choose an appearance preset</small></div></div>
         <div class="help">A preset changes appearance only. Appearance edits save automatically. A named setup also stores model settings; loading it replaces the current appearance and model settings. Prompts, sources and keys are not restored.</div>
         <div class="presets" id="presets"></div>
         <div class="saved"><b class="sv-t">Saved setups</b>
           <div class="two">
-            <div class="sub"><small>Save appearance and model settings under a name</small><textarea id="sname" rows="2" placeholder="Setup name" aria-label="State name"></textarea><button class="go green" id="save">Save named setup</button></div>
-            <div class="sub"><small>Restore a saved setup (replaces current settings)</small><select id="states" aria-label="Saved states"></select><div class="row2"><button class="go blue" id="load">Load</button></div></div>
+            <div class="sub"><b>Save a new setup</b><small>Reusable appearance and model settings. Prompts, sources and keys are not included.</small><input id="sname" placeholder="Setup name" aria-label="State name"><button class="go green" id="save">Save named setup</button></div>
+            <div class="sub"><b>Restore a saved setup</b><small>Restoring replaces the appearance and model settings included in that setup.</small><select id="states" aria-label="Saved states"></select><div class="row2"><button class="go blue" id="load">Load</button></div></div>
           </div>
           <details class="look-more"><summary>Manage saved setups</summary><div class="look-actions"><div class="look-transfer"><button class="go ghost" id="exp" type="button">Export</button><label class="go ghost filebtn" for="imp">Import<input id="imp" type="file" accept="application/json,.json" hidden></label></div><details class="look-danger"><summary>Remove or reset…</summary><div><button class="go ghost" id="del" type="button">Delete saved look</button><button class="go ghost" type="button" id="resetLink">Reset to default</button></div></details></div></details>
         </div>
@@ -47,7 +47,7 @@
       </section>
       <section class="tile" id="sec-portable"><div class="head"><span class="ic green">&#8599;</span><div><b>Load and share Nerds</b><small>Load saved settings, or download a shareable ZIP</small></div></div>
         <div class="help">Export app.yaml, the current model settings, saved look, prompts and configured local documents. Keys, accounts, conversations and personal uploads stay here. Review included documents before sharing. Python plugins and remote services still need their original setup.</div>
-        <div id="nerdDrop" class="nerd-drop" tabindex="0" role="button" aria-label="Choose or drop a Nerd ZIP or YAML"><span class="drop-symbol" aria-hidden="true">&#8593;</span><span class="drop-eyebrow">LOAD A NERD</span><b>Drop your bundle here</b><p>ZIP restores bundled settings, prompts, helper drafts and documents. YAML fills its declared settings; extra files need a ZIP.</p><label class="go ghost filebtn">Choose a file<input id="nerdFile" type="file" accept=".zip,.yaml,.yml,.json" hidden></label><small>ZIP or YAML. 1. Choose &nbsp; 2. Review included files and code &nbsp; 3. Run</small></div><div id="nerdReview" role="status"></div>
+        <div id="nerdDrop" class="nerd-drop" tabindex="0" role="button" aria-label="Choose or drop a Nerd ZIP or YAML"><span class="drop-symbol" aria-hidden="true">&#8593;</span><b>Drop your bundle here</b><p>ZIP restores bundled settings, prompts, helper drafts and documents. YAML fills its declared settings; extra files need a ZIP.</p><label class="go ghost filebtn">Choose a file<input id="nerdFile" type="file" accept=".zip,.yaml,.yml,.json" hidden></label><small>ZIP or YAML. 1. Choose &nbsp; 2. Review included files and code &nbsp; 3. Run</small></div><div id="nerdReview" role="status"></div>
         <div class="export-card"><div><b>Share this Nerd</b><p>Download an importable bundle of this app and its local documents. Keys and chats stay here.</p></div><button type="button" class="go green" id="exportApp"><span aria-hidden="true">&#8595;</span> Download app ZIP</button><label><input type="checkbox" id="exportKeys"> Include my saved API keys (sensitive)</label><span id="exportStatus" role="status" aria-live="polite"></span></div>
       </section>
       <section class="tile" id="sec-freshness"><div class="head"><span class="ic green">&#8635;</span><div><b>Document freshness</b><small>Keep local evidence up to date</small></div></div>
@@ -85,9 +85,9 @@
 <script>(function(){var b=document.getElementById("pvfab");if(!b)return;b.hidden=false;b.addEventListener("click",function(){var o=document.body.classList.toggle("pvopen");b.textContent=o?"Close preview":"Preview";b.setAttribute("aria-label",o?"Close live preview":"Show live preview")})})()</script>
 <script>(function(){var K="cc_cfg_mode_v2",bar=document.getElementById("cfgmode"),help=document.getElementById("modehelp");if(!bar)return;
 function set(m){document.body.classList.toggle("simple",m==="simple");[].forEach.call(bar.querySelectorAll("button"),function(b){var on=b.dataset.m===m;b.setAttribute("aria-checked",on?"true":"false");b.classList.toggle("on",on)});
-help.textContent=m==="simple"?"The everyday settings, in plain words.":"Adds design and fine controls.";try{localStorage.setItem(K,m)}catch(e){}}
+help.textContent=m==="simple"?"The everyday settings, in plain words.":"All settings, including design, prompts and technical controls.";try{localStorage.setItem(K,m)}catch(e){}}
 var m="simple";try{m=localStorage.getItem(K)||"simple"}catch(e){}set(m);
 window.CCSettingsSetMode=set;
 bar.addEventListener("click",function(e){var b=e.target.closest("button");if(b){set(b.dataset.m);document.dispatchEvent(new CustomEvent("cc-settings-mode"))}})})()</script>
-<script src="/settingssearch.js"></script><script src="/settingsfind.js"></script><script src="/settingsguide.js"></script><script src="/configstate.js"></script><script src="/workspace.js"></script><script src="/nerdload.js"></script><script src="/splitters.js"></script><script src="/sourcekeys.js"></script><script src="/settingssimple.js"></script><script src="/appbuilder.js"></script><script src="/feedback.js"></script></body>
+<script src="/settingssearch.js"></script><script src="/settingsfind.js"></script><script src="/settingsguide.js"></script><script src="/configstate.js"></script><script src="/workspace.js"></script><script src="/nerdload.js"></script><script src="/splitters.js"></script><script src="/sourcekeys.js"></script><script src="/settingssimple.js"></script><script src="/appbuilder.js"></script><script src="/feedback.js"></script><script src="/appearanceextras.js"></script></body>
                                                                                                                                  </html>

@@ -216,7 +216,7 @@ const SECTIONS = [
     { key: "line_height", label: "Line spacing", help: "Space between lines of text.", type: "range", unit: "%" } ] },
   { id: "shape", icon: "\u25A2", tone: "blue", title: "Shape and spacing", sub: "Corners, shadows, message style", help: "Small changes here make the whole app feel different.", fields: [
     { key: "radius", label: "Corner roundness", help: "0 is sharp. 100 is the default. Up to 160 is rounder.", type: "range", unit: "%" },
-    { key: "density", label: "Spacing", help: "Compact fits more on screen. Roomy is airy.", type: "select" },
+    { key: "density", label: "Spacing", help: "Compact: more on screen. Cozy: balanced reading. Roomy: more space between controls.", type: "select" },
     { key: "shadow", label: "Shadow", help: "Depth of the main panel.", type: "select" },
     { key: "bubble", label: "Message style", help: "Soft: filled bubbles. Flat: no bubble for answers. Outline: thin borders.", type: "select" } ] },
   { id: "emoji", icon: "\u263A", tone: "purple", title: "Emojis and icons", sub: "Avatars and buttons", help: "Choose an emoji. Use app default to reset.", fields: [
@@ -234,7 +234,7 @@ const SECTIONS = [
   { id: "layout", icon: "\u25EB", tone: "blue", title: "Layout", sub: "Where things sit", help: "Arrange the screen to suit how you work.", fields: [
     { key: "sidebar", label: "Sidebar position", help: "Left, right, or hidden until you press the menu button.", type: "select" },
     { key: "sidebar_width", label: "Sidebar width", help: "In pixels. You can also drag its edge in the chat.", type: "range", unit: "px" },
-    { key: "chat_width", label: "Chat width", help: "How wide the conversation column is.", type: "select" },
+    { key: "chat_width", label: "Chat width", help: "Narrow: focused reading. Normal: balanced. Wide: more room for long answers. Full: all available space.", type: "select" },
     { key: "avatars", label: "Avatars", help: "Show or hide the small pictures next to messages.", type: "select" },
     { key: "you_align", label: "Your messages", help: "On the right like a phone, or on the left like a document.", type: "select" },
     { key: "composer", label: "Question box", help: "Inline: attached to the bottom bar. Floating: a card over the chat.", type: "select" },
@@ -287,10 +287,11 @@ function pushPreview() {
   const frame=$("#pv");const reduced=matchMedia("(prefers-reduced-motion:reduce)").matches||["calm","none"].includes(t.motion);
   if(!reduced){frame.classList.add("preview-changing");setTimeout(()=>frame.classList.remove("preview-changing"),160)}
   const w = $("#pv").contentWindow; if (w) w.postMessage({ ccTheme: t }, location.origin);
-  const w2 = $("#pv").contentWindow; if (w2 && w2.CCTheme) { /* same-origin: also apply the wording/emoji source */ w2.CCTheme.apply(t); }
+  const w2 = $("#pv").contentWindow; if (w2 && w2.CCTheme) { /* same-origin: also apply the wording/emoji source */ w2.__ccPreviewReady = true; w2.CCTheme.apply(t); }
 }
 function updateVis() {
   if (!theme) return; const st = theme.bg_style, pt = theme.pattern;
+  if(st==="image"){const imageGroup=document.querySelector("#f-bg_image")?.closest("details");if(imageGroup)imageGroup.open=true;}
   const show = { bg_color2: st === "gradient", bg_angle: st === "gradient", bg_image: st === "image", pattern_color: !!pt && pt !== "none", pattern_opacity: !!pt && pt !== "none", pattern_size: !!pt && pt !== "none" };
   document.querySelectorAll("[data-k]").forEach((e) => { if (e.dataset.k in show) e.hidden = !show[e.dataset.k]; });
 }
@@ -298,8 +299,8 @@ function changed() {
   updateVis();syncPreset();
   clearTimeout(sendTimer); sendTimer = setTimeout(pushPreview, 40); pvExtra(); setTimeout(pvExtra, 350);
   const dirty = JSON.stringify(theme) !== JSON.stringify(saved);
-  $("#dirty").textContent = dirty ? "Saving..." : "All changes saved"; $("#dirty").className = dirty ? "dirty" : ""; $("#savebar").classList.toggle("clean", !dirty);
-  clearTimeout(autoTimer); if (dirty && canEdit) autoTimer = setTimeout(async () => { const snap = clone(theme); try { await api("/api/theme", { theme: snap }); saved = clone(snap); const d = $("#dirty"); if (JSON.stringify(theme) === JSON.stringify(saved)) { d.textContent = "All changes saved"; d.className = ""; $("#savebar").classList.add("clean"); say("Saved. The chat now uses it."); } } catch (e) { say(e.message, true); } }, 1500);
+  $("#dirty").textContent = dirty ? "Unsaved changes" : "All changes saved"; $("#dirty").className = dirty ? "dirty" : ""; $("#savebar").classList.toggle("clean", !dirty);
+  clearTimeout(autoTimer); if (dirty && canEdit) autoTimer = setTimeout(async () => { const snap = clone(theme); $("#dirty").textContent="Saving..."; try { await api("/api/theme", { theme: snap }); saved = clone(snap); const d = $("#dirty"); if (JSON.stringify(theme) === JSON.stringify(saved)) { d.textContent = "All changes saved"; d.className = ""; $("#savebar").classList.add("clean"); say("Saved. The chat now uses it."); } } catch (e) { $("#dirty").textContent="Save failed. Changes are not saved."; say(e.message, true); } }, 1500);
 }
 /* Logo: everything happens in the browser. The picture is shrunk, its plain background can be removed,
    and its edges are feathered so it melts into the page instead of sitting in a hard box. */
@@ -358,6 +359,7 @@ function logoControl(f, current) {
   });
   file.addEventListener("change", () => { derive.disabled = false; });
   rm.addEventListener("click", () => { derive.disabled = true; theme.logo_watermark = false; changed(); });
+  fe.addEventListener("input",()=>{const out=document.getElementById("logoSoftnessValue");if(out)out.textContent=fe.value});
   const box = el("div", { class: "logobox" });
   const take = (fl) => { if (!fl || !/^image\//.test(fl.type)) { say("Drop a PNG, JPG, WebP or GIF picture.", true); return; } const dt = new DataTransfer(); dt.items.add(fl); file.files = dt.files; file.dispatchEvent(new Event("change")); };
   let depth = 0; const over = (on) => box.classList.toggle("dragover", on);
@@ -365,7 +367,7 @@ function logoControl(f, current) {
   box.addEventListener("dragover", (e) => { e.preventDefault(); e.dataTransfer.dropEffect = "copy"; });
   box.addEventListener("dragleave", () => { if (--depth <= 0) { depth = 0; over(false); } });
   box.addEventListener("drop", (e) => { e.preventDefault(); depth = 0; over(false); take(e.dataTransfer.files[0]); });
-  box.append(stage, el("div", { class: "logoctl" }, fileBtn, el("span", { class: "h dropnote", text: "or drag a picture here" }), file, el("label", { class: "check" }, rb, "Remove plain background"), el("label", { class: "h" }, "Edge softness", fe), derive, el("span", {class:"h",text:"Replaces both palettes in the preview. Save look to keep; edit Colors for overrides. Logo also becomes the favicon."}), note, rm));
+  box.append(stage, el("div", { class: "logoctl" }, fileBtn, el("span", { class: "h dropnote", text: "or drag a picture here" }), file, el("label", { class: "check" }, rb, "Remove plain background"), el("label", { class: "h" }, "Edge softness ", el("output",{id:"logoSoftnessValue",text:fe.value}),fe), derive, el("span", {class:"h",text:"Replaces both palettes in the preview. Save look to keep; edit Colors for overrides. Logo also becomes the favicon."}), note, rm));
   return box;
 }
 const EMOJI_GROUPS={
@@ -377,12 +379,12 @@ const EMOJI_GROUPS={
  "Symbols":[["❤️","heart love"],["💚","green heart"],["💛","yellow heart"],["💜","purple heart"],["✅","check done"],["❌","cross no"],["➕","plus"],["➡️","arrow right send"],["⬆️","arrow up send"],["♾️","infinity"]]
 };
 function emojiControl(f,id,v){
- const tile=el("button",{id,type:"button",class:"emoji-tile",disabled:canEdit?undefined:"","aria-label":"Choose "+f.label.toLowerCase()}),choose=el("button",{type:"button",class:"mini",text:"Choose emoji",disabled:canEdit?undefined:""}),box=el("div",{class:"emoji-control"},tile,choose);tile.value=v||"";
- const paint=()=>{tile.replaceChildren(theme[f.key]?CCEmoji.node(theme[f.key],theme[f.key+"_animated"],"",["calm","none"].includes(theme.motion)):document.createTextNode("+"));};paint();
+ const tile=el("button",{id,type:"button",class:"emoji-tile",disabled:canEdit?undefined:"","aria-label":"Choose "+f.label.toLowerCase()}),choose=el("button",{type:"button",class:"mini",text:"Change",disabled:canEdit?undefined:""}),box=el("div",{class:"emoji-control"},tile,choose);tile.value=v||"";
+ const paint=()=>{tile.replaceChildren(theme[f.key]?CCEmoji.node(theme[f.key],theme[f.key+"_animated"],"",["calm","none"].includes(theme.motion)):document.createTextNode({emoji_bot:"🤖",emoji_user:"👤",emoji_send:"↑",emoji_hero:"👋",emoji_attach:"📎"}[f.key]||"Use default"));};paint();
  const open=()=>{
-  const dialog=el("dialog",{class:"emoji-dialog","aria-label":"Choose "+f.label.toLowerCase()}),search=el("input",{type:"search",placeholder:"Search emoji","aria-label":"Search emoji"}),tabs=el("div",{class:"emoji-tabs"}),grid=el("div",{class:"emoji-grid"}),close=el("button",{type:"button",class:"mini",text:"Close"}),clear=el("button",{type:"button",class:"mini",text:"Use app default"});let group="Animated";
-  const draw=()=>{const q=search.value.trim().toLowerCase();grid.replaceChildren();const pairs=group==="Animated"?Object.entries(CCEmoji.assets).map(([e,a])=>[e,a.name.toLowerCase()]):EMOJI_GROUPS[group];for(const [e,n] of pairs.filter(([e,n])=>!q||n.includes(q)||e===q)){const animated=group==="Animated",b=el("button",{type:"button",class:"emoji-option",title:n,"aria-label":n,onclick:()=>{tile.value=e;theme[f.key+"_animated"]=animated;setv(f,e);paint();dialog.close();choose.focus()}});b.append(CCEmoji.node(e,animated,n,["calm","none"].includes(theme.motion)));grid.append(b)}if(!grid.children.length)grid.append(el("small",{text:"No matching emoji"}));tabs.querySelectorAll("button").forEach(b=>b.setAttribute("aria-pressed",String(b.textContent===group)))};
-  for(const name of ["Animated",...Object.keys(EMOJI_GROUPS)])tabs.append(el("button",{type:"button",class:"mini",text:name,onclick:()=>{group=name;search.value="";draw()}}));search.addEventListener("input",draw);close.addEventListener("click",()=>dialog.close());clear.addEventListener("click",()=>{tile.value="";theme[f.key+"_animated"]=false;setv(f,"");paint();dialog.close();choose.focus()});dialog.addEventListener("close",()=>dialog.remove());dialog.append(el("div",{class:"emoji-head"},el("b",{text:"Choose an emoji"}),close),search,tabs,grid,el("small",{class:"h",text:"Noto Emoji by Google Fonts. Static icons are bundled for offline use; animated icons use CC BY 4.0 assets. Motion stops with Calm, None or reduced motion."}),clear);document.body.append(dialog);draw();dialog.showModal();search.focus();
+  const dialog=el("dialog",{class:"emoji-dialog","aria-label":"Choose "+f.label.toLowerCase()}),search=el("input",{type:"search",placeholder:"Search emoji","aria-label":"Search emoji"}),tabs=el("div",{class:"emoji-tabs"}),grid=el("div",{class:"emoji-grid"}),close=el("button",{type:"button",class:"mini",text:"Close"}),clear=el("button",{type:"button",class:"mini",text:"Use app default"});let group="Animated";let recent=[];try{recent=JSON.parse(localStorage.getItem('cc_emoji_recent')||'[]')}catch{}
+  const draw=()=>{const q=search.value.trim().toLowerCase();grid.replaceChildren();const pairs=group==="Recent"?recent.map(x=>[x,"Recent choice"]):group==="Animated"?Object.entries(CCEmoji.assets).map(([e,a])=>[e,a.name.toLowerCase()]):EMOJI_GROUPS[group];for(const [e,n] of pairs.filter(([e,n])=>!q||n.includes(q)||e===q)){const animated=group==="Animated",b=el("button",{type:"button",class:"emoji-option",title:n,"aria-label":n,onclick:()=>{tile.value=e;recent=[e,...recent.filter(x=>x!==e)].slice(0,12);localStorage.setItem('cc_emoji_recent',JSON.stringify(recent));theme[f.key+"_animated"]=animated;setv(f,e);paint();dialog.close();choose.focus()}});b.append(CCEmoji.node(e,animated,n,["calm","none"].includes(theme.motion)));grid.append(b)}if(!grid.children.length)grid.append(el("small",{text:"No matching emoji"}));tabs.querySelectorAll("button").forEach(b=>b.setAttribute("aria-pressed",String(b.textContent===group)))};
+  for(const name of ["Recent","Animated",...Object.keys(EMOJI_GROUPS)])tabs.append(el("button",{type:"button",class:"mini",text:name,onclick:()=>{group=name;search.value="";draw()}}));grid.addEventListener('keydown',e=>{if(!['ArrowRight','ArrowLeft','ArrowDown','ArrowUp'].includes(e.key))return;const bs=[...grid.querySelectorAll('button')],i=bs.indexOf(document.activeElement);e.preventDefault();bs[Math.max(0,Math.min(bs.length-1,i+(e.key==='ArrowRight'?1:e.key==='ArrowLeft'?-1:e.key==='ArrowDown'?5:-5)))]?.focus()});search.addEventListener("input",draw);close.addEventListener("click",()=>dialog.close());clear.addEventListener("click",()=>{tile.value="";theme[f.key+"_animated"]=false;setv(f,"");paint();dialog.close();choose.focus()});dialog.addEventListener("close",()=>dialog.remove());dialog.append(el("div",{class:"emoji-head"},el("b",{text:"Choose an emoji"}),close),search,tabs,grid,el("small",{class:"h",text:"Noto Emoji by Google Fonts. Static icons are bundled for offline use; animated icons use CC BY 4.0 assets. Motion stops with Calm, None or reduced motion."}),clear);document.body.append(dialog);draw();dialog.showModal();search.focus();
  };choose.addEventListener("click",open);tile.addEventListener("click",open);return box;
 }
 
@@ -398,13 +400,13 @@ function compactHelp(){
 function control(f) {
   const id = "f-" + (f.colors && f.key==="sidebar" ? "color-sidebar" : f.key); let input;
   if(f.key === "bg_image"){
-    const marker=el("small",{class:"h empty-field",text:"(not filled)",hidden:get(f)?"":undefined}),syncMarker=()=>{marker.hidden=!!link.value.trim()};const link=el("input",{id,type:"text",value:get(f)||"",placeholder:"https://… or choose a picture","aria-label":f.label}),file=el("input",{type:"file",accept:"image/png,image/jpeg,image/webp","aria-label":"Background picture",disabled:canEdit?undefined:""});link.addEventListener("input",()=>{setv(f,link.value);if(!link.value.trim())file.value="";syncMarker()});file.addEventListener("change",()=>{const chosen=file.files[0];if(!chosen)return;if(chosen.size>4000000){say("Choose a background picture under 4 MB.",true);return}const im=new Image(),url=URL.createObjectURL(chosen);im.onload=()=>{const c=document.createElement("canvas"),scale=Math.min(1,1000/im.width,1000/im.height);c.width=Math.round(im.width*scale);c.height=Math.round(im.height*scale);c.getContext("2d").drawImage(im,0,0,c.width,c.height);const data=c.toDataURL("image/jpeg",.75);if(data.length>600000){say("Picture is too detailed. Choose a smaller one.",true)}else{link.value=data;theme.bg_style="image";setv(f,data);syncMarker();say("Background picture added.")}URL.revokeObjectURL(url)};im.onerror=()=>{say("That picture could not be read.",true);URL.revokeObjectURL(url)};im.src=url});return el("div",{class:"field"},el("div",{class:"flabel",text:"Background picture"}),el("div",{class:"h",text:"Choose a local picture or paste an HTTPS image link."}),link,file,marker);
+    const marker=el("small",{class:"h empty-field",text:"(not filled)",hidden:get(f)?"":undefined}),syncMarker=()=>{marker.hidden=!!link.value.trim()};const link=el("input",{id,type:"text",value:get(f)||"",placeholder:"https://… or choose a picture","aria-label":f.label}),file=el("input",{type:"file",accept:"image/png,image/jpeg,image/webp","aria-label":"Background picture",disabled:canEdit?undefined:""});let imageRequest=0;const imageStatus=el("p",{class:"h",role:"status"});link.addEventListener("change",()=>{const seq=++imageRequest,value=link.value.trim();if(!value){file.value="";setv(f,"");syncMarker();imageStatus.textContent="Background image removed.";return}if(!/^https:\/\//.test(value)&&!/^data:image\/jpeg;base64,/.test(value)){imageStatus.textContent="Use an HTTPS image address or choose a local picture. Previous background kept.";link.setAttribute("aria-invalid","true");return}imageStatus.textContent="Loading image...";const candidate=new Image();candidate.onload=()=>{if(seq!==imageRequest)return;link.setAttribute("aria-invalid","false");setv(f,value);syncMarker();imageStatus.textContent="Image ready. Preview updated."};candidate.onerror=()=>{if(seq!==imageRequest)return;link.setAttribute("aria-invalid","true");imageStatus.textContent="Image could not be loaded. Previous background kept. Check the address."};candidate.src=value});file.addEventListener("change",()=>{const chosen=file.files[0];if(!chosen)return;if(chosen.size>4000000){say("Choose a background picture under 4 MB.",true);return}const im=new Image(),url=URL.createObjectURL(chosen);im.onload=()=>{const c=document.createElement("canvas"),scale=Math.min(1,1000/im.width,1000/im.height);c.width=Math.round(im.width*scale);c.height=Math.round(im.height*scale);c.getContext("2d").drawImage(im,0,0,c.width,c.height);const data=c.toDataURL("image/jpeg",.75);if(data.length>600000){say("Picture is too detailed. Choose a smaller one.",true)}else{link.value=data;theme.bg_style="image";setv(f,data);syncMarker();say("Background picture added.")}URL.revokeObjectURL(url)};im.onerror=()=>{say("That picture could not be read.",true);URL.revokeObjectURL(url)};im.src=url});return el("div",{class:"field"},el("div",{class:"flabel",text:"Background picture"}),el("div",{class:"h",text:"Choose a local picture or paste an HTTPS image link."}),link,file,marker,imageStatus);
   }
   const v = get(f);
   if (f.type === "color") {
     const swatch = el("input", { type: "color", id, value: v || "#888888", "aria-label": f.label }), hex = el("input", { type: "text", class: "hex", value: v || "", maxlength: "7", "aria-label": f.label + " hex code", placeholder: "automatic" });
     swatch.addEventListener("input", () => { hex.value = swatch.value; setv(f, swatch.value); });
-    hex.addEventListener("input", () => { if (/^#[0-9a-fA-F]{6}$/.test(hex.value)) { swatch.value = hex.value; setv(f, hex.value.toLowerCase()); } else if (f.clearable && hex.value === "") setv(f, ""); });
+    hex.addEventListener("input", () => { hex.setAttribute("aria-invalid",String(!/^#[0-9a-fA-F]{6}$/.test(hex.value)));hex.setCustomValidity(/^#[0-9a-fA-F]{6}$/.test(hex.value)?"":"Use a six-digit hex color, for example #173f35"); if (/^#[0-9a-fA-F]{6}$/.test(hex.value)) { swatch.value = hex.value; setv(f, hex.value.toLowerCase()); } else if (f.clearable && hex.value === "") setv(f, ""); });
     input = el("div", { class: "colorrow" }, swatch, hex); if (f.clearable) input.append(el("button", { type: "button", class: "mini", onclick: () => { hex.value = ""; setv(f, ""); } }, "Auto"));
   } else if (f.type === "logo") {
     input = logoControl(f, v);
@@ -429,7 +431,7 @@ function control(f) {
   if (!canEdit && input.tagName === "SELECT") input.disabled = true;
   const field=el("div", { class: "field" }, el("label", { for: id, class: "flabel" }, f.label), el("span", { class: "h", text: f.help }), input);
   if(f.key.startsWith("txt_")&&!theme[f.key]&&v)field.append(el("small",{class:"h value-source",text:"Using app default; no saved override."}));
-  if (["text","area","emoji","logo"].includes(f.type) && !v) field.append(el("small",{class:"h empty-field",text:"(not filled)"}));
+  if (["text","area","logo"].includes(f.type) && !v) field.append(el("small",{class:"h empty-field",text:"(not filled)"}));
   if(["motion","entrance","speed","hover_lift"].includes(f.key)){
     const play=()=>{pushPreview();setTimeout(()=>{const w=$("#pv").contentWindow;if(w?.ccPreviewMotion)w.ccPreviewMotion(theme)},60)};input.addEventListener("change",play);input.addEventListener("input",play);
   }
@@ -454,8 +456,8 @@ function pvExtra() {
     const c = (theme && theme[editMode]) || {};
     const pairs = [["Text on page", c.ink, c.bg], ["Text on cards", c.ink, c.surface], ["Soft text on page", c.muted, c.bg], ["Your bubble", c.ink, c.you], ["Reply bubble", c.ink, c.bot], ["Title color on page", c.brand, c.bg]];
     host.replaceChildren(el("b", { text: "Colors and readability" }), el("div", { class: "crgrid" }, ...pairs.map(([n, a, b]) => { const r = ratio(a, b), cls = r == null ? "" : r >= 4.5 ? "green" : r >= 3 ? "blue" : "red";
-      return el("div", { class: "cc", title: n + (cls === "green" ? ": easy to read" : cls === "blue" ? ": large text only" : ": too low") }, el("span", { class: "crs", style: "background:" + (b || "#fff") + ";color:" + (a || "#000") }, "Aa"), el("span", { text: n }), el("span", { class: "rt " + cls, text: r == null ? "n/a" : r.toFixed(1) })); })),
-      el("div", { class: "h", text: "Contrast ratio. 4.5 or more is easy to read (green), 3 to 4.5 only for large text (blue), below 3 is too low (red)." }));
+      return el("div", { class: "cc", title: n + (cls === "green" ? ": easy to read" : cls === "blue" ? ": large text only" : ": too low") }, el("span", { class: "crs", style: "background:" + (b || "#fff") + ";color:" + (a || "#000") }, "Aa"), el("span", { text: n }), el("span", { class: "rt " + cls, text: r == null ? "n/a" : (r>=4.5?"Pass ":"Fail ")+r.toFixed(1)+":1" })); })),
+      el("div", { class: "h", text: "WCAG AA for normal text requires 4.5:1. Ratios below that fail for normal-size text. Suggested fallback: dark text on a light surface, or white text on a dark surface. Colors are not changed by this panel." }));
   } else {
     let fam = {}; try { const d = $("#pv").contentDocument, h = d.querySelector(".hero h1, .hero b, h1") || d.body; fam = { body: getComputedStyle(d.body).fontFamily, head: getComputedStyle(h).fontFamily }; } catch (e) { fam = { body: "inherit", head: "inherit" }; }
     host.replaceChildren(el("b", { text: "Font sample" }), el("div", { class: "fs-h", style: "font-family:" + fam.head, text: "How can I help today?" }), el("div", { class: "fs-b", style: "font-family:" + fam.body, text: "A good answer explains itself, then shows where it came from. 0123456789" }), el("div", { class: "h", text: "Headline font above, answer font below." }));
@@ -508,7 +510,7 @@ function drawLook() {
     head.querySelector("button.reset")?.remove();sec.append(head, el("div", { class: "help", text: s.help }));
     if (s.modeTabs) {
       const tabs = el("div", { class: "seg mini", role: "radiogroup", "aria-label": "Color set being edited" });
-      for (const m of ["light", "dark"]) tabs.append(el("button", { type: "button", "data-m": m, role: "radio", "aria-checked": String(editMode === m), onclick: () => { editMode = m; setPvMode(m); syncColorEditor(sec); pushPreview(); } }, "Editing: " + (m === "light" ? "Light" : "Dark")));
+      for (const m of ["light", "dark"]) tabs.append(el("button", { type: "button", "data-m": m, role: "radio", "aria-checked": String(editMode === m), onclick: () => { editMode = m; syncColorEditor(sec); pushPreview(); } }, "Edit " + m + " theme"));
       sec.append(tabs);
     }
     const byKey = Object.fromEntries(s.fields.map((f) => [f.key, f])); const gs = GROUPS[s.id];
@@ -558,7 +560,10 @@ function buildMenu() {
   for(const [section,label,workspace] of items)panel.append(el("a",{"data-workspace":workspace,href:"#sec-"+section,text:label,onclick:e=>{e.preventDefault();showGroup(id);if(workspace)document.dispatchEvent(new CustomEvent("cc-workspace-open",{detail:workspace}));showSection(section,e.currentTarget)}}));panels.append(panel);
  }
  rail.addEventListener("keydown",e=>{if(!["ArrowDown","ArrowUp","ArrowLeft","ArrowRight","Home","End"].includes(e.key))return;e.preventDefault();const tabs=[...rail.querySelectorAll("button")],i=tabs.indexOf(document.activeElement),n=e.key==="Home"?0:e.key==="End"?tabs.length-1:(i+(["ArrowDown","ArrowRight"].includes(e.key)?1:-1)+tabs.length)%tabs.length;tabs[n].focus();tabs[n].click()});
- const requested=m.querySelector('a[href="'+location.hash+'"]');if(requested&&document.body.classList.contains('simple')&&!['#sec-model','#sec-finish','#sec-presets','#sec-freshness'].includes(requested.hash))window.CCSettingsSetMode?.('advanced');const first=requested||m.querySelector(document.body.classList.contains('simple')?'a[href="#sec-model"]':'a[href="#sec-finish"]');showGroup(first.closest(".nav-group").dataset.group);showSection(first.hash.replace("#sec-",""),first);if(first.dataset.workspace)document.dispatchEvent(new CustomEvent("cc-workspace-open",{detail:first.dataset.workspace}));document.dispatchEvent(new CustomEvent("cc-settings-nav-ready"));
+ const mobileLabel=el("label",{class:"mobile-section-label",for:"mobileSection",text:"Section"}),mobileSelect=el("select",{id:"mobileSection","data-native":"true","aria-label":"Configuration section"});
+ for(const [group,title] of groups){const optgroup=el("optgroup",{label:title});for(const link of panels.querySelectorAll('.nav-group[data-group="'+group+'"] a'))optgroup.append(el("option",{value:link.hash,text:link.textContent}));mobileSelect.append(optgroup)}
+ mobileSelect.addEventListener("change",()=>{m.querySelector('a[href="'+mobileSelect.value+'"]')?.click();const section=document.querySelector('.settings-active-panel');section?.setAttribute('tabindex','-1');section?.focus({preventScroll:true});section?.scrollIntoView({block:'start',behavior:'instant'})});m.append(mobileLabel,mobileSelect);
+ if(!window.ccSettingsPopstateBound){window.ccSettingsPopstateBound=true;window.addEventListener('popstate',()=>{const target=document.querySelector('#menu a[href="'+location.hash+'"]');if(target){window.ccRestoreNavigation=true;target.click();window.ccRestoreNavigation=false}})}const requested=m.querySelector('a[href="'+location.hash+'"]');if(requested&&document.body.classList.contains('simple')&&!['#sec-model','#sec-finish','#sec-presets','#sec-freshness'].includes(requested.hash))window.CCSettingsSetMode?.('advanced');const first=requested||m.querySelector(document.body.classList.contains('simple')?'a[href="#sec-model"]':'a[href="#sec-finish"]');showGroup(first.closest(".nav-group").dataset.group);showSection(first.hash.replace("#sec-",""),first);if(first.dataset.workspace)document.dispatchEvent(new CustomEvent("cc-workspace-open",{detail:first.dataset.workspace}));document.dispatchEvent(new CustomEvent("cc-settings-nav-ready"));
 }
 window.CCSettingsRefreshNavigation=buildMenu;
 window.addEventListener("hashchange",()=>{if(theme)buildMenu()});
@@ -574,7 +579,7 @@ function buildPresets() {
     const t = presetTheme(p);
     const c = t.mode === "dark" ? t.dark : t.light;
     const b = el("button", { type: "button", class: "preset", "data-preset":name,"aria-pressed":"false", title: "Apply the " + name + " look", disabled: canEdit ? undefined : "" }, el("span", { class: "sw", style: `background:linear-gradient(135deg,${c.bg} 0 50%,${c.brand} 50% 75%,${c.accent} 75%)` }), el("span", { class: "pn" }, el("span", { text: name }), el("small", { text: (FONTNAMES[t.font] || t.font) + (t.heading_font && t.heading_font !== t.font ? " + " + (FONTNAMES[t.heading_font] || t.heading_font) : "") })));
-    b.addEventListener("click", () => { const scroll=scrollY; const keep = ["txt_title", "txt_tagline", "txt_examples", "txt_placeholder", "txt_hint", "txt_disclaimer", "txt_sidebar", "txt_footer"]; for (const k of keep) t[k] = theme[k]; theme = t; editMode = theme.mode === "dark" ? "dark" : "light"; setPvMode(editMode); drawLook(); pvPop(); changed();window.scrollTo({top:scroll,behavior:"instant"});requestAnimationFrame(()=>window.scrollTo({top:scroll,behavior:"instant"})); say("Preset \u201c" + name + "\u201d applied to the preview. Press Save look to keep it."); });
+    b.addEventListener("click", () => { if(!confirm("Apply this preset? It replaces appearance settings only. Your wording, prompts, sources and keys stay unchanged."))return; const scroll=scrollY; const keep = ["txt_title", "txt_tagline", "txt_examples", "txt_placeholder", "txt_hint", "txt_disclaimer", "txt_sidebar", "txt_footer"]; for (const k of keep) t[k] = theme[k]; theme = t; editMode = theme.mode === "dark" ? "dark" : "light"; setPvMode(editMode); drawLook(); pvPop(); changed();window.scrollTo({top:scroll,behavior:"instant"});requestAnimationFrame(()=>window.scrollTo({top:scroll,behavior:"instant"})); say("Preset \u201c" + name + "\u201d applied to the preview. Press Save look to keep it."); });
     box.append(b);
   }
   const more = el("button", { type: "button", class: "preset more", "aria-expanded": showMore ? "true" : "false" }, showMore ? "Fewer presets" : "More presets");
@@ -582,6 +587,7 @@ function buildPresets() {
   box.append(more); };
   draw();syncPreset();
 }
+function appearanceValid(){const bad=$("#col").querySelector(".field input[aria-invalid=true]");if(!bad)return true;say("Fix the marked appearance field before saving.",true);bad.scrollIntoView({block:"center",behavior:"instant"});bad.focus();return false}
 async function init() {
   const c = await api("/api/config"); window.CCLoadedApp = c; $("#lead").textContent = "Editing " + c.app.title + ". " + (c.app.tagline || "") + " Keys stay on this computer."; $("#h").textContent = c.app.title + " configuration"; document.title = c.app.title + " configuration";
   const overview = el("details", {class:"loaded-app",id:"loadedApp"}, el("summary", {text:"Loaded workspace: " + c.app.title}), el("p", {text:c.app.tagline || ""}), el("small", {text:"Sources: " + c.sources.map(x=>x.label || x.id).join(", ")}));
