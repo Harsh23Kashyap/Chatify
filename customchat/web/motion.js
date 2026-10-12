@@ -104,11 +104,7 @@
         th.querySelectorAll(".row:not(.u)").forEach(function (r) { if (r.querySelector(".nf-tips")) r.classList.add("stale"); });
       }); });
     }).observe(th, { childList: true });
-    document.addEventListener("change", function (e) {
-      var f = e.target && e.target.closest && e.target.closest("[data-k=motion]"); if (!f) return;
-      var pv = document.querySelector(".preview"); if (!pv) return;
-      setTimeout(function () { pv.classList.remove("demo"); void pv.offsetWidth; pv.classList.add("demo"); setTimeout(function () { pv.classList.remove("demo"); }, 500); }, 60);
-    }, true);
+
   } catch (e) { /* decoration only */ }
 })();
 

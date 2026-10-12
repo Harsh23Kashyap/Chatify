@@ -432,9 +432,6 @@ function control(f) {
   const field=el("div", { class: "field" }, el("label", { for: id, class: "flabel" }, f.label), el("span", { class: "h", text: f.help }), input);
   if(f.key.startsWith("txt_")&&!theme[f.key]&&v)field.append(el("small",{class:"h value-source",text:"Using app default; no saved override."}));
   if (["text","area","logo"].includes(f.type) && !v) field.append(el("small",{class:"h empty-field",text:"(not filled)"}));
-  if(["motion","entrance","speed","hover_lift"].includes(f.key)){
-    const play=()=>{pushPreview();setTimeout(()=>{const w=$("#pv").contentWindow;if(w?.ccPreviewMotion)w.ccPreviewMotion(theme)},60)};input.addEventListener("change",play);input.addEventListener("input",play);
-  }
   return field;
 }
 async function saveSection(s) {
