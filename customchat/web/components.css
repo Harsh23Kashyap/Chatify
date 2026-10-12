@@ -12,3 +12,13 @@ body.settings-tabs .look-danger .go{color:#7d4138!important;border-color:#cbb3aa
 body.settings-tabs :is(#apply,#saveLook,#saveBudget,#sec-finish a,button,a,input,textarea,select,summary):focus-visible{outline:2px solid var(--ui-focus)!important;outline-offset:3px!important;box-shadow:0 0 0 2px var(--ui-surface)!important}
 body.settings-tabs #load:disabled{background:#e8ece7!important;color:var(--ui-disabled)!important;border:1px dashed #99a89e!important}
 body.settings-tabs :is(#del,#resetLink):disabled{background:#e8ece7!important;color:var(--ui-disabled)!important;border:1px dashed #99a89e!important}
+/* The editor's type scale does not change with a user's chat theme. */
+:root{--ui-type-title:32px;--ui-type-section:18px;--ui-type-subsection:15px;--ui-type-body:14px;--ui-type-label:13px;--ui-type-meta:12px;--ui-leading:1.5;--ui-space-1:4px;--ui-space-2:8px;--ui-space-3:12px;--ui-space-4:16px;--ui-space-6:24px;--ui-space-8:32px;--ui-space-12:48px;--ui-space-16:64px}
+body.settings-tabs #h{font-size:var(--ui-type-title)!important;line-height:1.2;text-wrap:balance}
+body.settings-tabs .head b{font-size:var(--ui-type-section)!important;line-height:1.3;overflow-wrap:anywhere}
+body.settings-tabs .tile h4{font-size:var(--ui-type-subsection)!important;line-height:1.4}
+body.settings-tabs :is(.help,.lead,.section-summary){font-size:var(--ui-type-body)!important;line-height:var(--ui-leading)!important}
+body.settings-tabs :is(.flabel,.field>label,.workspace-fields label){font-size:var(--ui-type-label)!important;line-height:var(--ui-leading)!important}
+body.settings-tabs :is(.field .h,.head small){font-size:var(--ui-type-meta)!important;line-height:var(--ui-leading)!important}
+body.settings-tabs .field{gap:var(--ui-space-2)!important}
+body.settings-tabs .field .h{margin:0!important}
