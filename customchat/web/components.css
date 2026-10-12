@@ -24,3 +24,9 @@ body.settings-tabs .field{gap:var(--ui-space-2)!important}
 body.settings-tabs .field .h{margin:0!important}
 body.settings-tabs #settingsFindHint{grid-column:1/-1;font-size:12px;line-height:1.5;margin:8px 0 0!important;color:var(--ui-muted)}
 body.settings-tabs #settingsFindStatus:empty{display:none}
+body.settings-tabs .helper-example{margin:8px 0 16px;font-size:13px;line-height:1.5}
+body.settings-tabs .helper-example summary{cursor:pointer;min-height:44px;display:flex;align-items:center;gap:8px}
+body.settings-tabs .helper-example summary::before{content:'+';font-weight:600}
+body.settings-tabs .helper-example[open] summary::before{content:'-'}
+body.settings-tabs .helper-example p{overflow-wrap:anywhere;margin:8px 0}
+html body.settings-tabs #sec-code #codeEditor .helper-example>summary{justify-content:flex-start!important;gap:8px!important;padding:8px 0!important}
