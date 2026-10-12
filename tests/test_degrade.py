@@ -28,13 +28,13 @@ class T(unittest.TestCase):
     def test_all_web_providers_failing_is_reported(self):
         from customchat.connectors.web_search import WebSearch
         from customchat import websearch
-        old = websearch.search
+        old = websearch.search;old_has=websearch.has_key;websearch.has_key=lambda p:True
         def boom(*a, **k): raise websearch.SearchError("no key")
         websearch.search = boom
         try:
             w = WebSearch({"id": "web", "label": "Web", "providers": ["tavily"]})
             with self.assertRaises(websearch.SearchError): w.search("q")
-        finally: websearch.search = old
+        finally: websearch.search = old;websearch.has_key=old_has
     def test_provider_down_fails_fast(self):
         from customchat import providers
         providers._DOWN["http://x.invalid/a"] = __import__("time").time() + 20

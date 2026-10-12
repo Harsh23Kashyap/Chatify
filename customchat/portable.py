@@ -47,9 +47,9 @@ def _safe_doc(p, root):
     return not any(x.startswith('.') or x.lower() in PRIVATE for x in parts) and not any(
         re.search(r'(secret|credential|password|token|api[_-]?key)', x, re.I) for x in parts)
 
-def bundle(cfg, theme_value=None, prompt_value=None):
+def bundle(cfg, theme_value=None, prompt_value=None,include_keys=False):
     """Returns ZIP bytes and a manifest; only configured local evidence is copied."""
-    clean = schema.validate({k: copy.deepcopy(v) for k, v in cfg.items() if k in schema.DEFAULTS})
+    clean = schema.validate({k: copy.deepcopy(v) for k, v in cfg.items() if k in set(schema.DEFAULTS)|{'appearance','pipeline_prompts','helper_drafts','api_suggestions'}})
     if state_folder := _state_folder(cfg):
         budget_path = state_folder / 'budget.json'
         if budget_path.exists():
@@ -101,19 +101,28 @@ def bundle(cfg, theme_value=None, prompt_value=None):
             files[target + '/'] = b''
     if theme_value is None:
         theme_value = theme.ThemeStore(str(state),cfg["app"]).value if state else {}
-    files['data/theme.json'] = json.dumps(theme.clean(theme_value), indent=2).encode()
+    clean['appearance']=theme.clean(theme_value)
+    files['data/theme.json'] = json.dumps(clean['appearance'], indent=2).encode()
     if prompt_value is None:
         prompt_value = prompts.PromptStore(str(state) if state else '')._load()
     pv = prompt_value if isinstance(prompt_value, dict) else {}
     pv = {'text': {k: v for k, v in (pv.get('text') or {}).items() if k in prompts.STAGES and isinstance(v, str) and len(v) <= prompts.MAX_LEN},
           'on': {k: bool(v) for k, v in (pv.get('on') or {}).items() if k in prompts.STAGES and prompts.STAGES[k]['optional']}}
+    pv['text']={k:pv['text'].get(k) or v['default'] or clean['prompt']['system'] for k,v in prompts.STAGES.items()}
+    clean['pipeline_prompts']=pv
     files['data/prompts.json'] = json.dumps(pv, indent=2).encode()
     if state:
         from .editstate import drafts
         helper_drafts=drafts(state)
         if helper_drafts:
             _check_values(helper_drafts)
+            clean['helper_drafts']=helper_drafts
             files['data/code-drafts.json']=json.dumps(helper_drafts).encode()
+    if include_keys:
+        from .keybundle import export_keys
+        keys=export_keys(cfg)
+        if keys:clean['api_keys']=keys
+        warnings.append('SENSITIVE: this bundle contains selected saved API keys. Anyone receiving it can use them. Share only with a trusted recipient; revoke after sharing.')
     files['app.yaml'] = yaml.safe_dump(clean, sort_keys=False, allow_unicode=True).encode()
     envs = set()
     def env_names(v):

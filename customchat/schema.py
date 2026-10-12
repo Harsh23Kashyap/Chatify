@@ -3,7 +3,7 @@
 Both DietChat (PubMed evidence, accounts, saved conversations) and WirelessChat
 (arXiv/IEEE evidence, source filters, pinned chats) are instances of this schema.
 """
-import copy, json, os
+import copy, json, os, math
 
 DEFAULTS = {
     "schema_version": 1,
@@ -126,6 +126,12 @@ def validate(raw):
     from .actions import REGISTRY
     if actions.get('allow') is not None and (not isinstance(actions['allow'],list) or any(x not in REGISTRY for x in actions['allow'])):raise ConfigError('actions.allow needs registered tool IDs')
     if not isinstance(actions.get('writes',True),bool):raise ConfigError('actions.writes must be true or false')
+    extensions={'appearance','pipeline_prompts','helper_drafts','api_suggestions'}
+    extra={k:raw[k] for k in extensions if k in raw}
+    if extra:
+        from .appbuilder import validate_extras
+        extra=validate_extras(copy.deepcopy(extra))
+    raw={k:v for k,v in raw.items() if k not in extensions}
     unknown = set(raw) - set(DEFAULTS)
     if unknown:
         raise ConfigError("Unknown top-level keys: " + ", ".join(sorted(unknown)))
@@ -133,6 +139,12 @@ def validate(raw):
     from .budget import clean as budget_clean
     try: cfg["budget"] = budget_clean(cfg["budget"])
     except ValueError as e: raise ConfigError(str(e)) from None
+    # Shared numeric gate: YAML, ZIP imports, API edits and generated drafts use this.
+    bounds={'provider.temperature':(0,2,False),'provider.timeout':(1,600,False),'retrieval.top_k':(1,50,True),'retrieval.min_score':(0,1,False),'retrieval.cache_ttl':(0,86400,True),'memory.recent_turns':(1,20,True),'memory.summary_every':(1,50,True),'memory.context_chars':(8000,2000000,True),'server.port':(1,65535,True)}
+    for field,(low,high,integer) in bounds.items():
+        area,key=field.split('.');value=cfg[area][key]
+        if isinstance(value,bool) or not isinstance(value,(int,float)) or not math.isfinite(value) or not low<=value<=high or integer and type(value)!=int:
+            raise ConfigError(field+' must be '+str(low)+'-'+str(high)+(' (whole number)' if integer else ''))
     p = cfg["provider"]
     if p["type"] not in PROVIDERS:
         raise ConfigError("provider.type must be one of " + ", ".join(sorted(PROVIDERS)))
@@ -147,6 +159,8 @@ def validate(raw):
             raise ConfigError("provider.fallback needs a valid type and no api_key")
         if fb["type"] in NEEDS_MODEL and not fb.get("model"):
             raise ConfigError("provider.fallback.model is required")
+        for name,lo,hi in (("temperature",0,2),("timeout",1,600)):
+            if name in fb and (type(fb[name]) not in (int,float) or not math.isfinite(fb[name]) or not lo<=fb[name]<=hi):raise ConfigError("provider.fallback."+name+" is out of range")
     if "api_key" in p:
         raise ConfigError("Do not put keys in the app file. Use provider.api_key_env with an env var name.")
     if not isinstance(cfg["sources"], list):
@@ -167,6 +181,10 @@ def validate(raw):
             value = s.get("refresh_interval", 30)
             if isinstance(value, bool) or not isinstance(value, (int, float)) or not 0 <= value <= 86400:
                 raise ConfigError("sources[%d].refresh_interval must be 0-86400 seconds" % i)
+        for field,lo,hi,integer in (("timeout",1,600,False),("max_chars",1,2000000,True),("max_docs",1,100000,True),("max_bytes",1,64000000,True),("refresh_interval",0,86400,False)):
+            if field in s:
+                v=s[field]
+                if type(v) not in (int,float) or not math.isfinite(v) or not lo<=v<=hi or integer and type(v)!=int:raise ConfigError("sources[%d].%s is out of range"%(i,field))
         if "read_users" in s:
             if cfg["auth"]["mode"] != "accounts" or not isinstance(s["read_users"],list) or any(not isinstance(u,str) or not u for u in s["read_users"]):
                 raise ConfigError("sources[%d].read_users needs account user IDs and accounts auth" % i)
@@ -178,7 +196,7 @@ def validate(raw):
                     raise ConfigError("sources[%d].document_users needs document names mapped to user ID lists" % i)
         s.setdefault("id", "%s%d" % (s["type"], i))
         s.setdefault("label", s["id"])
-        if not isinstance(s.get("weight", 1.0), (int, float)) or s.get("weight", 1.0) <= 0:
+        if type(s.get("weight",1.0)) not in (int,float) or not math.isfinite(s.get("weight",1.0)) or not 0<s.get("weight",1.0)<=1000:
             raise ConfigError("sources[%d].weight must be a positive number" % i)
         if s["id"] in seen:
             raise ConfigError("Duplicate source id " + s["id"])
@@ -196,6 +214,7 @@ def validate(raw):
         value = memory.get(key)
         if type(value) is not int or not low <= value <= high:
             raise ConfigError("memory.%s must be %s-%s" % (key, low, high))
+    cfg.update(extra)
     return cfg
 
 

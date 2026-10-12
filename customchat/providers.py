@@ -257,7 +257,7 @@ class OpenAICompatible(Streams):
 def _key(env, kind=None, required=True):
     """Saved key first (typed in the Configuration page), then the environment variable."""
     from . import secrets
-    key = (secrets.saved(kind) if kind else "") or (os.environ.get(env, "") if env else "")
+    key = (secrets.saved(kind) if kind else "") or ((secrets.saved("env:"+env) or os.environ.get(env, "")) if env else "")
     if not key and required:
         env = env or {"openai": "OPENAI_API_KEY", "claude": "ANTHROPIC_API_KEY", "gemini": "GEMINI_API_KEY"}.get(kind or "", "")
         raise ProviderError("No API key yet. Paste one under Model, Save key" + (", or set the %s environment variable." % env if env else "."), 401)
@@ -274,7 +274,7 @@ class Claude(Streams):
     def complete(self, messages):
         system = "\n\n".join(m["content"] for m in messages if m["role"] == "system")
         turns = [{"role": m["role"], "content": m["content"]} for m in messages if m["role"] in ("user", "assistant")]
-        r = _post(self.base + "/v1/messages", {"model": self.model, "max_tokens": 1500, "temperature": self.temp,
+        r = _post(self.base + "/v1/messages", {"model": self.model, "max_tokens": getattr(self,"output_limit",1500), "temperature": self.temp,
                   "system": system, "messages": turns}, {"x-api-key": _key(self.key_env, "claude"), "anthropic-version": "2023-06-01"}, self.t)
         try:
             return "".join(b.get("text", "") for b in r["content"] if b.get("type") == "text").strip()

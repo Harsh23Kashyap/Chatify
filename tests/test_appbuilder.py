@@ -60,3 +60,31 @@ class BuilderTests(unittest.TestCase):
  def test_no_changes_empty_diff(self):
   result=appbuilder.review(self.cfg,yaml.safe_dump({'app':self.cfg['app']}),['app'])
   self.assertEqual(result['sections'],[]);self.assertEqual(result['changes'],[])
+
+ def complete_config(self):
+  from customchat import theme,prompts,generators
+  raw=copy.deepcopy(schema.DEFAULTS)
+  raw.update(appearance=theme.DEFAULT_CLEAN(),pipeline_prompts={'text':{k:v['default'] or raw['prompt']['system'] for k,v in prompts.STAGES.items()},'on':{k:v['on'] for k,v in prompts.STAGES.items()}},helper_drafts={k:{'brief':'A reviewed helper draft','code':generators.code_template(k,'')} for k in ('search','clean_query')},api_suggestions=[{'name':'PubMed','reason':'Biomedical literature','connector':'pubmed','setup':'Enable after review','caveat':'Verify coverage; no price claim'}])
+  return raw
+ def test_complete_extensions_and_all_prompts(self):
+  raw=self.complete_config();result=appbuilder.validate(yaml.safe_dump(raw));self.assertEqual(len(result['pipeline_prompts']['text']),9)
+  self.assertEqual(set(result['appearance']),set(raw['appearance']));self.assertTrue(result['helper_drafts']['search']['code'])
+  self.assertEqual(schema.validate(result)['appearance']['font'],'dm-sans')
+ def test_blank_pipeline_prompt_rejected(self):
+  raw=self.complete_config();raw['pipeline_prompts']['text']['followups']='';self.assertRaises(ValueError,appbuilder.validate,yaml.safe_dump(raw))
+ def test_negative_and_numeric_bounds(self):
+  cases=[('budget','daily_questions',-26),('budget','daily_model_calls',1.2),('budget','spend_cap_usd',-1),('provider','temperature',-1),('provider','timeout',0),('retrieval','top_k',0),('retrieval','min_score',-1),('retrieval','cache_ttl',-1),('server','port',0),('memory','recent_turns',-1)]
+  for area,key,value in cases:
+   raw=copy.deepcopy(schema.DEFAULTS);raw[area][key]=value
+   with self.subTest(area=area,key=key):self.assertRaises(ValueError,appbuilder.validate,yaml.safe_dump(raw))
+ def test_complete_save_no_execute_extensions_restart(self):
+  from customchat import prompts,theme
+  self.cfg['_dir']=self.tmp.name;raw=self.complete_config();raw['app']['title']='Complete Garden';raw['storage']['path']='data/customchat.db'
+  plan=appbuilder.review(self.cfg,yaml.safe_dump(raw),appbuilder.SECTIONS);appbuilder.save_plan(self.cfg,plan)
+  saved=schema.load(str(self.path));self.assertEqual(saved['app']['title'],'Complete Garden')
+  self.assertEqual(len(saved['pipeline_prompts']['text']),9);self.assertTrue((Path(self.tmp.name)/'data'/'code-drafts.json').exists())
+  self.assertEqual(prompts.PromptStore('',saved['pipeline_prompts']).text('followups'),raw['pipeline_prompts']['text']['followups'])
+ def test_deploy_requires_consent_no_execution(self):
+  p=Fixture({'plan':'1. Review your app. 2. Set keys in the environment.','prompt':'Create a reviewed deployment plan.'})
+  self.assertRaises(ValueError,appbuilder.deployment,p,{'brief':'Local app','consent':False});self.assertEqual(p.calls,[])
+  result=appbuilder.deployment(p,{'brief':'Local app','consent':True});self.assertIn('plan',result);self.assertEqual(len(p.calls),1)

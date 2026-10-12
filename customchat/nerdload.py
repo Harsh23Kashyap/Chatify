@@ -67,10 +67,13 @@ class NerdLoader:
   except Exception:raise ValueError('Invalid app YAML/JSON') from None
   if isinstance(raw,dict) and 'articles' in raw and 'app' not in raw and 'provider' not in raw and 'sources' not in raw:
    raise ValueError('This looks like an API response, not a Nerd app. In Code helpers, open Search connector, then Match a real response and paste this JSON there. It will not be imported or run.')
+  from .keybundle import extract
+  raw,imported_keys=extract(raw)
   try:cfg=schema.validate(raw);_check_values(cfg)
   except (schema.ConfigError,ExportError) as e:raise ValueError(str(e)) from None
+  files[appname]=yaml.safe_dump(cfg,sort_keys=False).encode()
   for name,content in files.items():
-   if name.endswith('.json'):
+   if name.endswith('.json') and name!=appname:
     try:_check_values(json.loads(content))
     except (ValueError,ExportError):raise ValueError('Invalid or private JSON file: '+name) from None
   if cfg['auth']['mode']!='none':raise ValueError('Local imported Nerds must use auth.mode: none. Set up hosted authentication separately.')
@@ -79,7 +82,7 @@ class NerdLoader:
     from . import theme,prompts
     d=json.loads(files[name])
     if name.endswith('theme.json'):files[name]=json.dumps(theme.clean(d)).encode()
-    elif not isinstance(d,dict) or set(d)-{'text','on'}:raise ValueError('Invalid prompt settings')
+    elif not isinstance(d,dict) or set(d)-{'text','on'} or not isinstance(d.get('text',{}),dict) or not isinstance(d.get('on',{}),dict) or any(k not in prompts.STAGES or not isinstance(v,str) or len(v)>prompts.MAX_LEN for k,v in d.get('text',{}).items()) or any(k not in prompts.STAGES or type(v)!=bool for k,v in d.get('on',{}).items()):raise ValueError('Invalid prompt settings')
   empty_sources=[]
   for src in cfg['sources']:
    for field in ('path','module'):
@@ -109,16 +112,16 @@ class NerdLoader:
   token=hashlib.sha256(data).hexdigest()
   with self.lock:
    if len(self.pending)>=4:self.pending.pop(next(iter(self.pending)))
-   self.pending[token]=(files,cfg,code)
+   self.pending[token]=(files,cfg,code,imported_keys)
   from . import theme
-  look=theme.clean(json.loads(files['data/theme.json'])) if 'data/theme.json' in files else theme.clean({})
+  look=theme.clean(json.loads(files['data/theme.json'])) if 'data/theme.json' in files else theme.clean(cfg.get('appearance',{}))
   preview={'title':look.get('txt_title') or cfg['app']['title'],'tagline':look.get('txt_tagline') or cfg['app']['tagline'],'mode':look.get('mode','light'),'colors':look.get('dark' if look.get('mode')=='dark' else 'light',{}),'examples':cfg['app'].get('examples',[])[:3],'files':sorted(files),'static':True}
   from . import bundle_review
-  return {'auto_review':bundle_review.review(cfg,files),'preview':preview,'readiness':readiness,'token':token,'title':cfg['app']['title'],'tagline':cfg['app']['tagline'],'provider':cfg['provider']['type'],'model':cfg['provider']['model'],'sources':[{'id':s['id'],'label':s.get('label',s['id']),'type':s['type']} for s in cfg['sources']],'required_env':envs,'code':[{'path':n,'text':files[n].decode('utf-8')} for n in code],'warnings':['Python uses a bounded process, NOT a sandbox. Host files/network remain accessible; code review required.','Separate local workspace. Current app is not overwritten.','Keys, accounts and chat history are not imported.','Imported local apps disable write actions. Review remote sources before asking a question.']}
+  return {'auto_review':bundle_review.review(cfg,files),'preview':preview,'readiness':readiness,'token':token,'title':cfg['app']['title'],'tagline':cfg['app']['tagline'],'provider':cfg['provider']['type'],'model':cfg['provider']['model'],'sources':[{'id':s['id'],'label':s.get('label',s['id']),'type':s['type']} for s in cfg['sources']],'required_env':envs,'imported_key_count':len(imported_keys),'code':[{'path':n,'text':files[n].decode('utf-8')} for n in code],'warnings':['Python uses a bounded process, NOT a sandbox. Host files/network remain accessible; code review required.','Separate local workspace. Current app is not overwritten.',str(len(imported_keys))+' API key entries will be placed in this workspace private key storage. Values are not shown. Accounts and chat history are not imported.','Imported local apps disable write actions. Review remote sources before asking a question.']}
  def load(self,token,allow_code=False):
   with self.lock:item=self.pending.get(token)
   if not item:raise ValueError('Review the bundle first')
-  files,cfg,code=item
+  files,cfg,code,imported_keys=item
   if sum(p.poll() is None for p in self.children)>=4:raise ValueError('Maximum four running Nerds. Stop a running workspace before loading more.')
   if code and not allow_code:raise ValueError('Review Python code and explicitly allow it before loading')
   from .launcher import pick_port
@@ -131,6 +134,10 @@ class NerdLoader:
    if src['type']=='local_files':(folder/src.get('path','docs')).mkdir(parents=True,exist_ok=True)
   port=pick_port(8090)
   cfg['server']['port']=port;(folder/'app.yaml').write_text(yaml.safe_dump(cfg,sort_keys=False))
+  if imported_keys:
+   from .secrets import SecretStore
+   key_store=SecretStore(str(folder/'data'))
+   for name,value in imported_keys.items():key_store.set(name,value)
   log=open(folder/'run.log','wb')
   child=subprocess.Popen([sys.executable,'-m','customchat','run',str(folder/'app.yaml'),'--no-browser'],stdout=log,stderr=subprocess.STDOUT,cwd=str(Path(__file__).resolve().parents[1]),env={k:v for k,v in os.environ.items() if not re.search(r'(KEY|TOKEN|SECRET|PASSWORD|CREDENTIAL)',k,re.I)})
   log.close();self.children.append(child);self.workspaces[folder.name]={'folder':folder,'process':child,'title':cfg['app']['title'],'url':'http://127.0.0.1:'+str(port)}

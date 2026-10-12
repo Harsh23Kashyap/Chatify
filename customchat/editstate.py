@@ -6,7 +6,7 @@ from . import schema
 from .portable import _check_values
 
 def view(cfg):
- return copy.deepcopy({k:cfg[k] for k in schema.DEFAULTS})
+ return copy.deepcopy({k:cfg[k] for k in list(schema.DEFAULTS)+['appearance','pipeline_prompts','helper_drafts','api_suggestions'] if k in cfg})
 def saved_view(cfg):
  path=Path(cfg.get('_path',''))
  if not cfg.get('_path'):return view(cfg)
@@ -49,7 +49,7 @@ def save_draft(folder,kind,brief,code):
   if os.path.exists(tmp):os.unlink(tmp)
  return data[kind]
 def helper_state(cfg,folder):
- result=drafts(folder)
+ result=copy.deepcopy(cfg.get('helper_drafts',{}));result.update(drafts(folder))
  if 'search' not in result:
   for src in cfg['sources']:
    if src['type']!='python':continue

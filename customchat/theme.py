@@ -1,6 +1,6 @@
 """Look and feel, fully configurable. The theme is plain data (colours, fonts, background, emojis,
 motion, layout). It is validated here so a bad value can never break the page, and saved next to the database."""
-import json, os, re
+import json, os, re, math,base64
 
 HEX = re.compile(r"^#[0-9a-fA-F]{6}$")
 COLOR_KEYS = ["brand", "accent", "bg", "surface", "ink", "muted", "line", "sidebar", "bot", "you", "danger"]
@@ -79,6 +79,7 @@ def clean(raw):
         if raw.get(k) in opts:
             t[k] = raw[k]
     for k, (lo, hi) in RANGES.items():
+        if k in raw and (type(raw[k]) not in (int,float) or not math.isfinite(raw[k]) or not lo<=raw[k]<=hi or int(raw[k])!=raw[k]):raise ValueError(k+' must be a whole number from '+str(lo)+' to '+str(hi))
         try:
             t[k] = max(lo, min(hi, int(float(raw.get(k, t[k])))))
         except (TypeError, ValueError):
@@ -100,7 +101,11 @@ def clean(raw):
     img = str(raw.get("bg_image") or "").strip()
     t["bg_image"] = img if re.match(r"^https://[^\s\"'()<>]{4,300}$", img) or re.fullmatch(r"data:image/jpeg;base64,[A-Za-z0-9+/=]{20,600000}", img) else ""
     lg = str(raw.get("logo") or "")
-    t["logo"] = lg if re.fullmatch(r"data:image/png;base64,[A-Za-z0-9+/=]{20,300000}", lg) else ""
+    t["logo"] = lg if re.fullmatch(r"data:image/png;base64,[A-Za-z0-9+/=]{20,2800000}", lg) else ""
+    if t["logo"]:
+        try:
+            if not base64.b64decode(lg.split(",",1)[1],validate=True).startswith(b"\x89PNG\r\n\x1a\n"):t["logo"]=""
+        except ValueError:t["logo"]=""
     for k in ("emoji_bot", "emoji_you", "emoji_hero", "emoji_send", "emoji_attach", "emoji_temp"):
         t[k] = _emoji(raw.get(k))
         t[k+"_animated"] = bool(raw.get(k+"_animated", False))
@@ -113,9 +118,9 @@ def clean(raw):
 
 
 class ThemeStore:
-    def __init__(self, folder, app=None):
+    def __init__(self, folder, app=None, appearance=None):
         self.path = os.path.join(folder, "theme.json")
-        base = DEFAULT_CLEAN()
+        base = clean(appearance or {})
         app = app or {}
         for field,key in (("brand","accent"),("accent","accent2")):
             if HEX.match(str(app.get(key,""))):base["light"][field]=app[key]

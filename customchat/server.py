@@ -30,8 +30,10 @@ def make_handler(cfg, engine):
     budget = Budget(cfg, os.path.dirname(os.path.abspath(store.path)) if store.path != ":memory:" else None)
     cfg["budget"] = dict(budget.value)
     engine.provider = budget.wrap(engine.provider)
-    themestore = themes.ThemeStore(os.path.dirname(os.path.abspath(store.path)) if store.path != ":memory:" else "/tmp", cfg["app"])
+    themestore = themes.ThemeStore(os.path.dirname(os.path.abspath(store.path)) if store.path != ":memory:" else "/tmp", cfg["app"],cfg.get("appearance"))
     from . import editstate
+    from .buildjobs import BuildJobs
+    build_jobs=BuildJobs()
     state_folder = os.path.dirname(os.path.abspath(store.path)) if store.path != ":memory:" else "/tmp"
     acc = Accounts(store, bool(cfg["auth"].get("signup", True))) if cfg["auth"]["mode"] == "accounts" else None
 
@@ -70,8 +72,8 @@ def make_handler(cfg, engine):
         if "provider" in v: new["provider"]["type"] = str(v["provider"])
         if "model" in v: new["provider"]["model"] = str(v["model"])[:120]
         if "base_url" in v: new["provider"]["base_url"] = str(v["base_url"])[:300]
-        if "temperature" in v: new["provider"]["temperature"] = max(0.0, min(2.0, float(v["temperature"])))
-        if "top_k" in v: new["retrieval"]["top_k"] = max(1, min(20, int(v["top_k"])))
+        if "temperature" in v: new["provider"]["temperature"] = v["temperature"]
+        if "top_k" in v: new["retrieval"]["top_k"] = v["top_k"]
         if "query_rewrite" in v: new["retrieval"]["query_rewrite"] = bool(v["query_rewrite"])
         from .portable import _check_values,ExportError
         try:_check_values(new['provider'])
@@ -291,12 +293,13 @@ def make_handler(cfg, engine):
                     files = {n:archive.read(n) for n in archive.namelist() if not n.endswith("/")}
                 readiness=check(cfg,files)
                 return self._send(200, {"readiness":readiness,"warnings":manifest["warnings"],"excluded":["API keys and credentials","Accounts and chat history","Personal uploads","Installed local models"],"files":list(manifest["files"])})
-            if path == "/api/app-export" and method == "GET":
+            if path == "/api/app-export" and method in ("GET","POST"):
                 if not can_edit(self):
                     raise PermissionError("Only the app owner can export configuration.")
                 if editstate.saved_view(cfg)!=editstate.view(cfg):raise ValueError("Saved app-file changes are waiting for restart. Restart this workspace before exporting so the ZIP cannot contain stale settings.")
                 from .portable import bundle
-                data, _ = bundle(cfg, themestore.value, engine.prompts._load())
+                if method=="POST" and (b.get("include_keys") is not True or b.get("confirmed_sensitive_export") is not True):raise ValueError("Confirm sensitive key export explicitly")
+                data, _ = bundle(cfg, themestore.value, engine.prompts._load(),include_keys=method=="POST")
                 return self._send(200, data, "application/zip", {"Content-Disposition": 'attachment; filename="customchat-app.zip"'})
             if path in ("/api/nerds/review", "/api/nerds/load") and method == "POST":
                 self._owner()
@@ -351,14 +354,22 @@ def make_handler(cfg, engine):
                     ok, msg = providers.test_connection(cfg, kind, str(b.get("model") or "")[:120], base)
                     from .management import diagnosis
                     return self._send(200, {'ok':ok,'message':msg} if ok else {'ok':False,**diagnosis(msg)})
-            if path.startswith('/api/settings/build/') and method=='POST':
+            if path.startswith('/api/settings/build/') and method in ('POST','GET'):
                 if not can_edit(self):raise PermissionError('Only the app owner can build configuration')
                 from . import appbuilder
-                if path.endswith('/talk'):
+                if path.endswith('/job') and method=='GET':return self._send(200,build_jobs.view(o,qs.get('id','')))
+                if path.endswith('/cancel'):return self._send(200,build_jobs.cancel(o,str(b.get('id',''))))
+                if path.endswith('/retry'):return self._send(200,build_jobs.retry(o,str(b.get('id',''))))
+                if path.endswith('/talk') or path.endswith('/deploy') or path.endswith('/start'):
                     selected=b.get('selection') or {};kind=selected.get('provider');model=selected.get('model');base=selected.get('base_url','')
                     if kind not in schema.PROVIDERS or not isinstance(model,str) or not model.strip() or len(model)>120 or not isinstance(base,str) or len(base)>300:raise ValueError('Choose a valid provider and model')
                     build_cfg=providers._block(cfg,kind,model,base)
-                    return self._send(200,appbuilder.talk(budget.wrap(providers.make(build_cfg)),build_cfg,b))
+                    setup_provider=providers.make(build_cfg)
+                    setup_provider.output_limit=16000
+                    model_provider=budget.wrap(setup_provider)
+                    if path.endswith('/start'):return self._send(200,build_jobs.start(o,model_provider,build_cfg,b))
+                    if path.endswith('/deploy'):return self._send(200,appbuilder.deployment(model_provider,b))
+                    return self._send(200,appbuilder.talk(model_provider,build_cfg,b))
                 if path.endswith('/parse'):
                     import yaml
                     clean=appbuilder.validate(b.get('yaml'));raw=yaml.safe_load(b.get('yaml'))
@@ -371,14 +382,19 @@ def make_handler(cfg, engine):
                     clean=appbuilder.validate(b.get('yaml'))
                     payload=yaml.safe_dump(clean,sort_keys=False).encode();buf=io.BytesIO()
                     with zipfile.ZipFile(buf,'w',zipfile.ZIP_DEFLATED) as z:
-                        z.writestr('app.yaml',payload);z.writestr('README.md','Generated app draft. Review app.yaml before loading. Keys and documents are not included. Import using CustomChat Load and share Nerds. No code included.\n')
+                        extra={k:clean.pop(k) for k in appbuilder.EXTRAS if k in clean};payload=yaml.safe_dump(clean,sort_keys=False).encode()
+                        z.writestr('app.yaml',yaml.safe_dump({**clean,**extra},sort_keys=False).encode())
+                        for key,name in [('appearance','theme.json'),('pipeline_prompts','prompts.json'),('helper_drafts','code-drafts.json')]:
+                            if key in extra:z.writestr('data/'+name,json.dumps(extra[key]))
+                        if extra.get('api_suggestions'):z.writestr('API-SUGGESTIONS.json',json.dumps(extra['api_suggestions'],indent=2))
+                        z.writestr('README.md','Generated app draft. Review app.yaml before loading. Keys and documents are not included. Import using CustomChat Load and share Nerds. No code included.\n')
                     return self._send(200,buf.getvalue(),'application/zip',{'Content-Disposition':'attachment; filename=customchat-draft.zip'})
                 if path.endswith('/save'):
                     plan=management.reviews.take(o,'app-build',str(b.get('ticket','')),b.get('confirmed'))
                     with management.lock:
                         if management.active:raise ValueError('Wait for the workspace test to finish')
-                        rev=editstate.save_config(cfg,plan['config'],plan['revision'])
-                    return self._send(200,{'revision':rev,'restart_required':True,'message':'Reviewed app.yaml saved. Restart to apply. No new code or service ran.'})
+                        rev=appbuilder.save_plan(cfg,plan)
+                    return self._send(200,{'revision':rev,'restart_required':True,'message':'Reviewed app configuration and selected setup drafts saved. Restart to apply. No code installed or executed.'})
                 raise ValueError('Unknown builder action')
             if path == "/api/settings/guide" and method == "POST":
                 if not can_edit(self):
@@ -796,7 +812,7 @@ def serve(path, host=None, port=None):
             engine.set_catalog(json.load(open(cf)).get("types"))
     except (OSError, ValueError, AttributeError):
         pass
-    engine.prompts = promptmod.PromptStore(os.path.dirname(os.path.abspath(store.path)) if store.path != ":memory:" else "")
+    engine.prompts = promptmod.PromptStore(os.path.dirname(os.path.abspath(store.path)) if store.path != ":memory:" else "",cfg.get("pipeline_prompts"))
     host, port = host or cfg["server"]["host"], port or cfg["server"]["port"]
     srv = LocalHTTPServer((host, port), make_handler(cfg, engine))
     print("%s running at http://%s:%d  (provider: %s)" % (cfg["app"]["title"], host, port, cfg["provider"]["type"]))

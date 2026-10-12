@@ -618,7 +618,9 @@ document.getElementById("exportApp").addEventListener("click", async function ()
     const snap = clone(theme); await api("/api/theme", { theme: snap }); saved = clone(snap);
     const headers = {};
     if (token) headers.Authorization = "Bearer " + token;
-    const response = await fetch("/api/app-export", { headers });
+    const includeKeys=document.getElementById("exportKeys").checked;
+    if(includeKeys&&!confirm("This ZIP will contain saved API keys. Anyone receiving it can use them and incur costs. Only share privately with someone you trust. Include keys?"))return;
+    const response = await fetch("/api/app-export", includeKeys?{method:"POST",headers:{...headers,"Content-Type":"application/json"},body:JSON.stringify({include_keys:true,confirmed_sensitive_export:true})}:{ headers });
     if (!response.ok) { const error = await response.json(); throw new Error(error.error || "Export failed"); }
     const blob = await response.blob(), url = URL.createObjectURL(blob), a = document.createElement("a");
     a.href = url; a.download = "customchat-app.zip"; a.click(); setTimeout(() => URL.revokeObjectURL(url), 60000);
@@ -672,7 +674,9 @@ async function loadBudget() {
     el("small",{text:"Usage day: "+data.day+" · Resets at midnight UTC"}),el("details",{},el("summary",{text:"How dollar limits work"}),el("p",{text:data.spend_note}))));
 }
 $("#saveBudget").addEventListener("click", async function () {
-  if (!canEdit) return; this.disabled = true;
+  if (!canEdit) return;
+  for(const id of ["budgetQuestions","budgetUser","budgetCalls","budgetSpend"]){const n=$("#"+id);if((id!=="budgetSpend"&&!n.value.trim())||!n.checkValidity()){n.setAttribute("aria-invalid","true");$("#budgetStatus").textContent="Use a non-negative value within the shown limit; daily limits must be whole numbers.";n.reportValidity();return}n.setAttribute("aria-invalid","false")}
+  this.disabled = true;
   try {
     await api("/api/budget", { budget: { daily_questions: Number($("#budgetQuestions").value),
       user_daily_questions: Number($("#budgetUser").value), daily_model_calls: Number($("#budgetCalls").value),

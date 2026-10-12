@@ -1,5 +1,7 @@
 # CustomChat
 
+0.1.22: background multi-call Build with AI, all nine prompt drafts, appearance and layout, API choices and inert helpers. Request-only activity animations, strict numeric validation, deployment planning, and full YAML/ZIP restore. Keys stay excluded unless explicitly selected for sensitive export.
+
 0.1.21: saved-question history grouping, stale suggestion reset, actual source labels and verbatim evidence excerpts, custom-model persistence, and prompt/entity grounding. The 400-case evidence campaign has 385 ChatGPT scores at 80+ and 15 UI scores at 70-75; those remaining scores are not represented as passes.
 
 0.1.20: fuzzy settings search, an explicit-click settings guide, preview and sidebar layout fixes, and bundled emoji persistence after replies. Simple mode exposes the working workspace and freshness controls. The NewsNerd starter release asset has a native NewsAPI mapping and filled prompts/look/helper drafts; add your own OpenAI and NewsAPI keys locally. Live service use is not part of the offline test claim.
@@ -162,3 +164,29 @@ draft as the editable fields. An edit invalidates the reviewed save token.
 YAML and ZIP downloads contain the complete merged configuration; ZIP/YAML import
 opens the existing review-before-load workflow. Save writes app.yaml only, requires
 a restart, and never installs code.
+
+
+### Complete Build with AI drafts
+
+Complete app builds run separate calls for settings groups, design, each of the nine
+pipeline prompts, API recommendations and helper drafts. Up to three calls run together;
+API recommendations are ready before helper-code drafting. A build is capped at 36 calls,
+including final review and an optional logo call. Your configured model-call and dollar
+limits still apply. A dollar limit blocks calls when verified billing is unavailable.
+Close the dialog while it works and reopen the status indicator to review progress,
+failed parts or the finished draft. Retry only failed parts; cancel stops pending calls.
+In-flight provider calls may finish and incur charges. Builds are held in server memory,
+so restarting the server loses unfinished jobs. Nothing saves or installs automatically.
+
+YAML supports `appearance`, `pipeline_prompts`, `helper_drafts` and `api_suggestions`
+so an imported app can restore design/layout/fonts, stage prompts, inert helper drafts
+and API recommendations. Documents and executable connector files require a ZIP.
+Generated helper code is draft data, never automatically installed or executed.
+Blank keys, missing assets, unknown source paths, disabled fallback and an unset dollar
+cap are intentional. No guessed credential or endpoint fills those gaps.
+
+Keys stay out of exports by default. Explicit sensitive-key export requires the
+"Include my saved API keys" choice and a warning confirmation. Treat that bundle as a
+credential: anyone receiving it can use the keys. Imported `api_keys` entries are moved
+to private workspace key storage and removed from the imported app file; review shows
+only an entry count, not key values. Accounts and conversations are never imported.

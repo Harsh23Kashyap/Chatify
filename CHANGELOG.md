@@ -1,3 +1,12 @@
+## 0.1.22 - 2026-10-12
+
+- Complete background AI build split into isolated settings, appearance, nine prompts, API recommendations and inert helper drafts, followed by merged review.
+- Working/done ring, close and reopen, cancel, bounded failed-part retry, and request-only microanimations across AI controls.
+- Strict numeric validation on UI, HTTP, YAML and ZIP import paths.
+- Deployment search and detailed selected-model plan, plus a prompt for any AI.
+- Full portable appearance/prompt/helper restore. Optional sensitive key import/export is explicit; normal exports exclude keys.
+- Optional OpenAI/Gemini image-capability detection with safe text-only fallback. Generated logos remain reviewable drafts.
+
 ## 0.1.19 - 2026-10-11
 
 - Split paper sheets configuration: quiet controls sheet, wider right-side preview and slim section rail.

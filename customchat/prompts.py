@@ -71,13 +71,14 @@ STAGES = {
 
 
 class PromptStore:
-    def __init__(self, folder):
+    def __init__(self, folder, initial=None):
         self.path = os.path.join(folder, "prompts.json") if folder else ""
         self._d = None
+        self.initial = initial or {}
 
     def _load(self):
         if self._d is None:
-            self._d = {"text": {}, "on": {}}
+            self._d = {"text": dict(self.initial.get("text",{})), "on": dict(self.initial.get("on",{}))}
             try:
                 with open(self.path) as f:
                     d = json.load(f)

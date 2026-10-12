@@ -638,7 +638,7 @@ test_hardware_logic()
 
 def test_logo_validation():
     from customchat import theme
-    ok = "data:image/png;base64," + "A" * 100
+    ok = "data:image/png;base64," + __import__("base64").b64encode(b"\x89PNG\r\n\x1a\n"+b"A"*100).decode()
     assert theme.clean({"logo": ok})["logo"] == ok
     for bad in ("http://x/y.png", "data:image/svg+xml;base64,AAAA" + "A" * 30, "data:image/png;base64,<script>", "data:image/png;base64," + "A" * 400000):
         assert theme.clean({"logo": bad})["logo"] == ""
