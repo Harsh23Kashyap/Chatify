@@ -20,8 +20,8 @@
         <div class="presets" id="presets"></div>
         <div class="saved"><b class="sv-t">Saved setups</b>
           <div class="two">
-            <div class="sub"><b>Save a new setup</b><small>Reusable appearance and model settings. Prompts, sources and keys are not included.</small><input id="sname" placeholder="Setup name" aria-label="State name"><button class="go green" id="save">Save named setup</button></div>
-            <div class="sub"><b>Restore a saved setup</b><small>Restoring replaces the appearance and model settings included in that setup.</small><select id="states" aria-label="Saved states"></select><div class="row2"><button class="go blue" id="load">Load</button></div></div>
+            <div class="sub"><b>Save a new setup</b><small>Reusable appearance and model settings. Prompts, sources and keys are not included.</small><input id="sname" placeholder="Setup name" aria-label="Setup name" maxlength="60"><button class="go green" id="save">Save named setup</button></div>
+            <div class="sub"><b>Restore a saved setup</b><small>Restoring replaces the appearance and model settings included in that setup.</small><select id="states" aria-label="Saved setups"></select><div class="row2"><button class="go blue" id="load">Load</button></div></div>
           </div>
           <details class="look-more"><summary>Manage saved setups</summary><div class="look-actions"><div class="look-transfer"><button class="go ghost" id="exp" type="button">Export</button><label class="go ghost filebtn" for="imp">Import<input id="imp" type="file" accept="application/json,.json" hidden></label></div><details class="look-danger"><summary>Remove or reset…</summary><div><button class="go ghost" id="del" type="button">Delete saved look</button><button class="go ghost" type="button" id="resetLink">Reset to default</button></div></details></div></details>
         </div>
