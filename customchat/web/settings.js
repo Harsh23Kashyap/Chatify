@@ -587,7 +587,7 @@ function buildPresets() {
 }
 function appearanceValid(){const bad=$("#col").querySelector(".field input[aria-invalid=true]");if(!bad)return true;say("Fix the marked appearance field before saving.",true);bad.scrollIntoView({block:"center",behavior:"instant"});bad.focus();return false}
 async function init() {
-  const c = await api("/api/config"); window.CCLoadedApp = c; $("#lead").textContent = "Editing " + c.app.title + ". " + (c.app.tagline || "") + " Keys stay on this computer."; $("#h").textContent = c.app.title + " configuration"; document.title = c.app.title + " configuration";
+  const c = await api("/api/config"); window.CCLoadedApp = c; $("#lead").textContent = "Editing " + c.app.title + ". " + (c.app.tagline ? c.app.tagline.replace(/[.!?]$/, "") + ". " : "") + "Keys stay on this computer."; $("#h").textContent = c.app.title + " configuration"; document.title = c.app.title + " configuration";
   const overview = el("details", {class:"loaded-app",id:"loadedApp"}, el("summary", {text:"Loaded workspace: " + c.app.title}), el("p", {text:c.app.tagline || ""}), el("small", {text:"Sources: " + c.sources.map(x=>x.label || x.id).join(", ")}));
   $("#lead").after(overview);
   const sourceOverview = el("div", {class:"loaded-source-overview"}, el("b", {text:"This Nerd's configured sources"}), ...c.sources.map(x=>el("p", {text:(x.label || x.id) + " · " + (x.type || "") })), el("small", {text:"Sources in the loaded app file are configured. Reachability is not verified here. The controls below add optional web searches; they do not replace your Nerd's connector."}));

@@ -23,3 +23,4 @@ body.settings-tabs :is(.field .h,.head small){font-size:var(--ui-type-meta)!impo
 body.settings-tabs .field{gap:var(--ui-space-2)!important}
 body.settings-tabs .field .h{margin:0!important}
 body.settings-tabs #settingsFindHint{grid-column:1/-1;font-size:12px;line-height:1.5;margin:8px 0 0!important;color:var(--ui-muted)}
+body.settings-tabs #settingsFindStatus:empty{display:none}
