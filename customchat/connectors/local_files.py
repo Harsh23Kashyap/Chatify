@@ -70,11 +70,12 @@ class LocalFiles:
                 old = dict(self._snapshot or ())
                 current = {name:digest for name,_,digest in rows}
                 old_chunks = len(self.docs)
+                previous_passages = {(d["id"],d["text"]) for d in self.docs}
                 added = len(current.keys()-old.keys()); removed = len(old.keys()-current.keys())
                 changed = sum(old[name] != current[name] for name in old.keys() & current.keys())
                 signature = tuple((name, digest) for name, _, digest in rows)
                 if signature == self._snapshot:
-                    self.last_check = {"state":"unchanged","documents_scanned":len(rows),"added":0,"removed":0,"changed":0,"passages_before":old_chunks,"passages_after":old_chunks}
+                    self.last_check = {"state":"unchanged","documents_scanned":len(rows),"added":0,"removed":0,"changed":0,"passages_before":old_chunks,"passages_after":old_chunks,"passages_added":0,"passages_removed":0}
                     self.last_error = ""
                     return False
                 nxt = LocalFiles.__new__(LocalFiles)
@@ -96,7 +97,7 @@ class LocalFiles:
                 self._snapshot = signature
                 self.revision = hashlib.sha256(json.dumps(signature).encode()).hexdigest()
                 self.indexed_at = time.time(); self.last_error = ""
-                self.last_check = {"state":"updated","documents_scanned":len(rows),"added":added,"removed":removed,"changed":changed,"passages_before":old_chunks,"passages_after":len(self.docs)}
+                self.last_check = {"state":"updated","documents_scanned":len(rows),"added":added,"removed":removed,"changed":changed,"passages_before":old_chunks,"passages_after":len(self.docs),"passages_added":len({(d["id"],d["text"]) for d in self.docs}-previous_passages),"passages_removed":len(previous_passages-{(d["id"],d["text"]) for d in self.docs})}
                 return True
             except (OSError, ValueError) as exc:
                 self.last_check = {"state":"failed"}
