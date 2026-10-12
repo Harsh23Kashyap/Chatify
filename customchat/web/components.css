@@ -37,3 +37,9 @@ body.settings-tabs .go.copy-done::before{content:'✓';margin-right:6px}
 /* Native keyboard scrolling leaves room for the single sticky category bar. */
 body.settings-tabs :is(input,textarea,button,select,summary,a){scroll-margin-top:148px;scroll-margin-bottom:24px}
 @media(min-width:761px){body.settings-tabs :is(input,textarea,button,select,summary,a){scroll-margin-top:88px}}
+:root{--ui-border-width:1px;--ui-shadow-menu:0 8px 24px #173f3518;--ui-shadow-dialog:0 20px 60px #173f3528}
+body.settings-tabs :is(.go,.cs-btn,.editor-choice){border-radius:var(--ui-radius-control)!important}
+body.settings-tabs :is(.tile,.typeprev,.workspace-fields,.workspace-review){border-radius:var(--ui-radius-card)!important;box-shadow:none!important}
+body.settings-tabs :is(.settings-help,.preset-dialog,.emoji-dialog){border-radius:var(--ui-radius-dialog)!important;box-shadow:var(--ui-shadow-dialog)!important}
+body.settings-tabs .cs-list{border-radius:var(--ui-radius-card)!important;box-shadow:var(--ui-shadow-menu)!important}
+body.settings-tabs #col :is(.tile,.typeprev,.workspace-fields,.workspace-review){border-radius:var(--ui-radius-card)!important;box-shadow:none!important}
