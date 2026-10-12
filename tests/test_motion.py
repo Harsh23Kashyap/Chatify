@@ -49,7 +49,8 @@ class Motion(unittest.TestCase):
         self.assertIn(".row.stale", css)
         self.assertIn("stale", js)
         self.assertIn(".preview.demo", css)
-        self.assertIn("data-k=motion", js)
+        self.assertNotIn("closest(\"[data-k=motion]\")",js)
+        self.assertIn("Try selected motion",rd("appearanceextras.js"))
 
     def test_tip_underline_key_status_jump(self):
         css, js = rd("motion.css"), rd("motion.js")

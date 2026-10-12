@@ -14,7 +14,8 @@ class FeedbackPatch(unittest.TestCase):
   self.assertIn('web/emoji/*',(R/'pyproject.toml').read_text())
  def test_preview_and_logo_regressions(self):
   s=(R/'customchat/web/settings.js').read_text()
-  for x in ('readAsDataURL','ccPreviewMotion','testLog.unshift','detail:message','Suggested local models'):self.assertIn(x,s)
+  self.assertIn('ccPreviewMotion',(Path(__file__).resolve().parents[1]/'customchat/web/appearanceextras.js').read_text())
+  for x in ('readAsDataURL','testLog.unshift','detail:message','Suggested local models'):self.assertIn(x,s)
   self.assertNotIn('motion-sample',s)
  def test_disclosures_are_not_height_clipped(self):
   s=(R/'customchat/web/settings.css').read_text()
