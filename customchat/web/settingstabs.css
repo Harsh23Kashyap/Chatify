@@ -132,7 +132,7 @@ dialog.settings-help{width:min(580px,calc(100vw - 32px));max-height:calc(100dvh 
 .settings-help-head{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:18px}
 dialog.settings-help h3{font-size:23px;line-height:1.25;margin:0;font-weight:650;letter-spacing:-.02em}
 dialog.settings-help p{margin:0 0 18px;line-height:1.6}
-dialog.settings-help #settingsHelpProvider{padding:12px 14px;border:1px solid #dde5de;border-radius:10px;background:#f0f4ed;color:#40584a;font-size:13px}
+dialog.settings-help #settingsHelpProvider{padding:2px 0 2px 12px;border:0;border-left:2px solid #c9d6c5;border-radius:0;background:transparent;color:#40584a;font-size:13px}
 dialog.settings-help label[for=settingsHelpQuestion]{display:block;margin:20px 0 8px;font-weight:600}
 dialog.settings-help textarea{min-height:112px;margin:0 0 16px;padding:12px 14px;border-radius:12px;resize:vertical;font-size:14px;line-height:1.5}
 dialog.settings-help button{appearance:none;min-height:44px;padding:10px 16px;border-radius:10px;font-size:13px;font-weight:600;box-shadow:none}
@@ -154,26 +154,26 @@ body.settings-tabs.simple .settings-search:not(.search-open) .settings-help-open
 body.settings-tabs .settings-help-open:focus-visible{outline:0;box-shadow:0 0 0 3px #c0d4c7!important}
 dialog.settings-help .settings-help-local{margin:0 0 20px}
 dialog.settings-help #settingsHelpLocalStatus{font-size:12px;color:#53695a;margin:0 0 8px}
-dialog.settings-help #settingsHelpLocalResults{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
-dialog.settings-help #settingsHelpLocalResults button{text-align:left;background:#f3f6f0;color:#173f35;border:1px solid #dbe4da;display:flex;flex-direction:column;gap:3px;overflow-wrap:anywhere}
+dialog.settings-help #settingsHelpLocalResults{display:block;border-top:1px solid #e3e9e2}
+dialog.settings-help #settingsHelpLocalResults button{text-align:left;background:transparent;color:#173f35;border:0;border-bottom:1px solid #e3e9e2;border-radius:0;display:flex;flex-direction:column;gap:2px;overflow-wrap:anywhere;width:100%;padding:10px 2px;min-height:44px}
 dialog.settings-help #settingsHelpLocalResults small{display:block;font-size:11px;font-weight:400;color:#5d7163}
 @media(max-width:600px){dialog.settings-help #settingsHelpLocalResults{grid-template-columns:1fr}}
 /* Quiet depth, a compact sparkle badge and a clear action arrow. */
-body.settings-tabs .settings-search .settings-help-open{background:linear-gradient(135deg,#183f36,#286552)!important;color:#fffdf7!important;border-color:#275947!important;border-radius:14px!important;box-shadow:0 3px 8px #173f3520,inset 0 1px 0 #ffffff1f!important;gap:10px;padding:8px 13px!important;transition:background .15s,box-shadow .15s}
-body.settings-tabs .settings-search .settings-help-open:hover{background:linear-gradient(135deg,#225448,#31755f)!important;box-shadow:0 4px 12px #173f3530!important}
-.settings-help-spark{display:grid;place-items:center;width:26px;height:26px;border-radius:8px;background:#ffffff18;color:#f2dd9f;font-size:18px}
-.settings-help-arrow{font-size:17px;color:#d3e8dc;margin-left:3px}
-dialog.settings-help #settingsHelpSend:not(:disabled){background:linear-gradient(135deg,#183f36,#286552);border-color:#275947;box-shadow:0 3px 8px #173f3520}
+body.settings-tabs .settings-search .settings-help-open{background:#173f35!important;color:#fffdf7!important;border-color:#275947!important;border-radius:14px!important;box-shadow:0 3px 8px #173f3520,inset 0 1px 0 #ffffff1f!important;gap:10px;padding:8px 13px!important;transition:background .15s,box-shadow .15s}
+body.settings-tabs .settings-search .settings-help-open:hover{background:#225448!important;box-shadow:0 4px 12px #173f3530!important}
+
+
+dialog.settings-help #settingsHelpSend:not(:disabled){background:#173f35;border-color:#275947;box-shadow:0 3px 8px #173f3520}
 body.settings-tabs .settings-search{padding-right:150px}
 @media(max-width:600px){body.settings-tabs .settings-search{padding-right:0}.settings-help-arrow{display:none}body.settings-tabs .settings-search .settings-help-open{gap:7px;padding:8px 11px!important}}
 @media(prefers-reduced-motion:reduce){body.settings-tabs .settings-search .settings-help-open{transition:none}}
 body.settings-tabs .settings-search .settings-help-open{transition:transform .16s ease,box-shadow .16s ease,background .16s ease}
-.settings-help-spark,.settings-help-arrow{transition:transform .18s ease}
+
 body.settings-tabs .settings-search .settings-help-open:hover{transform:translateY(-1px)}
-.settings-help-open:hover .settings-help-spark{transform:rotate(12deg)}
-.settings-help-open:hover .settings-help-arrow{transform:translate(2px,-2px)}
+
+
 body.settings-tabs .settings-search .settings-help-open:active{transform:translateY(1px) scale(.98)}
-@media(prefers-reduced-motion:reduce){body.settings-tabs .settings-search .settings-help-open,.settings-help-spark,.settings-help-arrow{transition:none!important;transform:none!important}}
+@media(prefers-reduced-motion:reduce){body.settings-tabs .settings-search .settings-help-open{transition:none!important;transform:none!important}}
 body.settings-tabs .settings-search{display:grid!important;grid-template-columns:minmax(0,1fr) auto auto;gap:8px;align-items:center;padding:0!important;max-width:none;margin:16px 0!important}
 body.settings-tabs .settings-search>label{grid-column:1/-1;display:block!important;margin:0;font-weight:600;font-size:12px}
 body.settings-tabs .settings-search>input{grid-column:1;display:block!important;min-width:0;margin:0;height:46px;background:#fffdf8;border:1px solid #d0dcd3!important;box-shadow:0 2px 6px #173f3508;padding:11px 13px}
@@ -265,3 +265,19 @@ body.settings-tabs .pipeline-editor-pane textarea{min-height:320px!important}
 
 #settingsFind::placeholder{transition:color .18s ease}#settingsFind.placeholder-changing::placeholder{color:transparent}@media(prefers-reduced-motion:reduce){#settingsFind::placeholder{transition:none}}
 html body #seg button{gap:7px;padding-left:8px;padding-right:8px;font-size:13px;overflow-wrap:normal;word-break:normal}
+
+/* 0.1.26 Ask AI: calm thinking state tied to the real request, gentle answer arrival. */
+dialog.settings-help.ai-working::after{content:none}
+#settingsHelpThinking{display:flex;align-items:center;gap:10px;padding:10px 0;color:#40584a;font-size:13px}
+#settingsHelpThinking[hidden]{display:none}
+.ask-dots{display:inline-flex;gap:5px}
+.ask-dots i{width:6px;height:6px;border-radius:50%;background:#57705f;animation:ask-dot 1.2s ease-in-out infinite}
+.ask-dots i:nth-child(2){animation-delay:.15s}
+.ask-dots i:nth-child(3){animation-delay:.3s}
+@keyframes ask-dot{0%,100%{opacity:.25;transform:translateY(0)}50%{opacity:1;transform:translateY(-3px)}}
+#settingsHelpAnswer.arrived{animation:ask-arrive .35s ease-out}
+@keyframes ask-arrive{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+dialog.settings-help textarea::placeholder{transition:opacity .24s ease}
+dialog.settings-help textarea.ask-swap::placeholder{opacity:0}
+dialog.settings-help #settingsHelpLocalResults button:hover{background:#f4f7f0}
+@media(prefers-reduced-motion:reduce){.ask-dots i{animation:none!important;opacity:.7}#settingsHelpAnswer.arrived{animation:none!important}dialog.settings-help textarea::placeholder{transition:none!important}}

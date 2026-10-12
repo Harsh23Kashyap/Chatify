@@ -1,3 +1,10 @@
+## 0.1.26 - 2026-10-12
+
+- Rework Build with AI and Ask AI after an AI-tell audit: remove sparkle glyphs, the eyebrow badge, gradient buttons, uniform step cards, status dots and the dark ornament loader.
+- Add rotating realistic example briefs in the describe box: random order, gentle crossfade, paused on focus or typing, one static example under reduced motion.
+- Replace the build loader with a calm progress track driven only by real completed-area counts, a soft fill pulse while work runs, and per-part states that settle in gently.
+- Ask AI gets a thinking indicator tied to the real request, a gentle answer arrival, plainer copy, list-style local results and rotating example questions with the same pause rules.
+
 ## 0.1.25
 
 - Expand the Configuration guide, keep provider icon cards in Simple mode, remove redundant Search and top rules, and place Build with AI in its own action row.
