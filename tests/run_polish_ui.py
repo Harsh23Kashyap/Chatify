@@ -1,0 +1,11 @@
+"""Run local UI state regressions without paid model requests.
+Requires Chrome and Playwright. CUSTOMCHAT_TEST_URL must point at a disposable
+CustomChat fixture, not a user's running workspace. Requests mutate fixtures.
+"""
+import os,subprocess
+from pathlib import Path
+ROOT=Path(__file__).resolve().parent
+CASES=['review_precision','save_guards','first_paint','appearance_states','freshness_states','navigation_races','source_states','code_states']
+if __name__=='__main__':
+ if not os.environ.get('CUSTOMCHAT_TEST_URL'):raise SystemExit('Set CUSTOMCHAT_TEST_URL to a disposable fixture before running.')
+ for case in CASES:subprocess.run(['node',str(ROOT/(case+'_browser.cjs'))],check=True,env=os.environ)
