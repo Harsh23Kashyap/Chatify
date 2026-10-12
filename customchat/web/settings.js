@@ -31,12 +31,12 @@ const read = () => ({ provider: cur.provider, model: chosenModel(), base_url: $(
 let keyInfo = {}, modelNote = "";
 const OTHER = "__other__";
 async function provExtras() {
-  const p = cur.provider, k = keyInfo[p] || { needed: false, has: true };
+  const p = cur.provider, k = keyInfo[p] || { needed: !['mock','ollama','openai_compatible'].includes(p), has: false, unknown:true };
   $("#keybox").hidden = p === "mock" || p === "ollama"; { const bl = $("#base").closest("label"); if (bl) bl.hidden = !(p === "ollama" || p === "openai_compatible" || cur.base_url); }
   $("#keyh").textContent = p === "openai_compatible" ? "Only if your server asks for one. Stored on this computer only, never shown again." : "Stored on this computer only, never shown again.";
   $("#apikey").placeholder = k.has ? "Saved key available. Enter only to replace it." : "Paste a key to save privately";
   const ks = $("#keystate"); ks.className = "keystate" + (k.has ? " ok" : "");
-  ks.textContent = k.has ? (k.source === "env" ? "Key found in an environment variable." : "A key is saved.") : (k.needed ? "Not filled (no API key saved)." : "No key needed.");
+  ks.textContent = k.unknown ? 'Key status unavailable. Check access before testing.' : k.has ? (k.source === "env" ? "Key found in an environment variable." : "A key is saved.") : (k.needed ? "Not filled (no API key saved)." : "No key needed.");
   { const tc = $("#testconn"), blocked = !!(k.needed && !k.has); testBlocked = blocked; tc.disabled = blocked || !canEdit; tc.title = blocked ? "Save a key first, then test it" : ""; if (blocked) $("#testres").textContent = "Save a key first, then test."; else if ($("#testres").textContent === "Save a key first, then test.") $("#testres").textContent = ""; }
   $("#keyclear").hidden = k.source !== "saved"; $("#apikey").value = "";
   ollamaPanel();
@@ -76,6 +76,7 @@ async function loadModels(force) {
   $("#model").hidden=!typed;if(typed)$("#model").value=m;
   $("#refreshModels").disabled=!canEdit;modelNote=note;
   $("#modelh").textContent=demo?"The demo answers without a model.":fallback?(note?note+" ":"")+"Suggested examples, not verified for your account or server. Choose one or type your own model name.":note?note+" You can still enter a model name below.":list.length?list.length+" chat models shown ("+available+" returned). Choose one or enter another name.":"No chat model names were returned. Enter a model name below.";
+  pvFollow();
 }
 function sliderVisuals(){
   const t=document.getElementById("temperatureViz"), d=document.getElementById("sourcesViz");
@@ -131,7 +132,7 @@ async function ollamaPanel() {
   }
   if (det) {
     const total=hw.gpu && hw.vram_gb ? hw.vram_gb : hw.ram_gb, pct=Math.max(0,Math.min(100,rec.budget_gb/Math.max(.1,total)*100));
-    const graph=el("section",{class:"memory-graph","aria-label":"Model memory budget"},el("h3",{text:"Model memory budget"}),el("div",{class:"memory-label"},el("b",{text:total+" GB "+(hw.apple_silicon?"shared memory":hw.gpu?"GPU memory":"RAM")}),el("span",{text:hw.os+" · "+hw.cores+" CPU cores"})),el("div",{class:"memory-total",role:"img","aria-label":rec.budget_gb+" GB model budget, "+Math.max(0,total-rec.budget_gb).toFixed(1)+" GB reserve"},el("div",{class:"memory-available",style:"width:"+pct+"%;padding:"+(pct===0?0:4)+"px",text:pct>=20?rec.budget_gb+" GB model budget":""}),el("div",{class:"memory-reserve",style:"width:"+(100-pct)+"%",text:Math.max(0,total-rec.budget_gb).toFixed(1)+" GB reserve"})),el("small",{text:rec.budget_why}),el("h4",{text:"Safe fit inside that budget"}),el("div",{class:"memory-fit",role:"img","aria-label":"85% safe fit ceiling"},el("i",{style:"width:"+(rec.budget_gb>0?85:0)+"%"})),el("div",{class:"memory-label"},el("b",{text:rec.limit_gb+" GB fit ceiling"}),el("span",{text:rec.budget_gb+" GB budget"})),el("div",{class:"memory-thresholds"},el("span",{text:"Comfortable ≤60%"}),el("span",{text:"Fits ≤85%"}),el("span",{text:"Doesn't fit >85%"})),el("small",{text:"Includes about 1.5 GB for conversation overhead. Estimates, not measured free RAM."}),el("p",{text:"Ollama: "+(r.ollama_running?"running · "+(r.installed||[]).length+" models installed":"not reachable")}),el("small",{text:hw.os+" "+hw.arch}));
+    const graph=el("section",{class:"memory-graph","aria-label":"Model memory budget"},el("h3",{text:"Model memory budget"}),el("div",{class:"memory-label"},el("b",{text:total+" GB "+(hw.apple_silicon?"shared memory":hw.gpu?"GPU memory":"RAM")}),el("span",{text:hw.os+" · "+hw.cores+" CPU cores"})),el("div",{class:"memory-total",role:"img","aria-label":rec.budget_gb+" GB model budget, "+Math.max(0,total-rec.budget_gb).toFixed(1)+" GB reserve"},el("div",{class:"memory-available",style:"width:"+pct+"%;padding:"+(pct===0?0:4)+"px",text:pct>=20?rec.budget_gb+" GB model budget":""}),el("div",{class:"memory-reserve",style:"width:"+(100-pct)+"%",text:Math.max(0,total-rec.budget_gb).toFixed(1)+" GB reserve"})),el("small",{text:rec.budget_why}),el("h4",{text:"Estimated fit inside that budget"}),el("div",{class:"memory-fit",role:"img","aria-label":"85% estimated fit ceiling"},el("i",{style:"width:"+(rec.budget_gb>0?85:0)+"%"})),el("div",{class:"memory-label"},el("b",{text:rec.limit_gb+" GB fit ceiling"}),el("span",{text:rec.budget_gb+" GB budget"})),el("div",{class:"memory-thresholds"},el("span",{text:"Comfortable ≤60%"}),el("span",{text:"Fits ≤85%"}),el("span",{text:"Doesn't fit >85%"})),el("small",{text:"Includes about 1.5 GB for conversation overhead. Estimates, not measured free RAM."}),el("p",{text:"Ollama: "+(r.ollama_running?"running · "+(r.installed||[]).length+" models installed":"not reachable")}),el("small",{text:hw.os+" "+hw.arch}));
     if (rec.budget_gb === 0) graph.prepend(el("p",{text:"No safe model memory budget detected. Use a hosted provider or a larger computer."}));
     box.append(graph);
   }
@@ -543,7 +544,8 @@ function buildMenu() {
   $("#look").classList.toggle("settings-active-look",!!document.querySelector("#look #sec-"+id));
   document.body.classList.toggle("settings-appearance-active",link.closest(".nav-group").dataset.group==="frontend");
   const savebar=$("#savebar");$("#sec-"+id)?.append(savebar);
-  document.body.dataset.settingsSection=id;activeSec=id;pvFollow();history.replaceState(null,"",link.hash);
+  document.body.dataset.settingsSection=id;activeSec=id;pvFollow();if(location.hash!==link.hash){if(window.ccRestoreNavigation)history.replaceState(null,"",link.hash);else history.pushState(null,"",link.hash)}
+  const mobileSelect=document.getElementById("mobileSection");if(mobileSelect)mobileSelect.value=link.hash;
   m.querySelectorAll("a").forEach(n=>{n.classList.toggle("on",n===link);n.setAttribute("aria-current",n===link?"page":"false")});
  }
  function showGroup(id){
@@ -600,15 +602,15 @@ async function init() {
   // Key actions and Refresh rebuild the picker from cur.model. Keep typed edits.
   $("#model").addEventListener("input", () => { if ($("#modelPick").value === OTHER) cur.model = $("#model").value.trim(); $("#testres").className="testres";$("#testres").textContent="Model changed. Test this selection when ready.";pvFollow(); });
   $("#refreshModels").addEventListener("click", () => loadModels(true));
-  $("#keysave").addEventListener("click", async () => { const provider=cur.provider;const v = $("#apikey").value.trim(); if (!v) { say("Paste a key first.", true); return; } try { const r = await api("/api/provider/key", { provider, key: v }); keyInfo[provider] = r.key; if(cur.provider===provider)$("#apikey").value = ""; await provExtras(); say("Key saved on this computer."); } catch (e) { say(e.message, true); } });
-  $("#keyclear").addEventListener("click", async () => { const provider=cur.provider;try { const r = await api("/api/provider/key", { provider, clear: true }); keyInfo[provider] = r.key; await provExtras(); say("Key removed."); } catch (e) { say(e.message, true); } });
+  $("#keysave").addEventListener("click", async () => { if($("#keysave").dataset.running==="true")return;const provider=cur.provider;const v = $("#apikey").value.trim(); if (!v) { say("Paste a key first.", true); return; } $("#keysave").dataset.running="true";try { const r = await api("/api/provider/key", { provider, key: v }); keyInfo[provider] = r.key; if(cur.provider===provider&&$("#apikey").value.trim()===v)$("#apikey").value = ""; await provExtras(); say("Key saved on this computer."); } catch (e) { say(e.message, true); } finally {$("#keysave").dataset.running="false"} });
+  $("#keyclear").addEventListener("click", async () => { if($("#keyclear").dataset.running==="true")return;$("#keyclear").dataset.running="true";const provider=cur.provider;try { const r = await api("/api/provider/key", { provider, clear: true }); keyInfo[provider] = r.key; await provExtras(); say("Key removed."); } catch (e) { say(e.message, true); } finally {$("#keyclear").dataset.running="false"} });
   $("#testconn").addEventListener("click", async () => {if($("#testconn").dataset.running==="true")return;$("#testconn").dataset.running="true";const t=$("#testres"),provider=cur.provider,model=chosenModel(),base=$("#base").value.trim();t.className="testres busy";t.textContent="Testing...";let ok=false,message="";try{const r=await api("/api/provider/test",{provider,model,base_url:base});ok=r.ok;message=r.message}catch(e){message=e.message}testLog.unshift({p:NAMES[provider]||provider,ok,detail:message,t:new Date().toLocaleTimeString([],{hour:"2-digit",minute:"2-digit"})});testLog.length=Math.min(testLog.length,5);if(cur.provider===provider&&chosenModel()===model&&$("#base").value.trim()===base){t.className="testres "+(ok?"ok":"bad");t.textContent=(ok?"Passed. ":"Failed. ")+message}$("#testconn").dataset.running='false';pvFollow(); });
   $("#apply").addEventListener("click", async () => { try { cur = (await api("/api/settings", { settings: read() })).settings; draw(); localStorage.setItem("cc_config_changed", String(Date.now())); say("Applied. New questions use these settings."); } catch (e) { say(e.message, true); } });
-  $("#save").addEventListener("click", async () => { try { theme = (await api("/api/theme", {theme})).theme; saved=clone(theme); changed(); const setupName=$("#sname").value.trim();if([...$("#states").options].some(o=>o.value===setupName)&&!confirm("Replace the saved setup named "+setupName+"?"))return; const n = (await api("/api/states/save", { name: setupName })).name; await states(); say("Saved as \u201c" + n + "\u201d."); } catch (e) { say(e.message, true); } });
+  $("#save").addEventListener("click", async function () {if(this.disabled)return;const setupName=$("#sname").value.trim();if(!setupName)return say("Enter a setup name first.",true);if([...$("#states").options].some(o=>o.value===setupName)&&!confirm("Replace the saved setup named "+setupName+"?"))return;if(!appearanceValid())return;this.disabled=true;const label=this.textContent;this.textContent="Saving...";try { theme = (await api("/api/theme", {theme})).theme; saved=clone(theme); changed(); const n = (await api("/api/states/save", { name: setupName })).name; await states(); say("Saved as \u201c" + n + "\u201d."); } catch (e) { say(e.message, true); }finally{this.disabled=!canEdit;this.textContent=label} });
   $("#states").addEventListener("change",syncDeleteLook);
   $("#load").addEventListener("click", async () => { const n = $("#states").value; if (!n) return say("Choose a saved state first", true); if(!confirm("Restore this setup? It replaces the current appearance and model settings."))return; try { const restored = (await api("/api/states/load", { name: n })); cur = restored.settings; if(restored.theme){theme=restored.theme;saved=clone(theme);editMode=theme.mode==="dark"?"dark":"light";drawLook();changed();} draw(); localStorage.setItem("cc_config_changed", String(Date.now())); say("Loaded \u201c" + n + "\u201d."); } catch (e) { say(e.message, true); } });
   $("#del").addEventListener("click", async () => { const n = $("#states").value; if (!n) return say("Choose a saved look first", true); if (!confirm("Delete the saved look \"" + n + "\"?")) return; await api("/api/states/delete", { name: n }); await states(); say("Deleted."); });
-  $("#saveLook").addEventListener("click", async () => { try { theme = (await api("/api/theme", { theme })).theme; saved = clone(theme); drawLook(); changed(); say("Look saved. The chat now uses it for everyone."); } catch (e) { say(e.message, true); } });
+  $("#saveLook").addEventListener("click", async function () {if(this.disabled||!appearanceValid())return;this.disabled=true;const label=this.textContent;this.textContent="Saving...";try { theme = (await api("/api/theme", { theme })).theme; saved = clone(theme); drawLook(); changed(); say("Appearance saved. The chat now uses it for everyone."); } catch (e) { say(e.message, true); }finally{this.disabled=!canEdit;this.textContent=label} });
   $("#resetAll").addEventListener("click", () => { if (!confirm("Reset only the look to the default? Prompts, sources, keys and helper drafts stay unchanged.")) return; theme = clone(meta.default); drawLook(); changed(); });
   $("#exp").addEventListener("click", () => { const a = el("a", { href: URL.createObjectURL(new Blob([JSON.stringify(theme, null, 1)], { type: "application/json" })), download: "customchat-look.json" }); document.body.append(a); a.click(); a.remove(); });
   $("#imp").addEventListener("change", async (e) => { const f = e.target.files[0]; if (!f) return; try { const j = JSON.parse(await f.text()); const t = Object.assign(clone(meta.default), j); t.light = Object.assign(clone(meta.default.light), j.light || {}); t.dark = Object.assign(clone(meta.default.dark), j.dark || {}); if(!confirm("Import this look? It replaces current appearance settings."))return; theme = t; drawLook(); changed(); say("Look imported into the preview. Press Save look to keep it."); } catch (x) { say("That file is not a CustomChat look file", true); } e.target.value = ""; });
@@ -642,7 +644,7 @@ document.getElementById("exportApp").addEventListener("click", async function ()
 
 async function docsFreshness(force) {
   const box = $("#docsFreshness");
-  box.textContent = "Checking local documents...";
+  let loading=document.getElementById("docsLoading");if(!loading){loading=el("p",{id:"docsLoading",role:"status",text:"Checking local documents..."});box.prepend(loading)}
   try {
     const result = await api("/api/docs-freshness", force ? {} : undefined);
     box.replaceChildren();
@@ -651,20 +653,21 @@ async function docsFreshness(force) {
       const checked = source.checked_at ? new Date(source.checked_at * 1000).toLocaleString() : "not checked";
       const line=el("div",{class:"status-card"},el("b",{text:source.label}),
         el("div",{class:"status-stats"},el("span",{text:source.documents+" "+(source.documents===1?"document":"documents")}),el("span",{text:source.chunks+" "+(source.chunks===1?"passage":"passages")})),
-        el("small",{text:"Last checked: "+checked}));
+        el("small",{title:source.checked_at?new Date(source.checked_at*1000).toISOString():"",text:"Last checked: "+checked}));
+      if(source.last_check){const check=source.last_check;if(check.documents_scanned!==undefined)line.append(el("p",{text:check.documents_scanned+" documents scanned · "+check.added+" added · "+check.changed+" changed · "+check.removed+" removed"}),el("p",{text:"Passages: "+check.passages_before+" before, "+check.passages_after+" after"}))}line.append(el("p",{class:"freshness-state",text:source.error?"Needs attention":source.checked_at?"Index checked. Files may change before the next check.":"Not checked"}));
       if(source.error)line.append(el("p",{class:"bad",text:source.error}));
       else line.append(el("details",{},el("summary",{text:"Index details"}),el("small",{text:"Version "+source.revision.slice(0,12)+" · Checks on questions, at most every "+source.refresh_interval+" seconds"})));
       box.append(line);
     }
-  } catch (error) { box.textContent = error.message; }
+  } catch (error) {loading?.remove();box.prepend(el("p",{class:"bad",role:"alert",text:"Check failed: "+error.message+". Last known index details are kept below. Check the document folder and try again."}));}
 }
 $("#checkDocs").addEventListener("click", async function () {
-  if (!canEdit) return; this.disabled = true;
-  try { await docsFreshness(true); } finally { this.disabled = !canEdit; }
+  if (!canEdit||this.disabled) return; this.disabled = true;const label=this.textContent;this.textContent="Checking documents...";
+  try { await docsFreshness(true); } finally { this.disabled = !canEdit;this.textContent=label; }
 });
 
 function budgetVisuals(){
- for(const [id,icon] of [["budgetQuestions","?"] ,["budgetUser","♙"],["budgetCalls","✦"],["budgetSpend","$"]]){
+ for(const [id,icon] of [["budgetQuestions","?"] ,["budgetUser","1"],["budgetCalls","1"],["budgetSpend","$"]]){
   const input=document.getElementById(id);if(!input)continue;const label=input.closest("label");
   let v=label.querySelector(".budget-viz");if(!v){v=el("span",{class:"budget-viz","aria-hidden":"true"});label.append(v)}
   const count=id==="budgetSpend" ? (input.value===""?0:1) : Math.min(5,Math.max(0,Math.ceil(Math.log10(1+Math.max(0,+input.value))*2)));
@@ -685,16 +688,16 @@ async function loadBudget() {
     el("small",{text:"Usage day: "+data.day+" · Resets at midnight UTC"}),el("details",{},el("summary",{text:"How dollar limits work"}),el("p",{text:data.spend_note}))));
 }
 $("#saveBudget").addEventListener("click", async function () {
-  if (!canEdit) return;
+  if (!canEdit||this.disabled) return;
   for(const id of ["budgetQuestions","budgetUser","budgetCalls","budgetSpend"]){const n=$("#"+id);if((id!=="budgetSpend"&&!n.value.trim())||!n.checkValidity()){n.setAttribute("aria-invalid","true");$("#budgetStatus").textContent="Use a non-negative value within the shown limit; daily limits must be whole numbers.";n.reportValidity();return}n.setAttribute("aria-invalid","false")}
-  this.disabled = true;
+  this.disabled = true;const label=this.textContent;this.textContent="Saving...";
   try {
     await api("/api/budget", { budget: { daily_questions: Number($("#budgetQuestions").value),
       user_daily_questions: Number($("#budgetUser").value), daily_model_calls: Number($("#budgetCalls").value),
       spend_cap_usd: $("#budgetSpend").value === "" ? null : Number($("#budgetSpend").value) } });
-    await loadBudget();
+    await loadBudget();$("#budgetStatus").prepend(el("p",{role:"status",text:"Budget saved."}));
   } catch (error) { $("#budgetStatus").textContent = error.message; }
-  finally { this.disabled = !canEdit; }
+  finally { this.disabled = !canEdit;this.textContent=label; }
 });
 
 let helpQueued=false;new MutationObserver(()=>{if(helpQueued)return;helpQueued=true;queueMicrotask(()=>{helpQueued=false;compactHelp()})}).observe(document.getElementById("look"),{childList:true,subtree:true});
