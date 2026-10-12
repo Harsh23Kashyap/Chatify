@@ -744,7 +744,8 @@ def make_handler(cfg, engine):
             if not full.startswith(WEB + os.sep) or not os.path.isfile(full):
                 return self._error_page(404)
             ctype = mimetypes.guess_type(full)[0] or "application/octet-stream"
-            data = open(full, "rb").read()
+            with open(full, "rb") as handle:
+                data = handle.read()
             if name == "index.html":
                 a = cfg["app"]
                 data = data.decode().replace("{{THEME_JSON}}", json.dumps(themestore.value).replace("<", "\\u003c")).replace("{{TITLE}}", _esc(a["title"])).replace("{{ACCENT}}", _esc(a["accent"])).replace("{{ACCENT2}}", _esc(a.get("accent2", "#d7ef72"))).replace("{{THEME}}", _esc(a["theme"])).encode()

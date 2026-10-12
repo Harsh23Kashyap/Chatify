@@ -86,11 +86,12 @@ def _load_env(directory):
     """Load KEY=VALUE lines from a .env next to the app file. Existing environment wins."""
     f = os.path.join(directory, ".env")
     if os.path.isfile(f):
-        for line in open(f, encoding="utf-8"):
-            line = line.strip()
-            if line and not line.startswith("#") and "=" in line:
-                k, v = line.split("=", 1)
-                os.environ.setdefault(k.strip(), v.strip().strip("\"'"))
+        with open(f, encoding="utf-8") as handle:
+            for line in handle:
+                line = line.strip()
+                if line and not line.startswith("#") and "=" in line:
+                    k, v = line.split("=", 1)
+                    os.environ.setdefault(k.strip(), v.strip().strip("\"'"))
 
 
 def load(path):
