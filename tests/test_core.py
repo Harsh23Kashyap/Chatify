@@ -130,7 +130,7 @@ class Http(unittest.TestCase):
         threading.Thread(target=self.srv.serve_forever, daemon=True).start()
         self.base = "http://127.0.0.1:%d" % self.srv.server_port
 
-    def tearDown(self): self.srv.shutdown()
+    def tearDown(self): self.srv.shutdown(); self.srv.server_close()
 
     def call(self, path, body=None, headers=None):
         req = urllib.request.Request(self.base + path, data=None if body is None else json.dumps(body).encode(), headers=headers or {})
@@ -164,7 +164,7 @@ class Http(unittest.TestCase):
             try: return urllib.request.urlopen(urllib.request.Request(base + "/api/chats", headers=h)).status
             except urllib.error.HTTPError as ex: return ex.code
         self.assertEqual(get({}), 401); self.assertEqual(get({"Authorization": "Bearer wrong"}), 401)
-        self.assertEqual(get({"Authorization": "Bearer s3cret"}), 200); srv.shutdown()
+        self.assertEqual(get({"Authorization": "Bearer s3cret"}), 200); srv.shutdown(); srv.server_close()
 
 
 
@@ -231,7 +231,7 @@ class Streaming(unittest.TestCase):
         lines = [json.loads(l) for l in post({"question": "What is CustomChat?"}).read().decode().splitlines()]
         self.assertEqual(lines[0]["type"], "progress"); self.assertIn("meta", [e["type"] for e in lines]); self.assertEqual(lines[-1]["type"], "done")
         with self.assertRaises(urllib.error.HTTPError) as c: post({"question": ""})
-        self.assertEqual(c.exception.code, 400); srv.shutdown()
+        self.assertEqual(c.exception.code, 400); srv.shutdown(); srv.server_close()
 
 
 class Theme(unittest.TestCase):
@@ -241,7 +241,7 @@ class Theme(unittest.TestCase):
         srv = ThreadingHTTPServer(("127.0.0.1", 0), make_handler(cfg, e))
         threading.Thread(target=srv.serve_forever, daemon=True).start()
         html = urllib.request.urlopen("http://127.0.0.1:%d/" % srv.server_port).read().decode()
-        self.assertIn('data-theme="dark"', html); srv.shutdown()
+        self.assertIn('data-theme="dark"', html); srv.shutdown(); srv.server_close()
 
 
 class Round10(unittest.TestCase):
@@ -591,7 +591,7 @@ def test_provider_retry():
     try: bad.complete([{"role": "user", "content": "hi"}]); assert False
     except providers.ProviderError as e: assert e.code == 401 and "key" in str(e).lower() and hits["n"] == 1
     assert "minimax" in schema.PROVIDERS and "mimo" in schema.PROVIDERS
-    srv.shutdown()
+    srv.shutdown(); srv.server_close()
     print("provider retry ok")
 
 
@@ -749,7 +749,7 @@ def test_websearch():
     assert m.providers == ["tavily", "exa"] and len(m.search("hello", 4)) == 1
     w.PROVIDERS["exa"]["url"] = base + "/search"
     ev2 = m.search("hello", 4); assert len(ev2) == 1  # same URL from both providers is kept once
-    srv.shutdown(); print("websearch ok")
+    srv.shutdown(); srv.server_close(); print("websearch ok")
 
 test_websearch()
 

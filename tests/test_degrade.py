@@ -92,7 +92,7 @@ class T(unittest.TestCase):
             self.assertIn("dropped", str(c.exception))
             self.assertEqual(mk("/fine").complete([{"role": "user", "content": "x"}]), "ok")
         finally:
-            srv.shutdown(); providers._DOWN.clear()
+            srv.shutdown(); srv.server_close(); providers._DOWN.clear()
 
     def test_read_only_data_folder_keeps_working(self):
         if os.geteuid() == 0: self.skipTest("root ignores file permissions")

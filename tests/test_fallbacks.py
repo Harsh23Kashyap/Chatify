@@ -17,7 +17,7 @@ class T(unittest.TestCase):
         cls.s = HTTPServer(("127.0.0.1", 0), H); cls.port = cls.s.server_address[1]
         threading.Thread(target=cls.s.serve_forever, daemon=True).start()
     @classmethod
-    def tearDownClass(cls): cls.s.shutdown()
+    def tearDownClass(cls): cls.s.shutdown(); cls.s.server_close()
     def src(self, path):
         return HttpJson({"id": "x", "label": "X", "url": "http://127.0.0.1:%d%s?q={query}" % (self.port, path), "results_path": "results"})
     def test_broken_json_becomes_text(self):
