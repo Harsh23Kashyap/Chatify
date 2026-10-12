@@ -285,26 +285,24 @@ function gettingStarted() {
   box.append(el("p", {class:"getting-started-note",text:"After an answer: click [1] to check its source. Use the download button to export your chat."}));
   return box;
 }
-function temporaryScene(){const n=el("div");n.innerHTML='<div class="temp-concept"><div class="ephemeral-scene" aria-hidden="true"><svg viewBox="0 0 540 230"><defs><linearGradient id="vapour" x2="0" y2="1"><stop stop-color="#eee9f7"/><stop offset="1" stop-color="#f7f4ec"/></linearGradient></defs><ellipse cx="270" cy="190" rx="165" ry="15" fill="#e5dfeb"/><g class="bubble bubble-one"><rect x="100" y="57" width="144" height="73" rx="18" fill="url(#vapour)"/><path d="m126 130-13 15v-26"/><path d="M123 80h88M123 98h65" class="ink-line"/></g><g class="bubble bubble-two"><rect x="285" y="98" width="145" height="65" rx="18" fill="#e7edf0"/><path d="m399 163 12 14v-24"/><path d="M307 119h96M307 136h73" class="ink-line"/></g><g class="clock-loop"><circle cx="278" cy="65" r="29" fill="#fffdf7"/><path d="M278 47v19l12 7"/><path d="M250 63a28 28 0 0 1 47-19m-5-11 5 11-12-1"/></g><g class="paper-drift"><path d="M75 125h29l10 10v44H75zM104 125v10h10" fill="#fffdf7"/><path d="M83 145h23M83 154h18"/></g><g class="star star-one"><path d="m441 40 3 10 11 3-11 3-3 10-3-10-10-3 10-3z" fill="#d6bc78" stroke="none"/></g><g class="star star-two"><path d="m220 169 3 8 8 3-8 3-3 8-3-8-8-3 8-3z" fill="#b1c1b0" stroke="none"/></g><g class="vapour dots"><circle cx="128" cy="79" r="3"/><circle cx="157" cy="64" r="2"/><circle cx="186" cy="43" r="3"/></g></svg><span class="scene-caption">Here for the conversation. Gone from your history.</span></div><span class="temp-eyebrow">A LITTLE LESS PERMANENT</span><h1>Temporary chat</h1><p>This conversation is not saved.<br>Your profile and uploaded sources stay out of it.</p><button type="button">Back to saved chats ↗</button></div>';n.querySelector("button").addEventListener("click",()=>document.querySelector("#tempPill").click());return n.firstChild;}
+function temporaryScene(){return el("div",{class:"temp-concept"},el("h1",{text:"Temporary chat"}),el("p",{text:"This conversation is not saved. Your profile and uploaded sources stay out of it."}),el("button",{type:"button",text:"Back to saved chats",onclick:()=>$("#tempPill").click()}));}
 function playgroundLanding(a, exs) {
   const scene=el("div",{class:"playground-scene","aria-hidden":"true"});
-  scene.innerHTML="<svg class=\"doc-scene\" viewBox=\"0 0 220 180\"><circle cx=\"112\" cy=\"89\" r=\"70\" fill=\"#edf1df\"/><g class=\"doc-left\"><rect x=\"38\" y=\"37\" width=\"90\" height=\"115\" rx=\"13\" fill=\"#fffdf7\" stroke=\"#b9cbb8\"/><text x=\"54\" y=\"65\" fill=\"#173f35\">[1]</text><path d=\"M54 80h57M54 93h49M54 106h35\" stroke=\"#d3dfcc\" stroke-width=\"4\" stroke-linecap=\"round\"/></g><g class=\"doc-right\"><rect x=\"98\" y=\"22\" width=\"90\" height=\"115\" rx=\"13\" fill=\"#fffdf7\" stroke=\"#b9cbb8\"/><text x=\"114\" y=\"50\" fill=\"#173f35\">[2]</text><path d=\"M114 65h57M114 78h49M114 91h35\" stroke=\"#d3dfcc\" stroke-width=\"4\" stroke-linecap=\"round\"/></g><path class=\"doc-trail\" d=\"M64 112Q95 148 148 134\" stroke=\"#91a478\" stroke-width=\"2\" fill=\"none\" stroke-dasharray=\"3 5\"/><g class=\"doc-spark\"><rect x=\"145\" y=\"109\" width=\"50\" height=\"50\" rx=\"15\" fill=\"#d7e6a8\"/><path d=\"M170 120q1 11 12 13-11 2-12 13-2-11-13-13 11-2 13-13\" fill=\"#173f35\"/></g></svg>";
   const custom=TV("logo"), emoji=TV("emoji_hero")||TV("emoji_bot");
   if(custom)scene.prepend(el("img",{class:"playground-logo",src:custom,alt:""}));
   else if(emoji)scene.prepend(CCEmoji.node(emoji,TV((TV("emoji_hero")?"emoji_hero":"emoji_bot")+"_animated"),"",["calm","none"].includes(TV("motion"))));
   const actions=[
-    ["↥","Add documents","Bring your own sources",uploadDialog],
-    ["⌕","Choose sources","Focus the next answer",scopeDialog],
-    ["Aa","Make it yours","Set your reading view",()=>$("#readingBtn").click()]
+    ["↥","Add documents","Upload your files",uploadDialog],
+    ["⌕","Choose sources","Select existing sources",scopeDialog],
+    ["Aa","Reading view","Text size and width",()=>$("#readingBtn").click()]
   ];
-  if(document.querySelector('.common-nav a[href="/settings.html"]'))actions.push(["✦","Connect a model","When you're ready",()=>{location.href="/settings.html#sec-model"}]);
+  if(document.querySelector('.common-nav a[href="/settings.html"]'))actions.push(["↗","Connect a model","Choose an AI provider",()=>{location.href="/settings.html#sec-model"}]);
   return el("section",{class:"hero playground"},
     el("div",{class:"playground-intro"},el("div",{},
-      el("div",{class:"playground-eyebrow",text:S.cfg.provider.type==="mock"?"Offline playground":"Your document playground"}),
       el("h1",{text:TV("txt_title")||a.title}),el("p",{text:TV("txt_tagline")||a.tagline})),scene),
     exs.length?el("div",{},el("h2",{class:"playground-label",text:"Follow your curiosity"}),
       el("div",{class:"playground-questions"},exs.map(x=>el("button",{class:"playground-question",onclick:()=>{$("#q").value=x;send()}},el("span",{text:x}),el("b",{"aria-hidden":"true",text:"↗"}))))):null,
-    el("div",{class:"playground-actions"},actions.map(([icon,title,detail,action])=>el("button",{class:"playground-action",onclick:action},el("em",{"aria-hidden":"true",text:icon}),el("b",{text:title}),el("small",{text:detail})))),
+    el("div",{},el("h2",{class:"playground-label shortcut-label",text:"Chat tools"}),el("div",{class:"playground-actions"},actions.map(([icon,title,detail,action])=>el("button",{class:"playground-action",onclick:action},el("em",{"aria-hidden":"true",text:icon}),el("b",{text:title}),el("small",{text:detail}))))),
     el("p",{class:"playground-quiet",text:S.cfg.provider.type==="mock"?"Demo uses built-in answers. No model or paid calls.":"Answers use your configured sources and model."}));
 }
 function heroView() {
@@ -446,12 +444,34 @@ async function send() {
     else if (!$("#q").value) { $("#q").value = q; autosize(); }
   }
 }
+// Overlay lifecycle shared by source, context and account dialogs.
+function mountModal(back, dismiss = true) {
+  const previous = document.activeElement, box = back.querySelector('[role="dialog"]');
+  box.setAttribute('aria-modal', 'true'); box.tabIndex = -1;
+  const saved = new Map();
+  const shield = () => { for (const n of document.body.children) if (n !== back && !saved.has(n)) { saved.set(n, n.inert); n.inert = true; } };
+  const items = () => [...box.querySelectorAll('button,input,textarea,select,a[href],[tabindex="0"]')].filter(n => !n.disabled && n.getClientRects().length && !n.closest('[hidden]'));
+  const key = e => {
+    if (e.key === 'Escape') { e.preventDefault(); e.stopImmediatePropagation(); if (dismiss) {if(back.ccDismiss)back.ccDismiss();else back.remove();} }
+    if (e.key === 'Tab') { const list = items(), first = list[0] || box, last = list.at(-1) || box;
+      if (!box.contains(document.activeElement) || (e.shiftKey && document.activeElement === first) || (!e.shiftKey && document.activeElement === last)) { e.preventDefault(); (e.shiftKey ? last : first).focus(); }
+    }
+  };
+  const focus = e => { if (!box.contains(e.target)) (items()[0] || box).focus(); };
+  const observer = new MutationObserver(() => { if (!back.isConnected) { observer.disconnect(); document.removeEventListener('keydown', key, true); document.removeEventListener('focusin', focus); for (const [n, value] of saved) n.inert = value; if (previous?.isConnected) previous.focus(); } else shield(); });
+  document.body.append(back); shield(); observer.observe(document.body, {childList:true});
+  document.addEventListener('keydown', key, true); document.addEventListener('focusin', focus); (items()[0] || box).focus();
+}
 async function uploadDialog() {
-  const modal=el("div",{class:"modal-back"}),box=el("div",{class:"modal",role:"dialog","aria-label":"Add sources"}),files=el("input",{type:"file",multiple:"","aria-label":"Choose source files"}),url=el("input",{type:"url",placeholder:"https://…","aria-label":"Web page link"}),status=el("p",{class:"mut",text:S.temp?"Uploads are saved sources, not used in temporary chats. Start a saved chat to ask about them.":"PDF, text, Word and spreadsheets. Images use local text recognition, not visual reasoning. Unsupported files get a clear error."});
-  const upload=async()=>{let n=0;for(const f of files.files){try{if(f.size>8e6)throw Error("File is over 8 MB");const bytes=new Uint8Array(await f.arrayBuffer());let bin="";for(let i=0;i<bytes.length;i+=8192)bin+=String.fromCharCode.apply(null,bytes.subarray(i,i+8192));const result=await api("/api/upload-file",{name:f.name,data:btoa(bin)});n++;status.textContent="Added "+result.name+": "+result.chars+" text characters."}catch(e){status.textContent=f.name+": "+e.message;toast(status.textContent)}}if(n)toast(n+" source"+(n>1?"s":"")+" added"+(S.temp?". Not used in temporary chat.":"."))};
-  files.addEventListener("change",upload);
-  const addLink=el("button",{class:"btn-out",text:"Add web link",onclick:async()=>{try{const r=await api("/api/load-url",{url:url.value});status.textContent="Added: "+r.name}catch(e){status.textContent=e.message}}}),close=el("button",{class:"btn-out",text:"Done",onclick:()=>modal.remove()});
-  box.append(el("h2",{text:"Add sources"}),status,files,el("hr"),url,addLink,el("div",{class:"modal-act"},close));modal.append(box);document.body.append(modal);files.focus();
+ const modal=el('div',{class:'modal-back'}),box=el('div',{class:'modal source-add-modal',role:'dialog','aria-label':'Add sources'}),files=el('input',{id:'sourceFiles',type:'file',multiple:'','aria-label':'Choose source files'}),url=el('input',{id:'sourceUrl',type:'url',placeholder:'https://example.com/article','aria-label':'Web address',inputmode:'url'}),fileStatus=el('div',{class:'source-entry-status',role:'status','aria-live':'polite'}),urlStatus=el('p',{class:'source-entry-status',role:'status','aria-live':'polite'});let pending=false;
+ const closeFlow=()=>{if(pending){urlStatus.textContent='Please wait for the current source to finish adding.';return}if(url.value.trim()&&!confirm('Close without adding this web address? Sources already added are kept.'))return;modal.remove()};modal.ccDismiss=closeFlow;
+ const close=el('button',{class:'btn-out',text:'Done',onclick:closeFlow}),addLink=el('button',{class:'btn-out',text:'Add link'});
+ const setBusy=on=>{pending=on;files.disabled=on;url.disabled=on;addLink.disabled=on;close.disabled=on;box.setAttribute('aria-busy',String(on))};
+ const upload=async()=>{if(pending)return;const selected=[...files.files];fileStatus.replaceChildren();setBusy(true);for(const f of selected){const row=el('p',{text:'Adding '+f.name+'...'});fileStatus.append(row);try{if(f.size>8e6)throw Error('File is over 8 MB');const bytes=new Uint8Array(await f.arrayBuffer());let bin='';for(let i=0;i<bytes.length;i+=8192)bin+=String.fromCharCode.apply(null,bytes.subarray(i,i+8192));const result=await api('/api/upload-file',{name:f.name,data:btoa(bin)});row.textContent='Added '+result.name+'. '+result.chars+' text characters.';row.dataset.state='added'}catch(e){row.textContent=f.name+': '+e.message;row.dataset.state='error'}}files.value='';setBusy(false)};
+ files.addEventListener('change',upload);addLink.onclick=async()=>{if(pending)return;const text=url.value.trim();let parsed;try{parsed=new URL(text)}catch{urlStatus.textContent='Enter a full web address, such as https://example.com/article.';url.setAttribute('aria-invalid','true');url.focus();return}if(!['https:','http:'].includes(parsed.protocol)){urlStatus.textContent='Use an HTTP or HTTPS web address.';url.setAttribute('aria-invalid','true');url.focus();return}url.setAttribute('aria-invalid','false');setBusy(true);urlStatus.textContent='Adding link...';try{const r=await api('/api/load-url',{url:text});urlStatus.textContent='Added '+r.name+'. Ready to use in saved chats.';url.value=''}catch(e){urlStatus.textContent='Could not add this link: '+e.message+'. Check the address and try again.';url.setAttribute('aria-invalid','true')}finally{setBusy(false)}};
+ const fileGroup=el('section',{class:'source-entry-group'},el('h3',{text:'Upload files'}),el('p',{class:'mut',text:'PDF, Word, text and spreadsheets. Up to 8 MB per file.'}),el('label',{for:'sourceFiles',text:'Choose source files'}),files,fileStatus,el('p',{class:'mut',text:'Images use text recognition, not visual analysis.'}));
+ const linkGroup=el('section',{class:'source-entry-group'},el('h3',{text:'Add a web page'}),el('label',{for:'sourceUrl',text:'Web address'}),url,addLink,urlStatus);
+ const content=el('div',{class:'source-add-content'},el('p',{class:'mut',text:S.temp?'Added sources are saved, but not used in temporary chats.':'Each source is saved when added. Done closes this dialog.'}),fileGroup,linkGroup);box.append(el('h2',{text:'Add sources'}),content,el('div',{class:'modal-act'},close));modal.append(box);mountModal(modal);files.focus();
 }
 
 function contextDialog(t) {
@@ -461,7 +481,7 @@ function contextDialog(t) {
     el("p", { text: "Understood as: " + (t.standalone || t.question) }),
     el("p", { text: (t.evidence || []).length + " source" + ((t.evidence || []).length === 1 ? "" : "s") + " used" + (t.seconds !== undefined ? ", answered in " + (t.seconds < 1 ? "under 1s" : t.seconds + "s") : "") + "." }),
     el("div", { class: "modal-act" }, el("button", { class: "btn-out", onclick: () => m.remove() }, "Close"))));
-  document.body.append(m);
+  mountModal(m);
 }
 async function regen(turn, style) {
   try { const r = await api("/api/regenerate", { turn, style }); S.turns.push(r); drawThread(); } catch (e) { toast(e.message); }
@@ -583,10 +603,10 @@ async function profileDialog() {
   const previous=document.activeElement,rows=el("div",{class:"profile-fields"}),on=el("input",{type:"checkbox",id:"useProfile","aria-label":"Use in saved chats"}),count=el("span",{text:"0 / 3,000 characters"});on.checked=S.useProfile;
   const updateCount=()=>{const n=[...rows.querySelectorAll("input,textarea")].reduce((n,e)=>n+e.value.length,0);count.textContent=n.toLocaleString()+" / 3,000 characters"};
   const add=(f={label:"",value:""})=>{if(rows.children.length>=20){toast("Use at most 20 fields");return}const id="profile-field-"+Math.random().toString(36).slice(2),label=el("input",{id,type:"text",placeholder:"e.g. Goals, interests, preferences",maxlength:60,"aria-label":"What should it know?",oninput:updateCount}),value=el("textarea",{id:id+"-value",rows:2,placeholder:"Tell it what matters to you…",maxlength:1000,"aria-label":"Details",oninput:updateCount});label.value=f.label;value.value=f.value;const row=el("div",{class:"profile-field"},el("div",{class:"profile-field-head"},el("label",{for:id,text:"What should it know?"}),el("button",{type:"button",class:"profile-remove",text:"Remove",onclick:()=>{row.remove();updateCount()}})),label,el("label",{for:id+"-value",text:"Details"}),value);rows.append(row);updateCount();return label};
-  fields.forEach(add);if(!fields.length)add();const close=()=>{document.removeEventListener("keydown",keys);back.remove();previous?.focus()};const save=async()=>{try{const fields=[...rows.children].map(r=>({label:r.querySelector("input").value,value:r.querySelector("textarea").value}));await api("/api/profile",{fields});S.useProfile=on.checked&&fields.some(f=>f.value.trim());localStorage.setItem("cc_profile_on",S.useProfile?"1":"0");toast("Profile saved");close();drawThread()}catch(e){toast(e.message)}};
-  const box=el("div",{class:"modal profile-design",role:"dialog","aria-modal":"true","aria-label":"My profile"},el("header",{},el("div",{},el("span",{class:"profile-eyebrow",text:"OPTIONAL CONTEXT"}),el("h2",{text:"My profile"})),el("button",{type:"button",class:"profile-close","aria-label":"Close",text:"×",onclick:close})),el("p",{class:"profile-intro",text:"A little background for better replies. Not evidence. Never used in temporary chats. Up to 20 details."}),rows,el("button",{type:"button",class:"profile-add",text:"+ Add another detail",onclick:()=>add()?.focus()}),el("div",{class:"profile-use"},el("div",{},el("b",{text:"Use in saved chats"}),el("span",{text:"Stored on this server. You can change it anytime."})),on),el("footer",{},count,el("div",{},el("button",{type:"button",class:"profile-cancel",text:"Cancel",onclick:close}),el("button",{type:"button",class:"profile-save",text:"Save profile",onclick:save}))));
+  fields.forEach(add);if(!fields.length)add();const close=()=>{back.remove();previous?.focus()};const save=async()=>{try{const fields=[...rows.children].map(r=>({label:r.querySelector("input").value,value:r.querySelector("textarea").value}));await api("/api/profile",{fields});S.useProfile=on.checked&&fields.some(f=>f.value.trim());localStorage.setItem("cc_profile_on",S.useProfile?"1":"0");toast("Profile saved");close();drawThread()}catch(e){toast(e.message)}};
+  const box=el("div",{class:"modal profile-design",role:"dialog","aria-modal":"true","aria-label":"My profile"},el("header",{},el("div",{},el("h2",{text:"My profile"})),el("button",{type:"button",class:"profile-close","aria-label":"Close",text:"×",onclick:close})),el("p",{class:"profile-intro",text:"A little background for better replies. Not evidence. Never used in temporary chats. Up to 20 details."}),rows,el("button",{type:"button",class:"profile-add",text:"+ Add another detail",onclick:()=>add()?.focus()}),el("div",{class:"profile-use"},el("div",{},el("b",{text:"Use in saved chats"}),el("span",{text:"Stored on this server. You can change it anytime."})),on),el("footer",{},count,el("div",{},el("button",{type:"button",class:"profile-cancel",text:"Cancel",onclick:close}),el("button",{type:"button",class:"profile-save",text:"Save profile",onclick:save}))));
   const back=el("div",{class:"modal-back",onclick:e=>e.target===back&&close()},box);
-  const keys=(e)=>{if(e.key==="Escape"){e.preventDefault();e.stopPropagation();close()}else if(e.key==="Tab"){const items=[...box.querySelectorAll("button,input,textarea")];const first=items[0],last=items.at(-1);if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus()}else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus()}}};document.addEventListener("keydown",keys);document.body.append(back);rows.querySelector("input").focus();
+  mountModal(back);rows.querySelector("input").focus();
 }
 function setupMic() {
   const SR = window.SpeechRecognition || window.webkitSpeechRecognition; const m = $("#mic");
@@ -657,15 +677,15 @@ async function accountGate() {
         pw.autocomplete = mode === "in" ? "current-password" : "new-password"; err.textContent = "";
       };
       const submit = async () => {
-        go.disabled = true;
+        if(go.disabled)return;if(!email.value.trim()||!pw.value){err.textContent='Enter your email and password.';(!email.value.trim()?email:pw).focus();return}if(!email.checkValidity()){err.textContent='Enter a valid email address.';email.focus();return}if(mode==='up'&&pw.value.length<8){err.textContent='Use at least eight characters for your password.';pw.focus();return}go.disabled = true;sw.disabled=true;
         try { resolve(await post(mode === "in" ? "login" : "signup", { email: email.value, name: name.value, password: pw.value }).then(() => post("me"))); back.remove(); }
-        catch (e) { err.textContent = e.message; go.disabled = false; }
+        catch (e) { err.textContent = e.message; go.disabled = false;sw.disabled=false; }
       };
       go.addEventListener("click", submit); pw.addEventListener("keydown", (e) => e.key === "Enter" && submit());
       sw.addEventListener("click", () => { mode = mode === "in" ? "up" : "in"; draw(); });
       back.append(el("form", { class: "modal auth", onsubmit: (e) => e.preventDefault(), role: "dialog", "aria-modal": "true", "aria-label": "Sign in" },
         el("h2", { text: S.cfg.app.title }), el("p", { class: "mut", text: "Sign in to keep your chats private to you." }), email, name, pw, err, el("div", { class: "modal-act" }, sw, go)));
-      document.body.append(back); draw(); email.focus();
+      mountModal(back, false); draw(); email.focus();
     });
   }
   S.user = me.user;
@@ -674,20 +694,20 @@ async function accountGate() {
   const item = (t, f) => el("button", { class: "acct-item", onclick: () => { menu.hidden = true; f(); } }, t);
   menu.append(el("div", { class: "acct-mail mut", text: me.user.email }),
     item("Change password", () => {
-      const o = el("input", { type: "password", placeholder: "Current password", autocomplete: "current-password" }), n = el("input", { type: "password", placeholder: "New password (8+ characters)", autocomplete: "new-password" });
+      const o = el("input", { type: "password", placeholder: "Current password", "aria-label": "Current password", autocomplete: "current-password" }), n = el("input", { type: "password", placeholder: "New password (8+ characters)", "aria-label": "New password", autocomplete: "new-password" });
       const e = el("div", { class: "auth-err", role: "alert" }), back = el("div", { class: "modal-back" });
-      const save = el("button", { class: "chip on", onclick: async () => { try { await post("password", { old: o.value, new: n.value }); back.remove(); toast("Password changed. Other devices were signed out."); } catch (x) { e.textContent = x.message; } } }, "Save");
+      const save = el("button", { class: "chip on", onclick: async () => {if(save.disabled)return;if(!o.value||n.value.length<8){e.textContent=!o.value?'Enter your current password.':'Use at least eight characters for the new password.';(!o.value?o:n).focus();return}save.disabled=true;save.textContent='Saving...';try { await post("password", { old: o.value, new: n.value }); back.remove(); toast("Password changed. Other devices were signed out."); } catch (x) { e.textContent = x.message; }finally{save.disabled=false;save.textContent='Save'} } }, "Save");
       back.append(el("div", { class: "modal auth", role: "dialog", "aria-modal": "true", "aria-label": "Change password" }, el("h2", { text: "Change password" }), o, n, e, el("div", { class: "modal-act" }, el("button", { class: "chip", onclick: () => back.remove() }, "Cancel"), save)));
-      document.body.append(back); o.focus();
+      mountModal(back); o.focus();
     }),
     item("Sign out", async () => { await post("logout", {}); location.reload(); }));
   btn.addEventListener("click", (e) => { e.stopPropagation(); menu.hidden = !menu.hidden; });
   document.addEventListener("click", () => (menu.hidden = true));
-  tb.insertBefore(el("div", { class: "acct" }, btn, menu), $("#themeBtn"));
+  $("#themeBtn").parentElement.insertBefore(el("div", { class: "acct" }, btn, menu), $("#themeBtn"));
 }
 function applyWording() {
   const a = S.cfg.app;
-  { const b = $("#brand"); b.textContent = TV("txt_title") || a.title; const lg = TV("logo") || (a.title==="CustomChat"?"/icons/customchat.svg":""); if (lg) { const im = document.createElement("img"); im.className = "tb-logo"; im.alt = ""; im.src = lg; b.prepend(im); } } document.title = TV("txt_title") || a.title;
+  { const b = $("#brand"); b.replaceChildren(el("img",{class:"tb-logo",src:"/icons/customchat.svg",alt:""}),document.createTextNode("CustomChat"));b.title="Workspace: "+(TV("txt_title")||a.title); } document.title = TV("txt_title") || a.title;
   $("#noteName").textContent = TV("txt_title") || a.title; $("#noteText").textContent = TV("txt_footer") || a.footer;
   $("#q").placeholder = TV("txt_placeholder") || "Ask a question"; $("#hint").textContent = TV("txt_hint") || "Answers cite their sources. Check important facts.";
   const d = document.querySelector(".cmeta span:last-child"); if (d) d.textContent = TV("txt_disclaimer") || "Not a substitute for professional advice.";
