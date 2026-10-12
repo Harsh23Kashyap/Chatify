@@ -104,7 +104,7 @@ let hwView = "simple";
 /* Cloud picks, checked against the providers' own model pages on 12 Oct 2026:
    developers.openai.com/api/docs/models and ai.google.dev/gemini-api/docs/models */
 const CLOUD_PICKS = [
-  { p: "openai", id: "gpt-4.1-mini", name: "GPT-4.1 mini", why: "Smaller model for everyday text work and coding." },
+  { p: "openai", id: "gpt-4.1-mini", name: "GPT-4.1 mini", why: "Smaller, low-latency model for instruction following and tool use." },
   { p: "gemini", id: "gemini-3.5-flash-lite", name: "Gemini 3.5 Flash-Lite", why: "Low-latency model for document parsing and simple extraction." },
 ]; const testLog = [];
 async function ollamaPanel() {
@@ -485,7 +485,7 @@ function pvFollow() {
     cp.hidden = !m;
     if (m) cp.replaceChildren(el("b", { text: "Suggested cloud models" }), ...CLOUD_PICKS.map((c) => el("div", { class: "cpick" }, mark(c.p), el("div", { class: "cpt" }, el("b", { text: c.name }), el("span", { class: "h", text: c.why })),
       cur.provider === c.p && chosenModel() === c.id ? el("span", { class: "okt", text: "In use" }) : el("button", { type: "button", class: "mini", disabled: canEdit ? undefined : "", onclick: () => { if(!confirm("Select "+c.name+" for the unsaved answer settings? This changes the provider and model only. Keys stay unchanged; save answer settings when ready."))return;switchProvider(c.p, c.id); draw(); const tr = $("#testres"); if (tr) { tr.textContent = ""; tr.className = ""; } loadModels(false).then(() => { const pk = $("#modelPick"); pk.value = [...pk.options].some((o) => o.value === c.id) ? c.id : OTHER; if (pk.value === OTHER) { $("#model").hidden = false; $("#model").value = c.id; } cur.model = c.id; pvFollow(); }); } }, "Use"))),
-      el("div", { class: "h" }, "Taken from ", el("a", { href: "https://developers.openai.com/api/docs/models", target: "_blank", rel: "noopener" }, "OpenAI"), " and ", el("a", { href: "https://ai.google.dev/gemini-api/docs/models", target: "_blank", rel: "noopener" }, "Google"), " model pages on 12 Oct 2026. Suggestions only, not verified for your account. Use Refresh list after adding a key.")); }
+      el("div", { class: "h" }, "Taken from ", el("a", { href: "https://developers.openai.com/api/docs/models/gpt-4.1-mini", target: "_blank", rel: "noopener" }, "OpenAI"), " and ", el("a", { href: "https://ai.google.dev/gemini-api/docs/models", target: "_blank", rel: "noopener" }, "Google"), " model pages checked on 13 Oct 2026. Suggested for low latency, not measured comparisons or verified for your account. Use Refresh list after adding a key.")); }
   { const box = $("#ollamabox"); if (box) { const cpn = $("#pvcloud"); if (box.previousElementSibling !== cpn) cpn.after(box); box.hidden = !m; if (m && !box.dataset.loaded) ollamaPanel(); }
     let hist = $("#pvhist"); if (!hist) { hist = el("div", { id: "pvhist", class: "pvhist" }); card.parentNode.append(hist); }
     hist.hidden = !(m && testLog.length); hist.replaceChildren(el("b", { text: "Recent tests" }), ...testLog.map((x) => el("div", { class: "pvh-row" }, el("span", { class: "fitdot " + (x.ok ? "green" : "red") }), el("span", { text: x.p + (x.ok ? " worked" : " failed"),title:x.detail || "" }), el("span", { class: "h", text: x.t })))); }

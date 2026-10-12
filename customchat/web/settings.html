@@ -36,7 +36,7 @@
         <label for="modelPick">Model<span class="h" id="modelh">Pick from the list your provider offers.</span></label>
         <div class="keyrow"><select id="modelPick" aria-label="Model"></select><button type="button" class="go ghost" id="refreshModels">Refresh list</button></div>
         <input id="model" placeholder="Type the model name" aria-label="Model name" hidden>
-        <div class="keyrow testrow"><button type="button" class="go ghost" id="testconn">Test connection</button><span class="testres" id="testres" role="status" aria-live="polite"></span></div>
+        <div class="keyrow testrow"><p class="h provider-test-scope">Optional check: sends one small request to this provider and model. Your provider may charge. It does not test sources or save settings.</p><button type="button" class="go ghost" id="testconn">Test connection</button><span class="testres" id="testres" role="status" aria-live="polite"></span></div>
         <label>Base URL override <em>(optional)</em><span class="h">Leave blank for this provider's default. For a custom server, enter its API address.</span><input id="base" placeholder="http://localhost:11434"></label>
         <div class="two">
           <label><span class="range-setting-label">Temperature</span> <span id="temperatureViz" class="slider-viz thermometer" aria-hidden="true"><i></i></span><output id="tv"></output><span class="h">Low is precise and repeatable. High is more creative.</span><input id="temp" aria-label="Temperature" type="range" min="0" max="2" step="0.05"></label>
