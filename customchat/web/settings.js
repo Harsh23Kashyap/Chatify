@@ -681,12 +681,12 @@ function budgetVisuals(){
  }
 }
 for(const id of ["budgetQuestions","budgetUser","budgetCalls","budgetSpend"])document.getElementById(id)?.addEventListener("input",budgetVisuals);
-async function loadBudget() {
+async function loadBudget(preserveEdits=false) {
   const data = await api("/api/budget"), limits = data.limits;
-  $("#budgetQuestions").value = limits.daily_questions;
-  $("#budgetUser").value = limits.user_daily_questions;
-  $("#budgetCalls").value = limits.daily_model_calls;
-  $("#budgetSpend").value = limits.spend_cap_usd === null ? "" : limits.spend_cap_usd; budgetVisuals();
+  if(!preserveEdits)$("#budgetQuestions").value = limits.daily_questions;
+  if(!preserveEdits)$("#budgetUser").value = limits.user_daily_questions;
+  if(!preserveEdits)$("#budgetCalls").value = limits.daily_model_calls;
+  if(!preserveEdits)$("#budgetSpend").value = limits.spend_cap_usd === null ? "" : limits.spend_cap_usd; budgetVisuals();
   const q=data.used.question||0,m=data.used.model||0;
   $("#budgetStatus").replaceChildren(el("div",{class:"status-card"},el("b",{text:"Today's usage"}),
     el("div",{class:"status-stats"},el("span",{text:q+" "+(q===1?"question":"questions")}),el("span",{text:m+" "+(m===1?"model call":"model calls")})),
@@ -697,10 +697,10 @@ $("#saveBudget").addEventListener("click", async function () {
   for(const id of ["budgetQuestions","budgetUser","budgetCalls","budgetSpend"]){const n=$("#"+id);if((id!=="budgetSpend"&&!n.value.trim())||!n.checkValidity()){n.setAttribute("aria-invalid","true");$("#budgetStatus").textContent="Use a non-negative value within the shown limit; daily limits must be whole numbers.";n.reportValidity();return}n.setAttribute("aria-invalid","false")}
   this.disabled = true;const label=this.textContent;this.textContent="Saving...";
   try {
-    await api("/api/budget", { budget: { daily_questions: Number($("#budgetQuestions").value),
+    const submitted=["budgetQuestions","budgetUser","budgetCalls","budgetSpend"].map(id=>$("#"+id).value);await api("/api/budget", { budget: { daily_questions: Number($("#budgetQuestions").value),
       user_daily_questions: Number($("#budgetUser").value), daily_model_calls: Number($("#budgetCalls").value),
       spend_cap_usd: $("#budgetSpend").value === "" ? null : Number($("#budgetSpend").value) } });
-    await loadBudget();$("#budgetStatus").prepend(el("p",{role:"status",text:"Budget saved."}));
+    const edited=["budgetQuestions","budgetUser","budgetCalls","budgetSpend"].some((id,i)=>$("#"+id).value!==submitted[i]);await loadBudget(edited);$("#budgetStatus").prepend(el("p",{role:"status",text:edited?"Previous budget edits saved. Newer edits are still unsaved.":"Budget saved."}));
   } catch (error) { $("#budgetStatus").textContent = error.message; }
   finally { this.disabled = !canEdit;this.textContent=label; }
 });
