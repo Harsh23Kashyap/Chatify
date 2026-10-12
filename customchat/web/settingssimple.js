@@ -4,7 +4,7 @@
  function advanced(){window.CCSettingsSetMode?.('advanced');document.dispatchEvent(new CustomEvent('cc-settings-mode'));}
  function refresh(){
   const simple=body.classList.contains('simple'),state=window.CCSettingsSimple?.state();
-  const search=document.querySelector('.settings-search');if(search&&!search.querySelector('.simple-find')){const b=document.createElement('button');b.type='button';b.className='simple-find mini';b.textContent='Find any setting';b.onclick=()=>{search.classList.toggle('search-open');if(search.classList.contains('search-open'))search.querySelector('input').focus()};search.prepend(b)}
+  const search=document.querySelector('.settings-search');search?.classList.add('search-open');
 
   for(const section of document.querySelectorAll('#col>section.tile,#look>section.tile')){
    if(!section.querySelector(':scope>.simple-more')){const b=document.createElement('button');b.type='button';b.className='simple-more mini';b.textContent=section.id==='sec-finish'?'Workspace tools':'More settings';b.onclick=advanced;section.append(b)}

@@ -727,7 +727,7 @@ async function pollOllamaSetup(host,id){
 }
 
 init().then(() => { CCTour.config(); if (canEdit) { docsFreshness(false); loadBudget().catch((e) => { $("#budgetStatus").textContent = e.message; }); } updateVis(); setTimeout(updateVis, 500); }).catch((e) => say(e.message, true));
-window.CCSettingsSimple={state:()=>({provider:cur.provider,model:chosenModel(),canEdit,names:NAMES,key:keyInfo[cur.provider]}),select:provider=>{if(canEdit){switchProvider(provider);draw();pvFollow();}}};
+window.CCSettingsSimple={state:()=>({...read(),canEdit,names:NAMES,key:keyInfo[cur.provider]}),select:provider=>{if(canEdit){switchProvider(provider);draw();pvFollow();}}};
 })();
 
 

@@ -355,7 +355,15 @@ def make_handler(cfg, engine):
                 if not can_edit(self):
                     return self._send(403, {"error": "Only the app owner can use settings help"})
                 from . import settingsguide
-                return self._send(200, settingsguide.guide(engine.provider, cfg, b.get("question"), b.get("consent")))
+                selected=b.get("selection")
+                guide_cfg=cfg;guide_provider=engine.provider
+                if selected is not None:
+                    if not isinstance(selected,dict):raise ValueError("Invalid selected model")
+                    kind=selected.get("provider");model=selected.get("model");base=selected.get("base_url", "")
+                    if kind not in schema.PROVIDERS or not isinstance(model,str) or not model.strip() or len(model)>120 or not isinstance(base,str) or len(base)>300:raise ValueError("Choose a valid provider and model")
+                    guide_cfg=providers._block(cfg,kind,model,base)
+                    guide_provider=budget.wrap(providers.make(guide_cfg))
+                return self._send(200, settingsguide.guide(guide_provider, guide_cfg, b.get("question"), b.get("consent")))
             if path == "/api/hardware":
                 if not can_edit(self):
                     return self._send(403, {"error": "Only the admin can see this computer's details"})
