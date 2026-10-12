@@ -154,3 +154,6 @@ html body dialog.app-builder #builderBrief{transition:border-color .18s ease,box
 .builder-part-draft>summary::before{content:'';width:6px;height:6px;flex:none;border-right:1.5px solid currentColor;border-top:1.5px solid currentColor;transform:rotate(45deg);transition:transform .18s ease}
 .builder-part-draft[open]>summary::before{transform:rotate(135deg)}
 @media(prefers-reduced-motion:reduce){html body dialog.app-builder #builderBrief,.builder-part-draft>summary::before{transition:none!important}}
+
+.builder-scope-help{font-size:12px;line-height:1.5;margin:0 0 16px;overflow-wrap:break-word}.builder-scope-help.arrived{animation:studio-step-panel .18s ease-out}html body dialog.app-builder #builderScope{transition:border-color .18s ease,background .18s ease}
+@media(prefers-reduced-motion:reduce){.builder-scope-help.arrived{animation:none!important}html body dialog.app-builder #builderScope{transition:none!important}}
