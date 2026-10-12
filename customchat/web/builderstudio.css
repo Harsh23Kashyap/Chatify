@@ -146,3 +146,11 @@ html body dialog.app-builder .builder-draft-library button[aria-busy=true]{backg
 /* One progress pulse is enough; status rows communicate with labels. */
 .builder-group-board [data-state=running]>span,.builder-job-parts [data-state=running] .builder-part-icon{animation:none!important}
 .builder-step-mark{transition:background .18s ease,border-color .18s ease,color .18s ease}
+html body dialog.app-builder #builderBrief{transition:border-color .18s ease,box-shadow .18s ease}
+.builder-group-board article{align-content:start}
+.builder-group-board article>p{min-height:3em;overflow-wrap:break-word}
+.builder-part-draft>summary{list-style:none;display:flex;align-items:center;gap:8px;min-height:44px;cursor:pointer}
+.builder-part-draft>summary::-webkit-details-marker{display:none}
+.builder-part-draft>summary::before{content:'';width:6px;height:6px;flex:none;border-right:1.5px solid currentColor;border-top:1.5px solid currentColor;transform:rotate(45deg);transition:transform .18s ease}
+.builder-part-draft[open]>summary::before{transform:rotate(135deg)}
+@media(prefers-reduced-motion:reduce){html body dialog.app-builder #builderBrief,.builder-part-draft>summary::before{transition:none!important}}
