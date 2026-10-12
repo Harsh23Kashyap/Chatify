@@ -124,3 +124,14 @@ html body dialog.app-builder .builder-steps button[data-step="1"] strong::after{
 html body dialog.app-builder>.builder-steps{flex:none;padding:8px 24px!important;background:#fffdf7;border-bottom:1px solid #d5ded6;margin:0!important}html body dialog.app-builder>.builder-steps button{min-height:48px!important;background:transparent;box-shadow:none;border:0!important;border-bottom:2px solid transparent!important;border-radius:0!important}html body dialog.app-builder>.builder-steps [aria-current=step]{border-bottom-color:#173f35!important}html body dialog.app-builder>.builder-steps::before,html body dialog.app-builder>.builder-steps::after{content:none}@media(max-width:600px){html body dialog.app-builder>.builder-steps{padding:4px 16px!important;gap:4px!important}.builder-steps .builder-step-label strong{font-size:10px!important}}
 
 .builder-capabilities{border-top:1px solid #d5ded6;margin:16px 0;padding-top:16px}.builder-capabilities>p{font-size:12px;line-height:1.5}.builder-capabilities .builder-api-card{margin:12px 0;padding:12px 0;border:0;border-bottom:1px solid #d5ded6;background:transparent;box-shadow:none}.builder-capabilities h5{font-size:14px;margin:0 0 8px}.builder-capabilities details summary{min-height:44px;cursor:pointer}.builder-capabilities p{overflow-wrap:anywhere;line-height:1.5}
+
+/* A short shell transition, never a zoom or animated blur. */
+html body dialog.app-builder[open]{animation:builder-shell-enter .18s ease-out}
+html body dialog.app-builder[open]::backdrop{animation:builder-backdrop-enter .18s ease-out}
+html body dialog.app-builder[open].is-closing{animation:builder-shell-exit .18s ease-in forwards}
+html body dialog.app-builder[open].is-closing::backdrop{animation:builder-backdrop-exit .18s ease-in forwards}
+@keyframes builder-shell-enter{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+@keyframes builder-shell-exit{from{opacity:1;transform:translateY(0)}to{opacity:0;transform:translateY(6px)}}
+@keyframes builder-backdrop-enter{from{opacity:0}to{opacity:1}}
+@keyframes builder-backdrop-exit{from{opacity:1}to{opacity:0}}
+@media(prefers-reduced-motion:reduce){html body dialog.app-builder[open],html body dialog.app-builder[open]::backdrop{animation:none!important;transition:none!important}}
