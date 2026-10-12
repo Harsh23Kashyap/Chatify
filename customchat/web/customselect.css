@@ -16,3 +16,5 @@
 .cs.closing .cs-list{display:block;pointer-events:none;animation:csout .12s ease-in forwards}@keyframes csout{to{opacity:0;transform:translateY(-3px)}}
 @media(prefers-reduced-motion:reduce){.cs.closing .cs-list{display:none;animation:none!important}.cs *{transition:none!important}}
 html[data-motion=none] .cs-list{animation:none!important}html[data-motion=none] .cs-car{transition:none!important}
+
+.cs-list.cs-portal{display:block!important;position:fixed!important;z-index:2000!important;animation:none!important;transform:none!important;overflow-y:auto!important;max-height:var(--picker-height,300px)!important}
