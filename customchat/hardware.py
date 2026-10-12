@@ -48,14 +48,16 @@ def detect():
     """Facts about this computer. Nothing leaves it."""
     sysname = platform.system()
     hw = {"os": sysname, "arch": platform.machine(), "cpu": platform.processor() or "", "cores": os.cpu_count() or 1,
-          "ram_gb": 0.0, "gpu": "", "vram_gb": 0.0, "apple_silicon": False}
+          "ram_gb": 0.0, "gpu": "", "vram_gb": 0.0, "apple_silicon": False,"memory_source": {"Linux":"/proc/meminfo (system total RAM)","Darwin":"sysctl hw.memsize (system total memory)","Windows":"Win32_ComputerSystem TotalPhysicalMemory"}.get(sysname,"system hardware report")}
     try:
         if sysname == "Linux":
-            for line in open("/proc/meminfo"):
-                if line.startswith("MemTotal:"):
-                    hw["ram_gb"] = int(line.split()[1]) / 1024 / 1024
-                    break
-            m = re.search(r"model name\s*:\s*(.+)", open("/proc/cpuinfo").read())
+            with open("/proc/meminfo") as report:
+                for line in report:
+                    if line.startswith("MemTotal:"):
+                        hw["ram_gb"] = int(line.split()[1]) / 1024 / 1024
+                        break
+            with open("/proc/cpuinfo") as report:
+                m = re.search(r"model name\s*:\s*(.+)", report.read())
             if m: hw["cpu"] = m.group(1).strip()
         elif sysname == "Darwin":
             hw["ram_gb"] = int(_run(["sysctl", "-n", "hw.memsize"]) or 0) / 1024 ** 3
