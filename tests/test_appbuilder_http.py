@@ -43,3 +43,13 @@ class BuilderHTTP(test_workspace_api.WorkspaceAPITests):
    for body in ({'selection':{'provider':'openai','model':'fixture'},'consent':False,'messages':[{'role':'user','content':'app'}]}, {'selection':{'provider':'not-a-provider','model':'fixture'},'consent':True}):
     with self.assertRaises(urllib.error.HTTPError):self.call(self.clients[0],'/api/settings/build/talk',body)
    self.assertFalse(transport.called)
+
+ def test_parse_no_model_no_save_and_scope(self):
+  before=json.dumps(self.cfg,sort_keys=True)
+  with patch('customchat.providers._post') as transport:
+   result=self.call(self.clients[0],'/api/settings/build/parse',{'yaml':'app: {title: Editable title}'})
+  self.assertEqual(set(result['config']),{'app'});self.assertEqual(result['config']['app']['title'],'Editable title')
+  self.assertEqual(json.dumps(self.cfg,sort_keys=True),before);self.assertFalse(transport.called)
+ def test_parse_owner_gate_and_validation(self):
+  for client,source in [(self.clients[1],'app: {title: X}'),(self.clients[0],'app: {typo: X}'),(self.clients[0],'[invalid')]:
+   with self.assertRaises(urllib.error.HTTPError):self.call(client,'/api/settings/build/parse',{'yaml':source})

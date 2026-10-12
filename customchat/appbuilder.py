@@ -98,4 +98,9 @@ def review(cfg,text,selected):
   config[k]=draft[k]
  config=schema.validate(config);_check_values(config)
  changed=[k for k in selected if config[k]!=before[k]]
- return {'config':config,'sections':changed,'revision':editstate.revision(cfg),'yaml':yaml.safe_dump(config,sort_keys=False),'notice':'Save updates app.yaml only. Restart required. No source, code or new model runs now. Review source paths, URLs, access, storage and server settings before saving.'}
+ def differences(old,new,path=''):
+  if isinstance(old,dict) and isinstance(new,dict):
+   return [item for key in new for item in differences(old.get(key),new[key],path+'.'+key if path else key)]
+  return [] if old==new else [{'field':path,'before':old,'after':new}]
+ changes=[item for key in changed for item in differences(before[key],config[key],key)]
+ return {'changes':changes,'config':config,'sections':changed,'revision':editstate.revision(cfg),'yaml':yaml.safe_dump(config,sort_keys=False),'notice':'Save updates app.yaml only. Restart required. No source, code or new model runs now. Review source paths, URLs, access, storage and server settings before saving.'}

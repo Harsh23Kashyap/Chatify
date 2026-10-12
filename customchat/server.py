@@ -359,6 +359,10 @@ def make_handler(cfg, engine):
                     if kind not in schema.PROVIDERS or not isinstance(model,str) or not model.strip() or len(model)>120 or not isinstance(base,str) or len(base)>300:raise ValueError('Choose a valid provider and model')
                     build_cfg=providers._block(cfg,kind,model,base)
                     return self._send(200,appbuilder.talk(budget.wrap(providers.make(build_cfg)),build_cfg,b))
+                if path.endswith('/parse'):
+                    import yaml
+                    clean=appbuilder.validate(b.get('yaml'));raw=yaml.safe_load(b.get('yaml'))
+                    return self._send(200,{'config':{k:clean[k] for k in raw}})
                 if path.endswith('/review'):
                     plan=appbuilder.review(cfg,b.get('yaml'),b.get('sections'))
                     return self._send(200,{**plan,'ticket':management.reviews.put(o,'app-build',plan)})

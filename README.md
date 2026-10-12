@@ -152,3 +152,13 @@ source documents included, and review them before sharing.
 
 The About page has one tab per feature, six shown first with **Load more**. SVG
 scenes respect reduced motion and calm/no-motion settings.
+
+### Build with AI review flow
+
+Describe your app, review the proposed values and changed fields, then confirm Save.
+The selected setup provider/model is shown before each explicit request. Typing and
+local validation do not call a model. Raw YAML is under Advanced; it shares the same
+draft as the editable fields. An edit invalidates the reviewed save token.
+YAML and ZIP downloads contain the complete merged configuration; ZIP/YAML import
+opens the existing review-before-load workflow. Save writes app.yaml only, requires
+a restart, and never installs code.

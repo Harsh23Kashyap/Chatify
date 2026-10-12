@@ -51,3 +51,12 @@ class BuilderTests(unittest.TestCase):
   p=Fixture({'message':'New draft','config':{'app':{'title':'Tweaked'}}});appbuilder.talk(p,self.cfg,self.data(draft='app:\n title: Earlier draft\n'));self.assertIn('Earlier draft',json.dumps(p.calls));self.assertNotIn('PRIVATE_ENV',json.dumps(p.calls))
  def test_bad_draft_before_call(self):
   p=Fixture({});self.assertRaises(ValueError,appbuilder.talk,p,self.cfg,self.data(draft='server: {port: 4444}'));self.assertFalse(p.calls)
+
+ def test_field_changes_against_saved_not_model(self):
+  result=appbuilder.review(self.cfg,'app: {title: Human title}',['app'])
+  title=next(c for c in result['changes'] if c['field']=='app.title')
+  self.assertEqual(title['before'],'My Chat');self.assertEqual(title['after'],'Human title')
+  self.assertFalse(any(c['field'].startswith('provider') for c in result['changes']))
+ def test_no_changes_empty_diff(self):
+  result=appbuilder.review(self.cfg,yaml.safe_dump({'app':self.cfg['app']}),['app'])
+  self.assertEqual(result['sections'],[]);self.assertEqual(result['changes'],[])
