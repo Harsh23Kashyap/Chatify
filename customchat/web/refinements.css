@@ -57,3 +57,7 @@ html body.settings-tabs .settings-utilities .settings-search .settings-help-open
 
 .settings-search-highlight{animation:settings-search-target 1.4s ease-out}@keyframes settings-search-target{from{background-color:#eef3ea}to{background-color:transparent}}
 @media(prefers-reduced-motion:reduce){.settings-search-highlight{animation:none!important;background:#eef3ea!important}}html[data-motion=none] .settings-search-highlight{animation:none!important;background:#eef3ea!important}
+html body.settings-tabs #sec-model .keyrow:has(#modelPick){display:flex;flex-wrap:wrap;align-items:start}
+html body.settings-tabs #sec-model .cs:has(#modelPick){flex:1 1 220px;min-width:0}
+html body.settings-tabs #sec-model .cs:has(#modelPick) .cs-btn{height:auto!important;min-height:44px;padding:10px 12px!important}
+html body.settings-tabs #sec-model .cs:has(#modelPick) .cs-label{white-space:normal!important;overflow:visible;text-overflow:clip;overflow-wrap:anywhere}
