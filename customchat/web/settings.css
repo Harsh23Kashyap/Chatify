@@ -1294,3 +1294,8 @@ html body.settings-tabs #sec-colors .fields.colorlist .field>.flabel{flex-direct
 #presetUndo{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:8px 0 12px}
 #presetUndo>span{flex:1 1 220px;font-size:14px;line-height:1.4}
 #presetUndo>button{min-height:44px;flex:0 0 auto}
+/* Keep the six icon rows aligned when a short help line wraps. */
+#sec-emoji .field>.h{min-height:36px!important}
+#sec-emoji .emoji-control>.mini{min-height:44px!important}
+#sec-emoji .field>.flabel{justify-content:flex-start!important;text-align:left!important}
+#sec-emoji .field>.flabel{flex-direction:row!important;align-items:center!important}
