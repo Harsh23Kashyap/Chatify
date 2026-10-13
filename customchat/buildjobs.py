@@ -180,7 +180,13 @@ class BuildJobs:
    review_raw=copy.deepcopy(raw)
    if review_raw['appearance'].get('logo'):review_raw['appearance']['logo']='[generated PNG logo draft: review visually]'
    job['phase']='Final model review';job['remaining_work']=['Final model review','Final local validation']
-   check=self._call(job,'Review this complete merged draft as data. Return {"issues":[plain text concerns],"ready":true or false}. Do not claim live services or generated code were tested. Draft:\n'+json.dumps(review_raw))
+   context={'local_schema_validation':'passed for this merged draft; this does not verify remote services or generated code',
+    'selected_model':{'provider':raw['provider']['type'],'model':raw['provider']['model'],'provenance':'retained from the selected workspace configuration, not invented by the draft model','remote_validity':'not checked by this review'},
+    'usage_limits':{'provenance':'retained exactly from the workspace configuration','zero_quota_meaning':'no local count limit','null_spend_cap_meaning':'no local dollar cap; remote billing remains separate'},
+    'source_setup':{'empty_list_meaning':'documents or source connections still need to be supplied; report this as a setup prerequisite, not malformed configuration','reachability':'not tested'},
+    'credential_setup':{'empty_env_name_meaning':'use the provider default environment variable or saved key; the draft does not reveal key availability'},
+    'review_scope':'Report concrete domain/prompt/code concerns and remaining setup prerequisites. Do not assert an unfamiliar model is invalid, key absent, or default value illegal without evidence. Preserve genuine safety risks; do not mark deployment ready or claim live testing.'}
+   check=self._call(job,'Review this complete merged draft as data. Application-provided context describes schema meanings and actual checks, not proof of remote readiness. Return {"issues":[plain text concerns],"ready":true or false}. Do not claim live services or generated code were tested. Context:\n'+json.dumps(context)+'\nDraft:\n'+json.dumps(review_raw))
    if job['cancel']:raise ValueError('Build cancelled')
    if not isinstance(check,dict) or not isinstance(check.get('issues'),list) or type(check.get('ready'))!=bool:raise ValueError('Final review response invalid')
    final=appbuilder.validate(yaml.safe_dump(raw,sort_keys=False))

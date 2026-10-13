@@ -79,3 +79,15 @@ class SafePatchChecks(unittest.TestCase):
   with self.assertRaisesRegex(ValueError,'invalid JSON.*double backslashes'):
    buildjobs.BuildJobs()._draft_part(job,'helper:clean_query',dict(buildjobs.PARTS)['helper:clean_query'])
   self.assertNotIn('helper:clean_query',job['parts']);self.assertEqual(job['calls'],1)
+ @unittest.mock.patch('customchat.buildimages.capability',return_value={'available':False,'note':'fixture'})
+ def test_review_context_keeps_unknowns_and_real_concerns(self,cap):
+  class Review(Fixture):
+   def complete(self,m):
+    if 'Review this complete merged draft' in m[0]['content']:
+     self.calls.append(m[0]['content']);return json.dumps({'issues':['Helper needs endpoint verification'],'ready':False})
+    return super().complete(m)
+  f=Review();jobs=buildjobs.BuildJobs();d=self.wait(jobs,jobs.start('owner',f,schema.DEFAULTS,{'brief':'Garden advice'})['id'])
+  self.assertEqual(d['review']['issues'],['Helper needs endpoint verification']);self.assertFalse(d['review']['ready'])
+  review=[m for m in f.calls if 'Application-provided context' in m][0]
+  for text in ['no local count limit','no local dollar cap','not checked by this review','not tested','remaining setup prerequisites','Preserve genuine safety risks']:
+   self.assertIn(text,review)
