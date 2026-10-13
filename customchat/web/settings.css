@@ -1166,3 +1166,8 @@ body.settings-tabs .card{padding:28px 32px!important}body.settings-tabs .card h1
 @media(prefers-reduced-motion:reduce){.editor-choice{transition:none}}
 body.settings-tabs .editor-choice{transition:background-color 160ms cubic-bezier(.2,.8,.2,1),border-color 160ms cubic-bezier(.2,.8,.2,1),box-shadow 160ms cubic-bezier(.2,.8,.2,1)}
 @media(prefers-reduced-motion:reduce){body.settings-tabs .editor-choice{transition:none}}
+
+.helper-result-enter{animation:helper-result-in 160ms ease-out}
+@keyframes helper-result-in{from{opacity:.65}to{opacity:1}}
+@media(prefers-reduced-motion:reduce){.helper-result-enter{animation:none}}
+@media(prefers-reduced-motion:no-preference){html:not([data-motion=none]) .pipeline-editor-pane .helper-result-enter{animation:helper-result-in 160ms ease-out!important}html:not([data-motion=none]) .pipeline-editor-pane .save-confirmed{animation:saved-check-in 160ms ease-out!important}html:not([data-motion=none]) #promptsEditor textarea.prompt-draft-updated{transition:background-color 160ms ease-out!important}}
