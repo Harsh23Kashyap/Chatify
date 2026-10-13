@@ -289,7 +289,7 @@ const GROUPS = {
 const clone = (o) => JSON.parse(JSON.stringify(o));
 const effectiveWording = () => {const a=window.CCLoadedApp?.app||{};return {txt_title:a.title,txt_tagline:a.tagline,txt_examples:(a.examples||[]).join("\n"),txt_footer:a.footer,txt_placeholder:"Ask a question",txt_hint:"Answers cite their sources. Check important facts.",txt_disclaimer:"Not a substitute for professional advice.",txt_sidebar:"Conversations"};};
 const get = (f) => (f.colors ? theme[editMode][f.key] : theme[f.key] || effectiveWording()[f.key] || theme[f.key]);
-const setv = (f, v) => { const empty=(document.getElementById("f-"+f.key)||document.getElementById("f-"+f.key+"-file"))?.closest(".field")?.querySelector(".empty-field");if(empty)empty.hidden=!!v; if (f.colors) theme[editMode][f.key] = v; else theme[f.key] = v; changed(); };
+const setv = (f, v) => { const empty=(document.getElementById("f-"+f.key)||document.getElementById("f-"+f.key+"-file"))?.closest(".field")?.querySelector(".empty-field");if(empty)empty.hidden=!!v;const source=(document.getElementById("f-"+f.key))?.closest(".field")?.querySelector(".value-source");if(source)source.hidden=!!v; if (f.colors) theme[editMode][f.key] = v; else theme[f.key] = v; changed(); };
 let sendTimer = 0, lastPreviewMode = null;
 function pushPreview() {
   const t = clone(theme); const m = $("#pvmode .seg button[aria-checked=true], #pvmode button[aria-checked=true]"); t.mode = m ? m.dataset.m : t.mode;
