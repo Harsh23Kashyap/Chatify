@@ -265,3 +265,23 @@ details>summary{transition:color .16s ease,background-color .16s ease}
 .hero>*{animation:m-in 160ms ease-out both;animation-delay:0s!important}
 .hero :is(h1,p,.ex button){animation:none!important}
 @media(prefers-reduced-motion:reduce){.hero>*{animation:none!important}}html[data-motion=none] .hero>*{animation:none!important}
+/* Section changes reveal one group, never a cascade of fields. */
+@keyframes cc-settings-group-in{from{opacity:.7}to{opacity:1}}
+html body.settings-tabs .settings-active-panel,
+html body.settings-tabs.mode-swap .settings-active-panel{
+ animation:cc-settings-group-in 140ms cubic-bezier(.2,.8,.2,1) both!important;
+ animation-delay:0s!important;
+}
+html body.settings-tabs #menu a{
+ transition:background-color 160ms cubic-bezier(.2,.8,.2,1),color 160ms cubic-bezier(.2,.8,.2,1),border-color 160ms cubic-bezier(.2,.8,.2,1)!important;
+ transform:none!important;
+}
+html[data-motion=subtle] body.settings-tabs .settings-active-panel{animation-duration:120ms!important}
+html[data-motion=none] body.settings-tabs .settings-active-panel,
+html[data-motion=none] body.settings-tabs.mode-swap .settings-active-panel{animation:none!important}
+html[data-motion=none] body.settings-tabs #menu a{transition:none!important}
+@media(prefers-reduced-motion:reduce){
+ html body.settings-tabs .settings-active-panel,
+ html body.settings-tabs.mode-swap .settings-active-panel{animation:none!important}
+ html body.settings-tabs #menu a{transition:none!important}
+}
