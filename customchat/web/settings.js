@@ -124,7 +124,7 @@ async function ollamaPanel(viewOnly=false) {
   viewOnly=viewOnly===true;
   const box = $("#ollamabox"); if (activeSec !== "model") return; box.hidden = false; box.dataset.loaded = "1";
   const retainedActions=new Map([...box.querySelectorAll(".mact[data-model]")].filter(n=>viewOnly||n.dataset.pending==="true").map(n=>[n.dataset.model,n]));
-  const previousHardware=localHardwareSnapshot,hasCards=!!box.querySelector(".ocards");
+  const previousHardware=localHardwareSnapshot,previousCards=box.querySelector(".ocards"),hasCards=!!previousCards;
   box.querySelector(".local-refresh-status")?.remove();if(!viewOnly){const loading=el("div",{class:"h local-refresh-status",role:"status",text:"Looking at this computer..."});if(hasCards)box.append(loading);else box.replaceChildren(loading);box.setAttribute("aria-busy","true");}
   let r; try { r = viewOnly&&localHardwareSnapshot?localHardwareSnapshot:await api("/api/hardware?base_url=" + encodeURIComponent($("#base").value.trim()));localHardwareSnapshot=r; } catch (e) { box.dataset.loaded="";box.removeAttribute("aria-busy");box.querySelector(".local-refresh-status")?.remove();const error=el("div",{class:"local-suggestion-error"},el("div",{class:"h",text:e.message}),el("button",{type:"button",class:"mini",text:"Retry local suggestions",onclick:ollamaPanel}));if(retainedActions.size||hasCards){box.querySelector(".local-suggestion-error")?.remove();box.append(error)}else{box.replaceChildren(el("b",{text:"Suggested local models"}),error)} return; }
   box.removeAttribute("aria-busy");box.querySelector(".local-refresh-status")?.remove();box.querySelector(".local-suggestion-error")?.remove();
@@ -141,10 +141,16 @@ async function ollamaPanel(viewOnly=false) {
       el("div", { class: "fitchip " + p.fit }, el("i"), p.fit_why));
     if (det) c.append(el("div",{class:"model-metrics"},el("div",{class:"metric-head"},el("span",{text:"Memory budget"}),el("b",{text:p.uses_pct+"%"})),el("div",{class:"budget-track",role:"img","aria-label":p.uses_pct+"% of memory budget used, 85% fit limit"},el("i",{style:"width:"+Math.max(0,Math.min(100,p.uses_pct))+"%"}),el("span",{style:"left:85%"})),el("div",{class:"metric-foot"},el("b",{text:p.needs_gb+" GB needed"}),el("span",{text:rec.budget_gb+" GB budget"})),el("div",{class:"metric-row"},el("span",{},"↓ Download",el("b",{text:p.download_gb+" GB"})),el("span",{class:"speed",text:"Estimated speed: "+p.speed})),el("small",{class:"model-tag",text:p.tag})));
     c.append(el("div", { class: "oact" }, retainedActions.get(p.tag)||modelAction(p.tag, p.installed)));
-    cards.append(c);
+    c.dataset.model=p.tag;cards.append(c);
   });
   for(const [tag,action] of retainedActions)if(!rec.picks.some(p=>p.tag===tag))cards.append(el("div",{class:"ocard download-retained"},el("b",{text:tag}),el("p",{class:"h",text:"Download started earlier. Updated suggestions do not change this job."}),el("div",{class:"oact"},action)));
-  box.replaceChildren(head, cards);if(viewOnly){cards.classList.add("local-view-enter");}
+  let displayedCards=cards;
+  if(viewOnly&&previousCards){
+    const existing=new Map([...previousCards.querySelectorAll(".ocard[data-model]")].map(c=>[c.dataset.model,c]));
+    for(const next of cards.children){const old=existing.get(next.dataset.model);if(!old)continue;old.querySelector(".model-metrics")?.remove();const metrics=next.querySelector(".model-metrics");if(metrics)old.insertBefore(metrics,old.querySelector(".oact"));old.querySelector(".oact").replaceChildren(...next.querySelector(".oact").children);next.replaceWith(old)}
+    previousCards.replaceChildren(...cards.children);displayedCards=previousCards;
+  }
+  box.replaceChildren(head, displayedCards);if(viewOnly){displayedCards.classList.remove("local-view-enter");void displayedCards.offsetWidth;displayedCards.classList.add("local-view-enter");}
   if (r.others && r.others.length) {
     const d = el("details", { class: "grp" }, el("summary", { text: "See other models" }), el("div", { class: "oother" }, r.others.map((o) => el("div", { class: "orow" }, el("span", { class: "fitdot " + o.fit }), el("span", { class: "oname", text: o.name }), el("span", { class: "h", text: o.why })))));
     box.append(d);
