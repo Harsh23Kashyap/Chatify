@@ -20,7 +20,7 @@ function draw() {
   document.querySelectorAll("#seg button").forEach((b) => b.setAttribute("aria-checked", String(b.dataset.p === cur.provider)));
   buildChips();
   provExtras();
-  for (const id of ["model", "apikey", "keysave", "keyclear", "modelPick", "refreshModels", "testconn", "base", "temp", "topk", "rewrite", "apply", "load", "saveLook", "resetAll", "imp", "exportApp", "checkDocs", "saveBudget"]) $("#" + id).disabled = !canEdit; $("#testconn").disabled = !canEdit || testBlocked;
+  for (const id of ["model", "apikey", "keysave", "keyclear", "modelPick", "refreshModels", "testconn", "base", "temp", "topk", "rewrite", "apply", "load", "saveLook", "resetAll", "imp", "exportApp", "checkDocs", "saveBudget"]) $("#" + id).disabled = !canEdit; $("#testconn").disabled = !canEdit || testBlocked || $("#testconn").dataset.running==="true";
 }
 // Endpoint overrides belong to one provider, never silently migrate across providers.
 function switchProvider(provider, model = "") {
@@ -41,7 +41,7 @@ async function provExtras() {
   $("#apikey").placeholder = k.has ? "Saved key available. Enter only to replace it." : "Paste a key to save privately";
   const ks = $("#keystate"); ks.className = "keystate" + (k.has ? " ok" : "");
   ks.textContent = k.unknown ? 'Key status unavailable. Check access before testing.' : k.has ? (k.source === "env" ? "Key found in an environment variable." : "A key is saved.") : (k.needed ? "Not filled (no API key saved)." : "No key needed.");
-  { const tc = $("#testconn"), blocked = !!(k.needed && !k.has); testBlocked = blocked; tc.disabled = blocked || !canEdit; tc.title = blocked ? "Save a key first, then test it" : ""; if (blocked) $("#testres").textContent = "Save a key first, then test."; else if ($("#testres").textContent === "Save a key first, then test.") $("#testres").textContent = ""; }
+  { const tc = $("#testconn"), blocked = !!(k.needed && !k.has); testBlocked = blocked; tc.disabled = blocked || !canEdit || tc.dataset.running==="true"; tc.title = blocked ? "Save a key first, then test it" : ""; if (blocked) $("#testres").textContent = "Save a key first, then test."; else if ($("#testres").textContent === "Save a key first, then test.") $("#testres").textContent = ""; }
   $("#keyclear").hidden = k.source !== "saved"; $("#apikey").value = "";
   ollamaPanel();
   await loadModels(false);
@@ -95,13 +95,20 @@ let chipsMore = false, chipList = [];
 const LOGOS = ["openai", "claude", "gemini", "deepseek", "ollama", "groq", "mistral", "openrouter", "minimax", "mimo"];
 function mark(p) { if (LOGOS.includes(p)) { const img=el("img", { class: "plogo", src: "/logos/" + p + ".svg", alt: "", width: "20", height: "20" }); img.addEventListener("error",()=>{const b=BRAND[p] || ["#667",p[0]];img.replaceWith(el("span",{class:"pm",style:"background:"+b[0],"aria-hidden":"true",text:b[1]}))},{once:true});return img; } const b = BRAND[p] || ["#667", (NAMES[p] || p)[0]]; return el("span", { class: "pm", style: "background:" + b[0], "aria-hidden": "true", text: b[1] }); }
 function buildChips(list) {
-  if (list) chipList = list; const seg = $("#seg"); seg.replaceChildren();
+  if (list) chipList = list; const seg = $("#seg"),existing=new Map([...seg.querySelectorAll("[data-p]")].map(b=>[b.dataset.p,b]));
   const top = TOP.filter((p) => chipList.includes(p)), rest = chipList.filter((p) => !top.includes(p));
   // Keep the active provider visible without reopening a collapsed list.
   if (!top.includes(cur.provider) && chipList.includes(cur.provider)) top.push(cur.provider);
   const extra = rest.filter(p => !top.includes(p));
-  for (const p of top.concat(chipsMore ? extra : [])) { const b = el("button", { type: "button", "data-p": p, role: "radio", "aria-checked": String(p === cur.provider) }, mark(p), NAMES[p] || p); b.addEventListener("click", () => { if (canEdit) { switchProvider(p);$("#testres").textContent="";$("#testres").className="testres"; draw(); pvFollow(); } }); seg.append(b); }
-  if (extra.length) { const m = el("button", { type: "button", class: "chipmore", "aria-expanded": String(chipsMore) }, chipsMore ? "Show fewer" : "Show more"); m.addEventListener("click", () => { chipsMore = !chipsMore; buildChips(); }); seg.append(m); }
+  const buttons=[];
+  for (const p of top.concat(chipsMore ? extra : [])) {
+    let b=existing.get(p);
+    if(!b){b=el("button",{type:"button","data-p":p,role:"radio"},mark(p),el("span",{class:"provider-name",text:NAMES[p]||p}),el("span",{class:"provider-selected","aria-hidden":"true",text:"✓"}));b.addEventListener("click",()=>{if(canEdit){switchProvider(p);$("#testres").textContent="";$("#testres").className="testres";draw();pvFollow();}});}
+    b.setAttribute("aria-checked",String(p===cur.provider));buttons.push(b);
+  }
+  if(extra.length){const m=el("button",{type:"button",class:"chipmore","aria-expanded":String(chipsMore)},chipsMore?"Show fewer":"Show more");m.addEventListener("click",()=>{chipsMore=!chipsMore;buildChips();if(chipsMore&&!matchMedia("(prefers-reduced-motion:reduce)").matches&&!['calm','none'].includes(theme.motion))seg.animate([{opacity:.75},{opacity:1}],{duration:160,easing:"ease-out"});});buttons.push(m);}
+  for(const old of [...seg.children])if(!buttons.includes(old))old.remove();
+  buttons.forEach((button,i)=>{if(seg.children[i]!==button)seg.insertBefore(button,seg.children[i]||null)});
 }
 /* ---------- local model suggestions (Ollama) ---------- */
 let hwView = "simple";
@@ -680,7 +687,20 @@ async function init() {
   $("#refreshModels").addEventListener("click", () => loadModels(true));
   $("#keysave").addEventListener("click", async () => { if($("#keysave").dataset.running==="true")return;const provider=cur.provider;const v = $("#apikey").value.trim(); if (!v) { say("Paste a key first.", true); return; } $("#keysave").dataset.running="true";try { const r = await api("/api/provider/key", { provider, key: v }); keyInfo[provider] = r.key; if(cur.provider===provider&&$("#apikey").value.trim()===v)$("#apikey").value = ""; await provExtras(); say("Key saved on this computer."); } catch (e) { say(e.message, true); } finally {$("#keysave").dataset.running="false"} });
   $("#keyclear").addEventListener("click", async () => { if($("#keyclear").dataset.running==="true")return;$("#keyclear").dataset.running="true";const provider=cur.provider;try { const r = await api("/api/provider/key", { provider, clear: true }); keyInfo[provider] = r.key; await provExtras(); say("Key removed."); } catch (e) { say(e.message, true); } finally {$("#keyclear").dataset.running="false"} });
-  $("#testconn").addEventListener("click", async () => {if($("#testconn").dataset.running==="true")return;$("#testconn").dataset.running="true";const t=$("#testres"),provider=cur.provider,model=chosenModel(),base=$("#base").value.trim();t.className="testres busy";t.textContent="Testing...";let ok=false,message="";try{const r=await api("/api/provider/test",{provider,model,base_url:base});ok=r.ok;message=r.message}catch(e){message=e.message}testLog.unshift({p:NAMES[provider]||provider,ok,detail:message,t:new Date().toLocaleTimeString([],{hour:"2-digit",minute:"2-digit"})});testLog.length=Math.min(testLog.length,5);if(cur.provider===provider&&chosenModel()===model&&$("#base").value.trim()===base){t.className="testres "+(ok?"ok":"bad");t.textContent=(ok?"Passed. ":"Failed. ")+message}$("#testconn").dataset.running='false';pvFollow(); });
+  $("#testconn").addEventListener("click",async()=>{
+    const button=$("#testconn");if(button.dataset.running==="true")return;
+    button.dataset.running="true";button.disabled=true;button.textContent="Testing...";button.setAttribute("aria-busy","true");
+    const t=$("#testres"),provider=cur.provider,model=chosenModel(),base=$("#base").value.trim();
+    t.className="testres busy";t.replaceChildren(el("span",{class:"connection-status-icon","aria-hidden":"true",text:"…"}),document.createTextNode("Testing..."));pvFollow();
+    let ok=false,message="";
+    try{const r=await api("/api/provider/test",{provider,model,base_url:base});ok=r.ok;message=r.message}catch(e){message=e.message}
+    testLog.unshift({p:NAMES[provider]||provider,ok,detail:message,t:new Date().toLocaleTimeString([],{hour:"2-digit",minute:"2-digit"})});testLog.length=Math.min(testLog.length,5);
+    if(cur.provider===provider&&chosenModel()===model&&$("#base").value.trim()===base){
+      t.className="testres "+(ok?"ok":"bad");t.replaceChildren(el("span",{class:"connection-status-icon","aria-hidden":"true",text:ok?"✓":"!"}),document.createTextNode((ok?"Passed. ":"Failed. ")+message));
+      if(!matchMedia("(prefers-reduced-motion:reduce)").matches&&!['calm','none'].includes(theme.motion))t.querySelector(".connection-status-icon").animate([{opacity:0},{opacity:1}],{duration:160,easing:"ease-out"});
+    }
+    button.dataset.running="false";button.disabled=!canEdit||testBlocked;button.textContent="Test connection";button.removeAttribute("aria-busy");pvFollow();
+  });
   $("#apply").addEventListener("click", async function () {if(this.disabled)return;const label=this._savedLabel||this.textContent;let didSave=false;clearTimeout(this._savedTimer);this.classList.remove("save-confirmed");this.disabled=true;this.dataset.saving="true";this.textContent="Saving...";try {const submitted=read(),result=(await api("/api/settings", { settings: submitted })).settings;const edited=JSON.stringify(read())!==JSON.stringify(submitted);if(!edited){cur=result;draw()}recommendationPrior=null;$("#recommendationUndo")?.remove();document.dispatchEvent(new CustomEvent("cc-answer-saved",{detail:result}));localStorage.setItem("cc_config_changed", String(Date.now()));say(edited?"Previous answer settings saved. Newer edits are still unsaved.":"Applied. New questions use these settings."); didSave=true; } catch (e) { say(e.message, true); }finally{this.disabled=!canEdit;this.dataset.saving="false";this.textContent=label;if(didSave)window.CCSavedFeedback(this,label)} });
   $("#save").addEventListener("click", async function () {if(this.disabled)return;const setupName=$("#sname").value.trim().slice(0,60);if(!setupName)return say("Enter a setup name first.",true);if([...$("#states").options].some(o=>o.value===setupName)&&!confirm("Replace the saved setup named "+setupName+"?"))return;if(!appearanceValid())return;this.disabled=true;const label=this._savedLabel||this.textContent;let didSave=false;clearTimeout(this._savedTimer);this.classList.remove("save-confirmed");this.textContent="Saving...";try { const snapshot=clone(theme),response=await persistAppearance(snapshot);saved=clone(response.theme||snapshot);changed(); const n = (await api("/api/states/save", { name: setupName })).name; await states(); say("Saved as \u201c" + n + "\u201d."); didSave=true; } catch (e) { say(e.message, true); }finally{this.disabled=!canEdit;this.textContent=label;if(didSave)window.CCSavedFeedback(this,label)} });
   $("#states").addEventListener("change",syncDeleteLook);

@@ -74,3 +74,13 @@ html body.settings-tabs .memory-graph{scroll-margin-top:144px}
 @media(prefers-reduced-motion:reduce){.sidebar-shortcuts button,.chat-width-shortcuts button{transition:none!important}}
 html[data-motion=none] .sidebar-shortcuts button,html[data-motion=none] .chat-width-shortcuts button{transition:none!important}
 html body.settings-tabs .sidebar-shortcuts button[aria-pressed=true],html body.settings-tabs .chat-width-shortcuts button[aria-pressed=true]{background:#edf2e8!important}
+
+html body.settings-tabs #seg button[data-p]{transition:background-color 160ms ease-out,border-color 160ms ease-out!important;transform:none!important;min-height:48px!important}
+html body.settings-tabs #seg button[data-p]:hover{border-color:#78917d!important;transform:none!important}
+#seg .provider-name{flex:1;text-align:left;min-width:0}
+#seg .provider-selected{display:inline-block;width:14px;flex:0 0 14px;opacity:0;transition:opacity 160ms ease-out}
+#seg [aria-checked=true] .provider-selected{opacity:1}
+.connection-status-icon{display:inline-block;min-width:16px;text-align:center;margin-right:6px}
+#testconn{min-width:142px}
+@media(prefers-reduced-motion:reduce){html body.settings-tabs #seg button[data-p],#seg .provider-selected{transition:none!important}}
+html[data-motion=none] body.settings-tabs #seg button[data-p],html[data-motion=none] #seg .provider-selected{transition:none!important}
