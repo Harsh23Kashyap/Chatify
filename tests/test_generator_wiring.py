@@ -25,6 +25,12 @@ class WiringTests(unittest.TestCase):
    self.assertEqual(len(f.messages),2);self.assertNotEqual(result['prompt'],output)
    self.assertIn('reusable instructions',f.messages[1][0]['content'])
    self.assertIn('never perform the selected stage',f.messages[0][0]['content'])
+ def test_instruction_with_worked_output_is_not_domain_quality(self):
+  prompt="Write up to 3 short keyword search queries for the question. One per line. Example question: What meteor showers occur? Expected search queries: meteor dates"
+  self.assertTrue(d.validate_draft('queries',{'prompt':prompt}))
+  f=Fake([json.dumps({'prompt':prompt}),json.dumps({'prompt':d.template('queries','space and meteors')})])
+  self.assertTrue(g.generate_prompt(f,{'provider':{'type':'openai'}},'queries','space and meteors')['model_used'])
+  self.assertEqual(len(f.messages),2)
  def test_instance_output_twice_fails_bounded(self):
   f=Fake([json.dumps({'prompt':'How can I use a specific recipe to prepare a dish?'})]*2)
   with self.assertRaisesRegex(ValueError,'usable prompt'):
