@@ -570,13 +570,26 @@ async function init() {
     dialog.append(el('header',{class:'reading-head'},el('h2',{text:'Review an action'})));
     const content=el('div',{class:'action-body'});dialog.append(content);
     for(const tool of catalog) content.append(el('button',{class:'reading-done',onclick:()=>{
-     content.replaceChildren(el('h3',{text:tool.label}));const inputs={};
-     for(const [name,spec] of Object.entries(tool.fields)){const input=el(name==='text'?'textarea':'input',{maxlength:spec.maxLength,'aria-label':name});inputs[name]=input;content.append(el('label',{text:name}),input)}
-     content.append(el('button',{class:'reading-done',onclick:async()=>{try{
-      const args=Object.fromEntries(Object.entries(inputs).map(([k,v])=>[k,v.value]));const review=await api('/api/actions/prepare',{tool:tool.id,args});
-      content.replaceChildren(el('h3',{text:review.label}),el('p',{text:'Exact action: '+review.mode+' · '+review.tool}),el('pre',{text:JSON.stringify(review.args,null,2)}),el('p',{text:'Saved under this app identity. Shared-login modes share notes. Review expires in 5 minutes.'}));
-      content.append(el('button',{class:'reading-done',onclick:async(e)=>{e.currentTarget.disabled=true;try{const result=await api('/api/actions/execute',{ticket:review.ticket});content.replaceChildren(el('h3',{text:'Action complete'}),el('pre',{text:JSON.stringify(result,null,2)}))}catch(err){toast(err.message)}}},'Confirm action'));
-     }catch(err){toast(err.message)}}},'Preview action'));
+     const inputs={},labels={title:'Note title',text:'Note text'};
+     const form=()=>{content.replaceChildren(el('h3',{text:tool.label}));
+      for(const [name,spec] of Object.entries(tool.fields)){const id='action-field-'+name,input=el(name==='text'?'textarea':'input',{id,maxlength:spec.maxLength,'aria-label':labels[name]||name});input.value=inputs[name]?.value||'';inputs[name]=input;content.append(el('label',{for:id,text:labels[name]||name}),input)}
+      const error=el('p',{class:'action-error',role:'status'});content.append(error);
+      const preview=el('button',{class:'reading-done',text:'Preview action',onclick:async()=>{if(preview.disabled)return;preview.disabled=true;preview.textContent='Preparing...';error.textContent='';
+       try{const args=Object.fromEntries(Object.entries(inputs).map(([k,v])=>[k,v.value])),review=await api('/api/actions/prepare',{tool:tool.id,args});
+        content.replaceChildren(el('h3',{text:review.label}),el('p',{text:review.mode==='write'?'This will save a note in this app.':'This will show your notes in this app.'}));
+        for(const [name,value] of Object.entries(review.args))content.append(el('section',{class:'action-value'},el('h4',{text:labels[name]||name}),el('p',{text:value})));
+        content.append(el('p',{text:'Saved under this app identity. Shared-login modes share notes. Review expires in 5 minutes.'}));
+        const failure=el('p',{class:'action-error',role:'status'}),back=el('button',{class:'chip',text:'Back to edit',onclick:form});
+        const confirm=el('button',{class:'reading-done',text:'Confirm action',onclick:async()=>{if(confirm.disabled)return;confirm.disabled=true;back.disabled=true;confirm.textContent='Working...';
+         try{const result=await api('/api/actions/execute',{ticket:review.ticket});content.replaceChildren(el('h3',{text:result.saved?'Note saved':'Your notes'}));
+          if(result.saved)content.append(el('p',{text:'Your note was saved in this app.'}));
+          else if(Array.isArray(result.notes)){if(!result.notes.length)content.append(el('p',{text:'No notes saved yet.'}));for(const note of result.notes)content.append(el('section',{class:'action-value'},el('h4',{text:note.title}),el('p',{text:note.text})))}
+          else content.append(el('p',{text:'Action complete.'}));
+         }catch(err){failure.textContent=err.message+' Return to the form to review a fresh action. If the connection was interrupted, check your notes before saving again.';confirm.textContent='Action not confirmed';back.disabled=false}
+        }});content.append(failure,back,confirm);
+       }catch(err){error.textContent=err.message;preview.disabled=false;preview.textContent='Preview action'}
+      }});content.append(preview);
+     };form();
     }},tool.label));
     if(!catalog.length)content.append(el('p',{text:'No actions enabled.'}));
     dialog.append(el('footer',{},el('button',{class:'chip',onclick:()=>dialog.close()},'Close')));dialog.addEventListener('close',()=>{dialog.remove();$('#actionsBtn').focus()});document.body.append(dialog);dialog.showModal();

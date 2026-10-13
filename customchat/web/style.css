@@ -855,3 +855,6 @@ html:not(.preview) .composer>.box{width:100%}
 .history-state{padding:10px 12px;font-size:13px;line-height:1.5;display:flex;flex-wrap:wrap;align-items:center;gap:8px}.history-retry{min-height:44px;padding:6px 12px;border:1px solid var(--line);background:var(--paper);color:var(--ink);border-radius:8px;font:inherit;cursor:pointer}.history-retry:focus-visible{outline:2px solid var(--brand);outline-offset:2px}@media(prefers-reduced-motion:no-preference){html:not([data-motion=none]) #list>.empty{animation:history-empty-in .16s ease-out}}@keyframes history-empty-in{from{opacity:0}to{opacity:1}}
 
 .item:focus-within .acts{display:flex}.item:focus-within .t{max-width:calc(100% - 144px)}
+
+.action-body label,.action-body h4,.action-body p{margin:0}.action-body input,.action-body textarea{box-sizing:border-box;min-height:44px;font:inherit}.action-body textarea{min-height:120px;resize:vertical}.action-value{display:grid;gap:8px;padding:12px;border:1px solid var(--line);border-radius:8px}.action-value p{white-space:pre-wrap;overflow-wrap:anywhere}.action-error:empty{display:none}.action-error{color:var(--danger)!important}.action-dialog{max-height:calc(100vh - 32px);overflow:auto}.action-body button{min-height:44px}
+.action-dialog footer button{min-height:44px;min-width:44px}
