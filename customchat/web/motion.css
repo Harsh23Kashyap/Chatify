@@ -285,3 +285,17 @@ html[data-motion=none] body.settings-tabs #menu a{transition:none!important}
  html body.settings-tabs.mode-swap .settings-active-panel{animation:none!important}
  html body.settings-tabs #menu a{transition:none!important}
 }
+/* Appearance accordions use the same quiet disclosure cue as helper panels. */
+html body.settings-tabs details.grp>summary::before{
+ content:''!important;display:inline-block;width:6px;height:6px;margin-right:8px;
+ border-right:1.5px solid currentColor;border-bottom:1.5px solid currentColor;
+ transform:rotate(-45deg);transition:transform 160ms ease-out!important;
+}
+html body.settings-tabs details.grp[open]>summary::before{transform:rotate(45deg)}
+html body.settings-tabs details.grp[open]>*:not(summary){animation:m-in 160ms ease-out both!important;transform:none!important}
+html[data-motion=none] body.settings-tabs details.grp>summary::before{transition:none!important}
+html[data-motion=none] body.settings-tabs details.grp[open]>*:not(summary){animation:none!important}
+@media(prefers-reduced-motion:reduce){
+ html body.settings-tabs details.grp>summary::before{transition:none!important}
+ html body.settings-tabs details.grp[open]>*:not(summary){animation:none!important}
+}
