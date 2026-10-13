@@ -814,3 +814,4 @@ html:not(.preview) .composer>.box{width:100%}
 .playground-action small{margin-top:6px!important}
 @media(min-width:761px){.playground-questions{grid-auto-rows:1fr}}
 @media(max-width:760px){html:not(.preview) .composer{padding-left:20px;padding-right:20px}}
+@media(max-height:700px){html:not(.preview) .thread:has(.hero)>.wrap{padding-top:8px!important}html:not(.preview) .hero.playground{margin-top:0!important}html:not(.preview) .playground h1{margin-top:0!important}}
