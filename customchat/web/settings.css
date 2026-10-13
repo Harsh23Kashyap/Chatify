@@ -1186,3 +1186,10 @@ body.settings-tabs .editor-choice{transition:background-color 160ms cubic-bezier
 #sec-search .source-key-card label.check input[type=checkbox]{transition:background-color 160ms ease!important}
 #sec-search .source-key-card label.check input[type=checkbox]::after{transition:transform 160ms ease!important}
 @media(prefers-reduced-motion:reduce){#sec-search .source-key-card label.check input[type=checkbox],#sec-search .source-key-card label.check input[type=checkbox]::after{transition:none!important}}
+#sec-search .source-key-notes>summary{list-style:none;display:flex;align-items:center;gap:6px}
+#sec-search .source-key-notes>summary::-webkit-details-marker{display:none}
+#sec-search .source-key-notes>summary::before{content:'';display:inline-block;width:5px;height:5px;border-right:1px solid currentColor;border-bottom:1px solid currentColor;transform:rotate(-45deg);transition:transform 160ms ease;flex:none}
+#sec-search .source-key-notes[open]>summary::before{transform:rotate(45deg)}
+#sec-search .source-key-notes[open]>.h{animation:source-notes-in 160ms ease-out}
+@keyframes source-notes-in{from{opacity:0}to{opacity:1}}
+@media(prefers-reduced-motion:reduce){#sec-search .source-key-notes>summary::before{transition:none}#sec-search .source-key-notes[open]>.h{animation:none}}
