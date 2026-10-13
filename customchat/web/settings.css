@@ -1240,3 +1240,8 @@ html[data-motion=none] #pv.preview-changing{opacity:1}
 
 .workspace-live-status{font-size:13px;line-height:1.5;min-height:40px;margin:10px 0}
 .workspace-check-running::before{content:'…';display:inline-block;width:16px;margin-right:6px;font-weight:600}
+/* A quiet reserved selection mark, shared by prompt and helper choices. */
+body.settings-tabs .editor-choice{position:relative;padding-right:30px!important}
+body.settings-tabs .editor-choice::after{content:'✓';position:absolute;right:10px;top:10px;line-height:16px;font-size:12px;opacity:0;transition:opacity 160ms ease-out}
+body.settings-tabs .editor-choice[aria-pressed=true]::after{opacity:1}
+@media(prefers-reduced-motion:reduce){body.settings-tabs .editor-choice::after{transition:none!important}}
