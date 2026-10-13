@@ -816,3 +816,10 @@ html:not(.preview) .composer>.box{width:100%}
 @media(max-width:760px){html:not(.preview) .composer{padding-left:20px;padding-right:20px}}
 @media(max-height:700px){html:not(.preview) .thread:has(.hero)>.wrap{padding-top:8px!important}html:not(.preview) .hero.playground{margin-top:0!important}html:not(.preview) .playground h1{margin-top:0!important}}
 @media(max-width:360px){.bar #chatTitle{display:none}}
+
+/* Only a new user message arrives. Streamed content is already live. */
+@media(prefers-reduced-motion:no-preference){html:not([data-motion=none]):not([data-motion=calm]) .user-arrive{animation:cc-answer-in .16s ease-out both}}
+.tk{animation:none!important}.jump.reply-ready{width:auto;border-radius:12px;gap:6px;display:flex;padding:8px 12px;font-size:12px;box-shadow:none}.jump.reply-ready span{white-space:nowrap}
+
+/* Latest-reply control stays above the scrollport and growing composer. */
+.main>.jump{z-index:5}

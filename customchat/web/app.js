@@ -321,6 +321,18 @@ function chartCard() {
   return el("div", { class: "chartcard" }, el("b", { text: "Sample chart: groups of documents" }), el("div", { class: "chartrow" }, svg, el("ul", {}, parts.map(([n, v, c]) => el("li", {}, el("i", { style: "background:" + c }), n + " " + v + "%")))));
 }
 function rdy() { const q = $("#q"), s = $("#send"); if (!q || !s) return; const on = !!q.value.trim(); s.disabled = !S.busy && !on; s.classList.toggle("idle", s.disabled); if (S.busy) return; if (on && !s.classList.contains("on")) { s.classList.add("ready"); setTimeout(() => s.classList.remove("ready"), 200); } s.classList.toggle("on", on); }
+function syncLatest() {
+  const th = $("#thread"), jump = $("#jump"); if (!th || !jump) return;
+  jump.style.bottom = ($(".composer")?.offsetHeight || 96) + 16 + "px";
+  const away = th.scrollHeight - th.scrollTop - th.clientHeight > 100;
+  if (!away) jump.dataset.reply = "";
+  const ready = jump.dataset.reply === "ready";
+  jump.classList.toggle("show", away); jump.tabIndex = away ? 0 : -1;
+  jump.setAttribute("aria-label", ready ? "Reply ready. Scroll to latest" : "Scroll to latest");
+  jump.title = ready ? "Reply ready. Scroll to latest" : "Scroll to latest";
+  jump.classList.toggle("reply-ready", ready);
+  jump.replaceChildren(svg("down"), ...(ready ? [el("span", {text:"Reply ready"})] : []));
+}
 function drawThread() {
   const th = $("#thread"), priorScroll = th.scrollTop, keep = th.scrollHeight - th.scrollTop - th.clientHeight > 100; th.replaceChildren();
   const w = el("div", { class: "wrap" });
@@ -331,7 +343,7 @@ function drawThread() {
   } else { if (PREVIEW) w.append(heroView()); S.turns.forEach((t, i) => w.append(...turnView(t, S.turns[i - 1]))); if (PREVIEW) w.append(chartCard()); }
   { const rows = [...w.querySelectorAll(".row")], same = th.dataset.chat === String(S.chat), prev = same ? +th.dataset.n || 0 : 0; rows.forEach((r, i) => { if (i >= prev) r.classList.add("fresh"); }); th.dataset.chat = String(S.chat); th.dataset.n = rows.length; }
   th.append(w); th.scrollTop = PREVIEW || !S.turns.length ? 0 : (keep ? priorScroll : th.scrollHeight);
-  $("#pills").replaceChildren();
+  $("#pills").replaceChildren(); syncLatest();
 }
 
 function activateHistory(e,open){if(e.target!==e.currentTarget)return;if(e.key==='Enter'||e.key===' '){e.preventDefault();open()}}
@@ -364,6 +376,7 @@ async function loadList() {
 }
 
 async function openChat(id) {
+  $("#jump").dataset.reply = "";
   S.view = "chat";
   setTemp(false);
   S.chat = id; S.newTopic = false;
@@ -375,6 +388,7 @@ async function openChat(id) {
   $("#app").classList.remove("menu-open", "src"); drawThread(); loadList(); $("#q").focus();
 }
 async function openTopic(id) {
+  $("#jump").dataset.reply = "";
   S.view = "topic";
   setTemp(false);
   S.topic = id; S.newTopic = false;
@@ -406,9 +420,9 @@ async function send() {
   const w = $("#thread .wrap") || $("#thread");
   w.querySelector(".hero")?.remove();
   const live = el("div", { class: "a", id: "live" });
-  w.append(el("div", { class: "q", text: q }), el("div", { class: "think", id: "think" }, el("span", { class: "dot" }), el("span", { class: "dot" }), el("span", { class: "dot" }), el("span", { class: "tm", id: "thinkTm", text: "0.0s" })), live);
+  w.append(el("div", { class: "q user-arrive", text: q }), el("div", { class: "think", id: "think" }, el("span", { class: "dot" }), el("span", { class: "dot" }), el("span", { class: "dot" }), el("span", { class: "tm", id: "thinkTm", text: "0.0s" })), live);
   const t0 = Date.now(), tick = setInterval(() => { const e = $("#thinkTm"); if (e) e.textContent = ((Date.now() - t0) / 1000).toFixed(1) + "s"; else clearInterval(tick); }, 100);
-  const th = $("#thread"); th.scrollTop = th.scrollHeight;
+  const th = $("#thread"); $("#jump").dataset.reply = ""; th.scrollTop = th.scrollHeight; syncLatest();
   let text = "", result = null, err = null;
   try {
     await stream({ scope: S.scope, chat: S.temp ? null : S.chat, question: q, style: $("#style").value, topic: S.topic, new_topic: S.newTopic, sources: S.sources.size ? [...S.sources] : null, temporary: S.temp, history: S.temp ? S.turns.slice(-200).map((t) => ({ question: t.question, answer: t.answer })) : undefined, use_profile: S.useProfile && !S.temp }, (ev) => {
@@ -422,7 +436,7 @@ async function send() {
             live.classList.add("answer-arrive");
           } else thinking.remove();
         }
-        text += ev.data; const sp = document.createElement("span"); sp.className = "tk"; sp.textContent = ev.data; const follow = th.scrollHeight - th.scrollTop - th.clientHeight < 100; live.append(sp); if (follow) th.scrollTop = th.scrollHeight; }
+        text += ev.data; const sp = document.createElement("span"); sp.className = "tk"; sp.textContent = ev.data; const follow = th.scrollHeight - th.scrollTop - th.clientHeight < 100; live.append(sp); if (follow) th.scrollTop = th.scrollHeight; syncLatest(); }
       else if (ev.type === "done") result = ev.data;
       else if (ev.type === "error") err = ev.data;
     });
@@ -438,13 +452,15 @@ async function send() {
     document.body.append(u); setTimeout(() => u.remove(), 7000);
   }
   status.dataset.state=result?"done":"error"; status.textContent = result ? "Reply ready" : (err || "Reply interrupted"); setTimeout(() => { if (!S.busy) status.hidden = true; }, 2500);
-  S.busy = false; applyIcons(); sendIcon("send", "Send"); drawThread(); loadList(); $("#q").focus();
+  const readingEarlier = th.scrollHeight - th.scrollTop - th.clientHeight > 100;
+  if (result && readingEarlier) $("#jump").dataset.reply = "ready";
+  S.busy = false; applyIcons(); sendIcon("send", "Send"); drawThread(); loadList(); $("#q").focus({preventScroll:true});
   if (!result) {
     // keep what the user typed, and any text that did arrive, instead of losing both
     if (text && err !== "Stopped") { const w2 = $("#thread .wrap") || $("#thread"); w2.querySelector(".hero")?.remove(); w2.append(el("div", { class: "q", text: q }), el("div", { class: "a" }, text + "\n\n(Cut short. Click the notice to ask again.)")); }
     else if (!$("#q").value) { $("#q").value = q; autosize(); }
   }
-  rdy();
+  syncLatest(); rdy();
 }
 // Overlay lifecycle shared by source, context and account dialogs.
 function mountModal(back, dismiss = true) {
@@ -560,7 +576,8 @@ async function init() {
   document.querySelectorAll(".tab").forEach((b) => b.addEventListener("click", () => { document.querySelectorAll(".tab").forEach((x) => x.classList.toggle("on", x === b)); S.tab = b.dataset.tab; loadList(); }));
   document.addEventListener("keydown", (e) => { if (e.key === "Escape") $("#app").classList.remove("src", "menu-open"); });
   const th = $("#thread"), jump = $("#jump");
-  th.addEventListener("scroll", () => jump.classList.toggle("show", th.scrollHeight - th.scrollTop - th.clientHeight > 240));
+  th.addEventListener("scroll", syncLatest);
+  new ResizeObserver(syncLatest).observe($(".composer"));
   jump.addEventListener("click", () => th.scrollTo({ top: th.scrollHeight, behavior: motionAllowed()?"smooth":"auto" }));
   $("#menu").replaceChildren(svg("menu")); $("#upload").replaceChildren(svg("clip")); $("#exportChat").replaceChildren(svg("tray")); $("#newTopic").replaceChildren(svg("topic")); $("#newTopic").onclick = () => { S.newTopic = true; S.topic = null; toast("Next question starts a new conversation"); }; $("#send").replaceChildren(svg("send")); $("#jump").replaceChildren(svg("down"));
   $("#upload").addEventListener("click", uploadDialog);
