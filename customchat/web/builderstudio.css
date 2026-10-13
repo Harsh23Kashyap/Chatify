@@ -157,3 +157,5 @@ html body dialog.app-builder #builderBrief{transition:border-color .18s ease,box
 
 .builder-scope-help{font-size:12px;line-height:1.5;margin:0 0 16px;overflow-wrap:break-word}.builder-scope-help.arrived{animation:studio-step-panel .18s ease-out}html body dialog.app-builder #builderScope{transition:border-color .18s ease,background .18s ease}
 @media(prefers-reduced-motion:reduce){.builder-scope-help.arrived{animation:none!important}html body dialog.app-builder #builderScope{transition:none!important}}
+
+.builder-group-board article{transition:background .18s ease,border-color .18s ease}.builder-group-mark{transition:background .18s ease,border-color .18s ease,color .18s ease}
