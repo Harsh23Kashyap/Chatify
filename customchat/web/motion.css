@@ -357,3 +357,7 @@ html[data-motion=none] .hero .playground-question:active:not(:disabled),html[dat
 .memory-graph.local-estimate-changed{animation:m-in 160ms ease-out both!important}
 html[data-motion=none] .memory-graph.local-estimate-changed{animation:none!important}
 @media(prefers-reduced-motion:reduce){.memory-graph.local-estimate-changed{animation:none!important}}
+/* Connection availability changes the existing badge, not the preview card. */
+html .pvm-badge{transition:background-color 160ms ease-out,color 160ms ease-out!important}
+html[data-motion=none] .pvm-badge{transition:none!important}
+@media(prefers-reduced-motion:reduce){html .pvm-badge{transition:none!important}}
