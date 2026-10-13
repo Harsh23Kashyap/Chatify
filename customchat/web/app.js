@@ -234,7 +234,7 @@ function turnView(t, prev) {
     await api("/api/delete-turn", { turn: t.id }); S.turns = S.turns.filter((x) => x.id !== t.id); drawThread();
     toast("Answer deleted.", "Undo", async () => { await api("/api/restore-turn", { turn: t.id }); S.turns = await api(S.view === "topic" && S.topic ? "/api/topic-turns?topic=" + S.topic : "/api/turns?chat=" + S.chat); drawThread(); }); } }, "Delete"));
   const more = [...meta.querySelectorAll("[data-more]")];
-  if (more.length) { const d = el("details", { class: "more" }, el("summary", { class: "chip", title: "More actions" }, t.evidence.length ? "More" : "Details")); const box = el("div", { class: "more-box" }); more.forEach((b) => box.append(b)); d.append(box); meta.append(d); }
+  if (more.length) { const d = el("details", { class: "more" }, el("summary", { class: "chip" }, t.evidence.length ? "More" : "Details")); const box = el("div", { class: "more-box" }); more.forEach((b) => box.append(b)); d.append(box); meta.append(d); }
   return nodes;
 }
 async function branchQuestion(t) {
