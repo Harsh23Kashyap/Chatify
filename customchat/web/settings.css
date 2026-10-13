@@ -1252,3 +1252,10 @@ body.settings-tabs.simple #sec-presets #presetCurrent{display:block!important;ma
 details.helper>summary::after,#sec-prompts>.workspace-fields>summary::before,#sec-search .source-key-notes>summary::before{transition:transform 160ms ease-out!important}
 @media(prefers-reduced-motion:reduce){.seg button,details.helper>summary::after,#sec-prompts>.workspace-fields>summary::before,#sec-search .source-key-notes>summary::before{transition:none!important}}
 html[data-motion=none] .seg button,html[data-motion=none] details.helper>summary::after,html[data-motion=none] #sec-prompts>.workspace-fields>summary::before,html[data-motion=none] #sec-search .source-key-notes>summary::before{transition:none!important}
+
+/* Keep the color being edited visible while its section scrolls. */
+#sec-colors .selected-color-summary{position:sticky;z-index:90;display:flex;align-items:center;gap:10px;padding:10px 12px;margin:12px 0;background:#fffdf7;border:1px solid #d8e1d2;border-radius:8px;font-size:13px;line-height:1.4}
+#sec-colors .selected-color-summary[hidden]{display:none}
+.selected-color-summary b{display:block;font-size:13px;font-weight:500}
+.selected-color-value{display:block;font-variant-numeric:tabular-nums}
+.selected-color-chip{flex:none;width:32px;height:32px;border:1px solid #829187;border-radius:6px}

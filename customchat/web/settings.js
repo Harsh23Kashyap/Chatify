@@ -430,9 +430,10 @@ function control(f) {
   if (f.type === "color") {
     const swatch = el("input", { type: "color", id, value: v || "#888888", "aria-label": f.label }), hex = el("input", { type: "text", class: "hex", value: v || "", maxlength: "7", "aria-label": f.label + " hex code", placeholder: "automatic" });
     const syncSwatch=()=>swatch.style.setProperty("--swatch-color",swatch.value);syncSwatch();
-    swatch.addEventListener("input", () => { syncSwatch();hex.value = swatch.value; hex.setAttribute("aria-invalid","false");hex.setCustomValidity("");setv(f, swatch.value); });
-    hex.addEventListener("input", () => { const valid=/^#[0-9a-fA-F]{6}$/.test(hex.value)||(f.clearable&&hex.value==="");hex.setAttribute("aria-invalid",String(!valid));hex.setCustomValidity(valid?"":"Use a six-digit hex color, for example #173f35"); if (/^#[0-9a-fA-F]{6}$/.test(hex.value)) { swatch.value = hex.value;syncSwatch(); setv(f, hex.value.toLowerCase()); } else if (f.clearable && hex.value === "") setv(f, ""); });
-    input = el("div", { class: "colorrow" }, swatch, hex); if (f.clearable) input.append(el("button", { type: "button", class: "mini", onclick: () => { hex.value = "";hex.setAttribute("aria-invalid","false");hex.setCustomValidity("");setv(f, ""); } }, "Auto"));
+    for(const n of [swatch,hex])n.addEventListener("focus",()=>showSelectedColor(f));
+    swatch.addEventListener("input", () => { syncSwatch();hex.value = swatch.value; hex.setAttribute("aria-invalid","false");hex.setCustomValidity("");setv(f, swatch.value);showSelectedColor(f); });
+    hex.addEventListener("input", () => { const valid=/^#[0-9a-fA-F]{6}$/.test(hex.value)||(f.clearable&&hex.value==="");hex.setAttribute("aria-invalid",String(!valid));hex.setCustomValidity(valid?"":"Use a six-digit hex color, for example #173f35"); if (/^#[0-9a-fA-F]{6}$/.test(hex.value)) { swatch.value = hex.value;syncSwatch(); setv(f, hex.value.toLowerCase()); } else if (f.clearable && hex.value === "") setv(f, "");if(valid)showSelectedColor(f); });
+    input = el("div", { class: "colorrow" }, swatch, hex); if (f.clearable) input.append(el("button", { type: "button", class: "mini", onclick: () => { hex.value = "";hex.setAttribute("aria-invalid","false");hex.setCustomValidity("");setv(f, "");showSelectedColor(f); } }, "Auto"));
   } else if (f.type === "logo") {
     input = logoControl(f, v);
   } else if (f.type === "emoji") {
@@ -576,6 +577,16 @@ function pvFollow() {
     hist.hidden = !(m && testLog.length); hist.replaceChildren(el("b", { text: "Recent tests" }), ...testLog.map((x) => el("div", { class: "pvh-row" }, el("span", { class: "fitdot " + (x.ok ? "green" : "red") }), el("span", { text: x.p + (x.ok ? " worked" : " failed"),title:x.detail || "" }), el("span", { class: "h", text: x.t })))); }
 }
 function pvPop() { const f = document.getElementById("pv"); if (!f || matchMedia("(prefers-reduced-motion:reduce)").matches || ["calm","none"].includes(theme.motion)) return; f.animate([{ opacity: .75 }, { opacity: 1 }], { duration: 220, easing: "ease-out" }); }
+let selectedColorField=null;
+function showSelectedColor(f){
+  selectedColorField=f;
+  const sec=document.getElementById('sec-colors'),bar=sec?.querySelector('.selected-color-summary');if(!bar)return;
+  const value=get(f)||'',nav=document.getElementById('settingsNavTop');
+  bar.style.top=((nav?.getBoundingClientRect().height||0)+8)+'px';bar.hidden=false;
+  bar.querySelector('b').textContent=f.label+' · '+editMode+' theme';
+  bar.querySelector('.selected-color-value').textContent=value||'App default';
+  bar.querySelector('.selected-color-chip').style.backgroundColor=value||'transparent';
+}
 function syncColorEditor(sec) {
   sec.querySelectorAll('[data-m]').forEach(b=>b.setAttribute('aria-checked',String(b.dataset.m===editMode)));
   const spec=SECTIONS.find(s=>s.id==='colors');
@@ -583,6 +594,7 @@ function syncColorEditor(sec) {
     const swatch=sec.querySelector('#f-'+(f.colors&&f.key==='sidebar'?'color-sidebar':f.key));if(!swatch)continue;
     const value=get(f)||'';swatch.value=value||'#888888';swatch.style.setProperty('--swatch-color',swatch.value);const hex=swatch.closest('.colorrow')?.querySelector('.hex');if(hex){hex.value=value;hex.setAttribute("aria-invalid","false");hex.setCustomValidity("")}
   }
+  if(selectedColorField)showSelectedColor(selectedColorField);
 }
 function drawLook() {
   const floating=$("#savebar");if(floating)$("main.card").append(floating);
@@ -595,6 +607,9 @@ function drawLook() {
       const tabs = el("div", { class: "seg mini", role: "radiogroup", "aria-label": "Color set being edited" });
       for (const m of ["light", "dark"]) tabs.append(el("button", { type: "button", "data-m": m, role: "radio", "aria-checked": String(editMode === m), onclick: () => { editMode = m; syncColorEditor(sec); pushPreview(); } }, "Edit " + m + " theme"));
       sec.append(tabs);
+      const selected=el('div',{class:'selected-color-summary',hidden:''},el('span',{class:'selected-color-chip','aria-hidden':'true'}),el('div',{},el('b'),el('span',{class:'selected-color-value'})));
+      sec.append(selected);
+
     }
     const byKey = Object.fromEntries(s.fields.map((f) => [f.key, f])); const gs = GROUPS[s.id];
     if (!gs) { const grid = el("div", { class: "fields" }); s.fields.forEach((f) => grid.append(control(f))); sec.append(grid); }
@@ -612,7 +627,7 @@ function drawLook() {
     for(const panel of extra.get(sec.id)||[])sec.append(panel);
     root.append(sec);
   }
-  buildMenu();
+  buildMenu();if(selectedColorField)showSelectedColor(selectedColorField);
 }
 function resetGroup(s) { if (!confirm("Reset only " + s.title + " to the default? Other Appearance sections stay unchanged.")) return; const d = meta.default; for (const f of s.fields) { if (f.colors) theme[editMode][f.key] = d[editMode][f.key]; else {theme[f.key] = d[f.key];if(f.type==="emoji")theme[f.key+"_animated"]=d[f.key+"_animated"];} } drawLook(); changed(); const section=document.getElementById("sec-"+s.id);if(section){const notice=el("p",{class:"section-reset-confirmation",role:"status",text:s.title+" reset to defaults. Other sections unchanged."});section.querySelector(".secfoot").prepend(notice);section.querySelector(".secfoot button")?.focus({preventScroll:true});} }
 function setPvMode(m) { document.querySelectorAll("#pvmode button").forEach((b) => b.setAttribute("aria-checked", String(b.dataset.m === m))); }
