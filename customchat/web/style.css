@@ -804,3 +804,13 @@ html body :is(#newChat,#tempPill){min-height:44px!important}
 html body .sources>.icon,html body .side .acts button{min-width:44px!important;min-height:44px!important}
 html body .meta :is(button.chip,summary.chip){min-height:44px!important;box-sizing:border-box;display:inline-flex;align-items:center;justify-content:center}
 .side .search{min-height:44px}
+/* Keep the question controls on the same reading column as answers. */
+html:not(.preview) .composer{padding-left:clamp(16px,4vw,54px);padding-right:clamp(16px,4vw,54px)}
+html:not(.preview) .composer>.box,html:not(.preview) .composer>.cmeta,html:not(.preview) .composer>.pills{max-width:var(--reading-width,720px);margin-left:auto;margin-right:auto}
+html:not(.preview) .composer>.box{width:100%}
+.playground-action{display:flex;flex-direction:column;align-items:flex-start}
+.playground-action em{font-size:20px!important;line-height:24px;flex:none}
+.playground-action>b{display:block;min-height:2.8em;line-height:1.4}
+.playground-action small{margin-top:6px!important}
+@media(min-width:761px){.playground-questions{grid-auto-rows:1fr}}
+@media(max-width:760px){html:not(.preview) .composer{padding-left:20px;padding-right:20px}}
