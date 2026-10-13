@@ -17,4 +17,10 @@
 @media(prefers-reduced-motion:reduce){.cs.closing .cs-list{display:none;animation:none!important}.cs *{transition:none!important}}
 html[data-motion=none] .cs-list{animation:none!important}html[data-motion=none] .cs-car{transition:none!important}
 
-.cs-list.cs-portal{display:block!important;position:fixed!important;z-index:2000!important;animation:none!important;transform:none!important;overflow-y:auto!important;max-height:var(--picker-height,300px)!important}
+.cs-list.cs-portal{display:block!important;position:fixed!important;z-index:2000!important;animation:csin .16s ease-out;overflow-y:auto!important;max-height:var(--picker-height,300px)!important}
+
+.cs-list.cs-portal[data-origin=above]{--picker-enter-y:3px}.cs-list.cs-portal[data-origin=below]{--picker-enter-y:-3px}
+@keyframes csin{from{opacity:0;transform:translateY(var(--picker-enter-y,-3px))}to{opacity:1;transform:none}}
+.cs-list.cs-portal.cs-exiting{pointer-events:none;animation:csout .12s ease-in forwards}@keyframes csout{to{opacity:0;transform:translateY(var(--picker-enter-y,-3px))}}
+.cs-list[data-keyboard=true] .cs-opt.focused{outline:2px solid var(--brand,#496b46);outline-offset:-2px}
+@media(prefers-reduced-motion:reduce){.cs-list.cs-portal{animation:none!important;transform:none!important}}html[data-motion=none] .cs-list.cs-portal{animation:none!important;transform:none!important}
