@@ -102,15 +102,20 @@ async function codePanel(host) {
   const notice=el("p",{class:"h",role:"status"});
   const persistWeb=()=>api("/api/websearch/source",{on:webOn,providers:[...selected]});
   const persistLibraries=()=>api("/api/catalog",{types:[...libraries]});
+  function guardToggle(input){input.addEventListener("click",e=>{if(input.getAttribute("aria-busy")==="true")e.preventDefault()})}
+  function lockToggle(input){input.dataset.pendingChecked=String(input.checked);input.setAttribute("aria-busy","true");input.setAttribute("aria-disabled","true")}
+  function unlockToggle(input){input.removeAttribute("aria-busy");input.removeAttribute("aria-disabled");delete input.dataset.pendingChecked}
+  function togglePending(input){if(input.getAttribute("aria-busy")!=="true")return false;input.checked=input.dataset.pendingChecked==="true";return true}
+
   host.replaceChildren(el("div",{class:"head"},el("div",{},el("b",{text:"Sources and search keys"}),el("small",{text:"Your documents work without extra keys."}))),
     el("p",{class:"h",text:"Turn a service on, then add its key here. Missing keys pause that service, not your other sources. Keys are saved privately on this server."}));
-  const webToggle=el("input",{type:"checkbox","aria-label":"Add live web results"});webToggle.checked=webOn;
-  webToggle.addEventListener("change",async()=>{const before=webOn;webOn=webToggle.checked;if(!selected.size){notice.textContent="Choose a service below first.";webOn=false;webToggle.checked=false;return}webToggle.disabled=true;try{await persistWeb();notice.textContent="Live web setting saved. Service connections have not been tested."}catch(e){webOn=before;webToggle.checked=before;notice.textContent=e.message}finally{webToggle.disabled=false}});
+  const webToggle=el("input",{type:"checkbox","aria-label":"Add live web results"});webToggle.checked=webOn;guardToggle(webToggle);
+  webToggle.addEventListener("change",async()=>{if(togglePending(webToggle))return;const before=webOn;webOn=webToggle.checked;if(!selected.size){notice.textContent="Choose a service below first.";webOn=false;webToggle.checked=false;return}lockToggle(webToggle);try{await persistWeb();notice.textContent="Live web setting saved. Service connections have not been tested."}catch(e){webOn=before;webToggle.checked=before;notice.textContent=e.message}finally{unlockToggle(webToggle)}});
   host.append(el("label",{class:"check sw"},webToggle," Add live web results to answers"),notice,el("h3",{text:"Web search"}));
   function service(id,name,library,keyfree,url){
     const set=library?libraries:selected;
     let has=keyfree||(library?!!(state.catalog_keys||{})[id]:!!keyStatus[id]);
-    const cb=el("input",{type:"checkbox","aria-label":"Enable "+name});cb.checked=set.has(id);
+    const cb=el("input",{type:"checkbox","aria-label":"Enable "+name});cb.checked=set.has(id);guardToggle(cb);
     const badge=el("span",{class:"source-key-badge"});const status=el("small",{class:"h",role:"status"});
     const card=el("section",{class:"source-key-card"});
     const input=el("input",{type:"password",autocomplete:"off",spellcheck:"false","aria-label":name+" API key",placeholder:has?"Saved key available (replace only)":"(not filled) - "+name+" API key"});
@@ -120,7 +125,7 @@ async function codePanel(host) {
     const save=el("button",{type:"button",class:"go blue",text:"Save key",onclick:async()=>{if(save.disabled)return;if(!input.value.trim()){status.textContent="Paste a key first. Existing key kept.";return}const submitted=input.value;save.disabled=remove.disabled=true;save.textContent="Saving...";status.textContent="Saving key...";try{const r=await api(endpoint,{id,key:submitted});if(input.value===submitted)input.value="";has=r.has_key;refresh()}catch(e){status.textContent=e.message}finally{save.disabled=remove.disabled=false;save.textContent="Save key"}}});
     const remove=el("button",{type:"button",class:"go ghost",text:"Remove key",onclick:async()=>{if(remove.disabled)return;remove.disabled=save.disabled=true;status.textContent="Removing key...";try{const r=await api(endpoint,{id,clear:true});has=r.has_key;refresh()}catch(e){status.textContent=e.message}finally{remove.disabled=save.disabled=false}}});
     keyrow.append(input,save,remove);
-    cb.addEventListener("change",async()=>{const before=set.has(id);cb.checked?set.add(id):set.delete(id);refresh();cb.disabled=true;try{await(library?persistLibraries():persistWeb())}catch(e){before?set.add(id):set.delete(id);cb.checked=before;refresh();status.textContent=e.message}finally{cb.disabled=false}});
+    cb.addEventListener("change",async()=>{if(togglePending(cb))return;const before=set.has(id);cb.checked?set.add(id):set.delete(id);refresh();lockToggle(cb);try{await(library?persistLibraries():persistWeb())}catch(e){before?set.add(id):set.delete(id);cb.checked=before;refresh();status.textContent=e.message}finally{unlockToggle(cb)}});
     card.append(el("div",{class:"source-key-top"},el("label",{class:"check sw"},cb,el("b",{text:name})),badge),status,keyrow,notes);refresh();host.append(card);
   }
   const loaded=window.CCLoadedApp || await api("/api/config");
