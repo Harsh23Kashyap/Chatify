@@ -62,3 +62,14 @@ class BuilderHTTP(test_workspace_api.WorkspaceAPITests):
    with self.assertRaises(urllib.error.HTTPError) as error:self.call(self.clients[0],'/api/settings/build/save',{'ticket':plan['ticket'],'confirmed':True})
   self.assertEqual(error.exception.code,400)
   body=json.loads(error.exception.read());self.assertTrue(body['saved_state_uncertain']);self.assertIn('prompts.json',body['error'])
+
+ def test_section_draft_http_retain_reopen_review_keeps_scope(self):
+  from pathlib import Path
+  path=Path(self.cfg['_dir'])/'app.yaml';path.write_text(yaml.safe_dump({k:self.cfg[k] for k in schema.DEFAULTS}));self.cfg['_path']=str(path)
+  original=path.read_bytes()
+  retained=self.call(self.clients[0],'/api/settings/build/draft',{'yaml':'app: {title: Retained garden}','sections':['app'],'title':'Retained garden'})
+  restored=self.call(self.clients[0],'/api/settings/build/draft?id='+retained['id'])
+  self.assertEqual(set(yaml.safe_load(restored['yaml'])),{'app'})
+  plan=self.call(self.clients[0],'/api/settings/build/review',{'yaml':restored['yaml'],'sections':restored['sections']})
+  self.assertEqual(plan['selected'],['app']);self.assertEqual(plan['config']['app']['title'],'Retained garden')
+  self.assertEqual(path.read_bytes(),original)
