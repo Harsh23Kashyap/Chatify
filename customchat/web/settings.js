@@ -128,6 +128,7 @@ async function ollamaPanel(viewOnly=false) {
   box.querySelector(".local-refresh-status")?.remove();if(!viewOnly){const loading=el("div",{class:"h local-refresh-status",role:"status",text:"Looking at this computer..."});if(hasCards)box.append(loading);else box.replaceChildren(loading);box.setAttribute("aria-busy","true");}
   let r; try { r = viewOnly&&localHardwareSnapshot?localHardwareSnapshot:await api("/api/hardware?base_url=" + encodeURIComponent($("#base").value.trim()));localHardwareSnapshot=r; } catch (e) { box.dataset.loaded="";box.removeAttribute("aria-busy");box.querySelector(".local-refresh-status")?.remove();const error=el("div",{class:"local-suggestion-error"},el("div",{class:"h",text:e.message}),el("button",{type:"button",class:"mini",text:"Retry local suggestions",onclick:ollamaPanel}));if(retainedActions.size||hasCards){box.querySelector(".local-suggestion-error")?.remove();box.append(error)}else{box.replaceChildren(el("b",{text:"Suggested local models"}),error)} return; }
   box.removeAttribute("aria-busy");box.querySelector(".local-refresh-status")?.remove();box.querySelector(".local-suggestion-error")?.remove();
+  if (canEdit && cur.provider==="ollama") { $("#sec-model .ollama-setup")?.remove();const setup=el("section",{class:"ollama-setup"});$("#sec-model").prepend(setup);drawOllamaSetup(setup); }
   if(!viewOnly&&hasCards&&JSON.stringify(previousHardware)===JSON.stringify(r))return;
   const hw = r.hardware, rec = r.recommendation, det = hwView === "tech";
   const tabs = el("div", { class: "seg mini", role: "radiogroup", "aria-label": "Detail level" });
@@ -144,7 +145,6 @@ async function ollamaPanel(viewOnly=false) {
   });
   for(const [tag,action] of retainedActions)if(!rec.picks.some(p=>p.tag===tag))cards.append(el("div",{class:"ocard download-retained"},el("b",{text:tag}),el("p",{class:"h",text:"Download started earlier. Updated suggestions do not change this job."}),el("div",{class:"oact"},action)));
   box.replaceChildren(head, cards);if(viewOnly){cards.classList.add("local-view-enter");}
-  if (canEdit && cur.provider==="ollama") { $("#sec-model .ollama-setup")?.remove();const setup=el("section",{class:"ollama-setup"});$("#sec-model").prepend(setup);drawOllamaSetup(setup); }
   if (r.others && r.others.length) {
     const d = el("details", { class: "grp" }, el("summary", { text: "See other models" }), el("div", { class: "oother" }, r.others.map((o) => el("div", { class: "orow" }, el("span", { class: "fitdot " + o.fit }), el("span", { class: "oname", text: o.name }), el("span", { class: "h", text: o.why })))));
     box.append(d);
