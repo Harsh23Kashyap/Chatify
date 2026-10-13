@@ -286,20 +286,20 @@ html[data-motion=none] body.settings-tabs #menu a{transition:none!important}
  html body.settings-tabs #menu a{transition:none!important}
 }
 /* Settings accordions use the same quiet disclosure cue as helper panels. */
-html body.settings-tabs details:not(.helper):not(.stage)>summary{list-style:none}
-html body.settings-tabs details:not(.helper):not(.stage)>summary::-webkit-details-marker{display:none}
-html body.settings-tabs details:not(.helper):not(.stage)>summary::before{
+html body.settings-tabs details>summary{list-style:none}
+html body.settings-tabs details>summary::-webkit-details-marker{display:none}
+html body.settings-tabs details>summary::before{
  content:''!important;display:inline-block;width:6px;height:6px;margin-right:8px;
  border-top:0;border-left:0;border-right:1.5px solid currentColor;border-bottom:1.5px solid currentColor;
  transform:rotate(-45deg);transition:transform 160ms ease-out!important;
 }
-html body.settings-tabs details:not(.helper):not(.stage)[open]>summary::before{transform:rotate(45deg)}
-html body.settings-tabs details:not(.helper):not(.stage)[open]>*:not(summary){animation:m-in 160ms ease-out both!important;transform:none!important}
-html[data-motion=none] body.settings-tabs details:not(.helper):not(.stage)>summary::before{transition:none!important}
-html[data-motion=none] body.settings-tabs details:not(.helper):not(.stage)[open]>*:not(summary){animation:none!important}
+html body.settings-tabs details[open]>summary::before{transform:rotate(45deg)}
+html body.settings-tabs details[open]>*:not(summary){animation:m-in 160ms ease-out both!important;transform:none!important}
+html[data-motion=none] body.settings-tabs details>summary::before{transition:none!important}
+html[data-motion=none] body.settings-tabs details[open]>*:not(summary){animation:none!important}
 @media(prefers-reduced-motion:reduce){
- html body.settings-tabs details:not(.helper):not(.stage)>summary::before{transition:none!important}
- html body.settings-tabs details:not(.helper):not(.stage)[open]>*:not(summary){animation:none!important}
+ html body.settings-tabs details>summary::before{transition:none!important}
+ html body.settings-tabs details[open]>*:not(summary){animation:none!important}
 }
 /* Empty history is one useful message, not an animated illustration. */
 .side .list .empty{animation:m-in 140ms ease-out both!important;transform:none!important}
@@ -361,3 +361,10 @@ html[data-motion=none] .memory-graph.local-estimate-changed{animation:none!impor
 html .pvm-badge{transition:background-color 160ms ease-out,color 160ms ease-out!important}
 html[data-motion=none] .pvm-badge{transition:none!important}
 @media(prefers-reduced-motion:reduce){html .pvm-badge{transition:none!important}}
+
+/* Connector disclosures use the same leading cue, not a second trailing arrow. */
+html body.settings-tabs details.helper>summary::after{content:none!important}
+html body.settings-tabs details.helper>summary{display:grid!important;grid-template-columns:14px minmax(0,1fr)!important;gap:6px 8px!important}
+html body.settings-tabs details.helper>summary::before{grid-column:1;grid-row:1;align-self:center}
+html body.settings-tabs details.helper>summary>b{grid-column:2;grid-row:1}
+html body.settings-tabs details.helper>summary>small{grid-column:2;grid-row:2}
