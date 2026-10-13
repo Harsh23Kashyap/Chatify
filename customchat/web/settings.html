@@ -84,8 +84,8 @@
 <button type="button" id="pvfab" aria-label="Show live preview" hidden>Preview</button>
 <script>(function(){var b=document.getElementById("pvfab");if(!b)return;b.hidden=false;b.addEventListener("click",function(){var o=document.body.classList.toggle("pvopen");b.textContent=o?"Close preview":"Preview";b.setAttribute("aria-label",o?"Close live preview":"Show live preview")})})()</script>
 <script>(function(){var K="cc_cfg_mode_v2",bar=document.getElementById("cfgmode"),help=document.getElementById("modehelp");if(!bar)return;
-function set(m){document.body.classList.toggle("simple",m==="simple");[].forEach.call(bar.querySelectorAll("button"),function(b){var on=b.dataset.m===m;b.setAttribute("aria-checked",on?"true":"false");b.classList.toggle("on",on)});
-help.textContent=m==="simple"?"Everyday settings. Switching views keeps saved values.":"All settings and technical controls. Switching views keeps saved values.";try{localStorage.setItem(K,m)}catch(e){}}
+function set(m){var changed=bar.dataset.mode&&bar.dataset.mode!==m;bar.dataset.mode=m;document.body.classList.toggle("simple",m==="simple");[].forEach.call(bar.querySelectorAll("button"),function(b){var on=b.dataset.m===m;b.setAttribute("aria-checked",on?"true":"false");b.classList.toggle("on",on)});
+help.getAnimations().forEach(function(a){a.cancel()});help.textContent=m==="simple"?"Everyday settings. Switching views keeps saved values.":"All settings and technical controls. Switching views keeps saved values.";if(changed&&!["none","calm"].includes(document.documentElement.dataset.motion)&&!matchMedia("(prefers-reduced-motion:reduce)").matches)help.animate([{opacity:.65},{opacity:1}],{duration:140,easing:"ease-out"});try{localStorage.setItem(K,m)}catch(e){}}
 var m="simple";try{m=localStorage.getItem(K)||"simple"}catch(e){}set(m);
 window.CCSettingsSetMode=set;
 bar.addEventListener("click",function(e){var b=e.target.closest("button");if(b){set(b.dataset.m);document.dispatchEvent(new CustomEvent("cc-settings-mode"))}})})()</script>
