@@ -656,7 +656,7 @@ function buildMenu() {
   document.querySelectorAll("#col>section.tile,#look>section.tile").forEach(n=>{n.classList.toggle("settings-active-panel",n.id==="sec-"+id)});
   $("#look").classList.toggle("settings-active-look",!!document.querySelector("#look #sec-"+id));
   document.body.classList.toggle("settings-appearance-active",link.closest(".nav-group").dataset.group==="frontend");
-  const savebar=$("#savebar");$("#sec-"+id)?.append(savebar);
+  const savebar=$("#savebar");if(savebar)$("#sec-"+id)?.append(savebar);
   document.body.dataset.settingsSection=id;activeSec=id;pvFollow();if(location.hash!==link.hash){if(window.ccRestoreNavigation)history.replaceState(null,"",link.hash);else history.pushState(null,"",link.hash)}
   const mobileSelect=document.getElementById("mobileSection");if(mobileSelect)mobileSelect.value=link.hash;
   m.querySelectorAll("a").forEach(n=>{n.classList.toggle("on",n===link);n.setAttribute("aria-current",n===link?"page":"false")});
