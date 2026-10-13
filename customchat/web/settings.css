@@ -1290,3 +1290,7 @@ html body.settings-tabs #sec-colors .fields.colorlist .field>.flabel{flex-direct
 }
 
 @media(max-width:760px){html body.settings-tabs #modehelp{grid-row:3;margin:0 0 8px!important}html body.settings-tabs .modebar{min-height:44px!important}}
+/* A preset can be undone without putting the action inside its explanation. */
+#presetUndo{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:8px 0 12px}
+#presetUndo>span{flex:1 1 220px;font-size:14px;line-height:1.4}
+#presetUndo>button{min-height:44px;flex:0 0 auto}
