@@ -1153,3 +1153,8 @@ body.settings-tabs .card{padding:28px 32px!important}body.settings-tabs .card h1
 .index-count-changed{animation:index-count-in 160ms ease-out}
 @keyframes index-count-in{from{opacity:.6}to{opacity:1}}
 @media(prefers-reduced-motion:reduce){.index-count-changed{animation:none}}
+
+.freshness-state{display:flex;align-items:baseline;gap:6px}
+.index-status-icon{flex:none;animation:index-status-in 160ms ease-out}
+@keyframes index-status-in{from{opacity:.5}to{opacity:1}}
+@media(prefers-reduced-motion:reduce){.index-status-icon{animation:none}}
