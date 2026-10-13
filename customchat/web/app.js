@@ -262,6 +262,7 @@ function scopeChip() {
  if (S.scope) p.append(el("span",{text:"Only " + (S.scope.document || S.scope.source)}),el("button",{class:"chip",onclick:()=>{S.scope=null;scopeChip()}},"Clear"));
 }
 async function scopeDialog() {
+ const trigger=$("#scopeBtn");if(trigger.dataset.running==="true")return;trigger.dataset.running="true";trigger.setAttribute("aria-busy","true");const original=trigger.textContent;trigger.textContent="Loading sources...";
  try {
   const rows=await api("/api/scopes");const dialog=el("dialog",{class:"reading-dialog scope-dialog"});
   dialog.append(el("header",{class:"reading-head"},el("h2",{text:"Choose source scope"})));
@@ -274,7 +275,7 @@ async function scopeDialog() {
   if (!rows.length) options.append(el("p",{text:"No configured sources"}));
   dialog.append(options,el("footer",{},el("button",{class:"reading-done",onclick:()=>dialog.close()},"Done")));
   dialog.addEventListener("close",()=>{dialog.remove();$("#scopeBtn").focus()});document.body.append(dialog);dialog.showModal();
- } catch(e){toast(e.message)}
+ } catch(e){toast("Could not load sources: "+e.message+". Try Source scope again.")}finally{trigger.dataset.running="false";trigger.removeAttribute("aria-busy");trigger.textContent=original}
 }
 async function loadSuggestions() {
   if (PREVIEW) return;
