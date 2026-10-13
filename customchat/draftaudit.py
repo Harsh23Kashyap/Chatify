@@ -15,6 +15,6 @@ def findings(raw):
      if host:destinations.add(host)
   if destinations:notes.append('Helper '+kind+' contains literal destinations: '+', '.join(sorted(destinations))+'. Not verified or authorized by this inventory. Review every request destination before running; dynamically built destinations may be missed.')
  answer=raw.get('pipeline_prompts',{}).get('text',{}).get('answer','')
- if re.search(r'\b(?:ignore|disregard|bypass)\s+(?:the\s+)?(?:retrieved\s+|provided\s+|numbered\s+)?(?:passages|evidence|sources)\b',answer,re.I) or re.search(r'\b(?:no|without|omit|disable)\s+citations\b',answer,re.I):
-  notes.append('Answer prompt contains an explicit source or citation bypass phrase. Review it against the source-backed answer contract. This narrow text check can flag quoted examples and miss paraphrased attacks; it is not safety verification.')
+ if re.search(r'\b(?:ignore|disregard|bypass)\s+(?:the\s+)?(?:retrieved\s+|provided\s+|numbered\s+)?(?:passages|evidence|sources)\b',answer,re.I):
+  notes.append('Answer prompt contains literal source-bypass wording. This is a text occurrence, not evidence that the instruction is unsafe: quoted examples and negated instructions can match. Review its context yourself. This check misses paraphrased attacks and does not check citation rules; it is not safety verification.')
  return notes
