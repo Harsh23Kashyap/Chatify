@@ -336,3 +336,10 @@ html .composer #send:hover{transform:none}
 html .composer #send:not(:disabled):active{transform:scale(.98)}
 @media(prefers-reduced-motion:reduce){html .composer #send:not(:disabled):active{transform:none}}
 html[data-motion=none] .composer #send:not(:disabled):active{transform:none}
+/* New chat responds to the press before clearing the conversation. */
+html .side #newChat{transition:transform 120ms ease-out,background-color 140ms ease-out,border-color 140ms ease-out!important}
+html .side #newChat:hover{transform:none}
+html .side #newChat:active{transform:scale(.98)}
+html[data-motion=none] .side #newChat{transition:none!important}
+html[data-motion=none] .side #newChat:active{transform:none}
+@media(prefers-reduced-motion:reduce){html .side #newChat{transition:none!important}html .side #newChat:active{transform:none}}
