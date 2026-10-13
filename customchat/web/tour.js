@@ -32,15 +32,11 @@
       target?.scrollIntoView({block:'start',behavior:'instant'});
       const header=node('header','cc-tour-head'),count=node('span','cc-tour-count',`${i+1} / ${steps.length}`),skip=node('button','cc-tour-skip','Skip');skip.type='button';skip.onclick=end;
       header.append(node('span','cc-tour-label',title),count,skip);
-      const scene=node('div','cc-tour-scene');scene.setAttribute('aria-hidden','true');scene.dataset.kind=s.kind||'tabs';
-      const rail=node('div','cc-tour-rail');(s.tabs||['Ask','Sources','Answer']).forEach((t,j)=>{const chip=node('span','cc-tour-tab'+(j===0?' active':''),t);chip.style.setProperty('--n',j);rail.append(chip)});
-      const sample=node('div','cc-tour-sample');sample.append(node('span','cc-tour-orb',s.icon||'✦'),node('div','cc-tour-lines'));for(let j=0;j<3;j++)sample.lastChild.append(node('i'));
-      scene.append(rail,sample);
       const content=node('div','cc-tour-content');const h=node('h2','',s.title);h.id='cc-tour-title';dialog.setAttribute('aria-labelledby',h.id);content.append(h,node('p','',s.text));
       const progress=node('div','cc-tour-progress');progress.setAttribute('aria-label',`Step ${i+1} of ${steps.length}`);steps.forEach((_,j)=>progress.append(node('i',j<=i?'done':'')));
       const footer=node('footer','cc-tour-actions'),back=node('button','cc-tour-back','Back'),next=node('button','cc-tour-next',i===steps.length-1?'Done':'Next');back.type=next.type='button';back.disabled=i===0;back.onclick=()=>{i--;draw()};next.onclick=()=>{if(i===steps.length-1)end();else{i++;draw()}};footer.append(back,next);
       dialog.replaceChildren(header,content,progress,footer);locate();requestAnimationFrame(locate);
-      if(motion())dialog.animate([{opacity:.5,transform:'translateY(10px)'},{opacity:1,transform:'none'}],{duration:240,easing:'ease-out'});
+      if(motion())dialog.animate([{opacity:0},{opacity:1}],{duration:160,easing:'ease-out'});
       next.focus({preventScroll:true});
     }
     dialog.addEventListener('cancel',e=>{e.preventDefault();end()});
