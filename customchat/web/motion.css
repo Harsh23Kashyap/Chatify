@@ -257,3 +257,7 @@ details>summary{transition:color .16s ease,background-color .16s ease}
 
 /* A filled input is a state, not an event that needs a bounce. */
 .send.ready{animation:none!important}
+/* Toolbar actions share quiet state feedback without shifting their hit area. */
+.icon{transition:background-color 160ms ease-out,color 160ms ease-out,box-shadow 160ms ease-out!important}
+.icon:active:not(:disabled){transform:none!important;background:var(--soft);box-shadow:inset 0 0 0 1px var(--line)}
+@media(prefers-reduced-motion:reduce){.icon{transition:none!important}}
