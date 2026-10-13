@@ -303,3 +303,14 @@ html[data-motion=none] body.settings-tabs details.grp[open]>*:not(summary){anima
 .side .list .empty{animation:m-in 140ms ease-out both!important;transform:none!important}
 html[data-motion=none] .side .list .empty{animation:none!important}
 @media(prefers-reduced-motion:reduce){.side .list .empty{animation:none!important}}
+/* Drawer motion belongs to the sidebar, never the conversation surface. */
+@media(prefers-reduced-motion:no-preference) and (max-width:860px){
+ html:not([data-motion=none]) .app .side{transition:transform 220ms cubic-bezier(.2,.8,.2,1),background-color 180ms ease,color 180ms ease,border-color 180ms ease}
+ html:not([data-motion=none]) .app::after{transition:opacity 220ms cubic-bezier(.2,.8,.2,1)}
+ html[data-motion=subtle] .app .side,html[data-motion=subtle] .app::after{transition-duration:160ms!important}
+}
+@media(prefers-reduced-motion:no-preference){
+ html[data-sidebar=hidden]:not([data-motion=none]) .app .side{transition:transform 220ms cubic-bezier(.2,.8,.2,1),background-color 180ms ease,color 180ms ease,border-color 180ms ease}
+ html[data-sidebar=hidden]:not([data-motion=none]) .app::after{transition:opacity 220ms cubic-bezier(.2,.8,.2,1)}
+ html[data-sidebar=hidden][data-motion=subtle] .app .side,html[data-sidebar=hidden][data-motion=subtle] .app::after{transition-duration:160ms!important}
+}
