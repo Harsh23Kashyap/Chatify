@@ -795,6 +795,17 @@ function applyIcons() {
     const b = $(id); if (!b) continue; const e = TV(key); if (id === "#send" && S.busy) continue; b.classList.remove("emo-bounce","emo-pulse","emo-wiggle");if(e&&["bounce","pulse","wiggle"].includes(TV(key+"_motion")))b.classList.add("emo-"+TV(key+"_motion"));b.replaceChildren(e ? CCEmoji.node(e,TV(key+"_animated"),"",["calm","none"].includes(TV("motion"))) : svg(name));
   }
 }
+function updatePreviewAvatars() {
+  for(const kind of ["bot","you"]){
+    const key=kind==="bot"?"emoji_bot":"emoji_you",emoji=TV(key);
+    document.querySelectorAll(".row>.av."+kind).forEach(node=>{
+      const signature=JSON.stringify([emoji,TV(key+"_animated"),TV("motion")]);
+      if(node.dataset.iconValue===signature)return;node.dataset.iconValue=signature;
+      node.classList.toggle("emo",!!emoji);
+      node.replaceChildren(emoji?CCEmoji.node(emoji,TV(key+"_animated"),"",["calm","none"].includes(TV("motion"))):document.createTextNode(kind==="bot"?(TV("txt_title")||S.cfg.app.title||"AI").replace(/[^A-Za-z]/g,"").slice(0,2):"You"));
+    });
+  }
+}
 function pvBottom() { const t = $("#thread"); if (t) { t.style.scrollBehavior = "auto"; t.scrollTop = 0; } }
 function previewMode() {
   window.ccPreviewMotion=(t)=>{const node=document.querySelector('.row.bot:last-of-type')||document.querySelector('.msg.bot')||document.querySelector('#thread');if(!node)return;node.getAnimations().forEach(a=>a.cancel());if(matchMedia('(prefers-reduced-motion:reduce)').matches||['calm','none'].includes(t.motion)||t.entrance==='none')return;const frames=t.entrance==='slide'?[{opacity:0,transform:'translateY(18px)'},{opacity:1,transform:'none'}]:t.entrance==='pop'?[{opacity:0,transform:'scale(.94)'},{opacity:1,transform:'none'}]:[{opacity:0},{opacity:1}];node.animate(frames,{duration:(t.motion==='subtle'?180:420)*100/t.speed,easing:'ease-out'})};
@@ -806,11 +817,11 @@ function previewMode() {
   S.turns = [{ id: "p1", chat: "p", question: "How will answers look in this app?", answer: "This is a sample answer with a source citation [1].\n\nAdjust the appearance on the left to see it here. This preview does not contact your model or sources.", evidence: [{ n: 1, title: "Sample source for visual preview", text: "Preview sample only, not a retrieved document." }], ledger: [], seconds: 0 }];
   S.chat = "p"; drawThread(); pvBottom(); $("#chatTitle").textContent = "Sample conversation";
   const list = $("#list"); list.replaceChildren(...["Sample conversation", "Another conversation"].map((t, i) => el("div", { class: "item" + (i ? "" : " on") }, el("span", { text: t }))));
-  const previewCopy = () => JSON.stringify(["txt_title","txt_tagline","txt_examples","logo","emoji_hero","emoji_bot","emoji_you"].map(TV));
+  const previewCopy = () => JSON.stringify(["txt_title","txt_tagline","txt_examples","logo"].map(TV));
   let lastCopy = previewCopy();
   window.addEventListener("message", (e) => { if (e.origin === location.origin && e.data && e.data.ccTheme) {
     const thread = $("#thread"), scroll = thread.scrollTop, copy = previewCopy();
-    applyWording(); applyIcons();
+    applyWording(); applyIcons(); updatePreviewAvatars();
     if (copy !== lastCopy) { drawThread(); thread.scrollTop = scroll; lastCopy = copy; }
     $("#q").placeholder = "Visual preview only"; $("#chatTitle").textContent = "Sample conversation";
   } });
