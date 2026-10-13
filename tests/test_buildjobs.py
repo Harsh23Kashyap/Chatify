@@ -100,3 +100,25 @@ class SafePatchChecks(unittest.TestCase):
      return super().complete(m)
    jobs=buildjobs.BuildJobs();d=self.wait(jobs,jobs.start('owner',R(),schema.DEFAULTS,{'brief':'Garden advice'})['id'])
    self.assertEqual(d['review']['review_status'],expected);self.assertEqual(d['review']['ready'],response['ready']);self.assertEqual(d['review']['issues'],response['issues'])
+
+class RetainedFailureMatrix(unittest.TestCase):
+ wait=Jobs.wait
+ @unittest.mock.patch('customchat.buildimages.capability',return_value={'available':False,'note':'fixture'})
+ def test_targeted_contract_failures_retry_only_owner_and_keep_success(self,cap):
+  for target,broken in [('prompt:answer',{'text':'','on':True}),('helper:clean_query',{'brief':'Fixture','code':'def broken(:'}),('config:sources',[{'type':'url','url':'https://not-supplied.invalid/fixture'}])]:
+   with self.subTest(target=target):
+    class BadOnce(Fixture):
+     failed=False
+     def complete(self,m):
+      result=super().complete(m)
+      system=m[0]['content']
+      if 'This is one isolated' not in system:return result
+      spec=json.JSONDecoder().raw_decode(system[system.index('{',system.index('This is one isolated')):])[0]
+      hit=(target=='prompt:answer' and spec.get('stage')=='answer') or (target=='helper:clean_query' and spec.get('kind')=='clean_query') or (target=='config:sources' and spec.get('area')=='sources')
+      if hit and not self.failed:self.failed=True;return json.dumps(broken)
+      return result
+    f=BadOnce();jobs=buildjobs.BuildJobs();d=self.wait(jobs,jobs.start('owner',f,schema.DEFAULTS,{'brief':'Garden advice'})['id'])
+    self.assertTrue(f.failed,target);self.assertEqual(d['state'],'partial',d);self.assertIn(target,d['errors']);self.assertNotIn(target,jobs.jobs[d['id']]['parts'])
+    kept=copy.deepcopy(jobs.jobs[d['id']]['parts']);calls=d['calls'];self.assertEqual(len(kept),len(buildjobs.PARTS)-1)
+    jobs.retry('owner',d['id']);done=self.wait(jobs,d['id']);self.assertEqual(done['state'],'done',done);self.assertEqual(done['calls'],calls+2)
+    for key,value in kept.items():self.assertEqual(jobs.jobs[d['id']]['parts'][key],value)

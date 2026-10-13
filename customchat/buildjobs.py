@@ -102,7 +102,10 @@ class BuildJobs:
    if len(result['text'])>6000:raise ValueError('Prompt text is '+str(len(result['text']))+' characters; limit is 6000. Retry with a shorter instruction.')
    if result['text'].strip().lower()=='complete instruction':raise ValueError('Model echoed placeholder text instead of writing a prompt')
    if type(result.get('on',prompts.STAGES[key[7:]]['on']))!=bool:raise ValueError('Invalid stage switch')
-  elif key.startswith('helper:'):appbuilder.validate_extras({'helper_drafts':{key[7:]:result}})
+  elif key.startswith('helper:'):
+   appbuilder.validate_extras({'helper_drafts':{key[7:]:result}})
+   try:compile(result['code'],'<helper-draft>','exec')
+   except (SyntaxError,ValueError,TypeError) as e:raise ValueError('Helper Python compilation failed: '+str(e)) from e
   elif key=='api':appbuilder.validate_extras({'api_suggestions':result})
   else:
    if not isinstance(result,dict) and not (key=='config:sources' and isinstance(result,list)):raise ValueError('Expected configuration data')
