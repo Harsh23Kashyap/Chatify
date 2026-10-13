@@ -182,7 +182,7 @@ function modelAction(tag, installed) {
   });
   wrap.append(btn, cancel, bar, msg); return wrap;
 }
-function syncDeleteLook(){const name=$("#states").value,btn=$("#del");btn.disabled=!name||!canEdit;$("#load").disabled=!name||!canEdit;btn.textContent=name?'Delete "'+name+'"':'Choose a saved look to delete';}
+function syncDeleteLook(){const name=$("#states").value,btn=$("#del");btn.disabled=!name||!canEdit;$("#load").disabled=!name||!canEdit;$("#load").title=!canEdit?"Sign in as the workspace owner to restore a saved setup.":!name?"Choose a saved setup first.":"Restore the selected saved setup after confirmation.";btn.textContent=name?'Delete "'+name+'"':'Choose a saved look to delete';}
 async function states() {
   const data = await api("/api/states"), s=data.states; const sel = $("#states"); sel.replaceChildren();
   sel.append(el("option", { value: "", text: "Choose a saved setup…" })); s.forEach((n) => sel.append(el("option", { value: n, text: n })));sel.value=data.current||"";syncDeleteLook();
