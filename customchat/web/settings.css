@@ -1237,3 +1237,6 @@ html[data-motion=none] #pv.preview-changing{opacity:1}
 .cpick button[aria-pressed=true]{background:#edf2e8!important;color:#173f35!important;border-color:#78917d!important;opacity:1}
 .cloud-selection-status{min-height:56px}
 @media(min-width:761px){.cloud-selection-status{min-height:36px}}
+
+.workspace-live-status{font-size:13px;line-height:1.5;min-height:40px;margin:10px 0}
+.workspace-check-running::before{content:'…';display:inline-block;width:16px;margin-right:6px;font-weight:600}
