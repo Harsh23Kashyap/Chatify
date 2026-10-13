@@ -124,7 +124,7 @@ function highlight(node, text, terms) {
   return node;
 }
 function sendIcon(name, label) {
-  const send = $("#send"); send.replaceChildren(name === "send" && TV("emoji_send") ? CCEmoji.node(TV("emoji_send"),TV("emoji_send_animated"),"",["calm","none"].includes(TV("motion"))) : svg(name)); send.setAttribute("aria-label", label);
+  const send = $("#send"); send.replaceChildren(name === "send" && TV("emoji_send") ? CCEmoji.node(TV("emoji_send"),TV("emoji_send_animated"),"",["calm","none"].includes(TV("motion"))) : svg(name)); send.setAttribute("aria-label", label); rdy();
   if (motionAllowed() && send.animate) send.animate([{opacity:.5,transform:"scale(.95)"},{opacity:1,transform:"scale(1)"}],{duration:150,easing:"ease-out"});
 }
 function motionAllowed() { return document.documentElement.dataset.motion !== "none" && !matchMedia("(prefers-reduced-motion: reduce)").matches; }
@@ -320,7 +320,7 @@ function chartCard() {
   const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg"); svg.setAttribute("viewBox", "0 0 42 42"); svg.setAttribute("class", "donut"); svg.setAttribute("role", "img"); svg.setAttribute("aria-label", "Sample chart: groups of documents"); svg.innerHTML = ring;
   return el("div", { class: "chartcard" }, el("b", { text: "Sample chart: groups of documents" }), el("div", { class: "chartrow" }, svg, el("ul", {}, parts.map(([n, v, c]) => el("li", {}, el("i", { style: "background:" + c }), n + " " + v + "%")))));
 }
-function rdy() { const q = $("#q"), s = $("#send"); if (!q || !s || S.busy) return; const on = !!q.value.trim(); if (on && !s.classList.contains("on")) { s.classList.add("ready"); setTimeout(() => s.classList.remove("ready"), 200); } s.classList.toggle("on", on); }
+function rdy() { const q = $("#q"), s = $("#send"); if (!q || !s) return; const on = !!q.value.trim(); s.disabled = !S.busy && !on; s.classList.toggle("idle", s.disabled); if (S.busy) return; if (on && !s.classList.contains("on")) { s.classList.add("ready"); setTimeout(() => s.classList.remove("ready"), 200); } s.classList.toggle("on", on); }
 function drawThread() {
   const th = $("#thread"), priorScroll = th.scrollTop, keep = th.scrollHeight - th.scrollTop - th.clientHeight > 100; th.replaceChildren();
   const w = el("div", { class: "wrap" });
@@ -444,6 +444,7 @@ async function send() {
     if (text && err !== "Stopped") { const w2 = $("#thread .wrap") || $("#thread"); w2.querySelector(".hero")?.remove(); w2.append(el("div", { class: "q", text: q }), el("div", { class: "a" }, text + "\n\n(Cut short. Click the notice to ask again.)")); }
     else if (!$("#q").value) { $("#q").value = q; autosize(); }
   }
+  rdy();
 }
 // Overlay lifecycle shared by source, context and account dialogs.
 function mountModal(back, dismiss = true) {
@@ -540,7 +541,7 @@ async function init() {
   $("#q").addEventListener("input", autosize);
   $("#q").addEventListener("keydown", (e) => { if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); send(); } });
   $("#exportChat").addEventListener("click", () => S.chat && S.turns.length ? download("/api/export?chat=" + S.chat, "chat.md") : toast("Nothing to export yet"));
-  $("#q").addEventListener("input", rdy); $("#send").addEventListener("click", () => (S.busy ? aborter && aborter.abort() : send())); $("#newChat").addEventListener("click", newChat);
+  $("#q").addEventListener("input", rdy); rdy(); $("#send").addEventListener("click", () => (S.busy ? aborter && aborter.abort() : send())); $("#newChat").addEventListener("click", newChat);
   const sidebarOverlay = () => matchMedia("(max-width:860px)").matches || document.documentElement.dataset.sidebar === "hidden";
   const syncSidebar = () => {
     const open = sidebarOverlay() ? $("#app").classList.contains("menu-open") : !$("#app").classList.contains("side-collapsed");
@@ -618,7 +619,7 @@ function setupMic() {
     if (rec) { rec.stop(); return; }
     rec = new SR(); rec.lang = (S.cfg.app.language || "en"); rec.interimResults = true; rec.continuous = false;
     const base = $("#q").value; m.classList.add("rec"); m.setAttribute("aria-label", "Stop dictation");
-    rec.onresult = (e) => { let t = ""; for (const r of e.results) t += r[0].transcript; $("#q").value = (base ? base + " " : "") + t; autosize(); };
+    rec.onresult = (e) => { let t = ""; for (const r of e.results) t += r[0].transcript; $("#q").value = (base ? base + " " : "") + t; autosize(); rdy(); };
     rec.onerror = (e) => { if (e.error !== "aborted") toast("Dictation: " + e.error); };
     rec.onend = () => { rec = null; m.classList.remove("rec"); m.setAttribute("aria-label", "Dictate"); $("#q").focus(); };
     try { rec.start(); } catch (e) { rec = null; m.classList.remove("rec"); }
@@ -742,7 +743,6 @@ $("#chatGuide")?.addEventListener("click", () => tour(true));
 document.getElementById("sideClose")?.addEventListener("click", () => document.getElementById("app").classList.remove("menu-open"));
 (() => { const c = document.querySelector(".composer"); if (!c) return; const set = () => document.documentElement.style.setProperty("--composer-h", Math.ceil(c.getBoundingClientRect().height + (window.innerHeight - c.getBoundingClientRect().bottom)) + "px"); set(); window.addEventListener("resize", set); if (window.ResizeObserver) new ResizeObserver(set).observe(c); })();
 
-(function () { const q = document.getElementById("q"), sb = document.getElementById("send"); if (!q || !sb) return; const upd = () => sb.classList.toggle("idle", !q.value.trim() && sb.getAttribute("aria-label") === "Send"); q.addEventListener("input", upd); setInterval(upd, 400); upd(); })();
 
 // if saving is not possible (disk full, read-only folder) the server keeps answering; say so once
 try { fetch("/api/health").then((r) => r.json()).then((h) => { if (h && h.degraded && typeof toast === "function") toast(h.degraded); }).catch(() => {}); } catch (e) { /* notice only */ }
