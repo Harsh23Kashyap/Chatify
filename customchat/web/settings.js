@@ -162,7 +162,7 @@ function modelAction(tag, installed) {
         const progress=Math.max(0,Math.min(100,Number(st.pct)||0));bar.firstChild.style.width = progress + "%";bar.setAttribute("aria-valuenow",String(progress));bar.setAttribute("aria-valuetext",progress+"% downloaded"); msg.textContent = st.error || (st.done ? "Done" : (st.status || "Downloading") + " " + st.pct + "%");
         if(st.cancelled&&st.done){cancel.hidden=true;bar.hidden=true;btn.disabled=false;btn.textContent="Retry download";msg.textContent="Cancelled. Retry rechecks the model; Ollama decides whether partial files can be reused.";break}
         if (st.error) { cancel.hidden=true; btn.disabled = false; btn.textContent = "Try again"; bar.hidden = true; msg.className = "h bad"; break; }
-        if (st.done) { cancel.hidden=true;wrap.replaceChildren(el("span", { class: "okt", text: "Installed" }), el("button", { type: "button", class: "mini", onclick: use }, "Use this model")); use(); break; }
+        if (st.done) { cancel.hidden=true;wrap.replaceChildren(el("span", { class: "okt", text: "Installed" }), el("button", { type: "button", class: "mini", onclick: use }, "Use this model"),el("small",{class:"h",text:"Download complete. Select Use this model to change your unsaved answer settings."})); break; }
       }
     } catch (e) { cancel.hidden=true; btn.disabled = false; bar.hidden = true; msg.textContent = e.message; msg.className = "h bad"; }
   });
