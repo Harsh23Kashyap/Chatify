@@ -739,20 +739,22 @@ async function accountGate() {
   while (!me.user) {
     me = await new Promise((resolve) => {
       let mode = "in";
-      const back = el("div", { class: "modal-back" }), err = el("div", { class: "auth-err", role: "alert" });
+      const back = el("div", { class: "modal-back" }), err = el("div", { id:"signin-error",class: "auth-err", role: "alert" });
       const email = el("input", { type: "email", placeholder: "Email", autocomplete: "email", "aria-label": "Email" });
       const name = el("input", { type: "text", placeholder: "Your name (optional)", autocomplete: "name", "aria-label": "Name" });
       const pw = el("input", { type: "password", placeholder: "Password (8+ characters)", autocomplete: "current-password", "aria-label": "Password" });
       const go = el("button", { class: "chip on" }, "Sign in"), sw = el("button", { class: "linkbtn", type: "button" });
+      const invalid=(input,message)=>{input.setAttribute("aria-invalid","true");input.setAttribute("aria-describedby","signin-error");err.textContent=message;input.focus()};
+      for(const input of [email,pw])input.addEventListener("input",()=>{const valid=input===email?input.value.trim()&&input.checkValidity():input.value&&(mode==='in'||input.value.length>=8);if(valid){input.removeAttribute("aria-invalid");input.removeAttribute("aria-describedby");if(![email,pw].some(n=>n.getAttribute("aria-invalid")==="true"))err.textContent=""}});
       const draw = () => {
         name.hidden = mode === "in"; go.textContent = mode === "in" ? "Sign in" : "Create account";
         sw.textContent = mode === "in" ? "New here? Create an account" : "Have an account? Sign in"; sw.hidden = mode === "in" && !me.signup;
-        pw.autocomplete = mode === "in" ? "current-password" : "new-password"; err.textContent = "";
+        pw.autocomplete = mode === "in" ? "current-password" : "new-password"; err.textContent = "";for(const input of [email,pw]){input.removeAttribute("aria-invalid");input.removeAttribute("aria-describedby")}
       };
       const submit = async () => {
-        if(go.disabled)return;if(!email.value.trim()||!pw.value){err.textContent='Enter your email and password.';(!email.value.trim()?email:pw).focus();return}if(!email.checkValidity()){err.textContent='Enter a valid email address.';email.focus();return}if(mode==='up'&&pw.value.length<8){err.textContent='Use at least eight characters for your password.';pw.focus();return}go.disabled = true;sw.disabled=true;
+        if(go.disabled)return;if(!email.value.trim()||!pw.value){invalid(!email.value.trim()?email:pw,'Enter your email and password.');return}if(!email.checkValidity()){invalid(email,'Enter a valid email address.');return}if(mode==='up'&&pw.value.length<8){invalid(pw,'Use at least eight characters for your password.');return}go.disabled = true;sw.disabled=true;go.textContent=mode==='in'?'Signing in...':'Creating account...';
         try { resolve(await post(mode === "in" ? "login" : "signup", { email: email.value, name: name.value, password: pw.value }).then(() => post("me"))); back.remove(); }
-        catch (e) { err.textContent = e.message; go.disabled = false;sw.disabled=false; }
+        catch (e) { err.textContent = e.message; go.disabled = false;sw.disabled=false;go.textContent=mode==='in'?'Sign in':'Create account'; }
       };
       go.addEventListener("click", submit); pw.addEventListener("keydown", (e) => e.key === "Enter" && submit());
       sw.addEventListener("click", () => { mode = mode === "in" ? "up" : "in"; draw(); });
@@ -768,8 +770,10 @@ async function accountGate() {
   menu.append(el("div", { class: "acct-mail mut", text: me.user.email }),
     item("Change password", () => {
       const o = el("input", { type: "password", placeholder: "Current password", "aria-label": "Current password", autocomplete: "current-password" }), n = el("input", { type: "password", placeholder: "New password (8+ characters)", "aria-label": "New password", autocomplete: "new-password" });
-      const e = el("div", { class: "auth-err", role: "alert" }), back = el("div", { class: "modal-back" });
-      const save = el("button", { class: "chip on", onclick: async () => {if(save.disabled)return;if(!o.value||n.value.length<8){e.textContent=!o.value?'Enter your current password.':'Use at least eight characters for the new password.';(!o.value?o:n).focus();return}save.disabled=true;save.textContent='Saving...';try { await post("password", { old: o.value, new: n.value }); back.remove(); toast("Password changed. Other devices were signed out."); } catch (x) { e.textContent = x.message; }finally{save.disabled=false;save.textContent='Save'} } }, "Save");
+      const e = el("div", {id:"password-error",class: "auth-err", role: "alert" }), back = el("div", { class: "modal-back" });
+      const invalid=(input,message)=>{input.setAttribute("aria-invalid","true");input.setAttribute("aria-describedby","password-error");e.textContent=message;input.focus()};
+      for(const input of [o,n])input.addEventListener("input",()=>{if(input.value&&(input===o||input.value.length>=8)){input.removeAttribute("aria-invalid");input.removeAttribute("aria-describedby");if(![o,n].some(x=>x.getAttribute("aria-invalid")==="true"))e.textContent=""}});
+      const save = el("button", { class: "chip on", onclick: async () => {if(save.disabled)return;if(!o.value||n.value.length<8){invalid(!o.value?o:n,!o.value?'Enter your current password.':'Use at least eight characters for the new password.');return}save.disabled=true;save.textContent='Saving...';try { await post("password", { old: o.value, new: n.value }); back.remove(); toast("Password changed. Other devices were signed out."); } catch (x) { e.textContent = x.message; }finally{save.disabled=false;save.textContent='Save'} } }, "Save");
       back.append(el("div", { class: "modal auth", role: "dialog", "aria-modal": "true", "aria-label": "Change password" }, el("h2", { text: "Change password" }), o, n, e, el("div", { class: "modal-act" }, el("button", { class: "chip", onclick: () => back.remove() }, "Cancel"), save)));
       mountModal(back); o.focus();
     }),

@@ -858,3 +858,8 @@ html:not(.preview) .composer>.box{width:100%}
 
 .action-body label,.action-body h4,.action-body p{margin:0}.action-body input,.action-body textarea{box-sizing:border-box;min-height:44px;font:inherit}.action-body textarea{min-height:120px;resize:vertical}.action-value{display:grid;gap:8px;padding:12px;border:1px solid var(--line);border-radius:8px}.action-value p{white-space:pre-wrap;overflow-wrap:anywhere}.action-error:empty{display:none}.action-error{color:var(--danger)!important}.action-dialog{max-height:calc(100vh - 32px);overflow:auto}.action-body button{min-height:44px}
 .action-dialog footer button{min-height:44px;min-width:44px}
+
+.modal.auth input[aria-invalid=true]{border-color:var(--danger)}.modal.auth button{min-height:44px}.auth-err:empty{min-height:0}
+.toolbar:has(.acct-menu:not([hidden])){z-index:80;position:relative}.acct{position:relative;z-index:81}.acct-menu{z-index:82;max-width:calc(100vw - 32px)}
+
+.acct-btn,.acct-item{min-height:44px}
