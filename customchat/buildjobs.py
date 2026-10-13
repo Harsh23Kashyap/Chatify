@@ -52,14 +52,18 @@ class BuildJobs:
   spec=copy.deepcopy(spec)
   if key=='config:app':spec['requirements']='Fill title, tagline, footer and at least 3 domain-specific starter questions in examples, even if the schema examples default is empty.'
   if key=='config:provider':spec['defaults']=copy.deepcopy(job['cfg']['provider'])
+  if key=='config:budget':spec['defaults']=copy.deepcopy(job['cfg'].get('budget',schema.DEFAULTS['budget']));spec['requirements']='Retain the supplied usage limits exactly. App topic words such as budget meals, cost or limit do not authorize new app quotas. Limits can be edited in the reviewed draft.'
   if key.startswith('appearance:'):
    spec['valid_choices']={k:v for k,v in theme.ENUMS.items() if k in spec['defaults']}
    spec['numeric_ranges']={k:v for k,v in theme.RANGES.items() if k in spec['defaults']}
    if 'font' in spec['defaults']:spec['fonts']=list(theme.FONTS)
   if key.startswith('helper:'):spec['recommended_apis']=job['parts'].get('api',[]);spec['requirements']='Function name and signature must exactly match the contract, including search(query, limit=6) or clean_query(query). Draft for the recommended API; explicitly mark any endpoint not independently verified. Keep placeholder API keys outside code.'
+  correction=job.get('retry_corrections',{}).get(key)
+  if correction:spec['previous_validation_failure']=correction;spec['requirements']=spec.get('requirements','')+' Correct the previously rejected fields. Do not repeat blank interface wording, invent credentials or remove output contract fields.'
   instruction=json.dumps(spec)
   if key.startswith('prompt:'):
    spec={'area':'pipeline prompt','stage':key[7:],'output_contract':spec['contract'].get('help',''),'default_prompt':spec['default']}
+   if correction:spec['previous_validation_failure']=correction
    instruction=json.dumps(spec)
    instruction+=' Keep text between 1 and 6000 characters. DO NOT echo this metadata. Write the actual tailored prompt, not the literal words complete instruction. Return an object with exactly two keys: text (the full domain-tailored instruction string) and on (a boolean). Preserve the stage output contract; do not echo the input spec. The revise prompt must be filled even when the stage is off.'
   elif key.startswith('helper:'):
@@ -72,7 +76,7 @@ class BuildJobs:
   result=self._call(job,instruction)
   if isinstance(result,dict):
    wrappers=['config',key.partition(':')[2],spec['area'],'defaults']
-   if key=='api':wrappers=['api_suggestions','apis','recommendations','supported_connectors']
+   if key=='api':wrappers=['api_suggestions','apis','recommendations','api_recommendations','supported_connectors']
    elif key.startswith('helper:'):wrappers=[key[7:],'helper_drafts','draft']
    elif key.startswith('prompt:'):wrappers=[key[7:],'prompt','pipeline_prompts']
    for wrapper in wrappers:
@@ -88,6 +92,7 @@ class BuildJobs:
   if key=='api' and isinstance(result,list):result=[{k:v for k,v in row.items() if k in ('name','reason','connector','setup','caveat')} for row in result if isinstance(row,dict)][:8]
   if key.startswith('appearance:') or key.startswith('config:') and isinstance(spec.get('defaults'),dict):
    if isinstance(result,dict):result={k:v for k,v in result.items() if k in spec['defaults']}
+  if key=='config:budget' and isinstance(result,dict):result=copy.deepcopy(spec['defaults'])
   if key.startswith('prompt:'):
    if not isinstance(result,dict):raise ValueError('Prompt output must be an object with text and on fields')
    if not isinstance(result.get('text'),str) or not result['text'].strip():raise ValueError('Prompt text missing: model did not return a non-empty text field')
@@ -100,6 +105,9 @@ class BuildJobs:
    if not isinstance(result,dict) and not (key=='config:sources' and isinstance(result,list)):raise ValueError('Expected configuration data')
    if key.startswith('appearance:'):
     if set(result)!=set(spec['defaults']):raise ValueError('Appearance fields missing or outside this group')
+    if key=='appearance:wording_motion':
+     blank=[n for n in ('txt_title','txt_tagline','txt_examples','txt_placeholder','txt_footer','txt_disclaimer','txt_hint','txt_sidebar') if not str(result.get(n) or '').strip()]
+     if blank:raise ValueError('Interface wording left blank: '+', '.join(blank))
     appbuilder.validate_extras({'appearance':copy.deepcopy(result)})
    else:
     if isinstance(spec['defaults'],dict) and set(result)!=set(spec['defaults']):raise ValueError('Configuration fields missing or outside this section')
@@ -112,7 +120,7 @@ class BuildJobs:
  def _merge(self,job):
   raw=copy.deepcopy(schema.DEFAULTS);raw['appearance']={};raw['pipeline_prompts']={'text':{},'on':{}};raw['helper_drafts']={}
   for key,value in job['parts'].items():
-   if key.startswith('config:'):raw[key[7:]]=value
+   if key.startswith('config:'):raw[key[7:]]=copy.deepcopy(value)
    elif key.startswith('appearance:'):raw['appearance'].update(value)
    elif key.startswith('prompt:'):raw['pipeline_prompts']['text'][key[7:]]=value['text'];raw['pipeline_prompts']['on'][key[7:]]=value.get('on',prompts.STAGES[key[7:]]['on']) if prompts.STAGES[key[7:]]['optional'] else True
    elif key.startswith('helper:'):raw['helper_drafts'][key[7:]]=value
@@ -125,6 +133,7 @@ class BuildJobs:
    if not raw['appearance'].get(name):raise ValueError('Appearance '+name+' is blank')
   if not raw.get('api_suggestions'):raise ValueError('API recommendations missing')
   raw['provider']=copy.deepcopy(job['cfg']['provider'])
+  raw['budget']=copy.deepcopy(job['cfg'].get('budget',schema.DEFAULTS['budget']))
   raw['actions']['writes']=False;raw['server']['host']='127.0.0.1';raw['storage']['path']='data/customchat.db'
   if raw['sources'] and any(s.get('type')=='python' for s in raw['sources']):raise ValueError('Generated Python connectors must stay in helper drafts')
   if raw['provider']['type'] in schema.NEEDS_MODEL and not raw['provider']['model']:raise ValueError('Model identifier missing')
@@ -190,5 +199,8 @@ class BuildJobs:
    j=self._owned(owner,ident)
    if j['state'] not in ('partial',):raise ValueError('Only failed parts can be retried')
    if j['calls']>=MAX_CALLS:raise ValueError('Per-build call cap reached')
+   j['retry_corrections']=copy.deepcopy(j['errors'])
+   if str(j['errors'].get('final','')).startswith('Appearance txt_'):
+    j['parts'].pop('appearance:wording_motion',None);j['retry_corrections']['appearance:wording_motion']=j['errors']['final']
    parts=[(key,spec) for key,spec in PARTS if key not in j['parts']];j['errors'].clear();j['state']='running';j['cancel']=False
   threading.Thread(target=self._run,args=(j,parts),daemon=True).start();return self.view(owner,ident)

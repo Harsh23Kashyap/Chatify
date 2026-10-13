@@ -35,3 +35,41 @@ class Jobs(unittest.TestCase):
   class Down:
    def complete(self,m):raise ValueError('The model is not responding right now')
   jobs=buildjobs.BuildJobs();d=jobs.start('owner',Down(),schema.DEFAULTS,{'brief':'Garden advice'});d=self.wait(jobs,d['id']);self.assertEqual(d['state'],'partial');self.assertLess(d['calls'],30);self.assertTrue(d['errors'])
+
+class SafePatchChecks(unittest.TestCase):
+ wait=Jobs.wait
+ def part_job(self,output,brief='Garden advice',cfg=None):
+  class P:
+   def complete(self,m):return output
+  return {'cancel':False,'calls':0,'provider':P(),'cfg':cfg or copy.deepcopy(schema.DEFAULTS),'parts':{},'errors':{},'active':set(),'brief':brief}
+ def test_known_api_wrapper_only(self):
+  rows=[{'name':'A','reason':'r','connector':'openalex','setup':'s','caveat':'c'}]
+  for name in ['api_recommendations','api_suggestions']:
+   job=self.part_job(json.dumps({name:rows}));buildjobs.BuildJobs()._draft_part(job,'api',dict(buildjobs.PARTS)['api']);self.assertEqual(job['parts']['api'],rows)
+  job=self.part_job(json.dumps({'unrelated_requests':rows}))
+  with self.assertRaises(ValueError):buildjobs.BuildJobs()._draft_part(job,'api',dict(buildjobs.PARTS)['api'])
+  self.assertNotIn('api',job['parts'])
+ def test_json_escape_not_silently_repaired(self):
+  self.assertIsNone(buildjobs._extract_json('{"code":"bad\\s escape"}'))
+  text={'code':r'Pattern \\s, path C:\\coastal'}
+  self.assertEqual(buildjobs._extract_json(json.dumps(text)),text)
+ def test_topic_language_never_sets_app_quotas(self):
+  cfg=copy.deepcopy(schema.DEFAULTS);cfg['budget']['daily_questions']=42
+  for brief in ['Garden advice','coastal advice','limit saturated fat','budget meals','daily nutrition','cap spending at $2','20 questions per day']:
+   job=self.part_job(json.dumps(dict(cfg['budget'],daily_questions=5)),brief,cfg)
+   buildjobs.BuildJobs()._draft_part(job,'config:budget',dict(buildjobs.PARTS)['config:budget'])
+   self.assertEqual(job['parts']['config:budget'],cfg['budget'])
+ @unittest.mock.patch('customchat.buildimages.capability',return_value={'available':False,'note':'fixture'})
+ def test_blank_wording_retry_retains_successful_parts(self,cap):
+  class Blank(Fixture):
+   blank=True
+   def complete(self,m):
+    out=super().complete(m)
+    if '"area": "appearance"' in m[0]['content'] and '"txt_disclaimer"' in m[0]['content'] and self.blank:
+     self.blank=False;raw=json.loads(out);raw['txt_disclaimer']=' ';return json.dumps(raw)
+    return out
+  jobs=buildjobs.BuildJobs();f=Blank();d=self.wait(jobs,jobs.start('owner',f,schema.DEFAULTS,{'brief':'Garden advice'})['id'])
+  self.assertEqual(d['state'],'partial');self.assertIn('appearance:wording_motion',d['errors']);before=copy.deepcopy(jobs.jobs[d['id']]['parts']);calls=d['calls']
+  jobs.retry('owner',d['id']);d=self.wait(jobs,d['id']);self.assertEqual(d['state'],'done',d);self.assertEqual(d['calls'],calls+2)
+  self.assertTrue(any('previous_validation_failure' in m and 'Interface wording left blank: txt_disclaimer' in m for m in f.calls))
+  for k,v in before.items():self.assertEqual(jobs.jobs[d['id']]['parts'][k],v)
