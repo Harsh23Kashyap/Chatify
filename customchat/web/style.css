@@ -915,3 +915,5 @@ html[data-motion=none] #tempPill{transition:none}
 /* The composer follows the current conversation width, including wide layouts. */
 html:not(.preview) body .composer>:is(.box,.cmeta,.pills,.composer-tools){max-width:var(--chat-max,980px)}
 html.reading-width-selected:not(.preview) body .composer>:is(.box,.cmeta,.pills,.composer-tools){max-width:var(--reading-width,720px)}
+/* Keep the chat column moving with the sidebar rather than jumping at toggle. */
+@media(min-width:861px) and (prefers-reduced-motion:no-preference){html:not([data-motion=none]):not([data-sidebar=hidden]) .app{transition:grid-template-columns 240ms cubic-bezier(.2,.8,.2,1),border-radius 160ms ease-out,background-color 180ms ease,color 180ms ease,border-color 180ms ease}}
