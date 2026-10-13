@@ -1224,3 +1224,10 @@ html[data-motion=none] .colorrow input[type=color]{transition:none!important}
 #pvextra[data-sample=fonts] .fs-h{min-height:110px;box-sizing:border-box;margin:0;line-height:1.25;overflow-wrap:anywhere;transition:none!important}
 #pvextra[data-sample=fonts] .fs-b{min-height:190px;box-sizing:border-box;margin:0;overflow-wrap:anywhere;transition:none!important}
 .font-sample-status{min-height:54px;line-height:1.5;margin:0}
+/* Theme switching changes one preview, not a chain of message entrances. */
+#pv{transition:opacity 160ms ease-out}
+#pv.preview-changing{opacity:.88}
+#pvmode button,#sec-colors .seg button{transition:background-color 160ms ease-out,color 160ms ease-out,border-color 160ms ease-out!important}
+@media(prefers-reduced-motion:reduce){#pv,#pvmode button,#sec-colors .seg button{transition:none!important}#pv.preview-changing{opacity:1}}
+html[data-motion=none] #pv,html[data-motion=none] #pvmode button,html[data-motion=none] #sec-colors .seg button{transition:none!important}
+html[data-motion=none] #pv.preview-changing{opacity:1}
