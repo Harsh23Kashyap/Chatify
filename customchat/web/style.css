@@ -823,3 +823,10 @@ html:not(.preview) .composer>.box{width:100%}
 
 /* Latest-reply control stays above the scrollport and growing composer. */
 .main>.jump{z-index:5}
+
+/* Citations remain fixed while hover changes only color and background. */
+.cite,.a sup{transition:color .16s ease,background-color .16s ease;transform:none!important}.cite:hover,.a sup:hover{transform:none!important;background:var(--soft);color:var(--ink)}.srcs .s.cite-selected{outline:2px solid var(--brand);outline-offset:2px}.source-unavailable{font-style:italic;color:var(--mut)}
+
+.cite,.a sup{animation:none!important}
+
+.srcs-h{text-transform:none!important;letter-spacing:0!important}

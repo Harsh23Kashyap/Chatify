@@ -128,14 +128,16 @@ function sendIcon(name, label) {
   if (motionAllowed() && send.animate) send.animate([{opacity:.5,transform:"scale(.95)"},{opacity:1,transform:"scale(1)"}],{duration:150,easing:"ease-out"});
 }
 function motionAllowed() { return document.documentElement.dataset.motion !== "none" && !matchMedia("(prefers-reduced-motion: reduce)").matches; }
-let sourceExit;
+let sourceExit, sourceTrigger;
 function closeSources() {
   const pane = $("#sources");
+  if (sourceTrigger?.isConnected) sourceTrigger.focus({preventScroll:true});
   if (!motionAllowed() || !pane.animate) { $("#app").classList.remove("src"); return; }
   sourceExit = pane.animate([{opacity:1, transform:"translateX(0)"}, {opacity:0, transform:"translateX(12px)"}], {duration:160, easing:"ease-in"});
   sourceExit.onfinish = () => { $("#app").classList.remove("src"); sourceExit = null; };
 }
 function showSources(evidence, hl, trigger) {
+  sourceTrigger = trigger || document.activeElement;
   const terms = [...new Set(((S.turns[S.turns.length - 1] || {}).standalone || "").toLowerCase().match(/[a-z0-9]{4,}/g) || [])].slice(0, 8);
   const pane = $("#sources");
   if (sourceExit) { sourceExit.onfinish = null; sourceExit.cancel(); sourceExit = null; }
@@ -148,7 +150,7 @@ function showSources(evidence, hl, trigger) {
     list.replaceChildren(...evidence.filter((e) => !only || e.source === only).map((e) => el("div", { class: "src" + (e.n === hl ? " hl" : "") },
       el("b", { text: e.n + ". " + e.title }),
       el("small", { text: [(e.authors || []).slice(0, 3).join(", "), e.year, e.venue, e.document, e.page ? "page " + e.page : e.section, e.version ? "version " + e.version.slice(0, 12) : "", e.ocr ? "OCR text, check original" : ""].filter(Boolean).join(" · ") }),
-      highlight(el("p"), e.text, terms),
+      highlight(el("p", {class:e.text ? "source-text" : "source-unavailable"}), e.text || "Source excerpt unavailable. This saved reference has no text to inspect.", terms),
       e.url ? el("a", { href: e.url, target: "_blank", rel: "noopener noreferrer", text: "Open source" }) : null)));
   };
   if (types.length > 1) types.forEach((t) => filters.append(el("button", { class: "chip", onclick: (ev) => {
@@ -157,10 +159,11 @@ function showSources(evidence, hl, trigger) {
   pane.append(el("button", { class: "icon", style: "float:right", "aria-label": "Close sources", title: "Close sources", onclick: closeSources }, svg("close")),
     el("h3", { text: "Sources" }), el("div", { class: "sub", text: evidence.length + " used for this answer" }), filters, list);
   draw(null);
-  if (opening && motionAllowed() && pane.animate) pane.animate([{opacity:0, transform:"translateX(16px)"}, {opacity:1, transform:"translateX(0)"}], {duration:240, easing:"cubic-bezier(.2,.8,.2,1)"});
+  if (opening && motionAllowed() && pane.animate) pane.animate([{opacity:0, transform:"translateX(4px)"}, {opacity:1, transform:"translateX(0)"}], {duration:240, easing:"cubic-bezier(.2,.8,.2,1)"});
   const selected = list.querySelector(".hl");
-  document.querySelectorAll(".cite.cite-selected").forEach(x=>x.classList.remove("cite-selected"));
+  document.querySelectorAll(".cite-selected").forEach(x=>x.classList.remove("cite-selected"));
   if(trigger?.classList.contains("cite")) trigger.classList.add("cite-selected");
+  if(trigger?.classList.contains("s")) trigger.classList.add("cite-selected");
   if (selected) {
     selected.scrollIntoView({block:"nearest", behavior:motionAllowed() ? "smooth" : "auto"});
     if (motionAllowed() && selected.animate) selected.animate([{opacity:.7, transform:"translateY(2px)"},{opacity:1, transform:"none"}],{duration:180,easing:"ease-out"});
@@ -182,7 +185,7 @@ function turnView(t, prev) {
     bub.append(el("div", { class: "nf-tips" }, tip("Try a different question", () => { $("#q").focus(); }), tip("Use words from your documents", () => { $("#q").focus(); }), tip("See which documents this chat uses", () => { location.href = "/settings.html"; })));
   }
   const srcLabel = (e) => (S.cfg.sources.find((x) => x.id === e.source) || {}).label || e.source || "";
-  const srcs = !t.evidence.length ? null : (el("div", { class: "srcs" }, el("div", { class: "srcs-h", text: "Evidence for this answer" }), t.evidence.slice(0, 5).map((e) => el("button", { class: "s", title: e.title, onclick: () => showSources(t.evidence, e.n) }, el("span", { class: "n", text: "[" + e.n + "]" }), el("span", { class: "sx" }, el("span", { class: "st", text: srcLabel(e) ? srcLabel(e) + " / " + e.title : e.title }), el("span", {class:"source-excerpt",text:e.text ? e.text.slice(0,240) + (e.text.length>240 ? "…" : "") : "Open source to inspect the evidence"}), el("span", { class: "sm", text: [srcLabel(e), e.year, e.page ? "page " + e.page : e.section, e.ocr ? "OCR text, check original" : ""].filter(Boolean).join(" \u00b7 ") })), el("span", { class: "go", "aria-hidden": "true", text: "\u203a" })))));
+  const srcs = !t.evidence.length ? null : (el("div", { class: "srcs" }, el("div", { class: "srcs-h", text: "Evidence for this answer" }), t.evidence.slice(0, 5).map((e) => el("button", { class: "s", title: e.title, onclick: (ev) => showSources(t.evidence, e.n, ev.currentTarget) }, el("span", { class: "n", text: "[" + e.n + "]" }), el("span", { class: "sx" }, el("span", { class: "st", text: srcLabel(e) ? srcLabel(e) + " / " + e.title : e.title }), el("span", {class:"source-excerpt",text:e.text ? e.text.slice(0,240) + (e.text.length>240 ? "…" : "") : "Source excerpt unavailable"}), el("span", { class: "sm", text: [srcLabel(e), e.year, e.page ? "page " + e.page : e.section, e.ocr ? "OCR text, check original" : ""].filter(Boolean).join(" \u00b7 ") })), el("span", { class: "go", "aria-hidden": "true", text: "\u203a" })))));
   nodes.push(el("div", { class: "row" }, avatar("bot"), bub));
   const meta = el("div", { class: "meta" });
   const weak = (t.ledger || []).filter((l) => !l.supported || (l.overlap !== undefined && l.overlap < 0.35));
