@@ -758,7 +758,14 @@ function previewMode() {
   S.turns = [{ id: "p1", chat: "p", question: "How will answers look in this app?", answer: "This is a sample answer with a source citation [1].\n\nAdjust the appearance on the left to see it here. This preview does not contact your model or sources.", evidence: [{ n: 1, title: "Sample source for visual preview", text: "Preview sample only, not a retrieved document." }], ledger: [], seconds: 0 }];
   S.chat = "p"; drawThread(); pvBottom(); $("#chatTitle").textContent = "Sample conversation";
   const list = $("#list"); list.replaceChildren(...["Sample conversation", "Another conversation"].map((t, i) => el("div", { class: "item" + (i ? "" : " on") }, el("span", { text: t }))));
-  window.addEventListener("message", (e) => { if (e.origin === location.origin && e.data && e.data.ccTheme) { applyWording(); applyIcons(); drawThread(); pvBottom(); $("#chatTitle").textContent = "Sample conversation"; } });
+  const previewCopy = () => JSON.stringify(["txt_title","txt_tagline","txt_examples","logo","emoji_hero","emoji_bot","emoji_you"].map(TV));
+  let lastCopy = previewCopy();
+  window.addEventListener("message", (e) => { if (e.origin === location.origin && e.data && e.data.ccTheme) {
+    const thread = $("#thread"), scroll = thread.scrollTop, copy = previewCopy();
+    applyWording(); applyIcons();
+    if (copy !== lastCopy) { drawThread(); thread.scrollTop = scroll; lastCopy = copy; }
+    $("#q").placeholder = "Visual preview only"; $("#chatTitle").textContent = "Sample conversation";
+  } });
 }
 function tour(replay=false) {
   CCTour.chat(replay, () => $("#q").focus());

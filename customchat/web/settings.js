@@ -287,11 +287,12 @@ const clone = (o) => JSON.parse(JSON.stringify(o));
 const effectiveWording = () => {const a=window.CCLoadedApp?.app||{};return {txt_title:a.title,txt_tagline:a.tagline,txt_examples:(a.examples||[]).join("\n"),txt_footer:a.footer,txt_placeholder:"Ask a question",txt_hint:"Answers cite their sources. Check important facts.",txt_disclaimer:"Not a substitute for professional advice.",txt_sidebar:"Conversations"};};
 const get = (f) => (f.colors ? theme[editMode][f.key] : theme[f.key] || effectiveWording()[f.key] || theme[f.key]);
 const setv = (f, v) => { const empty=(document.getElementById("f-"+f.key)||document.getElementById("f-"+f.key+"-file"))?.closest(".field")?.querySelector(".empty-field");if(empty)empty.hidden=!!v; if (f.colors) theme[editMode][f.key] = v; else theme[f.key] = v; changed(); };
-let sendTimer = 0;
+let sendTimer = 0, lastPreviewMode = null;
 function pushPreview() {
   const t = clone(theme); const m = $("#pvmode .seg button[aria-checked=true], #pvmode button[aria-checked=true]"); t.mode = m ? m.dataset.m : t.mode;
   const frame=$("#pv");const reduced=matchMedia("(prefers-reduced-motion:reduce)").matches||["calm","none"].includes(t.motion);
-  if(!reduced){frame.classList.add("preview-changing");setTimeout(()=>frame.classList.remove("preview-changing"),160)}
+  if(!reduced&&lastPreviewMode!==null&&lastPreviewMode!==t.mode){frame.classList.add("preview-changing");setTimeout(()=>frame.classList.remove("preview-changing"),160)}
+  lastPreviewMode=t.mode;
   const w = $("#pv").contentWindow; if (w) w.postMessage({ ccTheme: t }, location.origin);
   const w2 = $("#pv").contentWindow; if (w2 && w2.CCTheme) { /* same-origin: also apply the wording/emoji source */ w2.__ccPreviewReady = true; w2.CCTheme.apply(t); }
 }
@@ -478,7 +479,7 @@ function pvFollow() {
   const m = activeSec === "model", card = $("#pvmodel"), fr = $("#pv"), cap = $("#pvcap");
   const names = { presets: "Whole look", wording: "Wording", colors: "Colors", background: "Background", fonts: "Fonts", shape: "Shape and spacing", emoji: "Icons", motion: "Motion", layout: "Layout", model: "Model" };
   if (cap) cap.textContent = "Showing: " + (names[activeSec] || "Chat");
-  if (card.hidden === m) { (m ? card : fr).hidden = false; (m ? fr : card).hidden = true; (m ? card : fr).animate([{ opacity: 0, transform: "translateY(4px)" }, { opacity: 1, transform: "none" }], { duration: 180, easing: "ease-out" }); }
+  if (card.hidden === m) { (m ? card : fr).hidden = false; (m ? fr : card).hidden = true; if(!matchMedia("(prefers-reduced-motion:reduce)").matches&&!["calm","none"].includes(theme.motion)) (m ? card : fr).animate([{ opacity: 0, transform: "translateY(4px)" }, { opacity: 1, transform: "none" }], { duration: 180, easing: "ease-out" }); }
   { const pn = document.querySelector(".pvnote:not(#pvcap)"), ph = document.querySelector(".pvhead b"), pm = $("#pvmode"); if (pn) pn.hidden = m; if (ph) ph.textContent = m ? "Model status" : "Live preview"; if (pm) pm.hidden = m; }
   if (m) {
     const k = keyInfo[cur.provider] || {}, r = $("#testres"), st = r && r.classList.contains("ok") ? "ok" : (r && r.classList.contains("bad") ? "bad" : "");
@@ -500,7 +501,7 @@ function pvFollow() {
     let hist = $("#pvhist"); if (!hist) { hist = el("div", { id: "pvhist", class: "pvhist" }); card.parentNode.append(hist); }
     hist.hidden = !(m && testLog.length); hist.replaceChildren(el("b", { text: "Recent tests" }), ...testLog.map((x) => el("div", { class: "pvh-row" }, el("span", { class: "fitdot " + (x.ok ? "green" : "red") }), el("span", { text: x.p + (x.ok ? " worked" : " failed"),title:x.detail || "" }), el("span", { class: "h", text: x.t })))); }
 }
-function pvPop() { const f = document.getElementById("pv"); if (!f || matchMedia("(prefers-reduced-motion:reduce)").matches || ["calm","none"].includes(theme.motion)) return; f.animate([{ opacity: .55, transform: "scale(.985)" }, { opacity: 1, transform: "scale(1)" }], { duration: 220, easing: "ease-out" }); }
+function pvPop() { const f = document.getElementById("pv"); if (!f || matchMedia("(prefers-reduced-motion:reduce)").matches || ["calm","none"].includes(theme.motion)) return; f.animate([{ opacity: .75 }, { opacity: 1 }], { duration: 220, easing: "ease-out" }); }
 function syncColorEditor(sec) {
   sec.querySelectorAll('[data-m]').forEach(b=>b.setAttribute('aria-checked',String(b.dataset.m===editMode)));
   const spec=SECTIONS.find(s=>s.id==='colors');
