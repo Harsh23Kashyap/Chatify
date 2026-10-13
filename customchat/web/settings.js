@@ -578,6 +578,7 @@ function pvFollow() {
 }
 function pvPop() { const f = document.getElementById("pv"); if (!f || matchMedia("(prefers-reduced-motion:reduce)").matches || ["calm","none"].includes(theme.motion)) return; f.animate([{ opacity: .75 }, { opacity: 1 }], { duration: 220, easing: "ease-out" }); }
 let selectedColorField=null;
+window.addEventListener("resize",()=>{if(selectedColorField)showSelectedColor(selectedColorField)});
 function showSelectedColor(f){
   selectedColorField=f;
   const sec=document.getElementById('sec-colors'),bar=sec?.querySelector('.selected-color-summary');if(!bar)return;

@@ -16,3 +16,10 @@ html body .builder-background[data-state=partial]{border-radius:999px}
 
 @media(prefers-color-scheme:dark){html[data-theme=auto]{--feedback-ink:#f1d4a5;--feedback-surface:#29271f;--feedback-line:#bd9b65;--feedback-focus:#bdd4bb}}
 html body [aria-invalid=true]{box-shadow:none!important}
+
+/* Reveal only the validation symbol, never shake or flash the field. */
+@keyframes field-error-symbol-in{from{opacity:0}to{opacity:1}}
+@media(prefers-reduced-motion:no-preference){html:not([data-motion=none]) body .builder-field-error:not(:empty)::before{animation:field-error-symbol-in .16s ease-out both}}
+@media(prefers-reduced-motion:reduce){html body .builder-field-error::before{animation:none!important}}
+html[data-motion=none] body .builder-field-error::before{animation:none!important}
+html body .builder-field-error:not(:empty){animation:none!important}
