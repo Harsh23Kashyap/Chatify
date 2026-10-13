@@ -208,6 +208,9 @@ def start_pull(base, model):
                         st["error"] = "Ollama said: " + str(d["error"])[:160]; break
                     st["status"] = str(d.get("status", ""))[:60]
                     if d.get("total"):
+                        st["downloaded_bytes"] = max(0, int(d.get("completed", 0)))
+                        st["total_bytes"] = max(0, int(d["total"]))
+                        st["progress_scope"] = "current download part"
                         st["pct"] = max(st["pct"], min(99, int(100 * d.get("completed", 0) / d["total"])))
                     if d.get("status") == "success":
                         st["pct"] = 100

@@ -23,5 +23,5 @@ class TransientKeyAndCancellation(unittest.TestCase):
  def test_success_cannot_be_cancelled_after_done(self):
   pid,st=self.pull(b'{"status":"success"}\n');self.assertTrue(st['done']);self.assertEqual(st['pct'],100);self.assertFalse(hardware.cancel_pull(pid)['cancelled']);self.assertNotIn(pid,hardware._PULL_HANDLES)
  def test_truncated_stream_is_not_installed(self):
-  pid,st=self.pull(b'{"status":"pulling","total":100,"completed":12}\n');self.assertTrue(st['error']);self.assertLess(st['pct'],100)
+  pid,st=self.pull(b'{"status":"pulling","total":100,"completed":12}\n');self.assertTrue(st['error']);self.assertLess(st['pct'],100);self.assertEqual(st['downloaded_bytes'],12);self.assertEqual(st['total_bytes'],100);self.assertEqual(st['progress_scope'],'current download part')
  def test_unknown_cancel(self):self.assertIsNone(hardware.cancel_pull('missing-test-id'))
