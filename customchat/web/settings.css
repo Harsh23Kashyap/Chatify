@@ -1299,3 +1299,6 @@ html body.settings-tabs #sec-colors .fields.colorlist .field>.flabel{flex-direct
 #sec-emoji .emoji-control>.mini{min-height:44px!important}
 #sec-emoji .field>.flabel{justify-content:flex-start!important;text-align:left!important}
 #sec-emoji .field>.flabel{flex-direction:row!important;align-items:center!important}
+
+/* Conditional appearance controls must stay hidden in every field layout. */
+html body.settings-tabs #col .field[hidden]{display:none!important}
