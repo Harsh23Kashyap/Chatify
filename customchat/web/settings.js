@@ -417,9 +417,9 @@ function control(f) {
   const v = get(f);
   if (f.type === "color") {
     const swatch = el("input", { type: "color", id, value: v || "#888888", "aria-label": f.label }), hex = el("input", { type: "text", class: "hex", value: v || "", maxlength: "7", "aria-label": f.label + " hex code", placeholder: "automatic" });
-    swatch.addEventListener("input", () => { hex.value = swatch.value; setv(f, swatch.value); });
-    hex.addEventListener("input", () => { hex.setAttribute("aria-invalid",String(!/^#[0-9a-fA-F]{6}$/.test(hex.value)));hex.setCustomValidity(/^#[0-9a-fA-F]{6}$/.test(hex.value)?"":"Use a six-digit hex color, for example #173f35"); if (/^#[0-9a-fA-F]{6}$/.test(hex.value)) { swatch.value = hex.value; setv(f, hex.value.toLowerCase()); } else if (f.clearable && hex.value === "") setv(f, ""); });
-    input = el("div", { class: "colorrow" }, swatch, hex); if (f.clearable) input.append(el("button", { type: "button", class: "mini", onclick: () => { hex.value = ""; setv(f, ""); } }, "Auto"));
+    swatch.addEventListener("input", () => { hex.value = swatch.value; hex.setAttribute("aria-invalid","false");hex.setCustomValidity("");setv(f, swatch.value); });
+    hex.addEventListener("input", () => { const valid=/^#[0-9a-fA-F]{6}$/.test(hex.value)||(f.clearable&&hex.value==="");hex.setAttribute("aria-invalid",String(!valid));hex.setCustomValidity(valid?"":"Use a six-digit hex color, for example #173f35"); if (/^#[0-9a-fA-F]{6}$/.test(hex.value)) { swatch.value = hex.value; setv(f, hex.value.toLowerCase()); } else if (f.clearable && hex.value === "") setv(f, ""); });
+    input = el("div", { class: "colorrow" }, swatch, hex); if (f.clearable) input.append(el("button", { type: "button", class: "mini", onclick: () => { hex.value = "";hex.setAttribute("aria-invalid","false");hex.setCustomValidity("");setv(f, ""); } }, "Auto"));
   } else if (f.type === "logo") {
     input = logoControl(f, v);
   } else if (f.type === "emoji") {
