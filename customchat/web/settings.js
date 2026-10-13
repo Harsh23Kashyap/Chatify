@@ -464,6 +464,22 @@ let activeSec = "presets";
 
 function lum(h) { const m = /^#?([0-9a-f]{6})$/i.exec(h || ""); if (!m) return null; const v = [0, 2, 4].map((i) => { const c = parseInt(m[1].substr(i, 2), 16) / 255; return c <= 0.03928 ? c / 12.92 : Math.pow((c + 0.055) / 1.055, 2.4); }); return 0.2126 * v[0] + 0.7152 * v[1] + 0.0722 * v[2]; }
 function ratio(a, b) { const x = lum(a), y = lum(b); if (x == null || y == null) return null; const hi = Math.max(x, y), lo = Math.min(x, y); return (hi + 0.05) / (lo + 0.05); }
+const sampleFontRequests=new Map();
+function loadSampleFont(key,custom,stacks){
+  const spec=stacks[key],family=key==="custom"?custom.trim():spec?.[0]?.split(",")[0]?.replaceAll('"',"");
+  if(spec&&!spec[1])return Promise.resolve(true);
+  if(!family)return Promise.resolve(false);
+  const request=key==="custom"?encodeURIComponent(family)+":wght@400;500;700":spec?.[1];
+  if(!request)return Promise.resolve(false);
+  if(sampleFontRequests.has(request))return sampleFontRequests.get(request);
+  const work=new Promise(resolve=>{
+    const link=el("link",{rel:"stylesheet",href:"https://fonts.googleapis.com/css2?family="+request+"&display=swap"});let settled=false;
+    const done=ok=>{if(settled)return;settled=true;clearTimeout(timer);resolve(ok)};
+    const timer=setTimeout(()=>done(false),6500);
+    link.onerror=()=>done(false);link.onload=async()=>{try{done((await document.fonts.load('16px "'+family+'"')).length>0)}catch{done(false)}};
+    document.head.append(link);
+  });sampleFontRequests.set(request,work);return work;
+}
 function pvExtra() {
   const host = $("#pvextra"); if (!host) return;
   const sec = activeSec; host.hidden = !(sec === "colors" || sec === "fonts"); if (host.hidden) { return; }
@@ -485,9 +501,32 @@ function pvExtra() {
       if(changedStatus){row._statusAnimation?.cancel();if(hadStatus&&!quiet)row._statusAnimation=row.animate([{opacity:.65},{opacity:1}],{duration:160,easing:"ease-out"});}
     });
   } else {
-    host.dataset.sample="fonts";
-    let fam = {}; try { const d = $("#pv").contentDocument, h = d.querySelector(".hero h1, .hero b, h1") || d.body; fam = { body: getComputedStyle(d.body).fontFamily, head: getComputedStyle(h).fontFamily }; } catch (e) { fam = { body: "inherit", head: "inherit" }; }
-    host.replaceChildren(el("b", { text: "Font sample" }), el("div", { class: "fs-h", style: "font-family:" + fam.head, text: "How can I help today?" }), el("div", { class: "fs-b", style: "font-family:" + fam.body, text: "A good answer explains itself, then shows where it came from. 0123456789" }), el("div", { class: "h", text: "Headline font above, answer font below." }));
+    if(host.dataset.sample!=="fonts"){
+      host.dataset.sample="fonts";
+      host.replaceChildren(el("b",{text:"Font sample"}),el("div",{class:"fs-h",text:"How can I help today?"}),el("div",{class:"fs-b",text:"A good answer explains itself, then shows where it came from. 0123456789"}),el("div",{class:"h font-sample-status",role:"status"}));
+    }
+    const loader=$("#pv")?.contentWindow?.CCTheme,heading=host.querySelector(".fs-h"),body=host.querySelector(".fs-b"),status=host.querySelector(".font-sample-status");
+    if(!loader)return;
+    const custom=theme.custom_font||"",signature=JSON.stringify([theme.font,theme.heading_font,custom]),changedFamily=host.dataset.fontSelection!==signature,previousHeading=host.dataset.headingSelection;
+    host.dataset.fontSelection=signature;
+    const headingSignature=JSON.stringify([theme.heading_font,theme.heading_font==="custom"?custom:""]);
+    const family=key=>key==="custom"&&custom?'"'+custom.replaceAll('"','')+'",system-ui,sans-serif':loader.fonts[key]?.[0]||"system-ui,sans-serif";
+    heading.style.fontFamily=family(theme.heading_font);body.style.fontFamily=family(theme.font);
+    heading.style.fontSize=(19*theme.font_size/100)+"px";body.style.fontSize=(13*theme.font_size/100)+"px";body.style.lineHeight=String(theme.line_height/100);
+    const quiet=matchMedia("(prefers-reduced-motion:reduce)").matches||["calm","none"].includes(theme.motion);
+    if(quiet)host._headingAnimation?.cancel();
+    if(previousHeading&&previousHeading!==headingSignature){host._headingAnimation?.cancel();if(!quiet)host._headingAnimation=heading.animate([{opacity:.5},{opacity:1}],{duration:160,easing:"ease-out"});}
+    host.dataset.headingSelection=headingSignature;
+    if(changedFamily){
+      const selected=[theme.font,theme.heading_font];
+      status.textContent="Loading selected fonts... System fallback is shown until ready.";host.setAttribute("aria-busy","true");
+      Promise.all(selected.map(key=>loadSampleFont(key,custom,loader.fonts))).then(results=>{
+        if(host.dataset.sample!=="fonts"||host.dataset.fontSelection!==signature)return;
+        host.setAttribute("aria-busy","false");
+        status.textContent=results.every(Boolean)?"Selected fonts ready. Headline above, answer below.":"A selected font could not load. System fallback is shown; the selection is kept.";
+      });
+    }
+
   }
 }
 function pvFollow() {

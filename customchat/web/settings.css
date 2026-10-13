@@ -1219,3 +1219,8 @@ html[data-motion=none] .crgrid .crs{transition:none!important}
 .colorrow input[type=color]::-webkit-color-swatch,.colorrow input[type=color]::-moz-color-swatch{opacity:0}
 @media(prefers-reduced-motion:reduce){.colorrow input[type=color]{transition:none!important}}
 html[data-motion=none] .colorrow input[type=color]{transition:none!important}
+
+/* Stable sample slots avoid bouncing the preview while families and sizes change. */
+#pvextra[data-sample=fonts] .fs-h{min-height:110px;box-sizing:border-box;margin:0;line-height:1.25;overflow-wrap:anywhere;transition:none!important}
+#pvextra[data-sample=fonts] .fs-b{min-height:190px;box-sizing:border-box;margin:0;overflow-wrap:anywhere;transition:none!important}
+.font-sample-status{min-height:54px;line-height:1.5;margin:0}
