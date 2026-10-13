@@ -5,7 +5,7 @@ function load(){try{return JSON.parse(localStorage.getItem(key)||"{}")}catch(_){
 function apply(v){
  const width=[600,720,900].includes(+v.width)?+v.width:720;
  const size=[15,17,19,21].includes(+v.size)?+v.size:17;
- document.documentElement.style.setProperty("--reading-width",width+"px");
+ document.documentElement.classList.add("reading-view");document.documentElement.style.setProperty("--reading-width",width+"px");
  document.documentElement.style.setProperty("--reading-size",size+"px");
  return {width,size};
 }
@@ -18,9 +18,9 @@ document.addEventListener("DOMContentLoaded",()=>{
   const header=document.createElement("header");header.className="reading-head";
   const badge=document.createElement("span");badge.className="reading-badge";badge.textContent="Aa";
   const title=document.createElement("div");const heading=document.createElement("h2");heading.id="readingTitle";heading.textContent="Make room to read";
-  const subtitle=document.createElement("p");subtitle.textContent="Your view. Your pace.";title.append(heading,subtitle);header.append(badge,title);dialog.append(header);
+  const subtitle=document.createElement("p");subtitle.textContent="Choose text size and answer width.";title.append(heading,subtitle);header.append(badge,title);dialog.append(header);
   const value=apply(load());const preview=document.createElement("div");preview.className="reading-preview";
-  const caption=document.createElement("span");caption.textContent="LIVE PREVIEW";preview.append(caption);
+  const caption=document.createElement("span");caption.textContent="Sample text";preview.append(caption);
   const sample=document.createElement("p");sample.textContent="A little space makes a long answer easier to follow.";preview.append(sample);
   function sync(){sample.style.fontSize=value.size+"px";preview.dataset.width=value.width;}
   for(const [name,label,options] of [["width","Answer width",[[600,"Narrow"],[720,"Standard"],[900,"Wide"]]],["size","Answer text",[[15,"Small"],[17,"Default"],[19,"Large"],[21,"Largest"]]]]){
