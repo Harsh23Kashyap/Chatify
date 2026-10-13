@@ -907,3 +907,11 @@ html.contrast-measuring *,html.contrast-measuring *::before,html.contrast-measur
 .history-skeleton-row span+span{width:48%;height:5px}
 @media(prefers-reduced-motion:no-preference){html:not([data-motion=none]) .history-skeleton.slow .history-skeleton-row span{background:linear-gradient(90deg,var(--line) 20%,var(--paper) 50%,var(--line) 80%);background-size:200% 100%;animation:history-placeholder 1.8s ease-in-out infinite}}
 @keyframes history-placeholder{from{background-position:100% 0}to{background-position:-100% 0}}
+/* Temporary mode is a state, not ongoing work. */
+#tempPill::before{animation:none!important}
+#tempPill{transition:background-color 160ms ease-out,border-color 160ms ease-out,color 160ms ease-out}
+@media(prefers-reduced-motion:reduce){#tempPill{transition:none}}
+html[data-motion=none] #tempPill{transition:none}
+/* The composer follows the current conversation width, including wide layouts. */
+html:not(.preview) body .composer>:is(.box,.cmeta,.pills,.composer-tools){max-width:var(--chat-max,980px)}
+html.reading-width-selected:not(.preview) body .composer>:is(.box,.cmeta,.pills,.composer-tools){max-width:var(--reading-width,720px)}
