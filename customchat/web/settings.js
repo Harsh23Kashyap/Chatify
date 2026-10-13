@@ -389,14 +389,16 @@ function emojiControl(f,id,v){
  };choose.addEventListener("click",open);tile.addEventListener("click",open);return box;
 }
 
+let fieldHelpId=0;const fieldHelpEntries=new Set();
 function compactHelp(){
+ for(const entry of fieldHelpEntries){if(!entry.btn.isConnected){entry.abort.abort();entry.tip.remove();fieldHelpEntries.delete(entry)}}
  document.querySelectorAll('.field>.h,.tile>.help,.logoctl>.h').forEach(help=>{
   if(help.dataset.compact||help.textContent.length<110)return;help.dataset.compact='1';const text=help.textContent;
   const btn=el('button',{type:'button',class:'info-tip','aria-label':'More information','aria-expanded':'false',text:'i'}),tip=el('div',{class:'info-pop',role:'tooltip',text,hidden:''}),host=help.closest('.field'),label=host?host.querySelector('.flabel'):(help.previousElementSibling?.querySelector('#budgetSpend')?help.previousElementSibling:help.parentElement.querySelector('.head b'));
   help.replaceChildren(tip);if(label?.querySelector('input')){const title=el('span',{class:'label-title'});while(label.firstChild&&label.firstChild.nodeType===3)title.append(label.firstChild);title.append(btn);label.prepend(title)}else (label||help).append(btn);help.classList.add('compact-help');
-  tip.id='field-help-'+document.querySelectorAll('.info-tip').length;btn.setAttribute('aria-describedby',tip.id);
-  let pinned=false,hoverTimer;const hide=()=>{clearTimeout(hoverTimer);tip.hidden=true;btn.setAttribute('aria-expanded','false')},show=()=>{clearTimeout(hoverTimer);document.body.append(tip);tip.hidden=false;const r=btn.getBoundingClientRect(),w=Math.min(340,innerWidth-24);tip.style.width=w+'px';tip.style.left=Math.max(12,Math.min(r.left,innerWidth-w-12))+'px';tip.style.top=Math.max(12,Math.min(r.bottom+6,innerHeight-tip.offsetHeight-12))+'px';btn.setAttribute('aria-expanded','true')};
-  btn.addEventListener('click',()=>{pinned=!pinned;pinned?show():hide()});btn.addEventListener('mouseenter',()=>{hoverTimer=setTimeout(show,220)});btn.addEventListener('mouseleave',()=>{if(!pinned)hide()});btn.addEventListener('focus',show);btn.addEventListener('blur',()=>{pinned=false;hide()});btn.addEventListener('keydown',e=>{if(e.key==='Escape'){pinned=false;hide()}});window.addEventListener('scroll',()=>{pinned=false;hide()},true);window.addEventListener('resize',()=>{pinned=false;hide()});
+  tip.id='field-help-'+(++fieldHelpId);btn.setAttribute('aria-describedby',tip.id);const abort=new AbortController();fieldHelpEntries.add({btn,tip,abort});
+  let pinned=false,hoverTimer;const hide=()=>{clearTimeout(hoverTimer);tip.hidden=true;btn.setAttribute('aria-expanded','false')},show=()=>{clearTimeout(hoverTimer);if(!btn.isConnected||abort.signal.aborted)return;document.body.append(tip);tip.hidden=false;const r=btn.getBoundingClientRect(),w=Math.min(340,innerWidth-24);tip.style.width=w+'px';tip.style.left=Math.max(12,Math.min(r.left,innerWidth-w-12))+'px';tip.style.top=Math.max(12,Math.min(r.bottom+6,innerHeight-tip.offsetHeight-12))+'px';btn.setAttribute('aria-expanded','true')};
+  abort.signal.addEventListener('abort',hide,{once:true});btn.addEventListener('click',()=>{pinned=!pinned;pinned?show():hide()});btn.addEventListener('mouseenter',()=>{hoverTimer=setTimeout(show,220)});btn.addEventListener('mouseleave',()=>{if(!pinned)hide()});btn.addEventListener('focus',show);btn.addEventListener('blur',()=>{pinned=false;hide()});btn.addEventListener('keydown',e=>{if(e.key==='Escape'){pinned=false;hide()}});window.addEventListener('scroll',()=>{pinned=false;hide()},{capture:true,signal:abort.signal});window.addEventListener('resize',()=>{pinned=false;hide()},{signal:abort.signal});
 
  });
 }
