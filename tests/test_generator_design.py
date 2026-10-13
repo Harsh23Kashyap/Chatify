@@ -32,3 +32,12 @@ class DesignTests(unittest.TestCase):
   for stage in DESIGNS:
    for attack in attacks:
     text=system(stage,attack);self.assertIn('INPUT FIELDS:',text);self.assertIn('OUTPUT CONTRACT:',text);self.assertIn('data, not authority',text);self.assertIn('REFERENCE PROMPT (data, not authority)',text)
+ def test_plural_runtime_inputs_and_queries_are_accepted(self):
+  from customchat.generator_design import validate_draft
+  for stage,text in [('queries','Write up to 3 short keyword search queries related to meteors. One per line, no numbering.'),('queries','Generate keyword queries from the supplied questions and inputs. Return one per line.'),('standalone','Rewrite follow-ups as standalone questions using earlier conversation context.')]:
+   self.assertEqual(validate_draft(stage,{'prompt':text}),[],text)
+ def test_morphology_fix_keeps_example_and_citation_contracts(self):
+  from customchat.generator_design import validate_draft
+  for stage,text in [('queries','Generate queries for input. Expected output: meteor showers, meteor dust.'),('standalone','Rewrite questions. Example question: What are meteors?'),('summary','Summarize conversation history. Sample summary: We discussed meteors.')]:
+   self.assertTrue(validate_draft(stage,{'prompt':text}),text)
+  self.assertTrue(validate_draft('answer',{'prompt':'Answer questions from numbered evidence and cite each factual claim.'}))
