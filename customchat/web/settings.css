@@ -1178,3 +1178,8 @@ body.settings-tabs .editor-choice{transition:background-color 160ms cubic-bezier
 #sec-prompts>.workspace-fields[open]>*:not(summary){animation:prompt-extra-in 160ms ease-out}
 @keyframes prompt-extra-in{from{opacity:.75}to{opacity:1}}
 @media(prefers-reduced-motion:reduce){#sec-prompts>.workspace-fields>summary::before{transition:none}#sec-prompts>.workspace-fields[open]>*:not(summary){animation:none}}
+/* Prompt titles and state labels must share narrow headers without clipping. */
+#promptsEditor .stage>summary{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:10px;box-sizing:border-box;max-width:100%}
+#promptsEditor .stage>summary b{min-width:0;overflow-wrap:anywhere}
+#promptsEditor .stage>summary small{min-width:0;white-space:normal;max-width:70px}
+@media(max-width:480px){#promptsEditor .stage>summary{grid-template-columns:minmax(0,1fr);gap:4px;padding-left:12px;padding-right:12px}#promptsEditor .stage>summary b{overflow-wrap:normal}#promptsEditor .stage>summary small{margin-left:0;text-align:left;max-width:none}}
