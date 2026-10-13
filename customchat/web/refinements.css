@@ -65,3 +65,5 @@ html body.settings-tabs #sec-model .cs:has(#modelPick) .cs-label{white-space:nor
 
 .builder-example-choices{margin:8px 0 20px;border:0;background:transparent}.builder-example-choices>summary{cursor:pointer;font-size:13px}.builder-example-choices>div{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}dialog.app-builder .builder-example-choices button{min-height:44px;padding:10px 12px;border:1px solid #bac9bf;border-radius:10px;background:transparent;box-shadow:none;color:#173f35}
 html body.settings-tabs .memory-graph{scroll-margin-top:144px}
+
+.memory-legend{display:flex;flex-wrap:wrap;gap:4px 16px;margin:0 0 12px;font-size:12px;line-height:1.5}.memory-total>div{min-width:0;overflow:hidden}
