@@ -1183,3 +1183,6 @@ body.settings-tabs .editor-choice{transition:background-color 160ms cubic-bezier
 #promptsEditor .stage>summary b{min-width:0;overflow-wrap:anywhere}
 #promptsEditor .stage>summary small{min-width:0;white-space:normal;max-width:70px}
 @media(max-width:480px){#promptsEditor .stage>summary{grid-template-columns:minmax(0,1fr);gap:4px;padding-left:12px;padding-right:12px}#promptsEditor .stage>summary b{overflow-wrap:normal}#promptsEditor .stage>summary small{margin-left:0;text-align:left;max-width:none}}
+#sec-search .source-key-card label.check input[type=checkbox]{transition:background-color 160ms ease!important}
+#sec-search .source-key-card label.check input[type=checkbox]::after{transition:transform 160ms ease!important}
+@media(prefers-reduced-motion:reduce){#sec-search .source-key-card label.check input[type=checkbox],#sec-search .source-key-card label.check input[type=checkbox]::after{transition:none!important}}
