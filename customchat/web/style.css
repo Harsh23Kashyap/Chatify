@@ -836,3 +836,6 @@ html:not(.preview) .composer>.box{width:100%}
 
 /* Long permission notices must stay readable on a phone. */
 .toast{width:max-content;max-width:calc(100vw - 32px)!important;box-sizing:border-box;white-space:normal;border-radius:12px!important;line-height:1.5;text-decoration:none!important}
+
+.source-upload-row{display:grid;gap:4px;border-top:1px solid var(--line);padding:12px 0;overflow-wrap:anywhere}.source-upload-row>b{font-size:13px;color:var(--ink)}.source-upload-state{font-size:13px;line-height:1.5}.source-upload-row[data-state=error] .source-upload-state{color:var(--danger,#a33322)}
+@media(prefers-reduced-motion:no-preference){html:not([data-motion=none]) .source-upload-row{animation:cc-panel-in .16s ease-out}}
