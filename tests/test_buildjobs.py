@@ -76,9 +76,8 @@ class SafePatchChecks(unittest.TestCase):
  def test_invalid_helper_json_reports_exact_corrective_contract(self):
   malformed='{"brief":"Cleaner","code":"re.sub(r\'\\s+\', \' \', query)"}'
   job=self.part_job(malformed)
-  with self.assertRaisesRegex(ValueError,'invalid JSON.*double backslashes'):
-   buildjobs.BuildJobs()._draft_part(job,'helper:clean_query',dict(buildjobs.PARTS)['helper:clean_query'])
-  self.assertNotIn('helper:clean_query',job['parts']);self.assertEqual(job['calls'],1)
+  buildjobs.BuildJobs()._draft_part(job,'helper:clean_query',dict(buildjobs.PARTS)['helper:clean_query'])
+  self.assertEqual(job['parts']['helper:clean_query']['code'],"re.sub(r'\\s+', ' ', query)");self.assertEqual(job['calls'],1)
  @unittest.mock.patch('customchat.buildimages.capability',return_value={'available':False,'note':'fixture'})
  def test_review_context_keeps_unknowns_and_real_concerns(self,cap):
   class Review(Fixture):
@@ -122,3 +121,26 @@ class RetainedFailureMatrix(unittest.TestCase):
     kept=copy.deepcopy(jobs.jobs[d['id']]['parts']);calls=d['calls'];self.assertEqual(len(kept),len(buildjobs.PARTS)-1)
     jobs.retry('owner',d['id']);done=self.wait(jobs,d['id']);self.assertEqual(done['state'],'done',done);self.assertEqual(done['calls'],calls+2)
     for key,value in kept.items():self.assertEqual(jobs.jobs[d['id']]['parts'][key],value)
+
+class DraftJSONRepairTests(unittest.TestCase):
+ def test_illegal_escape_preserves_literal_regex(self):
+  raw=r'{"brief":"Cleaner","code":"re.sub(r\'\s+\', \' \', query)"}'.replace("\\'", "'")
+  self.assertEqual(buildjobs.parse_draft_json(raw)['code'],"re.sub(r'\\s+', ' ', query)")
+ def test_truncated_and_missing_fields_never_invented(self):
+  self.assertIsNone(buildjobs.parse_draft_json('{"light":'))
+  self.assertEqual(buildjobs.parse_draft_json('{"brief":"only"}'),{'brief':'only'})
+
+class BrandingRetryTests(unittest.TestCase):
+ def test_final_branding_redrafts_identity_only(self):
+  from unittest.mock import patch
+  jobs=buildjobs.BuildJobs();cfg=schema.validate({})
+  job={'id':'x','owner':'owner','state':'partial','calls':31,'errors':{'final':'App branding was not tailored to the request'},'parts':{k:copy.deepcopy(v['defaults']) if 'defaults' in v else {} for k,v in buildjobs.PARTS},'cfg':cfg,'active':set(),'phase':'Final local validation','notice':'fixture','yaml':None,'created':time.time()}
+  jobs.jobs['x']=job
+  before=copy.deepcopy(job['parts'])
+  with patch('customchat.buildjobs.threading.Thread') as thread:
+   jobs.retry('owner','x')
+   selected=thread.call_args.kwargs['args'][1]
+  self.assertEqual([k for k,_ in selected],['config:app'])
+  self.assertNotIn('config:app',job['parts'])
+  for k,v in before.items():
+   if k!='config:app':self.assertEqual(job['parts'][k],v)

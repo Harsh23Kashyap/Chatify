@@ -70,7 +70,7 @@ async function loadModels(force) {
   const help=$("#modelh");let sources=document.getElementById("modelSuggestionSources");if(!sources){sources=el("small",{id:"modelSuggestionSources"});help.after(sources)}sources.replaceChildren();
   const available=list.length;list=modelShortlist(p,list);const fallback=!list.length&&suggestions.length>0;sel.replaceChildren();
   for(const n of list)sel.append(el("option",{value:n,text:n}));
-  if(fallback)for(const example of suggestions){if(example.source){const a=el("a",{href:example.source,target:"_blank",rel:"noopener noreferrer",text:"Model documentation"});sources.append(a,document.createTextNode(" · Checked "+example.checked));}const o=el("option",{value:example.id,text:example.id+" (suggested)"});o.dataset.description=example.description;sel.append(o)}
+  const documentedSources=new Set();if(fallback)for(const example of suggestions){if(example.source&&!documentedSources.has(example.source)){documentedSources.add(example.source);const a=el("a",{href:example.source,target:"_blank",rel:"noopener noreferrer",text:"Model documentation"});sources.append(a,document.createTextNode(" · Checked "+example.checked));}const o=el("option",{value:example.id,text:example.id+" (suggested)"});o.dataset.description=example.description;sel.append(o)}
   sel.append(el("option",{value:OTHER,text:list.length?"Other (type a name)":"Type a model name"}));
   sel.value=list.includes(currentModel)||fallback&&suggestions.some(x=>x.id===currentModel)?currentModel:OTHER;
   const demo=p==="mock",typed=!demo&&sel.value===OTHER;

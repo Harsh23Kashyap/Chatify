@@ -169,3 +169,6 @@ html body dialog.app-builder .cs[data-section-only] .cs-btn{transition:backgroun
 @media(prefers-reduced-motion:reduce){.builder-part-icon,.builder-group-mark{transition:none!important}}
 /* Keep missing prerequisites with the action on both desktop and mobile. */
 #builderDescribe>#builderPrerequisites{grid-column:1/-1;margin:4px 0 0;font-size:12px;line-height:1.55;color:var(--studio-muted)}
+
+/* Final check errors are full-width text, never a draft-row grid cell. */
+.app-builder .builder-final-error{display:block!important;grid-column:1/-1!important;width:100%!important;min-width:0!important;max-width:none!important;box-sizing:border-box;white-space:normal!important;word-break:normal!important;overflow-wrap:anywhere;padding:16px!important;font-size:14px!important;line-height:1.6!important}
