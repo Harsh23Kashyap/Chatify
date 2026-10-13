@@ -15,7 +15,7 @@ const el = (tag, props = {}, ...kids) => { const e = document.createElement(tag)
 
 /* ---------- model section (unchanged behaviour) ---------- */
 function draw() {
-  $("#model").value = cur.model || ""; $("#base").value = cur.base_url || ""; $("#temp").value = cur.temperature; $("#topk").value = cur.top_k; $("#rewrite").checked = !!cur.query_rewrite;
+  $("#model").value = cur.model || "";const picker=$("#modelPick"),matched=[...picker.options].some(o=>o.value===cur.model);picker.value=matched?cur.model:OTHER;$("#base").value = cur.base_url || ""; $("#temp").value = cur.temperature; $("#topk").value = cur.top_k; $("#rewrite").checked = !!cur.query_rewrite;
   $("#tv").textContent = (+cur.temperature).toFixed(2); $("#kv").textContent = cur.top_k; sliderVisuals();
   document.querySelectorAll("#seg button").forEach((b) => b.setAttribute("aria-checked", String(b.dataset.p === cur.provider)));
   buildChips();
@@ -62,22 +62,22 @@ function modelShortlist(provider, models) {
 let modelRequest=0;
 async function loadModels(force) {
   const request=++modelRequest,sel=$("#modelPick"),p=cur.provider,base=$("#base").value.trim();
-  const m=cur.model||"";let list=[],note="",suggestions=[];
+  const m=cur.model||"";let list=[],note="",suggestions=[];sel.setAttribute("aria-busy","true");
   $("#modelh").textContent=p==="mock"?"The demo answers without a model.":"Loading model names…";
   $("#refreshModels").disabled=true;
   try { const r=await api("/api/provider/models",{provider:p,base_url:base});list=r.models||[];note=r.note||"";suggestions=r.suggestions||[]; } catch(e){note=e.message;}
-  if(request!==modelRequest||p!==cur.provider)return;
+  if(request!==modelRequest||p!==cur.provider)return;sel.removeAttribute("aria-busy");const currentModel=cur.model||"";
   const help=$("#modelh");let sources=document.getElementById("modelSuggestionSources");if(!sources){sources=el("small",{id:"modelSuggestionSources"});help.after(sources)}sources.replaceChildren();
   const available=list.length;list=modelShortlist(p,list);const fallback=!list.length&&suggestions.length>0;sel.replaceChildren();
   for(const n of list)sel.append(el("option",{value:n,text:n}));
   if(fallback)for(const example of suggestions){if(example.source){const a=el("a",{href:example.source,target:"_blank",rel:"noopener noreferrer",text:"Model documentation"});sources.append(a,document.createTextNode(" · Checked "+example.checked));}const o=el("option",{value:example.id,text:example.id+" (suggested)"});o.dataset.description=example.description;sel.append(o)}
   sel.append(el("option",{value:OTHER,text:list.length?"Other (type a name)":"Type a model name"}));
-  sel.value=list.includes(m)||fallback&&suggestions.some(x=>x.id===m)?m:OTHER;
+  sel.value=list.includes(currentModel)||fallback&&suggestions.some(x=>x.id===currentModel)?currentModel:OTHER;
   const demo=p==="mock",typed=!demo&&sel.value===OTHER;
   sel.hidden=demo||!list.length&&!fallback;$("#refreshModels").hidden=demo;
   const ml=document.querySelector("label[for=modelPick]");if(ml)ml.hidden=demo;
   const kr=sel.closest(".keyrow");if(kr)kr.hidden=demo;
-  $("#model").hidden=!typed;if(typed)$("#model").value=m;
+  $("#model").hidden=!typed;if(typed)$("#model").value=currentModel;
   $("#refreshModels").disabled=!canEdit;modelNote=note;
   $("#modelh").textContent=demo?"The demo answers without a model.":fallback?(note?note+" ":"")+"Suggested examples, not verified for your account or server. Choose one or type your own model name.":note?note+" You can still enter a model name below.":list.length?list.length+" chat models shown ("+available+" returned). Choose one or enter another name.":"No chat model names were returned. Enter a model name below.";
   pvFollow();
