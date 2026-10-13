@@ -172,3 +172,5 @@ html body dialog.app-builder .cs[data-section-only] .cs-btn{transition:backgroun
 
 /* Final check errors are full-width text, never a draft-row grid cell. */
 .app-builder .builder-final-error{display:block!important;grid-column:1/-1!important;width:100%!important;min-width:0!important;max-width:none!important;box-sizing:border-box;white-space:normal!important;word-break:normal!important;overflow-wrap:anywhere;padding:16px!important;font-size:14px!important;line-height:1.6!important}
+/* A paused, cancelled or unverified job is not ongoing work. */
+#builderProgress:not([data-job-state=running]) .builder-progress-pulse{animation:none!important;opacity:0}
