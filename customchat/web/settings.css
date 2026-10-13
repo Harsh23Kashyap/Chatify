@@ -1161,3 +1161,8 @@ body.settings-tabs .card{padding:28px 32px!important}body.settings-tabs .card h1
 
 #promptsEditor textarea.prompt-draft-updated{background:#edf3e8!important;transition:background-color 160ms ease-out}
 @media(prefers-reduced-motion:reduce){#promptsEditor textarea.prompt-draft-updated{transition:none}}
+.editor-choice{transition:background-color 160ms cubic-bezier(.2,.8,.2,1),border-color 160ms cubic-bezier(.2,.8,.2,1),box-shadow 160ms cubic-bezier(.2,.8,.2,1);transform:none!important;animation:none!important}
+.editor-choice:hover{border-color:#718a79}
+@media(prefers-reduced-motion:reduce){.editor-choice{transition:none}}
+body.settings-tabs .editor-choice{transition:background-color 160ms cubic-bezier(.2,.8,.2,1),border-color 160ms cubic-bezier(.2,.8,.2,1),box-shadow 160ms cubic-bezier(.2,.8,.2,1)}
+@media(prefers-reduced-motion:reduce){body.settings-tabs .editor-choice{transition:none}}
