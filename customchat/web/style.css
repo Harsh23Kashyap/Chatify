@@ -863,3 +863,5 @@ html:not(.preview) .composer>.box{width:100%}
 .toolbar:has(.acct-menu:not([hidden])){z-index:80;position:relative}.acct{position:relative;z-index:81}.acct-menu{z-index:82;max-width:calc(100vw - 32px)}
 
 .acct-btn,.acct-item{min-height:44px}
+
+.app-builder .builder-section{scroll-margin-top:90px}.app-builder .builder-long-text{min-height:120px!important;max-height:420px;overflow:auto;resize:vertical}.app-builder .builder-section>summary{min-height:44px}.app-builder #builderClose:focus-visible{outline:2px solid var(--brand);outline-offset:2px}
