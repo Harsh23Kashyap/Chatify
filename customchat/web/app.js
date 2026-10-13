@@ -635,14 +635,17 @@ function setupMic() {
   if (!SR || !m) return;
   m.hidden = false; m.replaceChildren(svg("mic"));
   let rec = null;
+  const reset = active => { if (rec !== active) return; rec = null; m.classList.remove("rec"); m.setAttribute("aria-label", "Dictate"); m.title = "Dictate a question"; m.setAttribute("aria-pressed", "false"); };
+  m.title = "Dictate a question"; m.setAttribute("aria-pressed", "false");
   m.addEventListener("click", () => {
-    if (rec) { rec.stop(); return; }
-    rec = new SR(); rec.lang = (S.cfg.app.language || "en"); rec.interimResults = true; rec.continuous = false;
-    const base = $("#q").value; m.classList.add("rec"); m.setAttribute("aria-label", "Stop dictation");
-    rec.onresult = (e) => { let t = ""; for (const r of e.results) t += r[0].transcript; $("#q").value = (base ? base + " " : "") + t; autosize(); rdy(); };
-    rec.onerror = (e) => { if (e.error !== "aborted") toast("Dictation: " + e.error); };
-    rec.onend = () => { rec = null; m.classList.remove("rec"); m.setAttribute("aria-label", "Dictate"); $("#q").focus(); };
-    try { rec.start(); } catch (e) { rec = null; m.classList.remove("rec"); }
+    if (rec) { const active = rec; active.stop(); reset(active); return; }
+    const active = new SR(); rec = active; active.lang = (S.cfg.app.language || "en"); active.interimResults = true; active.continuous = false;
+    const base = $("#q").value;
+    active.onstart = () => { if (rec !== active) return; m.classList.add("rec"); m.setAttribute("aria-label", "Stop dictation"); m.title = "Listening. Click to stop dictation"; m.setAttribute("aria-pressed", "true"); };
+    active.onresult = (e) => { if (rec !== active) return; let t = ""; for (const r of e.results) t += r[0].transcript; $("#q").value = (base ? base + " " : "") + t; autosize(); rdy(); };
+    active.onerror = (e) => { if (rec !== active) return; reset(active); if (e.error === "aborted") return; const messages = {"not-allowed":"Microphone access was denied. Allow it in your browser settings, or type your question.","service-not-allowed":"Your browser blocked dictation. Check microphone and speech permissions, or type your question.","audio-capture":"No microphone was found. Connect one, or type your question.","no-speech":"No speech was heard. Try again, or type your question.","network":"Dictation could not connect. Check your connection, or type your question."}; toast(messages[e.error] || "Dictation could not start. Try again, or type your question."); };
+    active.onend = () => { if (rec !== active) return; reset(active); $("#q").focus({preventScroll:true}); };
+    try { active.start(); } catch (e) { reset(active); toast("Dictation could not start. Try again, or type your question."); }
   });
 }
 let simTimer = null;

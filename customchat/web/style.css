@@ -830,3 +830,9 @@ html:not(.preview) .composer>.box{width:100%}
 .cite,.a sup{animation:none!important}
 
 .srcs-h{text-transform:none!important;letter-spacing:0!important}
+
+/* Listening state is real, static and ends on stop or failure. */
+#mic.rec{animation:none!important;box-shadow:none!important}
+
+/* Long permission notices must stay readable on a phone. */
+.toast{width:max-content;max-width:calc(100vw - 32px)!important;box-sizing:border-box;white-space:normal;border-radius:12px!important;line-height:1.5;text-decoration:none!important}
