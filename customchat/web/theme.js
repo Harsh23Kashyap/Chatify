@@ -83,8 +83,28 @@ function rememberBackground(t, root, c) {
   const fade=cover.animate([{opacity:1},{opacity:0}],{duration:180,easing:"ease-out"});
   fade.onfinish=()=>{cover.remove();if(backgroundFade===cover)backgroundFade=null;};
 }
+let layoutAnimations=[];
+function beginSidebarMove(t,root){
+  const previous=root.dataset.sidebar;
+  if(previous===t.sidebar)return null;
+  layoutAnimations.forEach(a=>a.cancel());layoutAnimations=[];
+  const quiet=matchMedia("(prefers-reduced-motion:reduce)").matches||["calm","none"].includes(t.motion);
+  if(root!==document.documentElement||quiet||innerWidth<=860||!["left","right"].includes(previous)||!["left","right"].includes(t.sidebar))return null;
+  const app=document.querySelector(".app");if(!app||app.classList.contains("side-collapsed"))return null;
+  return [...app.children].filter(n=>n.matches(".side,.main,.sources")&&getComputedStyle(n).display!=="none").map(node=>({node,rect:node.getBoundingClientRect()}));
+}
+function finishSidebarMove(before){
+  if(!before)return;
+  for(const {node,rect} of before){
+    const after=node.getBoundingClientRect(),x=rect.left-after.left,y=rect.top-after.top;
+    if(Math.abs(x)<1&&Math.abs(y)<1)continue;
+    layoutAnimations.push(node.animate([{transform:`translate(${x}px,${y}px)`},{transform:"none"}],{duration:160,easing:"cubic-bezier(.2,.8,.2,1)"}));
+  }
+}
 function apply(t, root = document.documentElement) {
   if (!t || !t.light) return;
+  const sidebarMove=beginSidebarMove(t,root);
+  if(["calm","none"].includes(t.motion)||matchMedia("(prefers-reduced-motion:reduce)").matches){layoutAnimations.forEach(a=>a.cancel());layoutAnimations=[];}
   let local=null;try{local=!window.__ccPreview&&localStorage.getItem("cc_mode")}catch{}
   const mode = window.__ccPreview && !window.__ccPreviewReady ? "light" : ["light","dark","auto"].includes(local)?local:t.mode;
   const dark = mode === "dark" || (mode === "auto" && matchMedia("(prefers-color-scheme:dark)").matches);
@@ -129,6 +149,7 @@ function apply(t, root = document.documentElement) {
     watermark.hidden = !(t.logo && t.logo_watermark);
   };
   if (document.body) paintWatermark(); else document.addEventListener("DOMContentLoaded",paintWatermark,{once:true});
+  finishSidebarMove(sidebarMove);
   window.CCTheme.value = t; queueContrast();
 }
 window.__ccPreview = /[?&]preview=1/.test(location.search);
