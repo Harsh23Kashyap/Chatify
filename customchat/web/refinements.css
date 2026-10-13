@@ -85,3 +85,11 @@ html body.settings-tabs #seg button[data-p]:hover{border-color:#78917d!important
 @media(prefers-reduced-motion:reduce){html body.settings-tabs #seg button[data-p],#seg .provider-selected{transition:none!important}}
 html[data-motion=none] body.settings-tabs #seg button[data-p],html[data-motion=none] #seg .provider-selected{transition:none!important}
 @media(max-width:760px){#pvcloud .cpick{display:grid;grid-template-columns:26px minmax(0,1fr);align-items:start;gap:8px 10px}#pvcloud .cpick>.plogo,#pvcloud .cpick>.pm{grid-column:1;grid-row:1;margin-top:3px}#pvcloud .cpick>.cpt{grid-column:2;grid-row:1}#pvcloud .cpick>button{grid-column:2;grid-row:2;justify-self:end}#pvcloud .cloud-selection-status{min-height:36px}}
+
+html body.settings-tabs .preset{position:relative;transition:background-color 160ms ease-out,border-color 160ms ease-out!important;transform:none!important}
+html body.settings-tabs .preset:hover{border-color:#78917d!important;transform:none!important}
+html body.settings-tabs .preset.selected{background:#edf2e8!important;border-color:#78917d!important}
+.preset-selected{position:absolute;right:8px;top:8px;opacity:0;transition:opacity 160ms ease-out}
+.preset.selected .preset-selected{opacity:1}
+@media(prefers-reduced-motion:reduce){html body.settings-tabs .preset,.preset-selected{transition:none!important}}
+html[data-motion=none] body.settings-tabs .preset,html[data-motion=none] .preset-selected{transition:none!important}
