@@ -29,3 +29,7 @@ main>h1{max-width:850px;font-size:clamp(34px,5.6vw,62px);line-height:1.08;text-w
 .feature-copy{min-height:300px}@media(max-width:620px){.feature-copy{min-height:310px}}
 
 .feature-copy-leave{animation:feature-copy-leave .08s ease-in forwards}@keyframes feature-copy-leave{from{opacity:1}to{opacity:0}}@media(prefers-reduced-motion:reduce){.feature-copy-leave{animation:none}}html[data-motion=none] .feature-copy-leave,html[data-motion=calm] .feature-copy-leave{animation:none}
+footer a{transition:opacity 140ms ease-out;opacity:1}
+footer a:hover{opacity:.9}
+@media(prefers-reduced-motion:reduce){footer a{transition:none}}
+html[data-motion=none] footer a,html[data-motion=calm] footer a{transition:none}

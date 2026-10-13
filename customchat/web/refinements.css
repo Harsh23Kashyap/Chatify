@@ -93,3 +93,9 @@ html body.settings-tabs .preset.selected{background:#edf2e8!important;border-col
 .preset.selected .preset-selected{opacity:1}
 @media(prefers-reduced-motion:reduce){html body.settings-tabs .preset,.preset-selected{transition:none!important}}
 html[data-motion=none] body.settings-tabs .preset,html[data-motion=none] .preset-selected{transition:none!important}
+html body.settings-tabs #settingsFind{transition:box-shadow 160ms ease-out,border-color 160ms ease-out!important}
+html body.settings-tabs #settingsFind:focus-visible{border-color:#648967!important;box-shadow:0 0 0 3px #64896733!important;outline:2px solid #648967;outline-offset:2px}
+html body.settings-tabs .colorrow input[type=color]{transition:background-color 160ms ease-out,border-color 160ms ease-out!important;transform:none!important}
+html body.settings-tabs .colorrow input[type=color]:hover{border-color:#78917d!important;transform:none!important}
+@media(prefers-reduced-motion:reduce){html body.settings-tabs #settingsFind,html body.settings-tabs .colorrow input[type=color]{transition:none!important}}
+html[data-motion=none] body.settings-tabs #settingsFind,html[data-motion=none] body.settings-tabs .colorrow input[type=color]{transition:none!important}
