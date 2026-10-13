@@ -897,3 +897,5 @@ html body .thread>.wrap{max-width:var(--chat-max,980px)!important}
 @media(prefers-reduced-motion:no-preference){html:not([data-motion=none]) body .thread>.wrap{transition-property:max-width!important;transition-duration:160ms!important;transition-timing-function:ease-out!important}}
 
 html.reading-width-selected body .thread>.wrap{max-width:var(--reading-width,720px)!important}
+
+html.contrast-measuring *,html.contrast-measuring *::before,html.contrast-measuring *::after{transition:none!important}

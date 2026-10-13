@@ -44,6 +44,7 @@ const autoColors = new Map();
 let contrastFrame = 0, contrastSettle = 0;
 function readableFonts(){
   if (!window.CCBrand || !document.body) return;
+  document.documentElement.classList.add("contrast-measuring");
   autoColors.forEach((value,node)=>{if(node.isConnected){node.style.removeProperty("color");if(value)node.style.color=value;}});autoColors.clear();
   const shadeCache=new Map();
   const parse=value=>{const m=value.match(/^rgba?\(([^)]+)\)/);if(!m)return null;const v=m[1].split(/[, ]+/).map(Number);if(v.length>3&&v[3]===0)return null;return "#"+v.slice(0,3).map(x=>Math.round(x).toString(16).padStart(2,"0")).join("");};
@@ -55,6 +56,7 @@ function readableFonts(){
     if(!/^#[0-9a-f]{6}$/i.test(back))return;
     const key=color+back;const changed=shadeCache.get(key)||CCBrand.shade(color,back);shadeCache.set(key,changed);if(changed!==color){autoColors.set(node,node.style.color);node.style.setProperty("color",changed,"important");}
   });
+  document.documentElement.classList.remove("contrast-measuring");
 }
 function queueContrast(){cancelAnimationFrame(contrastFrame);contrastFrame=requestAnimationFrame(readableFonts);clearTimeout(contrastSettle);contrastSettle=setTimeout(readableFonts,400);}
 window.CCReadableFonts=queueContrast;
