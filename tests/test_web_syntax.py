@@ -7,7 +7,7 @@ class WebSyntax(unittest.TestCase):
    with self.subTest(file=path.name):
     p=subprocess.run(['node','--check',str(path)],capture_output=True,text=True);self.assertEqual(p.returncode,0,p.stderr)
  def test_background_marker_updates_on_input_and_upload(self):
-  s=(Path(__file__).resolve().parents[1]/'customchat/web/settings.js').read_text();self.assertIn('marker.hidden=!!link.value.trim()',s);self.assertIn('setv(f,data);syncMarker()',s);self.assertIn('if(!value){link.setAttribute("aria-invalid","false");file.value="";setv(f,"");syncMarker()',s);self.assertIn('candidate.onload=',s);self.assertIn('Previous background kept.',s)
+  s=(Path(__file__).resolve().parents[1]/'customchat/web/settings.js').read_text();self.assertIn('marker.hidden=!!get(f)',s);self.assertIn('setv(f,data);syncMarker()',s);self.assertIn('if(!value){link.setAttribute("aria-invalid","false");file.value="";setv(f,"");syncMarker()',s);self.assertIn('candidate.onload=',s);self.assertIn('Previous background kept.',s)
 
  def test_optional_workspace_marker_tracks_input(self):
   s=(Path(__file__).resolve().parents[1]/'customchat/web/configstate.js').read_text();self.assertIn("if(typeof value==='string'||value===null)",s);self.assertIn('marker.hidden=!!input.value.trim()',s);self.assertIn("input.addEventListener('input',sync)",s)

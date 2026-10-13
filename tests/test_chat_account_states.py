@@ -5,4 +5,4 @@ class AccountStates(unittest.TestCase):
   self.assertIn('signin-error',body);self.assertIn('password-error',body);self.assertIn('aria-describedby',body);self.assertIn('removeAttribute("aria-invalid")',body);self.assertIn("'Signing in...'",body);self.assertIn('if(go.disabled)return',body)
   css=(root/'style.css').read_text();self.assertIn('.toolbar:has(.acct-menu:not([hidden]))',css)
  def test_background_validation_clears_on_remove_or_file(self):
-  js=(pathlib.Path(__file__).resolve().parents[1]/'customchat/web/settings.js').read_text();self.assertIn('if(!value){link.setAttribute("aria-invalid","false")',js);self.assertIn('++imageRequest;link.setAttribute("aria-invalid","false");link.value=data',js)
+  js=(pathlib.Path(__file__).resolve().parents[1]/'customchat/web/settings.js').read_text();self.assertIn('if(!value){link.setAttribute("aria-invalid","false")',js);self.assertIn('link.setAttribute("aria-invalid","false");link.value="";theme.bg_style="image"',js)
