@@ -43,3 +43,6 @@ body.settings-tabs :is(.tile,.typeprev,.workspace-fields,.workspace-review){bord
 body.settings-tabs :is(.settings-help,.preset-dialog,.emoji-dialog){border-radius:var(--ui-radius-dialog)!important;box-shadow:var(--ui-shadow-dialog)!important}
 body.settings-tabs .cs-list{border-radius:var(--ui-radius-card)!important;box-shadow:var(--ui-shadow-menu)!important}
 body.settings-tabs #col :is(.tile,.typeprev,.workspace-fields,.workspace-review){border-radius:var(--ui-radius-card)!important;box-shadow:none!important}
+/* Selection changes stay local; focus rings are immediate. */
+body.settings-tabs #settingsNavTop .category-tabs button{transition:background-color .16s cubic-bezier(.2,.8,.2,1),color .16s cubic-bezier(.2,.8,.2,1),border-color .16s cubic-bezier(.2,.8,.2,1)}
+@media(prefers-reduced-motion:reduce){body.settings-tabs #settingsNavTop .category-tabs button{transition:none!important}}html[data-motion=none] body.settings-tabs #settingsNavTop .category-tabs button{transition:none!important}

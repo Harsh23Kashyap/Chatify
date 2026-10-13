@@ -26,3 +26,5 @@ html body .common-nav{background:var(--paper,#fffdf7);border-color:var(--line,#d
 html body .common-nav a,html body .common-nav button{min-height:44px!important}
 @media(max-width:600px){html body .toolbar,html body .about-nav{height:112px!important;min-height:112px!important;grid-template-rows:44px 52px!important;gap:0!important}html body .nav-status{max-width:100%}.acct-btn{max-width:100px}.acct-menu{z-index:500!important}}
 html body :is(button,a,input,textarea,select):focus-visible{outline:2px solid var(--brand,#173f35);outline-offset:3px}
+html body .common-nav a,html body .common-nav button{transition:background-color .16s cubic-bezier(.2,.8,.2,1),color .16s cubic-bezier(.2,.8,.2,1)!important}
+@media(prefers-reduced-motion:reduce){html body .common-nav a,html body .common-nav button{transition:none!important}}html[data-motion=none] body .common-nav a,html[data-motion=none] body .common-nav button{transition:none!important}
