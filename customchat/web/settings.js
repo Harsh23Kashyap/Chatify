@@ -144,7 +144,7 @@ async function ollamaPanel(viewOnly=false) {
   if (canEdit && cur.provider==="ollama") { $("#sec-model .ollama-setup")?.remove();const setup=el("section",{class:"ollama-setup"});$("#sec-model").prepend(setup);drawOllamaSetup(setup); }
   if (r.others && r.others.length) {
     const d = el("details", { class: "grp" }, el("summary", { text: "See other models" }), el("div", { class: "oother" }, r.others.map((o) => el("div", { class: "orow" }, el("span", { class: "fitdot " + o.fit }), el("span", { class: "oname", text: o.name }), el("span", { class: "h", text: o.why })))));
-    d.addEventListener('toggle',()=>{if(d.open&&!matchMedia('(prefers-reduced-motion:reduce)').matches&&!['calm','none'].includes(theme?.motion))d.querySelector('.oother').animate([{opacity:.65},{opacity:1}],{duration:160,easing:'ease-out'})});box.append(d);
+    box.append(d);
   }
   if (det) {
     const total=hw.gpu && hw.vram_gb ? hw.vram_gb : hw.ram_gb, pct=Math.max(0,Math.min(100,rec.budget_gb/Math.max(.1,total)*100));
