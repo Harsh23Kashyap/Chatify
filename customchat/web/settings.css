@@ -1231,3 +1231,9 @@ html[data-motion=none] .colorrow input[type=color]{transition:none!important}
 @media(prefers-reduced-motion:reduce){#pv,#pvmode button,#sec-colors .seg button{transition:none!important}#pv.preview-changing{opacity:1}}
 html[data-motion=none] #pv,html[data-motion=none] #pvmode button,html[data-motion=none] #sec-colors .seg button{transition:none!important}
 html[data-motion=none] #pv.preview-changing{opacity:1}
+
+.cloud-selection-status{display:block;min-height:36px;line-height:1.4;font-size:12px;color:#49634f}
+.cpick button{min-width:76px;min-height:44px;transition:background-color 160ms ease-out,border-color 160ms ease-out}
+.cpick button[aria-pressed=true]{background:#edf2e8!important;color:#173f35!important;border-color:#78917d!important;opacity:1}
+.cloud-selection-status{min-height:56px}
+@media(min-width:761px){.cloud-selection-status{min-height:36px}}

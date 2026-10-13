@@ -548,19 +548,28 @@ function pvFollow() {
   if (m) {
     const k = keyInfo[cur.provider] || {}, r = $("#testres"), st = r && r.classList.contains("ok") ? "ok" : (r && r.classList.contains("bad") ? "bad" : "");
     const keyTxt = k.source === "saved" ? "Key saved on this computer" : (k.source === "env" ? "Key from environment variable" : (k.needed === false ? "No key needed" : "No key yet"));
-    card.replaceChildren(
-      el("div", { class: "pvm-top" }, mark(cur.provider), el("div", {}, el("b", { text: NAMES[cur.provider] || cur.provider }), el("div", { class: "pvm-row", text: chosenModel() || (cur.provider === "mock" ? "Built-in demo, no model needed" : "No model chosen yet") }))),
-      el("div", { class: "pvm-row", text: keyTxt }),
-      el("div", { class: "pvm-badge " + st, text: cur.provider === "mock" ? "Offline demo" : (st === "ok" ? "Connected" : (st === "bad" ? "Not working" : "Not tested yet")) }),
-      el("div", { class: "pvm-row " + st, text: cur.provider === "mock" ? "Built-in answers. No AI connection or paid calls." : ((r && r.textContent) || "Press Test connection to check the key and model.") }));
+    if(!card.querySelector(".pvm-provider-name"))card.replaceChildren(el("div",{class:"pvm-top"},el("span",{class:"pvm-provider-logo"}),el("div",{},el("b",{class:"pvm-provider-name"}),el("div",{class:"pvm-row pvm-model-name"}))),el("div",{class:"pvm-row pvm-key-state"}),el("div",{class:"pvm-badge"}),el("div",{class:"pvm-row pvm-connection-state"}));
+    const logo=card.querySelector(".pvm-provider-logo");if(logo.dataset.provider!==cur.provider){logo.replaceChildren(mark(cur.provider));logo.dataset.provider=cur.provider;}
+    card.querySelector(".pvm-provider-name").textContent=NAMES[cur.provider]||cur.provider;
+    card.querySelector(".pvm-model-name").textContent=chosenModel()||(cur.provider==="mock"?"Built-in demo, no model needed":"No model chosen yet");
+    card.querySelector(".pvm-key-state").textContent=keyTxt;
+    const badge=card.querySelector(".pvm-badge");badge.className="pvm-badge "+st;badge.textContent=cur.provider==="mock"?"Offline demo":st==="ok"?"Connected":st==="bad"?"Not working":"Not tested yet";
+    const detail=card.querySelector(".pvm-connection-state");detail.className="pvm-row pvm-connection-state "+st;detail.textContent=cur.provider==="mock"?"Built-in answers. No AI connection or paid calls.":((r?.innerText)||"Press Test connection to check the key and model.");
 
   }
   pvExtra();
   { let cp = $("#pvcloud"); if (!cp) { cp = el("div", { id: "pvcloud", class: "pvcloud" }); card.after(cp); }
     cp.hidden = !m;
-    if (m) cp.replaceChildren(el("b", { text: "Suggested cloud models" }), ...CLOUD_PICKS.map((c) => el("div", { class: "cpick" }, mark(c.p), el("div", { class: "cpt" }, el("b", { text: c.name }), el("span", { class: "h", text: c.why })),
-      cur.provider === c.p && chosenModel() === c.id ? el("span", { class: "okt", text: "In use" }) : el("button", { type: "button", class: "mini", disabled: canEdit ? undefined : "", onclick: () => { if(!confirm("Select "+c.name+" for the unsaved answer settings? This changes the provider and model only. Keys stay unchanged; save answer settings when ready."))return;selectRecommendation(c.p,c.id); const tr = $("#testres"); if (tr) { tr.textContent = ""; tr.className = ""; } loadModels(false).then(() => { const pk = $("#modelPick"); pk.value = [...pk.options].some((o) => o.value === c.id) ? c.id : OTHER; if (pk.value === OTHER) { $("#model").hidden = false; $("#model").value = c.id; } cur.model = c.id; pvFollow(); }); } }, "Use"))),
-      el("div", { class: "h" }, "Taken from ", el("a", { href: "https://developers.openai.com/api/docs/models/gpt-4.1-mini", target: "_blank", rel: "noopener" }, "OpenAI"), " and ", el("a", { href: "https://ai.google.dev/gemini-api/docs/models", target: "_blank", rel: "noopener" }, "Google"), " model pages checked on 13 Oct 2026. Suggested for low latency, not measured comparisons or verified for your account. Use Refresh list after adding a key.")); }
+    if(m){
+      if(!cp.querySelector(".cpick")){
+        cp.replaceChildren(el("b",{text:"Suggested cloud models"}),...CLOUD_PICKS.map(c=>{
+          const button=el("button",{type:"button",class:"mini",text:"Use"}),status=el("small",{class:"cloud-selection-status"}),row=el("div",{class:"cpick","data-model":c.id},mark(c.p),el("div",{class:"cpt"},el("b",{text:c.name}),el("span",{class:"h",text:c.why}),status),button);
+          button.onclick=()=>{if(!confirm("Select "+c.name+" for the unsaved answer settings? This changes the provider and model only. Keys stay unchanged; save answer settings when ready."))return;selectRecommendation(c.p,c.id);const tr=$("#testres");tr.textContent="";tr.className="testres";pvFollow();};return row;
+        }),el("div",{class:"h"},"Taken from ",el("a",{href:"https://developers.openai.com/api/docs/models/gpt-4.1-mini",target:"_blank",rel:"noopener",text:"OpenAI"})," and ",el("a",{href:"https://ai.google.dev/gemini-api/docs/models",target:"_blank",rel:"noopener",text:"Google"})," model pages checked on 13 Oct 2026. Suggested for low latency, not measured comparisons or verified for your account. Use Refresh list after adding a key."));
+      }
+      CLOUD_PICKS.forEach(c=>{const row=[...cp.querySelectorAll(".cpick")].find(n=>n.dataset.model===c.id),selected=cur.provider===c.p&&chosenModel()===c.id,button=row.querySelector("button"),status=row.querySelector(".cloud-selection-status");button.disabled=selected||!canEdit;button.textContent=selected?"Selected":"Use";button.setAttribute("aria-pressed",String(selected));const k=keyInfo[c.p]||{};status.textContent=selected?(k.needed!==false&&!k.has?"Key needed. Not saved.":"Selected. Not saved."):"";});
+    }
+  }
   { const box = $("#ollamabox"); if (box) { const cpn = $("#pvcloud"); if (box.previousElementSibling !== cpn) cpn.after(box); box.hidden = !m; if (m && !box.dataset.loaded) ollamaPanel(); }
     let hist = $("#pvhist"); if (!hist) { hist = el("div", { id: "pvhist", class: "pvhist" }); card.parentNode.append(hist); }
     hist.hidden = !(m && testLog.length); hist.replaceChildren(el("b", { text: "Recent tests" }), ...testLog.map((x) => el("div", { class: "pvh-row" }, el("span", { class: "fitdot " + (x.ok ? "green" : "red") }), el("span", { text: x.p + (x.ok ? " worked" : " failed"),title:x.detail || "" }), el("span", { class: "h", text: x.t })))); }
