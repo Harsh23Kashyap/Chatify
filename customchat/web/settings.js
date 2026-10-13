@@ -108,13 +108,15 @@ const CLOUD_PICKS = [
   { p: "openai", id: "gpt-4.1-mini", name: "GPT-4.1 mini", why: "Smaller, low-latency model for instruction following and tool use." },
   { p: "gemini", id: "gemini-3.5-flash-lite", name: "Gemini 3.5 Flash-Lite", why: "Low-latency model for document parsing and simple extraction." },
 ]; const testLog = [];
-async function ollamaPanel() {
+let localHardwareSnapshot=null;
+async function ollamaPanel(viewOnly=false) {
+  viewOnly=viewOnly===true;
   const box = $("#ollamabox"); if (activeSec !== "model") return; box.hidden = false; box.dataset.loaded = "1";
-  box.replaceChildren(el("div", { class: "h", text: "Looking at this computer..." }));
-  let r; try { r = await api("/api/hardware?base_url=" + encodeURIComponent($("#base").value.trim())); } catch (e) { box.dataset.loaded="";box.replaceChildren(el("b",{text:"Suggested local models"}),el("div",{class:"h",text:e.message}),el("button",{type:"button",class:"mini",text:"Retry local suggestions",onclick:ollamaPanel})); return; }
+  if(!viewOnly||!localHardwareSnapshot)box.replaceChildren(el("div", { class: "h", text: "Looking at this computer..." }));
+  let r; try { r = viewOnly&&localHardwareSnapshot?localHardwareSnapshot:await api("/api/hardware?base_url=" + encodeURIComponent($("#base").value.trim()));localHardwareSnapshot=r; } catch (e) { box.dataset.loaded="";box.replaceChildren(el("b",{text:"Suggested local models"}),el("div",{class:"h",text:e.message}),el("button",{type:"button",class:"mini",text:"Retry local suggestions",onclick:ollamaPanel})); return; }
   const hw = r.hardware, rec = r.recommendation, det = hwView === "tech";
   const tabs = el("div", { class: "seg mini", role: "radiogroup", "aria-label": "Detail level" });
-  for (const [v, t] of [["simple", "Simple"], ["tech", "Details"]]) tabs.append(el("button", { type: "button", role: "radio", "aria-checked": String(hwView === v), onclick: () => { hwView = v; ollamaPanel(); } }, t));
+  for (const [v, t] of [["simple", "Simple"], ["tech", "Details"]]) tabs.append(el("button", { type: "button", role: "radio", "aria-checked": String(hwView === v), onclick: () => { hwView = v; ollamaPanel(true);box.querySelector('[role="radio"][aria-checked="true"]')?.focus(); } }, t));
   const head = el("div", { class: "ohead" }, el("b", { text: "Suggested local models" }), tabs);
   const cards = el("div", { class: "ocards" });
   if (!rec.picks.length) cards.append(el("div", { class: "h", text: rec.note || "No suggestion available." }));
@@ -125,7 +127,7 @@ async function ollamaPanel() {
     c.append(el("div", { class: "oact" }, modelAction(p.tag, p.installed)));
     cards.append(c);
   });
-  box.replaceChildren(head, cards);
+  box.replaceChildren(head, cards);if(viewOnly){cards.classList.add("local-view-enter");}
   if (canEdit && cur.provider==="ollama") { $("#sec-model .ollama-setup")?.remove();const setup=el("section",{class:"ollama-setup"});$("#sec-model").prepend(setup);drawOllamaSetup(setup); }
   if (r.others && r.others.length) {
     const d = el("details", { class: "grp" }, el("summary", { text: "See other models" }), el("div", { class: "oother" }, r.others.map((o) => el("div", { class: "orow" }, el("span", { class: "fitdot " + o.fit }), el("span", { class: "oname", text: o.name }), el("span", { class: "h", text: o.why })))));
@@ -162,7 +164,7 @@ function modelAction(tag, installed) {
         const progress=Math.max(0,Math.min(100,Number(st.pct)||0));bar.firstChild.style.width = progress + "%";bar.setAttribute("aria-valuenow",String(progress));bar.setAttribute("aria-valuetext",progress+"% downloaded"); msg.textContent = st.error || (st.done ? "Done" : (st.status || "Downloading") + " " + st.pct + "%");
         if(st.cancelled&&st.done){cancel.hidden=true;bar.hidden=true;btn.disabled=false;btn.textContent="Retry download";msg.textContent="Cancelled. Retry rechecks the model; Ollama decides whether partial files can be reused.";break}
         if (st.error) { cancel.hidden=true; btn.disabled = false; btn.textContent = "Try again"; bar.hidden = true; msg.className = "h bad"; break; }
-        if (st.done) { cancel.hidden=true;wrap.replaceChildren(el("span", { class: "okt", text: "Installed" }), el("button", { type: "button", class: "mini", onclick: use }, "Use this model"),el("small",{class:"h",text:"Download complete. Select Use this model to change your unsaved answer settings."})); break; }
+        if (st.done) { if(localHardwareSnapshot){for(const pick of localHardwareSnapshot.recommendation.picks)if(pick.tag===tag)pick.installed=true;localHardwareSnapshot.installed=[...new Set([...(localHardwareSnapshot.installed||[]),tag])]}cancel.hidden=true;wrap.replaceChildren(el("span", { class: "okt", text: "Installed" }), el("button", { type: "button", class: "mini", onclick: use }, "Use this model"),el("small",{class:"h",text:"Download complete. Select Use this model to change your unsaved answer settings."})); break; }
       }
     } catch (e) { cancel.hidden=true; btn.disabled = false; bar.hidden = true; msg.textContent = e.message; msg.className = "h bad"; }
   });
