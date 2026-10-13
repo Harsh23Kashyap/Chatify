@@ -10,7 +10,9 @@
  const toggle = document.createElement('button');
  toggle.type = 'button'; toggle.className = 'mini preview-toggle';
  const bar = document.querySelector('.modebar');
- if (bar) bar.append(toggle);
+ const phoneLayout=matchMedia('(max-width:760px)');
+ function placePreviewToggle(){const host=phoneLayout.matches?document.querySelector('main.card'):bar;if(host)host.append(toggle)}
+ placePreviewToggle();phoneLayout.addEventListener('change',placePreviewToggle);
  let previewHidden = false;
  try { previewHidden = localStorage.getItem(previewKey) === '1'; } catch (_) {}
  function togglePreview() {
