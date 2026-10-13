@@ -164,3 +164,6 @@ html body dialog.app-builder #builderBrief{transition:border-color .18s ease,box
 
 html body dialog.app-builder .cs[data-section-only] .cs-btn{transition:background .18s ease,border-color .18s ease;background:#fffdf7!important;border:1px solid #b5c8bc!important}html body dialog.app-builder .cs[data-section-only=true] .cs-btn{background:#edf2e8!important;border-color:#173f35!important}
 @media(prefers-reduced-motion:reduce){html body dialog.app-builder .cs[data-section-only] .cs-btn{transition:none!important}}
+
+.builder-part-icon{transition:background .18s ease,border-color .18s ease,color .18s ease}
+@media(prefers-reduced-motion:reduce){.builder-part-icon,.builder-group-mark{transition:none!important}}
