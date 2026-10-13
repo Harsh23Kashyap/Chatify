@@ -404,6 +404,7 @@ async function loadList() {
 }
 
 async function openChat(id) {
+  if (!confirmTemporaryExit()) return;
   $("#jump").dataset.reply = "";
   S.view = "chat";
   setTemp(false);
@@ -416,6 +417,7 @@ async function openChat(id) {
   $("#app").classList.remove("menu-open", "src"); drawThread(); loadList(); $("#q").focus();
 }
 async function openTopic(id) {
+  if (!confirmTemporaryExit()) return;
   $("#jump").dataset.reply = "";
   S.view = "topic";
   setTemp(false);
@@ -424,7 +426,7 @@ async function openTopic(id) {
   S.chat = S.turns.length ? S.turns[S.turns.length - 1].chat : null;
   $("#chatTitle").textContent = "Conversation"; $("#app").classList.remove("menu-open"); drawThread(); $("#q").focus();
 }
-function newChat() { S.view = "chat"; setTemp(false); loadSuggestions(); S.chat = null; S.topic = null; S.newTopic = false; S.turns = []; $("#chatTitle").textContent = "New chat"; $("#app").classList.remove("src", "menu-open"); drawThread(); loadList(); $("#q").focus(); }
+function newChat() { if (!confirmTemporaryExit()) return; S.view = "chat"; setTemp(false); loadSuggestions(); S.chat = null; S.topic = null; S.newTopic = false; S.turns = []; $("#chatTitle").textContent = "New chat"; $("#app").classList.remove("src", "menu-open"); drawThread(); loadList(); $("#q").focus(); }
 
 let aborter = null;
 async function stream(body, onEvent) {
@@ -659,6 +661,11 @@ document.addEventListener("click", (e) => {
 });
 
 // ---- temporary chat, profile, mic, similar questions, question navigation, resizer, tour ----
+function confirmTemporaryExit() {
+  if (!S.temp) return true;
+  if (S.busy) { toast("Wait for the temporary reply or stop it before leaving."); return false; }
+  return !S.turns.length || confirm("Leave this temporary conversation? Its questions and replies are not saved and will be cleared. Your unsent question stays in the composer.");
+}
 function setTemp(on) {
   S.temp = on; document.body.classList.toggle("temp", on);
   const b = $("#tempBtn"); if (b) b.setAttribute("aria-pressed", String(on)); $("#tempPill").setAttribute("aria-pressed", String(on)); $("#tempPill").title = on ? "Leave temporary mode" : "Start a chat that is not saved"; $("#q").placeholder = on ? "Ask without saving this chat" : "Ask a question";
