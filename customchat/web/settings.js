@@ -153,22 +153,22 @@ function modelAction(tag, installed) {
   const btn = el("button", { type: "button", class: "mini dl", disabled: canEdit ? undefined : "" }, "Download");
   let pullId="";const cancel=el("button",{type:"button",class:"mini",text:"Cancel download",hidden:"",onclick:async()=>{cancel.disabled=true;msg.textContent="Cancelling...";try{await api("/api/ollama/pull/cancel",{id:pullId})}catch(e){cancel.disabled=false;msg.textContent=e.message}}});
   btn.addEventListener("click", async () => {
-    wrap.dataset.pending="true";btn.disabled = true; bar.hidden = false;bar.firstChild.style.width="0%";bar.removeAttribute("aria-valuenow");bar.setAttribute("aria-valuetext","Preparing download review");msg.className="h";msg.textContent = "Starting...";
+    wrap.dataset.pending="true";btn.disabled = true;btn.textContent="Preparing..."; bar.hidden = false;bar.firstChild.style.width="0%";bar.removeAttribute("aria-valuenow");bar.setAttribute("aria-valuetext","Preparing download review");msg.className="h";msg.textContent = "Starting...";
     try {
       const plan=await api('/api/ollama/pull/review',{model:tag,base_url:$("#base").value.trim()});
       const reviewText='Download '+plan.model+'?\n\nApproximate download: '+(plan.download_gb_estimate??'unknown')+' GB. Free disk: '+plan.free_disk_gb+' GB. Memory estimate: '+(plan.memory_need_gb_estimate??'unknown')+' GB; fit: '+plan.fit+'.\n'+plan.location_note+'\n'+plan.notice;
-      if(!window.confirm(reviewText)){btn.disabled=false;bar.hidden=true;msg.textContent='Download not started.';return}
+      if(!window.confirm(reviewText)){btn.disabled=false;btn.textContent="Download";bar.hidden=true;msg.textContent='Download not started.';return}
       const { id } = await api('/api/ollama/pull/execute',{ticket:plan.ticket,confirmed:true});
-      pullId=id;cancel.hidden=false;cancel.disabled=false;
+      pullId=id;btn.textContent="Downloading...";cancel.hidden=false;cancel.disabled=false;
       for (;;) {
         await new Promise((r) => setTimeout(r, 700));
         const st = await api("/api/ollama/pull?id=" + id);
-        const progress=Math.max(0,Math.min(100,Number(st.pct)||0)),known=st.progress_known!==false;bar.firstChild.style.width = known?progress+"%":"0%";if(known)bar.setAttribute("aria-valuenow",String(progress));else bar.removeAttribute("aria-valuenow");bar.setAttribute("aria-valuetext",known?progress+(st.progress_scope==="current download part"?"% of current download part":"% downloaded"):"Progress not reported yet"); msg.textContent = st.error || (st.done ? "Done" : (st.status || "Downloading") + (known?" " + st.pct + "%"+(st.progress_scope==="current download part"?" of current part":""):". Progress not reported yet."));if(!st.error&&!st.done&&Number.isFinite(st.downloaded_bytes)&&Number.isFinite(st.total_bytes)&&st.total_bytes>0){const amount=n=>n>=1e9?(n/1e9).toFixed(2)+" GB":n>=1e6?(n/1e6).toFixed(1)+" MB":Math.round(n/1e3)+" KB";msg.textContent+=" · "+amount(st.downloaded_bytes)+" of "+amount(st.total_bytes)+(st.progress_scope==="current download part"?"":" (current download part)")}
+        const progress=Math.max(0,Math.min(100,Number(st.pct)||0)),known=st.progress_known!==false;btn.textContent=known?progress+"% of part":"Downloading...";bar.firstChild.style.width = known?progress+"%":"0%";if(known)bar.setAttribute("aria-valuenow",String(progress));else bar.removeAttribute("aria-valuenow");bar.setAttribute("aria-valuetext",known?progress+(st.progress_scope==="current download part"?"% of current download part":"% downloaded"):"Progress not reported yet"); msg.textContent = st.error || (st.done ? "Done" : (st.status || "Downloading") + (known?" " + st.pct + "%"+(st.progress_scope==="current download part"?" of current part":""):". Progress not reported yet."));if(!st.error&&!st.done&&Number.isFinite(st.downloaded_bytes)&&Number.isFinite(st.total_bytes)&&st.total_bytes>0){const amount=n=>n>=1e9?(n/1e9).toFixed(2)+" GB":n>=1e6?(n/1e6).toFixed(1)+" MB":Math.round(n/1e3)+" KB";msg.textContent+=" · "+amount(st.downloaded_bytes)+" of "+amount(st.total_bytes)+(st.progress_scope==="current download part"?"":" (current download part)")}
         if(st.cancelled&&st.done){cancel.hidden=true;bar.hidden=true;btn.disabled=false;btn.textContent="Retry download";msg.textContent="Cancelled. Retry rechecks the model; Ollama decides whether partial files can be reused.";break}
         if (st.error) { cancel.hidden=true; btn.disabled = false; btn.textContent = "Try again"; bar.hidden = true; msg.className = "h bad"; break; }
         if (st.done) { if(localHardwareSnapshot){for(const pick of localHardwareSnapshot.recommendation.picks)if(pick.tag===tag)pick.installed=true;localHardwareSnapshot.installed=[...new Set([...(localHardwareSnapshot.installed||[]),tag])]}cancel.hidden=true;wrap.replaceChildren(el("span", { class: "okt", text: "Installed" }), el("button", { type: "button", class: "mini", onclick: use }, "Use this model"),el("small",{class:"h",text:"Download complete. Select Use this model to change your unsaved answer settings."})); break; }
       }
-    } catch (e) { cancel.hidden=true; btn.disabled = false; bar.hidden = true; msg.textContent = e.message; msg.className = "h bad"; }finally{delete wrap.dataset.pending}
+    } catch (e) { cancel.hidden=true; btn.disabled = false;btn.textContent="Try again"; bar.hidden = true; msg.textContent = e.message; msg.className = "h bad"; }finally{delete wrap.dataset.pending}
   });
   wrap.append(btn, cancel, bar, msg); return wrap;
 }
