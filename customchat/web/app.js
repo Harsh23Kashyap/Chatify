@@ -374,10 +374,12 @@ function dayLabel(ts) {
   const d = new Date(ts * 1000), n = new Date(), day = 86400000, start = new Date(n.getFullYear(), n.getMonth(), n.getDate()).getTime();
   if (d.getTime() >= start) return "Today"; if (d.getTime() >= start - day) return "Yesterday"; if (d.getTime() >= start - 7 * day) return "This week"; return "Earlier";
 }
+let historySkeletonTimer=0,historyShimmerTimer=0;
 async function loadList() {
   const seq = (loadList.seq = (loadList.seq || 0) + 1); const list = $("#list"), tab = S.tab, query = $("#search").value.trim();
-  list.setAttribute("aria-busy","true");list.querySelector(".history-state")?.remove();
+  clearTimeout(historySkeletonTimer);clearTimeout(historyShimmerTimer);list.querySelector(".history-skeleton")?.remove();list.setAttribute("aria-busy","true");list.querySelector(".history-state")?.remove();
   const state=el("div",{class:"history-state",role:"status",text:"Loading history..."});list.prepend(state);
+  if(!list.querySelector(".item")){historySkeletonTimer=setTimeout(()=>{if(seq!==loadList.seq)return;const skeleton=el("div",{class:"history-skeleton","aria-hidden":"true"});for(let i=0;i<3;i++)skeleton.append(el("div",{class:"history-skeleton-row"},el("span"),el("span")));state.append(skeleton);historyShimmerTimer=setTimeout(()=>{if(seq===loadList.seq)skeleton.classList.add("slow")},750)},250)}
   try {
     if (tab === "chats") {
       const rows = await api("/api/chats?q=" + encodeURIComponent($("#search").value)); if (seq !== loadList.seq) return;list.replaceChildren();
@@ -397,8 +399,8 @@ async function loadList() {
         el("span", { class: "t" }, t.title, el("span", { class: "sub", text: (t.summary ? t.summary.slice(0, 70) : t.turns + " question" + (t.turns === 1 ? "" : "s")) })),
         el("span", { class: "acts" }, el("button", { title: "Rename", "aria-label": "Rename " + t.title, onclick: async (e) => { e.stopPropagation(); const n = prompt("Rename conversation", t.title); if (n) { await api("/api/rename-topic", { topic: t.id, title: n }); loadList(); } } }, svg("edit"))))));
     }
-  } catch (e) { if(seq!==loadList.seq)return;state.replaceChildren(el("span",{text:"History could not load. " + e.message}),el("button",{type:"button",class:"history-retry",text:"Try again",onclick:e=>{e.stopPropagation();loadList()}})); }
-  finally {if(seq===loadList.seq){list.removeAttribute("aria-busy");if(state.textContent==="Loading history...")state.remove()}}
+  } catch (e) { if(seq!==loadList.seq)return;clearTimeout(historySkeletonTimer);clearTimeout(historyShimmerTimer);state.replaceChildren(el("span",{text:"History could not load. " + e.message}),el("button",{type:"button",class:"history-retry",text:"Try again",onclick:e=>{e.stopPropagation();loadList()}})); }
+  finally {if(seq===loadList.seq){clearTimeout(historySkeletonTimer);clearTimeout(historyShimmerTimer);list.removeAttribute("aria-busy");if(state.textContent==="Loading history...")state.remove()}}
 }
 
 async function openChat(id) {
