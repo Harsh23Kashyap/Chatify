@@ -15,6 +15,21 @@ class WiringTests(unittest.TestCase):
  def test_bad_contract_retry(self):
   f=Fake([json.dumps({'prompt':'Return a boolean classification only.'}),json.dumps({'prompt':d.template('question_check','diet')})])
   self.assertTrue(g.generate_prompt(f,{'provider':{'type':'openai'}},'question_check','diet')['model_used']);self.assertEqual(len(f.messages),2)
+ def test_instance_outputs_retry_without_overwriting_user_prompt(self):
+  bad={'standalone':'How can I use a specific recipe to prepare a dish?',
+       'queries':'vegetarian diet charts\nhigh protein meal plans\nweekly nutrition schedule',
+       'summary':'The reader discussed dietary needs and asked about protein sources.'}
+  for stage,output in bad.items():
+   f=Fake([json.dumps({'prompt':output}),json.dumps({'prompt':d.template(stage,'diet charts')})])
+   result=g.generate_prompt(f,{'provider':{'type':'openai'}},stage,'diet charts')
+   self.assertEqual(len(f.messages),2);self.assertNotEqual(result['prompt'],output)
+   self.assertIn('reusable instructions',f.messages[1][0]['content'])
+   self.assertIn('never perform the selected stage',f.messages[0][0]['content'])
+ def test_instance_output_twice_fails_bounded(self):
+  f=Fake([json.dumps({'prompt':'How can I use a specific recipe to prepare a dish?'})]*2)
+  with self.assertRaisesRegex(ValueError,'usable prompt'):
+   g.generate_prompt(f,{'provider':{'type':'openai'}},'standalone','diet charts')
+  self.assertEqual(len(f.messages),2)
  def test_helpers_never_run_during_generation(self):
   for kind in g.KINDS:
    f=Fake(['```python\n'+g.code_template(kind,'one sentence')+'```'])
