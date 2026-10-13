@@ -124,7 +124,7 @@ async function codePanel(host) {
     card.append(el("div",{class:"source-key-top"},el("label",{class:"check sw"},cb,el("b",{text:name})),badge),status,keyrow,notes);refresh();host.append(card);
   }
   const loaded=window.CCLoadedApp || await api("/api/config");
-  host.prepend(el("div", {class:"loaded-source-overview"}, el("b", {text:"This workspace's configured sources"}), ...loaded.sources.map(s=>el("p", {text:s.label + " · " + s.type})),el("small", {text:"Configured in the loaded app file. Reachability is not verified here. The controls below add optional searches."})));
+  const overview=window.CCSourceOverview||document.querySelector('.loaded-source-overview');if(overview)host.prepend(overview);
   SEARCH.forEach(p=>service(p.id,p.name,false,false,p.url));
   host.append(el("h3",{text:"Reference libraries"}));
   [["pubmed","PubMed"],["arxiv","arXiv"],["wikipedia","Wikipedia"],["crossref","Crossref"],["openalex","OpenAlex"]].forEach(([id,name])=>service(id,name,true,id!=="openalex","https://openalex.org/settings/api"));

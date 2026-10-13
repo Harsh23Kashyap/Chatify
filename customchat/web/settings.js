@@ -601,8 +601,11 @@ async function init() {
   const c = await api("/api/config"); window.CCLoadedApp = c; $("#lead").textContent = "Editing " + c.app.title + ". " + (c.app.tagline ? c.app.tagline.replace(/[.!?]$/, "") + ". " : "") + "Keys stay on this computer."; $("#h").textContent = c.app.title + " configuration"; document.title = c.app.title + " configuration";
   const overview = el("details", {class:"loaded-app",id:"loadedApp"}, el("summary", {text:"Loaded workspace: " + c.app.title}), el("p", {text:c.app.tagline || ""}), el("small", {text:"Sources: " + c.sources.map(x=>x.label || x.id).join(", ")}));
   $("#lead").after(overview);
-  const sourceOverview = el("div", {class:"loaded-source-overview"}, el("b", {text:"This Nerd's configured sources"}), ...c.sources.map(x=>el("p", {text:(x.label || x.id) + " · " + (x.type || "") })), el("small", {text:"Sources in the loaded app file are configured. Reachability is not verified here. The controls below add optional web searches; they do not replace your Nerd's connector."}));
-  const search = $("#sec-search"); if (search) search.prepend(sourceOverview);
+  const sourceOverview=el("div",{class:"loaded-source-overview",role:"status"});window.CCSourceOverview=sourceOverview;
+  const sourceNames={local_files:"Local documents",http_json:"Custom API",pubmed:"PubMed",arxiv:"arXiv",python:"Python helper",web_search:"Web search",wikipedia:"Wikipedia",crossref:"Crossref",openalex:"OpenAlex"};
+  const sourceSummary=(sources,saved=false)=>{sourceOverview.replaceChildren(el("b",{text:saved?"Saved workspace sources":"Configured workspace sources"}),...sources.map(x=>el("p",{text:(x.label||x.id)+" · "+(sourceNames[x.type]||x.type||"Source")})),...(!sources.length?[el("p",{text:"No sources configured."})]:[]),el("small",{text:saved?"Saved to the app file. Restart this workspace to apply these sources. Reachability has not been tested.":"Sources from the loaded app file. Reachability has not been tested. Optional web searches below do not replace these sources."}))};sourceSummary(c.sources);
+  document.addEventListener("cc-workspace-saved",e=>{if(e.detail?.config?.sources)sourceSummary(e.detail.config.sources,true)});
+  const search=$("#sec-search");if(search)search.prepend(sourceOverview);
   const d = await api("/api/settings"); cur = d.settings; canEdit = d.can_edit; try { keyInfo = (await api("/api/provider/status")).keys; } catch (e) { keyInfo = {}; }
   const th = await api("/api/theme"); theme = th.theme; meta = th.meta; window.CCBuilderEnums={...meta.enums,font:Object.keys(meta.fonts).concat("custom"),heading_font:Object.keys(meta.fonts).concat("custom")}; saved = clone(theme); canEdit = canEdit && th.can_edit !== false;
   const seg = $("#seg");
