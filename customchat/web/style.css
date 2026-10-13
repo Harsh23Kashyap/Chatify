@@ -865,3 +865,5 @@ html:not(.preview) .composer>.box{width:100%}
 .acct-btn,.acct-item{min-height:44px}
 
 .app-builder .builder-section{scroll-margin-top:90px}.app-builder .builder-long-text{min-height:120px!important;max-height:420px;overflow:auto;resize:vertical}.app-builder .builder-section>summary{min-height:44px}.app-builder #builderClose:focus-visible{outline:2px solid var(--brand);outline-offset:2px}
+
+.recommendation-undo{display:flex;flex-wrap:wrap;gap:12px;align-items:center;padding:12px;border:1px solid var(--line);border-radius:10px;margin-top:16px}.recommendation-undo button{min-height:44px}.recommendation-undo span{font-size:13px;line-height:1.5}
