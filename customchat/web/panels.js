@@ -135,7 +135,7 @@ function boot() {
   if (!$("#pvbox") || !$("#menu a")) return setTimeout(boot, 200);
   modelGuide();
   const host=el("section",{class:"tile",id:"sec-search"});
-  $("#sec-model").after(host);codePanel(host);
+  $("#sec-model").after(host);window.CCSettingsRefreshNavigation?.();codePanel(host);
 
   const io=new IntersectionObserver(es=>{for(const e of es)if(e.isIntersecting){$("#pvbox").hidden=false;document.querySelectorAll("#menu a").forEach(a=>a.classList.toggle("on",a.getAttribute("href")==="#sec-search"));}},{rootMargin:"-20% 0px -70% 0px"});io.observe(host);
 }
