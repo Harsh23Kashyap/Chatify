@@ -510,7 +510,7 @@ function syncColorEditor(sec) {
   const spec=SECTIONS.find(s=>s.id==='colors');
   for(const f of spec.fields.filter(f=>f.colors)){
     const swatch=sec.querySelector('#f-'+(f.colors&&f.key==='sidebar'?'color-sidebar':f.key));if(!swatch)continue;
-    const value=get(f)||'';swatch.value=value||'#888888';const hex=swatch.closest('.colorrow')?.querySelector('.hex');if(hex)hex.value=value;
+    const value=get(f)||'';swatch.value=value||'#888888';const hex=swatch.closest('.colorrow')?.querySelector('.hex');if(hex){hex.value=value;hex.setAttribute("aria-invalid","false");hex.setCustomValidity("")}
   }
 }
 function drawLook() {
