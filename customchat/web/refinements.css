@@ -61,3 +61,4 @@ html body.settings-tabs #sec-model .keyrow:has(#modelPick){display:flex;flex-wra
 html body.settings-tabs #sec-model .cs:has(#modelPick){flex:1 1 220px;min-width:0}
 html body.settings-tabs #sec-model .cs:has(#modelPick) .cs-btn{height:auto!important;min-height:44px;padding:10px 12px!important}
 html body.settings-tabs #sec-model .cs:has(#modelPick) .cs-label{white-space:normal!important;overflow:visible;text-overflow:clip;overflow-wrap:anywhere}
+.settings-studio-actions .app-builder-drafts{appearance:none;min-height:44px;padding:10px 14px;border:1px solid #bac9bf;border-radius:12px;background:transparent;color:#173f35;font:600 13px system-ui;cursor:pointer;flex-shrink:0}.settings-studio-actions .app-builder-drafts:focus-visible{outline:3px solid #416544;outline-offset:3px}
