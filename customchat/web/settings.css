@@ -1208,3 +1208,5 @@ body.settings-tabs .editor-choice{transition:background-color 160ms cubic-bezier
 .emoji-dialog .emoji-tabs button[aria-pressed=true]{background:#173f35!important;color:#fffdf7!important;border:1px solid #173f35!important;box-shadow:none!important}
 /* Keep the category label readable through the result-set fade. */
 .emoji-dialog .emoji-tabs button{transition:none!important}
+html body.settings-tabs.settings-appearance-active #pvbox iframe#pv{height:900px!important;min-height:900px!important;max-height:none!important}
+@media(max-width:760px){html body.settings-tabs.settings-appearance-active #pvbox iframe#pv{height:1100px!important;min-height:1100px!important}}
