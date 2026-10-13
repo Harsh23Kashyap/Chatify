@@ -66,3 +66,7 @@ body.settings-tabs #settingsNavTop .category-tabs button{transition:background-c
 }
 /* Selected text is a value, not a teaser. Allow it to wrap in every settings picker. */
 html body.settings-tabs .cs .cs-label{white-space:normal!important;overflow:visible!important;text-overflow:clip!important;overflow-wrap:anywhere}
+/* Ordinary group headings keep the same sentence case as their source labels. */
+html body.settings-tabs :is(.grp h4,.pgroup,.otag,.builder-section>summary,#builderFields label,.builder-change strong,#builderDescribe>label){text-transform:none!important;letter-spacing:normal!important}
+/* Response snapshots are read-only text, while code and YAML editors remain editable. */
+html body.settings-tabs pre.code{background:var(--ui-nested);border:1px solid var(--ui-line);border-radius:8px;padding:12px;cursor:text;white-space:pre-wrap;overflow-wrap:anywhere}
