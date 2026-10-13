@@ -422,8 +422,9 @@ function control(f) {
   const v = get(f);
   if (f.type === "color") {
     const swatch = el("input", { type: "color", id, value: v || "#888888", "aria-label": f.label }), hex = el("input", { type: "text", class: "hex", value: v || "", maxlength: "7", "aria-label": f.label + " hex code", placeholder: "automatic" });
-    swatch.addEventListener("input", () => { hex.value = swatch.value; hex.setAttribute("aria-invalid","false");hex.setCustomValidity("");setv(f, swatch.value); });
-    hex.addEventListener("input", () => { const valid=/^#[0-9a-fA-F]{6}$/.test(hex.value)||(f.clearable&&hex.value==="");hex.setAttribute("aria-invalid",String(!valid));hex.setCustomValidity(valid?"":"Use a six-digit hex color, for example #173f35"); if (/^#[0-9a-fA-F]{6}$/.test(hex.value)) { swatch.value = hex.value; setv(f, hex.value.toLowerCase()); } else if (f.clearable && hex.value === "") setv(f, ""); });
+    const syncSwatch=()=>swatch.style.setProperty("--swatch-color",swatch.value);syncSwatch();
+    swatch.addEventListener("input", () => { syncSwatch();hex.value = swatch.value; hex.setAttribute("aria-invalid","false");hex.setCustomValidity("");setv(f, swatch.value); });
+    hex.addEventListener("input", () => { const valid=/^#[0-9a-fA-F]{6}$/.test(hex.value)||(f.clearable&&hex.value==="");hex.setAttribute("aria-invalid",String(!valid));hex.setCustomValidity(valid?"":"Use a six-digit hex color, for example #173f35"); if (/^#[0-9a-fA-F]{6}$/.test(hex.value)) { swatch.value = hex.value;syncSwatch(); setv(f, hex.value.toLowerCase()); } else if (f.clearable && hex.value === "") setv(f, ""); });
     input = el("div", { class: "colorrow" }, swatch, hex); if (f.clearable) input.append(el("button", { type: "button", class: "mini", onclick: () => { hex.value = "";hex.setAttribute("aria-invalid","false");hex.setCustomValidity("");setv(f, ""); } }, "Auto"));
   } else if (f.type === "logo") {
     input = logoControl(f, v);
@@ -469,10 +470,22 @@ function pvExtra() {
   if (sec === "colors") {
     const c = (theme && theme[editMode]) || {};
     const pairs = [["Text on page", c.ink, c.bg], ["Text on cards", c.ink, c.surface], ["Soft text on page", c.muted, c.bg], ["Your bubble", c.ink, c.you], ["Reply bubble", c.ink, c.bot], ["Title color on page", c.brand, c.bg]];
-    host.replaceChildren(el("b", { text: "Colors and readability" }), el("div", { class: "crgrid" }, ...pairs.map(([n, a, b]) => { const r = ratio(a, b), cls = r == null ? "" : r >= 4.5 ? "green" : r >= 3 ? "blue" : "red";
-      return el("div", { class: "cc", title: n + (cls === "green" ? ": easy to read" : cls === "blue" ? ": large text only" : ": too low") }, el("span", { class: "crs", style: "background:" + (b || "#fff") + ";color:" + (a || "#000") }, "Aa"), el("span", { text: n }), el("span", { class: "rt " + cls, text: r == null ? "n/a" : (r>=4.5?"Pass ":"Fail ")+r.toFixed(1)+":1" })); })),
-      el("div", { class: "h", text: "WCAG AA for normal text requires 4.5:1. Ratios below that fail for normal-size text. Suggested fallback: dark text on a light surface, or white text on a dark surface. Colors are not changed by this panel." }));
+    if(host.dataset.sample!=="colors"){
+      host.dataset.sample="colors";
+      host.replaceChildren(el("b",{text:"Colors and readability"}),el("div",{class:"crgrid"},...pairs.map(([n])=>el("div",{class:"cc"},el("span",{class:"crs"},"Aa"),el("span",{text:n}),el("span",{class:"rt"})))),el("div",{class:"h",text:"WCAG AA for normal text requires 4.5:1. Ratios below that fail for normal-size text. Suggested fallback: dark text on a light surface, or white text on a dark surface. Colors are not changed by this panel."}));
+    }
+    const quiet=matchMedia("(prefers-reduced-motion:reduce)").matches||["calm","none"].includes(theme.motion);
+    pairs.forEach(([n,a,b],i)=>{
+      const row=host.querySelectorAll(".cc")[i],sample=row.querySelector(".crs"),status=row.querySelector(".rt"),r=ratio(a,b),cls=r==null?"":r>=4.5?"green":r>=3?"blue":"red",text=r==null?"Not available":(r>=4.5?"Pass ":"Fail ")+r.toFixed(1)+":1";
+      const changedStatus=status.textContent!==text||status.className!=="rt "+cls,hadStatus=!!status.textContent;
+      sample.style.backgroundColor=b||"#fff";sample.style.color=a||"#000";
+      row.title=n+(r==null?": ratio unavailable":r>=4.5?": easy to read":": too low for normal text");
+      status.className="rt "+cls;status.textContent=text;
+      if(quiet)row._statusAnimation?.cancel();
+      if(changedStatus){row._statusAnimation?.cancel();if(hadStatus&&!quiet)row._statusAnimation=row.animate([{opacity:.65},{opacity:1}],{duration:160,easing:"ease-out"});}
+    });
   } else {
+    host.dataset.sample="fonts";
     let fam = {}; try { const d = $("#pv").contentDocument, h = d.querySelector(".hero h1, .hero b, h1") || d.body; fam = { body: getComputedStyle(d.body).fontFamily, head: getComputedStyle(h).fontFamily }; } catch (e) { fam = { body: "inherit", head: "inherit" }; }
     host.replaceChildren(el("b", { text: "Font sample" }), el("div", { class: "fs-h", style: "font-family:" + fam.head, text: "How can I help today?" }), el("div", { class: "fs-b", style: "font-family:" + fam.body, text: "A good answer explains itself, then shows where it came from. 0123456789" }), el("div", { class: "h", text: "Headline font above, answer font below." }));
   }
@@ -512,7 +525,7 @@ function syncColorEditor(sec) {
   const spec=SECTIONS.find(s=>s.id==='colors');
   for(const f of spec.fields.filter(f=>f.colors)){
     const swatch=sec.querySelector('#f-'+(f.colors&&f.key==='sidebar'?'color-sidebar':f.key));if(!swatch)continue;
-    const value=get(f)||'';swatch.value=value||'#888888';const hex=swatch.closest('.colorrow')?.querySelector('.hex');if(hex){hex.value=value;hex.setAttribute("aria-invalid","false");hex.setCustomValidity("")}
+    const value=get(f)||'';swatch.value=value||'#888888';swatch.style.setProperty('--swatch-color',swatch.value);const hex=swatch.closest('.colorrow')?.querySelector('.hex');if(hex){hex.value=value;hex.setAttribute("aria-invalid","false");hex.setCustomValidity("")}
   }
 }
 function drawLook() {

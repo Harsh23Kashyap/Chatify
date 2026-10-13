@@ -1210,3 +1210,12 @@ body.settings-tabs .editor-choice{transition:background-color 160ms cubic-bezier
 .emoji-dialog .emoji-tabs button{transition:none!important}
 html body.settings-tabs.settings-appearance-active #pvbox iframe#pv{height:900px!important;min-height:900px!important;max-height:none!important}
 @media(max-width:760px){html body.settings-tabs.settings-appearance-active #pvbox iframe#pv{height:1100px!important;min-height:1100px!important}}
+
+/* Color feedback stays on the swatch and the changed readability row. */
+.crgrid .crs{transition:background-color 160ms ease-out,color 160ms ease-out}
+@media(prefers-reduced-motion:reduce){.crgrid .crs{transition:none!important}}
+html[data-motion=none] .crgrid .crs{transition:none!important}
+.colorrow input[type=color]{background-color:var(--swatch-color)!important;transition:background-color 160ms ease-out,border-color 160ms ease-out!important}
+.colorrow input[type=color]::-webkit-color-swatch,.colorrow input[type=color]::-moz-color-swatch{opacity:0}
+@media(prefers-reduced-motion:reduce){.colorrow input[type=color]{transition:none!important}}
+html[data-motion=none] .colorrow input[type=color]{transition:none!important}
