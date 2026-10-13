@@ -114,6 +114,7 @@ async function ollamaPanel(viewOnly=false) {
   const box = $("#ollamabox"); if (activeSec !== "model") return; box.hidden = false; box.dataset.loaded = "1";
   if(!viewOnly||!localHardwareSnapshot)box.replaceChildren(el("div", { class: "h", text: "Looking at this computer..." }));
   let r; try { r = viewOnly&&localHardwareSnapshot?localHardwareSnapshot:await api("/api/hardware?base_url=" + encodeURIComponent($("#base").value.trim()));localHardwareSnapshot=r; } catch (e) { box.dataset.loaded="";box.replaceChildren(el("b",{text:"Suggested local models"}),el("div",{class:"h",text:e.message}),el("button",{type:"button",class:"mini",text:"Retry local suggestions",onclick:ollamaPanel})); return; }
+  const retainedActions=new Map(viewOnly?[...box.querySelectorAll(".mact[data-model]")].map(n=>[n.dataset.model,n]):[]);
   const hw = r.hardware, rec = r.recommendation, det = hwView === "tech";
   const tabs = el("div", { class: "seg mini", role: "radiogroup", "aria-label": "Detail level" });
   for (const [v, t] of [["simple", "Simple"], ["tech", "Details"]]) tabs.append(el("button", { type: "button", role: "radio", "aria-checked": String(hwView === v), onclick: () => { hwView = v; ollamaPanel(true);box.querySelector('[role="radio"][aria-checked="true"]')?.focus(); } }, t));
@@ -124,7 +125,7 @@ async function ollamaPanel(viewOnly=false) {
     const c = el("div", { class: "ocard fit-" + p.fit }, el("div", { class: "otag", text: p.label }), el("b", { text: p.name }), el("div", { class: "h", text: p.note }),
       el("div", { class: "fitchip " + p.fit }, el("i"), p.fit_why));
     if (det) c.append(el("div",{class:"model-metrics"},el("div",{class:"metric-head"},el("span",{text:"Memory budget"}),el("b",{text:p.uses_pct+"%"})),el("div",{class:"budget-track",role:"img","aria-label":p.uses_pct+"% of memory budget used, 85% fit limit"},el("i",{style:"width:"+Math.max(0,Math.min(100,p.uses_pct))+"%"}),el("span",{style:"left:85%"})),el("div",{class:"metric-foot"},el("b",{text:p.needs_gb+" GB needed"}),el("span",{text:rec.budget_gb+" GB budget"})),el("div",{class:"metric-row"},el("span",{},"↓ Download",el("b",{text:p.download_gb+" GB"})),el("span",{class:"speed",text:"Estimated speed: "+p.speed})),el("small",{class:"model-tag",text:p.tag})));
-    c.append(el("div", { class: "oact" }, modelAction(p.tag, p.installed)));
+    c.append(el("div", { class: "oact" }, retainedActions.get(p.tag)||modelAction(p.tag, p.installed)));
     cards.append(c);
   });
   box.replaceChildren(head, cards);if(viewOnly){cards.classList.add("local-view-enter");}
@@ -144,7 +145,7 @@ async function ollamaPanel(viewOnly=false) {
 }
 document.getElementById('seg').addEventListener('keydown',e=>{if(!['ArrowRight','ArrowLeft','ArrowDown','ArrowUp','Home','End'].includes(e.key))return;const buttons=[...e.currentTarget.querySelectorAll('[data-p]')],i=buttons.indexOf(document.activeElement);if(i<0)return;e.preventDefault();const next=e.key==='Home'?0:e.key==='End'?buttons.length-1:(i+(['ArrowRight','ArrowDown'].includes(e.key)?1:-1)+buttons.length)%buttons.length;const provider=buttons[next].dataset.p;buttons[next].click();document.querySelector('#seg [data-p="'+provider+'"]')?.focus()});
 function modelAction(tag, installed) {
-  const wrap = el("div", { class: "mact" });
+  const wrap = el("div", { class: "mact","data-model":tag });
   const use = () => { switchProvider("ollama", tag);draw();loadModels(true).then(() => { const pick=$("#modelPick");pick.value=[...pick.options].some(o=>o.value===tag)?tag:OTHER;$("#model").value=tag;pickChanged();pvFollow(); }); };
   if (installed) { wrap.append(el("span", { class: "okt", text: "Installed" }), el("button", { type: "button", class: "mini", onclick: use }, "Use this model")); return wrap; }
   const bar = el("div", { class: "pbar", hidden: "",role:"progressbar","aria-label":"Local model download","aria-valuemin":"0","aria-valuemax":"100" }, el("i")), msg = el("span", { class: "h",role:"status" });
