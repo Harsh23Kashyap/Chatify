@@ -343,3 +343,12 @@ html .side #newChat:active{transform:scale(.98)}
 html[data-motion=none] .side #newChat{transition:none!important}
 html[data-motion=none] .side #newChat:active{transform:none}
 @media(prefers-reduced-motion:reduce){html .side #newChat{transition:none!important}html .side #newChat:active{transform:none}}
+/* Suggestion feedback stays on the card and its directional arrow. */
+html .hero .playground-question{transition:background-color 140ms ease-out,border-color 140ms ease-out,transform 120ms ease-out!important}
+html .hero .playground-question:hover{transform:none}
+html .hero .playground-question>b{color:var(--mut);transition:color 140ms ease-out,transform 140ms ease-out!important}
+html .hero .playground-question:hover>b{color:var(--brand);transform:translate(2px,-2px)}
+html .hero .playground-question:active:not(:disabled){transform:scale(.98)}
+html[data-motion=none] .hero .playground-question,html[data-motion=none] .hero .playground-question>b{transition:none!important}
+html[data-motion=none] .hero .playground-question:active:not(:disabled),html[data-motion=none] .hero .playground-question:hover>b{transform:none}
+@media(prefers-reduced-motion:reduce){html .hero .playground-question,html .hero .playground-question>b{transition:none!important}html .hero .playground-question:active:not(:disabled),html .hero .playground-question:hover>b{transform:none}}
