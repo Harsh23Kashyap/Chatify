@@ -846,3 +846,6 @@ html:not(.preview) .composer>.box{width:100%}
 
 
 @media(max-width:480px){html body .bar{padding-inline:2px!important;gap:2px!important}html body .bar-r{gap:0!important}html body .bar-r>.cs{flex:none!important}html body .bar .cs-btn{min-width:96px!important;width:96px!important;max-width:96px!important;gap:4px!important;padding-inline:6px!important}}
+
+/* Notices never move focus or hide the growing composer. */
+.toast{display:flex;align-items:center;gap:12px;cursor:default}.toast-dismiss{flex:none;background:transparent;color:inherit;border:0;min-width:44px;min-height:44px;font-size:22px;border-radius:8px}.toast-dismiss:focus-visible{outline:2px solid currentColor;outline-offset:2px}

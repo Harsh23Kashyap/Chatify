@@ -49,7 +49,17 @@ async function api(path, body) {
   return d;
 }
 function centerToast(t) { const m = document.querySelector(".main"); if (m) { const r = m.getBoundingClientRect(); t.style.left = (r.left + r.width / 2) + "px"; } return t; }
-function toast(msg) { document.querySelectorAll(".toast").forEach((x) => x.remove()); const t = el("div", { class: "toast", role: "status", "aria-live": "polite", text: msg }); document.body.append(t); centerToast(t); setTimeout(() => t.classList.add("out"), 2000); setTimeout(() => t.remove(), 2250); }
+function toast(msg) {
+  document.querySelectorAll(".toast").forEach(x=>x.remove());
+  const t=el("div",{class:"toast",role:"status","aria-live":"polite"},el("span",{text:msg}));
+  const dismiss=el("button",{type:"button",class:"toast-dismiss","aria-label":"Dismiss notification",text:"×",onclick:()=>t.remove()});t.append(dismiss);
+  t.style.bottom=(innerHeight-($(".composer")?.getBoundingClientRect().top||innerHeight-110)+16)+"px";
+  document.body.append(t);centerToast(t);
+  const lifetime=Math.min(16000,Math.max(3500,1500+String(msg).length*65));let timer;
+  const wait=()=>{clearTimeout(timer);timer=setTimeout(()=>t.remove(),lifetime)};
+  t.addEventListener("mouseenter",()=>clearTimeout(timer));t.addEventListener("mouseleave",wait);t.addEventListener("focusin",()=>clearTimeout(timer));t.addEventListener("focusout",wait);wait();
+}
+
 
 function inline(parent, text, evidence) {
   // safe inline markdown: **bold**, `code`, and [n] citations. Everything is text nodes.
