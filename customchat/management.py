@@ -8,8 +8,9 @@ def diagnosis(message):
  if any(x in text for x in ('401','403','key','credential','authentication')):kind='authentication';hint='Check the saved credential and service permission privately.'
  elif any(x in text for x in ('429','rate','quota','budget')):kind='limit';hint='Check the service quota and local budget. Retry later.'
  elif any(x in text for x in ('timeout','timed out')):kind='timeout';hint='The service did not reply in time. Check its address and try later.'
- elif any(x in text for x in ('404','model','not found')):kind='configuration';hint='Check the model or source configuration.'
- else:kind='connection';hint='Check that the service is running and reachable from this host.'
+ elif any(x in text for x in ('400','404','model','not found','configuration')):kind='configuration';hint='Check the model name, service address and source configuration.'
+ elif any(x in text for x in ('network','reach','connection','connect','running','503','502','504')):kind='connection';hint='Check that the service is running and reachable from this host. Retry later if the service is unavailable.'
+ else:kind='unknown';hint='The check failed, but its cause could not be confirmed. Review the service setup and try again.'
  return {'category':kind,'message':hint,'redacted':True}
 
 def deploy_plan(cfg,data):
