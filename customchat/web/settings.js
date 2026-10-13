@@ -112,9 +112,9 @@ let localHardwareSnapshot=null;
 async function ollamaPanel(viewOnly=false) {
   viewOnly=viewOnly===true;
   const box = $("#ollamabox"); if (activeSec !== "model") return; box.hidden = false; box.dataset.loaded = "1";
-  if(!viewOnly||!localHardwareSnapshot)box.replaceChildren(el("div", { class: "h", text: "Looking at this computer..." }));
+  const retainedActions=new Map([...box.querySelectorAll(".mact[data-model]")].filter(n=>viewOnly||n.dataset.pending==="true").map(n=>[n.dataset.model,n]));
+  if(!retainedActions.size&&(!viewOnly||!localHardwareSnapshot))box.replaceChildren(el("div", { class: "h", text: "Looking at this computer..." }));
   let r; try { r = viewOnly&&localHardwareSnapshot?localHardwareSnapshot:await api("/api/hardware?base_url=" + encodeURIComponent($("#base").value.trim()));localHardwareSnapshot=r; } catch (e) { box.dataset.loaded="";box.replaceChildren(el("b",{text:"Suggested local models"}),el("div",{class:"h",text:e.message}),el("button",{type:"button",class:"mini",text:"Retry local suggestions",onclick:ollamaPanel})); return; }
-  const retainedActions=new Map(viewOnly?[...box.querySelectorAll(".mact[data-model]")].map(n=>[n.dataset.model,n]):[]);
   const hw = r.hardware, rec = r.recommendation, det = hwView === "tech";
   const tabs = el("div", { class: "seg mini", role: "radiogroup", "aria-label": "Detail level" });
   for (const [v, t] of [["simple", "Simple"], ["tech", "Details"]]) tabs.append(el("button", { type: "button", role: "radio", "aria-checked": String(hwView === v), onclick: () => { hwView = v; ollamaPanel(true);box.querySelector('[role="radio"][aria-checked="true"]')?.focus(); } }, t));
@@ -152,7 +152,7 @@ function modelAction(tag, installed) {
   const btn = el("button", { type: "button", class: "mini dl", disabled: canEdit ? undefined : "" }, "Download");
   let pullId="";const cancel=el("button",{type:"button",class:"mini",text:"Cancel download",hidden:"",onclick:async()=>{cancel.disabled=true;msg.textContent="Cancelling...";try{await api("/api/ollama/pull/cancel",{id:pullId})}catch(e){cancel.disabled=false;msg.textContent=e.message}}});
   btn.addEventListener("click", async () => {
-    btn.disabled = true; bar.hidden = false;bar.firstChild.style.width="0%";bar.removeAttribute("aria-valuenow");bar.setAttribute("aria-valuetext","Preparing download review");msg.className="h";msg.textContent = "Starting...";
+    wrap.dataset.pending="true";btn.disabled = true; bar.hidden = false;bar.firstChild.style.width="0%";bar.removeAttribute("aria-valuenow");bar.setAttribute("aria-valuetext","Preparing download review");msg.className="h";msg.textContent = "Starting...";
     try {
       const plan=await api('/api/ollama/pull/review',{model:tag,base_url:$("#base").value.trim()});
       const reviewText='Download '+plan.model+'?\n\nApproximate download: '+(plan.download_gb_estimate??'unknown')+' GB. Free disk: '+plan.free_disk_gb+' GB. Memory estimate: '+(plan.memory_need_gb_estimate??'unknown')+' GB; fit: '+plan.fit+'.\n'+plan.location_note+'\n'+plan.notice;
@@ -167,7 +167,7 @@ function modelAction(tag, installed) {
         if (st.error) { cancel.hidden=true; btn.disabled = false; btn.textContent = "Try again"; bar.hidden = true; msg.className = "h bad"; break; }
         if (st.done) { if(localHardwareSnapshot){for(const pick of localHardwareSnapshot.recommendation.picks)if(pick.tag===tag)pick.installed=true;localHardwareSnapshot.installed=[...new Set([...(localHardwareSnapshot.installed||[]),tag])]}cancel.hidden=true;wrap.replaceChildren(el("span", { class: "okt", text: "Installed" }), el("button", { type: "button", class: "mini", onclick: use }, "Use this model"),el("small",{class:"h",text:"Download complete. Select Use this model to change your unsaved answer settings."})); break; }
       }
-    } catch (e) { cancel.hidden=true; btn.disabled = false; bar.hidden = true; msg.textContent = e.message; msg.className = "h bad"; }
+    } catch (e) { cancel.hidden=true; btn.disabled = false; bar.hidden = true; msg.textContent = e.message; msg.className = "h bad"; }finally{delete wrap.dataset.pending}
   });
   wrap.append(btn, cancel, bar, msg); return wrap;
 }
