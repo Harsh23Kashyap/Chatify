@@ -5,6 +5,7 @@ function load(){try{return JSON.parse(localStorage.getItem(key)||"{}")}catch(_){
 function apply(v){
  const width=[600,720,900].includes(+v.width)?+v.width:720;
  const size=[15,17,19,21].includes(+v.size)?+v.size:17;
+ document.documentElement.classList.toggle("reading-width-selected",[600,720,900].includes(+v.width));
  document.documentElement.classList.add("reading-view");document.documentElement.style.setProperty("--reading-width",width+"px");
  document.documentElement.style.setProperty("--reading-size",size+"px");
  return {width,size};

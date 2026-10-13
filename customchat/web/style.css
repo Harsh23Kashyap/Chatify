@@ -891,3 +891,9 @@ html.preview .bubble{padding:calc(9px*var(--dens,1)) calc(12px*var(--dens,1))!im
 /* Compact preview type stays legible without inheriting full reading-view sizes. */
 html.preview .bubble .a,html.preview .bubble .a p,html.preview .bubble .a li{font-size:calc(13px*var(--fs,1))!important;line-height:1.5!important}
 @media(max-width:360px){html.preview .chartrow{display:grid;grid-template-columns:60px minmax(0,1fr);gap:8px;align-items:center}html.preview .donut{width:60px!important;height:60px!important}html.preview .chartrow ul{padding:0;margin:0;min-width:0;font-size:9px}html.preview .chartrow li{white-space:nowrap}}
+@media(prefers-reduced-motion:no-preference){html:not([data-motion=none]) .thread>.wrap{transition:max-width 160ms ease-out}}
+/* The chosen chat width must win over earlier fixed reading columns. */
+html body .thread>.wrap{max-width:var(--chat-max,980px)!important}
+@media(prefers-reduced-motion:no-preference){html:not([data-motion=none]) body .thread>.wrap{transition-property:max-width!important;transition-duration:160ms!important;transition-timing-function:ease-out!important}}
+
+html.reading-width-selected body .thread>.wrap{max-width:var(--reading-width,720px)!important}

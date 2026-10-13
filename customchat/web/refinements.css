@@ -67,3 +67,10 @@ html body.settings-tabs #sec-model .cs:has(#modelPick) .cs-label{white-space:nor
 html body.settings-tabs .memory-graph{scroll-margin-top:144px}
 
 .memory-legend{display:flex;flex-wrap:wrap;gap:4px 16px;margin:0 0 12px;font-size:12px;line-height:1.5}.memory-total>div{min-width:0;overflow:hidden}
+/* Layout choices keep their geometry; only the selected surface changes. */
+.sidebar-shortcuts button,.chat-width-shortcuts button{transition:background-color 160ms ease-out,border-color 160ms ease-out!important;transform:none!important}
+.sidebar-shortcuts button:hover,.chat-width-shortcuts button:hover{border-color:#78917d!important;transform:none!important}
+.sidebar-shortcuts button[aria-pressed=true],.chat-width-shortcuts button[aria-pressed=true]{background:#edf2e8!important}
+@media(prefers-reduced-motion:reduce){.sidebar-shortcuts button,.chat-width-shortcuts button{transition:none!important}}
+html[data-motion=none] .sidebar-shortcuts button,html[data-motion=none] .chat-width-shortcuts button{transition:none!important}
+html body.settings-tabs .sidebar-shortcuts button[aria-pressed=true],html body.settings-tabs .chat-width-shortcuts button[aria-pressed=true]{background:#edf2e8!important}
