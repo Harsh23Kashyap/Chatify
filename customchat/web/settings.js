@@ -292,6 +292,7 @@ const get = (f) => (f.colors ? theme[editMode][f.key] : theme[f.key] || effectiv
 const setv = (f, v) => { const empty=(document.getElementById("f-"+f.key)||document.getElementById("f-"+f.key+"-file"))?.closest(".field")?.querySelector(".empty-field");if(empty)empty.hidden=!!v;const source=(document.getElementById("f-"+f.key))?.closest(".field")?.querySelector(".value-source");if(source)source.hidden=!!v; if (f.colors) theme[editMode][f.key] = v; else theme[f.key] = v; changed(); };
 let sendTimer = 0, lastPreviewMode = null;
 function pushPreview() {
+  document.documentElement.dataset.motion=["calm","none"].includes(theme.motion)?"none":theme.motion;
   const t = clone(theme); const m = $("#pvmode .seg button[aria-checked=true], #pvmode button[aria-checked=true]"); t.mode = m ? m.dataset.m : t.mode;
   const frame=$("#pv");const reduced=matchMedia("(prefers-reduced-motion:reduce)").matches||["calm","none"].includes(t.motion);
   if(!reduced&&lastPreviewMode!==null&&lastPreviewMode!==t.mode){frame.classList.add("preview-changing");setTimeout(()=>frame.classList.remove("preview-changing"),160)}
@@ -308,6 +309,7 @@ function updateVis() {
 let appearanceQueue=Promise.resolve();
 function persistAppearance(snapshot){const next=appearanceQueue.catch(()=>{}).then(()=>api("/api/theme",{theme:snapshot}));appearanceQueue=next;return next}
 function changed() {
+  document.documentElement.dataset.motion=["calm","none"].includes(theme.motion)?"none":theme.motion;
   updateVis();syncPreset();
   clearTimeout(sendTimer); sendTimer = setTimeout(pushPreview, 40); pvExtra(); setTimeout(pvExtra, 350);
   const dirty = JSON.stringify(theme) !== JSON.stringify(saved);
@@ -430,7 +432,7 @@ function control(f) {
   } else if (f.type === "select") {
     input = el("select", { id }); if (f.fonts) input.dataset.fonts = "1"; const opts = f.fonts ? Object.keys(meta.fonts).concat("custom") : meta.enums[f.key];
     opts.forEach((o) => input.append(el("option", { value: o, text: f.fonts ? FONTNAMES[o] || o : (LABELS[f.key] || {})[o] || o })));
-    input.value = v; input.addEventListener("change", () => { setv(f, input.value); if (f.key === "mode" && input.value !== "auto") { editMode = input.value; setPvMode(editMode); drawLook(); } });
+    input.value = v; input.addEventListener("change", () => { setv(f, input.value); if(f.key==="motion"){if(["calm","none"].includes(input.value))$("#pv")?.contentWindow?.ccStopPreviewMotion?.();const trigger=input.closest(".cs")?.querySelector(".cs-btn");if(trigger&&!matchMedia("(prefers-reduced-motion:reduce)").matches)trigger.animate([{outline:"2px solid #78917d",outlineOffset:"2px"},{outline:"2px solid transparent",outlineOffset:"2px"}],{duration:160,easing:"ease-out"});} if (f.key === "mode" && input.value !== "auto") { editMode = input.value; setPvMode(editMode); drawLook(); } });
   } else if (f.type === "range") {
     const [lo, hi] = meta.ranges[f.key], out = el("output", { text: v + (f.unit || "") });
     input = el("div", { class: "rangerow" }, el("input", { type: "range", id, min: lo, max: hi, value: v, "aria-label": f.label }), out, el("small", { class: "rng", text: lo + (f.unit || "") + " to " + hi + (f.unit || "") }));

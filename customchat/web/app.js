@@ -808,7 +808,7 @@ function updatePreviewAvatars() {
 }
 function pvBottom() { const t = $("#thread"); if (t) { t.style.scrollBehavior = "auto"; t.scrollTop = 0; } }
 function previewMode() {
-  window.ccPreviewMotion=(t)=>{const node=document.querySelector('.row.bot:last-of-type')||document.querySelector('.msg.bot')||document.querySelector('#thread');if(!node)return;node.getAnimations().forEach(a=>a.cancel());if(matchMedia('(prefers-reduced-motion:reduce)').matches||['calm','none'].includes(t.motion)||t.entrance==='none')return;const frames=t.entrance==='slide'?[{opacity:0,transform:'translateY(18px)'},{opacity:1,transform:'none'}]:t.entrance==='pop'?[{opacity:0,transform:'scale(.94)'},{opacity:1,transform:'none'}]:[{opacity:0},{opacity:1}];node.animate(frames,{duration:(t.motion==='subtle'?180:420)*100/t.speed,easing:'ease-out'})};
+  let demoAnimation=null;window.ccStopPreviewMotion=()=>{if(demoAnimation){demoAnimation.cancel();demoAnimation=null}};window.ccPreviewMotion=(t)=>{window.ccStopPreviewMotion();const node=[...document.querySelectorAll('.row:not(.u)')].at(-1);if(!node)return;if(matchMedia('(prefers-reduced-motion:reduce)').matches||['calm','none'].includes(t.motion)||t.entrance==='none')return;const frames=t.entrance==='slide'?[{opacity:0,transform:'translateY(18px)'},{opacity:1,transform:'none'}]:t.entrance==='pop'?[{opacity:0,transform:'scale(.94)'},{opacity:1,transform:'none'}]:[{opacity:0},{opacity:1}];demoAnimation=node.animate(frames,{duration:(t.motion==='subtle'?180:420)*100/t.speed,easing:'ease-out'})};
   document.body.inert = true;
   document.querySelectorAll("input,textarea,select,button").forEach(control => { control.disabled=true; control.tabIndex=-1; });
   $("#q").placeholder="Visual preview only";
@@ -820,6 +820,7 @@ function previewMode() {
   const previewCopy = () => JSON.stringify(["txt_title","txt_tagline","txt_examples","logo"].map(TV));
   let lastCopy = previewCopy();
   window.addEventListener("message", (e) => { if (e.origin === location.origin && e.data && e.data.ccTheme) {
+    if(["calm","none"].includes(TV("motion"))||matchMedia("(prefers-reduced-motion:reduce)").matches)window.ccStopPreviewMotion();
     const thread = $("#thread"), scroll = thread.scrollTop, copy = previewCopy();
     applyWording(); applyIcons(); updatePreviewAvatars();
     if (copy !== lastCopy) { drawThread(); thread.scrollTop = scroll; lastCopy = copy; }
