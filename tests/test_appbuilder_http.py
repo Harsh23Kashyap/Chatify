@@ -1,7 +1,7 @@
 import json,urllib.error,unittest,yaml
 from unittest.mock import patch
 import test_workspace_api
-from customchat import providers,schema
+from customchat import providers,schema,appbuilder
 class BuilderHTTP(test_workspace_api.WorkspaceAPITests):
  def test_owner_gate(self):
   with self.assertRaises(urllib.error.HTTPError) as e:self.call(self.clients[1],'/api/settings/build/talk',{'consent':True})
@@ -53,3 +53,12 @@ class BuilderHTTP(test_workspace_api.WorkspaceAPITests):
  def test_parse_owner_gate_and_validation(self):
   for client,source in [(self.clients[1],'app: {title: X}'),(self.clients[0],'app: {typo: X}'),(self.clients[0],'[invalid')]:
    with self.assertRaises(urllib.error.HTTPError):self.call(client,'/api/settings/build/parse',{'yaml':source})
+
+ def test_incomplete_rollback_returns_explicit_uncertain_saved_state(self):
+  from pathlib import Path
+  path=Path(self.cfg['_dir'])/'app.yaml';path.write_text(yaml.safe_dump({k:self.cfg[k] for k in schema.DEFAULTS}));self.cfg['_path']=str(path)
+  plan=self.call(self.clients[0],'/api/settings/build/review',{'yaml':'app: {title: Garden app}','sections':['app']})
+  with patch('customchat.appbuilder.save_plan',side_effect=appbuilder.SaveRollbackError('Save failed and rollback could not restore: prompts.json')):
+   with self.assertRaises(urllib.error.HTTPError) as error:self.call(self.clients[0],'/api/settings/build/save',{'ticket':plan['ticket'],'confirmed':True})
+  self.assertEqual(error.exception.code,400)
+  body=json.loads(error.exception.read());self.assertTrue(body['saved_state_uncertain']);self.assertIn('prompts.json',body['error'])
