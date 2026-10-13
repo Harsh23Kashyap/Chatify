@@ -70,7 +70,7 @@ async function loadModels(force) {
   const help=$("#modelh");let sources=document.getElementById("modelSuggestionSources");if(!sources){sources=el("small",{id:"modelSuggestionSources"});help.after(sources)}sources.replaceChildren();
   const available=list.length;list=modelShortlist(p,list);const fallback=!list.length&&suggestions.length>0;sel.replaceChildren();
   for(const n of list)sel.append(el("option",{value:n,text:n}));
-  const documentedSources=new Set();if(fallback)for(const example of suggestions){if(example.source&&!documentedSources.has(example.source)){documentedSources.add(example.source);const a=el("a",{href:example.source,target:"_blank",rel:"noopener noreferrer",text:"Model documentation"});sources.append(a,document.createTextNode(" · Checked "+example.checked));}const o=el("option",{value:example.id,text:example.id+" (suggested)"});o.dataset.description=example.description;sel.append(o)}
+  const documentedSources=new Set();if(fallback)for(const example of suggestions){if(example.source&&!documentedSources.has(example.source)){documentedSources.add(example.source);const a=el("a",{href:example.source,target:"_blank",rel:"noopener noreferrer",text:"Model documentation"});sources.append(a,document.createTextNode(" · Checked "+example.checked));}const o=el("option",{value:example.id,text:example.id});o.title=example.description||"";sel.append(o)}
   sel.append(el("option",{value:OTHER,text:list.length?"Other (type a name)":"Type a model name"}));
   sel.value=list.includes(currentModel)||fallback&&suggestions.some(x=>x.id===currentModel)?currentModel:OTHER;
   const demo=p==="mock",typed=!demo&&sel.value===OTHER;
@@ -79,7 +79,8 @@ async function loadModels(force) {
   const kr=sel.closest(".keyrow");if(kr)kr.hidden=demo;
   $("#model").hidden=!typed;if(typed)$("#model").value=currentModel;
   $("#refreshModels").disabled=!canEdit;modelNote=note;
-  $("#modelh").textContent=demo?"The demo answers without a model.":fallback?(note?note+" ":"")+"Suggested examples, not verified for your account or server. Choose one or type your own model name.":note?note+" You can still enter a model name below.":list.length?list.length+" chat models shown ("+available+" returned). Choose one or enter another name.":"No chat model names were returned. Enter a model name below.";
+  $("#modelh").textContent=demo?"The demo answers without a model.":fallback?"Suggested models, not verified for your account.":note?note+" You can still enter a model name below.":list.length?list.length+" chat models shown ("+available+" returned). Choose one or enter another name.":"No chat model names were returned. Enter a model name below.";
+  help.title=note;
   pvFollow();
 }
 function sliderVisuals(){
