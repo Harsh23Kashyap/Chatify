@@ -41,3 +41,12 @@ html body.settings-tabs :is(#saveLook,#apply,#saveBudget){background:#173f35!imp
 @media(min-width:1101px){html body.settings-tabs:not(.simple) #col{padding-top:0!important}html body.settings-tabs:not(.simple) .col>.settings-active-panel,html body.settings-tabs:not(.simple) #look>.settings-active-panel{padding-top:0!important;margin-top:0!important}html body.settings-tabs .layout{align-items:start!important}}
 html body.settings-tabs .memory-graph small,html body.settings-tabs .memory-graph .memory-label,html body.settings-tabs .memory-thresholds span{font-size:12px!important;line-height:1.5}html body.settings-tabs .memory-thresholds{display:flex;flex-wrap:wrap;gap:0}html body.settings-tabs .memory-thresholds span{flex:1 1 100px;padding:8px!important}
 html body.settings-tabs .provider-test-scope{flex:1 0 100%;margin:8px 0!important;font-size:12px;line-height:1.5}
+
+html body.settings-tabs .settings-utilities .settings-search{grid-template-columns:minmax(0,1fr) 44px auto!important}
+html body.settings-tabs .settings-utilities .settings-search .settings-find-clear{grid-column:2!important;grid-row:2!important;width:44px;min-height:44px;padding:0;border:1px solid #c7d3c9;border-radius:8px;background:#fffdf7;color:#173f35;font:24px/1 system-ui;cursor:pointer;transition:opacity .14s ease}
+html body.settings-tabs .settings-utilities .settings-search .settings-find-clear:disabled{visibility:hidden;pointer-events:none}
+html body.settings-tabs .settings-utilities .settings-search .settings-help-open{grid-column:3!important}
+.settings-search-results.results-arrived{animation:settings-results-arrive .16s ease-out}@keyframes settings-results-arrive{from{opacity:0}to{opacity:1}}
+@media(prefers-reduced-motion:reduce){.settings-search-results.results-arrived{animation:none!important}.settings-find-clear{transition:none!important}}html[data-motion=none] .settings-search-results.results-arrived{animation:none!important}
+#settingsFind::-webkit-search-cancel-button{display:none;-webkit-appearance:none}
+.settings-search-results[data-result-state=empty]{padding:14px;font-size:13px;color:#53665b}
