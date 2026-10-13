@@ -1158,3 +1158,6 @@ body.settings-tabs .card{padding:28px 32px!important}body.settings-tabs .card h1
 .index-status-icon{flex:none;animation:index-status-in 160ms ease-out}
 @keyframes index-status-in{from{opacity:.5}to{opacity:1}}
 @media(prefers-reduced-motion:reduce){.index-status-icon{animation:none}}
+
+#promptsEditor textarea.prompt-draft-updated{background:#edf3e8!important;transition:background-color 160ms ease-out}
+@media(prefers-reduced-motion:reduce){#promptsEditor textarea.prompt-draft-updated{transition:none}}
