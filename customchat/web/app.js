@@ -49,15 +49,18 @@ async function api(path, body) {
   return d;
 }
 function centerToast(t) { const m = document.querySelector(".main"); if (m) { const r = m.getBoundingClientRect(); t.style.left = (r.left + r.width / 2) + "px"; } return t; }
-function toast(msg) {
-  document.querySelectorAll(".toast").forEach(x=>x.remove());
-  const t=el("div",{class:"toast",role:"status","aria-live":"polite"},el("span",{text:msg}));
-  const dismiss=el("button",{type:"button",class:"toast-dismiss","aria-label":"Dismiss notification",text:"×",onclick:()=>t.remove()});t.append(dismiss);
-  t.style.bottom=(innerHeight-($(".composer")?.getBoundingClientRect().top||innerHeight-110)+16)+"px";
-  document.body.append(t);centerToast(t);
-  const lifetime=Math.min(16000,Math.max(3500,1500+String(msg).length*65));let timer;
-  const wait=()=>{clearTimeout(timer);timer=setTimeout(()=>t.remove(),lifetime)};
-  t.addEventListener("mouseenter",()=>clearTimeout(timer));t.addEventListener("mouseleave",wait);t.addEventListener("focusin",()=>clearTimeout(timer));t.addEventListener("focusout",wait);wait();
+function toast(msg, actionLabel, action) {
+  document.querySelectorAll(".toast").forEach(x=>x.dismissNotice ? x.dismissNotice() : x.remove());
+  const message=el("span",{class:"toast-message",text:msg});
+  const t=el("div",{class:"toast",role:"status","aria-live":"polite"},message);let timer,observer;
+  const close=()=>{clearTimeout(timer);observer?.disconnect();window.removeEventListener("resize",place);t.remove()};t.dismissNotice=close;
+  const place=()=>{t.style.bottom=(innerHeight-($(".composer")?.getBoundingClientRect().top||innerHeight-110)+16)+"px";centerToast(t)};
+  if(action){const button=el("button",{type:"button",class:"toast-action",text:actionLabel,onclick:async()=>{if(button.disabled)return;button.disabled=true;try{await action();close()}catch(e){message.textContent=e.message||"Could not complete that action. Try again.";button.disabled=false}}});t.append(button)}
+  t.append(el("button",{type:"button",class:"toast-dismiss","aria-label":"Dismiss notification",text:"×",onclick:close}));
+  document.body.append(t);place();if(window.ResizeObserver&&$(".composer")){observer=new ResizeObserver(place);observer.observe($(".composer"))}window.addEventListener("resize",place);
+  const lifetime=Math.min(16000,Math.max(3500,1500+String(msg).length*65));
+  const wait=()=>{clearTimeout(timer);if(!action)timer=setTimeout(close,lifetime)};
+  t.addEventListener("mouseenter",()=>clearTimeout(timer));t.addEventListener("mouseleave",wait);t.addEventListener("focusin",()=>clearTimeout(timer));t.addEventListener("focusout",wait);wait();return t;
 }
 
 
@@ -229,8 +232,7 @@ function turnView(t, prev) {
   meta.append(el("button", { "data-more": "1", class: "chip", onclick: () => branchQuestion(t) }, "Edit + branch"));
   meta.append(el("button", { "data-more": "1", class: "chip del", title: "Delete this answer", onclick: async () => {
     await api("/api/delete-turn", { turn: t.id }); S.turns = S.turns.filter((x) => x.id !== t.id); drawThread();
-    const u = el("div", { class: "toast", onclick: async () => { await api("/api/restore-turn", { turn: t.id }); S.turns = await api(S.view === "topic" && S.topic ? "/api/topic-turns?topic=" + S.topic : "/api/turns?chat=" + S.chat); drawThread(); u.remove(); } }, "Answer deleted. Click to undo"); centerToast(u);
-    document.body.append(u); setTimeout(() => u.remove(), 6000); } }, "Delete"));
+    toast("Answer deleted.", "Undo", async () => { await api("/api/restore-turn", { turn: t.id }); S.turns = await api(S.view === "topic" && S.topic ? "/api/topic-turns?topic=" + S.topic : "/api/turns?chat=" + S.chat); drawThread(); }); } }, "Delete"));
   const more = [...meta.querySelectorAll("[data-more]")];
   if (more.length) { const d = el("details", { class: "more" }, el("summary", { class: "chip", title: "More actions" }, t.evidence.length ? "More" : "Details")); const box = el("div", { class: "more-box" }); more.forEach((b) => box.append(b)); d.append(box); meta.append(d); }
   return nodes;
@@ -385,7 +387,7 @@ async function loadList() {
         el("span", { class: "acts" },
           el("button", { class: c.pinned ? "is-pinned" : "", title: c.pinned ? "Unpin" : "Pin", "aria-label": (c.pinned ? "Unpin " : "Pin ") + c.title, "aria-pressed": c.pinned ? "true" : "false", onclick: async (e) => { e.stopPropagation(); await api("/api/pin", { chat: c.id, pinned: !c.pinned }); loadList(); } }, svg("pin")),
           el("button", { title: "Rename", "aria-label": "Rename " + c.title, onclick: async (e) => { e.stopPropagation(); const t = prompt("Rename chat", c.title); if (t) { await api("/api/rename", { chat: c.id, title: t }); loadList(); } } }, svg("edit")),
-          el("button", { title: "Delete", "aria-label": "Delete " + c.title, onclick: async (e) => { e.stopPropagation(); const wasOpen = S.chat === c.id; await api("/api/delete", { chat: c.id }); if (wasOpen) newChat(); loadList(); const u = el("div", { class: "toast", onclick: async () => { await api("/api/restore", { chat: c.id }); loadList(); u.remove(); if (wasOpen) openChat(c.id); } }, "Chat deleted. Undo"); document.body.append(u); centerToast(u); setTimeout(() => u.remove(), 6000); } }, svg("trash"))))); });
+          el("button", { title: "Delete", "aria-label": "Delete " + c.title, onclick: async (e) => { e.stopPropagation(); const wasOpen = S.chat === c.id; await api("/api/delete", { chat: c.id }); if (wasOpen) newChat(); loadList(); toast("Chat deleted.", "Undo", async () => { await api("/api/restore", { chat: c.id }); await loadList(); if (wasOpen) await openChat(c.id); }); } }, svg("trash"))))); });
     } else {
       const rows = await api("/api/topics"); if (seq !== loadList.seq) return;
       if (!rows.length) list.append(el("div", { class: "empty", text: "Conversations appear after your first question." }));
@@ -469,8 +471,7 @@ async function send() {
     if (Object.keys(result.source_errors || {}).length) toast("Some sources were unavailable: " + Object.keys(result.source_errors).join(", "));
     if (S.turns.length === 1 && !S.temp) $("#chatTitle").textContent = q.slice(0, 60);
   } else {
-    const u = el("div", { class: "toast", onclick: () => { u.remove(); $("#q").value = q; send(); } }, (err || "Something went wrong").replace(/[.?!]+$/, "") + ". Click to retry"); centerToast(u);
-    document.body.append(u); setTimeout(() => u.remove(), 7000);
+    toast((err || "Something went wrong").replace(/[.?!]+$/, "") + ".", "Retry", async () => { if(S.busy)throw Error("Wait for the current answer or stop it first."); if($("#q").value.trim() && $("#q").value.trim()!==q)throw Error("Your new draft is still here. Send or clear it before retrying the earlier question."); $("#q").value=q;await send(); });
   }
   status.dataset.state=result?"done":"error"; status.textContent = result ? "Reply ready" : (err || "Reply interrupted"); setTimeout(() => { if (!S.busy) status.hidden = true; }, 2500);
   const readingEarlier = th.scrollHeight - th.scrollTop - th.clientHeight > 100;
@@ -478,7 +479,7 @@ async function send() {
   S.busy = false; applyIcons(); sendIcon("send", "Send"); drawThread(); loadList(); $("#q").focus({preventScroll:true});
   if (!result) {
     // keep what the user typed, and any text that did arrive, instead of losing both
-    if (text && err !== "Stopped") { const w2 = $("#thread .wrap") || $("#thread"); w2.querySelector(".hero")?.remove(); w2.append(el("div", { class: "q", text: q }), el("div", { class: "a" }, text + "\n\n(Cut short. Click the notice to ask again.)")); }
+    if (text && err !== "Stopped") { const w2 = $("#thread .wrap") || $("#thread"); w2.querySelector(".hero")?.remove(); w2.append(el("div", { class: "q", text: q }), el("div", { class: "a" }, text + "\n\n(Cut short. Use Retry to ask again.)")); }
     else if (!$("#q").value) { $("#q").value = q; autosize(); }
   }
   syncLatest(); rdy();
@@ -632,7 +633,7 @@ document.addEventListener("keydown", (e) => {
   if (t === "INPUT" || t === "TEXTAREA" || t === "SELECT" || e.metaKey || e.ctrlKey || e.altKey) return;
   if (e.key === "/") { e.preventDefault(); const s = document.getElementById("search"); if (s) s.focus(); }
   else if (e.key === "n") { e.preventDefault(); const b = document.getElementById("newChat"); if (b) b.click(); }
-  else if (e.key === "?") { const u = document.createElement("div"); u.className = "toast"; u.textContent = "Shortcuts: / search, n new chat, Enter send, Shift+Enter new line, Esc close"; document.body.append(u); setTimeout(() => u.remove(), 5000); }
+  else if (e.key === "?") { toast("Shortcuts: / search, n new chat, Enter send, Shift+Enter new line, Esc close"); }
 });
 document.addEventListener("click", (e) => {
   const app = document.getElementById("app");

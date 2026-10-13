@@ -17,7 +17,7 @@ class UiErrors(unittest.TestCase):
 
     def test_question_and_partial_text_are_kept(self):
         self.assertIn("$(\"#q\").value = q", self.js)
-        self.assertIn("Cut short. Click the notice to ask again.", self.js)
+        self.assertIn("Cut short. Use Retry to ask again.", self.js)
 
 
 if __name__ == "__main__": unittest.main()

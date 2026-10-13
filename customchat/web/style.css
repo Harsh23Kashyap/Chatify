@@ -849,3 +849,5 @@ html:not(.preview) .composer>.box{width:100%}
 
 /* Notices never move focus or hide the growing composer. */
 .toast{display:flex;align-items:center;gap:12px;cursor:default}.toast-dismiss{flex:none;background:transparent;color:inherit;border:0;min-width:44px;min-height:44px;font-size:22px;border-radius:8px}.toast-dismiss:focus-visible{outline:2px solid currentColor;outline-offset:2px}
+
+.toast-message{min-width:0}.toast-action{flex:none;min-height:44px;min-width:44px;border:1px solid currentColor;border-radius:8px;background:transparent;color:inherit;padding:6px 10px;font:inherit;cursor:pointer}.toast-action:focus-visible{outline:2px solid currentColor;outline-offset:2px}.toast-action:disabled{opacity:.65;cursor:wait}.toast-dismiss{cursor:pointer}
