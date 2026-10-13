@@ -283,7 +283,7 @@ dialog.settings-help #settingsHelpLocalResults button:hover{background:#f4f7f0}
 @media(prefers-reduced-motion:reduce){.ask-dots i{animation:none!important;opacity:.7}#settingsHelpAnswer.arrived{animation:none!important}dialog.settings-help textarea::placeholder{transition:none!important}}
 
 /* 0.1.27: one spacing rhythm for the settings rail, editor and preview. */
-body.settings-tabs .layout{padding-bottom:0!important;gap:24px!important}
+body.settings-tabs.simple .layout,body.settings-tabs .layout{padding-bottom:0!important;gap:24px!important}
 body.settings-tabs #col{padding:20px!important;background:transparent!important}
 body.settings-tabs #menu{padding:0!important;background:transparent!important}
 body.settings-tabs #menu a{padding:12px!important;line-height:1.5!important}
@@ -313,7 +313,7 @@ body.settings-tabs .workspace-fields-save{padding-top:16px;margin-top:0;display:
 body.settings-tabs .workspace-fields-save p:empty{display:none}
 body.settings-tabs .field{gap:8px}.settings-tabs label.check{gap:12px!important}
 body.settings-tabs .sub{margin-bottom:16px;gap:8px}body.settings-tabs .sub small{margin:0;line-height:1.5}
-@media(max-width:760px){body.settings-tabs .layout{gap:16px!important}body.settings-tabs #col{padding:16px 0!important}body.settings-tabs #pvbox iframe#pv{height:480px!important;min-height:480px!important}}
+@media(max-width:760px){body.settings-tabs.simple .layout,body.settings-tabs .layout{gap:16px!important}body.settings-tabs #col{padding:16px 0!important}body.settings-tabs #pvbox iframe#pv{height:480px!important;min-height:480px!important}}
 body.settings-tabs #cfgmode{display:flex!important;width:240px!important;max-width:100%!important;height:44px!important;padding:3px!important;border:1px solid #d5ddd2;border-radius:9px!important;background:#f1f4ed!important;gap:3px;box-shadow:none!important}
 body.settings-tabs #cfgmode button{display:flex;align-items:center;justify-content:center;flex:1;min-width:0;height:36px!important;min-height:36px!important;padding:0 16px!important;font-size:13px!important;font-weight:600!important;line-height:1!important;text-decoration:none!important;border:0!important;border-radius:6px!important;box-shadow:none!important}
 body.settings-tabs #cfgmode button[aria-checked=true]{background:#fff!important;color:#173f35!important}
