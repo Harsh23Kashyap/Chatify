@@ -26,7 +26,7 @@ function diagram() {
 function stageCard(s) {
   const area = el("textarea", { rows: "6", maxlength: "6000", "aria-label": s.label + " prompt", spellcheck: "false" });
   area.value = s.text || s.default;
-  const fit=()=>{area.style.height='auto';area.style.height=Math.min(560,Math.max(200,area.scrollHeight))+'px'};area.addEventListener('input',()=>{area.classList.remove('prompt-draft-updated');clearTimeout(area._draftTimer);fit();st.textContent='Unsaved changes. Review, then save.'});requestAnimationFrame(fit);
+  const fit=()=>{area.style.height='auto';area.style.height=Math.min(560,Math.max(200,area.scrollHeight))+'px'};area.addEventListener('input',()=>{area.classList.remove('prompt-draft-updated');clearTimeout(area._draftTimer);fit();st.textContent='Manual edits. Review, then save.'});requestAnimationFrame(fit);
   const brief = el("input", { placeholder: "Topic (optional)", "aria-label": "About your topic" });
   const st = el("span", { class: "testres", role: "status" });
   const sw = s.optional ? el("label", { class: "check sw" }, el("input", { type: "checkbox", id: "on-" + s.key }), " Use this step") : null;
