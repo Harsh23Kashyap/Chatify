@@ -331,3 +331,8 @@ html .side .list .item:hover,html[data-lift=on] .side .list .item:hover{transfor
 html:not([data-motion=none]) .composer .box{transition:box-shadow 160ms ease-out,border-color 160ms ease-out,background-color 160ms ease-out!important}
 html:not([data-motion=none]) .composer #send{transition:opacity 160ms ease-out,background-color 160ms ease-out,color 160ms ease-out,transform 120ms ease-out!important}
 @media(prefers-reduced-motion:reduce){html:not([data-motion=none]) .composer .box,html:not([data-motion=none]) .composer #send{transition:none!important}}
+/* Send has a small press response, with no hover growth or bounce. */
+html .composer #send:hover{transform:none}
+html .composer #send:not(:disabled):active{transform:scale(.98)}
+@media(prefers-reduced-motion:reduce){html .composer #send:not(:disabled):active{transform:none}}
+html[data-motion=none] .composer #send:not(:disabled):active{transform:none}
