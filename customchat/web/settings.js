@@ -660,17 +660,17 @@ async function docsFreshness(force) {
   let loading=document.getElementById("docsLoading");box.classList.toggle("has-index-details",!!box.querySelector(".status-card"));if(!loading){loading=el("p",{id:"docsLoading",role:"status",text:"Checking local documents..."});box.prepend(loading)}
   box.setAttribute("aria-busy","true");try {
     const result = await api("/api/docs-freshness", force ? {} : undefined);
-    box.replaceChildren();
+    const counts=new Map([...box.querySelectorAll(".status-card")].map(n=>[n.querySelector("b")?.textContent,[...n.querySelectorAll(".index-count")].map(x=>x.dataset.count)]));box.replaceChildren();
     if (!result.sources.length) box.append(el("p",{text:"No local document folders configured. Add a local_files source in Sources and APIs."}),el("a",{href:"#sec-search",text:"Open Sources and APIs"}));
     for (const source of result.sources) {
       const checked = source.checked_at ? new Date(source.checked_at * 1000).toLocaleString() : "not checked";
       const line=el("div",{class:"status-card"},el("b",{text:source.label}),
-        el("div",{class:"status-stats"},el("span",{text:source.documents+" "+(source.documents===1?"document":"documents")}),el("span",{text:source.chunks+" "+(source.chunks===1?"passage":"passages")})),
+        el("div",{class:"status-stats"},el("span",{class:"index-count", "data-count":String(source.documents),text:source.documents+" "+(source.documents===1?"document":"documents")}),el("span",{class:"index-count", "data-count":String(source.chunks),text:source.chunks+" "+(source.chunks===1?"passage":"passages")})),
         el("small",{title:source.checked_at?new Date(source.checked_at*1000).toISOString():"",text:"Last checked: "+checked}));
       if(source.last_check){const check=source.last_check;const stateLabel={updated:"Changes indexed",unchanged:"No document changes",failed:"Check failed"}[check.state];if(stateLabel)line.append(el("p",{text:stateLabel}));if(check.documents_scanned!==undefined)line.append(el("p",{text:check.documents_scanned+" documents scanned · "+check.added+" added · "+check.changed+" changed · "+check.removed+" removed"}),el("p",{text:"Passages: "+check.passages_before+" before, "+check.passages_after+" after"+(check.passages_added!==undefined?" · "+check.passages_added+" added · "+check.passages_removed+" removed":"")}))}line.append(el("p",{class:"freshness-state",text:source.error?"Needs attention":source.checked_at?"Index checked. Files may change before the next check.":"Not checked"}));
       if(source.error)line.append(el("p",{class:"bad",text:source.error}));
       else line.append(el("details",{open:expanded.has(source.label)?"":undefined},el("summary",{text:"Index details"}),el("small",{text:"Version "+source.revision.slice(0,12)+" · Checks on questions, at most every "+source.refresh_interval+" seconds"})));
-      box.append(line);
+      const previous=counts.get(source.label);if(previous)line.querySelectorAll(".index-count").forEach((n,i)=>{if(n.dataset.count!==previous[i])n.classList.add("index-count-changed")});box.append(line);
     }
   } catch (error) {loading?.remove();box.prepend(el("p",{class:"bad",role:"alert",text:"Check failed: "+error.message+". Last known index details are kept below. Check the document folder and try again."}));}finally{box.setAttribute("aria-busy","false")}
 }
