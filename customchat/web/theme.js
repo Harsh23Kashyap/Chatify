@@ -62,6 +62,27 @@ document.addEventListener("DOMContentLoaded",()=>{
   queueContrast();new MutationObserver(queueContrast).observe(document.body,{childList:true,subtree:true});
 });
 
+const backgroundStates = new WeakMap();
+let backgroundFade = null;
+function rememberBackground(t, root, c) {
+  const signature = JSON.stringify([t.bg_style,t.bg_image,t.bg_color2,t.bg_angle,c.bg,t.pattern,t.pattern_color||c.ink,t.pattern_size,t.pattern_opacity]);
+  const previous = backgroundStates.get(root);
+  backgroundStates.set(root, signature);
+  const body = document.body;
+  const reduced = matchMedia("(prefers-reduced-motion:reduce)").matches || ["calm","none"].includes(t.motion);
+  if (reduced && backgroundFade) {backgroundFade.remove();backgroundFade=null;}
+  if (!body || root !== document.documentElement || !previous || previous === signature || reduced) return;
+  if (backgroundFade) backgroundFade.remove();
+  const old = getComputedStyle(body), pattern = getComputedStyle(body,"::before");
+  const cover = document.createElement("div"), texture = document.createElement("div");
+  cover.className = "background-fade";cover.setAttribute("aria-hidden","true");
+  cover.style.background = old.background;
+  texture.style.cssText = "position:absolute;inset:0;pointer-events:none";
+  texture.style.backgroundImage=pattern.backgroundImage;texture.style.backgroundSize=pattern.backgroundSize;texture.style.backgroundPosition=pattern.backgroundPosition;
+  cover.append(texture);body.append(cover);backgroundFade=cover;
+  const fade=cover.animate([{opacity:1},{opacity:0}],{duration:180,easing:"ease-out"});
+  fade.onfinish=()=>{cover.remove();if(backgroundFade===cover)backgroundFade=null;};
+}
 function apply(t, root = document.documentElement) {
   if (!t || !t.light) return;
   let local=null;try{local=!window.__ccPreview&&localStorage.getItem("cc_mode")}catch{}
@@ -82,6 +103,8 @@ function apply(t, root = document.documentElement) {
   set("--speed", 100 / t.speed);
   set("--side-w", t.sidebar_width + "px");
   set("--chat-max", { narrow: "680px", normal: "980px", wide: "1200px", full: "100%" }[t.chat_width]);
+  // Fade only the old background layer. Text, focus and controls stay in place.
+  rememberBackground(t, root, c);
   // background and pattern
   const soft = c.bg;
   const layer = { soft, solid: c.bg, gradient: `linear-gradient(${t.bg_angle}deg,${c.bg},${t.bg_color2})`, image: t.bg_image ? `linear-gradient(${rgba(c.bg, 0.55)},${rgba(c.bg, 0.55)}),url("${t.bg_image}") center/cover fixed, ${c.bg}` : soft }[t.bg_style];

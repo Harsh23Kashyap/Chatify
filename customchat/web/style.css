@@ -872,3 +872,8 @@ html.preview .hero.mini h1,html.preview .hero.mini p{white-space:normal;overflow
 html.preview .hero.mini .ex{display:none!important}html.preview .hero.mini .getting-started{display:none!important}
 
 html.reading-view .row .a{transition-property:background-color,color,border-color!important}#readingDialog{animation:reading-open .16s ease-out}@keyframes reading-open{from{opacity:0}to{opacity:1}}@media(prefers-reduced-motion:reduce){#readingDialog{animation:none}}#readingDialog .reading-options label,#readingDialog button{min-height:44px}
+
+/* A short opacity-only replacement, never a moving texture. */
+.background-fade{position:fixed;inset:0;pointer-events:none;z-index:0}
+@media(prefers-reduced-motion:reduce){.background-fade{display:none!important}}
+html[data-motion=none] .background-fade{display:none!important}

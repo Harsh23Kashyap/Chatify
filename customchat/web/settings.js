@@ -532,7 +532,7 @@ function drawLook() {
       for (const [title, keys, collapsed] of gs) {
         const fs = keys.map((k) => byKey[k]).filter(Boolean); if (!fs.length) continue; fs.forEach((f) => used.add(f.key));
         const grid = el("div", { class: "fields" + (fs.every((f) => f.type === "color") ? " colorlist" : "") }); fs.forEach((f) => { const c = control(f); if (c && c.dataset) c.dataset.k = f.key; grid.append(c); });
-        if (collapsed) { const d = el("details", { class: "grp" }, el("summary", { text: title }), grid); sec.append(d); }
+        if (collapsed) { const d = el("details", { class: "grp" }, el("summary", { text: title }), grid); d.addEventListener("toggle",()=>{if(d.open&&!matchMedia("(prefers-reduced-motion:reduce)").matches&&!["calm","none"].includes(theme.motion))grid.animate([{opacity:0,transform:"translateY(4px)"},{opacity:1,transform:"none"}],{duration:160,easing:"ease-out"})}); sec.append(d); }
         else sec.append(el("div", { class: "grp" }, el("h4", { text: title }), grid));
       }
       const rest = s.fields.filter((f) => !used.has(f.key)); if (rest.length) { const g = el("div", { class: "fields" }); rest.forEach((f) => g.append(control(f))); sec.append(el("details", { class: "grp" }, el("summary", { text: "More options" }), g)); }
