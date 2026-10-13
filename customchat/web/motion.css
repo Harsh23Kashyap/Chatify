@@ -384,3 +384,8 @@ html body details.more:not([open])::details-content,html body details.similar-hi
 /* Override older section-specific glyph geometry, not only its content. */
 html body.settings-tabs details>summary::before{width:6px!important;height:6px!important;flex:none!important;transform:rotate(-45deg)!important}
 html body.settings-tabs details[open]>summary::before{transform:rotate(45deg)!important}
+
+/* An empty saved-draft library is one quiet state, not a card cascade. */
+.builder-library-empty{animation:m-in 140ms ease-out both;transform:none}
+html[data-motion=none] .builder-library-empty{animation:none}
+@media(prefers-reduced-motion:reduce){.builder-library-empty{animation:none}}
