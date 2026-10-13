@@ -128,9 +128,17 @@ function sendIcon(name, label) {
   if (motionAllowed() && send.animate) send.animate([{opacity:.5,transform:"scale(.95)"},{opacity:1,transform:"scale(1)"}],{duration:150,easing:"ease-out"});
 }
 function motionAllowed() { return document.documentElement.dataset.motion !== "none" && !matchMedia("(prefers-reduced-motion: reduce)").matches; }
-let sourceExit, sourceTrigger;
+let sourceExit, sourceTrigger, sourceShield = new Map();
+function sourceModal(open) {
+  const pane = $("#sources"), mobile = matchMedia("(max-width:860px)").matches;
+  if (!open || !mobile) { for (const [n, value] of sourceShield) n.inert = value; sourceShield.clear(); pane.removeAttribute("role"); pane.removeAttribute("aria-modal"); return; }
+  pane.setAttribute("role", "dialog"); pane.setAttribute("aria-modal", "true");
+  for (const n of [$(".toolbar"),$("#side"),$(".main")]) if(n&&!sourceShield.has(n)){sourceShield.set(n,n.inert);n.inert=true}
+  pane.querySelector("button")?.focus({preventScroll:true});
+}
 function closeSources() {
   const pane = $("#sources");
+  sourceModal(false);
   if (sourceTrigger?.isConnected) sourceTrigger.focus({preventScroll:true});
   if (!motionAllowed() || !pane.animate) { $("#app").classList.remove("src"); return; }
   sourceExit = pane.animate([{opacity:1, transform:"translateX(0)"}, {opacity:0, transform:"translateX(12px)"}], {duration:160, easing:"ease-in"});
@@ -158,7 +166,7 @@ function showSources(evidence, hl, trigger) {
   } }, (S.cfg.sources.find((s) => s.id === t) || {}).label || t)));
   pane.append(el("button", { class: "icon", style: "float:right", "aria-label": "Close sources", title: "Close sources", onclick: closeSources }, svg("close")),
     el("h3", { text: "Sources" }), el("div", { class: "sub", text: evidence.length + " used for this answer" }), filters, list);
-  draw(null);
+  draw(null); sourceModal(true);
   if (opening && motionAllowed() && pane.animate) pane.animate([{opacity:0, transform:"translateX(4px)"}, {opacity:1, transform:"translateX(0)"}], {duration:240, easing:"cubic-bezier(.2,.8,.2,1)"});
   const selected = list.querySelector(".hl");
   document.querySelectorAll(".cite-selected").forEach(x=>x.classList.remove("cite-selected"));
@@ -581,7 +589,16 @@ async function init() {
   syncSidebar();
   $("#search").addEventListener("input", () => S.tab === "chats" && loadList());
   document.querySelectorAll(".tab").forEach((b) => b.addEventListener("click", () => { document.querySelectorAll(".tab").forEach((x) => x.classList.toggle("on", x === b)); S.tab = b.dataset.tab; loadList(); }));
-  document.addEventListener("keydown", (e) => { if (e.key === "Escape") $("#app").classList.remove("src", "menu-open"); });
+  document.addEventListener("keydown", (e) => {
+    if ($("#app").classList.contains("src")) {
+      if (e.key === "Escape") { e.preventDefault(); closeSources(); return; }
+      if (e.key === "Tab" && $("#sources").getAttribute("aria-modal") === "true") {
+        const controls = [...$("#sources").querySelectorAll("button,a[href]")].filter(n=>n.getClientRects().length), first=controls[0], last=controls.at(-1);
+        if((e.shiftKey&&document.activeElement===first)||(!e.shiftKey&&document.activeElement===last)){e.preventDefault();(e.shiftKey?last:first)?.focus()}
+      }
+    } else if (e.key === "Escape") $("#app").classList.remove("menu-open");
+  });
+  matchMedia("(max-width:860px)").addEventListener("change",()=>sourceModal($("#app").classList.contains("src")));
   const th = $("#thread"), jump = $("#jump");
   th.addEventListener("scroll", syncLatest);
   new ResizeObserver(syncLatest).observe($(".composer"));

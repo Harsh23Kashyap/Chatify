@@ -839,3 +839,10 @@ html:not(.preview) .composer>.box{width:100%}
 
 .source-upload-row{display:grid;gap:4px;border-top:1px solid var(--line);padding:12px 0;overflow-wrap:anywhere}.source-upload-row>b{font-size:13px;color:var(--ink)}.source-upload-state{font-size:13px;line-height:1.5}.source-upload-row[data-state=error] .source-upload-state{color:var(--danger,#a33322)}
 @media(prefers-reduced-motion:no-preference){html:not([data-motion=none]) .source-upload-row{animation:cc-panel-in .16s ease-out}}
+
+/* Source inspection must not change the one-column phone chat width. */
+@media(max-width:860px){.app.src>.main{grid-column:1;grid-row:1}.app.src>.sources{grid-column:1;grid-row:1}}
+
+
+
+@media(max-width:480px){html body .bar{padding-inline:2px!important;gap:2px!important}html body .bar-r{gap:0!important}html body .bar-r>.cs{flex:none!important}html body .bar .cs-btn{min-width:96px!important;width:96px!important;max-width:96px!important;gap:4px!important;padding-inline:6px!important}}
