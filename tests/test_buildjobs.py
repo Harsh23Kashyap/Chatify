@@ -91,3 +91,12 @@ class SafePatchChecks(unittest.TestCase):
   review=[m for m in f.calls if 'Application-provided context' in m][0]
   for text in ['no local count limit','no local dollar cap','not checked by this review','not tested','remaining deployment prerequisites','Preserve genuine safety risks']:
    self.assertIn(text,review)
+ @unittest.mock.patch('customchat.buildimages.capability',return_value={'available':False,'note':'fixture'})
+ def test_review_verdict_never_erases_concerns_or_uncertainty(self,cap):
+  for response,expected in [({'issues':[],'ready':False},'inconsistent'),({'issues':['Unsupported medical claim'],'ready':True},'inconsistent'),({'issues':['Cannot assess helper endpoint'],'ready':False},'concerns'),({'issues':[],'setup_notes':['Add sources'],'ready':True},'completed')]:
+   class R(Fixture):
+    def complete(self,m):
+     if 'Review this complete merged draft' in m[0]['content']:return json.dumps(response)
+     return super().complete(m)
+   jobs=buildjobs.BuildJobs();d=self.wait(jobs,jobs.start('owner',R(),schema.DEFAULTS,{'brief':'Garden advice'})['id'])
+   self.assertEqual(d['review']['review_status'],expected);self.assertEqual(d['review']['ready'],response['ready']);self.assertEqual(d['review']['issues'],response['issues'])
