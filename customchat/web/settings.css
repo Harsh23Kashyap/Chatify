@@ -1247,3 +1247,8 @@ body.settings-tabs .editor-choice[aria-pressed=true]::after{opacity:1}
 @media(prefers-reduced-motion:reduce){body.settings-tabs .editor-choice::after{transition:none!important}}
 /* The current appearance remains distinct from the available looks in either view. */
 body.settings-tabs.simple #sec-presets #presetCurrent{display:block!important;margin:0 0 12px}
+/* Shared selection feedback changes color only; values update in the click event. */
+.seg button{transition:background-color 160ms ease-out,color 160ms ease-out,border-color 160ms ease-out!important}
+details.helper>summary::after,#sec-prompts>.workspace-fields>summary::before,#sec-search .source-key-notes>summary::before{transition:transform 160ms ease-out!important}
+@media(prefers-reduced-motion:reduce){.seg button,details.helper>summary::after,#sec-prompts>.workspace-fields>summary::before,#sec-search .source-key-notes>summary::before{transition:none!important}}
+html[data-motion=none] .seg button,html[data-motion=none] details.helper>summary::after,html[data-motion=none] #sec-prompts>.workspace-fields>summary::before,html[data-motion=none] #sec-search .source-key-notes>summary::before{transition:none!important}
