@@ -1146,3 +1146,6 @@ body.settings-tabs .card{padding:28px 32px!important}body.settings-tabs .card h1
 @media(prefers-reduced-motion:reduce){.local-view-enter{animation:none}}
 
 #docsFreshness.has-index-details #docsLoading{display:none}
+#docsFreshness details[open]>*:not(summary){animation:index-details-in 160ms ease-out}
+@keyframes index-details-in{from{opacity:0}to{opacity:1}}
+@media(prefers-reduced-motion:reduce){#docsFreshness details[open]>*:not(summary){animation:none}}
