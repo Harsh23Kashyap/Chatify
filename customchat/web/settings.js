@@ -621,6 +621,7 @@ async function init() {
   $("#topk").addEventListener("input", () => {$("#kv").textContent = $("#topk").value;sliderVisuals()});
   $("#modelPick").addEventListener("change", pickChanged);
   // Key actions and Refresh rebuild the picker from cur.model. Keep typed edits.
+  for(const id of ["base","temp"]){$("#"+id).addEventListener("input",()=>{$("#testres").className="testres";$("#testres").textContent="Model settings changed. Test this selection when ready.";pvFollow()})}
   $("#model").addEventListener("input", () => { if ($("#modelPick").value === OTHER) cur.model = $("#model").value.trim(); $("#testres").className="testres";$("#testres").textContent="Model changed. Test this selection when ready.";pvFollow(); });
   $("#refreshModels").addEventListener("click", () => loadModels(true));
   $("#keysave").addEventListener("click", async () => { if($("#keysave").dataset.running==="true")return;const provider=cur.provider;const v = $("#apikey").value.trim(); if (!v) { say("Paste a key first.", true); return; } $("#keysave").dataset.running="true";try { const r = await api("/api/provider/key", { provider, key: v }); keyInfo[provider] = r.key; if(cur.provider===provider&&$("#apikey").value.trim()===v)$("#apikey").value = ""; await provExtras(); say("Key saved on this computer."); } catch (e) { say(e.message, true); } finally {$("#keysave").dataset.running="false"} });
