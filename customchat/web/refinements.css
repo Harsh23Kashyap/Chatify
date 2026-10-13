@@ -54,3 +54,6 @@ html body.settings-tabs .settings-utilities .settings-search{grid-template-colum
 html body.settings-tabs .settings-utilities .settings-search #settingsFind{padding-right:54px!important}
 html body.settings-tabs .settings-utilities .settings-search .settings-find-clear{grid-column:1!important;grid-row:2!important;justify-self:end;margin-right:2px;width:44px;border:0;background:transparent;z-index:1}
 html body.settings-tabs .settings-utilities .settings-search .settings-help-open{grid-column:2!important}
+
+.settings-search-highlight{animation:settings-search-target 1.4s ease-out}@keyframes settings-search-target{from{background-color:#eef3ea}to{background-color:transparent}}
+@media(prefers-reduced-motion:reduce){.settings-search-highlight{animation:none!important;background:#eef3ea!important}}html[data-motion=none] .settings-search-highlight{animation:none!important;background:#eef3ea!important}
