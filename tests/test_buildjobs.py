@@ -84,10 +84,10 @@ class SafePatchChecks(unittest.TestCase):
   class Review(Fixture):
    def complete(self,m):
     if 'Review this complete merged draft' in m[0]['content']:
-     self.calls.append(m[0]['content']);return json.dumps({'issues':['Helper needs endpoint verification'],'ready':False})
+     self.calls.append(m[0]['content']);return json.dumps({'issues':['Helper needs endpoint verification'],'setup_notes':['Add source documents'],'ready':False})
     return super().complete(m)
   f=Review();jobs=buildjobs.BuildJobs();d=self.wait(jobs,jobs.start('owner',f,schema.DEFAULTS,{'brief':'Garden advice'})['id'])
-  self.assertEqual(d['review']['issues'],['Helper needs endpoint verification']);self.assertFalse(d['review']['ready'])
+  self.assertEqual(d['review']['issues'],['Helper needs endpoint verification']);self.assertFalse(d['review']['ready']);self.assertEqual(d['review']['setup_notes'],['Add source documents']);self.assertIn('not deployment readiness',d['review']['scope'])
   review=[m for m in f.calls if 'Application-provided context' in m][0]
-  for text in ['no local count limit','no local dollar cap','not checked by this review','not tested','remaining setup prerequisites','Preserve genuine safety risks']:
+  for text in ['no local count limit','no local dollar cap','not checked by this review','not tested','remaining deployment prerequisites','Preserve genuine safety risks']:
    self.assertIn(text,review)
