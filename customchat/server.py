@@ -400,7 +400,8 @@ def make_handler(cfg, engine):
                     plan=management.reviews.take(o,'app-build',str(b.get('ticket','')),b.get('confirmed'))
                     with management.lock:
                         if management.active:raise ValueError('Wait for the workspace test to finish')
-                        rev=appbuilder.save_plan(cfg,plan)
+                        try:rev=appbuilder.save_plan(cfg,plan)
+                        except appbuilder.SaveRollbackError as e:return self._send(400,{'error':str(e),'saved_state_uncertain':True})
                     return self._send(200,{'revision':rev,'restart_required':True,'message':'Reviewed app configuration and selected setup drafts saved. Restart to apply. No code installed or executed.'})
                 raise ValueError('Unknown builder action')
             if path == "/api/settings/guide" and method == "POST":
