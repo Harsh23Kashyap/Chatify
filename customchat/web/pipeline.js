@@ -90,14 +90,15 @@ function codeCard(kind, title, help, ph) {
   const tq = el("input", { placeholder: "Sample question to try", "aria-label": "Sample question", value: kind === "search" ? "vitamin D and sleep" : "Can you tell me about vitamin D?" });
   const tres = el("div", { class: "review", role: "status", "aria-live": "polite" });
   const tryBtn = el("button", { type: "button", class: "go ghost", text: "Try it", title: "Runs reviewed code once in a bounded process, NOT a sandbox. Host files/network remain accessible.", onclick: async () => {
-    if(tryBtn.disabled)return;tryBtn.disabled = true; out.className = "review"; out.textContent = ""; if (ed) ed.mark([]); tres.className = "review"; tres.textContent = "Running once..."; try {
-      const checked=await api("/api/codegen/review",{kind,code:code.value});
+    if(tryBtn.disabled)return;const runCode=code.value,runQuery=tq.value,runConnector=recognized;tryBtn.disabled = true; out.className = "review"; out.textContent = ""; if (ed) ed.mark([]); tres.className = "review"; tres.textContent = "Running once..."; try {
+      const checked=await api("/api/codegen/review",{kind,code:runCode});
+      if(code.value!==runCode||tq.value!==runQuery||recognized!==runConnector){tres.textContent="Helper or sample changed during checking. Review the current code and try again. Nothing ran.";return}
       if(!checked.ok){tres.className="review bad";tres.textContent="Fix compilation/safety errors first: "+checked.problems.join(" ");return}
-      if(kind==="search"&&recognized){
+      if(kind==="search"&&runConnector){
         if(!confirm("Run one live search using the saved key through the built-in "+recognized+" connector? This can use provider credits. Edited code is not run with your key.")){tres.textContent="Not run.";return}
-        const r=await api("/api/websearch/test",{id:recognized,query:tq.value});tres.textContent=r.ok?"Built-in connector returned "+r.items.length+" results. Edited helper code was not run with your key.":r.error;return;
+        const r=await api("/api/websearch/test",{id:runConnector,query:runQuery});tres.textContent=r.ok?"Built-in connector returned "+r.items.length+" results. Edited helper code was not run with your key.":r.error;return;
       }
-      const r = await api("/api/codegen/test", { kind, code: code.value, query: tq.value }); tres.className = "review " + (r.ok ? "ok" : "bad");
+      const r = await api("/api/codegen/test", { kind, code: runCode, query: runQuery }); tres.className = "review " + (r.ok ? "ok" : "bad");
       const rows = [el("b", { text: r.ok ? "Worked" + (kind === "search" ? ": " + r.count + " result" + (r.count === 1 ? "" : "s") + " in " + r.seconds + "s" : ": " + (r.result || "")) : r.error || (r.empty ? "It ran but returned no results. Try another sample question, or show a raw response and rewrite the parsing." : "Needs changes")})];
       (r.problems || []).forEach((x) => rows.push(el("div", { text: x }))); (r.items || []).forEach((it) => rows.push(el("div", { class: "item", text: (it.title || "(no title)") + (it.year ? " (" + it.year + ")" : "") + ": " + (it.text || "").slice(0, 110) })));
       if (r.ok && (r.items || []).length) { const norm = JSON.stringify(r.items, null, 2); const parts = [el("div", { class: "h", text: "Normalized: what the chat receives from your code" }), el("pre", { class: "code", text: norm.slice(0, 4000) })]; if (raw.value.trim()) parts.unshift(el("div", { class: "h", text: "Raw: what the API sent (the box above)" }), el("pre", { class: "code", text: raw.value.slice(0, 1500) })); rows.push(el("details", { class: "stage inner" }, el("summary", {}, el("b", { text: "Compare raw and normalized" })), el("div", { class: "sbody" }, ...parts))); }
