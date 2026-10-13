@@ -1,3 +1,15 @@
+## 0.1.29 - 2026-10-14
+
+- Fix left-aligned labels and consistent padding across all eight Appearance sections, including mobile layouts.
+- Provide documented model suggestions for every provider when live listing is unavailable, clearly marked as not verified for the connected account or server. Keep manual model entry available.
+- Retry rejected generic app branding by redrafting App identity only, keeping the other ready drafts.
+- Distinguish final-check failure from failed draft areas, show readable full-width error text, and bound retry requests with status reconciliation after a timeout.
+- Repair illegal JSON backslash escapes locally without changing helper code or making an extra model call. Reject incomplete drafts rather than inventing content.
+- Fix conditional Background fields and upward-opening font menus. Add focused Appearance, range and motion audits.
+- Update both generic launch scripts to 0.1.29.
+
+Checks: 759 tests and 483 subtests passed before the release bump. Browser fixture checks cover the new model suggestions, final-check errors, retry timeout and Appearance alignment. No real provider calls were used in these checks. These are tested fixes, not a claim that every item in the independent backlog is complete.
+
 ## 0.1.27 - 2026-10-12
 
 - Shorten the shared README and PyPI description, with install/configuration steps and clean app screenshots.
