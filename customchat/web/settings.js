@@ -145,11 +145,11 @@ function modelAction(tag, installed) {
   const wrap = el("div", { class: "mact" });
   const use = () => { switchProvider("ollama", tag);draw();loadModels(true).then(() => { const pick=$("#modelPick");pick.value=[...pick.options].some(o=>o.value===tag)?tag:OTHER;$("#model").value=tag;pickChanged();pvFollow(); }); };
   if (installed) { wrap.append(el("span", { class: "okt", text: "Installed" }), el("button", { type: "button", class: "mini", onclick: use }, "Use this model")); return wrap; }
-  const bar = el("div", { class: "pbar", hidden: "" }, el("i")), msg = el("span", { class: "h" });
+  const bar = el("div", { class: "pbar", hidden: "",role:"progressbar","aria-label":"Local model download","aria-valuemin":"0","aria-valuemax":"100" }, el("i")), msg = el("span", { class: "h",role:"status" });
   const btn = el("button", { type: "button", class: "mini dl", disabled: canEdit ? undefined : "" }, "Download");
   let pullId="";const cancel=el("button",{type:"button",class:"mini",text:"Cancel download",hidden:"",onclick:async()=>{cancel.disabled=true;msg.textContent="Cancelling...";try{await api("/api/ollama/pull/cancel",{id:pullId})}catch(e){cancel.disabled=false;msg.textContent=e.message}}});
   btn.addEventListener("click", async () => {
-    btn.disabled = true; bar.hidden = false; msg.textContent = "Starting...";
+    btn.disabled = true; bar.hidden = false;bar.firstChild.style.width="0%";bar.removeAttribute("aria-valuenow");bar.setAttribute("aria-valuetext","Preparing download review");msg.className="h";msg.textContent = "Starting...";
     try {
       const plan=await api('/api/ollama/pull/review',{model:tag,base_url:$("#base").value.trim()});
       const reviewText='Download '+plan.model+'?\n\nApproximate download: '+(plan.download_gb_estimate??'unknown')+' GB. Free disk: '+plan.free_disk_gb+' GB. Memory estimate: '+(plan.memory_need_gb_estimate??'unknown')+' GB; fit: '+plan.fit+'.\n'+plan.location_note+'\n'+plan.notice;
@@ -159,7 +159,7 @@ function modelAction(tag, installed) {
       for (;;) {
         await new Promise((r) => setTimeout(r, 700));
         const st = await api("/api/ollama/pull?id=" + id);
-        bar.firstChild.style.width = st.pct + "%"; msg.textContent = st.error || (st.done ? "Done" : (st.status || "Downloading") + " " + st.pct + "%");
+        const progress=Math.max(0,Math.min(100,Number(st.pct)||0));bar.firstChild.style.width = progress + "%";bar.setAttribute("aria-valuenow",String(progress));bar.setAttribute("aria-valuetext",progress+"% downloaded"); msg.textContent = st.error || (st.done ? "Done" : (st.status || "Downloading") + " " + st.pct + "%");
         if(st.cancelled&&st.done){cancel.hidden=true;bar.hidden=true;btn.disabled=false;btn.textContent="Retry download";msg.textContent="Cancelled. Retry rechecks the model; Ollama decides whether partial files can be reused.";break}
         if (st.error) { cancel.hidden=true; btn.disabled = false; btn.textContent = "Try again"; bar.hidden = true; msg.className = "h bad"; break; }
         if (st.done) { cancel.hidden=true;wrap.replaceChildren(el("span", { class: "okt", text: "Installed" }), el("button", { type: "button", class: "mini", onclick: use }, "Use this model")); use(); break; }
