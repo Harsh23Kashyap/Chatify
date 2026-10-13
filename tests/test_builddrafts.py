@@ -28,3 +28,18 @@ class Drafts(unittest.TestCase):
    for source,selected in [('app: {title: X}',['app','provider']),('app: {title: X}\nprovider: {type: mock}',['app'])]:
     with self.assertRaises(ValueError):store.put('owner',source,sections=selected)
    self.assertEqual(store.list('owner'),[])
+
+ def test_inferred_scope_and_legacy_expanded_record_recovery(self):
+  import json,yaml
+  from customchat import schema
+  with tempfile.TemporaryDirectory() as d:
+   store=BuildDrafts(d);record=store.put('owner','app: {title: Inferred}')
+   self.assertEqual(record['sections'],['app'])
+   legacy=dict(record);legacy['yaml']=yaml.safe_dump(schema.validate({'app':{'title':'Legacy'}}));legacy['sections']=['app']
+   store._path('owner',record['id']).write_text(json.dumps(legacy))
+   recovered=store.get('owner',record['id'])
+   self.assertEqual(set(yaml.safe_load(recovered['yaml'])),{'app'})
+   self.assertEqual(recovered['sections'],['app'])
+   legacy['yaml']='app: {title: Without scope}';legacy['sections']=None
+   store._path('owner',record['id']).write_text(json.dumps(legacy))
+   self.assertEqual(store.get('owner',record['id'])['sections'],['app'])
