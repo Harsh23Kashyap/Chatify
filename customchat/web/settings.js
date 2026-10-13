@@ -537,6 +537,7 @@ function pvExtra() {
   }
 }
 function pvFollow() {
+  if (!theme) return;
   // Navigation updates the selected panel and its preview.
   window.CCPipelineFocus?.(activeSec);
   const setup=$("#sec-model .ollama-setup");if(setup)setup.hidden=cur.provider!=="ollama";
