@@ -207,11 +207,18 @@ def save_plan(cfg,plan):
    finally:
     if os.path.exists(tmp):os.unlink(tmp)
   return revision
- except Exception:
+ except Exception as error:
+  rollback_failed=[]
   for path,old in reversed(written):
-   if old is None:path.unlink()
-   else:path.write_bytes(old)
-  if app_written:app.write_bytes(original)
+   try:
+    if old is None:path.unlink()
+    else:path.write_bytes(old)
+   except Exception:rollback_failed.append(path.name)
+  if app_written:
+   try:app.write_bytes(original)
+   except Exception:rollback_failed.append(app.name)
+  if rollback_failed:
+   raise ValueError('Save failed and rollback could not restore: '+', '.join(rollback_failed)+'. Some saved files may have changed. Check these files before retrying; restart has not been applied.') from error
   raise
 
 def deployment(provider,data):

@@ -1,4 +1,5 @@
-import copy,json,tempfile,unittest,yaml
+import copy,json,tempfile,unittest,yaml,os
+from unittest import mock
 from pathlib import Path
 from customchat import appbuilder,schema,editstate
 class Fixture:
@@ -84,6 +85,51 @@ class BuilderTests(unittest.TestCase):
   saved=schema.load(str(self.path));self.assertEqual(saved['app']['title'],'Complete Garden')
   self.assertEqual(len(saved['pipeline_prompts']['text']),9);self.assertTrue((Path(self.tmp.name)/'data'/'code-drafts.json').exists())
   self.assertEqual(prompts.PromptStore('',saved['pipeline_prompts']).text('followups'),raw['pipeline_prompts']['text']['followups'])
+ def test_complete_save_rolls_back_each_setup_replace_failure(self):
+  self.cfg['_dir']=self.tmp.name
+  folder=Path(self.tmp.name)/'data';folder.mkdir()
+  names=['theme.json','prompts.json','code-drafts.json']
+  original=self.path.read_bytes();real_replace=os.replace
+  for existing in (False,True):
+   for failing in names:
+    with self.subTest(existing=existing,failing=failing):
+     for name in names:
+      path=folder/name
+      if path.exists():path.unlink()
+      if existing:path.write_text('{}')
+     old={name:(folder/name).read_bytes() if (folder/name).exists() else None for name in names}
+     raw=self.complete_config();raw['app']['title']='Must not survive failed save';raw['storage']['path']='data/customchat.db'
+     plan=appbuilder.review(self.cfg,yaml.safe_dump(raw),appbuilder.SECTIONS)
+     def replace(src,dst):
+      if Path(dst).name==failing:raise OSError('Injected setup replacement failure')
+      return real_replace(src,dst)
+     with mock.patch('customchat.appbuilder.os.replace',side_effect=replace):
+      with self.assertRaisesRegex(OSError,'Injected setup'):appbuilder.save_plan(self.cfg,plan)
+     self.assertEqual(self.path.read_bytes(),original)
+     for name in names:
+      path=folder/name
+      self.assertEqual(path.read_bytes() if path.exists() else None,old[name])
+     self.assertFalse(list(folder.glob('.setup-*')))
+     self.assertFalse(list(Path(self.tmp.name).glob('.app-edit-*')))
+ def test_setup_rollback_failure_still_restores_app_and_reports_uncertainty(self):
+  self.cfg['_dir']=self.tmp.name
+  folder=Path(self.tmp.name)/'data';folder.mkdir()
+  for name in ['theme.json','prompts.json','code-drafts.json']:(folder/name).write_text('{}')
+  original=self.path.read_bytes();real_replace=os.replace;real_write=Path.write_bytes
+  raw=self.complete_config();raw['app']['title']='Must not survive failed save';raw['storage']['path']='data/customchat.db'
+  plan=appbuilder.review(self.cfg,yaml.safe_dump(raw),appbuilder.SECTIONS)
+  def replace(src,dst):
+   if Path(dst).name=='code-drafts.json':raise OSError('Injected setup replacement failure')
+   return real_replace(src,dst)
+  def write(path,data):
+   if path.name=='prompts.json':raise OSError('Injected rollback write failure')
+   return real_write(path,data)
+  with mock.patch('customchat.appbuilder.os.replace',side_effect=replace),mock.patch.object(Path,'write_bytes',write):
+   with self.assertRaises(Exception) as error:appbuilder.save_plan(self.cfg,plan)
+  self.assertEqual(self.path.read_bytes(),original,'failed setup rollback must not prevent app restoration')
+  self.assertEqual((folder/'theme.json').read_text(),'{}','all independent rollback steps should be attempted')
+  self.assertIn('rollback',str(error.exception).lower())
+  self.assertIn('prompts.json',str(error.exception))
  def test_deploy_requires_consent_no_execution(self):
   p=Fixture({'plan':'1. Review your app. 2. Set keys in the environment.','prompt':'Create a reviewed deployment plan.'})
   self.assertRaises(ValueError,appbuilder.deployment,p,{'brief':'Local app','consent':False});self.assertEqual(p.calls,[])
