@@ -368,3 +368,16 @@ html body.settings-tabs details.helper>summary{display:grid!important;grid-templ
 html body.settings-tabs details.helper>summary::before{grid-column:1;grid-row:1;align-self:center}
 html body.settings-tabs details.helper>summary>b{grid-column:2;grid-row:1}
 html body.settings-tabs details.helper>summary>small{grid-column:2;grid-row:2}
+/* Chat inspection disclosures use the same leading cue as Settings. */
+html body details.more>summary,html body details.similar-history>summary{list-style:none}
+html body details.more>summary::-webkit-details-marker,html body details.similar-history>summary::-webkit-details-marker{display:none}
+html body details.more>summary::after{content:none!important}
+html body details.more>summary::before,html body details.similar-history>summary::before{
+ content:'';display:inline-block;width:6px;height:6px;margin-right:8px;
+ border-top:0;border-left:0;border-right:1.5px solid currentColor;border-bottom:1.5px solid currentColor;
+ transform:rotate(-45deg);transition:transform 160ms ease-out;
+}
+html body details.more[open]>summary::before,html body details.similar-history[open]>summary::before{transform:rotate(45deg)}
+html body details.more[open]>*:not(summary),html body details.similar-history[open]>*:not(summary){animation:m-in 160ms ease-out both;transform:none}
+html body details.more::details-content,html body details.similar-history::details-content{block-size:auto!important;overflow:visible!important;transition:none!important}
+html body details.more:not([open])::details-content,html body details.similar-history:not([open])::details-content{content-visibility:hidden!important}
