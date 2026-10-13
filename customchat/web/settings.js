@@ -755,7 +755,7 @@ async function docsFreshness(force) {
   const box = $("#docsFreshness"),expanded=new Set([...$("#docsFreshness").querySelectorAll(".status-card")].filter(n=>n.querySelector("details")?.open).map(n=>n.querySelector("b")?.textContent));
   let loading=document.getElementById("docsLoading");box.classList.toggle("has-index-details",!!box.querySelector(".status-card"));if(!loading){loading=el("p",{id:"docsLoading",role:"status",text:"Checking local documents..."});box.prepend(loading)}
   box.setAttribute("aria-busy","true");try {
-    const result = await api("/api/docs-freshness", force ? {} : undefined);
+    const result = await api("/api/docs-freshness", force ? {} : undefined),scrollBeforeResult=window.scrollY;
     const counts=new Map([...box.querySelectorAll(".status-card")].map(n=>[n.querySelector("b")?.textContent,[...n.querySelectorAll(".index-count")].map(x=>x.dataset.count)]));box.replaceChildren();
     if (!result.sources.length) box.append(el("p",{text:"No local document folders configured. Add a local_files source in Sources and APIs."}),el("a",{href:"#sec-search",text:"Open Sources and APIs"}));
     for (const source of result.sources) {
@@ -768,6 +768,7 @@ async function docsFreshness(force) {
       else line.append(el("details",{open:expanded.has(source.label)?"":undefined},el("summary",{text:"Index details"}),el("small",{text:"Version "+source.revision.slice(0,12)+" · Checks on questions, at most every "+source.refresh_interval+" seconds"})));
       const previous=counts.get(source.label);if(previous)line.querySelectorAll(".index-count").forEach((n,i)=>{if(n.dataset.count!==previous[i])n.classList.add("index-count-changed")});box.append(line);
     }
+    window.scrollTo({top:scrollBeforeResult,behavior:"instant"});
   } catch (error) {loading?.remove();box.prepend(el("p",{class:"bad",role:"alert",text:"Check failed: "+error.message+". Last known index details are kept below. Check the document folder and try again."}));}finally{box.setAttribute("aria-busy","false")}
 }
 $("#checkDocs").addEventListener("click", async function () {
