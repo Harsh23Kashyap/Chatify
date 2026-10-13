@@ -1,5 +1,5 @@
 /* Pass 4: one motion system. press 90ms, hover 140ms, state 180ms, layout 280ms, stagger 28ms */
-:root{--ease:cubic-bezier(.22,1,.36,1);--m-press:90ms;--m-hover:140ms;--m-state:180ms;--m-layout:280ms;--m-dist:6px}
+:root{--ease:cubic-bezier(.2,.8,.2,1);--m-press:90ms;--m-hover:140ms;--m-state:180ms;--m-layout:280ms;--m-dist:6px}
 @keyframes m-up{from{opacity:0;transform:translateY(var(--m-dist))}to{opacity:1;transform:none}}
 @keyframes m-in{from{opacity:0}to{opacity:1}}
 @keyframes m-settle{from{opacity:0;transform:translateY(4px) scale(.985)}to{opacity:1;transform:none}}
