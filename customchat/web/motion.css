@@ -327,3 +327,7 @@ html .side .list .item:hover,html[data-lift=on] .side .list .item:hover{transfor
 .side .list .item .tm,.side .list .item.on .tm{display:block;position:absolute;right:14px;pointer-events:none}
 .side .list .item:hover .tm,.side .list .item:focus-within .tm{visibility:hidden}
 @media(hover:none){.side .list .item .acts{opacity:1;visibility:visible;pointer-events:auto}}
+/* Focus and readiness change only the composer control the user is using. */
+html:not([data-motion=none]) .composer .box{transition:box-shadow 160ms ease-out,border-color 160ms ease-out,background-color 160ms ease-out!important}
+html:not([data-motion=none]) .composer #send{transition:opacity 160ms ease-out,background-color 160ms ease-out,color 160ms ease-out,transform 120ms ease-out!important}
+@media(prefers-reduced-motion:reduce){html:not([data-motion=none]) .composer .box,html:not([data-motion=none]) .composer #send{transition:none!important}}
