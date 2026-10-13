@@ -381,3 +381,6 @@ html body details.more[open]>summary::before,html body details.similar-history[o
 html body details.more[open]>*:not(summary),html body details.similar-history[open]>*:not(summary){animation:m-in 160ms ease-out both;transform:none}
 html body details.more::details-content,html body details.similar-history::details-content{block-size:auto!important;overflow:visible!important;transition:none!important}
 html body details.more:not([open])::details-content,html body details.similar-history:not([open])::details-content{content-visibility:hidden!important}
+/* Override older section-specific glyph geometry, not only its content. */
+html body.settings-tabs details>summary::before{width:6px!important;height:6px!important;flex:none!important;transform:rotate(-45deg)!important}
+html body.settings-tabs details[open]>summary::before{transform:rotate(45deg)!important}
