@@ -318,7 +318,7 @@ function persistAppearance(snapshot){const next=appearanceQueue.catch(()=>{}).th
 function changed() {
   document.documentElement.dataset.motion=["calm","none"].includes(theme.motion)?"none":theme.motion;
   updateVis();syncPreset();
-  clearTimeout(sendTimer); sendTimer = setTimeout(pushPreview, 40); pvExtra(); setTimeout(pvExtra, 350);
+  clearTimeout(sendTimer);pushPreview(); pvExtra(); setTimeout(pvExtra, 350);
   const dirty = JSON.stringify(theme) !== JSON.stringify(saved);
   $("#dirty").textContent = dirty ? "Unsaved changes" : "All changes saved"; $("#dirty").className = dirty ? "dirty" : ""; $("#savebar").classList.toggle("clean", !dirty);
   clearTimeout(autoTimer);const invalidAppearance=$("#look").querySelector("input[aria-invalid=true]");if(invalidAppearance)$("#dirty").textContent="Fix the marked appearance field. Nothing new is saved."; if (dirty && canEdit&&!invalidAppearance) autoTimer = setTimeout(async () => { if($("#look").querySelector("input[aria-invalid=true]"))return;const snap = clone(theme); $("#dirty").textContent="Saving..."; try { const response=await persistAppearance(snap);saved = clone(response.theme||snap); const d = $("#dirty"); if (JSON.stringify(theme) === JSON.stringify(saved)) { d.textContent = "All changes saved"; d.className = ""; $("#savebar").classList.add("clean"); say("Saved. The chat now uses it."); } } catch (e) { $("#dirty").textContent="Save failed. Changes are not saved."; say(e.message, true); } }, 1500);
