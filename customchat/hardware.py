@@ -191,6 +191,7 @@ def start_pull(base, model):
         _PULL_HANDLES[pid] = {"cancel": threading.Event(), "response": None}
 
     def run():
+        success_confirmed = False
         try:
             req = urllib.request.Request(base + "/api/pull", data=json.dumps({"model": model, "stream": True}).encode(), headers={"Content-Type": "application/json"})
             with urllib.request.urlopen(req, timeout=60) as r:
@@ -211,10 +212,11 @@ def start_pull(base, model):
                         st["downloaded_bytes"] = max(0, int(d.get("completed", 0)))
                         st["total_bytes"] = max(0, int(d["total"]))
                         st["progress_scope"] = "current download part"
-                        st["pct"] = max(st["pct"], min(99, int(100 * d.get("completed", 0) / d["total"])))
+                        st["pct"] = max(0, min(100, int(100 * d.get("completed", 0) / d["total"])))
                     if d.get("status") == "success":
+                        success_confirmed = True
                         st["pct"] = 100
-            if not st["error"] and st["pct"] < 100 and not _PULL_HANDLES[pid]["cancel"].is_set():
+            if not st["error"] and not success_confirmed and not _PULL_HANDLES[pid]["cancel"].is_set():
                 st["error"] = "Ollama ended the stream before confirming success."
         except urllib.error.HTTPError as e:
             st["error"] = "Ollama refused the download (HTTP %d). Check the model name." % e.code
