@@ -264,7 +264,7 @@ function scopeChip() {
 async function scopeDialog() {
  const trigger=$("#scopeBtn");if(trigger.dataset.running==="true")return;trigger.dataset.running="true";trigger.setAttribute("aria-busy","true");const original=trigger.textContent;trigger.textContent="Loading sources...";
  try {
-  const rows=await api("/api/scopes");const dialog=el("dialog",{class:"reading-dialog scope-dialog"});
+  const rows=await api("/api/scopes");const dialog=el("dialog",{class:"reading-dialog scope-dialog","aria-label":"Choose source scope"});
   dialog.append(el("header",{class:"reading-head"},el("h2",{text:"Choose source scope"})));
   const options=el("div",{class:"scope-options"});
   for (const row of rows) {
