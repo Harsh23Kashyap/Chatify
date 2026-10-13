@@ -656,7 +656,7 @@ document.getElementById("exportApp").addEventListener("click", async function ()
 });
 
 async function docsFreshness(force) {
-  const box = $("#docsFreshness");
+  const box = $("#docsFreshness"),expanded=new Set([...$("#docsFreshness").querySelectorAll(".status-card")].filter(n=>n.querySelector("details")?.open).map(n=>n.querySelector("b")?.textContent));
   let loading=document.getElementById("docsLoading");box.classList.toggle("has-index-details",!!box.querySelector(".status-card"));if(!loading){loading=el("p",{id:"docsLoading",role:"status",text:"Checking local documents..."});box.prepend(loading)}
   box.setAttribute("aria-busy","true");try {
     const result = await api("/api/docs-freshness", force ? {} : undefined);
@@ -669,7 +669,7 @@ async function docsFreshness(force) {
         el("small",{title:source.checked_at?new Date(source.checked_at*1000).toISOString():"",text:"Last checked: "+checked}));
       if(source.last_check){const check=source.last_check;const stateLabel={updated:"Changes indexed",unchanged:"No document changes",failed:"Check failed"}[check.state];if(stateLabel)line.append(el("p",{text:stateLabel}));if(check.documents_scanned!==undefined)line.append(el("p",{text:check.documents_scanned+" documents scanned · "+check.added+" added · "+check.changed+" changed · "+check.removed+" removed"}),el("p",{text:"Passages: "+check.passages_before+" before, "+check.passages_after+" after"+(check.passages_added!==undefined?" · "+check.passages_added+" added · "+check.passages_removed+" removed":"")}))}line.append(el("p",{class:"freshness-state",text:source.error?"Needs attention":source.checked_at?"Index checked. Files may change before the next check.":"Not checked"}));
       if(source.error)line.append(el("p",{class:"bad",text:source.error}));
-      else line.append(el("details",{},el("summary",{text:"Index details"}),el("small",{text:"Version "+source.revision.slice(0,12)+" · Checks on questions, at most every "+source.refresh_interval+" seconds"})));
+      else line.append(el("details",{open:expanded.has(source.label)?"":undefined},el("summary",{text:"Index details"}),el("small",{text:"Version "+source.revision.slice(0,12)+" · Checks on questions, at most every "+source.refresh_interval+" seconds"})));
       box.append(line);
     }
   } catch (error) {loading?.remove();box.prepend(el("p",{class:"bad",role:"alert",text:"Check failed: "+error.message+". Last known index details are kept below. Check the document folder and try again."}));}finally{box.setAttribute("aria-busy","false")}
