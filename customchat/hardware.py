@@ -183,7 +183,7 @@ def start_pull(base, model):
     if not TAG_OK.match(model or "") or not re.match(r"^https?://[^\s]+$", base):
         raise ValueError("That model name or address is not valid")
     pid = uuid.uuid4().hex[:12]
-    st = {"model": model, "status": "starting", "pct": 0, "done": False, "error": "", "cancelled": False}
+    st = {"model": model, "status": "starting", "pct": 0, "progress_known": False, "done": False, "error": "", "cancelled": False}
     with _plock:
         for k in [k for k, v in PULLS.items() if v["done"]][:-8]:
             PULLS.pop(k, None)
@@ -212,9 +212,11 @@ def start_pull(base, model):
                         st["downloaded_bytes"] = max(0, int(d.get("completed", 0)))
                         st["total_bytes"] = max(0, int(d["total"]))
                         st["progress_scope"] = "current download part"
+                        st["progress_known"] = True
                         st["pct"] = max(0, min(100, int(100 * d.get("completed", 0) / d["total"])))
                     if d.get("status") == "success":
                         success_confirmed = True
+                        st["progress_known"] = True
                         st["pct"] = 100
             if not st["error"] and not success_confirmed and not _PULL_HANDLES[pid]["cancel"].is_set():
                 st["error"] = "Ollama ended the stream before confirming success."

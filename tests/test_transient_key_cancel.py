@@ -30,3 +30,6 @@ class TransientKeyAndCancellation(unittest.TestCase):
   pid,st=self.pull(b'{"status":"pulling","total":100,"completed":90}\n{"status":"pulling","total":200,"completed":20}\n');self.assertEqual(st["pct"],10);self.assertEqual(st["downloaded_bytes"],20);self.assertEqual(st["total_bytes"],200);self.assertTrue(st["error"])
  def test_full_part_is_not_overall_success(self):
   pid,st=self.pull(b'{"status":"pulling","total":100,"completed":100}\n');self.assertEqual(st["pct"],100);self.assertTrue(st["error"]);self.assertTrue(st["done"])
+
+ def test_status_without_amount_does_not_invent_percentage(self):
+  pid,st=self.pull(b'{"status":"resolving manifest"}\n');self.assertFalse(st["progress_known"]);self.assertNotIn("downloaded_bytes",st)
