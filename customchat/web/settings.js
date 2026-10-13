@@ -657,8 +657,8 @@ document.getElementById("exportApp").addEventListener("click", async function ()
 
 async function docsFreshness(force) {
   const box = $("#docsFreshness");
-  let loading=document.getElementById("docsLoading");if(!loading){loading=el("p",{id:"docsLoading",role:"status",text:"Checking local documents..."});box.prepend(loading)}
-  try {
+  let loading=document.getElementById("docsLoading");box.classList.toggle("has-index-details",!!box.querySelector(".status-card"));if(!loading){loading=el("p",{id:"docsLoading",role:"status",text:"Checking local documents..."});box.prepend(loading)}
+  box.setAttribute("aria-busy","true");try {
     const result = await api("/api/docs-freshness", force ? {} : undefined);
     box.replaceChildren();
     if (!result.sources.length) box.append(el("p",{text:"No local document folders configured. Add a local_files source in Sources and APIs."}),el("a",{href:"#sec-search",text:"Open Sources and APIs"}));
@@ -672,7 +672,7 @@ async function docsFreshness(force) {
       else line.append(el("details",{},el("summary",{text:"Index details"}),el("small",{text:"Version "+source.revision.slice(0,12)+" · Checks on questions, at most every "+source.refresh_interval+" seconds"})));
       box.append(line);
     }
-  } catch (error) {loading?.remove();box.prepend(el("p",{class:"bad",role:"alert",text:"Check failed: "+error.message+". Last known index details are kept below. Check the document folder and try again."}));}
+  } catch (error) {loading?.remove();box.prepend(el("p",{class:"bad",role:"alert",text:"Check failed: "+error.message+". Last known index details are kept below. Check the document folder and try again."}));}finally{box.setAttribute("aria-busy","false")}
 }
 $("#checkDocs").addEventListener("click", async function () {
   if (!canEdit||this.disabled) return; this.disabled = true;const label=this.textContent;this.textContent="Checking documents...";

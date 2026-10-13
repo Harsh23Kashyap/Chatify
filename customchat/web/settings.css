@@ -1144,3 +1144,5 @@ body.settings-tabs .card{padding:28px 32px!important}body.settings-tabs .card h1
 .local-view-enter{animation:local-view-in 160ms ease-out}
 @keyframes local-view-in{from{opacity:.7}to{opacity:1}}
 @media(prefers-reduced-motion:reduce){.local-view-enter{animation:none}}
+
+#docsFreshness.has-index-details #docsLoading{display:none}
