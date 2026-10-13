@@ -314,3 +314,14 @@ html[data-motion=none] .side .list .empty{animation:none!important}
  html[data-sidebar=hidden]:not([data-motion=none]) .app::after{transition:opacity 220ms cubic-bezier(.2,.8,.2,1)}
  html[data-sidebar=hidden][data-motion=subtle] .app .side,html[data-sidebar=hidden][data-motion=subtle] .app::after{transition-duration:160ms!important}
 }
+/* History hover changes the surface, not the row's click target. */
+.side .list .item{transition:background-color 140ms cubic-bezier(.2,.8,.2,1),color 140ms cubic-bezier(.2,.8,.2,1)}
+html .side .list .item:hover,html[data-lift=on] .side .list .item:hover{transform:none}
+/* Reserve action space so hover and keyboard focus cannot shorten or move titles. */
+.side .list .item{min-height:60px;position:relative}
+.side .list .item .t,.side .list .item:hover .t,.side .list .item.on .t,.side .list .item:focus-within .t{max-width:none;min-width:0;flex:1}
+.side .list .item .acts{display:flex;flex:none;opacity:0;visibility:hidden;pointer-events:none;transition:opacity 140ms ease-out,visibility 140ms}
+.side .list .item:hover .acts,.side .list .item:focus-within .acts{display:flex;opacity:1;visibility:visible;pointer-events:auto}
+.side .list .item .tm,.side .list .item.on .tm{display:block;position:absolute;right:14px;pointer-events:none}
+.side .list .item:hover .tm,.side .list .item:focus-within .tm{visibility:hidden}
+@media(hover:none){.side .list .item .acts{opacity:1;visibility:visible;pointer-events:auto}}
