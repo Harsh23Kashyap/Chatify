@@ -458,7 +458,7 @@ function control(f) {
   if (!canEdit) { if (input.matches("input,select,textarea,button")) input.disabled=true; input.querySelectorAll("input,select,textarea,button").forEach((x)=>x.disabled=true); }
   if (!canEdit && input.tagName === "SELECT") input.disabled = true;
   const field=el("div", { class: "field" }, el("label", { for: id, class: "flabel" }, f.label), el("span", { class: "h", text: f.help }), input);
-  if(f.key.startsWith("txt_")&&!theme[f.key]&&v)field.append(el("small",{class:"h value-source",text:"Using app default; no saved override."}));
+  if(f.key.startsWith("txt_")&&effectiveWording()[f.key])field.append(el("small",{class:"h value-source",hidden:theme[f.key]?"":undefined,text:"Using app default; no saved override."}));
   if (["text","area","logo"].includes(f.type) && !v) field.append(el("small",{class:"h empty-field",text:"(not filled)"}));
   return field;
 }
@@ -632,7 +632,7 @@ function drawLook() {
   }
   buildMenu();if(selectedColorField)showSelectedColor(selectedColorField);
 }
-function resetGroup(s) { if (!confirm("Reset only " + s.title + " to the default? Other Appearance sections stay unchanged.")) return; const d = meta.default; for (const f of s.fields) { if (f.colors) theme[editMode][f.key] = d[editMode][f.key]; else {theme[f.key] = d[f.key];if(f.type==="emoji")theme[f.key+"_animated"]=d[f.key+"_animated"];} } drawLook(); changed(); const section=document.getElementById("sec-"+s.id);if(section){const notice=el("p",{class:"section-reset-confirmation",role:"status",text:s.title+" reset to defaults. Other sections unchanged."});section.querySelector(".secfoot").prepend(notice);section.querySelector(".secfoot button")?.focus({preventScroll:true});} }
+function resetGroup(s) { if (!confirm(s.id==="wording"?"Reset App name, Welcome line, logo and all other wording to the app defaults? Other Appearance sections stay unchanged.":"Reset only " + s.title + " to the default? Other Appearance sections stay unchanged.")) return; const d = meta.default; for (const f of s.fields) { if (f.colors) theme[editMode][f.key] = d[editMode][f.key]; else {theme[f.key] = d[f.key];if(f.type==="emoji")theme[f.key+"_animated"]=d[f.key+"_animated"];} } drawLook(); changed(); const section=document.getElementById("sec-"+s.id);if(section){const notice=el("p",{class:"section-reset-confirmation",role:"status",text:s.title+" reset to defaults. Other sections unchanged."});section.querySelector(".secfoot").prepend(notice);section.querySelector(".secfoot button")?.focus({preventScroll:true});} }
 function setPvMode(m) { document.querySelectorAll("#pvmode button").forEach((b) => b.setAttribute("aria-checked", String(b.dataset.m === m))); }
 function buildMenu() {
  const m=$("#menu");m.replaceChildren();document.body.classList.add("settings-tabs");let top=$("#settingsNavTop");if(!top){top=el("div",{id:"settingsNavTop"});$(".layout").before(top)}top.replaceChildren();
