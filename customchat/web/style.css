@@ -851,3 +851,7 @@ html:not(.preview) .composer>.box{width:100%}
 .toast{display:flex;align-items:center;gap:12px;cursor:default}.toast-dismiss{flex:none;background:transparent;color:inherit;border:0;min-width:44px;min-height:44px;font-size:22px;border-radius:8px}.toast-dismiss:focus-visible{outline:2px solid currentColor;outline-offset:2px}
 
 .toast-message{min-width:0}.toast-action{flex:none;min-height:44px;min-width:44px;border:1px solid currentColor;border-radius:8px;background:transparent;color:inherit;padding:6px 10px;font:inherit;cursor:pointer}.toast-action:focus-visible{outline:2px solid currentColor;outline-offset:2px}.toast-action:disabled{opacity:.65;cursor:wait}.toast-dismiss{cursor:pointer}
+
+.history-state{padding:10px 12px;font-size:13px;line-height:1.5;display:flex;flex-wrap:wrap;align-items:center;gap:8px}.history-retry{min-height:44px;padding:6px 12px;border:1px solid var(--line);background:var(--paper);color:var(--ink);border-radius:8px;font:inherit;cursor:pointer}.history-retry:focus-visible{outline:2px solid var(--brand);outline-offset:2px}@media(prefers-reduced-motion:no-preference){html:not([data-motion=none]) #list>.empty{animation:history-empty-in .16s ease-out}}@keyframes history-empty-in{from{opacity:0}to{opacity:1}}
+
+.item:focus-within .acts{display:flex}.item:focus-within .t{max-width:calc(100% - 144px)}

@@ -375,11 +375,13 @@ function dayLabel(ts) {
   if (d.getTime() >= start) return "Today"; if (d.getTime() >= start - day) return "Yesterday"; if (d.getTime() >= start - 7 * day) return "This week"; return "Earlier";
 }
 async function loadList() {
-  const seq = (loadList.seq = (loadList.seq || 0) + 1); const list = $("#list"); list.replaceChildren();
+  const seq = (loadList.seq = (loadList.seq || 0) + 1); const list = $("#list"), tab = S.tab, query = $("#search").value.trim();
+  list.setAttribute("aria-busy","true");list.querySelector(".history-state")?.remove();
+  const state=el("div",{class:"history-state",role:"status",text:"Loading history..."});list.prepend(state);
   try {
-    if (S.tab === "chats") {
-      const rows = await api("/api/chats?q=" + encodeURIComponent($("#search").value)); if (seq !== loadList.seq) return;
-      if (!rows.length) list.append(el("div", { class: "empty", text: "Your conversations will appear here. Ask a question to start." }));
+    if (tab === "chats") {
+      const rows = await api("/api/chats?q=" + encodeURIComponent($("#search").value)); if (seq !== loadList.seq) return;list.replaceChildren();
+      if (!rows.length) list.append(el("div", { class: "empty", text: query ? "No chats match your search. Try another word or clear the search." : "Your conversations will appear here. Ask a question to start." }));
       let lastGroup = "";
       const cnt = {}; rows.forEach((c) => { cnt[c.title] = (cnt[c.title] || 0) + 1; });
       rows.forEach((c) => { const g = c.pinned ? "Pinned" : dayLabel(c.created); if (g !== lastGroup) { list.append(el("div", { class: "group", text: g })); lastGroup = g; } list.append(el("div", { class: "item" + (c.id === S.chat ? " on" : ""), title: c.title, role:"button",tabindex:"0","aria-label":"Open chat: "+c.title,onkeydown:e=>activateHistory(e,()=>openChat(c.id)), onclick: () => openChat(c.id) },
@@ -389,13 +391,14 @@ async function loadList() {
           el("button", { title: "Rename", "aria-label": "Rename " + c.title, onclick: async (e) => { e.stopPropagation(); const t = prompt("Rename chat", c.title); if (t) { await api("/api/rename", { chat: c.id, title: t }); loadList(); } } }, svg("edit")),
           el("button", { title: "Delete", "aria-label": "Delete " + c.title, onclick: async (e) => { e.stopPropagation(); const wasOpen = S.chat === c.id; await api("/api/delete", { chat: c.id }); if (wasOpen) newChat(); loadList(); toast("Chat deleted.", "Undo", async () => { await api("/api/restore", { chat: c.id }); await loadList(); if (wasOpen) await openChat(c.id); }); } }, svg("trash"))))); });
     } else {
-      const rows = await api("/api/topics"); if (seq !== loadList.seq) return;
+      const rows = await api("/api/topics"); if (seq !== loadList.seq) return;list.replaceChildren();
       if (!rows.length) list.append(el("div", { class: "empty", text: "Conversations appear after your first question." }));
       rows.forEach((t) => list.append(el("div", { class: "item" + (t.id === S.topic ? " on" : ""), role:"button",tabindex:"0","aria-label":"Open conversation: "+t.title,onkeydown:e=>activateHistory(e,()=>openTopic(t.id)),onclick: () => openTopic(t.id) },
         el("span", { class: "t" }, t.title, el("span", { class: "sub", text: (t.summary ? t.summary.slice(0, 70) : t.turns + " question" + (t.turns === 1 ? "" : "s")) })),
         el("span", { class: "acts" }, el("button", { title: "Rename", "aria-label": "Rename " + t.title, onclick: async (e) => { e.stopPropagation(); const n = prompt("Rename conversation", t.title); if (n) { await api("/api/rename-topic", { topic: t.id, title: n }); loadList(); } } }, svg("edit"))))));
     }
-  } catch (e) { list.append(el("div", { class: "empty", text: e.message })); }
+  } catch (e) { if(seq!==loadList.seq)return;state.replaceChildren(el("span",{text:"History could not load. " + e.message}),el("button",{type:"button",class:"history-retry",text:"Try again",onclick:e=>{e.stopPropagation();loadList()}})); }
+  finally {if(seq===loadList.seq){list.removeAttribute("aria-busy");if(state.textContent==="Loading history...")state.remove()}}
 }
 
 async function openChat(id) {
