@@ -105,7 +105,7 @@ class RetainedFailureMatrix(unittest.TestCase):
  wait=Jobs.wait
  @unittest.mock.patch('customchat.buildimages.capability',return_value={'available':False,'note':'fixture'})
  def test_targeted_contract_failures_retry_only_owner_and_keep_success(self,cap):
-  for target,broken in [('prompt:answer',{'text':'','on':True}),('helper:clean_query',{'brief':'Fixture','code':'def broken(:'}),('config:sources',[{'type':'url','url':'https://not-supplied.invalid/fixture'}])]:
+  for target,broken in [('prompt:answer',{'text':'','on':True}),('helper:clean_query',{'brief':'Fixture','code':'def broken(:'}),('config:sources',[{'type':'url','url':'https://not-supplied.invalid/fixture'}]),('prompt:standalone',{'text':'Example question: What should I eat? Rewrite question: What diet is best?','on':True})]:
    with self.subTest(target=target):
     class BadOnce(Fixture):
      failed=False
@@ -114,7 +114,7 @@ class RetainedFailureMatrix(unittest.TestCase):
       system=m[0]['content']
       if 'This is one isolated' not in system:return result
       spec=json.JSONDecoder().raw_decode(system[system.index('{',system.index('This is one isolated')):])[0]
-      hit=(target=='prompt:answer' and spec.get('stage')=='answer') or (target=='helper:clean_query' and spec.get('kind')=='clean_query') or (target=='config:sources' and spec.get('area')=='sources')
+      hit=(target.startswith('prompt:') and spec.get('stage')==target.split(':')[1]) or (target=='helper:clean_query' and spec.get('kind')=='clean_query') or (target=='config:sources' and spec.get('area')=='sources')
       if hit and not self.failed:self.failed=True;return json.dumps(broken)
       return result
     f=BadOnce();jobs=buildjobs.BuildJobs();d=self.wait(jobs,jobs.start('owner',f,schema.DEFAULTS,{'brief':'Garden advice'})['id'])

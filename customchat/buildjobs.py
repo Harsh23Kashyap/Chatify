@@ -1,7 +1,7 @@
 """Bounded background draft jobs. Never runs generated code or saves app state."""
 import copy,json,threading,uuid,yaml,time
 from concurrent.futures import ThreadPoolExecutor,as_completed
-from . import appbuilder,schema,theme,prompts,generators,draftaudit
+from . import appbuilder,schema,theme,prompts,generators,draftaudit,generator_design
 from .generators import _extract_json
 PARTS=[('config:'+k,{'area':k,'defaults':v}) for k,v in schema.DEFAULTS.items() if k!='schema_version']
 LOOK={
@@ -102,6 +102,8 @@ class BuildJobs:
    if len(result['text'])>6000:raise ValueError('Prompt text is '+str(len(result['text']))+' characters; limit is 6000. Retry with a shorter instruction.')
    if result['text'].strip().lower()=='complete instruction':raise ValueError('Model echoed placeholder text instead of writing a prompt')
    if type(result.get('on',prompts.STAGES[key[7:]]['on']))!=bool:raise ValueError('Invalid stage switch')
+   problems=generator_design.validate_draft(key[7:],{'prompt':result['text']})
+   if problems:raise ValueError('Prompt contract failed: '+'; '.join(problems))
   elif key.startswith('helper:'):
    appbuilder.validate_extras({'helper_drafts':{key[7:]:result}})
    try:compile(result['code'],'<helper-draft>','exec')
