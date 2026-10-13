@@ -1195,3 +1195,5 @@ body.settings-tabs .editor-choice{transition:background-color 160ms cubic-bezier
 @media(prefers-reduced-motion:reduce){#sec-search .source-key-notes>summary::before{transition:none}#sec-search .source-key-notes[open]>.h{animation:none}}
 
 .logopage{flex-direction:column;justify-content:center;gap:6px;padding:8px}.logopage img{flex:none;max-width:100%;height:22px;object-fit:contain}.logopage span{width:100%;text-align:center;font:600 12px/1.25 var(--font,system-ui,sans-serif);overflow-wrap:normal;word-break:normal}
+
+.builder-draft-summary{padding:12px 16px;border-block:1px solid var(--line,#d7ddd2);margin:12px 0;overflow-wrap:anywhere}.builder-draft-summary h4{margin:0 0 6px;font-size:14px}.builder-draft-summary p{margin:4px 0}.builder-draft-summary small{display:block;font-size:12px;color:#52665a}
