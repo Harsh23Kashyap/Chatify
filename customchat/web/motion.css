@@ -286,20 +286,20 @@ html[data-motion=none] body.settings-tabs #menu a{transition:none!important}
  html body.settings-tabs #menu a{transition:none!important}
 }
 /* Settings accordions use the same quiet disclosure cue as helper panels. */
-html body.settings-tabs :is(details.grp,details.workspace-fields,details.helper-example)>summary{list-style:none}
-html body.settings-tabs :is(details.grp,details.workspace-fields,details.helper-example)>summary::-webkit-details-marker{display:none}
-html body.settings-tabs :is(details.grp,details.workspace-fields,details.helper-example)>summary::before{
+html body.settings-tabs details:not(.helper):not(.stage)>summary{list-style:none}
+html body.settings-tabs details:not(.helper):not(.stage)>summary::-webkit-details-marker{display:none}
+html body.settings-tabs details:not(.helper):not(.stage)>summary::before{
  content:''!important;display:inline-block;width:6px;height:6px;margin-right:8px;
- border-right:1.5px solid currentColor;border-bottom:1.5px solid currentColor;
+ border-top:0;border-left:0;border-right:1.5px solid currentColor;border-bottom:1.5px solid currentColor;
  transform:rotate(-45deg);transition:transform 160ms ease-out!important;
 }
-html body.settings-tabs :is(details.grp,details.workspace-fields,details.helper-example)[open]>summary::before{transform:rotate(45deg)}
-html body.settings-tabs :is(details.grp,details.workspace-fields,details.helper-example)[open]>*:not(summary){animation:m-in 160ms ease-out both!important;transform:none!important}
-html[data-motion=none] body.settings-tabs :is(details.grp,details.workspace-fields,details.helper-example)>summary::before{transition:none!important}
-html[data-motion=none] body.settings-tabs :is(details.grp,details.workspace-fields,details.helper-example)[open]>*:not(summary){animation:none!important}
+html body.settings-tabs details:not(.helper):not(.stage)[open]>summary::before{transform:rotate(45deg)}
+html body.settings-tabs details:not(.helper):not(.stage)[open]>*:not(summary){animation:m-in 160ms ease-out both!important;transform:none!important}
+html[data-motion=none] body.settings-tabs details:not(.helper):not(.stage)>summary::before{transition:none!important}
+html[data-motion=none] body.settings-tabs details:not(.helper):not(.stage)[open]>*:not(summary){animation:none!important}
 @media(prefers-reduced-motion:reduce){
- html body.settings-tabs :is(details.grp,details.workspace-fields,details.helper-example)>summary::before{transition:none!important}
- html body.settings-tabs :is(details.grp,details.workspace-fields,details.helper-example)[open]>*:not(summary){animation:none!important}
+ html body.settings-tabs details:not(.helper):not(.stage)>summary::before{transition:none!important}
+ html body.settings-tabs details:not(.helper):not(.stage)[open]>*:not(summary){animation:none!important}
 }
 /* Empty history is one useful message, not an animated illustration. */
 .side .list .empty{animation:m-in 140ms ease-out both!important;transform:none!important}
