@@ -677,7 +677,13 @@ async function init() {
   $("#lead").after(overview);
   const sourceOverview=el("div",{class:"loaded-source-overview",role:"status"});window.CCSourceOverview=sourceOverview;
   const sourceNames={local_files:"Local documents",http_json:"Custom API",pubmed:"PubMed",arxiv:"arXiv",python:"Python helper",web_search:"Web search",wikipedia:"Wikipedia",crossref:"Crossref",openalex:"OpenAlex"};
-  const sourceSummary=(sources,saved=false)=>{sourceOverview.replaceChildren(el("b",{text:saved?"Saved workspace sources":"Configured workspace sources"}),...sources.map(x=>el("p",{text:(x.label||x.id)+" · "+(sourceNames[x.type]||x.type||"Source")})),...(!sources.length?[el("p",{text:"No sources configured."})]:[]),el("small",{text:saved?"Saved to the app file. Restart this workspace to apply these sources. Reachability has not been tested.":"Sources from the loaded app file. Reachability has not been tested. Optional web searches below do not replace these sources."}))};sourceSummary(c.sources);
+  const sourceSummary=(sources,saved=false)=>{
+    let title=sourceOverview.querySelector('b'),note=sourceOverview.querySelector('small');if(!title){title=el('b');note=el('small');sourceOverview.append(title,note)}title.textContent=saved?'Saved workspace sources':'Configured workspace sources';
+    const previous=new Map([...sourceOverview.querySelectorAll('p[data-source-id]')].map(n=>[n.dataset.sourceId,n])),scroll=window.scrollY;sourceOverview.querySelector('.no-workspace-sources')?.remove();
+    for(const x of sources){const id=x.id||x.label,text=(x.label||x.id)+' · '+(sourceNames[x.type]||x.type||'Source');let row=previous.get(id),changed=!row||row.textContent!==text;if(!row)row=el('p',{'data-source-id':id});row.textContent=text;sourceOverview.insertBefore(row,note);previous.delete(id);if(changed&&saved&&!matchMedia('(prefers-reduced-motion:reduce)').matches&&!['calm','none'].includes(theme?.motion))row.animate([{opacity:.65},{opacity:1}],{duration:160,easing:'ease-out'})}
+    previous.forEach(n=>n.remove());if(!sources.length)sourceOverview.insertBefore(el('p',{class:'no-workspace-sources',text:'No sources configured.'}),note);
+    note.textContent=saved?'Saved to the app file. Restart this workspace to apply these sources. Reachability has not been tested.':'Sources from the loaded app file. Reachability has not been tested. Optional web searches below do not replace these sources.';if(saved)window.scrollTo({top:scroll,behavior:'instant'});
+  };sourceSummary(c.sources);
   document.addEventListener("cc-workspace-saved",e=>{if(e.detail?.config?.sources)sourceSummary(e.detail.config.sources,true)});
   const search=$("#sec-search");if(search)search.prepend(sourceOverview);
   const d = await api("/api/settings"); cur = d.settings; canEdit = d.can_edit; try { keyInfo = (await api("/api/provider/status")).keys; } catch (e) { keyInfo = {}; }
