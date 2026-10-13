@@ -24,3 +24,6 @@ main>h1{max-width:850px;font-size:clamp(34px,5.6vw,62px);line-height:1.08;text-w
 @media(prefers-reduced-motion:no-preference){html:not([data-motion=calm]):not([data-motion=none]) .feature-added{animation:feature-reveal .14s ease-out both}}
 @keyframes feature-reveal{from{opacity:.3}to{opacity:1}}
 .people article{transition:transform .16s,border-color .16s}.people article:hover{border-color:#8aa18b}
+
+.feature-copy-arrive{animation:feature-copy-arrive .16s ease-out}@keyframes feature-copy-arrive{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}@media(prefers-reduced-motion:reduce){.feature-copy-arrive{animation:none}}html[data-motion=none] .feature-copy-arrive,html[data-motion=calm] .feature-copy-arrive{animation:none}
+.feature-copy{min-height:300px}@media(max-width:620px){.feature-copy{min-height:310px}}
