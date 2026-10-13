@@ -167,3 +167,5 @@ html body dialog.app-builder .cs[data-section-only] .cs-btn{transition:backgroun
 
 .builder-part-icon{transition:background .18s ease,border-color .18s ease,color .18s ease}
 @media(prefers-reduced-motion:reduce){.builder-part-icon,.builder-group-mark{transition:none!important}}
+/* Keep missing prerequisites with the action on both desktop and mobile. */
+#builderDescribe>#builderPrerequisites{grid-column:1/-1;margin:4px 0 0;font-size:12px;line-height:1.55;color:var(--studio-muted)}
