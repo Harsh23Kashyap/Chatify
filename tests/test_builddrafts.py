@@ -21,3 +21,10 @@ class Drafts(unittest.TestCase):
    plan=appbuilder.review(cfg,restored['yaml'],restored['sections'])
    self.assertEqual(plan['config']['app']['title'],'Section draft')
    self.assertEqual(plan['selected'],['app'])
+
+ def test_selected_section_mismatch_is_rejected_without_retention(self):
+  with tempfile.TemporaryDirectory() as d:
+   store=BuildDrafts(d)
+   for source,selected in [('app: {title: X}',['app','provider']),('app: {title: X}\nprovider: {type: mock}',['app'])]:
+    with self.assertRaises(ValueError):store.put('owner',source,sections=selected)
+   self.assertEqual(store.list('owner'),[])

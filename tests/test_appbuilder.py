@@ -78,6 +78,20 @@ class BuilderTests(unittest.TestCase):
   plan=appbuilder.review(self.cfg,yaml.safe_dump({'provider':provider}),['provider'])
   removed=next(item for item in plan['changes'] if item['field']=='provider.fallback.model')
   self.assertEqual(removed['before'],'old-model');self.assertIsNone(removed['after'])
+ def test_app_only_save_preserves_sources_provider_and_setup_files(self):
+  raw=copy.deepcopy(schema.DEFAULTS)
+  raw['sources']=[{'id':'local','type':'local_files','label':'Owner documents','path':'docs'}]
+  raw['provider'].update(type='openai',model='owner-model',api_key_env='OWNER_MODEL_KEY')
+  self.path.write_text(yaml.safe_dump(raw));self.cfg['_dir']=self.tmp.name
+  folder=Path(self.tmp.name)/'data';folder.mkdir()
+  for name in ['theme.json','prompts.json','code-drafts.json']:(folder/name).write_text('{}')
+  originals={name:(folder/name).read_bytes() for name in ['theme.json','prompts.json','code-drafts.json']}
+  plan=appbuilder.review(self.cfg,'app: {title: New reviewed name}',['app'])
+  appbuilder.save_plan(self.cfg,plan)
+  saved=schema.load(str(self.path))
+  self.assertEqual(saved['sources'],schema.validate(raw)['sources'])
+  self.assertEqual(saved['provider'],schema.validate(raw)['provider'])
+  for name,old in originals.items():self.assertEqual((folder/name).read_bytes(),old)
  def complete_config(self):
   from customchat import theme,prompts,generators
   raw=copy.deepcopy(schema.DEFAULTS)
