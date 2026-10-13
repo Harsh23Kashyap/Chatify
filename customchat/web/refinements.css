@@ -99,3 +99,7 @@ html body.settings-tabs .colorrow input[type=color]{transition:background-color 
 html body.settings-tabs .colorrow input[type=color]:hover{border-color:#78917d!important;transform:none!important}
 @media(prefers-reduced-motion:reduce){html body.settings-tabs #settingsFind,html body.settings-tabs .colorrow input[type=color]{transition:none!important}}
 html[data-motion=none] body.settings-tabs #settingsFind,html[data-motion=none] body.settings-tabs .colorrow input[type=color]{transition:none!important}
+/* Optional response matching uses the same content width as its connector. */
+html body.settings-tabs #sec-code #codeEditor details.helper.selected-editor>details.inner{margin-inline:0!important;width:100%!important;box-sizing:border-box}
+html body.settings-tabs #sec-code #codeEditor details.helper.selected-editor>details.inner>.sbody{padding-inline:0!important;margin-inline:0!important;width:100%!important;box-sizing:border-box}
+html body.settings-tabs #sec-code #codeEditor details.inner textarea.code{width:100%!important;box-sizing:border-box;min-height:180px!important;max-height:440px;font:14px/1.6 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace!important}
