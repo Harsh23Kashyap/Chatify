@@ -84,3 +84,4 @@ html body.settings-tabs #seg button[data-p]:hover{border-color:#78917d!important
 #testconn{min-width:142px}
 @media(prefers-reduced-motion:reduce){html body.settings-tabs #seg button[data-p],#seg .provider-selected{transition:none!important}}
 html[data-motion=none] body.settings-tabs #seg button[data-p],html[data-motion=none] #seg .provider-selected{transition:none!important}
+@media(max-width:760px){#pvcloud .cpick{display:grid;grid-template-columns:26px minmax(0,1fr);align-items:start;gap:8px 10px}#pvcloud .cpick>.plogo,#pvcloud .cpick>.pm{grid-column:1;grid-row:1;margin-top:3px}#pvcloud .cpick>.cpt{grid-column:2;grid-row:1}#pvcloud .cpick>button{grid-column:2;grid-row:2;justify-self:end}#pvcloud .cloud-selection-status{min-height:36px}}
