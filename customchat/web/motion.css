@@ -352,3 +352,8 @@ html .hero .playground-question:active:not(:disabled){transform:scale(.98)}
 html[data-motion=none] .hero .playground-question,html[data-motion=none] .hero .playground-question>b{transition:none!important}
 html[data-motion=none] .hero .playground-question:active:not(:disabled),html[data-motion=none] .hero .playground-question:hover>b{transform:none}
 @media(prefers-reduced-motion:reduce){html .hero .playground-question,html .hero .playground-question>b{transition:none!important}html .hero .playground-question:active:not(:disabled),html .hero .playground-question:hover>b{transform:none}}
+
+/* A received estimate change gets one short graph fade, never fake counting. */
+.memory-graph.local-estimate-changed{animation:m-in 160ms ease-out both!important}
+html[data-motion=none] .memory-graph.local-estimate-changed{animation:none!important}
+@media(prefers-reduced-motion:reduce){.memory-graph.local-estimate-changed{animation:none!important}}
