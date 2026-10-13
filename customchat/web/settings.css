@@ -1302,3 +1302,15 @@ html body.settings-tabs #sec-colors .fields.colorlist .field>.flabel{flex-direct
 
 /* Conditional appearance controls must stay hidden in every field layout. */
 html body.settings-tabs #col .field[hidden]{display:none!important}
+/* Appearance fields share one left-aligned reading edge and breathing room. */
+html body.settings-tabs #look>.tile{padding:20px 16px!important;box-sizing:border-box}
+html body.settings-tabs #look .field>.flabel,
+html body.settings-tabs #look .field>.flabel .label-title,
+html body.settings-tabs #look .field>.flabel label{display:flex!important;flex-direction:row!important;justify-content:flex-start!important;align-items:center!important;text-align:left!important;width:auto!important;margin:0!important;gap:8px!important}
+html body.settings-tabs #look .field{gap:8px!important}
+html body.settings-tabs #look .field>.h{text-align:left!important;margin:0!important}
+html body.settings-tabs #look .field>.flabel .info-tip{margin:0!important;flex:none}
+html body.settings-tabs #look .secfoot{padding-top:16px!important}
+@media(max-width:760px){html body.settings-tabs #look>.tile{padding:16px 12px!important}}
+html body.settings-tabs #look #sec-colors .fields.colorlist .field{gap:8px 12px!important}
+html body.settings-tabs #look .field>.compact-help{margin-top:-8px!important;margin-bottom:-8px!important}
