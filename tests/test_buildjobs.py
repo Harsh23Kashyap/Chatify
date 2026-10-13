@@ -73,3 +73,9 @@ class SafePatchChecks(unittest.TestCase):
   jobs.retry('owner',d['id']);d=self.wait(jobs,d['id']);self.assertEqual(d['state'],'done',d);self.assertEqual(d['calls'],calls+2)
   self.assertTrue(any('previous_validation_failure' in m and 'Interface wording left blank: txt_disclaimer' in m for m in f.calls))
   for k,v in before.items():self.assertEqual(jobs.jobs[d['id']]['parts'][k],v)
+ def test_invalid_helper_json_reports_exact_corrective_contract(self):
+  malformed='{"brief":"Cleaner","code":"re.sub(r\'\\s+\', \' \', query)"}'
+  job=self.part_job(malformed)
+  with self.assertRaisesRegex(ValueError,'invalid JSON.*double backslashes'):
+   buildjobs.BuildJobs()._draft_part(job,'helper:clean_query',dict(buildjobs.PARTS)['helper:clean_query'])
+  self.assertNotIn('helper:clean_query',job['parts']);self.assertEqual(job['calls'],1)
