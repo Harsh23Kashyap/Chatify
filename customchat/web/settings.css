@@ -1193,3 +1193,5 @@ body.settings-tabs .editor-choice{transition:background-color 160ms cubic-bezier
 #sec-search .source-key-notes[open]>.h{animation:source-notes-in 160ms ease-out}
 @keyframes source-notes-in{from{opacity:0}to{opacity:1}}
 @media(prefers-reduced-motion:reduce){#sec-search .source-key-notes>summary::before{transition:none}#sec-search .source-key-notes[open]>.h{animation:none}}
+
+.logopage{flex-direction:column;justify-content:center;gap:6px;padding:8px}.logopage img{flex:none;max-width:100%;height:22px;object-fit:contain}.logopage span{width:100%;text-align:center;font:600 12px/1.25 var(--font,system-ui,sans-serif);overflow-wrap:normal;word-break:normal}
