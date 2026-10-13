@@ -1135,3 +1135,6 @@ body.settings-tabs .card{padding:28px 32px!important}body.settings-tabs .card h1
 .save-confirmed{animation:saved-check-in 160ms ease-out}
 @keyframes saved-check-in{from{opacity:.65}to{opacity:1}}
 @media(prefers-reduced-motion:reduce){.save-confirmed{animation:none}}
+
+.budget-field-error{display:block;color:var(--feedback-ink,#654c2d);font-size:13px;line-height:1.5;margin-top:6px}
+.budget-field-error[hidden]{display:none}

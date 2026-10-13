@@ -680,10 +680,11 @@ function budgetVisuals(){
  for(const id of ["budgetQuestions","budgetUser","budgetCalls","budgetSpend"]){
   const input=document.getElementById(id);if(!input)continue;const label=input.closest("label");
   let v=label.querySelector(".budget-viz");if(!v){v=el("small",{class:"budget-viz"});label.append(v)}
+  if(input.getAttribute("aria-invalid")==="true"&&input.checkValidity()&&(id==="budgetSpend"||input.value.trim())){input.setAttribute("aria-invalid","false");const error=document.getElementById(id+"Error");if(error)error.hidden=true}
   v.textContent=id==="budgetSpend"?(input.value===""?"No local dollar cap":"Non-Demo model calls blocked"):(+input.value===0?"No daily limit":input.value+" per day");
  }
 }
-for(const id of ["budgetQuestions","budgetUser","budgetCalls","budgetSpend"])document.getElementById(id)?.addEventListener("input",budgetVisuals);
+for(const id of ["budgetQuestions","budgetUser","budgetCalls","budgetSpend"]){const input=document.getElementById(id);if(!input)continue;const error=el("small",{id:id+"Error",class:"budget-field-error",hidden:"",text:id==="budgetSpend"?"Use a dollar amount from 0 to 1,000,000, with at most two decimal places. Blank means no local dollar cap.":"Use a whole number from 0 to 10,000,000. 0 means no daily limit."});input.after(error);input.setAttribute("aria-describedby",[input.getAttribute("aria-describedby"),error.id].filter(Boolean).join(" "));input.addEventListener("input",budgetVisuals)}
 async function loadBudget(preserveEdits=false) {
   const before=["budgetQuestions","budgetUser","budgetCalls","budgetSpend"].map(id=>$("#"+id).value);const data = await api("/api/budget"), limits = data.limits;preserveEdits=preserveEdits||["budgetQuestions","budgetUser","budgetCalls","budgetSpend"].some((id,i)=>$("#"+id).value!==before[i]);
   if(!preserveEdits)$("#budgetQuestions").value = limits.daily_questions;
@@ -697,7 +698,7 @@ async function loadBudget(preserveEdits=false) {
 }
 $("#saveBudget").addEventListener("click", async function () {
   if (!canEdit||this.disabled) return;
-  for(const id of ["budgetQuestions","budgetUser","budgetCalls","budgetSpend"]){const n=$("#"+id);if((id!=="budgetSpend"&&!n.value.trim())||!n.checkValidity()){n.setAttribute("aria-invalid","true");$("#budgetStatus").textContent="Use a non-negative value within the shown limit; daily limits must be whole numbers.";n.reportValidity();return}n.setAttribute("aria-invalid","false")}
+  for(const id of ["budgetQuestions","budgetUser","budgetCalls","budgetSpend"]){const n=$("#"+id);if((id!=="budgetSpend"&&!n.value.trim())||!n.checkValidity()){n.setAttribute("aria-invalid","true");document.getElementById(id+"Error").hidden=false;$("#budgetStatus").textContent="Use a non-negative value within the shown limit; daily limits must be whole numbers.";n.reportValidity();return}n.setAttribute("aria-invalid","false");document.getElementById(id+"Error").hidden=true}
   this.disabled = true;const label=this._savedLabel||this.textContent;let didSave=false;clearTimeout(this._savedTimer);this.classList.remove("save-confirmed");this.textContent="Saving...";
   try {
     const submitted=["budgetQuestions","budgetUser","budgetCalls","budgetSpend"].map(id=>$("#"+id).value);await api("/api/budget", { budget: { daily_questions: Number($("#budgetQuestions").value),
