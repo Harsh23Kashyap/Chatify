@@ -1245,3 +1245,5 @@ body.settings-tabs .editor-choice{position:relative;padding-right:30px!important
 body.settings-tabs .editor-choice::after{content:'✓';position:absolute;right:10px;top:10px;line-height:16px;font-size:12px;opacity:0;transition:opacity 160ms ease-out}
 body.settings-tabs .editor-choice[aria-pressed=true]::after{opacity:1}
 @media(prefers-reduced-motion:reduce){body.settings-tabs .editor-choice::after{transition:none!important}}
+/* The current appearance remains distinct from the available looks in either view. */
+body.settings-tabs.simple #sec-presets #presetCurrent{display:block!important;margin:0 0 12px}
