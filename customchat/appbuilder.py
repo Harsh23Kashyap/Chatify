@@ -178,7 +178,7 @@ def review(cfg,text,selected):
  changed=[k for k in selected if config[k]!=before[k]]
  def differences(old,new,path=''):
   if isinstance(old,dict) and isinstance(new,dict):
-   return [item for key in new for item in differences(old.get(key),new[key],path+'.'+key if path else key)]
+   return [item for key in dict.fromkeys([*old,*new]) for item in differences(old.get(key),new.get(key),path+'.'+key if path else key)]
   return [] if old==new else [{'field':path,'before':old,'after':new}]
  changes=[item for key in changed for item in differences(before[key],config[key],key)]
  return {'selected':selected,'snapshots':snapshots,'changes':changes,'config':config,'sections':changed,'revision':editstate.revision(cfg),'yaml':yaml.safe_dump(config,sort_keys=False),'notice':'Save updates app.yaml and selected appearance, prompts and inert helper drafts. Restart required. No source, code or new model runs now. Review source paths, URLs, access, storage and server settings before saving.'}

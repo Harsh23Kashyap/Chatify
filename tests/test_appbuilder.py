@@ -62,6 +62,22 @@ class BuilderTests(unittest.TestCase):
   result=appbuilder.review(self.cfg,yaml.safe_dump({'app':self.cfg['app']}),['app'])
   self.assertEqual(result['sections'],[]);self.assertEqual(result['changes'],[])
 
+ def test_review_includes_removed_nested_source_fields(self):
+  raw=copy.deepcopy(schema.DEFAULTS)
+  raw['sources']=[{'id':'catalog','type':'http_json','label':'Catalog','url':'https://example.invalid/data','timeout':20}]
+  self.path.write_text(yaml.safe_dump(raw))
+  new=copy.deepcopy(raw['sources']);del new[0]['timeout']
+  plan=appbuilder.review(self.cfg,yaml.safe_dump({'sources':new}),['sources'])
+  change=next(item for item in plan['changes'] if item['field']=='sources')
+  self.assertIn('timeout',change['before'][0]);self.assertNotIn('timeout',change['after'][0])
+ def test_review_includes_removed_mapping_setting(self):
+  raw=copy.deepcopy(schema.DEFAULTS)
+  raw['provider']['fallback']={'type':'mock','model':'old-model'}
+  self.path.write_text(yaml.safe_dump(raw))
+  provider=copy.deepcopy(raw['provider']);provider['fallback']={'type':'mock'}
+  plan=appbuilder.review(self.cfg,yaml.safe_dump({'provider':provider}),['provider'])
+  removed=next(item for item in plan['changes'] if item['field']=='provider.fallback.model')
+  self.assertEqual(removed['before'],'old-model');self.assertIsNone(removed['after'])
  def complete_config(self):
   from customchat import theme,prompts,generators
   raw=copy.deepcopy(schema.DEFAULTS)
