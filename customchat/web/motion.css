@@ -389,3 +389,8 @@ html body.settings-tabs details[open]>summary::before{transform:rotate(45deg)!im
 .builder-library-empty{animation:m-in 140ms ease-out both;transform:none}
 html[data-motion=none] .builder-library-empty{animation:none}
 @media(prefers-reduced-motion:reduce){.builder-library-empty{animation:none}}
+/* A mode change reveals advanced controls as one group, never per field. */
+@keyframes cc-settings-mode-in{from{opacity:.7;transform:translateY(2px)}to{opacity:1;transform:none}}
+html body.settings-tabs.mode-swap .settings-active-panel{animation-name:cc-settings-mode-in!important}
+html[data-motion=none] body.settings-tabs.mode-swap .settings-active-panel{animation:none!important}
+@media(prefers-reduced-motion:reduce){html body.settings-tabs.mode-swap .settings-active-panel{animation:none!important}}
