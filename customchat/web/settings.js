@@ -543,7 +543,7 @@ function drawLook() {
   }
   buildMenu();
 }
-function resetGroup(s) { if (!confirm("Reset only " + s.title + " to the default? Other Appearance sections stay unchanged.")) return; const d = meta.default; for (const f of s.fields) { if (f.colors) theme[editMode][f.key] = d[editMode][f.key]; else {theme[f.key] = d[f.key];if(f.type==="emoji")theme[f.key+"_animated"]=d[f.key+"_animated"];} } drawLook(); changed(); try { window.ccPulse && window.ccPulse(document.getElementById("sec-" + s.id)); } catch (e) {} }
+function resetGroup(s) { if (!confirm("Reset only " + s.title + " to the default? Other Appearance sections stay unchanged.")) return; const d = meta.default; for (const f of s.fields) { if (f.colors) theme[editMode][f.key] = d[editMode][f.key]; else {theme[f.key] = d[f.key];if(f.type==="emoji")theme[f.key+"_animated"]=d[f.key+"_animated"];} } drawLook(); changed(); const section=document.getElementById("sec-"+s.id);if(section){const notice=el("p",{class:"section-reset-confirmation",role:"status",text:s.title+" reset to defaults. Other sections unchanged."});section.querySelector(".secfoot").prepend(notice);section.querySelector(".secfoot button")?.focus({preventScroll:true});} }
 function setPvMode(m) { document.querySelectorAll("#pvmode button").forEach((b) => b.setAttribute("aria-checked", String(b.dataset.m === m))); }
 function buildMenu() {
  const m=$("#menu");m.replaceChildren();document.body.classList.add("settings-tabs");let top=$("#settingsNavTop");if(!top){top=el("div",{id:"settingsNavTop"});$(".layout").before(top)}top.replaceChildren();

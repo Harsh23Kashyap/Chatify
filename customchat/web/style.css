@@ -877,3 +877,14 @@ html.reading-view .row .a{transition-property:background-color,color,border-colo
 .background-fade{position:fixed;inset:0;pointer-events:none;z-index:0}
 @media(prefers-reduced-motion:reduce){.background-fade{display:none!important}}
 html[data-motion=none] .background-fade{display:none!important}
+
+/* Shape tokens change on their own surfaces, without scaling a card. */
+html[data-shadow=none] .app{box-shadow:none}
+html[data-shadow=soft] .app{box-shadow:0 1px 2px rgba(0,0,0,.04),0 8px 24px rgba(23,35,31,.06)}
+html[data-shadow=strong] .app{box-shadow:0 2px 4px rgba(0,0,0,.08),0 14px 32px rgba(23,35,31,.14)}
+html[data-bubble=soft] .bubble.bb{background:var(--bot);padding:calc(14px*var(--dens,1)) calc(16px*var(--dens,1));border:1px solid transparent;border-radius:calc(6px*var(--rs,1)) calc(18px*var(--rs,1)) calc(18px*var(--rs,1)) calc(18px*var(--rs,1))}
+html[data-bubble=outline] .bubble{box-shadow:none}
+html[data-bubble=outline] .bubble.bb{padding:calc(14px*var(--dens,1)) calc(16px*var(--dens,1));border-radius:calc(6px*var(--rs,1)) calc(18px*var(--rs,1)) calc(18px*var(--rs,1)) calc(18px*var(--rs,1))}
+html[data-bubble=flat] .bubble.bb{border:0;box-shadow:none;border-radius:0;padding:calc(2px*var(--dens,1)) 0;transition:none!important}
+@media(prefers-reduced-motion:no-preference){html:not([data-motion=none]) .app,html:not([data-motion=none]) .box,html:not([data-motion=none]) .av{transition:border-radius .16s ease-out,background-color .18s ease,color .18s ease,border-color .18s ease}html:not([data-motion=none]) .bubble{transition:border-radius .16s ease-out,border-color .16s ease-out,background-color .16s ease-out,padding .16s ease-out}html:not([data-motion=none]) .row{transition:margin-bottom .16s ease-out}}
+html.preview .bubble{padding:calc(9px*var(--dens,1)) calc(12px*var(--dens,1))!important}html.preview .row{margin:calc(8px*var(--dens,1)) 0}html.preview .row.u{margin:calc(4px*var(--dens,1)) 0}html.preview[data-bubble=flat] .bubble.bb{padding:calc(2px*var(--dens,1)) 0!important}

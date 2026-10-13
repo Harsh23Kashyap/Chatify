@@ -25,7 +25,7 @@ class Motion(unittest.TestCase):
     def test_pulse_and_picture_settle(self):
         css, js, st = rd("motion.css"), rd("motion.js"), rd("settings.js")
         self.assertIn("ccPulse", js)
-        self.assertIn("ccPulse", st)  # reset group calls it, guarded so a failure cannot break reset
+        self.assertIn("section-reset-confirmation", st)  # reset gives local, readable feedback, not a whole-card pulse
         self.assertIn(".pulse-soft", css)
         self.assertIn("m-img", css)
         i = css.index("select.pulse-soft")
