@@ -486,8 +486,8 @@ function pvFollow() {
     card.replaceChildren(
       el("div", { class: "pvm-top" }, mark(cur.provider), el("div", {}, el("b", { text: NAMES[cur.provider] || cur.provider }), el("div", { class: "pvm-row", text: chosenModel() || (cur.provider === "mock" ? "Built-in demo, no model needed" : "No model chosen yet") }))),
       el("div", { class: "pvm-row", text: keyTxt }),
-      el("div", { class: "pvm-badge " + st, text: st === "ok" ? "Connected" : (st === "bad" ? "Not working" : "Not tested yet") }),
-      el("div", { class: "pvm-row " + st, text: (r && r.textContent) || "Press Test connection to check the key and model." }));
+      el("div", { class: "pvm-badge " + st, text: cur.provider === "mock" ? "Offline demo" : (st === "ok" ? "Connected" : (st === "bad" ? "Not working" : "Not tested yet")) }),
+      el("div", { class: "pvm-row " + st, text: cur.provider === "mock" ? "Built-in answers. No AI connection or paid calls." : ((r && r.textContent) || "Press Test connection to check the key and model.") }));
 
   }
   pvExtra();
