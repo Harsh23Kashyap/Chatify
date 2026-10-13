@@ -45,13 +45,13 @@ function editorList(section, cards, kind) {
   const pane = el("div", {class:"pipeline-editor-pane inline-editor",id:kind+"Editor", "aria-label":kind === "prompts" ? "Selected prompt editor" : "Selected code editor"});
   const list = el("div", {class:"editor-list", role:"list", "aria-label":kind === "prompts" ? "Prompt stages" : "Code helpers"});
   const choose = (card, button) => {
-    if (selected[kind]) selected[kind].card.hidden = true;
+    if (selected[kind]){const old=selected[kind].card,area=$("textarea",old);if(kind==="prompts"&&area)old._promptView={scroll:area.scrollTop,start:area.selectionStart,end:area.selectionEnd};old.hidden=true;}
     cards.forEach(c => c.classList.remove("selected-editor"));
     list.querySelectorAll("button").forEach(b => b.setAttribute("aria-pressed", String(b === button)));
     card.hidden = false; card.open = true; card.classList.add("selected-editor");
     selected[kind] = {card,button};
     pane.replaceChildren(card);placePrompt();
-    if(kind==="prompts"){const area=$("textarea",card);if(area){area.scrollTop=0;area.setSelectionRange(0,0)}placePrompt();requestAnimationFrame(()=>{if(area)area.scrollTop=0})}
+    if(kind==="prompts"){const area=$("textarea",card),view=card._promptView;if(area&&view){area.setSelectionRange(view.start,view.end);area.scrollTop=view.scroll;requestAnimationFrame(()=>{if(selected[kind]?.card===card)area.scrollTop=view.scroll})}placePrompt()}
   };
   cards.forEach(card => {
     const title = $("summary b", card)?.textContent || "Editor";
