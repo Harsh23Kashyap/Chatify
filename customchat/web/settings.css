@@ -1171,3 +1171,10 @@ body.settings-tabs .editor-choice{transition:background-color 160ms cubic-bezier
 @keyframes helper-result-in{from{opacity:.65}to{opacity:1}}
 @media(prefers-reduced-motion:reduce){.helper-result-enter{animation:none}}
 @media(prefers-reduced-motion:no-preference){html:not([data-motion=none]) .pipeline-editor-pane .helper-result-enter{animation:helper-result-in 160ms ease-out!important}html:not([data-motion=none]) .pipeline-editor-pane .save-confirmed{animation:saved-check-in 160ms ease-out!important}html:not([data-motion=none]) #promptsEditor textarea.prompt-draft-updated{transition:background-color 160ms ease-out!important}}
+#sec-prompts>.workspace-fields>summary{list-style:none;display:flex;gap:8px;align-items:center}
+#sec-prompts>.workspace-fields>summary::-webkit-details-marker{display:none}
+#sec-prompts>.workspace-fields>summary::before{content:'›';display:inline-block;transition:transform 160ms cubic-bezier(.2,.8,.2,1);transform:rotate(0)}
+#sec-prompts>.workspace-fields[open]>summary::before{transform:rotate(90deg)}
+#sec-prompts>.workspace-fields[open]>*:not(summary){animation:prompt-extra-in 160ms ease-out}
+@keyframes prompt-extra-in{from{opacity:.75}to{opacity:1}}
+@media(prefers-reduced-motion:reduce){#sec-prompts>.workspace-fields>summary::before{transition:none}#sec-prompts>.workspace-fields[open]>*:not(summary){animation:none}}
