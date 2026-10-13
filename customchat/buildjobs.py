@@ -1,7 +1,7 @@
 """Bounded background draft jobs. Never runs generated code or saves app state."""
 import copy,json,threading,uuid,yaml,time
 from concurrent.futures import ThreadPoolExecutor,as_completed
-from . import appbuilder,schema,theme,prompts,generators
+from . import appbuilder,schema,theme,prompts,generators,draftaudit
 from .generators import _extract_json
 PARTS=[('config:'+k,{'area':k,'defaults':v}) for k,v in schema.DEFAULTS.items() if k!='schema_version']
 LOOK={
@@ -176,6 +176,7 @@ class BuildJobs:
      if hasattr(job['provider'],'_check'):job['provider']._check()
      raw['appearance']['logo']=buildimages.generate(job['cfg'],cap,job['brief']);job['logo_status']=dict(cap,state='done')
    except Exception as e:job['logo_status']={'state':'skipped','note':str(e)[:300]+' Text draft still available.'}
+   job['local_review']=draftaudit.findings(raw)
    job['merged_draft']=copy.deepcopy(raw)
    # One bounded final revision call, not a code or network test.
    review_raw=copy.deepcopy(raw)
@@ -204,7 +205,7 @@ class BuildJobs:
    with self.lock:job['errors']['final']=str(e)[:400];job['state']='partial' if not job['cancel'] else 'cancelled'
  def view(self,owner,ident):
   with self.lock:
-   j=self._owned(owner,ident);return {k:copy.deepcopy(j.get(k)) for k in ('id','state','calls','phase','notice','yaml','review','logo_status','remaining_work')}|{'completed':len(j['parts']),'total':len(PARTS),'errors':copy.deepcopy(j['errors']),'call_cap':MAX_CALLS,'partial_config':copy.deepcopy(j.get('merged_draft')) or {key:copy.deepcopy(value) for key,value in j['parts'].items()} if j['state']=='partial' else None,'parts':[{'id':key,'draft':copy.deepcopy(j['parts'].get(key)),'state':'done' if key in j['parts'] else 'error' if key in j['errors'] else 'running' if key in j.get('active',set()) else 'cancelled' if j['state']=='cancelled' else 'waiting'} for key,_ in PARTS]}
+   j=self._owned(owner,ident);return {k:copy.deepcopy(j.get(k)) for k in ('id','state','calls','phase','notice','yaml','review','logo_status','remaining_work','local_review')}|{'completed':len(j['parts']),'total':len(PARTS),'errors':copy.deepcopy(j['errors']),'call_cap':MAX_CALLS,'partial_config':copy.deepcopy(j.get('merged_draft')) or {key:copy.deepcopy(value) for key,value in j['parts'].items()} if j['state']=='partial' else None,'parts':[{'id':key,'draft':copy.deepcopy(j['parts'].get(key)),'state':'done' if key in j['parts'] else 'error' if key in j['errors'] else 'running' if key in j.get('active',set()) else 'cancelled' if j['state']=='cancelled' else 'waiting'} for key,_ in PARTS]}
  def cancel(self,owner,ident):
   with self.lock:self._owned(owner,ident)['cancel']=True
   return self.view(owner,ident)
