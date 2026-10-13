@@ -114,7 +114,7 @@ async function ollamaPanel(viewOnly=false) {
   const box = $("#ollamabox"); if (activeSec !== "model") return; box.hidden = false; box.dataset.loaded = "1";
   const retainedActions=new Map([...box.querySelectorAll(".mact[data-model]")].filter(n=>viewOnly||n.dataset.pending==="true").map(n=>[n.dataset.model,n]));
   if(!retainedActions.size&&(!viewOnly||!localHardwareSnapshot))box.replaceChildren(el("div", { class: "h", text: "Looking at this computer..." }));
-  let r; try { r = viewOnly&&localHardwareSnapshot?localHardwareSnapshot:await api("/api/hardware?base_url=" + encodeURIComponent($("#base").value.trim()));localHardwareSnapshot=r; } catch (e) { box.dataset.loaded="";box.replaceChildren(el("b",{text:"Suggested local models"}),el("div",{class:"h",text:e.message}),el("button",{type:"button",class:"mini",text:"Retry local suggestions",onclick:ollamaPanel})); return; }
+  let r; try { r = viewOnly&&localHardwareSnapshot?localHardwareSnapshot:await api("/api/hardware?base_url=" + encodeURIComponent($("#base").value.trim()));localHardwareSnapshot=r; } catch (e) { box.dataset.loaded="";const error=el("div",{class:"local-suggestion-error"},el("div",{class:"h",text:e.message}),el("button",{type:"button",class:"mini",text:"Retry local suggestions",onclick:ollamaPanel}));if(retainedActions.size){box.querySelector(".local-suggestion-error")?.remove();box.append(error)}else{box.replaceChildren(el("b",{text:"Suggested local models"}),error)} return; }
   const hw = r.hardware, rec = r.recommendation, det = hwView === "tech";
   const tabs = el("div", { class: "seg mini", role: "radiogroup", "aria-label": "Detail level" });
   for (const [v, t] of [["simple", "Simple"], ["tech", "Details"]]) tabs.append(el("button", { type: "button", role: "radio", "aria-checked": String(hwView === v), onclick: () => { hwView = v; ollamaPanel(true);box.querySelector('[role="radio"][aria-checked="true"]')?.focus(); } }, t));
@@ -128,6 +128,7 @@ async function ollamaPanel(viewOnly=false) {
     c.append(el("div", { class: "oact" }, retainedActions.get(p.tag)||modelAction(p.tag, p.installed)));
     cards.append(c);
   });
+  for(const [tag,action] of retainedActions)if(!rec.picks.some(p=>p.tag===tag))cards.append(el("div",{class:"ocard download-retained"},el("b",{text:tag}),el("p",{class:"h",text:"Download started earlier. Updated suggestions do not change this job."}),el("div",{class:"oact"},action)));
   box.replaceChildren(head, cards);if(viewOnly){cards.classList.add("local-view-enter");}
   if (canEdit && cur.provider==="ollama") { $("#sec-model .ollama-setup")?.remove();const setup=el("section",{class:"ollama-setup"});$("#sec-model").prepend(setup);drawOllamaSetup(setup); }
   if (r.others && r.others.length) {
