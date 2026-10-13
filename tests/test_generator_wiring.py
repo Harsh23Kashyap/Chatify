@@ -51,3 +51,9 @@ class WiringTests(unittest.TestCase):
   self.assertEqual(ns['clean_query'](' not keto - age 12 in 2026 '),'not keto - age 12 in 2026')
  def test_signature_and_dunder_blocked(self):
   self.assertFalse(g.review_code('clean_query','def clean_query(q, other):return q')[0]);self.assertFalse(g.review_code('clean_query','def clean_query(q):return q.__class__')[0])
+ def test_process_without_result_does_not_invent_timeout(self):
+  from types import SimpleNamespace
+  with patch('subprocess.run',return_value=SimpleNamespace(stdout='',stderr='')),patch('time.time',side_effect=[0,25,25]):
+   result=g.test_code('clean_query','def clean_query(query):\n    return query','fixture')
+  self.assertEqual(result['error'],'It stopped without a result.')
+  self.assertNotIn('20 seconds',result['error'])
