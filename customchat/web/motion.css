@@ -299,3 +299,7 @@ html[data-motion=none] body.settings-tabs details.grp[open]>*:not(summary){anima
  html body.settings-tabs details.grp>summary::before{transition:none!important}
  html body.settings-tabs details.grp[open]>*:not(summary){animation:none!important}
 }
+/* Empty history is one useful message, not an animated illustration. */
+.side .list .empty{animation:m-in 140ms ease-out both!important;transform:none!important}
+html[data-motion=none] .side .list .empty{animation:none!important}
+@media(prefers-reduced-motion:reduce){.side .list .empty{animation:none!important}}
