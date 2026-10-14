@@ -38,9 +38,8 @@ class Motion(unittest.TestCase):
 
     def test_preview_fade_and_grid(self):
         css, js = rd("motion.css"), rd("motion.js")
-        self.assertIn("fade-soft", js)
-        i = css.index(".preview.fade-soft")
-        self.assertIn("prefers-reduced-motion:no-preference", css[max(0, i - 80):i])
+        self.assertNotIn("fade-soft", js)
+        self.assertIn(".typeprev{animation:none}", css)
         self.assertIn("grid-template-columns var(--m-layout)", css)
 
     def test_hidden_sidebar_stale_and_demo(self):
@@ -86,7 +85,8 @@ class Motion(unittest.TestCase):
         self.assertIn(".app.menu-open #menu>*{transform:rotate(90deg)}", css)
         self.assertIn("@property --rs", css)
         self.assertIn("--rs .26s", css)
-        self.assertIn("typeprev", js)
+        self.assertIn('d.id = "typeprev"', rd("settings.js"))
+        self.assertNotIn("fade-soft", js)
 
     def test_dot_to_tick_and_key_tick(self):
         css = rd("motion.css")
