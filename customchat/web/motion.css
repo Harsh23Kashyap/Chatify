@@ -441,3 +441,14 @@ html[data-motion=subtle]:not([data-sidebar=hidden]) .app.side-collapsed .side :i
 .workspace-empty{animation:m-in 140ms ease-out both;transform:none}
 html[data-motion=none] .workspace-empty,html[data-motion=calm] .workspace-empty{animation:none!important}
 @media(prefers-reduced-motion:reduce){.workspace-empty{animation:none!important}}
+/* Answer support content arrives as readable groups, not a cascade of controls. */
+.fresh :is(.srcs,.nf-tips,.meta.fu){animation:m-in 160ms ease-out both;transform:none}
+.fresh :is(.srcs button.s,.nf-tips>*,.meta.fu .chip){animation:none!important;animation-delay:0s!important}
+html[data-motion=subtle] .fresh :is(.srcs,.nf-tips,.meta.fu){animation-duration:120ms}
+html[data-motion=none] .fresh :is(.srcs,.nf-tips,.meta.fu),html[data-motion=calm] .fresh :is(.srcs,.nf-tips,.meta.fu){animation:none!important}
+@media(prefers-reduced-motion:reduce){.fresh :is(.srcs,.nf-tips,.meta.fu){animation:none!important}}
+.meta.fu{animation:m-in 160ms ease-out both;transform:none}
+.meta.fu .chip{animation:none!important;animation-delay:0s!important}
+html[data-motion=subtle] .meta.fu{animation-duration:120ms}
+html[data-motion=none] .meta.fu,html[data-motion=calm] .meta.fu{animation:none!important}
+@media(prefers-reduced-motion:reduce){.meta.fu{animation:none!important}}
