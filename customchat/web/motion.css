@@ -436,3 +436,8 @@ html:not([data-sidebar=hidden]):not([data-motion=none]) .app.side-collapsed .sid
 html[data-motion=subtle]:not([data-sidebar=hidden]) .side :is(.note,.tm){transition-delay:60ms}
 html[data-motion=subtle]:not([data-sidebar=hidden]) .app.side-collapsed .side :is(.note,.tm){transition-delay:0ms}
 }
+
+/* Local workspace lists use one quiet empty message. */
+.workspace-empty{animation:m-in 140ms ease-out both;transform:none}
+html[data-motion=none] .workspace-empty,html[data-motion=calm] .workspace-empty{animation:none!important}
+@media(prefers-reduced-motion:reduce){.workspace-empty{animation:none!important}}
