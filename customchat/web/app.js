@@ -325,7 +325,7 @@ function playgroundLanding(a, exs) {
     el("div",{class:"playground-intro"},el("div",{},
       el("h1",{text:TV("txt_title")||a.title}),el("p",{text:TV("txt_tagline")||a.tagline})),scene),
     exs.length?el("div",{},el("h2",{class:"playground-label",text:"Follow your curiosity"}),
-      el("div",{class:"playground-questions"},exs.map(x=>el("button",{class:"playground-question",onclick:()=>{$("#q").value=x;send()}},el("span",{text:x}),el("b",{"aria-hidden":"true",text:"↗"}))))):null,
+      el("div",{class:"playground-questions"},exs.map((x,i)=>el("button",{class:"playground-question",style:"--question-order:"+i,onclick:()=>{$("#q").value=x;send()}},el("span",{text:x}),el("b",{"aria-hidden":"true",text:"↗"}))))):null,
     el("div",{},el("h2",{class:"playground-label shortcut-label",text:"Chat tools"}),el("div",{class:"playground-actions"},actions.map(([icon,title,detail,action])=>el("button",{class:"playground-action",onclick:action},el("em",{"aria-hidden":"true",text:icon}),el("b",{text:title}),el("small",{text:detail}))))),
     el("p",{class:"playground-quiet",text:S.cfg.provider.type==="mock"?"Demo uses built-in answers. No model or paid calls.":"Answers use your configured sources and model."}));
 }

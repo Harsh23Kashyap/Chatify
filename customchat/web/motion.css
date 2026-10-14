@@ -411,3 +411,9 @@ html[data-motion=none] .msg.err{animation:none!important}
  html[data-motion=none],html[data-motion=none] *,html[data-motion=none] *::before,html[data-motion=none] *::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}
  @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
 }
+/* Suggested questions arrive once with a short reading-order fade, never a scroll cascade. */
+@media(prefers-reduced-motion:no-preference){
+html:not([data-motion=none]) .hero>div:has(>.playground-questions){animation:none!important}
+html:not([data-motion=none]) .playground-questions>.playground-question{animation:m-in 140ms ease-out both;animation-delay:calc(min(var(--question-order,0),7)*28ms)}
+html[data-motion=subtle] .playground-questions>.playground-question{animation-duration:120ms;animation-delay:0s}
+}
