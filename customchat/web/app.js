@@ -259,7 +259,7 @@ async function download(path, name) {
 
 function scopeChip() {
  const p=$("#scopeChip");p.replaceChildren();
- if (S.scope) p.append(el("span",{class:"scope-selected-label",text:"Only " + (S.scope.document || S.scope.source),title:"Only " + (S.scope.document || S.scope.source)}),el("button",{class:"chip",onclick:()=>{S.scope=null;scopeChip()}},"Clear"));
+ if (S.scope) p.append(el("span",{class:"scope-selected-label",text:"Only " + (S.scope.document || S.scope.source),title:"Only " + (S.scope.document || S.scope.source)}),el("button",{class:"chip",onclick:()=>{S.scope=null;scopeChip();$("#scopeBtn").focus()}},"Clear"));
 }
 async function scopeDialog() {
  const trigger=$("#scopeBtn");if(trigger.dataset.running==="true")return;trigger.dataset.running="true";trigger.setAttribute("aria-busy","true");const original=trigger.textContent,originalMinWidth=trigger.style.minWidth;trigger.style.minWidth=trigger.getBoundingClientRect().width+"px";trigger.textContent="Loading...";
