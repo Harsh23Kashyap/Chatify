@@ -910,16 +910,17 @@ async function drawOllamaSetup(host) {
 }
 async function pollOllamaSetup(host,id){
   host.dataset.poll=id;
+  const heading=el('h3',{text:'Ollama setup'}),message=el('p',{role:'status','aria-live':'polite','aria-atomic':'true'}),amount=el('p',{class:'h',hidden:''}),details=el('div');
+  const recheck=el('button',{type:'button',class:'mini',text:'Recheck local service',onclick:()=>drawOllamaSetup(host)}),retry=el('button',{type:'button',class:'mini',text:'Retry after fresh review',hidden:'',onclick:()=>drawOllamaSetup(host)}),cancel=el('button',{type:'button',class:'mini',text:'Cancel setup work',onclick:async()=>{if(cancel.disabled)return;cancel.disabled=true;try{await api('/api/ollama/setup/cancel',{id})}catch(e){if(host.dataset.poll===id){message.textContent=e.message;cancel.disabled=false}}}});
+  host.replaceChildren(heading,message,amount,details,recheck,retry,cancel);
   for(let i=0;i<310 && host.isConnected && host.dataset.poll===id;i++){
     const st=await api('/api/ollama/setup/status?id='+encodeURIComponent(id));
     if(!host.isConnected||host.dataset.poll!==id)return;
-    host.replaceChildren(el('h3',{text:st.state==='ready'?'Ollama is ready':'Ollama setup'}),el('p',{text:st.message}));
-    if(st.downloaded_bytes)host.append(el('p',{class:'h',text:(st.downloaded_bytes/1048576).toFixed(1)+' MB downloaded'+(st.total_bytes?' of '+(st.total_bytes/1048576).toFixed(1)+' MB':' · total size unknown')}));
-    if(st.sha256){const d=el('details',{},el('summary',{text:'Downloaded installer fingerprint'}),el('small',{text:st.sha256}));host.append(d);}
-    if(st.page)host.append(el('a',{href:st.page,target:'_blank',rel:'noopener',text:'Official installation instructions'}));
-    host.append(el('button',{type:'button',class:'mini',text:'Recheck local service',onclick:()=>drawOllamaSetup(host)}));
-    if(['ready','failed','needs_manual','cancelled'].includes(st.state)){if(st.state!=='ready')host.append(el('button',{type:'button',class:'mini',text:'Retry after fresh review',onclick:()=>drawOllamaSetup(host)}));return;}
-    host.append(el('button',{type:'button',class:'mini',text:'Cancel setup work',onclick:async()=>{await api('/api/ollama/setup/cancel',{id})}}));
+    heading.textContent=st.state==='ready'?'Ollama is ready':'Ollama setup';message.textContent=st.message;
+    amount.hidden=!st.downloaded_bytes;if(st.downloaded_bytes)amount.textContent=(st.downloaded_bytes/1048576).toFixed(1)+' MB downloaded'+(st.total_bytes?' of '+(st.total_bytes/1048576).toFixed(1)+' MB':' · total size unknown');
+    if(st.sha256&&!details.querySelector('details'))details.append(el('details',{},el('summary',{text:'Downloaded installer fingerprint'}),el('small',{text:st.sha256})));
+    if(st.page&&!details.querySelector('a'))details.append(el('a',{href:st.page,target:'_blank',rel:'noopener',text:'Official installation instructions'}));
+    if(['ready','failed','needs_manual','cancelled'].includes(st.state)){const focusCancel=document.activeElement===cancel;cancel.hidden=true;retry.hidden=st.state==='ready';if(focusCancel)recheck.focus();return;}
     await new Promise(r=>setTimeout(r,2000));
   }
 }
