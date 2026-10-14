@@ -1320,3 +1320,7 @@ html body.settings-tabs #look .field>.compact-help{margin-top:-8px!important;mar
 
 /* Copy status labels keep the neighboring Save action still. */
 @media(min-width:481px){body.settings-tabs .helper .secondary-actions .helper-copy{min-width:114px}}
+
+/* The longest helper-save label sets its stable hit area. */
+@media(min-width:481px){body.settings-tabs .helper .secondary-actions .helper-save-draft{min-width:158px}}
+@media(max-width:480px){html body.settings-tabs #codeEditor .helper .secondary-actions .helper-save-draft{min-height:65px!important}}
