@@ -241,7 +241,7 @@ html.preview body,html.preview .app,html.preview .main,html.preview .bar,html.pr
 html[data-motion=none] *,html[data-motion=none] *::before{animation:none!important;transition:none!important;scroll-behavior:auto!important}
 @media(prefers-reduced-motion:reduce){*,*::before{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
 /* Short feedback transitions. No perpetual app-wide movement. */
-button,a[role=tab],.preset,.editor-choice,.emoji-tile{transition:background-color .16s ease,color .16s ease,border-color .16s ease,box-shadow .16s ease,transform .14s ease}
+button,a.go,a[role=tab],.preset,.editor-choice,.emoji-tile{transition:background-color .16s ease,color .16s ease,border-color .16s ease,box-shadow .16s ease,transform .14s ease}
 button:not(:disabled):active{transform:translateY(1px)}
 input[type=checkbox]{transition:background-color .16s ease,border-color .16s ease}
 details>summary{transition:color .16s ease,background-color .16s ease}
@@ -250,7 +250,7 @@ details>summary{transition:color .16s ease,background-color .16s ease}
 .testres:not(:empty),.msg:not(:empty),.builder-field-error:not(:empty){animation:cc-feedback-arrive .18s ease-out}
 @keyframes cc-panel-arrive{from{opacity:.75;transform:translateY(3px)}to{opacity:1;transform:none}}
 @keyframes cc-feedback-arrive{from{opacity:.5}to{opacity:1}}
-@media(prefers-reduced-motion:reduce){button,a[role=tab],.preset,.editor-choice,.emoji-tile,input[type=checkbox],details>summary,.cs-opt{transition:none!important;transform:none!important}.settings-active-panel,.testres,.msg,.builder-field-error{animation:none!important}}
+@media(prefers-reduced-motion:reduce){button,a.go,a[role=tab],.preset,.editor-choice,.emoji-tile,input[type=checkbox],details>summary,.cs-opt{transition:none!important;transform:none!important}.settings-active-panel,.testres,.msg,.builder-field-error{animation:none!important}}
 
 /* Passive state never breathes or shakes; local edits keep text and geometry immediate. */
 .msg.err,.testres.bad{animation:m-in .16s ease-out!important}.savebar span.dirty::before{animation:none!important}.rv,.rv.in{transform:none!important;transition:none!important}.preview *{transition-property:background-color,color,border-color!important}.toast{animation-duration:.16s!important}@keyframes m-toast-in{from{opacity:0;transform:translateX(-50%) translateY(4px)}to{opacity:1;transform:translateX(-50%)}}@media(prefers-reduced-motion:reduce){.msg.err,.testres.bad,.toast{animation:none!important}}
