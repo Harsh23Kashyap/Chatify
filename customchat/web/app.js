@@ -387,7 +387,7 @@ async function loadList() {
       if (!rows.length) list.append(el("div", { class: "empty", text: query ? "No chats match your search. Try another word or clear the search." : "Your conversations will appear here. Ask a question to start." }));
       let lastGroup = "";
       const cnt = {}; rows.forEach((c) => { cnt[c.title] = (cnt[c.title] || 0) + 1; });
-      rows.forEach((c) => { const g = c.pinned ? "Pinned" : dayLabel(c.created); if (g !== lastGroup) { list.append(el("div", { class: "group", text: g })); lastGroup = g; } list.append(el("div", { class: "item" + (c.id === S.chat ? " on" : ""), title: c.title, "aria-current":c.id===S.chat?"true":undefined, role:"button",tabindex:"0","aria-label":"Open chat: "+c.title,onkeydown:e=>activateHistory(e,()=>openChat(c.id)), onclick: () => openChat(c.id) },
+      rows.forEach((c) => { const g = c.pinned ? "Pinned" : dayLabel(c.created); if (g !== lastGroup) { list.append(el("div", { class: "group", text: g })); lastGroup = g; } list.append(el("div", { class: "item" + (c.id === S.chat ? " on" : ""), title: c.title, "aria-current":c.id===S.chat?"true":"false", role:"button",tabindex:"0","aria-label":"Open chat: "+c.title,onkeydown:e=>activateHistory(e,()=>openChat(c.id)), onclick: () => openChat(c.id) },
         el("span", { class: "t", text: c.title }), cnt[c.title] > 1 ? el("span", { class: "tm", text: new Date(c.created * 1000).toLocaleTimeString([], { hour: "numeric", minute: "2-digit" }) }) : null, c.pinned ? el("span", { class: "pinned", title: "Pinned" }, svg("pin")) : null,
         el("span", { class: "acts" },
           el("button", { class: c.pinned ? "is-pinned" : "", title: c.pinned ? "Unpin" : "Pin", "aria-label": (c.pinned ? "Unpin " : "Pin ") + c.title, "aria-pressed": c.pinned ? "true" : "false", onclick: async (e) => { e.stopPropagation(); await api("/api/pin", { chat: c.id, pinned: !c.pinned }); loadList(); } }, svg("pin")),
@@ -396,7 +396,7 @@ async function loadList() {
     } else {
       const rows = await api("/api/topics"); if (seq !== loadList.seq) return;delete list.dataset.chatsSignature;list.replaceChildren();
       if (!rows.length) list.append(el("div", { class: "empty", text: "Conversations appear after your first question." }));
-      rows.forEach((t) => list.append(el("div", { class: "item" + (t.id === S.topic ? " on" : ""), role:"button",tabindex:"0","aria-label":"Open conversation: "+t.title,onkeydown:e=>activateHistory(e,()=>openTopic(t.id)),onclick: () => openTopic(t.id) },
+      rows.forEach((t) => list.append(el("div", { class: "item" + (t.id === S.topic ? " on" : ""), role:"button",tabindex:"0","aria-current":t.id===S.topic?"true":"false","aria-label":"Open conversation: "+t.title,onkeydown:e=>activateHistory(e,()=>openTopic(t.id)),onclick: () => openTopic(t.id) },
         el("span", { class: "t" }, t.title, el("span", { class: "sub", text: (t.summary ? t.summary.slice(0, 70) : t.turns + " question" + (t.turns === 1 ? "" : "s")) })),
         el("span", { class: "acts" }, el("button", { title: "Rename", "aria-label": "Rename " + t.title, onclick: async (e) => { e.stopPropagation(); const n = prompt("Rename conversation", t.title); if (n) { await api("/api/rename-topic", { topic: t.id, title: n }); loadList(); } } }, svg("edit"))))));
     }
@@ -425,7 +425,7 @@ async function openTopic(id) {
   S.topic = id; S.newTopic = false;
   S.turns = await api("/api/topic-turns?topic=" + id);
   S.chat = S.turns.length ? S.turns[S.turns.length - 1].chat : null;
-  $("#chatTitle").textContent = "Conversation"; $("#app").classList.remove("menu-open"); drawThread(); $("#q").focus();
+  $("#chatTitle").textContent = "Conversation"; $("#app").classList.remove("menu-open"); drawThread(); loadList(); $("#q").focus();
 }
 function newChat() { if (!confirmTemporaryExit()) return; S.view = "chat"; setTemp(false); loadSuggestions(); S.chat = null; S.topic = null; S.newTopic = false; S.turns = []; $("#chatTitle").textContent = "New chat"; $("#app").classList.remove("src", "menu-open"); drawThread(); loadList(); $("#q").focus(); }
 
