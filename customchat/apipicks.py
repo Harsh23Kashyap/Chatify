@@ -1,6 +1,9 @@
 """Known provider pages inspected during development. No live requests or key creation."""
 import copy,re
 PAGES={
+ 'pubmed':{'name':'PubMed','page':'https://www.ncbi.nlm.nih.gov/books/NBK25501/','docs':'https://eutilities.github.io/site/API_Key/usageandkey/','key_required':False,'source':{'id':'pubmed','label':'PubMed','type':'pubmed'}},
+ 'arxiv':{'name':'arXiv','page':'https://info.arxiv.org/help/api/index.html','docs':'https://info.arxiv.org/help/api/user-manual.html','key_required':False,'source':{'id':'arxiv','label':'arXiv','type':'arxiv'}},
+ 'crossref':{'name':'Crossref','page':'https://www.crossref.org/documentation/retrieve-metadata/rest-api/','key_required':False,'source':{'id':'crossref','label':'Crossref','type':'crossref'}},
  'wikipedia':{'name':'Wikipedia','page':'https://www.mediawiki.org/wiki/API:Main_page','key_required':False,'source':{'id':'wikipedia','label':'Wikipedia','type':'wikipedia','lang':'en'}},
  'brave':{'name':'Brave Search','page':'https://brave.com/search/api/','key_required':True,'docs':'https://api-dashboard.search.brave.com/app/documentation/web-search/get-started','key_page':'https://api-dashboard.search.brave.com/register'},
  'open-meteo':{'name':'Open-Meteo','page':'https://open-meteo.com/en/docs','key_required':False},

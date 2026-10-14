@@ -93,3 +93,14 @@ html #sec-search .saved-setup-checks input::before,html #sec-search .saved-setup
 @keyframes builder-api-enter{from{opacity:0}to{opacity:1}}
 @media(prefers-reduced-motion:reduce){.builder-final-api{animation:none!important}}
 html[data-motion=none] .builder-final-api,html[data-motion=calm] .builder-final-api{animation:none!important}
+/* Final API choices: compact catalog first, setup on demand. */
+.builder-final-apis{max-width:900px;margin:24px 0}
+.builder-final-api{padding:14px 0}
+.builder-final-api label strong{font-size:16px;line-height:1.4}
+.builder-final-api>p{font-size:14px;max-width:65ch;padding-left:28px;color:var(--muted)}
+.builder-final-api details{margin:8px 0 0 28px;border:0;border-radius:0;padding:0}
+.builder-final-api summary{min-height:44px;display:flex;align-items:center;font-size:14px;cursor:pointer}
+.builder-api-setup[open]{border-top:1px solid var(--line);padding-top:8px}
+.builder-final-api .builder-api-links{display:flex;flex-wrap:wrap;gap:8px 20px;margin:12px 0}
+.builder-final-api .builder-api-code pre{border:1px solid var(--line);padding:12px;border-radius:4px;background:var(--bg)}
+@media(max-width:480px){.builder-final-api>p{padding-left:0}.builder-final-api details{margin-left:0}.builder-final-apis{margin:24px 0}}

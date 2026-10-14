@@ -109,8 +109,8 @@ class Engine:
             except providers.ProviderError:
                 pass
         # REST news/search endpoints generally expect keywords, not a full instruction.
-        if any(x.get("type")=="http_json" for x in self.cfg["sources"]):
-            stop=self._STOP|set("summarize summary headline headlines news give compact table chart graph plot publication date dates citations cite explain compare current latest reported report please only sample sources source detail detailed".split())
+        if any(x.get("type") in ("http_json","arxiv","pubmed","wikipedia","crossref") for x in self.cfg["sources"]):
+            stop=self._STOP|set("summarize summary headline headlines news give compact table chart graph plot publication date dates citations cite explain compare current latest reported report please only sample sources source detail detailed published research studies study findings benefits limits".split())
             words=[w for w in re.findall(r"[A-Za-z0-9][A-Za-z0-9-]*",question) if w.lower() not in stop]
             short=" ".join(words[:6])
             if short and short.lower()!=question.lower():return [question,short]

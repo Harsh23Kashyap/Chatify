@@ -10,7 +10,8 @@ from pathlib import Path
 sys.path.insert(0,sys.argv[1])
 m,f=sys.argv[2].split(':',1)
 q,k=json.loads(sys.stdin.read())
-x=list(getattr(importlib.import_module(m),f)(q,k))[:k]
+x=getattr(importlib.import_module(m),f)(q,k)
+if isinstance(x,list):x=x[:k]
 Path(sys.argv[3]).write_text(json.dumps(x))
 '''
 class BoundedPlugin:
@@ -38,10 +39,5 @@ class BoundedPlugin:
      time.sleep(.05)
    if p.returncode or not result.exists():raise ValueError('Connector failed in bounded mode; inspect its code and dependencies')
    if result.stat().st_size>2*1024*1024:raise ValueError('Connector result exceeds 2 MB')
-   rows=json.loads(result.read_text())
-   if not isinstance(rows,list) or not all(isinstance(x,dict) for x in rows):raise ValueError('Connector must return evidence objects')
-   out=[]
-   for e in rows[:k]:
-    if any(key in e and not isinstance(e[key],str) for key in ('id','title','text','url','source','venue')):raise ValueError('Connector evidence text fields must be strings')
-    out.append({**Evidence(),**e,'source':self.id})
-   return out
+   from .recovery import recover_evidence
+   return recover_evidence(json.loads(result.read_text()),self.id,k)

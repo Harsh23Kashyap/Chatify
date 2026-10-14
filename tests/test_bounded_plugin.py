@@ -16,7 +16,7 @@ class BoundedTests(unittest.TestCase):
  def test_wrong_result(self):
   with tempfile.TemporaryDirectory() as d:
    Path(d,'plug.py').write_text('def search(q,k):return ["bad"]')
-   with self.assertRaises(ValueError):BoundedPlugin({'id':'x','label':'x','entry':'plug:search'},d).search('q',2)
+   self.assertEqual(BoundedPlugin({'id':'x','label':'x','entry':'plug:search'},d).search('q',2)[0]['text'],'bad')
  def test_environment_allowlist(self):
   with tempfile.TemporaryDirectory() as d:
    Path(d,'plug.py').write_text('import os\ndef search(q,k):\n return [{"text":str(os.getenv("PRIVATE_SESSION_VALUE"))}]')

@@ -38,7 +38,7 @@ class HttpJson:
         request = urllib.request.Request(url, headers=headers)
         opener = urllib.request.build_opener(_NoCredentialRedirect()).open if self.b.get('header_env') else urllib.request.urlopen
         with opener(request, timeout=self.b.get("timeout", 20)) as r:
-            raw = r.read().decode("utf-8", "replace")
+            raw = r.read(1500000).decode("utf-8", "replace")
         try:
             data = json.loads(raw)
         except ValueError:
@@ -48,7 +48,10 @@ class HttpJson:
             raise ValueError('HTTP source rejected the query; check its key, quota and plan')
         items = dig(data, self.b.get("results_path", "")) or []
         if not isinstance(items, list) or not all(isinstance(item, dict) for item in items):
-            raise ValueError('HTTP source result mapping must select a list of objects')
+            from .recovery import recover_evidence
+            recovered=recover_evidence(data,self.id,k)
+            if not recovered:raise ValueError('HTTP source result mapping has no usable evidence')
+            return recovered
         f = self.b.get("fields", {})
         out = []
         for i, item in enumerate(items):

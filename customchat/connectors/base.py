@@ -39,11 +39,7 @@ def make_connector(block, base_dir="."):
         class Plugin:
             def __init__(self): self.id = block["id"]; self.label = block["label"]
             def search(self, q, k):
-                out = []
-                for e in f(q, k):
-                    e = {**Evidence(), **e}
-                    e["source"] = self.id
-                    out.append(e)
-                return out
+                from .recovery import recover_evidence
+                return recover_evidence(f(q,k),self.id,k)
         return Plugin()
     raise ValueError("Unknown connector " + t)

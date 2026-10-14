@@ -6,7 +6,7 @@ from customchat.portable import bundle
 class Reply:
  def __enter__(self):return self
  def __exit__(self,*a):pass
- def read(self):return json.dumps({'articles':[{'title':'Fixture only','description':'Not real news','url':'https://example.test/story','author':'Fixture author','publishedAt':'2026-10-09T00:00:00Z','source':{'name':'Fixture publisher'}}]}).encode()
+ def read(self,limit=-1):return json.dumps({'articles':[{'title':'Fixture only','description':'Not real news','url':'https://example.test/story','author':'Fixture author','publishedAt':'2026-10-09T00:00:00Z','source':{'name':'Fixture publisher'}}]}).encode()
 class SourceKeys(unittest.TestCase):
  def setUp(self):
   self.tmp=tempfile.TemporaryDirectory();self.old=secrets.STORE;secrets.STORE=secrets.SecretStore(self.tmp.name)
