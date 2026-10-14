@@ -12,5 +12,5 @@
   document.querySelector('main>h1')?.animate([{opacity:0},{opacity:1}],{duration:180,easing:'ease-out'});
   document.querySelector('main>p')?.animate([{opacity:0},{opacity:1}],{duration:180,delay:40,easing:'ease-out',fill:'backwards'});
  }
- fetch('/api/theme').then(r=>r.json()).then(r=>{document.documentElement.dataset.motion=(r.theme||r).motion;revealIntro()}).catch(revealIntro);
+ fetch('/api/theme').then(r=>r.json()).then(r=>{const motion=(r.theme||r).motion;document.documentElement.dataset.motion=["calm","none"].includes(motion)?"none":motion;revealIntro()}).catch(revealIntro);
 })();

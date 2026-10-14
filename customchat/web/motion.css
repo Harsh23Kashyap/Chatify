@@ -408,6 +408,6 @@ html[data-motion=none] .msg.save-confirmed{animation:none!important}
 html[data-motion=none] .msg.err{animation:none!important}
 /* Important safety rules in a layer outrank component-level important effects. */
 @layer cc-motion-safety {
- html[data-motion=none] *,html[data-motion=none] *::before,html[data-motion=none] *::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+ html[data-motion=none],html[data-motion=none] *,html[data-motion=none] *::before,html[data-motion=none] *::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}
  @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
 }
