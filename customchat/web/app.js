@@ -582,17 +582,17 @@ async function init() {
       const error=el('p',{class:'action-error',role:'status'});content.append(error);
       const preview=el('button',{class:'reading-done',text:'Preview action',onclick:async()=>{if(preview.disabled)return;preview.disabled=true;preview.textContent='Preparing...';error.textContent='';
        try{const args=Object.fromEntries(Object.entries(inputs).map(([k,v])=>[k,v.value])),review=await api('/api/actions/prepare',{tool:tool.id,args});
-        content.replaceChildren(el('h3',{text:review.label}),el('p',{text:review.mode==='write'?'This will save a note in this app.':'This will show your notes in this app.'}));
+        const focusReview=dialog.open&&(document.activeElement===document.body||document.activeElement===dialog||content.contains(document.activeElement));content.replaceChildren(el('h3',{text:review.label}),el('p',{text:review.mode==='write'?'This will save a note in this app.':'This will show your notes in this app.'}));
         for(const [name,value] of Object.entries(review.args))content.append(el('section',{class:'action-value'},el('h4',{text:labels[name]||name}),el('p',{text:value})));
         content.append(el('p',{text:'Saved under this app identity. Shared-login modes share notes. Review expires in 5 minutes.'}));
         const failure=el('p',{class:'action-error',role:'status'}),back=el('button',{class:'chip',text:'Back to edit',onclick:form});
         const confirm=el('button',{class:'reading-done',text:'Confirm action',onclick:async()=>{if(confirm.disabled)return;confirm.disabled=true;back.disabled=true;confirm.textContent='Working...';
-         try{const result=await api('/api/actions/execute',{ticket:review.ticket});content.replaceChildren(el('h3',{text:result.saved?'Note saved':'Your notes'}));
+         try{const result=await api('/api/actions/execute',{ticket:review.ticket}),focusResult=dialog.open&&(document.activeElement===document.body||document.activeElement===dialog||content.contains(document.activeElement));content.replaceChildren(el('h3',{text:result.saved?'Note saved':'Your notes'}));
           if(result.saved)content.append(el('p',{text:'Your note was saved in this app.'}));
           else if(Array.isArray(result.notes)){if(!result.notes.length)content.append(el('p',{text:'No notes saved yet.'}));for(const note of result.notes)content.append(el('section',{class:'action-value'},el('h4',{text:note.title}),el('p',{text:note.text})))}
-          else content.append(el('p',{text:'Action complete.'}));const heading=content.querySelector('h3');heading.tabIndex=-1;heading.focus();
+          else content.append(el('p',{text:'Action complete.'}));const heading=content.querySelector('h3');heading.tabIndex=-1;if(focusResult)heading.focus();
          }catch(err){failure.textContent=err.message+' Return to the form to review a fresh action. If the connection was interrupted, check your notes before saving again.';confirm.textContent='Action not confirmed';back.disabled=false;if(dialog.open&&(document.activeElement===document.body||document.activeElement===dialog||document.activeElement===confirm))back.focus()}
-        }});content.append(failure,back,confirm);back.focus();
+        }});content.append(failure,back,confirm);if(focusReview)back.focus();
        }catch(err){error.textContent=err.message;preview.disabled=false;preview.textContent='Preview action';if(dialog.open&&(document.activeElement===document.body||document.activeElement===dialog||document.activeElement===preview))preview.focus()}
       }});content.append(preview);(Object.values(inputs)[0]||preview).focus();
      };form();
