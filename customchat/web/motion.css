@@ -452,3 +452,7 @@ html[data-motion=none] .fresh :is(.srcs,.nf-tips,.meta.fu),html[data-motion=calm
 html[data-motion=subtle] .meta.fu{animation-duration:120ms}
 html[data-motion=none] .meta.fu,html[data-motion=calm] .meta.fu{animation:none!important}
 @media(prefers-reduced-motion:reduce){.meta.fu{animation:none!important}}
+
+.local-empty{animation:m-in 140ms ease-out both;transform:none}
+html[data-motion=none] .local-empty,html[data-motion=calm] .local-empty{animation:none!important}
+@media(prefers-reduced-motion:reduce){.local-empty{animation:none!important}}
