@@ -104,3 +104,14 @@ class BuilderHTTP(test_workspace_api.WorkspaceAPITests):
   self.call(self.clients[0],'/api/settings/build/save',{'ticket':plan['ticket'],'confirmed':True})
   first=next(iter(prompts.STAGES));response=self.call(self.clients[0],'/api/prompts/save',{'key':first,'text':'My newer prompt','on':False})
   for stage in response['stages']:self.assertEqual(stage['text'],'My newer prompt' if stage['key']==first else 'Trip planning fixture '+stage['key'])
+
+ def test_reset_one_prompt_after_builder_apply_keeps_other_saved_stages(self):
+  from pathlib import Path
+  from customchat import prompts
+  path=Path(self.cfg['_dir'])/'app.yaml';path.write_text(yaml.safe_dump({k:self.cfg[k] for k in schema.DEFAULTS}));self.cfg['_path']=str(path)
+  self.engine.prompts=prompts.PromptStore('');self.engine.prompts.view(self.cfg['prompt']['system'])
+  generated={'pipeline_prompts':{'text':{k:'Trip planning fixture '+k for k in prompts.STAGES},'on':{k:False for k in prompts.STAGES}}}
+  plan=self.call(self.clients[0],'/api/settings/build/review',{'yaml':yaml.safe_dump(generated),'sections':['pipeline_prompts']})
+  self.call(self.clients[0],'/api/settings/build/save',{'ticket':plan['ticket'],'confirmed':True})
+  first=next(iter(prompts.STAGES));response=self.call(self.clients[0],'/api/prompts/reset',{'key':first})
+  for stage in response['stages']:self.assertEqual(stage['text'],'' if stage['key']==first else 'Trip planning fixture '+stage['key'])

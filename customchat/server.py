@@ -435,6 +435,8 @@ def make_handler(cfg, engine):
                         engine.prompts.save(str(b.get("key") or ""), b.get("text"), b.get("on")); engine._cache.clear()
                         return self._send(200, {"stages": engine.prompts.view(cfg["prompt"]["system"], cfg["prompt"].get("revise",False))})
                     if path == "/api/prompts/reset" and method == "POST":
+                        saved=editstate.saved_view(cfg)
+                        engine.prompts=promptmod.PromptStore(state_folder,saved.get("pipeline_prompts"))
                         engine.prompts.reset(str(b.get("key") or "")); engine._cache.clear()
                         return self._send(200, {"stages": engine.prompts.view(cfg["prompt"]["system"], cfg["prompt"].get("revise",False))})
                     if path == "/api/prompts/test" and method == "POST":

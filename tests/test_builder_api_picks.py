@@ -25,3 +25,14 @@ class Picks(unittest.TestCase):
   job={'cancel':False,'calls':0,'provider':Provider(),'cfg':copy.deepcopy(schema.DEFAULTS),'parts':{},'errors':{},'active':set(),'brief':'Trip fixture'}
   with self.assertRaisesRegex(ValueError,'API helper contract failed'):buildjobs.BuildJobs()._draft_part(job,'api',dict(buildjobs.PARTS)['api'])
   self.assertNotIn('api',job['parts'])
+
+ def test_section_api_generation_is_concrete_and_does_not_widen_scope(self):
+  cfg=copy.deepcopy(schema.DEFAULTS);cfg['provider'].update(type='openai',model='fixture')
+  picks=[{'name':'Wikipedia','service':'Wikipedia','reason':'Background','connector':'wikipedia','setup':'Review','caveat':'Offline','helper':{'brief':'Wikipedia fixture','code':generators.code_template('search','')}}]
+  class Provider:
+   def complete(self,messages):return json.dumps({'message':'Review API','config':{'api_suggestions':picks}})
+  data={'consent':True,'messages':[{'role':'user','content':'Trip app API choices'}],'sections':['api_suggestions']}
+  raw=yaml.safe_load(appbuilder.talk(Provider(),cfg,data)['yaml'])
+  self.assertEqual(set(raw),{'api_suggestions'});self.assertEqual(raw['api_suggestions'][0]['docs_url'],apipicks.PAGES['wikipedia']['page'])
+  picks[0].pop('helper')
+  with self.assertRaisesRegex(ValueError,'Missing independent code helper'):appbuilder.talk(Provider(),cfg,data)

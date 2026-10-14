@@ -162,16 +162,8 @@ class BuildJobs:
   for name in ('txt_title','txt_tagline','txt_examples','txt_placeholder','txt_footer','txt_disclaimer','txt_hint','txt_sidebar'):
    if not raw['appearance'].get(name):raise ValueError('Appearance '+name+' is blank')
   if not raw.get('api_suggestions'):raise ValueError('API recommendations missing')
-  from .apipicks import enrich,PAGES
-  raw['api_suggestions']=enrich(raw['api_suggestions'])
-  for pick in raw['api_suggestions']:
-   if not pick.get('helper'):raise ValueError('Missing independent code helper for API '+pick.get('service',pick.get('name','pick')))
-  for i,pick in enumerate(raw['api_suggestions']):
-   helper=pick.get('helper')
-   if helper:raw['helper_drafts']['search_api_'+str(i+1)]=copy.deepcopy(helper)
-   if not pick.get('key_required',True):
-    info=next((x for x in PAGES.values() if x['page']==pick.get('provider_page')),None)
-    if info and info.get('source') and not any(s.get('type')==info['source']['type'] for s in raw['sources']):raw['sources'].append(copy.deepcopy(info['source']))
+  from .apipicks import complete_drafts
+  raw=complete_drafts(raw)
   raw=appbuilder.validate(yaml.safe_dump(raw,sort_keys=False))
   raw['provider']=copy.deepcopy(job['cfg']['provider'])
   raw['budget']=copy.deepcopy(job['cfg'].get('budget',schema.DEFAULTS['budget']))

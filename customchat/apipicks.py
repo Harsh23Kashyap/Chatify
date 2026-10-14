@@ -17,3 +17,20 @@ def enrich(items):
     item['provider_page']=info['page'];item['key_required']=info['key_required'];item['docs_url']=info.get('docs',info['page']);item['key_url']=info.get('key_page',info['page']) if info['key_required'] else '';break
  return result
 def helper_kind(kind):return 'search' if re.fullmatch(r'search_[a-z0-9_]{1,60}',kind or '') else kind
+
+def complete_drafts(raw,require_helpers=True):
+ """Complete generated API setup without activating code or making requests."""
+ from . import generators
+ raw=copy.deepcopy(raw);raw['api_suggestions']=enrich(raw.get('api_suggestions',[]))
+ for i,pick in enumerate(raw['api_suggestions']):
+  if not str(pick.get('service','')).strip():raise ValueError('API recommendations must name a concrete service pick')
+  helper=pick.get('helper')
+  if require_helpers and not helper:raise ValueError('Missing independent code helper for API '+pick['service'])
+  if helper:
+   ok,problems=generators.review_code('search',helper['code'])
+   if not ok:raise ValueError('API helper contract failed: '+'; '.join(problems))
+   if 'helper_drafts' in raw:raw['helper_drafts']['search_api_'+str(i+1)]=copy.deepcopy(helper)
+  if 'sources' in raw and not pick.get('key_required',True):
+   info=next((x for x in PAGES.values() if x['page']==pick.get('provider_page')),None)
+   if info and info.get('source') and not any(s.get('type')==info['source']['type'] for s in raw['sources']):raw['sources'].append(copy.deepcopy(info['source']))
+ return raw
