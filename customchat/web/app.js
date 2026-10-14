@@ -175,8 +175,8 @@ function showSources(evidence, hl, trigger) {
       highlight(el("p", {class:e.text ? "source-text" : "source-unavailable"}), e.text || "Source excerpt unavailable. This saved reference has no text to inspect.", terms),
       e.url ? el("a", { href: e.url, target: "_blank", rel: "noopener noreferrer", text: "Open source" }) : null)));
   };
-  if (types.length > 1) types.forEach((t) => filters.append(el("button", { class: "chip", onclick: (ev) => {
-    const on = ev.target.classList.toggle("on"); filters.querySelectorAll(".chip").forEach((c) => c !== ev.target && c.classList.remove("on")); draw(on ? t : null);
+  if (types.length > 1) types.forEach((t) => filters.append(el("button", { class: "chip", "aria-pressed":"false", onclick: (ev) => {
+    const button=ev.currentTarget,on=button.classList.toggle("on"); filters.querySelectorAll(".chip").forEach(c=>{if(c!==button)c.classList.remove("on");c.setAttribute("aria-pressed",String(c===button&&on))}); draw(on ? t : null);
   } }, (S.cfg.sources.find((s) => s.id === t) || {}).label || t)));
   pane.append(el("button", { class: "icon", style: "float:right", "aria-label": "Close sources", title: "Close sources", onclick: closeSources }, svg("close")),
     el("h3", { text: "Sources" }), el("div", { class: "sub", text: evidence.length + " used for this answer" }), filters, list);
