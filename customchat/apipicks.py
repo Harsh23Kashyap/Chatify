@@ -18,6 +18,12 @@ def enrich(items):
  return result
 def helper_kind(kind):return 'search' if re.fullmatch(r'search_[a-z0-9_]{1,60}',kind or '') else kind
 
+def check_description(pick):
+ service=re.sub(r'[^a-z0-9]','',str(pick.get('service','')).lower())
+ for field in ('what','reason'):
+  text=str(pick.get(field,'')).strip()
+  if len(text)<40 or len(text.split())<7 or re.sub(r'[^a-z0-9]','',text.lower())==service:raise ValueError('API '+field+' must be a useful sentence, not only a service name or short label')
+
 def complete_drafts(raw,require_helpers=True):
  """Complete generated API setup without activating code or making requests."""
  from . import generators
@@ -29,8 +35,8 @@ def complete_drafts(raw,require_helpers=True):
   if helper:
    ok,problems=generators.review_code('search',helper['code'])
    if not ok:raise ValueError('API helper contract failed: '+'; '.join(problems))
-   if 'helper_drafts' in raw:raw['helper_drafts']['search_api_'+str(i+1)]=copy.deepcopy(helper)
-  if 'sources' in raw and not pick.get('key_required',True):
+   if 'helper_drafts' in raw and pick.get('selected',True):raw['helper_drafts']['search_api_'+str(i+1)]=copy.deepcopy(helper)
+  if 'sources' in raw and pick.get('selected',True) and not pick.get('key_required',True):
    info=next((x for x in PAGES.values() if x['page']==pick.get('provider_page')),None)
    if info and info.get('source') and not any(s.get('type')==info['source']['type'] for s in raw['sources']):raw['sources'].append(copy.deepcopy(info['source']))
  return raw

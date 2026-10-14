@@ -21,14 +21,14 @@ class Picks(unittest.TestCase):
 
  def test_api_helper_static_failure_rejected_in_build_part(self):
   class Provider:
-   def complete(self,messages):return json.dumps([{'name':'Bad fixture','service':'Wikipedia','reason':'Background','connector':'wikipedia','setup':'Review','caveat':'Offline','helper':{'brief':'Bad','code':'import socket\ndef search(query, limit=6):\n return []'}}])
+   def complete(self,messages):return json.dumps([{'name':'Bad fixture','service':service,'what':'This service provides searchable public information to help answer user questions.','reason':'This API helps the trip app supply background information about destinations.','connector':'wikipedia','setup':'Review','caveat':'Offline','helper':{'brief':'Bad','code':'import socket\ndef search(query, limit=6):\n return []'}} for service in ['Wikipedia','Brave Search','Open-Meteo']])
   job={'cancel':False,'calls':0,'provider':Provider(),'cfg':copy.deepcopy(schema.DEFAULTS),'parts':{},'errors':{},'active':set(),'brief':'Trip fixture'}
   with self.assertRaisesRegex(ValueError,'API helper contract failed'):buildjobs.BuildJobs()._draft_part(job,'api',dict(buildjobs.PARTS)['api'])
   self.assertNotIn('api',job['parts'])
 
  def test_section_api_generation_is_concrete_and_does_not_widen_scope(self):
   cfg=copy.deepcopy(schema.DEFAULTS);cfg['provider'].update(type='openai',model='fixture')
-  picks=[{'name':'Wikipedia','service':'Wikipedia','reason':'Background','connector':'wikipedia','setup':'Review','caveat':'Offline','helper':{'brief':'Wikipedia fixture','code':generators.code_template('search','')}}]
+  picks=[{'name':name,'service':name,'what':'This service provides searchable public information for reader questions.','reason':'This service helps the app provide background information about destinations.','connector':'wikipedia','setup':'Review','caveat':'Offline','helper':{'brief':'Wikipedia fixture','code':generators.code_template('search','')}} for name in ['Wikipedia','Brave Search','Open-Meteo']]
   class Provider:
    def complete(self,messages):return json.dumps({'message':'Review API','config':{'api_suggestions':picks}})
   data={'consent':True,'messages':[{'role':'user','content':'Trip app API choices'}],'sections':['api_suggestions']}

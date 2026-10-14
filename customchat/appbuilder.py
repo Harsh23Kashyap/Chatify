@@ -55,11 +55,12 @@ def validate_extras(extras):
   t=extras['api_suggestions']
   if not isinstance(t,list) or len(t)>8:raise ValueError('Keep API suggestions to eight')
   for suggestion in t:
-   if not isinstance(suggestion,dict) or set(suggestion)-{'name','service','reason','connector','setup','caveat','provider_page','docs_url','key_url','key_required','helper'} or any(not isinstance(v,str) or len(v)>1000 for k,v in suggestion.items() if k not in ('key_required','helper')):raise ValueError('Invalid API suggestion')
+   if not isinstance(suggestion,dict) or set(suggestion)-{'name','service','what','reason','connector','setup','caveat','provider_page','docs_url','key_url','key_required','helper','selected'} or any(not isinstance(v,str) or len(v)>1000 for k,v in suggestion.items() if k not in ('key_required','helper','selected')):raise ValueError('Invalid API suggestion')
  from .apipicks import enrich
  if 'api_suggestions' in extras:extras['api_suggestions']=enrich(extras['api_suggestions'])
  for suggestion in extras.get('api_suggestions',[]):
   if 'key_required' in suggestion and type(suggestion['key_required']) is not bool:raise ValueError('key_required must be boolean')
+  if 'selected' in suggestion and type(suggestion['selected']) is not bool:raise ValueError('API selection must be boolean')
   if suggestion.get('helper'):validate_extras({'helper_drafts':{'search':suggestion['helper']}})
  _check_values(extras)
  return extras
@@ -162,7 +163,9 @@ def talk(provider,cfg,data):
  if 'provider' in selected and 'provider' not in draft:draft['provider']=defaults['provider']
  config=validate(yaml.safe_dump(draft,sort_keys=False))
  if 'api_suggestions' in draft:
-  from .apipicks import complete_drafts
+  from .apipicks import complete_drafts,check_description
+  if not 3<=len(draft['api_suggestions'])<=5:raise ValueError('Recommend three to five APIs')
+  for pick in draft['api_suggestions']:check_description(pick)
   bounded={k:config[k] for k in selected if k in draft}
   completed=complete_drafts(bounded)
   config.update(completed)

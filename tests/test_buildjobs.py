@@ -9,9 +9,9 @@ class Fixture:
   if 'Review this complete merged draft' in system:return json.dumps({'issues':[],'ready':True})
   spec=json.JSONDecoder().raw_decode(system[system.index('{',system.index('This is one isolated')):])[0]
   if self.fail and self.fail==spec.get('stage'):self.fail=None;raise ValueError('fixture part failure')
-  if spec['area']=='pipeline prompt':return json.dumps({'text':spec['default_prompt'],'on':True})
+  if spec['area']=='pipeline prompt':return json.dumps({'text':spec['domain_reference'],'on':True})
   if spec['area']=='inert Python helper':return json.dumps({'brief':'Fixture inert helper','code':generators.code_template(spec['kind'],'')})
-  if spec['area']=='API recommendations':return json.dumps([{'service':'OpenAlex','name':'OpenAlex','reason':'Catalog','connector':'openalex','setup':'Review setup','caveat':'Verify limits','helper':{'brief':'OpenAlex fixture helper','code':generators.code_template('search','')}}])
+  if spec['area']=='API recommendations':return json.dumps([{'service':service,'name':service,'what':'This service provides searchable information from published content and public data.','reason':'This service helps the app find background information for the reader questions.','connector':'openalex','setup':'Review setup','caveat':'Verify limits','helper':{'brief':service+' fixture helper','code':generators.code_template('search','')}} for service in ['OpenAlex','Wikipedia','Crossref']])
   defaults=copy.deepcopy(spec['defaults'])
   if isinstance(defaults,dict):
    for key,value in defaults.items():
@@ -43,7 +43,7 @@ class SafePatchChecks(unittest.TestCase):
    def complete(self,m):return output
   return {'cancel':False,'calls':0,'provider':P(),'cfg':cfg or copy.deepcopy(schema.DEFAULTS),'parts':{},'errors':{},'active':set(),'brief':brief}
  def test_known_api_wrapper_only(self):
-  rows=[{'name':'A','service':'OpenAlex','reason':'r','connector':'openalex','setup':'s','caveat':'c','helper':{'brief':'Fixture','code':generators.code_template('search','')}}]
+  rows=[{'name':service,'service':service,'what':'This service provides searchable information from published content and public data.','reason':'This service helps the app find background information for the reader questions.','connector':'openalex','setup':'s','caveat':'c','helper':{'brief':'Fixture','code':generators.code_template('search','')}} for service in ['OpenAlex','Wikipedia','Crossref']]
   for name in ['api_recommendations','api_suggestions']:
    job=self.part_job(json.dumps({name:rows}));buildjobs.BuildJobs()._draft_part(job,'api',dict(buildjobs.PARTS)['api']);self.assertEqual(job['parts']['api'],rows)
   job=self.part_job(json.dumps({'unrelated_requests':rows}))
@@ -144,3 +144,24 @@ class BrandingRetryTests(unittest.TestCase):
   self.assertNotIn('config:app',job['parts'])
   for k,v in before.items():
    if k!='config:app':self.assertEqual(job['parts'][k],v)
+
+class DomainPromptChecks(SafePatchChecks):
+ def test_builtin_generic_stage_is_rejected(self):
+  stage='question_check';job=self.part_job(json.dumps({'text':prompts.STAGES[stage]['default'],'on':True}),'A trip planning app')
+  with self.assertRaisesRegex(ValueError,'app-specific prompt'):buildjobs.BuildJobs()._draft_part(job,'prompt:'+stage,dict(buildjobs.PARTS)['prompt:'+stage])
+ def test_every_stage_request_has_domain_and_stage_contract(self):
+  from customchat import generator_design
+  for domain in ['Trip planning','Diet app','Sports app']:
+   for stage in prompts.STAGES:
+    job=self.part_job(json.dumps({'text':generator_design.template(stage,domain),'on':True}),domain)
+    buildjobs.BuildJobs()._draft_part(job,'prompt:'+stage,dict(buildjobs.PARTS)['prompt:'+stage])
+    self.assertIn('prompt:'+stage,job['parts'])
+
+class APIDescriptionChecks(SafePatchChecks):
+ def test_name_only_api_description_rejected(self):
+  picks=[{'name':name,'service':name,'what':name,'reason':'This API helps the app provide background information about destinations.','helper':{'brief':'Fixture','code':generators.code_template('search','')}} for name in ['Wikipedia','Brave Search','Open-Meteo']]
+  job=self.part_job(json.dumps(picks))
+  with self.assertRaisesRegex(ValueError,'useful sentence'):buildjobs.BuildJobs()._draft_part(job,'api',dict(buildjobs.PARTS)['api'])
+ def test_too_few_api_picks_rejected(self):
+  job=self.part_job(json.dumps([{'name':'Wikipedia','service':'Wikipedia','helper':{'brief':'Fixture','code':generators.code_template('search','')}}]))
+  with self.assertRaisesRegex(ValueError,'three to five'):buildjobs.BuildJobs()._draft_part(job,'api',dict(buildjobs.PARTS)['api'])

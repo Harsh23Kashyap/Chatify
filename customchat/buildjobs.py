@@ -73,21 +73,24 @@ class BuildJobs:
    spec['numeric_ranges']={k:v for k,v in theme.RANGES.items() if k in spec['defaults']}
    if 'font' in spec['defaults']:spec['fonts']=list(theme.FONTS)
    if key=='appearance:wording_motion':spec['requirements']='Return every field. All txt_ interface copy must be nonempty and tailored to the app, including txt_disclaimer (a truthful short limitation, no invented credentials or legal promises) and txt_sidebar (a short chat-list heading). Empty optional assets and numeric defaults remain valid.'
-  if key=='api':spec['requirements']='Suggest about three APIs that fit this app. Each recommendation needs name, service, reason, connector, setup and caveat strings, plus helper containing brief and code strings for that service using search(query, limit=6). Every selected service needs its own inert helper. Use urllib.request, json, os, time, urllib.parse, urllib.error only, no socket or getattr. No keys in code. service must name one concrete provider or public service you recommend, not a category. Pick a service, explain why, and give its integration steps without inventing an endpoint or claiming live verification. Do not defer the provider choice with choose a provider. Mark external details as unverified and let the user verify current documentation before setup.'
+  if key=='api':
+   from .apipicks import PAGES
+   spec['verified_provider_pages']={info['name']:{'documentation':info.get('docs',info['page']),'key_page':info.get('key_page',''),'key_required':info['key_required']} for info in PAGES.values()}
+  if key=='api':spec['requirements']='Suggest three to five APIs that fit this app. Each recommendation needs name, service, what, reason, connector, setup and caveat strings. what must explain what the API provides in a full useful sentence; reason must explain why it fits this app in a separate full sentence, never just repeat its name, plus helper containing brief and code strings for that service using search(query, limit=6). Every selected service needs its own inert helper. Use urllib.request, json, os, time, urllib.parse, urllib.error only, no socket or getattr. No keys in code. service must name one concrete provider or public service you recommend, not a category. Pick a service, explain why, and give its integration steps without inventing an endpoint or claiming live verification. Do not defer the provider choice with choose a provider. Mark external details as unverified and let the user verify current documentation before setup.'
   if key.startswith('helper:'):spec['recommended_apis']=job['parts'].get('api',[]);spec['requirements']='Function name and signature must exactly match the contract, including search(query, limit=6) or clean_query(query). Draft for the recommended API; explicitly mark any endpoint not independently verified. Keep placeholder API keys outside code.'
   correction=job.get('retry_corrections',{}).get(key)
   if correction:spec['previous_validation_failure']=correction;spec['requirements']=spec.get('requirements','')+' Correct the previously rejected fields. Do not repeat blank interface wording, invent credentials or remove output contract fields.'
   instruction=json.dumps(spec)
   if key.startswith('prompt:'):
-   spec={'area':'pipeline prompt','stage':key[7:],'output_contract':spec['contract'].get('help',''),'default_prompt':spec['default']}
+   spec={'area':'pipeline prompt','stage':key[7:],'app_domain_brief':job['brief'],'input_contract':generator_design.DESIGNS[key[7:]]['inputs'],'output_contract':generator_design.DESIGNS[key[7:]]['output'],'stage_rules':generator_design.DESIGNS[key[7:]]['rules'],'domain_reference':generator_design.template(key[7:],job['brief'])}
    if correction:spec['previous_validation_failure']=correction
    instruction=json.dumps(spec)
-   instruction+=' Keep text between 1 and 6000 characters. DO NOT echo this metadata. Write the actual tailored prompt, not the literal words complete instruction. Return an object with exactly two keys: text (the full domain-tailored instruction string) and on (a boolean). Preserve the stage output contract; do not echo the input spec. The revise prompt must be filled even when the stage is off.'
+   instruction+=' Write a detailed domain-specific instruction between 300 and 6000 characters. Include stage inputs, domain-specific rules, missing-data behavior and the exact output contract. Do not copy a generic built-in prompt or merely add the domain name to it. DO NOT echo this metadata. Write the actual tailored prompt, not the literal words complete instruction. Return an object with exactly two keys: text (the full domain-tailored instruction string) and on (a boolean). Preserve the stage output contract; do not echo the input spec. The revise prompt must be filled even when the stage is off.'
   elif key.startswith('helper:'):
    spec.pop('starter',None)
    instruction=json.dumps(spec)
    instruction+=' Keep Python code at most 12000 characters. Include both brief and code as strings. Use a JSON serializer for the complete object: escape each literal code backslash as two backslashes in JSON. Avoid regex when a simple string operation preserves the task. DO NOT echo input metadata. Return {"brief":"purpose and limitations", "code":"Python code"}. Code is an inert draft. Never install it.'
-  elif key=='api':instruction+=' Return a list of {name,service,reason,connector,setup,caveat,helper:{brief,code}}. Give practical choices, not verified price claims.'
+  elif key=='api':instruction+=' Return a list of {name,service,what,reason,connector,setup,caveat,helper:{brief,code}}. Give practical choices, not verified price claims.'
   elif key=='config:sources':instruction+=' Return a JSON list of connector objects, no wrapper. Empty list if no actual source supplied.'
   else:instruction+=' Return an object with exactly the keys shown in defaults; no wrapper.'
   result=self._call(job,instruction)
@@ -106,7 +109,7 @@ class BuildJobs:
      for field in ('prompt','instruction','content'):
       if isinstance(result.get(field),str):result['text']=result[field];break
    if key.startswith('helper:') and isinstance(result,dict):result={k:v for k,v in result.items() if k in ('brief','code','review_problems')}
-  if key=='api' and isinstance(result,list):result=[{k:v for k,v in row.items() if k in ('name','service','reason','connector','setup','caveat','helper')} for row in result if isinstance(row,dict)][:8]
+  if key=='api' and isinstance(result,list):result=[{k:v for k,v in row.items() if k in ('name','service','what','reason','connector','setup','caveat','helper')} for row in result if isinstance(row,dict)][:8]
   if key.startswith('appearance:') or key.startswith('config:') and isinstance(spec.get('defaults'),dict):
    if isinstance(result,dict):result={k:v for k,v in result.items() if k in spec['defaults']}
   if key=='config:budget' and isinstance(result,dict):result=copy.deepcopy(spec['defaults'])
@@ -115,6 +118,7 @@ class BuildJobs:
    if not isinstance(result.get('text'),str) or not result['text'].strip():raise ValueError('Prompt text missing: model did not return a non-empty text field')
    if len(result['text'])>6000:raise ValueError('Prompt text is '+str(len(result['text']))+' characters; limit is 6000. Retry with a shorter instruction.')
    if result['text'].strip().lower()=='complete instruction':raise ValueError('Model echoed placeholder text instead of writing a prompt')
+   if len(result['text'].strip())<300 or result['text'].strip() in {v['default'] for v in prompts.STAGES.values()} or result['text'].strip()==schema.DEFAULTS['prompt']['system']:raise ValueError('Write a detailed app-specific prompt, not a generic default; at least 300 characters')
    if type(result.get('on',prompts.STAGES[key[7:]]['on']))!=bool:raise ValueError('Invalid stage switch')
    problems=generator_design.validate_draft(key[7:],{'prompt':result['text']})
    if problems:raise ValueError('Prompt contract failed: '+'; '.join(problems))
@@ -124,6 +128,9 @@ class BuildJobs:
    except (SyntaxError,ValueError,TypeError) as e:raise ValueError('Helper Python compilation failed: '+str(e)) from e
   elif key=='api':
    appbuilder.validate_extras({'api_suggestions':result})
+   if not 3<=len(result)<=5:raise ValueError('Recommend three to five APIs')
+   from .apipicks import check_description
+   for pick in result:check_description(pick)
    for pick in result:
     helper=pick.get('helper')
     if helper:

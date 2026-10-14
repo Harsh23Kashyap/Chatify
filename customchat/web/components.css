@@ -82,3 +82,14 @@ html body.settings-tabs pre.code{background:var(--ui-nested);border:1px solid va
 html #sec-search .saved-setup-checks label{display:flex;flex-direction:row;align-items:flex-start;gap:10px;font-size:14px;font-weight:400;line-height:1.5;padding:6px 0;min-height:44px}
 html #sec-search .saved-setup-checks input{appearance:auto;-webkit-appearance:checkbox;display:block;position:static;width:18px;height:18px;border-radius:2px;margin:2px 0 0;flex:0 0 18px;accent-color:var(--accent,#174439)}
 html #sec-search .saved-setup-checks input::before,html #sec-search .saved-setup-checks input::after{display:none}
+.builder-final-apis{margin:20px 0;line-height:1.5}
+.builder-final-api{border-top:1px solid var(--line,#d6dfd3);padding:18px 0;animation:builder-api-enter 140ms ease-out}
+.builder-final-api label{display:flex!important;flex-direction:row!important;align-items:center;gap:10px;min-height:44px}
+.builder-final-api input{appearance:auto!important;width:18px!important;height:18px!important;flex:0 0 18px;position:static!important}
+.builder-final-api input::before,.builder-final-api input::after{display:none!important}
+.builder-final-api h5{font-size:14px;margin:12px 0 4px}.builder-final-api p{margin:4px 0 10px}
+.builder-api-links{display:flex;gap:10px;flex-wrap:wrap}.builder-api-links a{display:inline-flex;min-height:44px;align-items:center;border:1px solid var(--line,#d6dfd3);border-radius:8px;padding:8px 12px;color:inherit}
+.builder-final-api pre{white-space:pre-wrap;overflow-wrap:anywhere;max-height:280px;overflow:auto;font-size:12px;line-height:1.5}
+@keyframes builder-api-enter{from{opacity:0}to{opacity:1}}
+@media(prefers-reduced-motion:reduce){.builder-final-api{animation:none!important}}
+html[data-motion=none] .builder-final-api,html[data-motion=calm] .builder-final-api{animation:none!important}
