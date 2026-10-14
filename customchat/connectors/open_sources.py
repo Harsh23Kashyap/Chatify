@@ -5,7 +5,7 @@ raises on network errors, which the pipeline reports as a source error without b
 Crossref asks polite users to send a contact address; set `mailto` on the source block to do that.
 OpenAlex keys come from the private store or OPENALEX_API_KEY. No key pauses searches.
 """
-import json, os, re, urllib.parse, urllib.request
+import json, os, re, time, urllib.parse, urllib.request, urllib.error
 from .base import Evidence
 
 UA = "customchat/1.0 (+https://github.com/Harsh23Kashyap/customchat)"
@@ -13,8 +13,14 @@ UA = "customchat/1.0 (+https://github.com/Harsh23Kashyap/customchat)"
 
 def _get(url, timeout=20):
     req = urllib.request.Request(url, headers={"User-Agent": UA, "Accept": "application/json"})
-    with urllib.request.urlopen(req, timeout=timeout) as r:
-        return json.loads(r.read(3000000).decode("utf-8", "replace"))
+    for attempt in range(3):
+        try:
+            with urllib.request.urlopen(req, timeout=timeout) as r:
+                return json.loads(r.read(3000000).decode("utf-8", "replace"))
+        except urllib.error.HTTPError as error:
+            if attempt == 2 or error.code not in (429, 500, 502, 503, 504):
+                raise
+            time.sleep(attempt + 1)
 
 
 def _clean(t):
@@ -88,7 +94,7 @@ class OpenAlex:
         self.id, self.label, self.b = block["id"], block["label"], block
 
     def search(self, query, k=6):
-        args = {"search": query, "per-page": k, "select": "id,title,publication_year,abstract_inverted_index,doi,authorships,primary_location"}
+        args = {"search": re.sub(r"[?*]", " ", query).strip(), "per-page": k, "select": "id,title,publication_year,abstract_inverted_index,doi,authorships,primary_location"}
         from .. import secrets
         key = secrets.saved("catalog:openalex") or os.environ.get("OPENALEX_API_KEY", "")
         if not key:

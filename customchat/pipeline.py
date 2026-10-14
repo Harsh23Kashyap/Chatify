@@ -436,6 +436,15 @@ class Engine:
     def _llm_on(self, key):
         return self.prompts.enabled(key) and self.cfg["provider"]["type"] != "mock"
 
+    def simplification_evidence(self, owner, chat, topic, question, sources=None):
+        """A pure rewording uses the last accepted passages, not a fresh search."""
+        if not re.fullmatch(r"(?:please\s+)?(?:explain|summari[sz]e|rephrase|make)\s+(?:(?:the|that|this)\s+)?(?:previous\s+)?(?:answer|explanation|response|that)(?:\s+(?:more\s+)?(?:simply|simpler|shorter))?(?:\s+(?:using|with|based on)\s+(?:only\s+)?(?:the\s+)?same\s+(?:cited\s+)?sources)?[.!?]*",question.strip(),re.I):
+            return []
+        eligible=set(self.store.history_ids(owner,chat,topic))
+        previous=[t for t in self.store.turns(owner,chat) if t["id"] in eligible]
+        selected=set(self.connectors if sources is None else sources)
+        return [dict(e) for e in previous[-1].get("evidence",[]) if e.get("source") in selected] if previous else []
+
     def check_question(self, question, history=None):
         """Empty string when the question is fine; otherwise a short reason to show instead of an answer."""
         if not self._llm_on("question_check"):
@@ -586,16 +595,20 @@ class Engine:
             standalone = self.standalone(q, history, summary)
             blocked = self.check_question(standalone, history)
             yield "progress", {"stage": "sources", "label": "Checking selected sources"}
-            evidence, errors = ([], []) if blocked else (self.retrieve(standalone, sources, owner, scope) if use_cache else self._fresh(standalone, sources, owner, scope))
+            reused=self.simplification_evidence(owner,chat,topic,q,sources) if history and not new_topic and not blocked and not scope and not permissions.restricted(self.cfg) else []
+            evidence, errors = (reused,{}) if reused else (([], []) if blocked else (self.retrieve(standalone, sources, owner, scope) if use_cache else self._fresh(standalone, sources, owner, scope)))
         yield "progress", {"stage": "ranking", "label": "Selecting relevant passages"}
+        reuse_relevant=False
         if not temporary and history and not new_topic and re.search(r"\b(those|these|that|same|above|previous)\b",q,re.I) and not scope and not permissions.restricted(self.cfg):
             eligible=set(self.store.history_ids(owner,chat,topic))
             previous=[t for t in self.store.turns(owner,chat) if t["id"] in eligible]
             if previous and previous[-1].get("evidence"):
                 selected=set(self.connectors if sources is None else sources)
                 anchored=[dict(e) for e in previous[-1]["evidence"] if e.get("source") in selected]
-                if anchored:evidence=anchored
-        evidence = self.filter_relevant(standalone, evidence)
+                if anchored:
+                    evidence=anchored
+                    reuse_relevant=True if re.search(r"\b(simpler|simply|shorter|summari[sz]e|rephrase)\b",q,re.I) else False
+        evidence = evidence if reuse_relevant else self.filter_relevant(standalone, evidence)
         yield "meta", {"standalone": standalone, "evidence": evidence, "source_errors": errors}
         yield "progress", {"stage": "answer", "label": "Writing from sources" if evidence else "No matching evidence; preparing a reply"}
         if not evidence:
@@ -679,15 +692,19 @@ class Engine:
         summary = self.conversation_summary(owner, chat, topic) if mem_on else ""
         standalone = self.standalone(q, history, summary)
         blocked = self.check_question(standalone, history)
-        evidence, errors = ([], {}) if blocked else (self.retrieve(standalone, sources, owner) if use_cache else self._fresh(standalone, sources, owner))
+        reused=self.simplification_evidence(owner,chat,topic,q,sources) if history and not new_topic and not blocked else []
+        evidence, errors = (reused,{}) if reused else (([], {}) if blocked else (self.retrieve(standalone, sources, owner) if use_cache else self._fresh(standalone, sources, owner)))
+        reuse_relevant=False
         if history and not new_topic and re.search(r"\b(those|these|that|same|above|previous)\b",q,re.I):
             eligible=set(self.store.history_ids(owner,chat,topic))
             previous=[t for t in self.store.turns(owner,chat) if t["id"] in eligible]
             if previous and previous[-1].get("evidence"):
                 selected=set(self.connectors if sources is None else sources)
                 anchored=[dict(e) for e in previous[-1]["evidence"] if e.get("source") in selected]
-                if anchored:evidence=anchored
-        evidence = self.filter_relevant(standalone,evidence)
+                if anchored:
+                    evidence=anchored
+                    reuse_relevant=True if re.search(r"\b(simpler|simply|shorter|summari[sz]e|rephrase)\b",q,re.I) else False
+        evidence = evidence if reuse_relevant else self.filter_relevant(standalone,evidence)
         if blocked:
             answer,ledger=blocked,[]
         elif not evidence:

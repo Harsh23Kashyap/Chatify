@@ -1,5 +1,5 @@
 """arXiv Atom API (public). block.category narrows the search, e.g. eess.SP for signal processing."""
-import urllib.parse, urllib.request
+import time, urllib.error, urllib.parse, urllib.request
 import xml.etree.ElementTree as ET
 from .base import Evidence
 
@@ -14,9 +14,18 @@ class Arxiv:
         q = "all:" + urllib.parse.quote(query)
         if self.b.get("category"):
             q += "+AND+cat:" + urllib.parse.quote(self.b["category"])
-        url = "http://export.arxiv.org/api/query?search_query=%s&max_results=%d&sortBy=relevance" % (q, k)
-        with urllib.request.urlopen(url, timeout=25) as r:
-            root = ET.fromstring(r.read())
+        url = "https://export.arxiv.org/api/query?search_query=%s&max_results=%d&sortBy=relevance" % (q, k)
+        for attempt in range(3):
+            try:
+                with urllib.request.urlopen(url, timeout=25) as r:
+                    root = ET.fromstring(r.read())
+                break
+            except (TimeoutError, urllib.error.URLError) as error:
+                if isinstance(error, urllib.error.HTTPError) and error.code not in (429, 500, 502, 503, 504):
+                    raise
+                if attempt == 2:
+                    raise
+                time.sleep(3 * (attempt + 1))
         out = []
         for i, e in enumerate(root.findall("a:entry", NS)):
             link = e.findtext("a:id", "", NS)

@@ -299,6 +299,23 @@ def check_shape(kind, result):
     return sorted(set(probs))[:8]
 
 
+def _helper_environment(code):
+    """Pass only explicitly named helper keys, never the full parent environment."""
+    import os
+    env = {"PATH": "/usr/bin:/bin", "LANG": "C.UTF-8"}
+    tree = ast.parse(code)
+    for node in ast.walk(tree):
+        if not isinstance(node, ast.Call) or not node.args:
+            continue
+        f = node.func
+        direct = isinstance(f, ast.Attribute) and f.attr == "getenv" and isinstance(f.value, ast.Name) and f.value.id == "os"
+        lookup = isinstance(f, ast.Attribute) and f.attr == "get" and isinstance(f.value, ast.Attribute) and f.value.attr == "environ" and isinstance(f.value.value, ast.Name) and f.value.value.id == "os"
+        arg = node.args[0]
+        if (direct or lookup) and isinstance(arg, ast.Constant) and isinstance(arg.value, str) and re.fullmatch(r"[A-Z][A-Z0-9_]{2,100}", arg.value) and arg.value in os.environ:
+            env[arg.value] = os.environ[arg.value]
+    return env
+
+
 def test_code(kind, code, query):
     """Runs reviewed code once in a separate, limited process. Only called after an explicit click."""
     import subprocess, sys, tempfile, json as _j, time as _t
@@ -316,7 +333,7 @@ def test_code(kind, code, query):
     with tempfile.TemporaryDirectory() as d:
         try:
             p = subprocess.run([sys.executable, "-I", "-c", RUNNER], input=_j.dumps({"code": code, "func": spec["func"], "args": args}), capture_output=True,
-                               text=True, timeout=60, cwd=d, env={"PATH": "/usr/bin:/bin", "LANG": "C.UTF-8"})
+                               text=True, timeout=60, cwd=d, env=_helper_environment(code))
             out = p.stdout or ""
             if "@@RESULT@@" in out:
                 try:
