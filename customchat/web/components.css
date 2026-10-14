@@ -104,3 +104,25 @@ html[data-motion=none] .builder-final-api,html[data-motion=calm] .builder-final-
 .builder-final-api .builder-api-links{display:flex;flex-wrap:wrap;gap:8px 20px;margin:12px 0}
 .builder-final-api .builder-api-code pre{border:1px solid var(--line);padding:12px;border-radius:4px;background:var(--bg)}
 @media(max-width:480px){.builder-final-api>p{padding-left:0}.builder-final-api details{margin-left:0}.builder-final-apis{margin:24px 0}}
+/* Comparable API cards occupy the full review width. */
+.builder-final-apis{max-width:none}
+.builder-final-api-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;align-items:start;margin-top:20px}
+.builder-final-api{min-width:0;border:1px solid var(--line);border-radius:8px;background:var(--bg);padding:18px;animation:none}
+.builder-final-api label{margin-bottom:12px;justify-content:space-between;flex-direction:row-reverse!important}
+.builder-final-api label strong{font-size:18px}
+.builder-final-api h5{font-size:12px;font-weight:600;color:var(--muted);margin:14px 0 5px}
+.builder-final-api p{font-size:14px;line-height:1.5;margin:0;overflow-wrap:anywhere}
+.builder-api-purpose p{color:var(--ink)}
+.builder-api-fit p{color:var(--muted)}
+.builder-final-api .builder-api-links{margin:16px 0 8px;gap:4px 16px}
+.builder-final-api .builder-api-links a{padding:0;border:0;border-radius:0;font-size:13px;text-decoration:underline;text-underline-offset:3px}
+.builder-final-api details{margin:0;border-top:1px solid var(--line);padding:0}
+.builder-final-api summary{font-weight:600;justify-content:space-between;min-height:44px}
+.builder-final-api summary:after{content:'+';font-size:18px;font-weight:400}
+.builder-final-api details[open]>summary:after{content:'-'}
+.builder-final-api details[open]{padding-bottom:12px}
+@media(max-width:760px){.builder-final-api-grid{grid-template-columns:1fr;gap:12px}.builder-final-api{padding:14px}.builder-final-api label strong{font-size:17px}}
+.builder-final-api summary{text-align:left;justify-content:flex-start;gap:8px;list-style:none}
+.builder-final-api summary:after{margin-left:auto}
+.builder-final-api summary:before{display:none!important}
+.builder-final-api summary::-webkit-details-marker{display:none}
