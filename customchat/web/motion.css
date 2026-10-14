@@ -57,7 +57,7 @@
 .preview.pulse{animation:m-flash .5s var(--ease)}
 .preview *{transition:background-color .22s var(--ease),color .22s var(--ease),border-radius .22s var(--ease),font-size .22s var(--ease),padding .22s var(--ease),gap .22s var(--ease),max-width .28s var(--ease),width .28s var(--ease)}
 input[type=range]{transition:filter var(--m-hover)}input[type=range]::-webkit-slider-thumb{transition:transform var(--m-hover) var(--ease)}input[type=range]:active::-webkit-slider-thumb{transform:scale(1.12)}
-input[type=text],input[type=url],input[type=password],input[type=number],textarea,select{transition:background-color .16s ease-out,box-shadow .16s ease-out,border-color .16s ease-out}
+input:not([type]),input[type=text],input[type=email],input[type=search],input[type=tel],input[type=url],input[type=password],input[type=number],textarea,select{transition:background-color .16s ease-out,box-shadow .16s ease-out,border-color .16s ease-out}
 .savebar .go,.saved .go{transition:transform var(--m-press),background-color var(--m-state),opacity var(--m-state)}
 .dirty-dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:#d97706;margin-left:8px;vertical-align:middle;animation:m-tick .2s var(--ease)}
 details>summary{transition:color var(--m-hover)}details[open]>*:not(summary){animation:m-in .2s var(--ease) both}
