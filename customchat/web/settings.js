@@ -880,10 +880,12 @@ let helpQueued=false;new MutationObserver(()=>{if(helpQueued)return;helpQueued=t
 $("#configGuide").addEventListener("click", () => CCTour.config(true));
 
 async function drawOllamaSetup(host) {
+  const requestSequence=host._setupRequest=(host._setupRequest||0)+1;
   host.dataset.poll='';
   host.replaceChildren(el('div',{class:'h',text:'Checking local Ollama...'}));
   try {
     const st=await api('/api/ollama/setup');
+    if(!host.isConnected||host._setupRequest!==requestSequence)return;
     const titles={running:'Ollama is running',stopped:'Ollama is installed but stopped',not_detected:'Ollama not detected'};
     host.replaceChildren(el('h3',{text:'Set up Ollama'}),el('div',{class:'setup-status'},el('b',{text:titles[st.state]}),el('p',{class:'h',text:'On the computer running CustomChat, not this phone.'})));
     const recheck=el('button',{type:'button',class:'mini',text:'Recheck',onclick:()=>drawOllamaSetup(host)});
@@ -903,12 +905,13 @@ async function drawOllamaSetup(host) {
         host.append(label,go,el('button',{type:'button',class:'mini',text:'Not now',onclick:()=>drawOllamaSetup(host)}));
       }catch(e){host.append(el('p',{class:'testres bad',text:e.message}));}
     }}),recheck,detail);
-  }catch(e){host.replaceChildren(el('p',{class:'h',text:e.message}));}
+  }catch(e){if(host.isConnected&&host._setupRequest===requestSequence)host.replaceChildren(el('p',{class:'h',text:e.message}));}
 }
 async function pollOllamaSetup(host,id){
   host.dataset.poll=id;
   for(let i=0;i<310 && host.isConnected && host.dataset.poll===id;i++){
     const st=await api('/api/ollama/setup/status?id='+encodeURIComponent(id));
+    if(!host.isConnected||host.dataset.poll!==id)return;
     host.replaceChildren(el('h3',{text:st.state==='ready'?'Ollama is ready':'Ollama setup'}),el('p',{text:st.message}));
     if(st.downloaded_bytes)host.append(el('p',{class:'h',text:(st.downloaded_bytes/1048576).toFixed(1)+' MB downloaded'+(st.total_bytes?' of '+(st.total_bytes/1048576).toFixed(1)+' MB':' · total size unknown')}));
     if(st.sha256){const d=el('details',{},el('summary',{text:'Downloaded installer fingerprint'}),el('small',{text:st.sha256}));host.append(d);}
