@@ -590,7 +590,7 @@ async function init() {
   $("#scopeBtn").onclick=scopeDialog;
   $("#q").addEventListener("keydown",e=>{if((e.ctrlKey||e.metaKey)&&e.key==="Enter"){e.preventDefault();send()}});
   $("#actionsBtn").onclick=async()=>{
-   const trigger=$("#actionsBtn");if(trigger.dataset.running==="true")return;trigger.dataset.running="true";trigger.setAttribute("aria-busy","true");const original=trigger.textContent,originalMinWidth=trigger.style.minWidth;trigger.style.minWidth=trigger.getBoundingClientRect().width+"px";trigger.textContent="Wait...";
+   const trigger=$("#actionsBtn");if(trigger.dataset.running==="true")return;trigger.dataset.running="true";trigger.setAttribute("aria-busy","true");const original=trigger.textContent,originalMinWidth=trigger.style.minWidth;trigger.style.minWidth=trigger.getBoundingClientRect().width+"px";trigger.textContent="Wait...";$("#actionsError").hidden=true;
    try {
     const catalog=await api('/api/actions');const dialog=el('dialog',{class:'reading-dialog action-dialog','aria-label':'Review an action'});
     dialog.append(el('header',{class:'reading-head'},el('h2',{text:'Review an action'})));
@@ -619,7 +619,7 @@ async function init() {
     }},tool.label));
     if(!catalog.length)content.append(el('p',{class:'action-empty',role:'status',text:'No actions enabled.'}));
     dialog.append(el('footer',{},el('button',{class:'chip',onclick:()=>dialog.close()},'Close')));dialog.addEventListener('close',()=>{dialog.remove();$('#actionsBtn').focus()});document.body.append(dialog);dialog.showModal();
-   }catch(err){toast('Could not load actions: '+err.message+'. Try Actions again.')}finally{trigger.dataset.running='false';trigger.removeAttribute('aria-busy');trigger.textContent=original;trigger.style.minWidth=originalMinWidth}
+   }catch(err){const error=$('#actionsError');error.textContent='Could not load actions: '+err.message+'. Try Actions again.';error.hidden=false}finally{trigger.dataset.running='false';trigger.removeAttribute('aria-busy');trigger.textContent=original;trigger.style.minWidth=originalMinWidth}
   };
   $("#hint").textContent = "Answers cite their sources. Check important facts.";
   $("#q").addEventListener("input", autosize);
