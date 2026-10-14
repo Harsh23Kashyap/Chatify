@@ -106,3 +106,5 @@ html body.settings-tabs #sec-code #codeEditor details.inner textarea.code{width:
 /* Logo help belongs to the title row, not a second centered line. */
 html body.settings-tabs #sec-wording .field:has(>.logobox)>.flabel{display:flex!important;flex-direction:row!important;align-items:center!important;justify-content:flex-start!important;text-align:left!important;gap:6px!important}
 html body.settings-tabs #sec-wording .field:has(>.logobox)>.flabel .info-tip{margin:0!important}
+/* Prompt and code editors have no preview surface or preview controls. */
+html body.settings-tabs:is([data-settings-section=prompts],[data-settings-section=code]) :is(.preview-toggle,#pvfab){display:none!important}
