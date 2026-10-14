@@ -379,7 +379,7 @@ let historySkeletonTimer=0,historyShimmerTimer=0;
 async function loadList() {
   const seq = (loadList.seq = (loadList.seq || 0) + 1); const list = $("#list"), tab = S.tab, query = $("#search").value.trim();
   clearTimeout(historySkeletonTimer);clearTimeout(historyShimmerTimer);list.querySelector(".history-skeleton")?.remove();list.setAttribute("aria-busy","true");list.querySelector(".history-state")?.remove();
-  const state=el("div",{class:"history-state",role:"status",text:"Loading history..."});list.prepend(state);
+  const state=el("div",{class:"history-state",role:"status",text:"Loading history..."});if(list.querySelector(".item"))list.append(state);else list.prepend(state);
   if(!list.querySelector(".item")){historySkeletonTimer=setTimeout(()=>{if(seq!==loadList.seq)return;const skeleton=el("div",{class:"history-skeleton","aria-hidden":"true"});for(let i=0;i<3;i++)skeleton.append(el("div",{class:"history-skeleton-row"},el("span"),el("span")));state.append(skeleton);historyShimmerTimer=setTimeout(()=>{if(seq===loadList.seq)skeleton.classList.add("slow")},750)},250)}
   try {
     if (tab === "chats") {
