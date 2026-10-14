@@ -401,3 +401,7 @@ html body.settings-tabs.mode-swap .settings-active-panel :is(input,textarea,sele
 html[data-motion=none] .action-empty,html[data-motion=calm] .action-empty,html[data-motion=none] .scope-empty,html[data-motion=calm] .scope-empty{animation:none!important}
 @media(prefers-reduced-motion:reduce){.action-empty,.scope-empty{animation:none!important}}
 #dirty:not(.dirty)::before{animation:none}
+/* A completed automatic save gets the same short opacity confirmation as Save. */
+.msg.save-confirmed{animation:saved-check-in 160ms ease-out!important}
+html[data-motion=none] .msg.save-confirmed{animation:none!important}
+@media(prefers-reduced-motion:reduce){.msg.save-confirmed{animation:none!important}}
