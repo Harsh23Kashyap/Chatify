@@ -15,7 +15,7 @@ const el = (tag, props = {}, ...kids) => { const e = document.createElement(tag)
 
 // Active sample and disclosure feedback stops when the visitor asks for less motion.
 const sampleMotionMedia=matchMedia("(prefers-reduced-motion:reduce)");
-const stopSampleMotion=()=>{if(!sampleMotionMedia.matches&&!["none","calm"].includes(document.documentElement.dataset.motion))return;const host=$("#pvextra");host?._headingAnimation?.cancel();host?.querySelectorAll(".cc").forEach(row=>row._statusAnimation?.cancel());document.querySelectorAll("#seg,#presets,details.grp>.fields,.connection-status-icon").forEach(node=>node._revealMotion?.cancel())};
+const stopSampleMotion=()=>{if(!sampleMotionMedia.matches&&!["none","calm"].includes(document.documentElement.dataset.motion))return;const host=$("#pvextra");host?._headingAnimation?.cancel();host?.querySelectorAll(".cc").forEach(row=>row._statusAnimation?.cancel());document.querySelectorAll("#seg,#presets,details.grp>.fields,.connection-status-icon,.loaded-source-overview>p").forEach(node=>node._revealMotion?.cancel())};
 function revealMotion(node,frames,timing){node._revealMotion?.cancel();node._revealMotion=node.animate(frames,timing);stopSampleMotion()}
 sampleMotionMedia.addEventListener("change",stopSampleMotion);
 new MutationObserver(stopSampleMotion).observe(document.documentElement,{attributes:true,attributeFilter:["data-motion"]});
@@ -731,7 +731,7 @@ async function init() {
   const sourceSummary=(sources,saved=false)=>{
     let title=sourceOverview.querySelector('b'),note=sourceOverview.querySelector('small');if(!title){title=el('b');note=el('small');sourceOverview.append(title,note)}title.textContent=saved?'Saved workspace sources':'Configured workspace sources';
     const previous=new Map([...sourceOverview.querySelectorAll('p[data-source-id]')].map(n=>[n.dataset.sourceId,n])),scroll=window.scrollY;sourceOverview.querySelector('.no-workspace-sources')?.remove();
-    for(const x of sources){const id=x.id||x.label,text=(x.label||x.id)+' · '+(sourceNames[x.type]||x.type||'Source');let row=previous.get(id),changed=!row||row.textContent!==text;if(!row)row=el('p',{'data-source-id':id});row.textContent=text;sourceOverview.insertBefore(row,note);previous.delete(id);if(changed&&saved&&!matchMedia('(prefers-reduced-motion:reduce)').matches&&!['calm','none'].includes(theme?.motion))row.animate([{opacity:.65},{opacity:1}],{duration:160,easing:'ease-out'})}
+    for(const x of sources){const id=x.id||x.label,text=(x.label||x.id)+' · '+(sourceNames[x.type]||x.type||'Source');let row=previous.get(id),changed=!row||row.textContent!==text;if(!row)row=el('p',{'data-source-id':id});row.textContent=text;sourceOverview.insertBefore(row,note);previous.delete(id);if(changed&&saved&&!matchMedia('(prefers-reduced-motion:reduce)').matches&&!['calm','none'].includes(theme?.motion))revealMotion(row,[{opacity:.65},{opacity:1}],{duration:160,easing:'ease-out'})}
     previous.forEach(n=>n.remove());if(!sources.length)sourceOverview.insertBefore(el('p',{class:'no-workspace-sources',text:'No sources configured.'}),note);
     note.textContent=saved?'Saved to the app file. Restart this workspace to apply these sources. Reachability has not been tested.':'Sources from the loaded app file. Reachability has not been tested. Optional web searches below do not replace these sources.';if(saved)window.scrollTo({top:scroll,behavior:'instant'});
   };sourceSummary(c.sources);
