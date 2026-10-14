@@ -468,3 +468,5 @@ html[data-motion=none] .fresh.row:has(.bubble.none),html[data-motion=calm] .fres
  .side .list .item:has(.tm) .acts{grid-column:2;grid-row:1/3;align-self:center}
  .side .list .item .tm,.side .list .item.on .tm,.side .list .item:hover .tm,.side .list .item:focus-within .tm{display:block;position:static;grid-column:1;grid-row:2;margin:0;padding:0;visibility:visible;text-align:left}
 }
+/* No-motion also disables press displacement, not only its transition. */
+html[data-motion=none] button:active,html[data-motion=calm] button:active,html[data-motion=none] a.go:active,html[data-motion=calm] a.go:active{transform:none!important}
