@@ -1,3 +1,11 @@
+## 0.1.31 - 2026-10-14
+
+- Keep long builder draft names from pushing configuration fields out of place.
+- Fit answer action menus within the chat viewport and scroll when space is short.
+- Keep empty-state headings and illustrations stationary, with short opacity-only entrances. Respect reduced-motion preferences.
+- Expand fixture-only browser checks for button release, field focus, long configuration content, checkboxes and useful tooltip text.
+- Update both launch scripts to 0.1.31. Motion and accessibility work continues; this release does not claim full coverage.
+
 ## 0.1.30 - 2026-10-14
 
 - Fix compact picker labels and keyboard selection, keeping menus inside the viewport.

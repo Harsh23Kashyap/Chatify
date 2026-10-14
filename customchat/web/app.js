@@ -235,9 +235,18 @@ function turnView(t, prev) {
     await api("/api/delete-turn", { turn: t.id }); S.turns = S.turns.filter((x) => x.id !== t.id); drawThread();
     toast("Answer deleted.", "Undo", async () => { await api("/api/restore-turn", { turn: t.id }); S.turns = await api(S.view === "topic" && S.topic ? "/api/topic-turns?topic=" + S.topic : "/api/turns?chat=" + S.chat); drawThread(); }); } }, "Delete"));
   const more = [...meta.querySelectorAll("[data-more]")];
-  if (more.length) { const d = el("details", { class: "more" }, el("summary", { class: "chip" }, t.evidence.length ? "More" : "Details")); const box = el("div", { class: "more-box" }); more.forEach((b) => box.append(b)); d.append(box); meta.append(d); }
+  if (more.length) { const d = el("details", { class: "more" }, el("summary", { class: "chip" }, t.evidence.length ? "More" : "Details")); const box = el("div", { class: "more-box" }); more.forEach((b) => box.append(b)); d.append(box);d.addEventListener('toggle',()=>{positionAnswerMore(d);requestAnimationFrame(()=>positionAnswerMore(d))}); meta.append(d); }
   return nodes;
 }
+function positionAnswerMore(d) {
+  if(!d.open)return;
+  const box=d.querySelector('.more-box'),summary=d.querySelector('summary'),thread=d.closest('.thread');if(!box||!thread)return;
+  const bounds=thread.getBoundingClientRect(),r=summary.getBoundingClientRect(),above=Math.max(0,r.top-bounds.top-22),below=Math.max(0,bounds.bottom-r.bottom-22),up=above>=box.scrollHeight||above>=below;
+  box.style.maxHeight=Math.max(44,up?above:below)+'px';box.style.overflowY='auto';box.style.boxSizing='border-box';box.style.bottom=up?'calc(100% + 6px)':'auto';box.style.top=up?'auto':'calc(100% + 6px)';
+  box.style.left='0px';const br=box.getBoundingClientRect();box.style.left=Math.min(0,bounds.right-8-br.right)+'px';
+}
+window.addEventListener('resize',()=>document.querySelectorAll('.more[open]').forEach(positionAnswerMore));
+document.addEventListener('scroll',e=>{if(e.target.classList?.contains('thread'))e.target.querySelectorAll('.more[open]').forEach(positionAnswerMore)},true);
 async function branchQuestion(t) {
   if (S.busy) return toast("Wait for the current answer or stop it first");
   const question = prompt("Edit this question. A new branch keeps earlier context and leaves the original unchanged.", t.question);
