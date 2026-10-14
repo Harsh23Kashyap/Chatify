@@ -185,3 +185,9 @@ html body dialog.app-builder .cs[data-section-only] .cs-btn{transition:backgroun
 .builder-progress-copy strong,.builder-remaining-work{scrollbar-width:thin;scrollbar-gutter:stable;padding:2px;box-sizing:border-box}
 
 .builder-metrics small{opacity:1;color:#526650}
+
+.builder-progress-fill{transition:width 160ms ease-out}
+.builder-progress-pulse{transition:left 160ms ease-out}
+.builder-group-track::after{transition:width 160ms ease-out}
+
+#builderProgress[data-regressed=true] .builder-progress-fill,#builderProgress[data-regressed=true] .builder-progress-pulse,.builder-group-track[data-regressed=true]::after{transition:none!important}
