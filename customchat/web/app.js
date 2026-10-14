@@ -272,7 +272,7 @@ async function scopeDialog() {
    options.append(el("button",{class:"chip",onclick:()=>choose()},"Collection: "+row.label));
    row.documents.forEach(doc=>options.append(el("button",{class:"chip",onclick:()=>choose(doc)},doc)));
   }
-  if (!rows.length) options.append(el("p",{text:"No configured sources"}));
+  if (!rows.length) options.append(el("p",{class:"scope-empty",role:"status",text:"No configured sources"}));
   dialog.append(options,el("footer",{},el("button",{class:"reading-done",onclick:()=>dialog.close()},"Done")));
   dialog.addEventListener("close",()=>{dialog.remove();$("#scopeBtn").focus()});document.body.append(dialog);dialog.showModal();
  } catch(e){toast("Could not load sources: "+e.message+". Try Source scope again.")}finally{trigger.dataset.running="false";trigger.removeAttribute("aria-busy");trigger.textContent=original;trigger.style.minWidth=originalMinWidth}
