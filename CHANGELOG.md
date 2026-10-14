@@ -1,3 +1,12 @@
+## 0.1.30 - 2026-10-14
+
+- Fix compact picker labels and keyboard selection, keeping menus inside the viewport.
+- Keep settings navigation, dialogs, preview updates and feedback quiet under None, Calm and device reduced motion.
+- Prevent stale network responses from replacing newer settings, drafts or review results.
+- Keep save, retry and proposed-source actions single-flight, with clear status and keyboard focus recovery.
+- Expand browser regression coverage for motion, source tools, helpers, local downloads and builder review states.
+- Update both launch scripts to 0.1.30. Motion and accessibility work continues; this release does not claim full coverage.
+
 ## 0.1.29 - 2026-10-14
 
 - Fix left-aligned labels and consistent padding across all eight Appearance sections, including mobile layouts.
