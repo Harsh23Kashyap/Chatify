@@ -57,6 +57,8 @@
 const exampleChoices=el('details');exampleChoices.className='builder-example-choices';exampleChoices.append(el('summary','Try an example'));const exampleList=el('div');exampleChoices.append(exampleList);brief.after(exampleChoices);for(const [i,text] of briefExamples.entries()){const button=el('button',['Recipe helper','Study buddy','Bike shop support','Balcony gardening','Team onboarding','Trip planner','Tenant helper','Workout companion'][i]);button.type='button';button.onclick=()=>{if(busy)return;if(brief.value.trim()&&brief.value!==text&&!confirm('Replace your description with this example?'))return;brief.value=text;exampleChoices.open=false;update();brief.focus()};exampleList.append(button)}
 let exampleOrder=[],examplePos=0,exampleTimer=null;
 const calmMotion=matchMedia('(prefers-reduced-motion: reduce)');
+function stopReviewRemovalMotion(){if(calmMotion.matches||['none','calm'].includes(document.documentElement.dataset.motion))find('builderReviewResult')._removal?.cancel()}
+calmMotion.addEventListener('change',stopReviewRemovalMotion);new MutationObserver(stopReviewRemovalMotion).observe(document.documentElement,{attributes:true,attributeFilter:['data-motion']});
 function shuffleExamples(){exampleOrder=[...briefExamples].sort(()=>Math.random()-.5);examplePos=0}
 function nextExample(){if(examplePos>=exampleOrder.length)shuffleExamples();return 'For example: '+exampleOrder[examplePos++]}
 function exampleMotionAllowed(){return !calmMotion.matches&&!['none','calm'].includes(document.documentElement.dataset.motion)}
