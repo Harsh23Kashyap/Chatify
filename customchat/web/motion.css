@@ -427,3 +427,12 @@ html[data-sidebar=right] #menu[data-docked=true][aria-expanded=false]>svg{transf
 }
 @media(prefers-reduced-motion:reduce){#menu[data-docked=true]>svg{transition:none!important}}
 html[data-motion=none] #menu[data-docked=true]>svg{transition:none!important}
+/* Secondary sidebar copy leaves before the dock closes and returns once there is room to read it. */
+@media(min-width:861px) and (prefers-reduced-motion:no-preference){
+html:not([data-sidebar=hidden]):not([data-motion=none]) .side{transition:visibility 0s 0s!important;overflow:hidden}
+html:not([data-sidebar=hidden]):not([data-motion=none]) .app.side-collapsed .side{transition:visibility 0s 120ms!important}
+html:not([data-sidebar=hidden]):not([data-motion=none]) .side :is(.note,.tm){opacity:1;transition:opacity 120ms ease-out 180ms}
+html:not([data-sidebar=hidden]):not([data-motion=none]) .app.side-collapsed .side :is(.note,.tm){opacity:0;transition:opacity 100ms ease-in 0ms}
+html[data-motion=subtle]:not([data-sidebar=hidden]) .side :is(.note,.tm){transition-delay:60ms}
+html[data-motion=subtle]:not([data-sidebar=hidden]) .app.side-collapsed .side :is(.note,.tm){transition-delay:0ms}
+}
