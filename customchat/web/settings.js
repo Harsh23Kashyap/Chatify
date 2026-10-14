@@ -125,6 +125,8 @@ async function ollamaPanel(viewOnly=false) {
   const box = $("#ollamabox"); if (activeSec !== "model") return; box.hidden = false; box.dataset.loaded = "1";
   const retainedActions=new Map([...box.querySelectorAll(".mact[data-model]")].filter(n=>viewOnly||n.dataset.pending==="true").map(n=>[n.dataset.model,n]));
   const previousHardware=localHardwareSnapshot,previousCards=box.querySelector(".ocards"),hasCards=!!previousCards;
+  const barKey = n => n.closest(".ocard")?.dataset.model ? "model:"+n.closest(".ocard").dataset.model : n.className || n.parentElement.className;
+  const previousBars = new Map([...box.querySelectorAll(".memory-total>div,.memory-fit i,.budget-track i")].map(n=>[barKey(n),n.style.width]));
   box.querySelector(".local-refresh-status")?.remove();if(!viewOnly){const loading=el("div",{class:"h local-refresh-status",role:"status",text:"Looking at this computer..."});if(hasCards)box.append(loading);else box.replaceChildren(loading);box.setAttribute("aria-busy","true");}
   let r; try { r = viewOnly&&localHardwareSnapshot?localHardwareSnapshot:await api("/api/hardware?base_url=" + encodeURIComponent($("#base").value.trim()));localHardwareSnapshot=r; } catch (e) { box.dataset.loaded="";box.removeAttribute("aria-busy");box.querySelector(".local-refresh-status")?.remove();const error=el("div",{class:"local-suggestion-error"},el("div",{class:"h",text:e.message}),el("button",{type:"button",class:"mini",text:"Retry local suggestions",onclick:ollamaPanel}));if(retainedActions.size||hasCards){box.querySelector(".local-suggestion-error")?.remove();box.append(error)}else{box.replaceChildren(el("b",{text:"Suggested local models"}),error)} return; }
   box.removeAttribute("aria-busy");box.querySelector(".local-refresh-status")?.remove();box.querySelector(".local-suggestion-error")?.remove();
@@ -163,6 +165,19 @@ async function ollamaPanel(viewOnly=false) {
   }
   else box.append(el("div", { class: "h", text: "Rough estimate from " + hw.ram_gb + " GB of memory" + (hw.gpu ? " and your " + hw.gpu : "") + ". Choose Details to see the math." }));
   if (rec.note && rec.picks.length) box.append(el("div", { class: "h", text: rec.note }));
+  if (!viewOnly && previousHardware && !matchMedia("(prefers-reduced-motion:reduce)").matches && !["none","calm"].includes(theme.motion)) {
+    for (const bar of box.querySelectorAll(".memory-total>div,.memory-fit i,.budget-track i")) {
+      const before = previousBars.get(barKey(bar)), after = bar.style.width;
+      if (!before || before === after) continue;
+      const animation = bar.animate([{width:before},{width:after}],{duration:160,easing:"ease-out"});
+      const media = matchMedia("(prefers-reduced-motion:reduce)");
+      const stop = () => { if (media.matches || document.documentElement.dataset.motion === "none") animation.cancel(); };
+      const observer = new MutationObserver(stop);
+      observer.observe(document.documentElement,{attributes:true,attributeFilter:["data-motion"]});media.addEventListener("change",stop);
+      const clean = () => {observer.disconnect();media.removeEventListener("change",stop);};
+      animation.addEventListener("finish",clean,{once:true});animation.addEventListener("cancel",clean,{once:true});
+    }
+  }
 }
 document.getElementById('seg').addEventListener('keydown',e=>{if(!['ArrowRight','ArrowLeft','ArrowDown','ArrowUp','Home','End'].includes(e.key))return;const buttons=[...e.currentTarget.querySelectorAll('[data-p]')],i=buttons.indexOf(document.activeElement);if(i<0)return;e.preventDefault();const next=e.key==='Home'?0:e.key==='End'?buttons.length-1:(i+(['ArrowRight','ArrowDown'].includes(e.key)?1:-1)+buttons.length)%buttons.length;const provider=buttons[next].dataset.p;buttons[next].click();document.querySelector('#seg [data-p="'+provider+'"]')?.focus()});
 function modelAction(tag, installed) {
