@@ -143,3 +143,9 @@ html[data-motion=none] .builder-final-api,html[data-motion=calm] .builder-final-
 .builder-final-api .builder-api-links{margin-top:8px}
 html:not([data-motion=none]):not([data-motion=calm]) .app-builder .builder-final-api details[open]>p,html:not([data-motion=none]):not([data-motion=calm]) .app-builder .builder-final-api details[open]>pre,html:not([data-motion=none]):not([data-motion=calm]) .app-builder .builder-final-api details[open]>h5{animation:builder-api-enter 140ms ease-out!important}
 @media(prefers-reduced-motion:reduce){html .app-builder .builder-final-api details[open]>*{animation:none!important;transition:none!important}}
+/* Chosen direction 1: quiet cards, no alternative layout modes. */
+.builder-final-api-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.builder-final-api{background:#fff;border-color:#ddd5ca}
+.builder-api-mark{border-radius:50%;background:#eee9e2}
+.builder-api-fit p{-webkit-line-clamp:1}
+@media(max-width:760px){.builder-final-api-grid{grid-template-columns:1fr}}
