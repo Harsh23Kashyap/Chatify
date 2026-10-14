@@ -394,7 +394,7 @@ def make_handler(cfg, engine):
                         for key,name in [('appearance','theme.json'),('pipeline_prompts','prompts.json'),('helper_drafts','code-drafts.json')]:
                             if key in extra:z.writestr('data/'+name,json.dumps(extra[key]))
                         if extra.get('api_suggestions'):z.writestr('API-SUGGESTIONS.json',json.dumps(extra['api_suggestions'],indent=2))
-                        z.writestr('README.md','Generated app draft. Review app.yaml before loading. Keys and documents are not included. Import using CustomChat Load and share Nerds. No code included.\n')
+                        z.writestr('README.md','Generated app draft. Review app.yaml before loading. Keys and documents are not included. Import using CustomChat Load and share Nerds. Helper drafts, if present, are inert code for review. No code is installed or run by downloading or importing this draft. Review them before any execution.\n')
                     return self._send(200,buf.getvalue(),'application/zip',{'Content-Disposition':'attachment; filename=customchat-draft.zip'})
                 if path.endswith('/save'):
                     plan=management.reviews.take(o,'app-build',str(b.get('ticket','')),b.get('confirmed'))

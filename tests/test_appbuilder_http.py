@@ -115,3 +115,12 @@ class BuilderHTTP(test_workspace_api.WorkspaceAPITests):
   self.call(self.clients[0],'/api/settings/build/save',{'ticket':plan['ticket'],'confirmed':True})
   first=next(iter(prompts.STAGES));response=self.call(self.clients[0],'/api/prompts/reset',{'key':first})
   for stage in response['stages']:self.assertEqual(stage['text'],'' if stage['key']==first else 'Trip planning fixture '+stage['key'])
+
+ def test_download_readme_truthful_when_helper_code_is_bundled(self):
+  import io,zipfile,urllib.request
+  from customchat import generators
+  raw={'helper_drafts':{'search':{'brief':'Offline fixture','code':generators.code_template('search','')}}}
+  request=urllib.request.Request('http://127.0.0.1:'+str(self.server.server_port)+'/api/settings/build/download',data=json.dumps({'yaml':yaml.safe_dump(raw)}).encode(),headers={'Content-Type':'application/json'})
+  with zipfile.ZipFile(io.BytesIO(self.clients[0].open(request).read())) as z:
+   self.assertIn('data/code-drafts.json',z.namelist());readme=z.read('README.md').decode()
+   self.assertNotIn('No code included',readme);self.assertIn('inert code for review',readme);self.assertIn('No code is installed or run',readme)
