@@ -15,7 +15,7 @@ const el = (tag, props = {}, ...kids) => { const e = document.createElement(tag)
 
 // Active sample and disclosure feedback stops when the visitor asks for less motion.
 const sampleMotionMedia=matchMedia("(prefers-reduced-motion:reduce)");
-const stopSampleMotion=()=>{if(!sampleMotionMedia.matches&&!["none","calm"].includes(document.documentElement.dataset.motion))return;const host=$("#pvextra");host?._headingAnimation?.cancel();host?.querySelectorAll(".cc").forEach(row=>row._statusAnimation?.cancel());document.querySelectorAll("#seg,#presets,details.grp>.fields").forEach(node=>node._revealMotion?.cancel())};
+const stopSampleMotion=()=>{if(!sampleMotionMedia.matches&&!["none","calm"].includes(document.documentElement.dataset.motion))return;const host=$("#pvextra");host?._headingAnimation?.cancel();host?.querySelectorAll(".cc").forEach(row=>row._statusAnimation?.cancel());document.querySelectorAll("#seg,#presets,details.grp>.fields,.connection-status-icon").forEach(node=>node._revealMotion?.cancel())};
 function revealMotion(node,frames,timing){node._revealMotion?.cancel();node._revealMotion=node.animate(frames,timing);stopSampleMotion()}
 sampleMotionMedia.addEventListener("change",stopSampleMotion);
 new MutationObserver(stopSampleMotion).observe(document.documentElement,{attributes:true,attributeFilter:["data-motion"]});
@@ -773,7 +773,7 @@ async function init() {
     testLog.unshift({p:NAMES[provider]||provider,ok,detail:message,t:new Date().toLocaleTimeString([],{hour:"2-digit",minute:"2-digit"})});testLog.length=Math.min(testLog.length,5);
     if(cur.provider===provider&&chosenModel()===model&&$("#base").value.trim()===base){
       t.className="testres "+(ok?"ok":"bad");t.replaceChildren(el("span",{class:"connection-status-icon","aria-hidden":"true",text:ok?"✓":"!"}),document.createTextNode((ok?"Passed. ":"Failed. ")+message));
-      if(!matchMedia("(prefers-reduced-motion:reduce)").matches&&!['calm','none'].includes(theme.motion))t.querySelector(".connection-status-icon").animate([{opacity:0},{opacity:1}],{duration:160,easing:"ease-out"});
+      if(!matchMedia("(prefers-reduced-motion:reduce)").matches&&!['calm','none'].includes(theme.motion))revealMotion(t.querySelector(".connection-status-icon"),[{opacity:0},{opacity:1}],{duration:160,easing:"ease-out"});
     }
     button.dataset.running="false";button.disabled=!canEdit||testBlocked;button.textContent="Test connection";button.removeAttribute("aria-busy");pvFollow();
   });
