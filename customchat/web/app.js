@@ -25,6 +25,7 @@ const ICON = {
   user: "M12 12a4 4 0 100-8 4 4 0 000 8zM4 21a8 8 0 0116 0",
   up: "M12 20V8M6 12l6-6 6 6",
   menu: "M4 7h16M4 12h16M4 17h16",
+  collapse: "M15 5l-7 7 7 7",
   close: "M6 6l12 12M18 6L6 18",
 };
 const svg = (n) => { const e = document.createElementNS("http://www.w3.org/2000/svg", "svg"); e.setAttribute("viewBox", "0 0 24 24"); e.setAttribute("width", "18"); e.setAttribute("height", "18"); e.setAttribute("fill", "none"); e.setAttribute("stroke", "currentColor"); e.setAttribute("stroke-width", "2"); e.setAttribute("stroke-linecap", "round"); e.setAttribute("stroke-linejoin", "round"); const p = document.createElementNS("http://www.w3.org/2000/svg", "path"); p.setAttribute("d", ICON[n]); e.append(p); return e; };
@@ -609,6 +610,8 @@ async function init() {
   const sidebarOverlay = () => matchMedia("(max-width:860px)").matches || document.documentElement.dataset.sidebar === "hidden";
   const syncSidebar = () => {
     const open = sidebarOverlay() ? $("#app").classList.contains("menu-open") : !$("#app").classList.contains("side-collapsed");
+    const menu = $("#menu"), docked = !sidebarOverlay();
+    if(menu.dataset.docked !== String(docked)){menu.dataset.docked=String(docked);menu.replaceChildren(svg(docked?"collapse":"menu"));}
     $("#menu").setAttribute("aria-expanded", String(open));
     $("#menu").setAttribute("aria-label", open ? "Close chats" : "Open chats");
     $("#side").inert = !open;
@@ -636,7 +639,7 @@ async function init() {
   th.addEventListener("scroll", syncLatest);
   new ResizeObserver(syncLatest).observe($(".composer"));
   jump.addEventListener("click", () => th.scrollTo({ top: th.scrollHeight, behavior: motionAllowed()?"smooth":"auto" }));
-  $("#menu").replaceChildren(svg("menu")); $("#upload").replaceChildren(svg("clip")); $("#exportChat").replaceChildren(svg("tray")); $("#newTopic").replaceChildren(svg("topic")); $("#newTopic").onclick = () => { S.newTopic = true; S.topic = null; toast("Next question starts a new conversation"); }; $("#send").replaceChildren(svg("send")); $("#jump").replaceChildren(svg("down"));
+  $("#menu").replaceChildren(svg($("#menu").dataset.docked==="true"?"collapse":"menu")); $("#upload").replaceChildren(svg("clip")); $("#exportChat").replaceChildren(svg("tray")); $("#newTopic").replaceChildren(svg("topic")); $("#newTopic").onclick = () => { S.newTopic = true; S.topic = null; toast("Next question starts a new conversation"); }; $("#send").replaceChildren(svg("send")); $("#jump").replaceChildren(svg("down"));
   $("#upload").addEventListener("click", uploadDialog);
   document.addEventListener("keydown", (e) => { if ((e.metaKey || e.ctrlKey) && e.key === "k") { e.preventDefault(); $("#search").focus(); } });
   $("#tempBtn").replaceChildren(svg("temp")); $("#profileBtn").replaceChildren(svg("user")); $("#prevQ").replaceChildren(svg("up")); $("#nextQ").replaceChildren(svg("down"));

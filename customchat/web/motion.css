@@ -417,3 +417,13 @@ html:not([data-motion=none]) .hero>div:has(>.playground-questions){animation:non
 html:not([data-motion=none]) .playground-questions>.playground-question{animation:m-in 140ms ease-out both;animation-delay:calc(min(var(--question-order,0),7)*28ms)}
 html[data-motion=subtle] .playground-questions>.playground-question{animation-duration:120ms;animation-delay:0s}
 }
+
+/* Docked chat navigation uses a directional collapse chevron; overlays retain the menu icon. */
+@media(min-width:861px){
+html:not([data-sidebar=hidden]) #menu[data-docked=true]>svg{transform:rotate(0deg);transition:transform 140ms ease-out}
+html:not([data-sidebar=hidden]) #menu[data-docked=true][aria-expanded=false]>svg{transform:rotate(180deg)}
+html[data-sidebar=right] #menu[data-docked=true][aria-expanded=true]>svg{transform:rotate(180deg)}
+html[data-sidebar=right] #menu[data-docked=true][aria-expanded=false]>svg{transform:rotate(0deg)}
+}
+@media(prefers-reduced-motion:reduce){#menu[data-docked=true]>svg{transition:none!important}}
+html[data-motion=none] #menu[data-docked=true]>svg{transition:none!important}
