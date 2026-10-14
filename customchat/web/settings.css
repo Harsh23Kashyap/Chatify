@@ -1317,3 +1317,6 @@ html body.settings-tabs #look .field>.compact-help{margin-top:-8px!important;mar
 /* Long import inventories stay readable without expanding the whole page. */
 .import-inventory{max-height:min(360px,50dvh);overflow-y:auto;overscroll-behavior:contain;scrollbar-gutter:stable;overflow-wrap:anywhere;margin-top:12px;padding-right:8px}
 .import-inventory:focus-visible{outline:2px solid #173f35;outline-offset:2px}
+
+/* Copy status labels keep the neighboring Save action still. */
+@media(min-width:481px){body.settings-tabs .helper .secondary-actions .helper-copy{min-width:114px}}
