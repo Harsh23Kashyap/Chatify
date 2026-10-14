@@ -1324,3 +1324,5 @@ html body.settings-tabs #look .field>.compact-help{margin-top:-8px!important;mar
 /* The longest helper-save label sets its stable hit area. */
 @media(min-width:481px){body.settings-tabs .helper .secondary-actions .helper-save-draft{min-width:158px}}
 @media(max-width:480px){html body.settings-tabs #codeEditor .helper .secondary-actions .helper-save-draft{min-height:65px!important}}
+
+body.settings-tabs .helper .helper-detect{min-width:128px}
