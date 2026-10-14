@@ -327,11 +327,24 @@ def test_code(kind, code, query):
                 err = (p.stderr or "It stopped without a result.").strip().splitlines()[-1][:300] if (p.stderr or "").strip() else "It stopped without a result."
         except subprocess.TimeoutExpired:
             err = "It took longer than 60 seconds and was stopped."
+    recovered = False
+    original_result = result
+    if kind == 'search' and result is not None and check_shape(kind,result):
+        from .connectors.recovery import recover_evidence
+        try:
+            rows = recover_evidence(result,'helper',5)
+            if rows:
+                for row in rows:
+                    try: row['year']=int(row['year']) if row['year'] else None
+                    except (ValueError,TypeError): row['year']=None
+                result=rows;recovered=True
+        except ValueError:
+            pass
     shape = check_shape(kind, result) if result is not None else []
     items = result if isinstance(result, list) else []
     empty = kind == "search" and result == [] and not err
     return {"ran": ran, "ok": result is not None and not shape and not empty and not err, "error": err, "problems": shape,
-            "empty": empty, "items": [{k: (str(v)[:240] if v is not None else None) for k, v in it.items()} for it in items[:5] if isinstance(it, dict)],
+            "recovered": recovered, "recovery_note": "Returned data preserved as evidence; review the source content." if recovered else "", "empty": empty, "items": [{k: (str(v)[:240] if v is not None else None) for k, v in it.items()} for it in items[:5] if isinstance(it, dict)],
             "result": result if isinstance(result, str) else None, "count": len(items), "seconds": round(_t.time() - t0, 1)}
 
 

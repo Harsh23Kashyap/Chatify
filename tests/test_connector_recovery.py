@@ -15,3 +15,19 @@ class RecoveryTests(unittest.TestCase):
   self.assertEqual(len(recover_evidence(['data']*100,'test',2)),2)
  def test_no_execution(self):
   self.assertIn('__import__',recover_evidence('__import__("os").system("false")','test')[0]['text'])
+
+class HelperResultRecovery(unittest.TestCase):
+ def test_plain_string_preserved(self):
+  from unittest.mock import patch
+  from types import SimpleNamespace
+  from customchat.generators import test_code
+  with patch('customchat.generators.review_code',return_value=(True,[])),patch('subprocess.run',return_value=SimpleNamespace(stdout='@@RESULT@@"A useful source reply"',stderr='')):
+   r=test_code('search','def search(query,limit=6):return "A useful source reply"','question')
+  self.assertTrue(r['recovered']);self.assertTrue(r['ok']);self.assertEqual(r['items'][0]['text'],'A useful source reply')
+ def test_error_object_not_evidence(self):
+  from unittest.mock import patch
+  from types import SimpleNamespace
+  from customchat.generators import test_code
+  with patch('customchat.generators.review_code',return_value=(True,[])),patch('subprocess.run',return_value=SimpleNamespace(stdout='@@RESULT@@{"error":"request failed"}',stderr='')):
+   r=test_code('search','def search(query,limit=6):return {}','question')
+  self.assertFalse(r['ok']);self.assertFalse(r['recovered'])
