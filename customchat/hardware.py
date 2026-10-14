@@ -214,6 +214,12 @@ def start_pull(base, model):
                         st["progress_scope"] = "current download part"
                         st["progress_known"] = True
                         st["pct"] = max(0, min(100, int(100 * d.get("completed", 0) / d["total"])))
+                    else:
+                        st["progress_known"] = False
+                        st["pct"] = 0
+                        st.pop("downloaded_bytes", None)
+                        st.pop("total_bytes", None)
+                        st.pop("progress_scope", None)
                     if d.get("status") == "success":
                         success_confirmed = True
                         st["progress_known"] = True

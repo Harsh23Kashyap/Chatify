@@ -33,3 +33,7 @@ class TransientKeyAndCancellation(unittest.TestCase):
 
  def test_status_without_amount_does_not_invent_percentage(self):
   pid,st=self.pull(b'{"status":"resolving manifest"}\n');self.assertFalse(st["progress_known"]);self.assertNotIn("downloaded_bytes",st)
+
+ def test_amountless_phase_does_not_reuse_previous_part_percentage(self):
+  pid,st=self.pull(b'{"status":"pulling","total":100,"completed":100}\n{"status":"verifying sha256 digest"}\n')
+  self.assertFalse(st['progress_known']);self.assertNotIn('downloaded_bytes',st);self.assertNotIn('total_bytes',st);self.assertEqual(st['status'],'verifying sha256 digest');self.assertTrue(st['error'])
