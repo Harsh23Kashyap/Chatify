@@ -334,3 +334,5 @@ body.settings-tabs #settingsNavTop{z-index:150!important}
 
 .mobile-section-label,#mobileSection{display:none}
 @media(max-width:760px){body.settings-tabs #menu .section-tabs{display:none!important}body.settings-tabs #menu{position:static!important;width:100%!important;padding:8px 0!important;margin:0!important}body.settings-tabs #menu .mobile-section-label{display:block;font-size:13px;margin-bottom:4px}body.settings-tabs #menu #mobileSection{display:block!important;width:100%!important;min-height:44px!important;max-width:100%}body.settings-tabs .settings-active-panel{scroll-margin-top:160px}body.settings-tabs .category-tabs .tab-copy small,body.settings-tabs .category-tabs .tab-icon{display:none}body.settings-tabs .category-tabs button{min-height:44px!important;padding:8px!important}body.settings-tabs .workspace-fields{padding:12px!important}body.settings-tabs .workspace-fields fieldset{padding:8px!important;margin:8px 0!important}}
+
+#modelSuggestionSources .model-doc-source{display:block;margin:3px 0;overflow-wrap:anywhere}
