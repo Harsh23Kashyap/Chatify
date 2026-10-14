@@ -33,3 +33,10 @@ class BoundedTests(unittest.TestCase):
    Path(d,'plug.py').write_text('import time\ndef search(q,k):time.sleep(20);return []')
    with patch('time.monotonic',side_effect=[0,21]):
     with self.assertRaisesRegex(ValueError,'time/output'):BoundedPlugin({'id':'x','label':'x','entry':'plug:search'},d).search('q',1)
+ def test_explicit_source_key_only(self):
+  with tempfile.TemporaryDirectory() as d:
+   Path(d,'plug.py').write_text('import os\ndef search(q,k):\n return [{"text":"ready" if os.getenv("TEST_SOURCE_KEY") and not os.getenv("OTHER_PRIVATE_KEY") else "missing"}]')
+   from unittest.mock import patch
+   with patch.dict(os.environ,{'TEST_SOURCE_KEY':'private','OTHER_PRIVATE_KEY':'unrelated'}):
+    r=BoundedPlugin({'id':'x','label':'x','entry':'plug:search','api_key_env':'TEST_SOURCE_KEY'},d).search('q',2)
+   self.assertEqual(r[0]['text'],'ready')

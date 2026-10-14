@@ -139,7 +139,8 @@ class NerdLoader:
    key_store=SecretStore(str(folder/'data'))
    for name,value in imported_keys.items():key_store.set(name,value)
   log=open(folder/'run.log','wb')
-  child=subprocess.Popen([sys.executable,'-m','customchat','run',str(folder/'app.yaml'),'--no-browser'],stdout=log,stderr=subprocess.STDOUT,cwd=str(Path(__file__).resolve().parents[1]),env={k:v for k,v in os.environ.items() if not re.search(r'(KEY|TOKEN|SECRET|PASSWORD|CREDENTIAL)',k,re.I)})
+  declared_env={cfg['provider'].get('api_key_env','')}|{src.get('api_key_env','') for src in cfg['sources']}
+  child=subprocess.Popen([sys.executable,'-m','customchat','run',str(folder/'app.yaml'),'--no-browser'],stdout=log,stderr=subprocess.STDOUT,cwd=str(Path(__file__).resolve().parents[1]),env={k:v for k,v in os.environ.items() if not re.search(r'(KEY|TOKEN|SECRET|PASSWORD|CREDENTIAL)',k,re.I) or k in declared_env})
   log.close();self.children.append(child);self.workspaces[folder.name]={'folder':folder,'process':child,'title':cfg['app']['title'],'url':'http://127.0.0.1:'+str(port)}
   import time,urllib.request
   url='http://127.0.0.1:'+str(port)

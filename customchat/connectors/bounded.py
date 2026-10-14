@@ -15,7 +15,7 @@ if isinstance(x,list):x=x[:k]
 Path(sys.argv[3]).write_text(json.dumps(x))
 '''
 class BoundedPlugin:
- def __init__(self,block,base):self.id=block['id'];self.label=block['label'];self.entry=block['entry'];self.base=os.path.abspath(base)
+ def __init__(self,block,base):self.id=block['id'];self.label=block['label'];self.entry=block['entry'];self.base=os.path.abspath(base);self.key_env=block.get("api_key_env", "")
  def search(self,q,k):
   from .base import Evidence
   k=max(1,min(int(k),50))
@@ -23,6 +23,7 @@ class BoundedPlugin:
    result=Path(folder)/'result.json';log=Path(folder)/'output.log'
    allowed={'PATH','HOME','USERPROFILE','SYSTEMROOT','WINDIR','TEMP','TMP','TMPDIR','LANG','LC_ALL','LD_LIBRARY_PATH'}
    env={a:b for a,b in os.environ.items() if a.upper() in allowed}
+   if re.fullmatch(r'[A-Z][A-Z0-9_]{2,100}',self.key_env) and self.key_env in os.environ:env[self.key_env]=os.environ[self.key_env]
    with log.open('wb') as out:
     p=subprocess.Popen([sys.executable,'-I','-c',SCRIPT,self.base,self.entry,str(result)],stdin=subprocess.PIPE,stdout=out,stderr=out,env=env,cwd=folder,start_new_session=os.name!='nt')
     p.stdin.write(json.dumps([str(q)[:2000],k]).encode());p.stdin.close()
