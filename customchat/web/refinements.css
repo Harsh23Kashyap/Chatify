@@ -108,3 +108,7 @@ html body.settings-tabs #sec-wording .field:has(>.logobox)>.flabel{display:flex!
 html body.settings-tabs #sec-wording .field:has(>.logobox)>.flabel .info-tip{margin:0!important}
 /* Prompt and code editors have no preview surface or preview controls. */
 html body.settings-tabs:is([data-settings-section=prompts],[data-settings-section=code]) :is(.preview-toggle,#pvfab){display:none!important}
+/* At high browser zoom, keep an editor and its caret below the sticky navigation. */
+@media(max-height:420px){html body.settings-tabs.settings-editor-wide :is(#sec-prompts,#sec-code) :is(#promptsEditor,#codeEditor,.workspace-fields) :is(textarea,.cmhost.filled){min-height:64px!important;max-height:calc(100dvh - 144px)!important;overflow:auto!important}}
+@media(max-height:420px){html body.settings-tabs.settings-editor-wide #sec-code #codeEditor details.helper.selected-editor>textarea,html body.settings-tabs.settings-editor-wide #sec-code #codeEditor details.inner textarea.code{min-height:64px!important;max-height:calc(100dvh - 144px)!important;overflow:auto!important}}
+@media(max-height:420px) and (max-width:600px){html body.settings-tabs :is(input,textarea,select,button,summary){scroll-margin-top:110px!important}}
