@@ -78,7 +78,7 @@ function inline(parent, text, evidence) {
 }
 function renderAnswer(text, evidence) {
   const box = el("div", { class: "a" });
-  let list = null; const lines=text.split(/\n/);
+  let list = null, listType = null; const lines=text.split(/\n/);
   const cells=tableCells;
   for(let i=0;i<lines.length;i++) {
     const line=lines[i];
@@ -89,8 +89,8 @@ function renderAnswer(text, evidence) {
       while(i+1<lines.length&&lines[i+1].includes("|")){const row=cells(lines[++i]);const tr=el("tr");head.forEach((_,n)=>{const td=el("td",{"data-label":head[n]});inline(td,row[n]||"",evidence);tr.append(td)});body.append(tr)}
       box.append(el("div",{class:"answer-table-wrap",tabindex:"0","aria-label":"Answer table"},table));continue;
     }
-    const li=line.match(/^\s*(?:[-*]|\d+[.)])\s+(.*)/),h=line.match(/^#{1,3}\s+(.*)/);
-    if(li){if(!list){list=el("ul");box.append(list)}const x=el("li");inline(x,li[1],evidence);list.append(x);continue}
+    const li=line.match(/^\s*([-*]|\d+[.)])\s+(.*)/),h=line.match(/^#{1,3}\s+(.*)/);
+    if(li){const type=/^\d/.test(li[1])?"ol":"ul";if(!list||listType!==type){list=el(type,type==="ol"?{start:String(parseInt(li[1],10))}:{});listType=type;box.append(list)}const x=el("li");inline(x,li[2],evidence);list.append(x);continue}
     list=null;if(!line.trim())continue;const p=el(h?"h4":"p");inline(p,h?h[1]:line,evidence);box.append(p);
   }
   return box;
@@ -425,7 +425,7 @@ async function loadList() {
         el("span", { class: "t", text: c.title }), cnt[c.title] > 1 ? el("span", { class: "tm", text: new Date(c.created * 1000).toLocaleTimeString([], { hour: "numeric", minute: "2-digit" }) }) : null, c.pinned ? el("span", { class: "pinned", title: "Pinned" }, svg("pin")) : null,
         el("span", { class: "acts" },
           el("button", { class: c.pinned ? "is-pinned" : "", title: c.pinned ? "Unpin" : "Pin", "aria-label": (c.pinned ? "Unpin " : "Pin ") + c.title, "aria-pressed": c.pinned ? "true" : "false", onclick: async (e) => { e.stopPropagation(); await api("/api/pin", { chat: c.id, pinned: !c.pinned }); loadList(); } }, svg("pin")),
-          el("button", { title: "Rename", "aria-label": "Rename " + c.title, onclick: async (e) => { e.stopPropagation(); const t = prompt("Rename chat", c.title); if (t) { await api("/api/rename", { chat: c.id, title: t }); loadList(); } } }, svg("edit")),
+          el("button", { title: "Rename", "aria-label": "Rename " + c.title, onclick: e => { e.stopPropagation(); renameDialog(c, false); } }, svg("edit")),
           el("button", { title: "Delete", "aria-label": "Delete " + c.title, onclick: async (e) => {
             e.stopPropagation();const button=e.currentTarget;if(button.dataset.running==="true")return;
             const row=button.closest(".item");if(row.nextElementSibling?.classList.contains("history-action-error"))row.nextElementSibling.remove();
@@ -439,10 +439,26 @@ async function loadList() {
       if (!rows.length) list.append(el("div", { class: "empty", text: "Conversations appear after your first question." }));
       rows.forEach((t) => list.append(el("div", { class: "item" + (t.id === S.topic ? " on" : ""), role:"button",tabindex:"0","aria-current":t.id===S.topic?"true":"false","aria-label":"Open conversation: "+t.title,onkeydown:e=>activateHistory(e,()=>openTopic(t.id)),onclick: () => openTopic(t.id) },
         el("span", { class: "t" }, t.title, el("span", { class: "sub", text: (t.summary ? t.summary.slice(0, 70) : t.turns + " question" + (t.turns === 1 ? "" : "s")) })),
-        el("span", { class: "acts" }, el("button", { title: "Rename", "aria-label": "Rename " + t.title, onclick: async (e) => { e.stopPropagation(); const n = prompt("Rename conversation", t.title); if (n) { await api("/api/rename-topic", { topic: t.id, title: n }); loadList(); } } }, svg("edit"))))));
+        el("span", { class: "acts" }, el("button", { title: "Rename", "aria-label": "Rename " + t.title, onclick: e => { e.stopPropagation(); renameDialog(t, true); } }, svg("edit"))))));
     }
   } catch (e) { if(seq!==loadList.seq)return;clearTimeout(historySkeletonTimer);clearTimeout(historyShimmerTimer);state.replaceChildren(el("span",{text:"History could not load. " + e.message}),el("button",{type:"button",class:"history-retry",text:"Try again",onclick:e=>{e.stopPropagation();loadList()}})); }
   finally {if(seq===loadList.seq){clearTimeout(historySkeletonTimer);clearTimeout(historyShimmerTimer);list.removeAttribute("aria-busy");if(state.textContent==="Loading history...")state.remove()}}
+}
+
+function renameDialog(row, topic = false) {
+  const title = topic ? "Rename conversation" : "Rename chat";
+  const back = el("div", {class:"modal-back"}), input = el("input", {id:"renameTitle",value:row.title,maxlength:"140",required:"",type:"text",autocomplete:"off"});
+  const status = el("p", {role:"status","aria-live":"polite",class:"rename-error"});
+  const cancel = el("button", {type:"button",class:"btn-out",text:"Cancel"});
+  const save = el("button", {type:"submit",class:"btn-out",text:"Save name"});
+  const form = el("form", {class:"modal rename-dialog",role:"dialog","aria-label":title}, el("h2",{text:title}),el("label",{for:"renameTitle",text:"Name"}),input,status,el("div",{class:"modal-act"},cancel,save));
+  let pending=false;
+  const close=()=>{if(!pending)back.remove()};back.ccDismiss=close;cancel.onclick=close;
+  form.onsubmit=async e=>{e.preventDefault();if(pending)return;const name=input.value.trim();if(!name){status.textContent="Enter a name.";input.focus();return}pending=true;save.disabled=cancel.disabled=true;status.textContent="Saving name...";
+    try{await api(topic?"/api/rename-topic":"/api/rename",topic?{topic:row.id,title:name}:{chat:row.id,title:name});if((topic&&S.view==="topic"&&S.topic===row.id)||(!topic&&S.chat===row.id)){ $("#chatTitle").textContent=name;document.title=name+" - "+S.cfg.app.title;}await loadList();back.remove();toast("Name saved.")}
+    catch(error){status.textContent="Could not save name: "+error.message+". Try again.";input.focus()}
+    finally{pending=false;save.disabled=cancel.disabled=false}
+  };back.append(form);mountModal(back);input.focus();input.select();
 }
 
 async function openChat(id) {
@@ -508,7 +524,7 @@ async function send() {
             live.classList.add("answer-arrive");
           } else thinking.remove();
         }
-        text += ev.data; const sp = document.createElement("span"); sp.className = "tk"; sp.textContent = ev.data; const follow = th.scrollHeight - th.scrollTop - th.clientHeight < 100; live.append(sp); if (follow) th.scrollTop = th.scrollHeight; syncLatest(); }
+        text += ev.data; const follow = th.scrollHeight - th.scrollTop - th.clientHeight < 100; const rendered=renderAnswer(text, []); [...rendered.children].forEach(n=>n.classList.add("tk")); live.replaceChildren(...rendered.childNodes); if (follow) th.scrollTop = th.scrollHeight; syncLatest(); }
       else if (ev.type === "done") result = ev.data;
       else if (ev.type === "error") err = ev.data;
     });
@@ -528,7 +544,7 @@ async function send() {
   S.busy = false; applyIcons(); sendIcon("send", "Send"); drawThread(); loadList(); $("#q").focus({preventScroll:true});
   if (!result) {
     // keep what the user typed, and any text that did arrive, instead of losing both
-    if (text && err !== "Stopped") { const w2 = $("#thread .wrap") || $("#thread"); w2.querySelector(".hero")?.remove(); w2.append(el("div", { class: "q", text: q }), el("div", { class: "a" }, text + "\n\n(Cut short. Use Retry to ask again.)")); }
+    if (text && err !== "Stopped") { const w2 = $("#thread .wrap") || $("#thread"); w2.querySelector(".hero")?.remove(); w2.append(el("div", { class: "q", text: q }), renderAnswer(text + "\n\n(Cut short. Use Retry to ask again.)", [])); }
     else if (!$("#q").value) { $("#q").value = q; autosize(); }
   }
   syncLatest(); rdy();
@@ -692,7 +708,7 @@ async function init() {
   if (PREVIEW) { previewMode(); return; }
   drawThread(); loadList(); loadSuggestions(); tour();
 }
-init().catch((e) => { document.body.textContent = "Could not start: " + e.message; });
+init().then(()=>window.CCLoading?.ready()).catch((e) => { window.CCLoading?.ready();document.body.textContent = "Could not start: " + e.message; });
 
 document.addEventListener("keydown", (e) => {
   const t = e.target.tagName;

@@ -16,3 +16,14 @@ html[data-theme=dark] .cc-tour{background:#1f302c;color:#e8eee6;border-color:#40
 .cc-tour-focus{border:1px solid #648967;box-shadow:none;border-radius:8px}
 .cc-tour::before{display:none}
 .cc-tour-scene,.cc-tour-orb,.cc-tour-lines,.cc-tour-tab{animation:none!important}
+
+/* Chat walkthrough uses the active app palette; Configuration keeps its editor palette. */
+body:not(:has(#configGuide)) .cc-tour{background:var(--paper);color:var(--ink);border-color:var(--line);font-family:var(--font)}
+body:not(:has(#configGuide)) .cc-tour h2{font-family:var(--serif);color:var(--brand)}
+body:not(:has(#configGuide)) .cc-tour p,body:not(:has(#configGuide)) .cc-tour-count,body:not(:has(#configGuide)) .cc-tour-skip{color:var(--mut)}
+body:not(:has(#configGuide)) .cc-tour-next{background:var(--brand);border-color:var(--brand);color:var(--on-brand)}
+body:not(:has(#configGuide)) .cc-tour-back{color:var(--brand);border-color:var(--line)}
+body:not(:has(#configGuide)) .cc-tour-progress i{background:var(--line)}
+body:not(:has(#configGuide)) .cc-tour-progress i.done{background:var(--brand)}
+body:not(:has(#configGuide)) .cc-tour button:focus-visible{outline-color:var(--brand)}
+body:not(:has(#configGuide)) .cc-tour-focus{border-color:var(--brand)}

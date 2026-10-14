@@ -56,3 +56,7 @@ A list. Each entry has `type`, optional `id` and `label`.
 - `context_chars` (8000-2000000, default 60000): character allowance for answer context, with space reserved for the question, instructions and current evidence. Set a lower allowance for small local models. This is not an exact token count or automatic model-window discovery. Evidence alone can exceed a very small allowance.
 
 Recent history and older keyword matches are selected from storage; the entire thread is not sent to the model. Complete answers are kept when they fit. An oversized latest answer uses a marked head/tail excerpt. Summaries are lossy context, not evidence or unlimited recall. Demo mode does not perform model-based follow-up rewriting.
+
+### Answer depth
+
+`provider.max_output_tokens` sets the response ceiling (256-32768 tokens, default4096), not a target length. `retrieval.top_k` defaults to12 passages. Deep mode searches and retains twice that number, capped at50. Standard and Deep ask for fuller cited synthesis only when the sources support it; Quick stays concise. More passages and higher ceilings may use more tokens and cost more.

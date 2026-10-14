@@ -22,19 +22,19 @@ new MutationObserver(stopSampleMotion).observe(document.documentElement,{attribu
 
 /* ---------- model section (unchanged behaviour) ---------- */
 function draw() {
-  $("#model").value = cur.model || "";const picker=$("#modelPick"),matched=[...picker.options].some(o=>o.value===cur.model);picker.value=matched?cur.model:OTHER;$("#base").value = cur.base_url || ""; $("#temp").value = cur.temperature; $("#topk").value = cur.top_k; $("#rewrite").checked = !!cur.query_rewrite;
+  $("#model").value = cur.model || "";const picker=$("#modelPick"),matched=[...picker.options].some(o=>o.value===cur.model);picker.value=matched?cur.model:OTHER;$("#base").value = cur.base_url || ""; $("#temp").value = cur.temperature; $("#outputLimit").value=cur.max_output_tokens||4096; $("#topk").value = cur.top_k; $("#rewrite").checked = !!cur.query_rewrite;
   $("#tv").textContent = (+cur.temperature).toFixed(2); $("#kv").textContent = cur.top_k; sliderVisuals();
   document.querySelectorAll("#seg button").forEach((b) => b.setAttribute("aria-checked", String(b.dataset.p === cur.provider)));
   buildChips();
   provExtras();
-  for (const id of ["model", "apikey", "keysave", "keyclear", "modelPick", "refreshModels", "testconn", "base", "temp", "topk", "rewrite", "apply", "load", "saveLook", "resetAll", "imp", "exportApp", "checkDocs", "saveBudget"]) $("#" + id).disabled = !canEdit; $("#testconn").disabled = !canEdit || testBlocked || $("#testconn").dataset.running==="true";
+  for (const id of ["model", "apikey", "keysave", "keyclear", "modelPick", "refreshModels", "testconn", "base", "temp", "outputLimit", "topk", "rewrite", "apply", "load", "saveLook", "resetAll", "imp", "exportApp", "checkDocs", "saveBudget"]) $("#" + id).disabled = !canEdit; $("#testconn").disabled = !canEdit || testBlocked || $("#testconn").dataset.running==="true";
 }
 // Endpoint overrides belong to one provider, never silently migrate across providers.
 function switchProvider(provider, model = "") {
   const current = read();
   cur = { ...current, provider, model, base_url: current.provider === provider ? current.base_url : "" };
 }
-const read = () => ({ provider: cur.provider, model: chosenModel(), base_url: $("#base").value.trim(), temperature: +$("#temp").value, top_k: +$("#topk").value, query_rewrite: $("#rewrite").checked });
+const read = () => ({ provider: cur.provider, model: chosenModel(), base_url: $("#base").value.trim(), temperature: +$("#temp").value, max_output_tokens:+$("#outputLimit").value, top_k: +$("#topk").value, query_rewrite: $("#rewrite").checked });
 let recommendationPrior=null;
 function selectRecommendation(provider,model){recommendationPrior={...read()};switchProvider(provider,model);draw();loadModels(true).then(pvFollow);const host=$("#recommendationUndo")||el("div",{id:"recommendationUndo",class:"recommendation-undo",role:"status"});host.replaceChildren(el("span",{text:"Recommendation selected for unsaved answer settings."}),el("button",{type:"button",class:"go ghost",text:"Return to previous model settings",onclick:()=>{if(!recommendationPrior)return;cur={...recommendationPrior};recommendationPrior=null;draw();loadModels(true).then(pvFollow);host.remove();say("Previous model settings restored. Nothing was saved.")}}));$("#sec-model").append(host)}
 
@@ -758,7 +758,7 @@ async function init() {
   $("#topk").addEventListener("input", () => {$("#kv").textContent = $("#topk").value;sliderVisuals()});
   $("#modelPick").addEventListener("change", pickChanged);
   // Key actions and Refresh rebuild the picker from cur.model. Keep typed edits.
-  for(const id of ["base","temp"]){$("#"+id).addEventListener("input",()=>{$("#testres").className="testres";$("#testres").textContent="Model settings changed. Test this selection when ready.";pvFollow()})}
+  for(const id of ["base","temp","outputLimit"]){$("#"+id).addEventListener("input",()=>{$("#testres").className="testres";$("#testres").textContent="Model settings changed. Test this selection when ready.";pvFollow()})}
   $("#model").addEventListener("input", () => { if ($("#modelPick").value === OTHER) cur.model = $("#model").value.trim(); $("#testres").className="testres";$("#testres").textContent="Model changed. Test this selection when ready.";pvFollow(); });
   $("#refreshModels").addEventListener("click", () => loadModels(true));
   $("#keysave").addEventListener("click", async () => { if($("#keysave").dataset.running==="true")return;const provider=cur.provider;const v = $("#apikey").value.trim(); if (!v) { say("Paste a key first.", true); return; } $("#keysave").dataset.running="true";try { const r = await api("/api/provider/key", { provider, key: v }); keyInfo[provider] = r.key; if(cur.provider===provider&&$("#apikey").value.trim()===v)$("#apikey").value = ""; await provExtras(); say("Key saved on this computer."); } catch (e) { say(e.message, true); } finally {$("#keysave").dataset.running="false"} });

@@ -1,3 +1,16 @@
+## 0.1.34 - Chat rendering and app handoff
+
+- Stream safe bold/code/table/list formatting instead of literal Markdown; keep numbered lists numbered.
+- Profile, reading controls and chat Guide follow the active palette and fonts.
+- Rename chats and conversations in an in-app form with validation, visible errors and updated active headings.
+- Treat disconnected streaming clients as normal, close the generator and avoid a second error write to dead sockets.
+- Start reviewed saved Build with AI apps in a separate local workspace through Use this app, without restarting the current server. Imported apps already use separate workspaces.
+- Explain Build with AI near the start of Guide, including review, model-call costs and limits.
+- Add a small startup/navigation loading line and view fade, with static reduced-motion behavior.
+- Default to12 evidence passages; Deep uses twice the configured amount up to50. Ask for fuller source-backed answers and expose a4096-token output ceiling.
+
+Local validation:794 Python tests passed,3 skipped; streamed formatting/palette, saved rename, scrolling, loading/navigation/Guide and Build handoff browser checks. Real gpt-4.1-mini Deep comparisons: F1 253 to295 words, Nutrition250 to443, Travel300 to345. Length is not a guaranteed target and live answers are not independently fact-checked. Free dated FIA snapshot sources were added to the separate Formula One sample workspace, not the package. Publication uses the reviewed GitHub/PyPI workflow.
+
 ## 0.1.33 - Tested API helpers and clearer setup
 
 - Shorter API recommendation cards with expandable setup and reduced-motion-safe feedback.

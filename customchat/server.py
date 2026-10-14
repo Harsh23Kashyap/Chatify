@@ -57,7 +57,7 @@ def make_handler(cfg, engine):
     def settings_view():
         p, r = cfg["provider"], cfg["retrieval"]
         return {"provider": p["type"], "model": p["model"], "base_url": p["base_url"], "temperature": p["temperature"],
-                "top_k": r["top_k"], "query_rewrite": bool(r.get("query_rewrite"))}
+                "max_output_tokens":p.get("max_output_tokens",4096), "top_k": r["top_k"], "query_rewrite": bool(r.get("query_rewrite"))}
 
     def can_edit(h):
         if cfg["auth"]["mode"] == "token":
@@ -75,6 +75,7 @@ def make_handler(cfg, engine):
         if "model" in v: new["provider"]["model"] = str(v["model"])[:120]
         if "base_url" in v: new["provider"]["base_url"] = str(v["base_url"])[:300]
         if "temperature" in v: new["provider"]["temperature"] = v["temperature"]
+        if "max_output_tokens" in v: new["provider"]["max_output_tokens"] = v["max_output_tokens"]
         if "top_k" in v: new["retrieval"]["top_k"] = v["top_k"]
         if "query_rewrite" in v: new["retrieval"]["query_rewrite"] = bool(v["query_rewrite"])
         from .portable import _check_values,ExportError
@@ -396,13 +397,34 @@ def make_handler(cfg, engine):
                         if extra.get('api_suggestions'):z.writestr('API-SUGGESTIONS.json',json.dumps(extra['api_suggestions'],indent=2))
                         z.writestr('README.md','Generated app draft. Review app.yaml before loading. Keys and documents are not included. Import using CustomChat Load and share Nerds. Helper drafts, if present, are inert code for review. No code is installed or run by downloading or importing this draft. Review them before any execution.\n')
                     return self._send(200,buf.getvalue(),'application/zip',{'Content-Disposition':'attachment; filename=customchat-draft.zip'})
+                if path.endswith('/launch'):
+                    launch=management.reviews.take(o,'app-launch',str(b.get('ticket','')),True)
+                    with management.lock:
+                        if management.active:raise ValueError('Wait for the workspace test to finish')
+                        if launch['revision'] != editstate.revision(cfg):raise ValueError('Saved configuration changed. Review and save again before using it')
+                        clean=launch['config']
+                        from pathlib import Path
+                        folder=(Path(cfg.get('_dir','.'))/clean['storage']['path']).parent
+                        for key,name in [('appearance','theme.json'),('pipeline_prompts','prompts.json'),('helper_drafts','code-drafts.json')]:
+                            path=folder/name
+                            expected=launch['state'][name]
+                            if path.is_symlink() or (path.read_text() if path.exists() else None)!=expected:raise ValueError('Saved setup changed. Review and save again before using it')
+                        from .portable import bundle
+                        clean['_dir']=cfg.get('_dir',os.getcwd())
+                        payload,_=bundle(clean,theme_value=clean.get('appearance'),prompt_value=clean.get('pipeline_prompts'),include_keys=True)
+                        reviewed=loader.review('built-app.zip',base64.b64encode(payload).decode())
+                        return self._send(200,loader.load(reviewed['token']))
                 if path.endswith('/save'):
                     plan=management.reviews.take(o,'app-build',str(b.get('ticket','')),b.get('confirmed'))
                     with management.lock:
                         if management.active:raise ValueError('Wait for the workspace test to finish')
                         try:rev=appbuilder.save_plan(cfg,plan)
                         except appbuilder.SaveRollbackError as e:return self._send(400,{'error':str(e),'saved_state_uncertain':True})
-                    return self._send(200,{'revision':rev,'restart_required':True,'message':'Reviewed app configuration and selected setup drafts saved. Restart to apply. No code installed or executed.'})
+                    from pathlib import Path
+                    folder=(Path(cfg.get('_dir','.'))/plan['config']['storage']['path']).parent
+                    snapshots={name:(folder/name).read_text() if (folder/name).exists() else None for name in ('theme.json','prompts.json','code-drafts.json')}
+                    launch_ticket=management.reviews.put(o,'app-launch',{'config':plan['config'],'revision':rev,'state':snapshots})
+                    return self._send(200,{'revision':rev,'launch_ticket':launch_ticket,'restart_required':False,'message':'Reviewed configuration saved. Choose Use this app to start a separate workspace. Current chat stays unchanged. No helper code installed or executed.'})
                 raise ValueError('Unknown builder action')
             if path == "/api/settings/guide" and method == "POST":
                 if not can_edit(self):
@@ -659,12 +681,17 @@ def make_handler(cfg, engine):
                 self.end_headers()
                 def emit(kind, data):
                     self.wfile.write((json.dumps({"type": kind, "data": data}) + "\n").encode()); self.wfile.flush()
-                emit(*first)
                 try:
-                    for kind, data in gen:
-                        emit(kind, data)
-                except providers.ProviderError as e:
-                    emit("error", str(e))
+                    emit(*first)
+                    try:
+                        for kind, data in gen:
+                            emit(kind, data)
+                    except providers.ProviderError as e:
+                        emit("error", str(e))
+                except (BrokenPipeError, ConnectionResetError, ConnectionAbortedError):
+                    self.close_connection = True
+                finally:
+                    gen.close()
                 return
             if path in ("/api/ask",):
                 pass
@@ -762,7 +789,15 @@ def make_handler(cfg, engine):
 
         def _guard(self, method):
             try:
+                self._guard_connected(method)
+            except (BrokenPipeError, ConnectionResetError, ConnectionAbortedError):
+                self.close_connection = True
+
+        def _guard_connected(self, method):
+            try:
                 self._route(method)
+            except (BrokenPipeError, ConnectionResetError, ConnectionAbortedError):
+                self.close_connection = True
             except PermissionError as e:
                 self._send(401 if "Sign in" in str(e) else 404, {"error": str(e)})
             except OverflowError:

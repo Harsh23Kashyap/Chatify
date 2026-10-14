@@ -29,7 +29,7 @@ class BuilderHTTP(test_workspace_api.WorkspaceAPITests):
   plan=self.call(self.clients[0],'/api/settings/build/review',{'yaml':'app:\n title: Garden app\n','sections':['app']})
   with self.assertRaises(urllib.error.HTTPError):self.call(self.clients[0],'/api/settings/build/save',{'ticket':plan['ticket'],'confirmed':False})
   self.assertNotEqual(schema.load(str(path))['app']['title'],'Garden app')
-  r=self.call(self.clients[0],'/api/settings/build/save',{'ticket':plan['ticket'],'confirmed':True});self.assertTrue(r['restart_required']);self.assertEqual(schema.load(str(path))['app']['title'],'Garden app')
+  r=self.call(self.clients[0],'/api/settings/build/save',{'ticket':plan['ticket'],'confirmed':True});self.assertFalse(r['restart_required']);self.assertTrue(r['launch_ticket']);self.assertEqual(schema.load(str(path))['app']['title'],'Garden app')
   with self.assertRaises(urllib.error.HTTPError):self.call(self.clients[0],'/api/settings/build/save',{'ticket':plan['ticket'],'confirmed':True})
 
  def test_download_zip_can_review_and_load(self):

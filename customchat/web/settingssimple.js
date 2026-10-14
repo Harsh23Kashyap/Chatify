@@ -14,8 +14,8 @@
    if(state)model.querySelector('.simple-provider-note').textContent=state.provider==='mock'?'Demo works offline. No key needed.':'Provider selected. Connection not verified.';
 
 
-   if(!model.querySelector('.evidence-range')){const ends=document.createElement('small');ends.className='range-endpoints evidence-range';ends.textContent='1 passage · 20 passages';model.querySelector('#topk').closest('label').append(ends)}
-   for(const node of model.children){node.classList.toggle('simple-model-hidden',!node.matches('.head,#seg,.simple-provider-note,.two,#apply,#keybox,#model,.simple-more,label[for=modelPick],.keyrow:has(#modelPick),.testrow,label.check'))}
+   if(!model.querySelector('.evidence-range')){const ends=document.createElement('small');ends.className='range-endpoints evidence-range';ends.textContent='1 passage · 50 passages';model.querySelector('#topk').closest('label').append(ends)}
+   for(const node of model.children){node.classList.toggle('simple-model-hidden',!node.matches('.head,#seg,.simple-provider-note,.two,#apply,#keybox,#model,.simple-more,label[for=modelPick],.keyrow:has(#modelPick),.testrow,label.check,label:has(#outputLimit)'))}
    const key=model.querySelector('#keybox');if(key&&state)key.classList.toggle('simple-key-needed',state.provider!=='mock'&&state.provider!=='ollama'&&!!state.key?.needed&&!state.key?.has);
    const head=model.querySelector('.head b');if(head)head.textContent=simple?'Answer settings':'Model';
    const temperature=model.querySelector('#temp')?.closest('label');if(temperature&&state){temperature.classList.toggle('simple-temperature-hidden',state.provider==='mock'||(state.provider==='openai'&&/^(gpt-[56]|o[134])/.test((state.model||'').toLowerCase())));if(!temperature.querySelector('.range-endpoints')){const ends=document.createElement('small');ends.className='range-endpoints';ends.textContent='More precise · More creative';temperature.append(ends)}}
@@ -23,7 +23,7 @@
    const label=model.querySelector('#topk')?.closest('label');if(label){const text=label.querySelector('.range-setting-label');if(text)text.textContent=simple?'Evidence passages per answer':'Sources per answer'}
    const apply=model.querySelector('#apply');if(apply&&apply.dataset.saving!=='true')apply.textContent=simple?'Save answer settings':'Apply';
    let scope=model.querySelector('.simple-save-scope');if(!scope){scope=document.createElement('small');scope.className='simple-save-scope h';scope.textContent='Saves answer settings only.';apply.after(scope)}
-   let dirty=model.querySelector('#answerDirty');if(!dirty){dirty=document.createElement('small');dirty.id='answerDirty';dirty.className='simple-save-scope h';apply.before(dirty)}const changed=baseline&&state&&(state.provider!==baseline.provider||Number(model.querySelector('#temp').value)!==baseline.temperature||Number(model.querySelector('#topk').value)!==baseline.top_k||state.model!==baseline.model||model.querySelector('#rewrite').checked!==!!baseline.query_rewrite);dirty.textContent=changed?'Unsaved answer changes':'';
+   let dirty=model.querySelector('#answerDirty');if(!dirty){dirty=document.createElement('small');dirty.id='answerDirty';dirty.className='simple-save-scope h';apply.before(dirty)}const changed=baseline&&state&&(state.provider!==baseline.provider||Number(model.querySelector('#temp').value)!==baseline.temperature||Number(model.querySelector('#topk').value)!==baseline.top_k||Number(model.querySelector("#outputLimit").value)!==(baseline.max_output_tokens||4096)||state.model!==baseline.model||model.querySelector('#rewrite').checked!==!!baseline.query_rewrite);dirty.textContent=changed?'Unsaved answer changes':'';
 
   }
   const workspace=document.querySelector('#sec-finish');if(workspace&&!workspace.querySelector('.simple-workspace')){const p=document.createElement('p');p.className='simple-workspace';p.textContent='Edit this workspace here. Open the chat to try its current settings.';workspace.prepend(p)}

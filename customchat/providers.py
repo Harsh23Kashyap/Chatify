@@ -206,6 +206,8 @@ class OpenAICompatible(Streams):
 
     def _body(self, messages, **extra):
         b = {"model": self.model, "messages": messages, **extra}
+        limit_key = "max_completion_tokens" if self.kind == "openai" and self.model.lower().startswith(("gpt-5", "gpt-6", "o1", "o3", "o4")) else "max_tokens"
+        b[limit_key] = getattr(self, "output_limit", 4096)
         # OpenAI's newer models (gpt-5, gpt-6, o-series) only accept the default temperature.
         if not (self.kind == "openai" and self.model.lower().startswith(("gpt-5", "gpt-6", "o1", "o3", "o4"))):
             b["temperature"] = self.temp
@@ -249,6 +251,7 @@ class OpenAICompatible(Streams):
         self.model, self.t, self.temp = p["model"], p["timeout"], p["temperature"]
         self.key_env = p["api_key_env"] or denv or {"openai": "OPENAI_API_KEY"}.get(p["type"], "")
         self.kind = p["type"]
+        self.output_limit = p.get("max_output_tokens", 4096)
 
     def complete(self, messages):
         headers = self._auth()
@@ -275,11 +278,12 @@ class Claude(Streams):
         p = cfg["provider"]
         self.base = (p["base_url"] or "https://api.anthropic.com").rstrip("/")
         self.model, self.t, self.temp, self.key_env = p["model"], p["timeout"], p["temperature"], p["api_key_env"] or "ANTHROPIC_API_KEY"
+        self.output_limit = p.get("max_output_tokens", 4096)
 
     def complete(self, messages):
         system = "\n\n".join(m["content"] for m in messages if m["role"] == "system")
         turns = [{"role": m["role"], "content": m["content"]} for m in messages if m["role"] in ("user", "assistant")]
-        r = _post(self.base + "/v1/messages", {"model": self.model, "max_tokens": getattr(self,"output_limit",1500), "temperature": self.temp,
+        r = _post(self.base + "/v1/messages", {"model": self.model, "max_tokens": getattr(self,"output_limit",4096), "temperature": self.temp,
                   "system": system, "messages": turns}, {"x-api-key": _key(self.key_env, "claude"), "anthropic-version": "2023-06-01"}, self.t)
         try:
             return "".join(b.get("text", "") for b in r["content"] if b.get("type") == "text").strip()

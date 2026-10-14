@@ -3,7 +3,7 @@ W=pathlib.Path(__file__).resolve().parents[1]/'customchat'/'web'
 class StreamReading(unittest.TestCase):
  def test_actual_stream_and_no_token_animation(self):
   js=(W/'app.js').read_text();css=(W/'style.css').read_text()
-  self.assertIn('live.append(sp)',js);self.assertIn('.tk{animation:none!important}',css)
+  self.assertIn('live.replaceChildren(...rendered.childNodes)',js);self.assertIn('.tk{animation:none!important}',css)
   self.assertIn('if (follow) th.scrollTop = th.scrollHeight',js)
  def test_reading_indicator_focus_and_composer_placement(self):
   js=(W/'app.js').read_text();css=(W/'style.css').read_text()

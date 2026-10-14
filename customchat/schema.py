@@ -27,10 +27,11 @@ DEFAULTS = {
         "api_key_env": "",         # NAME of the env var that holds the key, never the key
         "temperature": 0.2,
         "timeout": 120,
+        "max_output_tokens": 4096,   # ceiling, not a target length
         "fallback": None,          # optional second provider block used if the first is unreachable
     },
     "sources": [],                 # list of connector blocks, see docs/SCHEMA.md
-    "retrieval": {"top_k": 6, "min_score": 0.0, "query_rewrite": False, "cache_ttl": 0},
+    "retrieval": {"top_k": 12, "min_score": 0.0, "query_rewrite": False, "cache_ttl": 0},
     "prompt": {
         "system": "You answer only from the numbered evidence. Cite with [n], placing each number right after the clause it supports, not at the end of the answer. "
                   "If the evidence does not cover the question, say so in one plain sentence with no citations and do not point the reader elsewhere. "
@@ -40,8 +41,8 @@ DEFAULTS = {
                   "Do not add causal links such as \"therefore\" that no passage makes, and write \"in some settings or groups\" instead of \"for some people\" unless a passage names who. "
                   "When a passage reports a result that cuts against the main conclusion, such as another outcome where the comparison group did better, include it.",
         "style": {"quick": "Answer in 2 to 4 sentences.",
-                  "standard": "Answer clearly with short paragraphs.",
-                  "deep": "Answer in depth with sections, caveats and open questions."},
+                  "standard": "Give a full, source-backed answer. Start with the direct answer, then explain the relevant findings, examples, comparisons and counterpoints supported by the sources. Use readable paragraphs and descriptive sections when useful. For broad questions with ample evidence, give several substantial paragraphs rather than a brief summary. For narrow questions or sparse evidence, stay concise. Cite each factual claim with [n]. Do not pad, repeat points or invent details to reach a length.",
+                  "deep": "Give a detailed, source-backed synthesis with a direct answer, organized sections, and comparison of relevant findings across sources. Explain methods, mechanisms, examples, trade-offs, counterpoints and uncertainties only when the sources support them. Cover distinct relevant findings rather than repeating the same point. Be more thorough than standard mode when evidence permits; do not invent background, caveats or open questions to fill space. Cite each factual claim with [n]."},
         "answer_note": "",
         "revise": False,
         "no_evidence": "I could not find evidence for that in the configured sources.",
@@ -141,7 +142,7 @@ def validate(raw):
     try: cfg["budget"] = budget_clean(cfg["budget"])
     except ValueError as e: raise ConfigError(str(e)) from None
     # Shared numeric gate: YAML, ZIP imports, API edits and generated drafts use this.
-    bounds={'provider.temperature':(0,2,False),'provider.timeout':(1,600,False),'retrieval.top_k':(1,50,True),'retrieval.min_score':(0,1,False),'retrieval.cache_ttl':(0,86400,True),'memory.recent_turns':(1,20,True),'memory.summary_every':(1,50,True),'memory.context_chars':(8000,2000000,True),'server.port':(1,65535,True)}
+    bounds={'provider.temperature':(0,2,False),'provider.timeout':(1,600,False),'provider.max_output_tokens':(256,32768,True),'retrieval.top_k':(1,50,True),'retrieval.min_score':(0,1,False),'retrieval.cache_ttl':(0,86400,True),'memory.recent_turns':(1,20,True),'memory.summary_every':(1,50,True),'memory.context_chars':(8000,2000000,True),'server.port':(1,65535,True)}
     for field,(low,high,integer) in bounds.items():
         area,key=field.split('.');value=cfg[area][key]
         if isinstance(value,bool) or not isinstance(value,(int,float)) or not math.isfinite(value) or not low<=value<=high or integer and type(value)!=int:
@@ -160,8 +161,10 @@ def validate(raw):
             raise ConfigError("provider.fallback needs a valid type and no api_key")
         if fb["type"] in NEEDS_MODEL and not fb.get("model"):
             raise ConfigError("provider.fallback.model is required")
-        for name,lo,hi in (("temperature",0,2),("timeout",1,600)):
+        for name,lo,hi in (("temperature",0,2),("timeout",1,600),("max_output_tokens",256,32768)):
             if name in fb and (type(fb[name]) not in (int,float) or not math.isfinite(fb[name]) or not lo<=fb[name]<=hi):raise ConfigError("provider.fallback."+name+" is out of range")
+        if "max_output_tokens" in fb and type(fb["max_output_tokens"]) is not int:
+            raise ConfigError("provider.fallback.max_output_tokens must be a whole number")
     if "api_key" in p:
         raise ConfigError("Do not put keys in the app file. Use provider.api_key_env with an env var name.")
     if not isinstance(cfg["sources"], list):

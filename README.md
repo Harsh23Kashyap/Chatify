@@ -35,3 +35,11 @@ Keep keys out of YAML and Git. Check sources for important answers; citations ar
 [Install options](https://github.com/Harsh23Kashyap/customchat/blob/v0.1.27/docs/INSTALL.md) · [Configuration reference](https://github.com/Harsh23Kashyap/customchat/blob/v0.1.27/docs/DESIGN.md) · [Hosting](https://github.com/Harsh23Kashyap/customchat/blob/v0.1.27/docs/DEPLOY_OPTIONS.md)
 
 MIT license. Harsh Kashyap and Shela Wu. Advisor: Dennis Shasha. Related project: [Custom-Nerd](https://github.com/Harsh23Kashyap/Custom-Nerd).
+
+Fetch and start the latest release (uv installed):
+
+```sh
+uvx --refresh customchat-app start --directory my-chat
+```
+
+For pip: `python -m pip install --upgrade --no-cache-dir customchat-app`, then `python -m customchat start --directory my-chat`.

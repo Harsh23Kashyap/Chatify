@@ -84,6 +84,13 @@
             "object",
             "null"
           ]
+        },
+        "max_output_tokens": {
+          "type": "integer",
+          "minimum": 256,
+          "maximum": 32768,
+          "default": 4096,
+          "description": "Output token ceiling for each model response, not a target answer length."
         }
       },
       "additionalProperties": false

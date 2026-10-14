@@ -196,7 +196,7 @@ def review(cfg,text,selected):
    return [item for key in dict.fromkeys([*old,*new]) for item in differences(old.get(key),new.get(key),path+'.'+key if path else key)]
   return [] if old==new else [{'field':path,'before':old,'after':new}]
  changes=[item for key in changed for item in differences(before[key],config[key],key)]
- return {'selected':selected,'snapshots':snapshots,'changes':changes,'config':config,'sections':changed,'revision':editstate.revision(cfg),'yaml':yaml.safe_dump(config,sort_keys=False),'notice':'Save updates app.yaml and selected appearance, prompts and inert helper drafts. Restart required. No source, code or new model runs now. Review source paths, URLs, access, storage and server settings before saving.'}
+ return {'selected':selected,'snapshots':snapshots,'changes':changes,'config':config,'sections':changed,'revision':editstate.revision(cfg),'yaml':yaml.safe_dump(config,sort_keys=False),'notice':'Save updates app.yaml and selected appearance, prompts and inert helper drafts. Use this app can start a separate workspace after save. No source, code or new model runs now. Review source paths, URLs, access, storage and server settings before saving.'}
 
 def save_plan(cfg,plan):
  raw=copy.deepcopy(plan['config']);extra={k:raw[k] for k in EXTRAS if k in raw}

@@ -5,9 +5,9 @@ class GuidedTours(unittest.TestCase):
  def test_both_pages_load_shared_guide_and_replay(self):
   for file,button in [('index.html','chatGuide'),('settings.html','configGuide')]:
    s=(W/file).read_text();self.assertIn('/tour.css',s);self.assertIn('/tour.js',s);self.assertIn('id="'+button+'"',s)
- def test_configuration_has_thirteen_steps_and_independent_first_open(self):
+ def test_configuration_has_fourteen_steps_and_independent_first_open(self):
   s=(W/'tour.js').read_text();config=s.split('const configSteps=[')[1].split('const chatSteps=')[0]
-  self.assertEqual(config.count('{title:'),13);self.assertIn("key:'cc_cfg_tour_v1'",s);self.assertIn("key:'cc_tour'",s)
+  self.assertEqual(config.count('{title:'),14);self.assertIn("key:'cc_cfg_tour_v1'",s);self.assertIn("key:'cc_tour'",s)
  def test_skip_keyboard_focus_and_local_only(self):
   s=(W/'tour.js').read_text()
   for text in ["'Skip'","'cancel'","ArrowRight","ArrowLeft","showModal()","before.focus","localStorage.setItem"]:self.assertIn(text,s)
