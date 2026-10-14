@@ -1,3 +1,13 @@
+## 0.1.32 - 2026-10-14
+
+- Keep local model setup and download status truthful through late responses, cancellation failures and retries.
+- Keep source filters accessible and show source/action loading failures beside their controls.
+- Center history action icons and separate duplicate-chat times from touch controls.
+- Wrap composer footer text as one flow, without orphan separators.
+- Disable press displacement in no-motion modes. Track answer clipboard work and keep copy/delete failures readable and retryable.
+- Distinguish model documentation links by their source and page.
+- Expand fixture-only motion and accessibility checks. Update both launch scripts to 0.1.32; remaining campaign items are not claimed complete.
+
 ## 0.1.31 - 2026-10-14
 
 - Keep long builder draft names from pushing configuration fields out of place.
