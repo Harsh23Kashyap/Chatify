@@ -13,9 +13,10 @@ window.CCSavedFeedback=(button,label)=>{button._savedLabel=label;clearTimeout(bu
 const say = (t, err) => { const m = $("#msg"); m.textContent = t; m.className = "msg" + (err ? " err" : ""); };
 const el = (tag, props = {}, ...kids) => { const e = document.createElement(tag); for (const [k, v] of Object.entries(props)) { if (v === undefined || v === null) continue; if (k === "class") e.className = v; else if (k === "text") e.textContent = v; else if (k.startsWith("on")) e.addEventListener(k.slice(2), v); else e.setAttribute(k, v); } for (const c of kids.flat()) if (c != null) e.append(c.nodeType ? c : document.createTextNode(c)); return e; };
 
-// Font and contrast feedback stops immediately when the visitor asks for less motion.
+// Active sample and disclosure feedback stops when the visitor asks for less motion.
 const sampleMotionMedia=matchMedia("(prefers-reduced-motion:reduce)");
-const stopSampleMotion=()=>{if(!sampleMotionMedia.matches&&!["none","calm"].includes(document.documentElement.dataset.motion))return;const host=$("#pvextra");host?._headingAnimation?.cancel();host?.querySelectorAll(".cc").forEach(row=>row._statusAnimation?.cancel())};
+const stopSampleMotion=()=>{if(!sampleMotionMedia.matches&&!["none","calm"].includes(document.documentElement.dataset.motion))return;const host=$("#pvextra");host?._headingAnimation?.cancel();host?.querySelectorAll(".cc").forEach(row=>row._statusAnimation?.cancel());document.querySelectorAll("#seg,#presets,details.grp>.fields").forEach(node=>node._revealMotion?.cancel())};
+function revealMotion(node,frames,timing){node._revealMotion?.cancel();node._revealMotion=node.animate(frames,timing);stopSampleMotion()}
 sampleMotionMedia.addEventListener("change",stopSampleMotion);
 new MutationObserver(stopSampleMotion).observe(document.documentElement,{attributes:true,attributeFilter:["data-motion"]});
 
@@ -113,7 +114,7 @@ function buildChips(list) {
     if(!b){b=el("button",{type:"button","data-p":p,role:"radio"},mark(p),el("span",{class:"provider-name",text:NAMES[p]||p}),el("span",{class:"provider-selected","aria-hidden":"true",text:"✓"}));b.addEventListener("click",()=>{if(canEdit){switchProvider(p);$("#testres").textContent="";$("#testres").className="testres";draw();pvFollow();}});}
     b.setAttribute("aria-checked",String(p===cur.provider));buttons.push(b);
   }
-  if(extra.length){const m=el("button",{type:"button",class:"chipmore","aria-expanded":String(chipsMore)},chipsMore?"Show fewer":"Show more");m.addEventListener("click",()=>{chipsMore=!chipsMore;buildChips();if(chipsMore&&!matchMedia("(prefers-reduced-motion:reduce)").matches&&!['calm','none'].includes(theme.motion))seg.animate([{opacity:.75},{opacity:1}],{duration:160,easing:"ease-out"});});buttons.push(m);}
+  if(extra.length){const m=el("button",{type:"button",class:"chipmore","aria-expanded":String(chipsMore)},chipsMore?"Show fewer":"Show more");m.addEventListener("click",()=>{chipsMore=!chipsMore;buildChips();if(chipsMore&&!matchMedia("(prefers-reduced-motion:reduce)").matches&&!['calm','none'].includes(theme.motion))revealMotion(seg,[{opacity:.75},{opacity:1}],{duration:160,easing:"ease-out"});});buttons.push(m);}
   for(const old of [...seg.children])if(!buttons.includes(old))old.remove();
   buttons.forEach((button,i)=>{if(seg.children[i]!==button)seg.insertBefore(button,seg.children[i]||null)});
 }
@@ -652,7 +653,7 @@ function drawLook() {
       for (const [title, keys, collapsed] of gs) {
         const fs = keys.map((k) => byKey[k]).filter(Boolean); if (!fs.length) continue; fs.forEach((f) => used.add(f.key));
         const grid = el("div", { class: "fields" + (fs.every((f) => f.type === "color") ? " colorlist" : "") }); fs.forEach((f) => { const c = control(f); if (c && c.dataset) c.dataset.k = f.key; grid.append(c); });
-        if (collapsed) { const d = el("details", { class: "grp" }, el("summary", { text: title }), grid); d.addEventListener("toggle",()=>{if(d.open&&!matchMedia("(prefers-reduced-motion:reduce)").matches&&!["calm","none"].includes(theme.motion))grid.animate([{opacity:0,transform:"translateY(4px)"},{opacity:1,transform:"none"}],{duration:160,easing:"ease-out"})}); sec.append(d); }
+        if (collapsed) { const d = el("details", { class: "grp" }, el("summary", { text: title }), grid); d.addEventListener("toggle",()=>{if(d.open&&!matchMedia("(prefers-reduced-motion:reduce)").matches&&!["calm","none"].includes(theme.motion))revealMotion(grid,[{opacity:0,transform:"translateY(4px)"},{opacity:1,transform:"none"}],{duration:160,easing:"ease-out"})}); sec.append(d); }
         else sec.append(el("div", { class: "grp" }, el("h4", { text: title }), grid));
       }
       const rest = s.fields.filter((f) => !used.has(f.key)); if (rest.length) { const g = el("div", { class: "fields" }); rest.forEach((f) => g.append(control(f))); sec.append(el("details", { class: "grp" }, el("summary", { text: "More options" }), g)); }
@@ -716,7 +717,7 @@ function buildPresets() {
     b.append(el("span",{class:"preset-selected","aria-hidden":"true",text:"✓"}));box.append(b);
   }
   const more = el("button", { type: "button", class: "preset more", "aria-expanded": showMore ? "true" : "false" }, showMore ? "Fewer presets" : "More presets");
-  more.addEventListener("click", () => { showMore = !showMore; draw();syncPreset();if(showMore&&!matchMedia("(prefers-reduced-motion:reduce)").matches&&!["calm","none"].includes(theme.motion))box.animate([{opacity:.75},{opacity:1}],{duration:160,easing:"ease-out"}); });
+  more.addEventListener("click", () => { showMore = !showMore; draw();syncPreset();if(showMore&&!matchMedia("(prefers-reduced-motion:reduce)").matches&&!["calm","none"].includes(theme.motion))revealMotion(box,[{opacity:.75},{opacity:1}],{duration:160,easing:"ease-out"}); });
   box.append(more); };
   draw();syncPreset();
 }
