@@ -96,7 +96,7 @@ dialog.app-builder .builder-steps [aria-current=step] .builder-step-mark{backgro
 dialog.app-builder .builder-steps [data-complete=true] .builder-step-mark{background:#e7efdc}
 dialog.app-builder .cs-btn{color:var(--studio-ink)}
 dialog.app-builder .builder-steps [aria-current=step] .builder-step-label small{color:#4c6654;opacity:1}
-dialog.app-builder .builder-steps .builder-step-label small{opacity:1;color:#7a8878}
+dialog.app-builder .builder-steps .builder-step-label small{opacity:1;color:#526650}
 dialog.app-builder .builder-steps [aria-current=step] .builder-step-label small{color:#4c6654}
 dialog.app-builder .builder-steps button[aria-current=step] .builder-step-label small{color:#4c6654;opacity:1}
 dialog.app-builder .builder-steps button[aria-current=step] .builder-step-label{color:#173f35!important}
@@ -174,3 +174,4 @@ html body dialog.app-builder .cs[data-section-only] .cs-btn{transition:backgroun
 .app-builder .builder-final-error{display:block!important;grid-column:1/-1!important;width:100%!important;min-width:0!important;max-width:none!important;box-sizing:border-box;white-space:normal!important;word-break:normal!important;overflow-wrap:anywhere;padding:16px!important;font-size:14px!important;line-height:1.6!important}
 /* A paused, cancelled or unverified job is not ongoing work. */
 #builderProgress:not([data-job-state=running]) .builder-progress-pulse{animation:none!important;opacity:0}
+
