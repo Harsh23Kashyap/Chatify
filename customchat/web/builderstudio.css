@@ -191,3 +191,5 @@ html body dialog.app-builder .cs[data-section-only] .cs-btn{transition:backgroun
 .builder-group-track::after{transition:width 160ms ease-out}
 
 #builderProgress[data-regressed=true] .builder-progress-fill,#builderProgress[data-regressed=true] .builder-progress-pulse,.builder-group-track[data-regressed=true]::after{transition:none!important}
+/* Editing a long draft name must not push the proposed fields out from under the caret. */
+.builder-draft-summary>b{display:block;min-width:0;max-width:100%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
