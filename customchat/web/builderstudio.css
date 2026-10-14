@@ -79,7 +79,7 @@ dialog.app-builder .builder-start button{border:0;text-decoration:underline;text
 dialog.app-builder #builderBrief{box-shadow:0 2px 0 #e4eadb}
 dialog.app-builder #builderBrief::placeholder{color:#7a8a76;opacity:1;transition:opacity .24s ease}
 dialog.app-builder #builderBrief.brief-swap::placeholder{opacity:0}
-.builder-message small{font-size:11px;letter-spacing:0;color:#6a7d66;text-transform:none}
+.builder-message small{font-size:11px;letter-spacing:0;color:#526650;text-transform:none}
 .builder-part-icon.is-running,.builder-group-mark.is-running{display:block;width:14px;height:14px;border:2px solid #b7c8ab;border-top-color:#173f35;border-radius:50%;animation:studio-spin 1s linear infinite}
 .builder-part-icon.is-waiting,.builder-group-mark.is-waiting{display:block;width:12px;height:12px;border:1.5px solid #c3d0b6;border-radius:50%}
 .builder-group-mark{font-weight:700;color:#3d5c47}
