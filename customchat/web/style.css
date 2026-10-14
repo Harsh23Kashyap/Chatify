@@ -921,3 +921,5 @@ html.reading-width-selected:not(.preview) body .composer>:is(.box,.cmeta,.pills,
 .scope-options button{min-width:0;white-space:normal;overflow-wrap:anywhere;word-break:normal}
 .composer-tools #scopeChip .scope-selected-label{min-width:0;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;overflow-wrap:anywhere}
 .composer-tools #scopeChip button{flex:none;min-width:44px;min-height:44px;white-space:nowrap}
+
+.composer-tools .scope-load-error{flex-basis:100%;margin:4px 0 0;color:var(--danger);font-size:13px;line-height:1.5;overflow-wrap:anywhere}
