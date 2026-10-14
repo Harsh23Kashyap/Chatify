@@ -897,13 +897,14 @@ async function drawOllamaSetup(host) {
     host.append(el('button',{type:'button',class:'mini',text:action==='start'?'Review start':'Review installation',onclick:async()=>{
       try {
         const plan=await api('/api/ollama/setup/prepare',{action});
+        if(!host.isConnected||host._setupRequest!==requestSequence)return;
         host.replaceChildren(el('h3',{text:action==='start'?'Start local Ollama':'Install Ollama?'}),el('p',{class:'h',text:'On this '+plan.system+' computer. '+plan.disk_free_gb+' GB free.'}));const more=el('details',{class:'setup-details'},el('summary',{text:'What changes'}),el('p',{class:'h',text:plan.changes}),el('p',{class:'h',text:plan.instructions}));host.append(more);
         if(action==='install')host.append(el('a',{href:plan.source,target:'_blank',rel:'noopener',text:'Official installer source'}),el('p',{class:'h',text:'No model download included. Installer size unknown; limit 2 GB.'}));
         const consent=el('input',{type:'checkbox'}),label=el('label',{class:'setup-consent'},consent,' I approve '+(action==='install'?'installing Ollama':'starting Ollama')+' on this computer.');
         const go=el('button',{type:'button',class:'mini',text:action==='install'?'Install Ollama':'Start Ollama',disabled:''});consent.onchange=()=>go.disabled=!consent.checked;
         go.onclick=async()=>{go.disabled=true;try{const {id}=await api('/api/ollama/setup/execute',{ticket:plan.ticket,confirmed:consent.checked});await pollOllamaSetup(host,id);}catch(e){host.append(el('p',{class:'testres bad',text:e.message}));}};
         host.append(label,go,el('button',{type:'button',class:'mini',text:'Not now',onclick:()=>drawOllamaSetup(host)}));
-      }catch(e){host.append(el('p',{class:'testres bad',text:e.message}));}
+      }catch(e){if(host.isConnected&&host._setupRequest===requestSequence)host.append(el('p',{class:'testres bad',text:e.message}));}
     }}),recheck,detail);
   }catch(e){if(host.isConnected&&host._setupRequest===requestSequence)host.replaceChildren(el('p',{class:'h',text:e.message}));}
 }
