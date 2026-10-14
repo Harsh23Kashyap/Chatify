@@ -930,3 +930,4 @@ html.reading-width-selected:not(.preview) body .composer>:is(.box,.cmeta,.pills,
 .composer .cmeta span+span::before{content:" "}
 .bubble .copy-status{display:block;font-size:13px;line-height:1.5;color:var(--mut);margin:8px 0;overflow-wrap:anywhere}
 .bubble .copy-status[hidden]{display:none}
+.history-action-error{font-size:13px;line-height:1.5;color:var(--mut);padding:8px 10px;overflow-wrap:anywhere}

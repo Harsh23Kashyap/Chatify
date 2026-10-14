@@ -426,7 +426,14 @@ async function loadList() {
         el("span", { class: "acts" },
           el("button", { class: c.pinned ? "is-pinned" : "", title: c.pinned ? "Unpin" : "Pin", "aria-label": (c.pinned ? "Unpin " : "Pin ") + c.title, "aria-pressed": c.pinned ? "true" : "false", onclick: async (e) => { e.stopPropagation(); await api("/api/pin", { chat: c.id, pinned: !c.pinned }); loadList(); } }, svg("pin")),
           el("button", { title: "Rename", "aria-label": "Rename " + c.title, onclick: async (e) => { e.stopPropagation(); const t = prompt("Rename chat", c.title); if (t) { await api("/api/rename", { chat: c.id, title: t }); loadList(); } } }, svg("edit")),
-          el("button", { title: "Delete", "aria-label": "Delete " + c.title, onclick: async (e) => { e.stopPropagation(); const wasOpen = S.chat === c.id; await api("/api/delete", { chat: c.id }); if (wasOpen) newChat(); loadList(); toast("Chat deleted.", "Undo", async () => { await api("/api/restore", { chat: c.id }); await loadList(); if (wasOpen) await openChat(c.id); }); } }, svg("trash"))))); });
+          el("button", { title: "Delete", "aria-label": "Delete " + c.title, onclick: async (e) => {
+            e.stopPropagation();const button=e.currentTarget;if(button.dataset.running==="true")return;
+            const row=button.closest(".item");if(row.nextElementSibling?.classList.contains("history-action-error"))row.nextElementSibling.remove();
+            button.dataset.running="true";button.setAttribute("aria-busy","true");const wasOpen=S.chat===c.id;
+            try{await api("/api/delete",{chat:c.id});if(wasOpen)newChat();await loadList();toast("Chat deleted.","Undo",async()=>{await api("/api/restore",{chat:c.id});await loadList();if(wasOpen)await openChat(c.id)})}
+            catch(error){row.after(el("div",{class:"history-action-error",role:"status",text:"Could not delete chat: "+error.message+". Try Delete again."}))}
+            finally{button.dataset.running="false";button.removeAttribute("aria-busy")}
+          } }, svg("trash"))))); });
     } else {
       const rows = await api("/api/topics"); if (seq !== loadList.seq) return;delete list.dataset.chatsSignature;const signature=JSON.stringify([tab,rows]);if(list.dataset.topicsSignature===signature&&list.querySelectorAll(".item").length===rows.length){const items=list.querySelectorAll(".item");rows.forEach((t,i)=>{items[i].classList.toggle("on",t.id===S.topic);items[i].setAttribute("aria-current",String(t.id===S.topic))});return}list.dataset.topicsSignature=signature;list.replaceChildren();
       if (!rows.length) list.append(el("div", { class: "empty", text: "Conversations appear after your first question." }));
