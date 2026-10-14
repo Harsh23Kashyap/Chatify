@@ -383,7 +383,7 @@ async function loadList() {
   if(!list.querySelector(".item")){historySkeletonTimer=setTimeout(()=>{if(seq!==loadList.seq)return;const skeleton=el("div",{class:"history-skeleton","aria-hidden":"true"});for(let i=0;i<3;i++)skeleton.append(el("div",{class:"history-skeleton-row"},el("span"),el("span")));state.append(skeleton);historyShimmerTimer=setTimeout(()=>{if(seq===loadList.seq)skeleton.classList.add("slow")},750)},250)}
   try {
     if (tab === "chats") {
-      const rows = await api("/api/chats?q=" + encodeURIComponent($("#search").value)); if (seq !== loadList.seq) return;list.replaceChildren();
+      const rows = await api("/api/chats?q=" + encodeURIComponent($("#search").value)); if (seq !== loadList.seq) return;const signature=JSON.stringify([tab,query,rows]);if(list.dataset.chatsSignature===signature&&list.querySelectorAll(".item").length===rows.length){const items=list.querySelectorAll(".item");rows.forEach((c,i)=>items[i].classList.toggle("on",c.id===S.chat));return}list.dataset.chatsSignature=signature;list.replaceChildren();
       if (!rows.length) list.append(el("div", { class: "empty", text: query ? "No chats match your search. Try another word or clear the search." : "Your conversations will appear here. Ask a question to start." }));
       let lastGroup = "";
       const cnt = {}; rows.forEach((c) => { cnt[c.title] = (cnt[c.title] || 0) + 1; });
@@ -394,7 +394,7 @@ async function loadList() {
           el("button", { title: "Rename", "aria-label": "Rename " + c.title, onclick: async (e) => { e.stopPropagation(); const t = prompt("Rename chat", c.title); if (t) { await api("/api/rename", { chat: c.id, title: t }); loadList(); } } }, svg("edit")),
           el("button", { title: "Delete", "aria-label": "Delete " + c.title, onclick: async (e) => { e.stopPropagation(); const wasOpen = S.chat === c.id; await api("/api/delete", { chat: c.id }); if (wasOpen) newChat(); loadList(); toast("Chat deleted.", "Undo", async () => { await api("/api/restore", { chat: c.id }); await loadList(); if (wasOpen) await openChat(c.id); }); } }, svg("trash"))))); });
     } else {
-      const rows = await api("/api/topics"); if (seq !== loadList.seq) return;list.replaceChildren();
+      const rows = await api("/api/topics"); if (seq !== loadList.seq) return;delete list.dataset.chatsSignature;list.replaceChildren();
       if (!rows.length) list.append(el("div", { class: "empty", text: "Conversations appear after your first question." }));
       rows.forEach((t) => list.append(el("div", { class: "item" + (t.id === S.topic ? " on" : ""), role:"button",tabindex:"0","aria-label":"Open conversation: "+t.title,onkeydown:e=>activateHistory(e,()=>openTopic(t.id)),onclick: () => openTopic(t.id) },
         el("span", { class: "t" }, t.title, el("span", { class: "sub", text: (t.summary ? t.summary.slice(0, 70) : t.turns + " question" + (t.turns === 1 ? "" : "s")) })),
