@@ -593,7 +593,7 @@ async function init() {
           else content.append(el('p',{text:'Action complete.'}));const heading=content.querySelector('h3');heading.tabIndex=-1;heading.focus();
          }catch(err){failure.textContent=err.message+' Return to the form to review a fresh action. If the connection was interrupted, check your notes before saving again.';confirm.textContent='Action not confirmed';back.disabled=false;if(dialog.open&&(document.activeElement===document.body||document.activeElement===dialog||document.activeElement===confirm))back.focus()}
         }});content.append(failure,back,confirm);back.focus();
-       }catch(err){error.textContent=err.message;preview.disabled=false;preview.textContent='Preview action'}
+       }catch(err){error.textContent=err.message;preview.disabled=false;preview.textContent='Preview action';if(dialog.open&&(document.activeElement===document.body||document.activeElement===dialog||document.activeElement===preview))preview.focus()}
       }});content.append(preview);(Object.values(inputs)[0]||preview).focus();
      };form();
     }},tool.label));
