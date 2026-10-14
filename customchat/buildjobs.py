@@ -73,6 +73,7 @@ class BuildJobs:
    spec['numeric_ranges']={k:v for k,v in theme.RANGES.items() if k in spec['defaults']}
    if 'font' in spec['defaults']:spec['fonts']=list(theme.FONTS)
    if key=='appearance:wording_motion':spec['requirements']='Return every field. All txt_ interface copy must be nonempty and tailored to the app, including txt_disclaimer (a truthful short limitation, no invented credentials or legal promises) and txt_sidebar (a short chat-list heading). Empty optional assets and numeric defaults remain valid.'
+  if key=='api':spec['requirements']='Suggest about three APIs that fit this app. Each recommendation needs name, service, reason, connector, setup and caveat strings, plus helper containing brief and code strings for that service using search(query, limit=6). Every selected service needs its own inert helper. Use urllib.request, json, os, time, urllib.parse, urllib.error only, no socket or getattr. No keys in code. service must name one concrete provider or public service you recommend, not a category. Pick a service, explain why, and give its integration steps without inventing an endpoint or claiming live verification. Do not defer the provider choice with choose a provider. Mark external details as unverified and let the user verify current documentation before setup.'
   if key.startswith('helper:'):spec['recommended_apis']=job['parts'].get('api',[]);spec['requirements']='Function name and signature must exactly match the contract, including search(query, limit=6) or clean_query(query). Draft for the recommended API; explicitly mark any endpoint not independently verified. Keep placeholder API keys outside code.'
   correction=job.get('retry_corrections',{}).get(key)
   if correction:spec['previous_validation_failure']=correction;spec['requirements']=spec.get('requirements','')+' Correct the previously rejected fields. Do not repeat blank interface wording, invent credentials or remove output contract fields.'
@@ -86,7 +87,7 @@ class BuildJobs:
    spec.pop('starter',None)
    instruction=json.dumps(spec)
    instruction+=' Keep Python code at most 12000 characters. Include both brief and code as strings. Use a JSON serializer for the complete object: escape each literal code backslash as two backslashes in JSON. Avoid regex when a simple string operation preserves the task. DO NOT echo input metadata. Return {"brief":"purpose and limitations", "code":"Python code"}. Code is an inert draft. Never install it.'
-  elif key=='api':instruction+=' Return a list of {name,reason,connector,setup,caveat}. Give practical choices, not verified price claims.'
+  elif key=='api':instruction+=' Return a list of {name,service,reason,connector,setup,caveat,helper:{brief,code}}. Give practical choices, not verified price claims.'
   elif key=='config:sources':instruction+=' Return a JSON list of connector objects, no wrapper. Empty list if no actual source supplied.'
   else:instruction+=' Return an object with exactly the keys shown in defaults; no wrapper.'
   result=self._call(job,instruction)
@@ -105,7 +106,7 @@ class BuildJobs:
      for field in ('prompt','instruction','content'):
       if isinstance(result.get(field),str):result['text']=result[field];break
    if key.startswith('helper:') and isinstance(result,dict):result={k:v for k,v in result.items() if k in ('brief','code','review_problems')}
-  if key=='api' and isinstance(result,list):result=[{k:v for k,v in row.items() if k in ('name','reason','connector','setup','caveat')} for row in result if isinstance(row,dict)][:8]
+  if key=='api' and isinstance(result,list):result=[{k:v for k,v in row.items() if k in ('name','service','reason','connector','setup','caveat','helper')} for row in result if isinstance(row,dict)][:8]
   if key.startswith('appearance:') or key.startswith('config:') and isinstance(spec.get('defaults'),dict):
    if isinstance(result,dict):result={k:v for k,v in result.items() if k in spec['defaults']}
   if key=='config:budget' and isinstance(result,dict):result=copy.deepcopy(spec['defaults'])
@@ -121,7 +122,15 @@ class BuildJobs:
    appbuilder.validate_extras({'helper_drafts':{key[7:]:result}})
    try:compile(result['code'],'<helper-draft>','exec')
    except (SyntaxError,ValueError,TypeError) as e:raise ValueError('Helper Python compilation failed: '+str(e)) from e
-  elif key=='api':appbuilder.validate_extras({'api_suggestions':result})
+  elif key=='api':
+   appbuilder.validate_extras({'api_suggestions':result})
+   for pick in result:
+    helper=pick.get('helper')
+    if helper:
+     ok,problems=generators.review_code('search',helper['code'])
+     if not ok:raise ValueError('API helper contract failed: '+'; '.join(problems))
+   if any(not x.get('helper') for x in result):raise ValueError('Each API recommendation must include its own code helper draft')
+   if not result or any(not str(x.get('service','')).strip() for x in result):raise ValueError('API recommendations must name a concrete service pick in service, not only a category')
   else:
    if not isinstance(result,dict) and not (key=='config:sources' and isinstance(result,list)):raise ValueError('Expected configuration data')
    if key.startswith('appearance:'):
@@ -153,6 +162,17 @@ class BuildJobs:
   for name in ('txt_title','txt_tagline','txt_examples','txt_placeholder','txt_footer','txt_disclaimer','txt_hint','txt_sidebar'):
    if not raw['appearance'].get(name):raise ValueError('Appearance '+name+' is blank')
   if not raw.get('api_suggestions'):raise ValueError('API recommendations missing')
+  from .apipicks import enrich,PAGES
+  raw['api_suggestions']=enrich(raw['api_suggestions'])
+  for pick in raw['api_suggestions']:
+   if not pick.get('helper'):raise ValueError('Missing independent code helper for API '+pick.get('service',pick.get('name','pick')))
+  for i,pick in enumerate(raw['api_suggestions']):
+   helper=pick.get('helper')
+   if helper:raw['helper_drafts']['search_api_'+str(i+1)]=copy.deepcopy(helper)
+   if not pick.get('key_required',True):
+    info=next((x for x in PAGES.values() if x['page']==pick.get('provider_page')),None)
+    if info and info.get('source') and not any(s.get('type')==info['source']['type'] for s in raw['sources']):raw['sources'].append(copy.deepcopy(info['source']))
+  raw=appbuilder.validate(yaml.safe_dump(raw,sort_keys=False))
   raw['provider']=copy.deepcopy(job['cfg']['provider'])
   raw['budget']=copy.deepcopy(job['cfg'].get('budget',schema.DEFAULTS['budget']))
   raw['actions']['writes']=False;raw['server']['host']='127.0.0.1';raw['storage']['path']='data/customchat.db'

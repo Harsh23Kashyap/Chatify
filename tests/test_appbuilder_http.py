@@ -3,6 +3,14 @@ from unittest.mock import patch
 import test_workspace_api
 from customchat import providers,schema,appbuilder
 class BuilderHTTP(test_workspace_api.WorkspaceAPITests):
+ def setUp(self):
+  import tempfile
+  from customchat.store import Store
+  self.state_tmp=tempfile.TemporaryDirectory()
+  with patch('test_workspace_api.Store',side_effect=lambda _:Store(self.state_tmp.name+'/customchat.db')):super().setUp()
+ def tearDown(self):
+  super().tearDown();self.state_tmp.cleanup()
+
  def test_owner_gate(self):
   with self.assertRaises(urllib.error.HTTPError) as e:self.call(self.clients[1],'/api/settings/build/talk',{'consent':True})
   self.assertIn(e.exception.code,(403,404))
@@ -73,3 +81,26 @@ class BuilderHTTP(test_workspace_api.WorkspaceAPITests):
   plan=self.call(self.clients[0],'/api/settings/build/review',{'yaml':restored['yaml'],'sections':restored['sections']})
   self.assertEqual(plan['selected'],['app']);self.assertEqual(plan['config']['app']['title'],'Retained garden')
   self.assertEqual(path.read_bytes(),original)
+
+ def test_prompt_editor_get_shows_saved_builder_prompts_without_restart(self):
+  from pathlib import Path
+  from customchat import prompts
+  path=Path(self.cfg['_dir'])/'app.yaml';path.write_text(yaml.safe_dump({k:self.cfg[k] for k in schema.DEFAULTS}));self.cfg['_path']=str(path)
+  self.engine.prompts=prompts.PromptStore('');self.engine.prompts.view(self.cfg['prompt']['system'])
+  generated={'pipeline_prompts':{'text':{k:'Trip planning fixture '+k for k in prompts.STAGES},'on':{k:False for k in prompts.STAGES}}}
+  plan=self.call(self.clients[0],'/api/settings/build/review',{'yaml':yaml.safe_dump(generated),'sections':['pipeline_prompts']})
+  self.call(self.clients[0],'/api/settings/build/save',{'ticket':plan['ticket'],'confirmed':True})
+  response=self.call(self.clients[0],'/api/prompts')
+  self.assertEqual(len(response['stages']),9)
+  for stage in response['stages']:self.assertEqual(stage['text'],'Trip planning fixture '+stage['key'])
+
+ def test_edit_one_prompt_after_builder_apply_keeps_other_saved_stages(self):
+  from pathlib import Path
+  from customchat import prompts
+  path=Path(self.cfg['_dir'])/'app.yaml';path.write_text(yaml.safe_dump({k:self.cfg[k] for k in schema.DEFAULTS}));self.cfg['_path']=str(path)
+  self.engine.prompts=prompts.PromptStore('');self.engine.prompts.view(self.cfg['prompt']['system'])
+  generated={'pipeline_prompts':{'text':{k:'Trip planning fixture '+k for k in prompts.STAGES},'on':{k:False for k in prompts.STAGES}}}
+  plan=self.call(self.clients[0],'/api/settings/build/review',{'yaml':yaml.safe_dump(generated),'sections':['pipeline_prompts']})
+  self.call(self.clients[0],'/api/settings/build/save',{'ticket':plan['ticket'],'confirmed':True})
+  first=next(iter(prompts.STAGES));response=self.call(self.clients[0],'/api/prompts/save',{'key':first,'text':'My newer prompt','on':False})
+  for stage in response['stages']:self.assertEqual(stage['text'],'My newer prompt' if stage['key']==first else 'Trip planning fixture '+stage['key'])

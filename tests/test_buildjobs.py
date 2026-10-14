@@ -11,7 +11,7 @@ class Fixture:
   if self.fail and self.fail==spec.get('stage'):self.fail=None;raise ValueError('fixture part failure')
   if spec['area']=='pipeline prompt':return json.dumps({'text':spec['default_prompt'],'on':True})
   if spec['area']=='inert Python helper':return json.dumps({'brief':'Fixture inert helper','code':generators.code_template(spec['kind'],'')})
-  if spec['area']=='API recommendations':return json.dumps([{'name':'OpenAlex','reason':'Catalog','connector':'openalex','setup':'Review setup','caveat':'Verify limits'}])
+  if spec['area']=='API recommendations':return json.dumps([{'service':'OpenAlex','name':'OpenAlex','reason':'Catalog','connector':'openalex','setup':'Review setup','caveat':'Verify limits','helper':{'brief':'OpenAlex fixture helper','code':generators.code_template('search','')}}])
   defaults=copy.deepcopy(spec['defaults'])
   if isinstance(defaults,dict):
    for key,value in defaults.items():
@@ -43,7 +43,7 @@ class SafePatchChecks(unittest.TestCase):
    def complete(self,m):return output
   return {'cancel':False,'calls':0,'provider':P(),'cfg':cfg or copy.deepcopy(schema.DEFAULTS),'parts':{},'errors':{},'active':set(),'brief':brief}
  def test_known_api_wrapper_only(self):
-  rows=[{'name':'A','reason':'r','connector':'openalex','setup':'s','caveat':'c'}]
+  rows=[{'name':'A','service':'OpenAlex','reason':'r','connector':'openalex','setup':'s','caveat':'c','helper':{'brief':'Fixture','code':generators.code_template('search','')}}]
   for name in ['api_recommendations','api_suggestions']:
    job=self.part_job(json.dumps({name:rows}));buildjobs.BuildJobs()._draft_part(job,'api',dict(buildjobs.PARTS)['api']);self.assertEqual(job['parts']['api'],rows)
   job=self.part_job(json.dumps({'unrelated_requests':rows}))

@@ -70,3 +70,15 @@ html body.settings-tabs .cs .cs-label{white-space:normal!important;overflow:visi
 html body.settings-tabs :is(.grp h4,.pgroup,.otag,.builder-section>summary,#builderFields label,.builder-change strong,#builderDescribe>label){text-transform:none!important;letter-spacing:normal!important}
 /* Response snapshots are read-only text, while code and YAML editors remain editable. */
 html body.settings-tabs pre.code{background:var(--ui-nested);border:1px solid var(--ui-line);border-radius:8px;padding:12px;cursor:text;white-space:pre-wrap;overflow-wrap:anywhere}
+.saved-api-recommendations{margin-top:20px;max-width:100%;overflow-wrap:anywhere;font-size:14px;line-height:1.5}
+.saved-api-recommendations article{border-top:1px solid var(--line,#d6dfd3);padding:16px 0}
+.saved-api-recommendations article h4{margin:0 0 8px}
+.saved-api-recommendations article a{display:inline-flex;align-items:center;min-height:44px;padding:8px 12px;margin:4px 8px 8px 0;border:1px solid var(--line,#d6dfd3);border-radius:8px;color:inherit}
+.saved-api-recommendations article p{margin:8px 0}
+.saved-builder-editor-notice{padding:12px 0;line-height:1.5;font-size:14px}
+.saved-setup-checks{border-bottom:1px solid var(--line,#d6dfd3);padding-bottom:12px;margin-bottom:14px}
+.saved-setup-checks label{display:flex;align-items:flex-start;gap:10px;min-height:44px;padding:8px 0}
+.saved-setup-checks input{flex:0 0 auto;margin-top:3px}
+html #sec-search .saved-setup-checks label{display:flex;flex-direction:row;align-items:flex-start;gap:10px;font-size:14px;font-weight:400;line-height:1.5;padding:6px 0;min-height:44px}
+html #sec-search .saved-setup-checks input{appearance:auto;-webkit-appearance:checkbox;display:block;position:static;width:18px;height:18px;border-radius:2px;margin:2px 0 0;flex:0 0 18px;accent-color:var(--accent,#174439)}
+html #sec-search .saved-setup-checks input::before,html #sec-search .saved-setup-checks input::after{display:none}

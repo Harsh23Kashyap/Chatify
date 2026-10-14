@@ -3,6 +3,7 @@ import copy,hashlib,json,os,tempfile
 from pathlib import Path
 import yaml
 from . import schema
+from .apipicks import helper_kind
 from .portable import _check_values
 
 def view(cfg):
@@ -37,7 +38,7 @@ def drafts(folder):
   return d if isinstance(d,dict) else {}
  except (OSError,ValueError):return {}
 def save_draft(folder,kind,brief,code):
- if kind not in ('search','clean_query') or not isinstance(brief,str) or not isinstance(code,str) or len(brief)>6000 or len(code)>200000:raise ValueError('Invalid helper draft')
+ if helper_kind(kind) not in ('search','clean_query') or not isinstance(brief,str) or not isinstance(code,str) or len(brief)>6000 or len(code)>200000:raise ValueError('Invalid helper draft')
  _check_values({'brief':brief,'code':code})
  data=drafts(folder);data[kind]={'brief':brief,'code':code}
  path=Path(folder)/'code-drafts.json';path.parent.mkdir(parents=True,exist_ok=True)

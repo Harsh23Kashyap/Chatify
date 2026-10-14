@@ -196,7 +196,7 @@ def make_handler(cfg, engine):
                     rev=editstate.save_config(cfg,b.get('config'),str(b.get('revision','')))
                     return self._send(200,{'revision':rev,'restart_required':True,'message':'App file saved. Restart this workspace to apply all fields. No new code or network calls ran.'})
                 saved_config=editstate.saved_view(cfg)
-                return self._send(200,{'config':saved_config,'runtime_config':editstate.view(cfg),'restart_required':saved_config!=editstate.view(cfg),'defaults':schema.DEFAULTS,'revision':editstate.revision(cfg),'helpers':editstate.helper_state(cfg,state_folder),'connector_keys':{k:websearch.has_key(k) for k in websearch.PROVIDERS}})
+                return self._send(200,{'config':saved_config,'runtime_config':editstate.view(cfg),'restart_required':saved_config!=editstate.view(cfg),'defaults':schema.DEFAULTS,'revision':editstate.revision(cfg),'helpers':editstate.helper_state(saved_config,state_folder),'connector_keys':{k:websearch.has_key(k) for k in websearch.PROVIDERS}})
             if path == "/api/codegen/draft" and method == "POST":
                 self._owner()
                 if not can_edit(self):raise PermissionError('Only the app owner can save helper drafts')
@@ -426,8 +426,12 @@ def make_handler(cfg, engine):
                     return self._send(403, {"error": "Only the admin can change prompts or generate code"})
                 try:
                     if path == "/api/prompts" and method == "GET":
-                        return self._send(200, {"stages": engine.prompts.view(cfg["prompt"]["system"], cfg["prompt"].get("revise",False)), "real_model": cfg["provider"]["type"] != "mock"})
+                        saved=editstate.saved_view(cfg)
+                        visible_prompts=promptmod.PromptStore(state_folder,saved.get("pipeline_prompts"))
+                        return self._send(200, {"stages": visible_prompts.view(saved["prompt"]["system"], saved["prompt"].get("revise",False)), "real_model": cfg["provider"]["type"] != "mock"})
                     if path == "/api/prompts/save" and method == "POST":
+                        saved=editstate.saved_view(cfg)
+                        engine.prompts=promptmod.PromptStore(state_folder,saved.get("pipeline_prompts"))
                         engine.prompts.save(str(b.get("key") or ""), b.get("text"), b.get("on")); engine._cache.clear()
                         return self._send(200, {"stages": engine.prompts.view(cfg["prompt"]["system"], cfg["prompt"].get("revise",False))})
                     if path == "/api/prompts/reset" and method == "POST":

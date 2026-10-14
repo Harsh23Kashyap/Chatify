@@ -25,7 +25,7 @@ function diagram() {
 
 function stageCard(s) {
   const area = el("textarea", { rows: "6", maxlength: "6000", "aria-label": s.label + " prompt", spellcheck: "false" });
-  area.value = s.text || s.default;
+  area.value = s.text || s.default;area.dataset.savedEditorValue=area.value;
   const fit=()=>{area.style.height='auto';area.style.height=Math.min(560,Math.max(200,area.scrollHeight))+'px'};area.addEventListener('input',()=>{area.classList.remove('prompt-draft-updated');clearTimeout(area._draftTimer);fit();st.textContent='Manual edits. Review, then save.'});requestAnimationFrame(fit);
   const brief = el("input", { placeholder: "Topic (optional)", "aria-label": "About your topic" });
   const st = el("span", { class: "testres", role: "status" });
@@ -66,7 +66,7 @@ function editorList(section, cards, kind) {
 let dg;
 function redrawDiagram() { if (dg) { const n = diagram(); dg.replaceWith(n); dg = n; } }
 
-function codeCard(kind, title, help, ph) {
+function codeCard(kind, title, help, ph, draftKey=kind) {
   const brief = el("textarea", { rows: "3", "aria-label": title + " description", placeholder: "Describe what this helper should do." });
   const example = el("details", {class:"helper-example"}, el("summary",{text:"Example description"}),el("p",{class:"h",text:ph.replace(/^Example: /, "")}));
   let recognized = "";
@@ -109,13 +109,13 @@ function codeCard(kind, title, help, ph) {
   const show = el("button", { type: "button", class: "go ghost", text: "Show raw response", onclick: async () => {if(show.disabled)return;if(!url.value.trim()){sampleStatus.textContent="Enter an API address first.";return}show.disabled=true;show.textContent="Fetching...";const originalRaw=raw.value,requestUrl=url.value,requestQuery=tq.value;sampleStatus.textContent="Fetching one sample response...";try { const r = await api("/api/codegen/sample", { url: requestUrl, query: requestQuery });if(raw.value!==originalRaw||url.value!==requestUrl||tq.value!==requestQuery){sampleStatus.textContent="Sample changed while fetching. Your newer edits were kept. Fetch again when ready.";return} raw.value = r.body; sampleStatus.className = "review"; sampleStatus.textContent = "Got HTTP " + r.status + " (" + (r.type || "unknown type") + "). Now press Rewrite parsing."; } catch (x) { sampleStatus.className = "review bad"; sampleStatus.textContent = x.message; }finally{show.disabled=false;show.textContent="Show raw response"} } });
   const rewrite = el("button", { type: "button", class: "go blue", text: "Rewrite parsing from this response", onclick: () => { sample = raw.value; gen.click(); } });
   const live = kind === "search" ? el("details", { class: "stage inner" }, el("summary", {}, el("b", { text: "Match a real response" }), el("small", { text: "Optional" })), el("div", { class: "sbody" }, el("p", { class: "h", text: "Fetch one real response so the parsing fits it." }), el("div", { class: "keyrow" }, url, show),sampleStatus, raw, rewrite)) : null;
-  const initial=helperState[kind];if(initial){brief.value=initial.brief||"";code.value=initial.code||"";}
-  dirty.textContent="";brief.addEventListener("input",markDirty);
+  const initial=helperState[draftKey];if(initial){brief.value=initial.brief||"";code.value=initial.code||"";}
+  brief.dataset.savedEditorValue=brief.value;host.dataset.savedEditorCode=code.value;if(fallback)fallback.dataset.savedEditorValue=fallback.value;dirty.textContent="";brief.addEventListener("input",markDirty);
   const pids=Object.keys(connectorKeys).filter(k=>new RegExp("\\b"+k+"\\b","i").test(brief.value));recognized=pids.length===1?pids[0]:"";
   const filled=el("p",{class:"h",role:"status",text:initial?.code?"Existing helper loaded from this workspace.":"No saved helper draft. Describe what it should do, then write the code."});
   
   if(recognized){apiKey.placeholder=connectorKeys[recognized]?"Saved key available (replace only)":"API key";detected.textContent=recognized+": "+(connectorKeys[recognized]?"Key saved privately.":"No key saved. Add one only if this service needs it.");}else{apiKey.placeholder="API key";detected.textContent="No API detected yet. Add its name or documentation URL above.";}
-  const saveDraft=el("button",{type:"button",class:"go ghost helper-save-draft",text:"Save helper draft",onclick:async()=>{if(saveDraft.disabled)return;clearTimeout(saveDraft._savedTimer);saveDraft.classList.remove("save-confirmed");saveDraft.disabled=true;saveDraft.textContent="Saving...";let didSave=false;const snapshot={kind,brief:brief.value,code:code.value};try{await api("/api/codegen/draft",snapshot);const unchanged=brief.value===snapshot.brief&&code.value===snapshot.code;dirty.textContent=unchanged?"All helper draft edits saved.":"Unsaved helper draft edits.";filled.textContent=snapshot.code.trim()?"Helper draft saved in this workspace.":"No saved helper code.";out.textContent=unchanged?"Draft saved in this workspace. Not activated or run.":"Previous draft saved. Newer helper edits are still unsaved.";didSave=true;}catch(e){out.textContent=e.message}finally{saveDraft.disabled=false;saveDraft.textContent="Save helper draft";if(didSave)window.CCSavedFeedback?.(saveDraft,"Save helper draft");if(saveDraft.isConnected&&document.activeElement===document.body)saveDraft.focus()}}});
+  const saveDraft=el("button",{type:"button",class:"go ghost helper-save-draft",text:"Save helper draft",onclick:async()=>{if(saveDraft.disabled)return;clearTimeout(saveDraft._savedTimer);saveDraft.classList.remove("save-confirmed");saveDraft.disabled=true;saveDraft.textContent="Saving...";let didSave=false;const snapshot={kind:draftKey,brief:brief.value,code:code.value};try{await api("/api/codegen/draft",snapshot);const unchanged=brief.value===snapshot.brief&&code.value===snapshot.code;dirty.textContent=unchanged?"All helper draft edits saved.":"Unsaved helper draft edits.";filled.textContent=snapshot.code.trim()?"Helper draft saved in this workspace.":"No saved helper code.";out.textContent=unchanged?"Draft saved in this workspace. Not activated or run.":"Previous draft saved. Newer helper edits are still unsaved.";didSave=true;}catch(e){out.textContent=e.message}finally{saveDraft.disabled=false;saveDraft.textContent="Save helper draft";if(didSave)window.CCSavedFeedback?.(saveDraft,"Save helper draft");if(saveDraft.isConnected&&document.activeElement===document.body)saveDraft.focus()}}});
   const copy = el("button", { type: "button", class: "go ghost helper-copy", text: "Copy", onclick: async () => {if(copy.disabled)return;clearTimeout(copy._copyTimer);copy.classList.remove("copy-done");copy.disabled=true;copy.textContent="Copying...";const copiedCode=code.value;try{if(!navigator.clipboard)throw Error("Clipboard unavailable. Select and copy the code instead.");await navigator.clipboard.writeText(copiedCode);copy.classList.add("copy-done");copy.textContent="Copied";copy._copyTimer=setTimeout(()=>{copy.classList.remove("copy-done");copy.textContent="Copy"},1400);out.textContent="Copied."}catch(e){copy.classList.remove("copy-done");copy.textContent="Copy";out.textContent=e.message}finally{copy.disabled=false;if(copy.isConnected&&document.activeElement===document.body)copy.focus()}} });
   const chk = el("button", { type: "button", class: "go ghost", text: "Check again", onclick: review });
   return el("details", { class: "sub helper" }, el("summary", {}, el("b", { text: title }), el("small", { text: help })), el("h4",{text:"Configure connector"}), kind==="search"?el("p",{class:"h",text:"Add the service name or documentation URL below. Detect API identifies supported services locally; it does not test a connection."}):null, brief, example, filled, kind==="search"?el("label",{class:"connector-key-label",text:"Connector API key (optional)"},el("div",{class:"keyrow"},apiKey,saveConnectorKey,detect)):null, kind==="search"?el("p",{class:"h",id:connectorHelpId,text:"Enter a key only if this service requires one. This field is editable before detection. Save key privately stores it on this computer after identifying a supported service. The key entered here is not included in generated code or sent to the writing model. Do not put keys in the description above."}):null, kind==="search"?detected:null, live,el("h4",{text:"Generate and review"}),el("div", { class: "keyrow tight" }, gen, chk),el("div", { class: "keyrow tight secondary-actions" }, copy, saveDraft), ed ? host : fallback,dirty, ed ? el("small", { class: "h", text: "Press Esc, then Tab, to move past the editor." }) : null, out, el("h4",{text:"Try the helper"}),el("p",{class:"h",text:"Enter one sample question. Try it runs code once, not in a security sandbox. Code can access files and the network on this computer. Review it before running."}),el("div", { class: "keyrow" }, tq, tryBtn), tres);
@@ -134,6 +134,7 @@ function build(col) {
     codeCard("search", "Search connector", "Pulls passages from your own API or website.", "Example: search my clinic's JSON API at https://example.org/api, using the q parameter, and return title, text and link."),
     codeCard("clean_query", "Query cleaning", "Tidies a question before it is searched.", "Example: remove filler words, keep drug names and numbers, and lowercase everything."));
 
+  for(const [key,draft] of Object.entries(helperState))if(key.startsWith('search_'))code.append(codeCard('search',draft.service||draft.brief?.split('\n')[0]?.slice(0,70)||'API helper','Saved inert API helper. Not activated or run.','',key));
   const promptCards = [...prompts.querySelectorAll(":scope > details.stage")];
   const codeCards = [...code.querySelectorAll(":scope > details.helper")];
   promptCards.forEach(c=>c.remove());codeCards.forEach(c=>c.remove());
@@ -150,5 +151,14 @@ async function init() {
   build($("#col"));
   window.CCSettingsRefreshNavigation?.();
 }
+document.addEventListener('cc-builder-saved',async()=>{
+  const dirty=[...document.querySelectorAll('#sec-prompts [data-saved-editor-value],#sec-code [data-saved-editor-value]')].some(n=>n.value!==n.dataset.savedEditorValue)||[...document.querySelectorAll('#sec-code .helper-dirty')].some(n=>n.textContent.includes('Unsaved'));
+  if(!dirty){const active=focusSection;$('#sec-prompts')?.remove();$('#sec-code')?.remove();await init();window.CCSettingsFind?.openSection('sec-'+(active||'prompts'));return}
+  for(const kind of ['prompts','code']){
+    const section=$('#sec-'+kind);if(!section||section.querySelector('.saved-builder-editor-notice'))continue;
+    const notice=el('div',{class:'saved-builder-editor-notice',role:'status'},el('p',{text:'Generated setup was saved. Your newer manual editor changes were kept. Reload Configuration to load the saved prompts and helpers; unsaved manual edits on this page will be lost.'}));
+    notice.append(el('button',{type:'button',class:'go ghost',text:'Reload saved setup',onclick:()=>{if(confirm('Reload Configuration and load the saved setup? Unsaved manual edits on this page will be lost.'))location.reload()}}));section.querySelector('.head').after(notice);
+  }
+});
 init();
 })();
