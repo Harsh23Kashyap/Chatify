@@ -12,4 +12,4 @@ class BackgroundTransition(unittest.TestCase):
  def test_disclosure_checks_device_and_saved_motion(self):
   js=(pathlib.Path(__file__).resolve().parents[1]/'customchat/web/settings.js').read_text()
   self.assertIn('d.addEventListener("toggle",()=>{if(d.open',js)
-  self.assertIn('grid.animate([{opacity:0,transform:"translateY(4px)"}',js)
+  self.assertIn('revealMotion(grid,[{opacity:0,transform:"translateY(4px)"}',js)
