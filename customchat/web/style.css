@@ -923,3 +923,5 @@ html.reading-width-selected:not(.preview) body .composer>:is(.box,.cmeta,.pills,
 .composer-tools #scopeChip button{flex:none;min-width:44px;min-height:44px;white-space:nowrap}
 
 .composer-tools .scope-load-error{flex-basis:100%;margin:4px 0 0;color:var(--danger);font-size:13px;line-height:1.5;overflow-wrap:anywhere}
+/* Keep history action glyphs centered in their 44px targets. */
+.side .list .acts button{align-items:center;justify-content:center}
