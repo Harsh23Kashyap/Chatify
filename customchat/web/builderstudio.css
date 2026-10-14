@@ -175,3 +175,13 @@ html body dialog.app-builder .cs[data-section-only] .cs-btn{transition:backgroun
 /* A paused, cancelled or unverified job is not ongoing work. */
 #builderProgress:not([data-job-state=running]) .builder-progress-pulse{animation:none!important;opacity:0}
 
+
+/* Long job descriptions stay readable in their own scroll areas, not page-sized jumps. */
+.builder-progress-copy strong{display:block;block-size:4.5em;overflow:auto;overflow-wrap:anywhere}
+.builder-progress-copy>small{display:block;block-size:3em;overflow:auto;overflow-wrap:anywhere}
+.builder-metrics>.builder-remaining-work{block-size:4.8em;overflow:auto;overflow-wrap:anywhere}
+.builder-metrics>p:last-child{block-size:3.2em;overflow:auto;overflow-wrap:anywhere}
+
+.builder-progress-copy strong,.builder-remaining-work{scrollbar-width:thin;scrollbar-gutter:stable;padding:2px;box-sizing:border-box}
+
+.builder-metrics small{opacity:1;color:#526650}
