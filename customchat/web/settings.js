@@ -643,7 +643,7 @@ function drawLook() {
   buildMenu();if(selectedColorField)showSelectedColor(selectedColorField);
 }
 function resetGroup(s) { if (!confirm(s.id==="wording"?"Reset App name, Welcome line, logo and all other wording to the app defaults? Other Appearance sections stay unchanged.":"Reset only " + s.title + " to the default? Other Appearance sections stay unchanged.")) return; const d = meta.default; for (const f of s.fields) { if (f.colors) theme[editMode][f.key] = d[editMode][f.key]; else {theme[f.key] = d[f.key];if(f.type==="emoji")theme[f.key+"_animated"]=d[f.key+"_animated"];} } drawLook(); changed(); const section=document.getElementById("sec-"+s.id);if(section){const notice=el("p",{class:"section-reset-confirmation",role:"status",text:s.title+" reset to defaults. Other sections unchanged."});section.querySelector(".secfoot").prepend(notice);section.querySelector(".secfoot button")?.focus({preventScroll:true});} }
-function setPvMode(m) { document.querySelectorAll("#pvmode button").forEach((b) => b.setAttribute("aria-checked", String(b.dataset.m === m))); }
+function setPvMode(m) { document.querySelectorAll("#pvmode button").forEach((b) => { const selected = b.dataset.m === m; b.setAttribute("aria-checked", String(selected)); b.tabIndex = selected ? 0 : -1; }); }
 function buildMenu() {
  const m=$("#menu");m.replaceChildren();document.body.classList.add("settings-tabs");let top=$("#settingsNavTop");if(!top){top=el("div",{id:"settingsNavTop"});$(".layout").before(top)}top.replaceChildren();
  const groups=[["start","Workspace",[["finish","Setup","Setup"],["portable","Load and share"],["workspace-list","Imported workspaces","Workspace"],["workspace-changes","Changes","Changes"],["workspace-backup","Backup","Backup"],["workspace-tests","Test questions","Test questions"],["workspace-deploy","Deploy plan","Deploy"]]],["config","Answers",[["model","Model and key"],["search","Sources and APIs"],["prompts","Prompts"],["code","Code helpers"]]],["frontend","Appearance",[["presets","Presets & setups"],...SECTIONS.map(s=>[s.id,s.title])]], ["manage","Maintenance",[["freshness","Document freshness"],["budget","Budget"]]]];
@@ -720,7 +720,16 @@ async function init() {
   const seg = $("#seg");
   buildChips(d.providers);
   draw(); await states(); buildPresets(); drawLook(); compactHelp();
-  document.querySelectorAll("#pvmode button").forEach((b) => b.addEventListener("click", () => { setPvMode(b.dataset.m); pushPreview(); }));
+  document.querySelectorAll("#pvmode button").forEach((b) => {
+    b.addEventListener("click", () => { setPvMode(b.dataset.m); pushPreview(); });
+    b.addEventListener("keydown", (event) => {
+      if (!["ArrowLeft", "ArrowRight", "ArrowUp", "ArrowDown", "Home", "End"].includes(event.key)) return;
+      event.preventDefault();
+      const buttons = [...document.querySelectorAll("#pvmode button")];
+      const index = event.key === "Home" ? 0 : event.key === "End" ? buttons.length - 1 : (buttons.indexOf(b) + (["ArrowLeft", "ArrowUp"].includes(event.key) ? -1 : 1) + buttons.length) % buttons.length;
+      buttons[index].click(); buttons[index].focus();
+    });
+  });
   $("#pv").addEventListener("load", () => { pushPreview(); });
   if (!canEdit) say("View only. Open this page on the computer running the app, or sign in as the admin, to change anything.");
   $("#temp").addEventListener("input", () => {$("#tv").textContent = (+$("#temp").value).toFixed(2);sliderVisuals()});

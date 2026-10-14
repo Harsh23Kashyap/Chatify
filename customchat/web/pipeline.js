@@ -43,7 +43,7 @@ window.CCPipelineFocus=section=>{focusSection=section;document.body.classList.to
 
 function editorList(section, cards, kind) {
   const pane = el("div", {class:"pipeline-editor-pane inline-editor",id:kind+"Editor", "aria-label":kind === "prompts" ? "Selected prompt editor" : "Selected code editor"});
-  const list = el("div", {class:"editor-list", role:"list", "aria-label":kind === "prompts" ? "Prompt stages" : "Code helpers"});
+  const list = el("div", {class:"editor-list", role:"group", "aria-label":kind === "prompts" ? "Prompt stages" : "Code helpers"});
   const choose = (card, button) => {
     if (selected[kind]){const old=selected[kind].card,area=$("textarea",old);if(kind==="prompts"&&area)old._promptView={scroll:area.scrollTop,start:area.selectionStart,end:area.selectionEnd};old.hidden=true;}
     cards.forEach(c => c.classList.remove("selected-editor"));
