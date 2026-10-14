@@ -1,3 +1,14 @@
+## 0.1.33 - Tested API helpers and clearer setup
+
+- Shorter API recommendation cards with expandable setup and reduced-motion-safe feedback.
+- Preserve usable helper response data while rejecting explicit source errors.
+- Forward only explicitly declared API-key environment names to reviewed imported apps and bounded connectors.
+- Reuse accepted passages for a pure simplification without a fresh source request; new factual questions still retrieve and filter evidence.
+- Retry transient arXiv and catalog errors, use verified HTTPS arXiv API transport, and avoid OpenAlex question-mark wildcard errors.
+- Strengthen generated stage prompts and domain follow-up checks.
+
+Validated locally with 805 tests and 483 subtests, ten app import/startup checks, and real two-turn checks for 40 included API integrations. Five card-required Brave picks were excluded from the example bundle. Integration success is not independent fact-checking of every answer or guaranteed source availability. No credentials are included.
+
 ## 0.1.32 - 2026-10-14
 
 - Keep local model setup and download status truthful through late responses, cancellation failures and retries.
