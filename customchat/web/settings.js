@@ -716,7 +716,7 @@ async function init() {
   document.addEventListener("cc-workspace-saved",e=>{if(e.detail?.config?.sources)sourceSummary(e.detail.config.sources,true)});
   const search=$("#sec-search");if(search)search.prepend(sourceOverview);
   const d = await api("/api/settings"); cur = d.settings; canEdit = d.can_edit; try { keyInfo = (await api("/api/provider/status")).keys; } catch (e) { keyInfo = {}; }
-  const th = await api("/api/theme"); theme = th.theme; meta = th.meta; window.CCBuilderEnums={...meta.enums,font:Object.keys(meta.fonts).concat("custom"),heading_font:Object.keys(meta.fonts).concat("custom")}; saved = clone(theme); canEdit = canEdit && th.can_edit !== false;
+  const th = await api("/api/theme"); theme = th.theme; document.documentElement.dataset.motion=["calm","none"].includes(theme.motion)?"none":theme.motion; meta = th.meta; window.CCBuilderEnums={...meta.enums,font:Object.keys(meta.fonts).concat("custom"),heading_font:Object.keys(meta.fonts).concat("custom")}; saved = clone(theme); canEdit = canEdit && th.can_edit !== false;
   const seg = $("#seg");
   buildChips(d.providers);
   draw(); await states(); buildPresets(); drawLook(); compactHelp();
