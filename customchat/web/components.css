@@ -141,3 +141,5 @@ html[data-motion=none] .builder-final-api,html[data-motion=calm] .builder-final-
 .app-builder .builder-api-more{background:transparent!important;color:var(--ink)!important;border:0!important;box-shadow:none!important;padding:0!important;min-height:36px;text-align:left;font-weight:400;border-radius:0!important}
 .builder-api-purpose h5,.builder-api-fit h5{margin-top:10px}
 .builder-final-api .builder-api-links{margin-top:8px}
+html:not([data-motion=none]):not([data-motion=calm]) .app-builder .builder-final-api details[open]>p,html:not([data-motion=none]):not([data-motion=calm]) .app-builder .builder-final-api details[open]>pre,html:not([data-motion=none]):not([data-motion=calm]) .app-builder .builder-final-api details[open]>h5{animation:builder-api-enter 140ms ease-out!important}
+@media(prefers-reduced-motion:reduce){html .app-builder .builder-final-api details[open]>*{animation:none!important;transition:none!important}}
