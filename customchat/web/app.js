@@ -141,8 +141,18 @@ function sendIcon(name, label) {
   const send = $("#send"); send.replaceChildren(name === "send" && TV("emoji_send") ? CCEmoji.node(TV("emoji_send"),TV("emoji_send_animated"),"",["calm","none"].includes(TV("motion"))) : svg(name)); send.setAttribute("aria-label", label); rdy();
   if (motionAllowed() && send.animate) send.animate([{opacity:.5,transform:"scale(.95)"},{opacity:1,transform:"scale(1)"}],{duration:150,easing:"ease-out"});
 }
-function motionAllowed() { return document.documentElement.dataset.motion !== "none" && !matchMedia("(prefers-reduced-motion: reduce)").matches; }
+function motionAllowed() { return !["none","calm"].includes(document.documentElement.dataset.motion) && !matchMedia("(prefers-reduced-motion: reduce)").matches; }
 let sourceExit, sourceTrigger, sourceShield = new Map();
+function quietSourceMotion(){
+  if(motionAllowed())return;
+  const closing=!!sourceExit;
+  if(sourceExit){sourceExit.onfinish=null;sourceExit.cancel();sourceExit=null;}
+  $("#sources")?.getAnimations({subtree:true}).forEach(a=>a.cancel());
+  if(closing)$("#app").classList.remove("src");
+}
+matchMedia("(prefers-reduced-motion: reduce)").addEventListener("change",quietSourceMotion);
+new MutationObserver(quietSourceMotion).observe(document.documentElement,{attributes:true,attributeFilter:["data-motion"]});
+
 function sourceModal(open) {
   const pane = $("#sources"), mobile = matchMedia("(max-width:860px)").matches;
   if (!open || !mobile) { for (const [n, value] of sourceShield) n.inert = value; sourceShield.clear(); pane.removeAttribute("role"); pane.removeAttribute("aria-modal"); return; }
