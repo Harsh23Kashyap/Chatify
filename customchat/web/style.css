@@ -928,3 +928,5 @@ html.reading-width-selected:not(.preview) body .composer>:is(.box,.cmeta,.pills,
 /* Footer copy wraps as one text flow, not two flex columns. */
 .composer .cmeta{display:block;text-align:center;overflow-wrap:anywhere}
 .composer .cmeta span+span::before{content:" "}
+.bubble .copy-status{display:block;font-size:13px;line-height:1.5;color:var(--mut);margin:8px 0;overflow-wrap:anywhere}
+.bubble .copy-status[hidden]{display:none}

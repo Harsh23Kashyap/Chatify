@@ -226,7 +226,21 @@ function turnView(t, prev) {
   if (t.standalone && t.standalone !== t.question) meta.append(el("span", { class: "chip", title: "Understood as" }, "Understood as: " + t.standalone));
   if (t.scope) meta.append(el("span", {class:"chip scope-used", text:"Scoped: " + (t.scope.document || t.scope.source)}));
   meta.append(el("button", { "data-more": "1", class: "chip", title: "How this answer was built", onclick: () => contextDialog(t) }, "Context"));
-  if (t.evidence.length) meta.append(el("button", { class: "chip copy", onclick: async (ev) => { const b = ev.currentTarget; try { if (!navigator.clipboard) throw Error("Clipboard unavailable. Select and copy the answer instead."); await navigator.clipboard.writeText(t.answer); toast("Copied"); b.textContent = "Copied"; b.classList.add("done"); setTimeout(() => { b.textContent = "Copy"; b.classList.remove("done"); }, 1600); } catch (e) { b.textContent = "Copy"; b.classList.remove("done"); toast(e.message || "Could not copy. Select and copy the answer instead."); } } }, "Copy"));
+  let answerCopyStatus;
+  if (t.evidence.length) {
+    const status=el("span",{class:"copy-status","role":"status",hidden:true});
+    let copying=false,resetTimer;
+    const copy=el("button",{class:"chip copy",onclick:async()=>{
+      if(copying)return;copying=true;clearTimeout(resetTimer);copy.classList.remove("done");copy.textContent="Copying...";copy.setAttribute("aria-busy","true");status.hidden=true;
+      try{
+        if(!navigator.clipboard)throw Error("Clipboard unavailable. Select and copy the answer instead.");
+        await navigator.clipboard.writeText(t.answer);copy.textContent="Copied";copy.classList.add("done");status.textContent="Answer copied.";status.hidden=false;
+        resetTimer=setTimeout(()=>{copy.textContent="Copy";copy.classList.remove("done");status.hidden=true},1600);
+      }catch(e){copy.textContent="Copy";copy.classList.remove("done");status.textContent=e.message||"Could not copy. Select and copy the answer instead.";status.hidden=false}
+      finally{copying=false;copy.removeAttribute("aria-busy")}
+    }},"Copy");
+    meta.append(copy);answerCopyStatus=status;
+  }
   if (t.evidence.length) {
     meta.append(el("button", { "data-more": "1", class: "chip", onclick: () => download("/api/bibtex?turn=" + t.id, "references.bib") }, "BibTeX"));
     meta.append(el("button", {"data-more":"1",class:"chip",onclick:()=>download("/api/answer-markdown?turn="+t.id,"answer.md")},"Markdown"));
@@ -234,7 +248,7 @@ function turnView(t, prev) {
     for (const s of ["quick", "deep"]) if (S.cfg.styles.includes(s)) meta.append(el("button", { "data-more": "1", class: "chip", onclick: () => regen(t.id, s) }, s === "quick" ? "Shorter" : "Deeper"));
   }
   if (srcs) bub.append(srcs);
-  bub.append(meta);
+  bub.append(meta);if(answerCopyStatus)bub.append(answerCopyStatus);
   if (t.followups && t.followups.length) {
     const f = el("div", { class: "meta fu" });
     t.followups.forEach((x) => f.append(el("button", { class: "chip", onclick: () => { $("#q").value = x; send(); } }, x)));
