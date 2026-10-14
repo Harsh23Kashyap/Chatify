@@ -395,3 +395,8 @@ html body.settings-tabs.mode-swap .settings-active-panel{animation-name:cc-setti
 html[data-motion=none] body.settings-tabs.mode-swap .settings-active-panel{animation:none!important}
 @media(prefers-reduced-motion:reduce){html body.settings-tabs.mode-swap .settings-active-panel{animation:none!important}}
 html body.settings-tabs.mode-swap .settings-active-panel :is(input,textarea,select,label,.field){animation:none!important}
+
+/* Empty action results appear without moving headings or hiding controls. */
+.action-empty{animation:m-in 140ms ease-out both;transform:none}
+html[data-motion=none] .action-empty,html[data-motion=calm] .action-empty{animation:none!important}
+@media(prefers-reduced-motion:reduce){.action-empty{animation:none!important}}

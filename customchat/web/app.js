@@ -589,7 +589,7 @@ async function init() {
         const confirm=el('button',{class:'reading-done',text:'Confirm action',onclick:async()=>{if(confirm.disabled)return;confirm.disabled=true;back.disabled=true;confirm.textContent='Working...';
          try{const result=await api('/api/actions/execute',{ticket:review.ticket}),focusResult=dialog.open&&(document.activeElement===document.body||document.activeElement===dialog||content.contains(document.activeElement));content.replaceChildren(el('h3',{text:result.saved?'Note saved':'Your notes'}));
           if(result.saved)content.append(el('p',{text:'Your note was saved in this app.'}));
-          else if(Array.isArray(result.notes)){if(!result.notes.length)content.append(el('p',{text:'No notes saved yet.'}));for(const note of result.notes)content.append(el('section',{class:'action-value'},el('h4',{text:note.title}),el('p',{text:note.text})))}
+          else if(Array.isArray(result.notes)){if(!result.notes.length)content.append(el('p',{class:'action-empty',role:'status',text:'No notes saved yet.'}));for(const note of result.notes)content.append(el('section',{class:'action-value'},el('h4',{text:note.title}),el('p',{text:note.text})))}
           else content.append(el('p',{text:'Action complete.'}));const heading=content.querySelector('h3');heading.tabIndex=-1;if(focusResult)heading.focus();
          }catch(err){failure.textContent=err.message+' Return to the form to review a fresh action. If the connection was interrupted, check your notes before saving again.';confirm.textContent='Action not confirmed';back.disabled=false;if(dialog.open&&(document.activeElement===document.body||document.activeElement===dialog||document.activeElement===confirm))back.focus()}
         }});content.append(failure,back,confirm);if(focusReview)back.focus();
@@ -597,7 +597,7 @@ async function init() {
       }});content.append(preview);(Object.values(inputs)[0]||preview).focus();
      };form();
     }},tool.label));
-    if(!catalog.length)content.append(el('p',{text:'No actions enabled.'}));
+    if(!catalog.length)content.append(el('p',{class:'action-empty',role:'status',text:'No actions enabled.'}));
     dialog.append(el('footer',{},el('button',{class:'chip',onclick:()=>dialog.close()},'Close')));dialog.addEventListener('close',()=>{dialog.remove();$('#actionsBtn').focus()});document.body.append(dialog);dialog.showModal();
    }catch(err){toast('Could not load actions: '+err.message+'. Try Actions again.')}finally{trigger.dataset.running='false';trigger.removeAttribute('aria-busy');trigger.textContent=original;trigger.style.minWidth=originalMinWidth}
   };
