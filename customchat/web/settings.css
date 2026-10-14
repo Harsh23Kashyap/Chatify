@@ -1331,3 +1331,6 @@ body.settings-tabs .helper .helper-detect{min-width:128px}
 /* Save feedback reflects a completed write, not any non-dirty label. */
 #dirty:not(.dirty){animation:none}
 #dirty.save-confirmed{animation:saved-check-in 160ms ease-out}
+/* Keep editor content still; only its action buttons share the normal hover response. */
+html:not([data-motion=none]):not([data-motion=calm]) .pipeline-editor-pane button{transition:background-color 160ms ease-out,border-color 160ms ease-out,color 160ms ease-out!important}
+@media(prefers-reduced-motion:reduce){html .pipeline-editor-pane button{transition:none!important}}
