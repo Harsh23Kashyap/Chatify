@@ -57,7 +57,7 @@ function toast(msg, actionLabel, action) {
   const close=()=>{clearTimeout(timer);observer?.disconnect();window.removeEventListener("resize",place);t.remove()};t.dismissNotice=close;
   const place=()=>{t.style.bottom=(innerHeight-($(".composer")?.getBoundingClientRect().top||innerHeight-110)+16)+"px";centerToast(t)};
   if(action){const button=el("button",{type:"button",class:"toast-action",text:actionLabel,onclick:async()=>{if(button.disabled)return;button.disabled=true;try{await action();close()}catch(e){message.textContent=e.message||"Could not complete that action. Try again.";button.disabled=false}}});t.append(button)}
-  t.append(el("button",{type:"button",class:"toast-dismiss","aria-label":"Dismiss notification",text:"×",onclick:close}));
+  t.append(el("button",{type:"button",class:"toast-dismiss","aria-label":"Dismiss notification",title:"Dismiss notification",text:"×",onclick:close}));
   document.body.append(t);place();if(window.ResizeObserver&&$(".composer")){observer=new ResizeObserver(place);observer.observe($(".composer"))}window.addEventListener("resize",place);
   const lifetime=Math.min(16000,Math.max(3500,1500+String(msg).length*65));
   const wait=()=>{clearTimeout(timer);if(!action)timer=setTimeout(close,lifetime)};
