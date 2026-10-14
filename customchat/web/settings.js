@@ -910,9 +910,9 @@ async function drawOllamaSetup(host) {
 }
 async function pollOllamaSetup(host,id){
   host.dataset.poll=id;
-  const heading=el('h3',{text:'Ollama setup'}),message=el('p',{role:'status','aria-live':'polite','aria-atomic':'true'}),amount=el('p',{class:'h',hidden:''}),details=el('div');
-  const recheck=el('button',{type:'button',class:'mini',text:'Recheck local service',onclick:()=>drawOllamaSetup(host)}),retry=el('button',{type:'button',class:'mini',text:'Retry after fresh review',hidden:'',onclick:()=>drawOllamaSetup(host)}),cancel=el('button',{type:'button',class:'mini',text:'Cancel setup work',onclick:async()=>{if(cancel.disabled)return;cancel.disabled=true;try{await api('/api/ollama/setup/cancel',{id})}catch(e){if(host.dataset.poll===id){message.textContent=e.message;cancel.disabled=false}}}});
-  host.replaceChildren(heading,message,amount,details,recheck,retry,cancel);
+  const heading=el('h3',{text:'Ollama setup'}),message=el('p',{role:'status','aria-live':'polite','aria-atomic':'true'}),amount=el('p',{class:'h',hidden:''}),details=el('div'),cancelError=el('p',{class:'testres bad',role:'status','aria-live':'polite',hidden:''});
+  const recheck=el('button',{type:'button',class:'mini',text:'Recheck local service',onclick:()=>drawOllamaSetup(host)}),retry=el('button',{type:'button',class:'mini',text:'Retry after fresh review',hidden:'',onclick:()=>drawOllamaSetup(host)}),cancel=el('button',{type:'button',class:'mini',text:'Cancel setup work',onclick:async()=>{if(cancel.disabled)return;const hadFocus=document.activeElement===cancel;cancel.disabled=true;cancelError.hidden=true;try{await api('/api/ollama/setup/cancel',{id})}catch(e){if(host.dataset.poll===id){cancelError.textContent=e.message;cancelError.hidden=false;cancel.disabled=false;if(hadFocus&&document.activeElement===document.body)cancel.focus()}}}});
+  host.replaceChildren(heading,message,amount,details,recheck,retry,cancel,cancelError);
   for(let i=0;i<310 && host.isConnected && host.dataset.poll===id;i++){
     const st=await api('/api/ollama/setup/status?id='+encodeURIComponent(id));
     if(!host.isConnected||host.dataset.poll!==id)return;
