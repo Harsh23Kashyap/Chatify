@@ -912,15 +912,18 @@ async function pollOllamaSetup(host,id){
   host.dataset.poll=id;
   const heading=el('h3',{text:'Ollama setup'}),message=el('p',{role:'status','aria-live':'polite','aria-atomic':'true'}),amount=el('p',{class:'h',hidden:''}),details=el('div'),cancelError=el('p',{class:'testres bad',role:'status','aria-live':'polite',hidden:''});
   const recheck=el('button',{type:'button',class:'mini',text:'Recheck local service',onclick:()=>drawOllamaSetup(host)}),retry=el('button',{type:'button',class:'mini',text:'Retry after fresh review',hidden:'',onclick:()=>drawOllamaSetup(host)}),cancel=el('button',{type:'button',class:'mini',text:'Cancel setup work',onclick:async()=>{if(cancel.disabled)return;const hadFocus=document.activeElement===cancel;cancel.disabled=true;cancelError.hidden=true;try{await api('/api/ollama/setup/cancel',{id})}catch(e){if(host.dataset.poll===id){cancelError.textContent=e.message;cancelError.hidden=false;cancel.disabled=false;if(hadFocus&&document.activeElement===document.body)cancel.focus()}}}});
-  host.replaceChildren(heading,message,amount,details,recheck,retry,cancel,cancelError);
+  let resumeStatus=null,retryHadFocus=false;const statusRetry=el('button',{type:'button',class:'mini',text:'Retry setup status',hidden:'',onclick:()=>{if(resumeStatus){retryHadFocus=document.activeElement===statusRetry;statusRetry.disabled=true;resumeStatus();resumeStatus=null}}});
+  host.replaceChildren(heading,message,amount,details,recheck,retry,cancel,cancelError,statusRetry);
   for(let i=0;i<310 && host.isConnected && host.dataset.poll===id;i++){
-    const st=await api('/api/ollama/setup/status?id='+encodeURIComponent(id));
+    let st;try{st=await api('/api/ollama/setup/status?id='+encodeURIComponent(id));}catch(e){if(!host.isConnected||host.dataset.poll!==id)return;message.textContent=e.message+' Setup status is unknown. Retry checks this same job; it does not start setup again.';statusRetry.hidden=false;statusRetry.disabled=false;await new Promise(resolve=>resumeStatus=resolve);continue;}
     if(!host.isConnected||host.dataset.poll!==id)return;
+    const focusStatusRetry=document.activeElement===statusRetry||retryHadFocus&&document.activeElement===document.body;retryHadFocus=false;statusRetry.hidden=true;
     heading.textContent=st.state==='ready'?'Ollama is ready':'Ollama setup';message.textContent=st.message;
     amount.hidden=!st.downloaded_bytes;if(st.downloaded_bytes)amount.textContent=(st.downloaded_bytes/1048576).toFixed(1)+' MB downloaded'+(st.total_bytes?' of '+(st.total_bytes/1048576).toFixed(1)+' MB':' · total size unknown');
     if(st.sha256&&!details.querySelector('details'))details.append(el('details',{},el('summary',{text:'Downloaded installer fingerprint'}),el('small',{text:st.sha256})));
     if(st.page&&!details.querySelector('a'))details.append(el('a',{href:st.page,target:'_blank',rel:'noopener',text:'Official installation instructions'}));
-    if(['ready','failed','needs_manual','cancelled'].includes(st.state)){const focusCancel=document.activeElement===cancel;cancel.hidden=true;retry.hidden=st.state==='ready';if(focusCancel)recheck.focus();return;}
+    if(['ready','failed','needs_manual','cancelled'].includes(st.state)){const focusCancel=document.activeElement===cancel;cancel.hidden=true;retry.hidden=st.state==='ready';if(focusCancel||focusStatusRetry)recheck.focus();return;}
+    if(focusStatusRetry)recheck.focus();
     await new Promise(r=>setTimeout(r,2000));
   }
 }
