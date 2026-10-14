@@ -400,3 +400,4 @@ html body.settings-tabs.mode-swap .settings-active-panel :is(input,textarea,sele
 .action-empty,.scope-empty{animation:m-in 140ms ease-out both;transform:none}
 html[data-motion=none] .action-empty,html[data-motion=calm] .action-empty,html[data-motion=none] .scope-empty,html[data-motion=calm] .scope-empty{animation:none!important}
 @media(prefers-reduced-motion:reduce){.action-empty,.scope-empty{animation:none!important}}
+#dirty:not(.dirty)::before{animation:none}

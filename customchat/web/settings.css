@@ -1328,3 +1328,6 @@ html body.settings-tabs #look .field>.compact-help{margin-top:-8px!important;mar
 body.settings-tabs .helper .helper-detect{min-width:128px}
 /* Editor focus feedback changes color and ring, never field geometry. */
 @media(prefers-reduced-motion:no-preference){html:not([data-motion=none]) .pipeline-editor-pane :is(input:not([type]),input[type=text],input[type=email],input[type=search],input[type=tel],input[type=url],input[type=password],input[type=number],textarea){transition:background-color 160ms ease-out,border-color 160ms ease-out,box-shadow 160ms ease-out!important}}
+/* Save feedback reflects a completed write, not any non-dirty label. */
+#dirty:not(.dirty){animation:none}
+#dirty.save-confirmed{animation:saved-check-in 160ms ease-out}
