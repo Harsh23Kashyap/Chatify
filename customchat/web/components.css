@@ -126,3 +126,18 @@ html[data-motion=none] .builder-final-api,html[data-motion=calm] .builder-final-
 .builder-final-api summary:after{margin-left:auto}
 .builder-final-api summary:before{display:none!important}
 .builder-final-api summary::-webkit-details-marker{display:none}
+/* Short API summaries, local initials and motion tied to real interaction. */
+.builder-api-identity{display:flex;align-items:center;gap:10px;min-width:0}
+.builder-api-mark{display:grid;place-items:center;flex:0 0 34px;height:34px;border-radius:6px;background:var(--line);color:var(--ink);font-size:12px;font-weight:600;letter-spacing:.03em}
+.builder-final-api label strong{overflow-wrap:anywhere}
+.builder-api-purpose p,.builder-api-fit p{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden}
+.builder-final-api.copy-expanded .builder-api-purpose p,.builder-final-api.copy-expanded .builder-api-fit p{display:block;overflow:visible}
+.builder-api-more{min-height:44px;border:0;background:none;padding:0;font-size:13px;text-decoration:underline;text-underline-offset:3px;color:inherit}
+.builder-final-api{transition:border-color 160ms ease,background-color 160ms ease;animation:builder-api-enter 140ms ease-out}
+.builder-final-api[data-selected=true]{border-color:color-mix(in srgb,var(--ink) 35%,var(--line))}
+.builder-final-api details[open]>p,.builder-final-api details[open]>pre,.builder-final-api details[open]>h5{animation:builder-api-enter 140ms ease-out}
+@media(prefers-reduced-motion:reduce){.builder-final-api,.builder-final-api details[open]>*{transition:none!important;animation:none!important}}
+html[data-motion=none] .builder-final-api,html[data-motion=calm] .builder-final-api,html[data-motion=none] .builder-final-api details[open]>*,html[data-motion=calm] .builder-final-api details[open]>*{transition:none!important;animation:none!important}
+.app-builder .builder-api-more{background:transparent!important;color:var(--ink)!important;border:0!important;box-shadow:none!important;padding:0!important;min-height:36px;text-align:left;font-weight:400;border-radius:0!important}
+.builder-api-purpose h5,.builder-api-fit h5{margin-top:10px}
+.builder-final-api .builder-api-links{margin-top:8px}
