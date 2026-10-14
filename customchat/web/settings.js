@@ -13,6 +13,12 @@ window.CCSavedFeedback=(button,label)=>{button._savedLabel=label;clearTimeout(bu
 const say = (t, err) => { const m = $("#msg"); m.textContent = t; m.className = "msg" + (err ? " err" : ""); };
 const el = (tag, props = {}, ...kids) => { const e = document.createElement(tag); for (const [k, v] of Object.entries(props)) { if (v === undefined || v === null) continue; if (k === "class") e.className = v; else if (k === "text") e.textContent = v; else if (k.startsWith("on")) e.addEventListener(k.slice(2), v); else e.setAttribute(k, v); } for (const c of kids.flat()) if (c != null) e.append(c.nodeType ? c : document.createTextNode(c)); return e; };
 
+// Font and contrast feedback stops immediately when the visitor asks for less motion.
+const sampleMotionMedia=matchMedia("(prefers-reduced-motion:reduce)");
+const stopSampleMotion=()=>{if(!sampleMotionMedia.matches&&!["none","calm"].includes(document.documentElement.dataset.motion))return;const host=$("#pvextra");host?._headingAnimation?.cancel();host?.querySelectorAll(".cc").forEach(row=>row._statusAnimation?.cancel())};
+sampleMotionMedia.addEventListener("change",stopSampleMotion);
+new MutationObserver(stopSampleMotion).observe(document.documentElement,{attributes:true,attributeFilter:["data-motion"]});
+
 /* ---------- model section (unchanged behaviour) ---------- */
 function draw() {
   $("#model").value = cur.model || "";const picker=$("#modelPick"),matched=[...picker.options].some(o=>o.value===cur.model);picker.value=matched?cur.model:OTHER;$("#base").value = cur.base_url || ""; $("#temp").value = cur.temperature; $("#topk").value = cur.top_k; $("#rewrite").checked = !!cur.query_rewrite;
