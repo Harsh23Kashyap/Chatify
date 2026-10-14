@@ -590,11 +590,11 @@ async function init() {
          try{const result=await api('/api/actions/execute',{ticket:review.ticket});content.replaceChildren(el('h3',{text:result.saved?'Note saved':'Your notes'}));
           if(result.saved)content.append(el('p',{text:'Your note was saved in this app.'}));
           else if(Array.isArray(result.notes)){if(!result.notes.length)content.append(el('p',{text:'No notes saved yet.'}));for(const note of result.notes)content.append(el('section',{class:'action-value'},el('h4',{text:note.title}),el('p',{text:note.text})))}
-          else content.append(el('p',{text:'Action complete.'}));
+          else content.append(el('p',{text:'Action complete.'}));const heading=content.querySelector('h3');heading.tabIndex=-1;heading.focus();
          }catch(err){failure.textContent=err.message+' Return to the form to review a fresh action. If the connection was interrupted, check your notes before saving again.';confirm.textContent='Action not confirmed';back.disabled=false}
-        }});content.append(failure,back,confirm);
+        }});content.append(failure,back,confirm);back.focus();
        }catch(err){error.textContent=err.message;preview.disabled=false;preview.textContent='Preview action'}
-      }});content.append(preview);
+      }});content.append(preview);(Object.values(inputs)[0]||preview).focus();
      };form();
     }},tool.label));
     if(!catalog.length)content.append(el('p',{text:'No actions enabled.'}));
