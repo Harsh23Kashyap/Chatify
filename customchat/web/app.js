@@ -262,7 +262,7 @@ function scopeChip() {
  if (S.scope) p.append(el("span",{class:"scope-selected-label",text:"Only " + (S.scope.document || S.scope.source),title:"Only " + (S.scope.document || S.scope.source)}),el("button",{class:"chip",onclick:()=>{S.scope=null;scopeChip();$("#scopeBtn").focus()}},"Clear"));
 }
 async function scopeDialog() {
- const trigger=$("#scopeBtn");if(trigger.dataset.running==="true")return;trigger.dataset.running="true";trigger.setAttribute("aria-busy","true");const original=trigger.textContent,originalMinWidth=trigger.style.minWidth;trigger.style.minWidth=trigger.getBoundingClientRect().width+"px";trigger.textContent="Loading...";
+ const origin=document.activeElement,trigger=$("#scopeBtn");if(trigger.dataset.running==="true")return;trigger.dataset.running="true";trigger.setAttribute("aria-busy","true");const original=trigger.textContent,originalMinWidth=trigger.style.minWidth;trigger.style.minWidth=trigger.getBoundingClientRect().width+"px";trigger.textContent="Loading...";
  try {
   const rows=await api("/api/scopes");const dialog=el("dialog",{class:"reading-dialog scope-dialog","aria-label":"Choose source scope"});
   dialog.append(el("header",{class:"reading-head"},el("h2",{text:"Choose source scope"})));
@@ -274,7 +274,7 @@ async function scopeDialog() {
   }
   if (!rows.length) options.append(el("p",{class:"scope-empty",role:"status",text:"No configured sources"}));
   dialog.append(options,el("footer",{},el("button",{class:"reading-done",onclick:()=>dialog.close()},"Done")));
-  dialog.addEventListener("close",()=>{dialog.remove();$("#scopeBtn").focus()});document.body.append(dialog);dialog.showModal();
+  dialog.addEventListener("close",()=>{dialog.remove();(origin?.isConnected&&origin!==document.body?origin:trigger).focus()});document.body.append(dialog);dialog.showModal();
  } catch(e){toast("Could not load sources: "+e.message+". Try Source scope again.")}finally{trigger.dataset.running="false";trigger.removeAttribute("aria-busy");trigger.textContent=original;trigger.style.minWidth=originalMinWidth}
 }
 async function loadSuggestions() {
