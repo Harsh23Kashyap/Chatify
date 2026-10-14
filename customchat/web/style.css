@@ -925,3 +925,6 @@ html.reading-width-selected:not(.preview) body .composer>:is(.box,.cmeta,.pills,
 .composer-tools .scope-load-error{flex-basis:100%;margin:4px 0 0;color:var(--danger);font-size:13px;line-height:1.5;overflow-wrap:anywhere}
 /* Keep history action glyphs centered in their 44px targets. */
 .side .list .acts button{align-items:center;justify-content:center}
+/* Footer copy wraps as one text flow, not two flex columns. */
+.composer .cmeta{display:block;text-align:center;overflow-wrap:anywhere}
+.composer .cmeta span+span::before{content:" "}
