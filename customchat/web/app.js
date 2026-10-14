@@ -570,8 +570,9 @@ async function init() {
   $("#scopeBtn").onclick=scopeDialog;
   $("#q").addEventListener("keydown",e=>{if((e.ctrlKey||e.metaKey)&&e.key==="Enter"){e.preventDefault();send()}});
   $("#actionsBtn").onclick=async()=>{
+   const trigger=$("#actionsBtn");if(trigger.dataset.running==="true")return;trigger.dataset.running="true";trigger.setAttribute("aria-busy","true");const original=trigger.textContent,originalMinWidth=trigger.style.minWidth;trigger.style.minWidth=trigger.getBoundingClientRect().width+"px";trigger.textContent="Wait...";
    try {
-    const catalog=await api('/api/actions');const dialog=el('dialog',{class:'reading-dialog action-dialog'});
+    const catalog=await api('/api/actions');const dialog=el('dialog',{class:'reading-dialog action-dialog','aria-label':'Review an action'});
     dialog.append(el('header',{class:'reading-head'},el('h2',{text:'Review an action'})));
     const content=el('div',{class:'action-body'});dialog.append(content);
     for(const tool of catalog) content.append(el('button',{class:'reading-done',onclick:()=>{
@@ -598,7 +599,7 @@ async function init() {
     }},tool.label));
     if(!catalog.length)content.append(el('p',{text:'No actions enabled.'}));
     dialog.append(el('footer',{},el('button',{class:'chip',onclick:()=>dialog.close()},'Close')));dialog.addEventListener('close',()=>{dialog.remove();$('#actionsBtn').focus()});document.body.append(dialog);dialog.showModal();
-   }catch(err){toast(err.message)}
+   }catch(err){toast('Could not load actions: '+err.message+'. Try Actions again.')}finally{trigger.dataset.running='false';trigger.removeAttribute('aria-busy');trigger.textContent=original;trigger.style.minWidth=originalMinWidth}
   };
   $("#hint").textContent = "Answers cite their sources. Check important facts.";
   $("#q").addEventListener("input", autosize);
