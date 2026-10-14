@@ -461,3 +461,10 @@ html[data-motion=none] .local-empty,html[data-motion=calm] .local-empty{animatio
 .fresh.row:has(.bubble.none){animation:m-in 140ms ease-out both;transform:none}
 html[data-motion=none] .fresh.row:has(.bubble.none),html[data-motion=calm] .fresh.row:has(.bubble.none){animation:none!important}
 @media(prefers-reduced-motion:reduce){.fresh.row:has(.bubble.none){animation:none!important}}
+/* Touch actions stay visible. Duplicate-chat times need their own space. */
+@media(hover:none){
+ .side .list .item:has(.tm){display:grid;grid-template-columns:minmax(0,1fr) auto;column-gap:4px;row-gap:2px;padding-top:8px;padding-bottom:8px}
+ .side .list .item:has(.tm) .t{grid-column:1;grid-row:1}
+ .side .list .item:has(.tm) .acts{grid-column:2;grid-row:1/3;align-self:center}
+ .side .list .item .tm,.side .list .item.on .tm,.side .list .item:hover .tm,.side .list .item:focus-within .tm{display:block;position:static;grid-column:1;grid-row:2;margin:0;padding:0;visibility:visible;text-align:left}
+}
