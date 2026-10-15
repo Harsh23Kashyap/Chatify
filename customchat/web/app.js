@@ -681,7 +681,8 @@ async function init() {
   matchMedia("(max-width:860px)").addEventListener("change", syncSidebar);
   syncSidebar();
   $("#search").addEventListener("input", () => S.tab === "chats" && loadList());
-  document.querySelectorAll(".tab").forEach((b) => b.addEventListener("click", () => { document.querySelectorAll(".tab").forEach((x) => x.classList.toggle("on", x === b)); S.tab = b.dataset.tab; loadList(); }));
+  const historyTabs = [...document.querySelectorAll(".tabs [role=tab]")];
+  historyTabs.forEach((b, index) => { b.addEventListener("click", () => { historyTabs.forEach((x) => { x.classList.toggle("on", x === b); x.setAttribute("aria-selected", String(x === b)); x.tabIndex = x === b ? 0 : -1; }); $("#list").setAttribute("aria-labelledby", b.id); S.tab = b.dataset.tab; loadList(); }); b.addEventListener("keydown", e => { let next; if(e.key === "ArrowRight") next=(index+1)%historyTabs.length; else if(e.key === "ArrowLeft") next=(index+historyTabs.length-1)%historyTabs.length; else if(e.key === "Home") next=0; else if(e.key === "End") next=historyTabs.length-1; else return; e.preventDefault(); historyTabs[next].focus(); historyTabs[next].click(); }); });
   document.addEventListener("keydown", (e) => {
     if ($("#app").classList.contains("src")) {
       if (e.key === "Escape") { e.preventDefault(); closeSources(); return; }
