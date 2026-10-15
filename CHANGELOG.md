@@ -1,3 +1,9 @@
+## 0.1.35 - Accessible history navigation
+
+- Give Chats and Topics proper tab semantics, selected state and arrow/Home/End keyboard navigation.
+- Keep the current layout and refresh regression checks for Guide, appearance, motion and workspace loading.
+- Original Gemini error root cause and physical phone/screen-reader checks remain unverified.
+
 ## 0.1.34 - Chat rendering and app handoff
 
 - Stream safe bold/code/table/list formatting instead of literal Markdown; keep numbered lists numbered.
