@@ -1,6 +1,6 @@
 import io,json,time,unittest
 from unittest.mock import patch,MagicMock
-from customchat import websearch,hardware
+from chatify import websearch,hardware
 class TransientKeyAndCancellation(unittest.TestCase):
  def test_transient_key_is_used_without_secret_store_read_or_write(self):
   store=MagicMock();response=io.BytesIO(json.dumps({'results':[{'title':'Result','text':'Body','url':'https://example.org'}]}).encode())

@@ -1,8 +1,8 @@
 import base64,io,tempfile,unittest,zipfile
 from pathlib import Path
-from customchat.nerdload import NerdLoader
-from customchat import schema
-from customchat.portable import bundle
+from chatify.nerdload import NerdLoader
+from chatify import schema
+from chatify.portable import bundle
 class NerdLoadTests(unittest.TestCase):
  def setUp(self):
   self.tmp=tempfile.TemporaryDirectory();self.addCleanup(self.tmp.cleanup);self.root=Path(self.tmp.name);self.loader=NerdLoader(self.root);self.addCleanup(self.loader.close)
@@ -64,8 +64,8 @@ class NerdLoadTests(unittest.TestCase):
   with self.assertRaisesRegex(ValueError,'Unsupported hidden file: .private'):
    self.loader.review('d.zip',self.encoded({'app.yaml':'{}','.private':'x'}))
  def test_source_archive_explained(self):
-  with self.assertRaisesRegex(ValueError,'CustomChat source ZIP, not a Nerd bundle'):
-   self.loader.review('source.zip',self.encoded({'customchat/.gitignore':'x','customchat/pyproject.toml':'x','customchat/customchat/__init__.py':'x','customchat/customchat/accounts.py':'x'}))
+  with self.assertRaisesRegex(ValueError,'Chatify source ZIP, not a Nerd bundle'):
+   self.loader.review('source.zip',self.encoded({'chatify/.gitignore':'x','chatify/pyproject.toml':'x','chatify/chatify/__init__.py':'x','chatify/chatify/accounts.py':'x'}))
  def test_article_response_has_routing_hint_without_import(self):
   with self.assertRaisesRegex(ValueError,'Match a real response'):
    self.loader.review('response.json',base64.b64encode(b'{"articles": [{"title":"Fixture"}]}').decode())

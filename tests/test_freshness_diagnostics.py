@@ -1,6 +1,6 @@
 import tempfile,unittest
 from pathlib import Path
-from customchat.connectors.local_files import LocalFiles
+from chatify.connectors.local_files import LocalFiles
 class FreshnessDiagnostics(unittest.TestCase):
  def test_change_counts_and_retained_last_index(self):
   with tempfile.TemporaryDirectory() as folder:

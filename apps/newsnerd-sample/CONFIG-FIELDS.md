@@ -4,7 +4,7 @@ Every supported core field is present in all three configs. Empty collections an
 
 | Field | Offline default | GNews / NewsAPI live value | Why |
 |---|---|---|---|
-| `schema_version` | 1 | 1 | Current CustomChat schema. |
+| `schema_version` | 1 | 1 | Current Chatify schema. |
 | `actions.allow` | [] | [] | No optional app mutations/tools enabled. |
 | `actions.writes` | False | False | No optional app mutations/tools enabled. |
 | `budget.daily_questions` | 80 | 80 | Coarse app quotas, not provider-wide billing enforcement. 0 means unlimited; null dollar cap means no meter. |
@@ -48,6 +48,6 @@ Every supported core field is present in all three configs. Empty collections an
 | `auth.mode` | none | none | No login on loopback local machine. Not safe to expose this setup publicly. Signup disabled; token env inactive. |
 | `auth.token_env` | NEWSNERD_LOCAL_TOKEN | NEWSNERD_LOCAL_TOKEN | No login on loopback local machine. Not safe to expose this setup publicly. Signup disabled; token env inactive. |
 | `auth.signup` | False | False | No login on loopback local machine. Not safe to expose this setup publicly. Signup disabled; token env inactive. |
-| `storage.path` | data/customchat.db | data/customchat.db | Persistent local database, shared across modes. |
+| `storage.path` | data/chatify.db | data/chatify.db | Persistent local database, shared across modes. |
 | `server.host` | 127.0.0.1 | 127.0.0.1 | Loopback only, separate port 8081. |
 | `server.port` | 8081 | 8081 | Loopback only, separate port 8081. |

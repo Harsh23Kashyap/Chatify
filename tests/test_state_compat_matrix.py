@@ -1,10 +1,10 @@
 """Saved state format and malformed input checks against actual HTTP handlers."""
 import unittest,tempfile,threading,json,urllib.request,urllib.error,os
 from http.server import ThreadingHTTPServer
-from customchat import schema
-from customchat.store import Store
-from customchat.pipeline import Engine
-from customchat.server import make_handler
+from chatify import schema
+from chatify.store import Store
+from chatify.pipeline import Engine
+from chatify.server import make_handler
 class StateMatrix(unittest.TestCase):
  def setUp(self):
   self.tmp=tempfile.TemporaryDirectory();cfg=schema.validate({'storage':{'path':self.tmp.name+'/s.db'}});cfg['_dir']=self.tmp.name

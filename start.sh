@@ -1,5 +1,5 @@
 #!/bin/sh
-# Bootstrap uv, then run CustomChat in uvx's isolated tool environment.
+# Bootstrap uv, then run Chatify in uvx's isolated tool environment.
 set -eu
 UV=$(command -v uv || true)
 if [ -z "$UV" ] && [ -x "$HOME/.local/bin/uv" ]; then UV="$HOME/.local/bin/uv"; fi
@@ -15,6 +15,6 @@ if [ -z "$UV" ]; then
   [ -x "$UV" ] || { echo 'uv install failed; inspect the message above.' >&2; exit 1; }
 fi
 # uv tool run is uvx. Archive source works without Git until the PyPI release.
-SOURCE=${CUSTOMCHAT_INSTALL_SOURCE:-customchat-app==0.1.36}
+SOURCE=${CHATIFY_INSTALL_SOURCE:-${CUSTOMCHAT_INSTALL_SOURCE:-chatify-app==0.2.0}}
 unset PYTHONPATH PYTHONHOME
-exec "$UV" tool run --python 3.12 --from "$SOURCE" customchat start "$@"
+exec "$UV" tool run --python 3.12 --from "$SOURCE" chatify start "$@"

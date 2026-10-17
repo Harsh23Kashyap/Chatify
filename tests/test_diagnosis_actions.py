@@ -1,5 +1,5 @@
 import unittest
-from customchat.management import diagnosis
+from chatify.management import diagnosis
 class DiagnosisActions(unittest.TestCase):
  def test_known_causes_have_private_actionable_guidance(self):
   for text,kind,word in [('400 rejected','configuration','model name'),('401 refused','authentication','credential'),('403 forbidden','authentication','permission'),('429 quota','limit','quota'),('timed out','timeout','address'),('503 unavailable','connection','Retry later'),('404 not found','configuration','service address')]:

@@ -1,9 +1,9 @@
 import unittest,threading,json,urllib.request,urllib.error,http.cookiejar,tempfile
-from customchat import schema
-from customchat.pipeline import Engine
-from customchat.store import Store
-from customchat.server import make_handler
-from customchat.accounts import Accounts
+from chatify import schema
+from chatify.pipeline import Engine
+from chatify.store import Store
+from chatify.server import make_handler
+from chatify.accounts import Accounts
 from http.server import ThreadingHTTPServer
 class WorkspaceAPITests(unittest.TestCase):
  def setUp(self):
@@ -30,7 +30,7 @@ class WorkspaceAPITests(unittest.TestCase):
   with self.assertRaises(urllib.error.HTTPError):self.call(self.clients[0],'/api/settings',{'settings':{'base_url':'https://host/?key=secret'}})
 
  def test_source_credentials_admin_only_and_not_echoed(self):
-  from customchat import secrets
+  from chatify import secrets
   old=secrets.STORE;secrets.STORE=secrets.SecretStore(self.tmp.name)
   self.cfg['sources']=[{'id':'newsapi','type':'http_json','label':'NewsAPI','url':'https://newsapi.org/v2/everything?q={query}','header_env':{'X-Api-Key':'NEWSAPI_KEY'}}]
   try:
@@ -43,6 +43,6 @@ class WorkspaceAPITests(unittest.TestCase):
   finally:secrets.STORE=old
  def test_source_credentials_locked(self):
   from unittest.mock import patch
-  with patch('customchat.server.LOCKED',True):
+  with patch('chatify.server.LOCKED',True):
    with self.assertRaises(urllib.error.HTTPError) as error:self.call(self.clients[0],'/api/source-credentials')
    self.assertEqual(error.exception.code,404)

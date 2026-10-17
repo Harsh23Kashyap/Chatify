@@ -1,16 +1,16 @@
 import json,tempfile,threading,unittest,urllib.request,yaml
 from pathlib import Path
 from http.server import ThreadingHTTPServer
-from customchat import schema
-from customchat.pipeline import Engine
-from customchat.store import Store
-from customchat.server import make_handler
+from chatify import schema
+from chatify.pipeline import Engine
+from chatify.store import Store
+from chatify.server import make_handler
 
 class BuilderLaunch(unittest.TestCase):
  def test_saved_app_starts_separately_preserves_parent(self):
   with tempfile.TemporaryDirectory() as td:
    root=Path(td);(root/'docs').mkdir();(root/'docs'/'guide.md').write_text('Evidence for fixture: conversation memory is saved between questions.')
-   raw={'app':{'title':'Saved launch fixture'},'sources':[{'id':'docs','type':'local_files','path':'docs'}]};(root/'app.yaml').write_text(yaml.safe_dump(raw));cfg=schema.load(str(root/'app.yaml'));cfg['_path']=str(root/'app.yaml');store=Store(str(root/'data'/'customchat.db'));eng=Engine(cfg,store);server=ThreadingHTTPServer(('127.0.0.1',0),make_handler(cfg,eng));thread=threading.Thread(target=server.serve_forever,daemon=True);thread.start();url='http://127.0.0.1:'+str(server.server_port)
+   raw={'app':{'title':'Saved launch fixture'},'sources':[{'id':'docs','type':'local_files','path':'docs'}]};(root/'app.yaml').write_text(yaml.safe_dump(raw));cfg=schema.load(str(root/'app.yaml'));cfg['_path']=str(root/'app.yaml');store=Store(str(root/'data'/'chatify.db'));eng=Engine(cfg,store);server=ThreadingHTTPServer(('127.0.0.1',0),make_handler(cfg,eng));thread=threading.Thread(target=server.serve_forever,daemon=True);thread.start();url='http://127.0.0.1:'+str(server.server_port)
    try:
     def post(path,body):
      req=urllib.request.Request(url+path,data=json.dumps(body).encode(),headers={'Content-Type':'application/json'})

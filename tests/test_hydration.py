@@ -1,8 +1,8 @@
 import unittest,tempfile,json
 from pathlib import Path
-from customchat import schema,theme
-from customchat.pipeline import Engine
-from customchat.store import Store
+from chatify import schema,theme
+from chatify.pipeline import Engine
+from chatify.store import Store
 class Hydration(unittest.TestCase):
  def engine(self,sources):
   cfg=schema.validate({'provider':{'type':'mock'},'sources':sources,'storage':{'path':':memory:'}})
@@ -27,4 +27,4 @@ class Hydration(unittest.TestCase):
    Path(d,'theme.json').write_text(json.dumps({'light':{'brand':'#abcdef'},'mode':'light'}));t=theme.ThemeStore(d,{'accent':'#123456','theme':'dark'}).value;self.assertEqual(t['light']['brand'],'#abcdef');self.assertEqual(t['mode'],'light')
  def test_custom_nested_fields(self):self.assertEqual(schema.validate({'app':{'audience':'Researchers'}})['app']['audience'],'Researchers')
  def test_raw_dump_removed(self):
-  p=Path(__file__).parent.parent/'customchat/web/configstate.js';s=p.read_text();self.assertNotIn('allConfigFields',s);self.assertIn('Configured sources and custom API fields',s)
+  p=Path(__file__).parent.parent/'chatify/web/configstate.js';s=p.read_text();self.assertNotIn('allConfigFields',s);self.assertIn('Configured sources and custom API fields',s)

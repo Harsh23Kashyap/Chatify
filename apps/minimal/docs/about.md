@@ -1,6 +1,6 @@
-# What is CustomChat
+# What is Chatify
 
-CustomChat turns one YAML file into a chat application. You describe the sources of evidence, the model provider and the look of the app. The engine retrieves evidence, writes an answer that cites it, and keeps the earlier questions of the conversation in mind.
+Chatify turns one YAML file into a chat application. You describe the sources of evidence, the model provider and the look of the app. The engine retrieves evidence, writes an answer that cites it, and keeps the earlier questions of the conversation in mind.
 
 # Conversation memory
 

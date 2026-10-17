@@ -4,12 +4,12 @@
 #    A key alone does not switch mock to OpenAI. Paste a key only for the selected provider.
 services:
   - type: web
-    name: customchat
+    name: chatify
     runtime: docker
     plan: starter
     healthCheckPath: /api/health
     envVars:
-      - key: CUSTOMCHAT_CONFIG
+      - key: CHATIFY_CONFIG
         value: "off"
       - key: OPENAI_API_KEY
         sync: false

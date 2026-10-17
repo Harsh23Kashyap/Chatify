@@ -42,7 +42,7 @@ UI: related chips, delete with undo, Esc closes panels, scroll-to-bottom, upload
 Features: deep health (`/api/health?deep=1`), chat import (`/api/import`), store ping. UI: keyboard shortcuts (/, n, ?). 3 features, 1 UI. Running total: about 29 features and 29 UI rounds.
 
 ## Batch 6
-Features (4): answer ratings (`/api/rate`, `/api/ratings`), usage stats (`/api/stats`), `customchat eval` (citation coverage over a question file), X-Request-Id header.
+Features (4): answer ratings (`/api/rate`, `/api/ratings`), usage stats (`/api/stats`), `chatify eval` (citation coverage over a question file), X-Request-Id header.
 UI (6): fixed the phone layout (the page was squeezed into a zero-width column below 860px), Helpful / Not helpful buttons, textarea focus ring, phone padding, scroll-to-bottom button position, "<1s" time label.
 Running total: about 33 features, 35 UI.
 
@@ -452,7 +452,7 @@ Not done: font previews inside options, radius slider cap, stepper scroll, provi
 ## Pass 68 (ChatGPT full-set 63/100, Gemini FAB sheet bug, Harsh: Simple/Advanced)
 Reviewer text used as design input only. Skipped: left borders, resting pills.
 - Capture fixed: the "answer with sources" shot now uses the Nutrition app and shows source cards (4, 2, 3, 3 cited sources in light/dark desktop/390); before it showed no-evidence.
-- Model tab and intro say one thing: keys stay on the computer running CustomChat, from an environment variable or a private local file (secrets.json, mode 0600), never shown again.
+- Model tab and intro say one thing: keys stay on the computer running Chatify, from an environment variable or a private local file (secrets.json, mode 0600), never shown again.
 - Preview sheet at 390 had overlapping cards because `#pvmodel{min-height:48px}` overrode the panel height; removed. Sheet children no longer shrink (iframe 433px). Checked 3 sections: Model (status cards), Colors, Layout: 0 overlaps.
 - Settings page background now cream #f5f1e8 (was pale blue).
 - Irrelevant fields hidden: gradient colour and angle only with Gradient, image link only with Image, pattern controls only with a pattern.
@@ -568,6 +568,6 @@ Copy button confirms in place (tick, "Copied" for 1.6 s, plus the toast), send b
 - setup_and_run.py: WSL browser open, venv failure hint, port auto-pick, readiness wait before opening the browser, content-hash requirements stamp, pip errors shown, --host. Tested on Linux only; real WSL and Windows runs untested.
 - Pass 98 (user feedback): desktop chat column widened (980px, 24px side padding; Wide 1200px); error pages for 404, 413 and 500 (error.html, JSON kept for API clients); 413 now returned for oversize bodies; no-evidence state gets an SVG illustration; settings: neutral toolbar (no blue), one-colour preset swatches aligned, 2-up presets on phones, quieter Preview button, clearer switch.
 - Fallback: http_json connector keeps a broken or non-JSON reply as one text passage instead of failing (tests/test_fallbacks.py, 3 tests).
-- Deploy: CUSTOMCHAT_CONFIG=off locks the app to chat only (no settings page or config endpoints); render.yaml blueprint; Dockerfile honors PORT and APP. Tested locally (tests/test_lock.py), real Render deploy not run.
+- Deploy: CHATIFY_CONFIG=off locks the app to chat only (no settings page or config endpoints); render.yaml blueprint; Dockerfile honors PORT and APP. Tested locally (tests/test_lock.py), real Render deploy not run.
 - Pass 99: streamed tokens fade in per chunk, typing dots use the shared timing, feedback chip pops once on selection.
 - Pass 100 (R26 Gemini 58 list, verified before applying): applied header icon contrast and the Details chevron. Rejected after DOM check: green left border on sources (computed 0px none), send arrow off-centre (offset 0,0), black Refresh list border (rgb 183,198,187), emoji input outline (filled by design), preset active state (presets apply a look, not a selection), seg track (7% tint, light).

@@ -12,7 +12,7 @@ const assert=require('node:assert/strict');
    return r.fulfill({json:{ticket:'fixture',label:'Save a private note',mode:'write',tool:d.tool,args:d.args}});
   });
   await p.route('**/api/actions/execute',async r=>{held=true;startedResolve();await gate;return failed?r.fulfill({status:503,json:{error:'Old execution failed.'}}):r.fulfill({json:{saved:true}})});
-  await p.goto(process.env.CUSTOMCHAT_TEST_URL+'/');await p.locator('.playground-action').first().waitFor();
+  await p.goto(process.env.CHATIFY_TEST_URL+'/');await p.locator('.playground-action').first().waitFor();
   await p.locator('#actionsBtn').click();await p.getByRole('button',{name:'Save a private note',exact:true}).click();
   await p.getByRole('textbox',{name:'Note title',exact:true}).fill('Old draft');
   await p.getByRole('button',{name:'Preview action',exact:true}).click();

@@ -23,7 +23,7 @@ class LocalStartTests(unittest.TestCase):
                 command = run.call_args_list[-1].args[0]
                 self.assertIn('--isolated', command)
                 self.assertIn('https://pypi.org/simple', command)
-                self.assertIn('customchat-app==' + S.VERSION, command)
+                self.assertIn('chatify-app==' + S.VERSION, command)
                 self.assertIn('-I', command)
                 self.assertNotIn('--break-system-packages', command)
                 self.assertEqual(call.call_args.args[0][-3:], ['--directory', 'my chat', '--no-browser'])
@@ -32,7 +32,7 @@ class LocalStartTests(unittest.TestCase):
 
     def test_incomplete_env_not_reset(self):
         with tempfile.TemporaryDirectory() as tmp:
-            folder = Path(tmp) / '.customchat-venv'
+            folder = Path(tmp) / '.chatify-venv'
             folder.mkdir()
             marker = folder / 'keep'
             marker.write_text('do not delete')
@@ -45,7 +45,7 @@ class LocalStartTests(unittest.TestCase):
     def test_install_failure_does_not_launch(self):
         import subprocess
         with tempfile.TemporaryDirectory() as tmp:
-            python = Path(tmp) / '.customchat-venv/bin/python'
+            python = Path(tmp) / '.chatify-venv/bin/python'
             python.parent.mkdir(parents=True)
             python.touch()
             with patch.object(S, '__file__', str(Path(tmp) / 'start_local.py')), patch.object(S.subprocess, 'run', side_effect=[None, subprocess.CalledProcessError(1, 'pip')]), patch.object(S.subprocess, 'call') as call:

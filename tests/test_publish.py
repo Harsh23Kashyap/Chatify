@@ -13,7 +13,7 @@ class PublishTests(unittest.TestCase):
             env=dict(os.environ,PATH=str(p)+':'+os.environ['PATH'],PUBLISH_ENV=str(config))
             r=subprocess.run([str(ROOT/'deploy/publish.sh')],cwd=ROOT,env=env,text=True,capture_output=True)
             self.assertEqual(r.returncode,0,r.stderr)
-            self.assertIn('/opt/customchat/apps/dietchat/data',r.stdout)
+            self.assertIn('/opt/chatify/apps/dietchat/data',r.stdout)
             self.assertIn('not MySQL',r.stdout)
             self.assertFalse(calls.exists())
     def test_failed_backup_stops_before_copy(self):

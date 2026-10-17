@@ -5,7 +5,7 @@ Not a live rule update feed. Colors in the PDFs carry editorial status that plai
 text cannot preserve; competition decisions must be checked in the original PDF.
 """
 from pathlib import Path
-from customchat.connectors.local_files import LocalFiles
+from chatify.connectors.local_files import LocalFiles
 
 BASE = Path(__file__).resolve().parent
 URLS = {

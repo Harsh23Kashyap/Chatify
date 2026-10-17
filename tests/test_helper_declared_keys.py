@@ -1,6 +1,6 @@
 import os
 from unittest.mock import patch
-from customchat.generators import _helper_environment,test_code as run_code
+from chatify.generators import _helper_environment,test_code as run_code
 
 def test_only_literal_declared_keys_forwarded():
  with patch.dict(os.environ,{'TEST_SOURCE_KEY':'private','UNRELATED_SECRET':'not-forwarded'}):

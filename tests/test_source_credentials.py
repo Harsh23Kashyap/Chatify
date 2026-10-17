@@ -1,8 +1,8 @@
 import io,json,os,tempfile,unittest,zipfile
 from unittest.mock import patch
-from customchat import schema,secrets,source_credentials
-from customchat.connectors.http_json import HttpJson
-from customchat.portable import bundle
+from chatify import schema,secrets,source_credentials
+from chatify.connectors.http_json import HttpJson
+from chatify.portable import bundle
 class Reply:
  def __enter__(self):return self
  def __exit__(self,*a):pass
@@ -41,7 +41,7 @@ class SourceKeys(unittest.TestCase):
   self.cfg['sources'][0]['url']='http://example.test/search'
   with self.assertRaises(ValueError):source_credentials.status(self.cfg)
  def test_no_credential_redirect(self):
-  from customchat.connectors.http_json import _NoCredentialRedirect
+  from chatify.connectors.http_json import _NoCredentialRedirect
   with self.assertRaises(ValueError):_NoCredentialRedirect().redirect_request(None,None,302,'Found',{},'https://other.invalid')
  def test_error_payload_not_empty_success(self):
   source_credentials.update(self.cfg,{'source':'newsapi','env':'NEWSAPI_KEY','key':'FAKE_FIXTURE_ONLY'})

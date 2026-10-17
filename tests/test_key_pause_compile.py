@@ -1,8 +1,8 @@
 import unittest
 from unittest.mock import patch
-from customchat import generators
-from customchat.connectors.open_sources import OpenAlex
-from customchat.connectors.web_search import WebSearch
+from chatify import generators
+from chatify.connectors.open_sources import OpenAlex
+from chatify.connectors.web_search import WebSearch
 
 
 class KeyPauseAndCompileTests(unittest.TestCase):
@@ -18,12 +18,12 @@ class KeyPauseAndCompileTests(unittest.TestCase):
             self.assertTrue(generators.review_code(kind, code)[0])
 
     def test_openalex_without_key_sends_nothing(self):
-        with patch('customchat.secrets.saved', return_value=''), patch.dict('os.environ', {}, clear=True), patch('customchat.connectors.open_sources._get') as get:
+        with patch('chatify.secrets.saved', return_value=''), patch.dict('os.environ', {}, clear=True), patch('chatify.connectors.open_sources._get') as get:
             self.assertEqual(OpenAlex({'id':'a','label':'A'}).search('q'), [])
             get.assert_not_called()
 
     def test_web_without_key_sends_nothing(self):
-        with patch('customchat.websearch.has_key', return_value=False), patch('customchat.websearch.search') as search:
+        with patch('chatify.websearch.has_key', return_value=False), patch('chatify.websearch.search') as search:
             self.assertEqual(WebSearch({'id':'web','label':'Web','providers':['tavily','exa']}).search('q'), [])
             search.assert_not_called()
 

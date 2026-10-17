@@ -1,5 +1,5 @@
 const assert=require('assert'),fs=require('fs'),vm=require('vm'),path=require('path');
-const src=fs.readFileSync(path.join(__dirname,'../customchat/web/app.js'),'utf8'),ctx={};vm.createContext(ctx);vm.runInContext(src.slice(src.indexOf('function tableCells('),src.indexOf('function answerChart(')),ctx);
+const src=fs.readFileSync(path.join(__dirname,'../chatify/web/app.js'),'utf8'),ctx={};vm.createContext(ctx);vm.runInContext(src.slice(src.indexOf('function tableCells('),src.indexOf('function answerChart(')),ctx);
 const ev=[{n:1,source:'Feed',url:'a'},{n:2,source:'Feed',url:'a'},{n:3,source:'Feed',url:'b'},{n:4,source:'Other',url:'c'}];
 const table=(value='2',label='Feed',cite='[1] [3]',header='Headline count')=>`| Source | ${header} | Citations |\n| --- | --- | --- |\n| ${label} | ${value} | ${cite} |`;
 let checks=0;function check(answer,valid,evidence=ev){assert.equal(!!ctx.chartData(answer,evidence),valid,answer);checks++}

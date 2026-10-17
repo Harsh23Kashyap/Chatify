@@ -1,7 +1,7 @@
 import os, sys, threading, unittest
 from http.server import BaseHTTPRequestHandler, HTTPServer
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), ".."))
-from customchat.connectors.http_json import HttpJson
+from chatify.connectors.http_json import HttpJson
 
 BODY = {"/broken": b'{"results": [{"title": "A", ', "/empty": b"", "/ok": b'{"results":[{"title":"A","abstract":"text"}]}'}
 

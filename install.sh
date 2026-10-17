@@ -18,8 +18,8 @@ ROOT=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)
 SHARED="$ROOT/scripts/install.py"
 if [ ! -f "$SHARED" ]; then
   SHARED=$(mktemp)
-  if command -v curl >/dev/null 2>&1; then curl -fLsS https://raw.githubusercontent.com/Harsh23Kashyap/customchat/main/scripts/install.py -o "$SHARED"
-  elif command -v wget >/dev/null 2>&1; then wget -q https://raw.githubusercontent.com/Harsh23Kashyap/customchat/main/scripts/install.py -O "$SHARED"
+  if command -v curl >/dev/null 2>&1; then curl -fLsS https://raw.githubusercontent.com/Harsh23Kashyap/chatify/main/scripts/install.py -o "$SHARED"
+  elif command -v wget >/dev/null 2>&1; then wget -q https://raw.githubusercontent.com/Harsh23Kashyap/chatify/main/scripts/install.py -O "$SHARED"
   else echo 'Need curl or wget to download the installer.' >&2; exit 1; fi
   trap 'rm -f "$SHARED"' EXIT HUP INT TERM
 fi

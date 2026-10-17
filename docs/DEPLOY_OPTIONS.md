@@ -1,8 +1,8 @@
-# Ways to run or host CustomChat: pick one
+# Ways to run or host Chatify: pick one
 
 New non-Docker path: [one-host preparation](../deploy/host/README.md) generates a systemd/Caddy plan and provides private SQLite backup, loopback health and code-release rollback helpers. Local helpers are tested. Public host, TLS and production restore remain unverified.
 
-New local install choice: [uvx source install](INSTALL.md), `uvx --from git+https://github.com/Harsh23Kashyap/customchat.git@main customchat start`. Local package installation is tested; no registry publication or public deployment.
+New local install choice: [uvx source install](INSTALL.md), `uvx --from git+https://github.com/Harsh23Kashyap/chatify.git@main chatify start`. Local package installation is tested; no registry publication or public deployment.
 
 Written hosting comparison only. Nothing here was deployed. Prices and free tiers change, so check each provider's pricing page before choosing.
 
@@ -28,10 +28,10 @@ The web files call the API with relative paths (`/api/...`) and the server sends
 The client's coding agent runs the local Demo path below. A fresh agent validated the core setup, health, Demo answer and configuration lock at commit c261a1b. The instructions below clarify the gaps found in that run. This is local-only, not public deployment.
 
 ```
-Set up CustomChat locally in offline Demo, using no API keys.
+Set up Chatify locally in offline Demo, using no API keys.
 
 1. Pick a new writable destination folder. Clone the main branch:
-   git clone --branch main https://github.com/Harsh23Kashyap/customchat.git <destination>
+   git clone --branch main https://github.com/Harsh23Kashyap/chatify.git <destination>
    cd <destination>
    Report the checked-out commit. Do not overwrite an existing folder.
 
@@ -44,7 +44,7 @@ Set up CustomChat locally in offline Demo, using no API keys.
    does not prove setup failed. If still running, keep using it; if stopped, rerun
    the same command to reuse finished setup. Do not start duplicate servers.
 
-3. Read the exact URL printed after "Starting CustomChat at". Do not assume 8080:
+3. Read the exact URL printed after "Starting Chatify at". Do not assume 8080:
    the launcher tries up to 20 ports and may print 8081 or another free port.
    While that server is running, require GET <printed-URL>/api/health to return 200.
    Stop this initial server cleanly with Ctrl+C (or SIGINT to its managed process)
@@ -57,10 +57,10 @@ Set up CustomChat locally in offline Demo, using no API keys.
    python3 setup_and_run.py --no-key-prompt --no-browser --port 8080 --lock-config
    Read its newly printed URL. --lock-config hides Configuration, but creates no
    public deployment. To unlock later, stop it and restart without --lock-config
-   (and without CUSTOMCHAT_CONFIG=off in the environment).
+   (and without CHATIFY_CONFIG=off in the environment).
 
 5. At that exact printed URL, check health 200 and confirm the provider is mock
-   using /api/config. Ask "What is CustomChat?" in the chat. Require a nonempty
+   using /api/config. Ask "What is Chatify?" in the chat. Require a nonempty
    answer that uses the local Demo passages and numbered source citations.
    Confirm /settings.html and /api/settings return 404 while chat remains usable.
    Open the printed URL and inspect the chat in a browser if you can. If you only

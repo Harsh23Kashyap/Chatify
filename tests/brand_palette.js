@@ -1,5 +1,5 @@
 const assert=require('node:assert/strict');
-const B=require('../customchat/web/brand.js');
+const B=require('../chatify/web/brand.js');
 let n=0;
 for(const c of ['#000000','#ffffff','#ff0000','#00ff00','#0000ff','#dddddd','#ccaa00','#000080'])for(const dark of [true,false]){
  const p=B.palette(c,dark);

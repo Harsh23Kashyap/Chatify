@@ -1,20 +1,20 @@
 import io, json, os, tempfile, unittest, zipfile
 from pathlib import Path
-from customchat import schema
-from customchat.portable import bundle, export_app, ExportError
-from customchat.pipeline import Engine
-from customchat.store import Store
+from chatify import schema
+from chatify.portable import bundle, export_app, ExportError
+from chatify.pipeline import Engine
+from chatify.store import Store
 
 class PortableTests(unittest.TestCase):
     def setUp(self):
         self.tmp = tempfile.TemporaryDirectory(); self.addCleanup(self.tmp.cleanup)
         self.root = Path(self.tmp.name); (self.root/'docs').mkdir(); (self.root/'data').mkdir()
-        (self.root/'docs'/'guide.md').write_text('# Guide\nCustomChat provides citation-backed answers.')
+        (self.root/'docs'/'guide.md').write_text('# Guide\nChatify provides citation-backed answers.')
         self.cfg = schema.validate({'app': {'title': 'Portable demo'}, 'sources': [{'id':'docs','type':'local_files','path':'docs'}]})
         self.cfg['_dir'] = str(self.root)
     def test_roundtrip(self):
         (self.root/'.env').write_text('PORTABLE_TEST_SECRET=hidden-key')
-        for n in ('secrets.json','customchat.db','accounts.json','uploads.json','states.json'):
+        for n in ('secrets.json','chatify.db','accounts.json','uploads.json','states.json'):
             (self.root/'data'/n).write_text('DO_NOT_EXPORT')
         (self.root/'data'/'theme.json').write_text(json.dumps({'font':'georgia','txt_title':'Branded'}))
         (self.root/'data'/'prompts.json').write_text(json.dumps({'text':{'answer':'Use citations.'},'on':{'relevance':True}}))
@@ -28,7 +28,7 @@ class PortableTests(unittest.TestCase):
         cfg = schema.load(str(self.root/'moved'/'app.yaml'))
         self.assertEqual(cfg['app']['title'],'Portable demo')
         st = Store(':memory:'); e = Engine(cfg,st)
-        res = e.ask('local',st.new_chat('local'),'What does CustomChat provide?')
+        res = e.ask('local',st.new_chat('local'),'What does Chatify provide?')
         self.assertTrue(res['evidence'])
     def test_override_live_settings(self):
         data,_ = bundle(self.cfg, {'txt_title':'Live'}, {'text':{'answer':'Current'}, 'on':{}})
@@ -45,7 +45,7 @@ class PortableTests(unittest.TestCase):
             with self.assertRaises(ExportError): bundle(self.cfg)
             p.unlink()
     def test_symlink(self):
-        p=self.root/'docs'/'linked.txt';p.symlink_to(self.root/'data'/'customchat.db')
+        p=self.root/'docs'/'linked.txt';p.symlink_to(self.root/'data'/'chatify.db')
         with self.assertRaises(ExportError): bundle(self.cfg)
     def test_external_root(self):
         self.cfg['sources'][0]['path']=str(self.root/'docs')
@@ -68,14 +68,14 @@ class PortableTests(unittest.TestCase):
         with self.assertRaises(ExportError): bundle(self.cfg)
     def test_size_limit(self):
         import unittest.mock
-        with unittest.mock.patch('customchat.portable.MAX_BYTES',1):
+        with unittest.mock.patch('chatify.portable.MAX_BYTES',1):
             with self.assertRaises(ExportError):bundle(self.cfg)
 if __name__ == '__main__': unittest.main()
 
 class ExportPermissions(unittest.TestCase):
     def test_permissions_and_lock(self):
         import threading, urllib.request, urllib.error
-        from customchat import server
+        from chatify import server
         from unittest.mock import patch
         with tempfile.TemporaryDirectory() as folder:
             cfg = schema.validate({'auth':{'mode':'token','token_env':'EXPORT_TEST_TOKEN'}, 'storage':{'path':':memory:'}});cfg['_dir']=folder

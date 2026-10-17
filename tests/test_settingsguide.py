@@ -1,5 +1,5 @@
 import unittest,json
-from customchat import settingsguide as g
+from chatify import settingsguide as g
 class Fake:
  def __init__(self,text):self.text=text;self.calls=[]
  def complete(self,m):self.calls.append(m);return self.text

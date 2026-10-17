@@ -1,5 +1,5 @@
 import unittest
-from customchat.draftaudit import findings
+from chatify.draftaudit import findings
 class DraftAudit(unittest.TestCase):
  def test_literal_unrelated_host_flagged_without_model(self):
   notes=findings({'helper_drafts':{'search':{'code':'def search(query, limit=6):\n return "https://unrelated.invalid/search"'}}})

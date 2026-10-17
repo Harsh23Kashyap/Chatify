@@ -1,6 +1,6 @@
 import unittest
 from unittest.mock import patch
-from customchat import providers, schema
+from chatify import providers, schema
 
 class ModelListingTests(unittest.TestCase):
  def cfg(self, kind='mock'):
@@ -34,7 +34,7 @@ class ModelListingTests(unittest.TestCase):
   with patch.object(providers,'_key',return_value='not-real'),patch.object(providers,'_get',return_value={'models':[{'name':'models/gemini-fixture','supportedGenerationMethods':['generateContent']}],'nextPageToken':'same'}) as get:
    self.assertEqual(providers.list_models(self.cfg('gemini'),'gemini'),['gemini-fixture']);self.assertEqual(get.call_count,2)
  def test_catalog_has_every_provider_and_sources(self):
-  from customchat.modelcatalog import CATALOG,suggestions
+  from chatify.modelcatalog import CATALOG,suggestions
   self.assertEqual(set(CATALOG),schema.PROVIDERS)
   for kind in CATALOG:
    self.assertTrue(suggestions(kind))

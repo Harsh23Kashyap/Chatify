@@ -1,7 +1,7 @@
 import io, unittest, zipfile
-from customchat import theme, fileread
-from customchat.pipeline import Engine
-from customchat.store import Store
+from chatify import theme, fileread
+from chatify.pipeline import Engine
+from chatify.store import Store
 
 class FeedbackComplete(unittest.TestCase):
  def test_profile_fields_and_owner_isolation(self):
@@ -16,7 +16,7 @@ class FeedbackComplete(unittest.TestCase):
   big=[{'question':'remote unique topic' if i==0 else 'other','answer':'z'*9000+' END'} for i in range(20)]
   packed=Engine.pack_history(big,'remote unique topic');self.assertLessEqual(sum(len(r['question'])+len(r['answer']) for r in packed),60000);self.assertTrue(all(r['answer'].endswith(' END') for r in packed));self.assertIn(big[0],packed)
  def test_saved_history_chat_topic_isolation(self):
-  from customchat import schema
+  from chatify import schema
   e=Engine(schema.validate({}),Store(':memory:'));a=e.store.new_chat('o','a');b=e.store.new_chat('o','b');topic=e.store.new_topic('o','one');other=e.store.new_topic('o','two')
   e.store.add_turn(a,topic,'Earlier question','q','Complete answer END',[],[],'standard')
   e.store.add_turn(a,other,'Different topic','q','Private other topic',[],[],'standard')
@@ -25,7 +25,7 @@ class FeedbackComplete(unittest.TestCase):
   prompt=e.prompt('follow-up',[],'standard',history,'')[1]['content'];self.assertIn('Complete answer END',prompt);self.assertNotIn('Private other',prompt)
   with self.assertRaises(PermissionError):e.conversation_history('different-owner',a,topic,'q')
  def test_whole_answer_prompt_after_old_clip_boundary(self):
-  from customchat import schema
+  from chatify import schema
   e=Engine(schema.validate({}),Store(':memory:'));answer='a'*500+' RELEVANT END'
   prompt=e.prompt('q',[],'standard',[{'question':'before','answer':answer}],'')[1]['content'];self.assertIn('RELEVANT END',prompt)
  def test_animated_emoji_validation(self):

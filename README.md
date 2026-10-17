@@ -1,24 +1,22 @@
-# CustomChat
-
-> **Renamed.** CustomChat is now **Chatify**. New installs and all future updates live at [chatify-app](https://pypi.org/project/chatify-app/): `pip install chatify-app` or `uvx chatify`. This package (`customchat-app`) stays installable but will no longer be updated.
+# Chatify
 
 A chat app for your documents. Ask a question, follow the citations, and keep the conversation going. Configure the model, sources and look in your browser.
 
 It starts in offline Demo mode, with no API key or paid calls. Demo uses built-in answers, not a live AI model.
 
-![CustomChat answering a question with sources in offline Demo mode](https://raw.githubusercontent.com/Harsh23Kashyap/customchat/v0.1.27/docs/screenshots/chat.png)
+![Chatify answering a question with sources in offline Demo mode](https://raw.githubusercontent.com/Harsh23Kashyap/chatify/v0.1.27/docs/screenshots/chat.png)
 
 ## Install and start
 
 With [uv](https://docs.astral.sh/uv/getting-started/installation/) installed, run:
 
 ```sh
-uvx customchat-app start --directory my-chat
+uvx chatify-app start --directory my-chat
 ```
 
 The app opens in your browser. Your settings, documents and chats stay in `my-chat`. Press Ctrl+C to stop; run the same command from the same folder to return.
 
-Without uv, use the [one-command installer for macOS, Linux or Windows](https://github.com/Harsh23Kashyap/customchat/blob/v0.1.27/docs/INSTALL.md). It installs what it needs without changing your system Python. For pip, install `customchat-app` in a virtual environment with Python 3.10 or newer. The package named `customchat` on PyPI is a different project.
+Without uv, use the [one-command installer for macOS, Linux or Windows](https://github.com/Harsh23Kashyap/chatify/blob/v0.1.27/docs/INSTALL.md). It installs what it needs without changing your system Python. For pip, install `chatify-app` in a virtual environment with Python 3.10 or newer. The package named `chatify` on PyPI is a different project.
 
 ## Configure
 
@@ -30,18 +28,18 @@ For help, type in **Find a setting** or open **Guide**. **Ask AI** asks your sel
 
 **Build with AI** drafts a setup from your description. Choose a provider and model first, describe the app, then review, validate and save the draft. Restart to apply it. Generated code does not run automatically. Model requests may cost money.
 
-![Build with AI describe step with an example prompt](https://raw.githubusercontent.com/Harsh23Kashyap/customchat/v0.1.27/docs/screenshots/build-with-ai.png)
+![Build with AI describe step with an example prompt](https://raw.githubusercontent.com/Harsh23Kashyap/chatify/v0.1.27/docs/screenshots/build-with-ai.png)
 
 Keep keys out of YAML and Git. Check sources for important answers; citations are not a guarantee of correctness.
 
-[Install options](https://github.com/Harsh23Kashyap/customchat/blob/v0.1.27/docs/INSTALL.md) · [Configuration reference](https://github.com/Harsh23Kashyap/customchat/blob/v0.1.27/docs/DESIGN.md) · [Hosting](https://github.com/Harsh23Kashyap/customchat/blob/v0.1.27/docs/DEPLOY_OPTIONS.md)
+[Install options](https://github.com/Harsh23Kashyap/chatify/blob/v0.1.27/docs/INSTALL.md) · [Configuration reference](https://github.com/Harsh23Kashyap/chatify/blob/v0.1.27/docs/DESIGN.md) · [Hosting](https://github.com/Harsh23Kashyap/chatify/blob/v0.1.27/docs/DEPLOY_OPTIONS.md)
 
 MIT license. Harsh Kashyap and Shela Wu. Advisor: Dennis Shasha. Related project: [Custom-Nerd](https://github.com/Harsh23Kashyap/Custom-Nerd).
 
 Fetch and start the latest release (uv installed):
 
 ```sh
-uvx --refresh customchat-app start --directory my-chat
+uvx --refresh chatify-app start --directory my-chat
 ```
 
-For pip: `python -m pip install --upgrade --no-cache-dir customchat-app`, then `python -m customchat start --directory my-chat`.
+For pip: `python -m pip install --upgrade --no-cache-dir chatify-app`, then `python -m chatify start --directory my-chat`.

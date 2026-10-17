@@ -1,9 +1,9 @@
 import unittest,tempfile,threading,json,urllib.request,os
 from http.server import ThreadingHTTPServer
-from customchat import schema
-from customchat.store import Store
-from customchat.pipeline import Engine
-from customchat.server import make_handler
+from chatify import schema
+from chatify.store import Store
+from chatify.pipeline import Engine
+from chatify.server import make_handler
 class SavedAppearance(unittest.TestCase):
  def test_named_state_roundtrip_and_legacy_load(self):
   with tempfile.TemporaryDirectory() as folder:

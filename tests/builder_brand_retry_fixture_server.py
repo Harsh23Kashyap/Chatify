@@ -2,7 +2,7 @@ import sys,json,copy,time,os
 from pathlib import Path
 sys.path[:0]=[str(Path(__file__).resolve().parents[1]),str(Path(__file__).resolve().parent)]
 from test_buildjobs import Fixture
-from customchat import providers,buildimages,server
+from chatify import providers,buildimages,server
 class BrandingFixture(Fixture):
  def __init__(self):super().__init__();self.apps=0
  def complete(self,messages):
@@ -20,4 +20,4 @@ class BrandingFixture(Fixture):
 old=providers.make
 providers.make=lambda cfg:BrandingFixture() if cfg['provider'].get('model')=='fixture' else old(cfg)
 buildimages.capability=lambda *a,**kw:{'available':False,'note':'Fixture no image calls'}
-server.serve(os.environ['CUSTOMCHAT_FIXTURE_APP'],'127.0.0.1',int(os.environ.get('CUSTOMCHAT_FIXTURE_PORT','18827')))
+server.serve(os.environ['CHATIFY_FIXTURE_APP'],'127.0.0.1',int(os.environ.get('CHATIFY_FIXTURE_PORT','18827')))

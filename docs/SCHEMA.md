@@ -1,6 +1,6 @@
 # App schema
 
-Every key is optional. Unknown top-level keys are rejected so typos fail loudly. Run `python -m customchat validate app.yaml`.
+Every key is optional. Unknown top-level keys are rejected so typos fail loudly. Run `python -m chatify validate app.yaml`.
 
 ## app
 | key | default | meaning |

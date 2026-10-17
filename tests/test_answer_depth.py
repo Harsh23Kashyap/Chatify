@@ -1,9 +1,9 @@
 import copy, unittest
 from unittest.mock import patch
-from customchat import schema, providers
-from customchat.pipeline import Engine
-from customchat.store import Store
-from customchat.connectors.base import Evidence
+from chatify import schema, providers
+from chatify.pipeline import Engine
+from chatify.store import Store
+from chatify.connectors.base import Evidence
 
 class Connector:
     def __init__(self): self.calls=[]
@@ -47,7 +47,7 @@ class AnswerDepth(unittest.TestCase):
     def test_claude_limit(self):
         c=schema.validate({'provider':{'type':'claude','model':'model','max_output_tokens':6000}})
         p=providers.Claude(c)
-        with patch('customchat.providers._key',return_value='test'),patch('customchat.providers._post',return_value={'content':[{'type':'text','text':'ok'}]}) as post:
+        with patch('chatify.providers._key',return_value='test'),patch('chatify.providers._post',return_value={'content':[{'type':'text','text':'ok'}]}) as post:
             self.assertEqual(p.complete([]),'ok');self.assertEqual(post.call_args.args[1]['max_tokens'],6000)
     def test_deep_mode_reaches_stream_and_fresh(self):
         e,c=self.engine()

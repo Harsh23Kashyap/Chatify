@@ -1,8 +1,8 @@
 import copy
 from unittest.mock import patch
-from customchat import schema
-from customchat.pipeline import Engine
-from customchat.store import Store
+from chatify import schema
+from chatify.pipeline import Engine
+from chatify.store import Store
 
 def test_simple_followup_reuses_accepted_evidence_without_relevance_rerun():
  cfg=copy.deepcopy(schema.DEFAULTS);store=Store(':memory:');cfg['sources']=[{'id':'s','label':'Source','type':'wikipedia'}]

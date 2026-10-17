@@ -1,7 +1,7 @@
 import tempfile,unittest,os
 from pathlib import Path
-from customchat.configchange import diff,apply,digest
-from customchat.schema import ConfigError,validate
+from chatify.configchange import diff,apply,digest
+from chatify.schema import ConfigError,validate
 class ConfigChange(unittest.TestCase):
  def setUp(self):
   self.t=tempfile.TemporaryDirectory();self.addCleanup(self.t.cleanup);self.a=Path(self.t.name)/'app.yaml';self.b=Path(self.t.name)/'candidate.yaml'

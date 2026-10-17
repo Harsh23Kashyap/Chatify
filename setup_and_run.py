@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""One command setup and run for CustomChat.
+"""One command setup and run for Chatify.
 
     python3 setup_and_run.py            # first time: installs, asks for a key, starts the app
     python3 setup_and_run.py --port 8080 --app apps/minimal/app.yaml
@@ -88,9 +88,9 @@ def venv_ok():
 
 def ensure_env():
     if sys.version_info < (3, 10):
-        sys.exit("CustomChat needs Python 3.10 or newer. You have %s." % sys.version.split()[0])
+        sys.exit("Chatify needs Python 3.10 or newer. You have %s." % sys.version.split()[0])
     if is_wsl() and ROOT.startswith("/mnt/"):
-        say("Note: this folder is on the Windows drive (%s). It works but is slow. For speed, clone the repo inside the Linux home folder (~/customchat)." % ROOT)
+        say("Note: this folder is on the Windows drive (%s). It works but is slow. For speed, clone the repo inside the Linux home folder (~/chatify)." % ROOT)
     if os.path.exists(venv_python()) and not venv_ok():
         say("The .venv folder is broken (the folder was probably moved or Python was updated). Rebuilding it ...")
         shutil.rmtree(VENV, ignore_errors=True)
@@ -144,7 +144,7 @@ def _ask_key(app):
         say("No key entered. Skipped.")
         return
     sys.path.insert(0, ROOT)
-    from customchat import secrets
+    from chatify import secrets
     folder = os.path.join(os.path.dirname(os.path.abspath(app)), "data")
     try:
         secrets.SecretStore(folder).set(kind, key)
@@ -174,7 +174,7 @@ def check(app):
 
 
 def main():
-    ap = argparse.ArgumentParser(description="Set up and run CustomChat")
+    ap = argparse.ArgumentParser(description="Set up and run Chatify")
     ap.add_argument("--app", default=os.path.join("apps", "minimal", "app.yaml"))
     ap.add_argument("--port", type=int, default=8095)
     ap.add_argument("--host", default="127.0.0.1", help="use 0.0.0.0 to reach it from other devices")
@@ -197,13 +197,13 @@ def main():
     url = "http://127.0.0.1:%d" % port
     if not a.no_browser:
         threading.Thread(target=lambda: wait_ready(url) and open_browser(url), daemon=True).start()
-    say("\nStarting CustomChat at %s  (Ctrl+C to stop)" % url)
+    say("\nStarting Chatify at %s  (Ctrl+C to stop)" % url)
     env = dict(os.environ, PYTHONPATH=ROOT)
     if a.lock_config:
-        env["CUSTOMCHAT_CONFIG"] = "off"
+        env["CHATIFY_CONFIG"] = "off"
         say("Configuration page is hidden.")
     try:
-        sys.exit(subprocess.call([venv_python(), "-m", "customchat", "run", app, "--host", a.host, "--port", str(port)], cwd=ROOT, env=env))
+        sys.exit(subprocess.call([venv_python(), "-m", "chatify", "run", app, "--host", a.host, "--port", str(port)], cwd=ROOT, env=env))
     except KeyboardInterrupt:
         say("\nStopped.")
 

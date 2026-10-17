@@ -1,7 +1,7 @@
 import unittest
-from customchat.actions import Actions
-from customchat.schema import validate,ConfigError
-from customchat.store import Store
+from chatify.actions import Actions
+from chatify.schema import validate,ConfigError
+from chatify.store import Store
 class ActionTests(unittest.TestCase):
  def setUp(self):self.s=Store(':memory:');self.cfg=validate({});self.a=Actions(self.cfg,self.s)
  def test_all_registered_default(self):self.assertEqual(len(self.a.catalog()),2)

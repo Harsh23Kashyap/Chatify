@@ -1,6 +1,6 @@
 import unittest,json
-from customchat import settingsguide as g
-from customchat import providers,budget
+from chatify import settingsguide as g
+from chatify import providers,budget
 class Model:
  def __init__(self):self.calls=0
  def complete(self,m):self.calls+=1;return '{"answer":"No changes","sections":["sec-model"]}'

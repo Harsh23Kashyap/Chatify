@@ -73,7 +73,7 @@ auth:
   token_env: NEWSNERD_LOCAL_TOKEN
   signup: false
 storage:
-  path: data/customchat.db
+  path: data/chatify.db
 server:
   host: 127.0.0.1
   port: 8081

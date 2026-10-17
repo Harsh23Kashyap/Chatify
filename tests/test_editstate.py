@@ -1,6 +1,6 @@
 import tempfile,unittest,json
 from pathlib import Path
-from customchat import editstate,schema
+from chatify import editstate,schema
 class EditStateTests(unittest.TestCase):
  def setUp(self):
   self.tmp=tempfile.TemporaryDirectory();self.addCleanup(self.tmp.cleanup);self.root=Path(self.tmp.name);self.path=self.root/'app.yaml';self.path.write_text('app: {title: Saved Nerd}\n');self.cfg=schema.load(str(self.path));self.cfg['_path']=str(self.path)
@@ -18,10 +18,10 @@ class EditStateTests(unittest.TestCase):
   self.cfg=schema.validate({'sources':[{'id':'p','type':'python','entry':'plugin:search'}]});self.cfg['_dir']=str(self.root);(self.root/'plugin.py').write_text('raise RuntimeError("never run")');self.assertIn('never run',editstate.helper_state(self.cfg,str(self.root))['search']['code'])
 
  def test_exports_drafts_not_saved_secrets(self):
-  from customchat.portable import bundle
-  from customchat.nerdload import NerdLoader
+  from chatify.portable import bundle
+  from chatify.nerdload import NerdLoader
   import base64,zipfile,io
-  self.cfg['storage']['path']='data/customchat.db';(self.root/'data').mkdir();(self.root/'data/secrets.json').write_text('{"openai":"test-private-key"}')
+  self.cfg['storage']['path']='data/chatify.db';(self.root/'data').mkdir();(self.root/'data/secrets.json').write_text('{"openai":"test-private-key"}')
   editstate.save_draft(str(self.root/'data'),'search','Saved helper','def search(q,k):return []')
   data,_=bundle(self.cfg)
   with zipfile.ZipFile(io.BytesIO(data)) as z:

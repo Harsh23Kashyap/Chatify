@@ -23,7 +23,7 @@ class Tests(unittest.TestCase):
             self.assertEqual(n.gnews('what is the news?',6),[]);req.assert_not_called()
     def test_all_config_fields(self):
         import yaml
-        from customchat.schema import DEFAULTS,validate
+        from chatify.schema import DEFAULTS,validate
         def check(raw,base):
             for key,value in base.items():
                 self.assertIn(key,raw)

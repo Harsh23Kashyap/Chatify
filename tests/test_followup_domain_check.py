@@ -1,8 +1,8 @@
 import copy,json,unittest
-from customchat.pipeline import Engine
-from customchat.store import Store
-from customchat import schema
-from customchat.prompts import PromptStore
+from chatify.pipeline import Engine
+from chatify.store import Store
+from chatify import schema
+from chatify.prompts import PromptStore
 class DomainCheck(unittest.TestCase):
  def test_recent_question_is_data(self):
   class P:

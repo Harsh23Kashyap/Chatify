@@ -1,9 +1,9 @@
 """Local continuation regression tests. No external providers or credentials."""
 import unittest
 from unittest.mock import patch
-from customchat import schema
-from customchat.pipeline import Engine
-from customchat.store import Store
+from chatify import schema
+from chatify.pipeline import Engine
+from chatify.store import Store
 
 class ContinuationSafety(unittest.TestCase):
     def engine(self, news=True):

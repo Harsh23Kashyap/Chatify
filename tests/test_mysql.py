@@ -1,8 +1,8 @@
 import os, sys, tempfile, unittest, types
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))
-from customchat import mysqlstore as m
-from customchat.store import Store, SCHEMA
-from customchat import accounts
+from chatify import mysqlstore as m
+from chatify.store import Store, SCHEMA
+from chatify import accounts
 
 
 class FakeCur:
@@ -74,7 +74,7 @@ class T(unittest.TestCase):
 
     def test_default_is_sqlite(self):
         with tempfile.TemporaryDirectory() as d:
-            os.environ.pop("CUSTOMCHAT_DB_URL", None)
+            os.environ.pop("CHATIFY_DB_URL", None)
             self.assertEqual(Store(os.path.join(d, "x.db")).kind, "sqlite")
 
 

@@ -1,4 +1,4 @@
-# CustomChat 0.1.5
+# Chatify 0.1.5
 
 - Prompts and Code helpers are now loaded and visible in the Configuration sidebar, including Simple mode.
 - Connector helpers can recognize Tavily, Exa, Firecrawl and Parallel from a description (Tavily also from its key prefix), save a key privately and generate a matching standalone template without a model. Unknown services need a name or docs URL. Live tests use the built-in connector after a cost/host confirmation; edited code is never given the saved key.

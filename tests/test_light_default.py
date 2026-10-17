@@ -1,5 +1,5 @@
 import unittest
-from customchat import theme
+from chatify import theme
 
 class LightDefault(unittest.TestCase):
  def test_missing_mode_defaults_light(self):

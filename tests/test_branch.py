@@ -1,6 +1,6 @@
 import unittest
 from unittest.mock import patch
-from customchat.store import Store
+from chatify.store import Store
 class Branch(unittest.TestCase):
  def setUp(self):
   self.s=Store(':memory:');self.chat=self.s.new_chat('a','Original');self.topic=self.s.new_topic('a','Topic');self.ids=[]

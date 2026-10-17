@@ -1,10 +1,10 @@
 # Portable apps
 
-Run `customchat export path/to/app.yaml my-app.zip`, or choose **Download app ZIP** in Configuration. The CLI never overwrites an existing file. Extract the ZIP into a new empty directory, then run:
+Run `chatify export path/to/app.yaml my-app.zip`, or choose **Download app ZIP** in Configuration. The CLI never overwrites an existing file. Extract the ZIP into a new empty directory, then run:
 
 ```
-customchat validate app.yaml
-customchat run app.yaml
+chatify validate app.yaml
+chatify run app.yaml
 ```
 
 The bundle contains app.yaml, supported local source documents (.md/.txt/.json/.csv/.pdf), saved theme and stage prompts, and a manifest with hashes and required environment-variable names. Local source paths become relative paths under assets/. Storage becomes a new local SQLite database and the host becomes loopback. Logos stay in the validated theme as embedded PNG data.

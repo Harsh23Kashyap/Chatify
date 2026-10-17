@@ -4,7 +4,7 @@ const assert=require('node:assert/strict');
  const browser=await chromium.launch({executablePath:process.env.CHROME_BIN||'/usr/bin/google-chrome',args:['--no-sandbox']});
  const page=await browser.newPage({viewport:{width:390,height:900}});
  await page.addInitScript(()=>{localStorage.setItem('cc_tour','1');});
- const base=process.env.CUSTOMCHAT_URL||'http://127.0.0.1:8190';
+ const base=process.env.CHATIFY_URL||'http://127.0.0.1:8190';
  await page.goto(base);await page.waitForSelector('#q');
  await page.locator('#q').fill('What files does Cedar accept?');
  await page.waitForSelector('#similar details');

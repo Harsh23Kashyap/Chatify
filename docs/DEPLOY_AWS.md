@@ -12,22 +12,22 @@ What you get: one EC2 box running the app behind nginx, chat only (the Configura
 ## 2. Prepare the box
 ```
 sudo apt update && sudo apt install -y python3 python3-venv rsync nginx mysql-server awscli certbot python3-certbot-nginx
-sudo mysql -e "CREATE DATABASE customchat CHARACTER SET utf8mb4; CREATE USER 'chat'@'localhost' IDENTIFIED BY 'CHOOSE-A-PASSWORD'; GRANT ALL ON customchat.* TO 'chat'@'localhost';"
-sudo mkdir -p /opt/customchat && sudo chown ubuntu /opt/customchat
-sudo tee /etc/customchat.env >/dev/null <<'ENV'
+sudo mysql -e "CREATE DATABASE chatify CHARACTER SET utf8mb4; CREATE USER 'chat'@'localhost' IDENTIFIED BY 'CHOOSE-A-PASSWORD'; GRANT ALL ON chatify.* TO 'chat'@'localhost';"
+sudo mkdir -p /opt/chatify && sudo chown ubuntu /opt/chatify
+sudo tee /etc/chatify.env >/dev/null <<'ENV'
 OPENAI_API_KEY=your-key
-CUSTOMCHAT_DB_URL=mysql://chat:CHOOSE-A-PASSWORD@127.0.0.1:3306/customchat
-CUSTOMCHAT_CONFIG=off
+CHATIFY_DB_URL=mysql://chat:CHOOSE-A-PASSWORD@127.0.0.1:3306/chatify
+CHATIFY_CONFIG=off
 ENV
-sudo chmod 600 /etc/customchat.env
+sudo chmod 600 /etc/chatify.env
 ```
-Keys and the DB password live only in `/etc/customchat.env`, never in the repo. If the password has special characters, URL-encode them (`@` is `%40`).
+Keys and the DB password live only in `/etc/chatify.env`, never in the repo. If the password has special characters, URL-encode them (`@` is `%40`).
 
 ## 3. Install the service and nginx
 ```
-sudo cp deploy/customchat.service /etc/systemd/system/ && sudo systemctl daemon-reload && sudo systemctl enable customchat
+sudo cp deploy/chatify.service /etc/systemd/system/ && sudo systemctl daemon-reload && sudo systemctl enable chatify
 ```
-nginx site (`/etc/nginx/sites-available/customchat`, then link it and reload):
+nginx site (`/etc/nginx/sites-available/chatify`, then link it and reload):
 ```
 server { listen 80; server_name _;
   location / { proxy_pass http://127.0.0.1:8100; proxy_set_header Host $host; proxy_buffering off; proxy_read_timeout 300s; } }
@@ -44,11 +44,11 @@ The script only talks to a box that already exists. It does not create anything 
 
 ## 5. Backups
 ```
-mysqldump customchat | gzip | aws s3 cp - s3://YOUR-BUCKET/customchat-$(date +%F).sql.gz
+mysqldump chatify | gzip | aws s3 cp - s3://YOUR-BUCKET/chatify-$(date +%F).sql.gz
 ```
 Put that in a daily cron on the box.
 
 ## MySQL notes
-- `CUSTOMCHAT_DB_URL` set and reachable: MySQL is used. Missing, wrong or unreachable: the app prints one line and uses the local SQLite file, so chat keeps working. Check the service log for "using MySQL".
-- Install the driver on the box after the first start has created `.venv`: `.venv/bin/pip install -r requirements-mysql.txt`, then `sudo systemctl restart customchat`.
+- `CHATIFY_DB_URL` set and reachable: MySQL is used. Missing, wrong or unreachable: the app prints one line and uses the local SQLite file, so chat keeps working. Check the service log for "using MySQL".
+- Install the driver on the box after the first start has created `.venv`: `.venv/bin/pip install -r requirements-mysql.txt`, then `sudo systemctl restart chatify`.
 - Existing SQLite chats are not copied over automatically. Use Export on the old site and Import on the new one.

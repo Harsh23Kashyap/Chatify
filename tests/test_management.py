@@ -1,10 +1,10 @@
 import tempfile,unittest,time
 from pathlib import Path
 from unittest.mock import Mock,patch
-from customchat import schema
-from customchat.store import Store
-from customchat.pipeline import Engine
-from customchat.management import Management,diagnosis,deploy_plan,model_review
+from chatify import schema
+from chatify.store import Store
+from chatify.pipeline import Engine
+from chatify.management import Management,diagnosis,deploy_plan,model_review
 class ManagementTests(unittest.TestCase):
  def setUp(self):
   self.cfg=schema.validate({'app':{'title':'test'},'provider':{'type':'mock'},'sources':[]});self.store=Store(':memory:');self.engine=Engine(self.cfg,self.store);self.current={'model':'old'}
@@ -51,7 +51,7 @@ class ManagementTests(unittest.TestCase):
  def test_model_local_only(self):
   with self.assertRaises(ValueError):model_review(self.cfg,{'model':'llama3.2:1b','base_url':'https://remote.invalid'})
  def test_model_estimate(self):
-  with patch('customchat.hardware.detect',return_value={'ram_gb':16,'vram_gb':0}),patch('customchat.management.shutil.disk_usage',return_value=Mock(free=20*1024**3)):
+  with patch('chatify.hardware.detect',return_value={'ram_gb':16,'vram_gb':0}),patch('chatify.management.shutil.disk_usage',return_value=Mock(free=20*1024**3)):
    r=model_review(self.cfg,{'model':'llama3.2:1b'});self.assertEqual(r['download_gb_estimate'],1.3);self.assertEqual(r['free_disk_gb'],20)
  def test_source_change_invalidates_review(self):
   r=self.m.prepare_live('a',{'model':True});self.cfg['sources'].append({'id':'new','type':'pubmed'})

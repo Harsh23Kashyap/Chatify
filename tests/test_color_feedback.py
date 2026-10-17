@@ -1,7 +1,7 @@
 import pathlib,unittest
 class ColorFeedback(unittest.TestCase):
  def test_swatch_and_contrast_feedback_are_local_and_reversible(self):
-  root=pathlib.Path(__file__).resolve().parents[1]/'customchat/web'
+  root=pathlib.Path(__file__).resolve().parents[1]/'chatify/web'
   js=(root/'settings.js').read_text();css=(root/'settings.css').read_text()
   self.assertIn('host.dataset.sample!=="colors"',js)
   self.assertIn('row._statusAnimation?.cancel()',js)

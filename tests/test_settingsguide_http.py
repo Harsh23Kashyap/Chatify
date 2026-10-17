@@ -18,7 +18,7 @@ class GuideHTTP(test_workspace_api.WorkspaceAPITests):
 
  def test_guide_selected_provider_and_model_transport(self):
   from unittest.mock import patch
-  from customchat import providers
+  from chatify import providers
   for kind,model in [('openai','user-openai-model'),('claude','user-claude-model'),('gemini','user-gemini-model'),('ollama','user-local-model'),('openai_compatible','user-custom-model')]:
    with self.subTest(provider=kind):
     self.cfg['provider'].update(type=kind,model=model,base_url='',fallback=None)
@@ -31,7 +31,7 @@ class GuideHTTP(test_workspace_api.WorkspaceAPITests):
      if kind=='gemini':return {'candidates':[{'content':{'parts':[{'text':answer}]}}]}
      if kind=='ollama':return {'message':{'content':answer}}
      return {'choices':[{'message':{'content':answer}}]}
-    with patch('customchat.providers._key',return_value='test-only'),patch('customchat.providers._post',side_effect=transport):
+    with patch('chatify.providers._key',return_value='test-only'),patch('chatify.providers._post',side_effect=transport):
      original=dict(self.cfg['provider']);self.cfg['provider']['type']='mock';self.cfg['provider']['model']='applied-demo'
      result=self.call(self.clients[0],'/api/settings/guide',{'question':'Which model setting?','consent':True,'selection':{'provider':kind,'model':model,'base_url':''}})
      self.assertEqual(self.cfg['provider']['type'],'mock');self.assertEqual(self.cfg['provider']['model'],'applied-demo')

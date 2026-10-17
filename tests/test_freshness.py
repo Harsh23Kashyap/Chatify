@@ -1,10 +1,10 @@
 import os, tempfile, unittest
 from pathlib import Path
 from unittest.mock import patch
-from customchat import schema
-from customchat.connectors.local_files import LocalFiles
-from customchat.pipeline import Engine
-from customchat.store import Store
+from chatify import schema
+from chatify.connectors.local_files import LocalFiles
+from chatify.pipeline import Engine
+from chatify.store import Store
 
 class FreshnessTests(unittest.TestCase):
     def setUp(self):

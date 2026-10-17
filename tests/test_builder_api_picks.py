@@ -1,5 +1,5 @@
 import copy,json,unittest,yaml
-from customchat import apipicks,appbuilder,buildjobs,schema,theme,prompts,generators
+from chatify import apipicks,appbuilder,buildjobs,schema,theme,prompts,generators
 class Picks(unittest.TestCase):
  def test_links_are_registry_only(self):
   data=apipicks.enrich([{'service':'Brave Search','provider_page':'https://evil.invalid','key_url':'https://evil.invalid'}, {'service':'Unknown service','provider_page':'https://evil.invalid'}, {'service':'Not Wikipedia','provider_page':'https://evil.invalid'}])

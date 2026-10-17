@@ -1,6 +1,6 @@
 import os, unittest
 from unittest.mock import patch
-from customchat.terminal import styled
+from chatify.terminal import styled
 class Stream:
     def __init__(self,tty):self.tty=tty
     def isatty(self):return self.tty

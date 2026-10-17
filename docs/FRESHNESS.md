@@ -1,6 +1,6 @@
 # Local document freshness
 
-Local source folders update without restarting the app. Before retrieval, CustomChat checks for changed, added and removed files, rebuilds the BM25 index and clears answer-evidence caches after a successful change. SHA-256 hashes identify document versions; local evidence includes the document-relative name and version hash, so saved answers retain the version they used.
+Local source folders update without restarting the app. Before retrieval, Chatify checks for changed, added and removed files, rebuilds the BM25 index and clears answer-evidence caches after a successful change. SHA-256 hashes identify document versions; local evidence includes the document-relative name and version hash, so saved answers retain the version they used.
 
 ```
 sources:

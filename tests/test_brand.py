@@ -1,5 +1,5 @@
 import unittest
-from customchat.theme import clean
+from chatify.theme import clean
 class BrandTests(unittest.TestCase):
     def test_watermark_default_and_save(self):
         self.assertFalse(clean({})['logo_watermark'])

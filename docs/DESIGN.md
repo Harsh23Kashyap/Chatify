@@ -11,11 +11,11 @@ question
   5. store     save the turn under a conversation, refresh the rolling summary
 ```
 
-DietChat, WirelessChat and Custom-Nerd all run this loop. They differ only in the source (PubMed, arXiv plus papers, domain APIs), the prompt, and the look. In CustomChat those differences are configuration.
+DietChat, WirelessChat and Custom-Nerd all run this loop. They differ only in the source (PubMed, arXiv plus papers, domain APIs), the prompt, and the look. In Chatify those differences are configuration.
 
 ## Mapping
 
-| Concept | DietChat | WirelessChat | Custom-Nerd | CustomChat |
+| Concept | DietChat | WirelessChat | Custom-Nerd | Chatify |
 |---|---|---|---|---|
 | Evidence | PubMed | arXiv, IEEE, uploaded papers | `user_search_apis.py` per domain | `sources:` connectors |
 | Prompts | `openai_prompts.py` | wrapper prompts | `saved_states/<Domain>/` | `prompt:` |
@@ -35,7 +35,7 @@ DietChat, WirelessChat and Custom-Nerd all run this loop. They differ only in th
 
 ## Adding a connector
 
-Write a function `search(query, k)` that returns evidence dicts and reference it from `app.yaml` with `type: python`, or add a class in `customchat/connectors/`.
+Write a function `search(query, k)` that returns evidence dicts and reference it from `app.yaml` with `type: python`, or add a class in `chatify/connectors/`.
 
 ## Safety defaults
 

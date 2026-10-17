@@ -1,11 +1,11 @@
 import json, os, tempfile, threading, unittest, urllib.request
 from http.server import ThreadingHTTPServer
-from customchat import schema
-from customchat.pipeline import Engine
-from customchat.store import Store
-from customchat.server import make_handler
-from customchat.exports import bibtex, pdf_bytes
-from customchat.connectors.local_files import LocalFiles
+from chatify import schema
+from chatify.pipeline import Engine
+from chatify.store import Store
+from chatify.server import make_handler
+from chatify.exports import bibtex, pdf_bytes
+from chatify.connectors.local_files import LocalFiles
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 APP = os.path.join(ROOT, "apps", "minimal", "app.yaml")
@@ -49,11 +49,11 @@ class Pipeline(unittest.TestCase):
     def test_answer_cites_and_stores(self):
         e, _ = engine()
         chat = e.store.new_chat("local")
-        r = e.ask("local", chat, "What is CustomChat?")
+        r = e.ask("local", chat, "What is Chatify?")
         self.assertIn("[1]", r["answer"])
         self.assertTrue(all(l["supported"] for l in r["ledger"]))
         self.assertEqual(len(e.store.turns("local", chat)), 1)
-        self.assertEqual(e.store.chat("local", chat)["title"], "What is CustomChat?")
+        self.assertEqual(e.store.chat("local", chat)["title"], "What is Chatify?")
 
     def test_no_evidence_message(self):
         e, cfg = engine()
@@ -68,7 +68,7 @@ class Pipeline(unittest.TestCase):
         class P:
             def __init__(s): s.calls = []
             def complete(s, m):
-                s.calls.append(m); return "How does conversation memory work in CustomChat?" if "Rewrite" in m[0]["content"] else "ok [1]"
+                s.calls.append(m); return "How does conversation memory work in Chatify?" if "Rewrite" in m[0]["content"] else "ok [1]"
         e, cfg = engine()
         cfg["provider"]["type"] = "ollama"
         e.provider = P()
@@ -80,10 +80,10 @@ class Pipeline(unittest.TestCase):
     def test_topics_span_chats_and_new_topic(self):
         e, _ = engine()
         c1 = e.store.new_chat("local")
-        a = e.ask("local", c1, "What is CustomChat?")
+        a = e.ask("local", c1, "What is Chatify?")
         b = e.ask("local", c1, "What is conversation memory?")
         self.assertEqual(a["topic"], b["topic"])
-        c = e.ask("local", c1, "What is CustomChat?", new_topic=True)
+        c = e.ask("local", c1, "What is Chatify?", new_topic=True)
         self.assertNotEqual(c["topic"], a["topic"])
         c2 = e.store.new_chat("local")
         d = e.ask("local", c2, "memory again", topic=a["topic"])
@@ -102,10 +102,10 @@ class Pipeline(unittest.TestCase):
         class Boom:
             def search(self, q, k): raise OSError("down")
         e.connectors["bad"] = Boom()
-        r = e.ask("local", e.store.new_chat("local"), "What is CustomChat?")
+        r = e.ask("local", e.store.new_chat("local"), "What is Chatify?")
         self.assertTrue(r["evidence"])
         e._cache.clear()
-        self.assertEqual(e.retrieve("What is CustomChat?", ["bad"])[1], {"bad": "OSError"})
+        self.assertEqual(e.retrieve("What is Chatify?", ["bad"])[1], {"bad": "OSError"})
 
     def test_chat_lifecycle(self):
         s = Store(":memory:")
@@ -142,7 +142,7 @@ class Http(unittest.TestCase):
         self.assertEqual(self.call("/api/health")[0], 200)
         code, body = self.call("/")
         self.assertIn(b"Docs Chat", body)
-        code, body = self.call("/api/ask", {"question": "What is CustomChat?"})
+        code, body = self.call("/api/ask", {"question": "What is Chatify?"})
         r = json.loads(body); self.assertEqual(code, 200); self.assertIn("[1]", r["answer"])
         self.assertEqual(len(json.loads(self.call("/api/turns?chat=" + r["chat"])[1])), 1)
         self.assertEqual(self.call("/api/bibtex?turn=" + r["id"])[0], 200)
@@ -179,12 +179,12 @@ class Extras(unittest.TestCase):
         self.assertEqual(os.environ["CC_A"], "keep"); self.assertEqual(os.environ["CC_B"], "two")
 
     def test_chat_markdown(self):
-        from customchat.exports import chat_markdown
+        from chatify.exports import chat_markdown
         md = chat_markdown("T", [{"question": "q", "answer": "a [1]", "evidence": [{"title": "X", "url": "u"}]}])
         self.assertIn("**Q:** q", md); self.assertIn("1. X <u>", md)
 
     def test_provider_retry_on_transient(self):
-        from customchat import providers
+        from chatify import providers
         calls = []
         def fake(url, payload, headers, timeout):
             calls.append(1)
@@ -214,7 +214,7 @@ class Streaming(unittest.TestCase):
     def test_ask_stream_matches_ask(self):
         e, _ = engine()
         chat = e.store.new_chat("local")
-        events = list(e.ask_stream("local", chat, "What is CustomChat?"))
+        events = list(e.ask_stream("local", chat, "What is Chatify?"))
         kinds = [k for k, _ in events]
         self.assertEqual(kinds[0], "progress"); self.assertIn("meta", kinds); self.assertEqual(kinds[-1], "done"); self.assertIn("token", kinds)
         done = events[-1][1]
@@ -228,7 +228,7 @@ class Streaming(unittest.TestCase):
         base = "http://127.0.0.1:%d" % srv.server_port
         def post(b):
             return urllib.request.urlopen(urllib.request.Request(base + "/api/ask-stream", data=json.dumps(b).encode()))
-        lines = [json.loads(l) for l in post({"question": "What is CustomChat?"}).read().decode().splitlines()]
+        lines = [json.loads(l) for l in post({"question": "What is Chatify?"}).read().decode().splitlines()]
         self.assertEqual(lines[0]["type"], "progress"); self.assertIn("meta", [e["type"] for e in lines]); self.assertEqual(lines[-1]["type"], "done")
         with self.assertRaises(urllib.error.HTTPError) as c: post({"question": ""})
         self.assertEqual(c.exception.code, 400); srv.shutdown(); srv.server_close()
@@ -257,20 +257,20 @@ class Round10(unittest.TestCase):
     def test_delete_and_restore_turn(self):
         e, _ = engine()
         chat = e.store.new_chat("local")
-        r = e.ask("local", chat, "What is CustomChat?")
+        r = e.ask("local", chat, "What is Chatify?")
         e.store.delete_turn("local", r["id"]); self.assertEqual(e.store.turns("local", chat), [])
         e.store.restore_turn("local", r["id"]); self.assertEqual(len(e.store.turns("local", chat)), 1)
 
     def test_weight_validated_and_applied(self):
         with self.assertRaises(schema.ConfigError): schema.validate({"sources": [{"type": "local_files", "weight": 0}]})
         e, cfg = engine()
-        a = e.retrieve("What is CustomChat?")[0][0]["score"]
+        a = e.retrieve("What is Chatify?")[0][0]["score"]
         e.cfg["sources"][0]["weight"] = 3.0; e._cache.clear()
-        self.assertAlmostEqual(e.retrieve("What is CustomChat?")[0][0]["score"], a * 3, places=6)
+        self.assertAlmostEqual(e.retrieve("What is Chatify?")[0][0]["score"], a * 3, places=6)
 
     def test_followups_present(self):
         e, _ = engine()
-        done = [d for k, d in e.ask_stream("local", e.store.new_chat("local"), "What is CustomChat?") if k == "done"][0]
+        done = [d for k, d in e.ask_stream("local", e.store.new_chat("local"), "What is Chatify?") if k == "done"][0]
         self.assertTrue(done["followups"])
 
     def test_url_dedupe(self):
@@ -289,7 +289,7 @@ class Round16(unittest.TestCase):
         self.assertGreater(led[0]["overlap"], 0.8); self.assertLess(led[1]["overlap"], 0.4)
 
     def test_fallback_provider_used_when_primary_fails(self):
-        from customchat import providers
+        from chatify import providers
         class Bad:
             def complete(self, m): raise providers.ProviderError("down")
             def stream(self, m): raise providers.ProviderError("down"); yield
@@ -331,19 +331,19 @@ class Round16(unittest.TestCase):
         self.assertEqual(len(calls), 1)
 
     def test_export_all(self):
-        e, _ = engine(); chat = e.store.new_chat("local"); e.ask("local", chat, "What is CustomChat?")
+        e, _ = engine(); chat = e.store.new_chat("local"); e.ask("local", chat, "What is Chatify?")
         out = e.store.export_all("local"); self.assertEqual(len(out), 1); self.assertEqual(len(out[0]["turns"]), 1)
 
     def test_cli_ask_json(self):
         import subprocess, sys
-        r = subprocess.run([sys.executable, "-m", "customchat", "ask", APP, "What is CustomChat?", "--json"], cwd=ROOT, capture_output=True, text=True)
+        r = subprocess.run([sys.executable, "-m", "chatify", "ask", APP, "What is Chatify?", "--json"], cwd=ROOT, capture_output=True, text=True)
         self.assertIn("evidence", json.loads(r.stdout))
 
 
 class Round17(unittest.TestCase):
     def test_import_roundtrip_and_ping(self):
         import tempfile, os
-        from customchat.store import Store
+        from chatify.store import Store
         d = tempfile.mkdtemp()
         s = Store(os.path.join(d, "t.db"))
         self.assertTrue(s.ping())
@@ -356,7 +356,7 @@ class Round17(unittest.TestCase):
 class Round18(unittest.TestCase):
     def test_feedback_and_stats(self):
         import tempfile, os
-        from customchat.store import Store
+        from chatify.store import Store
         s = Store(os.path.join(tempfile.mkdtemp(), "t.db"))
         cid = s.new_chat("o", "x")
         tid = s.add_turn(cid, None, "q", "q", "a", [], [], "standard")
@@ -370,7 +370,7 @@ class Round18(unittest.TestCase):
         import tempfile, os, subprocess, sys
         d = tempfile.mkdtemp(); q = os.path.join(d, "q.txt")
         open(q, "w").write("# c\nwhat is this\n")
-        out = subprocess.run([sys.executable, "-m", "customchat", "eval", "apps/minimal/app.yaml", q], capture_output=True, text=True, timeout=60)
+        out = subprocess.run([sys.executable, "-m", "chatify", "eval", "apps/minimal/app.yaml", q], capture_output=True, text=True, timeout=60)
         self.assertEqual(out.returncode, 0, out.stderr)
         self.assertIn("coverage:", out.stdout)
 
@@ -378,15 +378,15 @@ class Round18(unittest.TestCase):
 class Round19(unittest.TestCase):
     def _engine(self):
         import tempfile, os
-        from customchat import schema
-        from customchat.pipeline import Engine
-        from customchat.store import Store
+        from chatify import schema
+        from chatify.pipeline import Engine
+        from chatify.store import Store
         c = schema.load("apps/minimal/app.yaml")
         return Engine(c, Store(os.path.join(tempfile.mkdtemp(), "t.db")))
 
     def test_temporary_chat_saves_nothing(self):
         e = self._engine()
-        out = list(e.ask_stream("o", None, "What is CustomChat?", temporary=True))
+        out = list(e.ask_stream("o", None, "What is Chatify?", temporary=True))
         done = out[-1][1]
         self.assertTrue(done["temporary"]); self.assertIsNone(done["id"])
         self.assertEqual(e.store.export_all("o"), [])
@@ -421,7 +421,7 @@ class Round20(unittest.TestCase):
         return schema.load({"app": {"title": "T"}, "provider": {"type": t, "model": "m"}}) if hasattr(schema, "load") else None
 
     def test_claude_request_shape(self):
-        from customchat import providers
+        from chatify import providers
         seen = {}
         def fake(url, payload, headers, timeout, retries=2):
             seen.update(url=url, payload=payload, headers=headers)
@@ -440,7 +440,7 @@ class Round20(unittest.TestCase):
         self.assertIn("x-api-key", seen["headers"])
 
     def test_gemini_request_shape(self):
-        from customchat import providers
+        from chatify import providers
         seen = {}
         def fake(url, payload, headers, timeout, retries=2):
             seen.update(url=url, payload=payload, headers=headers)
@@ -458,20 +458,20 @@ class Round20(unittest.TestCase):
         self.assertIn("x-goog-api-key", seen["headers"])
 
     def test_missing_key_is_a_clear_error(self):
-        from customchat import providers
+        from chatify import providers
         os.environ.pop("ANTHROPIC_API_KEY", None)
         c = providers.Claude({"provider": {"base_url": "", "model": "m", "timeout": 5, "temperature": 0, "api_key_env": ""}})
         with self.assertRaises(providers.ProviderError):
             c.complete([{"role": "user", "content": "q"}])
 
     def test_url_loader_blocks_private_hosts(self):
-        from customchat import fetch
+        from chatify import fetch
         for u in ("http://127.0.0.1:8000/x", "http://localhost/x", "http://10.0.0.5/", "ftp://example.com/a", "file:///etc/passwd", "http://169.254.169.254/latest"):
             with self.assertRaises(ValueError, msg=u):
                 fetch.load(u)
 
     def test_html_to_text(self):
-        from customchat import fetch
+        from chatify import fetch
         p = fetch._Text(); p.feed("<html><title>Doc</title><script>bad()</script><p>Hello</p><p>World</p></html>")
         self.assertEqual(p.title, "Doc")
         self.assertIn("Hello", "".join(p.out)); self.assertNotIn("bad", "".join(p.out))
@@ -506,8 +506,8 @@ class SettingsApi(Http):
 
 
 def test_accounts():
-    from customchat.store import Store
-    from customchat.accounts import Accounts
+    from chatify.store import Store
+    from chatify.accounts import Accounts
     a = Accounts(Store(":memory:"))
     u1 = a.signup("Ann@x.com", "Ann", "password1")
     for bad in (("nope", "password1"), ("b@x.com", "short"), ("ann@x.com", "password1")):
@@ -549,7 +549,7 @@ test_accounts()
 def test_pdf():
     import logging; logging.getLogger("pypdf").setLevel(logging.CRITICAL)  # the hand-made PDF triggers a harmless "EOF marker not found" warning
     import zlib
-    from customchat import pdfread
+    from chatify import pdfread
     c = zlib.compress(b"BT (Hello from a PDF with enough words.) Tj 0 -14 Td [(Second ) -300 (line here.)] TJ ET")
     pdf = b"%PDF-1.4\n1 0 obj<</Filter/FlateDecode>>\nstream\n" + c + b"\nendstream\nendobj\n%%EOF"
     t = pdfread.extract(pdf)
@@ -566,7 +566,7 @@ test_pdf()
 
 def test_provider_retry():
     import threading, http.server, json as _j
-    from customchat import providers, schema
+    from chatify import providers, schema
     hits = {"n": 0}
 
     class H(http.server.BaseHTTPRequestHandler):
@@ -600,7 +600,7 @@ test_provider_retry()
 
 def test_secret_store():
     import tempfile, os, stat
-    from customchat import secrets, providers
+    from chatify import secrets, providers
     d = tempfile.mkdtemp(); st = secrets.SecretStore(d); secrets.STORE = st
     st.set("claude", "sk-abc123")
     assert st.get("claude") == "sk-abc123" and st.has("claude") and not st.has("gemini")
@@ -619,7 +619,7 @@ test_secret_store()
 
 
 def test_hardware_logic():
-    from customchat import hardware as h
+    from chatify import hardware as h
     big = h.recommend({"ram_gb": 64, "vram_gb": 24, "cores": 16})
     assert [p["tag"] for p in big["picks"]][0] == "gemma3:27b" and len(big["picks"]) == 3
     assert len({p["tag"] for p in big["picks"]}) == 3
@@ -637,7 +637,7 @@ test_hardware_logic()
 
 
 def test_logo_validation():
-    from customchat import theme
+    from chatify import theme
     ok = "data:image/png;base64," + __import__("base64").b64encode(b"\x89PNG\r\n\x1a\n"+b"A"*100).decode()
     assert theme.clean({"logo": ok})["logo"] == ok
     for bad in ("http://x/y.png", "data:image/svg+xml;base64,AAAA" + "A" * 30, "data:image/png;base64,<script>", "data:image/png;base64," + "A" * 400000):
@@ -651,7 +651,7 @@ test_logo_validation()
 
 
 def test_ollama_fit_and_pull_validation():
-    from customchat import hardware as h
+    from chatify import hardware as h
     assert h.fit_of(2, 10)[0] == "green" and h.fit_of(8, 10)[0] == "blue" and h.fit_of(12, 10)[0] == "red"
     for bad in ["", "a b", "x;rm -rf", "../x", "a" * 90]:
         try:
@@ -666,7 +666,7 @@ def test_ollama_fit_and_pull_validation():
 
 def test_prompts_and_generators():
     import tempfile, json as _j
-    from customchat import prompts as pm, generators as g
+    from chatify import prompts as pm, generators as g
     d = tempfile.mkdtemp(); ps = pm.PromptStore(d)
     assert ps.text("queries") == pm.STAGES["queries"]["default"]
     ps.save("queries", "Custom queries prompt"); assert pm.PromptStore(d).text("queries") == "Custom queries prompt"
@@ -715,8 +715,8 @@ test_prompts_and_generators()
 def test_websearch():
     import threading, tempfile, json as _j
     from http.server import BaseHTTPRequestHandler, HTTPServer
-    from customchat import websearch as w, secrets as sec
-    from customchat.connectors.base import make_connector
+    from chatify import websearch as w, secrets as sec
+    from chatify.connectors.base import make_connector
     seen = {}
     class H(BaseHTTPRequestHandler):
         def do_POST(s):
@@ -755,9 +755,9 @@ test_websearch()
 
 def test_web_toggle():
     import tempfile
-    from customchat import schema, secrets as sec, websearch as w
-    from customchat.pipeline import Engine
-    from customchat.store import Store
+    from chatify import schema, secrets as sec, websearch as w
+    from chatify.pipeline import Engine
+    from chatify.store import Store
     sec.STORE = sec.SecretStore(tempfile.mkdtemp()); sec.STORE.set("search:tavily", "tvly-test-key-1234")
     w.PROVIDERS["tavily"]["url"] = "http://127.0.0.1:9/none"  # nothing listens here, so every call fails
     cfg = schema.load("apps/minimal/app.yaml")
@@ -772,8 +772,8 @@ def test_web_toggle():
 test_web_toggle()
 
 def test_open_sources():
-    from customchat.connectors import open_sources as o
-    from customchat.connectors.base import make_connector
+    from chatify.connectors import open_sources as o
+    from chatify.connectors.base import make_connector
     calls = []
     def fake(url, timeout=20):
         calls.append(url)
@@ -787,14 +787,14 @@ def test_open_sources():
         c = make_connector({"id": "c", "label": "C", "type": "crossref", "mailto": "a@b.org"}).search("q", 3)
         assert len(c) == 1 and c[0]["text"] == "Hello world" and c[0]["year"] == "2021" and "mailto=a%40b.org" in calls[-1]
         from unittest.mock import patch
-        with patch("customchat.secrets.saved", return_value="fixture-key"):
+        with patch("chatify.secrets.saved", return_value="fixture-key"):
             a = make_connector({"id": "a", "label": "A", "type": "openalex"}).search("q", 3)
         assert len(a) == 1 and a[0]["text"] == "Hello world" and a[0]["year"] == "2020"
     finally:
         o._get = real
-    from customchat import schema
-    from customchat.pipeline import Engine
-    from customchat.store import Store
+    from chatify import schema
+    from chatify.pipeline import Engine
+    from chatify.store import Store
     e = Engine(schema.load("apps/minimal/app.yaml"), Store(":memory:"))
     assert e.set_catalog(["wikipedia", "bogus", "arxiv"]) == ["wikipedia", "arxiv"] and "cat-wikipedia" in e.connectors
     assert e.set_catalog([]) == [] and not [k for k in e.connectors if k.startswith("cat-")]
@@ -841,7 +841,7 @@ class LeadAndAttribution(unittest.TestCase):
 
 class CiteFormat(unittest.TestCase):
     def test_citation_moves_outside_bold(self):
-        from customchat.pipeline import Engine
+        from chatify.pipeline import Engine
         ev = [{"n": 1, "title": "t", "text": "x"}]
         out, _ = Engine.tidy("**Mixed: fasting may help. [1]** More text.", ev)
         self.assertIn("**Mixed: fasting may help.** [1]", out)
@@ -865,7 +865,7 @@ class CiteFormat(unittest.TestCase):
             def complete(self, m): return "**Mixed: fasting results matter in obese adults and long term outcomes.** [1] Fasting results matter in obese adults. [1]"
         class Pr:
             def text(self, k, f=""): return "revise"
-        from customchat.pipeline import Engine as E
+        from chatify.pipeline import Engine as E
         e = object.__new__(E); e.cfg = {"provider": {"type": "openai"}}; e.provider = P(); e.prompts = Pr()
         out = e.correct(bad, ev, led)
         self.assertIn("outcomes.** [1]", out)
@@ -879,7 +879,7 @@ class CiteFormat(unittest.TestCase):
 class PubMedQuery(unittest.TestCase):
     def test_429_is_retried_then_succeeds(self):
         import io, urllib.error
-        from customchat.connectors import pubmed
+        from chatify.connectors import pubmed
         calls = []
         class R:
             def __enter__(s): return s
@@ -903,7 +903,7 @@ class PubMedQuery(unittest.TestCase):
 
     def test_429_gives_up_after_three_calls_and_waits_between(self):
         import io, urllib.error
-        from customchat.connectors import pubmed
+        from chatify.connectors import pubmed
         calls, waits = [], []
         def always(url, timeout=0):
             calls.append(url); raise urllib.error.HTTPError(url, 429, "x", {}, io.BytesIO(b""))
@@ -917,7 +917,7 @@ class PubMedQuery(unittest.TestCase):
         self.assertEqual(waits, [1.0, 2.0])
 
     def test_uncited_sentence_with_number_is_dropped(self):
-        from customchat.pipeline import Engine
+        from chatify.pipeline import Engine
         e = Engine.__new__(Engine)
         ans = "**Possibly, in adults.** [1] Group A lost 4.87 kg versus 2.82 kg in group B. Other work is needed [1]."
         ledger = [{"claim": "Group A lost 4.87 kg versus 2.82 kg in group B.", "cites": []}, {"claim": "Other work is needed [1].", "cites": [1]}]
@@ -927,12 +927,12 @@ class PubMedQuery(unittest.TestCase):
         self.assertEqual(e.dropped, ["Group A lost 4.87 kg versus 2.82 kg in group B."])
 
     def test_keywords_drop_question_words(self):
-        from customchat.connectors.pubmed import keywords
+        from chatify.connectors.pubmed import keywords
         self.assertEqual(keywords("Does intermittent fasting beat continuous calorie restriction for type 2 diabetes?"),
                          "intermittent fasting continuous calorie restriction type 2 diabetes")
 
     def test_relaxes_when_nothing_matches(self):
-        from customchat.connectors import pubmed
+        from chatify.connectors import pubmed
         calls = []
         def fake(path, **p):
             if path == "esearch.fcgi":
@@ -949,7 +949,7 @@ class PubMedQuery(unittest.TestCase):
 
 class NumberCheck(unittest.TestCase):
     def test_numbers_must_be_in_cited_passage(self):
-        from customchat.pipeline import Engine
+        from chatify.pipeline import Engine
         ev = [{"n": 1, "title": "t", "text": "Fourteen adults did a 3 week trial; HOMA-IR fell 0.31"}]
         self.assertEqual(Engine.ledger("14 adults, three weeks [1].", ev)[0]["bad_numbers"], [])
         led = Engine.ledger("HOMA-IR fell 0.31 in 40 adults [1].", ev)[0]
@@ -957,7 +957,7 @@ class NumberCheck(unittest.TestCase):
         self.assertFalse(led["supported"])
 
     def _engine(self, reply):
-        from customchat.pipeline import Engine
+        from chatify.pipeline import Engine
         class P:
             def complete(self, m): return reply
         class Pr:
@@ -968,7 +968,7 @@ class NumberCheck(unittest.TestCase):
     def test_rewrite_kept_only_if_flag_is_gone(self):
         ev = [{"n": 1, "title": "t", "text": "both groups regained weight, with more fat mass regain in the CRD group 96 adults"}]
         bad = "IF had less regain. [1]"
-        from customchat.pipeline import Engine
+        from chatify.pipeline import Engine
         led = Engine.ledger(bad, ev)
         good = "The CRD group had more fat mass regain. [1]"
         self.assertEqual(self._engine(good).correct(bad, ev, led), good)
@@ -978,7 +978,7 @@ class NumberCheck(unittest.TestCase):
             "text": "Intermittent fasting is effective for weight loss in rats with low fitness. In a separate experiment using intermittent fasting in male HCR and LCR rats, alternate-day fasting induced significantly greater loss of weight and fat mass in LCR compared with HCR rats."}]
 
     def test_rewrite_with_fewer_flags_is_kept(self):
-        from customchat.pipeline import Engine
+        from chatify.pipeline import Engine
         bad = "Fasting caused greater loss in low-fitness groups. [1] A direct comparison is warranted for energy expenditure effects. [1]"
         led = Engine.ledger(bad, self.RAT)
         self.assertEqual(sum(1 for l in led if l["animal_unmarked"]), 2)
@@ -988,7 +988,7 @@ class NumberCheck(unittest.TestCase):
 
     def test_pmid_34086376_unmarked_animal_sentence_is_flagged_and_rewrite_names_rats(self):
         # real PMID 34086376 passage text (verbatim sentences); the model output is a fake string
-        from customchat.pipeline import Engine
+        from chatify.pipeline import Engine
         bad = "Alternate-day fasting caused greater loss of weight and fat mass in low-fitness groups. [1]"
         led = Engine.ledger(bad, self.RAT)
         self.assertTrue(led[0]["animal_unmarked"])
@@ -1004,26 +1004,26 @@ class NumberCheck(unittest.TestCase):
 
     def test_rewrite_rejected_if_it_adds_a_number(self):
         ev = [{"n": 1, "title": "t", "text": "both groups regained weight, with more fat mass regain in the CRD group 96 adults"}]
-        from customchat.pipeline import Engine
+        from chatify.pipeline import Engine
         bad = "IF had less regain. [1]"
         led = Engine.ledger(bad, ev)
         self.assertEqual(self._engine("The CRD group had more fat mass regain in 250 adults. [1]").correct(bad, ev, led), bad)
 
     def test_empty_records_are_not_usable(self):
-        from customchat.pipeline import Engine
+        from chatify.pipeline import Engine
         self.assertFalse(Engine.usable({"title": "t", "text": "  "}))
         self.assertFalse(Engine.usable({"title": "", "text": "abc"}))
         self.assertFalse(Engine.usable({"title": None, "text": None}))
         self.assertTrue(Engine.usable({"title": "t", "text": "abc"}))
 
     def test_regain_without_fat_mass_is_flagged(self):
-        from customchat.pipeline import Engine
+        from chatify.pipeline import Engine
         ev = [{"n": 1, "title": "t", "text": "both groups regained weight, with more fat mass regain in the CRD group"}]
         self.assertTrue(Engine.ledger("The IF group had less regain. [1]", ev)[0]["vague_regain"])
         self.assertFalse(Engine.ledger("The IF group had less fat-mass regain. [1]", ev)[0]["vague_regain"])
 
     def test_sentences_split_when_citations_follow_the_period(self):
-        from customchat.pipeline import Engine
+        from chatify.pipeline import Engine
         ev = [{"n": 1, "title": "t", "text": "alpha beta"}, {"n": 2, "title": "t", "text": "gamma 96"}]
         led = Engine.ledger("Alpha is beta. [1] Gamma is 96. [2] Both. [1] [2]", ev)
         self.assertEqual([l["cites"] for l in led], [[1], [2], [1, 2]])

@@ -1,3 +1,7 @@
+## 0.2.0 - Chatify
+
+CustomChat is now Chatify. The PyPI package is `chatify-app` (`pip install chatify-app`, `uvx chatify`), the command is `chatify`, and the repo is github.com/Harsh23Kashyap/Chatify. Old `customchat` / `customchat-app` commands keep working as aliases, and the old `CUSTOMCHAT_DB_URL`, `CUSTOMCHAT_CONFIG` and `CUSTOMCHAT_INSTALL_SOURCE` environment variables are still read as fallbacks.
+
 ## 0.1.36 - Rename notice
 
 CustomChat is now Chatify. New installs and updates: `chatify-app` on PyPI (`pip install chatify-app` or `uvx chatify`). This is the final `customchat-app` release; it stays installable for existing setups.

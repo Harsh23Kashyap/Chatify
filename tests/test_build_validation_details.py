@@ -1,5 +1,5 @@
 import copy,json,time,unittest
-from customchat import buildjobs,schema,appbuilder
+from chatify import buildjobs,schema,appbuilder
 from test_buildjobs import Fixture,Jobs
 class ValidationDetails(Jobs):
  def test_exact_prompt_and_helper_failures_retry_preserves_parts(self):

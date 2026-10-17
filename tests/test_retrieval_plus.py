@@ -1,8 +1,8 @@
 import tempfile, unittest
 from pathlib import Path
 from unittest.mock import patch
-from customchat import schema, pdfread
-from customchat.connectors.local_files import LocalFiles
+from chatify import schema, pdfread
+from chatify.connectors.local_files import LocalFiles
 
 class RetrievalPlus(unittest.TestCase):
     def test_heading_anchor(self):

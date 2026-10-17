@@ -1,7 +1,7 @@
 import pathlib,unittest
 class ProviderMotionStates(unittest.TestCase):
  def test_provider_identity_and_network_state_are_preserved(self):
-  root=pathlib.Path(__file__).resolve().parents[1]/'customchat/web'
+  root=pathlib.Path(__file__).resolve().parents[1]/'chatify/web'
   js=(root/'settings.js').read_text();css=(root/'refinements.css').read_text()
   self.assertIn('existing=new Map([...seg.querySelectorAll("[data-p]")]',js)
   self.assertIn('seg.insertBefore(button,seg.children[i]||null)',js)

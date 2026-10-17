@@ -1,6 +1,6 @@
 import http.client,io,unittest,urllib.error
 from unittest.mock import patch
-from customchat import providers
+from chatify import providers
 class ProviderErrorDetails(unittest.TestCase):
  def test_rejection_codes_plain_reason_without_provider_body(self):
   for code,word in [(400,'rejected'),(401,'refused'),(403,'not allowed'),(404,'not found'),(413,'too large'),(429,'rate limiting')]:

@@ -1,7 +1,7 @@
 import copy,json,tempfile,unittest,yaml,os
 from unittest import mock
 from pathlib import Path
-from customchat import appbuilder,schema,editstate
+from chatify import appbuilder,schema,editstate
 class Fixture:
  def __init__(self,result):self.result=result;self.calls=[]
  def complete(self,messages):self.calls.append(messages);return json.dumps(self.result)
@@ -93,7 +93,7 @@ class BuilderTests(unittest.TestCase):
   self.assertEqual(saved['provider'],schema.validate(raw)['provider'])
   for name,old in originals.items():self.assertEqual((folder/name).read_bytes(),old)
  def complete_config(self):
-  from customchat import theme,prompts,generators
+  from chatify import theme,prompts,generators
   raw=copy.deepcopy(schema.DEFAULTS)
   raw.update(appearance=theme.DEFAULT_CLEAN(),pipeline_prompts={'text':{k:v['default'] or raw['prompt']['system'] for k,v in prompts.STAGES.items()},'on':{k:v['on'] for k,v in prompts.STAGES.items()}},helper_drafts={k:{'brief':'A reviewed helper draft','code':generators.code_template(k,'')} for k in ('search','clean_query')},api_suggestions=[{'name':'PubMed','reason':'Biomedical literature','connector':'pubmed','setup':'Enable after review','caveat':'Verify coverage; no price claim'}])
   return raw
@@ -109,8 +109,8 @@ class BuilderTests(unittest.TestCase):
    raw=copy.deepcopy(schema.DEFAULTS);raw[area][key]=value
    with self.subTest(area=area,key=key):self.assertRaises(ValueError,appbuilder.validate,yaml.safe_dump(raw))
  def test_complete_save_no_execute_extensions_restart(self):
-  from customchat import prompts,theme
-  self.cfg['_dir']=self.tmp.name;raw=self.complete_config();raw['app']['title']='Complete Garden';raw['storage']['path']='data/customchat.db'
+  from chatify import prompts,theme
+  self.cfg['_dir']=self.tmp.name;raw=self.complete_config();raw['app']['title']='Complete Garden';raw['storage']['path']='data/chatify.db'
   plan=appbuilder.review(self.cfg,yaml.safe_dump(raw),appbuilder.SECTIONS);appbuilder.save_plan(self.cfg,plan)
   saved=schema.load(str(self.path));self.assertEqual(saved['app']['title'],'Complete Garden')
   self.assertEqual(len(saved['pipeline_prompts']['text']),9);self.assertTrue((Path(self.tmp.name)/'data'/'code-drafts.json').exists())
@@ -128,12 +128,12 @@ class BuilderTests(unittest.TestCase):
       if path.exists():path.unlink()
       if existing:path.write_text('{}')
      old={name:(folder/name).read_bytes() if (folder/name).exists() else None for name in names}
-     raw=self.complete_config();raw['app']['title']='Must not survive failed save';raw['storage']['path']='data/customchat.db'
+     raw=self.complete_config();raw['app']['title']='Must not survive failed save';raw['storage']['path']='data/chatify.db'
      plan=appbuilder.review(self.cfg,yaml.safe_dump(raw),appbuilder.SECTIONS)
      def replace(src,dst):
       if Path(dst).name==failing:raise OSError('Injected setup replacement failure')
       return real_replace(src,dst)
-     with mock.patch('customchat.appbuilder.os.replace',side_effect=replace):
+     with mock.patch('chatify.appbuilder.os.replace',side_effect=replace):
       with self.assertRaisesRegex(OSError,'Injected setup'):appbuilder.save_plan(self.cfg,plan)
      self.assertEqual(self.path.read_bytes(),original)
      for name in names:
@@ -146,7 +146,7 @@ class BuilderTests(unittest.TestCase):
   folder=Path(self.tmp.name)/'data';folder.mkdir()
   for name in ['theme.json','prompts.json','code-drafts.json']:(folder/name).write_text('{}')
   original=self.path.read_bytes();real_replace=os.replace;real_write=Path.write_bytes
-  raw=self.complete_config();raw['app']['title']='Must not survive failed save';raw['storage']['path']='data/customchat.db'
+  raw=self.complete_config();raw['app']['title']='Must not survive failed save';raw['storage']['path']='data/chatify.db'
   plan=appbuilder.review(self.cfg,yaml.safe_dump(raw),appbuilder.SECTIONS)
   def replace(src,dst):
    if Path(dst).name=='code-drafts.json':raise OSError('Injected setup replacement failure')
@@ -154,7 +154,7 @@ class BuilderTests(unittest.TestCase):
   def write(path,data):
    if path.name=='prompts.json':raise OSError('Injected rollback write failure')
    return real_write(path,data)
-  with mock.patch('customchat.appbuilder.os.replace',side_effect=replace),mock.patch.object(Path,'write_bytes',write):
+  with mock.patch('chatify.appbuilder.os.replace',side_effect=replace),mock.patch.object(Path,'write_bytes',write):
    with self.assertRaises(Exception) as error:appbuilder.save_plan(self.cfg,plan)
   self.assertEqual(self.path.read_bytes(),original,'failed setup rollback must not prevent app restoration')
   self.assertEqual((folder/'theme.json').read_text(),'{}','all independent rollback steps should be attempted')

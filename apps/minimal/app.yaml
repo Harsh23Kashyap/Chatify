@@ -1,11 +1,11 @@
-# The smallest working app. Run: python -m customchat run apps/minimal/app.yaml
+# The smallest working app. Run: python -m chatify run apps/minimal/app.yaml
 # yaml-language-server: $schema=../../schema/chat-app.schema.json
 app:
   id: minimal
   title: Docs Chat
   tagline: Ask questions about your documents
   examples:
-    - What is CustomChat?
+    - What is Chatify?
     - How does conversation memory work?
 provider:
   type: mock            # change to ollama (model: llama3.2) or openai (model: gpt-4o-mini)

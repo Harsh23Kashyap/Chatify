@@ -1,17 +1,17 @@
 """Fresh isolated local fixture server for the strict browser regression scripts.
-Run: CUSTOMCHAT_TEST_URL=http://127.0.0.1:8145 python tests/strict_ui_fixture.py
+Run: CHATIFY_TEST_URL=http://127.0.0.1:8145 python tests/strict_ui_fixture.py
 No network source or model calls are configured. Data disappears on exit.
 """
 import os,tempfile
 from urllib.parse import urlparse
 from http.server import ThreadingHTTPServer
-from customchat import schema
-from customchat.store import Store
-from customchat.pipeline import Engine
-from customchat.server import make_handler
+from chatify import schema
+from chatify.store import Store
+from chatify.pipeline import Engine
+from chatify.server import make_handler
 
 def serve():
- with tempfile.TemporaryDirectory(prefix='customchat-ui-') as folder:
+ with tempfile.TemporaryDirectory(prefix='chatify-ui-') as folder:
   cfg=schema.validate({'app':{'id':'newsnerd','title':'NewsNerd','tagline':'Understand the news. Check the source.'},'storage':{'path':folder+'/state.db'}});cfg['_dir']=folder
   s=Store(cfg['storage']['path']);owner='local'
   t=s.new_topic(owner,'Multi-chat undo fixture')
@@ -25,7 +25,7 @@ def serve():
   c=s.new_chat(owner,'Verified count sample');t=s.new_topic(owner,'Sample headlines')
   answer='Retrieved headline count by source (this sample only).\n\n| Source | Headline count | Citations |\n| --- | --- | --- |\n| Feed | 2 | [1] [2] |\n| Other | 1 | [3] |'
   s.add_turn(c,t,'Chart headline count by source','Chart headline count by source',answer,evidence,[],'standard')
-  url=urlparse(os.environ.get('CUSTOMCHAT_TEST_URL','http://127.0.0.1:8145'))
+  url=urlparse(os.environ.get('CHATIFY_TEST_URL','http://127.0.0.1:8145'))
   if url.hostname not in ('127.0.0.1','localhost'):raise ValueError('Fixture binds local only')
   ThreadingHTTPServer((url.hostname,url.port or 8145),make_handler(cfg,Engine(cfg,s))).serve_forever()
 if __name__=='__main__':serve()

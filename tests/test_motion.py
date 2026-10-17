@@ -1,5 +1,5 @@
 import os, unittest
-W = os.path.join(os.path.dirname(__file__), "..", "customchat", "web")
+W = os.path.join(os.path.dirname(__file__), "..", "chatify", "web")
 rd = lambda n: open(os.path.join(W, n), encoding="utf-8").read()
 
 

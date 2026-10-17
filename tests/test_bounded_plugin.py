@@ -1,6 +1,6 @@
 import tempfile,unittest,os
 from pathlib import Path
-from customchat.connectors.bounded import BoundedPlugin
+from chatify.connectors.bounded import BoundedPlugin
 class BoundedTests(unittest.TestCase):
  def test_result_and_env(self):
   with tempfile.TemporaryDirectory() as d:

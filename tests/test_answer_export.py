@@ -1,5 +1,5 @@
 import unittest
-from customchat.exports import pdf_bytes,answer_markdown
+from chatify.exports import pdf_bytes,answer_markdown
 class Export(unittest.TestCase):
  def turn(self):return {'question':'Fiber?','answer':('Fiber answer [1].\n'*200)+'FINAL END','evidence':[{'n':1,'title':'A source','url':'https://example.invalid/source','document':'file.md','page':2,'version':'abc123'}],'owner':'secret-owner','chat':'secret-chat','profile':'private'}
  def test_markdown_snapshot_private(self):
@@ -32,7 +32,7 @@ class Export(unittest.TestCase):
   t=self.turn();t['answer']='| Source | Headline count | Citations |\n| --- | --- | --- |\n| Feed | 2 | [1] |'
   b=pdf_bytes('Chat',t);self.assertIn(b'Source: Feed; Headline count: 2; Citations: [1]',b);self.assertNotIn(b'| --- |',b)
  def test_bibtex_missing_optional_metadata(self):
-  from customchat.exports import bibtex
+  from chatify.exports import bibtex
   self.assertIn('Minimal',bibtex([{'title':'Minimal','url':'https://example.org'}]))
  def test_null_optional_url_exports(self):
   t=self.turn();t['evidence'][0]['url']=None

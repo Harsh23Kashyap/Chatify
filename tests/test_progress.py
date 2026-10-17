@@ -1,8 +1,8 @@
 import unittest
 from pathlib import Path
-from customchat import schema
-from customchat.pipeline import Engine
-from customchat.store import Store
+from chatify import schema
+from chatify.pipeline import Engine
+from chatify.store import Store
 class Progress(unittest.TestCase):
  def test_real_stage_events_empty_sources(self):
   e=Engine(schema.validate({}),Store(':memory:'));c=e.store.new_chat('a')
@@ -16,5 +16,5 @@ class Progress(unittest.TestCase):
   with self.assertRaises(ValueError):next(e.ask_stream('a',None,''))
   with self.assertRaises(PermissionError):next(e.ask_stream('a','not-owned','Valid question?'))
  def test_status_live_region_and_scroll(self):
-  w=Path(__file__).resolve().parents[1]/'customchat/web'
+  w=Path(__file__).resolve().parents[1]/'chatify/web'
   self.assertIn('aria-atomic="true"',(w/'index.html').read_text());self.assertIn('Preparing your answer',(w/'app.js').read_text())

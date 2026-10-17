@@ -1,7 +1,7 @@
 import pathlib,unittest
 class SidebarMotion(unittest.TestCase):
  def test_docked_move_is_paired_and_large_changes_are_immediate(self):
-  js=(pathlib.Path(__file__).resolve().parents[1]/'customchat/web/theme.js').read_text()
+  js=(pathlib.Path(__file__).resolve().parents[1]/'chatify/web/theme.js').read_text()
   self.assertIn('const sidebarMove=beginSidebarMove(t,root)',js)
   self.assertIn('finishSidebarMove(sidebarMove)',js)
   self.assertIn('layoutAnimations.forEach(a=>a.cancel())',js)

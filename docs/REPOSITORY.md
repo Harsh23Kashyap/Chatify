@@ -1,7 +1,7 @@
 # Repository map
 
-- `customchat/`: packaged Python runtime, connectors, providers and web UI.
-- `customchat/templates/`: bundled Demo workspace used by installed quickstart.
+- `chatify/`: packaged Python runtime, connectors, providers and web UI.
+- `chatify/templates/`: bundled Demo workspace used by installed quickstart.
 - `apps/`: example app YAML and sample documents (DietChat, WirelessChat, minimal).
 - `schema/`: configuration schema for editors.
 - `scripts/`: shared installer implementation.

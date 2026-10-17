@@ -2,11 +2,11 @@
 import os,socket,subprocess,sys,tempfile,time,urllib.request
 from pathlib import Path
 from playwright.sync_api import sync_playwright
-ROOT=Path(os.environ.get('CUSTOMCHAT_TEST_ROOT',str(Path(__file__).resolve().parents[1])))
+ROOT=Path(os.environ.get('CHATIFY_TEST_ROOT',str(Path(__file__).resolve().parents[1])))
 def run():
     sock=socket.socket();sock.bind(('127.0.0.1',0));port=sock.getsockname()[1];sock.close()
     with tempfile.TemporaryDirectory() as folder:
-        proc=subprocess.Popen([sys.executable,'-m','customchat','start','--directory',folder+'/workspace','--port',str(port),'--no-browser'],cwd=ROOT,stdout=subprocess.DEVNULL,stderr=subprocess.DEVNULL)
+        proc=subprocess.Popen([sys.executable,'-m','chatify','start','--directory',folder+'/workspace','--port',str(port),'--no-browser'],cwd=ROOT,stdout=subprocess.DEVNULL,stderr=subprocess.DEVNULL)
         url='http://127.0.0.1:'+str(port)
         try:
             for _ in range(100):

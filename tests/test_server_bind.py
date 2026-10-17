@@ -1,6 +1,6 @@
 import unittest
 from unittest.mock import patch
-from customchat.server import LocalHTTPServer
+from chatify.server import LocalHTTPServer
 from http.server import BaseHTTPRequestHandler
 
 class BindTests(unittest.TestCase):

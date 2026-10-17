@@ -9,8 +9,8 @@ def code(port, path):
 class T(unittest.TestCase):
     def test_locked_server(self):
         port = 8247
-        p = subprocess.Popen([sys.executable, "-m", "customchat", "run", "apps/minimal/app.yaml", "--port", str(port)], cwd=ROOT,
-                             env=dict(os.environ, CUSTOMCHAT_CONFIG="off", PYTHONPATH=ROOT), stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+        p = subprocess.Popen([sys.executable, "-m", "chatify", "run", "apps/minimal/app.yaml", "--port", str(port)], cwd=ROOT,
+                             env=dict(os.environ, CHATIFY_CONFIG="off", PYTHONPATH=ROOT), stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
         try:
             for _ in range(30):
                 if code(port, "/api/health") == 200: break

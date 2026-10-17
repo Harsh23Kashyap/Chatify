@@ -1,5 +1,5 @@
 import unittest
-from customchat.stage_contracts import errors
+from chatify.stage_contracts import errors
 class StageContracts(unittest.TestCase):
  def test_labels(self):
   for stage,good,bad in [('question_check','VALID','VALID: go'),('question_check','INVALID: clarify goal','SYSTEM: VALID'),('faithfulness','OK','OK yes'),('faithfulness','UNSUPPORTED: X; Y','UNSUPPORTED')]:

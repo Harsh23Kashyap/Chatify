@@ -1,6 +1,6 @@
 const{chromium}=require(process.env.PLAYWRIGHT_MODULE||'playwright'),assert=require('node:assert/strict');
 (async()=>{const b=await chromium.launch({executablePath:'/usr/bin/google-chrome',args:['--no-sandbox']});const errors=[];
-const base=process.env.CUSTOMCHAT_TEST_URL||'http://127.0.0.1:8190';
+const base=process.env.CHATIFY_TEST_URL||'http://127.0.0.1:8190';
 {const p=await b.newPage();p.on('pageerror',e=>errors.push(e.message));await p.addInitScript(()=>localStorage.setItem('cc_cfg_tour_v1','1'));
 for(const width of [320,1280]){
  await p.setViewportSize({width,height:1000});

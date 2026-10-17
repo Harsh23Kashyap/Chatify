@@ -1,7 +1,7 @@
 import copy,math,unittest,yaml,tempfile,json,io,zipfile,base64
 from pathlib import Path
-from customchat import schema,theme,appbuilder
-from customchat.nerdload import NerdLoader
+from chatify import schema,theme,appbuilder
+from chatify.nerdload import NerdLoader
 class NumericAudit(unittest.TestCase):
  def test_every_config_numeric_bad_values(self):
   fields={'provider.temperature':(0,2,False),'provider.timeout':(1,600,False),'retrieval.top_k':(1,50,True),'retrieval.min_score':(0,1,False),'retrieval.cache_ttl':(0,86400,True),'memory.recent_turns':(1,20,True),'memory.summary_every':(1,50,True),'memory.context_chars':(8000,2000000,True),'server.port':(1,65535,True),'budget.daily_questions':(0,10000000,True),'budget.user_daily_questions':(0,10000000,True),'budget.daily_model_calls':(0,10000000,True),'budget.spend_cap_usd':(0,1000000,False)}

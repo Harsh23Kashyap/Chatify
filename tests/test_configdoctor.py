@@ -1,6 +1,6 @@
 import tempfile,unittest,json
 from pathlib import Path
-from customchat.configdoctor import inspect,editor_schema
+from chatify.configdoctor import inspect,editor_schema
 class ConfigDoctor(unittest.TestCase):
  def check(self,text):
   with tempfile.TemporaryDirectory() as p:

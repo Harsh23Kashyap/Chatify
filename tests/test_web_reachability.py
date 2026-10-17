@@ -1,7 +1,7 @@
 from pathlib import Path
 import unittest
 
-WEB = Path(__file__).parents[1] / 'customchat/web'
+WEB = Path(__file__).parents[1] / 'chatify/web'
 
 
 class WebReachabilityTests(unittest.TestCase):
@@ -22,6 +22,6 @@ class WebReachabilityTests(unittest.TestCase):
         config = (WEB.parents[1] / 'pyproject.toml').read_text()
         for item in ['web/icons/*.svg', 'web/team/*.jpg']:
             self.assertIn(item, config)
-        self.assertTrue((WEB / 'icons/customchat.svg').is_file())
+        self.assertTrue((WEB / 'icons/chatify.svg').is_file())
         for name in ['harsh', 'dennis']:
             self.assertTrue((WEB / ('team/' + name + '.jpg')).is_file())

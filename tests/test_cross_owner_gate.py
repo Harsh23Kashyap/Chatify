@@ -1,8 +1,8 @@
 """Synthetic cross-owner storage/export checks, no external accounts."""
 import unittest
-from customchat.store import Store
-from customchat.actions import Actions
-from customchat.schema import validate
+from chatify.store import Store
+from chatify.actions import Actions
+from chatify.schema import validate
 class CrossOwnerGate(unittest.TestCase):
  def setUp(self):
   self.s=Store(':memory:');self.chat=self.s.new_chat('a','A private chat');self.topic=self.s.new_topic('a','A private topic');self.turn=self.s.add_turn(self.chat,self.topic,'A question','A question','A answer',[],[],'standard')

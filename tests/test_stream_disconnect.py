@@ -1,6 +1,6 @@
 import unittest,io
 from tests.test_core import engine
-from customchat.server import make_handler
+from chatify.server import make_handler
 
 class Disconnect(unittest.TestCase):
  def test_stream_disconnect_closes_generator_no_second_response(self):

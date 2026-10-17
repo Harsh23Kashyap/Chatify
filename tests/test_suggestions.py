@@ -1,10 +1,10 @@
 import unittest
 from unittest.mock import Mock
-from customchat import schema
-from customchat.pipeline import Engine
-from customchat.store import Store
-from customchat.suggestions import starters,recent,clean
-from customchat.providers import ProviderError
+from chatify import schema
+from chatify.pipeline import Engine
+from chatify.store import Store
+from chatify.suggestions import starters,recent,clean
+from chatify.providers import ProviderError
 class Suggestions(unittest.TestCase):
     def engine(self):
         cfg=schema.validate({'app':{'title':'Diet Chat','examples':['What are the protein sources?']}})
@@ -31,7 +31,7 @@ class Suggestions(unittest.TestCase):
         self.assertEqual(clean(['<script>evil?</script>','x?','What are the protein sources?','What are the protein sources?']),['What are the protein sources?'])
     def test_http_temporary_hides_recent(self):
         import threading,json,urllib.request
-        from customchat.server import LocalHTTPServer,make_handler
+        from chatify.server import LocalHTTPServer,make_handler
         e=self.engine();c=e.store.new_chat('local');e.store.add_turn(c,None,'How much fiber is in beans?','','',[],[],'standard')
         srv=LocalHTTPServer(('127.0.0.1',0),make_handler(e.cfg,e));threading.Thread(target=srv.serve_forever,daemon=True).start()
         try:
@@ -43,6 +43,6 @@ class Suggestions(unittest.TestCase):
         finally:srv.shutdown();srv.server_close()
     def test_recent_ui_cross_group_dedupe(self):
         from pathlib import Path
-        js=(Path('customchat/web')/'app.js').read_text()
+        js=(Path('chatify/web')/'app.js').read_text()
         self.assertIn('recent.filter(x=>!shown.has',js)
         self.assertIn('TV("txt_examples")',js)

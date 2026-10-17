@@ -1,8 +1,8 @@
 import unittest,tempfile
 from pathlib import Path
-from customchat import schema
-from customchat.pipeline import Engine
-from customchat.store import Store
+from chatify import schema
+from chatify.pipeline import Engine
+from chatify.store import Store
 class Scope(unittest.TestCase):
  def setUp(self):
   self.tmp=tempfile.TemporaryDirectory();self.addCleanup(self.tmp.cleanup);p=Path(self.tmp.name);(p/'docs').mkdir()

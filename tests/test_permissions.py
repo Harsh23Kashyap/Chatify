@@ -1,8 +1,8 @@
 import unittest,tempfile
 from pathlib import Path
-from customchat import schema,permissions
-from customchat.pipeline import Engine
-from customchat.store import Store
+from chatify import schema,permissions
+from chatify.pipeline import Engine
+from chatify.store import Store
 class Permissions(unittest.TestCase):
  def setUp(self):
   self.tmp=tempfile.TemporaryDirectory();self.addCleanup(self.tmp.cleanup);p=Path(self.tmp.name);(p/'docs').mkdir()
@@ -37,8 +37,8 @@ class Permissions(unittest.TestCase):
  def test_http_accounts_and_revocation(self):
   import threading,json,urllib.request,http.cookiejar
   from http.server import ThreadingHTTPServer
-  from customchat.server import make_handler
-  from customchat.accounts import Accounts
+  from chatify.server import make_handler
+  from chatify.accounts import Accounts
   acc=Accounts(self.e.store);alice=acc.signup('alice@test.invalid','Alice','test-password');bob=acc.signup('bob@test.invalid','Bob','test-password')
   self.cfg['sources'][0]['document_users']={'private.md':[alice]}
   srv=ThreadingHTTPServer(('127.0.0.1',0),make_handler(self.cfg,self.e));threading.Thread(target=srv.serve_forever,daemon=True).start()

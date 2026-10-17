@@ -1,7 +1,7 @@
 import unittest
-from customchat import schema
-from customchat.pipeline import Engine
-from customchat.store import Store
+from chatify import schema
+from chatify.pipeline import Engine
+from chatify.store import Store
 
 class PromptFactFocus(unittest.TestCase):
  def test_missing_date_does_not_replace_requested_fact(self):

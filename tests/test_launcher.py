@@ -1,7 +1,7 @@
 import tempfile,unittest,socket
 from pathlib import Path
-from customchat.launcher import workspace,pick_port
-from customchat.schema import ConfigError,load
+from chatify.launcher import workspace,pick_port
+from chatify.schema import ConfigError,load
 class LauncherTests(unittest.TestCase):
     def test_packaged_template_and_rerun(self):
         with tempfile.TemporaryDirectory() as tmp:
@@ -22,6 +22,6 @@ if __name__=='__main__':unittest.main()
 class InstalledStartTests(unittest.TestCase):
     def test_locked_start_sets_flag_before_server_import(self):
         import inspect
-        from customchat.launcher import start
+        from chatify.launcher import start
         source=inspect.getsource(start)
         self.assertLess(source.index('if lock_config:'),source.index('from .server import serve'))

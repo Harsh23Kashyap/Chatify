@@ -3,7 +3,7 @@
 import argparse,contextlib,json,os,shutil,subprocess,sys,time,urllib.request
 from pathlib import Path
 RELEASE='v0.1.27'
-SOURCE='https://github.com/Harsh23Kashyap/customchat/archive/'+RELEASE+'.zip'
+SOURCE='https://github.com/Harsh23Kashyap/chatify/archive/'+RELEASE+'.zip'
 
 def stage(text):
     enabled=sys.stdout.isatty() and 'NO_COLOR' not in os.environ and os.environ.get('TERM')!='dumb'
@@ -50,7 +50,7 @@ def run(args):
     with locked(root/'install.lock'):
         valid=False
         if py.exists():
-            try:valid=subprocess.run([str(py),'-c','import customchat.launcher,yaml'],stdout=subprocess.DEVNULL,stderr=subprocess.DEVNULL).returncode==0
+            try:valid=subprocess.run([str(py),'-c','import chatify.launcher,yaml'],stdout=subprocess.DEVNULL,stderr=subprocess.DEVNULL).returncode==0
             except OSError:pass
         same=False
         try:same=json.loads(receipt.read_text()).get('source')==source
@@ -64,12 +64,12 @@ def run(args):
                 command('venv','--python',sys.executable,root/'venv')
             stage('2 / 3  Installing app and dependencies.')
             command('pip','install','--python',py,source)
-            subprocess.run([str(py),'-c','import customchat.launcher,yaml'],check=True)
+            subprocess.run([str(py),'-c','import chatify.launcher,yaml'],check=True)
             temp=receipt.with_suffix('.tmp');temp.write_text(json.dumps(dict(source=source)));temp.replace(receipt)
         if args.prepare_only:return
         # Holding the lock for server lifetime makes repeated invocations safe.
         log=root/'server.log'
-        cmd=[str(py),'-m','customchat','start','--directory',str(Path(args.directory).expanduser().resolve()),'--port',str(args.port)]
+        cmd=[str(py),'-m','chatify','start','--directory',str(Path(args.directory).expanduser().resolve()),'--port',str(args.port)]
         if args.no_browser:cmd.append('--no-browser')
         if args.lock_config:cmd.append('--lock-config')
         with open(log,'w') as out:
@@ -79,17 +79,17 @@ def run(args):
             for _ in range(150):
                 if child.poll() is not None:raise RuntimeError(log.read_text())
                 for line in log.read_text().splitlines():
-                    if line.startswith('Starting CustomChat at '):url=line.split()[3]
+                    if line.startswith('Starting Chatify at '):url=line.split()[3]
                 if url and healthy(url):break
                 time.sleep(.2)
             else:raise RuntimeError('App did not report ready; inspect '+str(log))
             active.write_text(json.dumps(dict(pid=child.pid,url=url)))
-            stage('3 / 3  Starting CustomChat at '+url+' (Ctrl+C to stop)')
+            stage('3 / 3  Starting Chatify at '+url+' (Ctrl+C to stop)')
             print('Workspace: '+str(Path(args.directory).expanduser().resolve()),flush=True)
             if args.verify_and_stop:
                 with urllib.request.urlopen(url+'/api/config',timeout=3) as response:
                     cfg=json.load(response)
-                request=urllib.request.Request(url+'/api/ask',data=b'{"question":"What is CustomChat?"}',headers={'Content-Type':'application/json'})
+                request=urllib.request.Request(url+'/api/ask',data=b'{"question":"What is Chatify?"}',headers={'Content-Type':'application/json'})
                 with urllib.request.urlopen(request,timeout=5) as response:answer=json.load(response)
                 if cfg['provider']['type']!='mock' or not answer.get('evidence') or '[1]' not in answer.get('answer',''):
                     raise RuntimeError('Demo acceptance failed')
@@ -107,8 +107,8 @@ def run(args):
             active.unlink(missing_ok=True)
 
 def main():
-    p=argparse.ArgumentParser();p.add_argument('--state',default=str(Path.home()/'.customchat/install'))
-    p.add_argument('--directory',default='customchat-app');p.add_argument('--uv');p.add_argument('--source')
+    p=argparse.ArgumentParser();p.add_argument('--state',default=str(Path.home()/'.chatify/install'))
+    p.add_argument('--directory',default='chatify-app');p.add_argument('--uv');p.add_argument('--source')
     p.add_argument('--port',type=int,default=8080);p.add_argument('--offline',action='store_true')
     p.add_argument('--verify-and-stop',action='store_true');p.add_argument('--stop-after-seconds',type=int,default=0,help=argparse.SUPPRESS)
     p.add_argument('--prepare-only',action='store_true');p.add_argument('--no-browser',action='store_true');p.add_argument('--lock-config',action='store_true')

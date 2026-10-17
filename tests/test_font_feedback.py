@@ -1,7 +1,7 @@
 import pathlib,unittest
 class FontFeedback(unittest.TestCase):
  def test_samples_are_stable_and_loading_status_is_truthful(self):
-  root=pathlib.Path(__file__).resolve().parents[1]/'customchat/web'
+  root=pathlib.Path(__file__).resolve().parents[1]/'chatify/web'
   js=(root/'settings.js').read_text();css=(root/'settings.css').read_text()
   self.assertIn('host.dataset.sample!=="fonts"',js)
   self.assertIn('host.dataset.fontSelection!==signature',js)

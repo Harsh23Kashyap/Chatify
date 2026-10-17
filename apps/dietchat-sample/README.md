@@ -3,13 +3,13 @@
 Run from this folder:
 
 ```sh
-customchat-app run app.yaml
+chatify-app run app.yaml
 ```
 
 Or from the repository root:
 
 ```sh
-python -m customchat run apps/dietchat-sample/app.yaml
+python -m chatify run apps/dietchat-sample/app.yaml
 ```
 
 Starts at http://127.0.0.1:8080 with no credentials. Demo is an offline response provider, not real AI or DietChat production output. All non-secret settings are filled. Starter questions match the public DietChat page. The four local documents contain public website text captured October 8, 2026, not research papers. The live site exposes no paper library to import.

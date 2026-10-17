@@ -7,7 +7,7 @@ def select(releases, current, name):
     if not re.fullmatch(r'[A-Za-z0-9_-]{1,80}',name):raise ValueError('Release name must be a plain folder name')
     root=Path(releases).absolute();target=root/name;link=Path(current).absolute()
     if root.is_symlink() or target.is_symlink() or not target.is_dir():raise ValueError('Release must be an existing non-symlink folder')
-    if not (target/'.venv/bin/python').is_file() or not (target/'customchat').is_dir():raise ValueError('Release is missing code or its prebuilt Python environment')
+    if not (target/'.venv/bin/python').is_file() or not (target/'chatify').is_dir():raise ValueError('Release is missing code or its prebuilt Python environment')
     if link.exists() and not link.is_symlink():raise ValueError('Current must be a symlink, never a real directory')
     tmp=link.with_name(link.name+'.next')
     if tmp.exists() or tmp.is_symlink():raise ValueError('Pending release link exists')

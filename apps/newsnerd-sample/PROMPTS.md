@@ -1,6 +1,6 @@
 # Prompts
 
-Configuration > Prompts is visible in both Simple and Advanced. All unedited stages inherit CustomChat 0.1.6 defaults; all prompt.system/style fields are explicitly filled in each YAML. Code helpers is separate.
+Configuration > Prompts is visible in both Simple and Advanced. All unedited stages inherit Chatify 0.1.6 defaults; all prompt.system/style fields are explicitly filled in each YAML. Code helpers is separate.
 
 | Stage | Default state | Purpose / format |
 |---|---|---|

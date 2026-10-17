@@ -2,7 +2,7 @@ const {chromium}=require(process.env.PLAYWRIGHT_MODULE||'playwright'),fs=require
 (async()=>{const b=await chromium.launch({executablePath:'/usr/bin/google-chrome',args:['--no-sandbox']});
 for(const width of [320,1280]){const p=await b.newPage({viewport:{width,height:1000}});let phase='running',saveCalls=0,releaseSave;
  await p.addInitScript(()=>localStorage.setItem('cc_cfg_tour_v1','1'));
- await p.goto(process.env.CUSTOMCHAT_TEST_URL+'/settings.html');await p.waitForFunction(()=>!!window.CCSettingsSimple?.state()?.names);
+ await p.goto(process.env.CHATIFY_TEST_URL+'/settings.html');await p.waitForFunction(()=>!!window.CCSettingsSimple?.state()?.names);
  await p.evaluate(()=>{const old=window.CCSettingsSimple.state;window.CCSettingsSimple.state=()=>({...old(),provider:'openai',model:'fixture',canEdit:true})});
  await p.route('**/api/provider/status',r=>r.fulfill({json:{keys:{openai:{has:true}}}}));
  const view=()=>({id:'lifecycle-fixture',state:phase,completed:phase==='done'?30:8,total:30,calls:10,call_cap:36,parts:[{id:'app:identity',state:'done',draft:{title:'Retained proposed app'}},{id:'appearance:fonts',state:phase==='partial'?'error':'running'}],errors:phase==='partial'?{'appearance:fonts':'Fixture unavailable'}:{},yaml:phase==='done'?fs.readFileSync(__dirname+'/fixtures/builder-complete.yaml','utf8'):null,local_review:['Helper search contains literal destinations: unrelated.invalid. Not verified or authorized by this inventory.'],review:{ready:false,review_status:'inconsistent',review_note:'Model review verdict conflicts with its concerns. Human review still needed; no safety or deployment approval.',issues:['Fixture prompt needs narrower scope.'],setup_notes:['Add source documents before deployment.']}});

@@ -20,8 +20,8 @@ def main():
         env={k:v for k,v in os.environ.items() if not k.upper().startswith(('PYTHON','UV_','XDG_')) and k.upper()!='PSMODULEPATH'}
         env.update(HOME=str(home),USERPROFILE=str(home),PATH=path,UV_CACHE_DIR=str(home/'cache'),UV_PYTHON_INSTALL_DIR=str(home/'python'))
         assert all(shutil.which(n,path=path) is None for n in ('uv','uvx','python','python3','git'))
-        if not os.environ.get('CUSTOMCHAT_TEST_REMOTE'):
-            env['CUSTOMCHAT_INSTALL_SOURCE']=str(next((ROOT/'dist').glob('*.whl')).resolve())
+        if not os.environ.get('CHATIFY_TEST_REMOTE'):
+            env['CHATIFY_INSTALL_SOURCE']=str(next((ROOT/'dist').glob('*.whl')).resolve())
         work=base/'my workspace';work.mkdir()
         with open(base/'run.log','w+') as log:
             proc=subprocess.Popen(cmd+['--no-browser','--lock-config','--port','18750'],cwd=work,env=env,stdout=log,stderr=subprocess.STDOUT,start_new_session=os.name!='nt')
@@ -30,7 +30,7 @@ def main():
                 for _ in range(900):
                     if proc.poll() is not None:raise AssertionError((base/'run.log').read_text())
                     for line in (base/'run.log').read_text().splitlines():
-                        if line.startswith('Starting CustomChat at '):url=line.split()[3]
+                        if line.startswith('Starting Chatify at '):url=line.split()[3]
                     if url:break
                     time.sleep(.2)
                 assert url,(base/'run.log').read_text()
@@ -40,7 +40,7 @@ def main():
                         break
                     except OSError:time.sleep(.1)
                 else:raise AssertionError('Server URL printed but health never became ready')
-                req=urllib.request.Request(url+'/api/ask',data=b'{"question":"What is CustomChat?"}',headers={'Content-Type':'application/json'})
+                req=urllib.request.Request(url+'/api/ask',data=b'{"question":"What is Chatify?"}',headers={'Content-Type':'application/json'})
                 with urllib.request.urlopen(req) as r:answer=json.load(r)
                 assert answer['evidence'] and '[1]' in answer['answer'],answer
                 assert (home/'.local/bin'/('uv.exe' if os.name=='nt' else 'uv')).exists()

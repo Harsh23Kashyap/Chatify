@@ -1,6 +1,6 @@
 from pathlib import Path
 import unittest
-W=Path(__file__).resolve().parents[1]/'customchat/web'
+W=Path(__file__).resolve().parents[1]/'chatify/web'
 class GuidedTours(unittest.TestCase):
  def test_both_pages_load_shared_guide_and_replay(self):
   for file,button in [('index.html','chatGuide'),('settings.html','configGuide')]:

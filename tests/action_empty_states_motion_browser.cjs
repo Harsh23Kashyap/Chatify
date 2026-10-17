@@ -5,7 +5,7 @@ const {chromium}=require(process.env.PLAYWRIGHT_MODULE||'playwright'),assert=req
  await p.route('**/api/actions',r=>r.fulfill({json:empty?[]:[{id:'list_notes',label:'List my notes',mode:'read',fields:{}}]}));
  await p.route('**/api/actions/prepare',r=>r.fulfill({json:{ticket:'fixture',label:'List my notes',mode:'read',tool:'list_notes',args:{}}}));
  await p.route('**/api/actions/execute',r=>r.fulfill({json:{notes:[]}}));
- await p.goto(process.env.CUSTOMCHAT_TEST_URL+'/');await p.locator('.playground-action').first().waitFor();await p.evaluate(m=>{const t=JSON.parse(JSON.stringify(CCTheme.value));t.motion=m;CCTheme.apply(t)},motion);
+ await p.goto(process.env.CHATIFY_TEST_URL+'/');await p.locator('.playground-action').first().waitFor();await p.evaluate(m=>{const t=JSON.parse(JSON.stringify(CCTheme.value));t.motion=m;CCTheme.apply(t)},motion);
  for(const kind of ['catalog','notes']){
  await p.locator('#actionsBtn').focus();await p.keyboard.press('Enter');await p.locator('.action-dialog').waitFor();
  if(kind==='notes'){await p.getByRole('button',{name:'List my notes',exact:true}).focus();await p.keyboard.press('Enter');await p.getByRole('button',{name:'Preview action',exact:true}).focus();await p.keyboard.press('Enter');await p.getByRole('button',{name:'Confirm action',exact:true}).waitFor();await p.getByRole('button',{name:'Confirm action',exact:true}).focus();await p.keyboard.press('Enter');await p.getByRole('heading',{name:'Your notes',exact:true}).waitFor()}

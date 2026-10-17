@@ -1,5 +1,5 @@
 import pathlib,unittest
-W=pathlib.Path(__file__).resolve().parents[1]/'customchat'/'web'
+W=pathlib.Path(__file__).resolve().parents[1]/'chatify'/'web'
 class StreamReading(unittest.TestCase):
  def test_actual_stream_and_no_token_animation(self):
   js=(W/'app.js').read_text();css=(W/'style.css').read_text()

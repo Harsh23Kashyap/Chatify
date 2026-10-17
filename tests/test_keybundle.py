@@ -1,7 +1,7 @@
 import unittest,tempfile,yaml,json,base64,zipfile,io,os
 from pathlib import Path
-from customchat import secrets,schema,keybundle,portable
-from customchat.nerdload import NerdLoader
+from chatify import secrets,schema,keybundle,portable
+from chatify.nerdload import NerdLoader
 class Keys(unittest.TestCase):
  def test_import_values_not_in_review_or_app_file(self):
   with tempfile.TemporaryDirectory() as folder:
@@ -20,7 +20,7 @@ class Keys(unittest.TestCase):
    finally:secrets.STORE=old
 
  def test_header_environment_transport_maps_to_bound_http_key(self):
-  from customchat import source_credentials
+  from chatify import source_credentials
   raw={'sources':[{'id':'private-api','type':'http','url':'https://example.invalid/items','header_env':{'Authorization':'FIXTURE_API'}}],'api_keys':{'env:FIXTURE_API':'fixture-header-key'}}
   clean,keys=keybundle.extract(raw);name=source_credentials.name('private-api','FIXTURE_API','https://example.invalid/items')
   self.assertEqual(keys,{name:'fixture-header-key'});self.assertNotIn('api_keys',clean)

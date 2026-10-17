@@ -1,6 +1,6 @@
 import unittest
 from pathlib import Path
-W=Path(__file__).resolve().parents[1]/'customchat/web'
+W=Path(__file__).resolve().parents[1]/'chatify/web'
 class Reading(unittest.TestCase):
  def test_bounds_and_local_prefs(self):
   s=(W/'reading.js').read_text();self.assertIn('[600,720,900]',s);self.assertIn('[15,17,19,21]',s);self.assertIn('localStorage.setItem',s);self.assertNotIn('fetch(',s)

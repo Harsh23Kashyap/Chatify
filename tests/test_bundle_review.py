@@ -1,6 +1,6 @@
 import unittest
 from unittest.mock import patch
-from customchat import bundle_review as b,schema
+from chatify import bundle_review as b,schema
 class BundleReviewTests(unittest.TestCase):
  def review(self,code):return b.review(schema.validate({}),{'plugin.py':code.encode(),'app.yaml':b'{}'})
  def test_patterns_and_lines(self):

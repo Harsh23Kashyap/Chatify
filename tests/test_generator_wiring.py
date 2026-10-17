@@ -1,6 +1,6 @@
 import json,unittest
 from unittest.mock import patch
-from customchat import generators as g, generator_design as d
+from chatify import generators as g, generator_design as d
 class Fake:
  def __init__(self,outputs):self.outputs=iter(outputs);self.messages=[]
  def complete(self,m):self.messages.append(m);return next(self.outputs)

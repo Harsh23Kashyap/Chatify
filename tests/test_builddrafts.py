@@ -1,5 +1,5 @@
 import tempfile,unittest,os
-from customchat.builddrafts import BuildDrafts
+from chatify.builddrafts import BuildDrafts
 class Drafts(unittest.TestCase):
  def test_restart_owner_isolation_and_no_apply(self):
   with tempfile.TemporaryDirectory() as d:
@@ -12,7 +12,7 @@ class Drafts(unittest.TestCase):
  def test_section_draft_preserves_scope_and_can_be_reviewed_after_restart(self):
   import yaml
   from pathlib import Path
-  from customchat import schema,appbuilder
+  from chatify import schema,appbuilder
   with tempfile.TemporaryDirectory() as d:
    cfg=schema.validate({});path=Path(d)/'app.yaml';path.write_text(yaml.safe_dump(cfg));cfg['_dir']=d;cfg['_path']=str(path)
    record=BuildDrafts(d).put('owner','app: {title: Section draft}',sections=['app'])
@@ -31,7 +31,7 @@ class Drafts(unittest.TestCase):
 
  def test_inferred_scope_and_legacy_expanded_record_recovery(self):
   import json,yaml
-  from customchat import schema
+  from chatify import schema
   with tempfile.TemporaryDirectory() as d:
    store=BuildDrafts(d);record=store.put('owner','app: {title: Inferred}')
    self.assertEqual(record['sections'],['app'])

@@ -1,6 +1,6 @@
 import unittest,time
-from customchat.workspace import Reviews,archive,validate_archive,SettingsHistory
-from customchat.store import Store
+from chatify.workspace import Reviews,archive,validate_archive,SettingsHistory
+from chatify.store import Store
 class WorkspaceTests(unittest.TestCase):
  def test_owner_bound(self):
   r=Reviews();t=r.put('a','backup',[1])

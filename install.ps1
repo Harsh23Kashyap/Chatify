@@ -27,7 +27,7 @@ $shared = Join-Path $PSScriptRoot 'scripts/install.py'
 $downloaded = $false
 if (-not (Test-Path $shared)) {
   $shared = Join-Path ([IO.Path]::GetTempPath()) ([IO.Path]::GetRandomFileName() + '.py')
-  Invoke-WebRequest https://raw.githubusercontent.com/Harsh23Kashyap/customchat/main/scripts/install.py -OutFile $shared
+  Invoke-WebRequest https://raw.githubusercontent.com/Harsh23Kashyap/chatify/main/scripts/install.py -OutFile $shared
   $downloaded = $true
 }
 if ($args -contains '--offline') { $env:UV_OFFLINE = '1' }

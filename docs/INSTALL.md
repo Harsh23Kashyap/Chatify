@@ -1,22 +1,22 @@
 # One-command local start
 
-Choose uvx as the main route. It runs a Python tool in an isolated cached environment and can obtain Python if missing. CustomChat keeps your workspace outside that cache. You need uv first; the Git route also needs Git and internet. This is a prerequisite-based choice, not a claim that most people already have uv installed.
+Choose uvx as the main route. It runs a Python tool in an isolated cached environment and can obtain Python if missing. Chatify keeps your workspace outside that cache. You need uv first; the Git route also needs Git and internet. This is a prerequisite-based choice, not a claim that most people already have uv installed.
 
 ## Published package and one-command start
 
-CustomChat 0.1.5 is the current release at https://pypi.org/project/customchat-app/ . With uv already installed:
+Chatify 0.1.5 is the current release at https://pypi.org/project/chatify-app/ . With uv already installed:
 
 ```sh
-uvx customchat-app start
+uvx chatify-app start
 # Pin a release:
-uvx customchat-app@0.1.5 start
+uvx chatify-app@0.1.5 start
 # Choose a workspace and hide configuration:
-uvx customchat-app start --directory my-chat --no-browser --lock-config
+uvx chatify-app start --directory my-chat --no-browser --lock-config
 ```
 
 For a fresh computer, use the README's OS-specific one-command bootstrap. It downloads uv and managed Python if absent, then runs the pinned package with `uv tool run`, the same operation as uvx. Git is not needed. The app starts offline Demo, opens or prints its local URL and preserves your workspace outside the tool environment. Ctrl+C stops it. API keys are only needed if you choose a live AI provider.
 
-Do not use `uvx customchat` or `pip install customchat`: that distribution belongs to another project.
+Do not use `uvx chatify` or `pip install chatify`: that distribution belongs to another project.
 
 ## Installer entry scripts
 
@@ -32,11 +32,11 @@ sh install.sh
 ./install.ps1
 ```
 
-The scripts download uv from its official installer only if missing, then obtain Python3.12 and install CustomChat in a private environment. No sudo or Git is needed for this route. Internet is required for first setup. Default workspace: `customchat-app`; installer state: `~/.customchat/install`. Existing workspace files stay untouched. A ready environment is skipped; an incomplete or broken installer-owned environment is rebuilt. Busy ports fall forward and active healthy runs are reused. A concurrent installer exits with a clear error.
+The scripts download uv from its official installer only if missing, then obtain Python3.12 and install Chatify in a private environment. No sudo or Git is needed for this route. Internet is required for first setup. Default workspace: `chatify-app`; installer state: `~/.chatify/install`. Existing workspace files stay untouched. A ready environment is skipped; an incomplete or broken installer-owned environment is rebuilt. Busy ports fall forward and active healthy runs are reused. A concurrent installer exits with a clear error.
 
 Use `--directory my-chat`, `--no-browser`, `--lock-config`, or `--prepare-only` as needed. `--offline` reuses an already prepared environment/cache; it cannot create missing downloads. The source is pinned in `scripts/install.py`, not a registry release. Installer scripts execute downloaded software: review them before running. Network, disk, permission and platform failures are reported, not a guarantee that every machine works.
 
-Linux: eight scenarios repeated ten times passed. A separate isolated absent-uv/Python bootstrap downloaded both and passed health, Demo citations and config lock. The GitHub Actions workflow repeats the scenario matrix ten times on ubuntu, macOS and Windows; all3OS passed in https://github.com/Harsh23Kashyap/customchat/actions/runs/37570556695 (240scenario checks). The macOS startup stall was Python HTTPServer reverse DNS; the server now avoids that unused lookup, with a regression test. Its entry-script step uses preinstalled uv, so it does not prove absent-uv bootstrap on those OSes.
+Linux: eight scenarios repeated ten times passed. A separate isolated absent-uv/Python bootstrap downloaded both and passed health, Demo citations and config lock. The GitHub Actions workflow repeats the scenario matrix ten times on ubuntu, macOS and Windows; all3OS passed in https://github.com/Harsh23Kashyap/chatify/actions/runs/37570556695 (240scenario checks). The macOS startup stall was Python HTTPServer reverse DNS; the server now avoids that unused lookup, with a regression test. Its entry-script step uses preinstalled uv, so it does not prove absent-uv bootstrap on those OSes.
 
 ## Other routes
 
@@ -51,7 +51,7 @@ Linux: eight scenarios repeated ten times passed. A separate isolated absent-uv/
 For pipx users:
 
 ```sh
-pipx run --spec git+https://github.com/Harsh23Kashyap/customchat.git@main customchat start
+pipx run --spec git+https://github.com/Harsh23Kashyap/chatify.git@main chatify start
 ```
 
 The pipx route follows its documented source-install syntax but was not executed here. The original uvx test used existing uv; a later isolated Linux installer test downloaded uv and managed Python. We do not have reliable measurements of what tools target users already have installed. Existing `python3 setup_and_run.py` remains the fallback for users who have Python and a clone.
@@ -60,7 +60,7 @@ The pipx route follows its documented source-install syntax but was not executed
 
 A wheel and source distribution were built locally. In a new home/workspace and empty uv cache, the wheel installed independently of the repo and served health 200, mock provider, a Demo answer with 2 local citations, and 404 for settings in locked mode. The Git source command was also executed with a new home and empty uv cache, resolving commit eecc832bf57821692d1cceddf04f995624090d77, and passed the same health/chat/lock checks. Packaged web assets and Demo template were inspected. API-verified; browser pixels not inspected for this install path. Existing source tests plus launcher regressions pass. The original uvx test was Linux only. The later installer matrix passed on real Ubuntu/macOS/Windows runners, each with uv preinstalled; WSL, Docker and public hosting remain unverified.
 
-Version 0.1.0 passed build and six artifact/bootstrap acceptance jobs on Ubuntu/macOS/Windows with Python 3.10/3.12: https://github.com/Harsh23Kashyap/customchat/actions/runs/37623429389 . The published package was then installed and run in a fresh Linux home/cache with no uv/Python/Git available, passing health 200 and cited Demo. Publication completed after account verification and token-free trusted-publisher setup.
+Version 0.1.0 passed build and six artifact/bootstrap acceptance jobs on Ubuntu/macOS/Windows with Python 3.10/3.12: https://github.com/Harsh23Kashyap/chatify/actions/runs/37623429389 . The published package was then installed and run in a fresh Linux home/cache with no uv/Python/Git available, passing health 200 and cited Demo. Publication completed after account verification and token-free trusted-publisher setup.
 
 ## Sources checked October 7, 2026
 

@@ -1,5 +1,5 @@
 import os, unittest
-W = os.path.join(os.path.dirname(__file__), "..", "customchat", "web")
+W = os.path.join(os.path.dirname(__file__), "..", "chatify", "web")
 
 
 class UiErrors(unittest.TestCase):

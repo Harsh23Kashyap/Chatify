@@ -1,6 +1,6 @@
 // Run with node tests/model_shortlist.cjs. Tests the production selector directly.
 const assert=require('assert'),fs=require('fs'),vm=require('vm'),path=require('path');
-const src=fs.readFileSync(path.join(__dirname,'../customchat/web/settings.js'),'utf8');
+const src=fs.readFileSync(path.join(__dirname,'../chatify/web/settings.js'),'utf8');
 const begin=src.indexOf('function modelShortlist('),end=src.indexOf('async function loadModels(',begin);
 const ctx={};vm.createContext(ctx);vm.runInContext(src.slice(begin,end),ctx);
 const ids=['gpt-6.1-sol','gpt-6-astra','gpt-6-luna','gpt-6-sol','gpt-5.6-sol','gpt-5-mini','gpt-5-nano','gpt-4.1','gpt-4.1-mini','gpt-4o-mini','gpt-4o-mini-tts','gpt-4o-transcribe','gpt-5-codex','gpt-5.6-terra'];

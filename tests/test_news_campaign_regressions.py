@@ -1,8 +1,8 @@
 import unittest, tempfile, os
-from customchat import schema
-from customchat.pipeline import Engine
-from customchat.store import Store
-from customchat.connectors.base import Evidence
+from chatify import schema
+from chatify.pipeline import Engine
+from chatify.store import Store
+from chatify.connectors.base import Evidence
 class NewsRegression(unittest.TestCase):
     def engine(self):
         cfg=schema.validate({'sources':[{'id':'feed','type':'http_json','label':'Feed','url':'https://example.org/a','results_path':'items'}],'retrieval':{'cache_ttl':100}})

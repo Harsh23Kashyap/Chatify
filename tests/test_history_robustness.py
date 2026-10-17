@@ -1,9 +1,9 @@
 """Conversation awareness regressions. No paid calls or network providers."""
 import unittest
 from unittest.mock import patch
-from customchat import schema, providers
-from customchat.pipeline import Engine
-from customchat.store import Store
+from chatify import schema, providers
+from chatify.pipeline import Engine
+from chatify.store import Store
 
 
 class HistoryRobustness(unittest.TestCase):

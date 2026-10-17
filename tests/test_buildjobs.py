@@ -1,7 +1,7 @@
 import copy,json,time,unittest,yaml,threading
 import unittest.mock
 from pathlib import Path
-from customchat import buildjobs,schema,theme,prompts,generators
+from chatify import buildjobs,schema,theme,prompts,generators
 class Fixture:
  def __init__(self):self.calls=[];self.fail=None
  def complete(self,messages):
@@ -25,10 +25,10 @@ class Jobs(unittest.TestCase):
    if data['state']!='running':return data
    time.sleep(.01)
   self.fail('timeout')
- @unittest.mock.patch('customchat.buildimages.capability',return_value={'available':False,'note':'fixture'})
+ @unittest.mock.patch('chatify.buildimages.capability',return_value={'available':False,'note':'fixture'})
  def test_complete(self,cap):
   jobs=buildjobs.BuildJobs();f=Fixture();data=jobs.start('owner',f,schema.DEFAULTS,{'brief':'Garden advice'});data=self.wait(jobs,data['id']);self.assertEqual(data['state'],'done',data);raw=yaml.safe_load(data['yaml']);self.assertEqual(set(raw['pipeline_prompts']['text']),set(prompts.STAGES));self.assertEqual(set(raw['appearance']),set(theme.DEFAULT_CLEAN()));self.assertLessEqual(data['calls'],36);self.assertEqual(data['completed'],data['total']);self.assertEqual(len(f.calls),data['total']+1);self.assertRaises(ValueError,jobs.view,'wrong',data['id'])
- @unittest.mock.patch('customchat.buildimages.capability',return_value={'available':False,'note':'fixture'})
+ @unittest.mock.patch('chatify.buildimages.capability',return_value={'available':False,'note':'fixture'})
  def test_retry_only_failed(self,cap):
   jobs=buildjobs.BuildJobs();f=Fixture();f.fail=next(iter(prompts.STAGES));d=jobs.start('owner',f,schema.DEFAULTS,{'brief':'Garden advice'});d=self.wait(jobs,d['id']);self.assertEqual(d['state'],'partial');calls=d['calls'];jobs.retry('owner',d['id']);d=self.wait(jobs,d['id']);self.assertEqual(d['state'],'done',d);self.assertEqual(d['calls'],calls+2)
  def test_provider_block_stops_pending_calls(self):
@@ -59,7 +59,7 @@ class SafePatchChecks(unittest.TestCase):
    job=self.part_job(json.dumps(dict(cfg['budget'],daily_questions=5)),brief,cfg)
    buildjobs.BuildJobs()._draft_part(job,'config:budget',dict(buildjobs.PARTS)['config:budget'])
    self.assertEqual(job['parts']['config:budget'],cfg['budget'])
- @unittest.mock.patch('customchat.buildimages.capability',return_value={'available':False,'note':'fixture'})
+ @unittest.mock.patch('chatify.buildimages.capability',return_value={'available':False,'note':'fixture'})
  def test_blank_wording_retry_retains_successful_parts(self,cap):
   class Blank(Fixture):
    blank=True
@@ -78,7 +78,7 @@ class SafePatchChecks(unittest.TestCase):
   job=self.part_job(malformed)
   buildjobs.BuildJobs()._draft_part(job,'helper:clean_query',dict(buildjobs.PARTS)['helper:clean_query'])
   self.assertEqual(job['parts']['helper:clean_query']['code'],"re.sub(r'\\s+', ' ', query)");self.assertEqual(job['calls'],1)
- @unittest.mock.patch('customchat.buildimages.capability',return_value={'available':False,'note':'fixture'})
+ @unittest.mock.patch('chatify.buildimages.capability',return_value={'available':False,'note':'fixture'})
  def test_review_context_keeps_unknowns_and_real_concerns(self,cap):
   class Review(Fixture):
    def complete(self,m):
@@ -90,7 +90,7 @@ class SafePatchChecks(unittest.TestCase):
   review=[m for m in f.calls if 'Application-provided context' in m][0]
   for text in ['no local count limit','no local dollar cap','not checked by this review','not tested','remaining deployment prerequisites','Preserve genuine safety risks']:
    self.assertIn(text,review)
- @unittest.mock.patch('customchat.buildimages.capability',return_value={'available':False,'note':'fixture'})
+ @unittest.mock.patch('chatify.buildimages.capability',return_value={'available':False,'note':'fixture'})
  def test_review_verdict_never_erases_concerns_or_uncertainty(self,cap):
   for response,expected in [({'issues':[],'ready':False},'inconsistent'),({'issues':['Unsupported medical claim'],'ready':True},'inconsistent'),({'issues':['Cannot assess helper endpoint'],'ready':False},'concerns'),({'issues':[],'setup_notes':['Add sources'],'ready':True},'completed')]:
    class R(Fixture):
@@ -102,7 +102,7 @@ class SafePatchChecks(unittest.TestCase):
 
 class RetainedFailureMatrix(unittest.TestCase):
  wait=Jobs.wait
- @unittest.mock.patch('customchat.buildimages.capability',return_value={'available':False,'note':'fixture'})
+ @unittest.mock.patch('chatify.buildimages.capability',return_value={'available':False,'note':'fixture'})
  def test_targeted_contract_failures_retry_only_owner_and_keep_success(self,cap):
   for target,broken in [('prompt:answer',{'text':'','on':True}),('helper:clean_query',{'brief':'Fixture','code':'def broken(:'}),('config:sources',[{'type':'url','url':'https://not-supplied.invalid/fixture'}]),('prompt:standalone',{'text':'Example question: What should I eat? Rewrite question: What diet is best?','on':True})]:
    with self.subTest(target=target):
@@ -137,7 +137,7 @@ class BrandingRetryTests(unittest.TestCase):
   job={'id':'x','owner':'owner','state':'partial','calls':31,'errors':{'final':'App branding was not tailored to the request'},'parts':{k:copy.deepcopy(v['defaults']) if 'defaults' in v else {} for k,v in buildjobs.PARTS},'cfg':cfg,'active':set(),'phase':'Final local validation','notice':'fixture','yaml':None,'created':time.time()}
   jobs.jobs['x']=job
   before=copy.deepcopy(job['parts'])
-  with patch('customchat.buildjobs.threading.Thread') as thread:
+  with patch('chatify.buildjobs.threading.Thread') as thread:
    jobs.retry('owner','x')
    selected=thread.call_args.kwargs['args'][1]
   self.assertEqual([k for k,_ in selected],['config:app'])
@@ -150,7 +150,7 @@ class DomainPromptChecks(SafePatchChecks):
   stage='question_check';job=self.part_job(json.dumps({'text':prompts.STAGES[stage]['default'],'on':True}),'A trip planning app')
   with self.assertRaisesRegex(ValueError,'app-specific prompt'):buildjobs.BuildJobs()._draft_part(job,'prompt:'+stage,dict(buildjobs.PARTS)['prompt:'+stage])
  def test_every_stage_request_has_domain_and_stage_contract(self):
-  from customchat import generator_design
+  from chatify import generator_design
   for domain in ['Trip planning','Diet app','Sports app']:
    for stage in prompts.STAGES:
     job=self.part_job(json.dumps({'text':generator_design.template(stage,domain),'on':True}),domain)

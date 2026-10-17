@@ -1,5 +1,5 @@
 // Direct production regressions; browser counterparts exercise real UI.
 const fs=require('fs'),vm=require('vm'),assert=require('assert'),path=require('path');
-const src=fs.readFileSync(path.join(__dirname,'../customchat/web/app.js'),'utf8');
+const src=fs.readFileSync(path.join(__dirname,'../chatify/web/app.js'),'utf8');
 (async()=>{const calls=[],S={chat:null,temp:true};let reset=false,draws=0;const context={S,setTemp:on=>{reset=!on;S.temp=on},api:async url=>{calls.push(url);return [{chat:'existing-chat',topic:'topic-1'}]},$:()=>({textContent:'',classList:{remove:()=>{}}}),drawThread:()=>draws++};vm.createContext(context);vm.runInContext(src.slice(src.indexOf('async function openTopic('),src.indexOf('function newChat(')),context);await context.openTopic('topic-1');assert(reset);assert.equal(S.chat,'existing-chat');assert.equal(calls.length,1);assert.equal(calls[0],'/api/topic-turns?topic=topic-1');assert.equal(draws,1);
 assert(src.includes('"#thread .row.u"'));assert(!src.includes('"#thread .q"'));const topic=src.slice(src.indexOf('rows.forEach((t) => list.append'),src.indexOf('async function openChat'));assert(!topic.includes('+ c.title'));console.log('PASS topic mode, existing-chat selection, no empty-chat creation, real question selector, topic rename scope');})().catch(e=>{console.error(e);process.exit(1)});

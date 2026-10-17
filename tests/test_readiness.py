@@ -1,6 +1,6 @@
 import unittest
-from customchat import schema
-from customchat.readiness import check
+from chatify import schema
+from chatify.readiness import check
 class ReadinessTests(unittest.TestCase):
  def test_partial_uses_defaults(self):
   raw={'app':{'title':'Partial'}};r=check(schema.validate(raw),provided=raw);self.assertTrue(r['can_load']);self.assertTrue(any(x['kind']=='default' for x in r['rows']))

@@ -1,9 +1,9 @@
 import tempfile, unittest
 from concurrent.futures import ThreadPoolExecutor
 from unittest.mock import patch
-from customchat.budget import Budget, BudgetError, clean
-from customchat.providers import Mock
-from customchat import schema
+from chatify.budget import Budget, BudgetError, clean
+from chatify.providers import Mock
+from chatify import schema
 
 class BudgetTests(unittest.TestCase):
     def test_global_user_quotas(self):
@@ -52,9 +52,9 @@ class BudgetTests(unittest.TestCase):
 class BudgetPermissions(unittest.TestCase):
     def test_endpoint_auth_and_lock(self):
         import threading, urllib.request, urllib.error
-        from customchat import server
-        from customchat.pipeline import Engine
-        from customchat.store import Store
+        from chatify import server
+        from chatify.pipeline import Engine
+        from chatify.store import Store
         cfg=schema.validate({'auth':{'mode':'token','token_env':'BUDGET_TEST_TOKEN'},'storage':{'path':':memory:'}})
         engine=Engine(cfg,Store(':memory:'));srv=server.LocalHTTPServer(('127.0.0.1',0),server.make_handler(cfg,engine))
         th=threading.Thread(target=srv.serve_forever,daemon=True);th.start();url='http://127.0.0.1:%d/api/budget'%srv.server_port
