@@ -1,3 +1,7 @@
+## 0.2.3 - Complete the rename paths
+
+Updated README documentation links and installer source pin to this Chatify release. Corrected stale release documentation and the historical rename command: use `uvx --from chatify-app chatify`, never bare `uvx chatify` (a different project). Added a release-pin regression check.
+
 ## 0.2.2 - Configuration compatibility
 
 Keep the configuration page available when CHATIFY_CONFIG is set to on. Both the new and legacy environment names use the same lock parsing.
@@ -8,11 +12,11 @@ README screenshots retaken from the renamed app, demo workspace now titled Chati
 
 ## 0.2.0 - Chatify
 
-CustomChat is now Chatify. The PyPI package is `chatify-app` (`pip install chatify-app`, `uvx chatify`), the command is `chatify`, and the repo is github.com/Harsh23Kashyap/Chatify. Old `customchat` / `customchat-app` commands keep working as aliases, and the old `CUSTOMCHAT_DB_URL`, `CUSTOMCHAT_CONFIG` and `CUSTOMCHAT_INSTALL_SOURCE` environment variables are still read as fallbacks.
+CustomChat is now Chatify. The PyPI package is `chatify-app` (`pip install chatify-app`, `uvx --from chatify-app chatify`), the command is `chatify`, and the repo is github.com/Harsh23Kashyap/Chatify. Old `customchat` / `customchat-app` commands keep working as aliases, and the old `CUSTOMCHAT_DB_URL`, `CUSTOMCHAT_CONFIG` and `CUSTOMCHAT_INSTALL_SOURCE` environment variables are still read as fallbacks.
 
 ## 0.1.36 - Rename notice
 
-CustomChat is now Chatify. New installs and updates: `chatify-app` on PyPI (`pip install chatify-app` or `uvx chatify`). This is the final `customchat-app` release; it stays installable for existing setups.
+CustomChat is now Chatify. New installs and updates: `chatify-app` on PyPI (`pip install chatify-app` or `uvx --from chatify-app chatify`). This is the final `customchat-app` release; it stays installable for existing setups.
 
 ## 0.1.35 - Accessible history navigation
 

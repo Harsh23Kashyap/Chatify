@@ -4,12 +4,12 @@ Choose uvx as the main route. It runs a Python tool in an isolated cached enviro
 
 ## Published package and one-command start
 
-Chatify 0.1.5 is the current release at https://pypi.org/project/chatify-app/ . With uv already installed:
+Chatify 0.2.3 is the current release at https://pypi.org/project/chatify-app/ . With uv already installed:
 
 ```sh
 uvx chatify-app start
 # Pin a release:
-uvx chatify-app@0.1.5 start
+uvx chatify-app@0.2.3 start
 # Choose a workspace and hide configuration:
 uvx chatify-app start --directory my-chat --no-browser --lock-config
 ```

@@ -16,7 +16,7 @@ uvx chatify-app start --directory my-chat
 
 The app opens in your browser. Your settings, documents and chats stay in `my-chat`. Press Ctrl+C to stop; run the same command from the same folder to return.
 
-Without uv, use the [one-command installer for macOS, Linux or Windows](https://github.com/Harsh23Kashyap/chatify/blob/v0.1.27/docs/INSTALL.md). It installs what it needs without changing your system Python. For pip, install `chatify-app` in a virtual environment with Python 3.10 or newer. The package named `chatify` on PyPI is a different project.
+Without uv, use the [one-command installer for macOS, Linux or Windows](https://github.com/Harsh23Kashyap/Chatify/blob/v0.2.3/docs/INSTALL.md). It installs what it needs without changing your system Python. For pip, install `chatify-app` in a virtual environment with Python 3.10 or newer. The package named `chatify` on PyPI is a different project.
 
 ## Configure
 
@@ -32,7 +32,7 @@ For help, type in **Find a setting** or open **Guide**. **Ask AI** asks your sel
 
 Keep keys out of YAML and Git. Check sources for important answers; citations are not a guarantee of correctness.
 
-[Install options](https://github.com/Harsh23Kashyap/chatify/blob/v0.1.27/docs/INSTALL.md) · [Configuration reference](https://github.com/Harsh23Kashyap/chatify/blob/v0.1.27/docs/DESIGN.md) · [Hosting](https://github.com/Harsh23Kashyap/chatify/blob/v0.1.27/docs/DEPLOY_OPTIONS.md)
+[Install options](https://github.com/Harsh23Kashyap/Chatify/blob/v0.2.3/docs/INSTALL.md) · [Configuration reference](https://github.com/Harsh23Kashyap/Chatify/blob/v0.2.3/docs/DESIGN.md) · [Hosting](https://github.com/Harsh23Kashyap/Chatify/blob/v0.2.3/docs/DEPLOY_OPTIONS.md)
 
 MIT license. Harsh Kashyap and Shela Wu. Advisor: Dennis Shasha. Related project: [Custom-Nerd](https://github.com/Harsh23Kashyap/Custom-Nerd).
 
