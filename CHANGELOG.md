@@ -1,3 +1,7 @@
+## 0.1.36 - Rename notice
+
+CustomChat is now Chatify. New installs and updates: `chatify-app` on PyPI (`pip install chatify-app` or `uvx chatify`). This is the final `customchat-app` release; it stays installable for existing setups.
+
 ## 0.1.35 - Accessible history navigation
 
 - Give Chats and Topics proper tab semantics, selected state and arrow/Home/End keyboard navigation.

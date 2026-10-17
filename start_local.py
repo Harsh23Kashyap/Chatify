@@ -6,7 +6,7 @@ import subprocess
 import sys
 import venv
 
-VERSION = '0.1.35'
+VERSION = '0.1.36'
 
 
 def main(args=None):
