@@ -1,3 +1,7 @@
+## 0.2.2 - Configuration compatibility
+
+Keep the configuration page available when CHATIFY_CONFIG is set to on. Both the new and legacy environment names use the same lock parsing.
+
 ## 0.2.1 - Chatify screenshots and docs
 
 README screenshots retaken from the renamed app, demo workspace now titled Chatify, and remaining docs references updated.

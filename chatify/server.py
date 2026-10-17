@@ -827,7 +827,7 @@ ERR_PAGES = {
 
 
 # Config lock: CHATIFY_CONFIG=off serves the chat only. No settings page, no config or key endpoints.
-LOCKED = os.environ.get("CHATIFY_CONFIG") or os.environ.get("CUSTOMCHAT_CONFIG", "").strip().lower() in ("off", "0", "false", "locked", "disabled")
+LOCKED = (os.environ.get("CHATIFY_CONFIG") or os.environ.get("CUSTOMCHAT_CONFIG", "")).strip().lower() in ("off", "0", "false", "locked", "disabled")
 LOCKED_PAGES = {"/settings.html", "/appbuilder.js", "/settings.js", "/settings.css", "/panels.js", "/pipeline.js", "/codeeditor.js", "/codeeditor.LICENSE.txt", "/workspace.js", "/splitters.js", "/sourcekeys.js"}
 LOCKED_API = ("/api/source-credentials","/api/budget", "/api/docs-freshness", "/api/app-export", "/api/app-export-check", "/api/settings", "/api/provider", "/api/hardware", "/api/prompts", "/api/codegen", "/api/websearch", "/api/catalog", "/api/ollama", "/api/states", "/api/nerds", "/api/workspace")
 
