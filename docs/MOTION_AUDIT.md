@@ -7,7 +7,7 @@ Built 80, partial 11 (eased), n/a 10, dropped 4 (owner approved), of 105.
 | # | Item | Status |
 |---|---|---|
 | 1 | Chat canvas entrance | built |
-| 2 | “Docs Chat” title | built |
+| 2 | “Chatify” title | built |
 | 3 | Example question rows | built |
 | 4 | Example-question chevron | built |
 | 5 | Empty-state breathing hierarchy | built |

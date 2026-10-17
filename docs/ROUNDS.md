@@ -208,7 +208,7 @@ Logo upload with in-browser plain-background removal and feathered edges (shrunk
 ## Pass 26 (from B2's critique of passes 24-25)
 - Related questions stack one per line, wrap, and align to the answer edge instead of running off the right side.
 - Citation markers [1] [2] have a small gap.
-- Three real agents run end to end on gpt-6-luna: Docs Chat (local files), Acme Support (help-center files with a support prompt), Nutrition Evidence (live PubMed). Results in the report to B2.
+- Three real agents run end to end on gpt-6-luna: Chatify (local files), Acme Support (help-center files with a support prompt), Nutrition Evidence (live PubMed). Results in the report to B2.
 
 ## Pass 27
 - Copy / Helpful / More row text now starts at the same left edge as the Related questions (the first button lost its 9px inset).

@@ -4,7 +4,7 @@ A chat app for your documents. Ask a question, follow the citations, and keep th
 
 It starts in offline Demo mode, with no API key or paid calls. Demo uses built-in answers, not a live AI model.
 
-![Chatify answering a question with sources in offline Demo mode](https://raw.githubusercontent.com/Harsh23Kashyap/chatify/v0.1.27/docs/screenshots/chat.png)
+![Chatify answering a question with sources in offline Demo mode](https://raw.githubusercontent.com/Harsh23Kashyap/Chatify/main/docs/screenshots/chat.png)
 
 ## Install and start
 
@@ -28,7 +28,7 @@ For help, type in **Find a setting** or open **Guide**. **Ask AI** asks your sel
 
 **Build with AI** drafts a setup from your description. Choose a provider and model first, describe the app, then review, validate and save the draft. Restart to apply it. Generated code does not run automatically. Model requests may cost money.
 
-![Build with AI describe step with an example prompt](https://raw.githubusercontent.com/Harsh23Kashyap/chatify/v0.1.27/docs/screenshots/build-with-ai.png)
+![Build with AI describe step with an example prompt](https://raw.githubusercontent.com/Harsh23Kashyap/Chatify/main/docs/screenshots/build-with-ai.png)
 
 Keep keys out of YAML and Git. Check sources for important answers; citations are not a guarantee of correctness.
 

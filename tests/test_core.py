@@ -141,7 +141,7 @@ class Http(unittest.TestCase):
     def test_flow(self):
         self.assertEqual(self.call("/api/health")[0], 200)
         code, body = self.call("/")
-        self.assertIn(b"Docs Chat", body)
+        self.assertIn(b"Chatify", body)
         code, body = self.call("/api/ask", {"question": "What is Chatify?"})
         r = json.loads(body); self.assertEqual(code, 200); self.assertIn("[1]", r["answer"])
         self.assertEqual(len(json.loads(self.call("/api/turns?chat=" + r["chat"])[1])), 1)
