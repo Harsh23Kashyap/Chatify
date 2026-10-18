@@ -552,7 +552,7 @@ async function send() {
   } else {
     toast((err || "Something went wrong").replace(/[.?!]+$/, "") + ".", "Retry", async () => { if(S.busy)throw Error("Wait for the current answer or stop it first."); if($("#q").value.trim() && $("#q").value.trim()!==q)throw Error("Your new draft is still here. Send or clear it before retrying the earlier question."); $("#q").value=q;await send(); });
   }
-  status.dataset.state=result?"done":"error"; status.textContent = result ? "Reply ready" : (err || "Reply interrupted"); setTimeout(() => { if (!S.busy) status.hidden = true; }, 2500);
+  status.dataset.state=result?"done":"error"; status.textContent = result ? "Reply ready" : ""; status.hidden = !result; setTimeout(() => { if (!S.busy) status.hidden = true; }, 2500);
   const readingEarlier = th.scrollHeight - th.scrollTop - th.clientHeight > 100;
   if (result && readingEarlier) $("#jump").dataset.reply = "ready";
   S.busy = false; applyIcons(); sendIcon("send", "Send"); drawThread(); loadList(); $("#q").focus({preventScroll:true});

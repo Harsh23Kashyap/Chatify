@@ -1,3 +1,8 @@
+## 0.2.7
+
+- Chat names in the sidebar use their full width again instead of truncating to a few characters; pin, rename and delete actions overlay the end of the row on hover or focus, with the name fading underneath
+- A failed question now shows a single error message with a Retry button instead of the same message in two places at once
+
 ## 0.2.6
 
 - Answers use the full reading column on desktop instead of shrinking to their shortest line
