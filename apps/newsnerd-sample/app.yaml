@@ -28,6 +28,7 @@ provider:
   api_key_env: UNUSED_DEMO_KEY
   temperature: 0.2
   timeout: 120
+  max_output_tokens: 4096
   fallback: null
 sources:
 - id: newsnerd-guide

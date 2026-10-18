@@ -1,3 +1,11 @@
+## 0.2.6
+
+- Answers use the full reading column on desktop instead of shrinking to their shortest line
+- Composer footer no longer repeats itself: one sources-and-citations line, one disclaimer
+- The no-evidence state is a small muted note with a small icon instead of a large heading
+- Scroll-to-latest button no longer floats over the welcome screen; it only appears inside chats
+- Repaired four more stale strict UI tests (answer undo, view routing, multi-topic cancel, icon targets) and the NewsNerd sample config
+
 ## 0.2.5
 
 - Fix the version shown by `chatify --version`, which still read 0.2.3 in the 0.2.4 build, and add a test so the package version, project metadata and installer release can never drift apart again

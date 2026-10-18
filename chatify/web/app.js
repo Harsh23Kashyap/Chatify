@@ -398,7 +398,8 @@ function syncLatest() {
   const away = th.scrollHeight - th.scrollTop - th.clientHeight > 100;
   if (!away) jump.dataset.reply = "";
   const ready = jump.dataset.reply === "ready";
-  jump.classList.toggle("show", away); jump.tabIndex = away ? 0 : -1;
+  const showJump = away && !th.querySelector(".hero");
+  jump.classList.toggle("show", showJump); jump.tabIndex = showJump ? 0 : -1;
   jump.setAttribute("aria-label", ready ? "Reply ready. Scroll to latest" : "Scroll to latest");
   jump.title = ready ? "Reply ready. Scroll to latest" : "Scroll to latest";
   jump.classList.toggle("reply-ready", ready);

@@ -7,6 +7,6 @@ class StreamReading(unittest.TestCase):
   self.assertIn('if (follow) th.scrollTop = th.scrollHeight',js)
  def test_reading_indicator_focus_and_composer_placement(self):
   js=(W/'app.js').read_text();css=(W/'style.css').read_text()
-  self.assertIn('Reply ready. Scroll to latest',js);self.assertIn('jump.tabIndex = away ? 0 : -1',js)
+  self.assertIn('Reply ready. Scroll to latest',js);self.assertIn('jump.tabIndex = showJump ? 0 : -1',js)
   self.assertIn('new ResizeObserver(syncLatest)',js);self.assertIn('.main>.jump{z-index:5}',css)
   self.assertIn('focus({preventScroll:true})',js)

@@ -190,6 +190,7 @@ html.preview .toolbar a.tb-link{pointer-events:none}
 .thread>*{max-width:var(--chat-max,720px);margin-left:auto;margin-right:auto}
 .thread>.row{margin-bottom:calc(14px*var(--dens,1))}
 .bubble{max-width:100%}.bubble.bb{padding:2px 0;background:transparent;border-radius:0;font-size:calc(15px*var(--fs,1));line-height:1.7}
+@media(min-width:761px){.row:not(.u)>.bubble.bb{flex:1 1 auto}}
 .row.u{justify-content:flex-start;flex-direction:row}.row.u .bubble.ub{margin-left:auto;max-width:85%;font-size:calc(15px*var(--fs,1))}
 .srcs{display:flex;flex-wrap:wrap;gap:6px;border:0;padding:0;margin:-4px auto 6px}
 .srcs button.s{display:inline-flex;gap:6px;width:auto;border:1px solid var(--line);border-radius:999px;padding:3px 10px;font-size:calc(12.5px*var(--fs,1));opacity:1;color:var(--mut)}
