@@ -1,6 +1,7 @@
-## 0.2.3 - Complete the rename paths
+## 0.2.5
 
-Updated README documentation links and installer source pin to this Chatify release. Corrected stale release documentation and the historical rename command: use `uvx --from chatify-app chatify`, never bare `uvx chatify` (a different project). Added a release-pin regression check.
+- Fix the version shown by `chatify --version`, which still read 0.2.3 in the 0.2.4 build, and add a test so the package version, project metadata and installer release can never drift apart again
+
 ## 0.2.4
 
 - Composer actions swap by context: dictate button when the box is empty, send once you type (with a speech-capable browser), send always present while an answer streams
@@ -10,6 +11,9 @@ Updated README documentation links and installer source pin to this Chatify rele
 - Answers now render fenced code blocks, each with its own Copy code button
 - Repaired stale strict UI tests (stream stop/retry, chat lifecycle, deleted chat topics) to match the current toast and sidebar behaviour
 
+## 0.2.3 - Complete the rename paths
+
+Updated README documentation links and installer source pin to this Chatify release. Corrected stale release documentation and the historical rename command: use `uvx --from chatify-app chatify`, never bare `uvx chatify` (a different project). Added a release-pin regression check.
 ## 0.2.2 - Configuration compatibility
 
 Keep the configuration page available when CHATIFY_CONFIG is set to on. Both the new and legacy environment names use the same lock parsing.
