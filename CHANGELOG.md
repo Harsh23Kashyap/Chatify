@@ -1,6 +1,14 @@
 ## 0.2.3 - Complete the rename paths
 
 Updated README documentation links and installer source pin to this Chatify release. Corrected stale release documentation and the historical rename command: use `uvx --from chatify-app chatify`, never bare `uvx chatify` (a different project). Added a release-pin regression check.
+## 0.2.4
+
+- Composer actions swap by context: dictate button when the box is empty, send once you type (with a speech-capable browser), send always present while an answer streams
+- Controls announce their current state: the source scope button and every custom dropdown now speak their value (for example, "Answer depth: Standard")
+- Keyboard shortcuts are exposed to assistive technology with aria-keyshortcuts (send, previous/next question, chat search)
+- Question box accessible name is now a full instruction; a sources-and-citations line joins the composer footer
+- Answers now render fenced code blocks, each with its own Copy code button
+- Repaired stale strict UI tests (stream stop/retry, chat lifecycle, deleted chat topics) to match the current toast and sidebar behaviour
 
 ## 0.2.2 - Configuration compatibility
 

@@ -82,6 +82,10 @@ function renderAnswer(text, evidence) {
   const cells=tableCells;
   for(let i=0;i<lines.length;i++) {
     const line=lines[i];
+    if(/^\s*```/.test(line)){const buf=[];i++;while(i<lines.length&&!/^\s*```\s*$/.test(lines[i])){buf.push(lines[i]);i++}
+      const wrap=el("div",{class:"codeblock-wrap"}),pre=el("pre",{class:"codeblock"}),code=el("code",{text:buf.join("\n")});pre.append(code);
+      const cp=el("button",{type:"button",class:"codeblock-copy","aria-label":"Copy code",onclick:async(ev)=>{const b=ev.currentTarget;try{await navigator.clipboard.writeText(code.textContent);b.textContent="Copied"}catch(e){b.textContent="Copy failed"}setTimeout(()=>{b.textContent="Copy"},1400)}},"Copy");
+      wrap.append(cp,pre);box.append(wrap);list=null;continue}
     if(line.includes("|")&&i+1<lines.length&&/^\s*\|?\s*:?-{3,}/.test(lines[i+1])) {
       list=null;const head=cells(line), table=el("table",{class:"answer-table"}), top=el("tr"),body=el("tbody");
       head.forEach(t=>{const th=el("th",{scope:"col"});inline(th,t,evidence);top.append(th)});
@@ -293,6 +297,7 @@ async function download(path, name) {
 
 function scopeChip() {
  const p=$("#scopeChip");p.replaceChildren();
+ $("#scopeBtn").setAttribute("aria-label","Source scope: "+(S.scope?("only "+(S.scope.document||S.scope.source)):"all documents"));
  if (S.scope) p.append(el("span",{class:"scope-selected-label",text:"Only " + (S.scope.document || S.scope.source),title:"Only " + (S.scope.document || S.scope.source)}),el("button",{class:"chip",onclick:()=>{S.scope=null;scopeChip();$("#scopeBtn").focus()}},"Clear"));
 }
 async function scopeDialog() {
@@ -378,7 +383,15 @@ function chartCard() {
   const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg"); svg.setAttribute("viewBox", "0 0 42 42"); svg.setAttribute("class", "donut"); svg.setAttribute("role", "img"); svg.setAttribute("aria-label", "Sample chart: groups of documents"); svg.innerHTML = ring;
   return el("div", { class: "chartcard" }, el("b", { text: "Sample chart: groups of documents" }), el("div", { class: "chartrow" }, svg, el("ul", {}, parts.map(([n, v, c]) => el("li", {}, el("i", { style: "background:" + c }), n + " " + v + "%")))));
 }
-function rdy() { const q = $("#q"), s = $("#send"); if (!q || !s) return; const on = !!q.value.trim(); s.disabled = !S.busy && !on; s.classList.toggle("idle", s.disabled); if (S.busy) return; if (on && !s.classList.contains("on")) { s.classList.add("ready"); setTimeout(() => s.classList.remove("ready"), 200); } s.classList.toggle("on", on); }
+function composerSwap() {
+  const s = $("#send"), m = $("#mic"); if (!s || !m) return;
+  const sr = !!(window.SpeechRecognition || window.webkitSpeechRecognition);
+  if (!sr) { s.hidden = false; return; }
+  const has = !!(($("#q") || {}).value || "").trim();
+  if (S.busy) { s.hidden = false; m.hidden = true; return; }
+  s.hidden = !has; m.hidden = has;
+}
+function rdy() { const q = $("#q"), s = $("#send"); if (!q || !s) return; const on = !!q.value.trim(); s.disabled = !S.busy && !on; s.classList.toggle("idle", s.disabled); if (S.busy) return; if (on && !s.classList.contains("on")) { s.classList.add("ready"); setTimeout(() => s.classList.remove("ready"), 200); } s.classList.toggle("on", on); composerSwap(); }
 function syncLatest() {
   const th = $("#thread"), jump = $("#jump"); if (!th || !jump) return;
   jump.style.bottom = ($(".composer")?.offsetHeight || 96) + 16 + "px";
@@ -753,7 +766,7 @@ async function profileDialog() {
 function setupMic() {
   const SR = window.SpeechRecognition || window.webkitSpeechRecognition; const m = $("#mic");
   if (!SR || !m) return;
-  m.hidden = false; m.replaceChildren(svg("mic"));
+  m.hidden = false; m.replaceChildren(svg("mic")); composerSwap();
   let rec = null;
   const reset = active => { if (rec !== active) return; rec = null; m.classList.remove("rec"); m.setAttribute("aria-label", "Dictate"); m.title = "Dictate a question"; m.setAttribute("aria-pressed", "false"); };
   m.title = "Dictate a question"; m.setAttribute("aria-pressed", "false");

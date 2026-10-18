@@ -933,3 +933,11 @@ html.reading-width-selected:not(.preview) body .composer>:is(.box,.cmeta,.pills,
 .history-action-error{font-size:13px;line-height:1.5;color:var(--mut);padding:8px 10px;overflow-wrap:anywhere}
 
 .rename-dialog label{display:block;margin:12px 0 8px;font-weight:600}.rename-dialog input{width:100%;box-sizing:border-box;min-height:44px;padding:10px 12px;border:1px solid var(--line);border-radius:8px;background:var(--soft);color:var(--ink);font:inherit}.rename-dialog button{min-height:44px}.rename-dialog .rename-error{margin-top:12px}.rename-dialog button[type=submit]{background:var(--brand);border-color:var(--brand);color:var(--on-brand)}
+/* R2/R6 deep-pass: hidden guard for swapped composer actions, fenced code blocks with copy */
+#send[hidden],#mic[hidden]{display:none}
+.codeblock-wrap{position:relative;margin:6px 0}
+pre.codeblock{margin:0;padding:12px 14px;background:rgba(0,0,0,.045);border:1px solid var(--line);border-radius:calc(10px*var(--rs,1));overflow-x:auto;font-size:.92em;line-height:1.5}
+pre.codeblock code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;white-space:pre}
+.codeblock-copy{position:absolute;top:6px;right:6px;font-size:11px;line-height:1;padding:6px 10px;min-height:28px;border-radius:7px;border:1px solid var(--line);background:var(--bg,#fff);color:inherit;cursor:pointer;opacity:.8}
+.codeblock-copy:hover,.codeblock-copy:focus-visible{opacity:1}
+:root[data-theme=dark] pre.codeblock{background:rgba(255,255,255,.06)}
