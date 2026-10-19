@@ -1,6 +1,6 @@
 # CustomChat
 
-> **Renamed.** CustomChat is now **Chatify**. New installs and all future updates live at [chatify-app](https://pypi.org/project/chatify-app/): `pip install chatify-app` or `uvx chatify`. This package (`customchat-app`) stays installable but will no longer be updated.
+> **Renamed.** CustomChat is now **Chatify**. New installs and all future updates live at [chatify-app](https://pypi.org/project/chatify-app/): `pip install chatify-app` or `uvx --from chatify-app chatify start`. This package (`customchat-app`) stays installable but will no longer be updated.
 
 A chat app for your documents. Ask a question, follow the citations, and keep the conversation going. Configure the model, sources and look in your browser.
 
