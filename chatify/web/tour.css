@@ -27,3 +27,7 @@ body:not(:has(#configGuide)) .cc-tour-progress i{background:var(--line)}
 body:not(:has(#configGuide)) .cc-tour-progress i.done{background:var(--brand)}
 body:not(:has(#configGuide)) .cc-tour button:focus-visible{outline-color:var(--brand)}
 body:not(:has(#configGuide)) .cc-tour-focus{border-color:var(--brand)}
+
+/* The walkthrough never blocks the page: clicks pass through the card body, its own buttons stay clickable. */
+.cc-tour{pointer-events:none}
+.cc-tour button,.cc-tour a{pointer-events:auto}

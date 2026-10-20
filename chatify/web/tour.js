@@ -40,8 +40,8 @@
       next.focus({preventScroll:true});
     }
     dialog.addEventListener('cancel',e=>{e.preventDefault();end()});
-    dialog.addEventListener('keydown',e=>{if(e.key==='ArrowRight'){e.preventDefault();dialog.querySelector('.cc-tour-next').click()}else if(e.key==='ArrowLeft'&&i){e.preventDefault();i--;draw()}});
-    window.addEventListener('resize',locate);window.addEventListener('scroll',locate,{passive:true});document.body.append(dialog);dialog.showModal();draw();
+    dialog.addEventListener('keydown',e=>{if(e.key==='Escape'){e.preventDefault();e.stopPropagation();end()}else if(e.key==='ArrowRight'){e.preventDefault();dialog.querySelector('.cc-tour-next').click()}else if(e.key==='ArrowLeft'&&i){e.preventDefault();i--;draw()}});
+    window.addEventListener('resize',locate);window.addEventListener('scroll',locate,{passive:true});document.body.append(dialog);dialog.show();draw();
   }
   const configSteps=[
     {title:'Four tabs, one setup',text:'Workspace loads and shares your Nerd. Answers controls models and sources. Appearance changes the look. Maintenance checks documents and limits. The selected tab shows its smaller sections beside the editor, or above it on a phone.',target:'#settingsNavTop',tabs:['Workspace','Answers','Appearance','Maintenance']},
