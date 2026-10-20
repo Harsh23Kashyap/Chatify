@@ -1,3 +1,7 @@
+## 0.2.9
+
+- Add a demo video to the README
+
 ## 0.2.7
 
 - Chat names in the sidebar use their full width again instead of truncating to a few characters; pin, rename and delete actions overlay the end of the row on hover or focus, with the name fading underneath
