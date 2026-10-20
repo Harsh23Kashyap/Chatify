@@ -1,5 +1,5 @@
 """Owner-scoped local draft snapshots. No provider calls or runtime application."""
-import hashlib,json,os,tempfile,threading,time,uuid
+import hashlib,json,os,re,tempfile,threading,time,uuid
 from pathlib import Path
 class BuildDrafts:
  def __init__(self,folder):self.folder=Path(folder)/'build-drafts';self.lock=threading.RLock()
@@ -11,8 +11,11 @@ class BuildDrafts:
   from .appbuilder import validate
   import yaml
   clean=validate(yaml_text)
+  cred_words={'key','apikey','password','passwd','secret','token','credentials'}
+  def cred(name):
+   return bool(cred_words & set(re.split(r'[^a-z0-9]+',str(name).lower())))
   def scrub(value):
-   if isinstance(value,dict):return {k:('' if any(x in k.lower() for x in ('api_key','password','secret','token')) else scrub(v)) for k,v in value.items()}
+   if isinstance(value,dict):return {k:(scrub(v) if isinstance(v,(dict,list)) else ('' if cred(k) and isinstance(v,str) else v)) for k,v in value.items()}
    if isinstance(value,list):return [scrub(v) for v in value]
    return value
   selected=set(yaml.safe_load(yaml_text))
