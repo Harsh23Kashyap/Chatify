@@ -10,7 +10,7 @@ class GuidedTours(unittest.TestCase):
   self.assertEqual(config.count('{title:'),14);self.assertIn("key:'cc_cfg_tour_v1'",s);self.assertIn("key:'cc_tour'",s)
  def test_skip_keyboard_focus_and_local_only(self):
   s=(W/'tour.js').read_text()
-  for text in ["'Skip'","'cancel'","ArrowRight","ArrowLeft","showModal()","before.focus","localStorage.setItem"]:self.assertIn(text,s)
+  for text in ["'Skip'","'cancel'","ArrowRight","ArrowLeft","dialog.show()","Escape","before.focus","localStorage.setItem"]:self.assertIn(text,s)
   self.assertIn('/api/guide-seen',s);self.assertNotIn('/api/ask',s)
  def test_motion_and_small_viewport_limits(self):
   css=(W/'tour.css').read_text()
