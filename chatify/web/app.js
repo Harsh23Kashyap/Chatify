@@ -522,13 +522,14 @@ async function send() {
   const w = $("#thread .wrap") || $("#thread");
   w.querySelector(".hero")?.remove();
   const live = el("div", { class: "a", id: "live" });
-  w.append(el("div", { class: "q user-arrive", text: q }), el("div", { class: "think", id: "think" }, el("span", { class: "dot" }), el("span", { class: "dot" }), el("span", { class: "dot" }), el("span", { class: "tm", id: "thinkTm", text: "0.0s" })), live);
-  const t0 = Date.now(), tick = setInterval(() => { const e = $("#thinkTm"); if (e) e.textContent = ((Date.now() - t0) / 1000).toFixed(1) + "s"; else clearInterval(tick); }, 100);
+  const thinkSpin = el("span", { class: "cc-spin", "aria-hidden": "true" });
+  thinkSpin.innerHTML = '<svg viewBox="0 0 88 88"><circle class="cc-spin-track" cx="44" cy="44" r="38"/><circle class="cc-spin-head" cx="44" cy="44" r="38"/></svg>';
+  w.append(el("div", { class: "q user-arrive", text: q }), el("div", { class: "think", id: "think" }, thinkSpin, el("span", { class: "tt", id: "thinkTxt", text: "Preparing your answer" })), live);
   const th = $("#thread"); $("#jump").dataset.reply = ""; th.scrollTop = th.scrollHeight; syncLatest();
   let text = "", result = null, err = null;
   try {
     await stream({ scope: S.scope, chat: S.temp ? null : S.chat, question: q, style: $("#style").value, topic: S.topic, new_topic: S.newTopic, sources: S.sources.size ? [...S.sources] : null, temporary: S.temp, history: S.temp ? S.turns.slice(-200).map((t) => ({ question: t.question, answer: t.answer })) : undefined, use_profile: S.useProfile && !S.temp }, (ev) => {
-      if (ev.type === "progress") { status.textContent = ev.data.label; }
+      if (ev.type === "progress") { status.textContent = ev.data.label; const tt = $("#thinkTxt"); if (tt) tt.textContent = ev.data.label; }
       else if (ev.type === "token") {
         const thinking = $("#think");
         if (thinking) {
