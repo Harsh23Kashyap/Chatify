@@ -43,6 +43,7 @@ ICONS = {
     "heart": '<g class="tick"><path d="M12 20s-7.5-4.6-7.5-9.8A4.3 4.3 0 0 1 12 7.6a4.3 4.3 0 0 1 7.5 2.6C19.5 15.4 12 20 12 20z"/></g><path class="draw" d="M6.8 12h2.6l1.2-2.4 1.8 4.6 1.2-2.2h2.4"/>',
     "planet": '<circle cx="12" cy="12" r="5.2"/><path class="sway" d="M4.5 15.5c-1.6.8-2.5 1.7-2 2.5 1 1.6 6.5.8 12-1.8s8.6-6.2 7.7-7.8c-.4-.8-2-.7-4-.2"/><circle class="bob" cx="18.6" cy="5.6" r="1" fill="currentColor" stroke="none"/><circle class="bob" cx="5" cy="5.4" r=".8" fill="currentColor" stroke="none"/>',
     "bowl": '<path d="M4 12.5h16a8 8 0 0 1-6.4 7.6l.4 1.4H10l.4-1.4A8 8 0 0 1 4 12.5z"/><path d="M6.8 12.5a8.5 8.5 0 0 0 3.2 4.9" opacity=".45"/><g class="sway"><path d="M9.5 9.5c-.8-1 .8-1.8 0-3M12.5 9.5c-.8-1 .8-1.8 0-3M15.5 9.5c-.8-1 .8-1.8 0-3"/></g>',
+    "dove": '<g class="sway"><path d="M4 15.5c2.5 0 4-1 5-2.5.5-4 3-6.5 6-7l1.5 2 2 .5-1.5 1.5c.5 3.5-1.5 6.5-5 7.5H7l-3 2z"/><path d="M9 13c1-3 3-4.5 5.5-5" opacity=".45"/></g><circle cx="14.2" cy="7.6" r=".8" fill="currentColor" stroke="none"/>',
     "spark": '<path class="bob" d="M12 3.5 13.8 9 19.5 12 13.8 14.5 12 20.5 10.2 14.5 4.5 12 10.2 9z"/>',
 }
 
