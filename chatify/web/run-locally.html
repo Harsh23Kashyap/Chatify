@@ -43,7 +43,7 @@ html[data-theme=dark] a{color:#a8d4b6}
 <main>
 <div class="rl-hero">
 <h1>Run Chatify on your own computer.</h1>
-<p>Everything runs on your machine: your documents, your keys, your chats. One command installs and starts it.</p>
+<p>Everything runs on your machine: your documents, your keys, your chats. Two commands do everything: install the small uv tool once, then one command installs and starts Chatify.</p>
 </div>
 <div class="rl-steps">
 <section class="rl-step"><h3>Open a command window</h3><p><strong>Mac:</strong> press Cmd+Space, type <code>Terminal</code>, press Return. <strong>Windows:</strong> open Start, type <code>PowerShell</code>, open it. <strong>Linux:</strong> open Terminal from your app menu.</p></section>
@@ -54,6 +54,7 @@ html[data-theme=dark] a{color:#a8d4b6}
 <div class="rl-tips"><h3>If something goes wrong</h3>
 <ul>
 <li><strong>"uv is not recognized" or "command not found":</strong> close and reopen the command window after installing uv, then try again.</li>
+<li><strong>No curl, or the installer script fails:</strong> install uv another way: <code>pip install uv</code> on any Python setup, or <code>brew install uv</code> on a Mac with Homebrew, then run the one command above.</li>
 <li><strong>The browser did not open:</strong> look for a line like <code>http://127.0.0.1:8080</code> in the command window and open it yourself.</li>
 <li><strong>Windows shows a red policy error:</strong> use the PowerShell command exactly as written above; it includes the permission for this one install.</li>
 <li><strong>Still stuck?</strong> The GitHub page has the full setup notes: <a href="https://github.com/Harsh23Kashyap/Chatify">github.com/Harsh23Kashyap/Chatify ↗</a></li>

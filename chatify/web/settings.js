@@ -44,7 +44,7 @@ const OTHER = "__other__";
 async function provExtras() {
   const p = cur.provider, k = keyInfo[p] || { needed: !['mock','ollama','openai_compatible'].includes(p), has: false, unknown:true };
   $("#keybox").hidden = p === "mock" || p === "ollama"; { const bl = $("#base").closest("label"); if (bl) bl.hidden = !(p === "ollama" || p === "openai_compatible" || cur.base_url); }
-  $("#keyh").textContent = p === "openai_compatible" ? "Only if your server asks for one. Stored on this computer only, never shown again." : "Stored on this computer only, never shown again.";
+  $("#keyh").textContent = p === "openai_compatible" ? "Only if your server asks for one. Stored on this server only, never shown again." : "Stored on this server only, never shown again.";
   $("#apikey").placeholder = k.has ? "Saved key available. Enter only to replace it." : "Paste a key to save privately";
   const ks = $("#keystate"); ks.className = "keystate" + (k.has ? " ok" : "");
   ks.textContent = k.unknown ? 'Key status unavailable. Check access before testing.' : k.has ? (k.source === "env" ? "Key found in an environment variable." : "A key is saved.") : (k.needed ? "Not filled (no API key saved)." : "No key needed.");
@@ -723,7 +723,7 @@ function buildPresets() {
 }
 function appearanceValid(){const bad=$("#col").querySelector(".field input[aria-invalid=true]");if(!bad)return true;say("Fix the marked appearance field before saving.",true);bad.scrollIntoView({block:"center",behavior:"instant"});bad.focus();return false}
 async function init() {
-  const c = await api("/api/config"); window.CCLoadedApp = c; $("#lead").textContent = "Editing " + c.app.title + ". " + (c.app.tagline ? c.app.tagline.replace(/[.!?]$/, "") + ". " : "") + "Keys stay on this computer."; $("#h").textContent = c.app.title + " configuration"; document.title = c.app.title + " configuration";
+  const c = await api("/api/config"); window.CCLoadedApp = c; $("#lead").textContent = "Editing " + c.app.title + ". " + (c.app.tagline ? c.app.tagline.replace(/[.!?]$/, "") + ". " : "") + "Keys stay on the server that runs this app."; $("#h").textContent = c.app.title + " configuration"; document.title = c.app.title + " configuration";
   const overview = el("details", {class:"loaded-app",id:"loadedApp"}, el("summary", {text:"Loaded workspace: " + c.app.title}), el("p", {text:c.app.tagline || ""}), el("small", {text:"Sources: " + c.sources.map(x=>x.label || x.id).join(", ")}));
   $("#lead").after(overview);
   const sourceOverview=el("div",{class:"loaded-source-overview",role:"status"});window.CCSourceOverview=sourceOverview;
