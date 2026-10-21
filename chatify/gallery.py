@@ -109,7 +109,7 @@ def load(path):
             icon, tags, accent = _meta(entry)
             apps.append({"slug": slug, "url": url, "title": str(entry["title"]),
                          "tagline": str(entry.get("tagline") or ""), "icon": icon, "tags": tags,
-                         "accent": accent})
+                         "accent": accent, "featured": bool(entry.get("featured"))})
             continue
         if not entry.get("dir"):
             raise ConfigError("Each gallery app needs a slug plus a dir (hosted here) or a url (links out)")
@@ -127,5 +127,5 @@ def load(path):
         caps["user_daily_questions"] = 0  # no-auth apps share one quota pool; keep it off
         cfg["budget"] = caps
         icon, tags, accent = _meta(entry)
-        apps.append({"slug": slug, "cfg": cfg, "icon": icon, "tags": tags, "accent": accent})
+        apps.append({"slug": slug, "cfg": cfg, "icon": icon, "tags": tags, "accent": accent, "featured": bool(entry.get("featured"))})
     return {"title": title, "tagline": tagline, "apps": apps, "_path": os.path.abspath(path)}

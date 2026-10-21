@@ -877,7 +877,7 @@ def serve_gallery(path, host=None, port=None):
     for app in g["apps"]:
         if app.get("url"):
             redirects[app["slug"]] = app["url"]
-            cards.append({"slug": app["slug"], "url": app["url"], "title": app["title"], "tagline": app.get("tagline", ""), "accent": app.get("accent") or "#173f35", "icon": app.get("icon") or "spark", "tags": app.get("tags") or []})
+            cards.append({"slug": app["slug"], "url": app["url"], "title": app["title"], "tagline": app.get("tagline", ""), "accent": app.get("accent") or "#173f35", "icon": app.get("icon") or "spark", "tags": app.get("tags") or [], "featured": bool(app.get("featured"))})
             continue
         cfg = app["cfg"]
         store = Store(os.path.join(cfg["_dir"], cfg["storage"]["path"]) if not os.path.isabs(cfg["storage"]["path"]) else cfg["storage"]["path"])
@@ -887,7 +887,7 @@ def serve_gallery(path, host=None, port=None):
         threading.Thread(target=srv.serve_forever, daemon=True).start()
         children[app["slug"]] = srv.server_port
         a = cfg["app"]
-        cards.append({"slug": app["slug"], "title": a["title"], "tagline": a.get("tagline", ""), "accent": app.get("accent") or a.get("accent", "#173f35"), "icon": app.get("icon") or "spark", "tags": app.get("tags") or []})
+        cards.append({"slug": app["slug"], "title": a["title"], "tagline": a.get("tagline", ""), "accent": app.get("accent") or a.get("accent", "#173f35"), "icon": app.get("icon") or "spark", "tags": app.get("tags") or [], "featured": bool(app.get("featured"))})
     secrets.STORE = secrets.SecretStore("/tmp")
     host = host or "127.0.0.1"
     port = port or 8080
@@ -911,11 +911,22 @@ def serve_gallery(path, host=None, port=None):
 
         def _gallery_page(self):
             page = open(os.path.join(WEB, "gallery.html"), encoding="utf-8").read()
+            featured = next((c for c in cards if c.get("featured")), None)
+            others = [c for c in cards if c is not featured]
             cards_html = "".join(
                 '<a class="g-card" href="%s" style="--card-accent:%s"><span class="g-top"><span class="g-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">%s</svg></span><span class="g-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></span></span><span class="g-name">%s</span><span class="g-tag">%s</span><span class="g-tags">%s</span></a>'
                 % (_esc(c.get("url") or ("/" + c["slug"] + "/")), _esc(c["accent"]), gallerymod.ICONS.get(c["icon"]) or gallerymod.ICONS["spark"], _esc(c["title"]), _esc(c["tagline"]), "".join("<i>%s</i>" % _esc(t) for t in c["tags"]))
-                for c in cards)
-            page = page.replace("{{CARDS}}", cards_html).replace("{{TITLE}}", _esc(g["title"])).replace("{{TAGLINE}}", _esc(g["tagline"])).replace("{{COUNT}}", str(len(cards)))
+                for c in others)
+            featured_html = ""
+            if featured:
+                f_title = featured.get("title") or featured["cfg"]["app"]["title"]
+                f_tagline = featured.get("tagline") or featured["cfg"]["app"].get("tagline") or ""
+                f_cta = featured.get("url") or ("/" + featured["slug"] + "/settings.html")
+                f_tags = "".join("<i>%s</i>" % _esc(t) for t in featured["tags"])
+                f_sub = "" if featured.get("url") else '<a class="g-f-sub" href="/%s/">Open the product guide</a>' % _esc(featured["slug"])
+                featured_html = ('<section class="g-feature"><div class="g-f-copy"><span class="g-f-eyebrow">Build your own</span><span class="g-f-name">%s</span><span class="g-f-tag">%s</span><span class="g-f-note">One YAML file plus your sources - every app below was built this way.</span><span class="g-f-tags">%s</span></div><div class="g-f-actions"><a class="g-f-cta" href="%s">Build with AI</a>%s</div></section>'
+                    % (_esc(f_title), _esc(f_tagline), f_tags, _esc(f_cta), f_sub))
+            page = page.replace("{{FEATURED}}", featured_html).replace("{{CARDS}}", cards_html).replace("{{TITLE}}", _esc(g["title"])).replace("{{TAGLINE}}", _esc(g["tagline"])).replace("{{COUNT}}", str(len(others)))
             self._send(200, page.encode(), "text/html; charset=utf-8")
 
         def _proxy(self, slug):

@@ -196,6 +196,21 @@ html body dialog.app-builder .cs[data-section-only] .cs-btn{transition:backgroun
 /* Hover responds quickly; the step's separate selected-state timing is unchanged. */
 html:not([data-motion=none]):not([data-motion=calm]) dialog.app-builder .builder-steps button:not(:disabled):hover{transition-duration:160ms}
 @media(prefers-reduced-motion:reduce){html dialog.app-builder .builder-steps button{transition:none!important}}
+
+.builder-leave{position:fixed;inset:0;margin:auto;max-height:90vh;border:0;border-radius:20px;padding:0;width:min(420px,calc(100vw - 48px));background:#fffdf7;color:#173f35;box-shadow:0 26px 64px rgba(14,43,32,.30);font-family:'DM Sans',system-ui,sans-serif}
+.builder-leave::backdrop{background:rgba(14,43,32,.42)}
+.builder-leave-card{display:grid;gap:10px;padding:26px 24px 20px}
+.builder-leave h3{margin:0;font:700 22px/1.15 Fraunces,Georgia,serif;letter-spacing:-.01em;color:#173f35}
+.builder-leave p{margin:0;color:#5d6b64;font-size:14px;line-height:1.55}
+.builder-leave-actions{display:flex;gap:10px;justify-content:flex-end;flex-wrap:wrap;margin-top:10px}
+.builder-leave-stay{background:#d7ef72;color:#173f35;border:0;border-radius:12px;min-height:42px;padding:11px 22px;font:700 14px/1.2 'DM Sans',system-ui,sans-serif;box-shadow:0 3px 0 #6b8520;cursor:pointer;transition:transform .15s ease}
+.builder-leave-stay:hover{transform:translateY(-1px)}
+.builder-leave-stay:active{transform:translateY(1px);box-shadow:0 1px 0 #6b8520}
+.builder-leave-quit{min-height:42px}
+.builder-leave-stay:focus-visible,.builder-leave-quit:focus-visible{outline:3px solid #2f7d5b;outline-offset:2px}
+@media(prefers-reduced-motion:no-preference){.builder-leave[open]{animation:builder-leave-in .28s cubic-bezier(.22,1,.36,1)}}
+@keyframes builder-leave-in{from{opacity:0;transform:translateY(10px) scale(.98)}}
+@media(prefers-reduced-motion:reduce){.builder-leave[open]{animation:none}.builder-leave-stay{transition:none}}
 .builder-hero{position:relative;overflow:hidden;display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin:4px 0 16px;padding:16px 18px;border-radius:16px;background:linear-gradient(115deg,#0e2b20 0%,#14522f 30%,#0f3a2e 55%,#16502e 78%,#0e2b20 100%);background-size:300% 300%;border:1px solid #2c5c40;animation:builder-drift 14s ease-in-out infinite}
 .builder-hero::before{content:'';position:absolute;inset:0;pointer-events:none;background:linear-gradient(115deg,transparent 30%,rgba(215,239,114,.16) 50%,transparent 70%);transform:translateX(-130%);animation:builder-sheen 4.5s ease-in-out infinite}
 .builder-hero::after{content:'';position:absolute;inset:-25%;pointer-events:none;z-index:0;background:linear-gradient(65deg,transparent 42%,rgba(255,255,255,.10) 46%,rgba(255,255,255,.26) 50%,rgba(215,239,114,.20) 52%,transparent 58%);transform:translateX(-115%);animation:builder-glint 6.5s ease-in-out infinite}

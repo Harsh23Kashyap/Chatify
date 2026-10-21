@@ -1,3 +1,9 @@
+## 0.4.14
+
+- Gallery: Chatify is now a featured "Build your own" panel above the grid, with a clear Build with AI action; the six example apps sit below under "Examples built with Chatify"
+- Build with AI: leaving the page with unsaved setup work now opens a Chatify-styled Leave dialog instead of the browser's native prompt, and kept drafts no longer trigger it
+- Build with AI: removed the "Selected model" note and the "Draft only" notice line; the draft notice only appears when there is something to report
+- Build with AI reliability: retries draw on their own 10-call budget instead of burning the 36-call first-pass cap, parts that keep failing after 3 attempts are filled with safe defaults and flagged for review in step 2, and the final review call always gets to run, so builds complete instead of pausing forever
 ## 0.4.13
 
 - Build with AI review follow-ups: the lower twinkle no longer clips the Start building button on desktop (moved to the empty strip below the copy), and every hero animation now pauses while the callout is scrolled offscreen; glint keeps its slow 6.5s sweep.

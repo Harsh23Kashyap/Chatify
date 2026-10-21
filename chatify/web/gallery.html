@@ -28,6 +28,21 @@ h1{font-family:Fraunces,Georgia,serif;font-weight:700;font-size:clamp(30px,4.6vw
 .chips li:nth-child(2){background:color-mix(in srgb,#30a46c 7%,rgba(255,253,247,.9));border-color:color-mix(in srgb,#30a46c 22%,#e6dfc9)}
 .chips li:nth-child(3){background:color-mix(in srgb,#b23a8e 7%,rgba(255,253,247,.9));border-color:color-mix(in srgb,#b23a8e 22%,#e6dfc9)}
 .chips li:nth-child(3)::before{background:#b23a8e}
+.g-feature{position:relative;overflow:hidden;display:flex;align-items:center;gap:22px;flex-wrap:wrap;margin:0 0 30px;padding:30px 28px;border-radius:22px;border:1px solid #2c5c40;background:linear-gradient(115deg,#0e2b20 0%,#14522f 30%,#0f3a2e 55%,#16502e 78%,#0e2b20 100%);background-size:300% 300%;color:#f4f8ee}
+.g-f-copy{display:grid;gap:8px;flex:1 1 320px;min-width:0}
+.g-f-eyebrow{font:700 12px "DM Sans",sans-serif;letter-spacing:.16em;text-transform:uppercase;color:#d7ef72;display:flex;align-items:center;gap:9px}
+.g-f-eyebrow::before{content:"\2726";font-size:13px;letter-spacing:0}
+.g-f-name{font-family:Fraunces,Georgia,serif;font-weight:700;font-size:clamp(26px,3.4vw,34px);letter-spacing:-.015em;line-height:1.08}
+.g-f-tag{color:#c9dcc9;font-size:15px;line-height:1.55;max-width:520px}
+.g-f-note{color:#9dbd9e;font-size:13.5px;line-height:1.5;max-width:520px}
+.g-f-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:3px}
+.g-f-tags i{font:600 11.5px "DM Sans",sans-serif;font-style:normal;letter-spacing:.03em;color:#e9f3df;background:rgba(244,248,238,.12);border:1px solid rgba(244,248,238,.16);border-radius:7px;padding:3px 9px}
+.g-f-actions{display:grid;gap:11px;justify-items:end;margin-left:auto}
+.g-f-cta{position:relative;overflow:hidden;background:#d7ef72;color:#173f35;border-radius:12px;padding:13px 26px;font:700 15px/1.2 "DM Sans",sans-serif;text-decoration:none;box-shadow:0 3px 0 #6b8520;transition:transform .15s ease}
+.g-f-cta:hover{transform:translateY(-1px)}
+.g-f-cta:active{transform:translateY(1px);box-shadow:0 1px 0 #6b8520}
+.g-f-sub{color:#dcebd4;font:600 13.5px "DM Sans",sans-serif;text-decoration:none;border-bottom:1px solid rgba(220,235,212,.4);padding-bottom:1px}
+.g-f-sub:hover{border-bottom-color:#dcebd4}
 .sec{display:flex;align-items:baseline;gap:14px;margin:0 0 20px}
 .sec h2{font-family:Fraunces,Georgia,serif;font-weight:600;font-size:22px;margin:0;letter-spacing:-.01em}
 .sec span{font:600 12.5px "DM Sans",sans-serif;letter-spacing:.08em;text-transform:uppercase;color:var(--mut)}
@@ -64,6 +79,8 @@ h1{font-family:Fraunces,Georgia,serif;font-weight:700;font-size:clamp(30px,4.6vw
 .foot a:hover{border-bottom-color:var(--ink)}
 @media(prefers-reduced-motion:no-preference){
 .bg{animation:g-drift 90s linear infinite}
+.g-feature{animation:g-up .38s .10s cubic-bezier(.22,1,.36,1) both,g-fdrift 16s ease-in-out .4s infinite}
+.g-f-cta::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(115deg,transparent 35%,rgba(23,63,53,.15) 50%,transparent 65%);transform:translateX(-130%);animation:g-fsheen 3s ease-in-out infinite}
 .top,.hero,.sec{animation:g-up .38s cubic-bezier(.22,1,.36,1) both}
 .hero{animation-delay:.07s}.sec{animation-delay:.16s}
 .eyebrow::before{transform-origin:left;animation:g-line .5s .3s cubic-bezier(.22,1,.36,1) both}
@@ -90,7 +107,9 @@ h1{font-family:Fraunces,Georgia,serif;font-weight:700;font-size:clamp(30px,4.6vw
 @keyframes g-draw{to{stroke-dashoffset:0}}
 @keyframes g-line{from{transform:scaleX(0)}}
 @keyframes g-drift{to{background-position:0 0,0 0,52px 52px}}
-@media(prefers-reduced-motion:reduce){.top,.hero,.sec,.g-card,.g-info,.foot{animation:none!important}.g-card{transition:none}.g-card:hover{transform:none}}
+@keyframes g-fdrift{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
+@keyframes g-fsheen{0%{transform:translateX(-130%)}55%{transform:translateX(130%)}100%{transform:translateX(130%)}}
+@media(prefers-reduced-motion:reduce){.top,.hero,.sec,.g-card,.g-info,.g-feature,.foot{animation:none!important}.g-feature{animation:none!important}.g-card{transition:none}.g-card:hover{transform:none}.g-f-cta{transition:none}}
 @media(min-width:1000px){.g-info{grid-column:2/span 2}}
 @media(max-width:640px){
 .wrap{padding:28px 18px 32px}
@@ -101,6 +120,9 @@ h1{font-family:Fraunces,Georgia,serif;font-weight:700;font-size:clamp(30px,4.6vw
 .chips li{flex:0 0 auto}
 .grid{grid-template-columns:1fr;gap:18px}
 .g-card,.g-info{padding:20px 18px}
+.g-feature{padding:22px 20px;margin-bottom:24px}
+.g-f-actions{justify-items:stretch;margin-left:0;width:100%}
+.g-f-cta{text-align:center}.g-f-sub{justify-self:center}
 .g-arrow{opacity:1;transform:none}
 .foot{flex-direction:column;align-items:flex-start;gap:8px}
 }
@@ -112,7 +134,8 @@ h1{font-family:Fraunces,Georgia,serif;font-weight:700;font-size:clamp(30px,4.6vw
 <p class="tag">{{TAGLINE}}</p>
 <ul class="chips"><li>Private per-visitor chats</li><li>Answers cite their sources</li><li>Free hosted demos</li></ul>
 </section>
-<div class="sec"><h2>Browse the apps</h2><span>{{COUNT}} live</span></div>
+{{FEATURED}}
+<div class="sec"><h2>Examples built with Chatify</h2><span>{{COUNT}} live</span></div>
 <div class="grid">{{CARDS}}<div class="g-info"><div class="g-info-t"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M12 11v5"/><circle cx="12" cy="7.8" r=".9" fill="currentColor" stroke="none"/></svg>About these demos</div><ul><li><b>Your chats are yours.</b> Every visitor gets a private session; histories never mix.</li><li><b>Free demos, daily limits apply.</b> A shared key stays healthy for everyone.</li><li><b>Cited answers.</b> Each answer links back to the sources behind it.</li></ul><div class="g-info-fine">Informational only - not medical advice.</div></div></div>
 <footer class="foot"><span>Built with <a href="/chatify/">Chatify</a>, from one YAML file and your sources.</span></footer>
 </div></body></html>
