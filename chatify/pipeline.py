@@ -154,8 +154,8 @@ class Engine:
             if hasattr(conn, "refresh"):
                 try:
                     if conn.refresh(): self._cache.clear()
-                except OSError:
-                    ids.remove(sid); refresh_errors[sid] = "Local folder unavailable"
+                except OSError as exc:
+                    ids.remove(sid); refresh_errors[sid] = ("Source unavailable: %s" % exc)[:160]
                     self._cache.clear()
         extra = self._uploads_evidence(owner, question, k) if source_ids is None and not scope else []
         key = (json.dumps(self.cfg["sources"],sort_keys=True),json.dumps(scope, sort_keys=True), question.lower().strip(), k, tuple(sorted(ids)), owner if extra or permissions.restricted(self.cfg) else None, len(extra),
@@ -308,8 +308,10 @@ class Engine:
             return answer
         if stage_contracts.errors("revise", out, [e["n"] for e in evidence]):
             return answer
-        if len(out) < 0.4 * len(answer) or not re.search(r"\[\d+\]", out):
+        if len(out) < 0.5 * len(answer) or not re.search(r"\[\d+\]", out):
             return answer
+        if re.match(r"\s*(?i)(additionally|moreover|furthermore|in addition|also|secondly|thirdly|finally|however|but|and|so)\b", out):
+            return answer  # a rewrite that opens mid-thought reads as broken even when every claim checks out
         new, ev2 = self.tidy(out, evidence)
         led2 = self.ledger(new, ev2, asked)
         n_flags = lambda led: sum(1 for l in led if l.get("vague_regain") or l.get("animal_unmarked") or l.get("unhedged_lead") or l.get("uncited"))
@@ -346,7 +348,9 @@ class Engine:
         out = re.sub(r"\n{3,}", "\n\n", out).strip()
         new, ev2 = self.tidy(out, evidence)
         # Never leave sentence fragments after removing unsupported numeric claims.
-        if not ev2 or len(new.split()) < 6 or new.count(chr(34)) % 2:
+        gutted = len(bad) >= 2 and len(bad) * 2 >= len(ledger)
+        mid_thought = bool(re.match(r"\s*(?i)(additionally|moreover|furthermore|in addition|also|secondly|thirdly|finally|however|but|and|so)\b", new))
+        if not ev2 or len(new.split()) < 6 or new.count(chr(34)) % 2 or gutted or mid_thought:
             new = self.fallback_answer(evidence).replace("The AI model could not be reached, so here are the most relevant passages from your sources.","The answer could not be fully checked. Here are the cited source passages instead.")
             new, ev2 = self.tidy(new,evidence)
         return new, ev2, self.ledger(new, ev2, asked)
@@ -635,12 +639,18 @@ class Engine:
         else:
             parts = []
             degraded = False
-            try:
-                for piece in self.provider.stream(self.prompt(standalone, evidence, style, history, summary, profile)):
-                    parts.append(piece)
-                    yield "token", piece
-            except providers.ProviderError:
-                degraded = True
+            messages = self.prompt(standalone, evidence, style, history, summary, profile)
+            for attempt in (0, 1):
+                try:
+                    for piece in self.provider.stream(messages):
+                        parts.append(piece)
+                        yield "token", piece
+                    break
+                except providers.ProviderError:
+                    if parts or attempt == 1:
+                        degraded = True
+                        break
+            if degraded:
                 if parts:
                     tail = "\n\n(The answer was cut short because the model stopped responding.)"
                     parts.append(tail); yield "token", tail
@@ -728,10 +738,16 @@ class Engine:
             answer=self.headline_chart(q,evidence);ledger=self.ledger(answer,evidence,standalone)
         else:
             degraded = False
-            try:
-                answer = self.provider.complete(self.prompt(standalone, evidence, style, history, summary))
-            except providers.ProviderError:
-                degraded = True
+            messages = self.prompt(standalone, evidence, style, history, summary)
+            answer = ""
+            for attempt in (0, 1):
+                try:
+                    answer = self.provider.complete(messages)
+                    break
+                except providers.ProviderError:
+                    if attempt == 1:
+                        degraded = True
+            if degraded:
                 answer = self.fallback_answer(evidence)
             if not degraded:
                 answer = self.revise(answer, evidence)

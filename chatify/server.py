@@ -12,6 +12,7 @@ from .exports import bibtex, pdf_bytes, chat_markdown, answer_markdown
 import time, collections
 
 WEB = os.path.join(os.path.dirname(__file__), "web")
+BUILD_STARTS = {}  # ip -> [timestamps of build starts]; light abuse limit for shared hosted demos
 
 
 def make_handler(cfg, engine):
@@ -387,7 +388,13 @@ def make_handler(cfg, engine):
                     setup_provider=providers.make(build_cfg)
                     setup_provider.output_limit=16000
                     model_provider=budget.wrap(setup_provider)
-                    if path.endswith('/start'):return self._send(200,build_jobs.start(o,model_provider,build_cfg,b))
+                    if path.endswith('/start'):
+                        ip=((self.headers.get('X-Forwarded-For') or '').split(',')[0].strip()) or self.client_address[0]
+                        now=time.time()
+                        recent=[t for t in BUILD_STARTS.get(ip,[]) if now-t<3600]
+                        if ip not in ('127.0.0.1','::1') and len(recent)>=5:raise ValueError('Too many builds from this network. Wait a little, then try again.')
+                        recent.append(now);BUILD_STARTS[ip]=recent
+                        return self._send(200,build_jobs.start(o,model_provider,build_cfg,b))
                     if path.endswith('/deploy'):return self._send(200,appbuilder.deployment(model_provider,b))
                     return self._send(200,appbuilder.talk(model_provider,build_cfg,b))
                 if path.endswith('/parse'):
@@ -927,10 +934,9 @@ def serve_gallery(path, host=None, port=None):
                 f_title = featured.get("title") or featured["cfg"]["app"]["title"]
                 f_tagline = featured.get("tagline") or featured["cfg"]["app"].get("tagline") or ""
                 f_cta = featured.get("url") or ("/" + featured["slug"] + "/settings.html")
-                f_tags = "".join("<i>%s</i>" % _esc(t) for t in featured["tags"])
                 f_sub = "" if featured.get("url") else '<a class="g-f-sub" href="/%s/">Open the product guide</a>' % _esc(featured["slug"])
-                featured_html = ('<section class="g-feature"><div class="g-f-copy"><span class="g-f-eyebrow">Build your own</span><span class="g-f-name">%s</span><span class="g-f-tag">%s</span><span class="g-f-note">One YAML file plus your sources - every app below was built this way.</span><span class="g-f-tags">%s</span></div><div class="g-f-actions"><a class="g-f-cta" href="%s">Build with AI</a>%s</div></section>'
-                    % (_esc(f_title), _esc(f_tagline), f_tags, _esc(f_cta), f_sub))
+                featured_html = ('<section class="g-feature"><div class="g-f-copy"><span class="g-f-eyebrow">Build your own</span><span class="g-f-name">%s</span><span class="g-f-tag">%s</span><span class="g-f-note">One YAML file plus your sources - every app below was built this way.</span></div><div class="g-f-actions"><a class="g-f-cta" href="%s">Build with AI</a>%s</div></section>'
+                    % (_esc(f_title), _esc(f_tagline), _esc(f_cta), f_sub))
             page = page.replace("{{FEATURED}}", featured_html).replace("{{CARDS}}", cards_html).replace("{{TITLE}}", _esc(g["title"])).replace("{{TAGLINE}}", _esc(g["tagline"])).replace("{{COUNT}}", str(len(others)))
             self._send(200, page.encode(), "text/html; charset=utf-8")
 

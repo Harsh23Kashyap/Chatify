@@ -80,13 +80,19 @@ class LocalFiles:
                     return False
                 nxt = LocalFiles.__new__(LocalFiles)
                 nxt.docs = []
+                skipped = []
                 for name, data, digest in rows:
-                    if name.lower().endswith(".pdf"):
-                        from ..pdfread import pages
-                        for page in pages(data, ocr=self.ocr):
-                            nxt._add(os.path.join(self.root, name), self.root, page["text"].encode(), digest, page["page"], page["ocr"])
-                    else:
-                        nxt._add(os.path.join(self.root, name), self.root, data, digest)
+                    try:
+                        if name.lower().endswith(".pdf"):
+                            from ..pdfread import pages
+                            for page in pages(data, ocr=self.ocr):
+                                nxt._add(os.path.join(self.root, name), self.root, page["text"].encode(), digest, page["page"], page["ocr"])
+                        else:
+                            nxt._add(os.path.join(self.root, name), self.root, data, digest)
+                    except (OSError, ValueError) as exc:
+                        skipped.append("%s (%s)" % (name, exc))
+                if skipped and not nxt.docs:
+                    raise ValueError("No readable documents: " + "; ".join(skipped)[:300])
                 n = len(nxt.docs) or 1
                 df = {}
                 for d in nxt.docs:
@@ -97,12 +103,12 @@ class LocalFiles:
                 self._snapshot = signature
                 self.revision = hashlib.sha256(json.dumps(signature).encode()).hexdigest()
                 self.indexed_at = time.time(); self.last_error = ""
-                self.last_check = {"state":"updated","documents_scanned":len(rows),"added":added,"removed":removed,"changed":changed,"passages_before":old_chunks,"passages_after":len(self.docs),"passages_added":len({(d["id"],d["text"]) for d in self.docs}-previous_passages),"passages_removed":len(previous_passages-{(d["id"],d["text"]) for d in self.docs})}
+                self.last_check = {"state":"updated","documents_scanned":len(rows),"added":added,"removed":removed,"changed":changed,"passages_before":old_chunks,"passages_after":len(self.docs),"passages_added":len({(d["id"],d["text"]) for d in self.docs}-previous_passages),"passages_removed":len(previous_passages-{(d["id"],d["text"]) for d in self.docs}),"skipped_files":skipped}
                 return True
             except (OSError, ValueError) as exc:
                 self.last_check = {"state":"failed"}
                 self.last_error = "Local folder check failed: "+str(exc)+". Check that the folder exists, files are readable and PDF dependencies are installed. No old passages will be used until it recovers."
-                raise OSError("Local source could not be indexed; check PDF dependencies or readability") from None
+                raise OSError("Local source could not be indexed: %s" % exc) from None
 
     def status(self):
         with self._lock:
