@@ -33,3 +33,19 @@ footer a{transition:opacity 140ms ease-out;opacity:1}
 footer a:hover{opacity:.9}
 @media(prefers-reduced-motion:reduce){footer a{transition:none}}
 html[data-motion=none] footer a,html[data-motion=calm] footer a{transition:none}
+
+html[data-theme=dark] body{background:#101c17;color:#e8eee6}
+html[data-theme=dark] main>p,html[data-theme=dark] .feature-copy p{color:#b9cabd}
+html[data-theme=dark] h1,html[data-theme=dark] h2,html[data-theme=dark] .feature-card h3,html[data-theme=dark] .people h3{color:#eef4ea}
+html[data-theme=dark] .features>div,html[data-theme=dark] article,html[data-theme=dark] .feature-showcase{background:#1f302c;border-color:#40594c}
+html[data-theme=dark] .features span,html[data-theme=dark] article p,html[data-theme=dark] .feature-note,html[data-theme=dark] small,html[data-theme=dark] footer{color:#9db3a4}
+html[data-theme=dark] .about-nav{background:#1f302ce8;border-color:#40594c}
+html[data-theme=dark] .about-brand{color:#eef4ea}
+html[data-theme=dark] #featureTabs button,html[data-theme=dark] #featureMore{background:#26392f;border-color:#40594c;color:#c2d2bf}
+html[data-theme=dark] #featureTabs [aria-selected=true]{background:#d7e6a8;color:#173f35;border-color:#d7e6a8}
+html[data-theme=dark] .feature-art{background:linear-gradient(140deg,#26392f,#1f302c)}
+html[data-theme=dark] .feature-art svg{stroke:#9fc7ab}
+html[data-theme=dark] .feature-art>small{color:#9db3a4}
+html[data-theme=dark] .feature-copy a{border-color:#40594c;color:#c2d2bf}
+html[data-theme=dark] .team-avatar{border-color:#40594c}
+html[data-theme=dark] footer{border-top-color:#40594c}

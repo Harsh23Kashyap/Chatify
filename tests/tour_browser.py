@@ -24,11 +24,12 @@ def run():
                 page.locator('.cc-tour-skip').click();assert page.evaluate('localStorage.getItem("cc_tour")')=='1'
                 page.reload();page.wait_for_selector('#q');assert page.locator('.cc-tour').count()==0
                 page.locator('#chatGuide').click();page.wait_for_selector('.cc-tour');page.locator('.cc-tour-next').click();assert 'Keep the conversation' in page.locator('.cc-tour h2').inner_text();page.locator('.cc-tour-back').click();page.keyboard.press('Escape');assert page.locator('.cc-tour').count()==0
-                page.goto(url+'/settings.html');page.wait_for_selector('.cc-tour');bounds();assert page.locator('.cc-tour-label').text_content()=='Configuration guide'
+                page.goto(url+'/settings.html');page.wait_for_selector('#configGuide');page.wait_for_timeout(400);assert page.locator('.cc-tour').count()==0  # one auto-opening tour max: the chat tour only
+                page.locator('#configGuide').click();page.wait_for_selector('.cc-tour');bounds();assert page.locator('.cc-tour-label').text_content()=='Configuration guide'
                 initial=page.evaluate('localStorage.getItem("cc_cfg_mode_v2")');page.wait_for_timeout(450);page.screenshot(path='/tmp/tour-config-desktop.png')
-                assert page.locator('.cc-tour h2').inner_text()=='Four tabs, one setup'
-                for i in range(13):
-                    assert page.locator('.cc-tour-count').inner_text()==f'{i+1} / 13';bounds()
+                assert page.locator('.cc-tour h2').inner_text()=='Start with Build with AI'
+                for i in range(4):
+                    assert page.locator('.cc-tour-count').inner_text()==f'{i+1} / 5';bounds()
                     page.locator('.cc-tour-next').click()
                 assert page.locator('.cc-tour').count()==0;assert page.evaluate('localStorage.getItem("cc_cfg_mode_v2")')==initial
                 page.reload();page.wait_for_selector('#configGuide');page.wait_for_timeout(400);assert page.locator('.cc-tour').count()==0

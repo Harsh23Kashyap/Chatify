@@ -11,7 +11,7 @@
   }
   const model=document.querySelector('#sec-model');if(model){
    if(!model.querySelector('.simple-provider-note')){const note=document.createElement('small');note.className='simple-provider-note h';model.querySelector('#seg').after(note)}
-   if(state)model.querySelector('.simple-provider-note').textContent=state.provider==='mock'?'Demo works offline. No key needed.':'Provider selected. Connection not verified.';
+   if(state){const verified=document.querySelector('#testres')?.classList.contains('ok');model.querySelector('.simple-provider-note').textContent=state.provider==='mock'?'Demo works offline. No key needed.':(verified?'Connected and ready.':'Provider selected. Connection not verified.');}
 
 
    if(!model.querySelector('.evidence-range')){const ends=document.createElement('small');ends.className='range-endpoints evidence-range';ends.textContent='1 passage · 50 passages';model.querySelector('#topk').closest('label').append(ends)}

@@ -3,7 +3,7 @@
  const root=document.documentElement;
  let timer;
  const ready=()=>{clearTimeout(timer);root.classList.remove('cc-page-loading');root.classList.remove('cc-page-leaving');document.querySelector('.cc-load-notice')?.remove()};
- const start=label=>{root.classList.add('cc-page-loading');clearTimeout(timer);timer=setTimeout(()=>{const note=document.createElement('div');note.className='cc-load-notice';note.setAttribute('role','status');note.textContent=label;document.body.append(note)},250)};
+ const start=label=>{root.classList.add('cc-page-loading');clearTimeout(timer);timer=setTimeout(()=>{const note=document.createElement('div');note.className='cc-load-notice';note.setAttribute('role','status');note.textContent=label;document.body.append(note);setTimeout(()=>{if(note.isConnected)note.textContent=label+' Taking longer than usual; the app may be waking up. The first visit can take up to a minute.'},6000)},250)};
  window.CCLoading={ready,start};start('Opening app...');
  window.addEventListener('pageshow',()=>{if(!document.getElementById('thread'))ready()});
  window.addEventListener('pagehide',ready);
