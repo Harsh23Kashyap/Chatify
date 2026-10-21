@@ -583,7 +583,7 @@ function mountModal(back, dismiss = true) {
 }
 async function uploadDialog() {
  const modal=el('div',{class:'modal-back'}),box=el('div',{class:'modal source-add-modal',role:'dialog','aria-label':'Add sources'}),files=el('input',{id:'sourceFiles',type:'file',multiple:'','aria-label':'Choose source files'}),url=el('input',{id:'sourceUrl',type:'url',placeholder:'https://example.com/article','aria-label':'Web address',inputmode:'url'}),fileStatus=el('div',{class:'source-entry-status',role:'status','aria-live':'polite'}),urlStatus=el('p',{class:'source-entry-status',role:'status','aria-live':'polite'});let pending=false;
- const closeFlow=()=>{if(pending){urlStatus.textContent='Please wait for the current source to finish adding.';return}if(url.value.trim()&&!confirm('You typed a web address but have not added it yet. Close and discard it? Sources already added are kept.'))return;modal.remove()};modal.ccDismiss=closeFlow;
+ const closeFlow=()=>{if(pending){urlStatus.textContent='Please wait for the current source to finish adding.';return}if(url.value.trim()&&!confirm('You typed a web address but have not added it yet. To add it, choose \"Add link\". Close and discard the address? Sources already added are kept.'))return;modal.remove()};modal.ccDismiss=closeFlow;
  const close=el('button',{class:'btn-out',text:'Done',onclick:closeFlow}),addLink=el('button',{class:'btn-out',text:'Add link'});
  const setBusy=on=>{pending=on;files.disabled=on;url.disabled=on;addLink.disabled=on;close.disabled=on;box.setAttribute('aria-busy',String(on))};
  const upload=async()=>{if(pending)return;const selected=[...files.files];if(!selected.length)return;fileStatus.replaceChildren();setBusy(true);
