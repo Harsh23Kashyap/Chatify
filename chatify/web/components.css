@@ -154,3 +154,6 @@ html body.settings-tabs .settings-studio-actions .app-builder-open{background:#1
 html body.settings-tabs .settings-studio-actions .app-builder-open span:first-child{color:#d7ef72}
 html[data-theme=dark] body.settings-tabs .settings-studio-actions .app-builder-open{background:#d7ef72!important;color:#173f35!important;border-color:#d7ef72!important;box-shadow:0 3px 0 #6b8520!important}
 html[data-theme=dark] body.settings-tabs .settings-studio-actions .app-builder-open span:first-child{color:#173f35}
+
+html body.settings-tabs .loaded-app{padding:8px 16px!important;margin:8px 0 6px!important}
+html body.settings-tabs .loaded-app>summary{min-height:36px!important}

@@ -1,3 +1,9 @@
+## 0.4.9
+
+- Loader polish from review: the progress bar is always filled with a dark band sweeping through it (shimmer visible from the first frame), the boot splash and the transition veil share the same geometry with a 64px mark and the serif Chatify wordmark (Georgia fallback before the webfont lands), and the veil only mounts after 160ms so fast page switches never flash a loader
+- Build with AI hero: more air between the sparkle and the title, and on phones the callout trims to two lines - "Describe your app in plain words. AI drafts it, you review and save." - with the confirm note moving under the button
+- The Loaded workspace bar loses its dead padding on desktop
+
 ## 0.4.8
 
 - Gallery hosting sends cache-revalidation headers on every proxied response, so phones and returning browsers always pick up the latest pages and styles after a deploy instead of serving stale cached copies

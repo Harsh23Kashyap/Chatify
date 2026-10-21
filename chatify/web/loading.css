@@ -1,19 +1,18 @@
 /* Branded veil shown while a page transition waits on the network, so a slow or
    sleeping demo host reads as a friendly loading state instead of a blank screen.
-   Appended to <html> so page exit animations never hide it. */
+   Appended to <html> so page exit animations never hide it. The bar is always
+   filled - the dark band sweeps through the track, so there is shimmer from t=0. */
 .cc-veil{position:fixed;inset:0;z-index:100000;display:grid;place-items:center;background:#f6f2e8;opacity:0;transition:opacity .18s ease-out}
 .cc-veil.cc-veil-show{opacity:1}
 html[data-theme=dark] .cc-veil{background:#101c17}
 .cc-veil-card{display:grid;justify-items:center;gap:14px;padding:24px;text-align:center}
 .cc-veil-logo{width:64px;height:64px;border-radius:18px;box-shadow:0 10px 30px rgba(23,63,53,.18);animation:cc-veil-bob 1.6s ease-in-out infinite}
-.cc-veil-name{font:700 17px 'DM Sans',system-ui,sans-serif;color:#173f35;letter-spacing:.02em}
+.cc-veil-name{font:700 20px Fraunces,Georgia,serif;color:#173f35;letter-spacing:.01em}
 html[data-theme=dark] .cc-veil-name{color:#e8eee6}
-.cc-veil-bar{width:180px;height:6px;border-radius:99px;background:#e4ddc9;overflow:hidden}
-html[data-theme=dark] .cc-veil-bar{background:#26392f}
-.cc-veil-bar i{display:block;width:60%;height:100%;border-radius:99px;background:linear-gradient(90deg,#7b9c79,#173f35);animation:cc-veil-slide 1.15s ease-in-out infinite}
-html[data-theme=dark] .cc-veil-bar i{background:linear-gradient(90deg,#7b9c79,#d7ef72)}
+.cc-veil-bar{width:180px;height:6px;border-radius:99px;background:linear-gradient(90deg,#e4ddc9 0%,#7b9c79 30%,#173f35 50%,#7b9c79 70%,#e4ddc9 100%);background-size:220% 100%;animation:cc-veil-shimmer 1.3s linear infinite}
+html[data-theme=dark] .cc-veil-bar{background:linear-gradient(90deg,#26392f 0%,#7b9c79 30%,#d7ef72 50%,#7b9c79 70%,#26392f 100%);background-size:220% 100%}
 .cc-veil-text{font:500 13.5px 'DM Sans',system-ui,sans-serif;color:#5d6b64;max-width:300px;line-height:1.5}
 html[data-theme=dark] .cc-veil-text{color:#9db3a4}
 @keyframes cc-veil-bob{0%,100%{transform:translateY(0) scale(1)}50%{transform:translateY(-7px) scale(1.04)}}
-@keyframes cc-veil-slide{0%{transform:translateX(-110%)}100%{transform:translateX(320%)}}
-@media(prefers-reduced-motion:reduce){.cc-veil{transition:none;opacity:1}.cc-veil-logo,.cc-veil-bar i{animation:none}}
+@keyframes cc-veil-shimmer{from{background-position:120% 0}to{background-position:-120% 0}}
+@media(prefers-reduced-motion:reduce){.cc-veil{transition:none;opacity:1}.cc-veil-logo,.cc-veil-bar{animation:none}}

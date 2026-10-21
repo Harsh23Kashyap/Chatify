@@ -3,7 +3,7 @@
    blank screen. Decoration only: links keep working as plain links if anything fails. */
 (() => {
   const root = document.documentElement;
-  let veilTimer, veilNote;
+  let veilTimer, veilDelay, veilNote;
 
   const dismissBoot = () => {
     const b = document.getElementById("cc-boot");
@@ -14,6 +14,8 @@
 
   const dropVeil = () => {
     clearTimeout(veilTimer);
+    clearTimeout(veilDelay);
+    veilDelay = null;
     root.classList.remove("cc-page-leaving");
     const v = document.querySelector(".cc-veil");
     if (v) v.remove();
@@ -23,20 +25,23 @@
 
   const leave = label => {
     root.classList.add("cc-page-leaving");
-    if (document.querySelector(".cc-veil")) return;
-    let icon = "icons/chatify.svg";
-    try { icon = new URL("icons/chatify.svg", location.href).href; } catch (e) { }
-    const v = document.createElement("div");
-    v.className = "cc-veil";
-    v.setAttribute("role", "status");
-    v.innerHTML = '<div class="cc-veil-card"><img class="cc-veil-logo" src="' + icon + '" alt=""><div class="cc-veil-name">Chatify</div><div class="cc-veil-bar"><i></i></div><div class="cc-veil-text"></div></div>';
-    veilNote = v.querySelector(".cc-veil-text");
-    veilNote.textContent = "Opening " + (label || "page") + "…";
-    v.addEventListener("click", () => { dropVeil(); });
-    root.appendChild(v);
-    requestAnimationFrame(() => v.classList.add("cc-veil-show"));
+    if (veilDelay || document.querySelector(".cc-veil")) return;
+    veilDelay = setTimeout(() => {
+      veilDelay = null;
+      let icon = "icons/chatify.svg";
+      try { icon = new URL("icons/chatify.svg", location.href).href; } catch (e) { }
+      const v = document.createElement("div");
+      v.className = "cc-veil";
+      v.setAttribute("role", "status");
+      v.innerHTML = '<div class="cc-veil-card"><img class="cc-veil-logo" src="' + icon + '" alt=""><div class="cc-veil-name">Chatify</div><div class="cc-veil-bar"></div><div class="cc-veil-text"></div></div>';
+      veilNote = v.querySelector(".cc-veil-text");
+      veilNote.textContent = "Opening " + (label || "page") + "…";
+      v.addEventListener("click", () => { dropVeil(); });
+      root.appendChild(v);
+      requestAnimationFrame(() => v.classList.add("cc-veil-show"));
+    }, 160);
     veilTimer = setTimeout(() => {
-      if (veilNote && v.isConnected) veilNote.textContent = "Waking up the server - the first visit can take up to a minute.";
+      if (veilNote && veilNote.isConnected) veilNote.textContent = "Waking up the server - the first visit can take up to a minute.";
     }, 7000);
   };
 
