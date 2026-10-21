@@ -472,3 +472,13 @@ html[data-motion=none] .fresh.row:has(.bubble.none),html[data-motion=calm] .fres
 }
 /* No-motion also disables press displacement, not only its transition. */
 html[data-motion=none] button:active,html[data-motion=calm] button:active,html[data-motion=none] a.go:active,html[data-motion=calm] a.go:active{transform:none!important}
+/* Entrance: first paint of the app frame */
+.toolbar{animation:m-in .3s var(--ease) both}
+.toolbar .tb-brand{animation:m-up .28s var(--ease) both}
+.toolbar .common-nav{animation:m-up .28s var(--ease) both .05s}
+.toolbar .nav-status{animation:m-up .28s var(--ease) both .1s}
+.bar{animation:m-in .26s var(--ease) both .08s}
+.hero{animation:m-settle .34s var(--ease) both .05s}
+.hero .av{animation:m-tick .5s var(--ease) .35s}
+@media(min-width:861px){.side{animation:m-up .3s var(--ease) both .04s}}
+html[data-toolbar=hide] .toolbar{animation:none}

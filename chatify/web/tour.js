@@ -60,9 +60,9 @@
     {title:'Preview when you want it',text:'Show chat preview makes the optional preview visible; it does not send a chat message. Open your chat from Workspace when ready. Guide replays this walkthrough at any time. Reading the guide does not change your settings.',target:'.preview-toggle',tabs:['Preview','Chat','Guide']}
   ];
   const chatSteps=[
-    {title:'Ask from your sources',text:'Add documents or a web link, then ask a question. Answers use the retrieved sources; check citations for important facts.',target:'#q',tabs:['Ask','Retrieve','Cite'],icon:'⌕'},
-    {title:'Keep the conversation going',text:'Follow-ups use bounded context from this conversation. Start a new conversation for a fresh subject. History is not unlimited recall.',target:'#newTopic',tabs:['Question','Follow-up','Context'],icon:'↻'},
-    {title:'Choose what stays with you',text:'Temporary chat saves no conversation. My profile adds optional background to saved chats. Configuration controls the model, sources and look.',target:'#profileBtn',tabs:['Temporary','Profile','Configure'],icon:'☺'}
+    {title:'Ask a question',text:'Type in the box at the bottom and press Enter. Answers come only from this app\'s sources, and each answer cites where it found the facts.',target:'#q',tabs:['Ask','Retrieve','Cite'],icon:'⌕'},
+    {title:'Keep the conversation going',text:'Ask a follow-up and Chatify remembers the topic. When you change subjects, start a new conversation so answers stay on track.',target:'#newTopic',tabs:['Question','Follow-up','Context'],icon:'↻'},
+    {title:'Make it yours',text:'Configuration controls sources, model and look. The easiest setup is Build with AI: describe the app in plain words and review what it drafts. You can skip this tour at any time; nothing is locked while it is open.',target:'#profileBtn',tabs:['Temporary','Profile','Configure'],icon:'☺'}
   ];
   window.CCTour={chat:(replay=false,onClose)=>show({key:'cc_tour',title:'Quick tour',steps:chatSteps,replay,onClose}),config:(replay=false)=>show({key:'cc_cfg_tour_v1',title:'Configuration guide',steps:configSteps,replay})};
 })();

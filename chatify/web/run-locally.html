@@ -1,0 +1,60 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Run locally · Chatify</title><link rel="stylesheet" href="/about.css"><link rel="stylesheet" href="/navigation.css"><link rel="icon" type="image/svg+xml" href="/icons/chatify.svg"><link rel="stylesheet" href="/components.css"><link rel="stylesheet" href="/loading.css"><script src="/loading.js" defer></script>
+<style>
+.rl-cmd{display:flex;align-items:center;gap:12px;flex-wrap:wrap;background:#173f35;color:#f4f8ee;border-radius:14px;padding:18px 20px;margin:14px 0 8px}
+.rl-cmd code{font:600 15px/1.4 ui-monospace,SFMono-Regular,Menlo,monospace;word-break:break-all;flex:1;min-width:220px}
+.rl-copy{border:1px solid #f4f8ee66;background:transparent;color:#f4f8ee;border-radius:10px;padding:8px 16px;font:600 13px 'DM Sans',sans-serif;cursor:pointer}
+.rl-copy:hover{background:#f4f8ee22}
+.rl-copy.done{background:#d7e6a8;color:#173f35;border-color:#d7e6a8}
+.rl-note{color:#52675c;font-size:14px}
+.rl-steps{counter-reset:s;display:grid;gap:18px;margin:26px 0}
+.rl-step{border:1px solid #dce4db;border-radius:16px;padding:20px 22px;background:#fffdf7}
+.rl-step h3{margin:0 0 8px;font:600 19px/1.2 Fraunces,Georgia,serif;color:#173f35}
+.rl-step h3::before{counter-increment:s;content:counter(s) ". ";color:#7b9c79}
+.rl-step p{margin:6px 0;color:#3c5548;line-height:1.6}
+.rl-step code{background:#eaf0e6;border-radius:6px;padding:2px 7px;font:600 13px ui-monospace,Menlo,monospace}
+.rl-step pre{background:#173f35;color:#f4f8ee;border-radius:10px;padding:12px 16px;overflow:auto;font:500 13px/1.5 ui-monospace,Menlo,monospace}
+.rl-tips{border-left:4px solid #d7e6a8;background:#f7f9f2;border-radius:0 14px 14px 0;padding:16px 20px;margin:22px 0}
+.rl-tips h3{margin:0 0 8px;font:600 17px Fraunces,Georgia,serif;color:#173f35}
+.rl-tips li{margin:7px 0;color:#3c5548;line-height:1.55}
+.rl-hero{animation:rl-up .35s cubic-bezier(.2,.8,.2,1) both}
+.rl-steps .rl-step{animation:rl-up .3s cubic-bezier(.2,.8,.2,1) both}
+.rl-steps .rl-step:nth-child(2){animation-delay:.06s}.rl-steps .rl-step:nth-child(3){animation-delay:.12s}
+.rl-tips{animation:rl-up .3s cubic-bezier(.2,.8,.2,1) both .16s}
+@keyframes rl-up{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+@media(prefers-reduced-motion:reduce){.rl-hero,.rl-steps .rl-step,.rl-tips{animation:none!important}}
+html[data-theme=dark] .rl-step{background:#1f302c;border-color:#40594c}
+html[data-theme=dark] .rl-step p,html[data-theme=dark] .rl-tips li{color:#b9cabd}
+html[data-theme=dark] .rl-step h3{color:#e8eee6}
+html[data-theme=dark] .rl-tips{background:#26392f;border-left-color:#7b9c79}
+html[data-theme=dark] .rl-tips h3{color:#e8eee6}
+html[data-theme=dark] .rl-step code{background:#304439;color:#e8eee6}
+</style></head><body>
+<header class="about-nav"><a class="about-brand nav-brand" href="/"><img class="brand-icon" src="/icons/chatify.svg" alt="">Chatify</a><nav class="common-nav" aria-label="Main navigation"><a href="/">Chat</a><a href="/about.html">About</a><a href="/settings.html">Configuration</a><a href="/run-locally.html" class="active" aria-current="page">Run locally</a><button type="button" class="cc-guide-replay" id="rlGuide" aria-label="Replay guide">Guide</button></nav><div class="nav-status"></div></header>
+<main>
+<div class="rl-hero">
+<h1>Run Chatify on your own computer.</h1>
+<p>Everything runs on your machine: your documents, your keys, your chats. One command installs and starts it.</p>
+</div>
+<h2 style="font:600 22px Fraunces,Georgia,serif;color:#173f35;margin:26px 0 4px">The one command</h2>
+<div class="rl-cmd"><code id="mainCmd">uvx --from chatify-app chatify start</code><button class="rl-copy" data-copy="mainCmd">Copy</button></div>
+<p class="rl-note">Paste it into Terminal (Mac, Linux) or PowerShell (Windows) and press Enter. The first run downloads Chatify; after that it starts in seconds. Your browser opens your new app automatically.</p>
+<div class="rl-steps">
+<section class="rl-step"><h3>Open a command window</h3><p><strong>Mac:</strong> press Cmd+Space, type <code>Terminal</code>, press Return. <strong>Windows:</strong> open Start, type <code>PowerShell</code>, open it. <strong>Linux:</strong> open Terminal from your app menu.</p></section>
+<section class="rl-step"><h3>Install uv once</h3><p>uv is the small installer the command above needs. You only do this the first time.</p><p><strong>Mac / Linux:</strong></p><pre>curl -LsSf https://astral.sh/uv/install.sh | sh</pre><p><strong>Windows PowerShell:</strong></p><pre>powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"</pre><p>When it finishes, close and reopen the command window.</p></section>
+<section class="rl-step"><h3>Start Chatify</h3><p>Run the one command at the top of this page. A short guide appears on first launch: you can skip it at any time, and it never locks the app while it is open.</p></section>
+</div>
+<div class="rl-tips"><h3>Good to know before you start</h3>
+<ul>
+<li><strong>The easiest setup is Build with AI.</strong> On the Configuration page, choose Build with AI and describe the app you want in plain words. It drafts the whole setup for you to review. Nothing is saved until you confirm.</li>
+<li><strong>Questions go in the box at the bottom of the Chat page.</strong> Type your question there and press Enter. Answers cite the sources they used.</li>
+<li><strong>Add a public web page as a source:</strong> in Add sources, choose "Add a web page" and paste the address. Chatify stores that page's text and answers over it.</li>
+<li><strong>Files can be up to 8 MB each.</strong> If a file is too large, remove it and choose a smaller one; large PDFs often work once figures are removed.</li>
+<li><strong>Your data stays with you.</strong> Documents, keys and chats never leave your computer.</li>
+</ul></div>
+<p><a href="/settings.html">Try Build with AI here first ↗</a> &nbsp;·&nbsp; <a href="https://github.com/Harsh23Kashyap/Chatify">Source and docs on GitHub ↗</a></p>
+</main>
+<script>
+document.querySelectorAll('.rl-copy').forEach(function(b){b.onclick=function(){var t=document.getElementById(b.dataset.copy).textContent;(navigator.clipboard?navigator.clipboard.writeText(t):Promise.reject()).then(function(){b.textContent='Copied';b.classList.add('done');setTimeout(function(){b.textContent='Copy';b.classList.remove('done')},1600)}).catch(function(){var r=document.createRange();r.selectNodeContents(document.getElementById(b.dataset.copy));var s=getSelection();s.removeAllRanges();s.addRange(r)})}});
+document.getElementById('rlGuide').onclick=function(){localStorage.removeItem('cc_tour');location.href='/'};
+</script>
+</body></html>

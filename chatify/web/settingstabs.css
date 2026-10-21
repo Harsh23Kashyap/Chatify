@@ -338,3 +338,9 @@ body.settings-tabs #settingsNavTop{z-index:150!important}
 #modelSuggestionSources .model-doc-source{display:block;margin:3px 0;overflow-wrap:anywhere}
 
 .settings-studio-actions .app-builder-note{align-self:center;max-width:260px;font-size:11px;line-height:1.35;color:#5c6f63}
+/* Build with AI is the recommended path: gentle finite glow on arrival */
+.app-builder-open{font-weight:700}
+@media(prefers-reduced-motion:no-preference){
+html:not([data-motion=none]):not([data-motion=calm]) .app-builder-open{animation:ab-glow 2.4s ease-in-out 1s 2}
+}
+@keyframes ab-glow{0%,100%{box-shadow:0 0 0 0 rgba(23,63,53,0)}50%{box-shadow:0 0 0 7px rgba(23,63,53,.13)}}
