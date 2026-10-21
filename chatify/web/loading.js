@@ -33,7 +33,7 @@
       const v = document.createElement("div");
       v.className = "cc-veil";
       v.setAttribute("role", "status");
-      v.innerHTML = '<div class="cc-veil-card"><img class="cc-veil-logo" src="' + icon + '" alt=""><div class="cc-veil-name">Chatify</div><div class="cc-veil-bar"></div><div class="cc-veil-text"></div></div>';
+      v.innerHTML = '<div class="cc-veil-card"><span class="cc-orbit" aria-hidden="true"><svg viewBox="0 0 88 88"><circle class="cc-orbit-track" cx="44" cy="44" r="38"/><circle class="cc-orbit-head" cx="44" cy="44" r="38"/></svg><img src="' + icon + '" alt=""></span><div class="cc-veil-name">Chatify</div><div class="cc-veil-text"></div></div>';
       veilNote = v.querySelector(".cc-veil-text");
       veilNote.textContent = "Opening " + (label || "page") + "…";
       v.addEventListener("click", () => { dropVeil(); });

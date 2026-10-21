@@ -6,6 +6,10 @@ It starts in offline Demo mode, with no API key or paid calls. Demo uses built-i
 
 ![Chatify answering a question with sources in offline Demo mode](https://raw.githubusercontent.com/Harsh23Kashyap/Chatify/main/docs/screenshots/chat.png)
 
+## Try the hosted gallery
+
+https://chatify-demo-779c.onrender.com/ - live demo apps built with Chatify (product guide, space, exercise, F1, news), each answering from its own cited sources. **Build with AI** works for every visitor: describe an app and watch the setup assistant draft it. Free, no sign-up; fair-use limits apply. The free host sleeps when idle - the first visit can take a minute to wake.
+
 ## Demo video
 
 https://github.com/user-attachments/assets/76727d82-3a95-4c37-8136-1aea5472b2a7
