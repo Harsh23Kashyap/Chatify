@@ -1,0 +1,26 @@
+# Hosted public demo: pre-configured model, anyone can Build with AI.
+# Run: python -m chatify run apps/hosted/app.yaml
+# yaml-language-server: $schema=../../schema/chat-app.schema.json
+app:
+  id: hosted
+  title: Chatify
+  tagline: Ask questions, or build your own chat app with AI
+  examples:
+    - What is Chatify?
+    - How do I build my own chat app?
+    - How are answers cited?
+  footer: A model is already configured here. Open Configuration and choose Build with AI, the easier path.
+provider:
+  type: openai         # key comes from the OPENAI_API_KEY environment variable on the host
+  model: gpt-4o-mini
+  api_key_env: OPENAI_API_KEY
+sources:
+  - id: docs
+    type: local_files
+    label: Chatify guide
+    path: docs
+budget:
+  daily_questions: 300      # shared across all visitors; 30 questions/minute throttle also applies
+  user_daily_questions: 0   # no-auth app: per-person quota would be shared by everyone, so keep it off
+  daily_model_calls: 500    # covers chat answers and Build with AI drafting; a full build is up to 36 calls
+  spend_cap_usd: null       # the host key carries its own provider-side budget limit
