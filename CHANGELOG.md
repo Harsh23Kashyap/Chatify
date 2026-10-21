@@ -1,3 +1,7 @@
+## 0.4.1
+
+- Gallery review polish: the About tile spans the free columns of the last row and carries an "informational only, not medical advice" line, FitChat's accent moves to magenta so it no longer reads as Formula One's terracotta, and the mobile trust chips fade at the scroll edge
+
 ## 0.4.0
 
 - Gallery apps can now be redirects: an entry with a url instead of a dir makes /<slug>/ send visitors to that site and its card link straight out, so systems with their own homes (like DietChat on dietchat.org) no longer run twice on the host key. /api/health lists hosted apps and redirects separately

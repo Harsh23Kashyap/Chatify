@@ -49,6 +49,8 @@ h1{font-family:Fraunces,Georgia,serif;font-weight:700;font-size:clamp(30px,4.6vw
 .g-info li{position:relative;padding-left:18px;color:var(--mut);font-size:13.8px;line-height:1.5}
 .g-info li::before{content:"";position:absolute;left:0;top:.52em;width:7px;height:7px;border-radius:50%;background:#30a46c;opacity:.75}
 .g-info b{color:var(--ink);font-weight:700}
+.g-info-fine{margin-top:auto;padding-top:10px;border-top:1px solid var(--line);font-size:12.5px;color:var(--mut)}
+@media(min-width:1000px){.g-info ul{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px}}
 .foot{margin-top:40px;padding-top:20px;border-top:1px solid var(--line);display:flex;flex-wrap:wrap;gap:6px 18px;align-items:center;justify-content:space-between;color:var(--mut);font-size:13.5px}
 .foot a{color:var(--ink);font-weight:600;text-decoration:none;border-bottom:1px solid var(--line)}
 .foot a:hover{border-bottom-color:var(--ink)}
@@ -81,11 +83,12 @@ h1{font-family:Fraunces,Georgia,serif;font-weight:700;font-size:clamp(30px,4.6vw
 @keyframes g-line{from{transform:scaleX(0)}}
 @keyframes g-drift{to{background-position:0 0,0 0,52px 52px}}
 @media(prefers-reduced-motion:reduce){.top,.hero,.sec,.g-card,.g-info,.foot{animation:none!important}.g-card{transition:none}.g-card:hover{transform:none}}
+@media(min-width:1000px){.g-info{grid-column:2/span 2}}
 @media(max-width:640px){
 .wrap{padding:28px 18px 32px}
 .hero{padding:42px 0 34px}
 .tag{font-size:16px}
-.chips{flex-wrap:nowrap;overflow-x:auto;padding-bottom:4px;scrollbar-width:none}
+.chips{flex-wrap:nowrap;overflow-x:auto;padding-bottom:4px;scrollbar-width:none;mask-image:linear-gradient(to right,#000 88%,transparent);-webkit-mask-image:linear-gradient(to right,#000 88%,transparent)}
 .chips::-webkit-scrollbar{display:none}
 .chips li{flex:0 0 auto}
 .grid{grid-template-columns:1fr;gap:18px}
@@ -102,6 +105,6 @@ h1{font-family:Fraunces,Georgia,serif;font-weight:700;font-size:clamp(30px,4.6vw
 <ul class="chips"><li>Private per-visitor chats</li><li>Answers cite their sources</li><li>Free hosted demos</li></ul>
 </section>
 <div class="sec"><h2>Browse the apps</h2><span>{{COUNT}} live</span></div>
-<div class="grid">{{CARDS}}<div class="g-info"><div class="g-info-t"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M12 11v5"/><circle cx="12" cy="7.8" r=".9" fill="currentColor" stroke="none"/></svg>About these demos</div><ul><li><b>Your chats are yours.</b> Every visitor gets a private session; histories never mix.</li><li><b>Free demos, daily limits apply.</b> A shared key stays healthy for everyone.</li><li><b>Cited answers.</b> Each answer links back to the sources behind it.</li></ul></div></div>
+<div class="grid">{{CARDS}}<div class="g-info"><div class="g-info-t"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M12 11v5"/><circle cx="12" cy="7.8" r=".9" fill="currentColor" stroke="none"/></svg>About these demos</div><ul><li><b>Your chats are yours.</b> Every visitor gets a private session; histories never mix.</li><li><b>Free demos, daily limits apply.</b> A shared key stays healthy for everyone.</li><li><b>Cited answers.</b> Each answer links back to the sources behind it.</li></ul><div class="g-info-fine">Informational only - not medical advice.</div></div></div>
 <footer class="foot"><span>Built with <a href="/chatify/">Chatify</a>, from one YAML file and your sources.</span></footer>
 </div></body></html>
