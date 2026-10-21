@@ -7,7 +7,7 @@
   if (window.CCDialog) return;
   const css = document.createElement("style");
   css.textContent = `
-.cc-cdlg{border:none;padding:0;border-radius:18px;background:#fffdf7;color:#173f35;box-shadow:0 24px 70px rgba(14,43,32,.35);width:min(430px,92vw);font:15px/1.55 "DM Sans",system-ui,sans-serif}
+.cc-cdlg{position:fixed;inset:0;margin:auto;border:none;padding:0;border-radius:18px;background:#fffdf7;color:#173f35;box-shadow:0 24px 70px rgba(14,43,32,.35);width:min(430px,92vw);font:15px/1.55 "DM Sans",system-ui,sans-serif}
 .cc-cdlg::backdrop{background:rgba(14,43,32,.38);backdrop-filter:blur(2px)}
 .cc-cdlg-card{display:grid;gap:12px;padding:24px 24px 20px}
 .cc-cdlg-title{font:700 19px Fraunces,Georgia,serif;letter-spacing:-.01em;margin:0}
