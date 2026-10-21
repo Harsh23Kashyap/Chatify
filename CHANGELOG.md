@@ -1,6 +1,10 @@
+## 0.4.11
+
+- Build with AI review fixes: the confirm note brightens to cream-green and the aurora's lightest stop deepens so text always reads on phones, sparkles move out of the text into the callout's corners and title gap (only one on mobile) with a softer peak, the traveling border comet thickens to 2px, and the button sheen is lighter with a subtle label lift so Start building stays crisp mid-sweep
+
 ## 0.4.10
 
-- Build with AI re-themed to the site palette: the callout drops pink and purple for a drifting mint-and-lime gradient with green sparkles, and Start building trades the glow pulse for a continuous light sweep that keeps gliding across the button - the feature always draws the eye, and every loop still stops under reduced motion. The focus ring is now a crisp mid-green
+- Build with AI goes bold within the site theme: the callout is a deep-pine aurora of drifting greens with a cream serif title, a lime comet travels its border on a loop, floating sparkles drift inside, and Start building is lime with a continuous sheen sweep - the feature always draws the eye. No pink, no purple, no glow, and every loop still stops under reduced motion. The focus ring is a crisp lime
 
 ## 0.4.9
 
