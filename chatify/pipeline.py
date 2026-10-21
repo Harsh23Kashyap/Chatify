@@ -304,13 +304,13 @@ class Engine:
         try:
             out = self.provider.complete([{"role": "system", "content": self.stage_prompt("revise")},
                                           {"role": "user", "content": "These sentences are too vague: %s\nSay exactly what the passage measured (for example fat mass regain, and which group had more). If a sentence rests on an animal study, say plainly that it was in rats or mice. Every sentence that states a finding needs its own [n] after it. If the opening says Yes or Probably and the effect came with weight loss, open with Possibly or say the effect may partly come from the weight loss.\n\nAnswer:\n%s\n\nEvidence:\n%s" % (" | ".join(flagged)[:800], answer, ev)}]).strip()
-        except providers.ProviderError:
-            return answer
+        except Exception:
+            return answer  # any revise-call failure keeps the original answer rather than failing the reply
         if stage_contracts.errors("revise", out, [e["n"] for e in evidence]):
             return answer
         if len(out) < 0.5 * len(answer) or not re.search(r"\[\d+\]", out):
             return answer
-        if re.match(r"\s*(?i)(additionally|moreover|furthermore|in addition|also|secondly|thirdly|finally|however|but|and|so)\b", out):
+        if re.match(r"\s*(additionally|moreover|furthermore|in addition|also|secondly|thirdly|finally|however|but|and|so)\b", out, re.I):
             return answer  # a rewrite that opens mid-thought reads as broken even when every claim checks out
         new, ev2 = self.tidy(out, evidence)
         led2 = self.ledger(new, ev2, asked)
@@ -349,7 +349,7 @@ class Engine:
         new, ev2 = self.tidy(out, evidence)
         # Never leave sentence fragments after removing unsupported numeric claims.
         gutted = len(bad) >= 2 and len(bad) * 2 >= len(ledger)
-        mid_thought = bool(re.match(r"\s*(?i)(additionally|moreover|furthermore|in addition|also|secondly|thirdly|finally|however|but|and|so)\b", new))
+        mid_thought = bool(re.match(r"\s*(additionally|moreover|furthermore|in addition|also|secondly|thirdly|finally|however|but|and|so)\b", new, re.I))
         if not ev2 or len(new.split()) < 6 or new.count(chr(34)) % 2 or gutted or mid_thought:
             new = self.fallback_answer(evidence).replace("The AI model could not be reached, so here are the most relevant passages from your sources.","The answer could not be fully checked. Here are the cited source passages instead.")
             new, ev2 = self.tidy(new,evidence)
