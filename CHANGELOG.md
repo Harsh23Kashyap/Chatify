@@ -2,6 +2,7 @@
 
 - Mobile navigation wraps: the tab bar no longer clips "Replay" on phones - tabs flow onto their own row under the brand instead of being cut off at a hard edge
 - Run locally page: the install command box is readable again (light text on its dark panel instead of a washed-out pill), long commands wrap cleanly instead of scrolling off, and the copy steps no longer overflow on small screens
+- Configuration greets you with a Build with AI hero: a soft indigo-to-mint callout under the Simple/Advanced toggle with a gentle continuous sparkle (disabled under reduced motion) and a Start building button that opens the existing builder - no model call until you ask
 - Gallery: NewsNerd's wash moves toward olive so it no longer reads as Formula One's terracotta, the eyebrow dash matches its green text, and the mobile trust-chip row fades visibly at its right edge
 
 ## 0.4.4

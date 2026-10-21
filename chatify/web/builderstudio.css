@@ -196,3 +196,23 @@ html body dialog.app-builder .cs[data-section-only] .cs-btn{transition:backgroun
 /* Hover responds quickly; the step's separate selected-state timing is unchanged. */
 html:not([data-motion=none]):not([data-motion=calm]) dialog.app-builder .builder-steps button:not(:disabled):hover{transition-duration:160ms}
 @media(prefers-reduced-motion:reduce){html dialog.app-builder .builder-steps button{transition:none!important}}
+.builder-hero{position:relative;overflow:hidden;display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin:4px 0 16px;padding:16px 18px;border-radius:16px;background:linear-gradient(115deg,#eeebfb 0%,#fbeaf6 55%,#e9f7ef 100%);border:1px solid #ddd6f0}
+.builder-hero::before{content:'';position:absolute;inset:0;pointer-events:none;background:linear-gradient(115deg,transparent 30%,rgba(255,255,255,.6) 50%,transparent 70%);transform:translateX(-130%);animation:builder-sheen 4.5s ease-in-out infinite}
+.builder-hero-copy{display:grid;gap:4px;min-width:0;flex:1 1 220px}
+.builder-hero-copy strong{font-family:Fraunces,Georgia,serif;font-size:18px;line-height:1.2;color:#241f3d;display:flex;align-items:center;gap:8px}
+.builder-hero-spark{display:inline-block;color:#7a4fd0;font-size:16px;animation:builder-twinkle 2.2s ease-in-out infinite}
+.builder-hero-sub{font-size:13px;line-height:1.45;color:#4b4664}
+.builder-hero-go{margin-left:auto;flex:none;background:#173f35;color:#fffdf7;border:0;border-radius:12px;min-height:44px;padding:11px 20px;font:700 14px/1.2 'DM Sans',system-ui,sans-serif;box-shadow:0 3px 0 #0c2b21;cursor:pointer;transition:transform .15s ease}
+.builder-hero-go:hover{transform:translateY(-1px)}
+.builder-hero-go:active{transform:translateY(1px);box-shadow:0 1px 0 #0c2b21}
+@keyframes builder-sheen{0%{transform:translateX(-130%)}55%{transform:translateX(130%)}100%{transform:translateX(130%)}}
+@keyframes builder-twinkle{0%,100%{opacity:.55;transform:scale(.9) rotate(0deg)}50%{opacity:1;transform:scale(1.18) rotate(14deg)}}
+@media(prefers-reduced-motion:reduce){.builder-hero::before,.builder-hero-spark{animation:none}}
+@media(max-width:600px){.builder-hero{padding:14px}.builder-hero-go{margin-left:0;flex:1 1 100%}}
+html[data-theme=dark] .builder-hero{background:linear-gradient(115deg,#2b2747 0%,#3a2340 55%,#1d3328 100%);border-color:#4a4470}
+html[data-theme=dark] .builder-hero::before{background:linear-gradient(115deg,transparent 30%,rgba(255,255,255,.14) 50%,transparent 70%)}
+html[data-theme=dark] .builder-hero-copy strong{color:#ece9fb}
+html[data-theme=dark] .builder-hero-spark{color:#c9a8ff}
+html[data-theme=dark] .builder-hero-sub{color:#b9b4d6}
+html[data-theme=dark] .builder-hero-go{background:#d7ef72;color:#173f35;box-shadow:0 3px 0 #6b8520}
+html[data-theme=dark] .builder-hero-go:active{box-shadow:0 1px 0 #6b8520}
