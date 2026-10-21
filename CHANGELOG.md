@@ -1,3 +1,7 @@
+## 0.4.4
+
+- Gallery gets its color back without the top band: each card carries a soft per-app wash that fades to white, icon tiles and tag chips sit deeper in their accent, hover shadows pick up the card's hue, and the hero turns colorful too - indigo, green and magenta trust chips and an indigo-to-magenta eyebrow rule. Text contrast and the light theme are unchanged
+
 ## 0.4.3
 
 - Gallery card follow-ups from review: the accent name dash grows to 30px so neighbouring hues (indigo, purple, magenta) read apart, the hover outline strengthens so bronze and teal stay visible on cream, cards get a real tap state on touch (accent outline, dash stretch, icon tilt), and the mobile chip row fades harder at its right edge
