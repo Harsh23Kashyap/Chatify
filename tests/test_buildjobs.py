@@ -30,7 +30,7 @@ class Jobs(unittest.TestCase):
   jobs=buildjobs.BuildJobs();f=Fixture();data=jobs.start('owner',f,schema.DEFAULTS,{'brief':'Garden advice'});data=self.wait(jobs,data['id']);self.assertEqual(data['state'],'done',data);raw=yaml.safe_load(data['yaml']);self.assertEqual(set(raw['pipeline_prompts']['text']),set(prompts.STAGES));self.assertEqual(set(raw['appearance']),set(theme.DEFAULT_CLEAN()));self.assertLessEqual(data['calls'],36);self.assertEqual(data['completed'],data['total']);self.assertEqual(len(f.calls),data['total']+1);self.assertRaises(ValueError,jobs.view,'wrong',data['id'])
  @unittest.mock.patch('chatify.buildimages.capability',return_value={'available':False,'note':'fixture'})
  def test_retry_only_failed(self,cap):
-  jobs=buildjobs.BuildJobs();f=Fixture();f.fail=next(iter(prompts.STAGES));d=jobs.start('owner',f,schema.DEFAULTS,{'brief':'Garden advice'});d=self.wait(jobs,d['id']);self.assertEqual(d['state'],'partial');calls=d['calls'];jobs.retry('owner',d['id']);d=self.wait(jobs,d['id']);self.assertEqual(d['state'],'done',d);self.assertEqual(d['calls'],calls);self.assertEqual(d['retry_calls'],2)
+  jobs=buildjobs.BuildJobs();f=Fixture();f.fail=next(iter(prompts.STAGES));d=jobs.start('owner',f,schema.DEFAULTS,{'brief':'Garden advice'});d=self.wait(jobs,d['id']);self.assertEqual(d['state'],'partial');calls=d['calls'];jobs.retry('owner',d['id']);d=self.wait(jobs,d['id']);self.assertEqual(d['state'],'done',d);self.assertEqual(d['calls'],calls+2);self.assertEqual(d['retry_calls'],2)
  def test_provider_block_stops_pending_calls(self):
   class Down:
    def complete(self,m):raise ValueError('The model is not responding right now')
@@ -70,7 +70,7 @@ class SafePatchChecks(unittest.TestCase):
     return out
   jobs=buildjobs.BuildJobs();f=Blank();d=self.wait(jobs,jobs.start('owner',f,schema.DEFAULTS,{'brief':'Garden advice'})['id'])
   self.assertEqual(d['state'],'partial');self.assertIn('appearance:wording_motion',d['errors']);before=copy.deepcopy(jobs.jobs[d['id']]['parts']);calls=d['calls']
-  jobs.retry('owner',d['id']);d=self.wait(jobs,d['id']);self.assertEqual(d['state'],'done',d);self.assertEqual(d['calls'],calls);self.assertEqual(d['retry_calls'],2)
+  jobs.retry('owner',d['id']);d=self.wait(jobs,d['id']);self.assertEqual(d['state'],'done',d);self.assertEqual(d['calls'],calls+2);self.assertEqual(d['retry_calls'],2)
   self.assertTrue(any('previous_validation_failure' in m and 'Interface wording left blank: txt_disclaimer' in m for m in f.calls))
   for k,v in before.items():self.assertEqual(jobs.jobs[d['id']]['parts'][k],v)
  def test_invalid_helper_json_reports_exact_corrective_contract(self):
@@ -119,7 +119,7 @@ class RetainedFailureMatrix(unittest.TestCase):
     f=BadOnce();jobs=buildjobs.BuildJobs();d=self.wait(jobs,jobs.start('owner',f,schema.DEFAULTS,{'brief':'Garden advice'})['id'])
     self.assertTrue(f.failed,target);self.assertEqual(d['state'],'partial',d);self.assertIn(target,d['errors']);self.assertNotIn(target,jobs.jobs[d['id']]['parts'])
     kept=copy.deepcopy(jobs.jobs[d['id']]['parts']);calls=d['calls'];self.assertEqual(len(kept),len(buildjobs.PARTS)-1)
-    jobs.retry('owner',d['id']);done=self.wait(jobs,d['id']);self.assertEqual(done['state'],'done',done);self.assertEqual(done['calls'],calls);self.assertEqual(done['retry_calls'],2)
+    jobs.retry('owner',d['id']);done=self.wait(jobs,d['id']);self.assertEqual(done['state'],'done',done);self.assertEqual(done['calls'],calls+2);self.assertEqual(done['retry_calls'],2)
     for key,value in kept.items():self.assertEqual(jobs.jobs[d['id']]['parts'][key],value)
 
 class DraftJSONRepairTests(unittest.TestCase):
@@ -182,11 +182,11 @@ class RetryCompletion(unittest.TestCase):
      if spec.get('area')=='appearance' and 'font' in spec.get('defaults',{}):raise ValueError('fixture always fails')
     return super().complete(messages)
   jobs=buildjobs.BuildJobs();f=AlwaysFail();d=jobs.start('owner',f,schema.DEFAULTS,{'brief':'Garden advice'});d=self.wait(jobs,d['id']);self.assertEqual(d['state'],'partial')
-  jobs.retry('owner',d['id']);d=self.wait(jobs,d['id']);self.assertEqual(d['state'],'partial')
-  jobs.retry('owner',d['id']);d=self.wait(jobs,d['id']);self.assertEqual(d['state'],'partial')
+  for _ in range(buildjobs.MAX_PART_ATTEMPTS-1):
+   jobs.retry('owner',d['id']);d=self.wait(jobs,d['id']);self.assertEqual(d['state'],'partial')
   jobs.retry('owner',d['id']);d=self.wait(jobs,d['id'])
   self.assertEqual(d['state'],'done',d)
   self.assertIn('appearance:fonts',d['defaulted'])
   self.assertIn('safe defaults',d['notice'])
-  self.assertLessEqual(d['calls'],36);self.assertLessEqual(d['retry_calls'],buildjobs.RETRY_CALLS+1)
+  self.assertEqual(d['calls'],31+buildjobs.MAX_PART_ATTEMPTS-1);self.assertEqual(d['retry_calls'],buildjobs.MAX_PART_ATTEMPTS-1+1)
   raw=yaml.safe_load(d['yaml']);self.assertEqual(set(raw['appearance']),set(theme.DEFAULT_CLEAN()));self.assertTrue(raw['appearance']['font'])

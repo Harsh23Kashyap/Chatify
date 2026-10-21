@@ -35,7 +35,7 @@ def make_handler(cfg, engine):
     from .buildjobs import BuildJobs
     from .builddrafts import BuildDrafts
     draft_store=BuildDrafts(os.path.dirname(os.path.abspath(store.path)) if store.path != ':memory:' else '/tmp')
-    build_jobs=BuildJobs(draft_store)
+    build_jobs=BuildJobs(draft_store, spend_dir=os.path.dirname(os.path.abspath(store.path)) if store.path != ':memory:' else None)
     state_folder = os.path.dirname(os.path.abspath(store.path)) if store.path != ":memory:" else "/tmp"
     acc = Accounts(store, bool(cfg["auth"].get("signup", True))) if cfg["auth"]["mode"] == "accounts" else None
 
@@ -368,7 +368,7 @@ def make_handler(cfg, engine):
                     return self._send(200, {'ok':ok,'message':msg} if ok else {'ok':False,**diagnosis(msg)})
             if path.startswith('/api/settings/build/') and method in ('POST','GET'):
                 if not can_edit(self):raise PermissionError('Only the app owner can build configuration')
-                from . import appbuilder
+                from . import appbuilder,buildjobs as buildjobs_mod
                 if path.endswith('/drafts') and method=='GET':return self._send(200,{'drafts':draft_store.list(o)})
                 if path.endswith('/draft') and method=='GET':return self._send(200,draft_store.get(o,qs.get('id','')))
                 if path.endswith('/draft') and method=='POST':return self._send(200,draft_store.put(o,b.get('yaml'),b.get('title',''),b.get('id'),b.get('sections')))
@@ -378,6 +378,11 @@ def make_handler(cfg, engine):
                 if path.endswith('/talk') or path.endswith('/deploy') or path.endswith('/start'):
                     selected=b.get('selection') or {};kind=selected.get('provider');model=selected.get('model');base=selected.get('base_url','')
                     if kind not in schema.PROVIDERS or not isinstance(model,str) or not model.strip() or len(model)>120 or not isinstance(base,str) or len(base)>300:raise ValueError('Choose a valid provider and model')
+                    cheap=buildjobs_mod.CHEAP_MODEL.get(kind)
+                    if cheap and cheap!=model:
+                        try:
+                            if cheap in providers.list_models(cfg,kind,base):model=cheap
+                        except Exception:pass
                     build_cfg=providers._block(cfg,kind,model,base)
                     setup_provider=providers.make(build_cfg)
                     setup_provider.output_limit=16000
