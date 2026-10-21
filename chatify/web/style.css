@@ -826,7 +826,7 @@ html:not(.preview) .composer>.box{width:100%}
 .main>.jump{z-index:5}
 
 /* Citations remain fixed while hover changes only color and background. */
-.cite,.a sup{transition:color .16s ease,background-color .16s ease;transform:none!important}.cite:hover,.a sup:hover{transform:none!important;background:var(--soft);color:var(--ink)}.srcs .s.cite-selected{outline:2px solid var(--brand);outline-offset:2px}.source-unavailable{font-style:italic;color:var(--mut)}.src-note{margin:12px 0 0;padding:10px 12px;border:1px solid var(--line);border-left:3px solid var(--brand);border-radius:10px;background:var(--soft);display:grid;gap:2px;max-width:100%;box-sizing:border-box}.src-note-t{font:600 12px/1.4 system-ui;color:var(--ink)}.src-note-b{font:12px/1.5 system-ui;color:var(--mut);overflow-wrap:anywhere}
+.cite,.a sup{transition:color .16s ease,background-color .16s ease;transform:none!important}.cite:hover,.a sup:hover{transform:none!important;background:var(--soft);color:var(--ink)}.srcs .s.cite-selected{outline:2px solid var(--brand);outline-offset:2px}.source-unavailable{font-style:italic;color:var(--mut)}.src-note{margin:8px 0 0;font:12px/1.5 system-ui;color:var(--mut);overflow-wrap:anywhere}
 
 .cite,.a sup{animation:none!important}
 

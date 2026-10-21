@@ -215,9 +215,8 @@ function turnView(t, prev) {
   const failedSources = Object.keys(t.source_errors || {});
   if (failedSources.length) {
     const names = failedSources.map((id) => (S.cfg.sources.find((x) => x.id === id) || {}).label || id);
-    bub.append(el("div", { class: "src-note", role: "note" },
-      el("span", { class: "src-note-t", text: "Some sources were unavailable" }),
-      el("span", { class: "src-note-b", text: names.join(", ") + " could not be reached for this question. The answer uses the remaining sources; ask again in a moment to retry them." })));
+    const allFailed = failedSources.length >= ((S.cfg.sources || []).length || 1);
+    bub.append(el("div", { class: "src-note", role: "note", text: names.join(", ") + " could not be reached" + (allFailed ? " for this question." : " - answered from the other sources.") }));
   }
   if (!t.evidence.length) {
     const ill = document.createElementNS("http://www.w3.org/2000/svg", "svg"); ill.setAttribute("viewBox", "0 0 96 96"); ill.setAttribute("class", "nf-ill"); ill.setAttribute("aria-hidden", "true");

@@ -325,9 +325,9 @@ class Engine:
             return self._drop_uncited_numbers(answer, evidence, ledger, asked)
         self.corrections = (getattr(self, "corrections", []) + [{"before": answer, "after": fixed}])[-20:]
         new, ev2 = self.tidy(fixed, evidence)
-        return self._drop_uncited_numbers(new, ev2, self.ledger(new, ev2, asked), asked)
+        return self._drop_uncited_numbers(new, ev2, self.ledger(new, ev2, asked), asked, full=evidence)
 
-    def _drop_uncited_numbers(self, answer, evidence, ledger, asked):
+    def _drop_uncited_numbers(self, answer, evidence, ledger, asked, full=None):
         """A sentence that carries a number but no [n] cannot be checked, so it is removed from the answer (kept in self.dropped)."""
         bad = [l["claim"] for l in ledger if re.search(r"\d", l["claim"]) and not l.get("cites") and len(l["claim"].split()) >= 4 and not l["claim"].lower().startswith(("i could not", "i couldn"))]
         out = answer
@@ -351,8 +351,9 @@ class Engine:
         gutted = len(bad) >= 2 and len(bad) * 2 >= len(ledger)
         mid_thought = bool(re.match(r"\s*(additionally|moreover|furthermore|in addition|also|secondly|thirdly|finally|however|but|and|so)\b", new, re.I))
         if not ev2 or len(new.split()) < 6 or new.count(chr(34)) % 2 or gutted or mid_thought:
-            new = self.fallback_answer(evidence).replace("The AI model could not be reached, so here are the most relevant passages from your sources.","The answer could not be fully checked. Here are the cited source passages instead.")
-            new, ev2 = self.tidy(new,evidence)
+            keep = full or evidence  # never promise passages and show none: fall back to the full retrieval set
+            new = self.fallback_answer(keep).replace("The AI model could not be reached, so here are the most relevant passages from your sources.","The answer could not be fully checked. Here are the cited source passages instead.")
+            new, ev2 = self.tidy(new,keep)
         return new, ev2, self.ledger(new, ev2, asked)
 
     @staticmethod
