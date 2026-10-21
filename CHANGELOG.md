@@ -1,3 +1,7 @@
+## 0.4.8
+
+- Gallery hosting sends cache-revalidation headers on every proxied response, so phones and returning browsers always pick up the latest pages and styles after a deploy instead of serving stale cached copies
+
 ## 0.4.7
 
 - Switching screens is never blank: navigating between Chat, Configuration, About, Run locally and the gallery now shows a branded loading veil (bouncing Chatify mark, shimmering progress bar, "Opening Chat...") that covers the network wait, and if the demo host is asleep the message changes to "Waking up the server - the first visit can take up to a minute". A matching compact boot veil covers first paint on cold starts, and sibling pages are prefetched so warm transitions are near-instant
