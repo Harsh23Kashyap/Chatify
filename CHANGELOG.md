@@ -1,3 +1,7 @@
+## 0.4.12
+
+- Build with AI gains its glimmer: a diagonal light glint sweeps the callout on a loop and the title carries a continuous cream shine that glides through the serif letters, on top of the existing aurora drift, border comet, button sheen and sparkles. All of it freezes under reduced motion, no pink or purple anywhere
+
 ## 0.4.11
 
 - Build with AI review fixes: the confirm note brightens to cream-green and the aurora's lightest stop deepens so text always reads on phones, sparkles move out of the text into the callout's corners and title gap (only one on mobile) with a softer peak, the traveling border comet thickens to 2px, and the button sheen is lighter with a subtle label lift so Start building stays crisp mid-sweep
