@@ -1,3 +1,7 @@
+## 0.4.3
+
+- Gallery card follow-ups from review: the accent name dash grows to 30px so neighbouring hues (indigo, purple, magenta) read apart, the hover outline strengthens so bronze and teal stay visible on cream, cards get a real tap state on touch (accent outline, dash stretch, icon tilt), and the mobile chip row fades harder at its right edge
+
 ## 0.4.2
 
 - Gallery cards drop the colored top band: each card's accent now shows as a short dash under the app name that stretches on hover, paired with an accent-tinted border on hover - the icon tile, tag chips, and arrow keep their accent treatment
