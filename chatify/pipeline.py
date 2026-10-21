@@ -319,13 +319,14 @@ class Engine:
             return answer  # the rewrite must have fewer flags than the original and add no number the cited passages lack
         return out
 
-    def _fix(self, answer, evidence, ledger, asked):
+    def _fix(self, answer, evidence, ledger, asked, full=None):
+        full = full or evidence
         fixed = self.correct(answer, evidence, ledger, asked)
         if fixed == answer:
-            return self._drop_uncited_numbers(answer, evidence, ledger, asked)
+            return self._drop_uncited_numbers(answer, evidence, ledger, asked, full=full)
         self.corrections = (getattr(self, "corrections", []) + [{"before": answer, "after": fixed}])[-20:]
         new, ev2 = self.tidy(fixed, evidence)
-        return self._drop_uncited_numbers(new, ev2, self.ledger(new, ev2, asked), asked, full=evidence)
+        return self._drop_uncited_numbers(new, ev2, self.ledger(new, ev2, asked), asked, full=full)
 
     def _drop_uncited_numbers(self, answer, evidence, ledger, asked, full=None):
         """A sentence that carries a number but no [n] cannot be checked, so it is removed from the answer (kept in self.dropped)."""
@@ -673,7 +674,7 @@ class Engine:
             if not evidence and len(answer.split())<12 and not re.search(r"cannot|could not|no (?:data|evidence|publication|dates?)|not (?:provided|available|specified)|insufficient|not establish|unavailable",answer,re.I):
                 answer=self.fallback_answer(original_evidence).replace("The AI model could not be reached, so here are the most relevant passages from your sources.","The answer could not be fully checked. Here are the cited source passages instead.");answer,evidence=self.tidy(answer,original_evidence)
             ledger = self.ledger(answer, evidence, standalone)
-            answer, evidence, ledger = self._fix(answer, evidence, ledger, standalone)
+            answer, evidence, ledger = self._fix(answer, evidence, ledger, standalone, full=original_evidence)
             note = (self.cfg["prompt"].get("answer_note") or "").strip()
             if evidence and note and note not in answer:
                 answer += "\n\n" + note
@@ -759,7 +760,7 @@ class Engine:
                 if not evidence and len(answer.split())<12 and not re.search(r"cannot|could not|no (?:data|evidence|publication|dates?)|not (?:provided|available|specified)|insufficient|not establish|unavailable",answer,re.I):
                     answer=self.fallback_answer(original_evidence).replace("The AI model could not be reached, so here are the most relevant passages from your sources.","The answer could not be fully checked. Here are the cited source passages instead.");answer,evidence=self.tidy(answer,original_evidence)
                 ledger = self.ledger(answer, evidence, standalone)
-                answer, evidence, ledger = self._fix(answer, evidence, ledger, standalone)
+                answer, evidence, ledger = self._fix(answer, evidence, ledger, standalone, full=original_evidence)
                 note = (self.cfg["prompt"].get("answer_note") or "").strip()
                 if evidence and note and note not in answer:
                     answer += "\n\n" + note
