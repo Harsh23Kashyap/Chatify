@@ -1,3 +1,8 @@
+## 0.3.3
+
+- Gallery review pass: the hero is shorter so the app cards start above the fold, the title no longer orphans a word, card arrows are always visible, tag text is darkened for contrast, the Chatify card is indigo so it no longer reads as DietChat's green, the About tile is a solid card instead of a dashed placeholder, and the duplicated app count and repeated privacy line are gone
+- Error pages carry the Chatify brand mark, use the same icon weight as the gallery, space their buttons evenly, and the 404 copy no longer orphans a word
+
 ## 0.3.2
 
 - The gallery home page is redesigned: a real hero with the gallery's promise and trust chips, richer app cards (per-app icon, accent color, tag chips, hover lift with a corner arrow, staggered entrance), an "About these demos" tile that fills out the grid, and a footer. It reads cleanly on phones too

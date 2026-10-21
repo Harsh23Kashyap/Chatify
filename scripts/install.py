@@ -2,7 +2,7 @@
 """Shared local installer. Invoked by OS scripts after uv/Python bootstrap."""
 import argparse,contextlib,json,os,shutil,subprocess,sys,time,urllib.request
 from pathlib import Path
-RELEASE='v0.3.2'
+RELEASE='v0.3.3'
 SOURCE='https://github.com/Harsh23Kashyap/chatify/archive/'+RELEASE+'.zip'
 
 def stage(text):
