@@ -71,7 +71,7 @@ class BuildJobs:
   brief=appbuilder.clean_text(data.get('brief'),4000)
   selected=appbuilder.sections(data.get('sections',appbuilder.SECTIONS))
   if set(selected)!=set(appbuilder.SECTIONS):raise ValueError('Background build currently generates a complete app; use section conversation for a focused tweak')
-  job={'id':uuid.uuid4().hex,'owner':owner,'provider':provider,'cfg':copy.deepcopy(cfg),'brief':brief,'state':'running','cancel':False,'calls':0,'retry_calls':0,'attempts':{},'defaulted':[],'in_retry':False,'parts':{},'active':set(),'remaining_work':['Draft areas','Final local validation','Optional logo capability check','Final model review'],'errors':{},'logo_status':{'state':'checking','note':'Logo capability not checked yet'},'yaml':None,'created':time.time(),'phase':'Drafting separate areas','notice':'Separate model calls on the cheapest suitable model for the selected provider, 3 at once. Daily Build with AI spend is capped at a conservative estimate of $500 per deployment. Local budget limits still apply. No save or code execution.'}
+  job={'id':uuid.uuid4().hex,'owner':owner,'provider':provider,'cfg':copy.deepcopy(cfg),'brief':brief,'state':'running','cancel':False,'calls':0,'retry_calls':0,'attempts':{},'defaulted':[],'in_retry':False,'parts':{},'active':set(),'remaining_work':['Draft areas','Final local validation','Optional logo capability check','Final model review'],'errors':{},'logo_status':{'state':'checking','note':'Logo capability not checked yet'},'yaml':None,'created':time.time(),'phase':'Drafting separate areas','notice':''}
   with self.lock:
    for key,old in list(self.jobs.items()):
     if time.time()-old['created']>86400 and old['state']!='running':self.jobs.pop(key)
