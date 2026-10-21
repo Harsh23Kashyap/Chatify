@@ -212,6 +212,13 @@ function turnView(t, prev) {
   nodes.push(el("div", { class: "row u" }, avatar("you"), el("div", { class: "bubble ub", text: t.question })));
   const bub = el("div", { class: "bubble bb" + (t.evidence.length ? "" : " none") }, renderAnswer(t.answer, t.evidence));
   if(/\b(chart|graph|plot)\b/i.test(t.question)){const chart=answerChart(t.answer,t.evidence);if(chart)bub.append(chart);}
+  const failedSources = Object.keys(t.source_errors || {});
+  if (failedSources.length) {
+    const names = failedSources.map((id) => (S.cfg.sources.find((x) => x.id === id) || {}).label || id);
+    bub.append(el("div", { class: "src-note", role: "note" },
+      el("span", { class: "src-note-t", text: "Some sources were unavailable" }),
+      el("span", { class: "src-note-b", text: names.join(", ") + " could not be reached for this question. The answer uses the remaining sources; ask again in a moment to retry them." })));
+  }
   if (!t.evidence.length) {
     const ill = document.createElementNS("http://www.w3.org/2000/svg", "svg"); ill.setAttribute("viewBox", "0 0 96 96"); ill.setAttribute("class", "nf-ill"); ill.setAttribute("aria-hidden", "true");
     ill.innerHTML = '<g fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M26 14h30l14 14v50H26z"/><path d="M56 14v15h14"/><path d="M36 42h24M36 52h18" opacity=".5"/><circle cx="58" cy="62" r="13" class="nf-lens"/><path d="m67 71 12 12"/></g>';
@@ -548,7 +555,6 @@ async function send() {
   if (result) {
     if (!S.temp) { S.chat = result.chat; S.topic = result.topic; S.newTopic = false; }
     S.turns.push(result);
-    if (Object.keys(result.source_errors || {}).length) toast("Some sources were unavailable: " + Object.keys(result.source_errors).join(", "));
     if (S.turns.length === 1 && !S.temp) $("#chatTitle").textContent = q.slice(0, 60);
   } else {
     toast((err || "Something went wrong").replace(/[.?!]+$/, "") + ".", "Retry", async () => { if(S.busy)throw Error("Wait for the current answer or stop it first."); if($("#q").value.trim() && $("#q").value.trim()!==q)throw Error("Your new draft is still here. Send or clear it before retrying the earlier question."); $("#q").value=q;await send(); });
