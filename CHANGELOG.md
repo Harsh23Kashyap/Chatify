@@ -1,3 +1,9 @@
+## 0.3.0
+
+- Moving between pages now animates: a short fade-and-rise on the way out and in, instead of a hard jump. It is skipped entirely for visitors who prefer reduced motion, and it never touches first loads, external links, new tabs, or same-page anchors
+- Designed pages for sign-in needed (401), not allowed (403), page not found (404), file too big (413), too many requests (429), server error (500), and waking up (503), each with its own animated artwork matching the rest of the app
+- Browsers that hit the sign-in wall now get the designed 401 page instead of raw JSON
+
 ## 0.2.9
 
 - Add a demo video to the README

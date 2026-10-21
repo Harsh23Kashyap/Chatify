@@ -1,0 +1,9 @@
+/* Page transitions between Chatify pages. Enter plays only when the departing page flagged the visit
+   (sessionStorage cc_nav), so first loads and external arrivals keep their own entrances.
+   The :not() guards match the app's motion modes and out-rank the generic load fade in loading.css. */
+@keyframes nav-in{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+@keyframes nav-out{from{opacity:1;transform:none}to{opacity:0;transform:translateY(-8px)}}
+@media(prefers-reduced-motion:no-preference){
+html:not([data-motion=none]):not([data-motion=calm]).nav-in body{animation:nav-in .24s cubic-bezier(.2,.8,.2,1) both}
+html:not([data-motion=none]):not([data-motion=calm]).nav-out body{animation:nav-out .15s cubic-bezier(.4,0,1,1) both}
+}

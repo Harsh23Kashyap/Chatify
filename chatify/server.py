@@ -809,7 +809,10 @@ def make_handler(cfg, engine):
             except (BrokenPipeError, ConnectionResetError, ConnectionAbortedError):
                 self.close_connection = True
             except PermissionError as e:
-                self._send(401 if "Sign in" in str(e) else 404, {"error": str(e)})
+                code = 401 if "Sign in" in str(e) else 404
+                if "text/html" in (self.headers.get("Accept") or ""):
+                    return self._error_page(code)
+                self._send(code, {"error": str(e)})
             except OverflowError:
                 self._send(413, {"error": "That file is too large. The limit is 8 MB for a PDF."})
             except (ValueError, KeyError, json.JSONDecodeError) as e:
@@ -830,9 +833,13 @@ def make_handler(cfg, engine):
 
 _DOC = '<path d="M42 24h46l20 20v82H42z"/><path d="M88 24v22h20"/><path d="M54 62h40M54 76h40M54 90h26" opacity=".55"/>'
 ERR_PAGES = {
+    401: ("Sign in needed", "This app asks visitors to sign in first. Sign in, then try again.", '<rect x="52" y="68" width="46" height="38" rx="8"/><path d="M62 68V56a13 13 0 0 1 26 0v12"/><circle cx="75" cy="86" r="4.5"/>'),
+    403: ("Not allowed here", "You are signed in, but this page or action is not available to your account.", '<path d="M75 28l36 13v27c0 25-16 42-36 51-20-9-36-26-36-51V41z"/><path d="M60 60l30 32"/>'),
     404: ("Page not found", "That page does not exist. It may have moved, or the link has a typo.", _DOC + '<circle cx="96" cy="100" r="18" fill="var(--bg)"/><path d="m109 113 16 16"/>'),
     413: ("That file is too big", "The upload is larger than the limit. PDFs can be up to 8 MB and pasted text up to 150,000 characters.", _DOC + '<path d="M75 138v-30m-12 12 12-12 12 12" stroke-width="4"/>'),
+    429: ("Slow down a little", "Too many requests in a short time. Wait a moment, then try again.", '<circle cx="75" cy="78" r="42"/><path d="M75 54v24l16 10"/>'),
     500: ("Something went wrong", "The server hit an unexpected problem. Nothing was lost. Try again in a moment.", _DOC + '<path d="M75 58v26M75 98v2" stroke-width="5"/>'),
+    503: ("Waking up", "The app is busy or restarting. Give it a few seconds, then try again.", '<path d="M55 30h40M55 120h40"/><path d="M60 30c0 32 30 34 30 45s-30 13-30 45M90 30c0 32-30 34-30 45s30 13 30 45"/>'),
 }
 
 
