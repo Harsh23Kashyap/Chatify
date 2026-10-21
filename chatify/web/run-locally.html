@@ -6,13 +6,13 @@
 .rl-copy:hover{background:#f4f8ee22}
 .rl-copy.done{background:#d7e6a8;color:#173f35;border-color:#d7e6a8}
 .rl-note{color:#52675c;font-size:14px}
-.rl-steps{counter-reset:s;display:grid;gap:18px;margin:26px 0}
-.rl-step{border:1px solid #dce4db;border-radius:16px;padding:20px 22px;background:#fffdf7}
+.rl-steps{counter-reset:s;display:grid;grid-template-columns:minmax(0,1fr);gap:18px;margin:26px 0}
+.rl-step{min-width:0;border:1px solid #dce4db;border-radius:16px;padding:20px 22px;background:#fffdf7}
 .rl-step h3{margin:0 0 8px;font:600 19px/1.2 Fraunces,Georgia,serif;color:#173f35}
 .rl-step h3::before{counter-increment:s;content:counter(s) ". ";color:#7b9c79}
 .rl-step p{margin:6px 0;color:#3c5548;line-height:1.6}
 .rl-step code{background:#eaf0e6;border-radius:6px;padding:2px 7px;font:600 13px ui-monospace,Menlo,monospace}
-.rl-step pre{background:#173f35;color:#f4f8ee;border-radius:10px;padding:12px 16px;overflow:auto;font:500 13px/1.5 ui-monospace,Menlo,monospace}
+.rl-step pre{max-width:100%;overflow-x:auto;background:#173f35;color:#f4f8ee;border-radius:10px;padding:12px 16px;overflow:auto;font:500 13px/1.5 ui-monospace,Menlo,monospace}
 .rl-tips{border-left:4px solid #d7e6a8;background:#f7f9f2;border-radius:0 14px 14px 0;padding:16px 20px;margin:22px 0}
 .rl-tips h3{margin:0 0 8px;font:600 17px Fraunces,Georgia,serif;color:#173f35}
 .rl-tips li{margin:7px 0;color:#3c5548;line-height:1.55}
@@ -21,6 +21,7 @@
 .rl-steps .rl-step:nth-child(2){animation-delay:.06s}.rl-steps .rl-step:nth-child(3){animation-delay:.12s}
 .rl-tips{animation:rl-up .3s cubic-bezier(.2,.8,.2,1) both .16s}
 @keyframes rl-up{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+@media(max-width:600px){.rl-cmd{flex-direction:column;align-items:stretch}.rl-cmd code{min-width:0}}
 @media(prefers-reduced-motion:reduce){.rl-hero,.rl-steps .rl-step,.rl-tips{animation:none!important}}
 html[data-theme=dark] .rl-step{background:#1f302c;border-color:#40594c}
 html[data-theme=dark] .rl-step p,html[data-theme=dark] .rl-tips li{color:#b9cabd}
