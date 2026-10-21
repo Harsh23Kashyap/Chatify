@@ -28,3 +28,7 @@ html body .common-nav a,html body .common-nav button{min-height:44px!important}
 html body :is(button,a,input,textarea,select):focus-visible{outline:2px solid var(--brand,#173f35);outline-offset:3px}
 html body .common-nav a,html body .common-nav button{transition:background-color .16s cubic-bezier(.2,.8,.2,1),color .16s cubic-bezier(.2,.8,.2,1)!important}
 @media(prefers-reduced-motion:reduce){html body .common-nav a,html body .common-nav button{transition:none!important}}html[data-motion=none] body .common-nav a,html[data-motion=none] body .common-nav button{transition:none!important}
+/* Five nav items (Chat, About, Configuration, Run locally, Guide) */
+html body .common-nav{width:354px!important}
+html body .common-nav a,html body .common-nav button{white-space:nowrap!important}
+@media(max-width:600px){html body .toolbar .common-nav,html body .about-nav .common-nav{width:314px!important}}
