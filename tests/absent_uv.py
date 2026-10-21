@@ -4,7 +4,7 @@ from pathlib import Path
 ROOT=Path(__file__).resolve().parents[1]
 def main():
     wheel=next((ROOT/'dist').glob('*.whl')).resolve()
-    with tempfile.TemporaryDirectory(prefix='cc absent uv ') as tmp:
+    with tempfile.TemporaryDirectory(prefix='cc absent uv ', ignore_cleanup_errors=True) as tmp:
         home=Path(tmp)/'new home';home.mkdir()
         env=dict(os.environ)
         env.update(HOME=str(home),USERPROFILE=str(home),UV_CACHE_DIR=str(home/'cache'))

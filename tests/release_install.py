@@ -4,7 +4,7 @@ from pathlib import Path
 ROOT=Path(__file__).resolve().parents[1]
 def run():
     wheel=next((ROOT/'dist').glob('*.whl'))
-    with tempfile.TemporaryDirectory(prefix='chatify release ') as folder:
+    with tempfile.TemporaryDirectory(prefix='chatify release ', ignore_cleanup_errors=True) as folder:
         root=Path(folder);envroot=root/'isolated env';venv.create(envroot,with_pip=True)
         py=envroot/('Scripts/python.exe' if os.name=='nt' else 'bin/python')
         env=dict(os.environ);env.pop('PYTHONPATH',None);env['PYTHONNOUSERSITE']='1'

@@ -4,7 +4,7 @@ from pathlib import Path
 ROOT=Path(__file__).resolve().parents[1]
 
 def main():
-    with tempfile.TemporaryDirectory(prefix='cc fresh laptop ') as tmp:
+    with tempfile.TemporaryDirectory(prefix='cc fresh laptop ', ignore_cleanup_errors=True) as tmp:
         base=Path(tmp);home=base/'new home';home.mkdir();bins=base/'system tools';bins.mkdir()
         if os.name!='nt':
             for name in ('realpath','ldd','sha256sum','sh','curl','uname','mktemp','rm','mkdir','chmod','mv','cp','tar','gzip','cat','sed','grep','head','tail','sort','cut','tr','dirname','basename','readlink','ln','rmdir','touch','wc','date','which','env','awk','find','ls','xargs','install'):
