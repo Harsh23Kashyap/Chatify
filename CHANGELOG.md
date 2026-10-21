@@ -1,3 +1,9 @@
+## 0.4.5
+
+- Mobile navigation wraps: the tab bar no longer clips "Replay" on phones - tabs flow onto their own row under the brand instead of being cut off at a hard edge
+- Run locally page: the install command box is readable again (light text on its dark panel instead of a washed-out pill), long commands wrap cleanly instead of scrolling off, and the copy steps no longer overflow on small screens
+- Gallery: NewsNerd's wash moves toward olive so it no longer reads as Formula One's terracotta, the eyebrow dash matches its green text, and the mobile trust-chip row fades visibly at its right edge
+
 ## 0.4.4
 
 - Gallery gets its color back without the top band: each card carries a soft per-app wash that fades to white, icon tiles and tag chips sit deeper in their accent, hover shadows pick up the card's hue, and the hero turns colorful too - indigo, green and magenta trust chips and an indigo-to-magenta eyebrow rule. Text contrast and the light theme are unchanged
