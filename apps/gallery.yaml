@@ -2,9 +2,10 @@
 # Run: python -m chatify run apps/gallery.yaml
 # Every member app runs on the host's server-side OpenAI key with the caps below;
 # per-visitor isolation is forced on and the per-person quota stays off.
+# Each app entry may add an icon (chat, leaf, signal, flag, news, spark) and up to 4 tags.
 gallery:
   title: Curiosity has many doors.
-  tagline: Chat apps built with Chatify, each over its own sources. Pick one and start asking.
+  tagline: Chat apps built with Chatify, each grounded in its own sources. Pick one and start asking.
   provider:
     type: openai
     model: gpt-4o-mini
@@ -15,11 +16,24 @@ gallery:
   apps:
     - dir: hosted
       slug: chatify
+      icon: chat
+      tags: [Product guide, Build your own]
     - dir: dietchat
       slug: dietchat
+      icon: leaf
+      tags: [Nutrition, PubMed-cited]
     - dir: wirelesschat
       slug: wirelesschat
+      accent: '#2f6f8f'
+      icon: signal
+      tags: [Wireless research, Cited papers]
     - dir: formulaone
       slug: formulaone
+      accent: '#b3402e'
+      icon: flag
+      tags: [F1 tech & rules, FIA sources]
     - dir: newsnerd-sample
       slug: newsnerd
+      accent: '#8a6d2f'
+      icon: news
+      tags: [News literacy, Source checks]

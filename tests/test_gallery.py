@@ -20,7 +20,7 @@ def _write_gallery(base):
         "  provider: {type: openai, model: gpt-4o-mini, api_key_env: OPENAI_API_KEY}\n"
         "  budget: {daily_questions: 300, daily_model_calls: 500}\n"
         "  apps:\n"
-        "    - {dir: alpha, slug: alpha}\n"
+        "    - {dir: alpha, slug: alpha, icon: chat, tags: [TagOne, TagTwo]}\n"
         "    - {dir: beta, slug: beta}\n")
 
 
@@ -91,6 +91,9 @@ class GalleryServer(unittest.TestCase):
         self.assertEqual(s, 200)
         self.assertEqual(b.count('class="g-card"'), 2)
         self.assertIn("Alpha App", b); self.assertIn("Beta App", b)
+        self.assertIn('class="g-ico"', b)                    # card icons render
+        self.assertIn("TagOne", b)                           # card tags render
+        self.assertIn('class="g-info"', b)                   # trust tile fills the grid
         self.assertIn('href="/alpha/"', b)
         self.assertIn("navflow", b)  # page transitions on the gallery too
 

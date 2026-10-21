@@ -882,7 +882,7 @@ def serve_gallery(path, host=None, port=None):
         threading.Thread(target=srv.serve_forever, daemon=True).start()
         children[app["slug"]] = srv.server_port
         a = cfg["app"]
-        cards.append({"slug": app["slug"], "title": a["title"], "tagline": a.get("tagline", ""), "accent": a.get("accent", "#173f35")})
+        cards.append({"slug": app["slug"], "title": a["title"], "tagline": a.get("tagline", ""), "accent": app.get("accent") or a.get("accent", "#173f35"), "icon": app.get("icon") or "spark", "tags": app.get("tags") or []})
     secrets.STORE = secrets.SecretStore("/tmp")
     host = host or "127.0.0.1"
     port = port or 8080
@@ -905,10 +905,10 @@ def serve_gallery(path, host=None, port=None):
         def _gallery_page(self):
             page = open(os.path.join(WEB, "gallery.html"), encoding="utf-8").read()
             cards_html = "".join(
-                '<a class="g-card" href="/%s/" style="--card-accent:%s"><span class="g-name">%s</span><span class="g-tag">%s</span><span class="g-open">Open app</span></a>'
-                % (_esc(c["slug"]), _esc(c["accent"]), _esc(c["title"]), _esc(c["tagline"]))
+                '<a class="g-card" href="/%s/" style="--card-accent:%s"><span class="g-top"><span class="g-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">%s</svg></span><span class="g-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></span></span><span class="g-name">%s</span><span class="g-tag">%s</span><span class="g-tags">%s</span></a>'
+                % (_esc(c["slug"]), _esc(c["accent"]), gallerymod.ICONS.get(c["icon"]) or gallerymod.ICONS["spark"], _esc(c["title"]), _esc(c["tagline"]), "".join("<i>%s</i>" % _esc(t) for t in c["tags"]))
                 for c in cards)
-            page = page.replace("{{CARDS}}", cards_html).replace("{{TITLE}}", _esc(g["title"])).replace("{{TAGLINE}}", _esc(g["tagline"]))
+            page = page.replace("{{CARDS}}", cards_html).replace("{{TITLE}}", _esc(g["title"])).replace("{{TAGLINE}}", _esc(g["tagline"])).replace("{{COUNT}}", str(len(cards)))
             self._send(200, page.encode(), "text/html; charset=utf-8")
 
         def _proxy(self, slug):

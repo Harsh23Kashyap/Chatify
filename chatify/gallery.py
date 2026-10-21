@@ -31,6 +31,32 @@ ConfigError = schema.ConfigError
 SLUG = re.compile(r"^[a-z0-9][a-z0-9-]{0,40}$")
 RESERVED = {"api", "gallery", "favicon.ico"}
 
+# Card glyphs for the gallery home page (inner SVG markup, stroke = card accent).
+ICONS = {
+    "chat": '<path d="M4 5.5h16v10.5H9.5L5 19.5z"/><circle cx="9" cy="10.7" r=".9" fill="currentColor" stroke="none"/><circle cx="12.6" cy="10.7" r=".9" fill="currentColor" stroke="none"/><circle cx="16.2" cy="10.7" r=".9" fill="currentColor" stroke="none"/>',
+    "leaf": '<path d="M5.5 18.5C5.5 9.8 12.6 4.5 19.5 4.5c0 7.5-4.4 14-12.5 14"/><path d="M5.5 18.5c2-4.5 5.5-8 9.5-9.8"/>',
+    "signal": '<path d="M12 20v-7"/><circle cx="12" cy="10.5" r="1.4"/><path d="M8.2 13.7a5.4 5.4 0 0 1 0-6.4M15.8 7.3a5.4 5.4 0 0 1 0 6.4M5.4 16.5a9.6 9.6 0 0 1 0-12M18.6 4.5a9.6 9.6 0 0 1 0 12"/>',
+    "flag": '<path d="M6 21V4.2"/><path d="M6 5h12.2l-2.8 3.8 2.8 3.7H6"/>',
+    "news": '<path d="M4 6.5h13v11a1.8 1.8 0 0 0 1.8 1.7H6a2 2 0 0 1-2-2z"/><path d="M17 9.5h2.2a.8.8 0 0 1 .8.8v7.2a1.7 1.7 0 0 1-1.7 1.7"/><path d="M7 9.5h7M7 12.5h7M7 15.5h4.5" opacity=".55"/>',
+    "spark": '<path d="M12 3.5 13.8 9 19.5 12 13.8 14.5 12 20.5 10.2 14.5 4.5 12 10.2 9z"/>',
+}
+
+
+ACCENT = re.compile(r"^#[0-9a-fA-F]{6}$")
+
+
+def _meta(entry):
+    icon = str(entry.get("icon") or "spark").strip().lower()
+    if icon not in ICONS:
+        raise ConfigError("Unknown gallery icon: %r (one of: %s)" % (icon, ", ".join(sorted(ICONS))))
+    tags = entry.get("tags") or []
+    if not isinstance(tags, list) or len(tags) > 4 or any(not isinstance(t, str) or not t.strip() or len(t) > 24 for t in tags):
+        raise ConfigError("gallery app tags must be a list of up to 4 short strings")
+    accent = entry.get("accent")
+    if accent is not None and not ACCENT.match(str(accent)):
+        raise ConfigError("gallery app accent must look like #1a2b3c (card color only; the app keeps its own)")
+    return icon, [t.strip() for t in tags], (str(accent) if accent else None)
+
 
 def is_gallery(path):
     try:
@@ -82,5 +108,6 @@ def load(path):
         caps.update(budget)
         caps["user_daily_questions"] = 0  # no-auth apps share one quota pool; keep it off
         cfg["budget"] = caps
-        apps.append({"slug": slug, "cfg": cfg})
+        icon, tags, accent = _meta(entry)
+        apps.append({"slug": slug, "cfg": cfg, "icon": icon, "tags": tags, "accent": accent})
     return {"title": title, "tagline": tagline, "apps": apps, "_path": os.path.abspath(path)}

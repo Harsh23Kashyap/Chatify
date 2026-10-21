@@ -1,3 +1,9 @@
+## 0.3.2
+
+- The gallery home page is redesigned: a real hero with the gallery's promise and trust chips, richer app cards (per-app icon, accent color, tag chips, hover lift with a corner arrow, staggered entrance), an "About these demos" tile that fills out the grid, and a footer. It reads cleanly on phones too
+- Gallery configs can set each card's icon, tags and accent color (icon, tags, accent on each app entry); the apps themselves keep their own branding
+- Error pages always render in the product's light theme with the gallery's typography, so they match the gallery and the member apps
+
 ## 0.3.1
 
 - Gallery member apps render in the light theme, so the gallery and every app share one consistent look
