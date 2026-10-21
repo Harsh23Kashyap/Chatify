@@ -1,0 +1,25 @@
+# The public gallery: one server, many Chatify apps, each at its own endpoint.
+# Run: python -m chatify run apps/gallery.yaml
+# Every member app runs on the host's server-side OpenAI key with the caps below;
+# per-visitor isolation is forced on and the per-person quota stays off.
+gallery:
+  title: Curiosity has many doors.
+  tagline: Chat apps built with Chatify, each over its own sources. Pick one and start asking.
+  provider:
+    type: openai
+    model: gpt-4o-mini
+    api_key_env: OPENAI_API_KEY
+  budget:
+    daily_questions: 300
+    daily_model_calls: 500
+  apps:
+    - dir: hosted
+      slug: chatify
+    - dir: dietchat
+      slug: dietchat
+    - dir: wirelesschat
+      slug: wirelesschat
+    - dir: formulaone
+      slug: formulaone
+    - dir: newsnerd-sample
+      slug: newsnerd

@@ -71,19 +71,29 @@ def _main(argv=None):
         from .launcher import start
         start(args.directory, args.port, args.no_browser, args.lock_config)
     elif args.cmd == "validate":
+        from . import gallery as gallerymod
         try:
-            c = schema.load(args.app)
-        except (schema.ConfigError, OSError) as e:
+            if gallerymod.is_gallery(args.app):
+                g = gallerymod.load(args.app)
+                print("OK: gallery %r, %d app(s): %s" % (g["title"], len(g["apps"]), ", ".join(a["slug"] for a in g["apps"])))
+            else:
+                c = schema.load(args.app)
+                print("OK: %s, %d source(s), provider %s" % (c["app"]["title"], len(c["sources"]), c["provider"]["type"]))
+        except (schema.ConfigError, ValueError, OSError) as e:
             sys.exit("Invalid: %s" % e)
-        print("OK: %s, %d source(s), provider %s" % (c["app"]["title"], len(c["sources"]), c["provider"]["type"]))
     elif args.cmd == "run":
         from .server import serve
-        c = schema.load(args.app)
-        host = args.host or c["server"]["host"]
-        port = args.port or c["server"]["port"]
+        from . import gallery as gallerymod
+        if gallerymod.is_gallery(args.app):
+            gallerymod.load(args.app)  # validate every member app before binding
+            host, port = args.host or "127.0.0.1", args.port or 8080
+        else:
+            c = schema.load(args.app)
+            host = args.host or c["server"]["host"]
+            port = args.port or c["server"]["port"]
         browser_host = "127.0.0.1" if host in ("0.0.0.0", "::") else host
         if ":" in browser_host: browser_host = "[" + browser_host + "]"
-        url = "http://%s:%s" % (browser_host, port)
+        url = "http://%s:%d" % (browser_host, port)
         print("Open %s in your browser. Ctrl+C stops the app." % url, flush=True)
         if not args.no_browser:
             from .launcher import open_when_ready

@@ -71,6 +71,6 @@ html[data-theme=dark] a{color:#a8d4b6}
 </main>
 <script>
 document.querySelectorAll('.rl-copy').forEach(function(b){b.onclick=function(){var t=document.getElementById(b.dataset.copy).textContent;(navigator.clipboard?navigator.clipboard.writeText(t):Promise.reject()).then(function(){b.textContent='Copied';b.classList.add('done');setTimeout(function(){b.textContent='Copy';b.classList.remove('done')},1600)}).catch(function(){var r=document.createRange();r.selectNodeContents(document.getElementById(b.dataset.copy));var s=getSelection();s.removeAllRanges();s.addRange(r)})}});
-document.getElementById('rlGuide').onclick=function(){localStorage.removeItem('cc_tour');location.href='/'};
+document.getElementById('rlGuide').onclick=function(){localStorage.removeItem('cc_tour');location.href=(window.CC_APP_BASE||'')+'/'};
 </script>
 </body></html>

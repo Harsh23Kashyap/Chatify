@@ -218,7 +218,7 @@ function turnView(t, prev) {
     bub.prepend(el("div", { class: "nf-h", text: "No evidence found" }));
     bub.prepend(ill);
     const tip = (txt, fn) => el("button", { class: "tip", onclick: fn }, el("span", { text: txt }), el("span", { class: "go", "aria-hidden": "true", text: "\u203a" }));
-    bub.append(el("div", { class: "nf-tips" }, tip("Try a different question", () => { $("#q").focus(); }), tip("Use words from your documents", () => { $("#q").focus(); }), tip("See which documents this chat uses", () => { location.href = "/settings.html"; })));
+    bub.append(el("div", { class: "nf-tips" }, tip("Try a different question", () => { $("#q").focus(); }), tip("Use words from your documents", () => { $("#q").focus(); }), tip("See which documents this chat uses", () => { location.href = (window.CC_APP_BASE||"") + "/settings.html"; })));
   }
   const srcLabel = (e) => (S.cfg.sources.find((x) => x.id === e.source) || {}).label || e.source || "";
   const srcs = !t.evidence.length ? null : (el("div", { class: "srcs" }, el("div", { class: "srcs-h", text: "Evidence for this answer" }), t.evidence.slice(0, 5).map((e) => el("button", { class: "s", title: e.title, onclick: (ev) => showSources(t.evidence, e.n, ev.currentTarget) }, el("span", { class: "n", text: "[" + e.n + "]" }), el("span", { class: "sx" }, el("span", { class: "st", text: srcLabel(e) ? srcLabel(e) + " / " + e.title : e.title }), el("span", {class:"source-excerpt",text:e.text ? e.text.slice(0,240) + (e.text.length>240 ? "…" : "") : "Source excerpt unavailable"}), el("span", { class: "sm", text: [srcLabel(e), e.year, e.page ? "page " + e.page : e.section, e.ocr ? "OCR text, check original" : ""].filter(Boolean).join(" \u00b7 ") })), el("span", { class: "go", "aria-hidden": "true", text: "\u203a" })))));
@@ -339,7 +339,7 @@ function gettingStarted() {
     ["4", "How do I change the reading view?", "Choose your text size and answer width.", () => $("#readingBtn").click()],
   ];
   if (document.querySelector('.common-nav a[href="/settings.html"]')) cards.push(
-    ["5", "How do I connect an AI model?", "Demo is offline. Choose a provider and test it in Configuration.", () => { location.href="/settings.html#sec-model"; }]);
+    ["5", "How do I connect an AI model?", "Demo is offline. Choose a provider and test it in Configuration.", () => { location.href=(window.CC_APP_BASE||"") + "/settings.html#sec-model"; }]);
   cards.push([String(cards.length+1), "How do I try an action?", "Preview a local note action. Nothing is saved until you confirm.", () => $("#actionsBtn").click()]);
   const box = el("section", {class:"getting-started", "aria-label":"Getting started"}, el("h2", {text:"Start here"}),
     el("p", {class:"getting-started-note",text:S.cfg.provider.type === "mock" ? "You're in offline Demo. Try the app first, then connect an AI model when you're ready." : "Follow these steps at your own pace. Your existing documents and chats stay unchanged."}));
@@ -359,7 +359,7 @@ function playgroundLanding(a, exs) {
     ["⌕","Choose sources","Select existing sources",scopeDialog],
     ["Aa","Reading view","Text size and width",()=>$("#readingBtn").click()]
   ];
-  if(document.querySelector('.common-nav a[href="/settings.html"]'))actions.push(["↗","Connect a model","Choose an AI provider",()=>{location.href="/settings.html#sec-model"}]);
+  if(document.querySelector('.common-nav a[href="/settings.html"]'))actions.push(["↗","Connect a model","Choose an AI provider",()=>{location.href=(window.CC_APP_BASE||"") + "/settings.html#sec-model"}]);
   return el("section",{class:"hero playground"},
     el("div",{class:"playground-intro"},el("div",{},
       el("h1",{text:TV("txt_title")||a.title}),el("p",{text:TV("txt_tagline")||a.tagline})),scene),

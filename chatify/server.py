@@ -773,11 +773,7 @@ def make_handler(cfg, engine):
             """Branded HTML error page for browsers; JSON for everything else."""
             if "text/html" not in (self.headers.get("Accept") or ""):
                 return self._send(code, {"error": ERR_PAGES.get(code, ERR_PAGES[500])[0]})
-            title, msg, art = ERR_PAGES.get(code, ERR_PAGES[500])
-            page = open(os.path.join(WEB, "error.html"), encoding="utf-8").read()
-            for k, v in (("{{CODE}}", str(code)), ("{{TITLE}}", title), ("{{MSG}}", msg), ("{{ART}}", art)):
-                page = page.replace(k, v)
-            self._send(code, page.encode(), "text/html; charset=utf-8")
+            self._send(code, error_page_html(code).encode(), "text/html; charset=utf-8")
 
         def _static(self, path):
             name = "index.html" if path in ("/", "") else path.lstrip("/")
@@ -831,6 +827,171 @@ def make_handler(cfg, engine):
     return H
 
 
+
+
+def error_page_html(code):
+    title, msg, art = ERR_PAGES.get(code, ERR_PAGES[500])
+    page = open(os.path.join(WEB, "error.html"), encoding="utf-8").read()
+    for k, v in (("{{CODE}}", str(code)), ("{{TITLE}}", title), ("{{MSG}}", msg), ("{{ART}}", art)):
+        page = page.replace(k, v)
+    return page
+
+
+# The base shim runs before every other script on apps served under an endpoint prefix.
+# It rewrites absolute same-site requests (fetch, XHR, EventSource, sendBeacon) so the
+# shared frontend works unchanged under /<slug>/.
+BASE_SHIM = """<script>window.CC_APP_BASE=%s;(function(){var b=window.CC_APP_BASE;if(!b)return;var fix=function(u){return (typeof u==="string"&&u.charAt(0)==="/"&&u.indexOf(b+"/")!==0&&u!==b)?b+u:u};
+var of=window.fetch;if(of)window.fetch=function(u,o){return of.call(this,fix(typeof u==="string"?u:u),o)};
+var oo=XMLHttpRequest.prototype.open;XMLHttpRequest.prototype.open=function(m,u){var a=[].slice.call(arguments);a[1]=fix(u);return oo.apply(this,a)};
+var OE=window.EventSource;if(OE){var W=function(u,c){return new OE(fix(u),c)};W.prototype=OE.prototype;window.EventSource=W}
+var sb=navigator.sendBeacon?navigator.sendBeacon.bind(navigator):null;if(sb)navigator.sendBeacon=function(u,d){return sb(fix(u),d)};})();</script>"""
+
+
+def _rewrite_app_html(data, base):
+    """Point a page's absolute links and asset URLs at its /<slug>/ endpoint and add the base shim."""
+    text = data.decode("utf-8")
+    text = text.replace('href="/', 'href="' + base + '/').replace('src="/', 'src="' + base + '/').replace('action="/', 'action="' + base + '/')
+    nav = '<nav class="common-nav" aria-label="Main navigation">'
+    if nav in text:
+        text = text.replace(nav, nav + '<a href="/">Gallery</a>', 1)
+    shim = BASE_SHIM % (json.dumps(base),)
+    for anchor in ("<script", "<link", "<title"):
+        i = text.find(anchor)
+        if i > 0:
+            return (text[:i] + shim + text[i:]).encode("utf-8")
+    return (shim + text).encode("utf-8")
+
+
+def serve_gallery(path, host=None, port=None):
+    """Host several apps on one server: / is the gallery, /<slug>/ is each app.
+
+    Every member app runs on its own internal loopback server; the dispatcher proxies
+    by first path segment, rewriting HTML so the shared frontend works under the prefix.
+    """
+    import http.client, threading
+    from . import gallery as gallerymod
+    g = gallerymod.load(path)
+    children = {}
+    cards = []
+    for app in g["apps"]:
+        cfg = app["cfg"]
+        store = Store(os.path.join(cfg["_dir"], cfg["storage"]["path"]) if not os.path.isabs(cfg["storage"]["path"]) else cfg["storage"]["path"])
+        engine = Engine(cfg, store)
+        engine.prompts = promptmod.PromptStore(os.path.dirname(os.path.abspath(store.path)) if store.path != ":memory:" else "", cfg.get("pipeline_prompts"))
+        srv = LocalHTTPServer(("127.0.0.1", 0), make_handler(cfg, engine))
+        threading.Thread(target=srv.serve_forever, daemon=True).start()
+        children[app["slug"]] = srv.server_port
+        a = cfg["app"]
+        cards.append({"slug": app["slug"], "title": a["title"], "tagline": a.get("tagline", ""), "accent": a.get("accent", "#173f35")})
+    secrets.STORE = secrets.SecretStore("/tmp")
+    host = host or "127.0.0.1"
+    port = port or 8080
+
+    class GalleryDispatch(BaseHTTPRequestHandler):
+        def log_message(self, *a):
+            pass
+
+        def _send(self, code, body, ctype="application/json", extra=None):
+            data = body if isinstance(body, bytes) else json.dumps(body).encode()
+            self.send_response(code)
+            self.send_header("Content-Type", ctype)
+            self.send_header("Content-Length", str(len(data)))
+            for k, v in (extra or {}).items():
+                self.send_header(k, v)
+            self.end_headers()
+            if self.command != "HEAD":
+                self.wfile.write(data)
+
+        def _gallery_page(self):
+            page = open(os.path.join(WEB, "gallery.html"), encoding="utf-8").read()
+            cards_html = "".join(
+                '<a class="g-card" href="/%s/" style="--card-accent:%s"><span class="g-name">%s</span><span class="g-tag">%s</span><span class="g-open">Open app</span></a>'
+                % (_esc(c["slug"]), _esc(c["accent"]), _esc(c["title"]), _esc(c["tagline"]))
+                for c in cards)
+            page = page.replace("{{CARDS}}", cards_html).replace("{{TITLE}}", _esc(g["title"])).replace("{{TAGLINE}}", _esc(g["tagline"]))
+            self._send(200, page.encode(), "text/html; charset=utf-8")
+
+        def _proxy(self, slug):
+            base = "/" + slug
+            rest = self.path[len(base):] or "/"
+            length = int(self.headers.get("Content-Length") or 0)
+            body = self.rfile.read(length) if length else None
+            headers = {}
+            for k, v in self.headers.items():
+                lk = k.lower()
+                if lk in ("host", "connection", "content-length", "accept-encoding", "keep-alive", "transfer-encoding"):
+                    continue
+                headers[k] = v
+            conn = http.client.HTTPConnection("127.0.0.1", children[slug], timeout=120)
+            try:
+                conn.request(self.command, rest, body=body, headers=headers)
+                resp = conn.getresponse()
+            except OSError:
+                conn.close()
+                return self._send(503, error_page_html(503).encode(), "text/html; charset=utf-8")
+            ctype = resp.getheader("Content-Type") or ""
+            passthrough = {k: v for k, v in resp.getheaders() if k.lower() in ("set-cookie", "cache-control", "content-disposition")}
+            if self.command == "GET" and ctype.startswith("text/html"):
+                data = resp.read()
+                conn.close()
+                loc = resp.getheader("Location")
+                if loc and loc.startswith("/"):
+                    passthrough["Location"] = base + loc
+                return self._send(resp.status, _rewrite_app_html(data, base), ctype, passthrough)
+            # stream everything else so chat answers still arrive token by token
+            self.send_response(resp.status)
+            self.send_header("Content-Type", ctype or "application/octet-stream")
+            for k, v in passthrough.items():
+                self.send_header(k, v)
+            loc = resp.getheader("Location")
+            if loc and loc.startswith("/"):
+                self.send_header("Location", base + loc)
+            self.send_header("Connection", "close")
+            self.end_headers()
+            self.close_connection = True
+            try:
+                while True:
+                    chunk = resp.read1(65536)
+                    if not chunk:
+                        break
+                    self.wfile.write(chunk)
+                    self.wfile.flush()
+            except (BrokenPipeError, ConnectionResetError):
+                pass
+            finally:
+                conn.close()
+
+        def _dispatch(self):
+            raw = urlparse(self.path).path
+            seg = raw.lstrip("/").split("/", 1)[0].lower() if raw != "/" else ""
+            if seg and seg in children:
+                return self._proxy(seg)
+            if raw in ("/", "/gallery.html", "/index.html"):
+                return self._gallery_page()
+            if raw == "/api/health":
+                return self._send(200, {"ok": True, "gallery": True, "apps": sorted(children)})
+            if raw == "/api/apps":
+                return self._send(200, {"apps": cards})
+            name = raw.lstrip("/")
+            full = os.path.normpath(os.path.join(WEB, name))
+            if name and full.startswith(WEB + os.sep) and os.path.isfile(full) and not name.endswith(".html"):
+                ctype = mimetypes.guess_type(full)[0] or "application/octet-stream"
+                with open(full, "rb") as handle:
+                    return self._send(200, handle.read(), ctype + ("; charset=utf-8" if ctype.startswith("text") or "javascript" in ctype else ""))
+            if "text/html" in (self.headers.get("Accept") or ""):
+                return self._send(404, error_page_html(404).encode(), "text/html; charset=utf-8")
+            return self._send(404, {"error": "Not found"})
+
+        do_GET = do_POST = do_PUT = do_PATCH = do_DELETE = do_HEAD = _dispatch
+
+    srv = LocalHTTPServer((host, port), GalleryDispatch)
+    print("Gallery running at http://%s:%d  (%d apps: %s)" % (host, port, len(children), ", ".join(sorted(children))))
+    try:
+        srv.serve_forever()
+    except KeyboardInterrupt:
+        pass
+
+
 _DOC = '<path d="M42 24h46l20 20v82H42z"/><path d="M88 24v22h20"/><path d="M54 62h40M54 76h40M54 90h26" opacity=".55"/>'
 ERR_PAGES = {
     401: ("Sign in needed", "This app asks visitors to sign in first. Sign in, then try again.", '<rect x="52" y="68" width="46" height="38" rx="8"/><path d="M62 68V56a13 13 0 0 1 26 0v12"/><circle cx="75" cy="86" r="4.5"/>'),
@@ -861,6 +1022,9 @@ class LocalHTTPServer(ThreadingHTTPServer):
 
 
 def serve(path, host=None, port=None):
+    from . import gallery
+    if gallery.is_gallery(path):
+        return serve_gallery(path, host, port)
     cfg = schema.load(path)
     cfg["_path"] = os.path.abspath(path)
     store = Store(os.path.join(cfg["_dir"], cfg["storage"]["path"]) if not os.path.isabs(cfg["storage"]["path"]) else cfg["storage"]["path"])
