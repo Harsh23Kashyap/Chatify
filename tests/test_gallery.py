@@ -38,6 +38,7 @@ class GalleryConfig(unittest.TestCase):
             self.assertEqual(cfg["provider"]["type"], "openai")           # host key, server-side only
             self.assertEqual(cfg["provider"]["api_key_env"], "OPENAI_API_KEY")
             self.assertTrue(cfg["server"]["public"])                      # per-visitor isolation
+            self.assertEqual(cfg["app"]["theme"], "light")                # consistent look; no dark settings pages
             self.assertEqual(cfg["budget"]["user_daily_questions"], 0)    # shared pool stays off
             self.assertEqual(cfg["budget"]["daily_questions"], 300)
             self.assertEqual(cfg["budget"]["daily_model_calls"], 500)
