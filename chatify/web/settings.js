@@ -738,7 +738,6 @@ async function init() {
   document.addEventListener("cc-workspace-saved",e=>{if(e.detail?.config?.sources)sourceSummary(e.detail.config.sources,true)});
   const search=$("#sec-search");if(search)search.prepend(sourceOverview);
   const d = await api("/api/settings"); cur = d.settings; canEdit = d.can_edit; try { keyInfo = (await api("/api/provider/status")).keys; } catch (e) { keyInfo = {}; }
-  try { const ki = keyInfo[cur.provider] || {}; if (ki.source === "env" && !sessionStorage.getItem("cc_env_conn_checked")) { sessionStorage.setItem("cc_env_conn_checked", "1"); setTimeout(() => { const tc = $("#testconn"); if (tc && !tc.disabled && tc.dataset.running !== "true") tc.click(); }, 400); } } catch (e) {}
   const th = await api("/api/theme"); theme = th.theme; document.documentElement.dataset.motion=["calm","none"].includes(theme.motion)?"none":theme.motion; meta = th.meta; window.CCBuilderEnums={...meta.enums,font:Object.keys(meta.fonts).concat("custom"),heading_font:Object.keys(meta.fonts).concat("custom")}; saved = clone(theme); canEdit = canEdit && th.can_edit !== false;
   const seg = $("#seg");
   buildChips(d.providers);
@@ -929,7 +928,7 @@ async function pollOllamaSetup(host,id){
   }
 }
 
-init().then(() => { if (canEdit) { docsFreshness(false); loadBudget().catch((e) => { $("#budgetStatus").textContent = e.message; }); } updateVis(); setTimeout(updateVis, 500); }).catch((e) => say(e.message, true));
+init().then(() => { try { const ki = keyInfo[cur.provider] || {}; if (ki.source === "env" && !sessionStorage.getItem("cc_env_conn_checked")) { sessionStorage.setItem("cc_env_conn_checked", "1"); setTimeout(() => { const tc = $("#testconn"); if (tc && !tc.disabled && tc.dataset.running !== "true") tc.click(); }, 600); } } catch (e) {} if (canEdit) { docsFreshness(false); loadBudget().catch((e) => { $("#budgetStatus").textContent = e.message; }); } updateVis(); setTimeout(updateVis, 500); }).catch((e) => say(e.message, true));
 window.CCSettingsSimple={state:()=>({...read(),canEdit,names:NAMES,key:keyInfo[cur.provider]}),select:provider=>{if(canEdit){switchProvider(provider);draw();pvFollow();}}};
 })();
 
