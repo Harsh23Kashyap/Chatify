@@ -774,7 +774,7 @@ async function init() {
     if(cur.provider===provider&&chosenModel()===model&&$("#base").value.trim()===base){
       t.className="testres "+(ok?"ok":"bad");t.replaceChildren(el("span",{class:"connection-status-icon","aria-hidden":"true",text:ok?"✓":"!"}),document.createTextNode((ok?"Passed. ":"Failed. ")+message));
       if(!matchMedia("(prefers-reduced-motion:reduce)").matches&&!['calm','none'].includes(theme.motion))revealMotion(t.querySelector(".connection-status-icon"),[{opacity:0},{opacity:1}],{duration:160,easing:"ease-out"});
-    }
+    } else if (t.classList.contains("busy")) { t.className="testres"; t.textContent="Model settings changed during the test. Test this selection when ready."; }
     button.dataset.running="false";button.disabled=!canEdit||testBlocked;button.textContent="Test connection";button.removeAttribute("aria-busy");pvFollow();
   });
   $("#apply").addEventListener("click", async function () {if(this.disabled)return;const label=this._savedLabel||this.textContent;let didSave=false;clearTimeout(this._savedTimer);this.classList.remove("save-confirmed");this.disabled=true;this.dataset.saving="true";this.textContent="Saving...";try {const submitted=read(),result=(await api("/api/settings", { settings: submitted })).settings;const edited=JSON.stringify(read())!==JSON.stringify(submitted);if(!edited){cur=result;draw()}recommendationPrior=null;$("#recommendationUndo")?.remove();document.dispatchEvent(new CustomEvent("cc-answer-saved",{detail:result}));localStorage.setItem("cc_config_changed", String(Date.now()));say(edited?"Previous answer settings saved. Newer edits are still unsaved.":"Applied. New questions use these settings."); didSave=true; } catch (e) { say(e.message, true); }finally{this.disabled=!canEdit;this.dataset.saving="false";this.textContent=label;if(didSave)window.CCSavedFeedback(this,label);if(this.isConnected&&document.activeElement===document.body)this.focus()} });
@@ -928,7 +928,7 @@ async function pollOllamaSetup(host,id){
   }
 }
 
-init().then(() => { try { const ki = keyInfo[cur.provider] || {}; if (ki.source === "env" && !sessionStorage.getItem("cc_env_conn_checked")) { sessionStorage.setItem("cc_env_conn_checked", "1"); setTimeout(() => { const tc = $("#testconn"); if (tc && !tc.disabled && tc.dataset.running !== "true") tc.click(); }, 600); } } catch (e) {} if (canEdit) { docsFreshness(false); loadBudget().catch((e) => { $("#budgetStatus").textContent = e.message; }); } updateVis(); setTimeout(updateVis, 500); }).catch((e) => say(e.message, true));
+init().then(() => { try { const ki = keyInfo[cur.provider] || {}; if (ki.source === "env" && !sessionStorage.getItem("cc_env_conn_checked")) { sessionStorage.setItem("cc_env_conn_checked", "1"); setTimeout(() => { const attempt = (left) => { const sel = $("#modelPick"), tc = $("#testconn"); if (sel && sel.getAttribute("aria-busy") === "true" && left > 0) { setTimeout(() => attempt(left - 1), 400); return; } if (tc && !tc.disabled && tc.dataset.running !== "true") tc.click(); }; attempt(25); }, 600); } } catch (e) {} if (canEdit) { docsFreshness(false); loadBudget().catch((e) => { $("#budgetStatus").textContent = e.message; }); } updateVis(); setTimeout(updateVis, 500); }).catch((e) => say(e.message, true));
 window.CCSettingsSimple={state:()=>({...read(),canEdit,names:NAMES,key:keyInfo[cur.provider]}),select:provider=>{if(canEdit){switchProvider(provider);draw();pvFollow();}}};
 })();
 
