@@ -1,5 +1,19 @@
-.cc-load-notice{position:fixed;top:78px;left:50%;transform:translateX(-50%);z-index:10050;padding:8px 14px;border:1px solid var(--line,#d4dbd7);border-radius:8px;background:var(--paper,#fff);color:var(--ink,#25372f);font:13px/1.5 var(--font,system-ui);pointer-events:none;box-shadow:0 2px 10px #0001}
-html.cc-page-loading::after{content:'';position:fixed;top:0;left:0;width:100%;height:2px;background:var(--brand,#173f35);z-index:10060;transform-origin:left;opacity:.55}
-@media(prefers-reduced-motion:no-preference){html:not([data-motion=none]):not([data-motion=calm]).cc-page-loading::after{animation:cc-opening 1.3s ease-in-out infinite}html:not([data-motion=none]):not([data-motion=calm]) body{animation:cc-view-in .16s ease-out}html:not([data-motion=none]):not([data-motion=calm]).cc-page-leaving body{opacity:.65;transition:opacity .12s ease-out}}
-@keyframes cc-opening{0%,100%{transform:scaleX(.15)}50%{transform:scaleX(1)}}@keyframes cc-view-in{from{opacity:.7}to{opacity:1}}
-@media(prefers-reduced-motion:reduce){.cc-load-notice,html.cc-page-loading::after{animation:none!important}html body{animation:none!important;transition:none!important}}
+/* Branded veil shown while a page transition waits on the network, so a slow or
+   sleeping demo host reads as a friendly loading state instead of a blank screen.
+   Appended to <html> so page exit animations never hide it. */
+.cc-veil{position:fixed;inset:0;z-index:100000;display:grid;place-items:center;background:#f6f2e8;opacity:0;transition:opacity .18s ease-out}
+.cc-veil.cc-veil-show{opacity:1}
+html[data-theme=dark] .cc-veil{background:#101c17}
+.cc-veil-card{display:grid;justify-items:center;gap:14px;padding:24px;text-align:center}
+.cc-veil-logo{width:64px;height:64px;border-radius:18px;box-shadow:0 10px 30px rgba(23,63,53,.18);animation:cc-veil-bob 1.6s ease-in-out infinite}
+.cc-veil-name{font:700 17px 'DM Sans',system-ui,sans-serif;color:#173f35;letter-spacing:.02em}
+html[data-theme=dark] .cc-veil-name{color:#e8eee6}
+.cc-veil-bar{width:180px;height:6px;border-radius:99px;background:#e4ddc9;overflow:hidden}
+html[data-theme=dark] .cc-veil-bar{background:#26392f}
+.cc-veil-bar i{display:block;width:60%;height:100%;border-radius:99px;background:linear-gradient(90deg,#7b9c79,#173f35);animation:cc-veil-slide 1.15s ease-in-out infinite}
+html[data-theme=dark] .cc-veil-bar i{background:linear-gradient(90deg,#7b9c79,#d7ef72)}
+.cc-veil-text{font:500 13.5px 'DM Sans',system-ui,sans-serif;color:#5d6b64;max-width:300px;line-height:1.5}
+html[data-theme=dark] .cc-veil-text{color:#9db3a4}
+@keyframes cc-veil-bob{0%,100%{transform:translateY(0) scale(1)}50%{transform:translateY(-7px) scale(1.04)}}
+@keyframes cc-veil-slide{0%{transform:translateX(-110%)}100%{transform:translateX(320%)}}
+@media(prefers-reduced-motion:reduce){.cc-veil{transition:none;opacity:1}.cc-veil-logo,.cc-veil-bar i{animation:none}}

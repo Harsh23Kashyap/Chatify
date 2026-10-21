@@ -1,3 +1,9 @@
+## 0.4.7
+
+- Switching screens is never blank: navigating between Chat, Configuration, About, Run locally and the gallery now shows a branded loading veil (bouncing Chatify mark, shimmering progress bar, "Opening Chat...") that covers the network wait, and if the demo host is asleep the message changes to "Waking up the server - the first visit can take up to a minute". A matching compact boot veil covers first paint on cold starts, and sibling pages are prefetched so warm transitions are near-instant
+- The Build with AI callout keeps attention gently: its gradient drifts slowly, three small sparkles twinkle at different rhythms alongside the existing title spark and sheen, and Start building pulses a soft glow - all disabled under reduced motion
+- Start building's focus ring is now a crisp accent-purple outline instead of a gray frame
+
 ## 0.4.6
 
 - Configuration review follow-ups: the duplicate Build with AI button row is gone - the hero callout carries the "easier path" sentence and its Start building button is now the single primary action, Saved drafts becomes a quiet underlined link, and Ask AI next to Find a setting is an outline secondary button

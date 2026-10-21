@@ -1,12 +1,62 @@
-/* Actual page navigation and startup states, not simulated progress. */
-(()=>{
- const root=document.documentElement;
- let timer;
- const ready=()=>{clearTimeout(timer);root.classList.remove('cc-page-loading');root.classList.remove('cc-page-leaving');document.querySelector('.cc-load-notice')?.remove()};
- const start=label=>{root.classList.add('cc-page-loading');clearTimeout(timer);timer=setTimeout(()=>{const note=document.createElement('div');note.className='cc-load-notice';note.setAttribute('role','status');note.textContent=label;document.body.append(note);setTimeout(()=>{if(note.isConnected)note.textContent=label+' Taking longer than usual; the app may be waking up. The first visit can take up to a minute.'},6000)},250)};
- window.CCLoading={ready,start};start('Opening app...');
- window.addEventListener('pageshow',()=>{if(!document.getElementById('thread'))ready()});
- window.addEventListener('pagehide',ready);
- document.addEventListener('click',e=>{const a=e.target.closest('a[href]');if(!a||e.defaultPrevented||e.ctrlKey||e.metaKey||e.shiftKey||e.altKey||a.target||a.download)return;const u=new URL(a.href,location.href);if(u.origin!==location.origin||u.pathname===location.pathname)return;root.classList.add('cc-page-leaving');start('Opening '+(a.textContent.trim()||'page')+'...')});
- window.addEventListener('error',ready);
+/* Branded navigation + startup states. When a page transition waits on the network
+   (the demo host can sleep), a branded veil covers the wait so it never reads as a
+   blank screen. Decoration only: links keep working as plain links if anything fails. */
+(() => {
+  const root = document.documentElement;
+  let veilTimer, veilNote;
+
+  const dismissBoot = () => {
+    const b = document.getElementById("cc-boot");
+    if (!b) return;
+    b.classList.add("cc-boot-out");
+    setTimeout(() => b.remove(), 280);
+  };
+
+  const dropVeil = () => {
+    clearTimeout(veilTimer);
+    root.classList.remove("cc-page-leaving");
+    const v = document.querySelector(".cc-veil");
+    if (v) v.remove();
+  };
+
+  const ready = () => { dropVeil(); dismissBoot(); };
+
+  const leave = label => {
+    root.classList.add("cc-page-leaving");
+    if (document.querySelector(".cc-veil")) return;
+    let icon = "icons/chatify.svg";
+    try { icon = new URL("icons/chatify.svg", location.href).href; } catch (e) { }
+    const v = document.createElement("div");
+    v.className = "cc-veil";
+    v.setAttribute("role", "status");
+    v.innerHTML = '<div class="cc-veil-card"><img class="cc-veil-logo" src="' + icon + '" alt=""><div class="cc-veil-name">Chatify</div><div class="cc-veil-bar"><i></i></div><div class="cc-veil-text"></div></div>';
+    veilNote = v.querySelector(".cc-veil-text");
+    veilNote.textContent = "Opening " + (label || "page") + "…";
+    v.addEventListener("click", () => { dropVeil(); });
+    root.appendChild(v);
+    requestAnimationFrame(() => v.classList.add("cc-veil-show"));
+    veilTimer = setTimeout(() => {
+      if (veilNote && v.isConnected) veilNote.textContent = "Waking up the server - the first visit can take up to a minute.";
+    }, 7000);
+  };
+
+  window.CCLoading = { ready, leave };
+
+  window.addEventListener("pageshow", e => { if (e.persisted) dropVeil(); });
+
+  document.addEventListener("click", e => {
+    const a = e.target && e.target.closest ? e.target.closest("a[href]") : null;
+    if (!a || e.ctrlKey || e.metaKey || e.shiftKey || e.altKey || a.target || a.download) return;
+    let u;
+    try { u = new URL(a.getAttribute("href"), location.href); } catch (e2) { return; }
+    if (u.origin !== location.origin) return;
+    if (u.pathname === location.pathname && u.search === location.search) return;
+    leave((a.textContent || "").trim());
+  });
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", () => setTimeout(dismissBoot, 120));
+  } else {
+    dismissBoot();
+  }
 })();
