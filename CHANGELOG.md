@@ -1,3 +1,7 @@
+## 0.4.2
+
+- Gallery cards drop the colored top band: each card's accent now shows as a short dash under the app name that stretches on hover, paired with an accent-tinted border on hover - the icon tile, tag chips, and arrow keep their accent treatment
+
 ## 0.4.1
 
 - Gallery review polish: the About tile spans the free columns of the last row and carries an "informational only, not medical advice" line, FitChat's accent moves to magenta so it no longer reads as Formula One's terracotta, and the mobile trust chips fade at the scroll edge
