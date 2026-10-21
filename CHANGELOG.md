@@ -1,3 +1,7 @@
+## 0.3.1
+
+- Gallery member apps render in the light theme, so the gallery and every app share one consistent look
+
 ## 0.3.0
 
 - Moving between pages now animates: a short fade-and-rise on the way out and in, instead of a hard jump. It is skipped entirely for visitors who prefer reduced motion, and it never touches first loads, external links, new tabs, or same-page anchors
