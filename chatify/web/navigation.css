@@ -35,8 +35,9 @@ html body .common-nav a,html body .common-nav button{white-space:nowrap!importan
 
 /* Mobile: brand and status on row 1, tabs wrap on their own row below. */
 @media(max-width:640px){
-html body .toolbar,html body .about-nav{height:auto!important;min-height:56px;padding:10px 12px!important;grid-template-columns:minmax(0,1fr) auto;grid-template-rows:none;gap:10px!important;align-items:center}
+html body .toolbar,html body .about-nav{height:auto!important;min-height:48px;padding:8px 12px!important;grid-template-columns:minmax(0,1fr) auto;grid-template-rows:none;gap:6px!important;align-items:center}
 html body .tb-brand,html body .nav-brand{grid-column:1;grid-row:1;justify-self:start}
 html body .nav-status{grid-column:2;grid-row:1;justify-self:end;max-width:none}
-html body .common-nav{grid-column:1/-1!important;grid-row:2!important;justify-self:center;flex-wrap:wrap;justify-content:center;align-content:center;row-gap:2px;width:auto!important;max-width:100%;box-sizing:border-box}
+html body .common-nav{grid-column:1/-1!important;grid-row:2!important;justify-self:stretch;display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr));gap:4px;width:100%!important;max-width:100%;box-sizing:border-box;padding:4px!important}
+html body .common-nav a,html body .common-nav button{text-align:center;padding:8px 4px!important;min-width:0!important;white-space:normal!important;line-height:1.2!important}
 }

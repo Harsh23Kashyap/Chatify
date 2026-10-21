@@ -216,3 +216,10 @@ html[data-theme=dark] .builder-hero-spark{color:#c9a8ff}
 html[data-theme=dark] .builder-hero-sub{color:#b9b4d6}
 html[data-theme=dark] .builder-hero-go{background:#d7ef72;color:#173f35;box-shadow:0 3px 0 #6b8520}
 html[data-theme=dark] .builder-hero-go:active{box-shadow:0 1px 0 #6b8520}
+.builder-hero-copy,.builder-hero-go{position:relative;z-index:1}
+html body.settings-tabs .settings-utilities .app-builder-drafts{flex:0 0 auto!important;border:0!important;background:transparent!important;color:#2f5d47!important;text-decoration:underline!important;text-underline-offset:3px!important;padding:6px 2px!important;min-height:36px!important;font:600 13px 'DM Sans',system-ui,sans-serif!important;box-shadow:none!important}
+html[data-theme=dark] body.settings-tabs .settings-utilities .app-builder-drafts{color:#a8d5b0!important}
+html body.settings-tabs .settings-utilities .settings-search .settings-help-open{background:transparent!important;color:#173f35!important;border:1.5px solid #8fae97!important;box-shadow:none!important;font-weight:600!important;border-radius:12px!important;padding:0 16px!important}
+html[data-theme=dark] body.settings-tabs .settings-utilities .settings-search .settings-help-open{color:#d7ef72!important;border-color:#6b8520!important;background:transparent!important}
+html body.settings-tabs .loaded-app{margin-bottom:6px!important}
+html body.settings-tabs .loaded-app+.modebar{margin-top:2px!important}

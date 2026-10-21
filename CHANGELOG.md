@@ -1,3 +1,10 @@
+## 0.4.6
+
+- Configuration review follow-ups: the duplicate Build with AI button row is gone - the hero callout carries the "easier path" sentence and its Start building button is now the single primary action, Saved drafts becomes a quiet underlined link, and Ask AI next to Find a setting is an outline secondary button
+- The gap under the Loaded workspace bar is tidied
+- Mobile navigation is a deliberate 3-column grid instead of five tabs plus an orphaned Replay guide row, and the mobile header is a touch shorter so chat headings and the input stay clear of the quick tour
+- The Build with AI sheen now sweeps behind the text and button, so it reads as a highlight instead of a streak over them
+
 ## 0.4.5
 
 - Mobile navigation wraps: the tab bar no longer clips "Replay" on phones - tabs flow onto their own row under the brand instead of being cut off at a hard edge
