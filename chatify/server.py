@@ -872,8 +872,13 @@ def serve_gallery(path, host=None, port=None):
     from . import gallery as gallerymod
     g = gallerymod.load(path)
     children = {}
+    redirects = {}
     cards = []
     for app in g["apps"]:
+        if app.get("url"):
+            redirects[app["slug"]] = app["url"]
+            cards.append({"slug": app["slug"], "url": app["url"], "title": app["title"], "tagline": app.get("tagline", ""), "accent": app.get("accent") or "#173f35", "icon": app.get("icon") or "spark", "tags": app.get("tags") or []})
+            continue
         cfg = app["cfg"]
         store = Store(os.path.join(cfg["_dir"], cfg["storage"]["path"]) if not os.path.isabs(cfg["storage"]["path"]) else cfg["storage"]["path"])
         engine = Engine(cfg, store)
@@ -905,8 +910,8 @@ def serve_gallery(path, host=None, port=None):
         def _gallery_page(self):
             page = open(os.path.join(WEB, "gallery.html"), encoding="utf-8").read()
             cards_html = "".join(
-                '<a class="g-card" href="/%s/" style="--card-accent:%s"><span class="g-top"><span class="g-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">%s</svg></span><span class="g-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></span></span><span class="g-name">%s</span><span class="g-tag">%s</span><span class="g-tags">%s</span></a>'
-                % (_esc(c["slug"]), _esc(c["accent"]), gallerymod.ICONS.get(c["icon"]) or gallerymod.ICONS["spark"], _esc(c["title"]), _esc(c["tagline"]), "".join("<i>%s</i>" % _esc(t) for t in c["tags"]))
+                '<a class="g-card" href="%s" style="--card-accent:%s"><span class="g-top"><span class="g-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">%s</svg></span><span class="g-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></span></span><span class="g-name">%s</span><span class="g-tag">%s</span><span class="g-tags">%s</span></a>'
+                % (_esc(c.get("url") or ("/" + c["slug"] + "/")), _esc(c["accent"]), gallerymod.ICONS.get(c["icon"]) or gallerymod.ICONS["spark"], _esc(c["title"]), _esc(c["tagline"]), "".join("<i>%s</i>" % _esc(t) for t in c["tags"]))
                 for c in cards)
             page = page.replace("{{CARDS}}", cards_html).replace("{{TITLE}}", _esc(g["title"])).replace("{{TAGLINE}}", _esc(g["tagline"])).replace("{{COUNT}}", str(len(cards)))
             self._send(200, page.encode(), "text/html; charset=utf-8")
@@ -966,10 +971,12 @@ def serve_gallery(path, host=None, port=None):
             seg = raw.lstrip("/").split("/", 1)[0].lower() if raw != "/" else ""
             if seg and seg in children:
                 return self._proxy(seg)
+            if seg and seg in redirects:
+                return self._send(302, b"", "text/plain", extra={"Location": redirects[seg]})
             if raw in ("/", "/gallery.html", "/index.html"):
                 return self._gallery_page()
             if raw == "/api/health":
-                return self._send(200, {"ok": True, "gallery": True, "apps": sorted(children)})
+                return self._send(200, {"ok": True, "gallery": True, "apps": sorted(children), "redirects": sorted(redirects)})
             if raw == "/api/apps":
                 return self._send(200, {"apps": cards})
             name = raw.lstrip("/")

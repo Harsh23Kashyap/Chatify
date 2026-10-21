@@ -1,8 +1,9 @@
 # The public gallery: one server, many Chatify apps, each at its own endpoint.
 # Run: python -m chatify run apps/gallery.yaml
-# Every member app runs on the host's server-side OpenAI key with the caps below;
+# Hosted apps run on the host's server-side OpenAI key with the caps below;
 # per-visitor isolation is forced on and the per-person quota stays off.
-# Each app entry may add an icon (chat, leaf, signal, flag, news, spark) and up to 4 tags.
+# An app entry may instead give a url: its card links out and /<slug>/ redirects,
+# so nothing runs on the host key. Card look: icon, tags, accent.
 gallery:
   title: Curiosity has many doors.
   tagline: Chat apps built with Chatify, each grounded in its own sources. Pick one and start asking.
@@ -19,12 +20,17 @@ gallery:
       accent: '#4f46b8'
       icon: chat
       tags: [Product guide, Build your own]
-    - dir: dietchat
-      slug: dietchat
+    - slug: dietchat
+      url: https://dietchat.org
+      title: DietChat
+      tagline: Evidence-based answers on diet and nutrition, cited from PubMed.
+      accent: '#30a46c'
       icon: leaf
       tags: [Nutrition, PubMed-cited]
-    - dir: wirelesschat
-      slug: wirelesschat
+    - slug: wirelesschat
+      url: https://wirelesschat-review.onrender.com/
+      title: WirelessChat
+      tagline: Ask about wireless communications research, with cited papers.
       accent: '#2f6f8f'
       icon: signal
       tags: [Wireless research, Cited papers]
@@ -38,3 +44,13 @@ gallery:
       accent: '#8a6d2f'
       icon: news
       tags: [News literacy, Source checks]
+    - dir: fitchat
+      slug: fitchat
+      accent: '#a8445f'
+      icon: heart
+      tags: [Exercise, Public health]
+    - dir: spacechat
+      slug: spacechat
+      accent: '#8c4f9e'
+      icon: planet
+      tags: [Space, NASA sources]

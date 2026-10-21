@@ -21,7 +21,8 @@ def _write_gallery(base):
         "  budget: {daily_questions: 300, daily_model_calls: 500}\n"
         "  apps:\n"
         "    - {dir: alpha, slug: alpha, icon: chat, tags: [TagOne, TagTwo]}\n"
-        "    - {dir: beta, slug: beta}\n")
+        "    - {dir: beta, slug: beta}\n"
+        "    - {slug: ext, url: 'https://example.com/ext', title: External App, tagline: Links out, icon: planet, accent: '#8c4f9e'}\n")
 
 
 class GalleryConfig(unittest.TestCase):
@@ -34,6 +35,8 @@ class GalleryConfig(unittest.TestCase):
         from chatify import gallery
         g = gallery.load(os.path.join(ROOT, "apps", "gallery.yaml"))
         for app in g["apps"]:
+            if "cfg" not in app:
+                continue  # redirect entries carry no hosted config
             cfg = app["cfg"]
             self.assertEqual(cfg["provider"]["type"], "openai")           # host key, server-side only
             self.assertEqual(cfg["provider"]["api_key_env"], "OPENAI_API_KEY")
@@ -89,13 +92,32 @@ class GalleryServer(unittest.TestCase):
     def test_gallery_page_lists_apps(self):
         s, b = self.get("/")
         self.assertEqual(s, 200)
-        self.assertEqual(b.count('class="g-card"'), 2)
+        self.assertEqual(b.count('class="g-card"'), 3)
         self.assertIn("Alpha App", b); self.assertIn("Beta App", b)
+        self.assertIn('href="https://example.com/ext"', b)   # redirect app card links out
         self.assertIn('class="g-ico"', b)                    # card icons render
         self.assertIn("TagOne", b)                           # card tags render
         self.assertIn('class="g-info"', b)                   # trust tile fills the grid
         self.assertIn('href="/alpha/"', b)
         self.assertIn("navflow", b)  # page transitions on the gallery too
+
+    def test_redirect_apps_link_out_and_redirect(self):
+        class NoRedirect(urllib.request.HTTPRedirectHandler):
+            def redirect_request(self, *a, **k):
+                return None
+        opener = urllib.request.build_opener(NoRedirect)
+        for path in ("/ext", "/ext/anything/deeper"):
+            try:
+                opener.open("http://127.0.0.1:%d%s" % (self.port, path), timeout=5)
+                self.fail("expected a redirect for " + path)
+            except urllib.error.HTTPError as e:
+                self.assertIn(e.code, (301, 302))
+                self.assertEqual(e.headers["Location"], "https://example.com/ext")
+        s3, health = self.get("/api/health", accept="application/json")
+        self.assertEqual(s3, 200)
+        h = json.loads(health)
+        self.assertEqual(sorted(h["apps"]), ["alpha", "beta"])   # hosted copies only
+        self.assertEqual(h["redirects"], ["ext"])
 
     def test_app_home_is_rewritten(self):
         s, b = self.get("/alpha/")

@@ -31,14 +31,18 @@ ConfigError = schema.ConfigError
 SLUG = re.compile(r"^[a-z0-9][a-z0-9-]{0,40}$")
 RESERVED = {"api", "gallery", "favicon.ico"}
 
-# Card glyphs for the gallery home page (inner SVG markup, stroke = card accent).
+# Card art for the gallery home page (inner SVG markup, stroke = card accent).
+# Classes used by the gallery stylesheet for micro-animations: .bob (gentle float),
+# .sway (rotate around base), .pulse (radiating fade), .tick (heartbeat), .draw (stroke draw).
 ICONS = {
-    "chat": '<path d="M4 5.5h16v10.5H9.5L5 19.5z"/><circle cx="9" cy="10.7" r=".9" fill="currentColor" stroke="none"/><circle cx="12.6" cy="10.7" r=".9" fill="currentColor" stroke="none"/><circle cx="16.2" cy="10.7" r=".9" fill="currentColor" stroke="none"/>',
-    "leaf": '<path d="M5.5 18.5C5.5 9.8 12.6 4.5 19.5 4.5c0 7.5-4.4 14-12.5 14"/><path d="M5.5 18.5c2-4.5 5.5-8 9.5-9.8"/>',
-    "signal": '<path d="M12 20v-7"/><circle cx="12" cy="10.5" r="1.4"/><path d="M8.2 13.7a5.4 5.4 0 0 1 0-6.4M15.8 7.3a5.4 5.4 0 0 1 0 6.4M5.4 16.5a9.6 9.6 0 0 1 0-12M18.6 4.5a9.6 9.6 0 0 1 0 12"/>',
-    "flag": '<path d="M6 21V4.2"/><path d="M6 5h12.2l-2.8 3.8 2.8 3.7H6"/>',
-    "news": '<path d="M4 6.5h13v11a1.8 1.8 0 0 0 1.8 1.7H6a2 2 0 0 1-2-2z"/><path d="M17 9.5h2.2a.8.8 0 0 1 .8.8v7.2a1.7 1.7 0 0 1-1.7 1.7"/><path d="M7 9.5h7M7 12.5h7M7 15.5h4.5" opacity=".55"/>',
-    "spark": '<path d="M12 3.5 13.8 9 19.5 12 13.8 14.5 12 20.5 10.2 14.5 4.5 12 10.2 9z"/>',
+    "chat": '<path d="M7 8.5h11a3 3 0 0 1 3 3v4.5a3 3 0 0 1-3 3h-6.5L7 22v-3H7a3 3 0 0 1-3-3v-4.5a3 3 0 0 1 3-3z" transform="translate(-1.5 -3)"/><circle cx="9.4" cy="11.2" r="1" fill="currentColor" stroke="none"/><circle cx="13" cy="11.2" r="1" fill="currentColor" stroke="none"/><circle cx="16.6" cy="11.2" r="1" fill="currentColor" stroke="none"/><path class="bob" d="m18.6 2.2.7 1.9 1.9.7-1.9.7-.7 1.9-.7-1.9-1.9-.7 1.9-.7z"/>',
+    "leaf": '<g class="sway"><path d="M5.5 18.5C5.5 9.8 12.6 4.5 19.5 4.5c0 7.5-4.4 14-12.5 14"/><path d="M5.5 18.5c2-4.5 5.5-8 9.5-9.8"/></g><path class="bob" d="m19.2 15.8.5 1.4 1.4.5-1.4.5-.5 1.4-.5-1.4-1.4-.5 1.4-.5z"/>',
+    "signal": '<path d="M12 20.5v-6.5"/><circle cx="12" cy="11" r="1.6"/><g class="pulse"><path d="M8.6 14.2a4.8 4.8 0 0 1 0-6.4M15.4 7.8a4.8 4.8 0 0 1 0 6.4"/></g><g class="pulse p2"><path d="M5.8 16.8a8.6 8.6 0 0 1 0-11.6M18.2 5.2a8.6 8.6 0 0 1 0 11.6"/></g>',
+    "flag": '<path d="M5.5 21.5v-17"/><g class="sway"><path d="M5.5 4.8c3-1.6 6 1.4 9 0s4-.4 4.5 0v8.6c-.5-.4-1.5-1.4-4.5 0s-6-1.4-9 0"/><path d="M8.8 4.4v8.2M13.4 4.4v8.2" opacity=".45"/></g>',
+    "news": '<path d="M4 6.5h13v11a1.8 1.8 0 0 0 1.8 1.7H6a2 2 0 0 1-2-2z"/><path d="M17 9.5h2.2a.8.8 0 0 1 .8.8v7.2a1.7 1.7 0 0 1-1.7 1.7"/><g class="draw" opacity=".6"><path d="M7 9.5h7M7 12.5h7M7 15.5h4.5"/></g>',
+    "heart": '<g class="tick"><path d="M12 20s-7.5-4.6-7.5-9.8A4.3 4.3 0 0 1 12 7.6a4.3 4.3 0 0 1 7.5 2.6C19.5 15.4 12 20 12 20z"/></g><path class="draw" d="M6.8 12h2.6l1.2-2.4 1.8 4.6 1.2-2.2h2.4"/>',
+    "planet": '<circle cx="12" cy="12" r="5.2"/><path class="sway" d="M4.5 15.5c-1.6.8-2.5 1.7-2 2.5 1 1.6 6.5.8 12-1.8s8.6-6.2 7.7-7.8c-.4-.8-2-.7-4-.2"/><circle class="bob" cx="18.6" cy="5.6" r="1" fill="currentColor" stroke="none"/><circle class="bob" cx="5" cy="5.4" r=".8" fill="currentColor" stroke="none"/>',
+    "spark": '<path class="bob" d="M12 3.5 13.8 9 19.5 12 13.8 14.5 12 20.5 10.2 14.5 4.5 12 10.2 9z"/>',
 }
 
 
@@ -87,14 +91,28 @@ def load(path):
         raise ConfigError("gallery.apps must be a non-empty list")
     apps, seen = [], set()
     for entry in apps_raw:
-        if not isinstance(entry, dict) or not entry.get("dir") or not entry.get("slug"):
-            raise ConfigError("Each gallery app needs a dir and a slug")
+        if not isinstance(entry, dict) or not entry.get("slug"):
+            raise ConfigError("Each gallery app needs a slug plus a dir (hosted here) or a url (links out)")
         slug = str(entry["slug"]).strip().lower()
         if not SLUG.match(slug) or slug in RESERVED:
             raise ConfigError("Bad gallery slug: %r (lowercase letters, numbers, dashes; not reserved)" % slug)
         if slug in seen:
             raise ConfigError("Duplicate gallery slug: %s" % slug)
         seen.add(slug)
+        url = entry.get("url")
+        if url is not None:
+            url = str(url).strip()
+            if not url.startswith("https://"):
+                raise ConfigError("gallery app url must be an https link")
+            if not entry.get("title"):
+                raise ConfigError("A redirect gallery app (url) needs a title for its card")
+            icon, tags, accent = _meta(entry)
+            apps.append({"slug": slug, "url": url, "title": str(entry["title"]),
+                         "tagline": str(entry.get("tagline") or ""), "icon": icon, "tags": tags,
+                         "accent": accent})
+            continue
+        if not entry.get("dir"):
+            raise ConfigError("Each gallery app needs a slug plus a dir (hosted here) or a url (links out)")
         app_path = os.path.join(base, str(entry["dir"]), "app.yaml")
         cfg = schema.load(app_path)
         cfg["_path"] = os.path.abspath(app_path)

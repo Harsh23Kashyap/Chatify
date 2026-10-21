@@ -27,15 +27,13 @@ h1{font-family:Fraunces,Georgia,serif;font-weight:700;font-size:clamp(30px,4.6vw
 .sec h2{font-family:Fraunces,Georgia,serif;font-weight:600;font-size:22px;margin:0;letter-spacing:-.01em}
 .sec span{font:600 12.5px "DM Sans",sans-serif;letter-spacing:.08em;text-transform:uppercase;color:var(--mut)}
 .sec::after{content:"";flex:1;height:1px;background:var(--line);align-self:center}
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:20px}
-.g-card{position:relative;display:flex;flex-direction:column;gap:10px;background:var(--card);border:1px solid var(--line);border-radius:20px;padding:24px 22px 22px;text-decoration:none;color:var(--ink);overflow:hidden;transition:transform .18s cubic-bezier(.2,.8,.2,1),box-shadow .18s,border-color .18s}
-.g-card::before{content:"";position:absolute;inset:0 0 auto 0;height:4px;background:var(--card-accent,#173f35);opacity:.9;transition:height .18s cubic-bezier(.2,.8,.2,1)}
-.g-card:hover{transform:translateY(-4px);box-shadow:0 16px 36px rgba(23,63,53,.12);border-color:transparent}
-.g-card:hover::before{height:6px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:22px}
+.g-card{position:relative;display:flex;flex-direction:column;gap:10px;background:var(--card);border:1px solid var(--line);border-radius:20px;padding:26px 22px 22px;text-decoration:none;color:var(--ink);box-shadow:inset 0 4px 0 var(--card-accent,#173f35);transition:transform .18s cubic-bezier(.2,.8,.2,1),box-shadow .18s,border-color .18s}
+.g-card:hover{transform:translateY(-4px);box-shadow:inset 0 6px 0 var(--card-accent,#173f35),0 16px 36px rgba(23,63,53,.12);border-color:transparent}
 .g-card:active{transform:scale(.99);transition-duration:90ms}
 .g-top{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:2px}
-.g-ico{display:grid;place-items:center;width:46px;height:46px;border-radius:13px;color:var(--card-accent,#173f35);background:#f2ecdc;background:color-mix(in srgb,var(--card-accent,#173f35) 10%,#fffdf7);transition:transform .18s cubic-bezier(.2,.8,.2,1)}
-.g-ico svg{width:25px;height:25px}
+.g-ico{display:grid;place-items:center;width:56px;height:56px;border-radius:15px;color:var(--card-accent,#173f35);background:#f2ecdc;background:color-mix(in srgb,var(--card-accent,#173f35) 10%,#fffdf7);transition:transform .18s cubic-bezier(.2,.8,.2,1)}
+.g-ico svg{width:32px;height:32px;overflow:visible}
 .g-card:hover .g-ico{transform:rotate(-4deg) scale(1.06)}
 .g-arrow{display:grid;place-items:center;width:30px;height:30px;border-radius:50%;color:var(--mut);transition:color .16s,background .16s,transform .18s cubic-bezier(.2,.8,.2,1)}
 .g-arrow svg{width:16px;height:16px}
@@ -55,13 +53,33 @@ h1{font-family:Fraunces,Georgia,serif;font-weight:700;font-size:clamp(30px,4.6vw
 .foot a{color:var(--ink);font-weight:600;text-decoration:none;border-bottom:1px solid var(--line)}
 .foot a:hover{border-bottom-color:var(--ink)}
 @media(prefers-reduced-motion:no-preference){
+.bg{animation:g-drift 90s linear infinite}
 .top,.hero,.sec{animation:g-up .38s cubic-bezier(.22,1,.36,1) both}
 .hero{animation-delay:.07s}.sec{animation-delay:.16s}
+.eyebrow::before{transform-origin:left;animation:g-line .5s .3s cubic-bezier(.22,1,.36,1) both}
+.chips li{animation:g-up .34s cubic-bezier(.22,1,.36,1) both}
+.chips li:nth-child(1){animation-delay:.24s}.chips li:nth-child(2){animation-delay:.31s}.chips li:nth-child(3){animation-delay:.38s}
 .g-card,.g-info{animation:g-up .38s cubic-bezier(.22,1,.36,1) both}
-.g-card:nth-child(1){animation-delay:.20s}.g-card:nth-child(2){animation-delay:.26s}.g-card:nth-child(3){animation-delay:.32s}.g-card:nth-child(4){animation-delay:.38s}.g-card:nth-child(5){animation-delay:.44s}.grid>*:nth-child(6){animation-delay:.50s}.grid>*:nth-child(n+7){animation-delay:.56s}
-.foot{animation:g-up .38s .5s cubic-bezier(.22,1,.36,1) both}
+.g-card:nth-child(1){animation-delay:.20s}.g-card:nth-child(2){animation-delay:.26s}.g-card:nth-child(3){animation-delay:.32s}.g-card:nth-child(4){animation-delay:.38s}.g-card:nth-child(5){animation-delay:.44s}.g-card:nth-child(6){animation-delay:.50s}.g-card:nth-child(7){animation-delay:.56s}.grid>*:nth-child(8){animation-delay:.62s}.grid>*:nth-child(n+9){animation-delay:.68s}
+.g-ico{animation:g-pop .34s cubic-bezier(.34,1.56,.64,1) both}
+.g-card:nth-child(1) .g-ico{animation-delay:.30s}.g-card:nth-child(2) .g-ico{animation-delay:.36s}.g-card:nth-child(3) .g-ico{animation-delay:.42s}.g-card:nth-child(4) .g-ico{animation-delay:.48s}.g-card:nth-child(5) .g-ico{animation-delay:.54s}.g-card:nth-child(6) .g-ico{animation-delay:.60s}.g-card:nth-child(7) .g-ico{animation-delay:.66s}
+.g-card .draw{stroke-dasharray:30;stroke-dashoffset:30;animation:g-draw .9s .8s cubic-bezier(.22,1,.36,1) forwards}
+.g-card:hover .bob{animation:g-bob 1.6s ease-in-out infinite}
+.g-card:hover .sway{transform-box:fill-box;transform-origin:bottom left;animation:g-sway 1.4s ease-in-out infinite}
+.g-card:hover .pulse{animation:g-pulse 1.5s ease-in-out infinite}
+.g-card:hover .pulse.p2{animation-delay:.35s}
+.g-card:hover .tick{transform-box:fill-box;transform-origin:center;animation:g-tick 1.3s ease-in-out infinite}
+.foot{animation:g-up .38s .56s cubic-bezier(.22,1,.36,1) both}
 }
 @keyframes g-up{from{opacity:0;transform:translateY(12px)}}
+@keyframes g-pop{from{opacity:0;transform:scale(.6)}}
+@keyframes g-bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-1.6px)}}
+@keyframes g-sway{0%,100%{transform:rotate(0)}30%{transform:rotate(-4deg)}70%{transform:rotate(2.5deg)}}
+@keyframes g-pulse{0%,100%{opacity:1}50%{opacity:.2}}
+@keyframes g-tick{0%,100%{transform:scale(1)}14%{transform:scale(1.13)}28%{transform:scale(1)}}
+@keyframes g-draw{to{stroke-dashoffset:0}}
+@keyframes g-line{from{transform:scaleX(0)}}
+@keyframes g-drift{to{background-position:0 0,0 0,52px 52px}}
 @media(prefers-reduced-motion:reduce){.top,.hero,.sec,.g-card,.g-info,.foot{animation:none!important}.g-card{transition:none}.g-card:hover{transform:none}}
 @media(max-width:640px){
 .wrap{padding:28px 18px 32px}
@@ -70,7 +88,7 @@ h1{font-family:Fraunces,Georgia,serif;font-weight:700;font-size:clamp(30px,4.6vw
 .chips{flex-wrap:nowrap;overflow-x:auto;padding-bottom:4px;scrollbar-width:none}
 .chips::-webkit-scrollbar{display:none}
 .chips li{flex:0 0 auto}
-.grid{grid-template-columns:1fr;gap:14px}
+.grid{grid-template-columns:1fr;gap:18px}
 .g-card,.g-info{padding:20px 18px}
 .g-arrow{opacity:1;transform:none}
 .foot{flex-direction:column;align-items:flex-start;gap:8px}

@@ -1,3 +1,11 @@
+## 0.4.0
+
+- Gallery apps can now be redirects: an entry with a url instead of a dir makes /<slug>/ send visitors to that site and its card link straight out, so systems with their own homes (like DietChat on dietchat.org) no longer run twice on the host key. /api/health lists hosted apps and redirects separately
+- Gallery cards get proper custom artwork: larger illustrated SVG icons per app (chat bubbles with a sparkle, a swaying leaf, a pulsing antenna, a waving flag, a printing newspaper, a heartbeat, a ringed planet) with subtle hover micro-animations and a staggered pop on entrance
+- More gallery motion: the eyebrow rule draws in, trust chips stagger, the dot texture drifts slowly, icons draw and pulse - all skipped for visitors who prefer reduced motion
+- The card top accent bar is now an inset shadow that follows the card's rounded corners exactly (it could bleed past the edge on phones), and mobile cards sit further apart
+- Two new bundled apps: FitChat (exercise answers from public US health guidance) and SpaceChat (space answers from attributed public reference texts)
+
 ## 0.3.3
 
 - Gallery review pass: the hero is shorter so the app cards start above the fold, the title no longer orphans a word, card arrows are always visible, tag text is darkened for contrast, the Chatify card is indigo so it no longer reads as DietChat's green, the About tile is a solid card instead of a dashed placeholder, and the duplicated app count and repeated privacy line are gone
