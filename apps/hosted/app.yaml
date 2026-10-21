@@ -11,6 +11,7 @@ app:
     - How are answers cited?
     - How do I run Chatify on my own computer?
   footer: A model is already configured here. Open Configuration and choose Build with AI, the easier path.
+  theme: light         # settings page has no dark theme support; keep every page light and consistent
 provider:
   type: openai         # key comes from the OPENAI_API_KEY environment variable on the host
   model: gpt-4o-mini
