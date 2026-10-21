@@ -30,6 +30,16 @@ def parse_draft_json(text):
    if e.msg!='Invalid \\escape' or candidate[e.pos:e.pos+1]!='\\':return None
    candidate=candidate[:e.pos]+'\\'+candidate[e.pos:]
  return None
+def repair_helper_code(code):
+ """Accept a helper draft whose Python arrived double-escaped (literal \" and \n), the common small-model failure."""
+ try:
+  compile(code,'<helper-draft>','exec');return code
+ except (SyntaxError,ValueError,TypeError):pass
+ repaired=code.replace('\\"','"').replace('\\n','\n').replace("\\'","'")
+ if repaired!=code:
+  try:compile(repaired,'<helper-draft>','exec');return repaired
+  except (SyntaxError,ValueError,TypeError):pass
+ return code
 MAX_CALLS=36
 class BuildJobs:
  def __init__(self,drafts=None):self.lock=threading.RLock();self.jobs={};self.drafts=drafts
@@ -125,6 +135,7 @@ class BuildJobs:
    if problems:raise ValueError('Prompt contract failed: '+'; '.join(problems))
   elif key.startswith('helper:'):
    appbuilder.validate_extras({'helper_drafts':{key[7:]:result}})
+   result['code']=repair_helper_code(result['code'])
    try:compile(result['code'],'<helper-draft>','exec')
    except (SyntaxError,ValueError,TypeError) as e:raise ValueError('Helper Python compilation failed: '+str(e)) from e
   elif key=='api':
