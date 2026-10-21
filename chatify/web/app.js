@@ -44,7 +44,7 @@ async function api(path, body) {
   const d = await r.json().catch(() => ({}));
   if (r.status === 401 && S.cfg && S.cfg.auth === "accounts" && !path.startsWith("/api/account/")) { location.reload(); return new Promise(() => {}); }
   if (r.status === 401 && S.cfg && S.cfg.auth === "token") {
-    const t = prompt("Access token"); if (t) { S.token = t; localStorage.setItem("cc_token", t); return api(path, body); }
+    const t = await CCDialog.prompt("Access token","",{secret:true,title:"Access token",okText:"Continue"}); if (t) { S.token = t; localStorage.setItem("cc_token", t); return api(path, body); }
   }
   if (!r.ok) throw new Error(d.error || "Request failed");
   return d;
@@ -225,7 +225,7 @@ function turnView(t, prev) {
   nodes.push(el("div", { class: "row" }, avatar("bot"), bub));
   const meta = el("div", { class: "meta" });
   const weak = (t.ledger || []).filter((l) => !l.supported || (l.overlap !== undefined && l.overlap < 0.35));
-  if (t.evidence.length && weak.length) meta.append(el("button", { class: "chip warn", title: "Sentences without a valid citation or with little overlap with the cited text. Click to see them.", onclick: () => alert("Check these sentences:\n\n" + weak.map((l) => "- " + l.claim).join("\n")) }, weak.length + " to check"));
+  if (t.evidence.length && weak.length) meta.append(el("button", { class: "chip warn", title: "Sentences without a valid citation or with little overlap with the cited text. Click to see them.", onclick: () => CCDialog.alert("Check these sentences:\n\n" + weak.map((l) => "- " + l.claim).join("\n"),{title:"Sentences to check"}) }, weak.length + " to check"));
   if (t.seconds !== undefined) meta.append(el("span", { "data-more": "1", class: "chip", title: "Time to answer" }, t.seconds < 1 ? "<1s" : t.seconds + "s"));
   if (t.standalone && t.standalone !== t.question) meta.append(el("span", { class: "chip", title: "Understood as" }, "Understood as: " + t.standalone));
   if (t.scope) meta.append(el("span", {class:"chip scope-used", text:"Scoped: " + (t.scope.document || t.scope.source)}));
@@ -277,7 +277,7 @@ window.addEventListener('resize',()=>document.querySelectorAll('.more[open]').fo
 document.addEventListener('scroll',e=>{if(e.target.classList?.contains('thread'))e.target.querySelectorAll('.more[open]').forEach(positionAnswerMore)},true);
 async function branchQuestion(t) {
   if (S.busy) return toast("Wait for the current answer or stop it first");
-  const question = prompt("Edit this question. A new branch keeps earlier context and leaves the original unchanged.", t.question);
+  const question = await CCDialog.prompt("Edit this question. A new branch keeps earlier context and leaves the original unchanged.", t.question, {title:"Edit + branch", multiline:true, okText:"Branch"});
   if (question == null || !question.trim()) return;
   if (S.temp) return toast("Edit + branch needs a saved chat. Temporary chats stay unsaved.");
   try {
@@ -476,7 +476,7 @@ function renameDialog(row, topic = false) {
 }
 
 async function openChat(id) {
-  if (!confirmTemporaryExit()) return;
+  if (!(await confirmTemporaryExit())) return;
   $("#jump").dataset.reply = "";
   S.view = "chat";
   setTemp(false);
@@ -489,7 +489,7 @@ async function openChat(id) {
   $("#app").classList.remove("menu-open", "src"); drawThread(); loadList(); $("#q").focus();
 }
 async function openTopic(id) {
-  if (!confirmTemporaryExit()) return;
+  if (!(await confirmTemporaryExit())) return;
   $("#jump").dataset.reply = "";
   S.view = "topic";
   setTemp(false);
@@ -498,7 +498,7 @@ async function openTopic(id) {
   S.chat = S.turns.length ? S.turns[S.turns.length - 1].chat : null;
   $("#chatTitle").textContent = "Conversation"; $("#app").classList.remove("menu-open"); drawThread(); loadList(); $("#q").focus();
 }
-function newChat() { if (!confirmTemporaryExit()) return; S.view = "chat"; setTemp(false); loadSuggestions(); S.chat = null; S.topic = null; S.newTopic = false; S.turns = []; $("#chatTitle").textContent = "New chat"; $("#app").classList.remove("src", "menu-open"); drawThread(); loadList(); $("#q").focus(); }
+async function newChat() { if (!(await confirmTemporaryExit())) return; S.view = "chat"; setTemp(false); loadSuggestions(); S.chat = null; S.topic = null; S.newTopic = false; S.turns = []; $("#chatTitle").textContent = "New chat"; $("#app").classList.remove("src", "menu-open"); drawThread(); loadList(); $("#q").focus(); }
 
 let aborter = null;
 async function stream(body, onEvent) {
@@ -583,7 +583,7 @@ function mountModal(back, dismiss = true) {
 }
 async function uploadDialog() {
  const modal=el('div',{class:'modal-back'}),box=el('div',{class:'modal source-add-modal',role:'dialog','aria-label':'Add sources'}),files=el('input',{id:'sourceFiles',type:'file',multiple:'','aria-label':'Choose source files'}),url=el('input',{id:'sourceUrl',type:'url',placeholder:'https://example.com/article','aria-label':'Web address',inputmode:'url'}),fileStatus=el('div',{class:'source-entry-status',role:'status','aria-live':'polite'}),urlStatus=el('p',{class:'source-entry-status',role:'status','aria-live':'polite'});let pending=false;
- const closeFlow=()=>{if(pending){urlStatus.textContent='Please wait for the current source to finish adding.';return}if(url.value.trim()&&!confirm('You typed a web address but have not added it yet. To add it, choose \"Add link\". Close and discard the address? Sources already added are kept.'))return;modal.remove()};modal.ccDismiss=closeFlow;
+ const closeFlow=async()=>{if(pending){urlStatus.textContent='Please wait for the current source to finish adding.';return}if(url.value.trim()&&!(await CCDialog.confirm('You typed a web address but have not added it yet. To add it, choose \"Add link\". Close and discard the address? Sources already added are kept.',{title:'Discard address?',okText:'Discard'})))return;modal.remove()};modal.ccDismiss=closeFlow;
  const close=el('button',{class:'btn-out',text:'Done',onclick:closeFlow}),addLink=el('button',{class:'btn-out',text:'Add link'});
  const setBusy=on=>{pending=on;files.disabled=on;url.disabled=on;addLink.disabled=on;close.disabled=on;box.setAttribute('aria-busy',String(on))};
  const upload=async()=>{if(pending)return;const selected=[...files.files];if(!selected.length)return;fileStatus.replaceChildren();setBusy(true);
@@ -738,10 +738,10 @@ document.addEventListener("click", (e) => {
 });
 
 // ---- temporary chat, profile, mic, similar questions, question navigation, resizer, tour ----
-function confirmTemporaryExit() {
+async function confirmTemporaryExit() {
   if (!S.temp) return true;
   if (S.busy) { toast("Wait for the temporary reply or stop it before leaving."); return false; }
-  return !S.turns.length || confirm("Leave this temporary conversation? Its questions and replies are not saved and will be cleared. Your unsent question stays in the composer.");
+  return !S.turns.length || (await CCDialog.confirm("Leave this temporary conversation? Its questions and replies are not saved and will be cleared. Your unsent question stays in the composer.",{title:"Leave temporary conversation?",okText:"Leave",danger:true}));
 }
 function setTemp(on) {
   S.temp = on; document.body.classList.toggle("temp", on);
