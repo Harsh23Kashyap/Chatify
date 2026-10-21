@@ -212,6 +212,7 @@ html:not([data-motion=none]):not([data-motion=calm]) dialog.app-builder .builder
 @keyframes builder-title-shine{0%{background-position:130% 0}100%{background-position:-130% 0}}
 @keyframes builder-sheen{0%{transform:translateX(-130%)}55%{transform:translateX(130%)}100%{transform:translateX(130%)}}
 @keyframes builder-twinkle{0%,100%{opacity:.55;transform:scale(.9) rotate(0deg)}50%{opacity:1;transform:scale(1.18) rotate(14deg)}}
+.builder-hero-paused,.builder-hero-paused::before,.builder-hero-paused::after,.builder-hero-paused .builder-hero-title,.builder-hero-paused .builder-hero-spark,.builder-hero-paused .builder-hero-twinkles i,.builder-hero-paused .builder-hero-go::after,.builder-hero-paused .builder-hero-ring{animation-play-state:paused}
 @media(prefers-reduced-motion:reduce){.builder-hero,.builder-hero::before,.builder-hero::after,.builder-hero-spark,.builder-hero-twinkles i,.builder-hero-go::after,.builder-hero-ring,.builder-hero-title{animation:none}.builder-hero-title{background:none;color:#f4f8ee}}
 @media(max-width:600px){.builder-hero{padding:14px}.builder-hero-go{margin-left:0;flex:1 1 100%}.builder-hero-sub{display:none}.builder-hero-sub-m{display:block}.builder-hero-note{display:block;flex:1 1 100%;font-size:11.5px;line-height:1.45;color:#dcebd4;margin-top:6px}}
 html[data-theme=dark] .builder-hero{border-color:#3c6b4c}
@@ -228,7 +229,7 @@ html body.settings-tabs .loaded-app+.modebar{margin-top:2px!important}
 .builder-hero-twinkles{position:absolute;inset:0;z-index:0;pointer-events:none}
 .builder-hero-twinkles i{position:absolute;font-style:normal;line-height:1;color:#d7ef72;opacity:0;animation:builder-spark 3.6s ease-in-out infinite}
 .builder-hero-twinkles i:nth-child(1){top:9%;right:8%;font-size:11px}
-.builder-hero-twinkles i:nth-child(2){bottom:11%;right:9%;font-size:13px;color:#8fd0a8;animation-delay:1.2s}
+.builder-hero-twinkles i:nth-child(2){bottom:8%;left:55%;font-size:13px;color:#8fd0a8;animation-delay:1.2s}
 .builder-hero-twinkles i:nth-child(3){top:16%;left:44%;font-size:9px;color:#e9f3df;animation-delay:2.3s}
 html body .builder-hero .builder-hero-go:focus-visible{outline:3px solid #d7ef72;outline-offset:3px}
 

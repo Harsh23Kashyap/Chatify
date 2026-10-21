@@ -1,3 +1,6 @@
+## 0.4.13
+
+- Build with AI review follow-ups: the lower twinkle no longer clips the Start building button on desktop (moved to the empty strip below the copy), and every hero animation now pauses while the callout is scrolled offscreen; glint keeps its slow 6.5s sweep.
 ## 0.4.12
 
 - Build with AI gains its glimmer: a diagonal light glint sweeps the callout on a loop and the title carries a continuous cream shine that glides through the serif letters, on top of the existing aurora drift, border comet, button sheen and sparkles. All of it freezes under reduced motion, no pink or purple anywhere
