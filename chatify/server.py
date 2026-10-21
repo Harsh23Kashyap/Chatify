@@ -115,18 +115,25 @@ def make_handler(cfg, engine):
             self.end_headers()
             self.wfile.write(data)
 
-        def _cookie(self):
+        def _cookie_named(self, name):
             for part in self.headers.get("Cookie", "").split(";"):
                 k, _, v = part.strip().partition("=")
-                if k == "cc_session":
+                if k == name:
                     return v
             return ""
+
+        def _cookie(self):
+            return self._cookie_named("cc_session")
 
         def _set_cookie(self, token, max_age=30 * 86400):
             return {"Set-Cookie": "cc_session=%s; Path=/; HttpOnly; SameSite=Strict; Max-Age=%d" % (token, max_age)}
 
         def _owner(self):
             if cfg["auth"]["mode"] == "none":
+                if cfg.get("server", {}).get("public"):
+                    visitor = self._cookie_named("cc_visitor")
+                    if re.fullmatch(r"[0-9a-f]{32}", visitor or ""):
+                        return "visitor:" + visitor
                 return "local"
             if acc:
                 u = acc.user_for(self._cookie())
@@ -785,7 +792,10 @@ def make_handler(cfg, engine):
                 data = data.decode().replace("{{THEME_JSON}}", json.dumps(themestore.value).replace("<", "\\u003c")).replace("{{TITLE}}", _esc(a["title"])).replace("{{ACCENT}}", _esc(a["accent"])).replace("{{ACCENT2}}", _esc(a.get("accent2", "#d7ef72"))).replace("{{THEME}}", _esc(a["theme"])).encode()
             if name == "index.html" and LOCKED:
                 data = re.sub(rb'<a[^>]*href="/settings.html"[^>]*>Configuration</a>', b"", data)
-            self._send(200, data, ctype + ("; charset=utf-8" if ctype.startswith("text") or "javascript" in ctype else ""))
+            extra = None
+            if ctype.startswith("text/html") and cfg["auth"]["mode"] == "none" and cfg.get("server", {}).get("public") and not re.fullmatch(r"[0-9a-f]{32}", self._cookie_named("cc_visitor") or ""):
+                extra = {"Set-Cookie": "cc_visitor=%s; Path=/; HttpOnly; SameSite=Strict; Max-Age=%d" % (uuid.uuid4().hex, 365 * 86400)}
+            self._send(200, data, ctype + ("; charset=utf-8" if ctype.startswith("text") or "javascript" in ctype else ""), extra=extra)
 
         def _guard(self, method):
             try:

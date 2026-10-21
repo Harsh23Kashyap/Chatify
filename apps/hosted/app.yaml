@@ -26,3 +26,6 @@ budget:
   user_daily_questions: 0   # no-auth app: per-person quota would be shared by everyone, so keep it off
   daily_model_calls: 500    # covers chat answers and Build with AI drafting; a full build is up to 36 calls
   spend_cap_usd: null       # the host key carries its own provider-side budget limit
+
+server:
+  public: true        # public demo: isolate each browser's chats, recent questions and drafts

@@ -51,7 +51,7 @@ DEFAULTS = {
     "citations": {"required": True, "ledger": True},
     "auth": {"mode": "none", "token_env": "", "signup": True},   # none | token | accounts
     "storage": {"path": "data/chatify.db"},
-    "server": {"host": "127.0.0.1", "port": 8080},
+    "server": {"host": "127.0.0.1", "port": 8080, "public": False},
 }
 
 # Hosted services that speak the OpenAI chat format: (default base_url, default key env var).
