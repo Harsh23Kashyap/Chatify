@@ -149,3 +149,8 @@ html:not([data-motion=none]):not([data-motion=calm]) .app-builder .builder-final
 .builder-api-mark{border-radius:50%;background:#eee9e2}
 .builder-api-fit p{-webkit-line-clamp:1}
 @media(max-width:760px){.builder-final-api-grid{grid-template-columns:1fr}}
+/* Build with AI is the recommended path: keep the primary treatment in the studio actions row */
+html body.settings-tabs .settings-studio-actions .app-builder-open{background:#173f35!important;color:#fffdf7!important;border:1px solid #49684e!important;box-shadow:0 3px 0 #0c2b21!important;font-size:13px!important;font-weight:700!important;padding:11px 16px!important}
+html body.settings-tabs .settings-studio-actions .app-builder-open span:first-child{color:#d7ef72}
+html[data-theme=dark] body.settings-tabs .settings-studio-actions .app-builder-open{background:#d7ef72!important;color:#173f35!important;border-color:#d7ef72!important;box-shadow:0 3px 0 #6b8520!important}
+html[data-theme=dark] body.settings-tabs .settings-studio-actions .app-builder-open span:first-child{color:#173f35}
