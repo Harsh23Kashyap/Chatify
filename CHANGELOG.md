@@ -1,3 +1,7 @@
+## 0.4.10
+
+- Build with AI re-themed to the site palette: the callout drops pink and purple for a drifting mint-and-lime gradient with green sparkles, and Start building trades the glow pulse for a continuous light sweep that keeps gliding across the button - the feature always draws the eye, and every loop still stops under reduced motion. The focus ring is now a crisp mid-green
+
 ## 0.4.9
 
 - Loader polish from review: the progress bar is always filled with a dark band sweeping through it (shimmer visible from the first frame), the boot splash and the transition veil share the same geometry with a 64px mark and the serif Chatify wordmark (Georgia fallback before the webfont lands), and the veil only mounts after 160ms so fast page switches never flash a loader
