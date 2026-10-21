@@ -767,7 +767,7 @@ async function init() {
     const button=$("#testconn");if(button.dataset.running==="true")return;
     button.dataset.running="true";button.disabled=true;button.textContent="Testing...";button.setAttribute("aria-busy","true");
     const t=$("#testres"),provider=cur.provider,model=chosenModel(),base=$("#base").value.trim();
-    t.className="testres busy";t.replaceChildren(el("span",{class:"connection-status-icon","aria-hidden":"true",text:"…"}),document.createTextNode("Testing..."));pvFollow();
+    t.className="testres busy";delete t.dataset.assumed;t.replaceChildren(el("span",{class:"connection-status-icon","aria-hidden":"true",text:"…"}),document.createTextNode("Testing..."));pvFollow();
     let ok=false,message="";
     try{const r=await api("/api/provider/test",{provider,model,base_url:base});ok=r.ok;message=r.message}catch(e){message=e.message}
     testLog.unshift({p:NAMES[provider]||provider,ok,detail:message,t:new Date().toLocaleTimeString([],{hour:"2-digit",minute:"2-digit"})});testLog.length=Math.min(testLog.length,5);
@@ -928,7 +928,7 @@ async function pollOllamaSetup(host,id){
   }
 }
 
-init().then(() => { try { const ki = keyInfo[cur.provider] || {}; if (ki.source === "env" && !sessionStorage.getItem("cc_env_conn_checked")) { sessionStorage.setItem("cc_env_conn_checked", "1"); setTimeout(() => { const attempt = (left) => { const sel = $("#modelPick"), tc = $("#testconn"); if (sel && sel.getAttribute("aria-busy") === "true" && left > 0) { setTimeout(() => attempt(left - 1), 400); return; } if (tc && !tc.disabled && tc.dataset.running !== "true") tc.click(); }; attempt(25); }, 600); } } catch (e) {} if (canEdit) { docsFreshness(false); loadBudget().catch((e) => { $("#budgetStatus").textContent = e.message; }); } updateVis(); setTimeout(updateVis, 500); }).catch((e) => say(e.message, true));
+init().then(() => { try { const ki = keyInfo[cur.provider] || {}; if (ki.source === "env") { const tr = $("#testres"); if (tr && !tr.textContent) { tr.dataset.assumed = "1"; tr.className = "testres ok"; tr.title = "Checked locally only: the host has a configured key. Use Test connection to verify it with the provider."; tr.replaceChildren(el("span",{class:"connection-status-icon","aria-hidden":"true",text:"✓"}),document.createTextNode("Ready. A key is configured on the host.")); pvFollow(); } } } catch (e) {} if (canEdit) { docsFreshness(false); loadBudget().catch((e) => { $("#budgetStatus").textContent = e.message; }); } updateVis(); setTimeout(updateVis, 500); }).catch((e) => say(e.message, true));
 window.CCSettingsSimple={state:()=>({...read(),canEdit,names:NAMES,key:keyInfo[cur.provider]}),select:provider=>{if(canEdit){switchProvider(provider);draw();pvFollow();}}};
 })();
 
