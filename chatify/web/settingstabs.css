@@ -422,3 +422,16 @@ html body.settings-tabs #cfgmode .seg-ind{border-radius:7px!important;background
 html body.settings-tabs #cfgmode.slide button[aria-checked=true]{background:transparent!important}
 html body.settings-tabs #cfgmode button{position:relative;z-index:1}
 html body.settings-tabs #seg>.seg-ind{display:none!important}
+
+/* Icons respond as small living illustrations, not loading indicators. */
+.section-card-icon svg{width:22px;height:22px;overflow:visible}
+@media(prefers-reduced-motion:no-preference){
+#settingsNavTop button[aria-selected=true] .tab-icon svg,#menu a.on .section-card-icon svg{animation:settings-icon-welcome .8s cubic-bezier(.2,.8,.2,1) both}
+#settingsNavTop button:hover .tab-icon svg,#menu a:hover .section-card-icon svg{animation:settings-icon-play 1.4s ease-in-out infinite}
+#settingsNavTop button:hover .tab-icon path,#menu a:hover .section-card-icon path{animation:settings-icon-draw 1.4s ease-in-out infinite}
+#settingsNavTop button[aria-selected=true] .tab-icon path,#menu a.on .section-card-icon path{animation:settings-icon-draw 2.8s ease-in-out 2}
+}
+@keyframes settings-icon-welcome{0%{transform:scale(.75) rotate(-14deg)}45%{transform:scale(1.18) rotate(8deg)}75%{transform:scale(.96) rotate(-3deg)}100%{transform:scale(1) rotate(0)}}
+@keyframes settings-icon-play{0%,100%{transform:rotate(0) scale(1)}25%{transform:rotate(-10deg) scale(1.1)}65%{transform:rotate(7deg) scale(1.05)}}
+@keyframes settings-icon-draw{0%,100%{stroke-dasharray:100 0;stroke-dashoffset:0}40%{stroke-dasharray:65 35;stroke-dashoffset:20}75%{stroke-dasharray:95 5;stroke-dashoffset:0}}
+@media(prefers-reduced-motion:reduce){#settingsNavTop .tab-icon svg,#settingsNavTop .tab-icon path,#menu .section-card-icon svg,#menu .section-card-icon path{animation:none!important}}
