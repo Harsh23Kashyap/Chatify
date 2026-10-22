@@ -31,6 +31,30 @@ class Jobs(unittest.TestCase):
  @unittest.mock.patch('chatify.buildimages.capability',return_value={'available':False,'note':'fixture'})
  def test_retry_only_failed(self,cap):
   jobs=buildjobs.BuildJobs();f=Fixture();f.fail=next(iter(prompts.STAGES));d=jobs.start('owner',f,schema.DEFAULTS,{'brief':'Garden advice'});d=self.wait(jobs,d['id']);self.assertEqual(d['state'],'partial');calls=d['calls'];jobs.retry('owner',d['id']);d=self.wait(jobs,d['id']);self.assertEqual(d['state'],'done',d);self.assertEqual(d['calls'],calls+2);self.assertEqual(d['retry_calls'],2)
+ @unittest.mock.patch('chatify.buildimages.generate',return_value='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAAB')
+ @unittest.mock.patch('chatify.buildimages.capability',return_value={'available':True,'provider':'openai','model':'fixture-image','note':'fixture'})
+ def test_optional_logo_reaches_final_review_and_completed_draft(self,cap,generate):
+  jobs=buildjobs.BuildJobs();f=Fixture()
+  data=self.wait(jobs,jobs.start('owner',f,schema.DEFAULTS,{'brief':'Garden advice'})['id'])
+  self.assertEqual(data['state'],'done',data)
+  generate.assert_called_once()
+  self.assertEqual(data['logo_status']['state'],'done',data['logo_status'])
+  self.assertEqual(data['calls'],data['total']+2)
+  self.assertEqual(data['errors'],{})
+  self.assertTrue(any('Review this complete merged draft' in call for call in f.calls))
+  self.assertEqual(data['remaining_work'],[])
+  self.assertEqual(yaml.safe_load(data['yaml'])['appearance']['logo'],generate.return_value)
+ @unittest.mock.patch('chatify.buildimages.generate',side_effect=ValueError('fixture image unavailable'))
+ @unittest.mock.patch('chatify.buildimages.capability',return_value={'available':True,'provider':'openai','model':'fixture-image','note':'fixture'})
+ def test_optional_logo_failure_keeps_text_draft_and_finishes_review(self,cap,generate):
+  jobs=buildjobs.BuildJobs();f=Fixture()
+  data=self.wait(jobs,jobs.start('owner',f,schema.DEFAULTS,{'brief':'Garden advice'})['id'])
+  self.assertEqual(data['state'],'done',data)
+  generate.assert_called_once()
+  self.assertEqual(data['logo_status']['state'],'skipped')
+  self.assertIn('fixture image unavailable',data['logo_status']['note'])
+  self.assertNotIn('MAX_CALLS',data['logo_status']['note'])
+  self.assertTrue(data['yaml'])
  def test_provider_block_stops_pending_calls(self):
   class Down:
    def complete(self,m):raise ValueError('The model is not responding right now')

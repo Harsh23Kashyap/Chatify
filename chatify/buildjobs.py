@@ -271,7 +271,7 @@ class BuildJobs:
      job['phase']='Generating optional logo draft';job['remaining_work']=['Logo draft','Final model review']
      with self.lock:
       if job['cancel']:raise ValueError('Build cancelled')
-      if job['calls']>=MAX_CALLS:raise ValueError('Per-build call cap reached')
+      self._spend_check()  # Logo requests follow the same daily budget gate as text drafts.
       job['calls']+=1
      if hasattr(job['provider'],'_check'):job['provider']._check()
      raw['appearance']['logo']=buildimages.generate(job['cfg'],cap,job['brief']);job['logo_status']=dict(cap,state='done')
