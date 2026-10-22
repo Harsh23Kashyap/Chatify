@@ -12,7 +12,7 @@ https://chatify-demo-779c.onrender.com/ - live demo apps built with Chatify (pro
 
 ## Demo video
 
-https://github.com/user-attachments/assets/76727d82-3a95-4c37-8136-1aea5472b2a7
+[Watch the v6 laptop demo (MP4, 1:44)](https://github.com/Harsh23Kashyap/Chatify/releases/download/v0.2.9/chatify-v6-laptop.mp4)
 
 A short tour: one-command start, manual configuration or **Build with AI**, and cited answers from your own sources.
 
