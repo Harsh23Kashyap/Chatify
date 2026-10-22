@@ -1,0 +1,32 @@
+/* The AI setup desk: an idea composer alongside an honest sample preview. */
+html body.settings-tabs .cfg-studio{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:24px;margin:8px 0 24px;order:3}
+html body.settings-tabs.cfgtop-manual .cfg-studio{display:none!important}
+html body.settings-tabs.cfgtop-builder .cfg-studio .builder-hero{display:flex!important;flex-direction:column;align-items:stretch;justify-content:center;gap:20px;min-width:0;min-height:520px;padding:32px;margin:0;background:linear-gradient(145deg,#173f35,#102e26);border-radius:20px}
+html body.settings-tabs .cfg-studio .builder-hero-copy{max-width:none}
+html body.settings-tabs .cfg-studio .builder-hero-title{font-size:29px;line-height:1.2}
+html body.settings-tabs .cfg-studio .builder-hero-sub{font-size:14px;line-height:1.6;margin-top:12px}
+html body.settings-tabs .cfg-composer{display:flex;flex-direction:column;gap:8px;z-index:1}
+html body.settings-tabs .cfg-composer label{color:#e7efdc;font-size:13px;font-weight:600;margin:0}
+html body.settings-tabs #cfgIdea{box-sizing:border-box;width:100%;min-height:145px;resize:vertical;border:1px solid #688779;border-radius:14px;background:#fffdf7;color:#173f35;padding:16px;font:15px/1.6 'DM Sans',sans-serif;box-shadow:none}
+html body.settings-tabs #cfgIdea::placeholder{color:#6b7d72}
+html body.settings-tabs .cfg-studio .builder-hero-go{align-self:flex-start;min-width:165px;margin:0}
+html body.settings-tabs .cfg-studio .builder-hero-note{display:block!important;color:#cadcc6;font-size:12px;line-height:1.6;margin:0}
+html body.settings-tabs .cfg-chat-preview{min-width:0;overflow:hidden;border:1px solid #d4dece;border-radius:20px;background:#f8faf3;box-shadow:0 10px 30px #173f3509}
+html body.settings-tabs .cfg-preview-head{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px;padding:15px 20px;border-bottom:1px solid #d4dece}
+html body.settings-tabs .cfg-preview-head strong{font-size:14px;color:#173f35}
+html body.settings-tabs .cfg-preview-head small{font-size:11px;color:#607564}
+html body.settings-tabs .cfg-chat-preview iframe{display:block;width:100%;height:480px;border:0;background:#f8faf3}
+@media(max-width:760px){html body.settings-tabs .cfg-studio{grid-template-columns:1fr;gap:18px}html body.settings-tabs.cfgtop-builder .cfg-studio .builder-hero{padding:24px;min-height:0;gap:16px}html body.settings-tabs .cfg-studio .builder-hero-title{font-size:25px}html body.settings-tabs .cfg-chat-preview iframe{height:430px}html body.settings-tabs .cfg-preview-head{padding:14px}}
+html body.settings-tabs.cfgtop-builder .cfg-studio .builder-hero{flex-wrap:nowrap!important;align-items:stretch!important;gap:20px!important;min-height:520px!important}
+html body.settings-tabs .cfg-studio .builder-hero-copy{flex:0 0 auto!important;display:block!important}
+html body.settings-tabs .cfg-studio .builder-hero-note{flex:0 0 auto!important}
+html body.settings-tabs .cfg-studio .builder-hero-go{flex:0 0 auto!important;position:relative!important;width:auto!important;max-width:100%;align-self:flex-start!important}
+html body.settings-tabs .cfg-studio #cfgIdea{display:block!important;background:#fffdf7!important;color:#173f35!important;border:1px solid #9aac9b!important;border-radius:14px!important;padding:16px!important;font-size:15px!important;min-height:140px!important}
+@media(max-width:760px){html body.settings-tabs.cfgtop-builder .cfg-studio .builder-hero{min-height:0!important;padding:24px!important;gap:16px!important}}
+@media(prefers-reduced-motion:no-preference){html body.settings-tabs .cfg-studio{animation:cfg-home-in .28s ease-out}html body.settings-tabs #cfgIdea{transition:border-color .2s,box-shadow .2s}html body.settings-tabs #cfgIdea:focus{box-shadow:0 0 0 3px #d7ef7240!important}@keyframes cfg-home-in{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:none}}}
+html body.settings-tabs #cfgtop.cfg-path-choice{display:flex!important;justify-content:flex-end;margin:0 0 18px;max-width:none!important;width:100%;background:none!important;border:0!important;box-shadow:none!important}
+html body.settings-tabs #cfgtop.cfg-path-choice button{padding:6px 0;border:0;border-radius:0;background:none!important;color:#617364!important;box-shadow:none!important;font:13px/1.6 'DM Sans',sans-serif;cursor:pointer;text-align:left}
+html body.settings-tabs #cfgtop.cfg-path-choice button span{color:#173f35;font-weight:700;text-decoration:underline;text-underline-offset:4px}
+html body.settings-tabs.cfgtop-builder #cfgtop [data-t=builder],html body.settings-tabs.cfgtop-manual #cfgtop [data-t=manual]{display:none!important}
+html body.settings-tabs.cfgtop-manual #cfgtop.cfg-path-choice{justify-content:flex-start}
+@media(max-width:760px){html body.settings-tabs #cfgtop.cfg-path-choice{justify-content:flex-start;margin:4px 0 14px}}
