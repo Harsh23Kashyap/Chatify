@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "chatify-app"
-version = "0.4.26"
+version = "0.4.27"
 readme = "README.md"
 description = "Chat with your documents. One YAML file, cited answers, offline demo."
 requires-python = ">=3.10"
@@ -18,10 +18,11 @@ customchat = "chatify.cli:main"
 customchat-app = "chatify.cli:main"
 
 [tool.setuptools.packages.find]
-include = ["chatify*"]
+include = ["chatify*", "apps*"]
 
 [tool.setuptools.package-data]
 chatify = ["web/*", "web/logos/*.svg", "web/icons/*.svg", "web/team/*.jpg", "web/emoji/*", "templates/minimal/app.yaml", "templates/minimal/docs/*.md"]
+"apps" = ["*.yaml", "**/*.yaml", "**/*.md", "**/*.txt", "**/*.pdf", "**/*.json", "**/*.py", "**/*.example"]
 
 [project.urls]
 Repository = "https://github.com/Harsh23Kashyap/chatify"

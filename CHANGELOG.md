@@ -1,3 +1,8 @@
+## 0.4.27
+
+- The PyPI package now ships the example apps inside both the wheel and the sdist (apps/**: RecipeChat, PeaceChat, Formula One, DietChat, FitChat, SpaceChat, WirelessChat, the hosted Build app and the NewsNerd/DietChat samples, including the Python source adapters like peace_sources.py and recipe_sources.py)
+- New `chatify examples` lists the bundled example apps; `chatify example <name>` copies one into a local folder, ready for `chatify run <name>/app.yaml` - runtime state (databases, guide markers, caches) is never copied
+
 ## 0.4.14
 
 - Gallery: Chatify is now a featured "Build your own" panel above the grid, with a clear Build with AI action; the six example apps sit below under "Examples built with Chatify"

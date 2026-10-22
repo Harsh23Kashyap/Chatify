@@ -5,6 +5,15 @@ from . import schema, __version__
 TEMPLATE = os.path.join(os.path.dirname(os.path.abspath(__file__)), "templates", "minimal")
 
 
+def _examples_root():
+    """Bundled example apps directory: installed package first, source checkout as fallback."""
+    import importlib.util
+    spec = importlib.util.find_spec("apps")
+    if spec and spec.submodule_search_locations:
+        return next(iter(spec.submodule_search_locations))
+    return os.path.join(os.path.dirname(os.path.abspath(__file__)), os.pardir, "apps")
+
+
 def main(argv=None):
     try:
         _main(argv)
@@ -19,6 +28,8 @@ def _main(argv=None):
     ap.add_argument("--version", action="version", version=__version__)
     sub = ap.add_subparsers(dest="cmd", required=True)
     i = sub.add_parser("init", help="scaffold a new app folder"); i.add_argument("name")
+    es = sub.add_parser("examples", help="list the bundled example apps")
+    eg = sub.add_parser("example", help="copy a bundled example app into a local folder"); eg.add_argument("slug"); eg.add_argument("--directory", default=None, help="target folder (default: ./<slug>)")
     st = sub.add_parser("start", help="create a local Demo workspace if absent, then run it")
     st.add_argument("--directory", default="chatify-app", help="persistent workspace, never the tool cache")
     st.add_argument("--port", type=int, default=8080)
@@ -59,6 +70,29 @@ def _main(argv=None):
             sys.exit("%s already exists" % args.name)
         shutil.copytree(TEMPLATE, args.name, ignore=shutil.ignore_patterns("__pycache__", "*.db"))
         print("Created %s/. Next: chatify run %s/app.yaml" % (args.name, args.name))
+    elif args.cmd == "examples":
+        import yaml
+        root = _examples_root()
+        rows = []
+        for name in sorted(os.listdir(root)):
+            yf = os.path.join(root, name, "app.yaml")
+            if os.path.isfile(yf):
+                with open(yf, encoding="utf-8") as fh:
+                    meta = yaml.safe_load(fh).get("app", {})
+                rows.append((name, meta.get("title", "")))
+        for name, title in rows:
+            print("%-16s %s" % (name, title))
+        print("Copy one out: chatify example <name>, then: chatify run <name>/app.yaml")
+    elif args.cmd == "example":
+        root = _examples_root()
+        src = os.path.join(root, args.slug)
+        if not os.path.isfile(os.path.join(src, "app.yaml")):
+            sys.exit("No bundled example called %r - run: chatify examples" % args.slug)
+        dest = args.directory or args.slug
+        if os.path.exists(dest):
+            sys.exit("%s already exists" % dest)
+        shutil.copytree(src, dest, ignore=shutil.ignore_patterns("__pycache__", "*.pyc", "*.db", "data", ".gitignore"))
+        print("Copied example to %s/. Next: chatify run %s/app.yaml" % (dest, dest))
     elif args.cmd == "export":
         from .portable import export_app, ExportError
         try:
