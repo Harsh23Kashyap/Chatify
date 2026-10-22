@@ -144,3 +144,75 @@ html[data-theme=dark] .build-guide b{color:var(--lime)}
 .build-guide code{background:rgba(23,63,53,.08);border-radius:6px;padding:1px 6px;font-size:13px}
 .build-warncount{font-size:13.5px;color:var(--mut);margin:8px 0 0}
 @media(max-width:640px){.build-guide div{flex-direction:column;gap:2px}.build-guide b{min-width:0}.build-ver{align-items:flex-start}.build-rv-row b{min-width:0}}
+
+/* Quiet header + workflow stepper (design consult, Oct 2026).
+   Scoped: build.css loads only on build.html, after navigation.css. */
+
+/* Header: unboxed nav row, pine active text with lime underline, no capsule */
+html body .build-page-nav .common-nav,
+html body .common-nav{border:0!important;background:transparent!important;border-radius:0!important;padding:0!important;gap:4px!important;height:100%}
+html body .common-nav a,html body .common-nav button{font:500 13px 'DM Sans',system-ui!important;color:#63736c!important;border-radius:6px!important;padding:0 12px!important;height:100%!important;min-height:0!important;position:relative!important;white-space:nowrap!important}
+html body .common-nav a:hover{color:#173f35!important;background:rgba(23,63,53,.05)!important}
+html body .common-nav .active{background:transparent!important;color:#173f35!important;font-weight:700!important}
+html body .common-nav .active::after{content:"";position:absolute;left:12px;right:12px;bottom:0;height:3px;border-radius:3px 3px 0 0;background:#d7ef72}
+html[data-theme=dark] body .common-nav a,html[data-theme=dark] body .common-nav button{color:#9db3a4!important}
+html[data-theme=dark] body .common-nav .active{color:#d7ef72!important}
+
+/* Stepper: own row, aligned to the page container, three honest states */
+.build-main{max-width:1120px;padding:0 24px 80px}
+.build-steps{display:block;margin:0;padding:22px 0 26px;font-size:13px;color:var(--mut);border-bottom:1px solid var(--line)}
+.build-steps-list{display:flex;align-items:flex-start;margin:0;padding:0;list-style:none}
+.build-step{position:relative;display:flex;flex:1 1 0;min-width:0}
+.build-step:not(:last-child)::after{content:"";position:absolute;top:14px;left:40px;right:10px;height:1px;background:var(--line)}
+.build-step-link{position:relative;z-index:1;display:inline-flex;align-items:center;gap:8px;min-width:0;line-height:28px}
+.build-step-num{flex:0 0 28px;width:28px;height:28px;display:grid;place-items:center;border:1px solid var(--line);border-radius:50%;background:transparent;color:var(--mut);font-size:12px;font-weight:600}
+.build-step-label{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:400;color:var(--mut)}
+.build-step[data-state=complete] .build-step-num{background:var(--lime);border-color:var(--lime);color:var(--pine)}
+.build-step[data-state=complete] .build-step-label{color:var(--pine);font-weight:500}
+.build-step[data-state=current] .build-step-num{background:var(--pine);border-color:var(--pine);color:#fffdf7}
+.build-step[data-state=current] .build-step-label{color:var(--pine);font-weight:700}
+html[data-theme=dark] .build-step[data-state=current] .build-step-num{background:var(--lime);border-color:var(--lime);color:var(--pine)}
+html[data-theme=dark] .build-step[data-state=current] .build-step-label{color:var(--lime)}
+.build-steps-mobile{display:none}
+
+/* Mobile nav replacement (phone only) */
+.build-mnav{display:none}
+
+@media(max-width:1100px){
+  html body .common-nav a,html body .common-nav button{padding:0 9px!important;font-size:12px!important}
+  .build-step-link{gap:6px;font-size:12px}
+  .build-step-num{flex-basis:26px;width:26px;height:26px}
+  .build-step:not(:last-child)::after{top:13px;left:34px;right:8px}
+}
+@media(max-width:800px){
+  .build-step-link{gap:5px;font-size:11px}
+  .build-step-num{flex-basis:24px;width:24px;height:24px}
+  .build-step:not(:last-child)::after{top:12px;left:30px;right:6px}
+}
+@media(max-width:600px){
+  .build-main{padding:0 16px 60px}
+  /* Global nav collapses into a real menu */
+  html body .about-nav .common-nav{display:none!important}
+  .build-mnav{display:block;grid-column:2;justify-self:center;position:relative}
+  .build-mnav summary{list-style:none;cursor:pointer;font:600 13px 'DM Sans',system-ui;color:var(--pine);padding:10px 18px;border:1px solid var(--line);border-radius:999px;background:var(--paper);min-height:44px;display:inline-flex;align-items:center}
+  .build-mnav summary::-webkit-details-marker{display:none}
+  .build-mnav[open] summary{border-color:var(--pine)}
+  .build-mnav-list{position:absolute;top:calc(100% + 8px);left:50%;transform:translateX(-50%);display:grid;gap:2px;min-width:200px;background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:8px;box-shadow:0 18px 44px rgba(23,63,53,.16);z-index:50}
+  .build-mnav-list a{font:500 14px 'DM Sans',system-ui;color:var(--mut);text-decoration:none;padding:11px 14px;border-radius:9px;min-height:44px;display:flex;align-items:center}
+  .build-mnav-list a.active{color:var(--pine);font-weight:700;background:rgba(215,239,114,.35)}
+  html[data-theme=dark] .build-mnav summary{color:var(--lime)}
+  html[data-theme=dark] .build-mnav-list a.active{color:var(--lime);background:rgba(215,239,114,.12)}
+  /* Stepper becomes a current-step row; full list on demand */
+  .build-steps{padding:14px 0 18px;border-bottom:0}
+  .build-steps-list{display:none}
+  .build-steps[data-open] .build-steps-list{display:grid;gap:4px;margin-top:12px}
+  .build-steps[data-open] .build-step:not(:last-child)::after{display:none}
+  .build-steps[data-open] .build-step-link{min-height:40px}
+  .build-steps-mobile{display:flex;align-items:center;gap:10px;min-height:40px;font-size:13px}
+  .build-steps-mobile .build-step-num{flex-basis:26px;width:26px;height:26px;background:var(--pine);border-color:var(--pine);color:#fffdf7}
+  .build-steps-cur{font-weight:600;color:var(--pine);min-width:0}
+  html[data-theme=dark] .build-steps-cur{color:var(--lime)}
+  html[data-theme=dark] .build-steps-mobile .build-step-num{background:var(--lime);border-color:var(--lime);color:var(--pine)}
+  #buildStepsToggle{margin-left:auto;font:600 12px 'DM Sans',system-ui;color:var(--pine);background:transparent;border:1px solid var(--line);border-radius:999px;padding:8px 14px;min-height:40px;cursor:pointer}
+  html[data-theme=dark] #buildStepsToggle{color:var(--lime)}
+}

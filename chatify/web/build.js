@@ -39,10 +39,28 @@ const state = { brief: "", selected: [], provider: null, model: "", canEdit: fal
 const screens = [$("#buildDescribe"), $("#buildSources"), $("#buildProgress"), $("#buildReview"), $("#buildYourApp"), $("#buildPublish")];
 function goStep(i) {
   screens.forEach((s, j) => { s.hidden = j !== i; });
-  document.querySelectorAll(".build-step").forEach((n, j) => { if (j === i) n.setAttribute("aria-current", "step"); else n.removeAttribute("aria-current"); });
+  const stepEls = [...document.querySelectorAll(".build-step")];
+  stepEls.forEach((n, j) => {
+    n.dataset.state = j < i ? "complete" : j === i ? "current" : "upcoming";
+    const link = n.querySelector(".build-step-link");
+    if (j === i) link.setAttribute("aria-current", "step"); else link.removeAttribute("aria-current");
+    n.querySelector(".build-step-num").textContent = j < i ? "\u2713" : String(j + 1);
+  });
+  const mobileCur = document.querySelector(".build-steps-cur");
+  if (mobileCur) mobileCur.textContent = `Step ${i + 1} of ${stepEls.length} · ${stepEls[i].querySelector(".build-step-label").textContent}`;
+  const stepsNav = document.querySelector(".build-steps");
+  if (stepsNav) { stepsNav.removeAttribute("data-open"); const t = $("#buildStepsToggle"); if (t) t.setAttribute("aria-expanded", "false"); }
   window.scrollTo({ top: 0, behavior: "instant" });
   if (i === 4) loadVersions();
 }
+
+const stepsToggle = $("#buildStepsToggle");
+if (stepsToggle) stepsToggle.addEventListener("click", () => {
+  const nav = stepsToggle.closest(".build-steps");
+  const open = nav.hasAttribute("data-open");
+  if (open) nav.removeAttribute("data-open"); else nav.setAttribute("data-open", "");
+  stepsToggle.setAttribute("aria-expanded", String(!open));
+});
 
 /* ---------- Step 1: describe ---------- */
 const brief = $("#buildBrief"), toSources = $("#buildToSources");
