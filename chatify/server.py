@@ -15,6 +15,52 @@ WEB = os.path.join(os.path.dirname(__file__), "web")
 BUILD_STARTS = {}  # ip -> [timestamps of build starts]; light abuse limit for shared hosted demos
 
 
+
+
+def _publish_saved_view(cfg):
+    """The saved app files as one consistent on-disk snapshot (app.yaml + theme + prompts), so publish works right after a guided save without an app restart."""
+    from pathlib import Path
+    import yaml as _yaml
+    folder=(Path(cfg.get('_dir','.'))/cfg['storage']['path']).parent
+    app_path=Path(cfg.get('_path') or (Path(cfg.get('_dir','.'))/'app.yaml'))
+    clean=_yaml.safe_load(app_path.read_text())
+    clean['_dir']=cfg.get('_dir',os.getcwd())
+    if (folder/'theme.json').exists():clean['appearance']=json.loads((folder/'theme.json').read_text())
+    if (folder/'prompts.json').exists():clean['pipeline_prompts']=json.loads((folder/'prompts.json').read_text())
+    return clean
+
+def workspace_check(loader,wid):
+    """Run a launched workspace's own source preflight (no model calls) over loopback."""
+    import urllib.request,urllib.parse,urllib.error
+    ws=next((w for w in loader.list() if w['id']==wid or w['id']==wid.rsplit('/',1)[-1] or w['url']==wid),None)
+    if not ws:raise ValueError('Unknown workspace. Launch it again from the Review step.')
+    if not ws['running']:raise ValueError('This workspace is not running anymore. Launch it again from the Review step.')
+    base=ws['url']
+    def call(path,payload=None,timeout=30):
+        if payload is None:
+            with urllib.request.urlopen(base+path,timeout=timeout) as r:return json.loads(r.read())
+        req=urllib.request.Request(base+path,data=json.dumps(payload).encode(),headers={'Content-Type':'application/json'})
+        try:
+            with urllib.request.urlopen(req,timeout=timeout) as r:return json.loads(r.read())
+        except urllib.error.HTTPError as e:
+            try:detail=json.loads(e.read())
+            except Exception:detail={}
+            raise ValueError(detail.get('error') or ('The preview app refused the check (%s)' % e.code))
+    try:
+        sources=call('/api/workspace/sources').get('sources',[])
+    except OSError:raise ValueError('The preview app is not answering yet. Give it a few seconds and try again.')
+    if not sources:return {'ok':True,'results':[],'workspace':ws['title'],'message':'This app has no evidence sources to check.'}
+    review=call('/api/workspace/preflight/review',{'sources':[s['id'] for s in sources],'model':False})
+    job=call('/api/workspace/preflight/run',{'ticket':review['ticket'],'confirmed':True})
+    deadline=time.time()+90;state={}
+    while time.time()<deadline:
+        state=call('/api/workspace/job?id='+urllib.parse.quote(str(job['id'])))
+        if state.get('state') in ('done','failed'):break
+        time.sleep(1)
+    if state.get('state')!='done':raise ValueError(state.get('message') or 'The source check is taking longer than expected. Try again shortly.')
+    results=state.get('results',[])
+    return {'ok':all(r.get('ok') for r in results),'results':results,'workspace':ws['title'],'notice':'Source connections were checked with one request each; answers and model behavior were not tested.'}
+
 def make_handler(cfg, engine):
     from . import permissions
     store = engine.store
@@ -443,8 +489,52 @@ def make_handler(cfg, engine):
                     folder=(Path(cfg.get('_dir','.'))/plan['config']['storage']['path']).parent
                     snapshots={name:(folder/name).read_text() if (folder/name).exists() else None for name in ('theme.json','prompts.json','code-drafts.json')}
                     launch_ticket=management.reviews.put(o,'app-launch',{'config':plan['config'],'revision':rev,'state':snapshots})
+                    try:
+                        from . import versions as versions_mod
+                        versions_mod.record(cfg,'Saved: '+str(plan['config']['app'].get('title') or 'app build'))
+                    except Exception:pass
                     return self._send(200,{'revision':rev,'launch_ticket':launch_ticket,'restart_required':False,'message':'Reviewed configuration saved. Choose Use this app to start a separate workspace. Current chat stays unchanged. No helper code installed or executed.'})
+                if path.endswith('/workspace-check'):
+                    return self._send(200,workspace_check(loader,str(b.get('workspace',''))))
                 raise ValueError('Unknown builder action')
+            if path == '/api/settings/versions' and method == 'GET':
+                if not can_edit(self):raise PermissionError('Only the app owner can manage versions')
+                from . import versions as versions_mod
+                out=versions_mod.list_versions(cfg)
+                out['pending_restart']=editstate.saved_view(cfg)!=editstate.view(cfg)
+                return self._send(200,out)
+            if path == '/api/settings/versions/diff' and method == 'GET':
+                if not can_edit(self):raise PermissionError('Only the app owner can manage versions')
+                from . import versions as versions_mod
+                return self._send(200,versions_mod.diff(cfg,qs.get('id','')))
+            if path == '/api/settings/versions/restore' and method == 'POST':
+                if not can_edit(self):raise PermissionError('Only the app owner can manage versions')
+                if b.get('confirmed') is not True:raise ValueError('Confirm the restore')
+                from . import versions as versions_mod
+                with management.lock:
+                    if management.active:raise ValueError('Wait for the workspace test to finish')
+                    result=versions_mod.restore(cfg,str(b.get('id','')))
+                from pathlib import Path
+                import yaml as _yaml
+                folder=(Path(cfg.get('_dir','.'))/cfg['storage']['path']).parent
+                app_path=Path(cfg.get('_path') or (Path(cfg.get('_dir','.'))/'app.yaml'))
+                clean=_yaml.safe_load(app_path.read_text())
+                clean['_dir']=cfg.get('_dir',os.getcwd())
+                theme_value=json.loads((folder/'theme.json').read_text()) if (folder/'theme.json').exists() else None
+                prompt_value=json.loads((folder/'prompts.json').read_text()) if (folder/'prompts.json').exists() else None
+                from .portable import bundle
+                payload,_=bundle(clean,theme_value=theme_value,prompt_value=prompt_value,include_keys=True)
+                reviewed=loader.review('restored-version.zip',base64.b64encode(payload).decode())
+                launched=loader.load(reviewed['token'])
+                return self._send(200,{**result,'workspace':launched,'restart_required':True,'message':'Restored version is running as a separate preview workspace. Restart this app to make the restored version its own configuration.'})
+            if path in ('/api/settings/publish/check','/api/settings/publish/package') and method in ('GET','POST'):
+                if not can_edit(self):raise PermissionError('Only the app owner can export a publishing package')
+                from . import publish as publish_mod
+                saved=_publish_saved_view(cfg)
+                if path.endswith('/check'):
+                    return self._send(200,publish_mod.check(saved))
+                data,info=publish_mod.package(saved)
+                return self._send(200,data,'application/zip',{'Content-Disposition':'attachment; filename="chatify-deploy-package.zip"'})
             if path == "/api/settings/guide" and method == "POST":
                 if not can_edit(self):
                     return self._send(403, {"error": "Only the app owner can use settings help"})
@@ -474,11 +564,19 @@ def make_handler(cfg, engine):
                         saved=editstate.saved_view(cfg)
                         engine.prompts=promptmod.PromptStore(state_folder,saved.get("pipeline_prompts"))
                         engine.prompts.save(str(b.get("key") or ""), b.get("text"), b.get("on")); engine._cache.clear()
+                        try:
+                            from . import versions as versions_mod
+                            versions_mod.record(cfg,'Answer step updated: '+str(b.get("key") or ""))
+                        except Exception:pass
                         return self._send(200, {"stages": engine.prompts.view(cfg["prompt"]["system"], cfg["prompt"].get("revise",False))})
                     if path == "/api/prompts/reset" and method == "POST":
                         saved=editstate.saved_view(cfg)
                         engine.prompts=promptmod.PromptStore(state_folder,saved.get("pipeline_prompts"))
                         engine.prompts.reset(str(b.get("key") or "")); engine._cache.clear()
+                        try:
+                            from . import versions as versions_mod
+                            versions_mod.record(cfg,'Answer step reset: '+str(b.get("key") or ""))
+                        except Exception:pass
                         return self._send(200, {"stages": engine.prompts.view(cfg["prompt"]["system"], cfg["prompt"].get("revise",False))})
                     if path == "/api/prompts/test" and method == "POST":
                         if cfg["provider"]["type"] == "mock":
