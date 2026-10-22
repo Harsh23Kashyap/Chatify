@@ -362,3 +362,63 @@ html body.settings-tabs #cfgtop .seg-ind{display:none!important}
 html body.settings-tabs #cfgtop button[aria-checked=true]{background:#173f35!important;color:#fffdf7!important;box-shadow:none!important}
 html body.settings-tabs #cfgtop button[aria-checked=false]{background:transparent!important;color:#315645!important;box-shadow:none!important}
 @media(max-width:760px){html body.settings-tabs main.card>#cfgtop{order:-9!important}html body.settings-tabs main.card>#h{order:-10!important}}
+/* Clear destinations with persistent labels, not a row of identical pills. */
+html body.settings-tabs #settingsNavTop .category-tabs{gap:8px;padding:0;border:0;background:none}
+html body.settings-tabs #settingsNavTop .category-tabs button{min-height:86px;padding:16px;gap:12px;justify-content:flex-start;text-align:left;border:1px solid #d0dbca!important;border-radius:14px!important;background:#f4f6ee!important;color:#5b705e;box-shadow:none!important}
+html body.settings-tabs #settingsNavTop .category-tabs button[aria-selected=true]{background:#173f35!important;color:#fffdf7!important;border-color:#173f35!important;box-shadow:0 4px 0 #d7ef72!important}
+html body.settings-tabs #settingsNavTop .category-tabs button:after{display:none!important}
+html body.settings-tabs #settingsNavTop .category-tabs .tab-icon{display:grid!important;background:#e2ead8;border-radius:10px;width:34px;height:34px}
+html body.settings-tabs #settingsNavTop .category-tabs button[aria-selected=true] .tab-icon{background:#d7ef72;color:#173f35}
+html body.settings-tabs #settingsNavTop .category-tabs .tab-copy{display:grid;gap:6px}
+html body.settings-tabs #settingsNavTop .category-tabs b{font-size:15px}
+html body.settings-tabs #settingsNavTop .category-tabs small{display:block!important;font-size:11px;line-height:1.4;opacity:.85}
+html body.settings-tabs #menu a{border-radius:8px!important;min-height:44px;padding:12px!important;margin:3px 0}
+html body.settings-tabs #menu a.on{background:#e8efdf!important;color:#173f35!important;border:0!important;box-shadow:inset 3px 0 #173f35!important;font-weight:700}
+@media(max-width:760px){html body.settings-tabs #settingsNavTop .category-tabs{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}html body.settings-tabs #settingsNavTop .category-tabs button{min-height:88px;padding:12px;gap:8px}html body.settings-tabs #settingsNavTop .category-tabs .tab-icon{width:28px;height:28px}html body.settings-tabs #settingsNavTop .category-tabs b{font-size:13px}html body.settings-tabs #settingsNavTop .category-tabs small{font-size:10px}}
+
+/* Section destinations are readable cards, including on narrow screens. */
+html body.settings-tabs.settings-tabs.settings-tabs .layout{grid-template-columns:244px minmax(0,1fr)!important;gap:24px!important}
+html body.settings-tabs.settings-tabs.settings-tabs #menu .nav-group{display:grid!important;gap:10px!important}
+html body.settings-tabs.settings-tabs.settings-tabs #menu .nav-group[hidden]{display:none!important}
+html body.settings-tabs.settings-tabs.settings-tabs #menu a{display:flex!important;align-items:center;gap:12px;min-height:82px!important;padding:14px!important;margin:0!important;border:1px solid #d4ddce!important;border-radius:12px!important;background:#f6f7f1!important;color:#4c6454!important;box-shadow:none!important;text-decoration:none}
+html body.settings-tabs.settings-tabs.settings-tabs #menu a.on{border-color:#173f35!important;background:#173f35!important;color:#fffdf7!important;box-shadow:inset 4px 0 #d7ef72!important}
+html body.settings-tabs.settings-tabs.settings-tabs #menu .section-card-icon{display:grid;place-items:center;flex:0 0 34px;height:34px;border-radius:9px;background:#e6ecdd;color:#173f35;font-size:12px;font-weight:700}
+html body.settings-tabs.settings-tabs.settings-tabs #menu a.on .section-card-icon{background:#d7ef72}
+html body.settings-tabs.settings-tabs.settings-tabs #menu .section-card-copy{display:grid;gap:6px;min-width:0}
+html body.settings-tabs.settings-tabs.settings-tabs #menu b{font-size:14px;line-height:1.35;font-weight:650;word-break:normal;overflow-wrap:normal}
+html body.settings-tabs.settings-tabs.settings-tabs #menu small{display:block;font-size:11px;line-height:1.4;font-weight:400;opacity:.85}
+html body.settings-tabs.settings-tabs.settings-tabs #menu a:hover{border-color:#8d9e78!important}
+@media(max-width:760px){html body.settings-tabs.settings-tabs.settings-tabs .layout{grid-template-columns:1fr!important;gap:18px!important}html body.settings-tabs.settings-tabs.settings-tabs #menu{display:block!important}html body.settings-tabs.settings-tabs.settings-tabs #menu .nav-group{grid-template-columns:repeat(2,minmax(0,1fr))!important}html body.settings-tabs.settings-tabs.settings-tabs #menu a{gap:8px;padding:10px!important;min-height:96px!important}html body.settings-tabs.settings-tabs.settings-tabs #menu b{font-size:12px}html body.settings-tabs.settings-tabs.settings-tabs #menu small{font-size:10px}html body.settings-tabs.settings-tabs.settings-tabs #menu .section-card-icon{flex-basis:26px;height:28px;font-size:10px}html body.settings-tabs.settings-tabs.settings-tabs #menu .mobile-section-label,html body.settings-tabs.settings-tabs.settings-tabs #menu #mobileSection{display:none!important}html body.settings-tabs.settings-tabs.settings-tabs #col{grid-column:1!important}}
+
+html body.settings-tabs.settings-tabs.settings-tabs #menu{width:100%!important;padding:0!important}
+html body.settings-tabs.settings-tabs.settings-tabs #menu .section-tabs{display:block!important}
+@media(min-width:1101px){html body.settings-tabs.settings-tabs.settings-tabs:not(.settings-preview-hidden) .layout{grid-template-columns:244px minmax(300px,1fr) minmax(290px,1fr)!important}}
+html body.settings-tabs.settings-tabs.settings-tabs #menu .nav-group{grid-template-columns:minmax(0,1fr)!important}
+@media(max-width:760px){html body.settings-tabs.settings-tabs.settings-tabs #menu .nav-group{grid-template-columns:repeat(2,minmax(0,1fr))!important}}
+/* Quiet feedback across configuration navigation. */
+html body.settings-tabs #menu a,html body.settings-tabs #settingsNavTop button,html body.settings-tabs #cfgtop button,html body.settings-tabs #seg button,html body.settings-tabs .settings-view-toggle button{transition:background-color .22s ease,color .22s ease,border-color .22s ease,box-shadow .22s ease,transform .18s ease}
+html body.settings-tabs #menu a:hover,html body.settings-tabs #settingsNavTop button:hover{transform:translateY(-2px)}
+html body.settings-tabs #menu a:active,html body.settings-tabs #settingsNavTop button:active,html body.settings-tabs #cfgtop button:active{transform:translateY(1px) scale(.985)}
+html body.settings-tabs #menu a:focus-visible,html body.settings-tabs #settingsNavTop button:focus-visible{outline:3px solid #8baa4d;outline-offset:3px}
+html body.settings-tabs .settings-active-panel{animation:settings-panel-enter .25s ease both}
+@keyframes settings-panel-enter{from{opacity:.4;transform:translateY(5px)}to{opacity:1;transform:translateY(0)}}
+@media(prefers-reduced-motion:reduce){html body.settings-tabs #menu a,html body.settings-tabs #settingsNavTop button,html body.settings-tabs #cfgtop button,html body.settings-tabs #seg button,html body.settings-tabs .settings-view-toggle button{transition:none!important;transform:none!important}html body.settings-tabs .settings-active-panel{animation:none!important}}
+/* Rounded, tactile destinations inspired by the supplied reference. */
+html body.settings-tabs #settingsNavTop .category-tabs button{border-radius:24px!important;background:#fffef9!important;box-shadow:0 3px 6px #173f3510,0 1px 2px #173f3517!important}
+html body.settings-tabs #settingsNavTop .category-tabs button[aria-selected=true]{background:#e8efdf!important;color:#173f35!important;border-color:#bccbad!important;box-shadow:inset 0 2px 5px #173f3522,0 2px 0 #d7ef72!important}
+html body.settings-tabs.settings-tabs.settings-tabs #menu a{border-radius:20px!important;box-shadow:0 3px 7px #173f350d!important}
+html body.settings-tabs.settings-tabs.settings-tabs #menu a.on{box-shadow:inset 4px 0 #d7ef72,0 4px 9px #173f3518!important}
+html body.settings-tabs #cfgmode button{transition:background-color .22s ease,color .22s ease,transform .18s ease}
+html body.settings-tabs #cfgmode button:hover{transform:translateY(-1px)}
+html body.settings-tabs #cfgmode button:active{transform:scale(.97)}
+@media(prefers-reduced-motion:reduce){html body.settings-tabs #cfgmode button{transition:none!important;transform:none!important}}
+/* On phones, keep navigation light: swipe a single row, not stacked dashboards. */
+@media(max-width:760px){html body.settings-tabs #settingsNavTop .category-tabs{display:flex!important;overflow-x:auto!important;scroll-snap-type:x mandatory;padding:4px 2px 10px!important;gap:10px!important;scrollbar-width:none}html body.settings-tabs #settingsNavTop .category-tabs button{flex:0 0 auto;min-height:50px!important;padding:10px 16px!important;border-radius:28px!important;scroll-snap-align:start;gap:9px!important}html body.settings-tabs #settingsNavTop .tab-copy small{display:none!important}html body.settings-tabs #settingsNavTop .category-tabs .tab-icon{width:24px;height:24px;background:transparent!important}html body.settings-tabs.settings-tabs.settings-tabs #menu .nav-group{display:flex!important;overflow-x:auto!important;scroll-snap-type:x mandatory;gap:10px!important;padding:3px 2px 10px!important;scrollbar-width:none}html body.settings-tabs.settings-tabs.settings-tabs #menu a{flex:0 0 204px;min-height:76px!important;padding:12px!important;scroll-snap-align:start;border-radius:18px!important}html body.settings-tabs.settings-tabs.settings-tabs #menu b{font-size:13px;white-space:nowrap}html body.settings-tabs.settings-tabs.settings-tabs #menu small{font-size:11px}}
+@media(max-width:760px){html body.settings-tabs.settings-tabs.settings-tabs #menu .nav-group{flex-wrap:nowrap!important}html body.settings-tabs.settings-tabs.settings-tabs #menu a{width:204px!important;max-width:none!important;flex-shrink:0!important;box-sizing:border-box!important}html body.settings-tabs.settings-tabs.settings-tabs #menu .section-card-copy{overflow:visible!important}}
+@media(max-width:760px){html body.settings-tabs.settings-tabs.settings-tabs #menu a{flex:0 0 220px!important;width:220px!important;overflow:visible!important}html body.settings-tabs.settings-tabs.settings-tabs #menu .section-card-copy{min-width:0!important}html body.settings-tabs.settings-tabs.settings-tabs #menu b{white-space:normal!important}}
+
+html body.settings-tabs #cfgmode{position:relative!important;isolation:isolate}
+html body.settings-tabs #cfgmode .seg-ind{border-radius:7px!important;background:#173f35!important}
+html body.settings-tabs #cfgmode.slide button[aria-checked=true]{background:transparent!important}
+html body.settings-tabs #cfgmode button{position:relative;z-index:1}
+html body.settings-tabs #seg>.seg-ind{display:none!important}

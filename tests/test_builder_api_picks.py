@@ -36,3 +36,13 @@ class Picks(unittest.TestCase):
   self.assertEqual(set(raw),{'api_suggestions'});self.assertEqual(raw['api_suggestions'][0]['docs_url'],apipicks.PAGES['wikipedia']['page'])
   picks[0].pop('helper')
   with self.assertRaisesRegex(ValueError,'Missing independent code helper'):appbuilder.talk(Provider(),cfg,data)
+
+class OlderAPICardMetadata(unittest.TestCase):
+ def test_known_legacy_name_gets_docs_and_optional_key_route(self):
+  from chatify.apipicks import enrich
+  wiki,oa=enrich([{'name':'Wikipedia'},{'name':'OpenAlex'}])
+  self.assertEqual(wiki['key_required'],False)
+  self.assertIn('mediawiki.org',wiki['docs_url'])
+  self.assertEqual(oa['key_required'],False)
+  self.assertEqual(oa['key_url'],'https://openalex.org/settings/api')
+  self.assertEqual(oa['docs_url'],'https://developers.openalex.org/guides/authentication')

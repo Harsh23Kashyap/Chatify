@@ -30,13 +30,14 @@
   try {
     var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     var place = function (seg, animate) {
+      if (seg.id === 'seg' || seg.closest('#cfgtop')) { seg.querySelector(':scope > .seg-ind')?.remove(); seg.classList.remove('slide'); return; }
       var a = seg.querySelector(":scope > button[aria-checked=true]");
       var ind = seg.querySelector(":scope > .seg-ind");
       if (!a) { if (ind) ind.classList.remove("on"); seg.classList.remove("slide"); return; }
       if (!ind) { ind = document.createElement("i"); ind.className = "seg-ind"; ind.setAttribute("aria-hidden", "true"); seg.insertBefore(ind, seg.firstChild); }
       seg.classList.add("slide");
       ind.style.setProperty("width", a.offsetWidth + "px", "important"); ind.style.setProperty("height", a.offsetHeight + "px", "important"); ind.style.setProperty("min-height", "0", "important");
-      ind.style.transform = "translate(" + a.offsetLeft + "px," + a.offsetTop + "px)";
+      ind.style.transform = "translate(" + (a.getBoundingClientRect().left-seg.getBoundingClientRect().left-seg.clientLeft+seg.scrollLeft) + "px," + (a.getBoundingClientRect().top-seg.getBoundingClientRect().top-seg.clientTop+seg.scrollTop) + "px)";
       ind.classList.add("on");
       if (animate && !reduce) ind.classList.add("go");
     };

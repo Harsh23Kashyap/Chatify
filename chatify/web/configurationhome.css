@@ -30,3 +30,9 @@ html body.settings-tabs #cfgtop.cfg-path-choice button span{color:#173f35;font-w
 html body.settings-tabs.cfgtop-builder #cfgtop [data-t=builder],html body.settings-tabs.cfgtop-manual #cfgtop [data-t=manual]{display:none!important}
 html body.settings-tabs.cfgtop-manual #cfgtop.cfg-path-choice{justify-content:flex-start}
 @media(max-width:760px){html body.settings-tabs #cfgtop.cfg-path-choice{justify-content:flex-start;margin:4px 0 14px}}
+
+html body.settings-tabs #cfgtop.cfg-path-choice button{display:flex;align-items:center;gap:12px;min-height:56px;font-size:21px;font-weight:700;color:#173f35!important;padding:12px 0}
+html body.settings-tabs #cfgtop.cfg-path-choice button small{font-size:14px;font-weight:400;color:#60735f}
+html body.settings-tabs #cfgtop.cfg-path-choice button span{text-decoration-thickness:2px;text-underline-offset:5px;font-size:21px}
+html body.settings-tabs #cfgtop.cfg-path-choice button[data-t=builder]{border:1px solid #b6c9ae;border-radius:12px;padding:14px 20px;background:#edf2e5!important}
+@media(max-width:760px){html body.settings-tabs #cfgtop.cfg-path-choice button[data-t=manual]{align-items:flex-start;flex-direction:column;gap:4px}html body.settings-tabs #cfgtop.cfg-path-choice button[data-t=builder]{flex-wrap:wrap}html body.settings-tabs #cfgtop.cfg-path-choice button[data-t=builder] small{width:100%;padding-left:27px}}

@@ -2,6 +2,7 @@
 import copy,re
 PAGES={
  'pubmed':{'name':'PubMed','page':'https://www.ncbi.nlm.nih.gov/books/NBK25501/','docs':'https://eutilities.github.io/site/API_Key/usageandkey/','key_required':False,'source':{'id':'pubmed','label':'PubMed','type':'pubmed'}},
+ 'openalex':{'name':'OpenAlex','page':'https://developers.openalex.org/api-reference/introduction','docs':'https://developers.openalex.org/guides/authentication','key_page':'https://openalex.org/settings/api','key_required':False,'key_optional':True},
  'arxiv':{'name':'arXiv','page':'https://info.arxiv.org/help/api/index.html','docs':'https://info.arxiv.org/help/api/user-manual.html','key_required':False,'source':{'id':'arxiv','label':'arXiv','type':'arxiv'}},
  'crossref':{'name':'Crossref','page':'https://www.crossref.org/documentation/retrieve-metadata/rest-api/','key_required':False,'source':{'id':'crossref','label':'Crossref','type':'crossref'}},
  'wikipedia':{'name':'Wikipedia','page':'https://www.mediawiki.org/wiki/API:Main_page','key_required':False,'source':{'id':'wikipedia','label':'Wikipedia','type':'wikipedia','lang':'en'}},
@@ -14,10 +15,10 @@ def enrich(items):
  result=copy.deepcopy(items)
  for item in result:
   for field in ('provider_page','docs_url','key_url','key_required'):item.pop(field,None)
-  name=re.sub(r'[^a-z0-9]','',str(item.get('service','')).lower())
+  name=re.sub(r'[^a-z0-9]','',str(item.get('service') or item.get('name','')).lower())
   for key,info in PAGES.items():
    if name in {re.sub(r'[^a-z0-9]','',key),re.sub(r'[^a-z0-9]','',info['name'].lower())}:
-    item['provider_page']=info['page'];item['key_required']=info['key_required'];item['docs_url']=info.get('docs',info['page']);item['key_url']=info.get('key_page',info['page']) if info['key_required'] else '';break
+    item['provider_page']=info['page'];item['key_required']=info['key_required'];item['docs_url']=info.get('docs',info['page']);item['key_url']=info.get('key_page',info['page']) if info['key_required'] or info.get('key_optional') else '';break
  return result
 def helper_kind(kind):return 'search' if re.fullmatch(r'search_[a-z0-9_]{1,60}',kind or '') else kind
 

@@ -3,8 +3,8 @@
   const KEY='cc_cfg_top_v1';
   const bar=document.createElement('div');bar.className='cfg-path-choice';bar.id='cfgtop';bar.setAttribute('role','navigation');bar.setAttribute('aria-label','Configuration view');
   const mk=(mode,label)=>{const b=document.createElement('button');b.type='button';b.dataset.t=mode;b.innerHTML=label;return b};
-  const bBuilder=mk('builder','<span aria-hidden="true">&#8592;</span> Back to Build with AI');
-  const bManual=mk('manual','Prefer to edit by hand? <span>Open manual settings &#8599;</span>');
+  const bBuilder=mk('builder','<span aria-hidden="true">&#8592;</span> Build with AI <small>Describe an app instead</small>');
+  const bManual=mk('manual','<small>Prefer to edit by hand?</small><span>Open manual settings &#8599;</span>');
   bar.append(bBuilder,bManual);
   const lead=document.getElementById('lead');(lead||document.querySelector('main.card')).after(bar);
   function set(mode,persist){
