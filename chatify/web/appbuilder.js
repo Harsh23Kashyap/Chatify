@@ -97,4 +97,27 @@ brief.oninput=update;yaml.oninput=()=>{invalidFields.clear();invalidate();update
  function download(blob,name){const u=URL.createObjectURL(blob),a=el('a');a.href=u;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(u),1000)}
  find('builderYamlDownload').onclick=async()=>{busy=true;update();try{const validated=review||await api('review',{yaml:yaml.value,sections});download(new Blob([validated.yaml],{type:'text/yaml'}),'app-draft.yaml');status.textContent='Complete YAML downloaded. Nothing saved or applied.'}catch(e){status.textContent=e.message}finally{busy=false;update()}};find('builderZipDownload').onclick=async()=>{busy=true;update();try{const validated=await api('review',{yaml:yaml.value,sections});download(await api('download',{yaml:validated.yaml}),'chatify-draft.zip');status.textContent='ZIP downloaded: configuration, design, prompts and inert helper drafts. No keys or documents. Code is not activated.'}catch(e){status.textContent=e.message}finally{busy=false;update()}};
 const shellContent=el('div');shellContent.className='builder-content';const shellFooter=el('footer');shellFooter.className='builder-shell-footer';const head=d.querySelector('.settings-help-head');for(const child of [...d.children])if(child!==head&&child!==steps)shellContent.append(child);head.after(steps);d.append(shellContent,shellFooter);const tools=d.querySelector('.builder-tools');shellFooter.append(tools);const finalAction=find('builderSave');shellFooter.append(finalAction);const syncFooter=()=>{tools.hidden=currentStep!==1;finalAction.hidden=currentStep!==2||!savedDownload.hidden};new MutationObserver(syncFooter).observe(d,{attributes:true,attributeFilter:['data-step','data-saved']});syncFooter();
+
+/* Guided build handoff: build.html sends finished or running builds here via #build-draft=<id>. */
+const guidedHandoff=(location.hash||'').match(/^#build-draft=([0-9a-f]{32})$/);
+if(guidedHandoff){
+ const handoffId=guidedHandoff[1];
+ history.replaceState(null,'',location.pathname+location.search);
+ (async()=>{
+  await entry.onclick();
+  try{
+   const r=await fetch('/api/settings/build/job?id='+handoffId,{headers:headers()});
+   const data=await r.json();
+   if(r.ok&&data&&data.state==='running'){jobId=handoffId;jobState='running';paintJob(data);pollJob();return}
+   if(r.ok&&data&&data.state==='done'&&data.yaml){jobId=handoffId;paintJob(data);yaml.value=data.yaml;sections=all;await editFields();step(1);retainedDraftId=data.id;retainedYaml=data.yaml;draftLibrary();status.textContent='Draft received from your guided build. Validate and review before saving.';update();return}
+  }catch(e){}
+  try{
+   const r2=await fetch('/api/settings/build/draft?id='+handoffId,{headers:headers()});
+   const draft=await r2.json();
+   if(r2.ok&&draft.yaml){await api('parse',{yaml:draft.yaml});retainedDraftId=handoffId;retainedYaml=draft.yaml;retainedTitle=draft.title||'';yaml.value=draft.yaml;sections=draft.sections||all;invalidate();await editFields();step(1);status.textContent='Reopened saved draft. Validate before saving.';update();return}
+  }catch(e2){}
+  status.textContent='Could not open that build draft. Open Saved drafts to find it.';
+ })();
+}
+
 })();

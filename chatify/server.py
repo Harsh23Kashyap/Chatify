@@ -800,6 +800,7 @@ def make_handler(cfg, engine):
                 data = data.decode().replace("{{THEME_JSON}}", json.dumps(themestore.value).replace("<", "\\u003c")).replace("{{TITLE}}", _esc(a["title"])).replace("{{ACCENT}}", _esc(a["accent"])).replace("{{ACCENT2}}", _esc(a.get("accent2", "#d7ef72"))).replace("{{THEME}}", _esc(a["theme"])).encode()
             if name == "index.html" and LOCKED:
                 data = re.sub(rb'<a[^>]*href="/settings.html"[^>]*>Configuration</a>', b"", data)
+                data = re.sub(rb'<a[^>]*href="/build.html"[^>]*>Build</a>', b"", data)
             extra = None
             if ctype.startswith("text/html") and cfg["auth"]["mode"] == "none" and cfg.get("server", {}).get("public") and not re.fullmatch(r"[0-9a-f]{32}", self._cookie_named("cc_visitor") or ""):
                 extra = {"Set-Cookie": "cc_visitor=%s; Path=/; HttpOnly; SameSite=Strict; Max-Age=%d" % (uuid.uuid4().hex, 365 * 86400)}

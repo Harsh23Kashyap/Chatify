@@ -1,0 +1,86 @@
+/* Guided build (describe -> sources -> build). Pine/lime brand, no progress bars. */
+:root{--pine:#173f35;--lime:#d7ef72;--lime-deep:#7fae3c;--cream:#f8f4e9;--paper:#fffdf7;--ink:#17231f;--mut:#63736c;--line:#d9e1dc}
+html[data-theme=dark]{--paper:#16211c;--ink:#e8eee6;--mut:#9db3a4;--line:#2a3a32}
+body{background:var(--cream);color:var(--ink);font-family:"DM Sans",-apple-system,system-ui,sans-serif}
+.build-main{max-width:820px;margin:0 auto;padding:28px 20px 80px}
+.build-steps{display:flex;align-items:center;gap:10px;justify-content:center;margin:6px 0 34px;font-size:13.5px;color:var(--mut)}
+.build-step{display:inline-flex;align-items:center;gap:7px;font-weight:500}
+.build-step b{display:grid;place-items:center;width:22px;height:22px;border-radius:50%;background:rgba(23,63,53,.1);color:var(--pine);font-size:12px}
+.build-step[aria-current]{color:var(--pine);font-weight:700}
+.build-step[aria-current] b{background:var(--pine);color:var(--lime)}
+html[data-theme=dark] .build-step[aria-current]{color:var(--lime)}
+.build-step-sep{opacity:.4}
+.build-screen{animation:build-rise .45s cubic-bezier(.2,.7,.2,1) both}
+@keyframes build-rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+.build-eyebrow{font-size:12.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--lime-deep);margin:0 0 10px}
+.build-screen h1{font-family:"Fraunces",Georgia,serif;font-weight:700;font-size:clamp(30px,4.6vw,44px);line-height:1.08;color:var(--pine);margin:0 0 14px;letter-spacing:-.01em}
+html[data-theme=dark] .build-screen h1{color:var(--lime)}
+.build-screen h1 em{font-style:italic;position:relative;white-space:nowrap}
+.build-screen h1 em::after{content:"";position:absolute;left:0;right:0;bottom:.06em;height:.22em;background:linear-gradient(90deg,rgba(215,239,114,.0),var(--lime),rgba(215,239,114,0));z-index:-1;transform-origin:left;animation:build-sweep 1s .3s cubic-bezier(.2,.7,.2,1) both}
+@keyframes build-sweep{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+.build-sub{font-size:16px;line-height:1.55;color:var(--mut);max-width:640px;margin:0 0 26px}
+.build-composer{display:flex;align-items:flex-end;gap:12px;background:var(--paper);border:1px solid var(--line);border-radius:22px;padding:14px 14px 14px 20px;box-shadow:0 24px 70px rgba(23,63,53,.10);transition:border-color .2s,box-shadow .2s}
+.build-composer:focus-within{border-color:var(--pine);box-shadow:0 24px 70px rgba(23,63,53,.16)}
+.build-composer textarea{flex:1;border:0;background:transparent;resize:none;font:inherit;font-size:16.5px;line-height:1.5;color:var(--ink);outline:none;max-height:180px}
+.build-composer textarea::placeholder{color:var(--mut);opacity:.75}
+.build-go{display:inline-flex;align-items:center;gap:8px;border:0;border-radius:999px;background:var(--pine);color:var(--lime);font:inherit;font-weight:700;font-size:15px;padding:13px 22px;cursor:pointer;transition:transform .15s,box-shadow .2s,opacity .2s;box-shadow:0 10px 24px rgba(23,63,53,.22)}
+.build-go:hover:not(:disabled){transform:translateY(-1px);box-shadow:0 14px 30px rgba(23,63,53,.28)}
+.build-go:disabled{opacity:.45;cursor:not-allowed;box-shadow:none}
+.build-ghost{border:1px solid var(--line);border-radius:999px;background:transparent;color:var(--pine);font:inherit;font-weight:500;font-size:15px;padding:12px 20px;cursor:pointer}
+html[data-theme=dark] .build-ghost{color:var(--lime)}
+.build-ghost:hover:not(:disabled){border-color:var(--pine)}
+.build-ghost:disabled{opacity:.45;cursor:not-allowed}
+.build-examples{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:18px 0 8px;font-size:13.5px;color:var(--mut)}
+.build-chip{border:1px solid var(--line);background:var(--paper);color:var(--pine);border-radius:999px;padding:8px 14px;font:inherit;font-size:13.5px;cursor:pointer;transition:transform .15s,border-color .2s,box-shadow .2s}
+html[data-theme=dark] .build-chip{color:var(--lime)}
+.build-chip:hover{transform:translateY(-1px);border-color:var(--pine);box-shadow:0 8px 18px rgba(23,63,53,.12)}
+.build-alt{font-size:14px;color:var(--mut);margin:14px 0 0}
+.build-alt a{color:var(--pine);font-weight:500}
+html[data-theme=dark] .build-alt a{color:var(--lime)}
+.build-how{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:44px}
+.build-how div{border-top:2px solid rgba(23,63,53,.14);padding-top:12px;animation:build-rise .5s both}
+.build-how div:nth-child(2){animation-delay:.08s}.build-how div:nth-child(3){animation-delay:.16s}
+.build-how b{display:block;font-family:"Fraunces",Georgia,serif;font-size:16.5px;color:var(--pine);margin-bottom:4px}
+html[data-theme=dark] .build-how b{color:var(--lime)}
+.build-how span{font-size:13.5px;color:var(--mut)}
+.build-note{font-size:13.5px;color:var(--mut);line-height:1.5;margin:0 0 14px}
+.build-cards{display:grid;gap:12px;margin:18px 0 22px}
+.build-card{display:flex;gap:14px;align-items:flex-start;background:var(--paper);border:1px solid var(--line);border-radius:18px;padding:16px 18px;animation:build-rise .4s both}
+.build-card-icon{flex:none;width:38px;height:38px;border-radius:12px;display:grid;place-items:center;background:rgba(215,239,114,.35);color:var(--pine)}
+.build-card-icon svg{width:20px;height:20px}
+.build-card-body{flex:1;min-width:0}
+.build-card-head{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.build-card-head b{font-size:15.5px;color:var(--pine)}
+html[data-theme=dark] .build-card-head b{color:var(--lime)}
+.build-card-tag{font-size:11.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--pine);background:rgba(215,239,114,.5);border-radius:999px;padding:3px 9px}
+.build-card-tag.optional{background:rgba(23,63,53,.08);color:var(--mut)}
+.build-card p{margin:6px 0 0;font-size:14px;line-height:1.5;color:var(--ink)}
+.build-card .why{color:var(--mut);font-size:13.5px}
+.build-card .status{font-size:12.5px;color:var(--mut);margin-top:6px}
+.build-card-remove{flex:none;border:0;background:transparent;color:var(--mut);font:inherit;font-size:13px;cursor:pointer;padding:6px 4px;border-radius:8px}
+.build-card-remove:hover{color:#a8493c}
+.build-addwrap{margin:0 0 18px}
+.build-addlabel{font-size:13.5px;font-weight:700;color:var(--pine);margin:0 0 10px}
+html[data-theme=dark] .build-addlabel{color:var(--lime)}
+.build-catalog{display:flex;flex-wrap:wrap;gap:8px}
+.build-cat{display:inline-flex;align-items:center;gap:7px;border:1px dashed var(--line);background:transparent;border-radius:999px;padding:8px 14px;font:inherit;font-size:13.5px;color:var(--pine);cursor:pointer;transition:border-color .2s,background .2s}
+html[data-theme=dark] .build-cat{color:var(--lime)}
+.build-cat:hover:not(:disabled){border-color:var(--pine);background:rgba(215,239,114,.18)}
+.build-cat:disabled{opacity:.4;cursor:default;text-decoration:line-through}
+.build-why{margin:0 0 18px;font-size:14px;color:var(--mut)}
+.build-why summary{cursor:pointer;font-weight:500;color:var(--pine)}
+html[data-theme=dark] .build-why summary{color:var(--lime)}
+.build-consent{display:flex;gap:10px;align-items:flex-start;font-size:13.5px;color:var(--mut);line-height:1.5;margin:6px 0 18px;max-width:640px}
+.build-consent input{margin-top:3px;accent-color:var(--pine)}
+.build-actions{display:flex;gap:12px;align-items:center;margin-top:6px}
+.build-orbitwrap{display:grid;place-items:center;margin:26px 0 10px}
+.cc-spin{position:relative;width:88px;height:88px;display:grid;place-items:center}
+.build-phase{font-family:"Fraunces",Georgia,serif;font-size:20px;color:var(--pine);text-align:center;margin:6px 0 4px;min-height:1.4em}
+html[data-theme=dark] .build-phase{color:var(--lime)}
+.build-counts{text-align:center;font-size:15px;font-weight:700;color:var(--ink);margin:0 0 4px}
+.build-states{text-align:center;font-size:13.5px;color:var(--mut);margin:0 0 18px}
+.build-done-mark{display:grid;place-items:center;width:88px;height:88px;border-radius:50%;background:rgba(215,239,114,.4);color:var(--pine);font-size:36px;animation:build-pop .45s cubic-bezier(.2,.9,.3,1.4) both}
+@keyframes build-pop{from{transform:scale(.4);opacity:0}to{transform:scale(1);opacity:1}}
+@media(max-width:640px){.build-composer{flex-direction:column;align-items:stretch}.build-go{justify-content:center}.build-how{grid-template-columns:1fr;gap:10px;margin-top:30px}.build-card{flex-wrap:wrap}}
+@media(prefers-reduced-motion:reduce){.build-screen,.build-how div,.build-card,.build-done-mark{animation:none}.build-screen h1 em::after{animation:none;transform:none}.cc-spin svg,.cc-spin img{animation:none}}
+[hidden]{display:none!important}
