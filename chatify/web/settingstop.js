@@ -33,7 +33,7 @@
     hero.querySelector('.builder-hero-note').textContent='Review first. Nothing changes until you confirm.';
     const preview=document.createElement('aside');preview.className='cfg-chat-preview';
     const head=document.createElement('div');head.className='cfg-preview-head';head.innerHTML='<strong>Your chat app</strong><small>Sample preview · no AI request</small>';
-    const frame=document.createElement('iframe');frame.title='Chat app sample preview';frame.src='/?preview=1';
+    const frame=document.createElement('iframe');frame.title='Chat app sample preview';frame.src='./?preview=1';
     frame.addEventListener('load',()=>{try{const st=document.createElement('style');st.textContent='html body header.toolbar{display:none!important} html body .app{height:100vh!important;min-height:0!important}';frame.contentDocument.head.append(st)}catch(e){}});preview.append(head,frame);studio.append(preview);
   }
   window.CCSettingsTop={set:set};
