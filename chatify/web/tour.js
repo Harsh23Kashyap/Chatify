@@ -27,7 +27,7 @@
     }
     function end(){mark(key);dialog.close();dialog.remove();glow.remove();window.removeEventListener('resize',locate);window.removeEventListener('scroll',locate);window.scrollTo({top:scroll,behavior:'instant'});if(before?.isConnected)before.focus({preventScroll:true});onClose?.();}
     function draw(){
-      const s=steps[i];target=document.querySelector(s.target||'');
+      const s=steps[i];if(window.CCSettingsTop&&s.target){if(s.target==='.app-builder-open')window.CCSettingsTop.set('builder',false);else if(['#settingsNavTop','#menu','#cfgmode'].includes(s.target))window.CCSettingsTop.set('manual',false)}target=document.querySelector(s.target||'');
       if(target&&(!target.getClientRects().length||getComputedStyle(target).display==='none'))target=document.querySelector('#settingsNavTop')||document.querySelector('#cfgmode');
       target?.scrollIntoView({block:'start',behavior:'instant'});
       const header=node('header','cc-tour-head'),count=node('span','cc-tour-count',`${i+1} / ${steps.length}`),skip=node('button','cc-tour-skip','Skip');skip.type='button';skip.onclick=end;

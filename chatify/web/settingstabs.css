@@ -344,3 +344,21 @@ body.settings-tabs #settingsNavTop{z-index:150!important}
 html:not([data-motion=none]):not([data-motion=calm]) .app-builder-open{animation:ab-glow 2.4s ease-in-out 1s 2}
 }
 @keyframes ab-glow{0%,100%{box-shadow:0 0 0 0 rgba(23,63,53,0)}50%{box-shadow:0 0 0 7px rgba(23,63,53,.13)}}
+
+/* Top-level Configuration view switch: Build with AI (default) or Manual settings. */
+.toptabs{margin:2px 0 18px;max-width:430px}
+/* These views override legacy layout-specific display rules. */
+html body.settings-tabs.cfgtop-builder.cfgtop-builder .modebar,html body.settings-tabs.cfgtop-builder.cfgtop-builder #settingsNavTop,html body.settings-tabs.cfgtop-builder.cfgtop-builder .layout,html body.settings-tabs.cfgtop-builder.cfgtop-builder #savebar,html body.settings-tabs.cfgtop-builder.cfgtop-builder .loaded-app,html body.settings-tabs.cfgtop-builder.cfgtop-builder #pvfab{display:none!important}
+html body.settings-tabs.cfgtop-manual.cfgtop-manual .builder-hero,html body.settings-tabs.cfgtop-manual.cfgtop-manual .settings-studio-actions{display:none!important}
+html body.settings-tabs.cfgtop-builder.cfgtop-builder .builder-hero{min-height:230px;padding:36px;align-items:center}
+html body.settings-tabs.cfgtop-builder.cfgtop-builder .builder-hero-copy{max-width:740px}
+html body.settings-tabs.cfgtop-builder.cfgtop-builder .builder-hero-title{font-size:30px}
+html body.settings-tabs.cfgtop-builder.cfgtop-builder .builder-hero-sub{font-size:15px;line-height:1.6;margin-top:14px}
+@media(max-width:600px){html body.settings-tabs.cfgtop-builder.cfgtop-builder .builder-hero{min-height:245px;padding:24px}html body.settings-tabs.cfgtop-builder.cfgtop-builder .builder-hero-title{font-size:25px}.toptabs{max-width:100%;width:100%}}
+html body.settings-tabs.cfgtop-builder #loadedApp,html body.settings-tabs.cfgtop-builder .preview-toggle{display:none!important}
+html body.settings-tabs.simple.cfgtop-builder #loadedApp{display:none!important}
+html body.settings-tabs #cfgtop{order:2;isolation:isolate}
+html body.settings-tabs #cfgtop .seg-ind{display:none!important}
+html body.settings-tabs #cfgtop button[aria-checked=true]{background:#173f35!important;color:#fffdf7!important;box-shadow:none!important}
+html body.settings-tabs #cfgtop button[aria-checked=false]{background:transparent!important;color:#315645!important;box-shadow:none!important}
+@media(max-width:760px){html body.settings-tabs main.card>#cfgtop{order:-9!important}html body.settings-tabs main.card>#h{order:-10!important}}
