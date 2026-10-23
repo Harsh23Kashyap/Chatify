@@ -435,3 +435,7 @@ html body.settings-tabs #seg>.seg-ind{display:none!important}
 @keyframes settings-icon-play{0%,100%{transform:rotate(0) scale(1)}25%{transform:rotate(-10deg) scale(1.1)}65%{transform:rotate(7deg) scale(1.05)}}
 @keyframes settings-icon-draw{0%,100%{stroke-dasharray:100 0;stroke-dashoffset:0}40%{stroke-dasharray:65 35;stroke-dashoffset:20}75%{stroke-dasharray:95 5;stroke-dashoffset:0}}
 @media(prefers-reduced-motion:reduce){#settingsNavTop .tab-icon svg,#settingsNavTop .tab-icon path,#menu .section-card-icon svg,#menu .section-card-icon path{animation:none!important}}
+/* Use the empty right column for editors when the chat preview is not shown. */
+@media(min-width:1101px){
+body.settings-tabs:not(.settings-appearance-active) #col,body.settings-tabs.settings-preview-hidden #col{grid-column:2/-1!important}
+}

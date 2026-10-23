@@ -1,3 +1,12 @@
+## 0.4.31
+- Settings opens as two clean views - Build with AI or manual settings - with a styled switcher; both views no longer appear together and the switcher survives script errors
+- Manual settings: prompt, pipeline and code editors are larger, wrap correctly, use readable syntax colors on dark themes and no longer bleed past their panel
+- Pipeline prompt fields now show accurate help instead of generic connector wording
+- Advanced settings shows saved workspace values, including pipeline prompts, helper drafts and API suggestions
+- Build with AI: drafted apps no longer default to green palettes unless the description asks for green; saved and user-chosen colors survive validation
+- Mobile settings navigation no longer overlaps content while scrolling
+- About page refreshed
+
 ## 0.4.30
 - PeaceChat uses ReliefWeb v2 report text with source organizations, dates and citation links. Requires an approved RELIEFWEB_APPNAME environment setting.
 

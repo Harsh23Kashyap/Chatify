@@ -179,7 +179,7 @@ class BuildJobs:
     if key=='appearance:wording_motion':
      blank=[n for n in ('txt_title','txt_tagline','txt_examples','txt_placeholder','txt_footer','txt_disclaimer','txt_hint','txt_sidebar') if not str(result.get(n) or '').strip()]
      if blank:raise ValueError('Interface wording left blank: '+', '.join(blank))
-    appbuilder.validate_extras({'appearance':copy.deepcopy(result)})
+    appbuilder.validate_extras({'appearance':result if appbuilder.green_requested(job.get('brief')) else appbuilder._degreen(copy.deepcopy(result))})
    else:
     if isinstance(spec['defaults'],dict) and set(result)!=set(spec['defaults']):raise ValueError('Configuration fields missing or outside this section')
     appbuilder.validate(yaml.safe_dump({key[7:]:result}))
@@ -206,6 +206,7 @@ class BuildJobs:
    return copy.deepcopy(schema.DEFAULTS[name])
   if key.startswith('appearance:'):
    filled={field:theme.DEFAULT_CLEAN()[field] for field in LOOK[key[11:]]}
+   if not appbuilder.green_requested(job.get('brief')):filled=appbuilder._degreen(filled)
    if key=='appearance:wording_motion':
     title=(job['parts'].get('config:app') or {}).get('title') or (brief[:60] or 'Custom Assistant')
     filled.update({'txt_title':title,'txt_tagline':'Ask about '+topic+'.','txt_examples':'Try one of these questions','txt_placeholder':'Ask about '+topic+'...','txt_footer':'Built with Chatify','txt_disclaimer':'Answers are generated and can be wrong. Check the cited sources.','txt_hint':'Answers cite their sources.','txt_sidebar':'Chats'})

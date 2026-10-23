@@ -5,9 +5,9 @@
 
  const overview=document.createElement('div');overview.className='feature-overview';overview.setAttribute('aria-label','Chatify feature overview');
  for(const id of ['builder','models','sources','upload','colors','layout','prompts','zip-out']){const f=catalog.find(f=>f[0]===id);if(!f)continue;const card=document.createElement('article');const h=document.createElement('h3');h.textContent=f[1];const p=document.createElement('p');p.textContent=f[2];card.append(h,p);overview.append(card)}
- document.getElementById('featureOverview').replaceWith(overview);
+ document.querySelector('.feature-selector').before(overview);
  function render(){if(!expanded){while(tabs.children.length>6)tabs.lastElementChild.remove()}catalog.forEach((f,i)=>{if((!expanded&&i>=6)||i<tabs.children.length)return;const b=document.createElement('button');b.type='button';b.id='feature-tab-'+f[0];b.dataset.i=i;b.setAttribute('role','tab');b.setAttribute('aria-controls','feature-panel-'+f[0]);b.textContent=f[1];if(expanded&&i>=6&&i<10){b.classList.add('feature-added');b.style.animationDelay=((i-6)*25)+'ms'}b.onclick=()=>choose(i);b.onkeydown=e=>{const count=expanded?catalog.length:6;let next=i;if(e.key==='ArrowRight')next=(i+1)%count;else if(e.key==='ArrowLeft')next=(i-1+count)%count;else if(e.key==='Home')next=0;else if(e.key==='End')next=count-1;else return;e.preventDefault();choose(next,true)};tabs.append(b)});if(!panel.children.length||(!expanded&&active>5))choose(expanded?active:Math.min(active,5));more.textContent=expanded?'Show fewer features':'Load more features ('+(catalog.length-6)+')';more.setAttribute('aria-expanded',String(expanded))}
- if(more){more.onclick=()=>{expanded=!expanded;render()};render()}
+ more.onclick=()=>{expanded=!expanded;render()};render();
  function revealIntro(){
   if(matchMedia('(prefers-reduced-motion: reduce)').matches||['none','calm'].includes(document.documentElement.dataset.motion))return;
   let seen=false;try{seen=sessionStorage.getItem('cc_about_intro_seen')==='1';sessionStorage.setItem('cc_about_intro_seen','1')}catch{}
