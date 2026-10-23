@@ -179,7 +179,8 @@ class BuildJobs:
     if key=='appearance:wording_motion':
      blank=[n for n in ('txt_title','txt_tagline','txt_examples','txt_placeholder','txt_footer','txt_disclaimer','txt_hint','txt_sidebar') if not str(result.get(n) or '').strip()]
      if blank:raise ValueError('Interface wording left blank: '+', '.join(blank))
-    appbuilder.validate_extras({'appearance':result if appbuilder.green_requested(job.get('brief')) else appbuilder._degreen(copy.deepcopy(result))})
+    if not appbuilder.green_requested(job.get('brief')):result=appbuilder._degreen(result)
+    appbuilder.validate_extras({'appearance':result})
    else:
     if isinstance(spec['defaults'],dict) and set(result)!=set(spec['defaults']):raise ValueError('Configuration fields missing or outside this section')
     appbuilder.validate(yaml.safe_dump({key[7:]:result}))

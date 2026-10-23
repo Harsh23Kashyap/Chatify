@@ -1,3 +1,6 @@
+## 0.4.32
+- Settings: manual settings content no longer slides under the live preview pane on wide screens; the test button, sliders and helper text stay fully visible
+
 ## 0.4.31
 - Settings opens as two clean views - Build with AI or manual settings - with a styled switcher; both views no longer appear together and the switcher survives script errors
 - Manual settings: prompt, pipeline and code editors are larger, wrap correctly, use readable syntax colors on dark themes and no longer bleed past their panel

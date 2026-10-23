@@ -40,6 +40,36 @@ class DraftPaletteGuard(unittest.TestCase):
   from chatify.appbuilder import _degreen
   keep={'light':{'bg':'#ffffff','ink':'#222222','brand':'#2f5d8a','danger':'#b3261e','muted':'#6b6b6b'}}
   self.assertEqual(_degreen({'light':dict(keep['light'])}),keep)
+ def test_model_draft_palette_is_stored_degreened(self):
+  import sys,copy
+  sys.path.insert(0,str(R))
+  from chatify import buildjobs,theme
+  import colorsys
+  spec=dict(buildjobs.PARTS)['appearance:colors']
+  green={k:'#2e7d32' for k in theme.COLOR_KEYS}
+  drafted={'mode':'light','light':dict(green),'dark':dict(green)}
+  job={'brief':'railway history chat','parts':{},'errors':{},'retry_corrections':{}}
+  bj=buildjobs.BuildJobs()
+  bj._call=lambda j,instruction:copy.deepcopy(drafted)
+  bj._draft_part(job,'appearance:colors',spec)
+  stored=job['parts']['appearance:colors']
+  for mode in ('light','dark'):
+   for v in stored[mode].values():
+    r,g,b=(int(v[i:i+2],16)/255 for i in (1,3,5))
+    h,l,sat=colorsys.rgb_to_hls(r,g,b)
+    if sat>=0.18:self.assertFalse(75<=h*360<=170,v+' stored still green')
+ def test_model_draft_palette_survives_when_user_asks_green(self):
+  import sys,copy
+  sys.path.insert(0,str(R))
+  from chatify import buildjobs,theme
+  spec=dict(buildjobs.PARTS)['appearance:colors']
+  green={k:'#2e7d32' for k in theme.COLOR_KEYS}
+  drafted={'mode':'light','light':dict(green),'dark':dict(green)}
+  job={'brief':'a fresh green garden notes chat','parts':{},'errors':{},'retry_corrections':{}}
+  bj=buildjobs.BuildJobs()
+  bj._call=lambda j,instruction:copy.deepcopy(drafted)
+  bj._draft_part(job,'appearance:colors',spec)
+  self.assertEqual(job['parts']['appearance:colors'],drafted)
  def test_user_chosen_green_survives_validation_save_and_import(self):
   import sys
   sys.path.insert(0,str(R))
