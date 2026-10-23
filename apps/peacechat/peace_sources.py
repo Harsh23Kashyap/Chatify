@@ -152,3 +152,80 @@ def reliefweb(query, k=12):
                     'venue': 'ReliefWeb (%s)' % (sources or 'humanitarian reports'),
                     'source': 'reliefweb', 'score': 1.0 / (len(out) + 1)})
     return out[:count]
+
+
+_SFCG_HOST = 'https://www.sfcg.org/wp-json/wp/v2'
+
+def _strip_html(raw):
+    text = re.sub(r'(?s)<(script|style).*?</\1>', ' ', raw or '')
+    text = re.sub(r'<[^>]+>', ' ', text)
+    import html as _html
+    return re.sub(r'\s+', ' ', _html.unescape(text)).strip()
+
+def _sfcg_fetch(kind, keywords, per_page):
+    params = {'search': keywords, 'per_page': per_page,
+              '_fields': 'date,link,title,content'}
+    url = '%s/%s?%s' % (_SFCG_HOST, kind, urllib.parse.urlencode(params, doseq=True))
+    try:
+        with urllib.request.urlopen(urllib.request.Request(url, headers=_UA), timeout=25) as reply:
+            raw = reply.read(4_000_001)
+        if len(raw) > 4_000_000:
+            raise ValueError('response too large')
+        payload = json.loads(raw)
+    except Exception as exc:
+        raise ValueError('Search for Common Ground publications could not be retrieved (%s).' % type(exc).__name__) from None
+    if not isinstance(payload, list):
+        raise ValueError('Search for Common Ground returned an invalid publications response.')
+    return payload
+
+def sfcg(query, k=12):
+    """Search for Common Ground publications and pages via its public WordPress API.
+
+    Keyless. Covers SFCG case studies, evaluations and program/country pages.
+    """
+    count = max(1, min(int(k), 15))
+    clean_query = re.sub(r"['’]s\b", "", query or "")
+    ignored = _STOP | _PEACE_WORDS | {'recent', 'latest', 'today', 'news', 'current',
+                                    'role', 'play', 'played', 'examples', 'example', 'successful', 'success',
+                                    'work', 'worked', 'help', 'helped', 'change', 'changes', 'countries'}
+    words = [w for w in re.findall(r"[\w]+", clean_query, flags=re.UNICODE)
+             if len(w) > 2 and w.lower() not in ignored][:4]
+    # WordPress ANDs search terms, so relax the query until a level has
+    # enough matches; keep the most specific level that reaches 3 results,
+    # otherwise the level that matched the most.
+    candidates = [' '.join(words[:n]) for n in range(min(len(words), 4), 0, -1)] or ['peacebuilding']
+    posts, pages = [], []
+    best = ([], [])
+    for trial in candidates:
+        p_posts = _sfcg_fetch('posts', trial, count)
+        p_pages = _sfcg_fetch('pages', trial, count)
+        if len(p_posts) + len(p_pages) > len(best[0]) + len(best[1]):
+            best = (p_posts, p_pages)
+        if len(p_posts) + len(p_pages) >= 3:
+            posts, pages = p_posts, p_pages
+            break
+    if not posts and not pages:
+        posts, pages = best
+    out, seen = [], set()
+    pools = [(p, 'publication') for p in posts] + [(p, 'page') for p in pages]
+    for item, kind in pools:
+        if not isinstance(item, dict):
+            continue
+        title = _strip_html(str((item.get('title') or {}).get('rendered') or ''))
+        link = str(item.get('link') or '').strip()
+        body = _strip_html(str((item.get('content') or {}).get('rendered') or ''))
+        parsed = urllib.parse.urlparse(link)
+        junk = ('terms & conditions', 'terms and conditions', 'privacy policy', 'cookie', 'careers', 'vacanc')
+        if not title or not body or parsed.scheme != 'https' or not (parsed.hostname or '').endswith('sfcg.org') or link in seen:
+            continue
+        if any(j in title.lower() for j in junk):
+            continue
+        seen.add(link)
+        date = str(item.get('date') or '')[:10]
+        text = ('Search for Common Ground %s.\nTitle: %s\nPublished: %s\n\n%s'
+                % (kind, title, date or 'undated', body[:6000]))
+        out.append({'id': link, 'title': title, 'text': text, 'url': link,
+                    'year': date[:4] if date[:4].isdigit() else '',
+                    'venue': 'Search for Common Ground (sfcg.org %s)' % kind,
+                    'source': 'sfcg', 'score': 1.0 / (len(out) + 1)})
+    return out[:count]

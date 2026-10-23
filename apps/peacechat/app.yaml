@@ -28,6 +28,11 @@ sources:
   type: wikipedia
   label: Wikipedia (peace processes, treaties, mediators)
   weight: 0.8
+- id: peacesfcg
+  type: python
+  label: Search for Common Ground publications (peacebuilding case studies and evaluations)
+  entry: peace_sources:sfcg
+  weight: 1.0
 retrieval:
   top_k: 10
   min_score: 0.0
