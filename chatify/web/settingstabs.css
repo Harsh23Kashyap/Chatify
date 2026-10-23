@@ -437,5 +437,5 @@ html body.settings-tabs #seg>.seg-ind{display:none!important}
 @media(prefers-reduced-motion:reduce){#settingsNavTop .tab-icon svg,#settingsNavTop .tab-icon path,#menu .section-card-icon svg,#menu .section-card-icon path{animation:none!important}}
 /* Use the empty right column for editors when the chat preview is not shown. */
 @media(min-width:1101px){
-body.settings-tabs:not(.settings-appearance-active) #col,body.settings-tabs.settings-preview-hidden #col{grid-column:2/-1!important}
+body.settings-tabs.settings-preview-hidden #col{grid-column:2/-1!important}
 }
