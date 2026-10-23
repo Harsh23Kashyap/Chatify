@@ -1,5 +1,7 @@
 ## 0.4.32
 - Settings: manual settings content no longer slides under the live preview pane on wide screens; the test button, sliders and helper text stay fully visible
+- Settings: prompt, pipeline and code editors keep their full width on the same wide screens instead of shrinking into the preview column
+- Build with AI: drafted apps now actually save the palette the generator validated, so drafts no longer come out green when the description never asked for green
 
 ## 0.4.31
 - Settings opens as two clean views - Build with AI or manual settings - with a styled switcher; both views no longer appear together and the switcher survives script errors
