@@ -1,11 +1,13 @@
-"""Key-free peace-news adapter for PeaceChat.
+"""PeaceChat report adapters. ReliefWeb requires RELIEFWEB_APPNAME.
+
+GDELT is retained for existing configs.
 
 GDELT DOC 2.0 (api.gdeltproject.org): recent world news coverage, free and
 key-less. Rate limit: one request per 5 seconds, so calls are spaced and the
 plain-text rate-limit notice is retried with backoff. Returns plain evidence
 dicts; untrusted source text is passed through as data only.
 """
-import json, re, time, urllib.parse, urllib.request, urllib.error
+import json, re, time, os, urllib.parse, urllib.request, urllib.error
 
 _UA = {'User-Agent': 'Chatify-PeaceChat/1.0 (+https://github.com/Harsh23Kashyap/Chatify)', 'Accept': 'application/json'}
 _STOP = {'what','whats','is','are','was','were','the','a','an','of','for','how','do','does','can','i','me','my','tell','show','give','about','in','to','and','with','good','best','some','please','did','which','that','when','where','who','whom','have','has','had'}
@@ -93,4 +95,57 @@ def gdelt(query, k=12):
         out.append({'id': link, 'title': title, 'text': text, 'url': link,
                     'year': year, 'venue': 'GDELT news index (%s)' % (domain or 'unknown outlet'),
                     'source': 'gdelt', 'score': 1.0 / (len(out) + 1)})
+    return out[:count]
+
+
+_RELIEFWEB_HOST = 'https://api.reliefweb.int/v2/reports'
+_RELIEFWEB_TERMS = '("peace agreement" OR "peace process" OR "peace talks" OR peacebuilding OR reconciliation OR mediation OR ceasefire)'
+
+def reliefweb(query, k=12):
+    appname = os.environ.get('RELIEFWEB_APPNAME', '').strip()
+    if not appname:
+        raise ValueError('ReliefWeb needs an approved RELIEFWEB_APPNAME environment setting.')
+    count = max(1, min(int(k), 15))
+    words = [w for w in re.findall(r"[\w]+", _keywords(query), flags=re.UNICODE)
+             if w.lower() not in {'recent', 'latest', 'today', 'news', 'current'}]
+    terms = ' AND '.join('"%s"' % w for w in words)
+    search = ('(%s) AND %s' % (terms, _RELIEFWEB_TERMS)) if terms else _RELIEFWEB_TERMS
+    params = {
+        'appname': appname, 'limit': count, 'query[value]': search,
+        'fields[include][]': ['title', 'body', 'url_alias', 'date.original', 'source.name'],
+    }
+    if re.search(r'\b(recent|latest|today|news|current)\b', query or '', re.I):
+        params['sort[]'] = 'date:desc'
+    url = _RELIEFWEB_HOST + '?' + urllib.parse.urlencode(params, doseq=True)
+    try:
+        with urllib.request.urlopen(urllib.request.Request(url, headers=_UA), timeout=25) as reply:
+            raw = reply.read(4_000_001)
+        if len(raw) > 4_000_000:
+            raise ValueError('response too large')
+        payload = json.loads(raw)
+    except Exception as exc:
+        raise ValueError('ReliefWeb reports could not be retrieved (%s).' % type(exc).__name__) from None
+    if not isinstance(payload, dict) or payload.get('error'):
+        raise ValueError('ReliefWeb returned an invalid reports response.')
+    out, seen = [], set()
+    for item in payload.get('data') or []:
+        if not isinstance(item, dict):
+            continue
+        f = item.get('fields') or {}
+        if not isinstance(f, dict):
+            continue
+        title = re.sub(r'\s+', ' ', str(f.get('title') or '')).strip()
+        link = str(f.get('url_alias') or '').strip()
+        body = str(f.get('body') or '').strip()
+        parsed = urllib.parse.urlparse(link)
+        if not title or not body or parsed.scheme != 'https' or parsed.hostname != 'reliefweb.int' or link in seen:
+            continue
+        seen.add(link)
+        date = str((f.get('date') or {}).get('original') or '')[:10]
+        sources = ', '.join(str(v.get('name')) for v in f.get('source', []) if isinstance(v, dict) and v.get('name'))
+        text = 'Humanitarian report on ReliefWeb.\nTitle: %s\nSource: %s\nPublished: %s\n\n%s' % (title, sources or 'unspecified', date or 'undated', body[:12000])
+        out.append({'id': link, 'title': title, 'text': text, 'url': link,
+                    'year': date[:4] if date[:4].isdigit() else '',
+                    'venue': 'ReliefWeb (%s)' % (sources or 'humanitarian reports'),
+                    'source': 'reliefweb', 'score': 1.0 / (len(out) + 1)})
     return out[:count]
