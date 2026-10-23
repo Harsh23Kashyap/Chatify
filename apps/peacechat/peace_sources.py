@@ -106,8 +106,11 @@ def reliefweb(query, k=12):
     if not appname:
         raise ValueError('ReliefWeb needs an approved RELIEFWEB_APPNAME environment setting.')
     count = max(1, min(int(k), 15))
-    words = [w for w in re.findall(r"[\w]+", _keywords(query), flags=re.UNICODE)
-             if w.lower() not in {'recent', 'latest', 'today', 'news', 'current'}]
+    clean_query = re.sub(r"['’]s\b", "", query or "")
+    ignored = _STOP | _PEACE_WORDS | {'recent', 'latest', 'today', 'news', 'current',
+                                    'role', 'play', 'played', 'examples', 'example', 'successful', 'success'}
+    words = [w for w in re.findall(r"[\w]+", clean_query, flags=re.UNICODE)
+             if len(w) > 2 and w.lower() not in ignored][:4]
     terms = ' AND '.join('"%s"' % w for w in words)
     search = ('(%s) AND %s' % (terms, _RELIEFWEB_TERMS)) if terms else _RELIEFWEB_TERMS
     params = {

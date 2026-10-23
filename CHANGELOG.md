@@ -1,3 +1,6 @@
+## 0.4.30
+- PeaceChat uses ReliefWeb v2 report text with source organizations, dates and citation links. Requires an approved RELIEFWEB_APPNAME environment setting.
+
 ## 0.4.27
 
 - The PyPI package now ships the example apps inside both the wheel and the sdist (apps/**: RecipeChat, PeaceChat, Formula One, DietChat, FitChat, SpaceChat, WirelessChat, the hosted Build app and the NewsNerd/DietChat samples, including the Python source adapters like peace_sources.py and recipe_sources.py)

@@ -33,6 +33,12 @@ class ReliefWebTests(unittest.TestCase):
                 p.reliefweb('peace')
         self.assertNotIn('private-test-value', str(ctx.exception))
 
+    def test_question_keywords_keep_topic_not_question_words(self):
+        with patch.dict(os.environ, {'RELIEFWEB_APPNAME': 'test'}), patch.object(p.urllib.request, 'urlopen', return_value=io.BytesIO(b'{"data": []}')) as call:
+            p.reliefweb("What role did women play in Liberia's peace process?", 3)
+        args = p.urllib.parse.parse_qs(p.urllib.parse.urlparse(call.call_args.args[0].full_url).query)
+        self.assertTrue(args['query[value]'][0].startswith('("women" AND "Liberia") AND'))
+
     def test_empty_results(self):
         with patch.dict(os.environ, {'RELIEFWEB_APPNAME': 'test'}), patch.object(p.urllib.request, 'urlopen', return_value=io.BytesIO(b'{"data": []}')):
             self.assertEqual(p.reliefweb('peace'), [])
