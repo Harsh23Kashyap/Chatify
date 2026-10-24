@@ -303,3 +303,5 @@ body.settings-tabs .builder-shell-footer button[disabled],dialog.app-builder .bu
 .builder-shell-footer button[disabled] *,.builder-shell-footer button[disabled]{text-decoration:none}
 
 html body.settings-tabs .builder-hero .builder-hero-cost{color:#c9dcc0;font-size:12px;margin-top:8px}
+dialog.app-builder #builderProgress[data-job-state] .cc-spin-head{stroke-dasharray:max(14px,calc(238.76px*var(--build-complete,0%)/100%)) 238.76px;stroke-dashoffset:0;animation:none;transition:stroke-dasharray .8s ease}
+@media(prefers-reduced-motion:reduce){dialog.app-builder #builderProgress[data-job-state] .cc-spin-head{transition:none}}

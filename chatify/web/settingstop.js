@@ -31,7 +31,7 @@
     composer.append(label,idea);const heroCopy=hero.querySelector('.builder-hero-copy');(heroCopy||hero).after(composer);
     const entry=hero.querySelector('.app-builder-open');if(entry){const entryLabel=entry.querySelector('span');if(entryLabel)entryLabel.textContent='Build with AI';
     entry.addEventListener('click',()=>{if(idea.value.trim())queueMicrotask(()=>{const brief=document.getElementById('builderBrief');if(brief&&!brief.value.trim()){brief.value=idea.value.trim();brief.dispatchEvent(new Event('input',{bubbles:true}))}})})}
-    const costNote=document.createElement('p');costNote.className='builder-hero-cost h';costNote.textContent='Uses your saved model key; requests may cost money. Nothing is saved or applied until you confirm.';composer.append(costNote);
+    const costNote=document.createElement('p');costNote.className='builder-hero-cost h';costNote.textContent='Uses your saved model key; requests may cost money. Creates a draft; your active app changes only after you review and confirm.';composer.append(costNote);
     const heroExamples=[idea.placeholder,'A study buddy that quizzes me from my own lecture notes and cites the page it used...','A support assistant that answers customer questions from our help center articles...','A research aide that reads papers I upload and answers with citations...'];let hx=0;setInterval(()=>{if(idea.value||document.activeElement===idea||document.hidden)return;hx=(hx+1)%heroExamples.length;idea.placeholder=heroExamples[hx]},4500);
     hero.querySelector('.builder-hero-note')?.remove();
     const preview=document.createElement('aside');preview.className='cfg-chat-preview';
