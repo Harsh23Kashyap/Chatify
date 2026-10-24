@@ -1,6 +1,21 @@
 const{chromium}=require(process.env.PLAYWRIGHT_MODULE||'playwright'),assert=require('node:assert/strict');
 (async()=>{const b=await chromium.launch({executablePath:'/usr/bin/google-chrome',args:['--no-sandbox']});
 for(const width of[320,1280])for(const reducedMotion of['reduce','no-preference'])for(const moved of[false,true]){
-const p=await b.newPage({viewport:{width,height:900},reducedMotion});await p.addInitScript(()=>{localStorage.setItem('cc_cfg_tour_v1','1');localStorage.setItem('cc_cfg_mode_v2','advanced')});let calls=0,release,resolveStart;const started=new Promise(r=>resolveStart=r);await p.route('**/api/codegen/draft',async r=>{if(r.request().method()!=='POST')return r.fulfill({json:{draft:null}});calls++;resolveStart();await new Promise(r=>release=r);return r.fulfill({status:503,json:{error:'Fixture draft save unavailable.'}})});
-await p.goto(process.env.CHATIFY_TEST_URL+'/settings.html#sec-code');await p.waitForFunction(()=>document.querySelector('#codeEditor .helper'));const h=p.locator('#codeEditor .helper'),brief=h.getByLabel('Search connector description'),save=h.locator('.secondary-actions button').filter({hasText:'Save helper draft'});await brief.fill('Preserve this connector draft');const saveId=await save.evaluate(n=>{n.dataset.fixtureSave='1';return '1'});const button=h.locator('[data-fixture-save="1"]');await button.focus();await p.keyboard.press('Enter');await started;assert.equal(await button.innerText(),'Saving...');assert(await button.isDisabled());await button.evaluate(n=>n.click());assert.equal(calls,1);if(moved)await brief.focus();release();await h.getByText('Fixture draft save unavailable.',{exact:true}).waitFor();assert.equal(await brief.inputValue(),'Preserve this connector draft');assert(!await button.isDisabled());assert(await (moved?brief:button).evaluate(n=>n===document.activeElement),'failed helper draft save retry focus or moved brief focus retained');assert.equal(await h.locator('.helper-dirty').innerText(),'Unsaved helper draft edits.');await p.close();
-}await b.close();console.log('PASS helper draft save503 singleflight preservedbrief unsaveddirty retryfocus3201280normalReduce')})().catch(e=>{console.error(e);process.exit(1)});
+const p=await b.newPage({viewport:{width,height:900},reducedMotion});await p.addInitScript(()=>{localStorage.setItem('cc_cfg_tour_v1','1');localStorage.setItem('cc_cfg_mode_v2','advanced')});let calls=0,release,resolveStart;const started=new Promise(r=>resolveStart=r);await p.route('**/codeeditor.js',r=>r.abort());
+await p.route('**/api/codegen/review',r=>r.fulfill({json:{ok:true,problems:[],marks:[]}}));
+await p.route('**/api/codegen/draft',async r=>{if(r.request().method()!=='POST')return r.fulfill({json:{draft:null}});calls++;resolveStart();await new Promise(r=>release=r);return r.fulfill({status:503,json:{error:'Fixture draft save unavailable.'}})});
+await p.goto(process.env.CHATIFY_TEST_URL+'/settings.html#sec-code');await p.waitForFunction(()=>document.querySelector('#codeEditor .helper'));
+const h=p.locator('#codeEditor .helper'),brief=h.getByLabel('Search connector description');
+assert.equal(await h.getByRole('button',{name:'Save helper draft',exact:true}).count(),0);
+const chk=h.getByRole('button',{name:'Check again',exact:true});await brief.fill('Preserve this connector draft');
+assert.equal(await h.locator('.helper-dirty').innerText(),'Unsaved edits. Saved when you write or check the code again.');
+await chk.focus();await p.keyboard.press('Enter');await started;
+assert.equal(await chk.getAttribute('aria-busy'),'true');
+await chk.evaluate(n=>n.click());assert.equal(calls,1);
+if(moved)await brief.focus();release();
+await h.getByText('Draft not saved in this workspace yet. It saves when you write or check the code again.',{exact:true}).waitFor();
+assert.equal(await brief.inputValue(),'Preserve this connector draft');
+assert.equal(await chk.getAttribute('aria-busy'),null);
+assert(await (moved?brief:chk).evaluate(n=>n===document.activeElement),'failed helper draft persist retry focus or moved brief focus retained');
+await p.close();
+}await b.close();console.log('PASS helper draft persist503 singleflight preservedbrief accuratedirty retryfocus3201280normalReduce')})().catch(e=>{console.error(e);process.exit(1)});
