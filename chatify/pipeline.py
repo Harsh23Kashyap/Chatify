@@ -115,7 +115,14 @@ def relevance_gate(question, found):
     # its vocabulary ride along; two thirds of the best is the cutoff (a B-ALL
     # review sharing cell/therapy must not survive next to real CAR-T evidence).
     floor = max(need, 1 if top < 2 else max(2, -(-2 * top // 3)))
-    return [e for n, e in scored if n >= floor]
+    kept = [(n, e) for n, e in scored if n >= floor]
+    # Lead with the passages that share the most question vocabulary: retrieval
+    # order put a broad B-ALL review above the CAR-T lymphoma trial papers on the
+    # live demo (2026-10-25), and the preview's extracted lead was then a review
+    # that does not establish the asked trial findings. Overlap order keeps the
+    # most on-question passage first; ties keep the connector's own ranking.
+    kept.sort(key=lambda ne: (-ne[0], -(ne[1].get("score") or 0)))
+    return [e for _, e in kept]
 
 
 _NO_KEY_WHY = ("This app has no API key saved yet, so it cannot answer with the AI model. "

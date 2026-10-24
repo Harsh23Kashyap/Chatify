@@ -212,3 +212,9 @@ class EnglishSpecificityGate(unittest.TestCase):
         survey = ev(5, "Text-to-image Diffusion Models in Generative AI: A Survey", "This survey reviews the progress of diffusion models in generating images from text, i.e. text-to-image diffusion models, and how diffusion models work for image synthesis.")
         umbrella = ev(6, "Umbrella sampling: a powerful method to sample tails of distributions", "We present the umbrella sampling (US) technique and show that it can be used to sample extremely low probability areas of the posterior distribution required in statistical analyses of data.")
         self.assertEqual([e["title"] for e in relevance_gate(q, [survey, umbrella])], ["Text-to-image Diffusion Models in Generative AI: A Survey"])
+
+    def test_most_on_question_passage_leads(self):
+        # Live demo 2026-10-25: retrieval order led the preview with a broad
+        # review whose excerpt did not establish the asked trial findings.
+        out = relevance_gate(self.CART_Q, [self.B_ALL, self.CRC, self.AI_TRIAL, self.CART_REAL])
+        self.assertTrue(out[0]["title"].startswith("CAR-T cell therapy in relapsed lymphoma"))
