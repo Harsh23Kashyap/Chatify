@@ -89,6 +89,10 @@ def _abstract(inv):
     return " ".join(words[i] for i in sorted(words))
 
 
+class SetupRequired(Exception):
+    """A source that cannot answer until the app owner finishes a named setup step."""
+
+
 class OpenAlex:
     def __init__(self, block):
         self.id, self.label, self.b = block["id"], block["label"], block
@@ -98,9 +102,8 @@ class OpenAlex:
         from .. import secrets
         key = secrets.saved("catalog:openalex") or os.environ.get("OPENALEX_API_KEY", "")
         if not key:
-            return []
-        if key:
-            args["api_key"] = key
+            raise SetupRequired("OpenAlex needs a free API key before it can search here. The app owner can add one in Settings under Source keys.")
+        args["api_key"] = key
         data = _get("https://api.openalex.org/works?" + urllib.parse.urlencode(args))
         out = []
         for n, it in enumerate(data.get("results") or []):

@@ -2,7 +2,7 @@
 import copy,re
 PAGES={
  'pubmed':{'name':'PubMed','page':'https://www.ncbi.nlm.nih.gov/books/NBK25501/','docs':'https://eutilities.github.io/site/API_Key/usageandkey/','key_required':False,'source':{'id':'pubmed','label':'PubMed','type':'pubmed'}},
- 'openalex':{'name':'OpenAlex','page':'https://developers.openalex.org/api-reference/introduction','docs':'https://developers.openalex.org/guides/authentication','key_page':'https://openalex.org/settings/api','key_required':False,'key_optional':True},
+ 'openalex':{'name':'OpenAlex','page':'https://developers.openalex.org/api-reference/introduction','docs':'https://developers.openalex.org/guides/authentication','key_page':'https://openalex.org/settings/api','key_required':True},
  'arxiv':{'name':'arXiv','page':'https://info.arxiv.org/help/api/index.html','docs':'https://info.arxiv.org/help/api/user-manual.html','key_required':False,'source':{'id':'arxiv','label':'arXiv','type':'arxiv'}},
  'crossref':{'name':'Crossref','page':'https://www.crossref.org/documentation/retrieve-metadata/rest-api/','key_required':False,'source':{'id':'crossref','label':'Crossref','type':'crossref'}},
  'wikipedia':{'name':'Wikipedia','page':'https://www.mediawiki.org/wiki/API:Main_page','key_required':False,'source':{'id':'wikipedia','label':'Wikipedia','type':'wikipedia','lang':'en'}},

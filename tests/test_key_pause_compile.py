@@ -1,7 +1,7 @@
 import unittest
 from unittest.mock import patch
 from chatify import generators
-from chatify.connectors.open_sources import OpenAlex
+from chatify.connectors.open_sources import OpenAlex, SetupRequired
 from chatify.connectors.web_search import WebSearch
 
 
@@ -19,12 +19,14 @@ class KeyPauseAndCompileTests(unittest.TestCase):
 
     def test_openalex_without_key_sends_nothing(self):
         with patch('chatify.secrets.saved', return_value=''), patch.dict('os.environ', {}, clear=True), patch('chatify.connectors.open_sources._get') as get:
-            self.assertEqual(OpenAlex({'id':'a','label':'A'}).search('q'), [])
+            with self.assertRaises(SetupRequired):
+                OpenAlex({'id':'a','label':'A'}).search('q')
             get.assert_not_called()
 
     def test_web_without_key_sends_nothing(self):
         with patch('chatify.websearch.has_key', return_value=False), patch('chatify.websearch.search') as search:
-            self.assertEqual(WebSearch({'id':'web','label':'Web','providers':['tavily','exa']}).search('q'), [])
+            with self.assertRaises(SetupRequired):
+                WebSearch({'id':'web','label':'Web','providers':['tavily','exa']}).search('q')
             search.assert_not_called()
 
     def test_known_connector_inference_and_safe_templates(self):

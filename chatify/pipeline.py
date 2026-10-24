@@ -12,6 +12,7 @@ from concurrent.futures import ThreadPoolExecutor
 from . import permissions, stage_contracts, generator_design
 from . import providers, prompts as promptmod
 from .connectors import make_connector
+from .connectors.open_sources import SetupRequired
 
 FOLLOW_UP = re.compile(r"\b(it|its|this|that|they|them|those|these|he|she|there|the same|above|previous|earlier)\b|^(?:and\b|but\b|what about\b|how about\b|why\??$|how so\??$|expand\b|elaborate\b|continue\b|shorter\b|summari[sz]e\b|compare\b)", re.I)
 
@@ -325,7 +326,9 @@ class Engine:
                     if sig not in seen and e["score"] >= self.cfg["retrieval"]["min_score"]:
                         seen.add(sig); found.append(e)
             except Exception as ex:  # one failing source must not sink the answer
-                errors[sid] = type(ex).__name__
+                # SetupRequired carries an owner-safe message naming the missing step; other
+                # exceptions stay as bare type names so internals never leak into the answer UI.
+                errors[sid] = (str(ex) or type(ex).__name__)[:160] if isinstance(ex, SetupRequired) else type(ex).__name__
         # The gate targets open-API keyword search, which can return popular but unrelated
         # pages; owner-corpus connectors (local files, uploads, python) are BM25/structured
         # matches over the owner's own documents, a different relevance profile.

@@ -212,11 +212,17 @@ function turnView(t, prev) {
   nodes.push(el("div", { class: "row u" }, avatar("you"), el("div", { class: "bubble ub", text: t.question })));
   const bub = el("div", { class: "bubble bb" + (t.evidence.length ? "" : " none") }, renderAnswer(t.answer, t.evidence));
   if(/\b(chart|graph|plot)\b/i.test(t.question)){const chart=answerChart(t.answer,t.evidence);if(chart)bub.append(chart);}
-  const failedSources = Object.keys(t.source_errors || {});
+  const failedSources = Object.entries(t.source_errors || {});
   if (failedSources.length) {
-    const names = failedSources.map((id) => (S.cfg.sources.find((x) => x.id === id) || {}).label || id);
+    const srcName = (id) => (S.cfg.sources.find((x) => x.id === id) || {}).label || id;
     const allFailed = failedSources.length >= ((S.cfg.sources || []).length || 1);
-    bub.append(el("div", { class: "src-note", role: "note", text: names.join(", ") + " could not be reached" + (allFailed ? " for this question." : " - answered from the other sources.") }));
+    // A sentence-valued error names the concrete cause (for example a missing free API
+    // key); a bare exception type name stays behind the generic wording.
+    const named = failedSources.map(([id, msg]) => typeof msg === "string" && msg.includes(" ") ? srcName(id) + ": " + msg : null).filter(Boolean);
+    const note = named.length
+      ? named.join(" ") + (allFailed ? "" : " Answered from the other sources.")
+      : failedSources.map(([id]) => srcName(id)).join(", ") + " could not be reached" + (allFailed ? " for this question." : " - answered from the other sources.");
+    bub.append(el("div", { class: "src-note", role: "note", text: note }));
   }
   if (!t.evidence.length) {
     const ill = document.createElementNS("http://www.w3.org/2000/svg", "svg"); ill.setAttribute("viewBox", "0 0 96 96"); ill.setAttribute("class", "nf-ill"); ill.setAttribute("aria-hidden", "true");

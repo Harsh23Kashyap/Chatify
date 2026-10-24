@@ -43,6 +43,6 @@ class OlderAPICardMetadata(unittest.TestCase):
   wiki,oa=enrich([{'name':'Wikipedia'},{'name':'OpenAlex'}])
   self.assertEqual(wiki['key_required'],False)
   self.assertIn('mediawiki.org',wiki['docs_url'])
-  self.assertEqual(oa['key_required'],False)
+  self.assertEqual(oa['key_required'],True)
   self.assertEqual(oa['key_url'],'https://openalex.org/settings/api')
   self.assertEqual(oa['docs_url'],'https://developers.openalex.org/guides/authentication')

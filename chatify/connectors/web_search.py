@@ -2,6 +2,7 @@
 Each provider is fail-safe on its own: one failing or out of credits never blocks the others or the local sources."""
 from concurrent.futures import ThreadPoolExecutor
 from .base import Evidence
+from .open_sources import SetupRequired
 from .. import websearch
 
 
@@ -22,7 +23,7 @@ class WebSearch:
     def search(self, query, k=6):
         active = [p for p in self.providers if websearch.has_key(p)]
         if not active:
-            return []
+            raise SetupRequired("Live web search needs an API key for one of its search providers (Tavily, Exa, Firecrawl or Parallel) before it can search here. The app owner can add a key in Settings under Web search.")
         with ThreadPoolExecutor(max_workers=len(active)) as ex:
             results = list(ex.map(lambda p: self._one(p, query, k), active))
         if not any(items for _, items in results) and self._errs and all(p in self._errs for p in active):
