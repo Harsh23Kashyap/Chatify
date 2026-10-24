@@ -20,3 +20,8 @@ class DraftSummary(unittest.TestCase):
   self.assertIn("const busyWord=busyHeading.replace(' your app','').replace(' your draft','')",js)
   self.assertIn("activityTitle.textContent=(busy?busyWord:",js)
   self.assertIn("entryLabel.textContent=busy?busyWord+'... '",js)
+ def test_import_reader_reset_and_timeout(self):
+  js=(pathlib.Path(__file__).resolve().parents[1]/'chatify/web/nerdload.js').read_text()
+  self.assertIn("input.addEventListener('change',()=>{const picked=input.files[0];input.value='';review(picked)});",js)
+  self.assertIn("AbortSignal.timeout(90000)",js)
+  self.assertIn("throw new Error('The server did not answer in time')",js)
