@@ -127,6 +127,25 @@ class BuilderTests(unittest.TestCase):
   saved=schema.load(str(self.path));self.assertEqual(saved['app']['title'],'Complete Garden')
   self.assertEqual(len(saved['pipeline_prompts']['text']),9);self.assertTrue((Path(self.tmp.name)/'data'/'code-drafts.json').exists())
   self.assertEqual(prompts.PromptStore('',saved['pipeline_prompts']).text('followups'),raw['pipeline_prompts']['text']['followups'])
+ def test_hosted_save_never_touches_served_app_file(self):
+  # Regression for 2026-10-25 live: on the hosted multi-visitor demo the shared
+  # save path wrote the served app's own app.yaml (hidden because /api/config
+  # answers from memory), so one visitor's build replaced the demo for everyone.
+  import hashlib
+  self.cfg['_dir']=self.tmp.name
+  raw=self.complete_config();raw['app']['title']='Visitor Build';raw['storage']['path']='data/chatify.db'
+  plan=appbuilder.review(self.cfg,yaml.safe_dump(raw),appbuilder.SECTIONS)
+  before=self.path.read_bytes()
+  rev=appbuilder.hosted_save_plan(self.cfg,'visitor-1','ticket-1',plan)
+  self.assertEqual(self.path.read_bytes(),before)
+  found=list((Path(self.tmp.name)/'data'/'build-apps').glob('*/*/app.yaml'))
+  self.assertEqual(len(found),1)
+  saved=yaml.safe_load(found[0].read_text())
+  self.assertEqual(saved['app']['title'],'Visitor Build')
+  self.assertTrue(saved['storage']['path'].startswith('data/build-apps/'))
+  self.assertEqual(hashlib.sha256(found[0].read_bytes()).hexdigest(),rev)
+  datadir=found[0].parent/'data'
+  for name in ['theme.json','prompts.json','code-drafts.json']:self.assertTrue((datadir/name).exists(),name)
  def test_complete_save_rolls_back_each_setup_replace_failure(self):
   self.cfg['_dir']=self.tmp.name
   folder=Path(self.tmp.name)/'data';folder.mkdir()

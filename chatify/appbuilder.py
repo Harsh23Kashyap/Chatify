@@ -287,6 +287,43 @@ def save_plan(cfg,plan):
    raise SaveRollbackError('Save failed and rollback could not restore: '+', '.join(rollback_failed)+'. Some saved files may have changed. Check these files before retrying; restart has not been applied.') from error
   raise
 
+def hosted_save_plan(cfg,owner,ticket,plan):
+ """Save a reviewed build as the visitor's own app on hosted multi-visitor demos.
+
+ Live evidence 2026-10-25: the shared save wrote the served demo's own app.yaml
+ (editstate.save_config targets cfg['_path']); the running process hid it because
+ /api/config answers from memory, so every visitor's build silently replaced the
+ demo's on-disk app. On hosted demos the reviewed configuration now lands in a
+ per-visitor build app dir and the served app file is never touched. plan['config']
+ is updated with the rewritten storage path so the launch step bundles from here."""
+ import hashlib
+ root=Path(cfg.get('_dir','.')).resolve()
+ appdir=(root/'data'/'build-apps'/hashlib.sha256(str(owner).encode()).hexdigest()[:12]/hashlib.sha256(str(ticket).encode()).hexdigest()[:12]).resolve()
+ if not appdir.is_relative_to(root):raise ValueError('Build save path must stay inside this workspace')
+ raw=copy.deepcopy(plan['config'])
+ raw['storage']=dict(raw.get('storage') or {})
+ raw['storage']['path']=str((appdir/'data'/'chatify.db').relative_to(root))
+ extra={k:raw[k] for k in EXTRAS if k in raw}
+ clean=schema.validate(raw)
+ _check_values(clean)
+ # Side files live beside the database (same layout as save_plan), which is also
+ # where the launch integrity check reads them back.
+ datadir=appdir/'data'
+ datadir.mkdir(parents=True,exist_ok=True)
+ def put(path,text):
+  fd,tmp=tempfile.mkstemp(prefix='.setup-',dir=str(path.parent))
+  try:
+   with os.fdopen(fd,'w') as f:f.write(text);f.flush();os.fsync(f.fileno())
+   os.replace(tmp,path)
+  finally:
+   if os.path.exists(tmp):os.unlink(tmp)
+ appfile=appdir/'app.yaml'
+ put(appfile,yaml.safe_dump(editstate.view(clean),sort_keys=False))
+ for key,name in [('appearance','theme.json'),('pipeline_prompts','prompts.json'),('helper_drafts','code-drafts.json')]:
+  if key in plan.get('selected',[]) and key in extra:put(datadir/name,json.dumps(extra[key],indent=2))
+ plan['config']=clean
+ return hashlib.sha256(appfile.read_bytes()).hexdigest()
+
 def deployment(provider,data):
  if data.get('consent') is not True:raise ValueError('Agree to send the deployment brief first')
  brief=clean_text(data.get('brief'),6000)
