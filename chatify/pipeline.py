@@ -42,6 +42,11 @@ def _gate_variants(w):
 def _gate_stems(text):
     out = set()
     for w in re.findall(r"[a-z0-9]{3,}", (text or "").lower()):
+        if w.isdigit():
+            # A bare number is never topical vocabulary: the live demo cited
+            # surgical papers for a lunch question because "200" matched "200
+            # cases" / "200,000 times" in their abstracts (2026-10-25).
+            continue
         if w not in _GATE_STOP:
             out |= _gate_variants(w)
     return out
@@ -57,7 +62,15 @@ def relevance_gate(question, found):
     reply instead of a list of irrelevant citations.
     """
     q = _gate_stems(question)
-    if not q or not found:
+    if not found:
+        return found
+    if not q:
+        if re.search(r"[^\x00-\x7f]", question or "") and re.search(r"[^\W\d_]", question or ""):
+            # Question vocabulary the gate cannot read (a non-Latin script): there
+            # is no lexical overlap signal, so passing everything through cited
+            # irrelevant pages as "most relevant" on the live demo (Hindi lunch
+            # question -> surgical papers, 2026-10-25). Clarify honestly instead.
+            return []
         return found
     scored = [(len(q & _gate_stems(str(e.get("title") or "") + " " + str(e.get("text") or "")[:1500])), e) for e in found]
     top = max(n for n, _ in scored)
@@ -179,7 +192,7 @@ class Engine:
         # frying" while "long vegetable stir fry take weeknight" finds only junk.
         if any(x.get("type") in ("http_json","arxiv","pubmed","wikipedia","crossref") for x in self.cfg["sources"]):
             stop=self._STOP|set("summarize summary headline headlines news give compact table chart graph plot publication date dates citations cite explain compare current latest reported report please only sample sources source detail detailed published research studies study findings benefits limits i me my mine we our us often really mean means meant much many way ways tips good best better great weekly daily monthly yearly long takes take took time timing weeknight weeknights weekend weekends morning evenings evening night nights day days hour hours minute minutes second seconds ago today tonight tomorrow yesterday".split())
-            words=[w for w in re.findall(r"[A-Za-z0-9][A-Za-z0-9-]*",question) if w.lower() not in stop]
+            words=[w for w in re.findall(r"[A-Za-z0-9][A-Za-z0-9-]*",question) if not w.isdigit() and w.lower() not in stop]
             out=[question]
             for n in (6,3,2):
                 short=" ".join(words[:n])

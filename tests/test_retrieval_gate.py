@@ -147,3 +147,36 @@ class QuestionCheckNoKey(unittest.TestCase):
             raise providers.ProviderError("model overloaded", 500)
         e.provider.complete = boom
         self.assertIn("could not be completed", e.check_question("q"))
+
+
+class MultilingualAndNumericGate(unittest.TestCase):
+    """Live demo 2026-10-25: a Hindi lunch question with "₹200" was answered with
+    MRSA child-care, sinus surgery and PHACE papers as "most relevant passages".
+    Two escapes made it possible: "200" counted as topical vocabulary and matched
+    the abstracts' numbers, and non-Latin question text gave the gate no readable
+    stems, so everything passed through."""
+
+    JUNK = [ev(1, "MRSA in child care centers", "Children attending child care centers are at increased risk for infections; nasal colonization preceded infection in 200 children."),
+            ev(2, "Failed endoscopic sinus surgery", "Functional endoscopic sinus surgery is performed 200,000 times annually in the United States."),
+            ev(3, "PHACE syndrome review", "More than 200 cases have been reported of PHACE syndrome.")]
+
+    def test_numbers_alone_never_establish_topical_overlap(self):
+        q = "What healthy lunch can I cook in 200 rupees?"
+        self.assertEqual(relevance_gate(q, self.JUNK), [])
+
+    def test_mixed_hindi_english_question_gated_on_english_only(self):
+        q = "सप्ताह के दिनों के lunch के लिए कौन से आसान व्यंजन अच्छे हैं? ₹200 में क्या बन सकता है?"
+        self.assertEqual(relevance_gate(q, self.JUNK), [])
+        good = ev(4, "Lunch meal planning", "Weekday lunch planning on a budget: simple lunch dishes and approximate costs.")
+        self.assertEqual([e["title"] for e in relevance_gate(q, self.JUNK + [good])], ["Lunch meal planning"])
+
+    def test_pure_non_latin_question_cannot_pass_everything_through(self):
+        self.assertEqual(relevance_gate("कौन से आसान व्यंजन अच्छे हैं?", self.JUNK), [])
+
+    def test_punctuation_only_question_still_passes_through(self):
+        # No lexical content at all: the pre-existing behavior for "???".
+        self.assertEqual(len(relevance_gate("???", self.JUNK)), 3)
+
+    def test_digit_tokens_are_not_gate_stems(self):
+        self.assertNotIn("200", _gate_stems("200 rupees 100 grams"))
+        self.assertIn("rupees", _gate_stems("200 rupees"))
