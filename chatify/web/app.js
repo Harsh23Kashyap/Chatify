@@ -642,7 +642,7 @@ async function init() {
   { const h = S.cfg.app.accent.replace("#", ""), v = [0, 2, 4].map((i) => parseInt(h.substr(i, 2), 16) / 255).map((c) => (c <= 0.03928 ? c / 12.92 : ((c + 0.055) / 1.055) ** 2.4));
     const L = 0.2126 * v[0] + 0.7152 * v[1] + 0.0722 * v[2]; document.documentElement.style.setProperty("--on-accent", L > 0.5 ? "#000" : "#fff"); }
   const a = S.cfg.app; document.title = a.title;
-  $("#brand").textContent = a.title; $("#sideTitle").textContent = "Conversations"; $("#noteName").textContent = a.title; $("#noteText").textContent = a.footer; $("#tempPill").addEventListener("click", toggleTemp); $("#themeBtn").addEventListener("click", () => { const dark = document.documentElement.dataset.theme === "dark"; localStorage.setItem("cc_mode", dark ? "light" : "dark"); CCTheme.apply(CCTheme.value); });
+  $("#brand").textContent = a.title; $("#sideTitle").textContent = "Conversations"; $("#noteName").textContent = a.title; $("#noteText").textContent = a.footer; $("#noteName").closest(".note").hidden = PREVIEW; $("#tempPill").addEventListener("click", toggleTemp); $("#themeBtn").addEventListener("click", () => { const dark = document.documentElement.dataset.theme === "dark"; localStorage.setItem("cc_mode", dark ? "light" : "dark"); CCTheme.apply(CCTheme.value); });
   updateModelBadge();
   $("#themeBtn").title = "Switch between light and dark theme";
   const modeHelp={quick:"2 to 4 sentences.",standard:"Short paragraphs.",deep:"More detail, with sections and caveats."};
@@ -885,7 +885,7 @@ async function accountGate() {
 function applyWording() {
   const a = S.cfg.app;
   { const b = $("#brand"); b.replaceChildren(el("img",{class:"tb-logo",src:"/icons/chatify.svg",alt:""}),document.createTextNode("Chatify"));b.title="Workspace: "+(TV("txt_title")||a.title); } document.title = TV("txt_title") || a.title;
-  $("#noteName").textContent = TV("txt_title") || a.title; $("#noteText").textContent = TV("txt_footer") || a.footer;
+  $("#noteName").textContent = TV("txt_title") || a.title; $("#noteText").textContent = TV("txt_footer") || a.footer; $("#noteName").closest(".note").hidden = PREVIEW;
   $("#q").placeholder = TV("txt_placeholder") || "Ask a question"; $("#hint").textContent = TV("txt_hint") || "Answers cite their sources. Check important facts.";
   const d = document.querySelector(".cmeta span:last-child"); if (d) d.textContent = TV("txt_disclaimer") || "Not a substitute for professional advice.";
   $("#sideTitle").textContent = TV("txt_sidebar") || "Chats";
