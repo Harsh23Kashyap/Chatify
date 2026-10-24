@@ -192,7 +192,7 @@ html body dialog.app-builder .cs[data-section-only] .cs-btn{transition:backgroun
 
 .builder-group-track[data-regressed=true]::after{transition:none!important}
 /* Editing a long draft name must not push the proposed fields out from under the caret. */
-.builder-draft-summary>b{display:block;min-width:0;max-width:100%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.builder-draft-summary>b,.builder-draft-summary>h4{display:block;min-width:0;max-width:100%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 /* Hover responds quickly; the step's separate selected-state timing is unchanged. */
 html:not([data-motion=none]):not([data-motion=calm]) dialog.app-builder .builder-steps button:not(:disabled):hover{transition-duration:160ms}
 @media(prefers-reduced-motion:reduce){html dialog.app-builder .builder-steps button{transition:none!important}}
