@@ -135,3 +135,34 @@ class ReadinessBudgetTest(unittest.TestCase):
         # ready'. Keep the budget generous.
         from chatify import nerdload
         self.assertGreaterEqual(nerdload.READY_POLLS * nerdload.READY_INTERVAL, 30)
+class RemoveResilience(unittest.TestCase):
+ def setUp(self):
+  self.tmp=tempfile.TemporaryDirectory();self.addCleanup(self.tmp.cleanup);self.root=Path(self.tmp.name);self.loader=NerdLoader(self.root);self.addCleanup(self.loader.close)
+ def _ws(self):
+  self.loader.root.mkdir(parents=True,exist_ok=True);folder=self.loader.root/'nerd-test01';folder.mkdir();(folder/'app.yaml').write_text('app: {id: w}\n')
+  self.loader.workspaces['nerd-test01']={'folder':folder,'process':None,'title':'W','url':'x','owner':'local','slug':None,'hosted':False}
+  return folder
+ def test_remove_retries_transient_file_failure_once(self):
+  import shutil
+  folder=self._ws();calls=[]
+  real=shutil.rmtree
+  def flaky(path):calls.append(path)
+  def once(path):
+   calls.append(path)
+   if len(calls)==1:raise OSError('child still releasing files')
+   return real(path)
+  import chatify.nerdload as m
+  orig=shutil.rmtree;shutil.rmtree=once
+  try:r=self.loader.remove('nerd-test01',True)
+  finally:shutil.rmtree=orig
+  self.assertEqual(r,{'removed':True});self.assertEqual(len(calls),2)
+  self.assertNotIn('nerd-test01',self.loader.workspaces);self.assertFalse(folder.exists())
+ def test_remove_persistent_failure_keeps_entry_and_files(self):
+  import shutil
+  folder=self._ws()
+  def always(path):raise OSError('fs busy')
+  orig=shutil.rmtree;shutil.rmtree=always
+  try:
+   with self.assertRaisesRegex(ValueError,'could not be deleted yet'):self.loader.remove('nerd-test01',True)
+  finally:shutil.rmtree=orig
+  self.assertIn('nerd-test01',self.loader.workspaces);self.assertTrue((folder/'app.yaml').exists())

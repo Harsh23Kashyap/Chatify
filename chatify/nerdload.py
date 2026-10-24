@@ -260,7 +260,18 @@ class NerdLoader:
   if not item or (owner is not None and (item.get('owner') or 'local')!=owner):raise ValueError('Unknown imported workspace')
   self.stop(key,owner=owner);folder=item['folder']
   if folder.is_symlink() or folder.parent.resolve()!=self.root.resolve():raise ValueError('Workspace path changed; removal stopped')
-  shutil.rmtree(folder)
+  # A just-stopped child can still be releasing its files on a loaded host; give
+  # the removal one short retry before failing honestly. The registry entry is
+  # popped only after the files are gone - never leave a ghost entry that claims
+  # a removable workspace while its credentials folder is already deleted, and
+  # never report removed while files remain.
+  import time as _time
+  try:
+   shutil.rmtree(folder)
+  except OSError:
+   _time.sleep(0.5)
+   try:shutil.rmtree(folder)
+   except OSError as exc:raise ValueError('Workspace files could not be deleted yet (%s). The workspace is stopped; try Remove again in a few seconds.'%exc)
   with self.lock:self.workspaces.pop(key,None)
   return {'removed':True}
  def close(self):
