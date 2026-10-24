@@ -66,6 +66,7 @@ PRESET_PROVIDERS = {
 NEEDS_MODEL = {"ollama", "openai", "openai_compatible", "claude", "gemini"} | set(PRESET_PROVIDERS)
 PROVIDERS = {"mock", "ollama", "openai", "openai_compatible", "claude", "gemini"} | set(PRESET_PROVIDERS)
 CONNECTORS = {"local_files", "http_json", "pubmed", "arxiv", "python", "web_search", "wikipedia", "crossref", "openalex"}
+SOURCE_TYPE_LABELS = {"local_files": "Your documents", "http_json": "Custom API", "pubmed": "PubMed", "arxiv": "arXiv", "python": "Python helper", "web_search": "Live web search", "wikipedia": "Wikipedia", "crossref": "Crossref", "openalex": "OpenAlex"}
 AUTH_MODES = {"none", "token", "accounts"}
 
 
@@ -199,7 +200,8 @@ def validate(raw):
                 if not isinstance(doc,str) or not doc or not isinstance(users,list) or any(not isinstance(u,str) or not u for u in users):
                     raise ConfigError("sources[%d].document_users needs document names mapped to user ID lists" % i)
         s.setdefault("id", "%s%d" % (s["type"], i))
-        s.setdefault("label", s["id"])
+        # A draft that omits a label gets the readable source name, not the raw id.
+        s.setdefault("label", SOURCE_TYPE_LABELS.get(s["type"], s["id"]))
         if type(s.get("weight",1.0)) not in (int,float) or not math.isfinite(s.get("weight",1.0)) or not 0<s.get("weight",1.0)<=1000:
             raise ConfigError("sources[%d].weight must be a positive number" % i)
         if s["id"] in seen:

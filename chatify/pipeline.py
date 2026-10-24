@@ -328,7 +328,7 @@ class Engine:
             except Exception as ex:  # one failing source must not sink the answer
                 # SetupRequired carries an owner-safe message naming the missing step; other
                 # exceptions stay as bare type names so internals never leak into the answer UI.
-                errors[sid] = (str(ex) or type(ex).__name__)[:160] if isinstance(ex, SetupRequired) else type(ex).__name__
+                errors[sid] = (str(ex) or type(ex).__name__)[:240] if isinstance(ex, SetupRequired) else type(ex).__name__
         # The gate targets open-API keyword search, which can return popular but unrelated
         # pages; owner-corpus connectors (local files, uploads, python) are BM25/structured
         # matches over the owner's own documents, a different relevance profile.
@@ -843,7 +843,7 @@ class Engine:
         if temporary:
             tid = None
         else:
-            tid = self.store.add_turn(chat, topic, q, standalone, answer, evidence, ledger, style)
+            tid = self.store.add_turn(chat, topic, q, standalone, answer, evidence, ledger, style, source_errors=errors)
             if scope: self.store.save_state(owner, "scope-" + tid, scope)
             if mem_on and not scope and not permissions.restricted(self.cfg):
                 self._summarize(owner, topic, chat)
@@ -928,7 +928,7 @@ class Engine:
                     answer += "\n\n" + note
         answer = self.attribute_news(answer, evidence)
         ledger = self.ledger(answer, evidence, standalone) if evidence else []
-        tid = self.store.add_turn(chat, topic, q, standalone, answer, evidence, ledger, style)
+        tid = self.store.add_turn(chat, topic, q, standalone, answer, evidence, ledger, style, source_errors=errors)
         if mem_on:
             self._summarize(owner, topic, chat)
         if self.store.chat(owner, chat)["title"] == "New chat":

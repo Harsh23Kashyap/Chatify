@@ -69,3 +69,32 @@ class EffectiveWording(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class SourceLabelDefaults(unittest.TestCase):
+    def test_missing_label_defaults_to_readable_type_name(self):
+        cfg = schema.validate({"sources": [{"type": "openalex"}, {"type": "web_search"}, {"type": "local_files", "path": "docs"}, {"type": "arxiv", "label": "Papers"}]})
+        labels = [s["label"] for s in cfg["sources"]]
+        self.assertEqual(labels, ["OpenAlex", "Live web search", "Your documents", "Papers"])
+
+
+class SourceErrorsPersistence(unittest.TestCase):
+    def test_source_errors_roundtrip_and_legacy_db_migration(self):
+        import sqlite3, time
+        with tempfile.TemporaryDirectory() as folder:
+            path = os.path.join(folder, "s.db")
+            # legacy data file: 10-column turns table, one positional row
+            c = sqlite3.connect(path)
+            c.execute("CREATE TABLE turns(id TEXT PRIMARY KEY, chat TEXT, topic TEXT, question TEXT, standalone TEXT, answer TEXT, evidence TEXT, ledger TEXT, style TEXT, created REAL)")
+            c.execute("CREATE TABLE chats(id TEXT PRIMARY KEY, owner TEXT, title TEXT, pinned INTEGER DEFAULT 0, deleted REAL, created REAL)")
+            c.execute("INSERT INTO chats VALUES('c1','local','t',0,NULL,?)", (time.time(),))
+            c.execute("INSERT INTO turns VALUES('t1','c1','','q','q','a','[]','[]','standard',?)", (time.time(),))
+            c.commit(); c.close()
+            store = Store(path)
+            legacy = store.turn("local", "t1")
+            self.assertEqual(legacy["source_errors"], {})
+            self.assertIsInstance(legacy["created"], float, "migrated column order must not shift created")
+            tid = store.add_turn("c1", "", "q2", "q2", "a2", [], [], "standard", source_errors={"oa": "OpenAlex needs a free API key"})
+            got = store.turn("local", tid)
+            self.assertEqual(got["source_errors"], {"oa": "OpenAlex needs a free API key"})
+            self.assertIsInstance(got["created"], float)

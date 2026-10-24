@@ -4,7 +4,7 @@ import json, os, re, sqlite3, time, uuid
 SCHEMA = """
 CREATE TABLE IF NOT EXISTS chats(id TEXT PRIMARY KEY, owner TEXT, title TEXT, pinned INTEGER DEFAULT 0, deleted REAL, created REAL);
 CREATE TABLE IF NOT EXISTS topics(id TEXT PRIMARY KEY, owner TEXT, title TEXT, summary TEXT DEFAULT '', created REAL);
-CREATE TABLE IF NOT EXISTS turns(id TEXT PRIMARY KEY, chat TEXT, topic TEXT, question TEXT, standalone TEXT, answer TEXT, evidence TEXT, ledger TEXT, style TEXT, created REAL);
+CREATE TABLE IF NOT EXISTS turns(id TEXT PRIMARY KEY, chat TEXT, topic TEXT, question TEXT, standalone TEXT, answer TEXT, evidence TEXT, ledger TEXT, style TEXT, source_errors TEXT, created REAL);
 CREATE TABLE IF NOT EXISTS feedback(turn TEXT PRIMARY KEY, owner TEXT, rating INTEGER, created REAL);
 CREATE TABLE IF NOT EXISTS states(owner TEXT, name TEXT, payload TEXT, updated REAL, PRIMARY KEY(owner,name));
 CREATE TABLE IF NOT EXISTS profile(owner TEXT PRIMARY KEY, text TEXT, updated REAL);
@@ -35,6 +35,7 @@ class Store:
                 self._my = mysqlstore.parse(url)
                 with self.c() as c:
                     c.executescript(SCHEMA)
+                self._migrate()
                 self.kind = "mysql"
                 print("chatify: using MySQL at " + self._my["host"])
                 return
@@ -45,6 +46,7 @@ class Store:
         try:
             with self.c() as c:
                 c.executescript(SCHEMA)
+            self._migrate()
         except sqlite3.DatabaseError as e:
             # A damaged data file must not stop the app. Keep the bad file for recovery and start fresh.
             if self._mem or not os.path.exists(path):
@@ -59,6 +61,7 @@ class Store:
             print("chatify: data file was damaged; moved to " + keep + " and started a new one")
             with self.c() as c:
                 c.executescript(SCHEMA)
+            self._migrate()
 
     def c(self):
         if self._my:
@@ -71,6 +74,16 @@ class Store:
         c.row_factory = sqlite3.Row
         return c
 
+    def _migrate(self):
+        # CREATE TABLE IF NOT EXISTS cannot add columns to an existing data file.
+        try:
+            with self.c() as c:
+                c.execute("ALTER TABLE turns ADD COLUMN source_errors TEXT")
+                try: c.commit()
+                except Exception: pass
+        except Exception:
+            pass  # column already present
+
     @staticmethod
     def _unwritable(e):
         m = str(e).lower()
@@ -80,6 +93,10 @@ class Store:
         """Disk full, read-only or missing folder: keep answering from memory instead of failing. History is not saved."""
         self._mem = sqlite3.connect(":memory:", check_same_thread=False)
         self._mem.executescript(SCHEMA)
+        try:
+            self._migrate()
+        except Exception:
+            pass
         try:
             from .accounts import TABLES
             self._mem.executescript(TABLES)
@@ -172,10 +189,10 @@ class Store:
         return r["topic"] if r else None
 
     # turns
-    def add_turn(self, chat, topic, question, standalone, answer, evidence, ledger, style):
+    def add_turn(self, chat, topic, question, standalone, answer, evidence, ledger, style, source_errors=None):
         i = str(uuid.uuid4())
-        self.q("INSERT INTO turns VALUES(?,?,?,?,?,?,?,?,?,?)", (i, chat, topic, question, standalone, answer,
-               json.dumps(evidence), json.dumps(ledger), style, time.time()), write=True)
+        self.q("INSERT INTO turns(id,chat,topic,question,standalone,answer,evidence,ledger,style,source_errors,created) VALUES(?,?,?,?,?,?,?,?,?,?,?)", (i, chat, topic, question, standalone, answer,
+               json.dumps(evidence), json.dumps(ledger), style, json.dumps(source_errors or {}), time.time()), write=True)
         return i
 
     def turns(self, owner, chat):
@@ -219,6 +236,7 @@ class Store:
         r = dict(r)
         r["evidence"] = json.loads(r["evidence"] or "[]")
         r["ledger"] = json.loads(r["ledger"] or "[]")
+        r["source_errors"] = json.loads(r.get("source_errors") or "{}")
         return r
 
     # turns: delete / restore
@@ -253,7 +271,7 @@ class Store:
                 if old not in topics:
                     topics[old] = str(uuid.uuid4())
                     c.execute("INSERT INTO topics(id,owner,title,summary,created) VALUES(?,?,?,'',?)", (topics[old], owner, r["question"][:120], now))
-                c.execute("INSERT INTO turns VALUES(?,?,?,?,?,?,?,?,?,?)", (str(uuid.uuid4()), chat, topics[old], r["question"], r["standalone"], r["answer"], json.dumps(r["evidence"]), json.dumps(r["ledger"]), r["style"], now + i * .001))
+                c.execute("INSERT INTO turns(id,chat,topic,question,standalone,answer,evidence,ledger,style,source_errors,created) VALUES(?,?,?,?,?,?,?,?,?,?,?)", (str(uuid.uuid4()), chat, topics[old], r["question"], r["standalone"], r["answer"], json.dumps(r["evidence"]), json.dumps(r["ledger"]), r["style"], r["source_errors"] if isinstance(r.get("source_errors"), str) else json.dumps(r.get("source_errors") or {}), now + i * .001))
             c.execute("INSERT INTO states VALUES(?,?,?,?)", (owner, "branch-" + chat, json.dumps({"chat": original["id"], "turn": turn}), now))
             c.commit()
         except Exception:
