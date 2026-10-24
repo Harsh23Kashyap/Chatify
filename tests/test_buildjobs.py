@@ -67,8 +67,7 @@ class CheckpointEdges(unittest.TestCase):
    time.sleep(.01)
   self.fail('timeout')
  def fp(self,cfg):
-  import hashlib
-  p=cfg['provider'];return hashlib.sha256(json.dumps([p.get('type',''),p.get('model',''),p.get('base_url','')],sort_keys=True).encode()).hexdigest()[:16]
+  return buildjobs.BuildJobs._fingerprint(cfg)
  def cpfile(self,tmp,jobs,owner='owner'):
   return jobs._checkpoint_path(owner)
  @unittest.mock.patch('chatify.buildimages.capability',return_value={'available':False,'note':'fixture'})
@@ -78,6 +77,17 @@ class CheckpointEdges(unittest.TestCase):
    jobs=buildjobs.BuildJobs(spend_dir=tmp);f=Fixture();f.fail=next(iter(prompts.STAGES))
    self.wait(jobs,jobs.start('owner',f,schema.DEFAULTS,{'brief':'Garden advice'})['id'])
    changed=copy.deepcopy(schema.DEFAULTS);changed['provider']['model']='some-other-model'
+   jobs2=buildjobs.BuildJobs(spend_dir=tmp);f2=Fixture()
+   d2=jobs2.start('owner',f2,changed,{'brief':'Garden advice'})
+   self.assertNotIn('Resumed',d2.get('notice',''));self.assertEqual(d2['completed'],0)
+   d2=self.wait(jobs2,d2['id']);self.assertEqual(d2['state'],'done',d2);self.assertGreater(len(f2.calls),20)
+ @unittest.mock.patch('chatify.buildimages.capability',return_value={'available':False,'note':'fixture'})
+ def test_changed_budget_settings_start_fresh(self,cap2):
+  import tempfile
+  with tempfile.TemporaryDirectory() as tmp:
+   jobs=buildjobs.BuildJobs(spend_dir=tmp);f=Fixture();f.fail=next(iter(prompts.STAGES))
+   self.wait(jobs,jobs.start('owner',f,schema.DEFAULTS,{'brief':'Garden advice'})['id'])
+   changed=copy.deepcopy(schema.DEFAULTS);changed['budget']['spend_cap_usd']=3.5
    jobs2=buildjobs.BuildJobs(spend_dir=tmp);f2=Fixture()
    d2=jobs2.start('owner',f2,changed,{'brief':'Garden advice'})
    self.assertNotIn('Resumed',d2.get('notice',''));self.assertEqual(d2['completed'],0)

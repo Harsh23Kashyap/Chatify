@@ -46,6 +46,16 @@ EST_OUT_USD_PER_MTOK=25.0
 MAX_PART_ATTEMPTS=8
 CHEAP_MODEL={'openai':'gpt-6-luna'}
 class BuildJobs:
+ @staticmethod
+ def _fingerprint(cfg):
+  # Digest of the non-secret inputs that actually shape drafted parts: the provider
+  # block and budget limits. Any secret-looking field is excluded by name.
+  def clean(value):
+   if isinstance(value,dict):return {k:clean(v) for k,v in sorted(value.items()) if not any(w in k.lower() for w in ('key','secret','token','password'))}
+   if isinstance(value,list):return [clean(v) for v in value]
+   return value
+  inputs=clean({'provider':cfg.get('provider',{}),'budget':cfg.get('budget',{})})
+  return hashlib.sha256(json.dumps(inputs,sort_keys=True).encode()).hexdigest()[:16]
  def __init__(self,drafts=None,spend_dir=None):
   self.lock=threading.RLock();self.jobs={};self.drafts=drafts
   self.checkpoint_dir=os.path.join(spend_dir,'build-checkpoints') if spend_dir else None
@@ -104,9 +114,7 @@ class BuildJobs:
   brief=appbuilder.clean_text(data.get('brief'),4000)
   selected=appbuilder.sections(data.get('sections',appbuilder.SECTIONS))
   if set(selected)!=set(appbuilder.SECTIONS):raise ValueError('Background build currently generates a complete app; use section conversation for a focused tweak')
-  p=cfg.get('provider',{})
-  fingerprint=hashlib.sha256(json.dumps([p.get('type',''),p.get('model',''),p.get('base_url','')],sort_keys=True).encode()).hexdigest()[:16]
-  job={'id':uuid.uuid4().hex,'owner':owner,'provider':provider,'cfg':copy.deepcopy(cfg),'fingerprint':fingerprint,'brief':brief,'state':'running','cancel':False,'calls':0,'retry_calls':0,'attempts':{},'defaulted':[],'in_retry':False,'parts':{},'active':set(),'remaining_work':['Draft areas','Final local validation','Optional logo capability check','Final model review'],'errors':{},'logo_status':{'state':'checking','note':'Logo capability not checked yet'},'yaml':None,'created':time.time(),'phase':'Drafting separate areas','notice':''}
+  job={'id':uuid.uuid4().hex,'owner':owner,'provider':provider,'cfg':copy.deepcopy(cfg),'fingerprint':self._fingerprint(cfg),'brief':brief,'state':'running','cancel':False,'calls':0,'retry_calls':0,'attempts':{},'defaulted':[],'in_retry':False,'parts':{},'active':set(),'remaining_work':['Draft areas','Final local validation','Optional logo capability check','Final model review'],'errors':{},'logo_status':{'state':'checking','note':'Logo capability not checked yet'},'yaml':None,'created':time.time(),'phase':'Drafting separate areas','notice':''}
   with self.lock:
    for key,old in list(self.jobs.items()):
     if time.time()-old['created']>86400 and old['state']!='running':self.jobs.pop(key)
