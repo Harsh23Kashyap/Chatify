@@ -6,7 +6,7 @@ const $ = (s, r = document) => r.querySelector(s);
 const el = (tag, cls, text) => { const n = document.createElement(tag); if (cls) n.className = cls; if (text !== undefined) n.textContent = text; return n; };
 const BASE = window.CC_APP_BASE || "";
 const headers = () => { const h = { "Content-Type": "application/json" }; const t = localStorage.getItem("cc_token"); if (t) h.Authorization = "Bearer " + t; return h; };
-async function api(path, body) { const r = await fetch("/api/settings/build/" + path, { method: "POST", headers: headers(), body: JSON.stringify(body || {}) }); const d = await r.json().catch(() => ({})); if (!r.ok) throw Error(d.error || "Request failed"); return d; }
+async function api(path, body) { const r = await fetch("/api/settings/build/" + path, { method: "POST", headers: headers(), body: JSON.stringify(body || {}) }); const d = await r.json().catch(() => ({})); if (!r.ok) { const err = new Error(d.error || "Request failed"); err.data = d; throw err; } return d; }
 async function getJson(path) { const r = await fetch(path, { headers: headers() }); const d = await r.json().catch(() => ({})); if (!r.ok) throw Error(d.error || "Request failed"); return d; }
 async function postJson(path, body) { const r = await fetch(path, { method: "POST", headers: headers(), body: JSON.stringify(body || {}) }); const d = await r.json().catch(() => ({})); if (!r.ok) throw Error(d.error || "Request failed"); return d; }
 
@@ -331,6 +331,7 @@ async function openReview() {
     return;
   }
   state.reviewTicket = plan.ticket;
+  state.launchTicket = null;
   const cfg = plan.config || {};
   body.replaceChildren();
 
@@ -393,14 +394,35 @@ $("#reviewSave").addEventListener("click", async () => {
   const busy = $("#reviewBusy"), phase = $("#reviewPhase"), err = $("#reviewError");
   err.hidden = true; busy.hidden = false;
   try {
-    phase.textContent = "Saving your app…";
-    const saved = await api("save", { ticket: state.reviewTicket, confirmed: true });
+    if (!state.launchTicket) {
+      try {
+        phase.textContent = "Saving your app…";
+        const saved = await api("save", { ticket: state.reviewTicket, confirmed: true });
+        state.launchTicket = saved.launch_ticket;
+      } catch (e) {
+        if (/expired|unavailable/i.test(e.message || "")) {
+          phase.textContent = "Refreshing the review…";
+          const plan = await api("review", { yaml: state.currentYaml, sections: state.currentSections });
+          state.reviewTicket = plan.ticket;
+          phase.textContent = "Saving your app…";
+          const saved = await api("save", { ticket: state.reviewTicket, confirmed: true });
+          state.launchTicket = saved.launch_ticket;
+        } else { throw e; }
+      }
+    }
     phase.textContent = "Starting a local preview…";
-    const launched = await api("launch", { ticket: saved.launch_ticket });
-    state.workspace = launched;
-    try { sessionStorage.setItem("cc_build_ws", JSON.stringify({ workspace: launched.workspace, title: launched.title, url: launched.url, at: Date.now() })); } catch (e) {}
-    paintYourApp();
-    goStep(4);
+    try {
+      const launched = await api("launch", { ticket: state.launchTicket });
+      state.workspace = launched;
+      try { sessionStorage.setItem("cc_build_ws", JSON.stringify({ workspace: launched.workspace, title: launched.title, url: launched.url, at: Date.now() })); } catch (e) {}
+      paintYourApp();
+      goStep(4);
+    } catch (e) {
+      if (e.data && e.data.retry_ticket) {
+        state.launchTicket = e.data.retry_ticket;
+        err.hidden = false; err.textContent = (e.message || "Starting failed") + " Tap the button again to retry starting - your saved app is safe.";
+      } else { throw e; }
+    }
   } catch (e) {
     err.hidden = false; err.textContent = e.message;
   } finally {
