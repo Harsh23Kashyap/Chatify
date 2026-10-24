@@ -91,6 +91,90 @@ class SfcgTests(unittest.TestCase):
             p.sfcg('???', 3)
         self.assertTrue(any('search=peacebuilding' in u for u in calls))
 
+    # --- classified errors and bounded transient retries ---
+
+    def _http_error(self, code):
+        return p.urllib.error.HTTPError('https://www.sfcg.org/', code, 'status', {}, io.BytesIO(b''))
+
+    def test_denied_not_retried(self):
+        with patch.object(p.urllib.request, 'urlopen', side_effect=self._http_error(403)) as call:
+            with self.assertRaises(p.SfcgDenied) as ctx:
+                p.sfcg('Madagascar', 3)
+        self.assertEqual(call.call_count, 1)  # denial: never retried
+        self.assertIn('HTTP 403', str(ctx.exception))
+
+    def test_challenge_page_is_denied_not_retried(self):
+        page = lambda *a, **k: io.BytesIO(b'<html><title>Attention Required</title></html>')
+        with patch.object(p.urllib.request, 'urlopen', side_effect=page) as call:
+            with self.assertRaises(p.SfcgDenied) as ctx:
+                p.sfcg('Madagascar', 3)
+        self.assertEqual(call.call_count, 1)
+        self.assertIn('non-JSON', str(ctx.exception))
+
+    def test_transient_retried_once_then_raises(self):
+        with patch.object(p.time, 'sleep'), patch.object(p.urllib.request, 'urlopen', side_effect=self._http_error(520)) as call:
+            with self.assertRaises(p.SfcgTransient) as ctx:
+                p.sfcg('Madagascar', 3)
+        self.assertEqual(call.call_count, 2)  # one bounded retry
+        self.assertIn('HTTP 520', str(ctx.exception))
+
+    def test_transient_then_success(self):
+        posts = io.BytesIO(json.dumps([_item('https://www.sfcg.org/peace-win/', 'Peace Win', 'body text')]).encode())
+        pages = io.BytesIO(b'[]')
+        with patch.object(p.time, 'sleep'), patch.object(p.urllib.request, 'urlopen', side_effect=[self._http_error(520), posts, pages]) as call:
+            out = p.sfcg('peace', 3)
+        self.assertEqual(call.call_count, 3)  # retry, then posts and pages
+        self.assertEqual(len(out), 1)
+
+    def test_unreachable_retried_once_then_raises(self):
+        with patch.object(p.time, 'sleep'), patch.object(p.urllib.request, 'urlopen', side_effect=p.urllib.error.URLError(' refused ')) as call:
+            with self.assertRaises(p.SfcgUnreachable):
+                p.sfcg('Madagascar', 3)
+        self.assertEqual(call.call_count, 2)
+
+    def test_error_message_free_of_query_url_and_body(self):
+        with patch.object(p.urllib.request, 'urlopen', side_effect=self._http_error(403)):
+            with self.assertRaises(ValueError) as ctx:
+                p.sfcg('Madagascar secretterms', 3)
+        msg = str(ctx.exception)
+        self.assertNotIn('Madagascar', msg)
+        self.assertNotIn('secretterms', msg)
+        self.assertNotIn('sfcg.org', msg)
+        self.assertNotIn('http://', msg) and self.assertNotIn('https://', msg)
+
+    def test_all_classified_errors_are_value_errors(self):
+        for cls in (p.SfcgDenied, p.SfcgTransient, p.SfcgUnreachable, p.SfcgBadResponse, p.SfcgThrottled):
+            self.assertTrue(issubclass(cls, ValueError))
+
+    def test_throttled_not_retried(self):
+        with patch.object(p.urllib.request, 'urlopen', side_effect=self._http_error(429)) as call:
+            with self.assertRaises(p.SfcgThrottled) as ctx:
+                p.sfcg('Madagascar', 3)
+        self.assertEqual(call.call_count, 1)  # 429 throttling: classified, never auto-retried
+        self.assertIn('429', str(ctx.exception))
+
+    def _challenge_error(self, code, body=b'<html><title>Just a moment...</title></html>', headers=None):
+        return p.urllib.error.HTTPError('https://www.sfcg.org/', code, 'status', headers or {}, io.BytesIO(body))
+
+    def test_challenge_bearing_5xx_is_denied_not_retried(self):
+        with patch.object(p.urllib.request, 'urlopen', side_effect=self._challenge_error(503)) as call:
+            with self.assertRaises(p.SfcgDenied):
+                p.sfcg('Madagascar', 3)
+        self.assertEqual(call.call_count, 1)  # challenge detection beats the nominal 5xx
+
+    def test_cf_mitigated_header_is_denied_not_retried(self):
+        err = self._challenge_error(503, body=b'', headers={'cf-mitigated': 'challenge'})
+        with patch.object(p.urllib.request, 'urlopen', side_effect=err) as call:
+            with self.assertRaises(p.SfcgDenied):
+                p.sfcg('Madagascar', 3)
+        self.assertEqual(call.call_count, 1)
+
+    def test_plain_503_remains_transient_and_retried(self):
+        with patch.object(p.time, 'sleep'), patch.object(p.urllib.request, 'urlopen', side_effect=self._http_error(503)) as call:
+            with self.assertRaises(p.SfcgTransient):
+                p.sfcg('Madagascar', 3)
+        self.assertEqual(call.call_count, 2)
+
 
 if __name__ == '__main__':
     unittest.main()

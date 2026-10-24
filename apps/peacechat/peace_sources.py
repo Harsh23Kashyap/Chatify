@@ -101,23 +101,12 @@ def gdelt(query, k=12):
 _RELIEFWEB_HOST = 'https://api.reliefweb.int/v2/reports'
 _RELIEFWEB_TERMS = '("peace agreement" OR "peace process" OR "peace talks" OR peacebuilding OR reconciliation OR mediation OR ceasefire)'
 
-def reliefweb(query, k=12):
-    appname = os.environ.get('RELIEFWEB_APPNAME', '').strip()
-    if not appname:
-        raise ValueError('ReliefWeb needs an approved RELIEFWEB_APPNAME environment setting.')
-    count = max(1, min(int(k), 15))
-    clean_query = re.sub(r"['’]s\b", "", query or "")
-    ignored = _STOP | _PEACE_WORDS | {'recent', 'latest', 'today', 'news', 'current',
-                                    'role', 'play', 'played', 'examples', 'example', 'successful', 'success'}
-    words = [w for w in re.findall(r"[\w]+", clean_query, flags=re.UNICODE)
-             if len(w) > 2 and w.lower() not in ignored][:4]
-    terms = ' AND '.join('"%s"' % w for w in words)
-    search = ('(%s) AND %s' % (terms, _RELIEFWEB_TERMS)) if terms else _RELIEFWEB_TERMS
+def _reliefweb_fetch(search, count, appname, recent):
     params = {
         'appname': appname, 'limit': count, 'query[value]': search,
         'fields[include][]': ['title', 'body', 'url_alias', 'date.original', 'source.name'],
     }
-    if re.search(r'\b(recent|latest|today|news|current)\b', query or '', re.I):
+    if recent:
         params['sort[]'] = 'date:desc'
     url = _RELIEFWEB_HOST + '?' + urllib.parse.urlencode(params, doseq=True)
     try:
@@ -130,6 +119,9 @@ def reliefweb(query, k=12):
         raise ValueError('ReliefWeb reports could not be retrieved (%s).' % type(exc).__name__) from None
     if not isinstance(payload, dict) or payload.get('error'):
         raise ValueError('ReliefWeb returned an invalid reports response.')
+    return payload
+
+def _reliefweb_items(payload, count):
     out, seen = [], set()
     for item in payload.get('data') or []:
         if not isinstance(item, dict):
@@ -154,6 +146,34 @@ def reliefweb(query, k=12):
     return out[:count]
 
 
+def reliefweb(query, k=12):
+    appname = os.environ.get('RELIEFWEB_APPNAME', '').strip()
+    if not appname:
+        raise ValueError('ReliefWeb needs an approved RELIEFWEB_APPNAME environment setting.')
+    count = max(1, min(int(k), 15))
+    clean_query = re.sub(r"['’]s\b", "", query or "")
+    ignored = _STOP | _PEACE_WORDS | {'recent', 'latest', 'today', 'news', 'current',
+                                    'role', 'play', 'played', 'examples', 'example', 'successful', 'success',
+                                    'work', 'worked', 'help', 'helped', 'change', 'changes', 'countries', 'country'}
+    words = [w for w in re.findall(r"[\w]+", clean_query, flags=re.UNICODE)
+             if len(w) > 2 and w.lower() not in ignored][:4]
+    recent = bool(re.search(r'\b(recent|latest|today|news|current)\b', query or '', re.I))
+    # ANDing every keyword is too strict for natural questions (measured: the
+    # full tracked questions returned nothing while their core topic matches).
+    # Relax one keyword at a time, most specific first; keep the level that
+    # reaches 3 reports, otherwise the level that matched the most.
+    levels = [' AND '.join('"%s"' % w for w in words[:n]) for n in range(min(len(words), 4), 0, -1)] or ['']
+    best = []
+    for terms in levels:
+        search = ('(%s) AND %s' % (terms, _RELIEFWEB_TERMS)) if terms else _RELIEFWEB_TERMS
+        items = _reliefweb_items(_reliefweb_fetch(search, count, appname, recent), count)
+        if len(items) > len(best):
+            best = items
+        if len(items) >= 3:
+            break
+    return best
+
+
 _SFCG_HOST = 'https://www.sfcg.org/wp-json/wp/v2'
 
 def _strip_html(raw):
@@ -162,21 +182,84 @@ def _strip_html(raw):
     import html as _html
     return re.sub(r'\s+', ' ', _html.unescape(text)).strip()
 
+class SfcgError(ValueError):
+    """Base class for Search for Common Ground fetch failures.
+
+    The retrieval pipeline surfaces only the exception type name in
+    source_errors, so each subclass name doubles as the diagnosis. Messages
+    stay static: no URLs, response bodies or query terms (which are the
+    user's question).
+    """
+
+class SfcgDenied(SfcgError):
+    """Auth, challenge or denial response - retrying cannot help."""
+
+class SfcgTransient(SfcgError):
+    """Transient upstream error - worth one bounded retry."""
+
+class SfcgUnreachable(SfcgError):
+    """Network-level failure (DNS, connect, TLS, timeout) - worth one bounded retry."""
+
+class SfcgThrottled(SfcgError):
+    """Rate limited by the upstream - classified and stopped, never auto-retried."""
+
+class SfcgBadResponse(SfcgError):
+    """A syntactically unusable response - retrying cannot help."""
+
+
+# The 5xx/52x family is transient; 520-526 are Cloudflare origin-side errors.
+# 429 throttling, 401/403 and challenge pages are never retried automatically;
+# challenge/denial detection takes precedence over a nominal 5xx status.
+_SFCG_TRANSIENT_HTTP = {500, 502, 503, 504, 520, 521, 522, 523, 524, 525, 526}
+_SFCG_ATTEMPTS = 2       # one retry; the pipeline caps source time at 60s
+_SFCG_BACKOFF = 4.0
+_SFCG_TIMEOUT = 15       # worst case 15 + 4 + 15 = 34s, inside the 60s cap
+
 def _sfcg_fetch(kind, keywords, per_page):
     params = {'search': keywords, 'per_page': per_page,
               '_fields': 'date,link,title,content'}
     url = '%s/%s?%s' % (_SFCG_HOST, kind, urllib.parse.urlencode(params, doseq=True))
-    try:
-        with urllib.request.urlopen(urllib.request.Request(url, headers=_UA), timeout=25) as reply:
-            raw = reply.read(4_000_001)
+    last = SfcgUnreachable('Search for Common Ground publications could not be retrieved (network failure).')
+    for attempt in range(_SFCG_ATTEMPTS):
+        if attempt:
+            time.sleep(_SFCG_BACKOFF)
+        try:
+            with urllib.request.urlopen(urllib.request.Request(url, headers=_UA), timeout=_SFCG_TIMEOUT) as reply:
+                raw = reply.read(4_000_001)
+        except urllib.error.HTTPError as e:
+            sniff = b''
+            try:
+                sniff = e.read(512) if e.fp else b''
+            except Exception:
+                sniff = b''
+            headers = e.headers or {}
+            challenged = ('challenge' in str(headers.get('cf-mitigated') or '').lower()
+                          or sniff.lstrip().startswith(b'<'))
+            if challenged or e.code in (401, 403):
+                raise SfcgDenied('Search for Common Ground publications could not be retrieved (HTTP %s).' % e.code) from None
+            if e.code == 429:
+                raise SfcgThrottled('Search for Common Ground publications rate limited the request (HTTP 429); not retried automatically.') from None
+            if e.code in _SFCG_TRANSIENT_HTTP:
+                last = SfcgTransient('Search for Common Ground publications could not be retrieved (HTTP %s).' % e.code)
+                continue
+            raise SfcgError('Search for Common Ground publications could not be retrieved (HTTP %s).' % e.code) from None
+        except (urllib.error.URLError, TimeoutError, OSError):
+            last = SfcgUnreachable('Search for Common Ground publications could not be retrieved (network failure).')
+            continue
         if len(raw) > 4_000_000:
-            raise ValueError('response too large')
-        payload = json.loads(raw)
-    except Exception as exc:
-        raise ValueError('Search for Common Ground publications could not be retrieved (%s).' % type(exc).__name__) from None
-    if not isinstance(payload, list):
-        raise ValueError('Search for Common Ground returned an invalid publications response.')
-    return payload
+            raise SfcgBadResponse('Search for Common Ground publications could not be retrieved (response too large).')
+        text = raw.decode('utf-8', 'replace')
+        try:
+            payload = json.loads(text)
+        except ValueError:
+            if text.lstrip().startswith('<'):
+                # an HTML page here is an interstitial challenge or error page
+                raise SfcgDenied('Search for Common Ground publications could not be retrieved (non-JSON page).') from None
+            raise SfcgBadResponse('Search for Common Ground publications could not be retrieved (invalid JSON).') from None
+        if not isinstance(payload, list):
+            raise SfcgBadResponse('Search for Common Ground returned an invalid publications response.')
+        return payload
+    raise last from None
 
 def sfcg(query, k=12):
     """Search for Common Ground publications and pages via its public WordPress API.
