@@ -1,4 +1,4 @@
-import copy,json,time,unittest,yaml,threading
+import copy,json,os,time,unittest,yaml,threading
 import unittest.mock
 from pathlib import Path
 from chatify import buildjobs,schema,theme,prompts,generators
@@ -18,6 +18,44 @@ class Fixture:
     if key.startswith('txt_') and not value:defaults[key]='Garden fixture wording'
    if spec['area']=='app':defaults['title']='Garden Field Guide';defaults['id']='garden';defaults['footer']='Garden fixture footer';defaults['examples']=['How do I grow basil?']
   return json.dumps(defaults)
+class Checkpoints(unittest.TestCase):
+ def wait(self,jobs,ident):
+  for _ in range(500):
+   data=jobs.view('owner',ident)
+   if data['state']!='running':return data
+   time.sleep(.01)
+  self.fail('timeout')
+ @unittest.mock.patch('chatify.buildimages.capability',return_value={'available':False,'note':'fixture'})
+ def test_resume_keeps_finished_parts_after_restart(self,cap):
+  import tempfile
+  with tempfile.TemporaryDirectory() as tmp:
+   jobs=buildjobs.BuildJobs(spend_dir=tmp);f=Fixture();f.fail=next(iter(prompts.STAGES))
+   d=self.wait(jobs,jobs.start('owner',f,schema.DEFAULTS,{'brief':'Garden advice'})['id'])
+   self.assertEqual(d['state'],'partial');first_calls=len(f.calls)
+   saved=[n for n in os.listdir(os.path.join(tmp,'build-checkpoints')) if n.endswith('.json')]
+   self.assertEqual(len(saved),1)
+   payload=json.load(open(os.path.join(tmp,'build-checkpoints',saved[0])))
+   self.assertEqual(len(payload['parts']),d['completed']);self.assertNotIn('cfg',payload);self.assertNotIn('provider',payload)
+   # simulated restart: a fresh BuildJobs over the same directory
+   jobs2=buildjobs.BuildJobs(spend_dir=tmp);f2=Fixture()
+   d2=jobs2.start('owner',f2,schema.DEFAULTS,{'brief':'Garden advice'})
+   self.assertIn('Resumed from a saved checkpoint',d2['notice'])
+   d2=self.wait(jobs2,d2['id']);self.assertEqual(d2['state'],'done',d2)
+   self.assertLessEqual(len(f2.calls),4,'only the failed part plus final review run after resume: '+str(len(f2.calls)))
+   self.assertEqual(len(f2.calls)+first_calls-len(f.calls)+len(f.calls),len(f.calls)+len(f2.calls))
+   self.assertEqual(os.listdir(os.path.join(tmp,'build-checkpoints')),[])
+ @unittest.mock.patch('chatify.buildimages.capability',return_value={'available':False,'note':'fixture'})
+ def test_different_brief_starts_fresh(self,cap):
+  import tempfile
+  with tempfile.TemporaryDirectory() as tmp:
+   jobs=buildjobs.BuildJobs(spend_dir=tmp);f=Fixture();f.fail=next(iter(prompts.STAGES))
+   self.wait(jobs,jobs.start('owner',f,schema.DEFAULTS,{'brief':'Garden advice'})['id'])
+   jobs2=buildjobs.BuildJobs(spend_dir=tmp);f2=Fixture()
+   d2=jobs2.start('owner',f2,schema.DEFAULTS,{'brief':'Astronomy questions'})
+   self.assertNotIn('Resumed',d2.get('notice',''))
+   d2=self.wait(jobs2,d2['id']);self.assertEqual(d2['state'],'done',d2)
+   self.assertGreater(len(f2.calls),20,'fresh build reruns all parts')
+
 class ActiveView(unittest.TestCase):
  def test_active_empty(self):
   jobs=buildjobs.BuildJobs();data=jobs.active('owner');self.assertEqual(data,{'active':False,'running_total':0,'mine':[]})

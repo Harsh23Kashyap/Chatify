@@ -1,5 +1,5 @@
 """Bounded background draft jobs. Never runs generated code or saves app state."""
-import copy,json,os,re,threading,uuid,yaml,time
+import copy,hashlib,json,os,re,threading,uuid,yaml,time
 from concurrent.futures import ThreadPoolExecutor,as_completed
 from . import appbuilder,schema,theme,prompts,generators,draftaudit,generator_design
 from .generators import _extract_json
@@ -48,11 +48,38 @@ CHEAP_MODEL={'openai':'gpt-6-luna'}
 class BuildJobs:
  def __init__(self,drafts=None,spend_dir=None):
   self.lock=threading.RLock();self.jobs={};self.drafts=drafts
+  self.checkpoint_dir=os.path.join(spend_dir,'build-checkpoints') if spend_dir else None
   self.spend_path=os.path.join(spend_dir,'build-spend.json') if spend_dir else None
   self.spend={'day':'','est_usd':0.0,'calls':0}
   if self.spend_path and os.path.exists(self.spend_path):
    try:self.spend=json.load(open(self.spend_path))
    except Exception:pass
+ def _checkpoint_path(self,owner):
+  if not self.checkpoint_dir:return None
+  return os.path.join(self.checkpoint_dir,hashlib.sha256(owner.encode()).hexdigest()[:16]+'.json')
+ def _checkpoint(self,job):
+  path=self._checkpoint_path(job['owner'])
+  if not path:return
+  with self.lock:payload={'brief':job['brief'],'parts':copy.deepcopy(job['parts']),'errors':copy.deepcopy(job['errors']),'calls':job['calls'],'retry_calls':job.get('retry_calls',0),'updated':time.time()}
+  try:
+   os.makedirs(self.checkpoint_dir,exist_ok=True)
+   tmp=path+'.tmp';json.dump(payload,open(tmp,'w'));os.replace(tmp,path)
+  except Exception:pass
+ def _checkpoint_clear(self,owner):
+  path=self._checkpoint_path(owner)
+  if path:
+   try:os.remove(path)
+   except OSError:pass
+ def _checkpoint_resume(self,job):
+  path=self._checkpoint_path(job['owner'])
+  if not path or not os.path.exists(path):return
+  try:payload=json.load(open(path))
+  except Exception:return
+  if payload.get('brief')!=job['brief'] or not isinstance(payload.get('parts'),dict):return
+  with self.lock:
+   job['parts']={key:value for key,value in payload['parts'].items() if key in dict(PARTS)}
+   job['calls']=int(payload.get('calls') or 0);job['retry_calls']=int(payload.get('retry_calls') or 0)
+   if job['parts']:job['notice']='Resumed from a saved checkpoint: '+str(len(job['parts']))+' of '+str(len(PARTS))+' draft areas kept from before the restart.'
  def _spend_check(self):
   day=time.strftime('%Y-%m-%d',time.gmtime())
   if self.spend.get('day')!=day:self.spend={'day':day,'est_usd':0.0,'calls':0}
@@ -77,7 +104,9 @@ class BuildJobs:
     if time.time()-old['created']>86400 and old['state']!='running':self.jobs.pop(key)
    if any(x['owner']==owner and x['state']=='running' for x in self.jobs.values()):raise ValueError('A build is already running. Open it or cancel first.')
    self.jobs[job['id']]=job
-  threading.Thread(target=self._run,args=(job,PARTS),daemon=True).start();return self.view(owner,job['id'])
+  self._checkpoint_resume(job)
+  remaining=[(key,spec) for key,spec in PARTS if key not in job['parts']]
+  threading.Thread(target=self._run,args=(job,remaining),daemon=True).start();return self.view(owner,job['id'])
  def _call(self,job,instruction):
   with self.lock:
    if job['cancel']:raise ValueError('Build cancelled')
@@ -254,14 +283,19 @@ class BuildJobs:
       with self.lock:
        job['errors'][key]=str(e)[:400]
        if 'not responding right now' in str(e) or 'rate limit' in str(e).lower():job['cancel']=True;job['provider_blocked']=True
+     self._checkpoint(job)
    for key,spec in parts:
     if not key.startswith('helper:'):continue
     if 'api' not in job['parts']:
      job['errors'][key]='Waiting for API recommendations; retry failed parts to generate a matching helper';continue
     try:self._part(job,key,spec)
     except Exception as e:job['errors'][key]=str(e)[:400]
+    self._checkpoint(job)
    with self.lock:
-    if job['cancel']:job['in_retry']=False;job['state']='partial' if job.get('provider_blocked') else 'cancelled';return
+    if job['cancel']:
+     job['in_retry']=False;job['state']='partial' if job.get('provider_blocked') else 'cancelled'
+     if job['state']=='cancelled':self._checkpoint_clear(job['owner'])
+     return
     if job['errors']:job['in_retry']=False;job['state']='partial';return
     job['phase']='Merged revision and final local validation';job['remaining_work']=['Final local validation','Optional logo capability check','Final model review']
    raw=self._merge(job)
@@ -303,6 +337,7 @@ class BuildJobs:
    if self.drafts:
     try:self.drafts.put(job['owner'],job['yaml'],raw['app']['title'],job['id'])
     except Exception as e:job['notice']+=' Draft persistence failed: '+str(e)[:120]
+   self._checkpoint_clear(job['owner'])
   except Exception as e:
    with self.lock:job['errors']['final']=str(e)[:400];job['state']='partial' if not job['cancel'] else 'cancelled';job['in_retry']=False
  def active(self,owner):
