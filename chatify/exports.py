@@ -1,5 +1,12 @@
-"""BibTeX and a dependency-free branded, multipage PDF for an answer."""
-import re, textwrap, unicodedata
+"""Branded multipage PDF and Markdown exports for an answer, plus BibTeX.
+
+The PDF uses bundled Noto Sans and Noto Sans Devanagari fonts (SIL Open Font
+License 1.1, see web/fonts/OFL.txt) with HarfBuzz shaping, so ordinary Unicode
+answer text - including Hindi - exports as itself instead of being folded or
+rejected. Scripts outside the bundled fonts are still rejected honestly.
+"""
+import os, re, unicodedata
+from fpdf import FPDF
 
 
 def _k(e, i):
@@ -16,10 +23,6 @@ def bibtex(evidence):
     return "\n\n".join(out) + "\n"
 
 
-def _pdf_escape(s):
-    return s.encode("cp1252", "replace").decode("cp1252").replace("\\", "\\\\").replace("(", "\\(").replace(")", "\\)")
-
-
 def snapshot(e):
     return " · ".join(str(x) for x in [e.get("document"), "page "+str(e["page"]) if e.get("page") else e.get("section"), "version "+str(e["version"]) if e.get("version") else "", "OCR" if e.get("ocr") else ""] if x)
 
@@ -32,8 +35,58 @@ def answer_markdown(app,turn):
     return "\n".join(out)
 
 
+_FONTS=os.path.join(os.path.dirname(os.path.abspath(__file__)),'web','fonts')
+_COVERAGE=None
+def _covered_chars():
+    global _COVERAGE
+    if _COVERAGE is None:
+        from fontTools.ttLib import TTFont
+        cov=set()
+        for name in ('NotoSans-Regular.ttf','NotoSans-Bold.ttf','NotoSansDevanagari-Regular.ttf','NotoSansDevanagari-Bold.ttf','NotoSansSymbols-Regular.ttf','NotoSansSymbols2-Regular.ttf'):
+            cov|=set(TTFont(os.path.join(_FONTS,name)).getBestCmap())
+        _COVERAGE=cov
+    return _COVERAGE
+
+# Joiners and variation selectors are consumed by the shaper, not drawn alone.
+_EXEMPT={'\u200c','\u200d','\ufe0f','\ufeff','\u00ad'}
+def _check_representable(blocks):
+    cov=_covered_chars()
+    for _,value in blocks:
+        for ch in value:
+            if ch in _EXEMPT or unicodedata.combining(ch):continue
+            if ord(ch) not in cov:raise ValueError('PDF font cannot represent this text. Download Markdown for full Unicode.') from None
+
+class _AnswerPDF(FPDF):
+    def __init__(self,doc_title,accent):
+        super().__init__(unit='pt',format='A4')
+        self._doc_title=doc_title
+        self._accent=accent
+        self.set_margins(50,50,86)
+        self.set_auto_page_break(True,82)
+        for family,style,filename in [('noto','','NotoSans-Regular.ttf'),('noto','B','NotoSans-Bold.ttf'),('deva','','NotoSansDevanagari-Regular.ttf'),('deva','B','NotoSansDevanagari-Bold.ttf'),('symbols','','NotoSansSymbols-Regular.ttf'),('symbols2','','NotoSansSymbols2-Regular.ttf')]:
+            self.add_font(family,style,os.path.join(_FONTS,filename))
+        self.set_fallback_fonts(['deva','symbols','symbols2'])
+        self.set_text_shaping(True)
+        self.set_title(doc_title)
+    def header(self):
+        self.set_fill_color(248,244,233);self.rect(0,0,595,842,'F')
+        self.set_fill_color(*self._accent);self.rect(50,44,36,3,'F')
+    def footer(self):
+        self.set_draw_color(217,224,214);self.set_line_width(0.5);self.line(50,783,545,783)
+        self.set_font('noto','',8);self.set_text_color(99,115,107)
+        self.set_xy(50,790);self.cell(0,12,'%s | %d / {nb}'%(self._doc_title[:60],self.page_no()))
+
+def chat_markdown(title, turns):
+    out = ["# " + title, ""]
+    for t in turns:
+        out += ["**Q:** " + t["question"], "", t["answer"], ""]
+        for i, e in enumerate(t["evidence"], 1):
+            out.append("%d. %s%s" % (i, e["title"], " <%s>" % e["url"] if e["url"] else ""))
+        out.append("")
+    return "\n".join(out)
+
+
 def pdf_bytes(title, turn, accent="#173f35", tagline=""):
-    # Latin-1 standard fonts; reject unsupported glyphs rather than losing text.
     blocks=[('label','ANSWER NOTE'),('title',title),('muted',tagline),('space',''),('label','YOUR QUESTION'),('question',turn['question']),('space',''),('heading','Answer')]
     # Recompose markdown tables into readable labeled rows for narrow PDF pages.
     lines=turn['answer'].split('\n');i=0
@@ -54,75 +107,24 @@ def pdf_bytes(title, turn, accent="#173f35", tagline=""):
     for i,e in enumerate(turn['evidence'],1):
         blocks += [('source','[%d] %s'%(e.get('n',i),e['title'])),('muted',snapshot(e).replace(' · ',' | ')),('muted',e.get('url') or ''),('space','')]
     blocks += [('muted','Source versions are snapshots. Linked documents may change.')]
-    # WinAnsi (cp1252) covers typographic punctuation used by model answers; common
-    # symbols outside it get readable text equivalents and stylized Latin letters
-    # fold to their plain forms. Accented letters fold through NFKD with combining
-    # marks stripped. Anything still unrepresentable (non-Latin scripts) stays an
-    # honest rejection instead of silent replacement; Markdown keeps full Unicode.
-    _PDF_TRANSLATE=str.maketrans({'\u20b9':'Rs. ','\u2192':'->','\u2190':'<-','\u2191':'^','\u2193':'v','\u2713':'[ok]','\u2714':'[ok]','\u2717':'[x]','\u2718':'[x]','\u26a0':'!','\u2605':'*','\u2606':'*','\u2026':'...','\u200d':'','\ufe0f':'','\u018e':'E','\u01dd':'e','\u0259':'e','\u0141':'L','\u0142':'l','\u0110':'D','\u0111':'d','\u0131':'i','\u014b':'n'})
-    def _fold(text):
-        out=[]
-        for ch in text.translate(_PDF_TRANSLATE):
-            try:
-                ch.encode('cp1252');out.append(ch);continue
-            except UnicodeEncodeError:pass
-            folded=''.join(c for c in unicodedata.normalize('NFKD',ch) if not unicodedata.combining(c))
-            try:
-                folded.encode('cp1252');out.append(folded)
-            except UnicodeEncodeError:out.append(ch)
-        return ''.join(out)
-    blocks=[(kind,_fold(value)) for kind,value in blocks]
-    try:'\n'.join(v for _,v in blocks).encode('cp1252')
-    except UnicodeEncodeError:raise ValueError('PDF font cannot represent this text. Download Markdown for full Unicode.') from None
+    # Bundled Noto Sans + Noto Sans Devanagari (SIL OFL 1.1) with HarfBuzz
+    # shaping cover ordinary generated answer text, including Hindi. Scripts the
+    # bundled fonts do not cover stay an honest rejection rather than silent
+    # .notdef boxes; Markdown keeps full Unicode for those.
+    _check_representable(blocks)
     if not re.fullmatch(r'#[0-9a-fA-F]{6}',accent):accent='#173f35'
-    rgb=' '.join('%.3f'%(int(accent[i:i+2],16)/255) for i in (1,3,5))
-    styles={'label':('F3',8,36,rgb,88),'title':('F2',30,38,rgb,32),'heading':('F2',20,30,rgb,48),'question':('F2',16,24,'0.09 0.14 0.12',54),'body':('F1',11,17,'0.09 0.14 0.12',78),'source':('F3',10,17,rgb,80),'muted':('F1',9,14,'0.39 0.45 0.42',92)}
-    pages=[];commands=[];y=762
+    rgb=tuple(int(accent[i:i+2],16) for i in (1,3,5))
+    # (style, size, block line pitch, color) - mirrors the former hand-rolled
+    # layout: same paper, margins, pitch and palette, now real Unicode fonts.
+    ink=(23,36,31);mut=(99,115,107)
+    styles={'label':('B',8,36,rgb),'title':('B',30,38,rgb),'heading':('B',20,30,rgb),'question':('B',16,24,ink),'body':('',11,17,ink),'source':('B',10,17,rgb),'muted':('',9,14,mut)}
+    pdf=_AnswerPDF(str(title)[:120],rgb)
+    pdf.add_page()
     for kind,text in blocks:
-        if kind=='space':y-=14;continue
-        font,size,leading,color,width=styles[kind]
-        rows=textwrap.wrap(text,width,replace_whitespace=False) or ['']
-        # A character count alone overflows for wide glyphs. Conservative widths
-        # keep arbitrary source titles and long unbroken words on the page.
-        def points(value):
-            return sum(size * (1 if c in "MW@%" or ord(c)>127 else .28 if c in " ilI.,:;!|'" else .6) for c in value)
-        safe=[]
-        for row in rows:
-            while points(row)>495:
-                cut=1
-                while cut<len(row) and points(row[:cut+1])<=495:cut+=1
-                space=row.rfind(' ',0,cut+1)
-                if space>0:cut=space
-                safe.append(row[:cut]);row=row[cut:].lstrip()
-            safe.append(row)
-        rows=safe
-        if kind in ('heading','label') and y<130:pages.append(commands);commands=[];y=756
-        for row in rows:
-            if y<82:pages.append(commands);commands=[];y=756
-            if kind=='heading' and row==rows[0]:commands.append('0.85 0.88 0.86 RG 0.5 w 50 %d m 545 %d l S'%(y+17,y+17))
-            commands.append('%s rg BT /%s %d Tf 50 %d Td (%s) Tj ET'%(color,font,size,y,_pdf_escape(row)))
-            y-=leading
-    if commands:pages.append(commands)
-    objs=['<< /Type /Catalog /Pages 2 0 R >>','', '<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica /Encoding /WinAnsiEncoding >>','<< /Type /Font /Subtype /Type1 /BaseFont /Times-Roman /Encoding /WinAnsiEncoding >>','<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold /Encoding /WinAnsiEncoding >>'];ids=[]
-    for n,cmd in enumerate(pages,1):
-        pid=len(objs)+1;cid=pid+1;ids.append(pid)
-        stream='0.973 0.957 0.914 rg 0 0 595 842 re f\n'+rgb+' rg 50 795 36 3 re f\n'+'\n'.join(cmd)+'\n0.85 0.88 0.86 RG 0.5 w 50 59 m 545 59 l S\nBT /F1 8 Tf 0.39 0.45 0.42 rg 50 40 Td ('+_pdf_escape(title[:60])+' | '+str(n)+' / '+str(len(pages))+') Tj ET'
-        objs.append('<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Contents %d 0 R /Resources << /Font << /F1 3 0 R /F2 4 0 R /F3 5 0 R >> >> >>'%cid)
-        objs.append('<< /Length %d >>\nstream\n%s\nendstream'%(len(stream.encode('cp1252')),stream))
-    objs[1]='<< /Type /Pages /Kids ['+' '.join('%d 0 R'%i for i in ids)+'] /Count %d >>'%len(ids)
-    out,offs=b'%PDF-1.4\n',[]
-    for i,o in enumerate(objs,1):offs.append(len(out));out+=('%d 0 obj\n%s\nendobj\n'%(i,o)).encode('cp1252')
-    x=len(out);out+=('xref\n0 %d\n0000000000 65535 f \n'%(len(objs)+1)).encode()
-    for o in offs:out+=('%010d 00000 n \n'%o).encode()
-    out+=('trailer\n<< /Size %d /Root 1 0 R >>\nstartxref\n%d\n%%%%EOF'%(len(objs)+1,x)).encode()
-    return out
-
-
-def chat_markdown(title, turns):
-    out = ["# " + title, ""]
-    for t in turns:
-        out += ["**Q:** " + t["question"], "", t["answer"], ""]
-        for i, e in enumerate(t["evidence"], 1):
-            out.append("%d. %s%s" % (i, e["title"], " <%s>" % e["url"] if e["url"] else ""))
-        out.append("")
-    return "\n".join(out)
+        if kind=='space':pdf.ln(14);continue
+        style,size,pitch,color=styles[kind]
+        pdf.set_font('noto',style,size);pdf.set_text_color(*color)
+        if kind=='heading':
+            y=pdf.get_y();pdf.set_draw_color(217,224,214);pdf.set_line_width(0.5);pdf.line(50,y+2,545,y+2);pdf.set_y(y+6)
+        pdf.multi_cell(0,pitch,text,new_x='LMARGIN',new_y='NEXT')
+    return bytes(pdf.output())

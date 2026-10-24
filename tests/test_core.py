@@ -120,7 +120,7 @@ class Exports(unittest.TestCase):
         ev = [{"title": "T {x}", "authors": ["Ada Lovelace"], "year": "1843", "venue": "J", "url": "u"}]
         self.assertIn("@article{Lovelace18431", bibtex(ev)); self.assertNotIn("{x}", bibtex(ev))
         p = pdf_bytes("App", {"question": "q (1)", "answer": "a [1]", "evidence": ev})
-        self.assertTrue(p.startswith(b"%PDF-1.4") and p.rstrip().endswith(b"%%EOF"))
+        self.assertTrue(p.startswith(b"%PDF-1.") and p.rstrip().endswith(b"%%EOF"))
 
 
 class Http(unittest.TestCase):
