@@ -92,9 +92,14 @@ def validate_extras(extras):
   t=extras['api_suggestions']
   if not isinstance(t,list) or len(t)>8:raise ValueError('Keep API suggestions to eight')
   for suggestion in t:
+   if isinstance(suggestion,dict):
+    # Verified terms are server-attached below; model-written copies are dropped.
+    for k in ('terms','terms_source','terms_verified'):suggestion.pop(k,None)
    if not isinstance(suggestion,dict) or set(suggestion)-{'name','service','what','reason','connector','setup','caveat','provider_page','docs_url','key_url','key_required','helper','selected'} or any(not isinstance(v,str) or len(v)>1000 for k,v in suggestion.items() if k not in ('key_required','helper','selected')):raise ValueError('Invalid API suggestion')
  from .apipicks import enrich
+ from . import apiterms
  if 'api_suggestions' in extras:extras['api_suggestions']=enrich(extras['api_suggestions'])
+ for suggestion in extras.get('api_suggestions',[]):apiterms.attach(suggestion)
  for suggestion in extras.get('api_suggestions',[]):
   if 'key_required' in suggestion and type(suggestion['key_required']) is not bool:raise ValueError('key_required must be boolean')
   if 'selected' in suggestion and type(suggestion['selected']) is not bool:raise ValueError('API selection must be boolean')
