@@ -11,7 +11,8 @@ class OnboardingUI(unittest.TestCase):
   self.assertIn('aria-label="Question tools"',s)
  def test_preview_and_nested_logo_packaging(self):
   r=Path(__file__).resolve().parents[1];s=(r/'chatify/web/app.js').read_text()
-  self.assertIn('document.body.inert = true',s)
+  self.assertIn('function previewMode()',s)
+  self.assertIn('Ask a sample question',s)
   self.assertIn('if (PREVIEW) return;',s)
   self.assertIn('web/logos/*.svg',(r/'pyproject.toml').read_text())
  def test_theme_switch_and_preset_palette(self):

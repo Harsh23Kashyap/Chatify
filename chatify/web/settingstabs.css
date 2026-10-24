@@ -439,3 +439,5 @@ html body.settings-tabs #seg>.seg-ind{display:none!important}
 @media(min-width:1101px){
 body.settings-tabs.settings-preview-hidden #col,body.settings-tabs.settings-editor-wide #col,body.settings-tabs.prompt-pane-active #col{grid-column:2/-1!important}
 }
+
+body.settings-tabs #menu{top:140px!important}body.settings-tabs #pvbox{top:140px!important}
