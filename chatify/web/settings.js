@@ -589,8 +589,8 @@ function pvFollow() {
     card.querySelector(".pvm-provider-name").textContent=NAMES[cur.provider]||cur.provider;
     card.querySelector(".pvm-model-name").textContent=chosenModel()||(cur.provider==="mock"?"Built-in demo, no model needed":"No model chosen yet");
     card.querySelector(".pvm-key-state").textContent=keyTxt;
-    const badge=card.querySelector(".pvm-badge"),testing=r?.classList.contains("busy");badge.className="pvm-badge "+(testing?"busy":st);badge.textContent=cur.provider==="mock"?"Offline demo":testing?"Testing connection":st==="ok"?"Connected":st==="bad"?"Not working":"Not tested yet";
-    const detail=card.querySelector(".pvm-connection-state");detail.className="pvm-row pvm-connection-state "+st;detail.textContent=cur.provider==="mock"?"Built-in answers. No AI connection or paid calls.":((r?.innerText)||"Press Test connection to check the key and model.");
+    const badge=card.querySelector(".pvm-badge"),testing=r?.classList.contains("busy"),assumed=r?.dataset.assumed==="1";badge.className="pvm-badge "+(testing?"busy":st);badge.textContent=cur.provider==="mock"?"Offline demo":testing?"Testing connection":st==="ok"?(assumed?"Key ready":"Connected"):st==="bad"?"Not working":"Not tested yet";
+    const detail=card.querySelector(".pvm-connection-state");detail.className="pvm-row pvm-connection-state "+st;detail.textContent=cur.provider==="mock"?"Built-in answers. No AI connection or paid calls.":assumed?"Key found on the host. Not tested with the provider yet.":((r?.innerText)||"Press Test connection to check the key and model.");
 
   }
   pvExtra();

@@ -1342,7 +1342,7 @@ html:not([data-motion=none]):not([data-motion=calm]) .pipeline-editor-pane butto
 .editor-list{align-items:stretch}
 
 /* Sticky top nav must not cover scrolled-to content */
-body.settings-tabs #col>section,body.settings-tabs #sec-prompts .stage,body.settings-tabs #sec-code .helper,body.settings-tabs .editor-choice{scroll-margin-top:76px}
+body.settings-tabs #col>section,body.settings-tabs #sec-prompts .stage,body.settings-tabs #sec-code .helper,body.settings-tabs .editor-choice{scroll-margin-top:130px}
 .emoji-tile-fallback{font-size:10px;line-height:1.15;text-align:center;font-weight:600;overflow-wrap:anywhere}
 
 body.simple #testres[data-assumed="1"]{display:none}.info-pop-more{margin-top:8px}
