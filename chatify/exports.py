@@ -1,5 +1,5 @@
 """BibTeX and a dependency-free branded, multipage PDF for an answer."""
-import re, textwrap
+import re, textwrap, unicodedata
 
 
 def _k(e, i):
@@ -55,10 +55,23 @@ def pdf_bytes(title, turn, accent="#173f35", tagline=""):
         blocks += [('source','[%d] %s'%(e.get('n',i),e['title'])),('muted',snapshot(e).replace(' · ',' | ')),('muted',e.get('url') or ''),('space','')]
     blocks += [('muted','Source versions are snapshots. Linked documents may change.')]
     # WinAnsi (cp1252) covers typographic punctuation used by model answers; common
-    # symbols outside it get readable text equivalents, everything else stays an
-    # honest rejection instead of silent replacement.
-    _PDF_TRANSLATE=str.maketrans({'\u20b9':'Rs. ','\u2192':'->','\u2190':'<-','\u2191':'^','\u2193':'v','\u2713':'[ok]','\u2714':'[ok]','\u2717':'[x]','\u2718':'[x]','\u26a0':'!','\u2605':'*','\u2606':'*','\u2026':'...','\u200d':'','\ufe0f':''})
-    blocks=[(kind,value.translate(_PDF_TRANSLATE)) for kind,value in blocks]
+    # symbols outside it get readable text equivalents and stylized Latin letters
+    # fold to their plain forms. Accented letters fold through NFKD with combining
+    # marks stripped. Anything still unrepresentable (non-Latin scripts) stays an
+    # honest rejection instead of silent replacement; Markdown keeps full Unicode.
+    _PDF_TRANSLATE=str.maketrans({'\u20b9':'Rs. ','\u2192':'->','\u2190':'<-','\u2191':'^','\u2193':'v','\u2713':'[ok]','\u2714':'[ok]','\u2717':'[x]','\u2718':'[x]','\u26a0':'!','\u2605':'*','\u2606':'*','\u2026':'...','\u200d':'','\ufe0f':'','\u018e':'E','\u01dd':'e','\u0259':'e','\u0141':'L','\u0142':'l','\u0110':'D','\u0111':'d','\u0131':'i','\u014b':'n'})
+    def _fold(text):
+        out=[]
+        for ch in text.translate(_PDF_TRANSLATE):
+            try:
+                ch.encode('cp1252');out.append(ch);continue
+            except UnicodeEncodeError:pass
+            folded=''.join(c for c in unicodedata.normalize('NFKD',ch) if not unicodedata.combining(c))
+            try:
+                folded.encode('cp1252');out.append(folded)
+            except UnicodeEncodeError:out.append(ch)
+        return ''.join(out)
+    blocks=[(kind,_fold(value)) for kind,value in blocks]
     try:'\n'.join(v for _,v in blocks).encode('cp1252')
     except UnicodeEncodeError:raise ValueError('PDF font cannot represent this text. Download Markdown for full Unicode.') from None
     if not re.fullmatch(r'#[0-9a-fA-F]{6}',accent):accent='#173f35'

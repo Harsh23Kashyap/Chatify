@@ -18,6 +18,16 @@ class Export(unittest.TestCase):
  def test_typographic_unicode_no_longer_rejected(self):
   t=self.turn();t['answer']='Em dash \u2014 en dash \u2013 quotes \u2018x\u2019 \u201cy\u201d bullet \u2022 ellipsis \u2026'
   self.assertTrue(pdf_bytes('Chat',t).startswith(b'%PDF'))
+ def test_stylized_latin_and_accents_fold_not_reject(self):
+  # Real failing text from the live demo: Wikipedia "E L I T Ǝ" extract
+  t=self.turn();t['answer']='- Elite (Spanish: Élite; stylized as E L I T Ǝ) is a Spanish teen drama series created by Carlos Montero and Darío Madrona.'
+  t['evidence']=[{'n':1,'title':'Elite (TV series)','url':'https://en.wikipedia.org/wiki/Elite_(TV_series)','document':'wikipedia','snapshot':'stylized as E L I T Ǝ'}]
+  b=pdf_bytes('Balcony Gardening Chat',t)
+  self.assertTrue(b.startswith(b'%PDF-1.4'));self.assertIn(b'E L I T E',b);self.assertIn(b'Madrona',b)
+  self.assertIn('E L I T Ǝ',answer_markdown({'title':'Chat'},t))
+ def test_accented_latin_folds_via_nfkd(self):
+  t=self.turn();t['answer']='S\u0219l\u0142owacki \u0151\u017c \u0103\u010d\u011b'
+  self.assertTrue(pdf_bytes('Chat',t).startswith(b'%PDF'))
  def test_accent_not_pdf_injection(self):self.assertIn(b'0.090 0.247 0.208',pdf_bytes('Chat',self.turn(),'bad-pdf'))
 
  def test_branded_template_fonts_paper_and_metadata(self):
