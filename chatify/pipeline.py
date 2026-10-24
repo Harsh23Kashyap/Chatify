@@ -39,6 +39,15 @@ def _gate_variants(w):
     return out
 
 
+_GATE_WEAK = frozenset(
+    "main recent current study studies review reviews finding findings result results method methods "
+    "effect effects analysis analyses".split())
+# Generic academic vocabulary: matching only these says nothing about topic. An
+# immunotherapy review matched a CAR-T lymphoma-trials question on
+# recent/main/cell alone and was cited on the live demo (2026-10-25); weak stems
+# no longer count toward the overlap floor.
+
+
 def _gate_stems(text):
     out = set()
     for w in re.findall(r"[a-z0-9]{3,}", (text or "").lower()):
@@ -57,7 +66,8 @@ def relevance_gate(question, found):
 
     Keyword search against open APIs (Wikipedia, news) can return popular but unrelated
     pages for conversational questions; citing them misleads the reader. The best match
-    sets the bar: keep anything with at least half its overlap (floor 1). When nothing
+    sets the bar: keep anything with at least half its overlap, and never below the
+    absolute specificity floor set by the question vocabulary size. When nothing
     overlaps at all the result is empty and the answer becomes the honest no-evidence
     reply instead of a list of irrelevant citations.
     """
@@ -72,7 +82,17 @@ def relevance_gate(question, found):
             # question -> surgical papers, 2026-10-25). Clarify honestly instead.
             return []
         return found
-    scored = [(len(q & _gate_stems(str(e.get("title") or "") + " " + str(e.get("text") or "")[:1500])), e) for e in found]
+    # Score by question WORD, not by stem variant: "trials" matching "trials"
+    # must count once, not once per shared inflection (trial/trials), or a single
+    # generic word reaches floor 2 by itself (live demo 2026-10-25).
+    q_words = list(dict.fromkeys(w for w in re.findall(r"[a-z0-9]{3,}", (question or "").lower())
+                                 if not w.isdigit() and w not in _GATE_STOP))
+    topical = [w for w in q_words if w not in _GATE_WEAK] or q_words
+    q_variants = [(w, _gate_variants(w)) for w in topical]
+    scored = []
+    for e in found:
+        p = _gate_stems(str(e.get("title") or "") + " " + str(e.get("text") or "")[:1500])
+        scored.append((sum(1 for _, v in q_variants if v & p), e))
     top = max(n for n, _ in scored)
     if top == 0:
         return []
@@ -82,7 +102,16 @@ def relevance_gate(question, found):
         # played "seasons"). Clarify instead of citing it. Short one-word questions keep
         # their single best lexical match - it is the only signal that can exist.
         return []
-    floor = 1 if top < 2 else max(2, top // 2)
+    # Absolute specificity floor: the more topical vocabulary the question has,
+    # the more of it a passage must share before it counts as evidence. Without
+    # this the live demo passed English misses through the floor-1 path: an
+    # AI-trial-design paper cited for a CAR-T lymphoma question and a
+    # statistical-physics umbrella-sampling paper for a diffusion-sampling
+    # question (2026-10-25). Short questions keep floor 1; mid questions need 2
+    # shared stems; vocabulary-rich questions need 3. When even the best passage
+    # falls short the answer becomes the honest no-evidence reply.
+    need = 1 if len(topical) <= 3 else (2 if len(topical) <= 6 else 3)  # topical = distinct question words
+    floor = max(need, 1 if top < 2 else max(2, top // 2))
     return [e for n, e in scored if n >= floor]
 
 

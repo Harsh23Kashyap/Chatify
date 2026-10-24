@@ -180,3 +180,35 @@ class MultilingualAndNumericGate(unittest.TestCase):
     def test_digit_tokens_are_not_gate_stems(self):
         self.assertNotIn("200", _gate_stems("200 rupees 100 grams"))
         self.assertIn("rupees", _gate_stems("200 rupees"))
+
+
+class EnglishSpecificityGate(unittest.TestCase):
+    """Live demo 2026-10-25, English edition of the shallow-gate defect: an
+    AI-trial-design paper was cited for a CAR-T lymphoma question and a
+    statistical-physics umbrella-sampling paper for a diffusion-sampling
+    question. Generic academic words (recent/main/methods) and variant
+    double-counting let a single shared word pass the floor."""
+
+    CART_Q = "What are the main findings of recent trials on CAR-T cell therapy in lymphoma?"
+    B_ALL = ev(1, "Immunotherapy in B-Cell Acute Lymphoblastic Leukemia", "In recent years, immunotherapy has been increasingly incorporated into the clinical care of both pediatric and adult patients with B-cell acute lymphoblastic leukemia (B-ALL) to improve outcomes. Four main categories of immunotherapies are used in B-ALL.")
+    CRC = ev(2, "Immunotherapy for colorectal cancer", "Colorectal cancer is the third most common cancer and the second most lethal cancer in the world. The treatment of this complex disease is mainly based on traditional treatments, including surgery, radiotherapy, and chemotherapy.")
+    AI_TRIAL = ev(3, "Artificial Intelligence for Clinical Trial Design", "Clinical trials consume the latter half of the 10 to 15 year development cycle for bringing a single new drug to market. Hence, a failed trial sinks the investment into the trial itself.")
+    CART_REAL = ev(4, "CAR-T cell therapy in relapsed lymphoma: trial results", "Recent trials of CAR-T cell therapy in lymphoma report durable remissions. We review the main findings across pivotal trials of CAR-T cell therapy in relapsed and refractory lymphoma.")
+
+    def test_generic_overlap_alone_is_not_evidence(self):
+        self.assertEqual(relevance_gate(self.CART_Q, [self.B_ALL, self.CRC, self.AI_TRIAL]), [])
+
+    def test_real_cart_evidence_kept_broad_papers_dropped(self):
+        out = relevance_gate(self.CART_Q, [self.B_ALL, self.CRC, self.AI_TRIAL, self.CART_REAL])
+        self.assertEqual([e["title"] for e in out], ["CAR-T cell therapy in relapsed lymphoma: trial results"])
+
+    def test_one_shared_word_counts_once_despite_inflections(self):
+        # "trials" matching "trials" is one shared word, not trial+trials.
+        out = relevance_gate(self.CART_Q, [self.AI_TRIAL])
+        self.assertEqual(out, [])
+
+    def test_same_word_family_different_field_dropped(self):
+        q = "What sampling methods improve diffusion model image quality?"
+        survey = ev(5, "Text-to-image Diffusion Models in Generative AI: A Survey", "This survey reviews the progress of diffusion models in generating images from text, i.e. text-to-image diffusion models, and how diffusion models work for image synthesis.")
+        umbrella = ev(6, "Umbrella sampling: a powerful method to sample tails of distributions", "We present the umbrella sampling (US) technique and show that it can be used to sample extremely low probability areas of the posterior distribution required in statistical analyses of data.")
+        self.assertEqual([e["title"] for e in relevance_gate(q, [survey, umbrella])], ["Text-to-image Diffusion Models in Generative AI: A Survey"])
