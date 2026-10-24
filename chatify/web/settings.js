@@ -444,8 +444,8 @@ function emojiControl(f,id,v){
 let fieldHelpId=0;const fieldHelpEntries=new Set();
 function compactHelp(){
  for(const entry of fieldHelpEntries){if(!entry.btn.isConnected){entry.abort.abort();entry.tip.remove();fieldHelpEntries.delete(entry)}}
- document.querySelectorAll('.field>.h,.tile>.help,.logoctl>.h').forEach(help=>{
-  if(help.dataset.compact||help.textContent.length<110)return;help.dataset.compact='1';const text=help.textContent;
+ document.querySelectorAll('.field>.h,.tile>.help,.tile>.h,.logoctl>.h,#sec-prompts>.help,#sec-code>.help,.stage .sbody>p.h,.workspace-fields .h').forEach(help=>{
+  if(help.dataset.compact||help.id||help.getAttribute('role')||help.hasAttribute('aria-live')||help.textContent.length<48)return;help.dataset.compact='1';const text=help.textContent;
   const btn=el('button',{type:'button',class:'info-tip','aria-label':'More information','aria-expanded':'false',text:'i'}),tip=el('div',{class:'info-pop',role:'tooltip',text,hidden:''}),host=help.closest('.field'),label=host?host.querySelector('.flabel'):(help.previousElementSibling?.querySelector('#budgetSpend')?help.previousElementSibling:help.parentElement.querySelector('.head b'));
   help.replaceChildren(tip);if(label?.querySelector('input')){const title=el('span',{class:'label-title'});while(label.firstChild&&label.firstChild.nodeType===3)title.append(label.firstChild);title.append(btn);label.prepend(title)}else (label||help).append(btn);help.classList.add('compact-help');
   tip.id='field-help-'+(++fieldHelpId);btn.setAttribute('aria-describedby',tip.id);const abort=new AbortController();fieldHelpEntries.add({btn,tip,abort});
