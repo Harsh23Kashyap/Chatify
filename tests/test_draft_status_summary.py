@@ -15,3 +15,8 @@ class DraftSummary(unittest.TestCase):
   self.assertIn("phaseName==='Generating optional logo draft'?'Finishing your app'",js)
   self.assertIn(":'Building your app'",js)
   self.assertIn("(busy&&phaseName&&phaseName!=='Drafting separate areas'?phaseName+'",js)
+ def test_busy_surfaces_follow_phase_word(self):
+  js=(pathlib.Path(__file__).resolve().parents[1]/'chatify/web/appbuilder.js').read_text()
+  self.assertIn("const busyWord=busyHeading.replace(' your app','').replace(' your draft','')",js)
+  self.assertIn("activityTitle.textContent=(busy?busyWord:",js)
+  self.assertIn("entryLabel.textContent=busy?busyWord+'... '",js)
