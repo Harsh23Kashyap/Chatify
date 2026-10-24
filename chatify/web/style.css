@@ -944,3 +944,7 @@ pre.codeblock code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monosp
 .codeblock-copy{position:absolute;top:6px;right:6px;font-size:11px;line-height:1;padding:6px 10px;min-height:28px;border-radius:7px;border:1px solid var(--line);background:var(--bg,#fff);color:inherit;cursor:pointer;opacity:.8}
 .codeblock-copy:hover,.codeblock-copy:focus-visible{opacity:1}
 :root[data-theme=dark] pre.codeblock{background:rgba(255,255,255,.06)}
+
+.key-bar{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin:8px 16px 0;padding:8px 14px;border:1px solid color-mix(in srgb,#b8860b 45%,transparent);border-radius:10px;background:color-mix(in srgb,#b8860b 12%,transparent);font-size:13px}
+.key-bar a{font-weight:600}
+#modelBadge.badge-warn{outline:2px solid color-mix(in srgb,#b8860b 65%,transparent);outline-offset:1px}

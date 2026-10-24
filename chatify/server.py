@@ -262,6 +262,8 @@ def make_handler(cfg, engine):
                 return self._send(200,editstate.save_draft(state_folder,str(b.get('kind','')),b.get('brief'),b.get('code')))
             if path == "/api/config":
                 view=schema.public_view(cfg)
+                _p=cfg['provider']
+                view['provider']['key_present']= _p['type'] in ('mock','ollama') or (_p['type']=='openai_compatible' and not _p.get('api_key_env')) or bool(providers._key(_p.get('api_key_env',''),_p['type'],required=False))
                 principal=acc.user_for(self._cookie()) if acc else None
                 view['sources']=[s for s in view['sources'] if permissions.allowed(cfg,principal['id'] if principal else None,s['id'])]
                 return self._send(200, view)

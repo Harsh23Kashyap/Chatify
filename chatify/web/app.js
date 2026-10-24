@@ -628,8 +628,18 @@ const autosize = () => { const q = $("#q"); q.style.height = "auto"; q.style.hei
 function updateModelBadge() {
   const providerNames = {mock:"Demo",openai:"OpenAI",claude:"Claude",gemini:"Gemini",ollama:"Ollama",openai_compatible:"Custom provider",openrouter:"OpenRouter",deepseek:"DeepSeek",groq:"Groq",mistral:"Mistral",minimax:"MiniMax",mimo:"Xiaomi MiMo"};
   const badge=$("#modelBadge"), demo=S.cfg.provider.type === "mock";
-  badge.textContent = demo ? "Demo · offline" : (providerNames[S.cfg.provider.type] || S.cfg.provider.type) + (S.cfg.provider.model ? " · " + S.cfg.provider.model : "");
-  badge.title = demo ? "Offline Demo: built-in answers from your documents. No AI model or paid calls. Choose a provider in Configuration to use AI." : "Configured AI provider and model";
+  const noKey = !demo && S.cfg.provider.key_present === false;
+  badge.textContent = demo ? "Demo · offline" : (providerNames[S.cfg.provider.type] || S.cfg.provider.type) + (S.cfg.provider.model ? " · " + S.cfg.provider.model : "") + (noKey ? " · no key" : "");
+  badge.title = demo ? "Offline Demo: built-in answers from your documents. No AI model or paid calls. Choose a provider in Configuration to use AI." : noKey ? "Provider configured but no API key saved yet - the model cannot answer until a key is added in Configuration." : "Configured AI provider and model";
+  badge.classList.toggle("badge-warn", noKey);
+  let bar = $("#keyBar");
+  if (noKey && !bar) {
+    bar = el("div", { id: "keyBar", class: "key-bar", role: "note" },
+      el("span", { text: "This app has no API key yet, so answers come from source previews, not the AI model. " }),
+      el("a", { href: (window.CC_APP_BASE || "") + "/settings.html#sec-model", text: "Add a key in Configuration" }));
+    const main = document.querySelector("main") || document.body;
+    main.prepend(bar);
+  } else if (!noKey && bar) bar.remove();
 }
 async function refreshModelBadge() { try { const cfg = await api("/api/config"); S.cfg.provider = cfg.provider; updateModelBadge(); } catch (_) {} }
 window.addEventListener("focus", refreshModelBadge);

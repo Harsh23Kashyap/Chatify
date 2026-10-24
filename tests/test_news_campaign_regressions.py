@@ -11,9 +11,9 @@ class NewsRegression(unittest.TestCase):
         e=self.engine()
         class C:
             def __init__(self,title):self.title=title
-            def search(self,q,k):return [Evidence(self.title,self.title,'https://example.org/'+self.title,[],2026,'','feed',1)]
-        e.connectors['feed']=C('First');self.assertEqual(e.retrieve('news')[0][0]['title'],'First')
-        e.cfg['sources'][0]['url']='https://example.org/b';e.connectors['feed']=C('Second');self.assertEqual(e.retrieve('news')[0][0]['title'],'Second')
+            def search(self,q,k):return [Evidence('news '+self.title,self.title,'https://example.org/'+self.title,[],2026,'','feed',1)]
+        e.connectors['feed']=C('First');self.assertEqual(e.retrieve('news')[0][0]['title'],'news First')
+        e.cfg['sources'][0]['url']='https://example.org/b';e.connectors['feed']=C('Second');self.assertEqual(e.retrieve('news')[0][0]['title'],'news Second')
     def test_numeric_cleanup_does_not_leave_fragment(self):
         e=self.engine();ev=[{'n':1,'title':'AI report','text':'AI report','year':'2026','source':'feed','url':'https://example.org'}]
         claim='This report occurred on 2026-10-10'

@@ -16,6 +16,68 @@ from .connectors import make_connector
 FOLLOW_UP = re.compile(r"\b(it|its|this|that|they|them|those|these|he|she|there|the same|above|previous|earlier)\b|^(?:and\b|but\b|what about\b|how about\b|why\??$|how so\??$|expand\b|elaborate\b|continue\b|shorter\b|summari[sz]e\b|compare\b)", re.I)
 
 
+_GATE_STOP = frozenset(
+    "what which when where does about this that with from your have into tell more than then them they their there were will would could should "
+    "the and for are how why who is it of to in on a an do did can i me my mine we our us often really mean means meant much many way ways tips good best better great weekly daily monthly yearly season seasonal seasons".split())
+
+
+def _gate_variants(w):
+    """Cheap suffix variants so singular/plural/inflected forms of a word count as the same topic word."""
+    out = {w}
+    if len(w) > 4 and w.endswith("ies"):
+        out.add(w[:-3] + "y")
+    if len(w) > 4 and w.endswith("es"):
+        out.add(w[:-2])
+    if len(w) > 3 and w.endswith("s"):
+        out.add(w[:-1])
+    if len(w) > 6 and w.endswith("ing"):
+        out.add(w[:-3])
+        out.add(w[:-3] + "e")
+    if len(w) > 5 and w.endswith("ed"):
+        out.add(w[:-2])
+        out.add(w[:-1])
+    return out
+
+
+def _gate_stems(text):
+    out = set()
+    for w in re.findall(r"[a-z0-9]{3,}", (text or "").lower()):
+        if w not in _GATE_STOP:
+            out |= _gate_variants(w)
+    return out
+
+
+def relevance_gate(question, found):
+    """Drop retrieved passages that share no vocabulary with the question.
+
+    Keyword search against open APIs (Wikipedia, news) can return popular but unrelated
+    pages for conversational questions; citing them misleads the reader. The best match
+    sets the bar: keep anything with at least half its overlap (floor 1). When nothing
+    overlaps at all the result is empty and the answer becomes the honest no-evidence
+    reply instead of a list of irrelevant citations.
+    """
+    q = _gate_stems(question)
+    if not q or not found:
+        return found
+    scored = [(len(q & _gate_stems(str(e.get("title") or "") + " " + str(e.get("text") or "")[:1500])), e) for e in found]
+    top = max(n for n, _ in scored)
+    if top == 0:
+        return []
+    if top < 2 and len(q) >= 3:
+        # The question had real topical vocabulary and the best passage matches only one
+        # word of it: a mention, not a topic match (a quarry has a "plant"; O. J. Simpson
+        # played "seasons"). Clarify instead of citing it. Short one-word questions keep
+        # their single best lexical match - it is the only signal that can exist.
+        return []
+    floor = 1 if top < 2 else max(2, top // 2)
+    return [e for n, e in scored if n >= floor]
+
+
+_NO_KEY_WHY = ("This app has no API key saved yet, so it cannot answer with the AI model. "
+               "The app owner can add a key on the Configuration page. "
+               "Until then this is a source preview, not a model answer: the most relevant passages from your sources.")
+
+
 class Engine:
     def __init__(self, cfg, store, provider=None, connectors=None):
         self.cfg, self.store = cfg, store
@@ -110,7 +172,7 @@ class Engine:
                 pass
         # REST news/search endpoints generally expect keywords, not a full instruction.
         if any(x.get("type") in ("http_json","arxiv","pubmed","wikipedia","crossref") for x in self.cfg["sources"]):
-            stop=self._STOP|set("summarize summary headline headlines news give compact table chart graph plot publication date dates citations cite explain compare current latest reported report please only sample sources source detail detailed published research studies study findings benefits limits".split())
+            stop=self._STOP|set("summarize summary headline headlines news give compact table chart graph plot publication date dates citations cite explain compare current latest reported report please only sample sources source detail detailed published research studies study findings benefits limits i me my mine we our us often really mean means meant much many way ways tips good best better great weekly daily monthly yearly".split())
             words=[w for w in re.findall(r"[A-Za-z0-9][A-Za-z0-9-]*",question) if w.lower() not in stop]
             short=" ".join(words[:6])
             if short and short.lower()!=question.lower():return [question,short]
@@ -194,6 +256,13 @@ class Engine:
                         seen.add(sig); found.append(e)
             except Exception as ex:  # one failing source must not sink the answer
                 errors[sid] = type(ex).__name__
+        # The gate targets open-API keyword search, which can return popular but unrelated
+        # pages; owner-corpus connectors (local files, uploads, python) are BM25/structured
+        # matches over the owner's own documents, a different relevance profile.
+        _SEARCH_TYPES = ("http_json", "arxiv", "pubmed", "wikipedia", "crossref", "openalex", "web_search")
+        search_ids = {s["id"] for s in self.cfg["sources"] if s.get("type") in _SEARCH_TYPES}
+        own = [e for e in found if e.get("source") not in search_ids]
+        found = own + relevance_gate(question, [e for e in found if e.get("source") in search_ids])
         found.sort(key=lambda e: -e["score"])
         found = found[:k]
         for n, e in enumerate(found, 1):
@@ -353,7 +422,7 @@ class Engine:
         mid_thought = bool(re.match(r"\s*(additionally|moreover|furthermore|in addition|also|secondly|thirdly|finally|however|but|and|so)\b", new, re.I))
         if not ev2 or len(new.split()) < 6 or new.count(chr(34)) % 2 or gutted or mid_thought:
             keep = full or evidence  # never promise passages and show none: fall back to the full retrieval set
-            new = self.fallback_answer(keep).replace("The AI model could not be reached, so here are the most relevant passages from your sources.","The answer could not be fully checked. Here are the cited source passages instead.")
+            new = self.fallback_answer(keep, why="The answer could not be fully checked. Here are the cited source passages instead.")
             new, ev2 = self.tidy(new,keep)
         return new, ev2, self.ledger(new, ev2, asked)
 
@@ -564,8 +633,8 @@ class Engine:
 
     @staticmethod
     def fallback_answer(evidence, why=""):
-        """No model reachable: answer with the best passages from the sources instead of an error."""
-        lines = ["The AI model could not be reached, so here are the most relevant passages from your sources."]
+        """No model answer: show the best passages as a clearly labeled source preview, never as a model answer."""
+        lines = [why or "The AI model could not be reached, so this is a source preview, not a model answer: the most relevant passages from your sources."]
         for e in (evidence or [])[:3]:
             t = " ".join(str(e.get("text") or "").split())
             if len(t) > 320:
@@ -641,6 +710,8 @@ class Engine:
         else:
             parts = []
             degraded = False
+            provider_error = None
+            model_status = "ok"
             messages = self.prompt(standalone, evidence, style, history, summary, profile)
             for attempt in (0, 1):
                 try:
@@ -648,7 +719,8 @@ class Engine:
                         parts.append(piece)
                         yield "token", piece
                     break
-                except providers.ProviderError:
+                except providers.ProviderError as exc:
+                    provider_error = exc
                     if parts or attempt == 1:
                         degraded = True
                         break
@@ -656,8 +728,11 @@ class Engine:
                 if parts:
                     tail = "\n\n(The answer was cut short because the model stopped responding.)"
                     parts.append(tail); yield "token", tail
+                    model_status = "cut"
                 else:
-                    fb = self.fallback_answer(evidence); parts.append(fb); yield "token", fb
+                    no_key = provider_error is not None and str(provider_error).startswith("No API key yet")
+                    model_status = "no_key" if no_key else "unreachable"
+                    fb = self.fallback_answer(evidence, why=_NO_KEY_WHY if no_key else ""); parts.append(fb); yield "token", fb
             answer = "".join(parts).strip()
             if not degraded:
                 answer = self.revise(answer, evidence)
@@ -672,7 +747,7 @@ class Engine:
             original_evidence=evidence
             answer, evidence = self.tidy(answer, evidence)
             if not evidence and len(answer.split())<12 and not re.search(r"cannot|could not|no (?:data|evidence|publication|dates?)|not (?:provided|available|specified)|insufficient|not establish|unavailable",answer,re.I):
-                answer=self.fallback_answer(original_evidence).replace("The AI model could not be reached, so here are the most relevant passages from your sources.","The answer could not be fully checked. Here are the cited source passages instead.");answer,evidence=self.tidy(answer,original_evidence)
+                answer=self.fallback_answer(original_evidence, why="The answer could not be fully checked. Here are the cited source passages instead.");answer,evidence=self.tidy(answer,original_evidence)
             ledger = self.ledger(answer, evidence, standalone)
             answer, evidence, ledger = self._fix(answer, evidence, ledger, standalone, full=original_evidence)
             note = (self.cfg["prompt"].get("answer_note") or "").strip()
@@ -692,7 +767,7 @@ class Engine:
                 self.store.rename_chat(owner, chat, q[:60])
         yield "progress", {"stage": "followups", "label": "Finding related questions"}
         fu = self.followups(q, answer, evidence, [t.get("question", "") for t in history[-6:]])
-        yield "done", {"seconds": round(time.time() - t0, 1), "followups": fu, "id": tid, "chat": chat, "topic": topic, "question": q, "standalone": standalone, "answer": answer,
+        yield "done", {"seconds": round(time.time() - t0, 1), "model_status": locals().get("model_status", "ok"), "followups": fu, "id": tid, "chat": chat, "topic": topic, "question": q, "standalone": standalone, "answer": answer,
                        "evidence": evidence, "ledger": ledger, "style": style, "source_errors": errors, "temporary": temporary, "scope": scope}
 
     def ask(self, owner, chat, question, sources=None, style="standard", topic=None, new_topic=False, use_cache=True, scope=None):
@@ -740,17 +815,20 @@ class Engine:
             answer=self.headline_chart(q,evidence);ledger=self.ledger(answer,evidence,standalone)
         else:
             degraded = False
+            provider_error = None
             messages = self.prompt(standalone, evidence, style, history, summary)
             answer = ""
             for attempt in (0, 1):
                 try:
                     answer = self.provider.complete(messages)
                     break
-                except providers.ProviderError:
+                except providers.ProviderError as exc:
+                    provider_error = exc
                     if attempt == 1:
                         degraded = True
             if degraded:
-                answer = self.fallback_answer(evidence)
+                no_key = provider_error is not None and str(provider_error).startswith("No API key yet")
+                answer = self.fallback_answer(evidence, why=_NO_KEY_WHY if no_key else "")
             if not degraded:
                 answer = self.revise(answer, evidence)
             ledger = self.ledger(answer, evidence, standalone)
@@ -758,7 +836,7 @@ class Engine:
                 original_evidence=evidence
                 answer, evidence = self.tidy(answer, evidence)
                 if not evidence and len(answer.split())<12 and not re.search(r"cannot|could not|no (?:data|evidence|publication|dates?)|not (?:provided|available|specified)|insufficient|not establish|unavailable",answer,re.I):
-                    answer=self.fallback_answer(original_evidence).replace("The AI model could not be reached, so here are the most relevant passages from your sources.","The answer could not be fully checked. Here are the cited source passages instead.");answer,evidence=self.tidy(answer,original_evidence)
+                    answer=self.fallback_answer(original_evidence, why="The answer could not be fully checked. Here are the cited source passages instead.");answer,evidence=self.tidy(answer,original_evidence)
                 ledger = self.ledger(answer, evidence, standalone)
                 answer, evidence, ledger = self._fix(answer, evidence, ledger, standalone, full=original_evidence)
                 note = (self.cfg["prompt"].get("answer_note") or "").strip()
