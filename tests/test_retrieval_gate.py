@@ -218,3 +218,54 @@ class EnglishSpecificityGate(unittest.TestCase):
         # review whose excerpt did not establish the asked trial findings.
         out = relevance_gate(self.CART_Q, [self.B_ALL, self.CRC, self.AI_TRIAL, self.CART_REAL])
         self.assertTrue(out[0]["title"].startswith("CAR-T cell therapy in relapsed lymphoma"))
+
+
+class RetrieveOrdering(unittest.TestCase):
+    """End-to-end ordering through Engine.retrieve: the gate's most-on-question-first
+    order must survive to the answer (live demo 2026-10-25: a blanket score re-sort
+    after the gate put the Holy Roman Empire lead above Gibbon's Decline and Fall
+    for "main causes of the fall of the Roman Empire")."""
+
+    Q = "What were the main causes of the fall of the Roman Empire?"
+    HOLY = {"id": "1", "title": "Holy Roman Empire", "source": "w", "score": 0.95, "url": "u1",
+            "authors": [], "year": "", "venue": "",
+            "text": "The Holy Roman Empire was a polity comprising much of Central Europe and Western Europe, headed by the Holy Roman Emperor and characterized by a decentralized political structure."}
+    GIBBON = {"id": "3", "title": "The History of the Decline and Fall of the Roman Empire", "source": "w", "score": 0.5, "url": "u3",
+              "authors": [], "year": "", "venue": "",
+              "text": "The History of the Decline and Fall of the Roman Empire is a six-volume work by the English historian Edward Gibbon covering the peak and fall of the Roman Empire."}
+
+    def _engine(self, sources, connectors):
+        from chatify import schema
+        from chatify.store import Store
+        import os
+        app = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "apps", "minimal", "app.yaml")
+        cfg = schema.load(app)
+        cfg["sources"] = sources
+        cfg["retrieval"]["min_score"] = 0.0
+        cfg["retrieval"]["cache_ttl"] = 0
+        e = Engine(cfg, Store(":memory:"))
+        e.connectors = connectors
+        return e
+
+    def test_pure_search_keeps_gate_order(self):
+        class W:
+            def search(self, q, k):
+                return [dict(RetrieveOrdering.HOLY), dict(RetrieveOrdering.GIBBON)]
+        e = self._engine([{"id": "w", "type": "wikipedia", "label": "W"}], {"w": W()})
+        found, _ = e.retrieve(self.Q)
+        self.assertEqual([f["title"] for f in found],
+                         ["The History of the Decline and Fall of the Roman Empire", "Holy Roman Empire"])
+
+    def test_mixed_corpus_keeps_score_order(self):
+        own_hit = {"id": "9", "title": "Owner notes on Rome", "source": "loc", "score": 0.99, "url": "u9",
+                   "authors": [], "year": "", "venue": "", "text": "My notes on the fall of the Roman Empire and its causes."}
+        class W:
+            def search(self, q, k):
+                return [dict(RetrieveOrdering.HOLY), dict(RetrieveOrdering.GIBBON)]
+        class L:
+            def search(self, q, k):
+                return [own_hit]
+        e = self._engine([{"id": "w", "type": "wikipedia", "label": "W"}, {"id": "loc", "type": "local_files", "label": "L"}],
+                         {"w": W(), "loc": L()})
+        found, _ = e.retrieve(self.Q)
+        self.assertEqual(found[0]["title"], "Owner notes on Rome")

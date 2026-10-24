@@ -81,7 +81,9 @@ def relevance_gate(question, found):
             # irrelevant pages as "most relevant" on the live demo (Hindi lunch
             # question -> surgical papers, 2026-10-25). Clarify honestly instead.
             return []
-        return found
+        # No readable question vocabulary: no overlap signal exists, so keep the
+        # connectors' own ranking (score order), as retrieve() no longer re-sorts.
+        return sorted(found, key=lambda e: -(e.get("score") or 0))
     # Score by question WORD, not by stem variant: "trials" matching "trials"
     # must count once, not once per shared inflection (trial/trials), or a single
     # generic word reaches floor 2 by itself (live demo 2026-10-25).
@@ -331,7 +333,14 @@ class Engine:
         search_ids = {s["id"] for s in self.cfg["sources"] if s.get("type") in _SEARCH_TYPES}
         own = [e for e in found if e.get("source") not in search_ids]
         found = own + relevance_gate(question, [e for e in found if e.get("source") in search_ids])
-        found.sort(key=lambda e: -e["score"])
+        if own:
+            # Mixed corpus: owner-corpus matches carry no gate rank, so keep the
+            # historical score ordering for the combined list. Pure open-API results
+            # keep the gate's most-on-question-first order - a blanket score sort
+            # undid it on the live demo (2026-10-25: the Holy Roman Empire led a
+            # fall-of-Rome answer on keyword popularity while Gibbon's Decline and
+            # Fall, sharing more question vocabulary, trailed at [3]).
+            found.sort(key=lambda e: -e["score"])
         found = found[:k]
         for n, e in enumerate(found, 1):
             e["n"] = n
