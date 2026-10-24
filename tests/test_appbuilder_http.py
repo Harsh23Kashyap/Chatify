@@ -49,6 +49,28 @@ class BuilderHTTP(test_workspace_api.WorkspaceAPITests):
   r=self.call(self.clients[0],'/api/settings/build/save',{'ticket':plan['ticket'],'confirmed':True});self.assertFalse(r['restart_required']);self.assertTrue(r['launch_ticket']);self.assertEqual(schema.load(str(path))['app']['title'],'Garden app')
   with self.assertRaises(urllib.error.HTTPError):self.call(self.clients[0],'/api/settings/build/save',{'ticket':plan['ticket'],'confirmed':True})
 
+ def test_launch_failure_reissues_ticket_and_retry_opens_workspace(self):
+  from pathlib import Path
+  base={k:self.cfg[k] for k in schema.DEFAULTS};base['auth']={'mode':'none'}
+  path=Path(self.cfg['_dir'])/'app.yaml';path.write_text(yaml.safe_dump(base));self.cfg['_path']=str(path)
+  plan=self.call(self.clients[0],'/api/settings/build/review',{'yaml':'app:\n title: Garden app\n','sections':['app']})
+  saved=self.call(self.clients[0],'/api/settings/build/save',{'ticket':plan['ticket'],'confirmed':True})
+  ticket=saved['launch_ticket']
+  loader=self.engine.nerd_loader;real_load=loader.load
+  def boom(*a,**k):raise ValueError('simulated workspace start failure')
+  loader.load=boom
+  try:
+   with self.assertRaises(urllib.error.HTTPError) as e:self.call(self.clients[0],'/api/settings/build/launch',{'ticket':ticket})
+   self.assertEqual(e.exception.code,400)
+   body=json.loads(e.exception.read())
+   self.assertIn('simulated workspace start failure',body['error'])
+   retry=body['retry_ticket'];self.assertTrue(retry);self.assertNotEqual(retry,ticket)
+  finally:loader.load=real_load
+  opened=self.call(self.clients[0],'/api/settings/build/launch',{'ticket':retry})
+  self.assertTrue(opened.get('url'));self.assertTrue(opened.get('title'))
+  with self.assertRaises(urllib.error.HTTPError) as e2:self.call(self.clients[0],'/api/settings/build/launch',{'ticket':retry})
+  self.assertIn('Validate and save the draft once more',json.loads(e2.exception.read())['error'])
+
  def test_download_zip_can_review_and_load(self):
   import io,zipfile,urllib.request,base64
   from chatify.nerdload import NerdLoader

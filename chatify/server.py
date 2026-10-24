@@ -467,22 +467,27 @@ def make_handler(cfg, engine):
                         z.writestr('README.md','Generated app draft. Review app.yaml before loading. Keys and documents are not included. Import using Chatify Load and share Nerds. Helper drafts, if present, are inert code for review. No code is installed or run by downloading or importing this draft. Review them before any execution.\n')
                     return self._send(200,buf.getvalue(),'application/zip',{'Content-Disposition':'attachment; filename=chatify-draft.zip'})
                 if path.endswith('/launch'):
-                    launch=management.reviews.take(o,'app-launch',str(b.get('ticket','')),True)
-                    with management.lock:
-                        if management.active:raise ValueError('Wait for the workspace test to finish')
-                        if launch['revision'] != editstate.revision(cfg):raise ValueError('Saved configuration changed. Review and save again before using it')
-                        clean=launch['config']
-                        from pathlib import Path
-                        folder=(Path(cfg.get('_dir','.'))/clean['storage']['path']).parent
-                        for key,name in [('appearance','theme.json'),('pipeline_prompts','prompts.json'),('helper_drafts','code-drafts.json')]:
-                            path=folder/name
-                            expected=launch['state'][name]
-                            if path.is_symlink() or (path.read_text() if path.exists() else None)!=expected:raise ValueError('Saved setup changed. Review and save again before using it')
-                        from .portable import bundle
-                        clean['_dir']=cfg.get('_dir',os.getcwd())
-                        payload,_=bundle(clean,theme_value=clean.get('appearance'),prompt_value=clean.get('pipeline_prompts'),include_keys=True)
-                        reviewed=loader.review('built-app.zip',base64.b64encode(payload).decode())
-                        return self._send(200,loader.load(reviewed['token'],owner=o))
+                    try:launch=management.reviews.take(o,'app-launch',str(b.get('ticket','')),True)
+                    except ValueError as e:return self._send(400,{'error':str(e)+' Validate and save the draft once more, then choose Use this app.','retry':'resave'})
+                    try:
+                        with management.lock:
+                            if management.active:raise ValueError('Wait for the workspace test to finish')
+                            if launch['revision'] != editstate.revision(cfg):raise ValueError('Saved configuration changed. Review and save again before using it')
+                            clean=launch['config']
+                            from pathlib import Path
+                            folder=(Path(cfg.get('_dir','.'))/clean['storage']['path']).parent
+                            for key,name in [('appearance','theme.json'),('pipeline_prompts','prompts.json'),('helper_drafts','code-drafts.json')]:
+                                path=folder/name
+                                expected=launch['state'][name]
+                                if path.is_symlink() or (path.read_text() if path.exists() else None)!=expected:raise ValueError('Saved setup changed. Review and save again before using it')
+                            from .portable import bundle
+                            clean['_dir']=cfg.get('_dir',os.getcwd())
+                            payload,_=bundle(clean,theme_value=clean.get('appearance'),prompt_value=clean.get('pipeline_prompts'),include_keys=True)
+                            reviewed=loader.review('built-app.zip',base64.b64encode(payload).decode())
+                            return self._send(200,loader.load(reviewed['token'],owner=o))
+                    except Exception as e:
+                        import traceback;traceback.print_exc()
+                        return self._send(400,{'error':str(e),'retry_ticket':management.reviews.put(o,'app-launch',launch)})
                 if path.endswith('/save'):
                     plan=management.reviews.take(o,'app-build',str(b.get('ticket','')),b.get('confirmed'))
                     with management.lock:
