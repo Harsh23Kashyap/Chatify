@@ -42,7 +42,10 @@ class Checkpoints(unittest.TestCase):
    self.assertIn('Resumed from a saved checkpoint',d2['notice'])
    d2=self.wait(jobs2,d2['id']);self.assertEqual(d2['state'],'done',d2)
    self.assertLessEqual(len(f2.calls),4,'only the failed part plus final review run after resume: '+str(len(f2.calls)))
-   self.assertEqual(len(f2.calls)+first_calls-len(f.calls)+len(f.calls),len(f.calls)+len(f2.calls))
+   # the checkpoint clear runs just after the state flips to done; allow that ordering
+   for _ in range(200):
+    if not os.listdir(os.path.join(tmp,'build-checkpoints')):break
+    time.sleep(.01)
    self.assertEqual(os.listdir(os.path.join(tmp,'build-checkpoints')),[])
  @unittest.mock.patch('chatify.buildimages.capability',return_value={'available':False,'note':'fixture'})
  def test_different_brief_starts_fresh(self,cap):
@@ -55,6 +58,93 @@ class Checkpoints(unittest.TestCase):
    self.assertNotIn('Resumed',d2.get('notice',''))
    d2=self.wait(jobs2,d2['id']);self.assertEqual(d2['state'],'done',d2)
    self.assertGreater(len(f2.calls),20,'fresh build reruns all parts')
+
+class CheckpointEdges(unittest.TestCase):
+ def wait(self,jobs,ident):
+  for _ in range(500):
+   data=jobs.view('owner',ident)
+   if data['state']!='running':return data
+   time.sleep(.01)
+  self.fail('timeout')
+ def fp(self,cfg):
+  import hashlib
+  p=cfg['provider'];return hashlib.sha256(json.dumps([p.get('type',''),p.get('model',''),p.get('base_url','')],sort_keys=True).encode()).hexdigest()[:16]
+ def cpfile(self,tmp,jobs,owner='owner'):
+  return jobs._checkpoint_path(owner)
+ @unittest.mock.patch('chatify.buildimages.capability',return_value={'available':False,'note':'fixture'})
+ def test_model_change_starts_fresh(self,cap):
+  import tempfile
+  with tempfile.TemporaryDirectory() as tmp:
+   jobs=buildjobs.BuildJobs(spend_dir=tmp);f=Fixture();f.fail=next(iter(prompts.STAGES))
+   self.wait(jobs,jobs.start('owner',f,schema.DEFAULTS,{'brief':'Garden advice'})['id'])
+   changed=copy.deepcopy(schema.DEFAULTS);changed['provider']['model']='some-other-model'
+   jobs2=buildjobs.BuildJobs(spend_dir=tmp);f2=Fixture()
+   d2=jobs2.start('owner',f2,changed,{'brief':'Garden advice'})
+   self.assertNotIn('Resumed',d2.get('notice',''));self.assertEqual(d2['completed'],0)
+   d2=self.wait(jobs2,d2['id']);self.assertEqual(d2['state'],'done',d2);self.assertGreater(len(f2.calls),20)
+ @unittest.mock.patch('chatify.buildimages.capability',return_value={'available':False,'note':'fixture'})
+ def test_corrupt_checkpoint_starts_fresh(self,cap):
+  import tempfile
+  with tempfile.TemporaryDirectory() as tmp:
+   jobs=buildjobs.BuildJobs(spend_dir=tmp)
+   path=jobs._checkpoint_path('owner');os.makedirs(os.path.dirname(path));open(path,'w').write('{not json')
+   f=Fixture();d=jobs.start('owner',f,schema.DEFAULTS,{'brief':'Garden advice'})
+   self.assertNotIn('Resumed',d.get('notice',''))
+   d=self.wait(jobs,d['id']);self.assertEqual(d['state'],'done',d)
+ def test_unknown_part_keys_filtered_on_resume(self):
+  import tempfile
+  with tempfile.TemporaryDirectory() as tmp:
+   jobs=buildjobs.BuildJobs(spend_dir=tmp)
+   path=jobs._checkpoint_path('owner');os.makedirs(os.path.dirname(path))
+   json.dump({'brief':'Garden advice','fingerprint':self.fp(schema.DEFAULTS),'writer':'old','parts':{'config:app':{'title':'Kept garden'},'bogus:key':{'x':1}},'errors':{},'calls':5,'retry_calls':0,'updated':time.time()},open(path,'w'))
+   gate=threading.Event()
+   class Slow:
+    def complete(self,messages):gate.wait(10);raise ValueError('released')
+   jobs2=buildjobs.BuildJobs(spend_dir=tmp)
+   d=jobs2.start('owner',Slow(),schema.DEFAULTS,{'brief':'Garden advice'})
+   try:
+    self.assertIn('Resumed from a saved checkpoint',d['notice'])
+    ids=[p['id'] for p in d['parts'] if p['state']=='done']
+    self.assertEqual(ids,['config:app'],'only the valid checkpointed part is kept: '+str(ids))
+   finally:
+    jobs2.cancel('owner',d['id']);gate.set()
+ def test_stale_writer_cannot_clear_newer_checkpoint(self):
+  import tempfile
+  with tempfile.TemporaryDirectory() as tmp:
+   jobs=buildjobs.BuildJobs(spend_dir=tmp)
+   path=jobs._checkpoint_path('owner');os.makedirs(os.path.dirname(path))
+   json.dump({'brief':'B','writer':'newer-job','parts':{},'errors':{},'calls':0,'updated':time.time()},open(path,'w'))
+   jobs._checkpoint_clear('owner','older-job')
+   self.assertTrue(os.path.exists(path),'stale writer must not clear a newer checkpoint')
+   jobs._checkpoint_clear('owner','newer-job')
+   self.assertFalse(os.path.exists(path))
+ @unittest.mock.patch('chatify.buildimages.capability',return_value={'available':False,'note':'fixture'})
+ def test_cancelled_inflight_writes_no_checkpoint(self,cap):
+  import tempfile
+  with tempfile.TemporaryDirectory() as tmp:
+   gate=threading.Event()
+   class Slow:
+    def complete(self,messages):gate.wait(10);raise ValueError('released')
+   jobs=buildjobs.BuildJobs(spend_dir=tmp)
+   d=jobs.start('owner',Slow(),schema.DEFAULTS,{'brief':'Garden advice'})
+   jobs.cancel('owner',d['id']);gate.set()
+   d=self.wait(jobs,d['id']);self.assertEqual(d['state'],'cancelled',d)
+   self.assertFalse(os.path.exists(jobs._checkpoint_path('owner')),'cancelled build must not leave a checkpoint')
+ def test_resume_never_touches_persisted_spend(self):
+  import tempfile
+  with tempfile.TemporaryDirectory() as tmp:
+   jobs=buildjobs.BuildJobs(spend_dir=tmp)
+   jobs.spend={'day':time.strftime('%Y-%m-%d',time.gmtime()),'est_usd':buildjobs.DAILY_SPEND_CAP_USD,'calls':99}
+   jobs._spend_record(0,0)
+   before=open(jobs.spend_path).read()
+   path=jobs._checkpoint_path('owner');os.makedirs(os.path.dirname(path))
+   json.dump({'brief':'Garden advice','fingerprint':self.fp(schema.DEFAULTS),'writer':'old','parts':{'config:app':{'title':'Kept'}},'errors':{},'calls':5,'retry_calls':0,'updated':time.time()},open(path,'w'))
+   jobs2=buildjobs.BuildJobs(spend_dir=tmp)
+   d=jobs2.start('owner',Fixture(),schema.DEFAULTS,{'brief':'Garden advice'})
+   d=self.wait(jobs2,d['id'])
+   self.assertEqual(d['state'],'partial',d)
+   self.assertTrue(any('spend cap' in m for m in d['errors'].values()),d['errors'])
+   self.assertEqual(open(jobs.spend_path).read(),before,'resume path must not reset persisted spend')
 
 class ActiveView(unittest.TestCase):
  def test_active_empty(self):

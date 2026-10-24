@@ -60,26 +60,32 @@ class BuildJobs:
  def _checkpoint(self,job):
   path=self._checkpoint_path(job['owner'])
   if not path:return
-  with self.lock:payload={'brief':job['brief'],'parts':copy.deepcopy(job['parts']),'errors':copy.deepcopy(job['errors']),'calls':job['calls'],'retry_calls':job.get('retry_calls',0),'updated':time.time()}
+  with self.lock:
+   if job['cancel']:return
+   payload={'brief':job['brief'],'fingerprint':job.get('fingerprint',''),'writer':job['id'],'parts':copy.deepcopy(job['parts']),'errors':copy.deepcopy(job['errors']),'calls':job['calls'],'retry_calls':job.get('retry_calls',0),'updated':time.time()}
   try:
    os.makedirs(self.checkpoint_dir,exist_ok=True)
    tmp=path+'.tmp';json.dump(payload,open(tmp,'w'));os.replace(tmp,path)
   except Exception:pass
- def _checkpoint_clear(self,owner):
+ def _checkpoint_clear(self,owner,job_id):
   path=self._checkpoint_path(owner)
-  if path:
-   try:os.remove(path)
-   except OSError:pass
+  if not path or not os.path.exists(path):return
+  try:writer=json.load(open(path)).get('writer')
+  except Exception:return
+  if writer!=job_id:return
+  try:os.remove(path)
+  except OSError:pass
  def _checkpoint_resume(self,job):
   path=self._checkpoint_path(job['owner'])
   if not path or not os.path.exists(path):return
   try:payload=json.load(open(path))
   except Exception:return
-  if payload.get('brief')!=job['brief'] or not isinstance(payload.get('parts'),dict):return
+  if payload.get('brief')!=job['brief'] or payload.get('fingerprint','')!=job.get('fingerprint','') or not isinstance(payload.get('parts'),dict):return
   with self.lock:
    job['parts']={key:value for key,value in payload['parts'].items() if key in dict(PARTS)}
    job['calls']=int(payload.get('calls') or 0);job['retry_calls']=int(payload.get('retry_calls') or 0)
    if job['parts']:job['notice']='Resumed from a saved checkpoint: '+str(len(job['parts']))+' of '+str(len(PARTS))+' draft areas kept from before the restart.'
+  if job['parts']:self._checkpoint(job)
  def _spend_check(self):
   day=time.strftime('%Y-%m-%d',time.gmtime())
   if self.spend.get('day')!=day:self.spend={'day':day,'est_usd':0.0,'calls':0}
@@ -98,7 +104,9 @@ class BuildJobs:
   brief=appbuilder.clean_text(data.get('brief'),4000)
   selected=appbuilder.sections(data.get('sections',appbuilder.SECTIONS))
   if set(selected)!=set(appbuilder.SECTIONS):raise ValueError('Background build currently generates a complete app; use section conversation for a focused tweak')
-  job={'id':uuid.uuid4().hex,'owner':owner,'provider':provider,'cfg':copy.deepcopy(cfg),'brief':brief,'state':'running','cancel':False,'calls':0,'retry_calls':0,'attempts':{},'defaulted':[],'in_retry':False,'parts':{},'active':set(),'remaining_work':['Draft areas','Final local validation','Optional logo capability check','Final model review'],'errors':{},'logo_status':{'state':'checking','note':'Logo capability not checked yet'},'yaml':None,'created':time.time(),'phase':'Drafting separate areas','notice':''}
+  p=cfg.get('provider',{})
+  fingerprint=hashlib.sha256(json.dumps([p.get('type',''),p.get('model',''),p.get('base_url','')],sort_keys=True).encode()).hexdigest()[:16]
+  job={'id':uuid.uuid4().hex,'owner':owner,'provider':provider,'cfg':copy.deepcopy(cfg),'fingerprint':fingerprint,'brief':brief,'state':'running','cancel':False,'calls':0,'retry_calls':0,'attempts':{},'defaulted':[],'in_retry':False,'parts':{},'active':set(),'remaining_work':['Draft areas','Final local validation','Optional logo capability check','Final model review'],'errors':{},'logo_status':{'state':'checking','note':'Logo capability not checked yet'},'yaml':None,'created':time.time(),'phase':'Drafting separate areas','notice':''}
   with self.lock:
    for key,old in list(self.jobs.items()):
     if time.time()-old['created']>86400 and old['state']!='running':self.jobs.pop(key)
@@ -294,7 +302,7 @@ class BuildJobs:
    with self.lock:
     if job['cancel']:
      job['in_retry']=False;job['state']='partial' if job.get('provider_blocked') else 'cancelled'
-     if job['state']=='cancelled':self._checkpoint_clear(job['owner'])
+     if job['state']=='cancelled':self._checkpoint_clear(job['owner'],job['id'])
      return
     if job['errors']:job['in_retry']=False;job['state']='partial';return
     job['phase']='Merged revision and final local validation';job['remaining_work']=['Final local validation','Optional logo capability check','Final model review']
@@ -337,7 +345,7 @@ class BuildJobs:
    if self.drafts:
     try:self.drafts.put(job['owner'],job['yaml'],raw['app']['title'],job['id'])
     except Exception as e:job['notice']+=' Draft persistence failed: '+str(e)[:120]
-   self._checkpoint_clear(job['owner'])
+   self._checkpoint_clear(job['owner'],job['id'])
   except Exception as e:
    with self.lock:job['errors']['final']=str(e)[:400];job['state']='partial' if not job['cancel'] else 'cancelled';job['in_retry']=False
  def active(self,owner):
