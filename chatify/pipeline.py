@@ -111,7 +111,10 @@ def relevance_gate(question, found):
     # shared stems; vocabulary-rich questions need 3. When even the best passage
     # falls short the answer becomes the honest no-evidence reply.
     need = 1 if len(topical) <= 3 else (2 if len(topical) <= 6 else 3)  # topical = distinct question words
-    floor = max(need, 1 if top < 2 else max(2, top // 2))
+    # Relative bar: when the best match is strong, passages sharing barely half
+    # its vocabulary ride along; two thirds of the best is the cutoff (a B-ALL
+    # review sharing cell/therapy must not survive next to real CAR-T evidence).
+    floor = max(need, 1 if top < 2 else max(2, -(-2 * top // 3)))
     return [e for n, e in scored if n >= floor]
 
 
@@ -222,6 +225,13 @@ class Engine:
         if any(x.get("type") in ("http_json","arxiv","pubmed","wikipedia","crossref") for x in self.cfg["sources"]):
             stop=self._STOP|set("summarize summary headline headlines news give compact table chart graph plot publication date dates citations cite explain compare current latest reported report please only sample sources source detail detailed published research studies study findings benefits limits i me my mine we our us often really mean means meant much many way ways tips good best better great weekly daily monthly yearly long takes take took time timing weeknight weeknights weekend weekends morning evenings evening night nights day days hour hours minute minutes second seconds ago today tonight tomorrow yesterday".split())
             words=[w for w in re.findall(r"[A-Za-z0-9][A-Za-z0-9-]*",question) if not w.isdigit() and w.lower() not in stop]
+            # Lead the focused queries with the question's specific terms, not its
+            # syntactic head: "main findings recent trials CAR-T cell" AND-searched
+            # against PubMed returned broad cancer reviews for a CAR-T lymphoma
+            # question on the live demo (2026-10-25), while the distinctive terms
+            # sat past the window cutoff.
+            strong=[w for w in words if w.lower() not in _GATE_WEAK]
+            words=strong or words
             out=[question]
             for n in (6,3,2):
                 short=" ".join(words[:n])
