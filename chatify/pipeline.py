@@ -544,7 +544,11 @@ class Engine:
             return ""
         try:
             out = self.provider.complete([{"role": "system", "content": self.stage_prompt("question_check")}, {"role": "user", "content": json.dumps({"question":question,"recent_questions":[str(t.get("question",""))[:2000] for t in (history or [])[-3:]]}) if history else question}]).strip()
-        except providers.ProviderError:
+        except providers.ProviderError as exc:
+            if str(exc).startswith("No API key yet"):
+                # Without a key this stage can never run; skip it so no-key apps
+                # still answer from source previews instead of dead-ending every turn.
+                return ""
             return "The question check could not be completed. Please try again."
         if stage_contracts.errors("question_check", out):
             return "The question check returned an invalid result. Please try again."

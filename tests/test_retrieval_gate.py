@@ -124,3 +124,26 @@ class QueryLadder(unittest.TestCase):
         junk = ev(2, "List of America's Test Kitchen episodes", "Episodes of an American cooking show.")
         out = relevance_gate(q, [junk, good])
         self.assertEqual([e["title"] for e in out], ["Stir frying"])
+
+class QuestionCheckNoKey(unittest.TestCase):
+    def engine(self):
+        from chatify.store import Store
+        from chatify import schema
+        cfg = schema.validate({'sources': [{'id': 'wikipedia', 'type': 'wikipedia', 'label': 'Wikipedia', 'lang': 'en'}],
+                               'provider': {'type': 'openai', 'model': 'gpt-4o-mini', 'api_key_env': 'CC_TEST_MISSING_KEY_ENV'}})
+        e = Engine(cfg, Store(':memory:'))
+        e.prompts._d = {'on': {'question_check': True}, 'text': {}}
+        return e
+
+    def test_no_key_skips_stage_instead_of_blocking_turn(self):
+        # Regression for 2026-10-24 live failure: a no-key app with question_check
+        # enabled answered EVERY question with "No evidence found" because the
+        # stage's ProviderError became a blocking message before retrieval ran.
+        self.assertEqual(self.engine().check_question("How long does a vegetable stir fry take?"), "")
+
+    def test_other_provider_errors_still_surface(self):
+        e = self.engine()
+        def boom(messages):
+            raise providers.ProviderError("model overloaded", 500)
+        e.provider.complete = boom
+        self.assertIn("could not be completed", e.check_question("q"))

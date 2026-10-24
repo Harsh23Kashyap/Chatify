@@ -4,7 +4,7 @@ from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from socketserver import TCPServer
 from urllib.parse import urlparse, parse_qs
 import base64
-from . import websearch, schema, providers, fetch, pdfread, secrets, hardware, theme as themes, generators, prompts as promptmod
+from . import websearch, schema, providers, fetch, pdfread, secrets, hardware, theme as themes, generators, prompts as promptmod, nerdload as nerdloadmod
 from .pipeline import Engine
 from .store import Store
 from .accounts import Accounts
@@ -29,13 +29,27 @@ def _publish_saved_view(cfg):
     if (folder/'prompts.json').exists():clean['pipeline_prompts']=json.loads((folder/'prompts.json').read_text())
     return clean
 
+def _workspace_base(ws):
+    """Loopback base URL for calling a launched workspace's own API."""
+    base=ws['url']
+    if base.startswith('/'):
+        # Hosted workspaces are path-based ("/nerd-.../" behind this server); call the
+        # child over its registered loopback port instead of treating the path as a URL.
+        slug=base.strip('/').split('/')[0]
+        reg=nerdloadmod.GALLERY_CHILDREN
+        entry=reg.get(slug) if reg is not None else None
+        port=(entry.get('port') if isinstance(entry,dict) else entry) if entry else None
+        if not port:raise ValueError('This workspace is not reachable yet. Give it a few seconds and try again.')
+        base='http://127.0.0.1:%d' % port
+    return base.rstrip('/')
+
 def workspace_check(loader,wid):
     """Run a launched workspace's own source preflight (no model calls) over loopback."""
     import urllib.request,urllib.parse,urllib.error
     ws=next((w for w in loader.list() if w['id']==wid or w['id']==wid.rsplit('/',1)[-1] or w['url']==wid),None)
     if not ws:raise ValueError('Unknown workspace. Launch it again from the Review step.')
     if not ws['running']:raise ValueError('This workspace is not running anymore. Launch it again from the Review step.')
-    base=ws['url']
+    base=_workspace_base(ws)
     def call(path,payload=None,timeout=30):
         if payload is None:
             with urllib.request.urlopen(base+path,timeout=timeout) as r:return json.loads(r.read())
