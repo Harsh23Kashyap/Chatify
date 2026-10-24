@@ -15,6 +15,11 @@ class WizardLaunchRetryTest(unittest.TestCase):
         # consumed review ticket.
         self.run_scenario('retry-ticket')
 
+    def test_job_id_written_to_url_for_resume(self):
+        # A completed draft must survive Back/reload: starting a build writes
+        # ?job=<id> into the URL and the boot code resumes from it.
+        self.run_scenario('start-wires-url')
+
     def test_expired_review_ticket_re_reviews_once(self):
         # A consumed/expired review ticket on save re-reviews once, saves with the
         # fresh ticket and starts - one click, no dead end.

@@ -7,6 +7,9 @@ from .portable import _check_values,ExportError
 # When a gallery dispatcher hosts this process, serve_gallery points this at its
 # child-port registry so loaded Nerds are reachable at same-origin /<slug>/ paths
 # instead of loopback URLs that only work on the host computer.
+READY_POLLS=240  # 240 x READY_INTERVAL = 60s readiness budget; throttled free hosts boot a child Python slowly
+READY_INTERVAL=.25
+
 GALLERY_CHILDREN = None
 # A spawned guest workspace runs in its own process, where the registry above is
 # absent. The dispatcher hands down a loopback registration endpoint + bearer so
@@ -207,7 +210,7 @@ class NerdLoader:
   log.close();self.workspaces[folder.name]={'folder':folder,'process':child,'title':cfg['app']['title'],'url':url,'owner':owner,'slug':slug,'hosted':hosted}
   import time,urllib.request
   probe='http://127.0.0.1:'+str(port)
-  for _ in range(40):
+  for _ in range(READY_POLLS):
    if child.poll() is not None:raise ValueError('Nerd could not start. Check dependencies and connector setup in '+str(folder/'run.log'))
    try:
     with urllib.request.urlopen(probe+'/api/health',timeout=.5):
@@ -221,7 +224,7 @@ class NerdLoader:
         except subprocess.TimeoutExpired:child.kill();child.wait()
         raise ValueError('The workspace started but could not register with the demo server. Try again.')
      return {'url':url,'title':cfg['app']['title'],'workspace':str(folder),'hosted':hosted}
-   except OSError:time.sleep(.1)
+   except OSError:time.sleep(READY_INTERVAL)
   child.terminate();raise ValueError('Nerd did not become ready; current app is unchanged')
  def _unregister(self,slug):
   if not slug:return

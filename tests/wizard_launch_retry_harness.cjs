@@ -17,7 +17,8 @@ global.document={getElementById:()=>null,querySelector:qs,querySelectorAll:()=>[
 global.localStorage={getItem:()=>null,setItem(){},removeItem(){}};
 global.sessionStorage={_d:{},getItem(k){return this._d[k]||null},setItem(k,v){this._d[k]=v},removeItem(k){delete this._d[k]}};
 global.location={href:'',hash:'',reload(){}};
-global.history={replaceState(){},pushState(){}};
+const historyCalls=[];
+global.history={replaceState(...a){historyCalls.push(a)},pushState(){}};
 global.matchMedia=()=>({matches:false,addEventListener(){},removeEventListener(){}});
 global.requestAnimationFrame=f=>setTimeout(f,0);
 global.navigator={clipboard:{writeText:async()=>{}}};
@@ -33,6 +34,11 @@ global.fetch=async(url,opts={})=>{
   if(ep==='launch'&&body.ticket==='L2')return respond(true,{workspace:'ws-1',title:'Garden',url:'/w/ws-1/'});
   return respond(false,{error:'unexpected '+ep});
  }
+ if(scenario==='start-wires-url'){
+  if(ep==='start')return respond(true,{id:'cccccccccccccccccccccccccccccccc',state:'running',calls:1,completed:0,total:30,parts:[]});
+  if(ep==='job')return respond(true,{id:'cccccccccccccccccccccccccccccccc',state:'running',calls:1,completed:0,total:30,parts:[]});
+  return respond(true,{});
+ }
  if(scenario==='expired-review'){
   if(ep==='save'){saveN++;if(saveN===1)return respond(false,{error:'Review expired or unavailable'});}
   if(ep==='review')return respond(true,{ticket:'R2',config:{app:{title:'Garden'}}});
@@ -46,7 +52,7 @@ const src=fs.readFileSync(path.join(__dirname,'..','chatify','web','build.js'),'
 eval(src);
 (async()=>{
  const save=qs('#reviewSave');assert(save.listeners.click,'wizard save button handler registered');
- await save.listeners.click();
+ if(scenario!=='start-wires-url')await save.listeners.click();
  if(scenario==='retry-ticket'){
   const eps=calls.map(c=>c.url.split('/api/settings/build/')[1]);
   assert.deepEqual(eps.slice(0,2),['save','launch'],'save then first launch attempt');
@@ -62,11 +68,18 @@ eval(src);
   assert(qs('#yourappTitle').textContent.includes('is running'),'app shown running after retry');
   assert(sessionStorage._d.cc_build_ws.includes('ws-1'),'workspace persisted for restore');
  }
+ if(scenario==='start-wires-url'){
+  const start=qs('#buildStart');assert(start.listeners.click,'wizard build-start handler registered');
+  await start.listeners.click();
+  await new Promise(r=>setTimeout(r,50));
+  assert(calls.some(c=>c.url.endsWith('/start')),'build start posted');
+  assert(historyCalls.some(a=>String(a[2]).includes('?job='+'c'.repeat(32))),'job id written into the URL for resume: '+JSON.stringify(historyCalls));
+ }
  if(scenario==='expired-review'){
   const eps=calls.map(c=>c.url.split('/api/settings/build/')[1]);
   assert.deepEqual(eps,['save','review','save','launch'],'expired review ticket re-reviews once then saves and starts');
   assert.equal(calls[2].body.ticket,'R2','second save uses the fresh review ticket');
   assert(qs('#yourappTitle').textContent.includes('is running'),'app shown running after recovery');
  }
- console.log('PASS',scenario,calls.map(c=>c.url.split('/').pop()+'('+(c.body.ticket||'')+')').join(' '));
+ console.log(JSON.stringify(calls.map(c=>c.url)));console.log('PASS',scenario,calls.map(c=>c.url.split('/').pop()+'('+(c.body.ticket||'')+')').join(' '));
 })().catch(e=>{console.error(e);process.exit(1)});

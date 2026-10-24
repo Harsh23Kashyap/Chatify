@@ -223,6 +223,7 @@ $("#buildStart").addEventListener("click", async () => {
   try {
     const d = await api("start", { selection: { provider: state.provider, model: state.model, base_url: "" }, brief: state.brief + plan, sections: SECTIONS_ALL, consent: true });
     state.jobId = d.id;
+    try { history.replaceState(null, "", location.pathname + "?job=" + d.id); } catch (e) {}
     goStep(2);
     paintJob(d);
     poll();

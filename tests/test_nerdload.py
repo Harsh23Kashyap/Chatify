@@ -127,3 +127,11 @@ class HostedNerdLoadTests(unittest.TestCase):
   with self.assertRaisesRegex(ValueError,'Up to 2 Nerds'):
    self.loader.review('nerd.zip',base64.b64encode(data).decode())
   self.assertEqual(nerdload.GALLERY_CHILDREN and 2,len(self.registry))
+
+class ReadinessBudgetTest(unittest.TestCase):
+    def test_readiness_budget_covers_slow_free_hosts(self):
+        # The hosted demo boots a child Python on a throttled free instance; a
+        # 4-second budget made first launches fail with 'Nerd did not become
+        # ready'. Keep the budget generous.
+        from chatify import nerdload
+        self.assertGreaterEqual(nerdload.READY_POLLS * nerdload.READY_INTERVAL, 30)
