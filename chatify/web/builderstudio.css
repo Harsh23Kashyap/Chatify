@@ -305,3 +305,8 @@ body.settings-tabs .builder-shell-footer button[disabled],dialog.app-builder .bu
 html body.settings-tabs .builder-hero .builder-hero-cost{color:#c9dcc0;font-size:12px;margin-top:8px}
 dialog.app-builder #builderProgress[data-job-state] .cc-spin-head{stroke-dasharray:max(14px,calc(238.76px*var(--build-complete,0%)/100%)) 238.76px;stroke-dashoffset:0;animation:none;transition:stroke-dasharray .8s ease}
 @media(prefers-reduced-motion:reduce){dialog.app-builder #builderProgress[data-job-state] .cc-spin-head{transition:none}}
+dialog.app-builder .builder-useapp-status{margin:10px 0 0;font-size:13px;line-height:1.5;max-width:72ch}
+dialog.app-builder .builder-useapp-status[data-state=run]{color:#315645}
+dialog.app-builder .builder-useapp-status[data-state=ok]{color:#2c5f3f;font-weight:600}
+dialog.app-builder .builder-useapp-status[data-state=error]{color:#9a3b2e;font-weight:600}
+#builderActionBar[data-state=error]{font-weight:600}
