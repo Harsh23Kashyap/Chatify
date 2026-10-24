@@ -9,7 +9,7 @@ class PublicVisitorIsolation(unittest.TestCase):
   root=pathlib.Path(__file__).resolve().parents[1]
   server=(root/'chatify/server.py').read_text()
   self.assertIn('def _cookie_named(self, name):',server)
-  self.assertIn('if cfg.get("server", {}).get("public"):',server)
+  self.assertIn('if cfg.get("server", {}).get("public") or os.environ.get("CHATIFY_GALLERY_REGISTER"):',server)
   self.assertIn('return "visitor:" + visitor',server)
   self.assertIn('cc_visitor=%s; Path=/; HttpOnly; SameSite=Strict',server)
  def test_hosted_demo_opts_in(self):

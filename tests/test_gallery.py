@@ -402,3 +402,129 @@ class GalleryBuilderUseThisApp(unittest.TestCase):
         s, b = self.req("GET", url + "api/provider/status", A)
         key = json.loads(b)["keys"]["openai"]
         self.assertFalse(key["has"]); self.assertTrue(key["needed"])
+        slug = url.strip("/")
+        s, b = self.req("POST", "/alpha/api/nerds/stop", A, {"id": slug})
+        self.assertEqual(s, 200, str(b)[:150])
+        s, b = self.req("POST", "/alpha/api/nerds/remove", A, {"id": slug, "confirmed": True})
+        self.assertEqual(s, 200, str(b)[:150])
+
+
+class GalleryNestedWorkspaceLaunch(unittest.TestCase):
+    """A workspace launched from INSIDE a guest workspace still gets a same-origin hosted URL."""
+    @classmethod
+    def setUpClass(cls):
+        cls.base = tempfile.mkdtemp()
+        _write_gallery(cls.base)
+        cls.port = 8944
+        env = dict(os.environ, OPENAI_API_KEY="sk-nested-host-fixture", CHATIFY_NERD_GLOBAL_CAP="2")
+        cls.proc = subprocess.Popen(
+            [sys.executable, "-m", "chatify", "run", os.path.join(cls.base, "gallery.yaml"), "--port", str(cls.port), "--no-browser"],
+            cwd=ROOT, env=env, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True)
+        for _ in range(40):
+            time.sleep(0.25)
+            if cls.proc.poll() is not None:
+                raise AssertionError("gallery server died: " + cls.proc.stdout.read()[-1500:])
+            try:
+                urllib.request.urlopen("http://127.0.0.1:%d/api/health" % cls.port, timeout=2)
+                break
+            except Exception:
+                continue
+        else:
+            raise AssertionError("gallery server never came up")
+
+    @classmethod
+    def tearDownClass(cls):
+        cls.proc.terminate(); cls.proc.wait()
+
+    def req(self, method, path, cookie, body=None, raw=False):
+        h = {"Accept": "application/json", "Cookie": "cc_visitor=" + cookie}
+        data = None
+        if body is not None:
+            data = json.dumps(body).encode(); h["Content-Type"] = "application/json"
+        r = urllib.request.Request("http://127.0.0.1:%d%s" % (self.port, path), data=data, headers=h, method=method)
+        try:
+            resp = urllib.request.urlopen(r, timeout=60)
+            out = resp.read().decode("utf-8", "replace")
+            return resp.status, (out if raw else json.loads(out))
+        except urllib.error.HTTPError as e:
+            out = e.read().decode("utf-8", "replace")
+            if raw: return e.code, out
+            try: return e.code, json.loads(out)
+            except ValueError: return e.code, {"error": out[:200]}
+
+    def test_launch_inside_workspace_registers_same_origin(self):
+        import base64
+        A = "a1b2c3d4" * 4
+        minimal = io.open(os.path.join(ROOT, "apps", "minimal", "app.yaml"), "rb").read()
+        s, b = self.req("POST", "/alpha/api/nerds/review", A, {"name": "app.yaml", "data": base64.b64encode(minimal).decode()})
+        self.assertEqual(s, 200, str(b)[:200])
+        self.assertTrue(b["hosted"])
+        s, b = self.req("POST", "/alpha/api/nerds/load", A, {"token": b["token"]})
+        self.assertEqual(s, 200, str(b)[:200])
+        self.assertTrue(b["hosted"])
+        w1 = b["url"]
+        self.assertRegex(w1, r"^/nerd-[A-Za-z0-9_-]+/$")
+
+        # builder chain INSIDE W1: review -> save -> launch
+        yaml_text = "app:\n  id: nested\n  title: Nested App\nprovider:\n  type: openai\n  model: gpt-4o-mini\n  api_key_env: OPENAI_API_KEY\nsources: []\n"
+        s, b = self.req("POST", w1 + "api/settings/build/review", A, {"yaml": yaml_text, "sections": ["app", "provider", "sources"]})
+        self.assertEqual(s, 200, str(b)[:200])
+        s, b = self.req("POST", w1 + "api/settings/build/save", A, {"ticket": b["ticket"], "confirmed": True})
+        self.assertEqual(s, 200, str(b)[:200])
+        s, b = self.req("POST", w1 + "api/settings/build/launch", A, {"ticket": b["launch_ticket"]})
+        self.assertEqual(s, 200, str(b)[:300])
+        self.assertTrue(b["hosted"], str(b)[:200])
+        w2 = b["url"]
+        self.assertRegex(w2, r"^/nerd-[A-Za-z0-9_-]+/$", str(b)[:200])
+        self.assertEqual(b["title"], "Nested App")
+        self.assertNotEqual(w1, w2)
+
+        # owner opens W2 same-origin; a stranger is denied
+        s, body = self.req("GET", w2, A, raw=True)
+        self.assertEqual(s, 200); self.assertIn("Nested App", body)
+        s, body = self.req("GET", w2, "b2c3d4e5" * 4, raw=True)
+        self.assertEqual(s, 403); self.assertIn("Private workspace", body)
+        # W2 inherits no host key material
+        s, st = self.req("GET", w2 + "api/provider/status", A)
+        self.assertEqual(s, 200)
+        self.assertFalse(st["keys"]["openai"]["has"])
+
+        # depth guard: W2 cannot launch a third level
+        s, b = self.req("POST", w2 + "api/settings/build/review", A, {"yaml": yaml_text, "sections": ["app", "provider", "sources"]})
+        self.assertEqual(s, 200, str(b)[:200])
+        s, b = self.req("POST", w2 + "api/settings/build/save", A, {"ticket": b["ticket"], "confirmed": True})
+        self.assertEqual(s, 200, str(b)[:200])
+        s, b = self.req("POST", w2 + "api/settings/build/launch", A, {"ticket": b["launch_ticket"]})
+        self.assertEqual(s, 400, str(b)[:200])
+        self.assertIn("cannot launch further workspaces", b["error"])
+
+        # a parent cannot stop while its nested workspace runs (no orphans)
+        key1 = w1.strip("/")
+        s, b = self.req("POST", "/alpha/api/nerds/stop", A, {"id": key1})
+        self.assertEqual(s, 400, str(b)[:200])
+        self.assertIn("running workspace of its own", b["error"])
+        # global cap across nested processes: W1 + W2 = 2, a third import refuses
+        s, b = self.req("POST", "/alpha/api/nerds/review", A, {"name": "app.yaml", "data": base64.b64encode(minimal).decode()})
+        self.assertEqual(s, 200, str(b)[:200])
+        s, b = self.req("POST", "/alpha/api/nerds/load", A, {"token": b["token"]})
+        self.assertEqual(s, 400, str(b)[:200])
+        self.assertIn("workspace limit", b["error"])
+        # cleanup: W2 is managed by W1's own API (the process that spawned it),
+        # W1 by the gallery app's; registry forgets both
+        key2 = w2.strip("/")
+        s, b = self.req("POST", w1 + "api/nerds/stop", A, {"id": key2})
+        self.assertEqual(s, 200, str(b)[:150])
+        s, b = self.req("POST", w1 + "api/nerds/remove", A, {"id": key2, "confirmed": True})
+        self.assertEqual(s, 200, str(b)[:150])
+        s, lst = self.req("GET", w1 + "api/nerds", A)
+        self.assertEqual(lst["workspaces"], [])
+        s, b = self.req("POST", "/alpha/api/nerds/stop", A, {"id": key1})
+        self.assertEqual(s, 200, str(b)[:150])
+        s, b = self.req("POST", "/alpha/api/nerds/remove", A, {"id": key1, "confirmed": True})
+        self.assertEqual(s, 200, str(b)[:150])
+        s, body = self.req("GET", w2, A, raw=True)
+        self.assertEqual(s, 404)
+        s, body = self.req("GET", w1, A, raw=True)
+        self.assertEqual(s, 404)
+        s, lst = self.req("GET", "/alpha/api/nerds", A)
+        self.assertEqual(lst["workspaces"], [])

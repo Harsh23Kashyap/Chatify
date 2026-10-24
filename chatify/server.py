@@ -177,7 +177,10 @@ def make_handler(cfg, engine):
 
         def _owner(self):
             if cfg["auth"]["mode"] == "none":
-                if cfg.get("server", {}).get("public"):
+                # Inside a spawned hosted workspace the dispatcher's visitor cookie
+                # is the real identity: nested launches and workspace management
+                # must stay scoped to the browser that owns the workspace.
+                if cfg.get("server", {}).get("public") or os.environ.get("CHATIFY_GALLERY_REGISTER"):
                     visitor = self._cookie_named("cc_visitor")
                     if re.fullmatch(r"[0-9a-f]{32}", visitor or ""):
                         return "visitor:" + visitor
@@ -988,6 +991,7 @@ def serve_gallery(path, host=None, port=None):
     # Loaded Nerds register here (slug -> {"port", "owner"}) so the dispatcher
     # proxies them at same-origin /<slug>/ and gates them to their creator.
     nerdloadmod.GALLERY_CHILDREN = children
+    nerdloadmod.GALLERY_REGISTER = {"url": "http://127.0.0.1:%d/__cc_nerds" % (port or 8080), "token": os.urandom(16).hex()}
     redirects = {}
     cards = []
     for app in g["apps"]:
@@ -1110,6 +1114,46 @@ def serve_gallery(path, host=None, port=None):
 
         def _dispatch(self):
             raw = urlparse(self.path).path
+            if raw == "/__cc_nerds" and self.command == "POST":
+                # Loopback is the real TCP peer, never a header: Render's proxy and
+                # any outside client fail this check even with spoofed forwarding
+                # headers. The token is per-parent (HMAC of the master secret with
+                # the parent slug), so a workspace registers descendants only under
+                # itself; the owner is inherited server-side from the parent entry.
+                import hmac as _hmac
+                if self.client_address[0] not in ("127.0.0.1", "::1"):
+                    return self._send(403, {"error": "Not allowed"})
+                try:
+                    body = json.loads(self.rfile.read(int(self.headers.get("Content-Length") or 0)) or b"{}")
+                except (ValueError, OSError):
+                    return self._send(400, {"error": "Bad request"})
+                parent = str(body.get("parent") or "")
+                pentry = children.get(parent)
+                want = _hmac.new(nerdloadmod.GALLERY_REGISTER["token"].encode(), parent.encode(), "sha256").hexdigest()
+                if not isinstance(pentry, dict) or not _hmac.compare_digest(str(self.headers.get("X-CC-Token") or ""), want):
+                    return self._send(403, {"error": "Not allowed"})
+                slug = str(body.get("slug") or "")
+                if not re.fullmatch(r"nerd-[A-Za-z0-9_-]{4,40}", slug):
+                    return self._send(400, {"error": "Bad workspace slug"})
+                if body.get("unregister"):
+                    target = children.get(slug)
+                    if isinstance(target, dict) and target.get("parent") == parent:
+                        children.pop(slug, None)
+                    return self._send(200, {"ok": True})
+                depth = int(pentry.get("depth") or 1) + 1
+                if depth > 2:
+                    return self._send(400, {"error": "Workspaces on this demo server cannot launch further workspaces of their own. Make your changes in the main demo app and use it there."})
+                try:
+                    cport = int(body.get("port"))
+                except (TypeError, ValueError):
+                    return self._send(400, {"error": "Bad port"})
+                if not 1024 <= cport <= 65535:
+                    return self._send(400, {"error": "Bad port"})
+                cap = nerdloadmod._global_cap()
+                if sum(1 for v in children.values() if isinstance(v, dict)) >= cap:
+                    return self._send(400, {"error": "This demo server is at its workspace limit (%d). Stop a running workspace before loading more." % cap})
+                children[slug] = {"port": cport, "owner": pentry.get("owner") or "", "parent": parent, "depth": depth}
+                return self._send(200, {"ok": True})
             seg = raw.lstrip("/").split("/", 1)[0].lower() if raw != "/" else ""
             if seg and seg in children:
                 return self._proxy(seg)

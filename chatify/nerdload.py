@@ -1,5 +1,5 @@
 """Review portable Nerds without importing code, then launch in a separate local workspace."""
-import base64,hashlib,io,json,os,re,shutil,subprocess,sys,threading,zipfile
+import base64,hashlib,hmac,io,json,os,re,shutil,socket,subprocess,sys,threading,zipfile
 from pathlib import Path,PurePosixPath
 import yaml
 from . import schema
@@ -8,11 +8,35 @@ from .portable import _check_values,ExportError
 # child-port registry so loaded Nerds are reachable at same-origin /<slug>/ paths
 # instead of loopback URLs that only work on the host computer.
 GALLERY_CHILDREN = None
+# A spawned guest workspace runs in its own process, where the registry above is
+# absent. The dispatcher hands down a loopback registration endpoint + bearer so
+# workspaces launched from inside a workspace still land at same-origin /<slug>/.
+GALLERY_REGISTER = None
+def _reg_token(slug):
+ # Per-workspace registration credential: HMAC of the dispatcher's master
+ # secret with the workspace slug. The dispatcher re-computes it server-side,
+ # so a workspace can only register descendants under itself, never under an
+ # arbitrary owner or parent.
+ return hmac.new(GALLERY_REGISTER['token'].encode(),slug.encode(),hashlib.sha256).hexdigest()
+def _global_cap():
+ try:return int(os.environ.get('CHATIFY_NERD_GLOBAL_CAP') or 0) or 4
+ except ValueError:return 4
+def _hosted():
+ return GALLERY_CHILDREN is not None or bool(os.environ.get('CHATIFY_GALLERY_REGISTER'))
 def _nerd_limit():
  # A hosted gallery shares one small server with its built-in apps, so it runs
  # fewer guest workspaces than a desktop install unless the host sets a limit.
- try:return int(os.environ.get('CHATIFY_NERD_LIMIT') or 0) or (2 if GALLERY_CHILDREN is not None else 4)
- except ValueError:return 2 if GALLERY_CHILDREN is not None else 4
+ try:return int(os.environ.get('CHATIFY_NERD_LIMIT') or 0) or (2 if _hosted() else 4)
+ except ValueError:return 2 if _hosted() else 4
+def _register_remote(payload):
+ import urllib.request,urllib.error
+ req=urllib.request.Request(os.environ['CHATIFY_GALLERY_REGISTER'],data=json.dumps(payload).encode(),headers={'Content-Type':'application/json','X-CC-Token':os.environ.get('CHATIFY_GALLERY_TOKEN','')},method='POST')
+ try:
+  with urllib.request.urlopen(req,timeout=5) as resp:resp.read()
+ except urllib.error.HTTPError as e:
+  try:msg=json.loads(e.read().decode('utf-8','replace')).get('error','')
+  except Exception:msg=''
+  raise ValueError(msg or 'The workspace could not register with the demo server.') from None
 MAX_UPLOAD=8*1024*1024
 MAX_EXPANDED=32*1024*1024
 _ALLOWED={'.yaml','.yml','.json','.md','.txt','.csv','.pdf','.py'}
@@ -125,17 +149,22 @@ class NerdLoader:
   from . import theme
   look=theme.clean(json.loads(files['data/theme.json'])) if 'data/theme.json' in files else theme.clean(cfg.get('appearance',{}))
   preview={'title':look.get('txt_title') or cfg['app']['title'],'tagline':look.get('txt_tagline') or cfg['app']['tagline'],'mode':look.get('mode','light'),'colors':look.get('dark' if look.get('mode')=='dark' else 'light',{}),'examples':cfg['app'].get('examples',[])[:3],'files':sorted(files),'static':True}
-  if GALLERY_CHILDREN is not None:warnings_hosted='Hosted workspace: it runs on this demo server, only this browser can open it, and it disappears when the demo restarts or redeploys. Add API keys in the new workspace Configuration; nothing is shared with other visitors.'
+  if _hosted():warnings_hosted='Hosted workspace: it runs on this demo server, only this browser can open it, and it disappears when the demo restarts or redeploys. Add API keys in the new workspace Configuration; nothing is shared with other visitors.'
   from . import bundle_review
   result_warnings=['Python uses a bounded process, NOT a sandbox. Host files/network remain accessible; code review required.','Separate local workspace. Current app is not overwritten.',str(len(imported_keys))+' API key entries will be placed in this workspace private key storage. Values are not shown. Accounts and chat history are not imported.','Imported local apps disable write actions. Review remote sources before asking a question.']
-  if GALLERY_CHILDREN is not None:result_warnings[1]=warnings_hosted
-  return {'hosted':GALLERY_CHILDREN is not None,'auto_review':bundle_review.review(cfg,files),'preview':preview,'readiness':readiness,'token':token,'title':cfg['app']['title'],'tagline':cfg['app']['tagline'],'provider':cfg['provider']['type'],'model':cfg['provider']['model'],'sources':[{'id':s['id'],'label':s.get('label',s['id']),'type':s['type']} for s in cfg['sources']],'required_env':envs,'imported_key_count':len(imported_keys),'code':[{'path':n,'text':files[n].decode('utf-8')} for n in code],'warnings':result_warnings}
+  if _hosted():result_warnings[1]=warnings_hosted
+  return {'hosted':_hosted(),'auto_review':bundle_review.review(cfg,files),'preview':preview,'readiness':readiness,'token':token,'title':cfg['app']['title'],'tagline':cfg['app']['tagline'],'provider':cfg['provider']['type'],'model':cfg['provider']['model'],'sources':[{'id':s['id'],'label':s.get('label',s['id']),'type':s['type']} for s in cfg['sources']],'required_env':envs,'imported_key_count':len(imported_keys),'code':[{'path':n,'text':files[n].decode('utf-8')} for n in code],'warnings':result_warnings}
  def load(self,token,allow_code=False,owner='local'):
   with self.lock:item=self.pending.get(token)
   if not item:raise ValueError('Review the bundle first')
   files,cfg,code,imported_keys=item
-  hosted=GALLERY_CHILDREN is not None
+  hosted=_hosted()
   if code and not allow_code:raise ValueError('Review Python code and explicitly allow it before loading')
+  depth=0
+  if hosted:
+   try:depth=int(os.environ.get('CHATIFY_NERD_DEPTH') or 0)
+   except ValueError:depth=0
+   if depth>=2:raise ValueError('Workspaces on this demo server cannot launch further workspaces of their own. Make your changes in the main demo app and use it there.')
   from .launcher import pick_port
   import tempfile
   self.root.mkdir(parents=True,exist_ok=True)
@@ -158,9 +187,21 @@ class NerdLoader:
   # the workspace Configuration. Desktop loads keep declared env keys only.
   declared_env=set() if hosted else {cfg['provider'].get('api_key_env','')}|{src.get('api_key_env','') for src in cfg['sources']}
   child_env={k:v for k,v in os.environ.items() if not re.search(r'(KEY|TOKEN|SECRET|PASSWORD|CREDENTIAL)',k,re.I) or k in declared_env}
+  if hosted:
+   # Nested launches register through the dispatcher: hand the endpoint, this
+   # workspace's registration credential (re-added after the key scrub), its
+   # slug and depth to the new workspace process.
+   if GALLERY_REGISTER:child_env['CHATIFY_GALLERY_REGISTER']=GALLERY_REGISTER['url'];child_env['CHATIFY_GALLERY_TOKEN']=_reg_token(slug)
+   else:
+    if os.environ.get('CHATIFY_GALLERY_REGISTER'):child_env['CHATIFY_GALLERY_REGISTER']=os.environ['CHATIFY_GALLERY_REGISTER']
+    if os.environ.get('CHATIFY_GALLERY_TOKEN'):child_env['CHATIFY_GALLERY_TOKEN']=os.environ['CHATIFY_GALLERY_TOKEN']
+   child_env['CHATIFY_NERD_SLUG']=slug
+   child_env['CHATIFY_NERD_DEPTH']=str(depth+1)
   with self.lock:
    if sum(p.poll() is None for p in self.children)>=_nerd_limit():
     log.close();raise ValueError('Maximum %d running Nerds. Stop a running workspace before loading more.'%_nerd_limit())
+   if GALLERY_CHILDREN is not None and sum(1 for v in GALLERY_CHILDREN.values() if isinstance(v,dict))>=_global_cap():
+    log.close();raise ValueError('This demo server is at its workspace limit (%d). Stop a running workspace before loading more.'%_global_cap())
    child=subprocess.Popen([sys.executable,'-m','chatify','run',str(folder/'app.yaml'),'--no-browser'],stdout=log,stderr=subprocess.STDOUT,cwd=str(Path(__file__).resolve().parents[1]),env=child_env)
    self.children.append(child)
   log.close();self.workspaces[folder.name]={'folder':folder,'process':child,'title':cfg['app']['title'],'url':url,'owner':owner,'slug':slug,'hosted':hosted}
@@ -170,18 +211,39 @@ class NerdLoader:
    if child.poll() is not None:raise ValueError('Nerd could not start. Check dependencies and connector setup in '+str(folder/'run.log'))
    try:
     with urllib.request.urlopen(probe+'/api/health',timeout=.5):
-     if hosted:GALLERY_CHILDREN[slug]={'port':port,'owner':owner}
+     if hosted:
+      if GALLERY_CHILDREN is not None:GALLERY_CHILDREN[slug]={'port':port,'owner':owner,'depth':1}
+      else:
+       try:_register_remote({'slug':slug,'port':port,'parent':os.environ.get('CHATIFY_NERD_SLUG','')})
+       except Exception:
+        child.terminate()
+        try:child.wait(timeout=3)
+        except subprocess.TimeoutExpired:child.kill();child.wait()
+        raise ValueError('The workspace started but could not register with the demo server. Try again.')
      return {'url':url,'title':cfg['app']['title'],'workspace':str(folder),'hosted':hosted}
    except OSError:time.sleep(.1)
   child.terminate();raise ValueError('Nerd did not become ready; current app is unchanged')
  def _unregister(self,slug):
-  if GALLERY_CHILDREN is not None and slug:GALLERY_CHILDREN.pop(slug,None)
+  if not slug:return
+  if GALLERY_CHILDREN is not None:GALLERY_CHILDREN.pop(slug,None)
+  elif os.environ.get('CHATIFY_GALLERY_REGISTER'):
+   try:_register_remote({'slug':slug,'parent':os.environ.get('CHATIFY_NERD_SLUG',''),'unregister':True})
+   except Exception:pass
  def list(self,owner=None):
   with self.lock:
    return [{'id':key,'title':v['title'],'url':v['url'],'slug':v.get('slug'),'hosted':bool(v.get('hosted')),'running':v['process'] is not None and v['process'].poll() is None} for key,v in self.workspaces.items() if owner is None or (v.get('owner') or 'local')==owner]
  def stop(self,key,owner=None):
   with self.lock:item=self.workspaces.get(key)
   if not item or (owner is not None and (item.get('owner') or 'local')!=owner):raise ValueError('Unknown imported workspace')
+  if GALLERY_CHILDREN is not None and item.get('slug'):
+   # Never orphan a nested workspace: a parent cannot stop while a registered
+   # descendant is alive. Dead registrations are forgotten on sight.
+   alive=[]
+   for s,v in list(GALLERY_CHILDREN.items()):
+    if isinstance(v,dict) and v.get('parent')==item['slug']:
+     try:socket.create_connection(('127.0.0.1',v['port']),timeout=.5).close();alive.append(s)
+     except OSError:GALLERY_CHILDREN.pop(s,None)
+   if alive:raise ValueError('This workspace has a running workspace of its own (%s). Stop it from inside the workspace first.'%', '.join(sorted(alive)))
   proc=item['process']
   if proc and proc.poll() is None:
    proc.terminate()
