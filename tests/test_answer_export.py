@@ -11,6 +11,13 @@ class Export(unittest.TestCase):
   t=self.turn();t['answer']='नमस्ते'
   with self.assertRaises(ValueError):pdf_bytes('Chat',t)
   self.assertIn('नमस्ते',answer_markdown({'title':'Chat'},t))
+ def test_typographic_unicode_renders_real_pdf(self):
+  t=self.turn();t['answer']='Returns - net 4.5% \u2014 \u201cgrowth\u201d \u2022 \u20b91,000 \u2192 \u20b91,045'
+  b=pdf_bytes('Wealth Chat',t)
+  self.assertTrue(b.startswith(b'%PDF-1.4'));self.assertIn(b'Rs. 1,000 -> Rs. 1,045',b);self.assertIn(b'\x97',b)
+ def test_typographic_unicode_no_longer_rejected(self):
+  t=self.turn();t['answer']='Em dash \u2014 en dash \u2013 quotes \u2018x\u2019 \u201cy\u201d bullet \u2022 ellipsis \u2026'
+  self.assertTrue(pdf_bytes('Chat',t).startswith(b'%PDF'))
  def test_accent_not_pdf_injection(self):self.assertIn(b'0.090 0.247 0.208',pdf_bytes('Chat',self.turn(),'bad-pdf'))
 
  def test_branded_template_fonts_paper_and_metadata(self):
