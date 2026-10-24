@@ -21,6 +21,12 @@ class BuilderTests(unittest.TestCase):
   p=Fixture({'message':'Review','config':{'provider':{'type':'openai','model':'gpt-6-luna','temperature':0.4}}})
   r=appbuilder.talk(p,self.cfg,self.data(sections=['provider']));raw=yaml.safe_load(r['yaml'])
   self.assertEqual(raw['provider']['model'],'user-model');self.assertEqual(raw['provider']['type'],'openai')
+ def test_user_named_model_is_preserved(self):
+  # The clamp targets model INVENTIONS; a model the user explicitly names in their
+  # own requirements is their choice and stays.
+  d=self.data(sections=['provider']);d['messages']=[{'role':'user','content':'A gardening app. Please use gpt-4o for the answers.'}]
+  p=Fixture({'message':'Review','config':{'provider':{'type':'openai','model':'gpt-4o'}}})
+  r=appbuilder.talk(p,self.cfg,d);self.assertEqual(yaml.safe_load(r['yaml'])['provider']['model'],'gpt-4o')
  def test_no_private_config_in_prompt(self):
   self.cfg['sources']=[{'type':'http_json','url':'https://private.invalid','label':'PRIVATE_SENTINEL'}];self.cfg['provider']['api_key_env']='PRIVATE_ENV';p=Fixture({'message':'Sources?','config':None});appbuilder.talk(p,self.cfg,self.data());sent=json.dumps(p.calls);self.assertNotIn('PRIVATE_SENTINEL',sent);self.assertNotIn('private.invalid',sent);self.assertNotIn('PRIVATE_ENV',sent)
  def test_consent_gate(self):
