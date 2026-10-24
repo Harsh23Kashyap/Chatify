@@ -92,6 +92,14 @@ def make_handler(cfg, engine):
     cfg["budget"] = dict(budget.value)
     engine.provider = budget.wrap(engine.provider)
     themestore = themes.ThemeStore(os.path.dirname(os.path.abspath(store.path)) if store.path != ":memory:" else "/tmp", cfg["app"],cfg.get("appearance"))
+
+    def effective_app():
+        # The rendered chat honors theme wording overrides (txt_title/txt_tagline) over
+        # cfg.app; exports and api/config must show the same wording the page shows.
+        view = dict(cfg["app"])
+        view["title"] = themestore.value.get("txt_title") or view.get("title", "")
+        view["tagline"] = themestore.value.get("txt_tagline") or view.get("tagline", "")
+        return view
     from . import editstate
     from .buildjobs import BuildJobs
     from .builddrafts import BuildDrafts
@@ -276,6 +284,7 @@ def make_handler(cfg, engine):
                 return self._send(200,editstate.save_draft(state_folder,str(b.get('kind','')),b.get('brief'),b.get('code')))
             if path == "/api/config":
                 view=schema.public_view(cfg)
+                view['app']=effective_app()
                 _p=cfg['provider']
                 view['provider']['key_present']= _p['type'] in ('mock','ollama') or (_p['type']=='openai_compatible' and not _p.get('api_key_env')) or bool(providers._key(_p.get('api_key_env',''),_p['type'],required=False))
                 principal=acc.user_for(self._cookie()) if acc else None
@@ -905,10 +914,10 @@ def make_handler(cfg, engine):
                                   {"Content-Disposition": 'attachment; filename="references.bib"'})
             if path == "/api/answer-markdown":
                 t=permissions.view(cfg,o,store.turn(o,qs.get('turn','')))
-                return self._send(200,answer_markdown(cfg['app'],t).encode(),'text/markdown; charset=utf-8',{'Content-Disposition':'attachment; filename="answer.md"'})
+                return self._send(200,answer_markdown(effective_app(),t).encode(),'text/markdown; charset=utf-8',{'Content-Disposition':'attachment; filename="answer.md"'})
             if path == "/api/pdf":
                 t = permissions.view(cfg,o,store.turn(o, qs.get("turn", "")))
-                return self._send(200, pdf_bytes(cfg["app"]["title"], t,themestore.value.get("light",{}).get("brand",cfg["app"]["accent"]),cfg["app"].get("tagline","")), "application/pdf",
+                return self._send(200, pdf_bytes(effective_app()["title"], t,themestore.value.get("light",{}).get("brand",cfg["app"]["accent"]),effective_app()["tagline"]), "application/pdf",
                                   {"Content-Disposition": 'attachment; filename="answer.pdf"'})
             return self._send(404, {"error": "Not found"})
 
