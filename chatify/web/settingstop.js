@@ -23,17 +23,17 @@
   if(hero){
     const studio=document.createElement('section');studio.className='cfg-studio';studio.setAttribute('aria-label','Build your app');hero.before(studio);studio.append(hero);
     setText('.builder-hero-title','What would you like to build?');
-    setText('.builder-hero-sub','Describe your idea. AI drafts the setup, then you review each change.');
-    setText('.builder-hero-sub-m','Describe your idea. Review the setup before saving.');
+    setText('.builder-hero-sub','Describe your idea. AI drafts the setup for your review.');
+    setText('.builder-hero-sub-m','Describe your idea. AI drafts the setup for your review.');
     const composer=document.createElement('div');composer.className='cfg-composer';
     const label=document.createElement('label');label.htmlFor='cfgIdea';label.textContent='Your app idea';
     const idea=document.createElement('textarea');idea.id='cfgIdea';idea.rows=4;idea.maxLength=4000;idea.placeholder='A diet assistant that answers from my nutrition guidelines, explains its sources, and helps me plan meals...';
     composer.append(label,idea);const heroCopy=hero.querySelector('.builder-hero-copy');(heroCopy||hero).after(composer);
     const entry=hero.querySelector('.app-builder-open');if(entry){const entryLabel=entry.querySelector('span');if(entryLabel)entryLabel.textContent='Build with AI';
     entry.addEventListener('click',()=>{if(idea.value.trim())queueMicrotask(()=>{const brief=document.getElementById('builderBrief');if(brief&&!brief.value.trim()){brief.value=idea.value.trim();brief.dispatchEvent(new Event('input',{bubbles:true}))}})})}
-    const costNote=document.createElement('p');costNote.className='builder-hero-cost h';costNote.textContent='AI drafting uses your saved model key; requests may cost money. Nothing is saved until you review.';composer.append(costNote);
+    const costNote=document.createElement('p');costNote.className='builder-hero-cost h';costNote.textContent='Uses your saved model key; requests may cost money. Nothing is saved or applied until you confirm.';composer.append(costNote);
     const heroExamples=[idea.placeholder,'A study buddy that quizzes me from my own lecture notes and cites the page it used...','A support assistant that answers customer questions from our help center articles...','A research aide that reads papers I upload and answers with citations...'];let hx=0;setInterval(()=>{if(idea.value||document.activeElement===idea||document.hidden)return;hx=(hx+1)%heroExamples.length;idea.placeholder=heroExamples[hx]},4500);
-    setText('.builder-hero-note','Review first. Nothing changes until you confirm.');
+    hero.querySelector('.builder-hero-note')?.remove();
     const preview=document.createElement('aside');preview.className='cfg-chat-preview';
     const head=document.createElement('div');head.className='cfg-preview-head';head.innerHTML='<strong>Your chat app</strong><small>Sample preview · no AI request</small>';
     const frame=document.createElement('iframe');frame.title='Chat app sample preview';frame.src='./?preview=1';
