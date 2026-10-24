@@ -54,12 +54,15 @@ class QueryWords(unittest.TestCase):
         eng.cfg = {"retrieval": {}, "provider": {"type": "mock"}, "sources": [{"type": "wikipedia"}]}
         qs = eng.queries("How often should I water tomatoes on a balcony - and what do deep watering and drainage really mean?")
         self.assertEqual(qs[0], "How often should I water tomatoes on a balcony - and what do deep watering and drainage really mean?")
-        self.assertEqual(len(qs), 2)
+        # Query ladder: raw question + focused content-word windows (6, 3, 2).
+        self.assertLessEqual(len(qs), 4)
+        self.assertEqual(len(qs), len(set(q.lower() for q in qs)))
         words = qs[1].lower().split()
         for w in ("how", "often", "should", "i", "really", "mean"):
             self.assertNotIn(w, words)
         for w in ("water", "tomatoes", "balcony", "drainage"):
             self.assertIn(w, words)
+        self.assertEqual(qs[1].lower().split(), "water tomatoes balcony deep watering drainage".split())
 
 
 class FallbackWording(unittest.TestCase):
@@ -82,3 +85,42 @@ class FallbackWording(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class QueryLadder(unittest.TestCase):
+    def engine(self):
+        from chatify.store import Store
+        from chatify import schema
+        cfg = schema.validate({'sources': [{'id': 'wikipedia', 'type': 'wikipedia', 'label': 'Wikipedia', 'lang': 'en'}]})
+        return Engine(cfg, Store(':memory:'))
+
+    def test_ladder_emits_focused_heads(self):
+        # Regression for the 2026-10-24 live recall hole: "How long does a vegetable
+        # stir fry take on a weeknight?" only searched the raw question and a noisy
+        # 6-word window, both of which Wikipedia answers with popular junk; the
+        # content-word head "vegetable stir fry" finds "Stir frying".
+        qs = self.engine().queries("How long does a vegetable stir fry take on a weeknight?")
+        self.assertEqual(qs[0], "How long does a vegetable stir fry take on a weeknight?")
+        self.assertIn("vegetable stir fry", qs)
+        self.assertIn("vegetable stir", qs)
+        self.assertLessEqual(len(qs), 4)
+        self.assertNotIn("weeknight", " ".join(qs[1:]))
+
+    def test_ladder_dedups_and_keeps_raw_first(self):
+        qs = self.engine().queries("Tomato?")
+        self.assertEqual(qs[0], "Tomato?")
+        self.assertEqual(len(qs), len(set(q.lower() for q in qs)))
+
+    def test_no_search_sources_keeps_single_query(self):
+        from chatify.store import Store
+        from chatify import schema
+        cfg = schema.validate({'sources': [{'id': 'docs', 'type': 'local_files', 'label': 'Docs', 'path': 'docs'}]})
+        e = Engine(cfg, Store(':memory:'))
+        self.assertEqual(e.queries("How long does a stir fry take?"), ["How long does a stir fry take?"])
+
+    def test_gate_keeps_stir_frying_for_stir_fry_question(self):
+        q = "How long does a vegetable stir fry take on a weeknight?"
+        good = ev(1, "Stir frying", "Stir frying is a Chinese cooking technique in which vegetables are fried in a small amount of very hot oil while being stirred in a wok.")
+        junk = ev(2, "List of America's Test Kitchen episodes", "Episodes of an American cooking show.")
+        out = relevance_gate(q, [junk, good])
+        self.assertEqual([e["title"] for e in out], ["Stir frying"])

@@ -171,11 +171,20 @@ class Engine:
             except providers.ProviderError:
                 pass
         # REST news/search endpoints generally expect keywords, not a full instruction.
+        # Open full-text search (Wikipedia especially) ranks rare-word mixtures as
+        # AND-soup and returns popular but unrelated pages, so emit a ladder of
+        # focused keyword queries: the 6-word window, then 3- and 2-word heads of
+        # the content words only. The relevance gate keeps precision; the ladder
+        # buys recall. Verified live 2026-10-24: "vegetable stir fry" finds "Stir
+        # frying" while "long vegetable stir fry take weeknight" finds only junk.
         if any(x.get("type") in ("http_json","arxiv","pubmed","wikipedia","crossref") for x in self.cfg["sources"]):
-            stop=self._STOP|set("summarize summary headline headlines news give compact table chart graph plot publication date dates citations cite explain compare current latest reported report please only sample sources source detail detailed published research studies study findings benefits limits i me my mine we our us often really mean means meant much many way ways tips good best better great weekly daily monthly yearly".split())
+            stop=self._STOP|set("summarize summary headline headlines news give compact table chart graph plot publication date dates citations cite explain compare current latest reported report please only sample sources source detail detailed published research studies study findings benefits limits i me my mine we our us often really mean means meant much many way ways tips good best better great weekly daily monthly yearly long takes take took time timing weeknight weeknights weekend weekends morning evenings evening night nights day days hour hours minute minutes second seconds ago today tonight tomorrow yesterday".split())
             words=[w for w in re.findall(r"[A-Za-z0-9][A-Za-z0-9-]*",question) if w.lower() not in stop]
-            short=" ".join(words[:6])
-            if short and short.lower()!=question.lower():return [question,short]
+            out=[question]
+            for n in (6,3,2):
+                short=" ".join(words[:n])
+                if short and len(words)>n-2 and short.lower() not in (q.lower() for q in out):out.append(short)
+            return out[:4]
         return [question]
 
     # (2)+(3) retrieval
