@@ -152,6 +152,7 @@ html[data-motion=subtle] *{transition-duration:.08s!important}html[data-motion=s
 html[data-motion=none] *,html[data-motion=none] *::before,html[data-motion=none] *::after{transition:none!important;animation:none!important;scroll-behavior:auto!important}
 .av.emo{font-size:calc(18px*var(--fs,1));font-weight:400}
 html.preview .toolbar a.tb-link{pointer-events:none}
+html.preview header.toolbar{display:none!important}html.preview .app{height:100vh!important;min-height:0!important}
 
 /* Polish pass 1: flat paper, one accent, calmer sidebar, readable small text */
 .note .strong,.note strong{display:none}.note{border-top:1px solid var(--line);padding-top:12px}.note span{font-size:calc(12px*var(--fs,1));color:var(--mut)}

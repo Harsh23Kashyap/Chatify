@@ -521,7 +521,15 @@ async function stream(body, onEvent) {
   }
 }
 async function send() {
-  if (PREVIEW) return;
+  if (PREVIEW) {
+    const inp = $("#q"), text = inp.value.trim(); if (!text || S.busy) return;
+    inp.value = ""; autosize(); rdy();
+    ($("#thread .wrap") || $("#thread")).querySelector(".hero")?.remove();
+    S.turns.push({ id: "p" + (S.turns.length + 1), chat: "p", question: text, answer: "This is a sample answer with a source citation [1].\n\nAdjust the appearance on the left to see it here. This preview does not contact your model or sources.", evidence: [{ n: 1, title: "Sample source for visual preview", text: "Preview sample only, not a retrieved document." }], ledger: [], seconds: 0 });
+    drawThread();
+    const t = $("#thread"); if (t) t.scrollTop = t.scrollHeight;
+    return;
+  }
   const q = $("#q").value.trim(); if (!q || S.busy) return;
   const status = $("#pipelineStatus"); status.hidden = false; status.dataset.state="working"; status.textContent = "Preparing your answer";
   S.busy = true; clearTimeout(simTimer); $("#similar").replaceChildren(); sendIcon("stop", "Stop"); $("#q").value = ""; autosize(); S.lastQ = q;
@@ -901,9 +909,9 @@ function updatePreviewAvatars() {
 function pvBottom() { const t = $("#thread"); if (t) { t.style.scrollBehavior = "auto"; t.scrollTop = 0; } }
 function previewMode() {
   let demoAnimation=null;window.ccStopPreviewMotion=()=>{if(demoAnimation){demoAnimation.cancel();demoAnimation=null}};window.ccPreviewMotion=(t)=>{window.ccStopPreviewMotion();const node=[...document.querySelectorAll('.row:not(.u)')].at(-1);if(!node)return;if(matchMedia('(prefers-reduced-motion:reduce)').matches||['calm','none'].includes(t.motion)||t.entrance==='none')return;const frames=t.entrance==='slide'?[{opacity:0,transform:'translateY(18px)'},{opacity:1,transform:'none'}]:t.entrance==='pop'?[{opacity:0,transform:'scale(.94)'},{opacity:1,transform:'none'}]:[{opacity:0},{opacity:1}];demoAnimation=node.animate(frames,{duration:(t.motion==='subtle'?180:420)*100/t.speed,easing:'ease-out'})};
-  document.body.inert = true;
   document.querySelectorAll("input,textarea,select,button").forEach(control => { control.disabled=true; control.tabIndex=-1; });
-  $("#q").placeholder="Visual preview only";
+  for (const id of ["q", "send", "menu", "sideClose", "jump"]) { const n = document.getElementById(id); if (n) { n.disabled = false; n.tabIndex = 0; } }
+  $("#q").placeholder="Ask a sample question";
   $("#q").value="";
   document.documentElement.classList.add("preview");
   S.turns = [{ id: "p1", chat: "p", question: "How will answers look in this app?", answer: "This is a sample answer with a source citation [1].\n\nAdjust the appearance on the left to see it here. This preview does not contact your model or sources.", evidence: [{ n: 1, title: "Sample source for visual preview", text: "Preview sample only, not a retrieved document." }], ledger: [], seconds: 0 }];
@@ -916,7 +924,7 @@ function previewMode() {
     const thread = $("#thread"), scroll = thread.scrollTop, copy = previewCopy();
     applyWording(); applyIcons(); updatePreviewAvatars();
     if (copy !== lastCopy) { drawThread(); thread.scrollTop = scroll; lastCopy = copy; }
-    $("#q").placeholder = "Visual preview only"; $("#chatTitle").textContent = "Sample conversation";
+    $("#q").placeholder = "Ask a sample question"; $("#chatTitle").textContent = "Sample conversation";
   } });
 }
 function tour(replay=false) {

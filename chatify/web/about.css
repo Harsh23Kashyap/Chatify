@@ -48,6 +48,4 @@ html[data-theme=dark] .feature-art svg{stroke:#9fc7ab}
 html[data-theme=dark] .feature-art>small{color:#9db3a4}
 html[data-theme=dark] .feature-copy a{border-color:#40594c;color:#c2d2bf}
 html[data-theme=dark] .team-avatar{border-color:#40594c}
-html[data-theme=dark] footer{border-top-color:#40594c}
-
-.feature-overview{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 36px;margin:24px 0 40px}.feature-overview article{border-top:1px solid #d4dece;padding:22px 0}.feature-overview h3{font-size:20px;margin:0 0 10px;color:#173f35}.feature-overview p{font-size:14px;line-height:1.65;margin:0;color:#5c6f60}@media(max-width:650px){.feature-overview{grid-template-columns:1fr;gap:0}.feature-overview article{padding:20px 0}}
+html[data-theme=dark] footer{border-top-color:#40594c}@media(max-width:650px){}
