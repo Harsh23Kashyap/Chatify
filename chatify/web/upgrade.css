@@ -1,0 +1,112 @@
+/* Chatify visual upgrade — batch 1 (chat core). Additive layer over style.css
+   and motion.css: tokens, mic listening visual, composer busy band, code-block
+   polish, arrival refinement. Zero color/duration systems of its own — colors
+   resolve through the app's tokens, motion through --m-*/--ease. Both motion
+   guards honored: prefers-reduced-motion and html[data-motion=none|calm]. */
+
+:root {
+  /* Spacing ladder (snap targets only; no layout rewrites in this batch) */
+  --space-25: 2px;  --space-50: 4px;  --space-75: 8px;  --space-100: 12px;
+  --space-200: 16px; --space-300: 24px; --space-400: 32px;
+  /* Radius scale aligned to existing usage */
+  --radius-sm: 6px; --radius-md: 8px; --radius-lg: 12px; --radius-xl: 16px;
+  /* Floating-layer elevation (flat surfaces stay flat) */
+  --elev-float: 0 12px 32px rgba(23, 63, 53, .12);
+}
+:root[data-theme=dark] { --elev-float: 0 12px 32px rgba(0, 0, 0, .45); }
+
+/* --- Mic listening visual ---------------------------------------------------
+   Replaces the flat red fill (the red pulse was already disabled app-wide).
+   Keyed to the app's real dictation lifecycle (#mic.rec, toggled in
+   app.js setupMic). #mic itself keeps animation:none (dictation_states test
+   and the "listening state is real, static" rule); the ring lives on
+   pseudo-elements and stops under either motion guard. */
+#mic { transition: background-color var(--m-hover,140ms) var(--ease), color var(--m-hover,140ms) var(--ease), transform var(--m-press,90ms) var(--ease); }
+#mic.rec {
+  background: color-mix(in srgb, var(--brand, #173f35) 12%, var(--paper));
+  color: var(--brand, #173f35);
+  border-color: color-mix(in srgb, var(--brand, #173f35) 40%, transparent);
+  position: relative;
+}
+#mic.rec::before, #mic.rec::after {
+  content: ""; position: absolute; inset: -1px; border-radius: inherit;
+  border: 1px solid color-mix(in srgb, var(--brand, #173f35) 50%, transparent);
+  animation: mic-ring 2.1s var(--ease) infinite; pointer-events: none;
+}
+#mic.rec::after { animation-delay: 1.05s; }
+@keyframes mic-ring {
+  0% { transform: scale(1); opacity: .9; }
+  70% { opacity: .25; }
+  100% { transform: scale(1.6); opacity: 0; }
+}
+:root[data-theme=dark] #mic.rec {
+  background: color-mix(in srgb, var(--lime, #d7ef72) 14%, var(--paper));
+  color: var(--lime, #d7ef72);
+  border-color: color-mix(in srgb, var(--lime, #d7ef72) 40%, transparent);
+}
+:root[data-theme=dark] #mic.rec::before, :root[data-theme=dark] #mic.rec::after {
+  border-color: color-mix(in srgb, var(--lime, #d7ef72) 50%, transparent);
+}
+@media (prefers-reduced-motion: reduce) {
+  #mic.rec::before, #mic.rec::after { animation: none; opacity: 0; }
+}
+html[data-motion=none] #mic.rec::before, html[data-motion=none] #mic.rec::after,
+html[data-motion=calm] #mic.rec::before, html[data-motion=calm] #mic.rec::after { animation: none; opacity: 0; }
+
+/* --- Composer busy band -----------------------------------------------------
+   While a request is in flight the app swaps #send to aria-label="Stop"; the
+   band keys off that real state, no JS added. A 1.5px accent line sweeps the
+   composer rim; under reduce/none/calm it rests as a static accent border. */
+@property --band-angle { syntax: "<angle>"; initial-value: 0deg; inherits: false; }
+.composer .box { position: relative; }
+.composer:has(#send[aria-label="Stop"]) .box::before {
+  content: ""; position: absolute; inset: -1px;
+  border-radius: calc(20px*var(--rs,1) + 1px);
+  padding: 1.5px;
+  background: conic-gradient(from var(--band-angle, 0deg), color-mix(in srgb, var(--brand, #173f35) 28%, transparent) 0 60%, var(--brand, #173f35) 82%, color-mix(in srgb, var(--brand, #173f35) 28%, transparent) 100%);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+          mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+          mask-composite: exclude;
+  animation: composer-band 1.6s linear infinite;
+  pointer-events: none;
+}
+@keyframes composer-band { to { --band-angle: 1turn; } }
+@supports not (background: conic-gradient(from var(--band-angle, 0deg), red, blue)) {
+  .composer:has(#send[aria-label="Stop"]) .box { border-color: var(--brand, #173f35); }
+  .composer:has(#send[aria-label="Stop"]) .box::before { content: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .composer:has(#send[aria-label="Stop"]) .box::before { animation: none; background: color-mix(in srgb, var(--brand, #173f35) 32%, transparent); }
+}
+html[data-motion=none] .composer:has(#send[aria-label="Stop"]) .box::before,
+html[data-motion=calm] .composer:has(#send[aria-label="Stop"]) .box::before { animation: none; opacity: .8; }
+
+/* --- Code-block polish ------------------------------------------------------
+   Restyles the existing .codeblock-wrap / pre.codeblock / .codeblock-copy
+   (markup unchanged; app.js already wires copy + confirm text). */
+.codeblock-wrap { margin: var(--space-100) 0; }
+pre.codeblock {
+  background: var(--bot, #f2f3eb);
+  border: 1px solid var(--line, #d9e1dc);
+  border-radius: var(--radius-lg);
+  padding: var(--space-200);
+  font-size: calc(13px*var(--fs,1));
+  line-height: 1.6;
+}
+.codeblock-copy {
+  border-radius: var(--radius-sm);
+  background: var(--paper, #fffdf7);
+  font-weight: 600;
+  opacity: 0;
+  transition: opacity var(--m-hover,140ms) var(--ease), background-color var(--m-hover,140ms) var(--ease);
+}
+.codeblock-wrap:hover .codeblock-copy, .codeblock-copy:focus-visible { opacity: 1; }
+.codeblock-copy[data-copied="true"] { color: var(--brand, #173f35); }
+@media (hover: none) { .codeblock-copy { opacity: .8; } }
+
+/* --- Arrival refinement -----------------------------------------------------
+   Names and guards unchanged (stream tests key on cc-answer-in); only the
+   keyframe shape is softened. */
+@keyframes cc-answer-in { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+@keyframes answer-arrive { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }

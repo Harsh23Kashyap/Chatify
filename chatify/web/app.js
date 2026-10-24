@@ -84,7 +84,7 @@ function renderAnswer(text, evidence) {
     const line=lines[i];
     if(/^\s*```/.test(line)){const buf=[];i++;while(i<lines.length&&!/^\s*```\s*$/.test(lines[i])){buf.push(lines[i]);i++}
       const wrap=el("div",{class:"codeblock-wrap"}),pre=el("pre",{class:"codeblock"}),code=el("code",{text:buf.join("\n")});pre.append(code);
-      const cp=el("button",{type:"button",class:"codeblock-copy","aria-label":"Copy code",onclick:async(ev)=>{const b=ev.currentTarget;try{await navigator.clipboard.writeText(code.textContent);b.textContent="Copied"}catch(e){b.textContent="Copy failed"}setTimeout(()=>{b.textContent="Copy"},1400)}},"Copy");
+      const cp=el("button",{type:"button",class:"codeblock-copy","aria-label":"Copy code",onclick:async(ev)=>{const b=ev.currentTarget;try{await navigator.clipboard.writeText(code.textContent);b.textContent="Copied";b.dataset.copied="true"}catch(e){b.textContent="Copy failed"}setTimeout(()=>{b.textContent="Copy";delete b.dataset.copied},1400)}},"Copy");
       wrap.append(cp,pre);box.append(wrap);list=null;continue}
     if(line.includes("|")&&i+1<lines.length&&/^\s*\|?\s*:?-{3,}/.test(lines[i+1])) {
       list=null;const head=cells(line), table=el("table",{class:"answer-table"}), top=el("tr"),body=el("tbody");
