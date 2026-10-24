@@ -197,7 +197,12 @@ def talk(provider,cfg,data):
  if 'actions' in selected:draft.setdefault('actions',{})['writes']=False
  if 'server' in selected:draft.setdefault('server',{})['host']='127.0.0.1'
  if 'storage' in selected:draft.setdefault('storage',{})['path']='data/chatify.db'
- if 'provider' in selected and 'provider' not in draft:draft['provider']=defaults['provider']
+ if 'provider' in selected:
+  # The child runs through the host-configured provider; a generated model
+  # identifier the host never configured (live: "gpt-6-luna") would fail every
+  # keyed call with model-not-found, so type and model always come from the host.
+  d=draft.setdefault('provider',{})
+  d['type']=cfg['provider']['type'];d['model']=cfg['provider']['model']
  config=validate(yaml.safe_dump(draft,sort_keys=False))
  if 'api_suggestions' in draft:
   from .apipicks import complete_drafts,check_description

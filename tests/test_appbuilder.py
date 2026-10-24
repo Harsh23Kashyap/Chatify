@@ -15,6 +15,12 @@ class BuilderTests(unittest.TestCase):
   p=Fixture({'message':'Review your draft','config':{'app':{'title':'Garden Chat'}}});r=appbuilder.talk(p,self.cfg,self.data());raw=yaml.safe_load(r['yaml']);self.assertEqual(set(raw),{'app'});self.assertEqual(raw['app']['title'],'Garden Chat');self.assertIn('examples',raw['app'])
  def test_full_draft(self):
   p=Fixture({'message':'Review','config':{'app':{'title':'Garden'}}});r=appbuilder.talk(p,self.cfg,self.data(sections=list(schema.DEFAULTS)));self.assertEqual(set(yaml.safe_load(r['yaml'])),set(schema.DEFAULTS))
+ def test_generated_provider_model_is_clamped_to_host(self):
+  # Regression for 2026-10-24 live: a generated draft carried provider.model
+  # "gpt-6-luna" - an identifier the host never configured; keyed use would fail.
+  p=Fixture({'message':'Review','config':{'provider':{'type':'openai','model':'gpt-6-luna','temperature':0.4}}})
+  r=appbuilder.talk(p,self.cfg,self.data(sections=['provider']));raw=yaml.safe_load(r['yaml'])
+  self.assertEqual(raw['provider']['model'],'user-model');self.assertEqual(raw['provider']['type'],'openai')
  def test_no_private_config_in_prompt(self):
   self.cfg['sources']=[{'type':'http_json','url':'https://private.invalid','label':'PRIVATE_SENTINEL'}];self.cfg['provider']['api_key_env']='PRIVATE_ENV';p=Fixture({'message':'Sources?','config':None});appbuilder.talk(p,self.cfg,self.data());sent=json.dumps(p.calls);self.assertNotIn('PRIVATE_SENTINEL',sent);self.assertNotIn('private.invalid',sent);self.assertNotIn('PRIVATE_ENV',sent)
  def test_consent_gate(self):
