@@ -528,3 +528,57 @@ class GalleryNestedWorkspaceLaunch(unittest.TestCase):
         self.assertEqual(s, 404)
         s, lst = self.req("GET", "/alpha/api/nerds", A)
         self.assertEqual(lst["workspaces"], [])
+
+
+class GalleryFeaturedBuildCta(unittest.TestCase):
+    """The featured card's Build with AI button opens the AI build wizard, never manual settings."""
+    @classmethod
+    def setUpClass(cls):
+        cls.base = tempfile.mkdtemp()
+        _write_gallery(cls.base)
+        # make alpha the featured build-your-own app
+        p = os.path.join(cls.base, "gallery.yaml")
+        s = io.open(p).read()
+        s = s.replace("{dir: alpha, slug: alpha, icon: chat, tags: [TagOne, TagTwo]}",
+                      "{dir: alpha, slug: alpha, icon: chat, tags: [TagOne, TagTwo], featured: true}")
+        io.open(p, "w").write(s)
+        cls.port = 8945
+        cls.proc = subprocess.Popen(
+            [sys.executable, "-m", "chatify", "run", os.path.join(cls.base, "gallery.yaml"), "--port", str(cls.port), "--no-browser"],
+            cwd=ROOT, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True)
+        for _ in range(40):
+            time.sleep(0.25)
+            if cls.proc.poll() is not None:
+                raise AssertionError("gallery server died: " + cls.proc.stdout.read()[-1500:])
+            try:
+                urllib.request.urlopen("http://127.0.0.1:%d/api/health" % cls.port, timeout=2)
+                break
+            except Exception:
+                continue
+        else:
+            raise AssertionError("gallery server never came up")
+
+    @classmethod
+    def tearDownClass(cls):
+        cls.proc.terminate(); cls.proc.wait()
+
+    def get(self, path):
+        try:
+            r = urllib.request.urlopen("http://127.0.0.1:%d%s" % (self.port, path), timeout=10)
+            return r.status, r.read().decode("utf-8", "replace")
+        except urllib.error.HTTPError as e:
+            return e.code, e.read().decode("utf-8", "replace")
+
+    def test_featured_cta_opens_ai_wizard(self):
+        s, b = self.get("/")
+        self.assertEqual(s, 200)
+        self.assertIn('class="g-f-cta" href="/alpha/build.html"', b)
+        self.assertNotIn('class="g-f-cta" href="/alpha/settings.html"', b)
+        # the wizard is actually reachable through the proxy and is the AI flow
+        s, b = self.get("/alpha/build.html")
+        self.assertEqual(s, 200)
+        self.assertIn("Chatify builds it.", b)
+        self.assertIn("buildBrief", b)
+        s, b = self.get("/alpha/build.js")
+        self.assertEqual(s, 200)
+        self.assertIn("launch_ticket", b)

@@ -1041,7 +1041,7 @@ def serve_gallery(path, host=None, port=None):
             if featured:
                 f_title = featured.get("title") or featured["cfg"]["app"]["title"]
                 f_tagline = featured.get("tagline") or featured["cfg"]["app"].get("tagline") or ""
-                f_cta = featured.get("url") or ("/" + featured["slug"] + "/settings.html")
+                f_cta = featured.get("url") or ("/" + featured["slug"] + "/build.html")
                 f_sub = "" if featured.get("url") else '<a class="g-f-sub" href="/%s/">Open the product guide</a>' % _esc(featured["slug"])
                 featured_html = ('<section class="g-feature"><div class="g-f-copy"><span class="g-f-eyebrow">Build your own</span><span class="g-f-name">%s</span><span class="g-f-tag">%s</span><span class="g-f-note">One YAML file plus your sources - every app below was built this way.</span></div><div class="g-f-actions"><a class="g-f-cta" href="%s">Build with AI</a>%s</div></section>'
                     % (_esc(f_title), _esc(f_tagline), _esc(f_cta), f_sub))
