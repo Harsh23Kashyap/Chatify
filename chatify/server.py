@@ -4,6 +4,7 @@ from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from socketserver import TCPServer
 from urllib.parse import urlparse, parse_qs
 import base64
+from pathlib import Path
 from . import websearch, schema, providers, fetch, pdfread, secrets, hardware, theme as themes, generators, prompts as promptmod, nerdload as nerdloadmod
 from .pipeline import Engine
 from .store import Store
@@ -19,7 +20,6 @@ BUILD_STARTS = {}  # ip -> [timestamps of build starts]; light abuse limit for s
 
 def _publish_saved_view(cfg):
     """The saved app files as one consistent on-disk snapshot (app.yaml + theme + prompts), so publish works right after a guided save without an app restart."""
-    from pathlib import Path
     import yaml as _yaml
     folder=(Path(cfg.get('_dir','.'))/cfg['storage']['path']).parent
     app_path=Path(cfg.get('_path') or (Path(cfg.get('_dir','.'))/'app.yaml'))
@@ -499,7 +499,6 @@ def make_handler(cfg, engine):
                                 if not _appfile.is_file() or _appfile.is_symlink() or _hl.sha256(_appfile.read_bytes()).hexdigest()!=launch['revision']:raise ValueError('Saved configuration changed. Review and save again before using it')
                             elif launch['revision'] != editstate.revision(cfg):raise ValueError('Saved configuration changed. Review and save again before using it')
                             clean=launch['config']
-                            from pathlib import Path
                             folder=(Path(cfg.get('_dir','.'))/clean['storage']['path']).parent
                             for key,name in [('appearance','theme.json'),('pipeline_prompts','prompts.json'),('helper_drafts','code-drafts.json')]:
                                 path=folder/name
@@ -520,7 +519,6 @@ def make_handler(cfg, engine):
                         if management.active:raise ValueError('Wait for the workspace test to finish')
                         try:rev=appbuilder.hosted_save_plan(cfg,o,str(b.get('ticket','')),plan) if hosted else appbuilder.save_plan(cfg,plan)
                         except appbuilder.SaveRollbackError as e:return self._send(400,{'error':str(e),'saved_state_uncertain':True})
-                    from pathlib import Path
                     folder=(Path(cfg.get('_dir','.'))/plan['config']['storage']['path']).parent
                     snapshots={name:(folder/name).read_text() if (folder/name).exists() else None for name in ('theme.json','prompts.json','code-drafts.json')}
                     launch_ticket=management.reviews.put(o,'app-launch',{'config':plan['config'],'revision':rev,'state':snapshots})
@@ -550,7 +548,6 @@ def make_handler(cfg, engine):
                 with management.lock:
                     if management.active:raise ValueError('Wait for the workspace test to finish')
                     result=versions_mod.restore(cfg,str(b.get('id','')))
-                from pathlib import Path
                 import yaml as _yaml
                 folder=(Path(cfg.get('_dir','.'))/cfg['storage']['path']).parent
                 app_path=Path(cfg.get('_path') or (Path(cfg.get('_dir','.'))/'app.yaml'))

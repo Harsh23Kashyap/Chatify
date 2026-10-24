@@ -369,10 +369,19 @@ class GalleryBuilderUseThisApp(unittest.TestCase):
         s, b = self.req("POST", "/alpha/api/settings/build/save", A, {"ticket": ticket, "confirmed": True})
         self.assertEqual(s, 200, b[:300])
         launch_ticket = json.loads(b)["launch_ticket"]
+        # Multi-visitor isolation: the served app file must be untouched; the
+        # reviewed build lands in the visitor's own build app dir.
         saved_cfg = yaml.safe_load(io.open(os.path.join(self.base, "alpha", "app.yaml")))
+        self.assertEqual(saved_cfg["app"]["title"], "Alpha App")
+        self.assertFalse(os.path.exists(os.path.join(self.base, "alpha", "data", "theme.json")))
+        import glob
+        built = glob.glob(os.path.join(self.base, "alpha", "data", "build-apps", "*", "*", "app.yaml"))
+        self.assertEqual(len(built), 1)
+        bdir = os.path.dirname(built[0])
+        saved_cfg = yaml.safe_load(io.open(built[0]))
         self.assertEqual(saved_cfg["app"]["title"], "Space Facts")
-        self.assertEqual(json.load(io.open(os.path.join(self.base, "alpha", "data", "theme.json")))["bubble"], "flat")
-        self.assertEqual(json.load(io.open(os.path.join(self.base, "alpha", "data", "prompts.json")))["text"]["answer"], "CUSTOM PROMPT answer")
+        self.assertEqual(json.load(io.open(os.path.join(bdir, "data", "theme.json")))["bubble"], "flat")
+        self.assertEqual(json.load(io.open(os.path.join(bdir, "data", "prompts.json")))["text"]["answer"], "CUSTOM PROMPT answer")
 
         s, b = self.req("POST", "/alpha/api/settings/build/launch", A, {"ticket": launch_ticket})
         self.assertEqual(s, 200, b[:300])
