@@ -294,9 +294,9 @@ def make_handler(cfg, engine):
                 return self._send(200,management.handle(o,path,method,b,qs))
             if path in ('/api/nerds','/api/nerds/stop','/api/nerds/remove'):
                 if not can_edit(self) or self.client_address[0] not in ('127.0.0.1','::1'): raise PermissionError('Only the local app owner can manage imported Nerds')
-                if path=='/api/nerds' and method=='GET': return self._send(200,{'workspaces':loader.list()})
-                if method=='POST' and path.endswith('/stop'): return self._send(200,loader.stop(str(b.get('id',''))))
-                if method=='POST' and path.endswith('/remove'): return self._send(200,loader.remove(str(b.get('id','')),b.get('confirmed')))
+                if path=='/api/nerds' and method=='GET': return self._send(200,{'workspaces':loader.list(owner=o)})
+                if method=='POST' and path.endswith('/stop'): return self._send(200,loader.stop(str(b.get('id','')),owner=o))
+                if method=='POST' and path.endswith('/remove'): return self._send(200,loader.remove(str(b.get('id','')),b.get('confirmed'),owner=o))
                 raise ValueError('Unknown workspace action')
             if path == "/api/actions" and method == "GET": return self._send(200,actions.catalog())
             if path == "/api/actions/prepare" and method == "POST": return self._send(200,actions.prepare(o,b.get('tool'),b.get('args')))
@@ -359,11 +359,11 @@ def make_handler(cfg, engine):
                 data, _ = bundle(cfg, themestore.value, engine.prompts._load(),include_keys=method=="POST")
                 return self._send(200, data, "application/zip", {"Content-Disposition": 'attachment; filename="chatify-app.zip"'})
             if path in ("/api/nerds/review", "/api/nerds/load") and method == "POST":
-                self._owner()
+                o = self._owner()
                 if not can_edit(self) or self.client_address[0] not in ("127.0.0.1", "::1"): raise PermissionError("Only the local app owner on this computer can load Nerds")
                 if path.endswith("review"):
                     return self._send(200, loader.review(str(b.get("name", "")), str(b.get("data", ""))))
-                return self._send(200, loader.load(str(b.get("token", "")), b.get("allow_code") is True))
+                return self._send(200, loader.load(str(b.get("token", "")), b.get("allow_code") is True, owner=o))
             if path == "/api/settings" and method == "GET":
                 return self._send(200, {"settings": settings_view(), "can_edit": can_edit(self), "providers": sorted(schema.PROVIDERS)})
             if path == "/api/settings" and method == "POST":
@@ -479,7 +479,7 @@ def make_handler(cfg, engine):
                         clean['_dir']=cfg.get('_dir',os.getcwd())
                         payload,_=bundle(clean,theme_value=clean.get('appearance'),prompt_value=clean.get('pipeline_prompts'),include_keys=True)
                         reviewed=loader.review('built-app.zip',base64.b64encode(payload).decode())
-                        return self._send(200,loader.load(reviewed['token']))
+                        return self._send(200,loader.load(reviewed['token'],owner=o))
                 if path.endswith('/save'):
                     plan=management.reviews.take(o,'app-build',str(b.get('ticket','')),b.get('confirmed'))
                     with management.lock:
@@ -526,7 +526,7 @@ def make_handler(cfg, engine):
                 from .portable import bundle
                 payload,_=bundle(clean,theme_value=theme_value,prompt_value=prompt_value,include_keys=True)
                 reviewed=loader.review('restored-version.zip',base64.b64encode(payload).decode())
-                launched=loader.load(reviewed['token'])
+                launched=loader.load(reviewed['token'],owner=o)
                 return self._send(200,{**result,'workspace':launched,'restart_required':True,'message':'Restored version is running as a separate preview workspace. Restart this app to make the restored version its own configuration.'})
             if path in ('/api/settings/publish/check','/api/settings/publish/package') and method in ('GET','POST'):
                 if not can_edit(self):raise PermissionError('Only the app owner can export a publishing package')
@@ -941,8 +941,8 @@ def make_handler(cfg, engine):
 
 
 
-def error_page_html(code):
-    title, msg, art = ERR_PAGES.get(code, ERR_PAGES[500])
+def error_page_html(code, key=None):
+    title, msg, art = ERR_PAGES.get(key or code, ERR_PAGES[500])
     page = open(os.path.join(WEB, "error.html"), encoding="utf-8").read()
     for k, v in (("{{CODE}}", str(code)), ("{{TITLE}}", title), ("{{MSG}}", msg), ("{{ART}}", art)):
         page = page.replace(k, v)
@@ -982,8 +982,12 @@ def serve_gallery(path, host=None, port=None):
     """
     import http.client, threading
     from . import gallery as gallerymod
+    from . import nerdload as nerdloadmod
     g = gallerymod.load(path)
     children = {}
+    # Loaded Nerds register here (slug -> {"port", "owner"}) so the dispatcher
+    # proxies them at same-origin /<slug>/ and gates them to their creator.
+    nerdloadmod.GALLERY_CHILDREN = children
     redirects = {}
     cards = []
     for app in g["apps"]:
@@ -1043,6 +1047,20 @@ def serve_gallery(path, host=None, port=None):
         def _proxy(self, slug):
             base = "/" + slug
             rest = self.path[len(base):] or "/"
+            entry = children[slug]
+            if isinstance(entry, dict):
+                want = entry.get("owner") or ""
+                if want.startswith("visitor:"):
+                    cookie = ""
+                    for part in self.headers.get("Cookie", "").split(";"):
+                        k, _, v = part.strip().partition("=")
+                        if k == "cc_visitor":
+                            cookie = v
+                    if not re.fullmatch(r"[0-9a-f]{32}", cookie or "") or "visitor:" + cookie != want:
+                        return self._send(403, error_page_html(403, key="workspace").encode(), "text/html; charset=utf-8")
+                port = entry["port"]
+            else:
+                port = entry
             length = int(self.headers.get("Content-Length") or 0)
             body = self.rfile.read(length) if length else None
             headers = {}
@@ -1051,7 +1069,7 @@ def serve_gallery(path, host=None, port=None):
                 if lk in ("host", "connection", "content-length", "accept-encoding", "keep-alive", "transfer-encoding"):
                     continue
                 headers[k] = v
-            conn = http.client.HTTPConnection("127.0.0.1", children[slug], timeout=120)
+            conn = http.client.HTTPConnection("127.0.0.1", port, timeout=120)
             try:
                 conn.request(self.command, rest, body=body, headers=headers)
                 resp = conn.getresponse()
@@ -1131,6 +1149,7 @@ ERR_PAGES = {
     413: ("That file is too big", "The upload is larger than the limit. PDFs can be up to 8 MB and pasted text up to 150,000 characters.", _DOC + '<path d="M75 138v-30m-12 12 12-12 12 12" stroke-width="4"/>'),
     429: ("Slow down a little", "Too many requests in a short time. Wait a moment, then try again.", '<circle cx="75" cy="78" r="42"/><path d="M75 54v24l16 10"/>'),
     500: ("Something went wrong", "The server hit an unexpected problem. Nothing was lost. Try again in a moment.", _DOC + '<path d="M75 58v26M75 98v2" stroke-width="5"/>'),
+    "workspace": ("Private workspace", "This workspace belongs to the browser session that started it. Open it from that same browser. If its cookies were cleared, the workspace can no longer tell it is you - start a new workspace from the gallery.", '<path d="M75 28l36 13v27c0 25-16 42-36 51-20-9-36-26-36-51V41z"/><path d="M60 60l30 32"/>'),
     503: ("Waking up", "The app is busy or restarting. Give it a few seconds, then try again.", '<path d="M55 30h40M55 120h40"/><path d="M60 30c0 32 30 34 30 45s-30 13-30 45M90 30c0 32-30 34-30 45s30 13 30 45"/>'),
 }
 

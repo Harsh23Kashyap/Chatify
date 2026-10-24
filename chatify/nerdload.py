@@ -4,6 +4,15 @@ from pathlib import Path,PurePosixPath
 import yaml
 from . import schema
 from .portable import _check_values,ExportError
+# When a gallery dispatcher hosts this process, serve_gallery points this at its
+# child-port registry so loaded Nerds are reachable at same-origin /<slug>/ paths
+# instead of loopback URLs that only work on the host computer.
+GALLERY_CHILDREN = None
+def _nerd_limit():
+ # A hosted gallery shares one small server with its built-in apps, so it runs
+ # fewer guest workspaces than a desktop install unless the host sets a limit.
+ try:return int(os.environ.get('CHATIFY_NERD_LIMIT') or 0) or (2 if GALLERY_CHILDREN is not None else 4)
+ except ValueError:return 2 if GALLERY_CHILDREN is not None else 4
 MAX_UPLOAD=8*1024*1024
 MAX_EXPANDED=32*1024*1024
 _ALLOWED={'.yaml','.yml','.json','.md','.txt','.csv','.pdf','.py'}
@@ -20,7 +29,7 @@ class NerdLoader:
  def review(self,name,encoded):
   try:data=base64.b64decode(encoded,validate=True)
   except Exception:raise ValueError('Invalid upload') from None
-  if sum(p.poll() is None for p in self.children)>=4:raise ValueError('Up to four Nerds can run here. Stop a running workspace before loading more.')
+  if sum(p.poll() is None for p in self.children)>=_nerd_limit():raise ValueError('Up to %d Nerds can run here. Stop a running workspace before loading more.'%_nerd_limit())
   if len(data)>MAX_UPLOAD:raise ValueError('Bundle limit is 8 MB')
   files={}
   if name.lower().endswith('.zip'):
@@ -116,13 +125,16 @@ class NerdLoader:
   from . import theme
   look=theme.clean(json.loads(files['data/theme.json'])) if 'data/theme.json' in files else theme.clean(cfg.get('appearance',{}))
   preview={'title':look.get('txt_title') or cfg['app']['title'],'tagline':look.get('txt_tagline') or cfg['app']['tagline'],'mode':look.get('mode','light'),'colors':look.get('dark' if look.get('mode')=='dark' else 'light',{}),'examples':cfg['app'].get('examples',[])[:3],'files':sorted(files),'static':True}
+  if GALLERY_CHILDREN is not None:warnings_hosted='Hosted workspace: it runs on this demo server, only this browser can open it, and it disappears when the demo restarts or redeploys. Add API keys in the new workspace Configuration; nothing is shared with other visitors.'
   from . import bundle_review
-  return {'auto_review':bundle_review.review(cfg,files),'preview':preview,'readiness':readiness,'token':token,'title':cfg['app']['title'],'tagline':cfg['app']['tagline'],'provider':cfg['provider']['type'],'model':cfg['provider']['model'],'sources':[{'id':s['id'],'label':s.get('label',s['id']),'type':s['type']} for s in cfg['sources']],'required_env':envs,'imported_key_count':len(imported_keys),'code':[{'path':n,'text':files[n].decode('utf-8')} for n in code],'warnings':['Python uses a bounded process, NOT a sandbox. Host files/network remain accessible; code review required.','Separate local workspace. Current app is not overwritten.',str(len(imported_keys))+' API key entries will be placed in this workspace private key storage. Values are not shown. Accounts and chat history are not imported.','Imported local apps disable write actions. Review remote sources before asking a question.']}
- def load(self,token,allow_code=False):
+  result_warnings=['Python uses a bounded process, NOT a sandbox. Host files/network remain accessible; code review required.','Separate local workspace. Current app is not overwritten.',str(len(imported_keys))+' API key entries will be placed in this workspace private key storage. Values are not shown. Accounts and chat history are not imported.','Imported local apps disable write actions. Review remote sources before asking a question.']
+  if GALLERY_CHILDREN is not None:result_warnings[1]=warnings_hosted
+  return {'hosted':GALLERY_CHILDREN is not None,'auto_review':bundle_review.review(cfg,files),'preview':preview,'readiness':readiness,'token':token,'title':cfg['app']['title'],'tagline':cfg['app']['tagline'],'provider':cfg['provider']['type'],'model':cfg['provider']['model'],'sources':[{'id':s['id'],'label':s.get('label',s['id']),'type':s['type']} for s in cfg['sources']],'required_env':envs,'imported_key_count':len(imported_keys),'code':[{'path':n,'text':files[n].decode('utf-8')} for n in code],'warnings':result_warnings}
+ def load(self,token,allow_code=False,owner='local'):
   with self.lock:item=self.pending.get(token)
   if not item:raise ValueError('Review the bundle first')
   files,cfg,code,imported_keys=item
-  if sum(p.poll() is None for p in self.children)>=4:raise ValueError('Maximum four running Nerds. Stop a running workspace before loading more.')
+  hosted=GALLERY_CHILDREN is not None
   if code and not allow_code:raise ValueError('Review Python code and explicitly allow it before loading')
   from .launcher import pick_port
   import tempfile
@@ -138,35 +150,50 @@ class NerdLoader:
    from .secrets import SecretStore
    key_store=SecretStore(str(folder/'data'))
    for name,value in imported_keys.items():key_store.set(name,value)
+  slug=folder.name
+  url='/'+slug+'/' if hosted else 'http://127.0.0.1:'+str(port)
   log=open(folder/'run.log','wb')
-  declared_env={cfg['provider'].get('api_key_env','')}|{src.get('api_key_env','') for src in cfg['sources']}
-  child=subprocess.Popen([sys.executable,'-m','chatify','run',str(folder/'app.yaml'),'--no-browser'],stdout=log,stderr=subprocess.STDOUT,cwd=str(Path(__file__).resolve().parents[1]),env={k:v for k,v in os.environ.items() if not re.search(r'(KEY|TOKEN|SECRET|PASSWORD|CREDENTIAL)',k,re.I) or k in declared_env})
-  log.close();self.children.append(child);self.workspaces[folder.name]={'folder':folder,'process':child,'title':cfg['app']['title'],'url':'http://127.0.0.1:'+str(port)}
+  # The host's own keys never enter a guest workspace: on a hosted gallery the
+  # child gets no key material at all, so each visitor adds their own keys in
+  # the workspace Configuration. Desktop loads keep declared env keys only.
+  declared_env=set() if hosted else {cfg['provider'].get('api_key_env','')}|{src.get('api_key_env','') for src in cfg['sources']}
+  child_env={k:v for k,v in os.environ.items() if not re.search(r'(KEY|TOKEN|SECRET|PASSWORD|CREDENTIAL)',k,re.I) or k in declared_env}
+  with self.lock:
+   if sum(p.poll() is None for p in self.children)>=_nerd_limit():
+    log.close();raise ValueError('Maximum %d running Nerds. Stop a running workspace before loading more.'%_nerd_limit())
+   child=subprocess.Popen([sys.executable,'-m','chatify','run',str(folder/'app.yaml'),'--no-browser'],stdout=log,stderr=subprocess.STDOUT,cwd=str(Path(__file__).resolve().parents[1]),env=child_env)
+   self.children.append(child)
+  log.close();self.workspaces[folder.name]={'folder':folder,'process':child,'title':cfg['app']['title'],'url':url,'owner':owner,'slug':slug,'hosted':hosted}
   import time,urllib.request
-  url='http://127.0.0.1:'+str(port)
+  probe='http://127.0.0.1:'+str(port)
   for _ in range(40):
    if child.poll() is not None:raise ValueError('Nerd could not start. Check dependencies and connector setup in '+str(folder/'run.log'))
    try:
-    with urllib.request.urlopen(url+'/api/health',timeout=.5):return {'url':url,'title':cfg['app']['title'],'workspace':str(folder)}
+    with urllib.request.urlopen(probe+'/api/health',timeout=.5):
+     if hosted:GALLERY_CHILDREN[slug]={'port':port,'owner':owner}
+     return {'url':url,'title':cfg['app']['title'],'workspace':str(folder),'hosted':hosted}
    except OSError:time.sleep(.1)
   child.terminate();raise ValueError('Nerd did not become ready; current app is unchanged')
- def list(self):
+ def _unregister(self,slug):
+  if GALLERY_CHILDREN is not None and slug:GALLERY_CHILDREN.pop(slug,None)
+ def list(self,owner=None):
   with self.lock:
-   return [{'id':key,'title':v['title'],'url':v['url'],'running':v['process'] is not None and v['process'].poll() is None} for key,v in self.workspaces.items()]
- def stop(self,key):
+   return [{'id':key,'title':v['title'],'url':v['url'],'slug':v.get('slug'),'hosted':bool(v.get('hosted')),'running':v['process'] is not None and v['process'].poll() is None} for key,v in self.workspaces.items() if owner is None or (v.get('owner') or 'local')==owner]
+ def stop(self,key,owner=None):
   with self.lock:item=self.workspaces.get(key)
-  if not item:raise ValueError('Unknown imported workspace')
+  if not item or (owner is not None and (item.get('owner') or 'local')!=owner):raise ValueError('Unknown imported workspace')
   proc=item['process']
   if proc and proc.poll() is None:
    proc.terminate()
    try:proc.wait(timeout=3)
    except subprocess.TimeoutExpired:proc.kill();proc.wait()
+  self._unregister(item.get('slug'))
   return {'stopped':True}
- def remove(self,key,confirmed):
+ def remove(self,key,confirmed,owner=None):
   if confirmed is not True:raise ValueError('Confirm removal of this imported workspace')
   with self.lock:item=self.workspaces.get(key)
-  if not item:raise ValueError('Unknown imported workspace')
-  self.stop(key);folder=item['folder']
+  if not item or (owner is not None and (item.get('owner') or 'local')!=owner):raise ValueError('Unknown imported workspace')
+  self.stop(key,owner=owner);folder=item['folder']
   if folder.is_symlink() or folder.parent.resolve()!=self.root.resolve():raise ValueError('Workspace path changed; removal stopped')
   shutil.rmtree(folder)
   with self.lock:self.workspaces.pop(key,None)

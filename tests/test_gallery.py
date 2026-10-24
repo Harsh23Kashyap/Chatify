@@ -156,3 +156,147 @@ class GalleryServer(unittest.TestCase):
 
 
 if __name__ == "__main__": unittest.main()
+
+
+import base64
+
+GUEST_YAML = ("app: {id: guestapp, title: Guest Workspace, tagline: Built by a visitor}\n"
+              "provider: {type: openai, model: gpt-4o-mini, api_key_env: OPENAI_API_KEY}\n"
+              "sources: []\n")
+
+
+class GalleryWorkspaceHandoff(unittest.TestCase):
+    """A visitor's built app loads as a same-origin proxied workspace, gated to its creator."""
+    @classmethod
+    def setUpClass(cls):
+        cls.base = tempfile.mkdtemp()
+        _write_gallery(cls.base)
+        cls.port = 8941
+        env = dict(os.environ, OPENAI_API_KEY="sk-gallery-host-fixture")
+        cls.proc = subprocess.Popen(
+            [sys.executable, "-m", "chatify", "run", os.path.join(cls.base, "gallery.yaml"), "--port", str(cls.port), "--no-browser"],
+            cwd=ROOT, env=env, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True)
+        for _ in range(40):
+            time.sleep(0.25)
+            if cls.proc.poll() is not None:
+                raise AssertionError("gallery server died: " + cls.proc.stdout.read()[-1500:])
+            try:
+                urllib.request.urlopen("http://127.0.0.1:%d/api/health" % cls.port, timeout=2)
+                break
+            except Exception:
+                continue
+        else:
+            raise AssertionError("gallery server never came up")
+
+    @classmethod
+    def tearDownClass(cls):
+        cls.proc.terminate(); cls.proc.wait()
+
+    def req(self, method, path, cookie=None, body=None, accept="text/html"):
+        headers = {"Accept": accept}
+        if cookie is not None:
+            headers["Cookie"] = "cc_visitor=" + cookie
+        data = None
+        if body is not None:
+            data = json.dumps(body).encode()
+            headers["Content-Type"] = "application/json"
+        r = urllib.request.Request("http://127.0.0.1:%d%s" % (self.port, path), data=data, headers=headers, method=method)
+        try:
+            resp = urllib.request.urlopen(r, timeout=30)
+            return resp.status, resp.read().decode("utf-8", "replace"), dict(resp.headers)
+        except urllib.error.HTTPError as e:
+            return e.code, e.read().decode("utf-8", "replace"), dict(e.headers)
+
+    def test_full_hosted_handoff_flow(self):
+        A, B = "a" * 32, "b" * 32
+        # issuance: first HTML visit sets a 128-bit HttpOnly visitor cookie
+        s, body, h = self.req("GET", "/alpha/")
+        self.assertEqual(s, 200)
+        setc = h.get("Set-Cookie", "")
+        self.assertIn("cc_visitor=", setc); self.assertIn("HttpOnly", setc); self.assertIn("SameSite=Strict", setc)
+        issued = setc.split("cc_visitor=", 1)[1].split(";", 1)[0]
+        self.assertRegex(issued, r"^[0-9a-f]{32}$")
+
+        # review: owner A gets a hosted review with the honest warning
+        bundle64 = base64.b64encode(GUEST_YAML.encode()).decode()
+        s, body, _ = self.req("POST", "/alpha/api/nerds/review", cookie=A, body={"name": "app.yaml", "data": bundle64}, accept="application/json")
+        self.assertEqual(s, 200, body[:300])
+        review = json.loads(body)
+        self.assertTrue(review["hosted"])
+        self.assertTrue(any("Hosted workspace" in w for w in review["warnings"]))
+        self.assertIn("OPENAI_API_KEY", review["required_env"])
+
+        # load: same-origin relative URL, slug registered
+        s, body, _ = self.req("POST", "/alpha/api/nerds/load", cookie=A, body={"token": review["token"]}, accept="application/json")
+        self.assertEqual(s, 200, body[:300])
+        loaded = json.loads(body)
+        self.assertTrue(loaded["hosted"])
+        url = loaded["url"]
+        self.assertRegex(url, r"^/nerd-[A-Za-z0-9_-]+/$")
+
+        # gate: every route class is protected - no cookie, wrong cookie, malformed cookie
+        for probe in (url, url + "settings.html", url + "api/health", url + "api/provider/status"):
+            for bad in (None, B, "not-a-real-cookie", "a" * 31):
+                s, body, _ = self.req("GET", probe, cookie=bad, accept="application/json")
+                self.assertEqual(s, 403, probe + " with cookie " + str(bad))
+                self.assertIn("Private workspace", body)
+        # gate: owner reaches HTML, API and settings
+        s, body, _ = self.req("GET", url, cookie=A)
+        self.assertEqual(s, 200)
+        self.assertIn("CC_APP_BASE", body)
+        self.assertIn('"/' + url.strip("/") + '"', body)
+        s, body, _ = self.req("GET", url + "api/health", cookie=A, accept="application/json")
+        self.assertEqual((s, json.loads(body)["ok"]), (200, True))
+        s, body, _ = self.req("GET", url + "settings.html", cookie=A)
+        self.assertEqual(s, 200)
+
+        # host key is NOT inherited by the guest workspace, and the state is surfaced honestly
+        s, body, _ = self.req("GET", "/alpha/api/provider/status", cookie=A, accept="application/json")
+        self.assertTrue(json.loads(body)["keys"]["openai"]["has"])   # gallery child sees host env
+        s, body, _ = self.req("GET", url + "api/provider/status", cookie=A, accept="application/json")
+        self.assertEqual(s, 200)
+        guest_key = json.loads(body)["keys"]["openai"]
+        self.assertFalse(guest_key["has"])                           # guest workspace does not inherit it
+        self.assertTrue(guest_key["needed"])                         # and says a key is still needed
+
+        # traversal does not escape into another app
+        s, body, _ = self.req("GET", url + "../alpha/", cookie=A)
+        self.assertNotEqual(s, 200)
+
+        # owner-scoped management: B cannot see, stop or remove A's workspace
+        s, body, _ = self.req("GET", "/alpha/api/nerds", cookie=B, accept="application/json")
+        self.assertEqual(json.loads(body)["workspaces"], [])
+        s, body, _ = self.req("GET", "/alpha/api/nerds", cookie=A, accept="application/json")
+        rows = json.loads(body)["workspaces"]
+        self.assertEqual(len(rows), 1); self.assertTrue(rows[0]["hosted"]); self.assertTrue(rows[0]["running"])
+        wid = rows[0]["id"]
+        s, body, _ = self.req("POST", "/alpha/api/nerds/stop", cookie=B, body={"id": wid}, accept="application/json")
+        self.assertNotEqual(s, 200)
+        s, body, _ = self.req("POST", "/alpha/api/nerds/remove", cookie=B, body={"id": wid, "confirmed": True}, accept="application/json")
+        self.assertNotEqual(s, 200)
+        # still running after B's attempts
+        s, body, _ = self.req("GET", url + "api/health", cookie=A, accept="application/json")
+        self.assertEqual(s, 200)
+        # owner stops it; slug unregisters and later requests fail honestly (503 waking page)
+        s, body, _ = self.req("POST", "/alpha/api/nerds/stop", cookie=A, body={"id": wid}, accept="application/json")
+        self.assertEqual(s, 200, body[:300])
+        time.sleep(1.5)
+        s, body, _ = self.req("GET", url + "api/health", cookie=A, accept="application/json")
+        self.assertNotEqual(s, 200)
+
+    def test_python_connector_stays_off_without_explicit_allow(self):
+        A = "c" * 32
+        files = {"app.yaml": "app: {id: codeapp, title: Code App}\nprovider: {type: mock}\nsources: [{id: p, type: python, entry: plugin:search}]\n",
+                 "plugin.py": "def search(q, k):\n    return []\n"}
+        out = io.BytesIO()
+        import zipfile
+        with zipfile.ZipFile(out, "w") as z:
+            for n, d in files.items():
+                z.writestr(n, d)
+        bundle64 = base64.b64encode(out.getvalue()).decode()
+        s, body, _ = self.req("POST", "/alpha/api/nerds/review", cookie=A, body={"name": "codeapp.zip", "data": bundle64}, accept="application/json")
+        self.assertEqual(s, 200, body[:300])
+        token = json.loads(body)["token"]
+        s, body, _ = self.req("POST", "/alpha/api/nerds/load", cookie=A, body={"token": token}, accept="application/json")
+        self.assertNotEqual(s, 200)
+        self.assertIn("allow", json.loads(body)["error"].lower())
