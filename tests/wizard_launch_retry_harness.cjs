@@ -13,7 +13,7 @@ function qs(sel){if(!elements.has(sel))elements.set(sel,mkEl(sel));return elemen
 global.window=global;
 global.addEventListener=()=>{};
 global.removeEventListener=()=>{};
-global.document={getElementById:()=>null,querySelector:qs,querySelectorAll:()=>[],createElement:t=>mkEl(t),addEventListener(){},removeEventListener(){},body:mkEl('body'),documentElement:mkEl('html'),hidden:false,visibilityState:'visible'};
+global.document={getElementById:()=>null,querySelector:qs,querySelectorAll:sel=>/build-step$|build-screen/.test(sel)?Array.from({length:6},()=>mkEl(sel)):[] ,createElement:t=>mkEl(t),addEventListener(){},removeEventListener(){},body:mkEl('body'),documentElement:mkEl('html'),hidden:false,visibilityState:'visible'};
 global.localStorage={getItem:()=>null,setItem(){},removeItem(){}};
 global.sessionStorage={_d:{},getItem(k){return this._d[k]||null},setItem(k,v){this._d[k]=v},removeItem(k){delete this._d[k]}};
 global.location={href:'',hash:'',reload(){}};
@@ -21,6 +21,7 @@ const historyCalls=[];
 global.history={replaceState(...a){historyCalls.push(a)},pushState(){}};
 global.matchMedia=()=>({matches:false,addEventListener(){},removeEventListener(){}});
 global.requestAnimationFrame=f=>setTimeout(f,0);
+global.scrollTo=()=>{};
 global.navigator={clipboard:{writeText:async()=>{}}};
 function respond(ok,payload,status){return{ok,status:status||(ok?200:400),json:async()=>payload,text:async()=>JSON.stringify(payload)};}
 global.fetch=async(url,opts={})=>{
@@ -28,6 +29,11 @@ global.fetch=async(url,opts={})=>{
  calls.push({url:String(url),body});
  if(!String(url).includes('/api/settings/build/'))return respond(true,{});
  const ep=String(url).split('/api/settings/build/')[1];
+ if(scenario==='back-and-return'){
+  if(ep==='draft')return respond(true,{id:'d1'});
+  if(ep==='review')return respond(true,{ticket:'R9',config:{app:{title:'Garden'},appearance:{},api_suggestions:[]}});
+  return respond(true,{});
+ }
  if(scenario==='retry-ticket'){
   if(ep==='save')return respond(true,{launch_ticket:'L1'});
   if(ep==='launch'&&body.ticket==='L1')return respond(false,{error:'Preview could not start',retry_ticket:'L2'});
@@ -52,7 +58,7 @@ const src=fs.readFileSync(path.join(__dirname,'..','chatify','web','build.js'),'
 eval(src);
 (async()=>{
  const save=qs('#reviewSave');assert(save.listeners.click,'wizard save button handler registered');
- if(scenario!=='start-wires-url')await save.listeners.click();
+ if(scenario==='retry-ticket'||scenario==='expired-review')await save.listeners.click();
  if(scenario==='retry-ticket'){
   const eps=calls.map(c=>c.url.split('/api/settings/build/')[1]);
   assert.deepEqual(eps.slice(0,2),['save','launch'],'save then first launch attempt');
@@ -81,5 +87,16 @@ eval(src);
   assert.equal(calls[2].body.ticket,'R2','second save uses the fresh review ticket');
   assert(qs('#yourappTitle').textContent.includes('is running'),'app shown running after recovery');
  }
+ if(scenario==='back-and-return'){
+  qs('#buildStarter').listeners.click&&await qs('#buildStarter').listeners.click();
+  await new Promise(r=>setTimeout(r,50));
+  assert.equal(calls.filter(c=>c.url.endsWith('/review')).length,1,'review opened once');
+  await qs('#reviewBack').listeners.click();
+  assert.equal(qs('#buildReturnReview').hidden,false,'return-to-draft offered on Sources after Back');
+  await qs('#buildReturnReview').listeners.click();
+  await new Promise(r=>setTimeout(r,50));
+  assert.equal(calls.filter(c=>c.url.endsWith('/review')).length,2,'return re-opens the review without a rebuild');
+  assert.equal(calls.filter(c=>c.url.endsWith('/start')).length,0,'no new model build started');
+ }
  console.log(JSON.stringify(calls.map(c=>c.url)));console.log('PASS',scenario,calls.map(c=>c.url.split('/').pop()+'('+(c.body.ticket||'')+')').join(' '));
-})().catch(e=>{console.error(e);process.exit(1)});
+})().catch(e=>{console.error(e);console.error('CALLS:',JSON.stringify(calls.map(c=>c.url)));process.exit(1)});

@@ -51,6 +51,7 @@ function goStep(i) {
   const stepsNav = document.querySelector(".build-steps");
   if (stepsNav) { stepsNav.removeAttribute("data-open"); const t = $("#buildStepsToggle"); if (t) t.setAttribute("aria-expanded", "false"); }
   window.scrollTo({ top: 0, behavior: "instant" });
+  const rr = $("#buildReturnReview"); if (rr) rr.hidden = !(i === 1 && state.currentYaml);
   if (i === 4) loadVersions();
 }
 
@@ -389,6 +390,7 @@ async function openReview() {
   $("#reviewSave").disabled = false;
 }
 $("#reviewBack").addEventListener("click", () => goStep(1));
+$("#buildReturnReview").addEventListener("click", () => { openReview(); });
 $("#reviewAdjust").addEventListener("click", () => { if (state.draftId) location.href = BASE + "/settings.html#build-draft=" + state.draftId; else location.href = BASE + "/settings.html"; });
 $("#reviewSave").addEventListener("click", async () => {
   const btn = $("#reviewSave"); btn.disabled = true;

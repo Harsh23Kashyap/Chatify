@@ -20,6 +20,12 @@ class WizardLaunchRetryTest(unittest.TestCase):
         # ?job=<id> into the URL and the boot code resumes from it.
         self.run_scenario('start-wires-url')
 
+    def test_back_from_review_offers_return_without_rebuild(self):
+        # Back from Review must not strand a finished draft: the Sources step
+        # offers Return to your ready draft, which re-opens the review with no
+        # new model build.
+        self.run_scenario('back-and-return')
+
     def test_expired_review_ticket_re_reviews_once(self):
         # A consumed/expired review ticket on save re-reviews once, saves with the
         # fresh ticket and starts - one click, no dead end.
