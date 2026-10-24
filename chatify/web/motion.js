@@ -45,6 +45,18 @@
     var t; var later = function () { clearTimeout(t); t = setTimeout(function () { scan(true); }, 0); };
     scan(false);
     new MutationObserver(later).observe(document.body, { subtree: true, childList: true, attributes: true, attributeFilter: ["aria-checked"] });
+    // Re-place when a control becomes visible or resizes (e.g. switching into the Manual view
+    // reveals the Simple/Advanced toggle): measurements taken while display:none are 0.
+    if (window.ResizeObserver) {
+      var ro = new ResizeObserver(function (entries) { entries.forEach(function (en) { place(en.target, false); }); });
+      document.querySelectorAll(".seg").forEach(function (s) { ro.observe(s); });
+    }
+    // Re-place when a control becomes visible or resizes (e.g. switching into the Manual view
+    // reveals the Simple/Advanced toggle): measurements taken while display:none are 0.
+    if (window.ResizeObserver) {
+      var ro = new ResizeObserver(function (entries) { entries.forEach(function (en) { place(en.target, false); }); });
+      document.querySelectorAll(".seg").forEach(function (s) { ro.observe(s); });
+    }
     window.addEventListener("resize", function () { document.querySelectorAll(".seg-ind.go").forEach(function (i) { i.classList.remove("go"); }); scan(false); });
     // Simple <-> Advanced: the sections settle in again
     var last = document.body.classList.contains("simple");
