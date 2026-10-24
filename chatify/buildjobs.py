@@ -305,6 +305,11 @@ class BuildJobs:
     except Exception as e:job['notice']+=' Draft persistence failed: '+str(e)[:120]
   except Exception as e:
    with self.lock:job['errors']['final']=str(e)[:400];job['state']='partial' if not job['cancel'] else 'cancelled';job['in_retry']=False
+ def active(self,owner):
+  with self.lock:
+   mine=[{'id':j['id'],'phase':j.get('phase',''),'completed':len(j['parts']),'total':len(PARTS),'calls':j.get('calls',0),'started':j.get('created')} for j in self.jobs.values() if j['owner']==owner and j['state']=='running']
+   total=sum(1 for j in self.jobs.values() if j['state']=='running')
+  return {'active':total>0,'running_total':total,'mine':mine}
  def view(self,owner,ident):
   with self.lock:
    j=self._owned(owner,ident);return {k:copy.deepcopy(j.get(k)) for k in ('id','state','calls','retry_calls','defaulted','phase','notice','yaml','review','logo_status','remaining_work','local_review')}|{'completed':len(j['parts']),'total':len(PARTS),'errors':copy.deepcopy(j['errors']),'daily_est_usd':round(self.spend.get('est_usd',0.0),2),'daily_cap_usd':int(DAILY_SPEND_CAP_USD),'partial_config':copy.deepcopy(j.get('merged_draft')) or {key:copy.deepcopy(value) for key,value in j['parts'].items()} if j['state']=='partial' else None,'parts':[{'id':key,'draft':copy.deepcopy(j['parts'].get(key)),'state':'done' if key in j['parts'] else 'error' if key in j['errors'] else 'running' if key in j.get('active',set()) else 'cancelled' if j['state']=='cancelled' else 'waiting'} for key,_ in PARTS]}

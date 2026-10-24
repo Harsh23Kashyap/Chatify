@@ -2,6 +2,23 @@ import json,urllib.error,unittest,yaml
 from unittest.mock import patch
 import test_workspace_api
 from chatify import providers,schema,appbuilder
+class BuildActiveHTTP(test_workspace_api.WorkspaceAPITests):
+ def setUp(self):
+  import tempfile
+  from chatify.store import Store
+  self.state_tmp=tempfile.TemporaryDirectory()
+  self.stub_active={'active':True,'running_total':1,'mine':[{'id':'job-fixture','phase':'Drafting prompts','completed':3,'total':30,'calls':3,'started':1.0}]}
+  with patch('test_workspace_api.Store',side_effect=lambda _:Store(self.state_tmp.name+'/chatify.db')),patch('chatify.buildjobs.BuildJobs') as bj:
+   bj.return_value.active=lambda owner:self.stub_active
+   super().setUp()
+ def tearDown(self):
+  super().tearDown();self.state_tmp.cleanup()
+ def test_active_owner_gets_scoped_snapshot(self):
+  self.assertEqual(self.call(self.clients[0],'/api/settings/build/active'),self.stub_active)
+ def test_active_non_owner_blocked(self):
+  with self.assertRaises(urllib.error.HTTPError) as e:self.call(self.clients[1],'/api/settings/build/active')
+  self.assertIn(e.exception.code,(403,404))
+
 class BuilderHTTP(test_workspace_api.WorkspaceAPITests):
  def setUp(self):
   import tempfile

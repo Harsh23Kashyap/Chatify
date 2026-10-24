@@ -42,6 +42,15 @@ deploy/publish.sh --yes    # tests, optional local-file backup, copy, restart, w
 ```
 The script only talks to a box that already exists. It does not create anything in AWS. The service selects `apps/dietchat/app.yaml`; edit the service to use a different app, and set `APP_DATA_DIR` in publish.env to that app's data directory. Optional publish backups copy only local app files and stop publication if the backup fails. They do not back up MySQL; use the separate database dump below.
 
+## 4a. Check for active builds before a restart or deploy
+Build with AI jobs run in server memory. A restart or redeploy discards them mid-flight, so check first:
+```
+GET /api/settings/build/active     # signed in as the app owner
+```
+The response is `{"active": bool, "running_total": N, "mine": [...]}`. `running_total` counts every running build on the server, including other users' builds as a bare count only - their briefs, configs and drafts are never included. `mine` lists only your own running builds with id, phase and progress. If `active` is true, wait and re-check until it is false, or ask the build's owner to cancel it.
+
+This check is a preflight snapshot, not a lock: a build can start in the gap between your check and the restart. Re-check immediately before you confirm the deploy or `systemctl restart`, and prefer low-traffic windows. The same check applies to a Render manual deploy (no shell needed - it is a plain authenticated request in the browser or with curl).
+
 ## 5. Backups
 ```
 mysqldump chatify | gzip | aws s3 cp - s3://YOUR-BUCKET/chatify-$(date +%F).sql.gz

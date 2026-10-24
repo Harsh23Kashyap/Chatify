@@ -18,6 +18,28 @@ class Fixture:
     if key.startswith('txt_') and not value:defaults[key]='Garden fixture wording'
    if spec['area']=='app':defaults['title']='Garden Field Guide';defaults['id']='garden';defaults['footer']='Garden fixture footer';defaults['examples']=['How do I grow basil?']
   return json.dumps(defaults)
+class ActiveView(unittest.TestCase):
+ def test_active_empty(self):
+  jobs=buildjobs.BuildJobs();data=jobs.active('owner');self.assertEqual(data,{'active':False,'running_total':0,'mine':[]})
+ def test_active_scopes_details_to_owner(self):
+  gate=threading.Event()
+  class Slow:
+   def complete(self,messages):gate.wait(10);raise ValueError('released')
+  jobs=buildjobs.BuildJobs()
+  own=jobs.start('owner',Slow(),schema.DEFAULTS,{'brief':'Private owner brief'})
+  other=jobs.start('other',Slow(),schema.DEFAULTS,{'brief':'Private other brief'})
+  try:
+   data=jobs.active('owner')
+   self.assertTrue(data['active']);self.assertEqual(data['running_total'],2);self.assertEqual(len(data['mine']),1)
+   mine=data['mine'][0];self.assertEqual(mine['id'],own['id']);self.assertIn('phase',mine);self.assertIn('completed',mine);self.assertIn('total',mine)
+   blob=json.dumps(data)
+   self.assertNotIn('Private other brief',blob);self.assertNotIn(other['id'],blob)
+   for entry in data['mine']:
+    self.assertNotIn('brief',entry);self.assertNotIn('cfg',entry)
+   nobody=jobs.active('nobody');self.assertEqual(nobody['running_total'],2);self.assertEqual(nobody['mine'],[])
+  finally:
+   jobs.cancel('owner',own['id']);jobs.cancel('other',other['id']);gate.set()
+
 class Jobs(unittest.TestCase):
  def wait(self,jobs,ident):
   for _ in range(500):

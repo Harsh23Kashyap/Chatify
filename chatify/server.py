@@ -419,6 +419,7 @@ def make_handler(cfg, engine):
                 if path.endswith('/drafts') and method=='GET':return self._send(200,{'drafts':draft_store.list(o)})
                 if path.endswith('/draft') and method=='GET':return self._send(200,draft_store.get(o,qs.get('id','')))
                 if path.endswith('/draft') and method=='POST':return self._send(200,draft_store.put(o,b.get('yaml'),b.get('title',''),b.get('id'),b.get('sections')))
+                if path.endswith('/active') and method=='GET':return self._send(200,build_jobs.active(o))
                 if path.endswith('/job') and method=='GET':return self._send(200,build_jobs.view(o,qs.get('id','')))
                 if path.endswith('/cancel'):return self._send(200,build_jobs.cancel(o,str(b.get('id',''))))
                 if path.endswith('/retry'):return self._send(200,build_jobs.retry(o,str(b.get('id',''))))

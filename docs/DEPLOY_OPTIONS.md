@@ -21,6 +21,9 @@ Written hosting comparison only. Nothing here was deployed. Prices and free tier
 - Client wants a public link with the least work and no server skills: **C**. Configure the app provider first, then use the blueprint and paste the key in Render. The default minimal app is offline Demo (mock); a key alone does not switch it to AI. It needs a paid instance because of the disk; check the current price.
 - Client insists on their own AWS: **D**. It is one box, which is the simplest AWS story. Skip E unless they need the static files served from S3.
 
+## Before any redeploy or restart
+Build with AI jobs live in server memory and a redeploy discards them. As the app owner, check `GET /api/settings/build/active` first and wait until `"active"` is false; other users' builds show as a count only, never their content. This is a snapshot, not a lock - re-check immediately before confirming; see DEPLOY_AWS.md section 4a.
+
 ## E: why the S3 frontend is not the easy path
 The web files call the API with relative paths (`/api/...`) and the server sends no CORS headers. A pure S3 frontend on a different address would fail until two things change: an API base address setting in the web code, and CORS headers on the server. Both are small, neither is built. A simpler option with the same result is CloudFront in front of S3 and EC2 with `/api/*` routed to the box, which needs no code change but more console setup. For a chat-only app one nginx box (D) is easier.
 
