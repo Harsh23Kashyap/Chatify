@@ -300,3 +300,105 @@ class GalleryWorkspaceHandoff(unittest.TestCase):
         s, body, _ = self.req("POST", "/alpha/api/nerds/load", cookie=A, body={"token": token}, accept="application/json")
         self.assertNotEqual(s, 200)
         self.assertIn("allow", json.loads(body)["error"].lower())
+
+
+BUILD_YAML_SECTIONS = None  # filled in test from schema + appbuilder
+
+
+class GalleryBuilderUseThisApp(unittest.TestCase):
+    """The builder's own Use-this-app route: review -> save -> launch -> hosted workspace."""
+    @classmethod
+    def setUpClass(cls):
+        cls.base = tempfile.mkdtemp()
+        _write_gallery(cls.base)
+        cls.port = 8943
+        env = dict(os.environ, OPENAI_API_KEY="sk-builder-host-fixture")
+        cls.proc = subprocess.Popen(
+            [sys.executable, "-m", "chatify", "run", os.path.join(cls.base, "gallery.yaml"), "--port", str(cls.port), "--no-browser"],
+            cwd=ROOT, env=env, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True)
+        for _ in range(40):
+            time.sleep(0.25)
+            if cls.proc.poll() is not None:
+                raise AssertionError("gallery server died: " + cls.proc.stdout.read()[-1500:])
+            try:
+                urllib.request.urlopen("http://127.0.0.1:%d/api/health" % cls.port, timeout=2)
+                break
+            except Exception:
+                continue
+        else:
+            raise AssertionError("gallery server never came up")
+
+    @classmethod
+    def tearDownClass(cls):
+        cls.proc.terminate(); cls.proc.wait()
+
+    def req(self, method, path, cookie, body=None):
+        h = {"Accept": "application/json", "Cookie": "cc_visitor=" + cookie}
+        data = None
+        if body is not None:
+            data = json.dumps(body).encode(); h["Content-Type"] = "application/json"
+        r = urllib.request.Request("http://127.0.0.1:%d%s" % (self.port, path), data=data, headers=h, method=method)
+        try:
+            resp = urllib.request.urlopen(r, timeout=30)
+            return resp.status, resp.read().decode("utf-8", "replace")
+        except urllib.error.HTTPError as e:
+            return e.code, e.read().decode("utf-8", "replace")
+
+    def test_save_then_launch_carries_everything_but_keys(self):
+        import yaml
+        from chatify import schema
+        A = "d5e6f7a8" * 4
+        draft = schema.validate({
+            "app": {"id": "spacefacts", "title": "Space Facts", "tagline": "Planets and missions", "examples": ["How far is Mars?"]},
+            "provider": {"type": "openai", "model": "gpt-4o-mini", "api_key_env": "OPENAI_API_KEY"},
+            "sources": [
+                {"id": "docs", "type": "local_files", "label": "Mission notes", "path": "docs"},
+                {"id": "launches", "type": "http_json", "label": "Launch API", "url": "https://api.example.com/launches", "api_key_env": "LAUNCH_API_KEY"},
+            ],
+        })
+        draft["appearance"] = {"mode": "light", "bubble": "flat"}
+        draft["pipeline_prompts"] = {"text": {s: "CUSTOM PROMPT %s" % s for s in
+            ["question_check", "standalone", "queries", "relevance", "answer", "faithfulness", "revise", "followups", "summary"]}, "on": {}}
+        draft["helper_drafts"] = {"search": {"brief": "Find rows", "code": "def search(query, items):\n    return []\n"}}
+        sections = sorted(schema.DEFAULTS) + ["appearance", "pipeline_prompts", "helper_drafts"]
+        yaml_text = yaml.safe_dump(draft, sort_keys=False)
+
+        s, b = self.req("POST", "/alpha/api/settings/build/review", A, {"yaml": yaml_text, "sections": sections})
+        self.assertEqual(s, 200, b[:300])
+        ticket = json.loads(b)["ticket"]
+        s, b = self.req("POST", "/alpha/api/settings/build/save", A, {"ticket": ticket, "confirmed": True})
+        self.assertEqual(s, 200, b[:300])
+        launch_ticket = json.loads(b)["launch_ticket"]
+        saved_cfg = yaml.safe_load(io.open(os.path.join(self.base, "alpha", "app.yaml")))
+        self.assertEqual(saved_cfg["app"]["title"], "Space Facts")
+        self.assertEqual(json.load(io.open(os.path.join(self.base, "alpha", "data", "theme.json")))["bubble"], "flat")
+        self.assertEqual(json.load(io.open(os.path.join(self.base, "alpha", "data", "prompts.json")))["text"]["answer"], "CUSTOM PROMPT answer")
+
+        s, b = self.req("POST", "/alpha/api/settings/build/launch", A, {"ticket": launch_ticket})
+        self.assertEqual(s, 200, b[:300])
+        launched = json.loads(b)
+        self.assertTrue(launched["hosted"])
+        url = launched["url"]
+        self.assertRegex(url, r"^/nerd-[A-Za-z0-9_-]+/$")
+        self.assertEqual(launched["title"], "Space Facts")
+        wsdir = launched["workspace"]
+
+        s, b = self.req("GET", url, A)
+        self.assertEqual(s, 200); self.assertIn("Space Facts", b); self.assertIn("CC_APP_BASE", b)
+        s, b = self.req("GET", url, "e6f7a8b9" * 4)
+        self.assertEqual(s, 403)
+
+        ws_cfg = yaml.safe_load(io.open(os.path.join(wsdir, "app.yaml")))
+        srcs = {x["id"]: x for x in ws_cfg["sources"]}
+        self.assertEqual(srcs["launches"]["url"], "https://api.example.com/launches")
+        self.assertEqual(srcs["launches"]["api_key_env"], "LAUNCH_API_KEY")
+        self.assertEqual(ws_cfg["app"]["examples"], ["How far is Mars?"])
+        self.assertEqual(json.load(io.open(os.path.join(wsdir, "data", "theme.json")))["bubble"], "flat")
+        self.assertEqual(json.load(io.open(os.path.join(wsdir, "data", "prompts.json")))["text"]["revise"], "CUSTOM PROMPT revise")
+        self.assertIn("search", json.load(io.open(os.path.join(wsdir, "data", "code-drafts.json"))))
+        moved = next(x["path"] for x in ws_cfg["sources"] if x["type"] == "local_files")
+        self.assertTrue(os.path.isfile(os.path.join(wsdir, moved, "a.md")))
+
+        s, b = self.req("GET", url + "api/provider/status", A)
+        key = json.loads(b)["keys"]["openai"]
+        self.assertFalse(key["has"]); self.assertTrue(key["needed"])
