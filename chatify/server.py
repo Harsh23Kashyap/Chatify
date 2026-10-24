@@ -460,7 +460,11 @@ def make_handler(cfg, engine):
                         recent=[t for t in BUILD_STARTS.get(ip,[]) if now-t<3600]
                         if ip not in ('127.0.0.1','::1') and len(recent)>=5:raise ValueError('Too many builds from this network. Wait a little, then try again.')
                         recent.append(now);BUILD_STARTS[ip]=recent
-                        return self._send(200,build_jobs.start(o,model_provider,build_cfg,b))
+                        # Generation may run on the cheaper build model, but the built
+                        # app must inherit the host's configured provider block
+                        # (live evidence 2026-10-25: a child app was saved with the
+                        # build-time substitution instead of the configured model).
+                        return self._send(200,build_jobs.start(o,model_provider,cfg,b))
                     if path.endswith('/deploy'):return self._send(200,appbuilder.deployment(model_provider,b))
                     return self._send(200,appbuilder.talk(model_provider,build_cfg,b))
                 if path.endswith('/parse'):
@@ -469,6 +473,7 @@ def make_handler(cfg, engine):
                     return self._send(200,{'config':{k:clean[k] for k in raw}})
                 if path.endswith('/review'):
                     plan=appbuilder.review(cfg,b.get('yaml'),b.get('sections'))
+                    if nerdloadmod._hosted():plan['notice']='Save keeps your own copy of this app build - the shared demo app is not changed. Use this app can start a separate workspace after save. No source, code or new model runs now. Review source paths, URLs, access, storage and server settings before saving.'
                     return self._send(200,{**plan,'ticket':management.reviews.put(o,'app-build',plan)})
                 if path.endswith('/download'):
                     import io,zipfile,yaml
@@ -488,7 +493,11 @@ def make_handler(cfg, engine):
                     try:
                         with management.lock:
                             if management.active:raise ValueError('Wait for the workspace test to finish')
-                            if launch['revision'] != editstate.revision(cfg):raise ValueError('Saved configuration changed. Review and save again before using it')
+                            if nerdloadmod._hosted():
+                                import hashlib as _hl
+                                _appfile=(Path(cfg.get('_dir','.'))/launch['config']['storage']['path']).parent.parent/'app.yaml'
+                                if not _appfile.is_file() or _appfile.is_symlink() or _hl.sha256(_appfile.read_bytes()).hexdigest()!=launch['revision']:raise ValueError('Saved configuration changed. Review and save again before using it')
+                            elif launch['revision'] != editstate.revision(cfg):raise ValueError('Saved configuration changed. Review and save again before using it')
                             clean=launch['config']
                             from pathlib import Path
                             folder=(Path(cfg.get('_dir','.'))/clean['storage']['path']).parent
@@ -506,19 +515,21 @@ def make_handler(cfg, engine):
                         return self._send(400,{'error':str(e),'retry_ticket':management.reviews.put(o,'app-launch',launch)})
                 if path.endswith('/save'):
                     plan=management.reviews.take(o,'app-build',str(b.get('ticket','')),b.get('confirmed'))
+                    hosted=nerdloadmod._hosted()
                     with management.lock:
                         if management.active:raise ValueError('Wait for the workspace test to finish')
-                        try:rev=appbuilder.save_plan(cfg,plan)
+                        try:rev=appbuilder.hosted_save_plan(cfg,o,str(b.get('ticket','')),plan) if hosted else appbuilder.save_plan(cfg,plan)
                         except appbuilder.SaveRollbackError as e:return self._send(400,{'error':str(e),'saved_state_uncertain':True})
                     from pathlib import Path
                     folder=(Path(cfg.get('_dir','.'))/plan['config']['storage']['path']).parent
                     snapshots={name:(folder/name).read_text() if (folder/name).exists() else None for name in ('theme.json','prompts.json','code-drafts.json')}
                     launch_ticket=management.reviews.put(o,'app-launch',{'config':plan['config'],'revision':rev,'state':snapshots})
-                    try:
-                        from . import versions as versions_mod
-                        versions_mod.record(cfg,'Saved: '+str(plan['config']['app'].get('title') or 'app build'))
-                    except Exception:pass
-                    return self._send(200,{'revision':rev,'launch_ticket':launch_ticket,'restart_required':False,'message':'Reviewed configuration saved. Choose Use this app to start a separate workspace. Current chat stays unchanged. No helper code installed or executed.'})
+                    if not hosted:
+                        try:
+                            from . import versions as versions_mod
+                            versions_mod.record(cfg,'Saved: '+str(plan['config']['app'].get('title') or 'app build'))
+                        except Exception:pass
+                    return self._send(200,{'revision':rev,'launch_ticket':launch_ticket,'restart_required':False,'message':('Your reviewed app is saved as your own build. Choose Use this app to start it as a separate workspace - the shared demo app stays unchanged. No helper code installed or executed.' if hosted else 'Reviewed configuration saved. Choose Use this app to start a separate workspace. Current chat stays unchanged. No helper code installed or executed.')})
                 if path.endswith('/workspace-check'):
                     return self._send(200,workspace_check(loader,str(b.get('workspace',''))))
                 raise ValueError('Unknown builder action')
