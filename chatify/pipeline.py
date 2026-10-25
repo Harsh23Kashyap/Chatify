@@ -838,7 +838,9 @@ class Engine:
         """No model answer: show the best passages as a clearly labeled source preview, never as a model answer."""
         lines = [why or "The AI model could not be reached, so this is a source preview, not a model answer: the most relevant passages from your sources."]
         for e in (evidence or [])[:3]:
-            t = plain_text(" ".join(str(e.get("text") or "").split()))
+            # plain_text first: heading markdown ("##") is line-anchored, so it must
+            # run before the whitespace join flattens newlines into one line.
+            t = " ".join(plain_text(str(e.get("text") or "")).split())
             if len(t) > 320:
                 if question:
                     terms = [w for w in re.findall(r"[a-z0-9]{3,}", question.lower()) if not w.isdigit() and w not in _GATE_STOP and w not in _GATE_WEAK]
