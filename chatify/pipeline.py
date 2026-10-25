@@ -619,6 +619,21 @@ class Engine:
             # Fall, sharing more question vocabulary, trailed at [3]).
             found.sort(key=lambda e: -e["score"])
         found = found[:k]
+        if self._RECENCY.search(question):
+            # A recency question ("most recent papers on X") is mis-served by an
+            # oldest-first list even when every passage is on-topic (hosted R2
+            # 2026-10-25: 2023 combo trial led a "most recent" answer ahead of a
+            # 2025 paper). Owner-corpus passages keep their positions; public
+            # passages order newest-first, ties keep the gate/score order.
+            def _yr(e):
+                try: return int(str(e.get("year") or "")[:4])
+                except ValueError: return 0
+            own_ids = {id(e) for e in found if e.get("source") not in search_ids}
+            if own_ids:
+                found = [e for e in found if id(e) in own_ids] + sorted(
+                    (e for e in found if id(e) not in own_ids), key=lambda e: -_yr(e))
+            else:
+                found = sorted(found, key=lambda e: -_yr(e))
         for n, e in enumerate(found, 1):
             e["n"] = n
         self._cache[key] = (found, errors)

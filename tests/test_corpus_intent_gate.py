@@ -104,3 +104,37 @@ class CorpusIntentGateTest(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+class RecencyOrderTest(unittest.TestCase):
+    HITS = [
+        ("Pioglitazone plus GLP-1 receptor agonist combination: dosing and safety in type 2 diabetes",
+         "This trial assessed pioglitazone added to a GLP-1 receptor agonist. Dosing was escalated over 26 weeks; safety outcomes including hypoglycemia were recorded.", "2023"),
+        ("Cinnamaldehyde modulates GLP-1 pathway in a mouse Parkinson model",
+         "Cinnamaldehyde improved motor outcomes in mice via the GLP-1 pathway. Dosing schedules mattered; safety in mammals is poorly characterized.", "2025"),
+    ]
+
+    class FakeConn:
+        def __init__(self, sid, hits): self.id, self.hits = sid, hits
+        def search(self, q, k, documents=None):
+            return [Evidence(t, x, "https://pubmed.ncbi.nlm.nih.gov/%d/" % (4000 + i), ["A Author"], y,
+                             "J Test", "pubmed", 1.0 / (i + 1), "PMID:%d" % (4000 + i))
+                    for i, (t, x, y) in enumerate(self.hits)][:k]
+
+    def make(self):
+        cfg = {"app": {"title": "T", "tagline": ""}, "provider": {"type": "mock"},
+               "sources": [{"id": "pubmed", "type": "pubmed", "label": "PubMed"}],
+               "retrieval": {"top_k": 6, "min_score": 0.0, "cache_ttl": 0},
+               "memory": {"enabled": False}, "permissions": {}, "pipeline_prompts": {}}
+        store = Store(":memory:")
+        return pipeline.Engine(cfg, store, connectors={"pubmed": self.FakeConn("pubmed", self.HITS)})
+
+    def test_recency_question_orders_newest_first(self):
+        eng = self.make()
+        found, _ = eng.retrieve("most recent papers GLP-1 dosing safety", owner="visitor:t")
+        self.assertEqual(len(found), 2)
+        self.assertEqual(found[0]["year"], "2025", "newest dated public evidence must lead a recency question")
+
+    def test_non_recency_question_keeps_gate_order(self):
+        eng = self.make()
+        found, _ = eng.retrieve("what is known about GLP-1 dosing safety", owner="visitor:t")
+        self.assertEqual(found[0]["year"], "2023", "without recency intent the gate/score order is kept")
