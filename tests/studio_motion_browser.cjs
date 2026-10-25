@@ -37,7 +37,7 @@ for(const width of [320,1280]){
  assert.equal(await p.locator('#settingsHelpThinking').isHidden(),true,'no thinking state before sending');
  await p.locator('#settingsHelpSend').click();
  await p.waitForSelector('#settingsHelpThinking:not([hidden])');
- assert.match(await p.locator('#settingsHelpThinkingText').innerText(),/openai \/ fixture-model/,'thinking names the real provider/model');
+ assert.match(await p.locator('#settingsHelpThinkingText').innerText(),/^Asking OpenAI \/ fixture-model/,'thinking names the real provider/model');
  assert.equal(await p.locator('#settingsHelpSend').getAttribute('aria-busy'),'true');
  assert.notEqual(await p.locator('.ask-dots i').first().evaluate(e=>getComputedStyle(e).animationName),'none','dots animate while the request runs');
  await p.screenshot({path:`/downloads/cc26-askai-thinking-${width}.png`});
