@@ -804,10 +804,14 @@ async function init() {
   $("#scopeBtn").onclick=scopeDialog;
   const toolsT = $("#toolsToggle"), toolsM = $("#toolsMenu");
   if (toolsT && toolsM) {
-    const setTools = (open) => { toolsM.hidden = !open; toolsT.setAttribute("aria-expanded", String(open)); if (open) toolsM.querySelector("button").focus(); };
+    const dictateItem = $("#toolsDictate"), srOk = !!(window.SpeechRecognition || window.webkitSpeechRecognition);
+    if (srOk && dictateItem) dictateItem.hidden = false; else document.documentElement.classList.add("no-sr");
+    const syncDictate = () => { if (dictateItem) dictateItem.textContent = $("#mic").getAttribute("aria-pressed") === "true" ? "Stop dictation" : "Dictate a question"; };
+    const visibleItems = () => [...toolsM.querySelectorAll("button")].filter((b) => !b.hidden && b.offsetWidth > 0);
+    const setTools = (open) => { toolsM.hidden = !open; toolsT.setAttribute("aria-expanded", String(open)); if (open) { syncDictate(); visibleItems()[0]?.focus(); } };
     toolsT.addEventListener("click", (e) => { e.stopPropagation(); setTools(toolsM.hidden); });
-    toolsM.addEventListener("click", (e) => { e.stopPropagation(); if (e.target.id === "toolsScope" || e.target.id === "toolsActions") { setTools(false); $(e.target.id === "toolsScope" ? "#scopeBtn" : "#actionsBtn").click(); } });
-    toolsM.addEventListener("keydown", (e) => { const items = [...toolsM.querySelectorAll("button")]; const i = items.indexOf(document.activeElement); if (e.key === "Escape") { setTools(false); toolsT.focus(); } if (e.key === "ArrowDown") { e.preventDefault(); items[(i + 1) % items.length].focus(); } if (e.key === "ArrowUp") { e.preventDefault(); items[(i - 1 + items.length) % items.length].focus(); } });
+    toolsM.addEventListener("click", (e) => { e.stopPropagation(); if (e.target.id === "toolsScope" || e.target.id === "toolsActions") { setTools(false); $(e.target.id === "toolsScope" ? "#scopeBtn" : "#actionsBtn").click(); } if (e.target.id === "toolsDictate") { setTools(false); const m = $("#mic"); m.click(); (m.offsetWidth > 0 ? m : toolsT).focus(); } });
+    toolsM.addEventListener("keydown", (e) => { const items = visibleItems(); const i = items.indexOf(document.activeElement); if (!items.length) return; if (e.key === "Escape") { setTools(false); toolsT.focus(); } if (e.key === "ArrowDown") { e.preventDefault(); items[(i + 1) % items.length].focus(); } if (e.key === "ArrowUp") { e.preventDefault(); items[(i - 1 + items.length) % items.length].focus(); } });
     document.addEventListener("click", () => { if (!toolsM.hidden) setTools(false); });
   }
   $("#q").addEventListener("keydown",e=>{if((e.ctrlKey||e.metaKey)&&e.key==="Enter"){e.preventDefault();send()}});

@@ -1060,12 +1060,16 @@ pre.codeblock code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monosp
 
 /* Composer tool chips collapse into an accessible overflow menu on small screens. */
 .composer-tools{position:relative}
-#toolsToggle{display:none;letter-spacing:2px;font-weight:700}
+#toolsToggle{display:inline-flex;letter-spacing:2px;font-weight:700;align-items:center;justify-content:center;min-width:44px;min-height:44px}
 #toolsMenu{position:absolute;bottom:calc(100% + 6px);left:0;z-index:70;background:var(--paper);border:1px solid var(--line);border-radius:12px;box-shadow:0 18px 50px rgba(23,63,53,.22);padding:4px;display:grid;gap:2px;min-width:180px}
 #toolsMenu[hidden]{display:none}
 #toolsMenu button{border:0;background:transparent;color:var(--ink);text-align:left;padding:10px 12px;border-radius:8px;font:inherit;cursor:pointer;min-height:44px}
 #toolsMenu button:hover,#toolsMenu button:focus-visible{background:var(--soft);outline:none}
 @media(max-width:600px){
   .composer-tools>#scopeBtn,.composer-tools>#actionsBtn{display:none}
-  #toolsToggle{display:inline-flex;min-width:45px;min-height:45px;align-items:center;justify-content:center}
 }
+@media(min-width:601px){
+  #toolsScope,#toolsActions{display:none}
+  html.no-sr #toolsToggle{display:none}
+}
+html.no-sr #toolsDictate{display:none}
