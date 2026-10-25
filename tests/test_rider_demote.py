@@ -68,6 +68,8 @@ class RiderDemote(unittest.TestCase):
         out = relevance_gate(Q, [BALL, CART, ADV, ZUMAT])
         text = Engine.fallback_answer(out, question=Q)
         self.assertIn("matched the question only loosely", text)
+        # loose matches are named by citation marker, not by list position
+        self.assertIn("[3]", text) and self.assertIn("[4]", text)
         clean = relevance_gate(Q, [CART, ZUMAT])
         self.assertNotIn("loosely", Engine.fallback_answer(clean, question=Q))
 
@@ -102,6 +104,9 @@ class RecencyComposition(unittest.TestCase):
         found, _ = eng.retrieve("most recent trials of CAR-T cell therapy lymphoma", owner="visitor:t")
         self.assertEqual(found[0]["title"], new_rider["title"])  # date wins
         self.assertTrue(found[0].get("_demoted"))                # but the rider is LABELED
+        # ...and the preview names it by marker even though it leads the list
+        self.assertIn("[1] matched the question only loosely",
+                      Engine.fallback_answer(found, question="most recent trials of CAR-T cell therapy lymphoma"))
 
     def test_equal_dates_keep_demote_order(self):
         strong = ev(1, "CAR T-cell therapy for B-cell lymphoma",

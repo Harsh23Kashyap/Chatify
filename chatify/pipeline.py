@@ -1117,8 +1117,13 @@ class Engine:
     def fallback_answer(evidence, why="", question=""):
         """No model answer: show the best passages as a clearly labeled source preview, never as a model answer."""
         lines = [why or "The AI model could not be reached, so this is a source preview, not a model answer: the most relevant passages from your sources."]
-        if any(e.get("_demoted") for e in (evidence or [])):
-            lines.append("Sources at the end of the evidence list matched the question only loosely; they are shown for completeness, not as close matches.")
+        demoted = [e for e in (evidence or []) if e.get("_demoted")]
+        if demoted:
+            # Name the loose matches by their citation markers - never by list
+            # position: explicit-newest date ordering stays authoritative, so a
+            # newer loosely-matched source can legitimately lead the list.
+            refs = ", ".join("[" + str(e.get("n")) + "]" for e in demoted[:6])
+            lines.append("Sources " + refs + " matched the question only loosely; they are shown for completeness, not as close matches.")
         for e in (evidence or [])[:3]:
             # plain_text first: heading markdown ("##") is line-anchored, so it must
             # run before the whitespace join flattens newlines into one line.
