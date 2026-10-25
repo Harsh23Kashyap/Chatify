@@ -199,7 +199,6 @@ html.preview #thread{scroll-padding-top:72px}html.preview .bar{background:var(--
 .srcs button.s:hover{background:var(--soft);color:var(--ink);text-decoration:none}
 .meta{flex-wrap:nowrap;overflow:visible;margin-bottom:calc(22px*var(--dens,1))}
 .meta .chip{font-size:calc(13px*var(--fs,1));color:var(--mut);white-space:nowrap}
-@media(min-width:861px){.bar-r #prevQ,.bar-r #nextQ{display:none}}
 .note{border-top:0;padding-top:0}
 .hero{margin-top:16vh}.ex button{font-size:calc(14px*var(--fs,1));padding:12px 16px}
 .cmeta{gap:0}.cmeta span+span::before{content:"\00a0\00b7\00a0"}
