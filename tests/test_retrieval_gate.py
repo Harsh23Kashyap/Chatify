@@ -220,6 +220,43 @@ class EnglishSpecificityGate(unittest.TestCase):
         self.assertTrue(out[0]["title"].startswith("CAR-T cell therapy in relapsed lymphoma"))
 
 
+class DiscriminatingWordGate(unittest.TestCase):
+    """Live demo 2026-10-25: a "CAR-T TREK" efficacy overview (treatment success,
+    no resistance/relapse content) displayed as evidence for a CAR-T
+    resistance-and-relapse mechanisms question because it passed the count floor
+    on words EVERY CAR-T candidate shares (car/cell/therapy/lymphoma)."""
+    Q = "What mechanisms drive CAR-T therapy resistance and relapse in diffuse large B-cell lymphoma?"
+    RESIST = ev(1, "Research progress on resistance mechanisms to CAR-T in DLBCL",
+                "This review covers resistance mechanisms and relapse after CAR-T therapy in lymphoma.")
+    TREK = ev(2, "CAR-T TREK through the lymphoma universe",
+              "CAR-T cell therapy has transformed the treatment of lymphoma, with high remission rates and durable success across pivotal studies.")
+    TME = ev(3, "TME impact on CD19 CAR-T efficacy in large B-cell lymphoma",
+             "The tumor microenvironment limits CAR-T cell therapy in large B-cell lymphoma and promotes resistance.")
+    GENERIC = ev(4, "CAR-T cell therapy outcomes in lymphoma",
+                 "CAR-T cell therapy in lymphoma: outcomes and follow-up.")
+
+    def test_ubiquitous_only_matches_dropped(self):
+        out = relevance_gate(self.Q, [self.TREK, self.RESIST, self.TME, self.GENERIC])
+        titles = [e["title"] for e in out]
+        self.assertNotIn("CAR-T TREK through the lymphoma universe", titles)
+        self.assertNotIn("CAR-T cell therapy outcomes in lymphoma", titles)
+        self.assertIn("Research progress on resistance mechanisms to CAR-T in DLBCL", titles)
+        self.assertIn("TME impact on CD19 CAR-T efficacy in large B-cell lymphoma", titles)
+
+    def test_most_specific_passage_leads(self):
+        out = relevance_gate(self.Q, [self.TREK, self.TME, self.RESIST])
+        self.assertTrue(out[0]["title"].startswith("Research progress on resistance mechanisms"))
+
+    def test_rule_inert_without_discriminating_coverage(self):
+        # When no candidate covers any discriminating word, the rule must not
+        # empty the list: the count floor alone decides (old behavior).
+        a = ev(5, "CAR-T cell therapy in lymphoma: part one", "CAR-T cell therapy in lymphoma, first part.")
+        b = ev(6, "CAR-T cell therapy in lymphoma: part two", "CAR-T cell therapy in lymphoma, second part.")
+        c = ev(7, "CAR-T cell therapy in lymphoma: part three", "CAR-T cell therapy in lymphoma, third part.")
+        out = relevance_gate("What is CAR-T cell therapy in lymphoma?", [a, b, c])
+        self.assertEqual(len(out), 3)
+
+
 class RetrieveOrdering(unittest.TestCase):
     """End-to-end ordering through Engine.retrieve: the gate's most-on-question-first
     order must survive to the answer (live demo 2026-10-25: a blanket score re-sort

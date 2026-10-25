@@ -95,8 +95,8 @@ def relevance_gate(question, found):
     scored = []
     for e in found:
         p = _gate_stems(str(e.get("title") or "") + " " + str(e.get("text") or "")[:1500])
-        scored.append((sum(1 for _, v in q_variants if v & p), e))
-    top = max(n for n, _ in scored)
+        scored.append((sum(1 for _, v in q_variants if v & p), e, p))
+    top = max(n for n, _, _ in scored)
     if top == 0:
         return []
     if top < 2 and len(q) >= 3:
@@ -118,14 +118,27 @@ def relevance_gate(question, found):
     # its vocabulary ride along; two thirds of the best is the cutoff (a B-ALL
     # review sharing cell/therapy must not survive next to real CAR-T evidence).
     floor = max(need, 1 if top < 2 else max(2, -(-2 * top // 3)))
-    kept = [(n, e) for n, e in scored if n >= floor]
-    # Lead with the passages that share the most question vocabulary: retrieval
-    # order put a broad B-ALL review above the CAR-T lymphoma trial papers on the
-    # live demo (2026-10-25), and the preview's extracted lead was then a review
-    # that does not establish the asked trial findings. Overlap order keeps the
-    # most on-question passage first; ties keep the connector's own ranking.
-    kept.sort(key=lambda ne: (-ne[0], -(ne[1].get("score") or 0)))
-    return [e for _, e in kept]
+    kept = [(n, e, p) for n, e, p in scored if n >= floor]
+    # Within the candidate set, a question word every passage shares (car/cell/
+    # therapy/lymphoma across CAR-T papers) carries no topical signal; the
+    # discriminating words are the ones only some passages share. A passage that
+    # passes the count floor on ubiquitous words alone still does not address the
+    # question (live demo 2026-10-25: a "CAR-T TREK" efficacy overview displayed
+    # for a resistance-and-relapse mechanisms question). Drop such passages when
+    # at least two discriminating question words are actually covered by the
+    # candidate set; with fewer candidates or no coverage the signal is noise and
+    # the count floor alone decides.
+    df = {w: sum(1 for _, _, p in scored if v & p) for w, v in q_variants}
+    disc = [(w, v) for w, v in q_variants if 0 < df[w] * 2 <= len(scored)]
+    if len(scored) >= 3 and len(disc) >= 2:
+        kept = [(n, e, p) for n, e, p in kept if any(v & p for _, v in disc)]
+    # Lead with the passages that share the most question vocabulary, weighted by
+    # how discriminating each shared word is within this candidate set. Overlap
+    # order keeps the most on-question passage first; ties keep the connector's
+    # own ranking.
+    weight = {w: 0.5 + (len(scored) - df[w]) / len(scored) for w, _ in q_variants}
+    kept.sort(key=lambda nep: (-sum(weight[w] for w, v in q_variants if v & nep[2]), -nep[0], -(nep[1].get("score") or 0)))
+    return [e for _, e, _ in kept]
 
 
 _NO_KEY_WHY = ("This app has no API key saved yet, so it cannot answer with the AI model. "
