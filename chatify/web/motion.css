@@ -466,11 +466,12 @@ html[data-motion=none] .fresh.row:has(.bubble.none),html[data-motion=calm] .fres
 @media(prefers-reduced-motion:reduce){.fresh.row:has(.bubble.none){animation:none!important}}
 /* Touch actions stay visible. Duplicate-chat times need their own space. */
 @media(hover:none){
- .side .list .item:has(.tm){display:grid;grid-template-columns:minmax(0,1fr) auto;column-gap:4px;row-gap:2px;padding-top:8px;padding-bottom:8px}
- .side .list .item:has(.tm) .t{grid-column:1;grid-row:1}
- .side .list .item:has(.tm) .acts{grid-column:2;grid-row:1/3;align-self:center}
+ .side .list .item{display:grid;grid-template-columns:minmax(0,1fr) auto;column-gap:4px;row-gap:2px;padding-top:8px;padding-bottom:8px}
+ .side .list .item .t{grid-column:1;grid-row:1;min-width:0}
+ .side .list .item .acts{position:static;translate:none;opacity:1;visibility:visible;pointer-events:auto;grid-column:2;grid-row:1;align-self:center}
+ .side .list .item:has(.tm) .acts{grid-row:1/3}
  .side .list .item .tm,.side .list .item.on .tm,.side .list .item:hover .tm,.side .list .item:focus-within .tm{display:block;position:static;grid-column:1;grid-row:2;margin:0;padding:0;visibility:visible;text-align:left}
- .side .list .item.on:has(.tm) .acts{grid-column:1/-1;grid-row:2;justify-content:flex-end;align-self:start}
+ .side .list .item.on .acts{grid-column:1/-1;grid-row:2;justify-content:flex-end;align-self:start}
  .side .list .item.on:has(.tm) .tm{visibility:hidden}
 }
 /* No-motion also disables press displacement, not only its transition. */
