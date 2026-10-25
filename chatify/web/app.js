@@ -70,32 +70,59 @@ function excerptWindow(text, question, size) {
   const groups = [];
   for (const w of terms) {
     const ps = [];
-    let i = -1;
-    while ((i = low.indexOf(w, i + 1)) >= 0) {
-      const before = i === 0 || !/[a-z0-9]/.test(low[i - 1]);
-      const after = i + w.length >= low.length || !/[a-z0-9]/.test(low[i + w.length]);
-      if (before && after) ps.push(i);
+    for (const v of excerptVariants(w)) {
+      let i = -1;
+      while ((i = low.indexOf(v, i + 1)) >= 0) {
+        const before = i === 0 || !/[\p{L}\p{N}]/u.test(low[i - 1]);
+        const after = i + v.length >= low.length || !/[\p{L}\p{N}]/u.test(low[i + v.length]);
+        if (before && after) ps.push(i);
+      }
     }
     if (ps.length) groups.push(ps);
   }
   if (!groups.length || text.length <= size) return text.slice(0, size) + (text.length > size ? "\u2026" : "");
   // Rarity-weighted hits, like the server: a term repeated all over the passage
   // must not outvote the few distinctive hits that actually answer the question.
-  // Cluster selection uses the server's 320-char span even when the displayed
-  // excerpt is shorter, or a tighter display window favors the chunk head again.
-  const span = Math.max(size, 320);
   const hits = groups.flatMap((ps) => ps.map((p) => [p, 1 / ps.length]));
-  let best = 0, bestScore = -1;
+  // Only hits inside the reliably visible zone vote: a match near the right
+  // edge is clipped by the final word-boundary truncation, so a window that
+  // barely contains it displays intro prose instead of the supporting span.
+  const visible = Math.floor(size * 0.85);
+  let start = 0, bestScore = -1;
   for (const [h] of hits) {
-    const s = Math.max(0, h - Math.floor(span / 3));
-    const c = hits.reduce((a, [x, wt]) => a + (x >= s && x <= s + span ? wt : 0), 0);
-    if (c > bestScore) { bestScore = c; best = s; }
+    const s = Math.max(0, h - Math.floor(size / 3));
+    const c = hits.reduce((a, [x, wt]) => a + (x >= s && x <= s + visible ? wt : 0), 0);
+    // Ties go to the later cluster: a head tie means the opening merely
+    // mentions the terms while a later span answers the question.
+    if (c > bestScore || (c === bestScore && s > start)) { bestScore = c; start = s; }
   }
-  let start = best;
   if (start > 0) { const sp = text.indexOf(" ", start); if (sp >= 0 && sp < start + 40) start = sp + 1; }
   let win = text.slice(start, start + size);
-  if (win.length === size) win = win.replace(/\s+\S*$/, "");
+  if (win.length === size) {
+    // Prefer ending at a sentence boundary: cutting mid-clause strands the
+    // reader at a topical cliff, right before the span that answers the question.
+    let extended = false;
+    for (let i = start + size; i < Math.min(text.length, start + size + 140); i++) {
+      const ch = text[i], nx = text[i + 1], nn = text[i + 2];
+      if ((ch === "." || ch === "!" || ch === "?") && (i + 1 >= text.length || ((nx === " " || nx === "\n") && (i + 2 >= text.length || /[A-Z]/.test(nn))))) {
+        win = text.slice(start, i + 1); extended = true; break;
+      }
+    }
+    if (!extended) win = win.replace(/\s+\S*$/, "");
+  }
   return (start > 0 ? "\u2026" : "") + win + (start + win.length < text.length ? "\u2026" : "");
+}
+function excerptVariants(w) {
+  // Cheap suffix variants so singular/plural/inflected forms of a word count
+  // as the same topic word (mirror of the server's _gate_variants).
+  const out = new Set([w]);
+  if (w.length > 3 && !w.endsWith("s")) {
+    out.add(w + "s");
+    if (/(s|x|z|ch|sh)$/.test(w)) out.add(w + "es");
+  }
+  if (w.length > 4 && w.endsWith("ies")) out.add(w.slice(0, -3) + "y");
+  if (w.length > 4 && w.endsWith("es")) out.add(w.slice(0, -2));
+  return out;
 }
 const ICON = {
   clip: "M21 11.5l-8.6 8.6a5 5 0 01-7-7l9-9a3.3 3.3 0 014.7 4.7l-9 9a1.7 1.7 0 01-2.4-2.4l8.3-8.3",
