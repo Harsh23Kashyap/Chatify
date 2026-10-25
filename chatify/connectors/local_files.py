@@ -144,7 +144,7 @@ class LocalFiles:
                                   "id": "%s#%s%d" % (os.path.relpath(path, root), ("page-%d-" % page) if page else "", n), "document": os.path.relpath(path, root), "version": digest, "section": sec_title, "page": page, "ocr": ocr})
                 n += 1
 
-    def search(self, query, k=6, documents=None):
+    def search(self, query, k=6, documents=None, recent=False):
         if hasattr(self, "_lock"):
             with self._lock:
                 self.refresh()

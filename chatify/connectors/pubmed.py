@@ -20,12 +20,16 @@ def _get(path, **params):
 
 
 _STOP = set("a an the and or of to for in on at by with without is are was were be been do does did can could should would will how what which who why when where than then that this these those it its my your our i you we they there their as from about into over under between versus vs better best beat beats compare compared help helps good bad vs. any some more most less not no yes".split())
+# Meta-intent words (recency, genre) are not topical content: PubMed ANDs them literally,
+# so "most recent papers on GLP-1 dosing safety" matched old reviews containing the word
+# "recent" (hosted R2 regression 2026-10-25: 2020/2011 hits for a most-recent question).
+_META = set("recent recently newest latest paper papers finding findings year years month week today current currently".split())
 
 
 def keywords(question):
     """PubMed ANDs every word, so a full question often returns nothing. Keep the content words."""
     words = [w for w in "".join(c if c.isalnum() or c in "-'" else " " for c in question).split()]
-    kept = [w for w in words if w.lower() not in _STOP]
+    kept = [w for w in words if w.lower() not in _STOP and w.lower() not in _META]
     return " ".join(kept) or question
 
 
@@ -33,13 +37,15 @@ class PubMed:
     def __init__(self, block):
         self.id, self.label, self.b = block["id"], block["label"], block
 
-    def search(self, query, k=6):
+    def search(self, query, k=6, recent=False):
         flt = " AND (" + self.b["filter"] + ")" if self.b.get("filter") else ""
         ids = []
         words = keywords(query).split()
+        # A recency question wants the newest matching papers, not the best lexical match.
+        order = "pub date" if recent else "relevance"
         # full keyword set first, then drop the last word until something matches (keep at least 2)
         while not ids and words:
-            ids = json.loads(_get("esearch.fcgi", db="pubmed", term=" ".join(words) + flt, retmax=k, sort="relevance", retmode="json"))["esearchresult"]["idlist"]
+            ids = json.loads(_get("esearch.fcgi", db="pubmed", term=" ".join(words) + flt, retmax=k, sort=order, retmode="json"))["esearchresult"]["idlist"]
             if len(words) <= 2:
                 break
             words = words[:-1]

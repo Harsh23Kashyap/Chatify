@@ -20,7 +20,7 @@ class WebSearch:
             self._errs[pid] = str(e)[:160]
             return pid, []
 
-    def search(self, query, k=6):
+    def search(self, query, k=6, recent=False):
         active = [p for p in self.providers if websearch.has_key(p)]
         if not active:
             raise SetupRequired("Live web search needs an API key for one of its search providers (Tavily, Exa, Firecrawl or Parallel) before it can search here. The app owner can add a key in Settings under Web search.")

@@ -27,7 +27,7 @@ class HttpJson:
     def __init__(self, block):
         self.id, self.label, self.b = block["id"], block["label"], block
 
-    def search(self, query, k=6):
+    def search(self, query, k=6, recent=False):
         url = self.b["url"].replace("{query}", urllib.parse.quote(query)).replace("{k}", str(k))
         headers = {"User-Agent": "chatify/0.1"}
         if self.b.get("header_env"):source_credentials.declared({"sources":[self.b]})

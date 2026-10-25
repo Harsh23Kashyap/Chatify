@@ -32,7 +32,7 @@ class Wikipedia:
         self.id, self.label, self.b = block["id"], block["label"], block
         self.lang = re.sub(r"[^a-z\-]", "", str(block.get("lang", "en")).lower()) or "en"
 
-    def search(self, query, k=6):
+    def search(self, query, k=6, recent=False):
         q = urllib.parse.urlencode({"action": "query", "generator": "search", "gsrsearch": query, "gsrlimit": k, "prop": "extracts",
                                     "exintro": 1, "explaintext": 1, "exlimit": "max", "format": "json", "formatversion": 2, "redirects": 1})
         data = _get("https://%s.wikipedia.org/w/api.php?%s" % (self.lang, q))
@@ -53,8 +53,10 @@ class Crossref:
     def __init__(self, block):
         self.id, self.label, self.b = block["id"], block["label"], block
 
-    def search(self, query, k=6):
+    def search(self, query, k=6, recent=False):
         args = {"query": query, "rows": k, "select": "DOI,title,abstract,URL,issued,container-title,author"}
+        if recent:
+            args["sort"], args["order"] = "published", "desc"
         if self.b.get("mailto"):
             args["mailto"] = str(self.b["mailto"])[:200]
         data = _get("https://api.crossref.org/works?" + urllib.parse.urlencode(args))
@@ -97,8 +99,10 @@ class OpenAlex:
     def __init__(self, block):
         self.id, self.label, self.b = block["id"], block["label"], block
 
-    def search(self, query, k=6):
+    def search(self, query, k=6, recent=False):
         args = {"search": re.sub(r"[?*]", " ", query).strip(), "per-page": k, "select": "id,title,publication_year,abstract_inverted_index,doi,authorships,primary_location"}
+        if recent:
+            args["sort"] = "publication_date:desc"
         from .. import secrets
         key = secrets.saved("catalog:openalex") or os.environ.get("OPENALEX_API_KEY", "")
         if not key:

@@ -7,7 +7,7 @@ question -> (1) resolve follow-up into a standalone question using memory
          -> (5) check citations, build a claim-to-evidence ledger
          -> (6) store the turn under a conversation and refresh its summary
 """
-import collections, math, re, time, json, hashlib
+import collections, inspect, math, re, time, json, hashlib
 from concurrent.futures import ThreadPoolExecutor
 from . import permissions, stage_contracts, generator_design
 from . import providers, prompts as promptmod
@@ -397,6 +397,18 @@ _NO_KEY_WHY = ("This app has no API key saved yet, so it cannot answer with the 
                "Until then this is a source preview, not a model answer: the most relevant passages from your sources.")
 
 
+
+_ACCEPTS_RECENT = {}
+def _accepts_recent(conn):
+    """Third-party connectors predate the recency hint; only pass it to ones that accept it."""
+    t = type(conn)
+    if t not in _ACCEPTS_RECENT:
+        try:
+            _ACCEPTS_RECENT[t] = "recent" in inspect.signature(conn.search).parameters
+        except (TypeError, ValueError):
+            _ACCEPTS_RECENT[t] = False
+    return _ACCEPTS_RECENT[t]
+
 class Engine:
     def __init__(self, cfg, store, provider=None, connectors=None):
         self.cfg, self.store = cfg, store
@@ -562,6 +574,7 @@ class Engine:
         found, errors, seen = list(extra), dict(refresh_errors), set()
         weights = {s["id"]: float(s.get("weight", 1.0)) for s in self.cfg["sources"]}
         qs = self.queries(question)
+        recent = bool(self._RECENCY.search(question))
 
         def run(sid):
             out = []
@@ -572,7 +585,10 @@ class Engine:
                     conn=self.connectors[sid]
                     docs=permissions.documents(self.cfg,owner,sid,conn)
                     if scope and scope.get("document"): docs=[scope["document"]] if docs is None or scope["document"] in docs else []
-                    hit=conn.search(qq,k,documents=docs) if docs is not None else conn.search(qq,k)
+                    kw={}
+                    if docs is not None: kw["documents"]=docs
+                    if recent and _accepts_recent(conn): kw["recent"]=True
+                    hit=conn.search(qq,k,**kw)
                     if not scope and not permissions.restricted(self.cfg): self._disk_put(ck, hit, sid)
                 out += hit
             return sid, out
@@ -619,7 +635,7 @@ class Engine:
             # Fall, sharing more question vocabulary, trailed at [3]).
             found.sort(key=lambda e: -e["score"])
         found = found[:k]
-        if self._RECENCY.search(question):
+        if recent:
             # A recency question ("most recent papers on X") is mis-served by an
             # oldest-first list even when every passage is on-topic (hosted R2
             # 2026-10-25: 2023 combo trial led a "most recent" answer ahead of a

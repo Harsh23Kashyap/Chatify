@@ -16,7 +16,7 @@ Path(sys.argv[3]).write_text(json.dumps(x))
 '''
 class BoundedPlugin:
  def __init__(self,block,base):self.id=block['id'];self.label=block['label'];self.entry=block['entry'];self.base=os.path.abspath(base);self.key_env=block.get("api_key_env", "")
- def search(self,q,k):
+ def search(self,q,k,recent=False):
   from .base import Evidence
   k=max(1,min(int(k),50))
   with tempfile.TemporaryDirectory(prefix='chatify-plugin-') as folder:

@@ -10,11 +10,12 @@ class Arxiv:
     def __init__(self, block):
         self.id, self.label, self.b = block["id"], block["label"], block
 
-    def search(self, query, k=6):
+    def search(self, query, k=6, recent=False):
         q = "all:" + urllib.parse.quote(query)
         if self.b.get("category"):
             q += "+AND+cat:" + urllib.parse.quote(self.b["category"])
-        url = "https://export.arxiv.org/api/query?search_query=%s&max_results=%d&sortBy=relevance" % (q, k)
+        order = "sortBy=submittedDate&sortOrder=descending" if recent else "sortBy=relevance"
+        url = "https://export.arxiv.org/api/query?search_query=%s&max_results=%d&%s" % (q, k, order)
         for attempt in range(3):
             try:
                 with urllib.request.urlopen(url, timeout=25) as r:
