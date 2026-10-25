@@ -22,6 +22,9 @@ def serve():
   s.add_turn(c,t,'हिंदी में उत्तर','हिंदी में उत्तर','स्रोत के अनुसार नमस्ते [1]।',evidence,[],'standard')
   c=s.new_chat(owner,'Navigation fixture');t=s.new_topic(owner,'Navigation fixture')
   for i in range(6):s.add_turn(c,t,'Navigation question '+str(i+1),'Navigation question '+str(i+1),('Long fixture paragraph for scroll navigation. '*12+'\n')*6,evidence,[],'standard')
+  c=s.new_chat(owner,'Cedar fixture');t=s.new_topic(owner,'Cedar fixture')
+  s.add_upload(owner,'Fixture A','Cedar accepts ZIP and PDF files. Cedar files are validated on upload. Rowan maintains Cedar.')
+  s.add_turn(c,t,'Which files does Cedar accept?','Which files does Cedar accept?','Cedar accepts ZIP files [1].',[{'n':1,'title':'Fixture A','source':'Feed','url':'https://example.org/cedar','year':'2026'}],[],'standard')
   c=s.new_chat(owner,'Verified count sample');t=s.new_topic(owner,'Sample headlines')
   answer='Retrieved headline count by source (this sample only).\n\n| Source | Headline count | Citations |\n| --- | --- | --- |\n| Feed | 2 | [1] [2] |\n| Other | 1 | [3] |'
   s.add_turn(c,t,'Chart headline count by source','Chart headline count by source',answer,evidence,[],'standard')

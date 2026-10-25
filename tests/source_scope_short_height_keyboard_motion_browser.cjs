@@ -1,7 +1,7 @@
 const{chromium}=require(process.env.PLAYWRIGHT_MODULE||'playwright'),assert=require('node:assert/strict');
 (async()=>{const b=await chromium.launch({executablePath:'/usr/bin/google-chrome',args:['--no-sandbox']});
 for(const width of[320,1280])for(const reducedMotion of['reduce','no-preference']){
-const p=await b.newPage({viewport:{width,height:400},reducedMotion});await p.addInitScript(()=>localStorage.setItem('cc_tour','1'));const docs=Array.from({length:80},(_,i)=>`Document ${String(i+1).padStart(2,'0')}: ${'Long reference label '.repeat(8)}`);
+const p=await b.newPage({viewport:{width,height:400},reducedMotion});await p.addInitScript(()=>localStorage.setItem('cc_tour','1'));const docs=Array.from({length:80},(_,i)=>`Document ${String(i+1).padStart(2,'0')}: ${'Long reference label '.repeat(60)}`);
 await p.route('**/api/scopes',r=>r.fulfill({json:[{source:'fixture',label:'Fixture collection',documents:docs}]}));
 await p.goto(process.env.CHATIFY_TEST_URL+'/');await p.locator('.playground-action').first().waitFor();await p.evaluate(()=>{const b=document.querySelector('#scopeBtn');if(b.offsetWidth>0){b.focus();return}const t=document.querySelector('#toolsToggle');t.focus();t.click();document.querySelector('#toolsScope').focus()});await p.keyboard.press('Enter');const d=p.getByRole('dialog',{name:'Choose source scope',exact:true});await d.waitFor();
 const last=d.getByRole('button',{name:docs[79],exact:true});await last.focus();await p.keyboard.press('Tab');const done=d.getByRole('button',{name:'Done',exact:true});assert(await done.evaluate(n=>n===document.activeElement));
