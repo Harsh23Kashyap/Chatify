@@ -440,6 +440,7 @@ function focusBack(...candidates) {
 }
 async function scopeDialog() {
  const origin=document.activeElement,trigger=$("#scopeBtn");if(trigger.dataset.running==="true")return;trigger.dataset.running="true";trigger.setAttribute("aria-busy","true");const original=trigger.textContent,originalMinWidth=trigger.style.minWidth;trigger.style.minWidth=trigger.getBoundingClientRect().width+"px";trigger.textContent="Loading...";$("#scopeError").hidden=true;
+ const altTrigger=$("#toolsToggle"),altOriginal=altTrigger?.textContent;if(altTrigger&&trigger.offsetWidth===0){altTrigger.dataset.running="true";altTrigger.setAttribute("aria-busy","true");altTrigger.textContent="Loading...";}
  try {
   const rows=await api("/api/scopes");const dialog=el("dialog",{class:"reading-dialog scope-dialog","aria-label":"Choose source scope"});
   dialog.append(el("header",{class:"reading-head"},el("h2",{text:"Choose source scope"})));
@@ -452,7 +453,7 @@ async function scopeDialog() {
   if (!rows.length) options.append(el("p",{class:"scope-empty",role:"status",text:"No configured sources"}));
   dialog.append(options,el("footer",{},el("button",{class:"reading-done",onclick:()=>dialog.close()},"Done")));
   dialog.addEventListener("close",()=>{dialog.remove();focusBack(origin,trigger,$("#toolsToggle"),$("#q"))});document.body.append(dialog);dialog.showModal();
- } catch(e){const error=$("#scopeError");error.textContent="Could not load sources: "+e.message+". Try Source scope again.";error.hidden=false}finally{trigger.dataset.running="false";trigger.removeAttribute("aria-busy");trigger.textContent=original;trigger.style.minWidth=originalMinWidth}
+ } catch(e){const error=$("#scopeError");error.textContent="Could not load sources: "+e.message+". Try Source scope again.";error.hidden=false}finally{trigger.dataset.running="false";trigger.removeAttribute("aria-busy");trigger.textContent=original;trigger.style.minWidth=originalMinWidth;if(altTrigger){altTrigger.dataset.running="false";altTrigger.removeAttribute("aria-busy");altTrigger.textContent=altOriginal}}
 }
 async function loadSuggestions() {
   if (PREVIEW) return;
@@ -810,6 +811,7 @@ async function init() {
   $("#q").addEventListener("keydown",e=>{if((e.ctrlKey||e.metaKey)&&e.key==="Enter"){e.preventDefault();send()}});
   $("#actionsBtn").onclick=async()=>{
    const trigger=$("#actionsBtn");if(trigger.dataset.running==="true")return;trigger.dataset.running="true";trigger.setAttribute("aria-busy","true");const original=trigger.textContent,originalMinWidth=trigger.style.minWidth;trigger.style.minWidth=trigger.getBoundingClientRect().width+"px";trigger.textContent="Wait...";$("#actionsError").hidden=true;
+   const altTrigger=$("#toolsToggle"),altOriginal=altTrigger?.textContent;if(altTrigger&&trigger.offsetWidth===0){altTrigger.dataset.running="true";altTrigger.setAttribute("aria-busy","true");altTrigger.textContent="Wait...";}
    try {
     const catalog=await api('/api/actions');const dialog=el('dialog',{class:'reading-dialog action-dialog','aria-label':'Review an action'});
     dialog.append(el('header',{class:'reading-head'},el('h2',{text:'Review an action'})));
@@ -838,7 +840,7 @@ async function init() {
     }},tool.label));
     if(!catalog.length)content.append(el('p',{class:'action-empty',role:'status',text:'No actions enabled.'}));
     dialog.append(el('footer',{},el('button',{class:'chip',onclick:()=>dialog.close()},'Close')));dialog.addEventListener('close',()=>{dialog.remove();focusBack($('#actionsBtn'),$('#toolsToggle'),$('#q'))});document.body.append(dialog);dialog.showModal();
-   }catch(err){const error=$('#actionsError');error.textContent='Could not load actions: '+err.message+'. Try Actions again.';error.hidden=false}finally{trigger.dataset.running='false';trigger.removeAttribute('aria-busy');trigger.textContent=original;trigger.style.minWidth=originalMinWidth}
+   }catch(err){const error=$('#actionsError');error.textContent='Could not load actions: '+err.message+'. Try Actions again.';error.hidden=false}finally{trigger.dataset.running='false';trigger.removeAttribute('aria-busy');trigger.textContent=original;trigger.style.minWidth=originalMinWidth;if(altTrigger){altTrigger.dataset.running='false';altTrigger.removeAttribute('aria-busy');altTrigger.textContent=altOriginal}}
   };
   $("#hint").textContent = "Answers cite their sources. Check important facts.";
   $("#q").addEventListener("input", autosize);
