@@ -213,8 +213,13 @@ def _excerpt_window(text, terms, size=320):
     (live demo 2026-10-25: the uploaded notes' hands/teeth section never showed
     in the displayed excerpt for a hands/teeth question)."""
     low = text.lower()
-    hits = []
+    # Rarity-weighted hits: a term repeated all over the passage ("diffusion",
+    # "models" in notes about diffusion models) must not outvote the few
+    # distinctive hits ("hands", "teeth", "malformed") that actually answer the
+    # question - the same discriminating-word principle as the candidate gate.
+    positions = {}
     for w in set(terms):
+        ps = []
         for v in _gate_variants(w):
             start = 0
             while True:
@@ -222,14 +227,17 @@ def _excerpt_window(text, terms, size=320):
                 if j < 0:
                     break
                 if (j == 0 or not low[j - 1].isalnum()) and (j + len(v) >= len(low) or not low[j + len(v)].isalnum()):
-                    hits.append(j)
+                    ps.append(j)
                 start = j + 1
-    if not hits:
+        if ps:
+            positions[w] = ps
+    if not positions:
         return text[:size].rsplit(" ", 1)[0] + "..."
-    best_start, best_count = 0, -1
-    for h in hits:
+    hits = [(p, 1.0 / len(ps)) for ps in positions.values() for p in ps]
+    best_start, best_count = 0, -1.0
+    for h, _ in hits:
         s = max(0, h - size // 3)
-        c = sum(1 for x in hits if s <= x <= s + size)
+        c = sum(wt for x, wt in hits if s <= x <= s + size)
         if c > best_count:
             best_start, best_count = s, c
     start = best_start

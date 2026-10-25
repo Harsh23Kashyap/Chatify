@@ -88,6 +88,21 @@ class FallbackWording(unittest.TestCase):
         self.assertNotIn("Mode collapse in diffusion models.", a.split("\n")[-1][:60])
         self.assertIn("...", a)
 
+    def test_excerpt_window_prefers_rare_distinctive_terms(self):
+        # Local R1 regression 2026-10-25: raw hit counts let ubiquitous terms
+        # ("diffusion", "models" - repeated across the whole document) outvote
+        # the single distinctive cluster ("hands", "teeth", "malformed"), so the
+        # displayed window opened on the document head again.
+        text = (
+            "Diffusion models and diffusion sampling. Diffusion models fail when diffusion training is wrong. "
+            "Mode collapse in diffusion models: the model loses diversity. "
+            + ("More diffusion models discussion of training dynamics and loss curves. " * 6)
+            + "Hands and fine structure: human hands, teeth and text remain hard, so fine anatomy emerges malformed. "
+            + ("Trailing notes on exposure bias. " * 4))
+        a = Engine.fallback_answer([{"n": 1, "text": text}], question="Why do diffusion models generate malformed hands and teeth?")
+        self.assertIn("hands, teeth and text remain hard", a)
+        self.assertNotIn("Diffusion models and diffusion sampling.", a.split("- ", 1)[1][:60])
+
     def test_excerpt_window_without_match_keeps_head(self):
         text = "Unrelated content. " * 40
         a = Engine.fallback_answer([{"n": 1, "text": text}], question="What is photosynthesis?")
