@@ -355,3 +355,40 @@ class FreshnessQualification(unittest.TestCase):
     def test_recency_without_dates_says_so(self):
         a = Engine.fallback_answer([{"n": 1, "text": "A passage."}], question="What is the current best treatment?")
         self.assertIn("show no dates", a)
+
+
+class DiscriminatingWordGuards(unittest.TestCase):
+    """The ubiquitous-only drop must never exclude legitimate passages when the
+    candidate set is too small for document frequency to mean anything, or when
+    a symptom-style question has a single distinctive word."""
+
+    def test_two_candidates_rule_inert(self):
+        q = DiscriminatingWordGate.Q
+        generic = DiscriminatingWordGate.GENERIC
+        resist = DiscriminatingWordGate.RESIST
+        out = relevance_gate(q, [generic, resist])
+        # df over two candidates is noise: the generic outcomes paper keeps its
+        # floor-passing place next to the on-question one.
+        self.assertEqual({e["title"] for e in out}, {generic["title"], resist["title"]})
+
+    def test_symptom_query_single_distinctive_word_keeps_common_word_passage(self):
+        q = "What causes fever and headache in children?"
+        peds = ev(1, "Fever in children", "Fever and headache in children are most often caused by viral infections; serious causes are rare.")
+        migraine = ev(2, "Migraine overview", "Migraine is a neurological disease characterized by recurrent headache attacks.")
+        vaccine = ev(3, "Vaccine schedule", "The routine immunization schedule for children and adolescents.")
+        out = relevance_gate(q, [migraine, vaccine, peds])
+        # Only "fever" is discriminating here; with fewer than two covered
+        # discriminating words the rule stays inert and the best passage -
+        # matching only domain-common words - correctly survives and leads.
+        self.assertEqual([e["title"] for e in out], ["Fever in children"])
+
+    def test_rule_only_drops_when_better_coverage_exists(self):
+        # A common-word-only passage is dropped only when at least two
+        # discriminating question words are actually covered by other
+        # candidates - never when it is the best available evidence.
+        q = DiscriminatingWordGate.Q
+        a = ev(5, "CAR-T cell therapy in lymphoma: one", "CAR-T cell therapy in lymphoma, part one.")
+        b = ev(6, "CAR-T cell therapy in lymphoma: two", "CAR-T cell therapy in lymphoma, part two.")
+        c = ev(7, "CAR-T cell therapy in lymphoma: three", "CAR-T cell therapy in lymphoma, part three.")
+        out = relevance_gate(q, [a, b, c])
+        self.assertEqual(len(out), 3)
