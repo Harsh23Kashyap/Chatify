@@ -515,7 +515,7 @@ def make_handler(cfg, engine):
                                 if path.is_symlink() or (path.read_text() if path.exists() else None)!=expected:raise ValueError('Saved setup changed. Review and save again before using it')
                             from .portable import bundle
                             clean['_dir']=cfg.get('_dir',os.getcwd())
-                            payload,_=bundle(clean,theme_value=clean.get('appearance'),prompt_value=clean.get('pipeline_prompts'),include_keys=True)
+                            payload,_=bundle(clean,theme_value=clean.get('appearance'),prompt_value=clean.get('pipeline_prompts'),include_keys=True,include_docs=not nerdloadmod._hosted())
                             reviewed=loader.review('built-app.zip',base64.b64encode(payload).decode())
                             return self._send(200,loader.load(reviewed['token'],owner=o))
                     except Exception as e:
@@ -565,7 +565,7 @@ def make_handler(cfg, engine):
                 theme_value=json.loads((folder/'theme.json').read_text()) if (folder/'theme.json').exists() else None
                 prompt_value=json.loads((folder/'prompts.json').read_text()) if (folder/'prompts.json').exists() else None
                 from .portable import bundle
-                payload,_=bundle(clean,theme_value=theme_value,prompt_value=prompt_value,include_keys=True)
+                payload,_=bundle(clean,theme_value=theme_value,prompt_value=prompt_value,include_keys=True,include_docs=not nerdloadmod._hosted())
                 reviewed=loader.review('restored-version.zip',base64.b64encode(payload).decode())
                 launched=loader.load(reviewed['token'],owner=o)
                 return self._send(200,{**result,'workspace':launched,'restart_required':True,'message':'Restored version is running as a separate preview workspace. Restart this app to make the restored version its own configuration.'})

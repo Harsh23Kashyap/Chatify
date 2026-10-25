@@ -47,8 +47,15 @@ def _safe_doc(p, root):
     return not any(x.startswith('.') or x.lower() in PRIVATE for x in parts) and not any(
         re.search(r'(secret|credential|password|token|api[_-]?key)', x, re.I) for x in parts)
 
-def bundle(cfg, theme_value=None, prompt_value=None,include_keys=False):
-    """Returns ZIP bytes and a manifest; only configured local evidence is copied."""
+def bundle(cfg, theme_value=None, prompt_value=None,include_keys=False, include_docs=True):
+    """Returns ZIP bytes and a manifest; only configured local evidence is copied.
+
+    include_docs=False bundles every local_files source as an empty folder: on a
+    hosted multi-visitor demo a launched workspace's relative source paths resolve
+    against the SHARED app's directory, so copying them hands each visitor the
+    hosting app's own documents (live demo 2026-10-25: guest workspaces answered
+    domain questions with the host's seeded Chatify guide). Guests add their own
+    documents inside the running workspace instead."""
     clean = schema.validate({k: copy.deepcopy(v) for k, v in cfg.items() if k in set(schema.DEFAULTS)|{'appearance','pipeline_prompts','helper_drafts','api_suggestions'}})
     if state_folder := _state_folder(cfg):
         budget_path = state_folder / 'budget.json'
@@ -61,8 +68,10 @@ def bundle(cfg, theme_value=None, prompt_value=None,include_keys=False):
     clean['storage'] = {'path': 'data/chatify.db'}
     clean['server']['host'] = '127.0.0.1'
     files = {}
-    warnings = ['Local source documents are included. Review them before sharing.',
-                'Keys, accounts, conversations, uploads, caches and saved looks are not included.',
+    warnings = (['Local source documents are included. Review them before sharing.']
+                if include_docs else
+                ['Local source documents are NOT included; add documents inside the workspace.'])
+    warnings += ['Keys, accounts, conversations, uploads, caches and saved looks are not included.',
                 'Remote sources, fonts and background URLs still require their original services.']
     used = 0
     for i, source in enumerate(clean['sources']):
@@ -79,6 +88,12 @@ def bundle(cfg, theme_value=None, prompt_value=None,include_keys=False):
             continue
         root = Path(source.get('path', 'docs'))
         root = root if root.is_absolute() else base / root
+        if not include_docs:
+            # Hosted workspace launch: keep the source runnable but empty; never
+            # copy the shared app's documents into a guest workspace bundle.
+            source['path'] = 'assets/source-%d' % (i + 1)
+            files[source['path'] + '/'] = b''
+            continue
         if root.is_symlink() or not root.is_dir() or root.resolve() != root.absolute():
             raise ExportError('Local source %s must be an existing, non-symlink directory.' % source['id'])
         root = root.absolute()

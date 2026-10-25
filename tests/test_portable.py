@@ -30,6 +30,26 @@ class PortableTests(unittest.TestCase):
         st = Store(':memory:'); e = Engine(cfg,st)
         res = e.ask('local',st.new_chat('local'),'What does Chatify provide?')
         self.assertTrue(res['evidence'])
+    def test_include_docs_false_bundles_empty_source(self):
+        # Hosted guest workspace launch (live demo 2026-10-25): a launched
+        # workspace's relative local_files path resolves against the SHARED
+        # app's directory, so copying it hands each guest the hosting app's own
+        # guide documents. include_docs=False keeps the source runnable but empty.
+        data, m = bundle(self.cfg, include_docs=False)
+        with zipfile.ZipFile(io.BytesIO(data)) as z:
+            names = set(z.namelist())
+            self.assertNotIn('assets/source-1/guide.md', names)
+            self.assertNotIn(b'citation-backed answers', b''.join(z.read(n) for n in z.namelist() if not n.endswith('/')))
+            z.extractall(self.root/'guest')
+        import yaml
+        cfg = yaml.safe_load((self.root/'guest'/'app.yaml').read_text())
+        src0 = cfg['sources'][0]
+        self.assertEqual(src0['type'], 'local_files')
+        self.assertEqual(src0['path'], 'assets/source-1')
+        # The extracted source folder is empty: the guest adds documents inside
+        # the running workspace, none are inherited from the host.
+        docs = list((self.root/'guest'/'assets'/'source-1').rglob('*')) if (self.root/'guest'/'assets'/'source-1').exists() else []
+        self.assertEqual([d for d in docs if d.is_file()], [])
     def test_override_live_settings(self):
         data,_ = bundle(self.cfg, {'txt_title':'Live'}, {'text':{'answer':'Current'}, 'on':{}})
         with zipfile.ZipFile(io.BytesIO(data)) as z:
