@@ -141,6 +141,43 @@ def relevance_gate(question, found):
     return [e for _, e, _ in kept]
 
 
+def _excerpt_window(text, terms, size=320):
+    """A readable excerpt around the densest question-term cluster. Truncating
+    every passage from the chunk head hid the matching span behind the intro
+    (live demo 2026-10-25: the uploaded notes' hands/teeth section never showed
+    in the displayed excerpt for a hands/teeth question)."""
+    low = text.lower()
+    hits = []
+    for w in set(terms):
+        for v in _gate_variants(w):
+            start = 0
+            while True:
+                j = low.find(v, start)
+                if j < 0:
+                    break
+                if (j == 0 or not low[j - 1].isalnum()) and (j + len(v) >= len(low) or not low[j + len(v)].isalnum()):
+                    hits.append(j)
+                start = j + 1
+    if not hits:
+        return text[:size].rsplit(" ", 1)[0] + "..."
+    best_start, best_count = 0, -1
+    for h in hits:
+        s = max(0, h - size // 3)
+        c = sum(1 for x in hits if s <= x <= s + size)
+        if c > best_count:
+            best_start, best_count = s, c
+    start = best_start
+    if start > 0:
+        sp = text.find(" ", start)
+        if 0 <= sp < start + 40:
+            start = sp + 1
+    window = text[start:start + size]
+    if len(window) == size:
+        window = window.rsplit(" ", 1)[0]
+    return ("..." if start > 0 else "") + window + ("..." if start + len(window) < len(text) else "")
+
+
+
 _NO_KEY_WHY = ("This app has no API key saved yet, so it cannot answer with the AI model. "
                "The app owner can add a key on the Configuration page. "
                "Until then this is a source preview, not a model answer: the most relevant passages from your sources.")
@@ -515,7 +552,7 @@ class Engine:
         mid_thought = bool(re.match(r"\s*(additionally|moreover|furthermore|in addition|also|secondly|thirdly|finally|however|but|and|so)\b", new, re.I))
         if not ev2 or len(new.split()) < 6 or new.count(chr(34)) % 2 or gutted or mid_thought:
             keep = full or evidence  # never promise passages and show none: fall back to the full retrieval set
-            new = self.fallback_answer(keep, why="The answer could not be fully checked. Here are the cited source passages instead.")
+            new = self.fallback_answer(keep, why="The answer could not be fully checked. Here are the cited source passages instead.", question=asked)
             new, ev2 = self.tidy(new,keep)
         return new, ev2, self.ledger(new, ev2, asked)
 
@@ -729,12 +766,17 @@ class Engine:
             for sid, items in counts.items())
 
     @staticmethod
-    def fallback_answer(evidence, why=""):
+    def fallback_answer(evidence, why="", question=""):
         """No model answer: show the best passages as a clearly labeled source preview, never as a model answer."""
         lines = [why or "The AI model could not be reached, so this is a source preview, not a model answer: the most relevant passages from your sources."]
         for e in (evidence or [])[:3]:
             t = " ".join(str(e.get("text") or "").split())
             if len(t) > 320:
+                if question:
+                    terms = [w for w in re.findall(r"[a-z0-9]{3,}", question.lower()) if not w.isdigit() and w not in _GATE_STOP and w not in _GATE_WEAK]
+                    t = _excerpt_window(t, terms)
+                else:
+                    t = t[:320].rsplit(" ", 1)[0] + "..."
                 t = t[:320].rsplit(" ", 1)[0] + "..."
             lines.append("- " + t + " [" + str(e.get("n")) + "]")
         return "\n\n".join([lines[0], "\n".join(lines[1:])]) if len(lines) > 1 else lines[0]
@@ -829,7 +871,7 @@ class Engine:
                 else:
                     no_key = provider_error is not None and str(provider_error).startswith("No API key yet")
                     model_status = "no_key" if no_key else "unreachable"
-                    fb = self.fallback_answer(evidence, why=_NO_KEY_WHY if no_key else ""); parts.append(fb); yield "token", fb
+                    fb = self.fallback_answer(evidence, why=_NO_KEY_WHY if no_key else "", question=standalone); parts.append(fb); yield "token", fb
             answer = "".join(parts).strip()
             if not degraded:
                 answer = self.revise(answer, evidence)
@@ -844,7 +886,7 @@ class Engine:
             original_evidence=evidence
             answer, evidence = self.tidy(answer, evidence)
             if not evidence and len(answer.split())<12 and not re.search(r"cannot|could not|no (?:data|evidence|publication|dates?)|not (?:provided|available|specified)|insufficient|not establish|unavailable",answer,re.I):
-                answer=self.fallback_answer(original_evidence, why="The answer could not be fully checked. Here are the cited source passages instead.");answer,evidence=self.tidy(answer,original_evidence)
+                answer=self.fallback_answer(original_evidence, why="The answer could not be fully checked. Here are the cited source passages instead.", question=standalone);answer,evidence=self.tidy(answer,original_evidence)
             ledger = self.ledger(answer, evidence, standalone)
             answer, evidence, ledger = self._fix(answer, evidence, ledger, standalone, full=original_evidence)
             note = (self.cfg["prompt"].get("answer_note") or "").strip()
@@ -925,7 +967,7 @@ class Engine:
                         degraded = True
             if degraded:
                 no_key = provider_error is not None and str(provider_error).startswith("No API key yet")
-                answer = self.fallback_answer(evidence, why=_NO_KEY_WHY if no_key else "")
+                answer = self.fallback_answer(evidence, why=_NO_KEY_WHY if no_key else "", question=standalone)
             if not degraded:
                 answer = self.revise(answer, evidence)
             ledger = self.ledger(answer, evidence, standalone)
@@ -933,7 +975,7 @@ class Engine:
                 original_evidence=evidence
                 answer, evidence = self.tidy(answer, evidence)
                 if not evidence and len(answer.split())<12 and not re.search(r"cannot|could not|no (?:data|evidence|publication|dates?)|not (?:provided|available|specified)|insufficient|not establish|unavailable",answer,re.I):
-                    answer=self.fallback_answer(original_evidence, why="The answer could not be fully checked. Here are the cited source passages instead.");answer,evidence=self.tidy(answer,original_evidence)
+                    answer=self.fallback_answer(original_evidence, why="The answer could not be fully checked. Here are the cited source passages instead.", question=standalone);answer,evidence=self.tidy(answer,original_evidence)
                 ledger = self.ledger(answer, evidence, standalone)
                 answer, evidence, ledger = self._fix(answer, evidence, ledger, standalone, full=original_evidence)
                 note = (self.cfg["prompt"].get("answer_note") or "").strip()

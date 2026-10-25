@@ -77,6 +77,27 @@ class FallbackWording(unittest.TestCase):
         self.assertIn("Configuration", a)
         self.assertIn("not a model answer", a)
 
+    def test_excerpt_window_shows_matching_span(self):
+        # Live demo 2026-10-25: head truncation hid the uploaded notes'
+        # hands/teeth span behind the chunk's mode-collapse intro.
+        intro = "Mode collapse in diffusion models. " + ("Filler discussion of training dynamics and loss curves. " * 8)
+        span = "Hands and fine structure: malformed hands and teeth appear when fine detail is under-modeled."
+        text = intro + span + " " + ("Trailing notes on exposure bias. " * 6)
+        a = Engine.fallback_answer([{"n": 1, "text": text}], question="Why do diffusion models generate malformed hands and teeth?")
+        self.assertIn("malformed hands and teeth", a)
+        self.assertNotIn("Mode collapse in diffusion models.", a.split("\n")[-1][:60])
+        self.assertIn("...", a)
+
+    def test_excerpt_window_without_match_keeps_head(self):
+        text = "Unrelated content. " * 40
+        a = Engine.fallback_answer([{"n": 1, "text": text}], question="What is photosynthesis?")
+        self.assertTrue(a.split("- ", 1)[1].startswith("Unrelated content."))
+
+    def test_no_question_keeps_old_truncation(self):
+        text = "A passage. " * 60
+        a = Engine.fallback_answer([{"n": 1, "text": text}])
+        self.assertIn("...", a)
+
     def test_no_key_error_shape(self):
         e = providers.ProviderError("No API key yet. Paste one under Model, Save key, or set the OPENAI_API_KEY environment variable.", 401)
         self.assertTrue(str(e).startswith("No API key yet"))
