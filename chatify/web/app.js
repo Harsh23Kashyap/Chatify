@@ -179,18 +179,18 @@ function toast(msg, actionLabel, action) {
 }
 
 
-function inline(parent, text, evidence) {
+function inline(parent, text, evidence, question) {
   // safe inline markdown: **bold**, `code`, and [n] citations. Everything is text nodes.
   let afterCite = false;
   text.split(/(\*\*[^*]+\*\*|`[^`]+`|\[\d+\])/).forEach((p) => {
     let m; const wasCite = afterCite; afterCite = false;
-    if ((m = p.match(/^\[(\d+)\]$/)) && evidence.some((e) => e.n === +m[1])) { parent.append(el("button", { class: "cite", title: "Show source " + m[1], onclick: (ev) => showSources(evidence, +m[1], ev.currentTarget) }, "[" + m[1] + "]")); afterCite = true; }
+    if ((m = p.match(/^\[(\d+)\]$/)) && evidence.some((e) => e.n === +m[1])) { parent.append(el("button", { class: "cite", title: "Show source " + m[1], onclick: (ev) => showSources(evidence, +m[1], ev.currentTarget, question) }, "[" + m[1] + "]")); afterCite = true; }
     else if (/^\*\*[^*]+\*\*$/.test(p)) parent.append(el("strong", { text: p.slice(2, -2) }));
     else if (/^`[^`]+`$/.test(p)) parent.append(el("code", { text: p.slice(1, -1) }));
     else if (p) parent.append(document.createTextNode((wasCite && /^[.,;:!?)]/.test(p) ? "\u2060" : "") + p));
   });
 }
-function renderAnswer(text, evidence) {
+function renderAnswer(text, evidence, question) {
   const box = el("div", { class: "a" });
   let list = null, listType = null; const lines=text.split(/\n/);
   const cells=tableCells;
@@ -202,14 +202,14 @@ function renderAnswer(text, evidence) {
       wrap.append(cp,pre);box.append(wrap);list=null;continue}
     if(line.includes("|")&&i+1<lines.length&&/^\s*\|?\s*:?-{3,}/.test(lines[i+1])) {
       list=null;const head=cells(line), table=el("table",{class:"answer-table"}), top=el("tr"),body=el("tbody");
-      head.forEach(t=>{const th=el("th",{scope:"col"});inline(th,t,evidence);top.append(th)});
+      head.forEach(t=>{const th=el("th",{scope:"col"});inline(th,t,evidence,question);top.append(th)});
       table.append(el("thead",{},top),body);i++;
-      while(i+1<lines.length&&lines[i+1].includes("|")){const row=cells(lines[++i]);const tr=el("tr");head.forEach((_,n)=>{const td=el("td",{"data-label":head[n]});inline(td,row[n]||"",evidence);tr.append(td)});body.append(tr)}
+      while(i+1<lines.length&&lines[i+1].includes("|")){const row=cells(lines[++i]);const tr=el("tr");head.forEach((_,n)=>{const td=el("td",{"data-label":head[n]});inline(td,row[n]||"",evidence,question);tr.append(td)});body.append(tr)}
       box.append(el("div",{class:"answer-table-wrap",tabindex:"0","aria-label":"Answer table"},table));continue;
     }
     const li=line.match(/^\s*([-*]|\d+[.)])\s+(.*)/),h=line.match(/^#{1,3}\s+(.*)/);
-    if(li){const type=/^\d/.test(li[1])?"ol":"ul";if(!list||listType!==type){list=el(type,type==="ol"?{start:String(parseInt(li[1],10))}:{});listType=type;box.append(list)}const x=el("li");inline(x,li[2],evidence);list.append(x);continue}
-    list=null;if(!line.trim())continue;const p=el(h?"h4":"p");inline(p,h?h[1]:line,evidence);box.append(p);
+    if(li){const type=/^\d/.test(li[1])?"ol":"ul";if(!list||listType!==type){list=el(type,type==="ol"?{start:String(parseInt(li[1],10))}:{});listType=type;box.append(list)}const x=el("li");inline(x,li[2],evidence,question);list.append(x);continue}
+    list=null;if(!line.trim())continue;const p=el(h?"h4":"p");inline(p,h?h[1]:line,evidence,question);box.append(p);
   }
   return box;
 }
@@ -293,9 +293,10 @@ function closeSources() {
   sourceExit = pane.animate([{opacity:1, transform:"translateX(0)"}, {opacity:0, transform:"translateX(12px)"}], {duration:160, easing:"ease-in"});
   sourceExit.onfinish = () => { $("#app").classList.remove("src"); sourceExit = null; };
 }
-function showSources(evidence, hl, trigger) {
+function showSources(evidence, hl, trigger, question) {
   sourceTrigger = trigger || document.activeElement;
-  const terms = [...new Set(((S.turns[S.turns.length - 1] || {}).standalone || "").toLowerCase().match(/[a-z0-9]{4,}/g) || [])].slice(0, 8);
+  const basis = question || (S.turns[S.turns.length - 1] || {}).standalone || "";
+  const terms = [...new Set(basis.toLowerCase().match(/[a-z0-9]{4,}/g) || [])].slice(0, 8);
   const pane = $("#sources");
   if (sourceExit) { sourceExit.onfinish = null; sourceExit.cancel(); sourceExit = null; }
   const opening = !$("#app").classList.contains("src"); pane.replaceChildren();
@@ -307,7 +308,7 @@ function showSources(evidence, hl, trigger) {
     list.replaceChildren(...evidence.filter((e) => !only || e.source === only).map((e) => el("div", { class: "src" + (e.n === hl ? " hl" : "") },
       el("b", { text: e.n + ". " + plainText(e.title) }),
       el("small", { text: [(e.authors || []).slice(0, 3).join(", "), e.year, e.venue, e.document, e.page ? "page " + e.page : e.section, e.version ? "version " + e.version.slice(0, 12) : "", e.ocr ? "OCR text, check original" : ""].filter(Boolean).join(" · ") }),
-      highlight(el("p", {class:e.text ? "source-text" : "source-unavailable"}), e.text ? excerptWindow(plainText(e.text), (S.turns[S.turns.length - 1] || {}).standalone || "", 280) : "Source excerpt unavailable. This saved reference has no text to inspect.", terms),
+      highlight(el("p", {class:e.text ? "source-text" : "source-unavailable"}), e.text ? excerptWindow(plainText(e.text), basis, 280) : "Source excerpt unavailable. This saved reference has no text to inspect.", terms),
       e.url ? el("a", { href: e.url, target: "_blank", rel: "noopener noreferrer", text: "Open source" }) : null)));
   };
   if (types.length > 1) types.forEach((t) => filters.append(el("button", { class: "chip", "aria-pressed":"false", onclick: (ev) => {
@@ -331,7 +332,7 @@ function turnView(t, prev) {
   const nodes = [];
   if (prev && prev.chat !== t.chat) nodes.push(el("div", { class: "divider", text: "Earlier chat" }));
   nodes.push(el("div", { class: "row u" }, avatar("you"), el("div", { class: "bubble ub", text: t.question })));
-  const bub = el("div", { class: "bubble bb" + (t.evidence.length ? "" : " none") }, renderAnswer(t.answer, t.evidence));
+  const bub = el("div", { class: "bubble bb" + (t.evidence.length ? "" : " none") }, renderAnswer(t.answer, t.evidence, t.question));
   if(/\b(chart|graph|plot)\b/i.test(t.question)){const chart=answerChart(t.answer,t.evidence);if(chart)bub.append(chart);}
   const failedSources = Object.entries(t.source_errors || {});
   if (failedSources.length) {
@@ -354,7 +355,7 @@ function turnView(t, prev) {
     bub.append(el("div", { class: "nf-tips" }, tip("Try a different question", () => { $("#q").focus(); }), tip("Use words from your documents", () => { $("#q").focus(); }), tip("See which documents this chat uses", () => { location.href = (window.CC_APP_BASE||"") + "/settings.html"; })));
   }
   const srcLabel = (e) => (S.cfg.sources.find((x) => x.id === e.source) || {}).label || e.source || "";
-  const srcs = !t.evidence.length ? null : (el("div", { class: "srcs" }, el("div", { class: "srcs-h", text: "Evidence for this answer" }), t.evidence.slice(0, 5).map((e) => el("button", { class: "s", title: plainText(e.title), onclick: (ev) => showSources(t.evidence, e.n, ev.currentTarget) }, el("span", { class: "n", text: "[" + e.n + "]" }), el("span", { class: "sx" }, el("span", { class: "st", text: srcLabel(e) ? srcLabel(e) + " / " + plainText(e.title) : plainText(e.title) }), el("span", {class:"source-excerpt",text:e.text ? excerptWindow(plainText(e.text), t.question, 240) : "Source excerpt unavailable"}), el("span", { class: "sm", text: [srcLabel(e), e.year, e.page ? "page " + e.page : e.section, e.ocr ? "OCR text, check original" : ""].filter(Boolean).join(" \u00b7 ") })), el("span", { class: "go", "aria-hidden": "true", text: "\u203a" })))));
+  const srcs = !t.evidence.length ? null : (el("div", { class: "srcs" }, el("div", { class: "srcs-h", text: "Evidence for this answer" }), t.evidence.slice(0, 5).map((e) => el("button", { class: "s", title: plainText(e.title), onclick: (ev) => showSources(t.evidence, e.n, ev.currentTarget, t.question) }, el("span", { class: "n", text: "[" + e.n + "]" }), el("span", { class: "sx" }, el("span", { class: "st", text: srcLabel(e) ? srcLabel(e) + " / " + plainText(e.title) : plainText(e.title) }), el("span", {class:"source-excerpt",text:e.text ? excerptWindow(plainText(e.text), t.question, 240) : "Source excerpt unavailable"}), el("span", { class: "sm", text: [srcLabel(e), e.year, e.page ? "page " + e.page : e.section, e.ocr ? "OCR text, check original" : ""].filter(Boolean).join(" \u00b7 ") })), el("span", { class: "go", "aria-hidden": "true", text: "\u203a" })))));
   nodes.push(el("div", { class: "row" }, avatar("bot"), bub));
   const meta = el("div", { class: "meta" });
   const weak = (t.ledger || []).filter((l) => !l.supported || (l.overlap !== undefined && l.overlap < 0.35));
