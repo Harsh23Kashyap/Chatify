@@ -321,7 +321,8 @@ html[data-motion=none] .side .list .empty{animation:none!important}
 html .side .list .item:hover,html[data-lift=on] .side .list .item:hover{transform:none}
 /* Actions overlay the item end, so titles keep their full width and never move. */
 .side .list .item{min-height:60px;position:relative}
-.side .list .item .t,.side .list .item:hover .t,.side .list .item.on .t,.side .list .item:focus-within .t{max-width:none;min-width:0;flex:1}
+.side .list .item .t,.side .list .item.on .t{max-width:calc(100% - 62px);min-width:0;flex:1}
+.side .list .item:hover .t,.side .list .item:focus-within .t{max-width:calc(100% - 150px);min-width:0;flex:1}
 .side .list .item .acts{position:absolute;right:10px;top:50%;translate:0 -50%;display:flex;flex:none;gap:4px;opacity:0;visibility:hidden;pointer-events:none;transition:opacity 140ms ease-out,visibility 140ms}
 .side .list .item:hover .acts,.side .list .item:focus-within .acts{opacity:1;visibility:visible;pointer-events:auto}
 .side .list .item:hover .t,.side .list .item:focus-within .t{max-width:calc(100% - 150px)}
