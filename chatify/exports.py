@@ -1,10 +1,12 @@
 """Branded multipage PDF and Markdown exports for an answer, plus BibTeX.
 
-The PDF uses bundled Noto Sans, Noto Sans Devanagari, Noto Sans Symbols,
-Noto Sans Symbols 2 and Noto Sans Math fonts (SIL Open Font License 1.1, see
-web/fonts/OFL.txt) with HarfBuzz shaping, so ordinary Unicode
-answer text - including Hindi - exports as itself instead of being folded or
-rejected. Scripts outside the bundled fonts are still rejected honestly.
+The PDF uses bundled Noto Sans, Noto Sans Devanagari, Noto Naskh Arabic,
+Noto Sans Hebrew, Noto Sans Symbols, Noto Sans Symbols 2 and Noto Sans Math
+fonts (SIL Open Font License 1.1, see web/fonts/OFL.txt) with HarfBuzz
+shaping, so ordinary Unicode answer text - including Hindi, Arabic and Hebrew -
+exports as itself instead of being folded or rejected. RTL-dominant paragraphs
+render right-aligned with RTL shaping. Scripts outside the bundled fonts
+(CJK, Thai, ...) are still rejected honestly.
 """
 import os, re, unicodedata
 from fpdf import FPDF
@@ -65,7 +67,7 @@ def _covered_chars():
     if _COVERAGE is None:
         from fontTools.ttLib import TTFont
         cov=set()
-        for name in ('NotoSans-Regular.ttf','NotoSans-Bold.ttf','NotoSansDevanagari-Regular.ttf','NotoSansDevanagari-Bold.ttf','NotoSansSymbols-Regular.ttf','NotoSansSymbols2-Regular.ttf','NotoSansMath-Regular.ttf'):
+        for name in ('NotoSans-Regular.ttf','NotoSans-Bold.ttf','NotoSansDevanagari-Regular.ttf','NotoSansDevanagari-Bold.ttf','NotoNaskhArabic[wght].ttf','NotoSansHebrew[wdth,wght].ttf','NotoSansSymbols-Regular.ttf','NotoSansSymbols2-Regular.ttf','NotoSansMath-Regular.ttf'):
             cov|=set(TTFont(os.path.join(_FONTS,name)).getBestCmap())
         _COVERAGE=cov
     return _COVERAGE
@@ -79,6 +81,21 @@ def _check_representable(blocks):
             if ch in _EXEMPT or unicodedata.combining(ch):continue
             if ord(ch) not in cov:raise ValueError('PDF font cannot represent this text. Download Markdown for full Unicode.') from None
 
+_RTL_STRONG = frozenset(("R", "AL"))
+def _rtl_dominant(text):
+    """Strong-direction vote: a paragraph whose strong characters are mostly
+    Arabic/Hebrew renders right-aligned; the shaper guesses script/direction
+    per run, so only alignment needs the vote here."""
+    rtl = ltr = 0
+    for ch in text:
+        b = unicodedata.bidirectional(ch)
+        if b in _RTL_STRONG:
+            rtl += 1
+        elif b == "L":
+            ltr += 1
+    return rtl > ltr
+
+
 class _AnswerPDF(FPDF):
     def __init__(self,doc_title,accent):
         super().__init__(unit='pt',format='A4')
@@ -88,7 +105,13 @@ class _AnswerPDF(FPDF):
         self.set_auto_page_break(True,82)
         for family,style,filename in [('noto','','NotoSans-Regular.ttf'),('noto','B','NotoSans-Bold.ttf'),('deva','','NotoSansDevanagari-Regular.ttf'),('deva','B','NotoSansDevanagari-Bold.ttf'),('symbols','','NotoSansSymbols-Regular.ttf'),('symbols2','','NotoSansSymbols2-Regular.ttf'),('math','','NotoSansMath-Regular.ttf')]:
             self.add_font(family,style,os.path.join(_FONTS,filename))
-        self.set_fallback_fonts(['deva','symbols','symbols2','math'])
+        # Arabic and Hebrew ship as variable fonts (leaner than static families);
+        # instantiate regular/bold at load (fpdf2 variations=).
+        self.add_font('arab','',os.path.join(_FONTS,'NotoNaskhArabic[wght].ttf'),variations={'wght':400})
+        self.add_font('arab','B',os.path.join(_FONTS,'NotoNaskhArabic[wght].ttf'),variations={'wght':700})
+        self.add_font('hebr','',os.path.join(_FONTS,'NotoSansHebrew[wdth,wght].ttf'),variations={'wght':400,'wdth':100})
+        self.add_font('hebr','B',os.path.join(_FONTS,'NotoSansHebrew[wdth,wght].ttf'),variations={'wght':700,'wdth':100})
+        self.set_fallback_fonts(['deva','arab','hebr','symbols','symbols2','math'])
         self.set_text_shaping(True)
         self.set_title(doc_title)
     def header(self):
@@ -182,6 +205,7 @@ def pdf_bytes(title, turn, accent="#173f35", tagline="", sources=None):
             pdf.set_font('noto',style,size)
             if need<=pdf.page_break_trigger-50 and pdf.get_y()+need>pdf.page_break_trigger:pdf.add_page()
         # Left-aligned text avoids the wide inter-word gaps justification opens
-        # in narrow answer bullets (R5 PDF review 2026-10-25).
-        pdf.multi_cell(0,pitch,text,new_x='LMARGIN',new_y='NEXT',align='L')
+        # in narrow answer bullets (R5 PDF review 2026-10-25). RTL-dominant
+        # paragraphs anchor right instead; the shaper reorders the runs.
+        pdf.multi_cell(0,pitch,text,new_x='LMARGIN',new_y='NEXT',align='R' if _rtl_dominant(text) else 'L')
     return bytes(pdf.output())
