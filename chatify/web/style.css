@@ -1054,8 +1054,6 @@ pre.codeblock code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monosp
 /* Sidebar titles read in both themes; actions appear on hover/focus, not as permanent columns. */
 .side .list .item{color:var(--ink)}
 .side .list .item.on{color:var(--brand)}
-.side .item .acts{display:none}
-.side .item:hover .acts,.side .item:focus-within .acts,.side .item.on .acts{display:flex}
 
 /* Busy skeleton keeps a visible delta from the page in both themes. */
 .answer-sk span{background:color-mix(in srgb,var(--soft) 80%,var(--ink) 20%)}
