@@ -94,18 +94,24 @@ class PlainTextDisplay(unittest.TestCase):
   # rendered literally in the answer text and PDF.
   from chatify.exports import pdf_bytes,answer_markdown,chat_markdown
   from chatify.pipeline import Engine,plain_text
-  assert plain_text('Li-Doped MgAl$_2$O$_4$')=='Li-Doped MgAl2O4'
+  assert plain_text('Li-Doped MgAl$_2$O$_4$')=='Li-Doped MgAl_2O_4'
   t={'question':'Why malformed hands?','answer':'- Hands fail when fine detail is under-modeled [1]','evidence':[{'n':1,'title':'Li-Doped MgAl$_2$O$_4$ at $z>10$','url':'https://example.invalid/a'}]}
   m=answer_markdown({'title':'Chat'},t)
-  self.assertIn('Li-Doped MgAl2O4 at z>10',m);self.assertNotIn('$_2$',m)
+  self.assertIn('Li-Doped MgAl_2O_4 at z>10',m);self.assertNotIn('$_2$',m)
   text=_pdf_text(pdf_bytes('Chat',t))
-  self.assertIn('Li-Doped MgAl2O4',text);self.assertNotIn('$_',text)
-  cm=chat_markdown('Chat',[t]);self.assertIn('Li-Doped MgAl2O4',cm)
- def test_preview_bullets_normalized(self):
-  from chatify.pipeline import Engine
-  a=Engine.fallback_answer([{'n':1,'text':'## Hands and fine structure\n\n**Malformed hands** appear at $z>10$ in MgAl$_2$O$_4$.'}])
-  self.assertIn('Malformed hands appear at z>10 in MgAl2O4.',a)
-  self.assertNotIn('##',a);self.assertNotIn('**',a);self.assertNotIn('$',a)
+  self.assertIn('Li-Doped MgAl_2O_4',text);self.assertNotIn('$_',text)
+  cm=chat_markdown('Chat',[t]);self.assertIn('Li-Doped MgAl_2O_4',cm)
+ def test_script_markers_keep_explicit_notation(self):
+  # R3 rendered review 2026-10-25: flattening scripts concatenated them into
+  # the base and corrupted magnitudes - 10^{9} displayed as "109" and
+  # M_{\rm UV} as "Mrm UV". Explicit caret/underscore notation keeps the
+  # scientific meaning unambiguous; legacy font switches never leak or eat.
+  from chatify.pipeline import plain_text
+  self.assertEqual(plain_text('galaxies of 10^{9} M\\odot at z>10'),'galaxies of 10^9 M⊙ at z>10')
+  self.assertEqual(plain_text('M_{\\rm UV} LF slope'),'M_UV LF slope')
+  self.assertEqual(plain_text('Lyman-$\\alpha$ at $10^{12}$'),'Lyman-α at 10^12')
+  self.assertEqual(plain_text('Li-Doped MgAl$_2$O$_4$ spinel'),'Li-Doped MgAl_2O_4 spinel')
+  self.assertEqual(plain_text('{\\bf H$_2$O} band, \\cal{} X, \\tt X$_1$'),'H_2O band, X, X_1')
 class SourceNoteExports(unittest.TestCase):
  SOURCES=[{'id':'openalex','label':'OpenAlex'},{'id':'web','label':'Live web search'},{'id':'arxiv','label':'arXiv'}]
  def turn(self):

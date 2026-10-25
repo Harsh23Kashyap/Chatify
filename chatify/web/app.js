@@ -33,6 +33,9 @@ function plainText(t) {
   t = String(t || "");
   t = t.replace(/\$\$([^$]+)\$\$/g, (m, c) => " " + c.trim() + " ");
   t = t.replace(/\$([^$\n]+)\$/g, (m, c) => c);
+  // Bare legacy font switches carry no content: drop them ("M_{\rm UV}" ->
+  // "M_{UV}", never "Mrm UV"). Mirrors the server plain_text.
+  t = t.replace(/\\(?:rm|bf|it|sf|tt|cal)(?![A-Za-z])/g, "");
   for (const name of ["mathrm", "mathbf", "mathit", "mathsf", "mathtt", "text", "textbf", "textit", "boldsymbol"])
     t = t.replace(new RegExp("\\\\" + name + "\\{([^{}]*)\\}", "g"), (m, c) => c);
   t = t.replace(LATEX_KNOWN, (m, n) => LATEX_SYMBOLS[n]);
@@ -41,7 +44,11 @@ function plainText(t) {
     return k ? LATEX_SYMBOLS[k] + run.slice(k.length) : run;
   });
   t = t.replace(/\\[,;:!]/g, " ").replace(/\\\s+/g, " ");
-  t = t.replace(/[_^]\{([^{}]*)\}/g, (m, c) => c).replace(/[_^](\S)/g, (m, c) => c);
+  // Scripts keep an explicit marker: flattening concatenated the script into
+  // the base and corrupted magnitudes (10^{9} -> "109"). 10^{9} -> 10^9,
+  // MgAl$_2$O$_4$ -> MgAl_2O_4. Mirrors the server plain_text.
+  t = t.replace(/_\{([^{}]*)\}/g, (m, c) => "_" + c.trim()).replace(/\^\{([^{}]*)\}/g, (m, c) => "^" + c.trim());
+  t = t.replace(/_(\S)/g, (m, c) => "_" + c).replace(/\^(\S)/g, (m, c) => "^" + c);
   t = t.replace(/[{}]/g, "");
   t = t.replace(/^\s{0,3}#{1,6}\s*/gm, "");
   t = t.replace(/\*\*(.+?)\*\*/g, "$1").replace(/__(.+?)__/g, "$1").replace(/\*(.+?)\*/g, "$1");

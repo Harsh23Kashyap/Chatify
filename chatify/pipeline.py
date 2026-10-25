@@ -215,6 +215,10 @@ def plain_text(text):
     # LaTeX math delimiters first: keep the contents, drop the dollars.
     t = re.sub(r"\$\$([^$]+)\$\$", lambda m: " " + m.group(1).strip() + " ", t)
     t = re.sub(r"\$([^$\n]+)\$", lambda m: m.group(1), t)
+    # Bare legacy font switches (\rm, \bf, \it, \sf, \tt, \cal) carry no
+    # content: drop the command so "M_{\rm UV}" becomes "M_{UV}", never
+    # "Mrm UV" (load-bearing corruption found in the R3 rendered review).
+    t = re.sub(r"\\(?:rm|bf|it|sf|tt|cal)(?![A-Za-z])", "", t)
     # Text-formatting wrappers keep their argument.
     for name in _LATEX_TEXT_WRAPPERS:
         t = re.sub(r"\\" + name + r"\{([^{}]*)\}", lambda m: m.group(1), t)
@@ -233,9 +237,14 @@ def plain_text(text):
     t = re.sub(r"\\([A-Za-z]+)", _unknown, t)
     t = re.sub(r"\\[,;:!]", " ", t)  # \, \; and friends are spacing
     t = re.sub(r"\\\s+", " ", t)  # \, \; and friends are spacing
-    # Sub/superscript markers keep their payload: MgAl$_2$ -> MgAl2, 10^{9} -> 109.
-    t = re.sub(r"[_^]\{([^{}]*)\}", lambda m: m.group(1), t)
-    t = re.sub(r"[_^](\S)", lambda m: m.group(1), t)
+    # Sub/superscripts keep an explicit script marker: flattening concatenated
+    # the script into the base and corrupted magnitudes (10^{9} -> "109",
+    # rendered in the R3 review). Caret/underscore notation stays unambiguous:
+    # 10^{9} -> 10^9, MgAl$_2$O$_4$ -> MgAl_2O_4, M_{\rm UV} -> M_UV.
+    t = re.sub(r"_\{([^{}]*)\}", lambda m: "_" + m.group(1).strip(), t)
+    t = re.sub(r"\^\{([^{}]*)\}", lambda m: "^" + m.group(1).strip(), t)
+    t = re.sub(r"_(\S)", lambda m: "_" + m.group(1), t)
+    t = re.sub(r"\^(\S)", lambda m: "^" + m.group(1), t)
     t = t.replace("{", "").replace("}", "")
     # Markdown: headings, emphasis, code and links become their plain text.
     t = re.sub(r"(?m)^\s{0,3}#{1,6}\s*", "", t)
