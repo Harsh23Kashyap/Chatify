@@ -645,10 +645,15 @@ class Engine:
                 try: return int(str(e.get("year") or "")[:4])
                 except ValueError: return 0
             own_ids = {id(e) for e in found if e.get("source") not in search_ids}
-            if own_ids:
+            if corpus_intent(question) and own_ids:
+                # The question named the corpus: it leads, public follows newest-first.
                 found = [e for e in found if id(e) in own_ids] + sorted(
                     (e for e in found if id(e) not in own_ids), key=lambda e: -_yr(e))
             else:
+                # No corpus reference: every retained passage joins the date order.
+                # An undated note cannot satisfy "newest findings this year" - it
+                # sinks below dated passages instead of leading on topic overlap
+                # alone (hosted R2 Q1 2026-10-25).
                 found = sorted(found, key=lambda e: -_yr(e))
         for n, e in enumerate(found, 1):
             e["n"] = n

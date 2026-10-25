@@ -102,6 +102,31 @@ class CorpusIntentGateTest(unittest.TestCase):
         self.assertFalse(pipeline.corpus_intent("what are the notes of a C major chord"))
 
 
+
+    def test_recency_without_corpus_intent_sinks_undated_note(self):
+        hits = [("GLP-1 dosing safety review 2026",
+                 "GLP-1 receptor agonist dosing titration; safety outcomes recorded.", "2026"),
+                ("GLP-1 dosing trial 2025",
+                 "GLP-1 receptor agonist dosing escalation trial; tolerability reported.", "2025")]
+        eng = make_engine([])
+        eng.connectors["pubmed"] = RecencyOrderTest.FakeConn("pubmed", hits)
+        found, _ = eng.retrieve("What are the newest findings on GLP-1 dosing this year?", owner="visitor:t")
+        titles = [e["title"] for e in found]
+        self.assertEqual(titles[0], "GLP-1 dosing safety review 2026")
+        self.assertEqual(titles[1], "GLP-1 dosing trial 2025")
+        self.assertEqual(titles[-1], "glp1-notes.md",
+                         "undated note sinks below dated passages without corpus intent")
+
+    def test_recency_with_corpus_intent_keeps_corpus_lead(self):
+        hits = [("GLP-1 dosing safety review 2026",
+                 "GLP-1 receptor agonist dosing titration; safety outcomes recorded.", "2026")]
+        eng = make_engine([])
+        eng.connectors["pubmed"] = RecencyOrderTest.FakeConn("pubmed", hits)
+        found, _ = eng.retrieve("What do my notes add beyond the newest GLP-1 dosing evidence?", owner="visitor:t")
+        self.assertEqual(found[0]["source"], "uploads",
+                         "corpus-intent recency question keeps the corpus lead")
+
+
 if __name__ == "__main__":
     unittest.main()
 
