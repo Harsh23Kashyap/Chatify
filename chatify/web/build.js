@@ -247,9 +247,17 @@ $("#buildRetry").addEventListener("click", async () => {
 
 /* ---------- Free starter draft (no model calls) ---------- */
 function slugify(t) { return (t.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "").slice(0, 24) || "my-app"); }
+function cutWords(t, n) {
+  // A baked-in "…" claims more text exists; the generated app name and tagline
+  // ARE the whole text, so cut at a word boundary instead (live demo 2026-10-25:
+  // starter app names rendered truncated-with-ellipsis in the PDF header/footer).
+  if (t.length <= n) return t;
+  const cut = t.slice(0, n).replace(/\s+\S*$/, "").replace(/[\s,;:.-]+$/, "").trim();
+  return cut || t.slice(0, n).trim();
+}
 function titleFromBrief(b) {
   let t = (b.split(/[.!?\n]/)[0] || b).trim().replace(/^(a|an|the)\s+/i, "");
-  if (t.length > 48) t = t.slice(0, 45).trim() + "…";
+  t = cutWords(t, 48);
   return t.charAt(0).toUpperCase() + t.slice(1);
 }
 function sourceBlocks(selected) {
@@ -286,7 +294,7 @@ function starterConfig() {
     cfg = {
       schema_version: 1,
       app: {
-        id: slugify(title), title, tagline: state.brief.length > 140 ? state.brief.slice(0, 137).trim() + "…" : state.brief,
+        id: slugify(title), title, tagline: cutWords(state.brief, 140),
         examples: ["Summarize the strongest recent evidence on my topic", "What do the sources say about a question I have?", "Which sources do you use, and how current are they?"],
         footer: "Answers are grounded in the listed sources.", theme: "light"
       },
