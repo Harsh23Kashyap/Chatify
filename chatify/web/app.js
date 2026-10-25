@@ -721,7 +721,7 @@ function mountModal(back, dismiss = true) {
   const previous = document.activeElement, box = back.querySelector('[role="dialog"]');
   box.setAttribute('aria-modal', 'true'); box.tabIndex = -1;
   const saved = new Map();
-  const shield = () => { for (const n of document.body.children) if (n !== back && !saved.has(n)) { saved.set(n, n.inert); n.inert = true; } };
+  const shield = () => { for (const n of document.body.children) if (n !== back && !saved.has(n) && !(n.matches && n.matches('dialog[open]'))) { saved.set(n, n.inert); n.inert = true; } };
   const items = () => [...box.querySelectorAll('button,input,textarea,select,a[href],[tabindex="0"]')].filter(n => !n.disabled && n.getClientRects().length && !n.closest('[hidden]'));
   const key = e => {
     if (e.key === 'Escape') { e.preventDefault(); e.stopImmediatePropagation(); if (dismiss) {if(back.ccDismiss)back.ccDismiss();else back.remove();} }
