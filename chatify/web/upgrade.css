@@ -132,6 +132,11 @@ pre.codeblock {
   transition: background-size var(--m-layout, 280ms) var(--ease);
 }
 .build-step[data-state="complete"]:not(:last-child)::after { --step-fill: 100%; }
+/* dark: pine fill on --line is 1.05:1 (invisible); lime keeps the complete/readable pairing */
+html[data-theme="dark"] .build-step:not(:last-child)::after {
+  background: linear-gradient(to right, var(--lime, #d7ef72), var(--lime, #d7ef72)) no-repeat 0 0 / var(--step-fill, 0%) 100%,
+              var(--line, #2a3a32);
+}
 /* Panel swap: [hidden] toggle in goStep restarts this CSS-only entry animation */
 .build-screen { animation: step-in var(--m-layout, 280ms) var(--ease) both; }
 @keyframes step-in {

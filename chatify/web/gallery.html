@@ -21,6 +21,8 @@ background-size:auto,auto,26px 26px}
 h1{font-family:Fraunces,Georgia,serif;font-weight:700;font-size:clamp(30px,4.6vw,46px);line-height:1.08;margin:0 0 14px;letter-spacing:-.015em;text-wrap:balance}
 .tag{color:var(--mut);font-size:17px;margin:0 0 22px;max-width:520px}
 .chips{display:flex;flex-wrap:wrap;gap:9px;list-style:none;margin:0;padding:0}
+a:focus-visible{outline:2px solid #2f7d5b;outline-offset:3px;border-radius:6px}
+.chips:focus-visible{outline:2px solid #2f7d5b;outline-offset:3px;border-radius:14px}
 .chips li{display:flex;align-items:center;gap:8px;font:500 13.5px "DM Sans",sans-serif;color:var(--ink);background:rgba(255,253,247,.85);border:1px solid var(--line);border-radius:999px;padding:7px 15px}
 .chips li::before{content:"";width:7px;height:7px;border-radius:50%;background:#30a46c}
 .chips li:nth-child(1){background:color-mix(in srgb,#4f46b8 7%,rgba(255,253,247,.9));border-color:color-mix(in srgb,#4f46b8 22%,#e6dfc9)}
@@ -117,6 +119,7 @@ h1{font-family:Fraunces,Georgia,serif;font-weight:700;font-size:clamp(30px,4.6vw
 .hero{padding:42px 0 34px}
 .tag{font-size:16px}
 .chips{flex-wrap:nowrap;overflow-x:auto;padding-bottom:4px;margin-right:-18px;padding-right:24px;scrollbar-width:none;mask-image:linear-gradient(to right,#000 78%,transparent 96%);-webkit-mask-image:linear-gradient(to right,#000 78%,transparent 96%)}
+.chips:focus-visible{mask-image:none;-webkit-mask-image:none}
 .chips::-webkit-scrollbar{display:none}
 .chips li{flex:0 0 auto}
 .grid{grid-template-columns:1fr;gap:18px}
@@ -132,14 +135,16 @@ h1{font-family:Fraunces,Georgia,serif;font-weight:700;font-size:clamp(30px,4.6vw
 }
 </style><link rel="stylesheet" href="/loading.css"><script src="/loading.js" defer></script></head><body><div id="cc-boot" class="cc-boot" aria-hidden="true"><div><span class="cc-orbit" aria-hidden="true"><svg viewBox="0 0 88 88"><circle class="cc-orbit-track" cx="44" cy="44" r="38"/><circle class="cc-orbit-head" cx="44" cy="44" r="38"/></svg><img src="/icons/chatify.svg" alt=""></span><div class="cc-boot-name">Chatify</div><div class="cc-boot-text">Loading…</div></div></div><div class="bg" aria-hidden="true"></div><div class="wrap">
 <header class="top"><a class="brand" href="/"><img src="/icons/chatify.svg" alt="">Chatify</a></header>
+<main>
 <section class="hero">
 <div class="eyebrow">The Chatify gallery</div>
 <h1>{{TITLE}}</h1>
 <p class="tag">{{TAGLINE}}</p>
-<ul class="chips"><li>Private per-visitor chats</li><li>Answers cite their sources</li><li>Free hosted demos</li></ul>
+<ul class="chips" tabindex="0" role="region" aria-label="Gallery highlights, horizontally scrollable on small screens"><li>Private per-visitor chats</li><li>Answers cite their sources</li><li>Free hosted demos</li></ul>
 </section>
 {{FEATURED}}
 <div class="sec"><h2>Examples built with Chatify</h2><span>{{COUNT}} live</span></div>
-<div class="grid">{{CARDS}}<div class="g-info"><div class="g-info-t"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M12 11v5"/><circle cx="12" cy="7.8" r=".9" fill="currentColor" stroke="none"/></svg>About these demos</div><ul><li><b>Your chats are yours.</b> Every visitor gets a private session; histories never mix.</li><li><b>Free demos, daily limits apply.</b> A shared key stays healthy for everyone.</li><li><b>Cited answers.</b> Each answer links back to the sources behind it.</li></ul><div class="g-info-fine">Informational only - not medical advice.</div></div></div>
+<nav class="grid" aria-label="Example apps">{{CARDS}}<div class="g-info"><div class="g-info-t"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M12 11v5"/><circle cx="12" cy="7.8" r=".9" fill="currentColor" stroke="none"/></svg>About these demos</div><ul><li><b>Your chats are yours.</b> Every visitor gets a private session; histories never mix.</li><li><b>Free demos, daily limits apply.</b> A shared key stays healthy for everyone.</li><li><b>Cited answers.</b> Each answer links back to the sources behind it.</li></ul><div class="g-info-fine">Informational only - not medical advice.</div></div></nav>
+</main>
 <footer class="foot"><span>Built with <a href="/chatify/">Chatify</a>, from one YAML file and your sources.</span></footer>
 </div></body></html>

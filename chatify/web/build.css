@@ -1,7 +1,9 @@
 /* Guided build (describe -> sources -> build). Pine/lime brand, no progress bars. */
 :root{--pine:#173f35;--lime:#d7ef72;--lime-deep:#7fae3c;--cream:#f8f4e9;--paper:#fffdf7;--ink:#17231f;--mut:#5f6d67;--line:#d9e1dc}
-html[data-theme=dark]{--paper:#16211c;--ink:#e8eee6;--mut:#9db3a4;--line:#2a3a32}
+html[data-theme=dark]{--cream:#0d1613;--paper:#16211c;--ink:#e8eee6;--mut:#9db3a4;--line:#2a3a32}
 body{background:var(--cream);color:var(--ink);font-family:"DM Sans",-apple-system,system-ui,sans-serif}
+/* components.css body:has(.about-nav) leaks --ui-page onto this page (build.html carries an .about-nav element); outrank it so the page uses its own --cream/--ink in both themes. */
+html[data-theme] body{background:var(--cream);color:var(--ink)}
 .build-main{max-width:1040px;margin:0 auto;padding:28px 24px 80px}
 .build-steps{display:flex;align-items:center;gap:10px;justify-content:center;flex-wrap:wrap;row-gap:12px;margin:6px 0 34px;font-size:13.5px;color:var(--mut)}
 .build-step{display:inline-flex;align-items:center;gap:7px;font-weight:500}
@@ -172,6 +174,8 @@ html[data-theme=dark] body .common-nav .active{color:#d7ef72!important}
 .build-step[data-state=current] .build-step-num{background:var(--pine);border-color:var(--pine);color:#fffdf7}
 .build-step[data-state=current] .build-step-label{color:var(--pine);font-weight:700}
 html[data-theme=dark] .build-step[data-state=current] .build-step-num{background:var(--lime);border-color:var(--lime);color:var(--pine)}
+html[data-theme=dark] .build-step-num{color:var(--mut)}
+html[data-theme=dark] .build-step[data-state=complete] .build-step-label{color:var(--lime)}
 html[data-theme=dark] .build-step[data-state=current] .build-step-label{color:var(--lime)}
 .build-steps-mobile{display:none}
 
