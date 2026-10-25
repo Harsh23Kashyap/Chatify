@@ -146,3 +146,33 @@ pre.codeblock {
 html[data-motion="none"] .build-step[data-state="current"] .build-step-num { transform: none; }
 html[data-motion="none"] .build-step:not(:last-child)::after { transition: none; }
 html[data-motion="none"] .build-screen { animation: none; }
+
+/* --- Answer action row + "More" disclosure --------------------------------
+   Extends the app's real pattern (.meta .chip primaries always visible,
+   secondary actions in details.more > .more-box). No markup/JS changes. */
+.meta .chip {
+  transition: background-color var(--m-hover, 140ms) var(--ease),
+              color var(--m-hover, 140ms) var(--ease),
+              transform var(--m-press, 90ms) var(--ease);
+}
+.meta .chip:active { transform: scale(.97); }
+.meta .chip:focus-visible, .more summary:focus-visible {
+  outline: 2px solid var(--brand, #173f35);
+  outline-offset: 2px;
+}
+.more-box {
+  transform-origin: bottom left;
+  animation: more-in var(--m-state, 180ms) var(--ease);
+}
+@keyframes more-in {
+  from { opacity: 0; transform: translateY(4px) scale(.98); }
+  to   { opacity: 1; transform: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .meta .chip { transition: none; }
+  .meta .chip:active { transform: none; }
+  .more-box { animation: none; }
+}
+html[data-motion="none"] .meta .chip { transition: none; }
+html[data-motion="none"] .meta .chip:active { transform: none; }
+html[data-motion="none"] .more-box { animation: none; }
