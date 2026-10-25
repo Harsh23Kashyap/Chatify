@@ -247,13 +247,23 @@ $("#buildRetry").addEventListener("click", async () => {
 
 /* ---------- Free starter draft (no model calls) ---------- */
 function slugify(t) { return (t.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "").slice(0, 24) || "my-app"); }
+// Function words a title cannot end on without reading as truncated
+// mid-sentence ("Research assistant answering questions about").
+const TRAILING_FUNCTION_WORDS = new Set(("a an the and or but nor so yet of for with without within about " +
+  "that this these those to in on at by from as is are was were be been being do does did have has had " +
+  "its their our your my his her we you they them us it who which whom whose when where while than into onto over under").split(" "));
 function cutWords(t, n) {
   // A baked-in "…" claims more text exists; the generated app name and tagline
   // ARE the whole text, so cut at a word boundary instead (live demo 2026-10-25:
-  // starter app names rendered truncated-with-ellipsis in the PDF header/footer).
+  // starter app names rendered truncated-with-ellipsis in the PDF header/footer),
+  // and drop trailing function words so the cut never dangles mid-thought
+  // (design review 2026-10-25: "Research assistant answering questions about").
+  // The full brief text stays available separately in the saved draft/tagline.
   if (t.length <= n) return t;
   const cut = t.slice(0, n).replace(/\s+\S*$/, "").replace(/[\s,;:.-]+$/, "").trim();
-  return cut || t.slice(0, n).trim();
+  const words = (cut || t.slice(0, n).trim()).split(/\s+/);
+  while (words.length > 2 && TRAILING_FUNCTION_WORDS.has(words[words.length - 1].toLowerCase())) words.pop();
+  return words.join(" ");
 }
 function titleFromBrief(b) {
   let t = (b.split(/[.!?\n]/)[0] || b).trim().replace(/^(a|an|the)\s+/i, "");
