@@ -80,6 +80,62 @@ def _gate_stems(text):
     return out
 
 
+
+# Corpus-reference words ("my notes", "our documents", "the uploaded file") name
+# the owner's corpus as the SUBJECT of the question, not topical vocabulary. They
+# must not count toward the specificity floor for any passage, and they carry no
+# signal about which public paper is on-topic (hosted R2 2026-10-25: "what do my
+# notes add beyond newest public evidence" cited a GPT-4-healthcare paper, a
+# verbal-tics note and a celiac-screening report on notes/public/evidence alone,
+# while the uploaded GLP-1 note - the question's actual subject - fell below the
+# count floor and vanished).
+_CORPUS_INTENT = re.compile(
+    r"\b(?:my|our)\s+(?:notes?|documents?|files?|uploads?|data|library|papers?)\b"
+    r"|\b(?:my|our)\s+uploaded\b"
+    r"|\buploaded\s+(?:notes?|documents?|files?)\b", re.I)
+_CORPUS_META = frozenset(
+    "my our note notes document documents file files upload uploads uploaded data library "
+    "add adds added beyond compare compared public newest latest evidence".split())
+
+
+def corpus_intent(question):
+    return bool(_CORPUS_INTENT.search(question or ""))
+
+
+def _domain_question(question):
+    """The question with corpus-reference/meta words removed: the topical signal left
+    for matching. Empty when the question is only about the corpus itself."""
+    words = [w for w in re.findall(r"[a-z0-9]{3,}", (question or "").lower())
+             if not w.isdigit() and w not in _GATE_STOP and w not in _CORPUS_META]
+    return " ".join(words)
+
+
+def corpus_gate(question, found):
+    """Gate for owner-corpus passages under a corpus-intent question.
+
+    The question is about the corpus; domain words may be absent entirely. Gate on
+    the non-meta vocabulary when it exists (a hands/teeth upload chunk must still
+    match the question's topic); when only meta words remain, the corpus reference
+    itself is the intent and the owner's BM25 order decides.
+    """
+    domain = _domain_question(question)
+    if not domain:
+        return sorted(found, key=lambda e: -(e.get("score") or 0))
+    return relevance_gate(domain, found)
+
+
+def public_gate(question, found):
+    """Gate for open-API passages under a corpus-intent question.
+
+    Meta words (notes/public/evidence/newest) must not carry a public passage: with
+    no non-meta question vocabulary there is no on-topic signal at all, so nothing
+    public is shown (hosted R2 2026-10-25 junk citations).
+    """
+    domain = _domain_question(question)
+    if not domain:
+        return []
+    return relevance_gate(domain, found)
+
 def relevance_gate(question, found):
     """Drop retrieved passages that share no vocabulary with the question.
 
@@ -545,7 +601,14 @@ class Engine:
         # keep their BM25 score ordering in a mixed list, below.
         _SEARCH_TYPES = ("http_json", "arxiv", "pubmed", "wikipedia", "crossref", "openalex", "web_search")
         search_ids = {s["id"] for s in self.cfg["sources"] if s.get("type") in _SEARCH_TYPES}
-        found = relevance_gate(question, found)
+        if corpus_intent(question) and any(e.get("source") not in search_ids for e in found):
+            own_part = corpus_gate(question, [e for e in found if e.get("source") not in search_ids])
+            pub_part = public_gate(question, [e for e in found if e.get("source") in search_ids])
+            # Corpus first: it is the question's subject; public passages follow for
+            # the comparison the question asked for.
+            found = own_part + pub_part
+        else:
+            found = relevance_gate(question, found)
         own = [e for e in found if e.get("source") not in search_ids]
         if own:
             # Mixed corpus: owner-corpus matches carry no gate rank, so keep the
