@@ -1035,7 +1035,7 @@ pre.codeblock code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monosp
   .hero.playground h1{font-size:clamp(26px,7vw,34px)}
 }
 @media(max-width:760px){
-  .bar #exportChat,.bar #profileBtn{display:inline-grid;min-width:36px;min-height:40px}
+  .bar #exportChat,.bar #profileBtn{display:inline-grid;min-width:44px;min-height:44px}
   .bar{overflow-x:auto;scrollbar-width:none}
   .bar::-webkit-scrollbar{display:none}
   #keyBar{padding:10px 12px!important;font-size:12.5px!important;line-height:1.45!important}
@@ -1067,5 +1067,5 @@ pre.codeblock code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monosp
 #toolsMenu button:hover,#toolsMenu button:focus-visible{background:var(--soft);outline:none}
 @media(max-width:600px){
   .composer-tools>#scopeBtn,.composer-tools>#actionsBtn{display:none}
-  #toolsToggle{display:inline-flex}
+  #toolsToggle{display:inline-flex;min-width:45px;min-height:45px;align-items:center;justify-content:center}
 }

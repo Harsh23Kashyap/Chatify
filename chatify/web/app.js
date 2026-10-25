@@ -505,7 +505,7 @@ function playgroundLanding(a, exs) {
       el("h1",{text:TV("txt_title")||((a.title==="Chatify")?"Ask the documents, get the receipts.":a.title)}),el("p",{class:"lede",text:TV("txt_tagline")||((a.title==="Chatify")?"Answers grounded in the sources you choose, with the passages shown so you can check them.":a.tagline)})),scene),
     exs.length?el("div",{class:"rise",style:"--rise-order:1"},el("h2",{class:"playground-label",text:"Follow your curiosity"}),
       el("div",{class:"playground-questions"},exs.map((x,i)=>el("button",{class:"playground-question",style:"--question-order:"+i,onclick:()=>{$("#q").value=x;send()}},el("span",{text:x}),el("b",{"aria-hidden":"true",text:"↗"}))))):null,
-    el("div",{class:"rise",style:"--rise-order:2"},el("h2",{class:"playground-label shortcut-label",text:"Chat tools"}),el("div",{class:"playground-actions"},actions.map(([icon,title,detail,action])=>el("button",{class:"playground-action",title:title+": "+detail,onclick:action},el("em",{"aria-hidden":"true",text:icon}),el("b",{text:title}),el("small",{text:detail}))))),
+    el("div",{class:"rise",style:"--rise-order:2"},el("h2",{class:"playground-label shortcut-label",text:"Chat tools"}),el("div",{class:"playground-actions"},actions.map(([icon,title,detail,action])=>el("button",{class:"playground-action",onclick:action},el("em",{"aria-hidden":"true",text:icon}),el("b",{text:title}),el("small",{text:detail}))))),
     el("p",{class:"playground-quiet",text:S.cfg.provider.type==="mock"?"Demo uses built-in answers. No model or paid calls.":"Answers use your configured sources and model."}));
 }
 function heroView() {
@@ -527,8 +527,9 @@ function composerSwap() {
   const s = $("#send"), m = $("#mic"); if (!s || !m) return;
   const sr = !!(window.SpeechRecognition || window.webkitSpeechRecognition);
   if (!sr) { s.hidden = false; return; }
-  const has = !!(($("#q") || {}).value || "").trim();
   if (S.busy) { s.hidden = false; m.hidden = true; return; }
+  if (m.getAttribute("aria-pressed") === "true") { m.hidden = false; s.hidden = true; return; }
+  const has = !!(($("#q") || {}).value || "").trim();
   s.hidden = !has; m.hidden = has;
 }
 function rdy() { const q = $("#q"), s = $("#send"); if (!q || !s) return; const on = !!q.value.trim(); s.disabled = !S.busy && !on; s.classList.toggle("idle", s.disabled); if (S.busy) return; if (on && !s.classList.contains("on")) { s.classList.add("ready"); setTimeout(() => s.classList.remove("ready"), 200); } s.classList.toggle("on", on); composerSwap(); }
@@ -666,7 +667,7 @@ async function send() {
   }
   const q = $("#q").value.trim(); if (!q || S.busy) return;
   const status = $("#pipelineStatus"); status.hidden = true; status.dataset.state="working"; status.textContent = "Preparing your answer";
-  S.busy = true; clearTimeout(simTimer); $("#similar").replaceChildren(); sendIcon("stop", "Stop"); $("#q").value = ""; autosize(); S.lastQ = q;
+  S.busy = true; clearTimeout(simTimer); $("#similar").replaceChildren(); sendIcon("stop", "Stop"); composerSwap(); $("#q").value = ""; autosize(); S.lastQ = q;
   const w = $("#thread .wrap") || $("#thread");
   w.querySelector(".hero")?.remove();
   const live = el("div", { class: "a", id: "live" });
