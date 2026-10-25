@@ -246,6 +246,29 @@ def relevance_gate(question, found):
                 meets = [(n, e, p) for n, e, p in kept if sum(1 for _, v in rest if v & p) >= bar]
                 if len(meets) >= 2:
                     kept = meets
+    # Human-factors genre mismatch: a passage whose TITLE announces a
+    # knowledge/attitudes/education study answers "who knows about X", not the
+    # findings question that was asked (hosted R2 2026-10-25: a pharmacy-students
+    # knowledge paper cited for "most recent papers on GLP-1 dosing safety").
+    # Lexicon is tight and title-only so statistical ("confidence intervals") and
+    # literature-genre ("survey", "review", "study") titles are untouched; the
+    # rule is inactive when the question itself asks about the genre, including
+    # broader question-side words ("training"), which only ever deactivate it.
+    # Mismatches drop even when they are the strongest or only match: a known
+    # mismatch shown as evidence is worse than the honest no-evidence reply.
+    if not _GENRE_Q.search(question or ""):
+        kept = [(n, e, p) for n, e, p in kept
+                if not _GENRE_TITLE.search(str(e.get("title") or ""))]
+    # Post-anchor context: an acronym anchor can appear only as a backward
+    # reference - "after CAR-T failure", "CAR-T-refractory" - when the paper's
+    # subject is what comes AFTER the anchored therapy (ISSUE-10 residual
+    # 2026-10-25: a glofitamab-after-CAR-T-failure paper led a CAR-T DLBCL
+    # question). When every anchor mention sits in such a post-anchor context
+    # and the question is not itself about failure/relapse/refractory disease,
+    # the passage is off-intent despite carrying the anchor.
+    if anchors and kept and not _POSTANCHOR_Q.search(question or ""):
+        kept = [(n, e, p) for n, e, p in kept
+                if not _anchor_only_post_context(e, anchors)]
     # Lead with the passages that share the most question vocabulary, weighted by
     # how discriminating each shared word is within this candidate set. Overlap
     # order keeps the most on-question passage first; ties keep the connector's
@@ -253,6 +276,38 @@ def relevance_gate(question, found):
     weight = {w: 0.5 + (len(scored) - df[w]) / len(scored) for w, _ in q_variants}
     kept.sort(key=lambda nep: (-sum(weight[w] for w, v in q_variants if v & nep[2]), -nep[0], -(nep[1].get("score") or 0)))
     return [e for _, e, _ in kept]
+
+
+_GENRE_TITLE = re.compile(
+    r"\b(?:know(?:ledge)?|attitudes?|perceptions?|perceiv\w*|awareness|beliefs?|barriers?|"
+    r"educat\w*|students?|trainees?|curricul\w*|readiness|willingness|competen\w+)\b", re.I)
+_GENRE_Q = re.compile(
+    r"\b(?:know\w*|attitud\w*|percei?\w*|aware\w*|belie[fv]\w*|barriers?|"
+    r"educat\w*|students?|trainees?|curricul\w*|readiness|willingness|competen\w*|"
+    r"train(?:ing|ed)?|teach\w*|learn\w*|courses?|classrooms?)\b", re.I)
+_POSTANCHOR_Q = re.compile(
+    r"\b(?:fail(?:ure|ed|s|ing)?|relaps\w*|refractor\w*|resistan\w*|"
+    r"progress\w*|salvage|second[- ]line|later[- ]line)\b", re.I)
+
+
+def _anchor_only_post_context(e, anchors):
+    """True when every anchor mention in the passage is a post-treatment reference."""
+    hay = str(e.get("title") or "") + " " + str(e.get("text") or "")[:1500]
+    pre = re.compile(r"(?:after|following|beyond|post[-\s]|progress\w+ on|failed|"
+                     r"failures? (?:of|on|after)|relaps\w+ (?:after|on|following)|"
+                     r"resistan\w+ to|refractory to)\s+(?:the\s+)?", re.I)
+    post = re.compile(r"[-\s](?:refractory|resistant|resistance|failure|failed|"
+                      r"relapsed?|na[iï]ve)\b", re.I)
+    saw = False
+    for a in anchors:
+        pat = re.compile(r"\b" + re.escape(a).replace(r"\-", r"[- ]?") + r"s?\b", re.I)
+        for m in pat.finditer(hay):
+            window_pre = hay[max(0, m.start() - 60):m.start()]
+            window_post = hay[m.end():m.end() + 30]
+            if not (pre.search(window_pre) or post.match(window_post)):
+                return False  # a subject-position mention: genuinely about the anchor
+            saw = True
+    return saw
 
 
 _LATEX_SYMBOLS = {
