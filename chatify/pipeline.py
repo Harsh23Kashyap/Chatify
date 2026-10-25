@@ -617,12 +617,14 @@ class Engine:
         rows = self.store.uploads(owner) if owner else []
         if not rows:
             return []
-        from .connectors.local_files import LocalFiles, tokens, chunks
+        from .connectors.local_files import LocalFiles, tokens, chunks, document_date
         lf = LocalFiles.__new__(LocalFiles)
         lf.id, lf.label, lf.docs = "uploads", "My uploads", []
         for r in rows:
+            doc_date, doc_date_src = document_date(r["text"])
             for i, c in enumerate(chunks(r["text"])):
-                lf.docs.append({"title": r["name"], "text": c, "tok": tokens(r["name"] + " " + c), "id": "%s#%d" % (r["id"], i)})
+                lf.docs.append({"title": r["name"], "text": c, "tok": tokens(r["name"] + " " + c), "id": "%s#%d" % (r["id"], i),
+                                "date": doc_date, "date_src": doc_date_src})
         import math
         n = len(lf.docs) or 1; df = {}
         for d in lf.docs:
@@ -1144,7 +1146,19 @@ class Engine:
                 m = re.match(r"(\d{4})", str(e.get("year") or ""))
                 if m:
                     years.append(int(m.group(1)))
-            undated = sum(1 for e in evidence if not re.match(r"(\d{4})", str(e.get("year") or "")))
+            undated_evs = [e for e in evidence if not re.match(r"(\d{4})", str(e.get("year") or ""))]
+            undated = len(undated_evs)
+            # A year mentioned inside a passage's text is NOT a confirmed
+            # publication date (an old document may cite a newer study, a
+            # background year, or several years) - but claiming such a source
+            # "shows no dates" is false (hosted 2026-10-25: the line sat above a
+            # passage visibly saying "March 2026"). Name the distinction.
+            mention = ""
+            for e in undated_evs:
+                mm = re.search(r"\b(?:19|20)\d{2}\b", str(e.get("title") or "") + " " + str(e.get("text") or ""))
+                if mm:
+                    mention = mm.group(0)
+                    break
             if years:
                 # A found-source year is a bound on what retrieval returned, never
                 # proof of the freshest information available.
@@ -1152,9 +1166,15 @@ class Engine:
                 if undated:
                     # The count base is the retained evidence behind this answer, not
                     # necessarily the passages visible in a capped preview list.
-                    line += " %d of the %d sources for this answer %s no date at all." % (
-                        undated, len(evidence), "carries" if undated == 1 else "carry")
+                    if mention:
+                        line += " %d of the %d sources for this answer %s no confirmed date; their text mentions years (like %s), but a date mentioned in a passage is not a confirmed publication date." % (
+                            undated, len(evidence), "carries" if undated == 1 else "carry", mention)
+                    else:
+                        line += " %d of the %d sources for this answer %s no date at all." % (
+                            undated, len(evidence), "carries" if undated == 1 else "carry")
                 lines.append(line)
+            elif mention:
+                lines.append("Freshness: none of these sources carry a confirmed date in their details; their text mentions years (like %s), but a date mentioned in a passage is not a confirmed publication date, so how current they are cannot be confirmed." % mention)
             else:
                 lines.append("Freshness: these sources show no dates, so how current they are cannot be confirmed.")
         return "\n\n".join([lines[0], "\n".join(lines[1:])]) if len(lines) > 1 else lines[0]

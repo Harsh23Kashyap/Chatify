@@ -22,6 +22,65 @@ def chunks(text, size=900):
     return out
 
 
+
+_MONTHS = {m: i + 1 for i, m in enumerate(
+    "january february march april may june july august september october november december".split())}
+
+
+def _norm_date(value):
+    """Normalize an explicit date string to YYYY[-MM[-DD]]; '' when not a date."""
+    v = value.strip().strip('"').strip("'")
+    m = re.match(r"(\d{4})(?:-(\d{1,2})(?:-(\d{1,2}))?)?\b", v)
+    if m:
+        out = m.group(1)
+        if m.group(2):
+            mo = int(m.group(2))
+            if not 1 <= mo <= 12:
+                return ""
+            out += "-%02d" % mo
+            if m.group(3):
+                dy = int(m.group(3))
+                if not 1 <= dy <= 31:
+                    return ""
+                out += "-%02d" % dy
+        return out
+    m = re.match(r"([A-Za-z]+)\s+(\d{4})\b", v)
+    if m and m.group(1).lower() in _MONTHS:
+        return "%s-%02d" % (m.group(2), _MONTHS[m.group(1).lower()])
+    return ""
+
+
+def document_date(raw):
+    """A document-level date ONLY from explicit metadata: a frontmatter
+    date:/updated: field or a leading Date:/Updated: header line, with its
+    provenance. Years merely mentioned in body text never count - an old
+    document may mention a newer study, a background year, or several years.
+    Returns (date, provenance), ('', '') when no explicit metadata exists."""
+    text = raw.lstrip()
+    if text.startswith("---"):
+        end = text.find("\n---", 3)
+        if end != -1:
+            for line in text[3:end].splitlines():
+                m = re.match(r"\s*(date|updated)\s*:\s*(.+?)\s*$", line, re.I)
+                if m:
+                    d = _norm_date(m.group(2))
+                    if d:
+                        return d, "frontmatter " + m.group(1).lower()
+    seen = 0
+    for line in text.splitlines():
+        s = line.strip()
+        if not s:
+            continue
+        seen += 1
+        if seen > 5:
+            break
+        m = re.match(r"(?:date|updated)\s*:\s*(.+?)\s*$", s, re.I)
+        if m:
+            d = _norm_date(m.group(1))
+            if d:
+                return d, "header"
+    return "", ""
+
 class LocalFiles:
     def __init__(self, block, base_dir="."):
         self.id, self.label = block["id"], block["label"]
@@ -122,6 +181,7 @@ class LocalFiles:
             with open(path, "rb") as f: data = f.read()
         raw = data.decode("utf-8", errors="replace")
         digest = digest or hashlib.sha256(data).hexdigest()
+        doc_date, doc_date_src = document_date(raw)
         title = os.path.splitext(os.path.relpath(path, root))[0]
         m = re.match(r"\s*#\s+(.+)", raw)
         if m:
@@ -141,7 +201,8 @@ class LocalFiles:
             body = re.sub(r"^\s*#{1,3}\s+.*\n?", "", sec, count=1) if h else sec
             for c in chunks(body):
                 self.docs.append({"title": sec_title, "text": c, "tok": tokens(sec_title + " " + c),
-                                  "id": "%s#%s%d" % (os.path.relpath(path, root), ("page-%d-" % page) if page else "", n), "document": os.path.relpath(path, root), "version": digest, "section": sec_title, "page": page, "ocr": ocr})
+                                  "id": "%s#%s%d" % (os.path.relpath(path, root), ("page-%d-" % page) if page else "", n), "document": os.path.relpath(path, root), "version": digest, "section": sec_title, "page": page, "ocr": ocr,
+                                  "date": doc_date, "date_src": doc_date_src})
                 n += 1
 
     def search(self, query, k=6, documents=None, recent=False):
@@ -188,7 +249,7 @@ class LocalFiles:
             predictions = self._reranker.predict([(query, d["text"]) for _, d in candidate])
             ranked = sorted([(float(value), d) for value, (_, d) in zip(predictions, candidate)], key=lambda x: -x[0])
             scored = [(1.0 / (rank + 1), d) for rank, (_, d) in enumerate(ranked)]
-        return [{**Evidence(d["title"], d["text"], "", [], "", "", self.id, s, d["id"]),
+        return [{**Evidence(d["title"], d["text"], "", [], d.get("date", ""), "", self.id, s, d["id"]),
                  **({"document": d["document"], "version": d["version"], "section": d["section"], "page": d["page"], "ocr": d["ocr"]} if "version" in d else {})} for s, d in scored[:k]]
 
     @staticmethod

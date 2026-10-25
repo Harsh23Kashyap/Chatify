@@ -887,19 +887,19 @@ def make_handler(cfg, engine):
                 name, text = str(b.get("name", "")).strip(), str(b.get("text", ""))
                 if not name or not text.strip() or len(text) > 150_000:
                     raise ValueError("Upload needs a name and text up to 150,000 characters")
-                return self._send(200, {"id": store.add_upload(o, name, text)})
+                engine._cache.clear(); return self._send(200, {"id": store.add_upload(o, name, text)})
             if path == "/api/upload-file" and method == "POST":
                 from . import fileread
                 name = str(b.get("name", "document")).strip()[:120] or "document"
                 text = fileread.extract(name, base64.b64decode(str(b.get("data", "")), validate=True))
-                return self._send(200, {"id": store.add_upload(o, name, text), "name": name, "chars": len(text)})
+                engine._cache.clear(); return self._send(200, {"id": store.add_upload(o, name, text), "name": name, "chars": len(text)})
             if path == "/api/upload-pdf" and method == "POST":
                 name = str(b.get("name", "document.pdf")).strip()[:120] or "document.pdf"
                 text = pdfread.extract(base64.b64decode(str(b.get("data", "")), validate=True))
                 return self._send(200, {"id": store.add_upload(o, name, text), "name": name, "chars": len(text)})
             if path == "/api/load-url" and method == "POST":
                 name, text = fetch.load(str(b.get("url", "")).strip())
-                return self._send(200, {"id": store.add_upload(o, name, text), "name": name, "chars": len(text)})
+                engine._cache.clear(); return self._send(200, {"id": store.add_upload(o, name, text), "name": name, "chars": len(text)})
             if path == "/api/delete-upload":
                 store.delete_upload(o, b.get("upload")); engine._cache.clear(); return self._send(200, {"ok": True})
             if path == "/api/topics":
