@@ -262,9 +262,15 @@ def make_handler(cfg, engine):
                 return self._send(200, seen)
             if path == "/api/health":
                 if qs.get("deep") and can_edit(self):
+                    maxrss_mb = None
+                    try:
+                        import resource
+                        maxrss_mb = round(resource.getrusage(resource.RUSAGE_SELF).ru_maxrss / 1024, 1)
+                    except Exception:
+                        pass
                     return self._send(200, {"ok": True, "app": cfg["app"].get("title") or cfg["app"].get("name", ""), "provider": cfg["provider"]["type"],
                                             "sources": [x.get("id") or x.get("name") or x.get("type") for x in cfg.get("sources", [])],
-                                            "db": store.ping(), "version": "0.1", "degraded": store.degraded})
+                                            "db": store.ping(), "version": "0.1", "degraded": store.degraded, "maxrss_mb": maxrss_mb})
                 return self._send(200, {"ok": True, "degraded": store.degraded} if store.degraded else {"ok": True})
             if path == "/api/theme" and method == "GET":
                 return self._send(200, {"theme": themestore.value, "meta": themes.meta(), "can_edit": can_edit(self)})
