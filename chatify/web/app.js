@@ -723,13 +723,15 @@ function mountModal(back, dismiss = true) {
   const saved = new Map();
   const shield = () => { for (const n of document.body.children) if (n !== back && !saved.has(n) && !(n.matches && n.matches('dialog[open]'))) { saved.set(n, n.inert); n.inert = true; } };
   const items = () => [...box.querySelectorAll('button,input,textarea,select,a[href],[tabindex="0"]')].filter(n => !n.disabled && n.getClientRects().length && !n.closest('[hidden]'));
+  const modalDialogUp = () => !!document.querySelector('dialog:modal');
   const key = e => {
+    if (modalDialogUp()) return;
     if (e.key === 'Escape') { e.preventDefault(); e.stopImmediatePropagation(); if (dismiss) {if(back.ccDismiss)back.ccDismiss();else back.remove();} }
     if (e.key === 'Tab') { const list = items(), first = list[0] || box, last = list.at(-1) || box;
       if (!box.contains(document.activeElement) || (e.shiftKey && document.activeElement === first) || (!e.shiftKey && document.activeElement === last)) { e.preventDefault(); (e.shiftKey ? last : first).focus(); }
     }
   };
-  const focus = e => { if (!box.contains(e.target)) (items()[0] || box).focus(); };
+  const focus = e => { if (!modalDialogUp() && !box.contains(e.target)) (items()[0] || box).focus(); };
   const observer = new MutationObserver(() => { if (!back.isConnected) { observer.disconnect(); document.removeEventListener('keydown', key, true); document.removeEventListener('focusin', focus); for (const [n, value] of saved) n.inert = value; if (previous?.isConnected) previous.focus(); } else shield(); });
   document.body.append(back); shield(); observer.observe(document.body, {childList:true});
   document.addEventListener('keydown', key, true); document.addEventListener('focusin', focus); (items()[0] || box).focus();
