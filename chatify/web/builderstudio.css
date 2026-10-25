@@ -276,8 +276,8 @@ dialog.app-builder #builderProgress .builder-progress-spin svg{position:absolute
 dialog.app-builder #builderProgress .builder-progress-spin img{width:46px;height:46px;border-radius:13px}
 dialog.app-builder #builderProgress .cc-spin-track{stroke:#d7dfce;stroke-width:2}
 dialog.app-builder #builderProgress .cc-spin-head{stroke:#7ea342;stroke-width:2.6}
-dialog.app-builder #builderProgress .builder-progress-copy strong{font:600 32px/1.2 Fraunces,Georgia,serif!important;block-size:auto!important;overflow:visible!important;padding:0;margin-bottom:8px}
-dialog.app-builder #builderProgress .builder-progress-copy>small{block-size:auto!important;overflow:visible!important;font-size:12px}
+dialog.app-builder #builderProgress .builder-progress-copy strong{font:600 32px/1.2 Fraunces,Georgia,serif!important;padding:0 2px;margin-bottom:8px;box-sizing:border-box}
+dialog.app-builder #builderProgress .builder-progress-copy>small{font-size:12px}
 .builder-live-counts{display:flex;flex-wrap:wrap;gap:22px;margin-top:20px}.builder-live-counts>span{display:flex;align-items:baseline;gap:6px}.builder-live-counts b{font-size:22px;font-weight:600;color:#173f35}.builder-live-counts small{font-size:12px!important;color:#61735f}.builder-live-counts [data-state=running] b{color:#69862f}.builder-live-counts [data-state=error] b{color:#985b31}
 dialog.app-builder #builderProgress .builder-metrics{grid-column:1/-1;border-top:1px solid #d2dccb;padding:18px 0 0;margin:0;gap:16px;display:grid;grid-template-columns:1fr 1fr}
 dialog.app-builder #builderProgress .builder-metrics>div{background:none;border:0;padding:0;min-height:0}.builder-metrics>div>b{font-size:25px!important}.builder-metrics>p{grid-column:1/-1;margin:0!important;line-height:1.6}
