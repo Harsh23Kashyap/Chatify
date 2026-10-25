@@ -228,6 +228,13 @@ function highlight(node, text, terms) {
   text.split(re).forEach((p, i) => node.append(i % 2 ? el("mark", { text: p }) : document.createTextNode(p)));
   return node;
 }
+function chatTitleFrom(q, limit = 60) {
+  q = q.trim();
+  if (q.length <= limit) return q;
+  if (q[limit] === " ") return q.slice(0, limit).replace(/[\s,;:]+$/, "");
+  const cut = q.slice(0, limit).replace(/\s+\S*$/, "").replace(/[\s,;:]+$/, "");
+  return cut.length >= 20 ? cut : q.slice(0, limit).trim();
+}
 function sendIcon(name, label) {
   const send = $("#send"); send.replaceChildren(name === "send" && TV("emoji_send") ? CCEmoji.node(TV("emoji_send"),TV("emoji_send_animated"),"",["calm","none"].includes(TV("motion"))) : svg(name)); send.setAttribute("aria-label", label); rdy();
   if (motionAllowed() && send.animate) send.animate([{opacity:.5,transform:"scale(.95)"},{opacity:1,transform:"scale(1)"}],{duration:150,easing:"ease-out"});
@@ -655,7 +662,7 @@ async function send() {
   if (result) {
     if (!S.temp) { S.chat = result.chat; S.topic = result.topic; S.newTopic = false; }
     S.turns.push(result);
-    if (S.turns.length === 1 && !S.temp) $("#chatTitle").textContent = q.slice(0, 60);
+    if (S.turns.length === 1 && !S.temp) $("#chatTitle").textContent = chatTitleFrom(q);
   } else {
     toast((err || "Something went wrong").replace(/[.?!]+$/, "") + ".", "Retry", async () => { if(S.busy)throw Error("Wait for the current answer or stop it first."); if($("#q").value.trim() && $("#q").value.trim()!==q)throw Error("Your new draft is still here. Send or clear it before retrying the earlier question."); $("#q").value=q;await send(); });
   }

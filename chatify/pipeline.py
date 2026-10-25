@@ -14,6 +14,14 @@ from . import providers, prompts as promptmod
 from .connectors import make_connector
 from .connectors.open_sources import SetupRequired
 
+def _chat_title(q, limit=60):
+    q = q.strip()
+    if len(q) <= limit: return q
+    if q[limit] == " ": return q[:limit].rstrip(" ,;:")
+    cut = q[:limit].rsplit(" ", 1)[0].rstrip(" ,;:")
+    return cut if len(cut) >= 20 else q[:limit].rstrip()
+
+
 FOLLOW_UP = re.compile(r"\b(it|its|this|that|they|them|those|these|he|she|there|the same|above|previous|earlier)\b|^(?:and\b|but\b|what about\b|how about\b|why\??$|how so\??$|expand\b|elaborate\b|continue\b|shorter\b|summari[sz]e\b|compare\b)", re.I)
 
 
@@ -1070,7 +1078,7 @@ class Engine:
             if mem_on and not scope and not permissions.restricted(self.cfg):
                 self._summarize(owner, topic, chat)
             if self.store.chat(owner, chat)["title"] == "New chat":
-                self.store.rename_chat(owner, chat, q[:60])
+                self.store.rename_chat(owner, chat, _chat_title(q))
         yield "progress", {"stage": "followups", "label": "Finding related questions"}
         fu = self.followups(q, answer, evidence, [t.get("question", "") for t in history[-6:]])
         yield "done", {"seconds": round(time.time() - t0, 1), "model_status": locals().get("model_status", "ok"), "followups": fu, "id": tid, "chat": chat, "topic": topic, "question": q, "standalone": standalone, "answer": answer,
@@ -1154,7 +1162,7 @@ class Engine:
         if mem_on:
             self._summarize(owner, topic, chat)
         if self.store.chat(owner, chat)["title"] == "New chat":
-            self.store.rename_chat(owner, chat, q[:60])
+            self.store.rename_chat(owner, chat, _chat_title(q))
         return {"id": tid, "chat": chat, "topic": topic, "question": q, "standalone": standalone, "answer": answer,
                 "evidence": evidence, "ledger": ledger, "style": style, "source_errors": errors}
 

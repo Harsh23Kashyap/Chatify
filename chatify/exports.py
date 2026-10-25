@@ -166,6 +166,20 @@ def pdf_bytes(title, turn, accent="#173f35", tagline="", sources=None):
                 pdf.set_font('noto',style,size)
             if pdf.get_y()+need>pdf.page_break_trigger:pdf.add_page()
             y=pdf.get_y();pdf.set_draw_color(217,224,214);pdf.set_line_width(0.5);pdf.line(50,y+2,545,y+2);pdf.set_y(y+6)
+        if kind=='source':
+            # Keep one source entry (title + snapshot + URL) on a single page when
+            # it fits: an orphaned title fragment reads as a broken export (hosted
+            # R2 review 2026-10-25: "[2] ...boldly go where no other therapy has"
+            # ended page 1 and "gone before." opened page 2).
+            import math as _m
+            need=0
+            for bk,btxt in blocks[bi:]:
+                if bk=='space':break
+                bs,bsz,bpit,_=styles[bk]
+                pdf.set_font('noto',bs,bsz)
+                need+=bpit*max(1,_m.ceil(pdf.get_string_width(btxt or ' ')/495))
+            pdf.set_font('noto',style,size)
+            if need<=pdf.page_break_trigger-50 and pdf.get_y()+need>pdf.page_break_trigger:pdf.add_page()
         # Left-aligned text avoids the wide inter-word gaps justification opens
         # in narrow answer bullets (R5 PDF review 2026-10-25).
         pdf.multi_cell(0,pitch,text,new_x='LMARGIN',new_y='NEXT',align='L')

@@ -929,6 +929,13 @@ def make_handler(cfg, engine):
 
         def _static(self, path):
             name = "index.html" if path in ("/", "") else path.lstrip("/")
+            if name in ("gallery.html", "error.html"):
+                # Template-only files: rendered by the gallery/error handlers, never served raw.
+                self.send_response(301)
+                self.send_header("Location", "/" if path.lstrip("/") == name else path[: -len(name)] or "/")
+                self.send_header("Cache-Control", "no-cache")
+                self.end_headers()
+                return
             full = os.path.normpath(os.path.join(WEB, name))
             if not full.startswith(WEB + os.sep) or not os.path.isfile(full):
                 return self._error_page(404)
