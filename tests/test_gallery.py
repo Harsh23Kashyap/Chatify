@@ -406,7 +406,13 @@ class GalleryBuilderUseThisApp(unittest.TestCase):
         self.assertEqual(json.load(io.open(os.path.join(wsdir, "data", "prompts.json")))["text"]["revise"], "CUSTOM PROMPT revise")
         self.assertIn("search", json.load(io.open(os.path.join(wsdir, "data", "code-drafts.json"))))
         moved = next(x["path"] for x in ws_cfg["sources"] if x["type"] == "local_files")
-        self.assertTrue(os.path.isfile(os.path.join(wsdir, moved, "a.md")))
+        # Hosted launch bundles never copy the SHARED app's documents into a
+        # guest workspace (live demo 2026-10-25: guests answered domain
+        # questions with the host's seeded guide); the guest's source starts
+        # empty and they add their own documents inside the workspace.
+        self.assertFalse(os.path.isfile(os.path.join(wsdir, moved, "a.md")))
+        leftovers = [f for f in glob.glob(os.path.join(wsdir, moved, "**", "*"), recursive=True) if os.path.isfile(f)]
+        self.assertEqual(leftovers, [])
 
         s, b = self.req("GET", url + "api/provider/status", A)
         key = json.loads(b)["keys"]["openai"]
