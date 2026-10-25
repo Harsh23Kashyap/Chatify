@@ -42,7 +42,11 @@ def _gate_variants(w):
 
 _GATE_WEAK = frozenset(
     "main recent current study studies review reviews finding findings result results method methods "
-    "effect effects analysis analyses".split())
+    "effect effects analysis analyses observation observations observed reveal reveals revealed".split())
+# "observations"/"revealed" are generic science-report vocabulary like "findings":
+# a nearby-galaxy star-cluster paper matched a JWST early-universe question on
+# observations/revealed/galaxy/formation without addressing early galaxies at all
+# (local R3 regression, 2026-10-25).
 # Generic academic vocabulary: matching only these says nothing about topic. An
 # immunotherapy review matched a CAR-T lymphoma-trials question on
 # recent/main/cell alone and was cited on the live demo (2026-10-25); weak stems
@@ -147,6 +151,19 @@ def relevance_gate(question, found):
             return any(pat.search(hay) for pat in pats)
         if sum(1 for _, e, _ in kept if _anchored(e)) >= 2:
             kept = [(n, e, p) for n, e, p in kept if _anchored(e)]
+            # The anchor alone is not the question's intent: a JWST paper about
+            # sub-Neptune exoplanets carries "JWST" but says nothing about early
+            # galaxy formation. When at least two anchored passages also cover a
+            # strict majority of the remaining topical question words, require
+            # that coverage (local R3 regression 2026-10-25: PHANGS star-cluster
+            # paper, sharing only galaxy/formation of latest/early/galaxy/
+            # formation, displayed for an early-galaxy-formation question).
+            rest = [(w, v) for w, v in q_variants if w not in anchors]
+            if rest:
+                bar = len(rest) // 2 + 1
+                meets = [(n, e, p) for n, e, p in kept if sum(1 for _, v in rest if v & p) >= bar]
+                if len(meets) >= 2:
+                    kept = meets
     # Lead with the passages that share the most question vocabulary, weighted by
     # how discriminating each shared word is within this candidate set. Overlap
     # order keeps the most on-question passage first; ties keep the connector's
@@ -468,13 +485,16 @@ class Engine:
                 # SetupRequired carries an owner-safe message naming the missing step; other
                 # exceptions stay as bare type names so internals never leak into the answer UI.
                 errors[sid] = (str(ex) or type(ex).__name__)[:240] if isinstance(ex, SetupRequired) else type(ex).__name__
-        # The gate targets open-API keyword search, which can return popular but unrelated
-        # pages; owner-corpus connectors (local files, uploads, python) are BM25/structured
-        # matches over the owner's own documents, a different relevance profile.
+        # Provenance is not relevance: an owner-corpus chunk that shares no topical
+        # vocabulary with the question still misleads when displayed as the most
+        # relevant passage (local R1 regression 2026-10-25: an upload's
+        # text-alignment chunk displayed for a malformed-hands/teeth question on
+        # BM25 rank alone). The gate now applies to every source; owner corpora
+        # keep their BM25 score ordering in a mixed list, below.
         _SEARCH_TYPES = ("http_json", "arxiv", "pubmed", "wikipedia", "crossref", "openalex", "web_search")
         search_ids = {s["id"] for s in self.cfg["sources"] if s.get("type") in _SEARCH_TYPES}
+        found = relevance_gate(question, found)
         own = [e for e in found if e.get("source") not in search_ids]
-        found = own + relevance_gate(question, [e for e in found if e.get("source") in search_ids])
         if own:
             # Mixed corpus: owner-corpus matches carry no gate rank, so keep the
             # historical score ordering for the combined list. Pure open-API results
