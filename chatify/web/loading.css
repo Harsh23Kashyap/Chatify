@@ -11,7 +11,7 @@ html[data-theme=dark] .cc-veil-name{color:#e8eee6}
 html[data-theme=dark] .cc-veil-text{font:500 13.5px 'DM Sans',system-ui,sans-serif;color:#5d6b64;max-width:300px;line-height:1.5}
 html[data-theme=dark] .cc-veil-text{color:#9db3a4}
 @keyframes cc-veil-shimmer{from{background-position:120% 0}to{background-position:-120% 0}}
-@media(prefers-reduced-motion:reduce){.cc-veil{transition:none;opacity:1}.cc-veil-logo,}
+@media(prefers-reduced-motion:reduce){.cc-veil{transition:none;opacity:1}.cc-veil .cc-orbit svg,.cc-veil .cc-orbit img,.cc-veil .cc-orbit-head{animation:none}}
 /* Shared inline orbit loader - the brand chase ring at in-page sizes. Used wherever
    something is loading inside a page (answers, builds, downloads): motion, never a bar. */
 .cc-spin{position:relative;display:inline-block;width:22px;height:22px;flex:none}
