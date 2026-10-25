@@ -19,3 +19,20 @@ async function openSettingsSection(p,group,hash){
   await p.waitForTimeout(150);
 }
 module.exports={ensureManualAdvanced,openSettingsSection};
+/* CCDialog replaced native confirm() (8a586fd): click-triggered confirms must
+   open dialog.cc-cdlg and press its labelled button; native dialog handlers
+   never fire. beforeunload dialogs remain native and are NOT covered here. */
+async function confirmCCDialog(p,okText){
+  const dlg=p.locator('dialog.cc-cdlg[open]');
+  await dlg.waitFor();
+  await dlg.getByRole('button',{name:okText,exact:true}).click();
+  await dlg.waitFor({state:'detached'}).catch(()=>{});
+}
+async function dismissCCDialog(p){
+  const dlg=p.locator('dialog.cc-cdlg[open]');
+  await dlg.waitFor();
+  const text=await dlg.innerText();
+  await dlg.getByRole('button',{name:'Cancel',exact:true}).click().catch(async()=>{await p.keyboard.press('Escape')});
+  return text;
+}
+module.exports={ensureManualAdvanced,openSettingsSection,confirmCCDialog,dismissCCDialog};
