@@ -1050,3 +1050,13 @@ pre.codeblock code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monosp
   .bar .title{flex:0 0 auto;min-width:80px}
   .composer #q{min-height:40px!important}
 }
+
+/* Sidebar titles read in both themes; actions appear on hover/focus, not as permanent columns. */
+.side .list .item{color:var(--ink)}
+.side .list .item.on{color:var(--brand)}
+.side .item .acts{display:none}
+.side .item:hover .acts,.side .item:focus-within .acts,.side .item.on .acts{display:flex}
+
+/* Busy skeleton keeps a visible delta from the page in both themes. */
+.answer-sk span{background:color-mix(in srgb,var(--soft) 80%,var(--ink) 20%)}
+@media(prefers-reduced-motion:no-preference){html:not([data-motion=none]) .answer-sk span{background:linear-gradient(90deg,color-mix(in srgb,var(--soft) 80%,var(--ink) 20%) 25%,color-mix(in srgb,var(--soft) 30%,var(--paper)) 50%,color-mix(in srgb,var(--soft) 80%,var(--ink) 20%) 75%);background-size:200% 100%;animation:answer-shimmer 1.6s linear infinite}}
