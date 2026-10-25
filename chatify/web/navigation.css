@@ -55,3 +55,11 @@ html body .nav-status{grid-column:2;grid-row:1;justify-self:end;max-width:none}
 html body .common-nav{grid-column:1/-1!important;grid-row:2!important;justify-self:stretch;display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr));gap:4px;width:100%!important;max-width:100%;box-sizing:border-box;padding:4px!important}
 html body .common-nav a,html body .common-nav button{text-align:center;padding:8px 4px!important;min-width:0!important;white-space:normal!important;line-height:1.2!important}
 }
+
+/* Chat page below 601px: keep brand, theme and the nav toggle on a single row; the model badge yields. */
+@media(max-width:600px){
+html body .toolbar:has(.nav-toggle){grid-template-columns:minmax(0,1fr) auto auto!important}
+html body .toolbar:has(.nav-toggle) .nav-status{grid-column:2;grid-row:1}
+html body .toolbar:has(.nav-toggle) .nav-toggle{grid-column:3;grid-row:1;justify-self:end;margin-left:0}
+html body .toolbar:has(.nav-toggle) .badge{display:none}
+}

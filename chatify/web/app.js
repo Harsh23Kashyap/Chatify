@@ -767,6 +767,14 @@ async function init() {
     $(".composer").prepend(f);
   }
   $("#scopeBtn").onclick=scopeDialog;
+  const toolsT = $("#toolsToggle"), toolsM = $("#toolsMenu");
+  if (toolsT && toolsM) {
+    const setTools = (open) => { toolsM.hidden = !open; toolsT.setAttribute("aria-expanded", String(open)); if (open) toolsM.querySelector("button").focus(); };
+    toolsT.addEventListener("click", (e) => { e.stopPropagation(); setTools(toolsM.hidden); });
+    toolsM.addEventListener("click", (e) => { e.stopPropagation(); if (e.target.id === "toolsScope" || e.target.id === "toolsActions") { setTools(false); $(e.target.id === "toolsScope" ? "#scopeBtn" : "#actionsBtn").click(); } });
+    toolsM.addEventListener("keydown", (e) => { const items = [...toolsM.querySelectorAll("button")]; const i = items.indexOf(document.activeElement); if (e.key === "Escape") { setTools(false); toolsT.focus(); } if (e.key === "ArrowDown") { e.preventDefault(); items[(i + 1) % items.length].focus(); } if (e.key === "ArrowUp") { e.preventDefault(); items[(i - 1 + items.length) % items.length].focus(); } });
+    document.addEventListener("click", () => { if (!toolsM.hidden) setTools(false); });
+  }
   $("#q").addEventListener("keydown",e=>{if((e.ctrlKey||e.metaKey)&&e.key==="Enter"){e.preventDefault();send()}});
   $("#actionsBtn").onclick=async()=>{
    const trigger=$("#actionsBtn");if(trigger.dataset.running==="true")return;trigger.dataset.running="true";trigger.setAttribute("aria-busy","true");const original=trigger.textContent,originalMinWidth=trigger.style.minWidth;trigger.style.minWidth=trigger.getBoundingClientRect().width+"px";trigger.textContent="Wait...";$("#actionsError").hidden=true;
@@ -818,9 +826,10 @@ async function init() {
   $("#menu").setAttribute("aria-controls", "side");
   const navT = $("#navToggle");
   if (navT) {
-    navT.addEventListener("click", (e) => { e.stopPropagation(); const open = document.body.classList.toggle("nav-open"); navT.setAttribute("aria-expanded", String(open)); });
-    document.addEventListener("click", (e) => { if (document.body.classList.contains("nav-open") && !e.target.closest(".common-nav") && !e.target.closest("#navToggle")) { document.body.classList.remove("nav-open"); navT.setAttribute("aria-expanded", "false"); } });
-    document.addEventListener("keydown", (e) => { if (e.key === "Escape" && document.body.classList.contains("nav-open")) { document.body.classList.remove("nav-open"); navT.setAttribute("aria-expanded", "false"); navT.focus(); } });
+    const setNavOpen = (open) => { document.body.classList.toggle("nav-open", open); navT.setAttribute("aria-expanded", String(open)); const main = $("#app"); if (main) main.inert = open; };
+    navT.addEventListener("click", (e) => { e.stopPropagation(); setNavOpen(!document.body.classList.contains("nav-open")); });
+    document.addEventListener("click", (e) => { if (document.body.classList.contains("nav-open") && !e.target.closest(".common-nav") && !e.target.closest("#navToggle")) setNavOpen(false); });
+    document.addEventListener("keydown", (e) => { if (e.key === "Escape" && document.body.classList.contains("nav-open")) { setNavOpen(false); navT.focus(); } });
   }
   $("#menu").addEventListener("click", () => { $("#app").classList.toggle(sidebarOverlay() ? "menu-open" : "side-collapsed"); syncSidebar(); });
   $("#sideClose").addEventListener("click", () => { $("#app").classList.remove("menu-open"); if (!sidebarOverlay()) $("#app").classList.add("side-collapsed"); $("#menu").focus(); syncSidebar(); });
