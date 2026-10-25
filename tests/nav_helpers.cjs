@@ -32,7 +32,14 @@ async function dismissCCDialog(p){
   const dlg=p.locator('dialog.cc-cdlg[open]');
   await dlg.waitFor();
   const text=await dlg.innerText();
-  await dlg.getByRole('button',{name:'Cancel',exact:true}).click().catch(async()=>{await p.keyboard.press('Escape')});
+  await dlg.locator('.cc-cdlg-cancel').click();
   return text;
 }
-module.exports={ensureManualAdvanced,openSettingsSection,confirmCCDialog,dismissCCDialog};
+async function promptCCDialog(p,value,okText){
+  const dlg=p.locator('dialog.cc-cdlg[open]');
+  await dlg.waitFor();
+  await dlg.locator('.cc-cdlg-input').fill(value);
+  await dlg.getByRole('button',{name:okText,exact:true}).click();
+  await dlg.waitFor({state:'detached'}).catch(()=>{});
+}
+module.exports={ensureManualAdvanced,openSettingsSection,confirmCCDialog,dismissCCDialog,promptCCDialog};
