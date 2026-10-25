@@ -816,7 +816,7 @@ def make_handler(cfg, engine):
                 return self._send(200, {"imported": n})
             if path == "/api/export":
                 ch = store.chat(o, qs.get("chat", ""))
-                return self._send(200, chat_markdown(ch["title"], turn_scopes(o,store.turns(o, ch["id"]))).encode(), "text/markdown; charset=utf-8",
+                return self._send(200, chat_markdown(ch["title"], turn_scopes(o,store.turns(o, ch["id"])), cfg["sources"]).encode(), "text/markdown; charset=utf-8",
                                   {"Content-Disposition": 'attachment; filename="chat.md"'})
             if path in ("/api/ask", "/api/ask-stream", "/api/regenerate"):
                 budget.take("question", o)
@@ -914,10 +914,10 @@ def make_handler(cfg, engine):
                                   {"Content-Disposition": 'attachment; filename="references.bib"'})
             if path == "/api/answer-markdown":
                 t=permissions.view(cfg,o,store.turn(o,qs.get('turn','')))
-                return self._send(200,answer_markdown(effective_app(),t).encode(),'text/markdown; charset=utf-8',{'Content-Disposition':'attachment; filename="answer.md"'})
+                return self._send(200,answer_markdown(effective_app(),t,cfg["sources"]).encode(),'text/markdown; charset=utf-8',{'Content-Disposition':'attachment; filename="answer.md"'})
             if path == "/api/pdf":
                 t = permissions.view(cfg,o,store.turn(o, qs.get("turn", "")))
-                return self._send(200, pdf_bytes(effective_app()["title"], t,themestore.value.get("light",{}).get("brand",cfg["app"]["accent"]),effective_app()["tagline"]), "application/pdf",
+                return self._send(200, pdf_bytes(effective_app()["title"], t,themestore.value.get("light",{}).get("brand",cfg["app"]["accent"]),effective_app()["tagline"],cfg["sources"]), "application/pdf",
                                   {"Content-Disposition": 'attachment; filename="answer.pdf"'})
             return self._send(404, {"error": "Not found"})
 

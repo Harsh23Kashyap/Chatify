@@ -106,3 +106,28 @@ class PlainTextDisplay(unittest.TestCase):
   a=Engine.fallback_answer([{'n':1,'text':'## Hands and fine structure\n\n**Malformed hands** appear at $z>10$ in MgAl$_2$O$_4$.'}])
   self.assertIn('Malformed hands appear at z>10 in MgAl2O4.',a)
   self.assertNotIn('##',a);self.assertNotIn('**',a);self.assertNotIn('$',a)
+class SourceNoteExports(unittest.TestCase):
+ SOURCES=[{'id':'openalex','label':'OpenAlex'},{'id':'web','label':'Live web search'},{'id':'arxiv','label':'arXiv'}]
+ def turn(self):
+  return {'question':'Q','answer':'Preview [1]','evidence':[{'n':1,'title':'A source','url':'https://example.invalid/s'}],
+          'source_errors':{'openalex':'OpenAlex needs a free API key. Add it under Sources.','web':'SetupRequired'}}
+ def test_markdown_carries_named_note(self):
+  from chatify.exports import answer_markdown,chat_markdown
+  m=answer_markdown({'title':'Chat'},self.turn(),self.SOURCES)
+  self.assertIn('OpenAlex: OpenAlex needs a free API key. Add it under Sources.',m)
+  self.assertIn('Answered from the other sources.',m)
+  cm=chat_markdown('Chat',[self.turn()],self.SOURCES)
+  self.assertIn('OpenAlex needs a free API key',cm)
+ def test_pdf_carries_named_note(self):
+  from chatify.exports import pdf_bytes
+  text=_pdf_text(pdf_bytes('Chat',self.turn(),sources=self.SOURCES))
+  self.assertIn('OpenAlex needs a free API key',text);self.assertIn('Answered from the other sources',text)
+ def test_all_failed_wording(self):
+  from chatify.exports import source_note
+  note=source_note({'openalex':'TimeoutError'},[{'id':'openalex','label':'OpenAlex'}])
+  self.assertIn('OpenAlex could not be reached for this question.',note)
+  self.assertEqual(source_note({},self.SOURCES),'');self.assertEqual(source_note(None,None),'')
+ def test_no_note_without_errors(self):
+  from chatify.exports import answer_markdown
+  t=self.turn();t['source_errors']={}
+  self.assertNotIn('could not be reached',answer_markdown({'title':'Chat'},t,self.SOURCES))

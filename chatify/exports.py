@@ -29,8 +29,28 @@ def snapshot(e):
     return " · ".join(str(x) for x in [e.get("document"), "page "+str(e["page"]) if e.get("page") else e.get("section"), "version "+str(e["version"]) if e.get("version") else "", "OCR" if e.get("ocr") else ""] if x)
 
 
-def answer_markdown(app,turn):
-    out=["# "+app.get("title","Chat"),app.get("tagline",""),"", "## Question",turn['question'],"", "## Answer",turn['answer'],"", "## Sources at answer time"]
+def source_note(errors, sources):
+    """The source-skip explanation the chat UI shows, for exports: which sources
+    could not search and why (live-demo gap 2026-10-25: exports showed passages
+    without saying sources had been skipped)."""
+    if not isinstance(errors, dict) or not errors:
+        return ""
+    labels = {str(s.get("id")): str(s.get("label") or s.get("id")) for s in (sources or []) if isinstance(s, dict)}
+    items = [(str(k), v) for k, v in errors.items()]
+    all_failed = len(items) >= max(1, len(sources or []))
+    # A sentence-valued error names the concrete cause; a bare exception type
+    # name stays behind the generic wording (mirrors the chat UI note).
+    named = ["%s: %s" % (labels.get(sid, sid), str(msg).strip()) for sid, msg in items if isinstance(msg, str) and " " in msg]
+    if named:
+        return " ".join(named) + ("" if all_failed else " Answered from the other sources.")
+    return ", ".join(labels.get(sid, sid) for sid, _ in items) + " could not be reached" + (" for this question." if all_failed else " - answered from the other sources.")
+
+
+def answer_markdown(app,turn,sources=None):
+    out=["# "+app.get("title","Chat"),app.get("tagline",""),"", "## Question",turn['question'],"", "## Answer",turn['answer']]
+    note=source_note(turn.get('source_errors'),sources if sources is not None else app.get('sources'))
+    if note:out+=["",note]
+    out+=["", "## Sources at answer time"]
     for i,e in enumerate(turn['evidence'],1):
         out += ["[%d] %s" % (e.get('n',i),_plain(e['title'])),e.get('url') or '',snapshot(e),""]
     out += ["Source versions are snapshots at answer time. They are not a guarantee the linked document is unchanged."]
@@ -78,17 +98,20 @@ class _AnswerPDF(FPDF):
         self.set_font('noto','',8);self.set_text_color(99,115,107)
         self.set_xy(50,790);self.cell(0,12,'%s | %d / {nb}'%(self._doc_title[:60],self.page_no()))
 
-def chat_markdown(title, turns):
+def chat_markdown(title, turns, sources=None):
     out = ["# " + title, ""]
     for t in turns:
         out += ["**Q:** " + t["question"], "", t["answer"], ""]
+        note = source_note(t.get("source_errors"), sources)
+        if note:
+            out += [note, ""]
         for i, e in enumerate(t["evidence"], 1):
             out.append("%d. %s%s" % (i, _plain(e["title"]), " <%s>" % e["url"] if e["url"] else ""))
         out.append("")
     return "\n".join(out)
 
 
-def pdf_bytes(title, turn, accent="#173f35", tagline=""):
+def pdf_bytes(title, turn, accent="#173f35", tagline="", sources=None):
     blocks=[('label','ANSWER NOTE'),('title',title),('muted',tagline),('space',''),('label','YOUR QUESTION'),('question',turn['question']),('space',''),('heading','Answer')]
     # Recompose markdown tables into readable labeled rows for narrow PDF pages.
     lines=turn['answer'].split('\n');i=0
@@ -105,6 +128,8 @@ def pdf_bytes(title, turn, accent="#173f35", tagline=""):
                 blocks.append(('body','; '.join('%s: %s'%(h,values[n]) for n,h in enumerate(headers))));i+=1
             continue
         blocks.append(('body',line) if line else ('space',''));i+=1
+    note=source_note(turn.get('source_errors'),sources)
+    if note:blocks += [('space',''),('muted',note)]
     blocks += [('space',''),('heading','Sources at answer time')]
     for i,e in enumerate(turn['evidence'],1):
         blocks += [('source','[%d] %s'%(e.get('n',i),_plain(e['title']))),('muted',snapshot(e).replace(' · ',' | ')),('muted',e.get('url') or ''),('space','')]
