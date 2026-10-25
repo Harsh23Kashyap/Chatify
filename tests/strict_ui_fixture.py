@@ -13,6 +13,9 @@ from chatify.server import make_handler
 def serve():
  with tempfile.TemporaryDirectory(prefix='chatify-ui-') as folder:
   cfg=schema.validate({'app':{'id':'newsnerd','title':'NewsNerd','tagline':'Understand the news. Check the source.'},'storage':{'path':folder+'/state.db'}});cfg['_dir']=folder
+  import yaml as _yaml
+  from pathlib import Path as _Path
+  _appfile=_Path(folder)/'app.yaml';_appfile.write_text(_yaml.safe_dump({k:cfg[k] for k in schema.DEFAULTS}));cfg['_path']=str(_appfile)
   s=Store(cfg['storage']['path']);owner='local'
   t=s.new_topic(owner,'Multi-chat undo fixture')
   for n in range(2):

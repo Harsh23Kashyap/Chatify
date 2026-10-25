@@ -32,7 +32,7 @@ html body.settings-tabs.cfgtop-manual #cfgtop.cfg-path-choice{justify-content:fl
 @media(max-width:760px){html body.settings-tabs #cfgtop.cfg-path-choice{justify-content:flex-start;margin:4px 0 14px}}
 
 html body.settings-tabs #cfgtop.cfg-path-choice button{display:flex;align-items:center;gap:8px;min-height:0;font-size:14px;font-weight:600;color:#173f35!important;padding:6px 0}
-html body.settings-tabs #cfgtop.cfg-path-choice button small{font-size:12px;font-weight:400;color:#60735f}
+html body.settings-tabs #cfgtop.cfg-path-choice button small{font-size:12px;font-weight:400;color:#55695c}
 html body.settings-tabs #cfgtop.cfg-path-choice button[data-t=manual] span{text-decoration-thickness:1.5px;text-underline-offset:3px}
 html body.settings-tabs #cfgtop.cfg-path-choice button[data-t=builder]{border:1px solid #b6c9ae;border-radius:10px;padding:8px 14px;background:#edf2e5!important}
 @media(max-width:760px){html body.settings-tabs #cfgtop.cfg-path-choice button[data-t=manual]{align-items:flex-start;flex-direction:column;gap:4px}html body.settings-tabs #cfgtop.cfg-path-choice button[data-t=builder]{flex-wrap:wrap}html body.settings-tabs #cfgtop.cfg-path-choice button[data-t=builder] small{padding-left:0}}

@@ -385,6 +385,9 @@ html body.settings-tabs.settings-tabs.settings-tabs #menu a.on{border-color:#173
 html body.settings-tabs.settings-tabs.settings-tabs #menu .section-card-icon{display:grid;place-items:center;flex:0 0 34px;height:34px;border-radius:9px;background:#e6ecdd;color:#173f35;font-size:12px;font-weight:700}
 html body.settings-tabs.settings-tabs.settings-tabs #menu a.on .section-card-icon{background:#d7ef72}
 html body.settings-tabs.settings-tabs.settings-tabs #menu .section-card-copy{display:grid;gap:6px;min-width:0}
+html body.settings-tabs.settings-tabs.settings-tabs #menu .section-card-copy small{color:#4f6156;opacity:1}
+html body.settings-tabs.settings-tabs.settings-tabs #menu a.on .section-card-copy small{color:#e8efe6}
+html body.settings-tabs #settingsNavTop .category-tabs .tab-copy small{color:#4f6156;opacity:1}
 html body.settings-tabs.settings-tabs.settings-tabs #menu b{font-size:14px;line-height:1.35;font-weight:650;word-break:normal;overflow-wrap:normal}
 html body.settings-tabs.settings-tabs.settings-tabs #menu small{display:block;font-size:11px;line-height:1.4;font-weight:400;opacity:.85}
 html body.settings-tabs.settings-tabs.settings-tabs #menu a:hover{border-color:#8d9e78!important}
