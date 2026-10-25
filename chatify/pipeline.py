@@ -132,6 +132,21 @@ def relevance_gate(question, found):
     disc = [(w, v) for w, v in q_variants if 0 < df[w] * 2 <= len(scored)]
     if len(scored) >= 3 and len(disc) >= 2:
         kept = [(n, e, p) for n, e, p in kept if any(v & p for _, v in disc)]
+    # Acronym/proper-noun anchors: an all-caps question word (JWST, CAR-T,
+    # DLBCL) names the entity the question is about. A passage can share every
+    # generic context word (early, galaxy, formation, revealed) and still not
+    # address the question without it (live demo 2026-10-25: Stephan's Quintet,
+    # a nearby galaxy group, displayed for a JWST early-galaxy question). When
+    # at least two kept passages carry an anchor, require one; with fewer the
+    # anchor signal is absent from retrieval and the count floor alone decides.
+    anchors = sorted(set(a.lower() for a in re.findall(r"\b[A-Z][A-Z0-9]{2,}(?:-[A-Z0-9]+)*\b", question or "")))
+    if anchors and kept:
+        pats = [re.compile(r"\b" + re.escape(a).replace(r"\-", r"[- ]?") + r"s?\b", re.I) for a in anchors]
+        def _anchored(e):
+            hay = (str(e.get("title") or "") + " " + str(e.get("text") or "")[:1500])
+            return any(pat.search(hay) for pat in pats)
+        if sum(1 for _, e, _ in kept if _anchored(e)) >= 2:
+            kept = [(n, e, p) for n, e, p in kept if _anchored(e)]
     # Lead with the passages that share the most question vocabulary, weighted by
     # how discriminating each shared word is within this candidate set. Overlap
     # order keeps the most on-question passage first; ties keep the connector's

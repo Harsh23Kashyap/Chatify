@@ -372,6 +372,42 @@ class FreshnessQualification(unittest.TestCase):
         self.assertIn("show no dates", a)
 
 
+class AcronymAnchorGate(unittest.TestCase):
+    """Live demo 2026-10-25: Wikipedia's Stephan's Quintet (a nearby galaxy
+    group) displayed for "What have the latest JWST observations revealed about
+    early galaxy formation?" - it shared every generic context word
+    (observations/revealed/early/galaxy/formation) but not the JWST anchor."""
+    Q = "What have the latest JWST observations revealed about early galaxy formation?"
+    QUINTET = ev(1, "Stephan's Quintet",
+                 "Four of the five galaxies in Stephan's Quintet form a physical association. "
+                 "Radio observations in the early 1970s revealed a filament of emission; star formation is occurring.")
+    ABUND = ev(2, "Super-early massive galaxies revealed by JWST",
+               "JWST observations revealed an abundance of early galaxy formation candidates at z>10.")
+    REVIEW = ev(3, "How JWST is revolutionizing early galaxy formation",
+                "The James Webb Space Telescope (JWST) revealed early galaxy formation in new detail.")
+
+    def test_anchorless_context_match_dropped(self):
+        out = relevance_gate(self.Q, [self.QUINTET, self.ABUND, self.REVIEW])
+        titles = [e["title"] for e in out]
+        self.assertNotIn("Stephan's Quintet", titles)
+        self.assertIn("Super-early massive galaxies revealed by JWST", titles)
+        self.assertIn("How JWST is revolutionizing early galaxy formation", titles)
+
+    def test_anchor_rule_inert_when_retrieval_lacks_anchor(self):
+        # Fewer than two kept passages carry the anchor: no anchor signal, the
+        # count floor alone decides and nothing extra is dropped.
+        other = ev(4, "Galaxy formation overview",
+                   "Early galaxy formation revealed by deep observations of galaxies.")
+        out = relevance_gate(self.Q, [self.QUINTET, self.ABUND, other])
+        self.assertTrue(any("Stephan" in e["title"] or "overview" in e["title"] for e in out))
+
+    def test_no_anchor_question_unchanged(self):
+        a = ev(5, "Stir frying", "Stir frying technique for vegetables in a wok.")
+        b = ev(6, "Wok hei", "The wok hei flavour in stir frying comes from high heat.")
+        out = relevance_gate("How do I stir fry vegetables in a wok?", [a, b])
+        self.assertEqual(len(out), 2)
+
+
 class DiscriminatingWordGuards(unittest.TestCase):
     """The ubiquitous-only drop must never exclude legitimate passages when the
     candidate set is too small for document frequency to mean anything, or when
