@@ -50,6 +50,46 @@ function plainText(t) {
   t = t.replace(/[ \t]{2,}/g, " ");
   return t.trim();
 }
+// Display-time mirror of the server-side match-span window: the evidence
+// excerpt must show the span that supports the displayed answer, not the chunk
+// head (design review 2026-10-25: the sources panel showed generic intro text
+// while the answer quoted the matching passage further down).
+const EXCERPT_STOP = new Set(("what which when where does about this that with from your have into tell more than then them they their there were will would could should " +
+  "the and for are how why who is it of to in on a an do did can i me my mine we our us").split(" "));
+function excerptWindow(text, question, size) {
+  const low = text.toLowerCase();
+  const terms = [...new Set(((question || "").toLowerCase().match(/[a-z0-9]{3,}/g) || [])
+    .filter((w) => !/^\d+$/.test(w) && !EXCERPT_STOP.has(w)))];
+  const groups = [];
+  for (const w of terms) {
+    const ps = [];
+    let i = -1;
+    while ((i = low.indexOf(w, i + 1)) >= 0) {
+      const before = i === 0 || !/[a-z0-9]/.test(low[i - 1]);
+      const after = i + w.length >= low.length || !/[a-z0-9]/.test(low[i + w.length]);
+      if (before && after) ps.push(i);
+    }
+    if (ps.length) groups.push(ps);
+  }
+  if (!groups.length || text.length <= size) return text.slice(0, size) + (text.length > size ? "\u2026" : "");
+  // Rarity-weighted hits, like the server: a term repeated all over the passage
+  // must not outvote the few distinctive hits that actually answer the question.
+  // Cluster selection uses the server's 320-char span even when the displayed
+  // excerpt is shorter, or a tighter display window favors the chunk head again.
+  const span = Math.max(size, 320);
+  const hits = groups.flatMap((ps) => ps.map((p) => [p, 1 / ps.length]));
+  let best = 0, bestScore = -1;
+  for (const [h] of hits) {
+    const s = Math.max(0, h - Math.floor(span / 3));
+    const c = hits.reduce((a, [x, wt]) => a + (x >= s && x <= s + span ? wt : 0), 0);
+    if (c > bestScore) { bestScore = c; best = s; }
+  }
+  let start = best;
+  if (start > 0) { const sp = text.indexOf(" ", start); if (sp >= 0 && sp < start + 40) start = sp + 1; }
+  let win = text.slice(start, start + size);
+  if (win.length === size) win = win.replace(/\s+\S*$/, "");
+  return (start > 0 ? "\u2026" : "") + win + (start + win.length < text.length ? "\u2026" : "");
+}
 const ICON = {
   clip: "M21 11.5l-8.6 8.6a5 5 0 01-7-7l9-9a3.3 3.3 0 014.7 4.7l-9 9a1.7 1.7 0 01-2.4-2.4l8.3-8.3",
   pin: "M12 17v5M9 3h6l-1 7 3 3v2H7v-2l3-3z",
@@ -273,7 +313,7 @@ function turnView(t, prev) {
     bub.append(el("div", { class: "nf-tips" }, tip("Try a different question", () => { $("#q").focus(); }), tip("Use words from your documents", () => { $("#q").focus(); }), tip("See which documents this chat uses", () => { location.href = (window.CC_APP_BASE||"") + "/settings.html"; })));
   }
   const srcLabel = (e) => (S.cfg.sources.find((x) => x.id === e.source) || {}).label || e.source || "";
-  const srcs = !t.evidence.length ? null : (el("div", { class: "srcs" }, el("div", { class: "srcs-h", text: "Evidence for this answer" }), t.evidence.slice(0, 5).map((e) => el("button", { class: "s", title: plainText(e.title), onclick: (ev) => showSources(t.evidence, e.n, ev.currentTarget) }, el("span", { class: "n", text: "[" + e.n + "]" }), el("span", { class: "sx" }, el("span", { class: "st", text: srcLabel(e) ? srcLabel(e) + " / " + plainText(e.title) : plainText(e.title) }), el("span", {class:"source-excerpt",text:e.text ? (()=>{const x=plainText(e.text);return x.slice(0,240)+(x.length>240?"…":"")})() : "Source excerpt unavailable"}), el("span", { class: "sm", text: [srcLabel(e), e.year, e.page ? "page " + e.page : e.section, e.ocr ? "OCR text, check original" : ""].filter(Boolean).join(" \u00b7 ") })), el("span", { class: "go", "aria-hidden": "true", text: "\u203a" })))));
+  const srcs = !t.evidence.length ? null : (el("div", { class: "srcs" }, el("div", { class: "srcs-h", text: "Evidence for this answer" }), t.evidence.slice(0, 5).map((e) => el("button", { class: "s", title: plainText(e.title), onclick: (ev) => showSources(t.evidence, e.n, ev.currentTarget) }, el("span", { class: "n", text: "[" + e.n + "]" }), el("span", { class: "sx" }, el("span", { class: "st", text: srcLabel(e) ? srcLabel(e) + " / " + plainText(e.title) : plainText(e.title) }), el("span", {class:"source-excerpt",text:e.text ? excerptWindow(plainText(e.text), t.question, 240) : "Source excerpt unavailable"}), el("span", { class: "sm", text: [srcLabel(e), e.year, e.page ? "page " + e.page : e.section, e.ocr ? "OCR text, check original" : ""].filter(Boolean).join(" \u00b7 ") })), el("span", { class: "go", "aria-hidden": "true", text: "\u203a" })))));
   nodes.push(el("div", { class: "row" }, avatar("bot"), bub));
   const meta = el("div", { class: "meta" });
   const weak = (t.ledger || []).filter((l) => !l.supported || (l.overlap !== undefined && l.overlap < 0.35));
