@@ -12,7 +12,7 @@ from .accounts import Accounts
 from .exports import bibtex, pdf_bytes, chat_markdown, answer_markdown
 import time, collections
 
-WEB = os.path.join(os.path.dirname(__file__), "web")
+WEB = os.path.normpath(os.path.join(os.path.dirname(os.path.abspath(__file__)), "web"))
 BUILD_STARTS = {}  # ip -> [timestamps of build starts]; light abuse limit for shared hosted demos
 
 

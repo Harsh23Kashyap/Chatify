@@ -1,5 +1,5 @@
 import os, sys, unittest
-sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), ".."))
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from chatify.pipeline import relevance_gate, _gate_stems, _NO_KEY_WHY, Engine
 from chatify import providers
 

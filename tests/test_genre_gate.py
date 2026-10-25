@@ -1,5 +1,5 @@
 import os, sys, unittest
-sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), ".."))
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from chatify.pipeline import relevance_gate
 
 
@@ -17,6 +17,19 @@ GENUINE2 = ev(2, "Elecoglipron phase 1 pharmacokinetics, fed/fasted dosing, safe
               "GLP-1 dosing safety findings from a phase 1 trial. Dosing cohorts; safety endpoints. " * 4)
 RIDER = ev(3, "Pharmacy students' knowledge of GLP-1 receptor agonist adverse effects",
            "GLP-1 dosing safety knowledge among pharmacy students was assessed; dosing safety awareness surveyed. " * 4)
+
+
+class WebRootNormalization(unittest.TestCase):
+    def test_web_root_is_normalized(self):
+        # 2026-10-25: an unnormalized sys.path entry ('tests/..', inserted by gate
+        # test modules) made chatify.server import with '..' in __file__; WEB then
+        # carried '..' and _static's traversal guard compared a normalized full
+        # path against the unnormalized WEB prefix - every page 404'd while APIs
+        # stayed up. WEB must be normalized at import.
+        import os
+        from chatify import server
+        self.assertEqual(server.WEB, os.path.normpath(server.WEB))
+        self.assertTrue(os.path.isfile(os.path.join(server.WEB, "index.html")))
 
 
 class GenreGate(unittest.TestCase):
