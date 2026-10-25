@@ -1057,7 +1057,10 @@ class Engine:
                 # proof of the freshest information available.
                 line = "Freshness: the newest dated source found for this question is from %d; newer information may exist that these sources do not cover." % max(years)
                 if undated:
-                    line += " %d of the sources shown carry no date at all." % undated
+                    # The count base is the retained evidence behind this answer, not
+                    # necessarily the passages visible in a capped preview list.
+                    line += " %d of the %d sources for this answer %s no date at all." % (
+                        undated, len(evidence), "carries" if undated == 1 else "carry")
                 lines.append(line)
             else:
                 lines.append("Freshness: these sources show no dates, so how current they are cannot be confirmed.")

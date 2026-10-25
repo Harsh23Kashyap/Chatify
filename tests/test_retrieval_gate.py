@@ -467,7 +467,7 @@ class FreshnessQualification(unittest.TestCase):
         evs = [{"n": 1, "text": "A passage.", "year": "2023"}, {"n": 2, "text": "B passage."}]
         a = Engine.fallback_answer(evs, question="What are the newest findings on CAR-T resistance?")
         self.assertIn("newest dated source found for this question is from 2023", a)
-        self.assertIn("1 of the sources shown carry no date at all", a)
+        self.assertIn("1 of the 2 sources for this answer carries no date at all", a)
 
     def test_non_recency_question_has_no_freshness_line(self):
         a = Engine.fallback_answer([{"n": 1, "text": "A passage.", "year": "2023"}], question="What is CAR-T therapy?")
