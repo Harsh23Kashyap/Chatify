@@ -370,7 +370,7 @@ function logoControl(f, current) {
   const file = el("input", { type: "file", accept: ".png,.jpg,.jpeg,.webp,.gif,image/*", id: "f-logo-file", "aria-label": "Choose a logo picture" }); file.style.cssText = "position:absolute;width:1px;height:1px;opacity:0;pointer-events:none"; const fileBtn = el("label", { class: "go ghost filebtn", for: "f-logo-file" }, "Choose a picture");
   const fe = el("input", { type: "range", min: "0", max: "50", value: "25", "aria-label": "Edge softness", disabled: "" });
   const rb = el("input", { type: "checkbox", disabled: "" });
-  const note = el("div", { class: "h", text: current ? "Choose a new picture to adjust it. Current logo stays until a replacement is ready." : "PNG, JPG, WebP or GIF. Add a picture to enable background removal and edge softness." });
+  const note = el("div", { class: "h", role: "status", text: current ? "Choose a new picture to adjust it. Current logo stays until a replacement is ready." : "PNG, JPG, WebP or GIF. Add a picture to enable background removal and edge softness." });
   const rm = el("button", { type: "button", class: "mini", hidden: current ? undefined : "" }, "Remove");
   function render() {
     if (!orig) return; const max = 256, k = Math.min(1, max / Math.max(orig.width, orig.height));
