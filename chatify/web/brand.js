@@ -22,7 +22,7 @@
   function palette(color,dark){
     const bg=mix(color,dark?'#000000':'#ffffff',dark?.94:.97),surface=mix(color,dark?'#000000':'#ffffff',dark?.89:.99),sidebar=mix(color,dark?'#000000':'#ffffff',dark?.85:.94),bot=mix(color,dark?'#000000':'#ffffff',dark?.82:.94),you=mix(color,dark?'#000000':'#ffffff',dark?.72:.88);
     const backs=[bg,surface,sidebar,bot,you];
-    return {bg,surface,sidebar,bot,you,brand:safe(color,backs),accent:safe(color,backs),ink:safe(dark?'#f8f8f8':'#17231f',backs),muted:safe(dark?'#a9b7b0':'#63736c',backs),line:mix(color,dark?'#000000':'#ffffff',dark?.65:.78),danger:safe('#b23a3a',backs)};
+    return {bg,surface,sidebar,bot,you,brand:safe(color,backs),accent:safe(color,backs),ink:safe(dark?'#f8f8f8':'#17231f',backs),muted:safe(dark?'#a9b7b0':'#5f6d67',backs),line:mix(color,dark?'#000000':'#ffffff',dark?.65:.78),danger:safe('#b23a3a',backs)};
   }
   function shade(color, background, target=4.5){
     if(contrast(color,background)>=target)return color;

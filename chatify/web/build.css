@@ -1,5 +1,5 @@
 /* Guided build (describe -> sources -> build). Pine/lime brand, no progress bars. */
-:root{--pine:#173f35;--lime:#d7ef72;--lime-deep:#7fae3c;--cream:#f8f4e9;--paper:#fffdf7;--ink:#17231f;--mut:#63736c;--line:#d9e1dc}
+:root{--pine:#173f35;--lime:#d7ef72;--lime-deep:#7fae3c;--cream:#f8f4e9;--paper:#fffdf7;--ink:#17231f;--mut:#5f6d67;--line:#d9e1dc}
 html[data-theme=dark]{--paper:#16211c;--ink:#e8eee6;--mut:#9db3a4;--line:#2a3a32}
 body{background:var(--cream);color:var(--ink);font-family:"DM Sans",-apple-system,system-ui,sans-serif}
 .build-main{max-width:1040px;margin:0 auto;padding:28px 24px 80px}
