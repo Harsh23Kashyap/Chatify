@@ -1,7 +1,8 @@
 """Branded multipage PDF and Markdown exports for an answer, plus BibTeX.
 
-The PDF uses bundled Noto Sans and Noto Sans Devanagari fonts (SIL Open Font
-License 1.1, see web/fonts/OFL.txt) with HarfBuzz shaping, so ordinary Unicode
+The PDF uses bundled Noto Sans, Noto Sans Devanagari, Noto Sans Symbols,
+Noto Sans Symbols 2 and Noto Sans Math fonts (SIL Open Font License 1.1, see
+web/fonts/OFL.txt) with HarfBuzz shaping, so ordinary Unicode
 answer text - including Hindi - exports as itself instead of being folded or
 rejected. Scripts outside the bundled fonts are still rejected honestly.
 """
@@ -64,7 +65,7 @@ def _covered_chars():
     if _COVERAGE is None:
         from fontTools.ttLib import TTFont
         cov=set()
-        for name in ('NotoSans-Regular.ttf','NotoSans-Bold.ttf','NotoSansDevanagari-Regular.ttf','NotoSansDevanagari-Bold.ttf','NotoSansSymbols-Regular.ttf','NotoSansSymbols2-Regular.ttf'):
+        for name in ('NotoSans-Regular.ttf','NotoSans-Bold.ttf','NotoSansDevanagari-Regular.ttf','NotoSansDevanagari-Bold.ttf','NotoSansSymbols-Regular.ttf','NotoSansSymbols2-Regular.ttf','NotoSansMath-Regular.ttf'):
             cov|=set(TTFont(os.path.join(_FONTS,name)).getBestCmap())
         _COVERAGE=cov
     return _COVERAGE
@@ -85,9 +86,9 @@ class _AnswerPDF(FPDF):
         self._accent=accent
         self.set_margins(50,50,86)
         self.set_auto_page_break(True,82)
-        for family,style,filename in [('noto','','NotoSans-Regular.ttf'),('noto','B','NotoSans-Bold.ttf'),('deva','','NotoSansDevanagari-Regular.ttf'),('deva','B','NotoSansDevanagari-Bold.ttf'),('symbols','','NotoSansSymbols-Regular.ttf'),('symbols2','','NotoSansSymbols2-Regular.ttf')]:
+        for family,style,filename in [('noto','','NotoSans-Regular.ttf'),('noto','B','NotoSans-Bold.ttf'),('deva','','NotoSansDevanagari-Regular.ttf'),('deva','B','NotoSansDevanagari-Bold.ttf'),('symbols','','NotoSansSymbols-Regular.ttf'),('symbols2','','NotoSansSymbols2-Regular.ttf'),('math','','NotoSansMath-Regular.ttf')]:
             self.add_font(family,style,os.path.join(_FONTS,filename))
-        self.set_fallback_fonts(['deva','symbols','symbols2'])
+        self.set_fallback_fonts(['deva','symbols','symbols2','math'])
         self.set_text_shaping(True)
         self.set_title(doc_title)
     def header(self):

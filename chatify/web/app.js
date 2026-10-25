@@ -280,7 +280,7 @@ function showSources(evidence, hl, trigger) {
     list.replaceChildren(...evidence.filter((e) => !only || e.source === only).map((e) => el("div", { class: "src" + (e.n === hl ? " hl" : "") },
       el("b", { text: e.n + ". " + plainText(e.title) }),
       el("small", { text: [(e.authors || []).slice(0, 3).join(", "), e.year, e.venue, e.document, e.page ? "page " + e.page : e.section, e.version ? "version " + e.version.slice(0, 12) : "", e.ocr ? "OCR text, check original" : ""].filter(Boolean).join(" · ") }),
-      highlight(el("p", {class:e.text ? "source-text" : "source-unavailable"}), e.text ? plainText(e.text) : "Source excerpt unavailable. This saved reference has no text to inspect.", terms),
+      highlight(el("p", {class:e.text ? "source-text" : "source-unavailable"}), e.text ? excerptWindow(plainText(e.text), (S.turns[S.turns.length - 1] || {}).standalone || "", 280) : "Source excerpt unavailable. This saved reference has no text to inspect.", terms),
       e.url ? el("a", { href: e.url, target: "_blank", rel: "noopener noreferrer", text: "Open source" }) : null)));
   };
   if (types.length > 1) types.forEach((t) => filters.append(el("button", { class: "chip", "aria-pressed":"false", onclick: (ev) => {

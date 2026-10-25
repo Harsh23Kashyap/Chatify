@@ -120,6 +120,18 @@ class FallbackWording(unittest.TestCase):
         self.assertIn("hands, teeth and text remain hard", a)
         self.assertNotIn("Diffusion models and diffusion sampling.", a.split("- ", 1)[1][:60])
 
+    def test_excerpt_window_completes_cliff_sentence(self):
+        # Hosted R2 2026-10-25: the window cut mid-clause at "...a significant
+        # proportion of", stranding the reader right before the resistance span.
+        text = (
+            "CAR-T cell therapy for r/r diffuse large B-cell lymphoma (DLBCL): CD19-targeted CAR-T cell therapy is approved "
+            "in second-line and post-second-line settings, achieving substantial clinical responses in selected B-cell "
+            "leukemia/lymphoma subgroups. Nevertheless, a significant proportion of patients experience primary resistance "
+            "or relapse after an initial response. " + ("Additional mechanism detail follows. " * 8))
+        a = Engine.fallback_answer([{"n": 1, "text": text}], question="What mechanisms drive CAR-T therapy resistance and relapse in diffuse large B-cell lymphoma?")
+        self.assertIn("primary resistance or relapse after an initial response.", a)
+        self.assertNotIn("proportion of...", a)
+
     def test_excerpt_window_without_match_keeps_head(self):
         text = "Unrelated content. " * 40
         a = Engine.fallback_answer([{"n": 1, "text": text}], question="What is photosynthesis?")

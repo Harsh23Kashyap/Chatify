@@ -322,7 +322,16 @@ def _excerpt_window(text, terms, size=320):
             start = sp + 1
     window = text[start:start + size]
     if len(window) == size:
-        window = window.rsplit(" ", 1)[0]
+        # Prefer ending at a sentence boundary: cutting mid-clause strands the
+        # reader at a topical cliff (hosted R2 2026-10-25: the excerpt ended
+        # "...a significant proportion of" right before the resistance span).
+        end = start + size
+        for i in range(end, min(len(text), end + 140)):
+            if text[i] in ".!?" and (i + 1 >= len(text) or (text[i + 1] in " \n" and (i + 2 >= len(text) or text[i + 2].isupper()))):
+                window = text[start:i + 1]
+                break
+        else:
+            window = window.rsplit(" ", 1)[0]
     return ("..." if start > 0 else "") + window + ("..." if start + len(window) < len(text) else "")
 
 
@@ -933,7 +942,6 @@ class Engine:
                     t = _excerpt_window(t, terms)
                 else:
                     t = t[:320].rsplit(" ", 1)[0] + "..."
-                t = t[:320].rsplit(" ", 1)[0] + "..."
             lines.append("- " + t + " [" + str(e.get("n")) + "]")
         if question and Engine._RECENCY.search(question) and evidence:
             # A "latest" question answered from old hits must say so: the preview
