@@ -269,17 +269,26 @@ class Round10(unittest.TestCase):
         self.assertAlmostEqual(e.retrieve("What is Chatify?")[0][0]["score"], a * 3, places=6)
 
     def test_followups_present(self):
+        # Two on-question passages with a title the question has not touched:
+        # the filler suggests it. (The gate now drops adjacent zero-overlap
+        # owner-corpus sections - "Conversation memory" no longer displays for
+        # "What is Chatify?" - so a single-chunk fixture yields no suggestions.)
         e, _ = engine()
+        class Duo:
+            def search(self, q, k): return [
+                {"id": "1", "title": "Chatify overview", "text": "Chatify turns one YAML file into a chat application.", "url": "u1", "authors": [], "year": "", "venue": "", "source": "d", "score": 1.0},
+                {"id": "2", "title": "Chatify conversation memory", "text": "Chatify keeps conversation memory across the turns of a chat.", "url": "u2", "authors": [], "year": "", "venue": "", "source": "d", "score": 0.9}]
+        e.connectors = {"d": Duo()}
         done = [d for k, d in e.ask_stream("local", e.store.new_chat("local"), "What is Chatify?") if k == "done"][0]
         self.assertTrue(done["followups"])
 
     def test_url_dedupe(self):
         e, _ = engine()
         class Dup:
-            def search(self, q, k): return [{"id": "1", "title": "A", "text": "t", "url": "http://x", "authors": [], "year": "", "venue": "", "source": "d", "score": 1.0},
-                                             {"id": "2", "title": "B different title", "text": "t", "url": "http://x", "authors": [], "year": "", "venue": "", "source": "d", "score": 0.9}]
+            def search(self, q, k): return [{"id": "1", "title": "A", "text": "chatify alpha notes", "url": "http://x", "authors": [], "year": "", "venue": "", "source": "d", "score": 1.0},
+                                             {"id": "2", "title": "B different title", "text": "chatify alpha notes", "url": "http://x", "authors": [], "year": "", "venue": "", "source": "d", "score": 0.9}]
         e.connectors = {"d": Dup()}
-        self.assertEqual(len(e.retrieve("anything")[0]), 1)
+        self.assertEqual(len(e.retrieve("What is Chatify?")[0]), 1)
 
 
 class Round16(unittest.TestCase):
@@ -306,11 +315,11 @@ class Round16(unittest.TestCase):
         import time as _t
         e, _ = engine()
         class Slow:
-            def search(self, q, k): _t.sleep(0.2); return [{"id": "s", "title": "Slow", "text": "t", "url": "u1", "authors": [], "year": "", "venue": "", "source": "slow", "score": 0.5}]
+            def search(self, q, k): _t.sleep(0.2); return [{"id": "s", "title": "Slow", "text": "chatify slow notes", "url": "u1", "authors": [], "year": "", "venue": "", "source": "slow", "score": 0.5}]
         class Boom:
             def search(self, q, k): raise RuntimeError("x")
         e.connectors = {"slow": Slow(), "boom": Boom()}
-        found, errors = e.retrieve("anything")
+        found, errors = e.retrieve("What is Chatify?")
         self.assertEqual([f["title"] for f in found], ["Slow"]); self.assertEqual(errors, {"boom": "RuntimeError"})
 
     def test_query_rewrite_with_model(self):

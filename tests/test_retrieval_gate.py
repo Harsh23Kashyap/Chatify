@@ -344,6 +344,82 @@ class RetrieveOrdering(unittest.TestCase):
         self.assertEqual(found[0]["title"], "Owner notes on Rome")
 
 
+class OwnerCorpusGating(unittest.TestCase):
+    """Local R1 regression 2026-10-25: an upload's text-alignment chunk displayed
+    for "Why do diffusion models generate malformed hands and teeth?" on BM25
+    rank alone - provenance is not relevance. The gate now applies to owner
+    corpora too; an on-question chunk still leads."""
+    Q = "Why do diffusion models generate malformed hands and teeth?"
+    HANDS = {"id": "0", "title": "diffusion-notes.md", "source": "loc", "score": 0.9, "url": "u0",
+             "authors": [], "year": "", "venue": "",
+             "text": "Failure modes in diffusion image models. Diffusion models fail in characteristic ways. "
+                     "Mode collapse and loss of diversity: samples cluster around a few modes. "
+                     "Hands and fine structure: human hands, teeth and text remain hard, fine anatomy emerges malformed."}
+    ALIGN = {"id": "1", "title": "diffusion-notes.md", "source": "loc", "score": 0.8, "url": "u1",
+             "authors": [], "year": "", "venue": "",
+             "text": "Text alignment failures. The text encoder compresses long prompts; attributes get swapped "
+                     "between objects (a red cube and blue sphere become a blue cube and red sphere)."}
+
+    def _engine(self):
+        from chatify import schema
+        from chatify.store import Store
+        import os
+        app = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "apps", "minimal", "app.yaml")
+        cfg = schema.load(app)
+        cfg["sources"] = [{"id": "loc", "type": "local_files", "label": "Docs"}]
+        cfg["retrieval"]["min_score"] = 0.0
+        cfg["retrieval"]["cache_ttl"] = 0
+        hits = self.HITS
+        class L:
+            def search(self, q, k):
+                return [dict(h) for h in hits]
+        e = Engine(cfg, Store(":memory:"))
+        e.connectors = {"loc": L()}
+        return e
+
+    HITS = [HANDS, ALIGN]
+
+    def test_off_question_upload_chunk_dropped(self):
+        found, _ = self._engine().retrieve(self.Q)
+        texts = [f["text"] for f in found]
+        self.assertTrue(any("hands, teeth" in t for t in texts))
+        self.assertFalse(any("Text alignment failures" in t for t in texts))
+
+    def test_owner_chunk_without_question_overlap_does_not_display(self):
+        out = relevance_gate(self.Q, [dict(self.HANDS), dict(self.ALIGN)])
+        self.assertEqual([e["id"] for e in out], ["0"])
+
+
+class AcronymAnchorCoverage(unittest.TestCase):
+    """Local R3 regression 2026-10-25: a JWST-anchored PHANGS star-cluster paper
+    (nearby galaxies) displayed for an early-galaxy-formation question. Carrying
+    the anchor alone is not the question's intent: with at least two anchored
+    passages covering a strict majority of the remaining topical words, require
+    that coverage."""
+    Q = "What have the latest JWST observations revealed about early galaxy formation?"
+    ABUND = ev(1, "Super-early massive galaxies revealed by JWST",
+               "JWST revealed an unexpected abundance of super-early massive galaxies; early galaxy formation at z>10.")
+    TENSION = ev(2, "JWST high redshift galaxy observations in tension",
+                 "Early galaxy formation measured by JWST at high redshift challenges models of early galaxies.")
+    PHANGS = ev(3, "PHANGS-JWST star clusters",
+                "JWST images reveal star cluster formation in nearby galaxy bars, triggered by gas streamers.")
+
+    def test_anchored_but_off_intent_dropped(self):
+        out = relevance_gate(self.Q, [self.PHANGS, self.ABUND, self.TENSION])
+        titles = [e["title"] for e in out]
+        self.assertNotIn("PHANGS-JWST star clusters", titles)
+        self.assertIn("Super-early massive galaxies revealed by JWST", titles)
+        self.assertIn("JWST high redshift galaxy observations in tension", titles)
+
+    def test_coverage_rule_inert_without_two_full_matches(self):
+        # Only one passage meets the majority bar: the signal is too thin to
+        # filter on, so the anchor rule alone decides.
+        other = ev(4, "JWST galaxy survey",
+                   "JWST galaxy survey first light: galaxy catalogs and galaxy selection.")
+        out = relevance_gate(self.Q, [self.ABUND, self.PHANGS, other])
+        self.assertTrue(any("PHANGS" in e["title"] for e in out))
+
+
 class FreshnessQualification(unittest.TestCase):
     """Live demo 2026-10-25: a 2026 'latest JWST' question was answered from
     2022-2023 passages with no freshness qualification - a substantive answer
