@@ -327,3 +327,22 @@ class RetrieveOrdering(unittest.TestCase):
                          {"w": W(), "loc": L()})
         found, _ = e.retrieve(self.Q)
         self.assertEqual(found[0]["title"], "Owner notes on Rome")
+
+
+class FreshnessQualification(unittest.TestCase):
+    """Live demo 2026-10-25: a 2026 'latest JWST' question was answered from
+    2022-2023 passages with no freshness qualification - a substantive answer
+    limitation even without fabricated dates."""
+
+    def test_recency_question_states_newest_source_year(self):
+        evs = [{"n": 1, "text": "A passage.", "year": "2022"}, {"n": 2, "text": "B passage.", "year": "2023"}]
+        a = Engine.fallback_answer(evs, question="What have the latest JWST observations revealed?")
+        self.assertIn("the newest source found for this question is from 2023", a)
+
+    def test_non_recency_question_has_no_freshness_line(self):
+        a = Engine.fallback_answer([{"n": 1, "text": "A passage.", "year": "2023"}], question="What is CAR-T therapy?")
+        self.assertNotIn("Freshness:", a)
+
+    def test_recency_without_dates_says_so(self):
+        a = Engine.fallback_answer([{"n": 1, "text": "A passage."}], question="What is the current best treatment?")
+        self.assertIn("do not show dates", a)

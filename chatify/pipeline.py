@@ -831,6 +831,8 @@ class Engine:
             "| %s | %d | %s |" % (escape(sid), len(items), " ".join("[%d]" % n for n in items.values()))
             for sid, items in counts.items())
 
+    _RECENCY = re.compile(r"\b(latest|recent|recently|newest|current|currently|today|this (?:week|month|year))\b", re.I)
+
     @staticmethod
     def fallback_answer(evidence, why="", question=""):
         """No model answer: show the best passages as a clearly labeled source preview, never as a model answer."""
@@ -845,6 +847,19 @@ class Engine:
                     t = t[:320].rsplit(" ", 1)[0] + "..."
                 t = t[:320].rsplit(" ", 1)[0] + "..."
             lines.append("- " + t + " [" + str(e.get("n")) + "]")
+        if question and Engine._RECENCY.search(question) and evidence:
+            # A "latest" question answered from old hits must say so: the preview
+            # showed 2022-2023 passages for a 2026 "latest JWST" question with no
+            # freshness qualification (live demo 2026-10-25).
+            years = []
+            for e in evidence:
+                m = re.match(r"(\d{4})", str(e.get("year") or ""))
+                if m:
+                    years.append(int(m.group(1)))
+            if years:
+                lines.append("Freshness: the newest source found for this question is from %d." % max(years))
+            else:
+                lines.append("Freshness: these sources do not show dates, so how current they are cannot be confirmed.")
         return "\n\n".join([lines[0], "\n".join(lines[1:])]) if len(lines) > 1 else lines[0]
 
     def ask_stream(self, owner, chat, question, sources=None, style="standard", topic=None, new_topic=False, use_cache=True, temporary=False, temp_history=None, use_profile=False, scope=None):
