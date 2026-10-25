@@ -121,7 +121,7 @@ def corpus_gate(question, found):
     domain = _domain_question(question)
     if not domain:
         return sorted(found, key=lambda e: -(e.get("score") or 0))
-    return relevance_gate(domain, found)
+    return relevance_gate(domain, found, public_ids=set())
 
 
 def public_gate(question, found):
@@ -136,7 +136,7 @@ def public_gate(question, found):
         return []
     return relevance_gate(domain, found)
 
-def relevance_gate(question, found):
+def relevance_gate(question, found, public_ids=None):
     """Drop retrieved passages that share no vocabulary with the question.
 
     Keyword search against open APIs (Wikipedia, news) can return popular but unrelated
@@ -275,6 +275,37 @@ def relevance_gate(question, found):
     # own ranking.
     weight = {w: 0.5 + (len(scored) - df[w]) / len(scored) for w, _ in q_variants}
     kept.sort(key=lambda nep: (-sum(weight[w] for w, v in q_variants if v & nep[2]), -nep[0], -(nep[1].get("score") or 0)))
+    # Adjacent-rider demotion - never drops. When at least two retained public
+    # passages carry a title-level discriminating question word, public passages
+    # whose titles share none of those words sink to the end with provenance
+    # intact: a review of a DIFFERENT disease whose abstract echoes the question
+    # vocabulary no longer leads the evidence (hosted 2026-10-25: a B-ALL
+    # leukemia review led a CAR-T lymphoma question). Title-level comparison
+    # only (present in some but not all titles) - abstracts share vocabulary
+    # by construction - and words shorter than
+    # five letters ("car", "cell") cannot demote: they match across entities
+    # ("B-cell"). Vague-titled genuine studies ("ZUMA-1: a phase 2 study") and
+    # title-less records are demoted, never removed; with fewer than two strong
+    # matches the gate's order is unchanged. Recency ordering stays
+    # authoritative: retrieve()'s date sort is stable, so demotion orders
+    # equal-date ties only, never dates against title matches.
+    if kept:
+        tstems = {id(e): _gate_stems(str(e.get("title") or "")) for _, e, _ in kept}
+        tdf = {w: sum(1 for _, e, _ in kept if v & tstems[id(e)]) for w, v in q_variants}
+        tdisc = [(w, v) for w, v in q_variants if len(w) >= 5 and 0 < tdf[w] < len(kept)]
+
+        def _public(e):
+            return public_ids is None or (e.get("source") or "") in public_ids
+        strong = sum(1 for _, e, _ in kept if _public(e) and any(v & tstems[id(e)] for _, v in tdisc)) if tdisc else 0
+        for _, e, _ in kept:
+            e.pop("_demoted", None)
+        if strong >= 2:
+            weak = [(n, e, p) for n, e, p in kept if _public(e) and not any(v & tstems[id(e)] for _, v in tdisc)]
+            if weak:
+                for _, e, _ in weak:
+                    e["_demoted"] = True
+                weak_ids = {id(e) for _, e, _ in weak}
+                kept = [(n, e, p) for n, e, p in kept if id(e) not in weak_ids] + weak
     return [e for _, e, _ in kept]
 
 
@@ -679,7 +710,7 @@ class Engine:
             # the comparison the question asked for.
             found = own_part + pub_part
         else:
-            found = relevance_gate(question, found)
+            found = relevance_gate(question, found, public_ids=search_ids)
         own = [e for e in found if e.get("source") not in search_ids]
         if own:
             # Mixed corpus: owner-corpus matches carry no gate rank, so keep the
@@ -1086,6 +1117,8 @@ class Engine:
     def fallback_answer(evidence, why="", question=""):
         """No model answer: show the best passages as a clearly labeled source preview, never as a model answer."""
         lines = [why or "The AI model could not be reached, so this is a source preview, not a model answer: the most relevant passages from your sources."]
+        if any(e.get("_demoted") for e in (evidence or [])):
+            lines.append("Sources at the end of the evidence list matched the question only loosely; they are shown for completeness, not as close matches.")
         for e in (evidence or [])[:3]:
             # plain_text first: heading markdown ("##") is line-anchored, so it must
             # run before the whitespace join flattens newlines into one line.
