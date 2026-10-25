@@ -112,6 +112,23 @@ class PlainTextDisplay(unittest.TestCase):
   self.assertEqual(plain_text('Lyman-$\\alpha$ at $10^{12}$'),'Lyman-α at 10^12')
   self.assertEqual(plain_text('Li-Doped MgAl$_2$O$_4$ spinel'),'Li-Doped MgAl_2O_4 spinel')
   self.assertEqual(plain_text('{\\bf H$_2$O} band, \\cal{} X, \\tt X$_1$'),'H_2O band, X, X_1')
+ def test_pdf_keeps_sources_heading_with_first_source(self):
+  # R5 rendered review 2026-10-25: "Sources at answer time" sat orphaned at the
+  # bottom of a page while its first source opened the next.
+  from chatify.exports import pdf_bytes
+  t={'question':'Q?','answer':'\n'.join('finding %d with a fair amount of supporting prose around it'%i for i in range(30)),
+   'evidence':[{'n':1,'title':'Source one','url':'https://example.invalid/1'},{'n':2,'title':'Source two','url':'https://example.invalid/2'}]}
+  import io
+  from pypdf import PdfReader
+  pages=[p.extract_text() for p in PdfReader(io.BytesIO(pdf_bytes('Chat',t))).pages]
+  idx=[i for i,p in enumerate(pages) if 'Sources at answer time' in p]
+  self.assertTrue(idx)
+  self.assertIn('Source one',pages[idx[-1]])
+ def test_preview_bullets_normalized(self):
+  from chatify.pipeline import Engine
+  a=Engine.fallback_answer([{'n':1,'text':'## Hands and fine structure\n\n**Malformed hands** appear at $z>10$ in MgAl$_2$O$_4$.'}])
+  self.assertIn('Malformed hands appear at z>10 in MgAl_2O_4.',a)
+  self.assertNotIn('##',a);self.assertNotIn('**',a);self.assertNotIn('$',a)
 class SourceNoteExports(unittest.TestCase):
  SOURCES=[{'id':'openalex','label':'OpenAlex'},{'id':'web','label':'Live web search'},{'id':'arxiv','label':'arXiv'}]
  def turn(self):

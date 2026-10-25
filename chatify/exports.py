@@ -147,11 +147,26 @@ def pdf_bytes(title, turn, accent="#173f35", tagline="", sources=None):
     styles={'label':('B',8,36,rgb),'title':('B',30,38,rgb),'heading':('B',20,30,rgb),'question':('B',16,24,ink),'body':('',11,17,ink),'source':('B',10,17,rgb),'muted':('',9,14,mut)}
     pdf=_AnswerPDF(str(title)[:120],rgb)
     pdf.add_page()
-    for kind,text in blocks:
+    for bi,(kind,text) in enumerate(blocks):
         if kind=='space':pdf.ln(14);continue
         style,size,pitch,color=styles[kind]
         pdf.set_font('noto',style,size);pdf.set_text_color(*color)
         if kind=='heading':
+            # Keep a heading with what it introduces: when the heading plus the
+            # first following block no longer fit, break before the heading
+            # (live R5 review 2026-10-25: "Sources at answer time" sat orphaned
+            # at the bottom of page 1 while its first source opened page 2).
+            nxt=next((b for b in blocks[bi+1:] if b[0]!='space'),None)
+            need=6+2*pitch
+            if nxt:
+                ns,nsz,npit,_=styles[nxt[0]]
+                pdf.set_font('noto',ns,nsz)
+                import math as _m
+                need+=npit*max(1,_m.ceil(pdf.get_string_width(nxt[1] or ' ')/495))
+                pdf.set_font('noto',style,size)
+            if pdf.get_y()+need>pdf.page_break_trigger:pdf.add_page()
             y=pdf.get_y();pdf.set_draw_color(217,224,214);pdf.set_line_width(0.5);pdf.line(50,y+2,545,y+2);pdf.set_y(y+6)
-        pdf.multi_cell(0,pitch,text,new_x='LMARGIN',new_y='NEXT')
+        # Left-aligned text avoids the wide inter-word gaps justification opens
+        # in narrow answer bullets (R5 PDF review 2026-10-25).
+        pdf.multi_cell(0,pitch,text,new_x='LMARGIN',new_y='NEXT',align='L')
     return bytes(pdf.output())
