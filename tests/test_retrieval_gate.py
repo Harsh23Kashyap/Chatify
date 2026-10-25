@@ -337,7 +337,16 @@ class FreshnessQualification(unittest.TestCase):
     def test_recency_question_states_newest_source_year(self):
         evs = [{"n": 1, "text": "A passage.", "year": "2022"}, {"n": 2, "text": "B passage.", "year": "2023"}]
         a = Engine.fallback_answer(evs, question="What have the latest JWST observations revealed?")
-        self.assertIn("the newest source found for this question is from 2023", a)
+        self.assertIn("the newest dated source found for this question is from 2023", a)
+        # The year is a bound on what retrieval returned, not a claim of freshest
+        # available information, and it never satisfies a latest-2026 ask by itself.
+        self.assertIn("newer information may exist that these sources do not cover", a)
+
+    def test_mixed_dated_and_undated_sources_are_explicit(self):
+        evs = [{"n": 1, "text": "A passage.", "year": "2023"}, {"n": 2, "text": "B passage."}]
+        a = Engine.fallback_answer(evs, question="What are the newest findings on CAR-T resistance?")
+        self.assertIn("newest dated source found for this question is from 2023", a)
+        self.assertIn("1 of the sources shown carry no date at all", a)
 
     def test_non_recency_question_has_no_freshness_line(self):
         a = Engine.fallback_answer([{"n": 1, "text": "A passage.", "year": "2023"}], question="What is CAR-T therapy?")
@@ -345,4 +354,4 @@ class FreshnessQualification(unittest.TestCase):
 
     def test_recency_without_dates_says_so(self):
         a = Engine.fallback_answer([{"n": 1, "text": "A passage."}], question="What is the current best treatment?")
-        self.assertIn("do not show dates", a)
+        self.assertIn("show no dates", a)

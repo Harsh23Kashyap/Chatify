@@ -856,10 +856,16 @@ class Engine:
                 m = re.match(r"(\d{4})", str(e.get("year") or ""))
                 if m:
                     years.append(int(m.group(1)))
+            undated = sum(1 for e in evidence if not re.match(r"(\d{4})", str(e.get("year") or "")))
             if years:
-                lines.append("Freshness: the newest source found for this question is from %d." % max(years))
+                # A found-source year is a bound on what retrieval returned, never
+                # proof of the freshest information available.
+                line = "Freshness: the newest dated source found for this question is from %d; newer information may exist that these sources do not cover." % max(years)
+                if undated:
+                    line += " %d of the sources shown carry no date at all." % undated
+                lines.append(line)
             else:
-                lines.append("Freshness: these sources do not show dates, so how current they are cannot be confirmed.")
+                lines.append("Freshness: these sources show no dates, so how current they are cannot be confirmed.")
         return "\n\n".join([lines[0], "\n".join(lines[1:])]) if len(lines) > 1 else lines[0]
 
     def ask_stream(self, owner, chat, question, sources=None, style="standard", topic=None, new_topic=False, use_cache=True, temporary=False, temp_history=None, use_profile=False, scope=None):
