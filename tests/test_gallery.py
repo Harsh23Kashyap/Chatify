@@ -414,6 +414,26 @@ class GalleryBuilderUseThisApp(unittest.TestCase):
         leftovers = [f for f in glob.glob(os.path.join(wsdir, moved, "**", "*"), recursive=True) if os.path.isfile(f)]
         self.assertEqual(leftovers, [])
 
+        # Workspace source isolation semantics (live demo 2026-10-25 defect):
+        # the SHARED app's own documents never enter a guest workspace, while
+        # the visitor's own uploads inside the workspace feed answers, survive
+        # reload and appear in exports.
+        s, b = self.req("POST", url + "api/uploads", A, {"name": "mission-notes.md", "text": "The Zebra protocol governs quarantine handling for returned samples. Zebra quarantine lasts eleven days."})
+        self.assertEqual(s, 200, b[:300])
+        s, b = self.req("POST", url + "api/ask", A, {"question": "How long does Zebra quarantine last?"})
+        self.assertEqual(s, 200, b[:300])
+        ans = json.loads(b)
+        self.assertIn("Zebra", ans["answer"])
+        self.assertTrue(any(e.get("source") == "uploads" for e in ans["evidence"]))
+        # Nothing from the host app's docs/a.md (content "x") leaked into the workspace.
+        self.assertFalse(any(e.get("source") == "docs" for e in ans["evidence"]))
+        self.assertFalse(any("a.md" in str(e.get("document") or "") for e in ans["evidence"]))
+        chat_id = ans["chat"]
+        s, b = self.req("GET", url + "api/turns?chat=" + chat_id, A)
+        self.assertEqual(s, 200, b[:300]); self.assertIn("Zebra", b)
+        s, b = self.req("GET", url + "api/export?chat=" + chat_id, A)
+        self.assertEqual(s, 200, b[:300]); self.assertIn("Zebra quarantine lasts eleven days", b)
+
         s, b = self.req("GET", url + "api/provider/status", A)
         key = json.loads(b)["keys"]["openai"]
         self.assertFalse(key["has"]); self.assertTrue(key["needed"])
