@@ -88,3 +88,21 @@ class Export(unittest.TestCase):
  def test_escaped_pipe_table_label_retained(self):
   t=self.turn();t['answer']='| Source | Count |\n| --- | --- |\n| A\\|B | 1 |'
   self.assertIn('Source: A|B; Count: 1',_pdf_text(pdf_bytes('Chat',t)))
+class PlainTextDisplay(unittest.TestCase):
+ def test_markdown_and_latex_normalized_in_exports(self):
+  # Live demo 2026-10-25: uploaded "##"/"**" and arXiv "$z>10$" / "MgAl$_2$O$_4$"
+  # rendered literally in the answer text and PDF.
+  from chatify.exports import pdf_bytes,answer_markdown,chat_markdown
+  from chatify.pipeline import Engine,plain_text
+  assert plain_text('Li-Doped MgAl$_2$O$_4$')=='Li-Doped MgAl2O4'
+  t={'question':'Why malformed hands?','answer':'- Hands fail when fine detail is under-modeled [1]','evidence':[{'n':1,'title':'Li-Doped MgAl$_2$O$_4$ at $z>10$','url':'https://example.invalid/a'}]}
+  m=answer_markdown({'title':'Chat'},t)
+  self.assertIn('Li-Doped MgAl2O4 at z>10',m);self.assertNotIn('$_2$',m)
+  text=_pdf_text(pdf_bytes('Chat',t))
+  self.assertIn('Li-Doped MgAl2O4',text);self.assertNotIn('$_',text)
+  cm=chat_markdown('Chat',[t]);self.assertIn('Li-Doped MgAl2O4',cm)
+ def test_preview_bullets_normalized(self):
+  from chatify.pipeline import Engine
+  a=Engine.fallback_answer([{'n':1,'text':'## Hands and fine structure\n\n**Malformed hands** appear at $z>10$ in MgAl$_2$O$_4$.'}])
+  self.assertIn('Malformed hands appear at z>10 in MgAl2O4.',a)
+  self.assertNotIn('##',a);self.assertNotIn('**',a);self.assertNotIn('$',a)

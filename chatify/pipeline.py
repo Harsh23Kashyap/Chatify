@@ -141,6 +141,72 @@ def relevance_gate(question, found):
     return [e for _, e, _ in kept]
 
 
+_LATEX_SYMBOLS = {
+    "approx": "~", "simeq": "~", "cong": "~", "sim": "~", "propto": "~",
+    "geq": ">=", "ge": ">=", "leq": "<=", "le": "<=", "neq": "!=", "ne": "!=",
+    "times": "\u00d7", "pm": "\u00b1", "mp": "-/+",
+    "to": "\u2192", "rightarrow": "\u2192", "leftarrow": "\u2190", "Rightarrow": "=>",
+    "odot": "\u2299", "circ": "\u00b0", "deg": "\u00b0", "cdot": "\u00b7",
+    "in": "in", "infty": "infinity", "sqrt": "sqrt",
+    "alpha": "\u03b1", "beta": "\u03b2", "gamma": "\u03b3", "delta": "\u03b4",
+    "epsilon": "\u03b5", "zeta": "\u03b6", "eta": "\u03b7", "theta": "\u03b8",
+    "iota": "\u03b9", "kappa": "\u03ba", "lambda": "\u03bb", "mu": "\u03bc",
+    "nu": "\u03bd", "xi": "\u03be", "pi": "\u03c0", "rho": "\u03c1",
+    "sigma": "\u03c3", "tau": "\u03c4", "phi": "\u03c6", "chi": "\u03c7",
+    "psi": "\u03c8", "omega": "\u03c9",
+    "Delta": "\u0394", "Omega": "\u03a9", "Sigma": "\u03a3", "Pi": "\u03a0",
+    "Gamma": "\u0393", "Lambda": "\u039b", "Theta": "\u0398", "Phi": "\u03a6", "Psi": "\u03a8",
+}
+_LATEX_TEXT_WRAPPERS = ("mathrm", "mathbf", "mathit", "mathsf", "mathtt", "text", "textbf", "textit", "boldsymbol", "rm", "bf", "it", "mathrm")
+
+
+def plain_text(text):
+    """Readable plain text for passages shown or exported as-is.
+
+    Retrieved passages and titles carry raw markdown ("##", "**") and arXiv
+    LaTeX ("$z>10$", "MgAl$_2$O$_4$") that rendered literally in the answer
+    preview and the PDF on the live demo (2026-10-25). Symbol replacements use
+    only characters the bundled PDF fonts represent; anything else falls back
+    to ASCII. Evidence records keep the original text; this runs at display
+    and export time only.
+    """
+    t = str(text or "")
+    # LaTeX math delimiters first: keep the contents, drop the dollars.
+    t = re.sub(r"\$\$([^$]+)\$\$", lambda m: " " + m.group(1).strip() + " ", t)
+    t = re.sub(r"\$([^$\n]+)\$", lambda m: m.group(1), t)
+    # Text-formatting wrappers keep their argument.
+    for name in _LATEX_TEXT_WRAPPERS:
+        t = re.sub(r"\\" + name + r"\{([^{}]*)\}", lambda m: m.group(1), t)
+    # Known commands become readable symbols (longest name first, never a prefix
+    # of a longer command); unknown commands drop the backslash.
+    t = re.sub(r"\\(" + "|".join(sorted((re.escape(k) for k in _LATEX_SYMBOLS), key=len, reverse=True)) + r")(?![A-Za-z])",
+               lambda m: _LATEX_SYMBOLS[m.group(1)], t)
+    def _unknown(m):
+        run = m.group(1)
+        if run not in _LATEX_SYMBOLS:
+            # "$\\Lambda$CDM" survives math-delimiter stripping as one letter run:
+            # split off the longest known command prefix ("Lambda" + "CDM").
+            for k in sorted((k for k in _LATEX_SYMBOLS if run.startswith(k) and len(k) < len(run)), key=len, reverse=True):
+                return _LATEX_SYMBOLS[k] + run[len(k):]
+        return run
+    t = re.sub(r"\\([A-Za-z]+)", _unknown, t)
+    t = re.sub(r"\\[,;:!]", " ", t)  # \, \; and friends are spacing
+    t = re.sub(r"\\\s+", " ", t)  # \, \; and friends are spacing
+    # Sub/superscript markers keep their payload: MgAl$_2$ -> MgAl2, 10^{9} -> 109.
+    t = re.sub(r"[_^]\{([^{}]*)\}", lambda m: m.group(1), t)
+    t = re.sub(r"[_^](\S)", lambda m: m.group(1), t)
+    t = t.replace("{", "").replace("}", "")
+    # Markdown: headings, emphasis, code and links become their plain text.
+    t = re.sub(r"(?m)^\s{0,3}#{1,6}\s*", "", t)
+    t = re.sub(r"\*\*(.+?)\*\*", lambda m: m.group(1), t)
+    t = re.sub(r"__(.+?)__", lambda m: m.group(1), t)
+    t = re.sub(r"\*(.+?)\*", lambda m: m.group(1), t)
+    t = re.sub(r"`+([^`]*)`+", lambda m: m.group(1), t)
+    t = re.sub(r"\[([^\]]*)\]\(([^)\s]*)\)", lambda m: (m.group(1) + " (" + m.group(2) + ")").strip(), t)
+    t = re.sub(r"[ \t]{2,}", " ", t)
+    return t.strip()
+
+
 def _excerpt_window(text, terms, size=320):
     """A readable excerpt around the densest question-term cluster. Truncating
     every passage from the chunk head hid the matching span behind the intro
@@ -770,7 +836,7 @@ class Engine:
         """No model answer: show the best passages as a clearly labeled source preview, never as a model answer."""
         lines = [why or "The AI model could not be reached, so this is a source preview, not a model answer: the most relevant passages from your sources."]
         for e in (evidence or [])[:3]:
-            t = " ".join(str(e.get("text") or "").split())
+            t = plain_text(" ".join(str(e.get("text") or "").split()))
             if len(t) > 320:
                 if question:
                     terms = [w for w in re.findall(r"[a-z0-9]{3,}", question.lower()) if not w.isdigit() and w not in _GATE_STOP and w not in _GATE_WEAK]

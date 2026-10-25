@@ -8,6 +8,8 @@ rejected. Scripts outside the bundled fonts are still rejected honestly.
 import os, re, unicodedata
 from fpdf import FPDF
 
+from .pipeline import plain_text as _plain
+
 
 def _k(e, i):
     a = (str(e.get("authors",[])[0]).split()[-1] if e.get("authors") and str(e["authors"][0]).split() else "anon")
@@ -30,7 +32,7 @@ def snapshot(e):
 def answer_markdown(app,turn):
     out=["# "+app.get("title","Chat"),app.get("tagline",""),"", "## Question",turn['question'],"", "## Answer",turn['answer'],"", "## Sources at answer time"]
     for i,e in enumerate(turn['evidence'],1):
-        out += ["[%d] %s" % (e.get('n',i),e['title']),e.get('url') or '',snapshot(e),""]
+        out += ["[%d] %s" % (e.get('n',i),_plain(e['title'])),e.get('url') or '',snapshot(e),""]
     out += ["Source versions are snapshots at answer time. They are not a guarantee the linked document is unchanged."]
     return "\n".join(out)
 
@@ -81,7 +83,7 @@ def chat_markdown(title, turns):
     for t in turns:
         out += ["**Q:** " + t["question"], "", t["answer"], ""]
         for i, e in enumerate(t["evidence"], 1):
-            out.append("%d. %s%s" % (i, e["title"], " <%s>" % e["url"] if e["url"] else ""))
+            out.append("%d. %s%s" % (i, _plain(e["title"]), " <%s>" % e["url"] if e["url"] else ""))
         out.append("")
     return "\n".join(out)
 
@@ -105,7 +107,7 @@ def pdf_bytes(title, turn, accent="#173f35", tagline=""):
         blocks.append(('body',line) if line else ('space',''));i+=1
     blocks += [('space',''),('heading','Sources at answer time')]
     for i,e in enumerate(turn['evidence'],1):
-        blocks += [('source','[%d] %s'%(e.get('n',i),e['title'])),('muted',snapshot(e).replace(' · ',' | ')),('muted',e.get('url') or ''),('space','')]
+        blocks += [('source','[%d] %s'%(e.get('n',i),_plain(e['title']))),('muted',snapshot(e).replace(' · ',' | ')),('muted',e.get('url') or ''),('space','')]
     blocks += [('muted','Source versions are snapshots. Linked documents may change.')]
     # Bundled Noto Sans + Noto Sans Devanagari (SIL OFL 1.1) with HarfBuzz
     # shaping cover ordinary generated answer text, including Hindi. Scripts the
