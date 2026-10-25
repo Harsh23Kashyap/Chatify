@@ -110,3 +110,39 @@ pre.codeblock {
    keyframe shape is softened. */
 @keyframes cc-answer-in { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
 @keyframes answer-arrive { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+
+/* --- Build-wizard stepper (real markup: .build-step[data-state] > .build-step-link[aria-current]
+   > .build-step-num + .build-step-label; connector = .build-step::after hairline).
+   Signals key to build.js goStep()'s real data-state transitions - zero JS added. */
+.build-step-link {
+  background: var(--cream, #f8f4e9); /* connector hairline tucks behind label, never crosses text */
+  padding-right: 10px;
+}
+.build-step-num {
+  transition: background-color var(--m-state, 180ms) var(--ease),
+              color var(--m-state, 180ms) var(--ease),
+              border-color var(--m-state, 180ms) var(--ease),
+              transform var(--m-press, 90ms) var(--ease);
+}
+.build-step-label { transition: color var(--m-state, 180ms) var(--ease); }
+.build-step[data-state="current"] .build-step-num { transform: scale(1.08); }
+.build-step:not(:last-child)::after {
+  background: linear-gradient(to right, var(--pine, #173f35), var(--pine, #173f35)) no-repeat 0 0 / var(--step-fill, 0%) 100%,
+              var(--line, #d9e1dc);
+  transition: background-size var(--m-layout, 280ms) var(--ease);
+}
+.build-step[data-state="complete"]:not(:last-child)::after { --step-fill: 100%; }
+/* Panel swap: [hidden] toggle in goStep restarts this CSS-only entry animation */
+.build-screen { animation: step-in var(--m-layout, 280ms) var(--ease) both; }
+@keyframes step-in {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .build-step[data-state="current"] .build-step-num { transform: none; }
+  .build-step:not(:last-child)::after { transition: none; }
+  .build-screen { animation: none; }
+}
+html[data-motion="none"] .build-step[data-state="current"] .build-step-num { transform: none; }
+html[data-motion="none"] .build-step:not(:last-child)::after { transition: none; }
+html[data-motion="none"] .build-screen { animation: none; }
