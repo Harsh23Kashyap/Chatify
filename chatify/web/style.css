@@ -904,7 +904,7 @@ html.contrast-measuring *,html.contrast-measuring *::before,html.contrast-measur
 
 /* Placeholder only for a delayed empty history. Existing history stays usable. */
 .history-skeleton{width:100%;flex-basis:100%;display:grid;gap:4px;margin-top:12px;pointer-events:none}
-.history-skeleton-row{height:44px;padding:10px 12px;display:flex;flex-direction:column;gap:6px}
+.history-skeleton-row{height:60px;padding:10px 12px;display:flex;flex-direction:column;gap:6px;justify-content:center;box-sizing:border-box}
 .history-skeleton-row span{height:7px;width:80%;background:var(--line);border-radius:3px;opacity:.65}
 .history-skeleton-row span+span{width:48%;height:5px}
 @media(prefers-reduced-motion:no-preference){html:not([data-motion=none]) .history-skeleton.slow .history-skeleton-row span{background:linear-gradient(90deg,var(--line) 20%,var(--paper) 50%,var(--line) 80%);background-size:200% 100%;animation:history-placeholder 1.8s ease-in-out infinite}}
