@@ -10,6 +10,46 @@ const el = (tag, props = {}, ...kids) => {
   for (const c of kids.flat()) if (c != null) e.append(c.nodeType ? c : document.createTextNode(c));
   return e;
 };
+// Display-time mirror of the server-side plain_text(): retrieved titles and
+// passages can carry raw markdown ("##", "**") and arXiv LaTeX ("$z>10$",
+// "MgAl$_2$O$_4$"); the sources UI shows readable text, stored evidence stays raw.
+const LATEX_SYMBOLS = {
+  approx: "~", simeq: "~", cong: "~", sim: "~", propto: "~",
+  geq: ">=", ge: ">=", leq: "<=", le: "<=", neq: "!=", ne: "!=",
+  times: "\u00d7", pm: "\u00b1", mp: "-/+",
+  to: "\u2192", rightarrow: "\u2192", leftarrow: "\u2190", Rightarrow: "=>",
+  odot: "\u2299", circ: "\u00b0", deg: "\u00b0", cdot: "\u00b7",
+  in: "in", infty: "infinity", sqrt: "sqrt",
+  alpha: "\u03b1", beta: "\u03b2", gamma: "\u03b3", delta: "\u03b4", epsilon: "\u03b5",
+  zeta: "\u03b6", eta: "\u03b7", theta: "\u03b8", iota: "\u03b9", kappa: "\u03ba",
+  lambda: "\u03bb", mu: "\u03bc", nu: "\u03bd", xi: "\u03be", pi: "\u03c0", rho: "\u03c1",
+  sigma: "\u03c3", tau: "\u03c4", phi: "\u03c6", chi: "\u03c7", psi: "\u03c8", omega: "\u03c9",
+  Delta: "\u0394", Omega: "\u03a9", Sigma: "\u03a3", Pi: "\u03a0", Gamma: "\u0393",
+  Lambda: "\u039b", Theta: "\u0398", Phi: "\u03a6", Psi: "\u03a8",
+};
+const LATEX_NAMES = Object.keys(LATEX_SYMBOLS).sort((a, b) => b.length - a.length);
+const LATEX_KNOWN = new RegExp("\\\\(" + LATEX_NAMES.join("|") + ")(?![A-Za-z])", "g");
+function plainText(t) {
+  t = String(t || "");
+  t = t.replace(/\$\$([^$]+)\$\$/g, (m, c) => " " + c.trim() + " ");
+  t = t.replace(/\$([^$\n]+)\$/g, (m, c) => c);
+  for (const name of ["mathrm", "mathbf", "mathit", "mathsf", "mathtt", "text", "textbf", "textit", "boldsymbol"])
+    t = t.replace(new RegExp("\\\\" + name + "\\{([^{}]*)\\}", "g"), (m, c) => c);
+  t = t.replace(LATEX_KNOWN, (m, n) => LATEX_SYMBOLS[n]);
+  t = t.replace(/\\([A-Za-z]+)/g, (m, run) => {
+    const k = LATEX_NAMES.find((k) => run !== k && run.startsWith(k));
+    return k ? LATEX_SYMBOLS[k] + run.slice(k.length) : run;
+  });
+  t = t.replace(/\\[,;:!]/g, " ").replace(/\\\s+/g, " ");
+  t = t.replace(/[_^]\{([^{}]*)\}/g, (m, c) => c).replace(/[_^](\S)/g, (m, c) => c);
+  t = t.replace(/[{}]/g, "");
+  t = t.replace(/^\s{0,3}#{1,6}\s*/gm, "");
+  t = t.replace(/\*\*(.+?)\*\*/g, "$1").replace(/__(.+?)__/g, "$1").replace(/\*(.+?)\*/g, "$1");
+  t = t.replace(/`+([^`]*)`+/g, "$1");
+  t = t.replace(/\[([^\]]*)\]\(([^)\s]*)\)/g, (m, a, u) => (a + " (" + u + ")").trim());
+  t = t.replace(/[ \t]{2,}/g, " ");
+  return t.trim();
+}
 const ICON = {
   clip: "M21 11.5l-8.6 8.6a5 5 0 01-7-7l9-9a3.3 3.3 0 014.7 4.7l-9 9a1.7 1.7 0 01-2.4-2.4l8.3-8.3",
   pin: "M12 17v5M9 3h6l-1 7 3 3v2H7v-2l3-3z",
@@ -184,9 +224,9 @@ function showSources(evidence, hl, trigger) {
   const list = el("div");
   const draw = (only) => {
     list.replaceChildren(...evidence.filter((e) => !only || e.source === only).map((e) => el("div", { class: "src" + (e.n === hl ? " hl" : "") },
-      el("b", { text: e.n + ". " + e.title }),
+      el("b", { text: e.n + ". " + plainText(e.title) }),
       el("small", { text: [(e.authors || []).slice(0, 3).join(", "), e.year, e.venue, e.document, e.page ? "page " + e.page : e.section, e.version ? "version " + e.version.slice(0, 12) : "", e.ocr ? "OCR text, check original" : ""].filter(Boolean).join(" · ") }),
-      highlight(el("p", {class:e.text ? "source-text" : "source-unavailable"}), e.text || "Source excerpt unavailable. This saved reference has no text to inspect.", terms),
+      highlight(el("p", {class:e.text ? "source-text" : "source-unavailable"}), e.text ? plainText(e.text) : "Source excerpt unavailable. This saved reference has no text to inspect.", terms),
       e.url ? el("a", { href: e.url, target: "_blank", rel: "noopener noreferrer", text: "Open source" }) : null)));
   };
   if (types.length > 1) types.forEach((t) => filters.append(el("button", { class: "chip", "aria-pressed":"false", onclick: (ev) => {
@@ -233,7 +273,7 @@ function turnView(t, prev) {
     bub.append(el("div", { class: "nf-tips" }, tip("Try a different question", () => { $("#q").focus(); }), tip("Use words from your documents", () => { $("#q").focus(); }), tip("See which documents this chat uses", () => { location.href = (window.CC_APP_BASE||"") + "/settings.html"; })));
   }
   const srcLabel = (e) => (S.cfg.sources.find((x) => x.id === e.source) || {}).label || e.source || "";
-  const srcs = !t.evidence.length ? null : (el("div", { class: "srcs" }, el("div", { class: "srcs-h", text: "Evidence for this answer" }), t.evidence.slice(0, 5).map((e) => el("button", { class: "s", title: e.title, onclick: (ev) => showSources(t.evidence, e.n, ev.currentTarget) }, el("span", { class: "n", text: "[" + e.n + "]" }), el("span", { class: "sx" }, el("span", { class: "st", text: srcLabel(e) ? srcLabel(e) + " / " + e.title : e.title }), el("span", {class:"source-excerpt",text:e.text ? e.text.slice(0,240) + (e.text.length>240 ? "…" : "") : "Source excerpt unavailable"}), el("span", { class: "sm", text: [srcLabel(e), e.year, e.page ? "page " + e.page : e.section, e.ocr ? "OCR text, check original" : ""].filter(Boolean).join(" \u00b7 ") })), el("span", { class: "go", "aria-hidden": "true", text: "\u203a" })))));
+  const srcs = !t.evidence.length ? null : (el("div", { class: "srcs" }, el("div", { class: "srcs-h", text: "Evidence for this answer" }), t.evidence.slice(0, 5).map((e) => el("button", { class: "s", title: plainText(e.title), onclick: (ev) => showSources(t.evidence, e.n, ev.currentTarget) }, el("span", { class: "n", text: "[" + e.n + "]" }), el("span", { class: "sx" }, el("span", { class: "st", text: srcLabel(e) ? srcLabel(e) + " / " + plainText(e.title) : plainText(e.title) }), el("span", {class:"source-excerpt",text:e.text ? (()=>{const x=plainText(e.text);return x.slice(0,240)+(x.length>240?"…":"")})() : "Source excerpt unavailable"}), el("span", { class: "sm", text: [srcLabel(e), e.year, e.page ? "page " + e.page : e.section, e.ocr ? "OCR text, check original" : ""].filter(Boolean).join(" \u00b7 ") })), el("span", { class: "go", "aria-hidden": "true", text: "\u203a" })))));
   nodes.push(el("div", { class: "row" }, avatar("bot"), bub));
   const meta = el("div", { class: "meta" });
   const weak = (t.ledger || []).filter((l) => !l.supported || (l.overlap !== undefined && l.overlap < 0.35));
