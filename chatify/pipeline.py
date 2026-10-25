@@ -9,7 +9,7 @@ question -> (1) resolve follow-up into a standalone question using memory
 """
 import collections, inspect, math, re, time, json, hashlib
 from concurrent.futures import ThreadPoolExecutor
-from . import permissions, stage_contracts, generator_design
+from . import permissions, stage_contracts, generator_design, rerank as rerankmod
 from . import providers, prompts as promptmod
 from .connectors import make_connector
 from .connectors.open_sources import SetupRequired
@@ -713,6 +713,8 @@ class Engine:
             found = own_part + pub_part
         else:
             found = relevance_gate(question, found, public_ids=search_ids)
+        # Semantic re-order of the gate-retained set (order only, fail-open; see rerank.py).
+        _rr = self.cfg["retrieval"].get("rerank", True)
         own = [e for e in found if e.get("source") not in search_ids]
         if own:
             # Mixed corpus: owner-corpus matches carry no gate rank, so keep the
@@ -722,6 +724,8 @@ class Engine:
             # fall-of-Rome answer on keyword popularity while Gibbon's Decline and
             # Fall, sharing more question vocabulary, trailed at [3]).
             found.sort(key=lambda e: -e["score"])
+        else:
+            found = rerankmod.rerank(question, found, enabled=_rr)
         found = found[:k]
         if recent:
             # A recency question ("most recent papers on X") is mis-served by an

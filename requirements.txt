@@ -3,3 +3,8 @@ PyYAML>=6.0
 pypdf>=4
 fpdf2>=2.8
 uharfbuzz>=0.39
+
+# Evidence re-order stage (chatify/rerank.py); pinned to the verified pair. The app
+# fails open without the model files, but deployed images bundle them under chatify/models/rerank/.
+onnxruntime==1.31.0
+tokenizers==0.23.3
