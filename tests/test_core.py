@@ -12,8 +12,14 @@ APP = os.path.join(ROOT, "apps", "minimal", "app.yaml")
 
 
 def engine():
+    # Per-server private state dir: with ":memory:" the server's side stores
+    # (ThemeStore, BuildDrafts, guide-seen) fall back to shared /tmp paths, so
+    # concurrent or later servers read each other's theme/draft state
+    # (qualification 2026-10-25: /tmp/theme.json written by one server merged
+    # into the next). A per-call temp dir keeps each server isolated.
     cfg = schema.load(APP)
-    return Engine(cfg, Store(":memory:")), cfg
+    tmp = tempfile.mkdtemp(prefix="cc-test-")
+    return Engine(cfg, Store(os.path.join(tmp, "t.db"))), cfg
 
 
 class Schema(unittest.TestCase):
