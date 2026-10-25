@@ -23,6 +23,7 @@ def serve():
   evidence=[{'n':1,'title':'Sample AI report','source':'Feed','url':'https://example.org/a','year':'2026'}, {'n':2,'title':'Sample energy opinion','source':'Feed','url':'https://example.org/b','year':'2026'}, {'n':3,'title':'Sample India report','source':'Other','url':'https://example.org/c','year':'2026'}]
   c=s.new_chat(owner,'Hindi export fixture');t=s.new_topic(owner,'Hindi export fixture')
   s.add_turn(c,t,'हिंदी में उत्तर','हिंदी में उत्तर','स्रोत के अनुसार नमस्ते [1]।',evidence,[],'standard')
+  s.add_turn(c,t,'CJK export check','CJK export check','根据来源，你好 [1]。',evidence,[],'standard')
   c=s.new_chat(owner,'Navigation fixture');t=s.new_topic(owner,'Navigation fixture')
   for i in range(6):s.add_turn(c,t,'Navigation question '+str(i+1),'Navigation question '+str(i+1),('Long fixture paragraph for scroll navigation. '*12+'\n')*6,evidence,[],'standard')
   c=s.new_chat(owner,'Cedar fixture');t=s.new_topic(owner,'Cedar fixture')
