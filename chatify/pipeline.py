@@ -25,6 +25,12 @@ _GATE_STOP = frozenset(
 def _gate_variants(w):
     """Cheap suffix variants so singular/plural/inflected forms of a word count as the same topic word."""
     out = {w}
+    if len(w) > 3 and not w.endswith("s"):
+        # Generative direction too: a singular question word must match plural
+        # text ("hot Jupiter" question vs "hot Jupiters" abstract, R4 2026-10-25).
+        out.add(w + "s")
+        if w.endswith(("s", "x", "z", "ch", "sh")):
+            out.add(w + "es")
     if len(w) > 4 and w.endswith("ies"):
         out.add(w[:-3] + "y")
     if len(w) > 4 and w.endswith("es"):
@@ -103,11 +109,14 @@ def relevance_gate(question, found):
     top = max(n for n, _, _ in scored)
     if top == 0:
         return []
-    if top < 2 and len(q) >= 3:
+    if top < 2 and len(topical) >= 3:
         # The question had real topical vocabulary and the best passage matches only one
         # word of it: a mention, not a topic match (a quarry has a "plant"; O. J. Simpson
         # played "seasons"). Clarify instead of citing it. Short one-word questions keep
-        # their single best lexical match - it is the only signal that can exist.
+        # their single best lexical match - it is the only signal that can exist. Count
+        # question WORDS, not the stem-variant set, which the generative plural variants
+        # inflate (a one-word Hindi lunch question reached len(q)>=3 via lunch/lunchs/
+        # lunches and lost its only valid match, 2026-10-25).
         return []
     # Absolute specificity floor: the more topical vocabulary the question has,
     # the more of it a passage must share before it counts as evidence. Without
@@ -284,11 +293,19 @@ def _excerpt_window(text, terms, size=320):
     if not positions:
         return text[:size].rsplit(" ", 1)[0] + "..."
     hits = [(p, 1.0 / len(ps)) for ps in positions.values() for p in ps]
+    # Only hits inside the reliably visible zone vote: a match near the right
+    # edge is clipped by the final word-boundary truncation, so a window that
+    # barely contains it displays intro prose instead of the supporting span
+    # (live R4 2026-10-25: the Overcast abstract's "For hot Jupiters..." span
+    # sat at offset ~280 and the displayed excerpt ended at "For...").
+    visible = int(size * 0.85)
     best_start, best_count = 0, -1.0
     for h, _ in hits:
         s = max(0, h - size // 3)
-        c = sum(wt for x, wt in hits if s <= x <= s + size)
-        if c > best_count:
+        c = sum(wt for x, wt in hits if s <= x <= s + visible)
+        # Ties go to the later cluster: a head tie means the opening merely
+        # mentions the terms while a later span answers the question.
+        if c > best_count or (c == best_count and s > best_start):
             best_start, best_count = s, c
     start = best_start
     if start > 0:
