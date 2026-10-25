@@ -1011,9 +1011,12 @@ def _rewrite_app_html(data, base):
     """Point a page's absolute links and asset URLs at its /<slug>/ endpoint and add the base shim."""
     text = data.decode("utf-8")
     text = text.replace('href="/', 'href="' + base + '/').replace('src="/', 'src="' + base + '/').replace('action="/', 'action="' + base + '/')
-    nav = '<nav class="common-nav" aria-label="Main navigation">'
-    if nav in text:
-        text = text.replace(nav, nav + '<a href="/">Gallery</a>', 1)
+    nav = '<nav class="common-nav"'
+    i = text.find(nav)
+    if i >= 0:
+        j = text.find(">", i)
+        if j > i:
+            text = text[:j + 1] + '<a href="/">Gallery</a>' + text[j + 1:]
     shim = BASE_SHIM % (json.dumps(base),)
     for anchor in ("<script", "<link", "<title"):
         i = text.find(anchor)

@@ -469,7 +469,7 @@ function playgroundLanding(a, exs) {
   return el("section",{class:"hero playground"},
     el("div",{class:"playground-intro"},el("div",{class:"rise"},
       el("div",{class:"kicker","aria-hidden":"true"},document.createTextNode("Grounded in your sources")),
-      el("h1",{text:TV("txt_title")||a.title}),el("p",{class:"lede",text:TV("txt_tagline")||a.tagline})),scene),
+      el("h1",{text:TV("txt_title")||((a.title==="Chatify")?"Ask the documents, get the receipts.":a.title)}),el("p",{class:"lede",text:TV("txt_tagline")||((a.title==="Chatify")?"Answers grounded in the sources you choose, with the passages shown so you can check them.":a.tagline)})),scene),
     exs.length?el("div",{class:"rise",style:"--rise-order:1"},el("h2",{class:"playground-label",text:"Follow your curiosity"}),
       el("div",{class:"playground-questions"},exs.map((x,i)=>el("button",{class:"playground-question",style:"--question-order:"+i,onclick:()=>{$("#q").value=x;send()}},el("span",{text:x}),el("b",{"aria-hidden":"true",text:"↗"}))))):null,
     el("div",{class:"rise",style:"--rise-order:2"},el("h2",{class:"playground-label shortcut-label",text:"Chat tools"}),el("div",{class:"playground-actions"},actions.map(([icon,title,detail,action])=>el("button",{class:"playground-action",title:title+": "+detail,onclick:action},el("em",{"aria-hidden":"true",text:icon}),el("b",{text:title}),el("small",{text:detail}))))),
@@ -632,7 +632,7 @@ async function send() {
     return;
   }
   const q = $("#q").value.trim(); if (!q || S.busy) return;
-  const status = $("#pipelineStatus"); status.hidden = false; status.dataset.state="working"; status.textContent = "Preparing your answer";
+  const status = $("#pipelineStatus"); status.hidden = true; status.dataset.state="working"; status.textContent = "Preparing your answer";
   S.busy = true; clearTimeout(simTimer); $("#similar").replaceChildren(); sendIcon("stop", "Stop"); $("#q").value = ""; autosize(); S.lastQ = q;
   const w = $("#thread .wrap") || $("#thread");
   w.querySelector(".hero")?.remove();
@@ -641,7 +641,8 @@ async function send() {
   thinkSpin.innerHTML = '<svg viewBox="0 0 88 88"><circle class="cc-spin-track" cx="44" cy="44" r="38"/><circle class="cc-spin-head" cx="44" cy="44" r="38"/></svg>';
   const skel = el("div", { class: "answer-sk", "aria-hidden": "true" }, el("span"), el("span"), el("span"));
   live.append(skel);
-  w.append(el("div", { class: "q user-arrive", text: q }), el("div", { class: "think", id: "think" }, thinkSpin, el("span", { class: "tt", id: "thinkTxt", text: "Preparing your answer" })), live);
+  w.querySelector(".recent-questions")?.remove();
+  w.append(el("div", { class: "row u user-arrive" }, el("div", { class: "bubble ub", text: q })), el("div", { class: "think", id: "think" }, thinkSpin, el("span", { class: "tt", id: "thinkTxt", text: "Preparing your answer" })), live);
   const th = $("#thread"); $("#jump").dataset.reply = ""; th.scrollTop = th.scrollHeight; syncLatest();
   let text = "", result = null, err = null;
   try {
@@ -675,7 +676,7 @@ async function send() {
   S.busy = false; applyIcons(); sendIcon("send", "Send"); drawThread(); loadList(); $("#q").focus({preventScroll:true});
   if (!result) {
     // keep what the user typed, and any text that did arrive, instead of losing both
-    if (text && err !== "Stopped") { const w2 = $("#thread .wrap") || $("#thread"); w2.querySelector(".hero")?.remove(); w2.append(el("div", { class: "q", text: q }), renderAnswer(text + "\n\n(Cut short. Use Retry to ask again.)", [])); }
+    if (text && err !== "Stopped") { const w2 = $("#thread .wrap") || $("#thread"); w2.querySelector(".hero")?.remove(); w2.append(el("div", { class: "row u" }, el("div", { class: "bubble ub", text: q })), renderAnswer(text + "\n\n(Cut short. Use Retry to ask again.)", [])); }
     else if (!$("#q").value) { $("#q").value = q; autosize(); }
   }
   syncLatest(); rdy();
@@ -815,6 +816,12 @@ async function init() {
     $("#side").inert = !open;
   };
   $("#menu").setAttribute("aria-controls", "side");
+  const navT = $("#navToggle");
+  if (navT) {
+    navT.addEventListener("click", (e) => { e.stopPropagation(); const open = document.body.classList.toggle("nav-open"); navT.setAttribute("aria-expanded", String(open)); });
+    document.addEventListener("click", (e) => { if (document.body.classList.contains("nav-open") && !e.target.closest(".common-nav") && !e.target.closest("#navToggle")) { document.body.classList.remove("nav-open"); navT.setAttribute("aria-expanded", "false"); } });
+    document.addEventListener("keydown", (e) => { if (e.key === "Escape" && document.body.classList.contains("nav-open")) { document.body.classList.remove("nav-open"); navT.setAttribute("aria-expanded", "false"); navT.focus(); } });
+  }
   $("#menu").addEventListener("click", () => { $("#app").classList.toggle(sidebarOverlay() ? "menu-open" : "side-collapsed"); syncSidebar(); });
   $("#sideClose").addEventListener("click", () => { $("#app").classList.remove("menu-open"); if (!sidebarOverlay()) $("#app").classList.add("side-collapsed"); $("#menu").focus(); syncSidebar(); });
   new MutationObserver(syncSidebar).observe($("#app"), {attributes:true, attributeFilter:["class"]});

@@ -12,3 +12,11 @@ class TemplateRoutes(unittest.TestCase):
   self.assertIn('{{TITLE}}',(Path(__file__).resolve().parents[1]/'chatify/web/gallery.html').read_text())
   self.assertIn('_esc(',s[i:i+3000])  # injected values stay escaped
 if __name__=='__main__':unittest.main()
+
+class GalleryNavInjection(unittest.TestCase):
+ def test_gallery_link_survives_nav_id_attribute(self):
+  import chatify.server as S
+  html = '<nav class="common-nav" id="siteNav" aria-label="Main navigation"><a href="/chatify/">Chat</a></nav>'
+  out = S._rewrite_app_html(('<html><body>' + html + '</body></html>').encode(), '/chatify')
+  if isinstance(out, bytes): out = out.decode('utf-8')
+  self.assertIn('<a href="/">Gallery</a>', out)
