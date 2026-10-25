@@ -668,7 +668,7 @@ async function send() {
   }
   const q = $("#q").value.trim(); if (!q || S.busy) return;
   const status = $("#pipelineStatus"); status.hidden = true; status.dataset.state="working"; status.textContent = "Preparing your answer";
-  S.busy = true; clearTimeout(simTimer); $("#similar").replaceChildren(); sendIcon("stop", "Stop"); composerSwap(); $("#q").value = ""; autosize(); S.lastQ = q;
+  S.busy = true; clearTimeout(simTimer); $("#similar").replaceChildren(); sendIcon("stop", "Stop"); composerSwap(); $("#q").style.setProperty("min-block-size",$("#q").offsetHeight+"px","important"); $("#q").value = ""; autosize(); S.lastQ = q;
   const w = $("#thread .wrap") || $("#thread");
   w.querySelector(".hero")?.remove();
   const live = el("div", { class: "a", id: "live" });
@@ -714,6 +714,7 @@ async function send() {
     if (text && err !== "Stopped") { const w2 = $("#thread .wrap") || $("#thread"); w2.querySelector(".hero")?.remove(); w2.append(el("div", { class: "row u" }, el("div", { class: "bubble ub", text: q })), renderAnswer(text + "\n\n(Cut short. Use Retry to ask again.)", [])); }
     else if (!$("#q").value) { $("#q").value = q; autosize(); }
   }
+  $("#q").style.removeProperty("min-block-size"); autosize();
   syncLatest(); rdy();
 }
 // Overlay lifecycle shared by source, context and account dialogs.
