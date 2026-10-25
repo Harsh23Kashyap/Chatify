@@ -483,5 +483,5 @@ html[data-motion=none] button:active,html[data-motion=calm] button:active,html[d
 .bar{animation:m-in .26s var(--ease) both .08s}
 .hero{animation:m-settle .34s var(--ease) both .05s}
 .hero .av{animation:m-tick .5s var(--ease) .35s}
-@media(min-width:861px){.side{animation:m-up .3s var(--ease) both .04s}}
+@media(min-width:861px){html:not([data-sidebar=hidden]) .side{animation:m-up .3s var(--ease) both .04s}}
 html[data-toolbar=hide] .toolbar{animation:none}
