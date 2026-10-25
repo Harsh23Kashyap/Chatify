@@ -13,12 +13,12 @@ const assert=require('node:assert/strict');
   });
   await p.route('**/api/actions/execute',async r=>{held=true;startedResolve();await gate;return failed?r.fulfill({status:503,json:{error:'Old execution failed.'}}):r.fulfill({json:{saved:true}})});
   await p.goto(process.env.CHATIFY_TEST_URL+'/');await p.locator('.playground-action').first().waitFor();
-  await p.locator('#actionsBtn').click();await p.getByRole('button',{name:'Save a private note',exact:true}).click();
+  await p.evaluate(()=>{const b=document.querySelector('#actionsBtn');if(b&&b.offsetWidth>0)b.click();else{document.querySelector('#toolsToggle').click();document.querySelector('#toolsActions').click()}});await p.getByRole('button',{name:'Save a private note',exact:true}).click();
   await p.getByRole('textbox',{name:'Note title',exact:true}).fill('Old draft');
   await p.getByRole('button',{name:'Preview action',exact:true}).click();
   if(phase==='execute'){await p.getByRole('button',{name:'Confirm action',exact:true}).waitFor();await p.getByRole('button',{name:'Confirm action',exact:true}).click()}
-  await started;await p.getByRole('button',{name:'Close',exact:true}).click();assert(await p.locator('#actionsBtn').evaluate(n=>n===document.activeElement));
-  await p.locator('#actionsBtn').click();await p.getByRole('button',{name:'Save a private note',exact:true}).click();
+  await started;await p.getByRole('button',{name:'Close',exact:true}).click();await p.waitForFunction(()=>{const a=document.querySelector('#actionsBtn');return document.activeElement===(a.offsetWidth>0?a:document.querySelector('#toolsToggle'))});
+  await p.evaluate(()=>{const b=document.querySelector('#actionsBtn');if(b&&b.offsetWidth>0)b.click();else{document.querySelector('#toolsToggle').click();document.querySelector('#toolsActions').click()}});await p.getByRole('button',{name:'Save a private note',exact:true}).click();
   await p.getByRole('textbox',{name:'Note title',exact:true}).fill('New draft');
   await p.getByRole('textbox',{name:'Note text',exact:true}).fill('New pending text');
   const oldResponse=p.waitForResponse(r=>r.url().endsWith('/api/actions/'+phase));release();await oldResponse;

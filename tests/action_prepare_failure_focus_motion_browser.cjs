@@ -13,7 +13,7 @@ const assert=require('node:assert/strict');
   });
   await p.route('**/api/actions/execute',r=>{executes++;return r.fulfill({json:{saved:true}})});
   await p.goto(process.env.CHATIFY_TEST_URL+'/');await p.locator('.playground-action').first().waitFor();
-  await p.locator('#actionsBtn').click();await p.getByRole('button',{name:'Save a private note',exact:true}).click();
+  await p.evaluate(()=>{const b=document.querySelector('#actionsBtn');if(b&&b.offsetWidth>0)b.click();else{document.querySelector('#toolsToggle').click();document.querySelector('#toolsActions').click()}});await p.getByRole('button',{name:'Save a private note',exact:true}).click();
   await p.getByRole('textbox',{name:'Note title',exact:true}).fill('Keep this title');
   await p.getByRole('textbox',{name:'Note text',exact:true}).fill('Keep this draft');
   await p.getByRole('button',{name:'Preview action',exact:true}).dblclick();
@@ -26,7 +26,7 @@ const assert=require('node:assert/strict');
   await p.getByRole('button',{name:'Preview action',exact:true}).focus();await p.keyboard.press('Enter');
   await p.getByRole('button',{name:'Confirm action',exact:true}).waitFor();
   assert.equal(prepares,2);assert.equal(executes,0);assert.match(await p.locator('.action-body').innerText(),/Keep this draft/);
-  await p.getByRole('button',{name:'Close',exact:true}).click();assert(await p.locator('#actionsBtn').evaluate(n=>n===document.activeElement));
+  await p.getByRole('button',{name:'Close',exact:true}).click();await p.waitForFunction(()=>{const a=document.querySelector('#actionsBtn');return document.activeElement===(a.offsetWidth>0?a:document.querySelector('#toolsToggle'))});
   assert(await p.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1));await p.close();
  }
  await b.close();console.log('PASS prepare503 recovery focus preserved draft singleflight nativeEnter freshreview noexecute 3201280 normalReduce movedClose');

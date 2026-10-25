@@ -15,6 +15,7 @@ document.addEventListener("DOMContentLoaded",()=>{
  const button=document.getElementById("readingBtn");if(!button)return;
  button.onclick=()=>{
   if(document.getElementById("readingDialog"))return;
+  const origin=document.activeElement;
   const dialog=document.createElement("dialog");dialog.id="readingDialog";dialog.className="reading-dialog";dialog.setAttribute("aria-labelledby","readingTitle");
   const header=document.createElement("header");header.className="reading-head";
   const badge=document.createElement("span");badge.className="reading-badge";badge.textContent="Aa";
@@ -33,7 +34,7 @@ document.addEventListener("DOMContentLoaded",()=>{
   sync();dialog.append(preview);
   const note=document.createElement("p");note.className="reading-note";note.textContent="Saved on this browser. Scroll up during an answer to hold your place.";dialog.append(note);
   const footer=document.createElement("footer");const close=document.createElement("button");close.className="reading-done";close.textContent="Done";close.onclick=()=>dialog.close();footer.append(close);dialog.append(footer);
-  dialog.addEventListener("close",()=>{dialog.remove();button.focus()});document.body.append(dialog);dialog.showModal();
+  dialog.addEventListener("close",()=>{dialog.remove();(window.focusBack||((...c)=>{for(const n of c)if(n&&n.isConnected&&n!==document.body&&n.getClientRects().length){n.focus();return}}))(origin,button,document.getElementById("q"))});document.body.append(dialog);dialog.showModal();
  };
 });
 })();

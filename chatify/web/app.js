@@ -431,7 +431,12 @@ async function download(path, name) {
 function scopeChip() {
  const p=$("#scopeChip");p.replaceChildren();
  $("#scopeBtn").setAttribute("aria-label","Source scope: "+(S.scope?("only "+(S.scope.document||S.scope.source)):"all documents"));
- if (S.scope) p.append(el("span",{class:"scope-selected-label",text:"Only " + (S.scope.document || S.scope.source),title:"Only " + (S.scope.document || S.scope.source)}),el("button",{class:"chip",onclick:()=>{S.scope=null;scopeChip();$("#scopeBtn").focus()}},"Clear"));
+ if (S.scope) p.append(el("span",{class:"scope-selected-label",text:"Only " + (S.scope.document || S.scope.source),title:"Only " + (S.scope.document || S.scope.source)}),el("button",{class:"chip",onclick:()=>{S.scope=null;scopeChip();focusBack($("#scopeBtn"),$("#toolsToggle"),$("#q"))}},"Clear"));
+}
+function focusBack(...candidates) {
+  /* Return focus to the first visible candidate: the chip row collapses into
+     the overflow menu on small screens, so the original trigger may be hidden. */
+  for (const n of candidates) if (n && n.isConnected && n !== document.body && n.getClientRects().length) { n.focus(); return; }
 }
 async function scopeDialog() {
  const origin=document.activeElement,trigger=$("#scopeBtn");if(trigger.dataset.running==="true")return;trigger.dataset.running="true";trigger.setAttribute("aria-busy","true");const original=trigger.textContent,originalMinWidth=trigger.style.minWidth;trigger.style.minWidth=trigger.getBoundingClientRect().width+"px";trigger.textContent="Loading...";$("#scopeError").hidden=true;
@@ -446,7 +451,7 @@ async function scopeDialog() {
   }
   if (!rows.length) options.append(el("p",{class:"scope-empty",role:"status",text:"No configured sources"}));
   dialog.append(options,el("footer",{},el("button",{class:"reading-done",onclick:()=>dialog.close()},"Done")));
-  dialog.addEventListener("close",()=>{dialog.remove();(origin?.isConnected&&origin!==document.body?origin:trigger).focus()});document.body.append(dialog);dialog.showModal();
+  dialog.addEventListener("close",()=>{dialog.remove();focusBack(origin,trigger,$("#toolsToggle"),$("#q"))});document.body.append(dialog);dialog.showModal();
  } catch(e){const error=$("#scopeError");error.textContent="Could not load sources: "+e.message+". Try Source scope again.";error.hidden=false}finally{trigger.dataset.running="false";trigger.removeAttribute("aria-busy");trigger.textContent=original;trigger.style.minWidth=originalMinWidth}
 }
 async function loadSuggestions() {
@@ -832,7 +837,7 @@ async function init() {
      };form();
     }},tool.label));
     if(!catalog.length)content.append(el('p',{class:'action-empty',role:'status',text:'No actions enabled.'}));
-    dialog.append(el('footer',{},el('button',{class:'chip',onclick:()=>dialog.close()},'Close')));dialog.addEventListener('close',()=>{dialog.remove();$('#actionsBtn').focus()});document.body.append(dialog);dialog.showModal();
+    dialog.append(el('footer',{},el('button',{class:'chip',onclick:()=>dialog.close()},'Close')));dialog.addEventListener('close',()=>{dialog.remove();focusBack($('#actionsBtn'),$('#toolsToggle'),$('#q'))});document.body.append(dialog);dialog.showModal();
    }catch(err){const error=$('#actionsError');error.textContent='Could not load actions: '+err.message+'. Try Actions again.';error.hidden=false}finally{trigger.dataset.running='false';trigger.removeAttribute('aria-busy');trigger.textContent=original;trigger.style.minWidth=originalMinWidth}
   };
   $("#hint").textContent = "Answers cite their sources. Check important facts.";
