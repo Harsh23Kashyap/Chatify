@@ -144,6 +144,15 @@ def relevance_gate(question, found):
     # at least two kept passages carry an anchor, require one; with fewer the
     # anchor signal is absent from retrieval and the count floor alone decides.
     anchors = sorted(set(a.lower() for a in re.findall(r"\b[A-Z][A-Z0-9]{2,}(?:-[A-Z0-9]+)*\b", question or "")))
+    # A capitalized word inside the question sentence is usually a named entity
+    # ("hot Jupiter exoplanets"): the same anchor logic applies. Sentence-initial
+    # capitalization and capitalized function words are excluded.
+    _ANCHOR_SKIP = frozenset("The A An This That These Those It Its If When What Why How Who Which Where Do Does Did Can Could Should Would Is Are Was Were On In At By For With From To Of As Not No Yes".split())
+    q_str = (question or "").strip()
+    anchors += [m.group(0).lower() for m in re.finditer(r"\b[A-Z][a-z]{2,}\b", q_str)
+                if m.start() > 0 and m.group(0) not in _ANCHOR_SKIP
+                and not re.match(r"[.!?]\s*$", q_str[:m.start()].strip()[-1:] or "x")]
+    anchors = sorted(set(anchors))
     if anchors and kept:
         pats = [re.compile(r"\b" + re.escape(a).replace(r"\-", r"[- ]?") + r"s?\b", re.I) for a in anchors]
         def _anchored(e):

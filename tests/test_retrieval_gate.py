@@ -47,6 +47,23 @@ class Gate(unittest.TestCase):
         self.assertIn("tomato", s)
         self.assertIn("balcony", s)
 
+    def test_capitalized_entity_anchors_retrieval(self):
+        # R4 review 2026-10-25: "Cloud Formation and Dynamics in Cool Dwarf and
+        # Hot Exoplanetary Atmospheres" (no Jupiter anywhere) displayed for
+        # "What are recent findings about atmospheres of hot Jupiter exoplanets?"
+        # A capitalized mid-question word is a named entity and anchors like an
+        # all-caps acronym.
+        q = "What are recent findings about atmospheres of hot Jupiter exoplanets?"
+        overcast = ev(1, "Overcast mornings and clear evenings in hot Jupiter exoplanet atmospheres",
+                      "Hot Jupiter exoplanet atmospheres show morning cloud coverage and clear evenings.")
+        cooldwarf = ev(2, "Cloud Formation and Dynamics in Cool Dwarf and Hot Exoplanetary Atmospheres",
+                       "Brown dwarfs, L and T dwarfs and exoplanets: thermal energy balance, cloud formation, and dynamics of cool dwarf and hot exoplanetary atmospheres.")
+        ultrahot = ev(3, "The Atmospheric Circulation of Ultra-hot Jupiters",
+                      "Ultra-hot Jupiter atmospheres: hydrodynamical simulations of hot Jupiter circulation.")
+        titles = [e["title"] for e in relevance_gate(q, [overcast, cooldwarf, ultrahot])]
+        self.assertNotIn("Cloud Formation and Dynamics in Cool Dwarf and Hot Exoplanetary Atmospheres", titles)
+        self.assertIn("Overcast mornings and clear evenings in hot Jupiter exoplanet atmospheres", titles)
+
 
 class QueryWords(unittest.TestCase):
     def test_short_query_drops_question_words(self):
@@ -117,6 +134,7 @@ class FallbackWording(unittest.TestCase):
         e = providers.ProviderError("No API key yet. Paste one under Model, Save key, or set the OPENAI_API_KEY environment variable.", 401)
         self.assertTrue(str(e).startswith("No API key yet"))
         self.assertEqual(e.code, 401)
+
 
 
 if __name__ == "__main__":
