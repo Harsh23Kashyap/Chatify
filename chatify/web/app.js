@@ -467,11 +467,12 @@ function playgroundLanding(a, exs) {
   ];
   if(document.querySelector('.common-nav a[href="/settings.html"]'))actions.push(["↗","Connect a model","Choose an AI provider",()=>{location.href=(window.CC_APP_BASE||"") + "/settings.html#sec-model"}]);
   return el("section",{class:"hero playground"},
-    el("div",{class:"playground-intro"},el("div",{},
-      el("h1",{text:TV("txt_title")||a.title}),el("p",{text:TV("txt_tagline")||a.tagline})),scene),
-    exs.length?el("div",{},el("h2",{class:"playground-label",text:"Follow your curiosity"}),
+    el("div",{class:"playground-intro"},el("div",{class:"rise"},
+      el("div",{class:"kicker","aria-hidden":"true"},document.createTextNode("Grounded in your sources")),
+      el("h1",{text:TV("txt_title")||a.title}),el("p",{class:"lede",text:TV("txt_tagline")||a.tagline})),scene),
+    exs.length?el("div",{class:"rise",style:"--rise-order:1"},el("h2",{class:"playground-label",text:"Follow your curiosity"}),
       el("div",{class:"playground-questions"},exs.map((x,i)=>el("button",{class:"playground-question",style:"--question-order:"+i,onclick:()=>{$("#q").value=x;send()}},el("span",{text:x}),el("b",{"aria-hidden":"true",text:"↗"}))))):null,
-    el("div",{},el("h2",{class:"playground-label shortcut-label",text:"Chat tools"}),el("div",{class:"playground-actions"},actions.map(([icon,title,detail,action])=>el("button",{class:"playground-action",onclick:action},el("em",{"aria-hidden":"true",text:icon}),el("b",{text:title}),el("small",{text:detail}))))),
+    el("div",{class:"rise",style:"--rise-order:2"},el("h2",{class:"playground-label shortcut-label",text:"Chat tools"}),el("div",{class:"playground-actions"},actions.map(([icon,title,detail,action])=>el("button",{class:"playground-action",title:title+": "+detail,onclick:action},el("em",{"aria-hidden":"true",text:icon}),el("b",{text:title}),el("small",{text:detail}))))),
     el("p",{class:"playground-quiet",text:S.cfg.provider.type==="mock"?"Demo uses built-in answers. No model or paid calls.":"Answers use your configured sources and model."}));
 }
 function heroView() {
@@ -638,6 +639,8 @@ async function send() {
   const live = el("div", { class: "a", id: "live" });
   const thinkSpin = el("span", { class: "cc-spin", "aria-hidden": "true" });
   thinkSpin.innerHTML = '<svg viewBox="0 0 88 88"><circle class="cc-spin-track" cx="44" cy="44" r="38"/><circle class="cc-spin-head" cx="44" cy="44" r="38"/></svg>';
+  const skel = el("div", { class: "answer-sk", "aria-hidden": "true" }, el("span"), el("span"), el("span"));
+  live.append(skel);
   w.append(el("div", { class: "q user-arrive", text: q }), el("div", { class: "think", id: "think" }, thinkSpin, el("span", { class: "tt", id: "thinkTxt", text: "Preparing your answer" })), live);
   const th = $("#thread"); $("#jump").dataset.reply = ""; th.scrollTop = th.scrollHeight; syncLatest();
   let text = "", result = null, err = null;
