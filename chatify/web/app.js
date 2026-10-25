@@ -1055,7 +1055,7 @@ async function accountGate() {
 }
 function applyWording() {
   const a = S.cfg.app;
-  { const b = $("#brand"); b.replaceChildren(el("img",{class:"tb-logo",src:"/icons/chatify.svg",alt:""}),document.createTextNode("Chatify"));b.title="Workspace: "+(TV("txt_title")||a.title); } document.title = TV("txt_title") || a.title;
+  { const b = $("#brand"); b.replaceChildren(el("img",{class:"tb-logo",src:"/icons/chatify.svg",alt:""}),document.createTextNode(PREVIEW?(TV("txt_title")||a.title):"Chatify"));b.title="Workspace: "+(TV("txt_title")||a.title); } document.title = TV("txt_title") || a.title;
   $("#noteName").textContent = TV("txt_title") || a.title; $("#noteText").textContent = TV("txt_footer") || a.footer; $("#noteName").closest(".note").hidden = PREVIEW;
   $("#q").placeholder = TV("txt_placeholder") || "Ask a question"; $("#hint").textContent = TV("txt_hint") || "Answers cite their sources. Check important facts.";
   const d = document.querySelector(".cmeta span:last-child"); if (d) d.textContent = TV("txt_disclaimer") || "Not a substitute for professional advice.";
