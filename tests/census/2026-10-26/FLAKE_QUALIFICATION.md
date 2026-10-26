@@ -43,3 +43,15 @@ Passed census 08:56. Failed 2/2 solo today (11:05 fixed code, 11:07 pristine HEA
 Mechanism (runtime-proven): .builder-remaining-work scrolls with smooth behavior under no-preference motion (reduce-motion forces auto). End-key starts a smooth scroll; the build-status poll (1s cadence while running) calls paintJob, which detached the node (metrics.replaceChildren) and restored a scrollTop captured BEFORE the scroll produced frames - canceling the in-flight scroll and stomping scrollTop back to 0. Deterministic replication: capture-detach-restore during a smooth scroll -> final scrollTop 0 vs destination 21px; no-detach control -> 21 ({max:21,captured:0,afterDetachRestore:0,control:21}). Real-user impact: a poll landing mid-scroll canceled the user's scroll of the Remaining-work region.
 Fix (product, assertions untouched): appbuilder.js paintJob now keeps the existing .builder-remaining-work node in place when its text is unchanged (surgical metrics rebuild around it; no detach, no scrollTop write, no focus steal). Content-changed path keeps the prior replace+restore behavior.
 Verification: post-fix real-path probe - smooth scroll survives real 1s polls to destination ({max:21,afterRealPolls:21,focused:true}); unmodified builder_whole_dashboard_fontstress_browser.cjs solo 4/4 PASS (plus the deterministic mechanism probe). Distribution: 2 fail (pre-fix) / 8 pass (pre-fix) + 4 pass (post-fix). FLAKY-OPEN -> FIXED-PENDING-FULLPASS.
+
+## emoji_runtime_quiet_motion_browser — TEST-OBSERVATION RACE (repaired, not a product bug)
+
+Observed: getAnimations() empty at assert time → 1280/none/opening FAIL; lane contention also failed combo 1.
+Root cause (verified): anims:1 at click, anims:0 immediately after — the 160ms default-fill entrance
+animation FINISHES and drops out of getAnimations() before the assert's evaluate lands on a slow
+sandbox. Diag copy with one extra evaluate passed all 12 combos; product behavior (animation plays,
+pausable, quiet modes cancel motion) intact.
+Repair (contract unchanged): addInitScript wraps Element.prototype.animate to keep records;
+assertion uses live animation if present, else the most recent completed record, and pause() +
+currentTime=40 rewinds it into getAnimations() so the product's quiet-mode cancel path is still
+exercised. PASS 3/3 solo + 1/1 through lane path.
