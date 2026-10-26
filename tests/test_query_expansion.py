@@ -40,10 +40,13 @@ class StubProvider:
             if self.fail:
                 raise providers.ProviderError("boom")
             return self.expansion or ""
+        if messages[0]["content"] == pipeline.Engine.stage_prompt(self._eng, "relevance"):
+            import re as _re
+            return " ".join(_re.findall(r"\[(\d+)\]", messages[1]["content"])) or "NONE"
         return "unused"
 
 
-def make_engine(hits_by_keyword, provider, with_upload=False):
+def make_engine(hits_by_keyword, provider, with_upload=False, ptype="openai"):
     class Conn:
         id = "pubmed"
 
@@ -55,7 +58,7 @@ def make_engine(hits_by_keyword, provider, with_upload=False):
                                         "pubmed", 1.0 / (i + 1), "X:%d" % i))
             return out[:k]
 
-    cfg = {"app": {"title": "T", "tagline": ""}, "provider": {"type": "mock"},
+    cfg = {"app": {"title": "T", "tagline": ""}, "provider": {"type": ptype},
            "sources": [{"id": "pubmed", "type": "pubmed", "label": "PubMed"}],
            "retrieval": {"top_k": 6, "min_score": 0.0, "cache_ttl": 0},
            "memory": {"enabled": False}, "permissions": {}, "pipeline_prompts": {}}
@@ -87,11 +90,14 @@ class QueryExpansionTest(unittest.TestCase):
         found, _ = eng.retrieve("jaguar habitat", owner="visitor:t")
         self.assertEqual([e["title"] for e in found], [PANTHERA[0]])
 
-    def test_expansion_dropping_an_original_word_is_rejected(self):
+    def test_expansion_substituting_original_words_is_allowed_and_judged(self):
+        # Substitution is permitted (real models rewrite slang to technical terms);
+        # with no original stems preserved the rescue is fail-closed on the judge,
+        # which here confirms the passage.
         prov = StubProvider("myocardial infarction acute management")
         eng = make_engine([("myocardial", MI)], prov)
         found, _ = eng.retrieve("heart attack treatment options", owner="visitor:t")
-        self.assertEqual(found, [])
+        self.assertEqual([e["title"] for e in found], [MI[0]])
 
     def test_negation_parity_violation_is_rejected(self):
         prov = StubProvider("treatments that cure insomnia myocardial infarction")
@@ -117,6 +123,15 @@ class QueryExpansionTest(unittest.TestCase):
         eng = make_engine([("myocardial", MI)], prov)
         found, _ = eng.retrieve("heart attack treatment options", owner="visitor:t")
         self.assertEqual(found, [])
+
+    def test_mock_provider_type_disables_the_rescue_entirely(self):
+        # The demo provider can neither expand nor judge, so the rescue path stays
+        # off: no expansion call, no pretend semantic guard, honest abstention.
+        prov = StubProvider("heart attack treatment options myocardial infarction")
+        eng = make_engine([("myocardial", MI)], prov, ptype="mock")
+        found, _ = eng.retrieve("heart attack treatment options", owner="visitor:t")
+        self.assertEqual(found, [])
+        self.assertEqual(prov.expand_calls, 0)
 
     def test_mock_provider_output_is_rejected_by_contract(self):
         eng = make_engine([("myocardial", MI)], providers.Mock({}))
@@ -256,11 +271,21 @@ class SubstitutionExpansionTest(unittest.TestCase):
         found, _ = eng.retrieve("tummy bug treatment options", owner="visitor:t")
         self.assertEqual(found, [])  # no unjudged substituted rescue, ever
 
-    def test_stem_preserving_rewrite_stays_fail_open_when_judge_fails(self):
+    def test_expanded_only_passage_is_fail_closed_even_when_stems_preserved(self):
+        # The MI passage matches only expanded tokens; a failed judge must not
+        # knowingly admit unverified expanded-only evidence.
         prov = JudgeProvider("heart attack treatment options myocardial infarction", judge_fail=True)
         eng = make_judging_engine([("myocardial", MI)], prov)
         found, _ = eng.retrieve("heart attack treatment options", owner="visitor:t")
-        self.assertEqual([e["title"] for e in found], [MI[0]])
+        self.assertEqual(found, [])
+
+    def test_original_word_anchored_passage_stays_fail_open_when_judge_fails(self):
+        anchored = ("Heart attack recovery: rehabilitation after myocardial infarction",
+                    "Heart attack recovery takes weeks. Cardiac rehabilitation, statins and beta blockers follow a myocardial infarction.")
+        prov = JudgeProvider("heart attack treatment options myocardial infarction", judge_fail=True)
+        eng = make_judging_engine([("myocardial", anchored)], prov)
+        found, _ = eng.retrieve("heart attack treatment options", owner="visitor:t")
+        self.assertEqual([e["title"] for e in found], [anchored[0]])
 
     def test_substitution_still_enforces_negation_parity(self):
         prov = JudgeProvider("insomnia cures melatonin therapy", judge="1")

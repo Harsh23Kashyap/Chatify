@@ -639,6 +639,10 @@ class Engine:
         return min(50, k * 2) if style == "deep" else k
 
     _NEGATION = frozenset("no not never without nor neither avoid avoids avoidant".split())
+    # The rescue path adds provider calls after the reader has already waited for a
+    # full search round; each rescue call gets its own bounded timeout so the worst
+    # added latency stays seconds, not the full provider timeout per call.
+    _RESCUE_TIMEOUT = 15
 
     def _expand_for_recall(self, question):
         """One synonym-expanded rewrite for the zero-evidence rescue path.
@@ -754,12 +758,20 @@ class Engine:
             found = relevance_gate(question, found, public_ids=search_ids)
         if (not found and _expandable and not scope and search_ids
                 and not corpus_intent(question) and _gate_stems(question)
+                and self.cfg["provider"]["type"] != "mock"  # the demo provider can neither expand nor judge; rescue stays off
                 and self.cfg["retrieval"].get("query_expansion", True)):
             # Zero-evidence rescue: one bounded synonym expansion, one re-search of the
             # open connectors, then the gate on the UNION vocabulary. A passage must
             # share at least two union content words, so a single expanded token alone
             # cannot carry an off-topic page (ambiguous-synonym laundering).
-            expansion = self._expand_for_recall(question)
+            _prov_t = getattr(self.provider, "t", None)
+            if isinstance(_prov_t, (int, float)):
+                self.provider.t = min(_prov_t, self._RESCUE_TIMEOUT)
+            try:
+                expansion = self._expand_for_recall(question)
+            finally:
+                if isinstance(_prov_t, (int, float)):
+                    self.provider.t = _prov_t
             if expansion:
                 expanded, stems_preserved = expansion
                 union_q = question + " " + expanded
@@ -784,16 +796,28 @@ class Engine:
                 # stage judges them against the ORIGINAL question regardless of
                 # the relevance toggle - ambiguous-synonym near-misses and
                 # expanded-only junk are dropped here (adversarial cases in
-                # tests/test_query_expansion.py). Fail-open on provider failure.
-                judged = self.filter_relevant(question, kept, force=True,
-                                              strict=not stems_preserved, snippet=1500)
-                # strict and the judge could not run (provider/contract failure):
-                # a substituted rewrite has no mechanical intent anchor, so the
-                # honest outcome is abstention, never an unjudged rescue.
-                if judged is None:
-                    kept = []
-                else:
-                    kept = judged
+                # tests/test_query_expansion.py). The judge must SUCCEED whenever
+                # no original-question anchor exists: a substituted rewrite, or a
+                # passage sharing only expanded tokens, is abstained on judge
+                # failure (fail-closed); only a passage that also shares an
+                # original question word keeps the fail-open path.
+                orig_stems = _gate_stems(question)
+                anchored, unanchored = [], []
+                for e in kept:
+                    p = _gate_stems(str(e.get("title") or "") + " " + str(e.get("text") or "")[:1500])
+                    (anchored if p & orig_stems else unanchored).append(e)
+                _prov_t = getattr(self.provider, "t", None)
+                if isinstance(_prov_t, (int, float)):
+                    self.provider.t = min(_prov_t, self._RESCUE_TIMEOUT)
+                try:
+                    kept = self.filter_relevant(question, anchored, force=True,
+                                                strict=not stems_preserved, snippet=1500) or []
+                    if unanchored:
+                        kept = kept + (self.filter_relevant(question, unanchored, force=True,
+                                                            strict=True, snippet=1500) or [])
+                finally:
+                    if isinstance(_prov_t, (int, float)):
+                        self.provider.t = _prov_t
                 found = kept
         # Semantic re-order of the gate-retained set (order only, fail-open; see rerank.py).
         _rr = self.cfg["retrieval"].get("rerank", True)
