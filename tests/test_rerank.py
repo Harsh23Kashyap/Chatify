@@ -1,6 +1,17 @@
 """Order-only cross-encoder re-order stage (chatify/rerank.py + retrieve() hook)."""
 import os
-import pytest
+try:
+    import pytest
+except ImportError:
+    # The CI tests workflow runs unittest discover without pytest installed; the
+    # module must still import cleanly (its pytest-style tests collect only under
+    # pytest). Markers become no-ops there.
+    class _NoPytest:
+        class mark:
+            @staticmethod
+            def skipif(*a, **k):
+                return lambda f: f
+    pytest = _NoPytest()
 from chatify import rerank
 
 
