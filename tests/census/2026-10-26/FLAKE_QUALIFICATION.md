@@ -84,3 +84,48 @@ completion under lane shift; same observation-race family as emoji_runtime_quiet
 solo rerun PASS 30s (13:13:30), latest-row supersedes. WATCH: if this recurs in a solo/full-run
 context, apply the emoji-style race-free observation repair (record via animate wrapper +
 pause/currentTime rewind) rather than rerunning forever.
+
+## Addendum 2026-10-26 20:20 IST - color_feedback_browser.cjs RECLASSIFIED (harness observation-race, mechanism resolved)
+
+CORRECTION (supersedes earlier node-identity diagnosis): the preserved original FAIL logs
+(rerun_logs/color_feedback_browser.log = lane run, .solo.log = uncontended solo) both fail at
+line 2 col 2156 = `assert.equal(fail.animations.some(a=>a.duration===160), motion==='no-preference')`
+(actual false, expected true). HEX/SWATCH line counts place both failures in no-preference combos
+(lane: 320/no-preference; solo: 1280/no-preference). The node-identity asserts (fail.same, fail.status),
+the 'Fail 1.0:1' text assert, host-animation count, transform and focus asserts all PASSED in the
+failing snapshots. Any earlier claim (mine) that the failures were node-identity losses is withdrawn;
+the originals are preserved unchanged in rerun_logs/ and results.tsv.
+
+Mechanism (source-backed): settings.js pvExtra() creates the 160ms row-status fade synchronously in
+the hex input handler (setv is synchronous; rows created once behind the dataset.sample!=="colors"
+guard and updated in place). The pre-repair test sampled live getAnimations() after waitForTimeout(30)
+plus a cross-process evaluate round trip. Each changed() also re-renders the same-process iframe
+preview (pushPreview), occupying the shared main thread. When the sample landed >160ms after
+animation creation, the finished animation was no longer listed -> false FAIL exactly in
+no-preference combos (reduce combos expect absence and pass trivially). Consistent with the observed
+lane FAIL + solo FAIL + solo2 PASS distribution under slow-regime timing. Same family as the accepted
+builder_keep_current_removal_motion 120ms race (commit da1afdc).
+
+Harness repair (precedent 486baf4, pass-through, no timing/playback change): an
+Element.prototype.animate wrapper records original calls (window.__anims) and returns the original
+Animation. The 160ms assert now reads recorded calls targeted at the asserted row
+(a.effect.target===n) created after a pre-fill mark (window.__animMark). Unmodified-runtime
+assertions retained: 'Fail 1.0:1' text, node identity, host getAnimations()===0, transform, focus,
+swatch transition durations, calm-gating (0 animations). ADDED unmodified natural-completion check:
+after the existing waitForTimeout(400), the row's live getAnimations() must no longer contain a 160ms
+animation (verifies natural finish/removal). Pre-repair test preserved:
+rerun_logs/color_feedback_browser.cjs.pre-repair.bak.
+
+Target/mark discrimination verified empirically (rerun_logs/color_feedback_target_probe.log):
+3 pre-mark animations correctly excluded; 7 post-mark animations recorded, all on .cc rows, exactly
+2 targeting the asserted first row (bg-fill round: later cancelled by the ink-round pvExtra, playState
+idle = product-correct supersede; ink-fill round: finished naturally within 160ms). Without the
+row-target filter, sibling rows' recorded animations could satisfy the assert; with it, the assert
+measures the same row the original live sampling measured.
+
+Repeatability: repaired test 3 consecutive solo PASSes (30s/26s/27s,
+rerun_logs/color_feedback_browser.repaired_solo{1,2,3}.log). Case remains in
+stability_set.txt for the 5-consecutive-solo phase using the repaired file.
+
+Scope: this classification covers THIS failure signature only. It is not a blanket absence of product
+risk for color_feedback or any other case.
