@@ -192,3 +192,15 @@ separate awaited disabled/text/Next-visible assertions. Source accept.onclick
 creates140ms status-only fade synchronously. Late observation is plausible, not
 proven from the original log; no product-exclusion claim or patch at this stage.
 Natural lifecycle evidence and five replacement solo passes remain required.
+
+## Addendum 2026-10-27 01:38 IST - dashboard scroll assertions
+
+fontstress run2 FAIL152s (after PASS25s) and dashboard_status run3 FAIL285s
+(after PASS31s/314s) both fail `scrollHeight>clientHeight && scrollTop>0` after
+focus/End/wait. Logs show two320px BOARD records before failure in a later matrix
+iteration. This is a functional text-scroll failure, not animation/geometry-null.
+Source paintJob preserves unchanged remaining-work text nodes; logs do not contain
+activeElement, identity, scroll dimensions or key event state at failure. A shared
+focus/scroll/repaint family is an investigation lead only. Both remain unexplained
+and unqualified; retain original assertions and evidence, capture missing state
+before any repair/classification. Replacement five-solo streaks remain required.
