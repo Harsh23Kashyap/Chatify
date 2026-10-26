@@ -124,6 +124,9 @@ class QueryExpansionTest(unittest.TestCase):
         self.assertEqual(found, [])
 
 
+GASTRO = ("Gastroenteritis (stomach flu): treatment and care",
+         "Gastroenteritis, often called stomach flu or a tummy bug, is treated with oral rehydration. Most cases resolve without antibiotics.")
+
 WARD = ("Myocardial infarction ward staffing roster",
         "The myocardial infarction ward staffs three nurses per shift. Roster gaps are covered by float pool staff.")
 SHOWROOM = ("Jaguar habitat-themed showroom opens downtown",
@@ -135,9 +138,9 @@ INSOMNIA_CURE = ("Insomnia cures: what the evidence says",
 class JudgeProvider(StubProvider):
     """Answers the expand stage with a canned rewrite and the relevance stage as a
     semantic judge against the ORIGINAL question it records."""
-    def __init__(self, expansion=None, judge="NONE"):
+    def __init__(self, expansion=None, judge="NONE", judge_fail=False):
         super().__init__(expansion)
-        self.judge, self.relevance_questions = judge, []
+        self.judge, self.judge_fail, self.relevance_questions = judge, judge_fail, []
 
     def complete(self, messages):
         system = messages[0]["content"]
@@ -145,6 +148,8 @@ class JudgeProvider(StubProvider):
             self.expand_calls += 1
             return self.expansion or ""
         if system == pipeline.Engine.stage_prompt(self._eng, "relevance"):
+            if self.judge_fail:
+                raise providers.ProviderError("judge down")
             user = messages[1]["content"]
             self.relevance_questions.append(user.split("\n", 1)[0])
             return self.judge
@@ -224,6 +229,50 @@ class AdversarialExpansionTest(unittest.TestCase):
         eng = make_judging_engine([("insomnia", INSOMNIA_CURE)], prov)
         found, _ = eng.retrieve("treatments that do not cure insomnia", owner="visitor:t")
         self.assertEqual([e["title"] for e in found], [INSOMNIA_CURE[0]])
+
+
+class SubstitutionExpansionTest(unittest.TestCase):
+    """Real models substitute slang with technical terms instead of appending
+    synonyms (live gpt-4o-mini 2026-10-26: 3/3 rewrites were substitutions).
+    Substitution is allowed, but without original stems the forced relevance
+    judgment becomes the only intent anchor and must succeed (fail-closed)."""
+
+    def test_substituted_rewrite_rescues_when_judge_confirms(self):
+        prov = JudgeProvider("gastrointestinal infection treatment options", judge="1")
+        eng = make_judging_engine([("gastrointestinal", GASTRO)], prov)
+        found, _ = eng.retrieve("tummy bug treatment options", owner="visitor:t")
+        self.assertEqual([e["title"] for e in found], [GASTRO[0]])
+        self.assertEqual(prov.relevance_questions, ["Question: tummy bug treatment options"])
+
+    def test_substituted_rewrite_abstains_when_judge_says_none(self):
+        prov = JudgeProvider("gastrointestinal infection treatment options", judge="NONE")
+        eng = make_judging_engine([("gastrointestinal", GASTRO)], prov)
+        found, _ = eng.retrieve("tummy bug treatment options", owner="visitor:t")
+        self.assertEqual(found, [])
+
+    def test_substituted_rewrite_is_fail_closed_when_judge_fails(self):
+        prov = JudgeProvider("gastrointestinal infection treatment options", judge_fail=True)
+        eng = make_judging_engine([("gastrointestinal", GASTRO)], prov)
+        found, _ = eng.retrieve("tummy bug treatment options", owner="visitor:t")
+        self.assertEqual(found, [])  # no unjudged substituted rescue, ever
+
+    def test_stem_preserving_rewrite_stays_fail_open_when_judge_fails(self):
+        prov = JudgeProvider("heart attack treatment options myocardial infarction", judge_fail=True)
+        eng = make_judging_engine([("myocardial", MI)], prov)
+        found, _ = eng.retrieve("heart attack treatment options", owner="visitor:t")
+        self.assertEqual([e["title"] for e in found], [MI[0]])
+
+    def test_substitution_still_enforces_negation_parity(self):
+        prov = JudgeProvider("insomnia cures melatonin therapy", judge="1")
+        eng = make_judging_engine([("melatonin", INSOMNIA_CURE)], prov)
+        found, _ = eng.retrieve("treatments that do not cure insomnia", owner="visitor:t")
+        self.assertEqual(found, [])  # dropped "not" -> rewrite rejected before any search
+
+    def test_substitution_still_rejects_corpus_references(self):
+        prov = JudgeProvider("my notes on gastrointestinal infection", judge="1")
+        eng = make_judging_engine([("gastrointestinal", GASTRO)], prov)
+        found, _ = eng.retrieve("tummy bug treatment options", owner="visitor:t")
+        self.assertEqual(found, [])
 
 
 if __name__ == "__main__":

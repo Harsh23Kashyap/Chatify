@@ -643,11 +643,15 @@ class Engine:
     def _expand_for_recall(self, question):
         """One synonym-expanded rewrite for the zero-evidence rescue path.
 
-        The expansion may only ADD standard synonyms/technical equivalents: the
-        contract check below requires every original content word's stem and the
-        exact negation set to survive, and rejects corpus references, so the retry
-        cannot launder an off-intent passage past the gate on new tokens alone.
-        Returns None on any provider or contract failure (the caller abstains).
+        Returns (text, stems_preserved) or None. Hard contract (always): one
+        line, exact negation parity, no corpus references, not a verbatim echo.
+        Real models SUBSTITUTE slang with technical terms instead of appending
+        synonyms (live gpt-4o-mini eval 2026-10-26: "tummy bug" -> "gastrointestinal
+        infection", rejected 3/3 rewrites under the old append-only rule), so
+        substitution is allowed - but a substituted rewrite loses the mechanical
+        intent anchor, so the caller must then require the original-question
+        relevance judgment to succeed (fail-closed), while a stem-preserving
+        rewrite keeps the fail-open judgment.
         """
         try:
             out = self.provider.complete([{"role": "system", "content": self.stage_prompt("expand")},
@@ -656,17 +660,16 @@ class Engine:
             return None
         if stage_contracts.errors("expand", out):
             return None
-        original_words = [w for w in re.findall(r"[a-z0-9]{3,}", (question or "").lower())
-                          if not w.isdigit() and w not in _GATE_STOP]
-        expanded_stems = _gate_stems(out)
-        if any(not (_gate_variants(w) & expanded_stems) for w in original_words):
-            return None
         neg = lambda t: {w for w in re.findall(r"[a-z]+", (t or "").lower()) if w in self._NEGATION}
         if neg(out) != neg(question):
             return None
         if corpus_intent(out) or out.strip().lower() == (question or "").strip().lower():
             return None
-        return out
+        original_words = [w for w in re.findall(r"[a-z0-9]{3,}", (question or "").lower())
+                          if not w.isdigit() and w not in _GATE_STOP]
+        expanded_stems = _gate_stems(out)
+        preserved = all((_gate_variants(w) & expanded_stems) for w in original_words)
+        return out, preserved
 
     def retrieve(self, question, source_ids=None, owner=None, scope=None, style="standard", _expandable=True):
         k = self.retrieval_limit(style)
@@ -756,11 +759,17 @@ class Engine:
             # open connectors, then the gate on the UNION vocabulary. A passage must
             # share at least two union content words, so a single expanded token alone
             # cannot carry an off-topic page (ambiguous-synonym laundering).
-            expanded = self._expand_for_recall(question)
-            if expanded:
-                more, _merr = self.retrieve(expanded, source_ids=sorted(search_ids), owner=owner,
-                                            style=style, _expandable=False)
+            expansion = self._expand_for_recall(question)
+            if expansion:
+                expanded, stems_preserved = expansion
                 union_q = question + " " + expanded
+                # Re-search with the UNION, not the expansion alone: a substituted
+                # rewrite's passages often share vocabulary with the ORIGINAL words
+                # only (a "gastrointestinal infection" rewrite rescuing a "tummy bug"
+                # page), and gating the inner search on the expansion alone empties
+                # exactly those rescues before the union gate can judge them.
+                more, _merr = self.retrieve(union_q, source_ids=sorted(search_ids), owner=owner,
+                                            style=style, _expandable=False)
                 kept = relevance_gate(union_q, [e for e in more if e.get("source") in search_ids],
                                       public_ids=search_ids)
                 q_words = [w for w in re.findall(r"[a-z0-9]{3,}", union_q.lower())
@@ -776,7 +785,15 @@ class Engine:
                 # the relevance toggle - ambiguous-synonym near-misses and
                 # expanded-only junk are dropped here (adversarial cases in
                 # tests/test_query_expansion.py). Fail-open on provider failure.
-                kept = self.filter_relevant(question, kept, force=True)
+                judged = self.filter_relevant(question, kept, force=True,
+                                              strict=not stems_preserved, snippet=1500)
+                # strict and the judge could not run (provider/contract failure):
+                # a substituted rewrite has no mechanical intent anchor, so the
+                # honest outcome is abstention, never an unjudged rescue.
+                if judged is None:
+                    kept = []
+                else:
+                    kept = judged
                 found = kept
         # Semantic re-order of the gate-retained set (order only, fail-open; see rerank.py).
         _rr = self.cfg["retrieval"].get("rerank", True)
@@ -1095,25 +1112,32 @@ class Engine:
             return why[:300] or "That question is outside what this assistant can answer."
         return ""
 
-    def filter_relevant(self, question, evidence, force=False):
+    def filter_relevant(self, question, evidence, force=False, strict=False, snippet=400):
+        """strict=True returns None (not the unjudged evidence) when the judgment
+        itself could not run, for callers whose path has no other intent anchor.
+        snippet widens the per-passage text the judge sees: the forced rescue
+        judgment passes 1500 because a 400-character lead can end before the
+        passage's relevant content (live 2026-10-26: gpt-4o-mini answered NONE
+        for the Gastroenteritis rescue of "tummy bug treatment options" - the
+        treatment section sat past the 400-character cut)."""
         if not evidence:
-            return evidence
+            return [] if strict else evidence
         if self.cfg["provider"]["type"] == "mock":
-            return evidence  # the demo provider cannot judge; recall stays curated
+            return None if strict else evidence  # the demo provider cannot judge; recall stays curated
         if not force and not self._llm_on("relevance"):
-            return evidence
-        listing = "\n".join("[%d] %s. %s" % (e["n"], e["title"], e["text"][:400]) for e in evidence)
+            return None if strict else evidence
+        listing = "\n".join("[%d] %s. %s" % (e["n"], e["title"], e["text"][:snippet]) for e in evidence)
         try:
             out = self.provider.complete([{"role": "system", "content": self.stage_prompt("relevance")}, {"role": "user", "content": "Question: %s\n\nPassages:\n%s" % (question, listing)}]).strip()
         except providers.ProviderError:
-            return evidence
+            return None if strict else evidence
         if stage_contracts.errors("relevance", out, [e["n"] for e in evidence]):
-            return evidence
+            return None if strict else evidence
         if out == "NONE":
             return []
         keep = {int(x) for x in re.findall(r"\d+", out)}
         kept = [e for e in evidence if e["n"] in keep]
-        return kept or evidence
+        return kept or (None if strict else evidence)
 
     def revise(self, answer, evidence):
         if not evidence or not answer or not (self._llm_on("revise") or (self.cfg["prompt"].get("revise") and self.prompts._load()["on"].get("revise",True) and self.cfg["provider"]["type"] != "mock")):
