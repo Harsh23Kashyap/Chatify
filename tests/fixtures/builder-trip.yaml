@@ -1,0 +1,316 @@
+# RECONSTRUCTED 2026-10-26: 'Offline Trip fixture' for builder_apply_saved_e2e_browser.cjs.
+# The original lived outside the repo in a wiped harness dir. Content derived solely
+# from that test's enumerated assertions (title, 3 api suggestions with 4 links,
+# helper_drafts search/clean_query/search_api_1..3, question_check prompt prefix,
+# 10-stage pipeline_prompts contract). Not a historical file.
+schema_version: 1
+actions:
+  allow: null
+  writes: false
+budget:
+  daily_questions: 0
+  user_daily_questions: 0
+  daily_model_calls: 0
+  spend_cap_usd: null
+app:
+  id: trip-planner
+  title: Offline Trip fixture
+  tagline: Plan trips with answers from your sources.
+  accent: '#173f35'
+  accent2: '#d7ef72'
+  footer: For planning, not a substitute for local travel advice.
+  examples:
+  - What should I pack for a monsoon trek?
+  - How do I plan three days in Jaipur?
+  language: en
+  theme: auto
+provider:
+  type: mock
+  model: ''
+  base_url: ''
+  api_key_env: ''
+  temperature: 0.2
+  timeout: 120
+  fallback: null
+sources: []
+retrieval:
+  top_k: 6
+  min_score: 0.0
+  query_rewrite: false
+  cache_ttl: 0
+prompt:
+  system: 'You answer only from the numbered evidence. Cite with [n], placing each
+    number right after the clause it supports, not at the end of the answer. If the
+    evidence does not cover the question, say so in one plain sentence with no citations
+    and do not point the reader elsewhere. Take one clear stance that matches the
+    evidence and do not add claims the passages do not make: no years, numbers or
+    study details that are not written in a passage, and no remarks about limits (such
+    as small or short) unless a passage states them. Refer to the sources as "the
+    sources" or "the studies cited", never "the evidence provided" or "the passages".
+    Do not call a benefit lasting or durable, and do not describe the reader''s own
+    situation, unless a passage says so. Report each outcome as the passage measures
+    it: fat mass is not body weight, and use "suggested" or "may" when the passage
+    does, not "concluded" or "showed". Do not add causal links such as "therefore"
+    that no passage makes, and write "in some settings or groups" instead of "for
+    some people" unless a passage names who. When a passage reports a result that
+    cuts against the main conclusion, such as another outcome where the comparison
+    group did better, include it.'
+  style:
+    quick: Answer in 2 to 4 sentences.
+    standard: Answer clearly with short paragraphs.
+    deep: Answer in depth with sections, caveats and open questions.
+  answer_note: ''
+  revise: false
+  no_evidence: I could not find evidence for that in the configured sources.
+memory:
+  enabled: true
+  recent_turns: 4
+  summary_every: 6
+  context_chars: 60000
+citations:
+  required: true
+  ledger: true
+auth:
+  mode: none
+  token_env: ''
+  signup: true
+storage:
+  path: data/chatify.db
+server:
+  host: 127.0.0.1
+  port: 8080
+appearance:
+  mode: light
+  light:
+    brand: '#173f35'
+    accent: '#d7ef72'
+    bg: '#f8f4e9'
+    surface: '#fffdf7'
+    ink: '#17231f'
+    muted: '#63736c'
+    line: '#d9e1dc'
+    sidebar: '#e9eee5'
+    bot: '#f2f3eb'
+    you: '#efe9d8'
+    danger: '#a8493c'
+  dark:
+    brand: '#8fd0b4'
+    accent: '#d7ef72'
+    bg: '#0d1613'
+    surface: '#121d19'
+    ink: '#e8efe9'
+    muted: '#93a39b'
+    line: '#25352f'
+    sidebar: '#16231e'
+    bot: '#1a2823'
+    you: '#2d3a33'
+    danger: '#e08a7d'
+  bg_style: solid
+  bg_color2: '#e6f0d0'
+  bg_angle: 160
+  bg_image: ''
+  pattern: dots
+  pattern_opacity: 12
+  pattern_size: 24
+  pattern_color: ''
+  font: georgia
+  heading_font: georgia
+  custom_font: ''
+  font_size: 100
+  line_height: 150
+  radius: 100
+  density: cozy
+  shadow: soft
+  emoji_bot: ''
+  emoji_you: ''
+  emoji_hero: ''
+  emoji_send: ''
+  emoji_attach: ''
+  emoji_temp: ''
+  motion: subtle
+  entrance: fade
+  speed: 100
+  hover_lift: true
+  sidebar: right
+  sidebar_width: 250
+  chat_width: wide
+  avatars: hide
+  bubble: flat
+  logo: ''
+  logo_watermark: false
+  txt_title: Garden Field Guide
+  txt_tagline: Grow with answers from your sources
+  txt_examples: 'How much sun does basil need?
+
+    How do I water seedlings?'
+  txt_placeholder: Ask about your garden
+  txt_footer: Learn, check sources, then grow.
+  txt_disclaimer: Check local conditions before acting.
+  txt_hint: Answers cite your selected sources
+  txt_sidebar: Your growing notes
+  you_align: right
+  composer: inline
+  toolbar: show
+  sources_panel: true
+  emoji_bot_animated: false
+  emoji_bot_motion: none
+  emoji_you_animated: false
+  emoji_you_motion: none
+  emoji_hero_animated: false
+  emoji_hero_motion: none
+  emoji_send_animated: false
+  emoji_send_motion: none
+  emoji_attach_animated: false
+  emoji_attach_motion: none
+  emoji_temp_animated: false
+  emoji_temp_motion: none
+pipeline_prompts:
+  text:
+    question_check: 'Trip planning fixture question gate. You decide whether a question
+      is something this assistant should answer from its sources.
+
+
+      Reply with one line. Start with VALID if the question is on topic and clear
+      enough to search, or INVALID followed by a colon and a short, friendly reason
+      the reader can act on.
+
+
+      Greetings and thanks are VALID. Do not answer the question.
+
+
+      Audience: trip planners. Use plain language and source-backed guidance.'
+    standalone: 'Rewrite the last question so it can be understood alone. Return only
+      the rewritten question.
+
+      Audience: beginner gardeners. Use plain language and source-backed guidance.'
+    queries: 'Write up to 3 short keyword search queries for the question. One per
+      line, no numbering.
+
+      Audience: beginner gardeners. Use plain language and source-backed guidance.'
+    expand: 'Rewrite the question as one search query that keeps every original word
+      and adds only standard synonyms or technical equivalents for its terms. Do not
+      change the meaning, do not add or remove negation, do not add new topics. Return
+      only the rewritten query.
+
+      Audience: beginner gardeners. Use plain language and source-backed guidance.'
+    relevance: 'You check retrieved passages against a question. Each passage has
+      a number in square brackets.
+
+      Reply with only the numbers of the passages that help answer the question, separated
+      by commas. Reply NONE if no passage helps. Be strict: a passage that only shares
+      a word with the question does not help.
+
+      Audience: beginner gardeners. Use plain language and source-backed guidance.'
+    answer: 'You answer only from the numbered evidence. Cite with [n], placing each
+      number right after the clause it supports, not at the end of the answer. If
+      the evidence does not cover the question, say so in one plain sentence with
+      no citations and do not point the reader elsewhere. Take one clear stance that
+      matches the evidence and do not add claims the passages do not make: no years,
+      numbers or study details that are not written in a passage, and no remarks about
+      limits (such as small or short) unless a passage states them. Refer to the sources
+      as "the sources" or "the studies cited", never "the evidence provided" or "the
+      passages". Do not call a benefit lasting or durable, and do not describe the
+      reader''s own situation, unless a passage says so. Report each outcome as the
+      passage measures it: fat mass is not body weight, and use "suggested" or "may"
+      when the passage does, not "concluded" or "showed". Do not add causal links
+      such as "therefore" that no passage makes, and write "in some settings or groups"
+      instead of "for some people" unless a passage names who. When a passage reports
+      a result that cuts against the main conclusion, such as another outcome where
+      the comparison group did better, include it.
+
+      Audience: beginner gardeners. Use plain language and source-backed guidance.'
+    faithfulness: 'You verify an answer against its evidence. Each evidence passage
+      has a number in square brackets.
+
+      If every claim in the answer is supported by the evidence, reply with exactly
+      OK.
+
+      Otherwise reply with UNSUPPORTED followed by a colon and a short list of the
+      claims that the evidence does not support. Do not rewrite the answer.
+
+      Audience: beginner gardeners. Use plain language and source-backed guidance.'
+    revise: 'You edit an answer so it stays inside its numbered evidence passages.
+
+      Rules: keep every [n] citation in place and keep the same length and structure.
+      Delete or rewrite any statement, number, year or descriptive word (small, short,
+      lasting, strong) that the cited passage does not state. If a cited passage says
+      the participants lost weight or that a comparison group did better on an outcome,
+      the answer must say so. Keep the direction of every comparison finding (which
+      group did better or regained less) and keep the key numbers the passages give
+      for the main result (effect sizes, group sizes, durations); never reduce a directional
+      finding to a bare report that something happened. Call the sources ''the sources'',
+      never ''the evidence provided''. Reply with only the edited answer.
+
+      Audience: beginner gardeners. Use plain language and source-backed guidance.'
+    followups: 'Suggest 3 short follow-up questions a curious reader might ask next.
+      One per line, no numbering.
+
+      Audience: beginner gardeners. Use plain language and source-backed guidance.'
+    summary: 'Summarise the conversation topics in 2 sentences.
+
+      Audience: beginner gardeners. Use plain language and source-backed guidance.'
+  'on':
+    question_check: false
+    standalone: true
+    queries: true
+    expand: true
+    relevance: false
+    answer: true
+    faithfulness: false
+    revise: false
+    followups: true
+    summary: true
+helper_drafts:
+  search:
+    brief: Trip app search helper draft; review before use.
+    code: "def search(query, limit=6):\n    return []"
+  clean_query:
+    brief: Trip query cleaner draft; review before use.
+    code: "def clean_query(query):\n    return query"
+  search_api_1:
+    brief: Wikipedia trip search helper draft; review before use.
+    code: "def search(query, limit=6):\n    return []"
+  search_api_2:
+    brief: PubMed trip search helper draft; review before use.
+    code: "def search(query, limit=6):\n    return []"
+  search_api_3:
+    brief: Crossref trip search helper draft; review before use.
+    code: "def search(query, limit=6):\n    return []"
+api_suggestions:
+- service: Wikipedia
+  name: Destination background
+  what: Searchable encyclopedia background on destinations.
+  reason: Gives the trip app sourced background for places.
+  connector: wikipedia
+  setup: Built-in source included after review.
+  caveat: Coverage can be uneven; confirm details locally.
+  key_required: false
+  docs_url: https://www.mediawiki.org/wiki/API:Main_page
+  key_url: https://www.mediawiki.org/wiki/API:Main_page
+  provider_page: https://www.mediawiki.org/wiki/API:Main_page
+  helper:
+    brief: Wikipedia trip search helper draft; review before use.
+    code: "def search(query, limit=6):\n    return []"
+- service: PubMed
+  name: Health travel notices
+  what: Searchable health and travel-medicine literature for destination questions.
+  reason: Gives the trip app sourced health guidance for travelers.
+  connector: pubmed
+  setup: Review setup before enabling.
+  caveat: Verify limits before use.
+  helper:
+    brief: PubMed trip search helper draft; review before use.
+    code: "def search(query, limit=6):\n    return []"
+- service: Crossref
+  name: Guide references
+  what: DOI metadata search for cited material.
+  reason: Helps the app cite published travel references.
+  connector: crossref
+  setup: Review setup before enabling.
+  caveat: Verify limits before use.
+  key_required: false
+  docs_url: https://api.crossref.org/
+  provider_page: https://api.crossref.org/
+  helper:
+    brief: Crossref trip search helper draft; review before use.
+    code: "def search(query, limit=6):\n    return []"
