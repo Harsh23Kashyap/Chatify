@@ -1,0 +1,12 @@
+AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:
+
+  assert(await target.evaluate(n=>new Promise(done=>setTimeout(()=>done(n._revealMotion.playState==='idle'),30))))
+
+    at /home/sandbox/chatify/tests/choice_runtime_quiet_motion_browser.cjs:2:2077 {
+  generatedMessage: true,
+  code: 'ERR_ASSERTION',
+  actual: false,
+  expected: true,
+  operator: '==',
+  diff: 'simple'
+}

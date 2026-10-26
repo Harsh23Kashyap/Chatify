@@ -1,0 +1,39 @@
+HEX [
+  'Main color hex code',
+  'Page background hex code',
+  'Accent color hex code',
+  'Cards and chat area hex code',
+  'Sidebar hex code',
+  'Text hex code',
+  'Soft text hex code',
+  'Lines hex code',
+  'Assistant message hex code',
+  'Your avatar hex code',
+  'Warning color hex code'
+]
+SWATCH 320 reduce { duration: '0s', color: 'rgb(0, 0, 0)', animations: 0 }
+HEX [
+  'Main color hex code',
+  'Page background hex code',
+  'Accent color hex code',
+  'Cards and chat area hex code',
+  'Sidebar hex code',
+  'Text hex code',
+  'Soft text hex code',
+  'Lines hex code',
+  'Assistant message hex code',
+  'Your avatar hex code',
+  'Warning color hex code'
+]
+AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+
+false !== true
+
+    at /home/sandbox/chatify/tests/color_feedback_browser.cjs:2:2156 {
+  generatedMessage: true,
+  code: 'ERR_ASSERTION',
+  actual: false,
+  expected: true,
+  operator: 'strictEqual',
+  diff: 'simple'
+}
