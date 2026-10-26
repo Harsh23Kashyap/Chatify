@@ -832,16 +832,22 @@ class Engine:
         # Semantic re-order of the gate-retained set (order only, fail-open; see rerank.py).
         _rr = self.cfg["retrieval"].get("rerank", True)
         own = [e for e in found if e.get("source") not in search_ids]
-        if own:
-            # Mixed corpus: owner-corpus matches carry no gate rank, so keep the
-            # historical score ordering for the combined list. Pure open-API results
-            # keep the gate's most-on-question-first order - a blanket score sort
-            # undid it on the live demo (2026-10-25: the Holy Roman Empire led a
-            # fall-of-Rome answer on keyword popularity while Gibbon's Decline and
-            # Fall, sharing more question vocabulary, trailed at [3]).
+        mixed = bool(own) and len(own) < len(found)
+        if mixed:
+            # Mixed corpus only: owner-corpus matches carry no gate rank, so keep
+            # the historical score ordering for the combined list (2026-10-25 live
+            # evidence: keyword-popularity order misled a fall-of-Rome answer).
             found.sort(key=lambda e: -e["score"])
         else:
-            found = rerankmod.rerank(question, found, enabled=_rr)
+            # Pure corpus (owner-only or open-API-only): semantic re-order so the
+            # best-answering passage leads. Order only, fail-open; see rerank.py.
+            # 2026-10-26: the pre-fix condition routed pure owner corpora here too,
+            # leaving rerank dead on every local_files app (whole hosted gallery).
+            try:
+                found = rerankmod.rerank(question, found, enabled=_rr)
+            except Exception:
+                pass  # fail-open at the call site too: gate order stands
+
         found = found[:k]
         if recent:
             # A recency question ("most recent papers on X") is mis-served by an

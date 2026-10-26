@@ -261,6 +261,7 @@ def make_handler(cfg, engine):
                     with open(guide_path, "w") as f: json.dump(seen, f)
                 return self._send(200, seen)
             if path == "/api/health":
+                from . import rerank as rerankmod
                 if qs.get("deep") and can_edit(self):
                     maxrss_mb = None
                     try:
@@ -270,7 +271,9 @@ def make_handler(cfg, engine):
                         pass
                     return self._send(200, {"ok": True, "app": cfg["app"].get("title") or cfg["app"].get("name", ""), "provider": cfg["provider"]["type"],
                                             "sources": [x.get("id") or x.get("name") or x.get("type") for x in cfg.get("sources", [])],
-                                            "db": store.ping(), "version": "0.1", "degraded": store.degraded, "maxrss_mb": maxrss_mb})
+                                            "db": store.ping(), "version": "0.1", "degraded": store.degraded, "maxrss_mb": maxrss_mb,
+                                            "rerank": {"enabled": bool(cfg.get("retrieval", {}).get("rerank", True)),
+                                                       "available": rerankmod.available()}})
                 return self._send(200, {"ok": True, "degraded": store.degraded} if store.degraded else {"ok": True})
             if path == "/api/theme" and method == "GET":
                 return self._send(200, {"theme": themestore.value, "meta": themes.meta(), "can_edit": can_edit(self)})
