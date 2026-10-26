@@ -204,3 +204,37 @@ activeElement, identity, scroll dimensions or key event state at failure. A shar
 focus/scroll/repaint family is an investigation lead only. Both remain unexplained
 and unqualified; retain original assertions and evidence, capture missing state
 before any repair/classification. Replacement five-solo streaks remain required.
+
+## Addendum 2026-10-27 01:48 IST - reproduced mechanisms and scoped repairs
+
+Broad serial coordinator remains paused; diagnostic runs were uncontended after
+its active color_feedback2 child exited naturally. Diagnostic copies and original
+failure logs are preserved separately. Diagnostic logs do not count as streaks.
+
+Removal natural playback probe reproduced null height: at animation creation host
+had4children/inert/nonzero geometry; at165.4ms clear mutation had0children/noinert/
+zero geometry, natural finish177.3ms. A failing1280px precheck already showed clear
+at202.6ms BEFORE awaited boundingBox returned null. Source160ms fallback explains
+that boundary. Initial probe retained the original later animation pause; the
+separate natural log removes pause and is the decisive evidence. Repair captures
+inert/text/geometry synchronously at original animate return, comparing exact
+pre-action geometry. Wrapper forwards original args/returns original Animation;
+no pause remains. Natural completion/noinert/shell/focus/singleflight assertions
+retained. One full repaired matrix PASS, five replacement solos still required.
+
+Fontstress and dashboard_status both independently reproduced native End delayed
+scroll: correct focused same node received unprevented End, overflow present;
+1280px original100ms observation top0, later natural~160-169ms top71(fontstress)
+or21(status), then stable. No identity/focus loss observed in these reproductions.
+Repair: wait bounded2s for actual overflow+positive native scroll instead of fixed
+100ms sleep; original assertion retained, explicit focus check added. No scripted
+scroll substituted for keyboard End. One full repaired matrix PASS each; five
+replacement solos still required. Logs: *_scroll_timeline, *scroll_repaired.
+
+Runtime natural probe reproduced null box near160ms, but lacked post-null snapshot;
+next probe hit later natural-animation expiration. Its old test paused animation
+before runtime quiet-setting cancellation. Cannot mechanically remove that pause
+and call cancellation passed after natural finish: active-animation cancellation
+contract needs separate non-vacuous observation. Still unresolved.
+Mark-reviewed natural probe passed once without null reproduction; unresolved.
+Choice cancellation-state failure unresolved. No global product-risk exclusion.
