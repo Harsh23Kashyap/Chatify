@@ -129,3 +129,33 @@ stability_set.txt for the 5-consecutive-solo phase using the repaired file.
 
 Scope: this classification covers THIS failure signature only. It is not a blanket absence of product
 risk for color_feedback or any other case.
+
+## Addendum 2026-10-26 21:14 IST - additional_fields_newer_edits_browser stability run 4 (teardown race, repair v2)
+
+FAILURE: stability run 4/5, 2026-10-26 ~21:13, 9s, exit 1. Preserved: rerun_logs/stab_additional_fields_newer_edits_browser_4.log,
+results.tsv row additional_fields_newer_edits_browser[stab4] FAIL. No assertion failed; a TargetClosedError
+("route.fetch: Request context disposed ... while running route callback" for GET /api/configuration-state,
+referer settings.html) surfaced before the PASS print.
+
+LIFECYCLE ORDERING (demonstrated, rerun_logs/stab4_newer_edits_screenshots/): the test's full matrix is
+width{1280,320} x reducedMotion{no-preference,reduce} x phase{GET,POST} = 8 iterations; each iteration ends
+assert(...) -> scrollIntoView -> screenshot -> p.close(). Run 4 wrote ALL 8 screenshots, the last
+(320-reduce-POST) at 21:13:05.0, immediately before the 21:13:05+ exit. Therefore every required
+assertion/observation of every iteration completed BEFORE the late configuration-state request raced the
+final p.close()/b.close(). Attribution is internal to the test's own page lifecycle (Playwright-named
+teardown race), not an external kill and not a product contract failure: the failing request is a page-side
+configuration-state fetch whose mock callback was still awaiting r.fetch()/the intentional hold when the
+page closed; the product fixture server on 8765 stayed healthy throughout.
+
+REPAIR v2 (replaces v1 unrouteAll ignoreErrors + blanket catch, which was error suppression):
+await Promise.race([p.unrouteAll({behavior:'wait'}), 15s timeout -> Error('route handlers did not settle
+within 15s before close')]) before each p.close(). Settlement is explicit and bounded: in-flight mock
+callbacks complete while the context is still alive; a stuck handler (e.g. an unreleased intentional hold)
+or any unrouteAll error THROWS and fails the run - unexpected route errors are preserved as failures,
+nothing is masked. After unrouteAll resolves, routes are removed so any further page-side request goes
+direct and closes silently; the disposal race is closed. No assertion or product-contract step changed.
+Pre-repair test: rerun_logs/additional_fields_newer_edits_browser.cjs.pre-repair.bak.
+
+STATUS: case remains UNQUALIFIED pending 5 consecutive solo PASSes of the repaired file, to run only when
+solo conditions are available (stability runner sequential completion first). Original 3/5 PASS + 1 FAIL
+rows retained as evidence of the harness race, not of product behavior.
