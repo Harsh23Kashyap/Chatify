@@ -8,7 +8,10 @@ and only rows in the NEW results.tsv (appended to this directory when complete) 
 
 ## Scope and boundary (source-backed)
 Census window (09:09-13:33): exactly 2 app-code commits, 091aaa9 (settings.js 11:09) and
-8b6f43a (appbuilder.js 11:17), BOTH affecting only chatify/web/settings.html (grep-verified).
+8b6f43a (appbuilder.js 11:17), affecting chatify/web/settings.js and chatify/web/appbuilder.js respectively.
+Correction verified 2026-10-27 00:32 IST via git show --stat for both commits: the
+earlier reconstruction incorrectly said both modified settings.html; neither did.
+The boundary selects tests that load settings.html, not the changed file paths.
 Boundary rule: tests that load settings.html whose latest census-window PASS in
 tests/census/2026-10-26/results.tsv predates 11:17 (8b6f43a) at census close 13:33.
 Re-derived 16:08 from the PUSHED census results.tsv (a8ce3fd): 115 keys; the STRICT pair
@@ -57,3 +60,21 @@ sidebar_secondary_labels_motion_browser (historical WATCH keys).
 - builder_apply_saved_e2e 2!==3: harness fixture-routing (trip vs complete yaml).
 - builder_mounted_preview: harness routing (literal 8142 goto).
 - 7 unexplained intermittents (solo-PASSed, mechanism unestablished) -> stability.
+
+## Current re-execution addendum (2026-10-27 00:32 IST)
+
+The 11-case list above records the earlier protocol, not the final running set.
+The current set is 19 unique keys in stability_set.txt, expanded as re-execution
+incidents were encountered. Original lost runs do not count toward a streak.
+Five consecutive solo passes measure repeatability; unexplained historical
+intermittents retain residual risk rather than being declared mechanism-resolved.
+
+All 117 rerun unique keys have at least one post-rebuild PASS, with special
+viewport/motion executions counted under their underlying case, not as new keys.
+This is coverage, not a completed qualification or hosted-release verdict.
+The running stability evidence remains in rerun_results.tsv and rerun_logs/.
+The newer_edits original four-run streak broke at run4; its original three PASS
+plus FAIL are preserved. Five repaired solo runs are still required after the
+current serial runner finishes. If no further streak breaks occur, total
+stability executions will be 99 (94 current-runner executions plus 5 replacement
+solos), not 95 successful required runs plus all original attempts conflated.
