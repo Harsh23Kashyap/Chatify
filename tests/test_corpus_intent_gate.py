@@ -49,6 +49,15 @@ class FakeConn:
                 for i, (t, x) in enumerate(self.hits)][:k]
 
 
+def make_engine_no_corpus(hits):
+    """Same engine without any owner uploads: corpus questions have zero corpus hits."""
+    cfg = {"app": {"title": "T", "tagline": ""}, "provider": {"type": "mock"},
+           "sources": [{"id": "pubmed", "type": "pubmed", "label": "PubMed"}],
+           "retrieval": {"top_k": 6, "min_score": 0.0, "cache_ttl": 0},
+           "memory": {"enabled": False}, "permissions": {}, "pipeline_prompts": {}}
+    return pipeline.Engine(cfg, Store(":memory:"), connectors={"pubmed": FakeConn("pubmed", hits)})
+
+
 def make_engine(hits):
     cfg = {"app": {"title": "T", "tagline": ""}, "provider": {"type": "mock"},
            "sources": [{"id": "pubmed", "type": "pubmed", "label": "PubMed"}],
@@ -66,6 +75,27 @@ class CorpusIntentGateTest(unittest.TestCase):
         self.assertTrue(found, "the uploaded note is the question's subject and must surface")
         self.assertTrue(all(e["source"] == "uploads" for e in found),
                         "public hits matching only meta words must not be cited: %r"
+                        % [e["title"] for e in found])
+
+    def test_corpus_question_with_zero_corpus_hits_abstains_over_meta_junk(self):
+        # Zero-corpus-hit routing (2026-10-26): the corpus branch used to require a
+        # retrieved corpus chunk, so this question fell to the plain gate, whose
+        # meta-vocabulary (notes/add/beyond/public/evidence) carried the junk into
+        # the answer. Expect an honest abstention instead.
+        eng = make_engine_no_corpus(JUNK)
+        found, _ = eng.retrieve("what do my notes add beyond newest public evidence", owner="visitor:t")
+        self.assertEqual(found, [],
+                         "meta-vocabulary alone must not carry public pages: %r"
+                         % [e["title"] for e in found])
+
+    def test_corpus_question_with_topic_words_keeps_topical_public_without_corpus(self):
+        # Same zero-corpus-hit routing, but the question carries real topic words:
+        # topical public evidence still surfaces (the fix must not over-block).
+        eng = make_engine_no_corpus(JUNK + GLP)
+        found, _ = eng.retrieve("semaglutide dosing beyond my notes", owner="visitor:t")
+        self.assertTrue(found, "topical public evidence should still surface")
+        self.assertTrue(all("GLP" in e["title"] or "semaglutide" in e["title"].lower() for e in found),
+                        "only topical public passages may be cited: %r"
                         % [e["title"] for e in found])
 
     def test_corpus_question_with_domain_words_keeps_topical_public_passages(self):

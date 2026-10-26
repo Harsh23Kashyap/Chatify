@@ -705,7 +705,13 @@ class Engine:
         # keep their BM25 score ordering in a mixed list, below.
         _SEARCH_TYPES = ("http_json", "arxiv", "pubmed", "wikipedia", "crossref", "openalex", "web_search")
         search_ids = {s["id"] for s in self.cfg["sources"] if s.get("type") in _SEARCH_TYPES}
-        if corpus_intent(question) and any(e.get("source") not in search_ids for e in found):
+        if corpus_intent(question):
+            # The question named the owner's corpus: route through the corpus/public
+            # gates even when no corpus chunks were retrieved. Otherwise a corpus
+            # question with zero corpus hits fell through to the plain gate, whose
+            # meta-vocabulary ("notes", "public", "evidence") carried off-topic
+            # public pages into the answer instead of an honest abstention
+            # (frozen notes-add-beyond case, both gate-only and rerank-active).
             own_part = corpus_gate(question, [e for e in found if e.get("source") not in search_ids])
             pub_part = public_gate(question, [e for e in found if e.get("source") in search_ids])
             # Corpus first: it is the question's subject; public passages follow for
