@@ -68,3 +68,11 @@ exercised. PASS 3/3 solo + 1/1 through lane path.
 Protocol unchanged: lane FAILs are never claimed as product FAILs until an uncontended solo rerun
 confirms; solo PASS supersedes via latest-row. These three are logged here rather than silently
 dropped so the qualification list can re-examine them if any recurs.
+
+## sidebar-profile (13:08 lane FAIL 7s, TimeoutError #list .item) — fixture routing, not product
+
+Root cause: positional seeded-chat assertions (STRICT family per map; test honors
+CHATIFY_TEST_URL). Generic apps/minimal has no seeded chats -> empty #list.
+Rerun against strict fixture (strict_ui_fixture.py bound 8765): PASS 3s (13:09:04).
+Latest-row PASS supersedes. settings_finder_clarity 12:54 FAIL = ERR_CONNECTION_REFUSED
+(harness boot race after prior call's kill); solo PASS 12:55. Evidence retained, no product defect.
