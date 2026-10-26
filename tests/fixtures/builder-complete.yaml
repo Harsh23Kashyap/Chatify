@@ -179,6 +179,12 @@ pipeline_prompts:
       line, no numbering.
 
       Audience: beginner gardeners. Use plain language and source-backed guidance.'
+    expand: 'Rewrite the question as one search query that keeps every original
+      word and adds only standard synonyms or technical equivalents for its terms.
+      Do not change the meaning, do not add or remove negation, do not add new topics.
+      Return only the rewritten query.
+
+      Audience: beginner gardeners. Use plain language and source-backed guidance.'
     relevance: 'You check retrieved passages against a question. Each passage has
       a number in square brackets.
 
@@ -239,6 +245,7 @@ pipeline_prompts:
     question_check: false
     standalone: true
     queries: true
+    expand: true
     relevance: false
     answer: true
     faithfulness: false
