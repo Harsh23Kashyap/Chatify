@@ -262,3 +262,23 @@ Runtime still unresolved: independent160ms fallback clear runs even if Animation
 is paused, so cancellation must prove the original active retirement exists at
 the actual quiet-change event. Timeout-cleared _removal=null is not cancellation
 proof. No mechanical repair or vacuous pass accepted.
+
+## Addendum 2026-10-27 02:03 IST - controlled active cancellation
+
+Runtime repair validates original explicit controlled-pause intervention, NOT
+natural playback. Pass-through original Animation is paused at creation; synchronous
+start geometry/text/inert snapshot replaces expiring cross-call observations.
+OS listener registered before product captures actual native media-change event;
+None/Calm snapshot occurs immediately before attribute write. Every transition
+requires host._removal===original, inert, children>0 and paused state at that event.
+Expired fallback setup fails. Product160ms timer unchanged, no synthetic OS event.
+Actual original cancel event idle and post-clear/no-inert/removal-null asserted;
+parse singleflight/disabled editor/hidden Next/shell/focus/draft assertions retained.
+One full6-state exit0 validation: runtime_active_repaired2.log. Earlier emulator
+ack-before-media-event failed setup preserved in runtime_active_repaired.log;
+repair waits actual event rather than treating emulator acknowledgement as event.
+
+Natural removal completion tested separately; paused coverage does not establish
+natural timing. Five consecutive replacement solos still required. Choice exact
+30ms cancellation contract unchanged: two event-order diagnostics passed but did
+not reproduce old failure; remains unexplained with residual risk.

@@ -1,0 +1,10 @@
+ACTIVE-CANCEL 320 os [{"stage":"paused-original-assigned","at":3295.2000000001863,"original":true,"inert":true,"children":4,"state":"paused","time":0,"motion":"full","reduce":false}]
+AssertionError [ERR_ASSERTION]: quiet transition must encounter original active retirement, not expired fallback
+    at /home/sandbox/chatify/tests/builder_keep_current_runtime_motion_browser.cjs:1:5632 {
+  generatedMessage: false,
+  code: 'ERR_ASSERTION',
+  actual: undefined,
+  expected: true,
+  operator: '==',
+  diff: 'simple'
+}
