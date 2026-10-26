@@ -4,7 +4,11 @@ Not a completion report. Rebuilt Oct27 from preserved research File and reposito
 
 ## 1. A concise summary of the original design problems.
 
-Pending reconstruction from original audit evidence. The preserved research File contains desktop/mobile audit images; those must be inspected before making specific before/after claims.
+Original-brief baseline remains unbound: the surviving research images do not by themselves establish which revision was the starting point. A separate repository audit is dated October7 and must not be relabeled as the October25 baseline.
+
+Re-inspected preserved research snapshots on October27: desktop settled chat (1278x899), desktop settings/build (1280x720), and mobile settled chat (390x844). Visible opportunities in those snapshots, not claims about today's product: mobile global navigation occupies roughly the first quarter of the viewport; the composer leaves only a shallow suggestion-reading region; desktop settings stacks a large heading, view switch, search and category cards before the working editor reaches the lower edge. The pine/cream/lime identity and serif display heading already exist in these images, so they cannot honestly be presented as entirely new work without the baseline comparison.
+
+Evidence: recovered research source src/photos/audit-desktop-chat-settled.png, audit-desktop-settings.png, audit-desktop-build.png, audit-mobile-chat-default-settled.png. These are preserved snapshots, not current live visual verification. Original screenshots retained; final before/after comparisons still pending.
 
 ## 2. A research matrix covering all 15 references and the components worth adopting.
 
@@ -38,7 +42,14 @@ A complete mission-wide inventory remains to be reconstructed. Current post-rebu
 
 ## 5. New dependencies and installation details.
 
-No claim yet about mission-wide dependency additions. Current pyproject.toml declares chatify-app0.4.32 and Python>=3.10, with PyYAML>=6.0.3,<7 base dependency. This is repository state, NOT a registry/release verification. Temporary test tooling includes Playwright and axe-core; do not present them as product runtime additions.
+Current source inventory, not yet a mission-wide additions diff or registry verification:
+
+- pyproject.toml: chatify-app0.4.32, Python>=3.10, PyYAML>=6.0.3,<7 base dependency; setuptools>=61 build backend.
+- Optional documents extra: pypdf>=4, fpdf2>=2.8, uharfbuzz>=0.39. Optional semantic extra: sentence-transformers>=3.
+- requirements.txt for deployed images additionally lists pypdf/fpdf2/uharfbuzz, onnxruntime==1.31.0 for Python>=3.11 or ==1.23.2 for Python<3.11, and tokenizers==0.23.3. Its PyYAML floor is >=6.0, unlike the package metadata. These are different installation surfaces, not interchangeable lockfiles.
+- The browser UI is shipped as static assets; the research matrix's React/Tailwind/shadcn commands are reference instructions, not commands to install into Chatify. Playwright and axe-core are qualification tooling, not product runtime additions.
+
+Installation/fresh-computer verification must still be reconciled with current artifacts. No build/install success is inferred from dependency declarations.
 
 ## 6. Test, lint, type-check, and build results.
 
