@@ -76,3 +76,11 @@ CHATIFY_TEST_URL). Generic apps/minimal has no seeded chats -> empty #list.
 Rerun against strict fixture (strict_ui_fixture.py bound 8765): PASS 3s (13:09:04).
 Latest-row PASS supersedes. settings_finder_clarity 12:54 FAIL = ERR_CONNECTION_REFUSED
 (harness boot race after prior call's kill); solo PASS 12:55. Evidence retained, no product defect.
+
+## sidebar_secondary_labels_motion (13:12 lane FAIL 4s) — lane timing transient, watched
+
+getAnimations() returned [] at assert (element's 120ms entrance with 180ms delay read after
+completion under lane shift; same observation-race family as emoji_runtime_quiet). Uncontended
+solo rerun PASS 30s (13:13:30), latest-row supersedes. WATCH: if this recurs in a solo/full-run
+context, apply the emoji-style race-free observation repair (record via animate wrapper +
+pause/currentTime rewind) rather than rerunning forever.
