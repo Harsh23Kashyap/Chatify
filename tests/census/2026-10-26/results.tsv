@@ -205,3 +205,19 @@ config_organization_browser.cjs	PASS	11	2026-10-26T10:24:30+05:30
 config_layout_browser.cjs	PASS	13	2026-10-26T10:24:32+05:30
 config_utility_browser.cjs	PASS	9	2026-10-26T10:24:53+05:30
 config_top_views_browser.cjs	PASS	14	2026-10-26T10:24:58+05:30
+config_workspace_browser.cjs	PASS	12	2026-10-26T10:30:53+05:30
+configuration_long_singleline_inventory_browser.cjs	PASS	83	2026-10-26T10:32:04+05:30
+connection_runtime_quiet_motion_browser.cjs	FAIL	42	2026-10-26T10:32:58+05:30
+connection_indicator_lifecycle_motion_browser.cjs	PASS	56	2026-10-26T10:33:12+05:30
+connection_runtime_quiet_motion_browser.cjs	PASS	2026-10-26T10:33:42+05:30	solo-rerun supersedes lane waitForFunction-timeout (contention)
+connector_clarity_browser.cjs	PASS	6	2026-10-26T10:33:58+05:30
+connector_geometry_browser.cjs	PASS	9	2026-10-26T10:34:01+05:30
+deployment_long_configuration_geometry_browser.cjs	FAIL	49	2026-10-26T10:35:02+05:30
+consent_profile_toggle_immediate_motion_browser.cjs	PASS	53	2026-10-26T10:35:06+05:30
+deployment_long_configuration_geometry_browser.cjs	PASS	2026-10-26T10:38:16+05:30	FLAKY: lane FAIL + solo FAIL (Target/service hidden) then solo PASS + probe PASS 320/1280; root cause open
+dictation_states_browser.cjs	PASS	10	2026-10-26T10:38:44+05:30
+disclosure_motion_audit_browser.cjs	PASS	100	2026-10-26T10:40:14+05:30
+disclosure_runtime_quiet_motion_browser.cjs	PASS	15	2026-10-26T10:40:51+05:30
+drawer_motion_audit_browser.cjs	PASS	29	2026-10-26T10:41:05+05:30
+dynamic_button_hover_inventory_browser.cjs	PASS	6	2026-10-26T10:41:22+05:30
+drawer_navigation_audit_browser.cjs	PASS	19	2026-10-26T10:41:35+05:30
