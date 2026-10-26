@@ -159,3 +159,26 @@ Pre-repair test: rerun_logs/additional_fields_newer_edits_browser.cjs.pre-repair
 STATUS: case remains UNQUALIFIED pending 5 consecutive solo PASSes of the repaired file, to run only when
 solo conditions are available (stability runner sequential completion first). Original 3/5 PASS + 1 FAIL
 rows retained as evidence of the harness race, not of product behavior.
+
+## Addendum 2026-10-27 00:56 IST - removal_motion stability run3 new signature
+
+UNQUALIFIED: run1 PASS769s, run2 PASS298s, run3 FAIL339s. Exact failure preserved in
+rerun_logs/stab_builder_keep_current_removal_motion_browser_3.log: TypeError reading
+height of null at line1 col3902 (`after.height`, after host.boundingBox()). This is
+NOT the earlier animation-list assertion. The repaired test had already passed
+host.inert, invalidation heading text and absence of Validation passed assertions
+before making another cross-process boundingBox call.
+
+Source inspection: appbuilder.js invalidate(retiringArea) line61 sets host.inert,
+updates the heading, animates retiringArea for120ms, then clears host children on
+finish/cancel or a160ms timeout. Therefore geometry observed across multiple
+awaited calls can cross the host-clear boundary. A null boundingBox is consistent
+with that boundary crossing, but the log has no per-call timestamps or render-state
+snapshot to establish causation. Retain as a new unresolved observation-lifecycle
+signature, not a product-exclusion claim and not cleared by earlier PASSes.
+
+No assertion weakened or new patch applied for this signature. Need direct
+lifecycle/geometry evidence and an observation design that leaves natural timing
+unchanged before classification. Current serial runner continues; no concurrent
+rerun. A replacement five-solo streak will be required after resolving the
+signature and freeing solo conditions.
