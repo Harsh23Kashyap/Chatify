@@ -182,3 +182,13 @@ lifecycle/geometry evidence and an observation design that leaves natural timing
 unchanged before classification. Current serial runner continues; no concurrent
 rerun. A replacement five-solo streak will be required after resolving the
 signature and freeing solo conditions.
+
+## Addendum 2026-10-27 01:19 IST - mark_reviewed stability break
+
+UNQUALIFIED: PASS613s, PASS567s, FAIL5s at run3. Preserved original log:
+rerun_logs/stab_builder_mark_reviewed_motion_browser_3.log. TypeError reading
+`result.duration` of null (line1 col2836), from state.getAnimations()[0] after
+separate awaited disabled/text/Next-visible assertions. Source accept.onclick
+creates140ms status-only fade synchronously. Late observation is plausible, not
+proven from the original log; no product-exclusion claim or patch at this stage.
+Natural lifecycle evidence and five replacement solo passes remain required.
