@@ -253,7 +253,7 @@ pipeline_prompts:
     followups: true
     summary: true
 helper_drafts:
-  search:
+  search_api_1:
     brief: Garden app search helper draft; review before use.
     code: "import json, os, time, urllib.error, urllib.parse, urllib.request\n\nAPI_URL\
       \ = \"\"  # TODO: the API address from your description\nAPI_KEY = os.environ.get(\"\
