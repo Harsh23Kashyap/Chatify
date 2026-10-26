@@ -1,0 +1,17 @@
+PROGRESSAXE []
+BOARD 320 {"progress":558.953125,"height":94,"cards":[{"height":94,"title":19}]}
+PROGRESSAXE []
+BOARD 320 {"progress":558.953125,"height":94,"cards":[{"height":94,"title":19}]}
+PROGRESSAXE []
+AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:
+
+  assert(await title.evaluate(n=>n.scrollHeight>n.clientHeight&&n.scrollTop>0))
+
+    at /home/sandbox/chatify/tests/builder_whole_dashboard_fontstress_browser.cjs:6:1311 {
+  generatedMessage: true,
+  code: 'ERR_ASSERTION',
+  actual: false,
+  expected: true,
+  operator: '==',
+  diff: 'simple'
+}

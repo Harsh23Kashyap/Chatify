@@ -1,0 +1,7 @@
+elementHandle.evaluate: TypeError: Cannot read properties of undefined (reading 'pause')
+    at eval (eval at evaluate (:370:30), <anonymous>:1:69)
+    at UtilityScript.evaluate (<anonymous>:372:16)
+    at UtilityScript.<anonymous> (<anonymous>:1:44)
+    at /home/sandbox/chatify/tests/builder_keep_current_removal_motion_browser.cjs:1:3827 {
+  log: []
+}

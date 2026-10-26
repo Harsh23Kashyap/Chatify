@@ -1,0 +1,12 @@
+AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:
+
+  assert(await host.evaluate(n=>n.inert))
+
+    at /home/sandbox/chatify/tests/builder_keep_current_removal_motion_browser.cjs:1:3496 {
+  generatedMessage: true,
+  code: 'ERR_ASSERTION',
+  actual: false,
+  expected: true,
+  operator: '==',
+  diff: 'simple'
+}
