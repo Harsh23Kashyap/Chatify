@@ -769,6 +769,14 @@ class Engine:
                 if len(topical) >= 3:
                     kept = [e for e in kept
                             if sum(1 for w in topical if _gate_variants(w) & _gate_stems(str(e.get("title") or "") + " " + str(e.get("text") or "")[:1500])) >= 2]
+                # The rescue path created its own risk: rescued passages can match
+                # expanded tokens alone, and two shared union words are a lexical
+                # count, not intent. Before they count as evidence, the relevance
+                # stage judges them against the ORIGINAL question regardless of
+                # the relevance toggle - ambiguous-synonym near-misses and
+                # expanded-only junk are dropped here (adversarial cases in
+                # tests/test_query_expansion.py). Fail-open on provider failure.
+                kept = self.filter_relevant(question, kept, force=True)
                 found = kept
         # Semantic re-order of the gate-retained set (order only, fail-open; see rerank.py).
         _rr = self.cfg["retrieval"].get("rerank", True)
@@ -1087,8 +1095,12 @@ class Engine:
             return why[:300] or "That question is outside what this assistant can answer."
         return ""
 
-    def filter_relevant(self, question, evidence):
-        if not evidence or not self._llm_on("relevance"):
+    def filter_relevant(self, question, evidence, force=False):
+        if not evidence:
+            return evidence
+        if self.cfg["provider"]["type"] == "mock":
+            return evidence  # the demo provider cannot judge; recall stays curated
+        if not force and not self._llm_on("relevance"):
             return evidence
         listing = "\n".join("[%d] %s. %s" % (e["n"], e["title"], e["text"][:400]) for e in evidence)
         try:
