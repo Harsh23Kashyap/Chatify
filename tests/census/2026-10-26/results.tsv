@@ -132,3 +132,52 @@ button_press_feedback_inventory_browser.cjs	FAIL	105	2026-10-26T09:54:36+05:30
 button_release_inventory_motion_browser.cjs	FAIL	105	2026-10-26T09:54:36+05:30
 button_press_feedback_inventory_browser.cjs	PASS	2026-10-26T09:59:44+05:30	combos:320:no-preference,320:reduce,1280:no-preference,1280:reduce via RELEASE_WIDTH/RELEASE_MOTION supersedes timeout FAILs
 button_release_inventory_motion_browser.cjs	PASS	2026-10-26T10:05:05+05:30	combos:320:no-preference,320:reduce,1280:no-preference,1280:reduce via RELEASE_WIDTH/RELEASE_MOTION supersedes timeout FAILs
+category_motion_audit_browser.cjs	PASS	16	2026-10-26T10:09:50+05:30
+card_stagger_inventory_browser.cjs	PASS	35	2026-10-26T10:10:09+05:30
+category_reveal_audit_browser.cjs	PASS	18	2026-10-26T10:10:47+05:30
+category_selection_browser.cjs	PASS	26	2026-10-26T10:10:55+05:30
+chart_integrity.cjs	PASS	0	2026-10-26T10:11:06+05:30
+ccdialog_overlay_interaction_browser.cjs	PASS	5	2026-10-26T10:11:11+05:30
+chat_about_idle_loops_inventory_browser.cjs	PASS	6	2026-10-26T10:11:30+05:30
+chat-lifecycle.cjs	FAIL	9	2026-10-26T10:11:33+05:30
+chat-lifecycle.cjs	PASS	2026-10-26T10:11:43+05:30	strict-fixture-8145 supersedes generic FAIL
+deleted-chat-topic.cjs	PASS	2026-10-26T10:12:36+05:30	strict-fixture-8145
+local-actions.cjs	PASS	2026-10-26T10:12:36+05:30	strict-fixture-8145
+mobile_profile.cjs	PASS	2026-10-26T10:12:36+05:30	strict-fixture-8145
+mobile_strict.cjs	PASS	2026-10-26T10:12:36+05:30	strict-fixture-8145
+multi-topic-cancel.cjs	PASS	2026-10-26T10:12:36+05:30	strict-fixture-8145
+question-nav.cjs	PASS	2026-10-26T10:12:36+05:30	strict-fixture-8145
+reading-persistence.cjs	PASS	2026-10-26T10:12:36+05:30	strict-fixture-8145
+regen-buttons.cjs	PASS	2026-10-26T10:12:43+05:30	strict-fixture-8145
+sidebar_profile_browser.cjs	PASS	2026-10-26T10:12:46+05:30	strict-fixture-8145
+stream-buttons.cjs	PASS	2026-10-26T10:12:48+05:30	strict-fixture-8145
+topic-export.cjs	PASS	2026-10-26T10:12:50+05:30	strict-fixture-8145
+topic-temp.cjs	PASS	2026-10-26T10:12:52+05:30	strict-fixture-8145
+undo-view-route.cjs	PASS	2026-10-26T10:12:54+05:30	strict-fixture-8145
+unicode-export.cjs	PASS	2026-10-26T10:12:58+05:30	strict-fixture-8145
+chat_about_idle_loops_inventory_browser.cjs	PASS	6	2026-10-26T10:13:17+05:30
+chat-lifecycle.cjs	FAIL	8	2026-10-26T10:13:19+05:30
+chat_account_states_browser.cjs	PASS	7	2026-10-26T10:13:39+05:30
+chat_about_off_motion_inventory_browser.cjs	PASS	8	2026-10-26T10:13:40+05:30
+chat_action_states_browser.cjs	PASS	7	2026-10-26T10:13:59+05:30
+chat_action_step_focus_motion_browser.cjs	PASS	12	2026-10-26T10:14:04+05:30
+chat_composer_browser.cjs	PASS	7	2026-10-26T10:14:22+05:30
+chat_disclosure_cue_motion_audit_browser.cjs	PASS	13	2026-10-26T10:14:28+05:30
+chat_evidence_history_browser.cjs	FAIL	1	2026-10-26T10:14:40+05:30
+chat_history_states_browser.cjs	PASS	9	2026-10-26T10:14:48+05:30
+chat_evidence_history_browser.cjs	PASS	2026-10-26T10:15:03+05:30	strict-fixture-8190 supersedes generic FAIL
+import_share_browser.cjs	PASS	2026-10-26T10:15:56+05:30	strict-fixture-8145 after stage-count repair 9->10 (5100841 contract)
+chat_evidence_history_browser.cjs	FAIL	1	2026-10-26T10:16:10+05:30
+chat_history_states_browser.cjs	PASS	9	2026-10-26T10:16:18+05:30
+chat_history_tabs_browser.cjs	PASS	3	2026-10-26T10:16:33+05:30
+chat_icon_targets_browser.cjs	PASS	14	2026-10-26T10:16:44+05:30
+chat_history_tabs_browser.cjs	PASS	5	2026-10-26T10:17:00+05:30
+chat_icon_targets_browser.cjs	PASS	14	2026-10-26T10:17:09+05:30
+chat_navigation_browser.cjs	PASS	6	2026-10-26T10:17:26+05:30
+chat_motion_criteria_audit_browser.cjs	PASS	11	2026-10-26T10:17:31+05:30
+chat_notification_actions_browser.cjs	PASS	8	2026-10-26T10:17:51+05:30
+chat_notification_states_browser.cjs	PASS	11	2026-10-26T10:17:54+05:30
+chat_short_view_browser.cjs	PASS	5	2026-10-26T10:18:10+05:30
+chat_shortcuts_audit_browser.cjs	PASS	8	2026-10-26T10:18:13+05:30
+chat-lifecycle.cjs	PASS	2026-10-26T10:18:20+05:30	strict-fixture-8145 restated after dup-lane FAIL (test already verified 10:11)
+chat_evidence_history_browser.cjs	PASS	2026-10-26T10:18:20+05:30	strict-fixture-8190 restated after dup-lane FAIL (test already verified 10:14)
