@@ -101,3 +101,33 @@ builder_final_failure_browser.cjs	PASS	13	2026-10-26T09:31:28+05:30
 builder_example_motion_levels_browser.cjs	PASS	32	2026-10-26T09:31:47+05:30
 builder_import_route_browser.cjs	PASS	13	2026-10-26T09:32:30+05:30
 builder_focus_motion_audit_browser.cjs	PASS	26	2026-10-26T09:32:43+05:30
+builder_keep_current_runtime_motion_browser.cjs	FAIL	20	2026-10-26T09:37:47+05:30
+builder_keep_current_removal_motion_browser.cjs	PASS	57	2026-10-26T09:38:24+05:30
+builder_keep_current_runtime_motion_browser.cjs	PASS	2026-10-26T09:39:05+05:30	solo-rerun supersedes contention-null-height-fail
+builder_library_empty_motion_browser.cjs	PASS	15	2026-10-26T09:39:29+05:30
+builder_keep_current_singleflight_browser.cjs	PASS	21	2026-10-26T09:39:35+05:30
+builder_library_error_recovery_motion_browser.cjs	PASS	16	2026-10-26T09:40:02+05:30
+builder_lifecycle_browser.cjs	PASS	31	2026-10-26T09:40:17+05:30
+builder_mark_reviewed_motion_browser.cjs	PASS	70	2026-10-26T09:41:41+05:30
+builder_long_configuration_geometry_browser.cjs	PASS	93	2026-10-26T09:42:04+05:30
+builder_mounted_preview_browser.cjs	FAIL	1	2026-10-26T09:42:17+05:30
+builder_progress_interpolation_browser.cjs	PASS	12	2026-10-26T09:42:28+05:30
+builder_mounted_preview_browser.cjs	PASS	2026-10-26T09:43:59+05:30	minimal-on-8142-route-rewrite supersedes prior FAILs
+builder_progress_truth_browser.cjs	PASS	14	2026-10-26T09:44:26+05:30
+builder_proposed_checkbox_immediate_motion_browser.cjs	PASS	44	2026-10-26T09:44:56+05:30
+builder_retained_validation_label_browser.cjs	PASS	19	2026-10-26T09:45:34+05:30
+builder_remove_source_singleflight_browser.cjs	PASS	21	2026-10-26T09:45:36+05:30
+builder_retry_states_browser.cjs	PASS	7	2026-10-26T09:45:54+05:30
+builder_review_a11y_browser.cjs	PASS	10	2026-10-26T09:45:57+05:30
+builder_saved_hover_inventory_browser.cjs	PASS	15	2026-10-26T09:46:24+05:30
+builder_scope_clarity_browser.cjs	PASS	21	2026-10-26T09:46:30+05:30
+builder_use_app_browser.cjs	PASS	12	2026-10-26T09:46:53+05:30
+builder_todo_navigation_motion_levels_browser.cjs	PASS	41	2026-10-26T09:47:22+05:30
+builder_whole_dashboard_fontstress_browser.cjs	FAIL	20	2026-10-26T09:47:53+05:30
+builder_whole_dashboard_status_motion_browser.cjs	PASS	34	2026-10-26T09:48:07+05:30
+builder_whole_dashboard_fontstress_browser.cjs	PASS	2026-10-26T09:51:05+05:30	flaky: 1 lane + 1 solo FAIL then probe+solo PASS; probe metrics sh541/138 ch67 st>0 all4combos
+button_hover_transition_inventory_browser.cjs	PASS	84	2026-10-26T09:52:38+05:30
+button_hover_exact_duration_inventory_browser.cjs	PASS	86	2026-10-26T09:52:40+05:30
+button_press_feedback_inventory_browser.cjs	FAIL	105	2026-10-26T09:54:36+05:30
+button_release_inventory_motion_browser.cjs	FAIL	105	2026-10-26T09:54:36+05:30
+button_press_feedback_inventory_browser.cjs	PASS	2026-10-26T09:59:44+05:30	combos:320:no-preference,320:reduce,1280:no-preference,1280:reduce via RELEASE_WIDTH/RELEASE_MOTION supersedes timeout FAILs
