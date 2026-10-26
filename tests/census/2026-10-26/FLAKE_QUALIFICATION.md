@@ -238,3 +238,27 @@ and call cancellation passed after natural finish: active-animation cancellation
 contract needs separate non-vacuous observation. Still unresolved.
 Mark-reviewed natural probe passed once without null reproduction; unresolved.
 Choice cancellation-state failure unresolved. No global product-risk exclusion.
+
+## Addendum 2026-10-27 01:57 IST - mark observation and completion timing
+
+Controlled extra170ms observation delay reproduces null mark animation: declared
+140ms fade finishes naturally at179ms in diagnostic wall timeline, then live
+getAnimations absent. This proves delayed-observation vulnerability, not the exact
+unrecorded timing of the original stability FAIL. Target-filtered/pre-key-marked
+original-call recorder replaces late live sampling, no playback pause.
+
+First repaired validation FAILED: added fixed200ms natural-completion check found
+one live animation. An initially incorrect parent PASS report was immediately
+retracted. Two further diagnostics recorded running140ms animation with actual
+animation currentTime83.386ms/133.4ms at the fixed wall sleep observation. Thus
+wall-clock wait is not animation-timeline completion proof here. Bounded2s actual
+no-animation condition replaces fixed sleep; zero-animation assertions retained.
+One full16-combo repaired matrix then exited0. Five replacement solos still owed.
+All failed validations retained, not quietly superseded as successful streaks.
+
+Choice cancellation diagnostic passed12states, same animation idle throughout;
+original30ms failed cancellation signature NOT reproduced or explained, no repair.
+Runtime still unresolved: independent160ms fallback clear runs even if Animation
+is paused, so cancellation must prove the original active retirement exists at
+the actual quiet-change event. Timeout-cleared _removal=null is not cancellation
+proof. No mechanical repair or vacuous pass accepted.
