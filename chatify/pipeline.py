@@ -643,6 +643,13 @@ class Engine:
     # full search round; each rescue call gets its own bounded timeout so the worst
     # added latency stays seconds, not the full provider timeout per call.
     _RESCUE_TIMEOUT = 15
+    # Generic request nouns cannot anchor a rescued passage to the original
+    # question: "Diabetes treatment options" would otherwise ride "treatment/
+    # options" from a heart-attack question past a failed judge (main review
+    # 2026-10-26). Only a distinctive original word makes a passage fail-open.
+    _RESCUE_GENERIC = frozenset(
+        "treatment treatments option options remedy remedies cure cures therapy therapies "
+        "guide guides information overview help tips way ways management causes symptoms".split())
 
     def _expand_for_recall(self, question):
         """One synonym-expanded rewrite for the zero-evidence rescue path.
@@ -801,11 +808,14 @@ class Engine:
                 # passage sharing only expanded tokens, is abstained on judge
                 # failure (fail-closed); only a passage that also shares an
                 # original question word keeps the fail-open path.
-                orig_stems = _gate_stems(question)
+                orig_q_words = [w for w in re.findall(r"[a-z0-9]{3,}", (question or "").lower())
+                                if not w.isdigit() and w not in _GATE_STOP
+                                and w not in _GATE_WEAK and w not in self._RESCUE_GENERIC]
+                orig_anchor_stems = set().union(*(_gate_variants(w) for w in orig_q_words)) if orig_q_words else set()
                 anchored, unanchored = [], []
                 for e in kept:
                     p = _gate_stems(str(e.get("title") or "") + " " + str(e.get("text") or "")[:1500])
-                    (anchored if p & orig_stems else unanchored).append(e)
+                    (anchored if p & orig_anchor_stems else unanchored).append(e)
                 _prov_t = getattr(self.provider, "t", None)
                 if isinstance(_prov_t, (int, float)):
                     self.provider.t = min(_prov_t, self._RESCUE_TIMEOUT)

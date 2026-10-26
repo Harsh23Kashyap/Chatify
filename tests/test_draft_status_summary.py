@@ -14,7 +14,9 @@ class DraftSummary(unittest.TestCase):
   self.assertIn("phaseName==='Final model review'?'Reviewing your draft'",js)
   self.assertIn("phaseName==='Generating optional logo draft'?'Finishing your app'",js)
   self.assertIn(":'Building your app'",js)
-  self.assertIn("(busy&&phaseName&&phaseName!=='Drafting separate areas'?phaseName+'",js)
+  # c59747f moved the raw server phase from the busy heading (now friendly-mapped
+  # above, for a stable panel height) into the always-present phase line.
+  self.assertIn("activityPart.textContent=busy?(data.phase||'Shaping your app')",js)
  def test_busy_surfaces_follow_phase_word(self):
   js=(pathlib.Path(__file__).resolve().parents[1]/'chatify/web/appbuilder.js').read_text()
   self.assertIn("const busyWord=busyHeading.replace(' your app','').replace(' your draft','')",js)

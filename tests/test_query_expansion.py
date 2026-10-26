@@ -300,5 +300,25 @@ class SubstitutionExpansionTest(unittest.TestCase):
         self.assertEqual(found, [])
 
 
+    def test_generic_original_words_do_not_anchor_a_wrong_concept(self):
+        # Judge down; junk passage shares only generic original words
+        # (treatment, options) while the expanded concept is wrong: no anchor,
+        # fail-closed, abstain.
+        junk = ("Diabetes treatment options: a patient guide",
+                "Diabetes treatment options include insulin, metformin and lifestyle changes. Treatment plans are reviewed regularly.")
+        prov = JudgeProvider("heart attack treatment options diabetes management", judge_fail=True)
+        eng = make_judging_engine([("diabetes", junk)], prov)
+        found, _ = eng.retrieve("heart attack treatment options", owner="visitor:t")
+        self.assertEqual(found, [])
+
+    def test_distinctive_original_word_still_anchors_fail_open(self):
+        anchored = ("Heart attack recovery: rehabilitation after myocardial infarction",
+                    "Heart attack recovery takes weeks. Cardiac rehabilitation, statins and beta blockers follow a myocardial infarction.")
+        prov = JudgeProvider("heart attack treatment options myocardial infarction", judge_fail=True)
+        eng = make_judging_engine([("myocardial", anchored)], prov)
+        found, _ = eng.retrieve("heart attack treatment options", owner="visitor:t")
+        self.assertEqual([e["title"] for e in found], [anchored[0]])
+
+
 if __name__ == "__main__":
     unittest.main()

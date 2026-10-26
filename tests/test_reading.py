@@ -7,4 +7,4 @@ class Reading(unittest.TestCase):
  def test_keep_scroll_when_reading_earlier(self):
   s=(W/'app.js').read_text();self.assertIn('keep ? priorScroll',s);self.assertIn('if (follow) th.scrollTop',s)
  def test_accessible_dialog_and_focus(self):
-  s=(W/'reading.js').read_text();self.assertIn('dialog.showModal()',s);self.assertIn('button.focus()',s)
+  s=(W/'reading.js').read_text();self.assertIn('dialog.showModal()',s);self.assertIn('(origin,button,document.getElementById("q"))',s)  # 5003250: focus returns to the first visible of origin/button/search

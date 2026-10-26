@@ -7,5 +7,5 @@ class HistorySkeleton(unittest.TestCase):
   self.assertIn('"aria-hidden":"true"',js)
   self.assertIn('},250)',js)
   self.assertIn('clearTimeout(historyShimmerTimer)',js)
-  self.assertIn('.history-skeleton-row{height:44px',css)
+  self.assertIn('.history-skeleton-row{height:60px',css)  # b15d31f: skeleton matches the real 60px row height
   self.assertIn('@media(prefers-reduced-motion:no-preference){html:not([data-motion=none]) .history-skeleton.slow',css)
