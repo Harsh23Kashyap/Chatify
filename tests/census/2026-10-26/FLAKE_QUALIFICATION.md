@@ -282,3 +282,9 @@ Natural removal completion tested separately; paused coverage does not establish
 natural timing. Five consecutive replacement solos still required. Choice exact
 30ms cancellation contract unchanged: two event-order diagnostics passed but did
 not reproduce old failure; remains unexplained with residual risk.
+
+## Addendum2026-10-27 03:38 - runtime replacement streak BROKEN by expired actual-event precondition
+
+Preserved replacement_builder_keep_current_runtime_motion_browser_3.log and FAIL486s row. First two replacement solos PASS29/619s; they do not establish five-consecutive repeatability. Third fails1280/OS. Start snapshot5402.4ms: original=true,inert=true,children4,paused,time0. Actual media event5610.8ms: original=false,inert=false,children0,still-paused recorded Animation. Elapsed208.4ms exceeds unchanged product fallback160ms (appbuilder.js invalidate). The fallback clears host and nulls _removal independently of the paused Animation. Thus actual quiet event encountered NO active host retirement. The strengthened precondition correctly refuses to count this as cancellation coverage. Earlier320OS/None/Calm combos showed active original preconditions/cancelidle.
+
+This proves setup expiration, not a product cancellation failure: the actual event arrived after the retirement fallback had already removed the review. No synthetic OS event, delayed/removed product timer, skipped assertion, or replacement-animation substitution was used. Exact historical product risk remains scoped separately. Runtime remains UNQUALIFIED and requires a fresh five-solo streak after a defensible observation setup, not credit carried from these two PASSes. Independent mark/scroll/choice replacements continue serially. No runtime repair or retry made yet.

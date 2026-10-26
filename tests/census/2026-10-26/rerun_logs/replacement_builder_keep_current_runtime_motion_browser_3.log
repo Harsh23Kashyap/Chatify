@@ -1,0 +1,13 @@
+ACTIVE-CANCEL 320 os [{"stage":"paused-original-assigned","at":3051.2999999998137,"original":true,"inert":true,"children":4,"state":"paused","time":0,"motion":"full","reduce":false},{"stage":"before-product-media-listener","at":3169.0999999996275,"original":true,"inert":true,"children":4,"state":"paused","time":0,"motion":"full","reduce":true},{"stage":"cancel-event","at":3170.5,"original":true,"inert":true,"children":4,"state":"idle","time":null,"motion":"full","reduce":true}]
+ACTIVE-CANCEL 320 none [{"stage":"paused-original-assigned","at":3207.7000000001863,"original":true,"inert":true,"children":4,"state":"paused","time":0,"motion":"full","reduce":false},{"stage":"immediately-before-quiet","at":3236.399999999441,"original":true,"inert":true,"children":4,"state":"paused","time":0,"motion":"full","reduce":false},{"stage":"cancel-event","at":3248.899999999441,"original":true,"inert":true,"children":4,"state":"idle","time":null,"motion":"none","reduce":false}]
+ACTIVE-CANCEL 320 calm [{"stage":"paused-original-assigned","at":3110.9000000003725,"original":true,"inert":true,"children":4,"state":"paused","time":0,"motion":"full","reduce":false},{"stage":"immediately-before-quiet","at":3162.5,"original":true,"inert":true,"children":4,"state":"paused","time":0,"motion":"full","reduce":false},{"stage":"cancel-event","at":3172.9000000003725,"original":true,"inert":true,"children":4,"state":"idle","time":null,"motion":"calm","reduce":false}]
+ACTIVE-CANCEL 1280 os [{"stage":"paused-original-assigned","at":5402.399999999441,"original":true,"inert":true,"children":4,"state":"paused","time":0,"motion":"full","reduce":false},{"stage":"before-product-media-listener","at":5610.799999999814,"original":false,"inert":false,"children":0,"state":"paused","time":0,"motion":"full","reduce":true}]
+AssertionError [ERR_ASSERTION]: quiet transition must encounter original active retirement, not expired fallback
+    at /home/sandbox/chatify/tests/builder_keep_current_runtime_motion_browser.cjs:1:5738 {
+  generatedMessage: false,
+  code: 'ERR_ASSERTION',
+  actual: false,
+  expected: true,
+  operator: '==',
+  diff: 'simple'
+}
