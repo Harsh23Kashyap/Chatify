@@ -31,7 +31,7 @@ DEFAULTS = {
         "fallback": None,          # optional second provider block used if the first is unreachable
     },
     "sources": [],                 # list of connector blocks, see docs/SCHEMA.md
-    "retrieval": {"top_k": 12, "min_score": 0.0, "query_rewrite": False, "cache_ttl": 0},
+    "retrieval": {"top_k": 12, "min_score": 0.0, "query_rewrite": False, "query_expansion": True, "cache_ttl": 0},
     "prompt": {
         "system": "You answer only from the numbered evidence. Cite with [n], placing each number right after the clause it supports, not at the end of the answer. "
                   "If the evidence does not cover the question, say so in one plain sentence with no citations and do not point the reader elsewhere. "

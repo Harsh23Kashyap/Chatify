@@ -29,6 +29,13 @@ STAGES = {
         "help": "Writes the short keyword searches sent to your sources.",
         "default": "Write up to 3 short keyword search queries for the question. One per line, no numbering.",
     },
+    "expand": {
+        "label": "Zero-evidence synonym expansion", "optional": False, "on": True,
+        "help": "When a search finds nothing usable, rewrites the question once with standard synonyms or technical terms added, so a retry can find evidence written in other words.",
+        "default": ("Rewrite the question as one search query that keeps every original word and adds only standard "
+                    "synonyms or technical equivalents for its terms (for example, add \"myocardial infarction\" for \"heart attack\"). "
+                    "Do not change the meaning, do not add or remove negation, do not add new topics. Return only the rewritten query."),
+    },
     "relevance": {
         "label": "Relevance filter", "optional": True, "on": False,
         "help": "Asks the model which retrieved passages actually help, and drops the rest. Off by default.",

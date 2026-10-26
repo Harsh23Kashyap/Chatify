@@ -110,7 +110,7 @@ class BuilderTests(unittest.TestCase):
   raw.update(appearance=theme.DEFAULT_CLEAN(),pipeline_prompts={'text':{k:v['default'] or raw['prompt']['system'] for k,v in prompts.STAGES.items()},'on':{k:v['on'] for k,v in prompts.STAGES.items()}},helper_drafts={k:{'brief':'A reviewed helper draft','code':generators.code_template(k,'')} for k in ('search','clean_query')},api_suggestions=[{'name':'PubMed','reason':'Biomedical literature','connector':'pubmed','setup':'Enable after review','caveat':'Verify coverage; no price claim'}])
   return raw
  def test_complete_extensions_and_all_prompts(self):
-  raw=self.complete_config();result=appbuilder.validate(yaml.safe_dump(raw));self.assertEqual(len(result['pipeline_prompts']['text']),9)
+  raw=self.complete_config();result=appbuilder.validate(yaml.safe_dump(raw));self.assertEqual(len(result['pipeline_prompts']['text']),10)
   self.assertEqual(set(result['appearance']),set(raw['appearance']));self.assertTrue(result['helper_drafts']['search']['code'])
   self.assertEqual(schema.validate(result)['appearance']['font'],'dm-sans')
  def test_blank_pipeline_prompt_rejected(self):
@@ -125,7 +125,7 @@ class BuilderTests(unittest.TestCase):
   self.cfg['_dir']=self.tmp.name;raw=self.complete_config();raw['app']['title']='Complete Garden';raw['storage']['path']='data/chatify.db'
   plan=appbuilder.review(self.cfg,yaml.safe_dump(raw),appbuilder.SECTIONS);appbuilder.save_plan(self.cfg,plan)
   saved=schema.load(str(self.path));self.assertEqual(saved['app']['title'],'Complete Garden')
-  self.assertEqual(len(saved['pipeline_prompts']['text']),9);self.assertTrue((Path(self.tmp.name)/'data'/'code-drafts.json').exists())
+  self.assertEqual(len(saved['pipeline_prompts']['text']),10);self.assertTrue((Path(self.tmp.name)/'data'/'code-drafts.json').exists())
   self.assertEqual(prompts.PromptStore('',saved['pipeline_prompts']).text('followups'),raw['pipeline_prompts']['text']['followups'])
  def test_hosted_save_never_touches_served_app_file(self):
   # Regression for 2026-10-25 live: on the hosted multi-visitor demo the shared

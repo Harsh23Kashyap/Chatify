@@ -358,7 +358,7 @@ class GalleryBuilderUseThisApp(unittest.TestCase):
         })
         draft["appearance"] = {"mode": "light", "bubble": "flat"}
         draft["pipeline_prompts"] = {"text": {s: "CUSTOM PROMPT %s" % s for s in
-            ["question_check", "standalone", "queries", "relevance", "answer", "faithfulness", "revise", "followups", "summary"]}, "on": {}}
+            ["question_check", "standalone", "queries", "expand", "relevance", "answer", "faithfulness", "revise", "followups", "summary"]}, "on": {}}
         draft["helper_drafts"] = {"search": {"brief": "Find rows", "code": "def search(query, items):\n    return []\n"}}
         sections = sorted(schema.DEFAULTS) + ["appearance", "pipeline_prompts", "helper_drafts"]
         yaml_text = yaml.safe_dump(draft, sort_keys=False)

@@ -15,6 +15,7 @@ def errors(stage, text, evidence_ids=()):
   lines=t.splitlines() if t else []
   normalized=[x.strip().casefold() for x in lines]
   return ['Use up to3 distinct plain lines'] if len(lines)>3 or any(not x or len(x)>500 or re.match(r'^\s*(?:[-*]|\d+[.)])\s+',x) for x in lines) or len(set(normalized))!=len(normalized) else []
+ if stage=='expand':return [] if t and '\n' not in t and len(t)<=500 else ['Use one nonempty line, at most 500 characters']
  if stage=='standalone':return [] if t and len(t)<=2000 and '\n' not in t else ['Use one nonempty question, at most2000 characters']
  if stage=='summary':return [] if len(t)<=600 else ['Summary exceeds600 characters']
  if stage in ('answer','revise'):

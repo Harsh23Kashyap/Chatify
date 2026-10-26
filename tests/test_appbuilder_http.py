@@ -130,7 +130,7 @@ class BuilderHTTP(test_workspace_api.WorkspaceAPITests):
   plan=self.call(self.clients[0],'/api/settings/build/review',{'yaml':yaml.safe_dump(generated),'sections':['pipeline_prompts']})
   self.call(self.clients[0],'/api/settings/build/save',{'ticket':plan['ticket'],'confirmed':True})
   response=self.call(self.clients[0],'/api/prompts')
-  self.assertEqual(len(response['stages']),9)
+  self.assertEqual(len(response['stages']),len(__import__('chatify.prompts',fromlist=['STAGES']).STAGES))
   for stage in response['stages']:self.assertEqual(stage['text'],'Trip planning fixture '+stage['key'])
 
  def test_edit_one_prompt_after_builder_apply_keeps_other_saved_stages(self):

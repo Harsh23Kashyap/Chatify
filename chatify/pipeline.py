@@ -638,7 +638,37 @@ class Engine:
         k = self.cfg["retrieval"]["top_k"]
         return min(50, k * 2) if style == "deep" else k
 
-    def retrieve(self, question, source_ids=None, owner=None, scope=None, style="standard"):
+    _NEGATION = frozenset("no not never without nor neither avoid avoids avoidant".split())
+
+    def _expand_for_recall(self, question):
+        """One synonym-expanded rewrite for the zero-evidence rescue path.
+
+        The expansion may only ADD standard synonyms/technical equivalents: the
+        contract check below requires every original content word's stem and the
+        exact negation set to survive, and rejects corpus references, so the retry
+        cannot launder an off-intent passage past the gate on new tokens alone.
+        Returns None on any provider or contract failure (the caller abstains).
+        """
+        try:
+            out = self.provider.complete([{"role": "system", "content": self.stage_prompt("expand")},
+                                          {"role": "user", "content": question}]).strip()
+        except providers.ProviderError:
+            return None
+        if stage_contracts.errors("expand", out):
+            return None
+        original_words = [w for w in re.findall(r"[a-z0-9]{3,}", (question or "").lower())
+                          if not w.isdigit() and w not in _GATE_STOP]
+        expanded_stems = _gate_stems(out)
+        if any(not (_gate_variants(w) & expanded_stems) for w in original_words):
+            return None
+        neg = lambda t: {w for w in re.findall(r"[a-z]+", (t or "").lower()) if w in self._NEGATION}
+        if neg(out) != neg(question):
+            return None
+        if corpus_intent(out) or out.strip().lower() == (question or "").strip().lower():
+            return None
+        return out
+
+    def retrieve(self, question, source_ids=None, owner=None, scope=None, style="standard", _expandable=True):
         k = self.retrieval_limit(style)
         ids = [s for s in (list(self.connectors) if source_ids is None else source_ids) if s in self.connectors]
         ids = [sid for sid in ids if permissions.allowed(self.cfg,owner,sid)]
@@ -719,6 +749,27 @@ class Engine:
             found = own_part + pub_part
         else:
             found = relevance_gate(question, found, public_ids=search_ids)
+        if (not found and _expandable and not scope and search_ids
+                and not corpus_intent(question) and _gate_stems(question)
+                and self.cfg["retrieval"].get("query_expansion", True)):
+            # Zero-evidence rescue: one bounded synonym expansion, one re-search of the
+            # open connectors, then the gate on the UNION vocabulary. A passage must
+            # share at least two union content words, so a single expanded token alone
+            # cannot carry an off-topic page (ambiguous-synonym laundering).
+            expanded = self._expand_for_recall(question)
+            if expanded:
+                more, _merr = self.retrieve(expanded, source_ids=sorted(search_ids), owner=owner,
+                                            style=style, _expandable=False)
+                union_q = question + " " + expanded
+                kept = relevance_gate(union_q, [e for e in more if e.get("source") in search_ids],
+                                      public_ids=search_ids)
+                q_words = [w for w in re.findall(r"[a-z0-9]{3,}", union_q.lower())
+                           if not w.isdigit() and w not in _GATE_STOP]
+                topical = [w for w in dict.fromkeys(q_words) if w not in _GATE_WEAK] or list(dict.fromkeys(q_words))
+                if len(topical) >= 3:
+                    kept = [e for e in kept
+                            if sum(1 for w in topical if _gate_variants(w) & _gate_stems(str(e.get("title") or "") + " " + str(e.get("text") or "")[:1500])) >= 2]
+                found = kept
         # Semantic re-order of the gate-retained set (order only, fail-open; see rerank.py).
         _rr = self.cfg["retrieval"].get("rerank", True)
         own = [e for e in found if e.get("source") not in search_ids]

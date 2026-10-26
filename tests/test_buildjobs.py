@@ -372,5 +372,5 @@ class RetryCompletion(unittest.TestCase):
   self.assertEqual(d['state'],'done',d)
   self.assertIn('appearance:fonts',d['defaulted'])
   self.assertIn('safe defaults',d['notice'])
-  self.assertEqual(d['calls'],31+buildjobs.MAX_PART_ATTEMPTS-1);self.assertEqual(d['retry_calls'],buildjobs.MAX_PART_ATTEMPTS-1+1)
+  self.assertEqual(d['calls'],32+buildjobs.MAX_PART_ATTEMPTS-1);self.assertEqual(d['retry_calls'],buildjobs.MAX_PART_ATTEMPTS-1+1)
   raw=yaml.safe_load(d['yaml']);self.assertEqual(set(raw['appearance']),set(theme.DEFAULT_CLEAN()));self.assertTrue(raw['appearance']['font'])

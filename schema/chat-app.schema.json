@@ -152,6 +152,9 @@
         "query_rewrite": {
           "type": "boolean"
         },
+        "query_expansion": {
+          "type": "boolean"
+        },
         "cache_ttl": {
           "type": "integer",
           "minimum": 0
