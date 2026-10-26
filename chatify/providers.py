@@ -149,6 +149,10 @@ class Mock(Streams):
 
     def complete(self, messages):
         user = messages[-1]["content"].split("Evidence:\n", 1)[-1]
+        # The prompt may append verbatim "sentences mentioning the named entity" as a
+        # reading aid; those repeat evidence sentences under the same [n] markers, so
+        # quoting from there duplicates the answer (installer demo, 2026-10-26).
+        user = user.split("\n\nSentences mentioning the named entity", 1)[0]
         blocks = re.findall(r"\[(\d+)\]\s*(.+?)(?=\n\[\d+\]|\Z)", user, flags=re.S)
         if not blocks:
             return "No evidence was provided."
