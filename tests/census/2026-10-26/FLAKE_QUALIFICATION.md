@@ -55,3 +55,16 @@ Repair (contract unchanged): addInitScript wraps Element.prototype.animate to ke
 assertion uses live animation if present, else the most recent completed record, and pause() +
 currentTime=40 rewinds it into getAnimations() so the product's quiet-mode cancel path is still
 exercised. PASS 3/3 solo + 1/1 through lane path.
+
+## Lane-contention transients (12:02-12:04 batch) — evidence kept, no product bug
+
+1. hero_motion_audit_browser (11:40 lane FAIL, 4s): empty computed animation names under reduce.
+   Evidence: probe (same Chrome, same page) showed animation:none on every hero child under
+   reduce; uncontended solo rerun PASS (11:42). Contention artifact.
+2. metadata_geometry_audit_browser (12:02 lane FAIL, 35s): 30s locator timeout
+   [data-workspace-field="app.id"] under 2-lane contention; uncontended solo rerun PASS in 8s (12:03).
+3. mobile_a11y_current_browser (12:03 lane FAIL, 11s): axe returned a violation array mid-run under
+   contention; uncontended solo rerun completed the full 41s scan with zero violations (12:04 PASS).
+Protocol unchanged: lane FAILs are never claimed as product FAILs until an uncontended solo rerun
+confirms; solo PASS supersedes via latest-row. These three are logged here rather than silently
+dropped so the qualification list can re-examine them if any recurs.
