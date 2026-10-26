@@ -154,3 +154,25 @@ class SourceNoteExports(unittest.TestCase):
   from chatify.exports import answer_markdown
   t=self.turn();t['source_errors']={}
   self.assertNotIn('could not be reached',answer_markdown({'title':'Chat'},t,self.SOURCES))
+
+class WheelInstallImport(unittest.TestCase):
+ def test_server_imports_and_pdf_fails_clear_without_fpdf(self):
+  # Wheel installs lack fpdf2/uharfbuzz (documents extra): importing the server must
+  # not require fpdf, and PDF export must fail with an actionable message (installer
+  # matrix regression: cb75907 made server.py unimportable from a bare wheel).
+  code=("import builtins; real=builtins.__import__\n"
+   "def block(name,*a,**k):\n"
+   " if name=='fpdf' or name.startswith('fpdf.'): raise ImportError(name)\n"
+   " return real(name,*a,**k)\n"
+   "builtins.__import__=block\n"
+   "import chatify.server\n"
+   "import chatify.exports as ex\n"
+   "assert ex.FPDF is None\n"
+   "try:\n"
+   " ex.pdf_bytes('t',{'question':'q','answer':'a'})\n"
+   " raise SystemExit('pdf_bytes should have raised')\n"
+   "except RuntimeError as e:\n"
+   " assert 'documents' in str(e), e\n")
+  import subprocess,sys
+  r=subprocess.run([sys.executable,"-c",code],capture_output=True,text=True)
+  self.assertEqual(r.returncode,0,r.stderr[-600:])

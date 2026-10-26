@@ -9,7 +9,10 @@ render right-aligned with RTL shaping. Scripts outside the bundled fonts
 (CJK, Thai, ...) are still rejected honestly.
 """
 import os, re, unicodedata
-from fpdf import FPDF
+try:
+    from fpdf import FPDF
+except ImportError:  # optional dependency: wheel installs without the pdf extra
+    FPDF = None
 
 from .pipeline import plain_text as _plain
 
@@ -96,7 +99,7 @@ def _rtl_dominant(text):
     return rtl > ltr
 
 
-class _AnswerPDF(FPDF):
+class _AnswerPDF(FPDF if FPDF is not None else object):
     def __init__(self,doc_title,accent):
         super().__init__(unit='pt',format='A4')
         self._doc_title=doc_title
@@ -136,6 +139,8 @@ def chat_markdown(title, turns, sources=None):
 
 
 def pdf_bytes(title, turn, accent="#173f35", tagline="", sources=None):
+    if FPDF is None:
+        raise RuntimeError("PDF export needs the pdf extra: pip install 'chatify[documents]'.")
     blocks=[('label','ANSWER NOTE'),('title',title),('muted',tagline),('space',''),('label','YOUR QUESTION'),('question',turn['question']),('space',''),('heading','Answer')]
     # Recompose markdown tables into readable labeled rows for narrow PDF pages.
     lines=turn['answer'].split('\n');i=0

@@ -6,5 +6,9 @@ uharfbuzz>=0.39
 
 # Evidence re-order stage (chatify/rerank.py); pinned to the verified pair. The app
 # fails open without the model files, but deployed images bundle them under chatify/models/rerank/.
-onnxruntime==1.31.0
+onnxruntime==1.31.0; python_version >= "3.11"
+# 1.31.0 has no cp310 wheels (Requires-Python >=3.11); 1.23.2 is the newest cp310
+# release and is verified on Python 3.10 against the bundled model (loads and orders
+# frozen control cases correctly, 2026-10-26).
+onnxruntime==1.23.2; python_version < "3.11"
 tokenizers==0.23.3
