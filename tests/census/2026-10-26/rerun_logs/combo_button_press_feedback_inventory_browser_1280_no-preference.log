@@ -1,0 +1,61 @@
+FEEDBACK BUTTON|cc-guide-replay none none
+RELEASE 1280 no-preference BUTTON|cc-guide-replay chatGuide
+FEEDBACK BUTTON|theme-btn matrix(1, 0, 0, 1, 0, 1) none
+RELEASE 1280 no-preference BUTTON|theme-btn themeBtn
+FEEDBACK BUTTON|icon menu|menu none none
+RELEASE 1280 no-preference BUTTON|icon menu|menu menu
+FEEDBACK BUTTON|icon|readingBtn none none
+RELEASE 1280 no-preference BUTTON|icon|readingBtn readingBtn
+FEEDBACK BUTTON|cs-btn matrix(1, 0, 0, 1, 0, 1) none
+RELEASE 1280 no-preference BUTTON|cs-btn null
+FEEDBACK BUTTON|icon|prevQ none none
+RELEASE 1280 no-preference BUTTON|icon|prevQ prevQ
+FEEDBACK BUTTON|icon|nextQ none none
+RELEASE 1280 no-preference BUTTON|icon|nextQ nextQ
+FEEDBACK BUTTON|icon|tempBtn none none
+RELEASE 1280 no-preference BUTTON|icon|tempBtn tempBtn
+FEEDBACK BUTTON|icon|profileBtn none none
+RELEASE 1280 no-preference BUTTON|icon|profileBtn profileBtn
+FEEDBACK BUTTON|icon|exportChat none none
+RELEASE 1280 no-preference BUTTON|icon|exportChat exportChat
+FEEDBACK BUTTON|icon|upload none none
+RELEASE 1280 no-preference BUTTON|icon|upload upload
+FEEDBACK BUTTON|icon|mic none none
+RELEASE 1280 no-preference BUTTON|icon|mic mic
+FEEDBACK BUTTON|chip matrix(1, 0, 0, 1, 0, 1) none
+RELEASE 1280 no-preference BUTTON|chip scopeBtn
+FEEDBACK BUTTON| none none
+RELEASE 1280 no-preference BUTTON| feature-tab-chat
+FEEDBACK BUTTON|feature-added none none
+RELEASE 1280 no-preference BUTTON|feature-added feature-tab-search
+FEEDBACK SUMMARY| none none
+RELEASE 1280 no-preference SUMMARY| null
+FEEDBACK BUTTON|go ghost matrix(1, 0, 0, 1, 0, 1) none
+RELEASE 1280 no-preference BUTTON|go ghost null
+FEEDBACK BUTTON|go green matrix(1, 0, 0, 1, 0, 1) none
+RELEASE 1280 no-preference BUTTON|go green null
+FEEDBACK BUTTON|info-tip matrix(1, 0, 0, 1, 0, 1) none
+RELEASE 1280 no-preference BUTTON|info-tip null
+FEEDBACK BUTTON|chipmore matrix(0.97, 0, 0, 0.97, 0, 0) none
+RELEASE 1280 no-preference BUTTON|chipmore null
+FEEDBACK BUTTON|go blue big matrix(1, 0, 0, 1, 0, 1) none
+RELEASE 1280 no-preference BUTTON|go blue big apply
+FEEDBACK BUTTON|editor-choice none none
+RELEASE 1280 no-preference BUTTON|editor-choice null
+FEEDBACK BUTTON|go blue matrix(1, 0, 0, 1, 0, 1) none
+RELEASE 1280 no-preference BUTTON|go blue null
+FEEDBACK BUTTON|go ghost helper-detect matrix(1, 0, 0, 1, 0, 1) none
+RELEASE 1280 no-preference BUTTON|go ghost helper-detect null
+FEEDBACK BUTTON|go ghost helper-copy matrix(1, 0, 0, 1, 0, 1) none
+RELEASE 1280 no-preference BUTTON|go ghost helper-copy null
+FEEDBACK BUTTON|preset none none
+RELEASE 1280 no-preference BUTTON|preset null
+FEEDBACK BUTTON|preset more none none
+RELEASE 1280 no-preference BUTTON|preset more null
+FEEDBACK BUTTON|emoji-tile matrix(1, 0, 0, 1, 0, 1) none
+RELEASE 1280 no-preference BUTTON|emoji-tile f-emoji_bot
+FEEDBACK BUTTON|mini matrix(1, 0, 0, 1, 0, 1) none
+RELEASE 1280 no-preference BUTTON|mini null
+FEEDBACK BUTTON|settings-help-open matrix(0.98, 0, 0, 0.98, 0, 1) none
+RELEASE 1280 no-preference BUTTON|settings-help-open null
+PASS presscomputedinventory 30 no mutations; requested matrix 1280 no-preference

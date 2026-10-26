@@ -1,0 +1,20 @@
+[
+  {
+    case: 'Nonempty topic tab renders',
+    status: 'PASS',
+    mode: 'ACTUAL browser UI'
+  },
+  { case: 'Topic rename', status: 'PASS', mode: 'ACTUAL browser UI' },
+  { case: 'Pin chat', status: 'PASS', mode: 'ACTUAL browser UI' },
+  { case: 'Unpin chat', status: 'PASS', mode: 'ACTUAL browser UI' },
+  {
+    case: 'Profile save/reload',
+    status: 'PASS',
+    mode: 'ACTUAL browser UI'
+  },
+  {
+    case: 'Profile remove/save',
+    status: 'PASS',
+    mode: 'ACTUAL browser UI'
+  }
+]
