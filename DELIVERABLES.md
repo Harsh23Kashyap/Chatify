@@ -38,7 +38,17 @@ Pending source-backed change inventory and visual review. Do not equate research
 
 ## 4. The exact files and components changed.
 
-A complete mission-wide inventory remains to be reconstructed. Current post-rebuild changes are listed separately by git diff a8ce3fd..HEAD and predominantly concern qualification/test evidence; that is not the full redesign diff.
+A complete mission-wide inventory remains to be reconstructed. A reproducible **technical comparison window**, 42fcc2c^..c6b60e5, starts before the October25 09:16 v2 chat-treatment commit. It is NOT established as the original mission baseline. UI/package paths changed in that window:
+
+- Chat and answer reading: chatify/web/app.js, index.html, style.css, pipeline.js, reading.js.
+- Builder and settings: chatify/web/appbuilder.js, appearanceextras.js, builderstudio.css, configurationhome.css, settings.css, settings.js, settingsguide.js, settingstabs.css, settingstop.js.
+- Shared interaction styling: chatify/web/components.css, loading.css, motion.css, navigation.css, refinements.css.
+- Font assets/notices: chatify/web/fonts/FONTS.md, NotoNaskhArabic[wght].ttf, NotoSansHebrew[wdth,wght].ttf, NotoSansMath-OFL.txt.
+- Installation metadata: pyproject.toml, requirements.txt.
+
+This list is an exact path diff for that bounded window, not every earlier or backend file. The source-backed October25 09:16 commit 42fcc2c adds welcome hierarchy, compact Chat tools chips, evidence cards, busy answer skeleton, dotted thread surface and sidebar active marker (app.js/style.css plus font license notices). A current visual comparison is still required before claiming the delivered result.
+
+Current post-rebuild changes are separately reproducible with git diff a8ce3fd..HEAD and predominantly concern qualification/test evidence; that is not the full redesign diff.
 
 ## 5. New dependencies and installation details.
 
