@@ -1,9 +1,12 @@
-# 469 census fixture map (recovered 2026-10-26)
-Harness: node22 + playwright-core + /usr/bin/google-chrome. All 469 tests local-fixture by design (0 reference hosted/onrender/provider keys).
-- GENERIC family (apps/minimal mock, any port; defaults 8190 x28, 18827 x38, misc): majority. Correct fixture: `python -m chatify run apps/minimal/app.yaml`.
-- STRICT family (17 tests, default port 8145): answer-delete-topic, branch-review, chat-lifecycle, deleted-chat-topic, local-actions, mobile_profile, mobile_strict, multi-topic-cancel, question-nav, reading-persistence, regen-buttons, sidebar_profile_browser, stream-buttons, topic-export, topic-temp, undo-view-route, unicode-export. Correct fixture: `CHATIFY_TEST_URL=http://127.0.0.1:PORT python tests/strict_ui_fixture.py` (seeded NewsNerd: Sample headlines topic, Hindi/CJK turns, navigation, Cedar upload).
-- MOUNTED family (8142, 15 tests incl. config_* + builder_mounted_preview): needs gallery-style mount (root + /chatify/ path). Fixture: `python -m chatify run apps/gallery.yaml` (verify mount paths on first run).
-- BUILDER-MOCK family (builder_brand_retry_fixture_server.py, deterministic brand drafts incl. pipeline_prompts): review_capabilities, review_precision, ten_actual_palettes, theme_contrast_settle + likely appbuilder_full + other full-builder-journey tests (TBD first runs).
-- NODE family (7, no playwright import): chart_integrity, model_shortlist, nav_helpers, settings_search_rank, topic_navigation_integrity, wizard_launch_retry_harness, workspace_review_confirm_harness — may spawn own servers; run directly with node.
-Teardown artifact protocol: held-route TargetClosedError at teardown with passing body => rerun with --unhandled-rejections=warn; PASS recorded as PASS-teardown-rerun.
-Parallel-lane caution: stateful settings/builder tests get sequential uncontended rerun before any FAIL claim.
+# 469 census fixture map v2 (contract-based, 2026-10-26 08:43)
+Classification evidence: per-test source reads for seed strings, builder-draft assertions, mount paths, playwright import — not port heuristics alone. Ports are corroboration.
+
+- STRICT (17): needs tests/strict_ui_fixture.py seeded server (NewsNerd; Sample headlines, Hindi/CJK, navigation, Cedar, multi-chat fixtures). Evidence: default port 8145 (17 tests) of which 12 also reference seed strings literally; 5 (local-actions, mobile_profile, reading-persistence, sidebar_profile_browser, stream-buttons) interact with seeded chats positionally. Plus seed-string matches outside 8145 (unicode-export family overlap) — run any seed-string test against strict fixture.
+- BUILDER-MOCK-REVIEW (9): assert deterministic AI draft content. 5 by string contract (appbuilder_full_browser, builder_long_configuration_geometry_browser, builder_mounted_preview_browser, builder_proposed_checkbox_immediate_motion_browser, studio_polish_browser) + 4 by brand-fixture naming (review_capabilities_browser, review_precision_browser, ten_actual_palettes_browser, theme_contrast_settle_browser). Fixture: tests/builder_brand_retry_fixture_server.py. Verify by first run per test: if generic mock draft satisfies assertions, reclassify GENERIC with note.
+- MOUNTED (1 confirmed): builder_mounted_preview_browser (goto mount= root + /chatify/). Fixture: apps/gallery.yaml serving root + mounted app. 4 node files contain '/chatify/' as static strings — NOT evidence of mount need.
+- NODE (7): no playwright import; likely static integrity checks or self-spawning. chart_integrity, model_shortlist, nav_helpers, settings_search_rank, topic_navigation_integrity, wizard_launch_retry_harness, workspace_review_confirm_harness. Run directly with node; observe.
+- GENERIC (~438): everything else; contract = generic-app UI, apps/minimal mock valid. Ask-flow tests assert DOM structure (sources/chips/toast), not answer semantics. Semantic answer quality NOT covered by ANY mock-fixture pass.
+
+Audit of first 31 PASS (08:43): zero references to strict seeds, builder-draft strings, or mount paths in all 31 => contract-generic, valid on apps/minimal. Counts stand: 31 completed / 438 remaining.
+
+Teardown artifact protocol + contention protocol unchanged (see manifest.md).
