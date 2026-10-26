@@ -1,0 +1,9 @@
+# 469 census fixture map (recovered 2026-10-26)
+Harness: node22 + playwright-core + /usr/bin/google-chrome. All 469 tests local-fixture by design (0 reference hosted/onrender/provider keys).
+- GENERIC family (apps/minimal mock, any port; defaults 8190 x28, 18827 x38, misc): majority. Correct fixture: `python -m chatify run apps/minimal/app.yaml`.
+- STRICT family (17 tests, default port 8145): answer-delete-topic, branch-review, chat-lifecycle, deleted-chat-topic, local-actions, mobile_profile, mobile_strict, multi-topic-cancel, question-nav, reading-persistence, regen-buttons, sidebar_profile_browser, stream-buttons, topic-export, topic-temp, undo-view-route, unicode-export. Correct fixture: `CHATIFY_TEST_URL=http://127.0.0.1:PORT python tests/strict_ui_fixture.py` (seeded NewsNerd: Sample headlines topic, Hindi/CJK turns, navigation, Cedar upload).
+- MOUNTED family (8142, 15 tests incl. config_* + builder_mounted_preview): needs gallery-style mount (root + /chatify/ path). Fixture: `python -m chatify run apps/gallery.yaml` (verify mount paths on first run).
+- BUILDER-MOCK family (builder_brand_retry_fixture_server.py, deterministic brand drafts incl. pipeline_prompts): review_capabilities, review_precision, ten_actual_palettes, theme_contrast_settle + likely appbuilder_full + other full-builder-journey tests (TBD first runs).
+- NODE family (7, no playwright import): chart_integrity, model_shortlist, nav_helpers, settings_search_rank, topic_navigation_integrity, wizard_launch_retry_harness, workspace_review_confirm_harness — may spawn own servers; run directly with node.
+Teardown artifact protocol: held-route TargetClosedError at teardown with passing body => rerun with --unhandled-rejections=warn; PASS recorded as PASS-teardown-rerun.
+Parallel-lane caution: stateful settings/builder tests get sequential uncontended rerun before any FAIL claim.
