@@ -1,0 +1,11 @@
+Error: ENOENT: no such file or directory, open '/tmp/cc-ui-tools/node_modules/axe-core/axe.min.js'
+    at async open (node:internal/fs/promises:639:25)
+    at async Object.readFile (node:internal/fs/promises:1252:14)
+    at async _Frame.addScriptTag (/home/sandbox/pw-runner/node_modules/playwright-core/lib/coreBundle.js:62001:27)
+    at async _Page.addScriptTag (/home/sandbox/pw-runner/node_modules/playwright-core/lib/coreBundle.js:63077:16)
+    at async /home/sandbox/chatify/tests/builder_checklist_keyboard_motion_browser.cjs:1:2949 {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/tmp/cc-ui-tools/node_modules/axe-core/axe.min.js'
+}

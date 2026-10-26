@@ -1,0 +1,18 @@
+DISCLOSURE 320 reduce true []
+DISCLOSURE 320 no-preference true [ 160, 160 ]
+DISCLOSURE 390 reduce true []
+DISCLOSURE 390 no-preference true [ 160, 160 ]
+DISCLOSURE 1280 reduce true []
+DISCLOSURE 1280 no-preference true [ 160, 160 ]
+AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+
+1 !== 0
+
+    at /home/sandbox/chatify/tests/background_transition_browser.cjs:8:265 {
+  generatedMessage: true,
+  code: 'ERR_ASSERTION',
+  actual: 1,
+  expected: 0,
+  operator: 'strictEqual',
+  diff: 'simple'
+}

@@ -1,0 +1,9 @@
+AssertionError [ERR_ASSERTION]: sticky stepper stays within one CSS pixel after scroll
+    at /home/sandbox/chatify/tests/builder_draft_loading_browser.cjs:11:1146 {
+  generatedMessage: false,
+  code: 'ERR_ASSERTION',
+  actual: false,
+  expected: true,
+  operator: '==',
+  diff: 'simple'
+}
