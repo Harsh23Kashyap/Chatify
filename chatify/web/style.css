@@ -1073,17 +1073,13 @@ pre.codeblock code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monosp
   html.no-sr #toolsToggle{display:none}
 }
 html.no-sr #toolsDictate{display:none}
-/* Keep every chat action visible on phones instead of hiding it beyond an unmarked scroller. */
+/* Keep phone actions visible on two rows instead of an unmarked horizontal scroller. */
 @media(max-width:760px){
  header.bar{height:auto;min-height:56px;flex-wrap:wrap;overflow:visible;padding:6px 8px;gap:4px}
- header.bar>.title{flex:1 1 calc(100% - 60px);min-width:0}
- header.bar>.bar-r{flex:1 0 100%;min-width:0;flex-wrap:wrap;justify-content:flex-end;gap:2px}
- header.bar>.bar-r>.icon{flex:0 0 44px;min-width:44px}
-}
-@media(max-width:760px){
+ header.bar>.title{flex:1 1 40px;min-width:0}
  header.bar>.bar-r{display:contents}
- header.bar>.title{flex:1 1 40px}
  header.bar::after{content:'';flex-basis:100%;height:0;order:1}
+ header.bar .bar-r>.icon{flex:0 0 44px;min-width:44px}
  header.bar .bar-r>.icon:not(#readingBtn){order:2}
  header.bar .bar-r>.cs{flex:0 0 auto;max-width:110px}
 }

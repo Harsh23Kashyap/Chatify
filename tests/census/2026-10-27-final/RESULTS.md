@@ -17,3 +17,4 @@
 - Mounted-preview test first failed because its hardcoded8142 server was not running. Preserved connection-error log. Identical test with URL changed only to current8765 server PASS at root and/chatify/ mounts. This is a current-server diagnostic, not a change to assertions.
 - Configuration sample preview native wheel scrollTop0->291, scrollHeight479/client188: content is internally scrollable, not dead clipping.
 - Fresh wheel after CSS: build exit0, hash recorded alongside the build log. Unit counts above refer to the pre-CSS revision; the affected browser checks were rerun separately.
+- Build invocation first used absent `python` executable and exited127; no wheel was built by that attempt. Retried with installed `python3`, exit0, fresh12967401-byte wheel SHA256 c7671111ebc6564a68becefec2b1d70727c636f7ece8c8f9eea4c19620ab2c79. Failure and retry do not imply a packaging failure.
