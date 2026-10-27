@@ -1,0 +1,39 @@
+FAILTRACE {
+  "events": [
+    {
+      "at": 1006.9000000003725,
+      "name": "Setup",
+      "stack": "Error\n    at HTMLDocument.<anonymous> (<anonymous>:2:151)\n    at buildMenu (http://127.0.0.1:42355/settings.js:700:797)\n    at init (http://127.0.0.1:42355/pipeline.js:156:39)"
+    },
+    {
+      "at": 1098.7999999988824,
+      "name": "Setup",
+      "stack": "Error\n    at HTMLDocument.<anonymous> (<anonymous>:2:151)\n    at buildMenu (http://127.0.0.1:42355/settings.js:700:797)\n    at drawLook (http://127.0.0.1:42355/settings.js:665:3)\n    at init (http://127.0.0.1:42355/settings.js:745:43)"
+    },
+    {
+      "at": 1156.2999999988824,
+      "name": "Deploy",
+      "stack": "Error\n    at HTMLDocument.<anonymous> (<anonymous>:2:151)\n    at eval (eval at evaluate (:370:30), <anonymous>:1:14)\n    at UtilityScript.evaluate (<anonymous>:372:16)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)"
+    },
+    {
+      "at": 1184.9000000003725,
+      "name": "Setup",
+      "stack": "Error\n    at HTMLDocument.<anonymous> (<anonymous>:2:151)\n    at buildMenu (http://127.0.0.1:42355/settings.js:700:797)\n    at boot (http://127.0.0.1:42355/panels.js:143:67)"
+    }
+  ],
+  "body": "Local checks only. Live services have not been tested.\n\nModel\nOffline Demo\nCredential\nNo key needed\nEvidence sources\nSources added\nData audience\nReview before sharing\nConnector code\nNo Python connector\nMy documents\nLocal documents indexed\nCheck details and limits\nChoose live checks",
+  "hash": "#sec-finish",
+  "ready": true,
+  "classes": "cfgtop-manual settings-tabs",
+  "button": []
+}
+locator.click: Timeout 30000ms exceeded.
+Call log:
+  - waiting for getByRole('button', { name: 'Prepare deployment plan', exact: true })
+
+    at /tmp/late-trace.cjs:1:1182 {
+  log: [
+    "  - waiting for getByRole('button', { name: 'Prepare deployment plan', exact: true })"
+  ],
+  name: 'TimeoutError'
+}
