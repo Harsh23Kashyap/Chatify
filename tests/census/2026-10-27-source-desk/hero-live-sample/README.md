@@ -1,0 +1,5 @@
+# Atomic live hero style sample
+
+40b50cb shard10 failed one hero-motion case:1280reduce yielded four empty style strings rather than animations. Original solo case5PASS. Attached hero yields expected styles; detached clone reproduces identical empty name/duration values. Product async suggestions completion calls drawThread and replaces the hero, so locator resolution followed by evaluation can hold a detached node. This is a supported race mechanism, not a trace proving which asynchronous update detached the remote node.
+
+Change test sampling to query the live hero inside the same synchronous page evaluation that reads styles, with explicit connected check. Every reduced-motion, stagger, duration, settled-animation and composer assertion remains unchanged. No product change or fixed sleep. Forced hero replacement followed by atomic sampling5PASS, ordinary repaired case5PASS. Original failure retained. Fresh remote full suite required. Historical native400%caret failure remains unexplained intermittent, prior andcurrentremotePASS with original assertion, no mechanism claim.
