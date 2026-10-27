@@ -1,0 +1,74 @@
+name: offline browser regression
+on: [push, pull_request, workflow_dispatch]
+permissions:
+  contents: read
+concurrency:
+  group: offline-browser-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  regression:
+    name: Offline browser shard ${{ matrix.shard }} of 12
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    strategy:
+      fail-fast: false
+      matrix:
+        shard: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12.15'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22.23.3'
+      - name: Install offline regression dependencies
+        run: |
+          python -m pip install '.[documents]' playwright==1.56.0
+          mkdir -p /tmp/cc-ui-tools /downloads
+          npm install --prefix /tmp/cc-ui-tools --no-audit --no-fund playwright-core@1.56.1 axe-core@4.14.0
+          sudo apt-get update -qq
+          sudo apt-get install -y xvfb xdotool imagemagick
+      - name: Browser and manifest preflight
+        env:
+          PLAYWRIGHT_MODULE: /tmp/cc-ui-tools/node_modules/playwright-core
+        run: |
+          test -x /usr/bin/google-chrome
+          /usr/bin/google-chrome --version
+          python --version
+          node --version
+          python tests/ci/browser_suite.py --list --shard ${{ matrix.shard }} --shards 12
+      - name: Run all assigned offline regression contracts
+        env:
+          PLAYWRIGHT_MODULE: /tmp/cc-ui-tools/node_modules/playwright-core
+          PYTHONUNBUFFERED: '1'
+        run: python tests/ci/browser_suite.py --shard ${{ matrix.shard }} --shards 12
+      # No cache/artifact uploads, repository secrets, production keys or user data.
+      # Ordinary job logs retain the pass/fail rows and offline test output.
+  syntax-and-package:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12.15'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22.23.3'
+      - name: Install package and build tools
+        run: python -m pip install . build
+      - name: Python and JavaScript syntax
+        run: |
+          python -m compileall -q chatify tests
+          find chatify/web -maxdepth 1 -name '*.js' -print0 | xargs -0 -n 1 node --check
+      - name: Manifest and orchestration tests
+        run: python -m unittest discover -s tests -p test_ci_browser_suite.py -v
+      - name: Build wheel and verify font packaging regression
+        run: |
+          python -m build --wheel
+          python -m unittest discover -s tests -p test_packaged_fonts.py -v

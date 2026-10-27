@@ -1,0 +1,13 @@
+CASE question-nav.cjs default FAIL exit=1 seconds=6.2
+locator.click: Timeout 5000ms exceeded.
+Call log:
+  - waiting for locator('#list .item').filter({ hasText: 'Navigation fixture' }).first()
+
+    at /home/sandbox/chatify/tests/question-nav.cjs:3:358 {
+  log: [
+    "  - waiting for locator('#list .item').filter({ hasText: 'Navigation fixture' }).first()"
+  ],
+  name: 'TimeoutError'
+}
+
+{"executions": 1, "failed": 1, "passed": 0, "scripts": 1}

@@ -1,0 +1,4 @@
+CASE settings_search_rank.cjs default PASS exit=0 seconds=0.1
+PASS rank user phrases, typo, prompt stages, no match
+
+{"executions": 1, "failed": 0, "passed": 1, "scripts": 1}

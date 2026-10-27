@@ -1,0 +1,7 @@
+CASE mobile_toolbar_visibility_browser.cjs default PASS exit=0 seconds=4.1
+PASS visible toolbar controls keyboardreach readingdialog buildmenu 320
+PASS visible toolbar controls keyboardreach readingdialog buildmenu 390
+PASS visible toolbar controls keyboardreach readingdialog buildmenu 768
+PASS visible toolbar controls keyboardreach readingdialog buildmenu 1280
+
+{"executions": 1, "failed": 0, "passed": 1, "scripts": 1}
