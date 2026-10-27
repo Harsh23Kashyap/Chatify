@@ -1,0 +1,6 @@
+HELD_CONFIG { oldReady: true, overview: false }
+page.waitForFunction: Timeout 30000ms exceeded.
+    at /tmp/probe-source-readiness.cjs:1:967 {
+  log: [],
+  name: 'TimeoutError'
+}

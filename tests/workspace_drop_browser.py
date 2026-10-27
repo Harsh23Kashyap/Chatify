@@ -16,6 +16,8 @@ try:
  with sync_playwright() as pw:
   b=pw.chromium.launch(executable_path='/usr/bin/google-chrome',args=['--no-sandbox']);p=b.new_page(viewport={'width':1440,'height':1000});errors=[];p.on('pageerror',lambda e:errors.append(str(e)));p.goto(url);p.evaluate('localStorage.setItem("cc_cfg_tour_v1","1");localStorage.setItem("cc_tour","1")');p.goto(url+'/settings.html');p.wait_for_selector('#nerdDrop',state='attached');p.wait_for_selector('#workspacePanel',state='attached');p.keyboard.press('Escape')
   def drop(data,name):
+
+   if not p.locator('body').evaluate('(e)=>e.classList.contains("cfgtop-manual")'):p.locator('#cfgtop [data-t=manual]').click()
    p.locator('.category-tabs [data-group=start]').click();p.locator('#menu a[href="#sec-portable"]').click();p.locator('#nerdDrop').wait_for(state='visible')
    transfer=p.evaluate_handle('([bytes,name])=>{const dt=new DataTransfer();dt.items.add(new File([new Uint8Array(bytes)],name,{type:"application/zip"}));return dt}',[data,name]);p.locator('#nerdDrop').dispatch_event('drop',{'dataTransfer':transfer})
   drop(bundle,'nerd.zip');p.get_by_role('button',name='Load and run',exact=True).wait_for();assert 'Dropped Nerd' in p.locator('#nerdReview').inner_text();assert not list((root/'nerds').glob('nerd-*')) if (root/'nerds').exists() else True;p.locator('#nerdReview').scroll_into_view_if_needed();p.locator('#nerdReview').wait_for(state='visible');p.wait_for_timeout(350);p.screenshot(path='/tmp/017-drop-review-desktop.png')

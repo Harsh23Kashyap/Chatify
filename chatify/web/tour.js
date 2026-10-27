@@ -9,6 +9,7 @@
     if(document.querySelector('.cc-tour')||(!replay&&stored(key)))return;
     mark(key);fetch('/api/guide-seen',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({key})}).catch(()=>{});
     const before=document.activeElement,scroll=window.scrollY;
+    const originalSettingsMode=key==='cc_cfg_tour_v1'?(document.body.classList.contains('simple')?'simple':'advanced'):null;
     const dialog=node('dialog','cc-tour');dialog.setAttribute('aria-label',title);
     const glow=node('div','cc-tour-focus');glow.setAttribute('aria-hidden','true');document.body.append(glow);
     let i=0,target=null;
@@ -25,7 +26,7 @@
       else{x=Math.max(pad,(innerWidth-w)/2);y=Math.max(pad,innerHeight-h-pad);edge='top'}
       dialog.dataset.edge=edge;Object.assign(dialog.style,{left:x+'px',top:y+'px',bottom:'auto',right:'auto'});
     }
-    function end(){mark(key);dialog.close();dialog.remove();glow.remove();window.removeEventListener('resize',locate);window.removeEventListener('scroll',locate);window.scrollTo({top:scroll,behavior:'instant'});if(before?.isConnected)before.focus({preventScroll:true});onClose?.();}
+    function end(){mark(key);if(originalSettingsMode)window.CCSettingsSetMode?.(originalSettingsMode);dialog.close();dialog.remove();glow.remove();window.removeEventListener('resize',locate);window.removeEventListener('scroll',locate);window.scrollTo({top:scroll,behavior:'instant'});if(before?.isConnected)before.focus({preventScroll:true});onClose?.();}
     function draw(){
       const s=steps[i];if(s.view)window.CCSettingsTop?.set(s.view,false);if(s.section)window.CCSettingsFind?.openSection(s.section);if(!s.view&&window.CCSettingsTop&&s.target){if(s.target==='.app-builder-open')window.CCSettingsTop.set('builder',false);else if(['#settingsNavTop','#menu','#cfgmode'].includes(s.target))window.CCSettingsTop.set('manual',false)}target=document.querySelector(s.target||'');
       if(target&&(!target.getClientRects().length||getComputedStyle(target).display==='none'))target=document.querySelector('#settingsNavTop')||document.querySelector('#cfgmode');

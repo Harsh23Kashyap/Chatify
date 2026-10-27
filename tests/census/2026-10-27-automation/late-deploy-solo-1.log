@@ -1,0 +1,13 @@
+CASE workspace_late_deploy_plan_browser.cjs default FAIL exit=1 seconds=34.1
+locator.click: Timeout 30000ms exceeded.
+Call log:
+  - waiting for getByRole('button', { name: 'Prepare deployment plan', exact: true })
+
+    at /home/sandbox/chatify/tests/workspace_late_deploy_plan_browser.cjs:1:1018 {
+  log: [
+    "  - waiting for getByRole('button', { name: 'Prepare deployment plan', exact: true })"
+  ],
+  name: 'TimeoutError'
+}
+
+{"executions": 1, "failed": 1, "passed": 0, "scripts": 1}

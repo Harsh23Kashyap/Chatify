@@ -16,20 +16,25 @@ def run():
                 browser=pw.chromium.launch(executable_path='/usr/bin/google-chrome',headless=True,args=['--no-sandbox'])
                 page=browser.new_page(viewport={'width':1280,'height':980});errors=[];page.on('pageerror',lambda e:errors.append(str(e)))
                 def bounds():
-                    assert page.evaluate('document.documentElement.scrollWidth<=innerWidth+1')
-                    r=page.locator('.cc-tour').bounding_box();assert r['x']>=0 and r['y']>=0 and r['x']+r['width']<=page.viewport_size['width']+1 and r['y']+r['height']<=page.viewport_size['height']+1
-                    for selector in ['.cc-tour-skip','.cc-tour-next']:
-                        b=page.locator(selector).bounding_box();assert b['y']>=r['y'] and b['y']+b['height']<=r['y']+r['height']+1
+                    # One frame-local snapshot: locate() can reposition on rAF between
+                    # separate browser round trips. Compare simultaneous geometry.
+                    geometry=page.evaluate("""() => ({width:innerWidth,height:innerHeight,overflow:document.documentElement.scrollWidth,
+                        dialog:document.querySelector('.cc-tour').getBoundingClientRect().toJSON(),
+                        buttons:['.cc-tour-skip','.cc-tour-next'].map(s=>document.querySelector(s).getBoundingClientRect().toJSON())})""")
+                    assert geometry['overflow']<=geometry['width']+1
+                    r=geometry['dialog'];assert r['x']>=0 and r['y']>=0 and r['right']<=geometry['width']+1 and r['bottom']<=geometry['height']+1
+                    for b in geometry['buttons']:
+                        assert b['y']>=r['y'] and b['bottom']<=r['bottom']+1
                 page.goto(url);page.wait_for_selector('.cc-tour');bounds();assert page.locator('.cc-tour-label').text_content()=='Quick tour'
                 page.locator('.cc-tour-skip').click();assert page.evaluate('localStorage.getItem("cc_tour")')=='1'
                 page.reload();page.wait_for_selector('#q');assert page.locator('.cc-tour').count()==0
-                page.locator('#chatGuide').click();page.wait_for_selector('.cc-tour');page.locator('.cc-tour-next').click();assert 'Keep the conversation' in page.locator('.cc-tour h2').inner_text();page.locator('.cc-tour-back').click();page.keyboard.press('Escape');assert page.locator('.cc-tour').count()==0
+                page.locator('#chatGuide').click();page.wait_for_selector('.cc-tour');page.locator('.cc-tour-next').click();assert page.locator('.cc-tour h2').inner_text()=='Choose answer depth';page.locator('.cc-tour-back').click();page.keyboard.press('Escape');assert page.locator('.cc-tour').count()==0
                 page.goto(url+'/settings.html');page.wait_for_selector('#configGuide');page.wait_for_timeout(400);assert page.locator('.cc-tour').count()==0  # one auto-opening tour max: the chat tour only
                 page.locator('#configGuide').click();page.wait_for_selector('.cc-tour');bounds();assert page.locator('.cc-tour-label').text_content()=='Configuration guide'
                 initial=page.evaluate('localStorage.getItem("cc_cfg_mode_v2")');page.wait_for_timeout(450);page.screenshot(path='/tmp/tour-config-desktop.png')
-                assert page.locator('.cc-tour h2').inner_text()=='Start with Build with AI'
-                for i in range(4):
-                    assert page.locator('.cc-tour-count').inner_text()==f'{i+1} / 5';bounds()
+                assert page.locator('.cc-tour h2').inner_text()=='Describe your app'
+                for i in range(13):
+                    assert page.locator('.cc-tour-count').inner_text()==f'{i+1} / 13';bounds()
                     page.locator('.cc-tour-next').click()
                 assert page.locator('.cc-tour').count()==0;assert page.evaluate('localStorage.getItem("cc_cfg_mode_v2")')==initial
                 page.reload();page.wait_for_selector('#configGuide');page.wait_for_timeout(400);assert page.locator('.cc-tour').count()==0

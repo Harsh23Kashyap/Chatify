@@ -1,0 +1,10 @@
+CASE source_summary_runtime_quiet_motion_browser.cjs default PASS exit=0 seconds=11.4
+QUIETSOURCESUMMARY 320 reduce changedrow160cancelled samevaluerender noreplay stablefocus no source verification claim
+QUIETSOURCESUMMARY 320 none changedrow160cancelled samevaluerender noreplay stablefocus no source verification claim
+QUIETSOURCESUMMARY 320 calm changedrow160cancelled samevaluerender noreplay stablefocus no source verification claim
+QUIETSOURCESUMMARY 1280 reduce changedrow160cancelled samevaluerender noreplay stablefocus no source verification claim
+QUIETSOURCESUMMARY 1280 none changedrow160cancelled samevaluerender noreplay stablefocus no source verification claim
+QUIETSOURCESUMMARY 1280 calm changedrow160cancelled samevaluerender noreplay stablefocus no source verification claim
+PASS sourceconfiguration-summary actualsaveeventfeedback runtimeReduceNoneCalm6states3201280 localfixtureevent noSave/modelcalls
+
+{"executions": 1, "failed": 0, "passed": 1, "scripts": 1}
