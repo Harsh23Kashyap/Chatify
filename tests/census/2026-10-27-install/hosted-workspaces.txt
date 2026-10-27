@@ -1,0 +1,157 @@
+Current URL: https://chatify-demo-779c.onrender.com/chatify/settings.html#sec-workspace-list
+
+[viewport: showing the on-screen region (~68% down a 1426px page). Scroll then read again to see other regions, or use find to jump to any element anywhere on the page.]
+
+RootWebArea "Chatify configuration"
+  main
+    group
+      DisclosureTriangle "Loaded workspace: Chatify"
+        StaticText "Loaded workspace: Chatify"
+    radiogroup "Settings level"
+      radio "Simple" [ref=n157]
+        StaticText "Simple"
+      radio "Advanced" [ref=n158]
+        StaticText "Advanced"
+    StaticText "All settings and technical controls. Switching views keeps saved values."
+    button "Hide chat preview" [ref=n159]
+      StaticText "Hide chat preview"
+    region "Find settings or build an app"
+      LabelText
+        StaticText "Find a setting"
+      searchbox "Find a setting" [ref=n160]
+      button "Ask your selected AI model for settings help" [ref=n161]
+        StaticText "Ask AI"
+    tablist "Configuration groups"
+      tab "Workspace Your Nerd" [ref=n162]
+        StaticText "Workspace"
+        StaticText "Your Nerd"
+      tab "Answers Models & sources" [ref=n163]
+        StaticText "Answers"
+        StaticText "Models & sources"
+      tab "Appearance Theme & wording" [ref=n164]
+        StaticText "Appearance"
+        StaticText "Theme & wording"
+      tab "Maintenance Documents & limits" [ref=n165]
+        StaticText "Maintenance"
+        StaticText "Documents & limits"
+    navigation "Sections"
+      tabpanel
+        link "Setup" href="https://chatify-demo-779c.onrender.com/chatify/settings.html#sec-finish" [ref=n166]
+          StaticText "Setup"
+          StaticText "Setup checklist"
+        link "Load and share" href="https://chatify-demo-779c.onrender.com/chatify/settings.html#sec-portable" [ref=n167]
+          StaticText "Load and share"
+          StaticText "Import or export"
+        link "Imported workspaces" href="https://chatify-demo-779c.onrender.com/chatify/settings.html#sec-workspace-list" [ref=n168]
+          StaticText "Imported workspaces"
+          StaticText "Manage this workspace"
+        link "Changes" href="https://chatify-demo-779c.onrender.com/chatify/settings.html#sec-workspace-changes" [ref=n169]
+          StaticText "Changes"
+          StaticText "Manage this workspace"
+        link "Backup" href="https://chatify-demo-779c.onrender.com/chatify/settings.html#sec-workspace-backup" [ref=n170]
+          StaticText "Backup"
+          StaticText "Manage this workspace"
+        link "Test questions" href="https://chatify-demo-779c.onrender.com/chatify/settings.html#sec-workspace-tests" [ref=n171]
+          StaticText "Test questions"
+          StaticText "Manage this workspace"
+        link "Deploy plan" href="https://chatify-demo-779c.onrender.com/chatify/settings.html#sec-workspace-deploy" [ref=n172]
+          StaticText "Deploy plan"
+          StaticText "Manage this workspace"
+    StaticText "Workspace setup"
+    StaticText "One setup status page. Choose a group and a tab to edit one panel at a time."
+    paragraph
+      StaticText "Check setup and manage this local workspace. No live service is contacted unless you choose, review and confirm a check."
+    heading "Workspace"
+      StaticText "Workspace"
+    paragraph
+      StaticText "Current app stays open. Imported Nerds run separately. Stopped workspaces are kept on disk; reimport the original bundle to start a new reviewed copy."
+    paragraph
+      StaticText "Imported Python code is NOT sandboxed. It can access host files and the network. Review it before opening."
+    paragraph
+      StaticText "No imported workspaces yet. Load a Nerd from Portable app."
+    paragraph
+      StaticText "Python bounded mode is NOT a sandbox. Imported code can still access host files and the network. Review it first."
+    status
+    link "Open your chat" href="https://chatify-demo-779c.onrender.com/chatify/" [ref=n173]
+      StaticText "Open your chat"
+    status
+    complementary "Live preview"
+      StaticText "Live preview"
+      StaticText "Updates as you edit"
+      radiogroup "Preview as"
+        radio "Light" [ref=n174]
+          StaticText "Light"
+        radio "Dark" [ref=n175]
+          StaticText "Dark"
+      Iframe "Preview of the chat"
+      StaticText "Showing: Chat"
+      StaticText "Visual preview only. Sample answers; no model or source requests."
+
+Iframe [frame_id=D7C9D6EA7D7932ABB04D441F14D5FF16 parent_frame_id=49BC52DF9D04183256F3D8028D5E61DC origin=https://chatify-demo-779c.onrender.com depth=1]
+RootWebArea "Chatify"
+  link "Skip to question box" href="https://chatify-demo-779c.onrender.com/chatify/?preview=1#q" [ref=n176]
+    StaticText "Skip to question box"
+  main
+    sectionheader
+      button "Open chats" [ref=n177]
+        image
+      StaticText "Sample conversation"
+      button "Reading preferences" [ref=n178]
+        StaticText "Aa"
+      combobox "Answer depth: Standard" value="Standard" [ref=n179]
+        StaticText "Standard"
+      button "Previous question" [ref=n180]
+        image
+      button "Next question" [ref=n181]
+        image
+      button "Temporary chat" [ref=n182]
+        image
+      button "My profile" [ref=n183]
+        image
+      button "New conversation" [ref=n184]
+        image
+      button "Export chat" [ref=n185]
+        image
+    log "Conversation"
+      heading "Chatify"
+        StaticText "Chatify"
+      paragraph
+        StaticText "Ask questions, or build your own chat app with AI"
+      StaticText "How will answers look in this app?"
+      paragraph
+        StaticText "This is a sample answer with a source citation "
+        button "[1]" [ref=n186]
+          StaticText "[1]"
+        StaticText "⁠."
+      paragraph
+        StaticText "Adjust the appearance on the left to see it here. This preview does not contact your model or sources."
+      button "Copy" [ref=n187]
+        StaticText "Copy"
+      group
+        DisclosureTriangle "More"
+          StaticText "More"
+      StaticText "Sample chart: groups of documents"
+      image "Sample chart: groups of documents"
+      list
+        listitem
+          StaticText "Group A 46%"
+        listitem
+          StaticText "Group B 31%"
+        listitem
+          StaticText "Group C 23%"
+    button "Scroll to latest" [ref=n188]
+      image
+    sectionfooter
+      button "Add file" [ref=n189]
+        image
+      button "Dictate" [ref=n190]
+        image
+      textbox "Ask a question about your sources" [ref=n191]
+      group "Question tools"
+        button "More question tools" [ref=n192]
+          StaticText "•••"
+      StaticText "  "
+      StaticText "Not a substitute for professional advice."
+
+Iframe [frame_id=343D68460BED3EEAF9BBB03E725DB4ED parent_frame_id=49BC52DF9D04183256F3D8028D5E61DC origin=https://chatify-demo-779c.onrender.com depth=1]
+RootWebArea "Chatify"

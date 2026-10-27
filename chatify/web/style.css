@@ -1074,7 +1074,7 @@ pre.codeblock code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monosp
 }
 html.no-sr #toolsDictate{display:none}
 /* Keep phone actions visible on two rows instead of an unmarked horizontal scroller. */
-@media(max-width:760px){
+@media(max-width:860px){
  header.bar{height:auto;min-height:56px;flex-wrap:wrap;overflow:visible;padding:6px 8px;gap:4px}
  header.bar>.title{flex:1 1 40px;min-width:0}
  header.bar>.bar-r{display:contents}
