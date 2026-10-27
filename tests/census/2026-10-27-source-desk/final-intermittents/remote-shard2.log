@@ -1,0 +1,1065 @@
+2026-10-27T17:25:54.5106574Z Current runner version: '2.338.0'
+2026-10-27T17:25:54.5125919Z ##[group]Runner Image Provisioner
+2026-10-27T17:25:54.5126537Z Hosted Compute Agent
+2026-10-27T17:25:54.5126888Z Version: 20261021.618
+2026-10-27T17:25:54.5127362Z Commit: 21505ad2541d5be6135ed84fc33697146cf75b8e
+2026-10-27T17:25:54.5127805Z Build Date: 2026-10-21T00:45:21Z
+2026-10-27T17:25:54.5128242Z Worker ID: {b177a219-7f56-45a6-9d5b-75f01177e8d7}
+2026-10-27T17:25:54.5128680Z Region: centralus
+2026-10-27T17:25:54.5129030Z Cloud: Azure
+2026-10-27T17:25:54.5129402Z ##[endgroup]
+2026-10-27T17:25:54.5130592Z ##[group]Operating System
+2026-10-27T17:25:54.5131034Z Ubuntu
+2026-10-27T17:25:54.5131376Z 24.04.5
+2026-10-27T17:25:54.5131702Z LTS
+2026-10-27T17:25:54.5132088Z ##[endgroup]
+2026-10-27T17:25:54.5132435Z ##[group]Runner Image
+2026-10-27T17:25:54.5132801Z Image: ubuntu-24.04
+2026-10-27T17:25:54.5133203Z Version: 20261025.353.1
+2026-10-27T17:25:54.5134259Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20261025.353/images/ubuntu/Ubuntu2404-Readme.md
+2026-10-27T17:25:54.5135245Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20261025.353
+2026-10-27T17:25:54.5135807Z ##[endgroup]
+2026-10-27T17:25:54.5136542Z ##[group]GITHUB_TOKEN Permissions
+2026-10-27T17:25:54.5138008Z Contents: read
+2026-10-27T17:25:54.5138375Z Metadata: read
+2026-10-27T17:25:54.5138722Z ##[endgroup]
+2026-10-27T17:25:54.5140301Z Secret source: Actions
+2026-10-27T17:25:54.5140856Z Cache mode: write
+2026-10-27T17:25:54.5141388Z Prepare workflow directory
+2026-10-27T17:25:54.5458732Z Prepare all required actions
+2026-10-27T17:25:54.5494321Z Getting action download info
+2026-10-27T17:25:54.8019254Z Download action repository 'actions/checkout@v4' (SHA:11d5960a326750d5838078e36cf38b85af677262)
+2026-10-27T17:25:55.1526222Z Download action repository 'actions/setup-python@v5' (SHA:a26af69be951a213d495a4c3e4e4022e16d87065)
+2026-10-27T17:25:55.4079861Z Download action repository 'actions/setup-node@v4' (SHA:49933ea5288caeca8642d1e84afbd3f7d6820020)
+2026-10-27T17:25:55.8094992Z Complete job name: Offline browser shard 2 of 12
+2026-10-27T17:25:55.8792363Z ##[group]Run actions/checkout@v4
+2026-10-27T17:25:55.8792811Z with:
+2026-10-27T17:25:55.8793070Z   persist-credentials: false
+2026-10-27T17:25:55.8793361Z   repository: Harsh23Kashyap/Chatify
+2026-10-27T17:25:55.8795510Z   token: ***
+2026-10-27T17:25:55.8795742Z   ssh-strict: true
+2026-10-27T17:25:55.8795980Z   ssh-user: git
+2026-10-27T17:25:55.8796208Z   clean: true
+2026-10-27T17:25:55.8796456Z   sparse-checkout-cone-mode: true
+2026-10-27T17:25:55.8796738Z   fetch-depth: 1
+2026-10-27T17:25:55.8796974Z   fetch-tags: false
+2026-10-27T17:25:55.8797214Z   show-progress: true
+2026-10-27T17:25:55.8797660Z   lfs: false
+2026-10-27T17:25:55.8798039Z   submodules: false
+2026-10-27T17:25:55.8798391Z   set-safe-directory: true
+2026-10-27T17:25:55.8798811Z   allow-unsafe-pr-checkout: false
+2026-10-27T17:25:55.8799419Z ##[endgroup]
+2026-10-27T17:25:55.9562873Z Syncing repository: Harsh23Kashyap/Chatify
+2026-10-27T17:25:55.9564893Z ##[group]Getting Git version info
+2026-10-27T17:25:55.9565580Z Working directory is '/home/runner/work/Chatify/Chatify'
+2026-10-27T17:25:55.9566453Z [command]/usr/bin/git version
+2026-10-27T17:25:55.9716902Z git version 2.56.0
+2026-10-27T17:25:55.9730593Z ##[endgroup]
+2026-10-27T17:25:55.9750768Z Temporarily overriding HOME='/home/runner/work/_temp/6334bdbf-0e8d-49f1-827a-30ce3c1298c0' before making global git config changes
+2026-10-27T17:25:55.9758282Z Adding repository directory to the temporary git global config as a safe directory
+2026-10-27T17:25:55.9763285Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/Chatify/Chatify
+2026-10-27T17:25:55.9835479Z Deleting the contents of '/home/runner/work/Chatify/Chatify'
+2026-10-27T17:25:55.9840630Z ##[group]Initializing the repository
+2026-10-27T17:25:55.9845976Z [command]/usr/bin/git init /home/runner/work/Chatify/Chatify
+2026-10-27T17:25:56.1028617Z hint: Using 'master' as the name for the initial branch. This default branch name
+2026-10-27T17:25:56.1030054Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+2026-10-27T17:25:56.1030753Z hint: to use in all of your new repositories, which will suppress this warning,
+2026-10-27T17:25:56.1031346Z hint: call:
+2026-10-27T17:25:56.1031686Z hint:
+2026-10-27T17:25:56.1032144Z hint: 	git config --global init.defaultBranch <name>
+2026-10-27T17:25:56.1032601Z hint:
+2026-10-27T17:25:56.1033038Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+2026-10-27T17:25:56.1033666Z hint: 'development'. The just-created branch can be renamed via this command:
+2026-10-27T17:25:56.1034220Z hint:
+2026-10-27T17:25:56.1034582Z hint: 	git branch -m <name>
+2026-10-27T17:25:56.1034961Z hint:
+2026-10-27T17:25:56.1035428Z hint: Disable this message with "git config set advice.defaultBranchName false"
+2026-10-27T17:25:56.1036276Z Initialized empty Git repository in /home/runner/work/Chatify/Chatify/.git/
+2026-10-27T17:25:56.1046107Z [command]/usr/bin/git remote add origin https://github.com/Harsh23Kashyap/Chatify
+2026-10-27T17:25:56.1898797Z ##[endgroup]
+2026-10-27T17:25:56.1899828Z ##[group]Disabling automatic garbage collection
+2026-10-27T17:25:56.1902427Z [command]/usr/bin/git config --local gc.auto 0
+2026-10-27T17:25:56.2200359Z ##[endgroup]
+2026-10-27T17:25:56.2200876Z ##[group]Setting up auth
+2026-10-27T17:25:56.2205884Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-10-27T17:25:56.2252653Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-10-27T17:25:56.2614214Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-10-27T17:25:56.2657807Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-10-27T17:25:56.2886052Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-10-27T17:25:56.2929749Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-10-27T17:25:56.3145280Z [command]/usr/bin/git config --local http.https://github.com/.extraheader AUTHORIZATION: basic ***
+2026-10-27T17:25:56.3402405Z ##[endgroup]
+2026-10-27T17:25:56.3403240Z ##[group]Fetching the repository
+2026-10-27T17:25:56.3410124Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +7ad38ea28e0b3194bd2f76d253ba3b431237f60b:refs/remotes/origin/main
+2026-10-27T17:25:59.6603895Z From https://github.com/Harsh23Kashyap/Chatify
+2026-10-27T17:25:59.6604519Z  * [new ref]         7ad38ea28e0b3194bd2f76d253ba3b431237f60b -> origin/main
+2026-10-27T17:25:59.6606977Z ##[endgroup]
+2026-10-27T17:25:59.6607716Z ##[group]Determining the checkout info
+2026-10-27T17:25:59.6609186Z ##[endgroup]
+2026-10-27T17:25:59.6614362Z [command]/usr/bin/git sparse-checkout disable
+2026-10-27T17:25:59.6675082Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+2026-10-27T17:25:59.6713953Z ##[group]Checking out the ref
+2026-10-27T17:25:59.6718165Z [command]/usr/bin/git checkout --progress --force -B main refs/remotes/origin/main
+2026-10-27T17:25:59.9272657Z Switched to a new branch 'main'
+2026-10-27T17:25:59.9282117Z branch 'main' set up to track 'origin/main'.
+2026-10-27T17:25:59.9297392Z ##[endgroup]
+2026-10-27T17:25:59.9347069Z [command]/usr/bin/git log -1 --format=%H
+2026-10-27T17:25:59.9380933Z 7ad38ea28e0b3194bd2f76d253ba3b431237f60b
+2026-10-27T17:25:59.9389225Z ##[group]Removing auth
+2026-10-27T17:25:59.9392302Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-10-27T17:25:59.9430690Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-10-27T17:25:59.9640490Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-10-27T17:25:59.9676024Z http.https://github.com/.extraheader
+2026-10-27T17:25:59.9683208Z [command]/usr/bin/git config --local --unset-all http.https://github.com/.extraheader
+2026-10-27T17:25:59.9723119Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-10-27T17:25:59.9927148Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-10-27T17:25:59.9964494Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-10-27T17:26:00.0167948Z ##[endgroup]
+2026-10-27T17:26:00.0374029Z ##[group]Run actions/setup-python@v5
+2026-10-27T17:26:00.0439787Z with:
+2026-10-27T17:26:00.0440071Z   python-version: 3.12.15
+2026-10-27T17:26:00.0440262Z   check-latest: false
+2026-10-27T17:26:00.0442031Z   token: ***
+2026-10-27T17:26:00.0442381Z   update-environment: true
+2026-10-27T17:26:00.0442600Z   allow-prereleases: false
+2026-10-27T17:26:00.0442775Z   freethreaded: false
+2026-10-27T17:26:00.0442941Z ##[endgroup]
+2026-10-27T17:26:00.1419013Z ##[group]Installed versions
+2026-10-27T17:26:00.1453910Z (node:2148) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+2026-10-27T17:26:00.1454774Z (Use `node --trace-deprecation ...` to show where the warning was created)
+2026-10-27T17:26:00.1455245Z Successfully set up CPython (3.12.15)
+2026-10-27T17:26:00.1457148Z ##[endgroup]
+2026-10-27T17:26:00.1683187Z ##[group]Run actions/setup-node@v4
+2026-10-27T17:26:00.1683526Z with:
+2026-10-27T17:26:00.1683756Z   node-version: 22.23.3
+2026-10-27T17:26:00.1684009Z   always-auth: false
+2026-10-27T17:26:00.1684275Z   check-latest: false
+2026-10-27T17:26:00.1686562Z   token: ***
+2026-10-27T17:26:00.1686783Z env:
+2026-10-27T17:26:00.1687082Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.15/x64
+2026-10-27T17:26:00.1687730Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.15/x64/lib/pkgconfig
+2026-10-27T17:26:00.1688260Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.15/x64
+2026-10-27T17:26:00.1688667Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.15/x64
+2026-10-27T17:26:00.1689062Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.15/x64
+2026-10-27T17:26:00.1689717Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.15/x64/lib
+2026-10-27T17:26:00.1690149Z ##[endgroup]
+2026-10-27T17:26:00.2740933Z Attempting to download 22.23.3...
+2026-10-27T17:26:00.2817283Z (node:2156) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+2026-10-27T17:26:00.2817967Z (Use `node --trace-deprecation ...` to show where the warning was created)
+2026-10-27T17:26:01.0519400Z Acquiring 22.23.3 - x64 from https://github.com/actions/node-versions/releases/download/22.23.3-35947643734/node-22.23.3-linux-x64.tar.gz
+2026-10-27T17:26:01.5719041Z Extracting ...
+2026-10-27T17:26:01.5825407Z [command]/usr/bin/tar xz --strip 1 --warning=no-unknown-keyword --overwrite -C /home/runner/work/_temp/da4fa255-b68b-4f83-acc3-936caf2ef964 -f /home/runner/work/_temp/c34ef638-a90d-4bca-9161-baf2fd0df45a
+2026-10-27T17:26:02.5134435Z Adding to the cache ...
+2026-10-27T17:26:04.4489403Z ##[group]Environment details
+2026-10-27T17:26:04.6345265Z node: v22.23.3
+2026-10-27T17:26:04.6345662Z npm: 10.9.9
+2026-10-27T17:26:04.6345798Z yarn: 1.22.22
+2026-10-27T17:26:04.6346128Z ##[endgroup]
+2026-10-27T17:26:04.6520446Z ##[group]Run python -m pip install '.[documents]' playwright==1.56.0
+2026-10-27T17:26:04.6520801Z [36;1mpython -m pip install '.[documents]' playwright==1.56.0[0m
+2026-10-27T17:26:04.6521035Z [36;1mmkdir -p /tmp/cc-ui-tools[0m
+2026-10-27T17:26:04.6521196Z [36;1msudo mkdir -p /downloads[0m
+2026-10-27T17:26:04.6521537Z [36;1msudo chown "$(id -u):$(id -g)" /downloads[0m
+2026-10-27T17:26:04.6521833Z [36;1mnpm install --prefix /tmp/cc-ui-tools --no-audit --no-fund playwright-core@1.56.1 axe-core@4.14.0[0m
+2026-10-27T17:26:04.6522113Z [36;1msudo apt-get update -qq[0m
+2026-10-27T17:26:04.6522366Z [36;1msudo apt-get install -y xvfb xdotool imagemagick fonts-crosextra-caladea poppler-utils[0m
+2026-10-27T17:26:04.6547995Z shell: /usr/bin/bash -e {0}
+2026-10-27T17:26:04.6548146Z env:
+2026-10-27T17:26:04.6548303Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.15/x64
+2026-10-27T17:26:04.6548555Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.15/x64/lib/pkgconfig
+2026-10-27T17:26:04.6548833Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.15/x64
+2026-10-27T17:26:04.6549051Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.15/x64
+2026-10-27T17:26:04.6549263Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.15/x64
+2026-10-27T17:26:04.6549486Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.15/x64/lib
+2026-10-27T17:26:04.6549879Z ##[endgroup]
+2026-10-27T17:26:05.5541504Z Processing ./.
+2026-10-27T17:26:05.5550991Z   Installing build dependencies: started
+2026-10-27T17:26:06.1999851Z   Installing build dependencies: finished with status 'done'
+2026-10-27T17:26:06.2005029Z   Getting requirements to build wheel: started
+2026-10-27T17:26:06.6354978Z   Getting requirements to build wheel: finished with status 'done'
+2026-10-27T17:26:06.6363634Z   Preparing metadata (pyproject.toml): started
+2026-10-27T17:26:06.7988108Z   Preparing metadata (pyproject.toml): finished with status 'done'
+2026-10-27T17:26:06.9085517Z Collecting playwright==1.56.0
+2026-10-27T17:26:06.9737965Z   Downloading playwright-1.56.0-py3-none-manylinux1_x86_64.whl.metadata (3.5 kB)
+2026-10-27T17:26:07.0118074Z Collecting PyYAML<7,>=6.0.3 (from chatify-app==0.4.32)
+2026-10-27T17:26:07.0250643Z   Downloading pyyaml-6.0.3-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (2.4 kB)
+2026-10-27T17:26:07.0528066Z Collecting pypdf>=4 (from chatify-app==0.4.32)
+2026-10-27T17:26:07.0659713Z   Downloading pypdf-6.21.3-py3-none-any.whl.metadata (7.6 kB)
+2026-10-27T17:26:07.0921994Z Collecting fpdf2>=2.8 (from chatify-app==0.4.32)
+2026-10-27T17:26:07.1054546Z   Downloading fpdf2-2.8.9-py3-none-any.whl.metadata (88 kB)
+2026-10-27T17:26:07.2612774Z Collecting uharfbuzz>=0.39 (from chatify-app==0.4.32)
+2026-10-27T17:26:07.2744490Z   Downloading uharfbuzz-0.57.0-cp311-abi3-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (3.6 kB)
+2026-10-27T17:26:07.2976625Z Collecting pyee<14,>=13 (from playwright==1.56.0)
+2026-10-27T17:26:07.3106210Z   Downloading pyee-13.0.1-py3-none-any.whl.metadata (3.0 kB)
+2026-10-27T17:26:07.4081821Z Collecting greenlet<4.0.0,>=3.1.1 (from playwright==1.56.0)
+2026-10-27T17:26:07.4216039Z   Downloading greenlet-3.5.6-cp312-cp312-manylinux_2_24_x86_64.manylinux_2_28_x86_64.whl.metadata (3.8 kB)
+2026-10-27T17:26:07.4566072Z Collecting typing-extensions (from pyee<14,>=13->playwright==1.56.0)
+2026-10-27T17:26:07.4698545Z   Downloading typing_extensions-4.16.0-py3-none-any.whl.metadata (3.3 kB)
+2026-10-27T17:26:07.4919342Z Collecting defusedxml (from fpdf2>=2.8->chatify-app==0.4.32)
+2026-10-27T17:26:07.5048868Z   Downloading defusedxml-0.7.1-py2.py3-none-any.whl.metadata (32 kB)
+2026-10-27T17:26:07.6184505Z Collecting Pillow!=9.2.*,>=8.3.2 (from fpdf2>=2.8->chatify-app==0.4.32)
+2026-10-27T17:26:07.6318088Z   Downloading pillow-13.0.0-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl.metadata (9.1 kB)
+2026-10-27T17:26:07.7335102Z Collecting fonttools>=4.34.0 (from fpdf2>=2.8->chatify-app==0.4.32)
+2026-10-27T17:26:07.7483608Z   Downloading fonttools-4.68.0-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.whl.metadata (139 kB)
+2026-10-27T17:26:07.7828990Z Downloading playwright-1.56.0-py3-none-manylinux1_x86_64.whl (46.3 MB)
+2026-10-27T17:26:08.1535156Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 46.3/46.3 MB 128.4 MB/s  0:00:00
+2026-10-27T17:26:08.1668082Z Downloading greenlet-3.5.6-cp312-cp312-manylinux_2_24_x86_64.manylinux_2_28_x86_64.whl (621 kB)
+2026-10-27T17:26:08.1711604Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 621.4/621.4 kB 135.7 MB/s  0:00:00
+2026-10-27T17:26:08.1903277Z Downloading pyee-13.0.1-py3-none-any.whl (15 kB)
+2026-10-27T17:26:08.2053170Z Downloading pyyaml-6.0.3-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (807 kB)
+2026-10-27T17:26:08.2098851Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 807.9/807.9 kB 194.6 MB/s  0:00:00
+2026-10-27T17:26:08.2248238Z Downloading fpdf2-2.8.9-py3-none-any.whl (341 kB)
+2026-10-27T17:26:08.3799646Z Downloading fonttools-4.68.0-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.whl (5.4 MB)
+2026-10-27T17:26:08.7759321Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 5.4/5.4 MB 13.2 MB/s  0:00:00
+2026-10-27T17:26:08.7907595Z Downloading pillow-13.0.0-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl (7.1 MB)
+2026-10-27T17:26:08.9147151Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 7.1/7.1 MB 58.0 MB/s  0:00:00
+2026-10-27T17:26:08.9283192Z Downloading pypdf-6.21.3-py3-none-any.whl (409 kB)
+2026-10-27T17:26:08.9585396Z Downloading uharfbuzz-0.57.0-cp311-abi3-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (2.1 MB)
+2026-10-27T17:26:09.0238054Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 2.1/2.1 MB 29.8 MB/s  0:00:00
+2026-10-27T17:26:09.0371449Z Downloading defusedxml-0.7.1-py2.py3-none-any.whl (25 kB)
+2026-10-27T17:26:09.2359494Z Downloading typing_extensions-4.16.0-py3-none-any.whl (45 kB)
+2026-10-27T17:26:09.3417725Z Building wheels for collected packages: chatify-app
+2026-10-27T17:26:09.3423870Z   Building wheel for chatify-app (pyproject.toml): started
+2026-10-27T17:26:10.0623912Z   Building wheel for chatify-app (pyproject.toml): finished with status 'done'
+2026-10-27T17:26:10.0708730Z   Created wheel for chatify-app: filename=chatify_app-0.4.32-py3-none-any.whl size=15009775 sha256=46034f3162102e482f53a1e7ea2657dba6de8b8ca7ee3391d2435f438dac096e
+2026-10-27T17:26:10.0710206Z   Stored in directory: /tmp/pip-ephem-wheel-cache-54udb5ef/wheels/fa/4a/b7/11ab0cd7112da076720ed506d9de3dd0ead3355746a909ce1c
+2026-10-27T17:26:10.0732906Z Successfully built chatify-app
+2026-10-27T17:26:10.0995240Z Installing collected packages: uharfbuzz, typing-extensions, PyYAML, pypdf, Pillow, greenlet, fonttools, defusedxml, pyee, fpdf2, chatify-app, playwright
+2026-10-27T17:26:12.9117923Z 
+2026-10-27T17:26:12.9130500Z Successfully installed Pillow-13.0.0 PyYAML-6.0.3 chatify-app-0.4.32 defusedxml-0.7.1 fonttools-4.68.0 fpdf2-2.8.9 greenlet-3.5.6 playwright-1.56.0 pyee-13.0.1 pypdf-6.21.3 typing-extensions-4.16.0 uharfbuzz-0.57.0
+2026-10-27T17:26:14.2759774Z 
+2026-10-27T17:26:14.2760325Z added 2 packages in 1s
+2026-10-27T17:26:18.2915148Z Reading package lists...
+2026-10-27T17:26:18.5086558Z Building dependency tree...
+2026-10-27T17:26:18.5093321Z Reading state information...
+2026-10-27T17:26:18.6602362Z xvfb is already the newest version (2:21.1.12-1ubuntu1.9).
+2026-10-27T17:26:18.6603177Z The following additional packages will be installed:
+2026-10-27T17:26:18.6603885Z   fonts-droid-fallback fonts-noto-mono fonts-urw-base35 ghostscript
+2026-10-27T17:26:18.6604939Z   imagemagick-6.q16 libdjvulibre-text libdjvulibre21 libgs-common libgs10
+2026-10-27T17:26:18.6605785Z   libgs10-common libidn12 libijs-0.35 libimath-3-1-29t64 libjbig2dec0
+2026-10-27T17:26:18.6606577Z   libjxr-tools libjxr0t64 libmagickcore-6.q16-7-extra libnetpbm11t64
+2026-10-27T17:26:18.6607447Z   libopenexr-3-1-30 libpaper-utils libpaper1 libpoppler134 libwmflite-0.2-7
+2026-10-27T17:26:18.6615296Z   libxdo3 netpbm poppler-data xfonts-encodings xfonts-utils
+2026-10-27T17:26:18.6626930Z Suggested packages:
+2026-10-27T17:26:18.6627305Z   fonts-crosextra-carlito fonts-noto fonts-freefont-otf | fonts-freefont-ttf
+2026-10-27T17:26:18.6627640Z   fonts-texgyre texlive-binaries imagemagick-6-doc autotrace cups-bsd | lpr
+2026-10-27T17:26:18.6627956Z   | lprng enscript ffmpeg gimp gnuplot grads graphviz hp2xx html2ps libwmf-bin
+2026-10-27T17:26:18.6628416Z   mplayer povray radiance sane-utils texlive-base-bin transfig libraw-bin
+2026-10-27T17:26:18.6628734Z   inkscape fonts-japanese-mincho | fonts-ipafont-mincho fonts-japanese-gothic
+2026-10-27T17:26:18.6629078Z   | fonts-ipafont-gothic fonts-arphic-ukai fonts-arphic-uming fonts-nanum
+2026-10-27T17:26:18.6903127Z The following NEW packages will be installed:
+2026-10-27T17:26:18.6903698Z   fonts-crosextra-caladea fonts-droid-fallback fonts-noto-mono
+2026-10-27T17:26:18.6904323Z   fonts-urw-base35 ghostscript imagemagick imagemagick-6.q16 libdjvulibre-text
+2026-10-27T17:26:18.6904984Z   libdjvulibre21 libgs-common libgs10 libgs10-common libidn12 libijs-0.35
+2026-10-27T17:26:18.6905516Z   libimath-3-1-29t64 libjbig2dec0 libjxr-tools libjxr0t64
+2026-10-27T17:26:18.6906048Z   libmagickcore-6.q16-7-extra libnetpbm11t64 libopenexr-3-1-30 libpaper-utils
+2026-10-27T17:26:18.6912770Z   libpaper1 libpoppler134 libwmflite-0.2-7 libxdo3 netpbm poppler-data
+2026-10-27T17:26:18.6914681Z   poppler-utils xdotool xfonts-encodings xfonts-utils
+2026-10-27T17:26:18.7108079Z 0 upgraded, 32 newly installed, 0 to remove and 5 not upgraded.
+2026-10-27T17:26:18.7108513Z Need to get 26.8 MB of archives.
+2026-10-27T17:26:18.7108868Z After this operation, 90.4 MB of additional disk space will be used.
+2026-10-27T17:26:18.7109155Z Get:1 file:/etc/apt/apt-mirrors.txt Mirrorlist [144 B]
+2026-10-27T17:26:18.7627358Z Get:2 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 fonts-droid-fallback all 1:6.0.1r16-1.1build1 [1805 kB]
+2026-10-27T17:26:18.8085906Z Get:3 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 poppler-data all 0.4.12-1 [2060 kB]
+2026-10-27T17:26:18.8616036Z Get:4 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 fonts-crosextra-caladea all 20200211-2 [127 kB]
+2026-10-27T17:26:18.9016331Z Get:5 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 fonts-noto-mono all 20201225-2 [435 kB]
+2026-10-27T17:26:18.9397350Z Get:6 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 xfonts-encodings all 1:1.0.5-0ubuntu2 [578 kB]
+2026-10-27T17:26:18.9716793Z Get:7 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 xfonts-utils amd64 1:7.7+6build3 [94.4 kB]
+2026-10-27T17:26:19.0005578Z Get:8 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 fonts-urw-base35 all 20200910-8 [11.0 MB]
+2026-10-27T17:26:19.1209720Z Get:9 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 libgs-common all 10.02.1~dfsg1-0ubuntu7.10 [176 kB]
+2026-10-27T17:26:19.1496391Z Get:10 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 libgs10-common all 10.02.1~dfsg1-0ubuntu7.10 [488 kB]
+2026-10-27T17:26:19.1800380Z Get:11 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 libidn12 amd64 1.42-1ubuntu0.1 [56.1 kB]
+2026-10-27T17:26:19.2084954Z Get:12 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 libijs-0.35 amd64 0.35-15.1build1 [15.3 kB]
+2026-10-27T17:26:19.2442427Z Get:13 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 libjbig2dec0 amd64 0.20-1ubuntu0.24.04.1 [65.2 kB]
+2026-10-27T17:26:19.2821021Z Get:14 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 libpaper1 amd64 1.1.29build1 [13.4 kB]
+2026-10-27T17:26:19.3209999Z Get:15 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 libgs10 amd64 10.02.1~dfsg1-0ubuntu7.10 [3900 kB]
+2026-10-27T17:26:19.3964790Z Get:16 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 ghostscript amd64 10.02.1~dfsg1-0ubuntu7.10 [43.4 kB]
+2026-10-27T17:26:19.4325605Z Get:17 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 imagemagick-6.q16 amd64 8:6.9.12.98+dfsg1-5.2build2 [254 kB]
+2026-10-27T17:26:19.4690767Z Get:18 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 imagemagick amd64 8:6.9.12.98+dfsg1-5.2build2 [14.2 kB]
+2026-10-27T17:26:19.5082497Z Get:19 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 libdjvulibre-text all 3.5.28-2ubuntu0.24.04.2 [51.1 kB]
+2026-10-27T17:26:19.5920105Z Get:20 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 libdjvulibre21 amd64 3.5.28-2ubuntu0.24.04.2 [638 kB]
+2026-10-27T17:26:19.6345069Z Get:21 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 libimath-3-1-29t64 amd64 3.1.9-3.1ubuntu2 [72.2 kB]
+2026-10-27T17:26:19.6627320Z Get:22 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 libjxr0t64 amd64 1.2~git20170615.f752187-5.1ubuntu2 [181 kB]
+2026-10-27T17:26:19.6916045Z Get:23 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 libjxr-tools amd64 1.2~git20170615.f752187-5.1ubuntu2 [15.8 kB]
+2026-10-27T17:26:19.7198730Z Get:24 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 libopenexr-3-1-30 amd64 3.1.5-5.1build3 [1004 kB]
+2026-10-27T17:26:19.7523970Z Get:25 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 libwmflite-0.2-7 amd64 0.2.13-1.1build3 [68.6 kB]
+2026-10-27T17:26:19.7806764Z Get:26 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 libmagickcore-6.q16-7-extra amd64 8:6.9.12.98+dfsg1-5.2build2 [70.1 kB]
+2026-10-27T17:26:19.8087485Z Get:27 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 libnetpbm11t64 amd64 2:11.05.02-1.1build1 [114 kB]
+2026-10-27T17:26:19.8382423Z Get:28 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 libpaper-utils amd64 1.1.29build1 [8650 B]
+2026-10-27T17:26:19.8662278Z Get:29 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 libpoppler134 amd64 24.02.0-1ubuntu9.11 [1118 kB]
+2026-10-27T17:26:19.8992747Z Get:30 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 netpbm amd64 2:11.05.02-1.1build1 [2054 kB]
+2026-10-27T17:26:19.9372267Z Get:31 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 poppler-utils amd64 24.02.0-1ubuntu9.11 [212 kB]
+2026-10-27T17:26:19.9659087Z Get:32 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 libxdo3 amd64 1:3.20160805.1-5build1 [22.2 kB]
+2026-10-27T17:26:19.9939029Z Get:33 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 xdotool amd64 1:3.20160805.1-5build1 [42.6 kB]
+2026-10-27T17:26:20.2004792Z Preconfiguring packages ...
+2026-10-27T17:26:20.2624705Z Fetched 26.8 MB in 1s (20.7 MB/s)
+2026-10-27T17:26:20.2818378Z Selecting previously unselected package fonts-droid-fallback.
+2026-10-27T17:26:20.3079617Z (Reading database ... 
+2026-10-27T17:26:20.3079995Z (Reading database ... 5%
+2026-10-27T17:26:20.3080427Z (Reading database ... 10%
+2026-10-27T17:26:20.3080657Z (Reading database ... 15%
+2026-10-27T17:26:20.3080874Z (Reading database ... 20%
+2026-10-27T17:26:20.3081085Z (Reading database ... 25%
+2026-10-27T17:26:20.3081263Z (Reading database ... 30%
+2026-10-27T17:26:20.3081402Z (Reading database ... 35%
+2026-10-27T17:26:20.3081537Z (Reading database ... 40%
+2026-10-27T17:26:20.3081703Z (Reading database ... 45%
+2026-10-27T17:26:20.3081836Z (Reading database ... 50%
+2026-10-27T17:26:20.3118431Z (Reading database ... 55%
+2026-10-27T17:26:20.4847415Z (Reading database ... 60%
+2026-10-27T17:26:20.6355632Z (Reading database ... 65%
+2026-10-27T17:26:20.8414518Z (Reading database ... 70%
+2026-10-27T17:26:21.0413373Z (Reading database ... 75%
+2026-10-27T17:26:21.2374817Z (Reading database ... 80%
+2026-10-27T17:26:21.3776362Z (Reading database ... 85%
+2026-10-27T17:26:21.4930450Z (Reading database ... 90%
+2026-10-27T17:26:21.5914825Z (Reading database ... 95%
+2026-10-27T17:26:21.5915144Z (Reading database ... 100%
+2026-10-27T17:26:21.5915538Z (Reading database ... 215504 files and directories currently installed.)
+2026-10-27T17:26:21.5955412Z Preparing to unpack .../00-fonts-droid-fallback_1%3a6.0.1r16-1.1build1_all.deb ...
+2026-10-27T17:26:21.6142899Z Unpacking fonts-droid-fallback (1:6.0.1r16-1.1build1) ...
+2026-10-27T17:26:21.7490195Z Selecting previously unselected package poppler-data.
+2026-10-27T17:26:21.7675050Z Preparing to unpack .../01-poppler-data_0.4.12-1_all.deb ...
+2026-10-27T17:26:21.7685070Z Unpacking poppler-data (0.4.12-1) ...
+2026-10-27T17:26:21.9263109Z Selecting previously unselected package fonts-crosextra-caladea.
+2026-10-27T17:26:21.9377711Z Preparing to unpack .../02-fonts-crosextra-caladea_20200211-2_all.deb ...
+2026-10-27T17:26:21.9384053Z Unpacking fonts-crosextra-caladea (20200211-2) ...
+2026-10-27T17:26:21.9615261Z Selecting previously unselected package fonts-noto-mono.
+2026-10-27T17:26:21.9727467Z Preparing to unpack .../03-fonts-noto-mono_20201225-2_all.deb ...
+2026-10-27T17:26:21.9733762Z Unpacking fonts-noto-mono (20201225-2) ...
+2026-10-27T17:26:21.9992469Z Selecting previously unselected package xfonts-encodings.
+2026-10-27T17:26:22.0105233Z Preparing to unpack .../04-xfonts-encodings_1%3a1.0.5-0ubuntu2_all.deb ...
+2026-10-27T17:26:22.0180849Z Unpacking xfonts-encodings (1:1.0.5-0ubuntu2) ...
+2026-10-27T17:26:22.0442548Z Selecting previously unselected package xfonts-utils.
+2026-10-27T17:26:22.0555264Z Preparing to unpack .../05-xfonts-utils_1%3a7.7+6build3_amd64.deb ...
+2026-10-27T17:26:22.0562334Z Unpacking xfonts-utils (1:7.7+6build3) ...
+2026-10-27T17:26:22.0898458Z Selecting previously unselected package fonts-urw-base35.
+2026-10-27T17:26:22.1011545Z Preparing to unpack .../06-fonts-urw-base35_20200910-8_all.deb ...
+2026-10-27T17:26:22.1531170Z Unpacking fonts-urw-base35 (20200910-8) ...
+2026-10-27T17:26:22.2837308Z Selecting previously unselected package libgs-common.
+2026-10-27T17:26:22.2957634Z Preparing to unpack .../07-libgs-common_10.02.1~dfsg1-0ubuntu7.10_all.deb ...
+2026-10-27T17:26:22.2964283Z Unpacking libgs-common (10.02.1~dfsg1-0ubuntu7.10) ...
+2026-10-27T17:26:22.3203670Z Selecting previously unselected package libgs10-common.
+2026-10-27T17:26:22.3320123Z Preparing to unpack .../08-libgs10-common_10.02.1~dfsg1-0ubuntu7.10_all.deb ...
+2026-10-27T17:26:22.3325449Z Unpacking libgs10-common (10.02.1~dfsg1-0ubuntu7.10) ...
+2026-10-27T17:26:22.3809347Z Selecting previously unselected package libidn12:amd64.
+2026-10-27T17:26:22.3923436Z Preparing to unpack .../09-libidn12_1.42-1ubuntu0.1_amd64.deb ...
+2026-10-27T17:26:22.3936871Z Unpacking libidn12:amd64 (1.42-1ubuntu0.1) ...
+2026-10-27T17:26:22.4282837Z Selecting previously unselected package libijs-0.35:amd64.
+2026-10-27T17:26:22.4396466Z Preparing to unpack .../10-libijs-0.35_0.35-15.1build1_amd64.deb ...
+2026-10-27T17:26:22.4403931Z Unpacking libijs-0.35:amd64 (0.35-15.1build1) ...
+2026-10-27T17:26:22.4617093Z Selecting previously unselected package libjbig2dec0:amd64.
+2026-10-27T17:26:22.4727961Z Preparing to unpack .../11-libjbig2dec0_0.20-1ubuntu0.24.04.1_amd64.deb ...
+2026-10-27T17:26:22.4735124Z Unpacking libjbig2dec0:amd64 (0.20-1ubuntu0.24.04.1) ...
+2026-10-27T17:26:22.4954014Z Selecting previously unselected package libpaper1:amd64.
+2026-10-27T17:26:22.5063998Z Preparing to unpack .../12-libpaper1_1.1.29build1_amd64.deb ...
+2026-10-27T17:26:22.5071170Z Unpacking libpaper1:amd64 (1.1.29build1) ...
+2026-10-27T17:26:22.5328175Z Selecting previously unselected package libgs10:amd64.
+2026-10-27T17:26:22.5440208Z Preparing to unpack .../13-libgs10_10.02.1~dfsg1-0ubuntu7.10_amd64.deb ...
+2026-10-27T17:26:22.5445899Z Unpacking libgs10:amd64 (10.02.1~dfsg1-0ubuntu7.10) ...
+2026-10-27T17:26:22.7512014Z Selecting previously unselected package ghostscript.
+2026-10-27T17:26:22.7621904Z Preparing to unpack .../14-ghostscript_10.02.1~dfsg1-0ubuntu7.10_amd64.deb ...
+2026-10-27T17:26:22.7627420Z Unpacking ghostscript (10.02.1~dfsg1-0ubuntu7.10) ...
+2026-10-27T17:26:22.7915821Z Selecting previously unselected package imagemagick-6.q16.
+2026-10-27T17:26:22.8027131Z Preparing to unpack .../15-imagemagick-6.q16_8%3a6.9.12.98+dfsg1-5.2build2_amd64.deb ...
+2026-10-27T17:26:22.8033374Z Unpacking imagemagick-6.q16 (8:6.9.12.98+dfsg1-5.2build2) ...
+2026-10-27T17:26:25.0084722Z Selecting previously unselected package imagemagick.
+2026-10-27T17:26:25.0200101Z Preparing to unpack .../16-imagemagick_8%3a6.9.12.98+dfsg1-5.2build2_amd64.deb ...
+2026-10-27T17:26:25.0207691Z Unpacking imagemagick (8:6.9.12.98+dfsg1-5.2build2) ...
+2026-10-27T17:26:25.0407805Z Selecting previously unselected package libdjvulibre-text.
+2026-10-27T17:26:25.0521374Z Preparing to unpack .../17-libdjvulibre-text_3.5.28-2ubuntu0.24.04.2_all.deb ...
+2026-10-27T17:26:25.0527335Z Unpacking libdjvulibre-text (3.5.28-2ubuntu0.24.04.2) ...
+2026-10-27T17:26:25.0830880Z Selecting previously unselected package libdjvulibre21:amd64.
+2026-10-27T17:26:25.0944212Z Preparing to unpack .../18-libdjvulibre21_3.5.28-2ubuntu0.24.04.2_amd64.deb ...
+2026-10-27T17:26:25.0951339Z Unpacking libdjvulibre21:amd64 (3.5.28-2ubuntu0.24.04.2) ...
+2026-10-27T17:26:25.1221233Z Selecting previously unselected package libimath-3-1-29t64:amd64.
+2026-10-27T17:26:25.1334696Z Preparing to unpack .../19-libimath-3-1-29t64_3.1.9-3.1ubuntu2_amd64.deb ...
+2026-10-27T17:26:25.1342555Z Unpacking libimath-3-1-29t64:amd64 (3.1.9-3.1ubuntu2) ...
+2026-10-27T17:26:25.1570249Z Selecting previously unselected package libjxr0t64:amd64.
+2026-10-27T17:26:25.1683610Z Preparing to unpack .../20-libjxr0t64_1.2~git20170615.f752187-5.1ubuntu2_amd64.deb ...
+2026-10-27T17:26:25.1690828Z Unpacking libjxr0t64:amd64 (1.2~git20170615.f752187-5.1ubuntu2) ...
+2026-10-27T17:26:25.1909701Z Selecting previously unselected package libjxr-tools.
+2026-10-27T17:26:25.2021037Z Preparing to unpack .../21-libjxr-tools_1.2~git20170615.f752187-5.1ubuntu2_amd64.deb ...
+2026-10-27T17:26:25.2026765Z Unpacking libjxr-tools (1.2~git20170615.f752187-5.1ubuntu2) ...
+2026-10-27T17:26:25.2237937Z Selecting previously unselected package libopenexr-3-1-30:amd64.
+2026-10-27T17:26:25.2349111Z Preparing to unpack .../22-libopenexr-3-1-30_3.1.5-5.1build3_amd64.deb ...
+2026-10-27T17:26:25.2357413Z Unpacking libopenexr-3-1-30:amd64 (3.1.5-5.1build3) ...
+2026-10-27T17:26:25.2957096Z Selecting previously unselected package libwmflite-0.2-7:amd64.
+2026-10-27T17:26:25.3069066Z Preparing to unpack .../23-libwmflite-0.2-7_0.2.13-1.1build3_amd64.deb ...
+2026-10-27T17:26:25.3076237Z Unpacking libwmflite-0.2-7:amd64 (0.2.13-1.1build3) ...
+2026-10-27T17:26:25.3287482Z Selecting previously unselected package libmagickcore-6.q16-7-extra:amd64.
+2026-10-27T17:26:25.3401667Z Preparing to unpack .../24-libmagickcore-6.q16-7-extra_8%3a6.9.12.98+dfsg1-5.2build2_amd64.deb ...
+2026-10-27T17:26:25.3408433Z Unpacking libmagickcore-6.q16-7-extra:amd64 (8:6.9.12.98+dfsg1-5.2build2) ...
+2026-10-27T17:26:25.3650182Z Selecting previously unselected package libnetpbm11t64:amd64.
+2026-10-27T17:26:25.3762418Z Preparing to unpack .../25-libnetpbm11t64_2%3a11.05.02-1.1build1_amd64.deb ...
+2026-10-27T17:26:25.3768582Z Unpacking libnetpbm11t64:amd64 (2:11.05.02-1.1build1) ...
+2026-10-27T17:26:25.3982196Z Selecting previously unselected package libpaper-utils.
+2026-10-27T17:26:25.4094662Z Preparing to unpack .../26-libpaper-utils_1.1.29build1_amd64.deb ...
+2026-10-27T17:26:25.4101539Z Unpacking libpaper-utils (1.1.29build1) ...
+2026-10-27T17:26:25.4344053Z Selecting previously unselected package libpoppler134:amd64.
+2026-10-27T17:26:25.4456231Z Preparing to unpack .../27-libpoppler134_24.02.0-1ubuntu9.11_amd64.deb ...
+2026-10-27T17:26:25.4463551Z Unpacking libpoppler134:amd64 (24.02.0-1ubuntu9.11) ...
+2026-10-27T17:26:25.5163007Z Selecting previously unselected package netpbm.
+2026-10-27T17:26:25.5276336Z Preparing to unpack .../28-netpbm_2%3a11.05.02-1.1build1_amd64.deb ...
+2026-10-27T17:26:25.5282340Z Unpacking netpbm (2:11.05.02-1.1build1) ...
+2026-10-27T17:26:25.6991670Z Selecting previously unselected package poppler-utils.
+2026-10-27T17:26:25.7109436Z Preparing to unpack .../29-poppler-utils_24.02.0-1ubuntu9.11_amd64.deb ...
+2026-10-27T17:26:25.7116686Z Unpacking poppler-utils (24.02.0-1ubuntu9.11) ...
+2026-10-27T17:26:25.7380709Z Selecting previously unselected package libxdo3:amd64.
+2026-10-27T17:26:25.7495259Z Preparing to unpack .../30-libxdo3_1%3a3.20160805.1-5build1_amd64.deb ...
+2026-10-27T17:26:25.7507139Z Unpacking libxdo3:amd64 (1:3.20160805.1-5build1) ...
+2026-10-27T17:26:25.7717055Z Selecting previously unselected package xdotool.
+2026-10-27T17:26:25.7831064Z Preparing to unpack .../31-xdotool_1%3a3.20160805.1-5build1_amd64.deb ...
+2026-10-27T17:26:25.7837832Z Unpacking xdotool (1:3.20160805.1-5build1) ...
+2026-10-27T17:26:25.8317904Z Setting up libpaper1:amd64 (1.1.29build1) ...
+2026-10-27T17:26:25.9379500Z 
+2026-10-27T17:26:25.9380218Z Creating config file /etc/papersize with new version
+2026-10-27T17:26:25.9851097Z Setting up fonts-noto-mono (20201225-2) ...
+2026-10-27T17:26:25.9872455Z Setting up libwmflite-0.2-7:amd64 (0.2.13-1.1build3) ...
+2026-10-27T17:26:25.9891836Z Setting up libpoppler134:amd64 (24.02.0-1ubuntu9.11) ...
+2026-10-27T17:26:25.9907735Z Setting up libijs-0.35:amd64 (0.35-15.1build1) ...
+2026-10-27T17:26:25.9926044Z Setting up libgs-common (10.02.1~dfsg1-0ubuntu7.10) ...
+2026-10-27T17:26:25.9940286Z Setting up libpaper-utils (1.1.29build1) ...
+2026-10-27T17:26:25.9956176Z Setting up libnetpbm11t64:amd64 (2:11.05.02-1.1build1) ...
+2026-10-27T17:26:25.9972067Z Setting up poppler-data (0.4.12-1) ...
+2026-10-27T17:26:26.0061958Z Setting up libxdo3:amd64 (1:3.20160805.1-5build1) ...
+2026-10-27T17:26:26.0077709Z Setting up libjxr0t64:amd64 (1.2~git20170615.f752187-5.1ubuntu2) ...
+2026-10-27T17:26:26.0095814Z Setting up libjbig2dec0:amd64 (0.20-1ubuntu0.24.04.1) ...
+2026-10-27T17:26:26.0111411Z Setting up xfonts-encodings (1:1.0.5-0ubuntu2) ...
+2026-10-27T17:26:26.0126322Z Setting up libimath-3-1-29t64:amd64 (3.1.9-3.1ubuntu2) ...
+2026-10-27T17:26:26.0142386Z Setting up libidn12:amd64 (1.42-1ubuntu0.1) ...
+2026-10-27T17:26:26.0158380Z Setting up netpbm (2:11.05.02-1.1build1) ...
+2026-10-27T17:26:26.0173025Z Setting up imagemagick-6.q16 (8:6.9.12.98+dfsg1-5.2build2) ...
+2026-10-27T17:26:26.0231974Z update-alternatives: using /usr/bin/compare-im6.q16 to provide /usr/bin/compare (compare) in auto mode
+2026-10-27T17:26:26.0266728Z update-alternatives: using /usr/bin/compare-im6.q16 to provide /usr/bin/compare-im6 (compare-im6) in auto mode
+2026-10-27T17:26:26.0311339Z update-alternatives: using /usr/bin/animate-im6.q16 to provide /usr/bin/animate (animate) in auto mode
+2026-10-27T17:26:26.0345786Z update-alternatives: using /usr/bin/animate-im6.q16 to provide /usr/bin/animate-im6 (animate-im6) in auto mode
+2026-10-27T17:26:26.0390873Z update-alternatives: using /usr/bin/convert-im6.q16 to provide /usr/bin/convert (convert) in auto mode
+2026-10-27T17:26:26.0425065Z update-alternatives: using /usr/bin/convert-im6.q16 to provide /usr/bin/convert-im6 (convert-im6) in auto mode
+2026-10-27T17:26:26.0468816Z update-alternatives: using /usr/bin/composite-im6.q16 to provide /usr/bin/composite (composite) in auto mode
+2026-10-27T17:26:26.0503556Z update-alternatives: using /usr/bin/composite-im6.q16 to provide /usr/bin/composite-im6 (composite-im6) in auto mode
+2026-10-27T17:26:26.0546921Z update-alternatives: using /usr/bin/conjure-im6.q16 to provide /usr/bin/conjure (conjure) in auto mode
+2026-10-27T17:26:26.0581986Z update-alternatives: using /usr/bin/conjure-im6.q16 to provide /usr/bin/conjure-im6 (conjure-im6) in auto mode
+2026-10-27T17:26:26.0626656Z update-alternatives: using /usr/bin/import-im6.q16 to provide /usr/bin/import (import) in auto mode
+2026-10-27T17:26:26.0661107Z update-alternatives: using /usr/bin/import-im6.q16 to provide /usr/bin/import-im6 (import-im6) in auto mode
+2026-10-27T17:26:26.0704041Z update-alternatives: using /usr/bin/identify-im6.q16 to provide /usr/bin/identify (identify) in auto mode
+2026-10-27T17:26:26.0920936Z update-alternatives: using /usr/bin/identify-im6.q16 to provide /usr/bin/identify-im6 (identify-im6) in auto mode
+2026-10-27T17:26:26.0968909Z update-alternatives: using /usr/bin/stream-im6.q16 to provide /usr/bin/stream (stream) in auto mode
+2026-10-27T17:26:26.1005577Z update-alternatives: using /usr/bin/stream-im6.q16 to provide /usr/bin/stream-im6 (stream-im6) in auto mode
+2026-10-27T17:26:26.1051491Z update-alternatives: using /usr/bin/display-im6.q16 to provide /usr/bin/display (display) in auto mode
+2026-10-27T17:26:26.1087494Z update-alternatives: using /usr/bin/display-im6.q16 to provide /usr/bin/display-im6 (display-im6) in auto mode
+2026-10-27T17:26:26.1132390Z update-alternatives: using /usr/bin/montage-im6.q16 to provide /usr/bin/montage (montage) in auto mode
+2026-10-27T17:26:26.1167267Z update-alternatives: using /usr/bin/montage-im6.q16 to provide /usr/bin/montage-im6 (montage-im6) in auto mode
+2026-10-27T17:26:26.1213139Z update-alternatives: using /usr/bin/mogrify-im6.q16 to provide /usr/bin/mogrify (mogrify) in auto mode
+2026-10-27T17:26:26.1249325Z update-alternatives: using /usr/bin/mogrify-im6.q16 to provide /usr/bin/mogrify-im6 (mogrify-im6) in auto mode
+2026-10-27T17:26:26.1265724Z Setting up fonts-crosextra-caladea (20200211-2) ...
+2026-10-27T17:26:26.1283115Z Setting up fonts-droid-fallback (1:6.0.1r16-1.1build1) ...
+2026-10-27T17:26:26.1452485Z Setting up poppler-utils (24.02.0-1ubuntu9.11) ...
+2026-10-27T17:26:26.1467861Z Setting up libdjvulibre-text (3.5.28-2ubuntu0.24.04.2) ...
+2026-10-27T17:26:26.1483009Z Setting up libjxr-tools (1.2~git20170615.f752187-5.1ubuntu2) ...
+2026-10-27T17:26:26.1498724Z Setting up xdotool (1:3.20160805.1-5build1) ...
+2026-10-27T17:26:26.1513586Z Setting up libdjvulibre21:amd64 (3.5.28-2ubuntu0.24.04.2) ...
+2026-10-27T17:26:26.1528354Z Setting up xfonts-utils (1:7.7+6build3) ...
+2026-10-27T17:26:26.1565491Z Setting up libopenexr-3-1-30:amd64 (3.1.5-5.1build3) ...
+2026-10-27T17:26:26.1582831Z Setting up imagemagick (8:6.9.12.98+dfsg1-5.2build2) ...
+2026-10-27T17:26:26.1597754Z Setting up libmagickcore-6.q16-7-extra:amd64 (8:6.9.12.98+dfsg1-5.2build2) ...
+2026-10-27T17:26:26.1612947Z Setting up fonts-urw-base35 (20200910-8) ...
+2026-10-27T17:26:26.2672321Z Setting up libgs10-common (10.02.1~dfsg1-0ubuntu7.10) ...
+2026-10-27T17:26:26.2690930Z Setting up libgs10:amd64 (10.02.1~dfsg1-0ubuntu7.10) ...
+2026-10-27T17:26:26.2705989Z Setting up ghostscript (10.02.1~dfsg1-0ubuntu7.10) ...
+2026-10-27T17:26:26.2936679Z Processing triggers for fontconfig (2.15.0-1.1ubuntu2) ...
+2026-10-27T17:26:26.4190955Z Processing triggers for hicolor-icon-theme (0.17-2) ...
+2026-10-27T17:26:26.9824133Z Processing triggers for libc-bin (2.39-0ubuntu8.9) ...
+2026-10-27T17:26:27.4130489Z Processing triggers for man-db (2.12.0-4build2) ...
+2026-10-27T17:26:27.4342345Z Not building database; man-db/auto-update is not 'true'.
+2026-10-27T17:26:28.0981605Z 
+2026-10-27T17:26:28.0982238Z Running kernel seems to be up-to-date.
+2026-10-27T17:26:28.0982488Z 
+2026-10-27T17:26:28.0982598Z No services need to be restarted.
+2026-10-27T17:26:28.0982709Z 
+2026-10-27T17:26:28.0982807Z No containers need to be restarted.
+2026-10-27T17:26:28.0982922Z 
+2026-10-27T17:26:28.0983033Z No user sessions are running outdated binaries.
+2026-10-27T17:26:28.0983169Z 
+2026-10-27T17:26:28.0983347Z No VM guests are running outdated hypervisor (qemu) binaries on this host.
+2026-10-27T17:26:29.0150061Z ##[group]Run test -x /usr/bin/google-chrome
+2026-10-27T17:26:29.0150303Z [36;1mtest -x /usr/bin/google-chrome[0m
+2026-10-27T17:26:29.0150466Z [36;1m/usr/bin/google-chrome --version[0m
+2026-10-27T17:26:29.0150624Z [36;1mpython --version[0m
+2026-10-27T17:26:29.0150759Z [36;1mnode --version[0m
+2026-10-27T17:26:29.0150944Z [36;1mpython tests/ci/browser_suite.py --list --shard 2 --shards 12[0m
+2026-10-27T17:26:29.0168336Z shell: /usr/bin/bash -e {0}
+2026-10-27T17:26:29.0168470Z env:
+2026-10-27T17:26:29.0168638Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.15/x64
+2026-10-27T17:26:29.0168879Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.15/x64/lib/pkgconfig
+2026-10-27T17:26:29.0169114Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.15/x64
+2026-10-27T17:26:29.0169325Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.15/x64
+2026-10-27T17:26:29.0169684Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.15/x64
+2026-10-27T17:26:29.0169930Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.15/x64/lib
+2026-10-27T17:26:29.0170162Z   PLAYWRIGHT_MODULE: /tmp/cc-ui-tools/node_modules/playwright-core
+2026-10-27T17:26:29.0170359Z ##[endgroup]
+2026-10-27T17:26:30.6565017Z Google Chrome 156.0.8078.47 
+2026-10-27T17:26:30.6682527Z Python 3.12.15
+2026-10-27T17:26:30.6709446Z v22.23.3
+2026-10-27T17:26:30.7117819Z {
+2026-10-27T17:26:30.7118206Z   "total_scripts": 471,
+2026-10-27T17:26:30.7118453Z   "selected": [
+2026-10-27T17:26:30.7118705Z     "about_feature_geometry_browser.cjs",
+2026-10-27T17:26:30.7119740Z     "action_prepare_failure_focus_motion_browser.cjs",
+2026-10-27T17:26:30.7120081Z     "answer-delete-topic.cjs",
+2026-10-27T17:26:30.7120367Z     "appearance_autosave_feedback_browser.cjs",
+2026-10-27T17:26:30.7120640Z     "branch-review.cjs",
+2026-10-27T17:26:30.7120901Z     "builder_checklist_moved_focus_browser.cjs",
+2026-10-27T17:26:30.7121165Z     "builder_keep_current_removal_motion_browser.cjs",
+2026-10-27T17:26:30.7121399Z     "builder_remove_source_singleflight_browser.cjs",
+2026-10-27T17:26:30.7121616Z     "button_hover_transition_inventory_browser.cjs",
+2026-10-27T17:26:30.7121818Z     "chat_account_states_browser.cjs",
+2026-10-27T17:26:30.7121997Z     "chat_notification_states_browser.cjs",
+2026-10-27T17:26:30.7122179Z     "completion_boundaries_browser.cjs",
+2026-10-27T17:26:30.7122359Z     "config_organization_browser.cjs",
+2026-10-27T17:26:30.7122528Z     "dictation_states_browser.cjs",
+2026-10-27T17:26:30.7122738Z     "editor_preview_controls_hidden_motion_browser.cjs",
+2026-10-27T17:26:30.7122965Z     "font_real_bytes_delayed_swap_motion_browser.cjs",
+2026-10-27T17:26:30.7123168Z     "helper_cross_card_review_motion_browser.cjs",
+2026-10-27T17:26:30.7123356Z     "helper_sample_browser.cjs",
+2026-10-27T17:26:30.7123522Z     "history_empty_motion_browser.cjs",
+2026-10-27T17:26:30.7123716Z     "import_code_disclosure_motion_audit_browser.cjs",
+2026-10-27T17:26:30.7123908Z     "local_download_states_browser.cjs",
+2026-10-27T17:26:30.7124085Z     "mobile_a11y_builder_browser.cjs",
+2026-10-27T17:26:30.7124262Z     "model_documentation_rows_browser.cjs",
+2026-10-27T17:26:30.7124450Z     "newchat_press_motion_audit_browser.cjs",
+2026-10-27T17:26:30.7124630Z     "preset_states_browser.cjs",
+2026-10-27T17:26:30.7124799Z     "prompt_generation_states_browser.cjs",
+2026-10-27T17:26:30.7124983Z     "provider_four_state_motion_browser.cjs",
+2026-10-27T17:26:30.7125226Z     "reading_view_states_browser.cjs",
+2026-10-27T17:26:30.7125426Z     "save_guards_browser.cjs",
+2026-10-27T17:26:30.7125595Z     "settings_finder_clarity_browser.cjs",
+2026-10-27T17:26:30.7125804Z     "settings_native_browser_zoom_tab_order_browser.cjs",
+2026-10-27T17:26:30.7126011Z     "settings_title_inventory_browser.cjs",
+2026-10-27T17:26:30.7126210Z     "setup_workspace_consent_toggle_motion_browser.cjs",
+2026-10-27T17:26:30.7126430Z     "sidebar_timestamp_icon_alignment_browser.cjs",
+2026-10-27T17:26:30.7126632Z     "source_panel_runtime_quiet_browser.cjs",
+2026-10-27T17:26:30.7127029Z     "source_services_browser.cjs",
+2026-10-27T17:26:30.7127181Z     "stream-buttons.cjs",
+2026-10-27T17:26:30.7127318Z     "topic-temp.cjs",
+2026-10-27T17:26:30.7127473Z     "workspace_all_late_reviews_browser.cjs",
+2026-10-27T17:26:30.7127664Z     "workspace_review_confirm_harness.cjs"
+2026-10-27T17:26:30.7127821Z   ],
+2026-10-27T17:26:30.7127934Z   "excluded": {
+2026-10-27T17:26:30.7128303Z     "builder_keep_current_native_event_dispatch_diagnostic.cjs": "Instrumented diagnostic copy, not a regression verdict.",
+2026-10-27T17:26:30.7128828Z     "builder_keep_current_removal_motion_browser.diagnostic.cjs": "Instrumented diagnostic copy, not a regression verdict.",
+2026-10-27T17:26:30.7129359Z     "builder_keep_current_runtime_motion_browser.diagnostic.cjs": "Instrumented diagnostic copy, not a regression verdict.",
+2026-10-27T17:26:30.7130073Z     "builder_mark_reviewed_motion_browser.diagnostic.cjs": "Instrumented diagnostic copy, not a regression verdict.",
+2026-10-27T17:26:30.7130596Z     "builder_mounted_preview_current_server_diagnostic.cjs": "Instrumented diagnostic copy, not a regression verdict.",
+2026-10-27T17:26:30.7131133Z     "builder_whole_dashboard_fontstress_browser.diagnostic.cjs": "Instrumented diagnostic copy, not a regression verdict.",
+2026-10-27T17:26:30.7131687Z     "builder_whole_dashboard_status_motion_browser.diagnostic.cjs": "Instrumented diagnostic copy, not a regression verdict.",
+2026-10-27T17:26:30.7132191Z     "choice_quiet_event_order_diagnostic.cjs": "Instrumented diagnostic copy, not a regression verdict.",
+2026-10-27T17:26:30.7132866Z     "choice_runtime_quiet_motion_browser.diagnostic.cjs": "Instrumented diagnostic copy, not a regression verdict.",
+2026-10-27T17:26:30.7133314Z     "mark_completion_diagnostic.cjs": "Instrumented diagnostic copy, not a regression verdict.",
+2026-10-27T17:26:30.7133684Z     "nav_helpers.cjs": "Shared navigation library, exercised by importing cases.",
+2026-10-27T17:26:30.7134084Z     "runtime_active_cancel_diagnostic.cjs": "Instrumented diagnostic copy, not a regression verdict.",
+2026-10-27T17:26:30.7134512Z     "sidebar_secondary_labels_lifecycle_diagnostic.cjs": "Instrumented diagnostic copy, not a regression verdict."
+2026-10-27T17:26:30.7134788Z   }
+2026-10-27T17:26:30.7134895Z }
+2026-10-27T17:26:30.7217750Z ##[group]Run python tests/ci/browser_suite.py --shard 2 --shards 12
+2026-10-27T17:26:30.7218044Z [36;1mpython tests/ci/browser_suite.py --shard 2 --shards 12[0m
+2026-10-27T17:26:30.7235589Z shell: /usr/bin/bash -e {0}
+2026-10-27T17:26:30.7235740Z env:
+2026-10-27T17:26:30.7235918Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.15/x64
+2026-10-27T17:26:30.7236168Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.15/x64/lib/pkgconfig
+2026-10-27T17:26:30.7236408Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.15/x64
+2026-10-27T17:26:30.7236622Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.15/x64
+2026-10-27T17:26:30.7236840Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.15/x64
+2026-10-27T17:26:30.7237057Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.15/x64/lib
+2026-10-27T17:26:30.7237290Z   PLAYWRIGHT_MODULE: /tmp/cc-ui-tools/node_modules/playwright-core
+2026-10-27T17:26:30.7237491Z   PYTHONUNBUFFERED: 1
+2026-10-27T17:26:30.7237619Z ##[endgroup]
+2026-10-27T17:27:55.3820833Z CASE about_feature_geometry_browser.cjs default PASS exit=0 seconds=84.6
+2026-10-27T17:27:55.3825579Z {"width":320,"motion":"reduce","count":23,"heightSpread":2.109375,"ctaSpread":2.109375,"all":[{"h":539.25,"cta":476.25,"title":"Saved conversation","w":320},{"h":539.25,"cta":476.25,"title":"See the evidence","w":320},{"h":539.25,"cta":476.25,"title":"Bring your documents","w":320},{"h":539.25,"cta":476.25,"title":"Microphone input","w":320},{"h":539.25,"cta":476.25,"title":"AI app builder","w":320},{"h":539.25,"cta":476.25,"title":"Ask AI about settings","w":320},{"h":539.25,"cta":476.25,"title":"Find a setting","w":320},{"h":539.25,"cta":476.25,"title":"Temporary chat","w":320},{"h":539.25,"cta":476.25,"title":"Drop in a Nerd","w":320},{"h":541.359375,"cta":478.359375,"title":"Share an app ZIP","w":320},{"h":541.359375,"cta":478.359375,"title":"Choose a model","w":320},{"h":539.25,"cta":476.25,"title":"Presets and saved setups","w":320},{"h":539.25,"cta":476.25,"title":"Colors and themes","w":320},{"h":539.25,"cta":476.25,"title":"Fonts and reading","w":320},{"h":539.25,"cta":476.25,"title":"Motion and emoji","w":320},{"h":539.25,"cta":476.25,"title":"Layout playground","w":320},{"h":539.25,"cta":476.25,"title":"Configuration status","w":320},{"h":539.25,"cta":476.25,"title":"Prompt pipeline","w":320},{"h":539.25,"cta":476.25,"title":"Evidence connectors","w":320},{"h":539.25,"cta":476.25,"title":"Usage limits","w":320},{"h":539.25,"cta":476.25,"title":"Keep a useful answer","w":320},{"h":539.25,"cta":476.25,"title":"Workspace tools","w":320},{"h":539.25,"cta":476.25,"title":"Accounts and access","w":320}]}
+2026-10-27T17:27:55.3831200Z {"width":320,"motion":"no-preference","count":23,"heightSpread":2.109375,"ctaSpread":2.109375,"all":[{"h":539.25,"cta":476.25,"title":"Saved conversation","w":320},{"h":539.25,"cta":476.25,"title":"See the evidence","w":320},{"h":539.25,"cta":476.25,"title":"Bring your documents","w":320},{"h":539.25,"cta":476.25,"title":"Microphone input","w":320},{"h":539.25,"cta":476.25,"title":"AI app builder","w":320},{"h":539.25,"cta":476.25,"title":"Ask AI about settings","w":320},{"h":539.25,"cta":476.25,"title":"Find a setting","w":320},{"h":539.25,"cta":476.25,"title":"Temporary chat","w":320},{"h":539.25,"cta":476.25,"title":"Drop in a Nerd","w":320},{"h":541.359375,"cta":478.359375,"title":"Share an app ZIP","w":320},{"h":541.359375,"cta":478.359375,"title":"Choose a model","w":320},{"h":539.25,"cta":476.25,"title":"Presets and saved setups","w":320},{"h":539.25,"cta":476.25,"title":"Colors and themes","w":320},{"h":539.25,"cta":476.25,"title":"Fonts and reading","w":320},{"h":539.25,"cta":476.25,"title":"Motion and emoji","w":320},{"h":539.25,"cta":476.25,"title":"Layout playground","w":320},{"h":539.25,"cta":476.25,"title":"Configuration status","w":320},{"h":539.25,"cta":476.25,"title":"Prompt pipeline","w":320},{"h":539.25,"cta":476.25,"title":"Evidence connectors","w":320},{"h":539.25,"cta":476.25,"title":"Usage limits","w":320},{"h":539.25,"cta":476.25,"title":"Keep a useful answer","w":320},{"h":539.25,"cta":476.25,"title":"Workspace tools","w":320},{"h":539.25,"cta":476.25,"title":"Accounts and access","w":320}]}
+2026-10-27T17:27:55.3836662Z {"width":390,"motion":"reduce","count":23,"heightSpread":0,"ctaSpread":0,"all":[{"h":591.109375,"cta":528.109375,"title":"Saved conversation","w":390},{"h":591.109375,"cta":528.109375,"title":"See the evidence","w":390},{"h":591.109375,"cta":528.109375,"title":"Bring your documents","w":390},{"h":591.109375,"cta":528.109375,"title":"Microphone input","w":390},{"h":591.109375,"cta":528.109375,"title":"AI app builder","w":390},{"h":591.109375,"cta":528.109375,"title":"Ask AI about settings","w":390},{"h":591.109375,"cta":528.109375,"title":"Find a setting","w":390},{"h":591.109375,"cta":528.109375,"title":"Temporary chat","w":390},{"h":591.109375,"cta":528.109375,"title":"Drop in a Nerd","w":390},{"h":591.109375,"cta":528.109375,"title":"Share an app ZIP","w":390},{"h":591.109375,"cta":528.109375,"title":"Choose a model","w":390},{"h":591.109375,"cta":528.109375,"title":"Presets and saved setups","w":390},{"h":591.109375,"cta":528.109375,"title":"Colors and themes","w":390},{"h":591.109375,"cta":528.109375,"title":"Fonts and reading","w":390},{"h":591.109375,"cta":528.109375,"title":"Motion and emoji","w":390},{"h":591.109375,"cta":528.109375,"title":"Layout playground","w":390},{"h":591.109375,"cta":528.109375,"title":"Configuration status","w":390},{"h":591.109375,"cta":528.109375,"title":"Prompt pipeline","w":390},{"h":591.109375,"cta":528.109375,"title":"Evidence connectors","w":390},{"h":591.109375,"cta":528.109375,"title":"Usage limits","w":390},{"h":591.109375,"cta":528.109375,"title":"Keep a useful answer","w":390},{"h":591.109375,"cta":528.109375,"title":"Workspace tools","w":390},{"h":591.109375,"cta":528.109375,"title":"Accounts and access","w":390}]}
+2026-10-27T17:27:55.3846041Z {"width":390,"motion":"no-preference","count":23,"heightSpread":0,"ctaSpread":0,"all":[{"h":591.109375,"cta":528.109375,"title":"Saved conversation","w":390},{"h":591.109375,"cta":528.109375,"title":"See the evidence","w":390},{"h":591.109375,"cta":528.109375,"title":"Bring your documents","w":390},{"h":591.109375,"cta":528.109375,"title":"Microphone input","w":390},{"h":591.109375,"cta":528.109375,"title":"AI app builder","w":390},{"h":591.109375,"cta":528.109375,"title":"Ask AI about settings","w":390},{"h":591.109375,"cta":528.109375,"title":"Find a setting","w":390},{"h":591.109375,"cta":528.109375,"title":"Temporary chat","w":390},{"h":591.109375,"cta":528.109375,"title":"Drop in a Nerd","w":390},{"h":591.109375,"cta":528.109375,"title":"Share an app ZIP","w":390},{"h":591.109375,"cta":528.109375,"title":"Choose a model","w":390},{"h":591.109375,"cta":528.109375,"title":"Presets and saved setups","w":390},{"h":591.109375,"cta":528.109375,"title":"Colors and themes","w":390},{"h":591.109375,"cta":528.109375,"title":"Fonts and reading","w":390},{"h":591.109375,"cta":528.109375,"title":"Motion and emoji","w":390},{"h":591.109375,"cta":528.109375,"title":"Layout playground","w":390},{"h":591.109375,"cta":528.109375,"title":"Configuration status","w":390},{"h":591.109375,"cta":528.109375,"title":"Prompt pipeline","w":390},{"h":591.109375,"cta":528.109375,"title":"Evidence connectors","w":390},{"h":591.109375,"cta":528.109375,"title":"Usage limits","w":390},{"h":591.109375,"cta":528.109375,"title":"Keep a useful answer","w":390},{"h":591.109375,"cta":528.109375,"title":"Workspace tools","w":390},{"h":591.109375,"cta":528.109375,"title":"Accounts and access","w":390}]}
+2026-10-27T17:27:55.3852158Z {"width":620,"motion":"reduce","count":23,"heightSpread":0,"ctaSpread":0,"all":[{"h":604.4375,"cta":541.4375,"title":"Saved conversation","w":620},{"h":604.4375,"cta":541.4375,"title":"See the evidence","w":620},{"h":604.4375,"cta":541.4375,"title":"Bring your documents","w":620},{"h":604.4375,"cta":541.4375,"title":"Microphone input","w":620},{"h":604.4375,"cta":541.4375,"title":"AI app builder","w":620},{"h":604.4375,"cta":541.4375,"title":"Ask AI about settings","w":620},{"h":604.4375,"cta":541.4375,"title":"Find a setting","w":620},{"h":604.4375,"cta":541.4375,"title":"Temporary chat","w":620},{"h":604.4375,"cta":541.4375,"title":"Drop in a Nerd","w":620},{"h":604.4375,"cta":541.4375,"title":"Share an app ZIP","w":620},{"h":604.4375,"cta":541.4375,"title":"Choose a model","w":620},{"h":604.4375,"cta":541.4375,"title":"Presets and saved setups","w":620},{"h":604.4375,"cta":541.4375,"title":"Colors and themes","w":620},{"h":604.4375,"cta":541.4375,"title":"Fonts and reading","w":620},{"h":604.4375,"cta":541.4375,"title":"Motion and emoji","w":620},{"h":604.4375,"cta":541.4375,"title":"Layout playground","w":620},{"h":604.4375,"cta":541.4375,"title":"Configuration status","w":620},{"h":604.4375,"cta":541.4375,"title":"Prompt pipeline","w":620},{"h":604.4375,"cta":541.4375,"title":"Evidence connectors","w":620},{"h":604.4375,"cta":541.4375,"title":"Usage limits","w":620},{"h":604.4375,"cta":541.4375,"title":"Keep a useful answer","w":620},{"h":604.4375,"cta":541.4375,"title":"Workspace tools","w":620},{"h":604.4375,"cta":541.4375,"title":"Accounts and access","w":620}]}
+2026-10-27T17:27:55.3857567Z {"width":620,"motion":"no-preference","count":23,"heightSpread":0,"ctaSpread":0.0274658203125,"all":[{"h":604.4375,"cta":541.4649658203125,"title":"Saved conversation","w":620},{"h":604.4375,"cta":541.4375,"title":"See the evidence","w":620},{"h":604.4375,"cta":541.4375,"title":"Bring your documents","w":620},{"h":604.4375,"cta":541.4375,"title":"Microphone input","w":620},{"h":604.4375,"cta":541.4375,"title":"AI app builder","w":620},{"h":604.4375,"cta":541.4375,"title":"Ask AI about settings","w":620},{"h":604.4375,"cta":541.4375,"title":"Find a setting","w":620},{"h":604.4375,"cta":541.4375,"title":"Temporary chat","w":620},{"h":604.4375,"cta":541.4375,"title":"Drop in a Nerd","w":620},{"h":604.4375,"cta":541.4375,"title":"Share an app ZIP","w":620},{"h":604.4375,"cta":541.4375,"title":"Choose a model","w":620},{"h":604.4375,"cta":541.4375,"title":"Presets and saved setups","w":620},{"h":604.4375,"cta":541.4375,"title":"Colors and themes","w":620},{"h":604.4375,"cta":541.4375,"title":"Fonts and reading","w":620},{"h":604.4375,"cta":541.4375,"title":"Motion and emoji","w":620},{"h":604.4375,"cta":541.4375,"title":"Layout playground","w":620},{"h":604.4375,"cta":541.4375,"title":"Configuration status","w":620},{"h":604.4375,"cta":541.4375,"title":"Prompt pipeline","w":620},{"h":604.4375,"cta":541.4375,"title":"Evidence connectors","w":620},{"h":604.4375,"cta":541.4375,"title":"Usage limits","w":620},{"h":604.4375,"cta":541.4375,"title":"Keep a useful answer","w":620},{"h":604.4375,"cta":541.4375,"title":"Workspace tools","w":620},{"h":604.4375,"cta":541.4375,"title":"Accounts and access","w":620}]}
+2026-10-27T17:27:55.3862657Z {"width":768,"motion":"reduce","count":23,"heightSpread":6.3125,"ctaSpread":6.3125,"all":[{"h":354,"cta":283,"title":"Saved conversation","w":768},{"h":354,"cta":283,"title":"See the evidence","w":768},{"h":354,"cta":283,"title":"Bring your documents","w":768},{"h":354,"cta":283,"title":"Microphone input","w":768},{"h":354,"cta":283,"title":"AI app builder","w":768},{"h":354,"cta":283,"title":"Ask AI about settings","w":768},{"h":354,"cta":283,"title":"Find a setting","w":768},{"h":354,"cta":283,"title":"Temporary chat","w":768},{"h":354,"cta":283,"title":"Drop in a Nerd","w":768},{"h":360.3125,"cta":289.3125,"title":"Share an app ZIP","w":768},{"h":360.3125,"cta":289.3125,"title":"Choose a model","w":768},{"h":354,"cta":283,"title":"Presets and saved setups","w":768},{"h":354,"cta":283,"title":"Colors and themes","w":768},{"h":354,"cta":283,"title":"Fonts and reading","w":768},{"h":354,"cta":283,"title":"Motion and emoji","w":768},{"h":354,"cta":283,"title":"Layout playground","w":768},{"h":354,"cta":283,"title":"Configuration status","w":768},{"h":354,"cta":283,"title":"Prompt pipeline","w":768},{"h":354,"cta":283,"title":"Evidence connectors","w":768},{"h":354,"cta":283,"title":"Usage limits","w":768},{"h":354,"cta":283,"title":"Keep a useful answer","w":768},{"h":354,"cta":283,"title":"Workspace tools","w":768},{"h":354,"cta":283,"title":"Accounts and access","w":768}]}
+2026-10-27T17:27:55.3867412Z {"width":768,"motion":"no-preference","count":23,"heightSpread":6.3125,"ctaSpread":6.3125,"all":[{"h":354,"cta":283,"title":"Saved conversation","w":768},{"h":354,"cta":283,"title":"See the evidence","w":768},{"h":354,"cta":283,"title":"Bring your documents","w":768},{"h":354,"cta":283,"title":"Microphone input","w":768},{"h":354,"cta":283,"title":"AI app builder","w":768},{"h":354,"cta":283,"title":"Ask AI about settings","w":768},{"h":354,"cta":283,"title":"Find a setting","w":768},{"h":354,"cta":283,"title":"Temporary chat","w":768},{"h":354,"cta":283,"title":"Drop in a Nerd","w":768},{"h":360.3125,"cta":289.3125,"title":"Share an app ZIP","w":768},{"h":360.3125,"cta":289.3125,"title":"Choose a model","w":768},{"h":354,"cta":283,"title":"Presets and saved setups","w":768},{"h":354,"cta":283,"title":"Colors and themes","w":768},{"h":354,"cta":283,"title":"Fonts and reading","w":768},{"h":354,"cta":283,"title":"Motion and emoji","w":768},{"h":354,"cta":283,"title":"Layout playground","w":768},{"h":354,"cta":283,"title":"Configuration status","w":768},{"h":354,"cta":283,"title":"Prompt pipeline","w":768},{"h":354,"cta":283,"title":"Evidence connectors","w":768},{"h":354,"cta":283,"title":"Usage limits","w":768},{"h":354,"cta":283,"title":"Keep a useful answer","w":768},{"h":354,"cta":283,"title":"Workspace tools","w":768},{"h":354,"cta":283,"title":"Accounts and access","w":768}]}
+2026-10-27T17:27:55.3872983Z {"width":1280,"motion":"reduce","count":23,"heightSpread":0,"ctaSpread":0,"all":[{"h":376.484375,"cta":294.234375,"title":"Saved conversation","w":1280},{"h":376.484375,"cta":294.234375,"title":"See the evidence","w":1280},{"h":376.484375,"cta":294.234375,"title":"Bring your documents","w":1280},{"h":376.484375,"cta":294.234375,"title":"Microphone input","w":1280},{"h":376.484375,"cta":294.234375,"title":"AI app builder","w":1280},{"h":376.484375,"cta":294.234375,"title":"Ask AI about settings","w":1280},{"h":376.484375,"cta":294.234375,"title":"Find a setting","w":1280},{"h":376.484375,"cta":294.234375,"title":"Temporary chat","w":1280},{"h":376.484375,"cta":294.234375,"title":"Drop in a Nerd","w":1280},{"h":376.484375,"cta":294.234375,"title":"Share an app ZIP","w":1280},{"h":376.484375,"cta":294.234375,"title":"Choose a model","w":1280},{"h":376.484375,"cta":294.234375,"title":"Presets and saved setups","w":1280},{"h":376.484375,"cta":294.234375,"title":"Colors and themes","w":1280},{"h":376.484375,"cta":294.234375,"title":"Fonts and reading","w":1280},{"h":376.484375,"cta":294.234375,"title":"Motion and emoji","w":1280},{"h":376.484375,"cta":294.234375,"title":"Layout playground","w":1280},{"h":376.484375,"cta":294.234375,"title":"Configuration status","w":1280},{"h":376.484375,"cta":294.234375,"title":"Prompt pipeline","w":1280},{"h":376.484375,"cta":294.234375,"title":"Evidence connectors","w":1280},{"h":376.484375,"cta":294.234375,"title":"Usage limits","w":1280},{"h":376.484375,"cta":294.234375,"title":"Keep a useful answer","w":1280},{"h":376.484375,"cta":294.234375,"title":"Workspace tools","w":1280},{"h":376.484375,"cta":294.234375,"title":"Accounts and access","w":1280}]}
+2026-10-27T17:27:55.3879018Z {"width":1280,"motion":"no-preference","count":23,"heightSpread":0,"ctaSpread":0,"all":[{"h":376.484375,"cta":294.234375,"title":"Saved conversation","w":1280},{"h":376.484375,"cta":294.234375,"title":"See the evidence","w":1280},{"h":376.484375,"cta":294.234375,"title":"Bring your documents","w":1280},{"h":376.484375,"cta":294.234375,"title":"Microphone input","w":1280},{"h":376.484375,"cta":294.234375,"title":"AI app builder","w":1280},{"h":376.484375,"cta":294.234375,"title":"Ask AI about settings","w":1280},{"h":376.484375,"cta":294.234375,"title":"Find a setting","w":1280},{"h":376.484375,"cta":294.234375,"title":"Temporary chat","w":1280},{"h":376.484375,"cta":294.234375,"title":"Drop in a Nerd","w":1280},{"h":376.484375,"cta":294.234375,"title":"Share an app ZIP","w":1280},{"h":376.484375,"cta":294.234375,"title":"Choose a model","w":1280},{"h":376.484375,"cta":294.234375,"title":"Presets and saved setups","w":1280},{"h":376.484375,"cta":294.234375,"title":"Colors and themes","w":1280},{"h":376.484375,"cta":294.234375,"title":"Fonts and reading","w":1280},{"h":376.484375,"cta":294.234375,"title":"Motion and emoji","w":1280},{"h":376.484375,"cta":294.234375,"title":"Layout playground","w":1280},{"h":376.484375,"cta":294.234375,"title":"Configuration status","w":1280},{"h":376.484375,"cta":294.234375,"title":"Prompt pipeline","w":1280},{"h":376.484375,"cta":294.234375,"title":"Evidence connectors","w":1280},{"h":376.484375,"cta":294.234375,"title":"Usage limits","w":1280},{"h":376.484375,"cta":294.234375,"title":"Keep a useful answer","w":1280},{"h":376.484375,"cta":294.234375,"title":"Workspace tools","w":1280},{"h":376.484375,"cta":294.234375,"title":"Accounts and access","w":1280}]}
+2026-10-27T17:27:55.3882022Z PASS all feature geometry five widths both motion states + collapse restores visible selected tab
+2026-10-27T17:27:55.3882231Z 
+2026-10-27T17:28:05.7553311Z CASE action_prepare_failure_focus_motion_browser.cjs default PASS exit=0 seconds=10.4
+2026-10-27T17:28:05.7553884Z PASS prepare503 recovery focus preserved draft singleflight nativeEnter freshreview noexecute 3201280 normalReduce movedClose
+2026-10-27T17:28:05.7554176Z 
+2026-10-27T17:28:08.4894629Z CASE answer-delete-topic.cjs default PASS exit=0 seconds=2.7
+2026-10-27T17:28:08.4894893Z 
+2026-10-27T17:28:56.6001863Z CASE appearance_autosave_feedback_browser.cjs default PASS exit=0 seconds=48.1
+2026-10-27T17:28:56.6002634Z PASS sevenAppearanceautosavesections realfixturePOSTsuccess feedback160Reduceoff3201280
+2026-10-27T17:28:56.6003006Z 
+2026-10-27T17:28:59.3391700Z CASE branch-review.cjs default PASS exit=0 seconds=2.7
+2026-10-27T17:28:59.3392116Z 2 branch checks pass
+2026-10-27T17:28:59.3392247Z 
+2026-10-27T17:30:02.9772903Z CASE builder_checklist_moved_focus_browser.cjs default PASS exit=0 seconds=63.6
+2026-10-27T17:30:02.9773268Z REVIEWAXE 320 []
+2026-10-27T17:30:02.9773399Z REVIEWAXE 320 []
+2026-10-27T17:30:02.9773521Z REVIEWAXE 320 []
+2026-10-27T17:30:02.9773639Z REVIEWAXE 320 []
+2026-10-27T17:30:02.9773760Z REVIEWAXE 320 []
+2026-10-27T17:30:02.9773880Z REVIEWAXE 320 []
+2026-10-27T17:30:02.9774008Z REVIEWAXE 320 []
+2026-10-27T17:30:02.9774126Z REVIEWAXE 320 []
+2026-10-27T17:30:02.9774256Z REVIEWAXE 1280 []
+2026-10-27T17:30:02.9774383Z REVIEWAXE 1280 []
+2026-10-27T17:30:02.9774503Z REVIEWAXE 1280 []
+2026-10-27T17:30:02.9774623Z REVIEWAXE 1280 []
+2026-10-27T17:30:02.9774750Z REVIEWAXE 1280 []
+2026-10-27T17:30:02.9774871Z REVIEWAXE 1280 []
+2026-10-27T17:30:02.9774994Z REVIEWAXE 1280 []
+2026-10-27T17:30:02.9775115Z REVIEWAXE 1280 []
+2026-10-27T17:30:02.9775521Z PASS4buildermanualchecklist nativeSpacetwiceselectedstate/focusretained stablecheckboxnodes16motionmatrix3201280 noSave/modelcalls
+2026-10-27T17:30:02.9775831Z 
+2026-10-27T17:30:38.2300901Z CASE builder_keep_current_removal_motion_browser.cjs default PASS exit=0 seconds=35.2
+2026-10-27T17:30:38.2301628Z PASS Keepcurrent120opacityExit inertReview immediateinvalidatesreview heldparse singleflightdisablededitor nativeEnterfocusrestore3201280normalReduce noModelSavecalls
+2026-10-27T17:30:38.2302005Z 
+2026-10-27T17:30:48.8582346Z CASE builder_remove_source_singleflight_browser.cjs default PASS exit=0 seconds=10.6
+2026-10-27T17:30:48.8583479Z PASS proposedSourceRemove singleflight heldparse2sourcesonly1removed ccdialogEnterfocusRestore3201280normalReduce noModelSavecalls
+2026-10-27T17:30:48.8583782Z 
+2026-10-27T17:31:06.3410564Z CASE button_hover_transition_inventory_browser.cjs 320-no-preference PASS exit=0 seconds=17.5
+2026-10-27T17:31:06.3411363Z RELEASE 320 no-preference BUTTON|icon nav-toggle|navToggle navToggle
+2026-10-27T17:31:06.3411982Z RELEASE 320 no-preference BUTTON|theme-btn themeBtn
+2026-10-27T17:31:06.3412556Z RELEASE 320 no-preference BUTTON|icon menu|menu menu
+2026-10-27T17:31:06.3413543Z RELEASE 320 no-preference BUTTON|icon|readingBtn readingBtn
+2026-10-27T17:31:06.3414000Z RELEASE 320 no-preference BUTTON|cs-btn null
+2026-10-27T17:31:06.3414341Z RELEASE 320 no-preference BUTTON|icon|prevQ prevQ
+2026-10-27T17:31:06.3414746Z RELEASE 320 no-preference BUTTON|icon|nextQ nextQ
+2026-10-27T17:31:06.3415157Z RELEASE 320 no-preference BUTTON|icon|tempBtn tempBtn
+2026-10-27T17:31:06.3415559Z RELEASE 320 no-preference BUTTON|icon|profileBtn profileBtn
+2026-10-27T17:31:06.3415845Z RELEASE 320 no-preference BUTTON|icon|newTopic newTopic
+2026-10-27T17:31:06.3416124Z RELEASE 320 no-preference BUTTON|icon|exportChat exportChat
+2026-10-27T17:31:06.3416399Z RELEASE 320 no-preference BUTTON|icon|upload upload
+2026-10-27T17:31:06.3416688Z RELEASE 320 no-preference BUTTON|icon|mic mic
+2026-10-27T17:31:06.3416951Z RELEASE 320 no-preference BUTTON|chip toolsToggle
+2026-10-27T17:31:06.3417319Z RELEASE 320 no-preference BUTTON|cc-guide-replay aboutGuide
+2026-10-27T17:31:06.3417688Z RELEASE 320 no-preference BUTTON| feature-tab-chat
+2026-10-27T17:31:06.3417994Z RELEASE 320 no-preference BUTTON|feature-added feature-tab-search
+2026-10-27T17:31:06.3418254Z RELEASE 320 no-preference SUMMARY| null
+2026-10-27T17:31:06.3418476Z RELEASE 320 no-preference BUTTON|go ghost null
+2026-10-27T17:31:06.3418726Z RELEASE 320 no-preference BUTTON|go green null
+2026-10-27T17:31:06.3418980Z RELEASE 320 no-preference BUTTON|info-tip null
+2026-10-27T17:31:06.3419283Z RELEASE 320 no-preference BUTTON|chipmore null
+2026-10-27T17:31:06.3419824Z RELEASE 320 no-preference BUTTON|go blue big apply
+2026-10-27T17:31:06.3420116Z RELEASE 320 no-preference BUTTON|editor-choice null
+2026-10-27T17:31:06.3420351Z RELEASE 320 no-preference BUTTON|go blue null
+2026-10-27T17:31:06.3420611Z RELEASE 320 no-preference BUTTON|go ghost helper-detect null
+2026-10-27T17:31:06.3420906Z RELEASE 320 no-preference BUTTON|go ghost helper-copy null
+2026-10-27T17:31:06.3421184Z RELEASE 320 no-preference BUTTON|preset null
+2026-10-27T17:31:06.3421478Z RELEASE 320 no-preference BUTTON|preset more null
+2026-10-27T17:31:06.3421799Z RELEASE 320 no-preference BUTTON|emoji-tile f-emoji_bot
+2026-10-27T17:31:06.3422109Z RELEASE 320 no-preference BUTTON|mini null
+2026-10-27T17:31:06.3422381Z RELEASE 320 no-preference BUTTON|settings-help-open null
+2026-10-27T17:31:06.3422717Z PASS hovercomputedinventory 32 no mutations; requested matrix 320 no-preference
+2026-10-27T17:31:06.3422931Z 
+2026-10-27T17:31:22.5674563Z CASE button_hover_transition_inventory_browser.cjs 320-reduce PASS exit=0 seconds=16.2
+2026-10-27T17:31:22.5675196Z RELEASE 320 reduce BUTTON|icon nav-toggle|navToggle navToggle
+2026-10-27T17:31:22.5675585Z RELEASE 320 reduce BUTTON|theme-btn themeBtn
+2026-10-27T17:31:22.5675913Z RELEASE 320 reduce BUTTON|icon menu|menu menu
+2026-10-27T17:31:22.5676247Z RELEASE 320 reduce BUTTON|icon|readingBtn readingBtn
+2026-10-27T17:31:22.5676521Z RELEASE 320 reduce BUTTON|cs-btn null
+2026-10-27T17:31:22.5676720Z RELEASE 320 reduce BUTTON|icon|prevQ prevQ
+2026-10-27T17:31:22.5676921Z RELEASE 320 reduce BUTTON|icon|nextQ nextQ
+2026-10-27T17:31:22.5677162Z RELEASE 320 reduce BUTTON|icon|tempBtn tempBtn
+2026-10-27T17:31:22.5677541Z RELEASE 320 reduce BUTTON|icon|profileBtn profileBtn
+2026-10-27T17:31:22.5677888Z RELEASE 320 reduce BUTTON|icon|newTopic newTopic
+2026-10-27T17:31:22.5678221Z RELEASE 320 reduce BUTTON|icon|exportChat exportChat
+2026-10-27T17:31:22.5678784Z RELEASE 320 reduce BUTTON|icon|upload upload
+2026-10-27T17:31:22.5678975Z RELEASE 320 reduce BUTTON|icon|mic mic
+2026-10-27T17:31:22.5679257Z RELEASE 320 reduce BUTTON|chip toolsToggle
+2026-10-27T17:31:22.5679503Z RELEASE 320 reduce BUTTON|cc-guide-replay aboutGuide
+2026-10-27T17:31:22.5679943Z RELEASE 320 reduce BUTTON| feature-tab-chat
+2026-10-27T17:31:22.5680260Z RELEASE 320 reduce BUTTON|feature-added feature-tab-search
+2026-10-27T17:31:22.5680505Z RELEASE 320 reduce SUMMARY| null
+2026-10-27T17:31:22.5680680Z RELEASE 320 reduce BUTTON|go ghost null
+2026-10-27T17:31:22.5680867Z RELEASE 320 reduce BUTTON|go green null
+2026-10-27T17:31:22.5683092Z RELEASE 320 reduce BUTTON|info-tip null
+2026-10-27T17:31:22.5683507Z RELEASE 320 reduce BUTTON|chipmore null
+2026-10-27T17:31:22.5683739Z RELEASE 320 reduce BUTTON|go blue big apply
+2026-10-27T17:31:22.5683942Z RELEASE 320 reduce BUTTON|editor-choice null
+2026-10-27T17:31:22.5684134Z RELEASE 320 reduce BUTTON|go blue null
+2026-10-27T17:31:22.5684363Z RELEASE 320 reduce BUTTON|go ghost helper-detect null
+2026-10-27T17:31:22.5684635Z RELEASE 320 reduce BUTTON|go ghost helper-copy null
+2026-10-27T17:31:22.5684909Z RELEASE 320 reduce BUTTON|preset null
+2026-10-27T17:31:22.5685097Z RELEASE 320 reduce BUTTON|preset more null
+2026-10-27T17:31:22.5685301Z RELEASE 320 reduce BUTTON|emoji-tile f-emoji_bot
+2026-10-27T17:31:22.5685503Z RELEASE 320 reduce BUTTON|mini null
+2026-10-27T17:31:22.5685749Z RELEASE 320 reduce BUTTON|settings-help-open null
+2026-10-27T17:31:22.5686189Z PASS hovercomputedinventory 32 no mutations; requested matrix 320 reduce
+2026-10-27T17:31:22.5686464Z 
+2026-10-27T17:31:40.5528784Z CASE button_hover_transition_inventory_browser.cjs 1280-no-preference PASS exit=0 seconds=18.0
+2026-10-27T17:31:40.5529367Z RELEASE 1280 no-preference BUTTON|cc-guide-replay chatGuide
+2026-10-27T17:31:40.5529904Z RELEASE 1280 no-preference BUTTON|theme-btn themeBtn
+2026-10-27T17:31:40.5530293Z RELEASE 1280 no-preference BUTTON|btn-dark newChat
+2026-10-27T17:31:40.5530678Z RELEASE 1280 no-preference BUTTON|btn-out tempPill
+2026-10-27T17:31:40.5531072Z RELEASE 1280 no-preference BUTTON|tab on history-chats
+2026-10-27T17:31:40.5531504Z RELEASE 1280 no-preference BUTTON|tab history-topics
+2026-10-27T17:31:40.5531928Z RELEASE 1280 no-preference BUTTON|icon menu|menu menu
+2026-10-27T17:31:40.5532370Z RELEASE 1280 no-preference BUTTON|icon|readingBtn readingBtn
+2026-10-27T17:31:40.5532795Z RELEASE 1280 no-preference BUTTON|cs-btn null
+2026-10-27T17:31:40.5533150Z RELEASE 1280 no-preference BUTTON|icon|prevQ prevQ
+2026-10-27T17:31:40.5533511Z RELEASE 1280 no-preference BUTTON|icon|nextQ nextQ
+2026-10-27T17:31:40.5533900Z RELEASE 1280 no-preference BUTTON|icon|tempBtn tempBtn
+2026-10-27T17:31:40.5534262Z RELEASE 1280 no-preference BUTTON|icon|profileBtn profileBtn
+2026-10-27T17:31:40.5534521Z RELEASE 1280 no-preference BUTTON|icon|exportChat exportChat
+2026-10-27T17:31:40.5534760Z RELEASE 1280 no-preference BUTTON|icon|upload upload
+2026-10-27T17:31:40.5534978Z RELEASE 1280 no-preference BUTTON|icon|mic mic
+2026-10-27T17:31:40.5535189Z RELEASE 1280 no-preference BUTTON|chip scopeBtn
+2026-10-27T17:31:40.5535415Z RELEASE 1280 no-preference BUTTON| feature-tab-chat
+2026-10-27T17:31:40.5535672Z RELEASE 1280 no-preference BUTTON|feature-added feature-tab-search
+2026-10-27T17:31:40.5535903Z RELEASE 1280 no-preference SUMMARY| null
+2026-10-27T17:31:40.5536106Z RELEASE 1280 no-preference BUTTON|go ghost null
+2026-10-27T17:31:40.5536312Z RELEASE 1280 no-preference BUTTON|go green null
+2026-10-27T17:31:40.5536525Z RELEASE 1280 no-preference BUTTON|info-tip null
+2026-10-27T17:31:40.5536742Z RELEASE 1280 no-preference BUTTON|chipmore null
+2026-10-27T17:31:40.5536955Z RELEASE 1280 no-preference BUTTON|go blue big apply
+2026-10-27T17:31:40.5537176Z RELEASE 1280 no-preference BUTTON|editor-choice null
+2026-10-27T17:31:40.5537386Z RELEASE 1280 no-preference BUTTON|go blue null
+2026-10-27T17:31:40.5537623Z RELEASE 1280 no-preference BUTTON|go ghost helper-detect null
+2026-10-27T17:31:40.5538193Z RELEASE 1280 no-preference BUTTON|go ghost helper-copy null
+2026-10-27T17:31:40.5538419Z RELEASE 1280 no-preference BUTTON|preset null
+2026-10-27T17:31:40.5538627Z RELEASE 1280 no-preference BUTTON|preset more null
+2026-10-27T17:31:40.5538859Z RELEASE 1280 no-preference BUTTON|emoji-tile f-emoji_bot
+2026-10-27T17:31:40.5539086Z RELEASE 1280 no-preference BUTTON|mini null
+2026-10-27T17:31:40.5539326Z RELEASE 1280 no-preference BUTTON|settings-help-open null
+2026-10-27T17:31:40.5539822Z PASS hovercomputedinventory 34 no mutations; requested matrix 1280 no-preference
+2026-10-27T17:31:40.5540007Z 
+2026-10-27T17:31:57.2371338Z CASE button_hover_transition_inventory_browser.cjs 1280-reduce PASS exit=0 seconds=16.7
+2026-10-27T17:31:57.2371945Z RELEASE 1280 reduce BUTTON|cc-guide-replay chatGuide
+2026-10-27T17:31:57.2372322Z RELEASE 1280 reduce BUTTON|theme-btn themeBtn
+2026-10-27T17:31:57.2372685Z RELEASE 1280 reduce BUTTON|btn-dark newChat
+2026-10-27T17:31:57.2373041Z RELEASE 1280 reduce BUTTON|btn-out tempPill
+2026-10-27T17:31:57.2373420Z RELEASE 1280 reduce BUTTON|tab on history-chats
+2026-10-27T17:31:57.2373782Z RELEASE 1280 reduce BUTTON|tab history-topics
+2026-10-27T17:31:57.2374144Z RELEASE 1280 reduce BUTTON|icon menu|menu menu
+2026-10-27T17:31:57.2374529Z RELEASE 1280 reduce BUTTON|icon|readingBtn readingBtn
+2026-10-27T17:31:57.2374871Z RELEASE 1280 reduce BUTTON|cs-btn null
+2026-10-27T17:31:57.2375214Z RELEASE 1280 reduce BUTTON|icon|prevQ prevQ
+2026-10-27T17:31:57.2375555Z RELEASE 1280 reduce BUTTON|icon|nextQ nextQ
+2026-10-27T17:31:57.2375919Z RELEASE 1280 reduce BUTTON|icon|tempBtn tempBtn
+2026-10-27T17:31:57.2376296Z RELEASE 1280 reduce BUTTON|icon|profileBtn profileBtn
+2026-10-27T17:31:57.2376681Z RELEASE 1280 reduce BUTTON|icon|exportChat exportChat
+2026-10-27T17:31:57.2377009Z RELEASE 1280 reduce BUTTON|icon|upload upload
+2026-10-27T17:31:57.2377200Z RELEASE 1280 reduce BUTTON|icon|mic mic
+2026-10-27T17:31:57.2377384Z RELEASE 1280 reduce BUTTON|chip scopeBtn
+2026-10-27T17:31:57.2377583Z RELEASE 1280 reduce BUTTON| feature-tab-chat
+2026-10-27T17:31:57.2377842Z RELEASE 1280 reduce BUTTON|feature-added feature-tab-search
+2026-10-27T17:31:57.2378064Z RELEASE 1280 reduce SUMMARY| null
+2026-10-27T17:31:57.2378244Z RELEASE 1280 reduce BUTTON|go ghost null
+2026-10-27T17:31:57.2378428Z RELEASE 1280 reduce BUTTON|go green null
+2026-10-27T17:31:57.2378606Z RELEASE 1280 reduce BUTTON|info-tip null
+2026-10-27T17:31:57.2378788Z RELEASE 1280 reduce BUTTON|chipmore null
+2026-10-27T17:31:57.2378975Z RELEASE 1280 reduce BUTTON|go blue big apply
+2026-10-27T17:31:57.2379183Z RELEASE 1280 reduce BUTTON|editor-choice null
+2026-10-27T17:31:57.2379378Z RELEASE 1280 reduce BUTTON|go blue null
+2026-10-27T17:31:57.2379760Z RELEASE 1280 reduce BUTTON|go ghost helper-detect null
+2026-10-27T17:31:57.2380004Z RELEASE 1280 reduce BUTTON|go ghost helper-copy null
+2026-10-27T17:31:57.2380207Z RELEASE 1280 reduce BUTTON|preset null
+2026-10-27T17:31:57.2380398Z RELEASE 1280 reduce BUTTON|preset more null
+2026-10-27T17:31:57.2380600Z RELEASE 1280 reduce BUTTON|emoji-tile f-emoji_bot
+2026-10-27T17:31:57.2380793Z RELEASE 1280 reduce BUTTON|mini null
+2026-10-27T17:31:57.2380991Z RELEASE 1280 reduce BUTTON|settings-help-open null
+2026-10-27T17:31:57.2381267Z PASS hovercomputedinventory 34 no mutations; requested matrix 1280 reduce
+2026-10-27T17:31:57.2381437Z 
+2026-10-27T17:32:02.0883645Z CASE chat_account_states_browser.cjs default PASS exit=0 seconds=4.8
+2026-10-27T17:32:02.0884236Z PASS fixture account requiredfield-invalid-clearsvalidated/passwordlength/errorpreservesvalues pendingguards login/passwordsuccess3201280
+2026-10-27T17:32:02.0884559Z 
+2026-10-27T17:32:11.8503067Z CASE chat_notification_states_browser.cjs default PASS exit=0 seconds=9.8
+2026-10-27T17:32:11.8503661Z PASS longnotification readablelifetime/dismiss/nofocussteal/singletoast/growingcomposeravoidance3201280fixture
+2026-10-27T17:32:11.8503916Z 
+2026-10-27T17:32:15.7974497Z CASE completion_boundaries_browser.cjs default PASS exit=0 seconds=3.9
+2026-10-27T17:32:15.7975573Z PASS source empty completion/pending URL discard-cancel-retain;budget invalid/zero/unset+duplicate guard/failure retention
+2026-10-27T17:32:15.7975859Z 
+2026-10-27T17:32:22.1127125Z CASE config_organization_browser.cjs default PASS exit=0 seconds=6.3
+2026-10-27T17:32:22.1127820Z PASS top tabs, restored workspace routes, right-arrow navigation, code deep-link reload, reset/redraw, no unrelated Save, 28 group/width cases
+2026-10-27T17:32:22.1128193Z 
+2026-10-27T17:32:30.7354023Z CASE dictation_states_browser.cjs default PASS exit=0 seconds=8.6
+2026-10-27T17:32:30.7355202Z PASS fixture speech lifecycle actualstart/notbefore, static recording, transcriptpreserved, stop immediate, permissiondeny and synchronousfailure humanstates, endfocus3203901280normalreduce
+2026-10-27T17:32:30.7355665Z 
+2026-10-27T17:32:36.3490391Z CASE editor_preview_controls_hidden_motion_browser.cjs default PASS exit=0 seconds=5.6
+2026-10-27T17:32:36.3491000Z PASS CodePrompts no preview ortoggle/fab Appearancepreviewtoggle retained3201280normalReduce
+2026-10-27T17:32:36.3491241Z 
+2026-10-27T17:32:45.2705399Z CASE font_real_bytes_delayed_swap_motion_browser.cjs default PASS exit=0 seconds=8.9
+2026-10-27T17:32:45.2706208Z REALFONT 320 no-preference localCaladeaTTFservedunderLora fixturelabel node/text/opacityretained
+2026-10-27T17:32:45.2706934Z REALFONT 320 reduce localCaladeaTTFservedunderLora fixturelabel node/text/opacityretained
+2026-10-27T17:32:45.2707567Z REALFONT 1280 no-preference localCaladeaTTFservedunderLora fixturelabel node/text/opacityretained
+2026-10-27T17:32:45.2708022Z REALFONT 1280 reduce localCaladeaTTFservedunderLora fixturelabel node/text/opacityretained
+2026-10-27T17:32:45.2708863Z PASS delayedactualTTFfontload nosimulateddocumentfonts visibleopacity1stabletext/node duringpendingandsuccess3201280normalReduce fixtureCaladeanotactualGoogleLora
+2026-10-27T17:32:45.2709458Z 
+2026-10-27T17:32:54.7476066Z CASE helper_cross_card_review_motion_browser.cjs default PASS exit=0 seconds=9.5
+2026-10-27T17:32:54.7477010Z PASS search/querycleaning review pending card switch retains independent drafts/reviewstatus nohiddencompletionfocussteal3201280normalReduce
+2026-10-27T17:32:54.7477566Z 
+2026-10-27T17:33:01.0516481Z CASE helper_sample_browser.cjs default PASS exit=0 seconds=6.3
+2026-10-27T17:33:01.0516901Z PASS real sample pending/newerrawretained/errorretained/successbody3201280
+2026-10-27T17:33:01.0517089Z 
+2026-10-27T17:33:11.8733904Z CASE history_empty_motion_browser.cjs default PASS exit=0 seconds=10.8
+2026-10-27T17:33:11.8734872Z EMPTY 320 reduce chats {"text":"Your conversations will appear here. Ask a question to start.","animation":"none","duration":"0s","transform":"none","images":0,"frames":[]}
+2026-10-27T17:33:11.8735820Z EMPTY 320 reduce search {"text":"No chats match your search. Try another word or clear the search.","animation":"none","duration":"0s","transform":"none","images":0,"frames":[]}
+2026-10-27T17:33:11.8736923Z EMPTY 320 reduce topics {"text":"Conversations appear after your first question.","animation":"none","duration":"0s","transform":"none","images":0,"frames":[]}
+2026-10-27T17:33:11.8738354Z EMPTY 320 no-preference chats {"text":"Your conversations will appear here. Ask a question to start.","animation":"m-in","duration":"0.14s","transform":"none","images":0,"frames":[{"opacity":"0","transform":"none"},{"opacity":"1","transform":"none"}]}
+2026-10-27T17:33:11.8740013Z EMPTY 320 no-preference search {"text":"No chats match your search. Try another word or clear the search.","animation":"m-in","duration":"0.14s","transform":"none","images":0,"frames":[{"opacity":"0","transform":"none"},{"opacity":"1","transform":"none"}]}
+2026-10-27T17:33:11.8740971Z EMPTY 320 no-preference topics {"text":"Conversations appear after your first question.","animation":"m-in","duration":"0.14s","transform":"none","images":0,"frames":[{"opacity":"0","transform":"none"},{"opacity":"1","transform":"none"}]}
+2026-10-27T17:33:11.8741768Z EMPTY 1280 reduce chats {"text":"Your conversations will appear here. Ask a question to start.","animation":"none","duration":"0s","transform":"none","images":0,"frames":[]}
+2026-10-27T17:33:11.8742778Z EMPTY 1280 reduce search {"text":"No chats match your search. Try another word or clear the search.","animation":"none","duration":"0s","transform":"none","images":0,"frames":[]}
+2026-10-27T17:33:11.8743449Z EMPTY 1280 reduce topics {"text":"Conversations appear after your first question.","animation":"none","duration":"0s","transform":"none","images":0,"frames":[]}
+2026-10-27T17:33:11.8744445Z EMPTY 1280 no-preference chats {"text":"Your conversations will appear here. Ask a question to start.","animation":"m-in","duration":"0.14s","transform":"none","images":0,"frames":[{"opacity":"0","transform":"none"},{"opacity":"1","transform":"none"}]}
+2026-10-27T17:33:11.8745456Z EMPTY 1280 no-preference search {"text":"No chats match your search. Try another word or clear the search.","animation":"m-in","duration":"0.14s","transform":"none","images":0,"frames":[{"opacity":"0","transform":"none"},{"opacity":"1","transform":"none"}]}
+2026-10-27T17:33:11.8746413Z EMPTY 1280 no-preference topics {"text":"Conversations appear after your first question.","animation":"m-in","duration":"0.14s","transform":"none","images":0,"frames":[{"opacity":"0","transform":"none"},{"opacity":"1","transform":"none"}]}
+2026-10-27T17:33:11.8747134Z PASS historyemptychat/search/topic140opacityonly noillustration stationary copy contentreplacement NoneReduceoff3201280
+2026-10-27T17:33:11.8747422Z 
+2026-10-27T17:33:24.7629102Z CASE import_code_disclosure_motion_audit_browser.cjs default PASS exit=0 seconds=12.9
+2026-10-27T17:33:24.7629917Z IMPORT 320 no-preference realofflineZIPreview nativeEnter160chevron noheight/transform NoneReduceoff load0
+2026-10-27T17:33:24.7630420Z IMPORT 320 reduce realofflineZIPreview nativeEnter160chevron noheight/transform NoneReduceoff load0
+2026-10-27T17:33:24.7630886Z IMPORT 1280 no-preference realofflineZIPreview nativeEnter160chevron noheight/transform NoneReduceoff load0
+2026-10-27T17:33:24.7631355Z IMPORT 1280 reduce realofflineZIPreview nativeEnter160chevron noheight/transform NoneReduceoff load0
+2026-10-27T17:33:24.7631833Z PASS successfulofflineZIPwithCodeImportreview disclosures read/keyboard/motion noLoad3201280normalReduce
+2026-10-27T17:33:24.7632072Z 
+2026-10-27T17:33:32.2198943Z CASE local_download_states_browser.cjs default PASS exit=0 seconds=7.5
+2026-10-27T17:33:32.2199954Z PASS downloadreviewcancel0execute/37pctpending/cancelvisible/failureactionableretry/reviewfreshtheninstalled-no-download320fixture
+2026-10-27T17:33:32.2200470Z 
+2026-10-27T17:33:36.5197704Z CASE mobile_a11y_builder_browser.cjs default PASS exit=0 seconds=4.3
+2026-10-27T17:33:36.5198052Z 320 []
+2026-10-27T17:33:36.5198178Z 1280 []
+2026-10-27T17:33:36.5198282Z 
+2026-10-27T17:33:41.2850876Z CASE model_documentation_rows_browser.cjs default PASS exit=0 seconds=4.8
+2026-10-27T17:33:41.2851547Z PASS distinct documentation rows dedupedURLs readable3201280normalReduce noProviderCall
+2026-10-27T17:33:41.2851876Z 
+2026-10-27T17:33:52.0114361Z CASE newchat_press_motion_audit_browser.cjs default PASS exit=0 seconds=10.7
+2026-10-27T17:33:52.0114999Z NEWCHATPRESS 320 no-preference matrix(0.98, 0, 0, 0.98, 0, 0) release1 outside no request draftretained Noneoff
+2026-10-27T17:33:52.0115394Z NEWCHATPRESS 320 reduce none release1 outside no request draftretained Noneoff
+2026-10-27T17:33:52.0115791Z NEWCHATPRESS 1280 no-preference matrix(0.98, 0, 0, 0.98, 0, 0) release1 outside no request draftretained Noneoff
+2026-10-27T17:33:52.0116174Z NEWCHATPRESS 1280 reduce none release1 outside no request draftretained Noneoff
+2026-10-27T17:33:52.0116538Z PASS NewChat98pctpress120ms nohovergrowth release1 noovershoot ReduceNoneoff3201280
+2026-10-27T17:33:52.0116730Z 
+2026-10-27T17:34:11.4159857Z CASE preset_states_browser.cjs default PASS exit=0 seconds=19.4
+2026-10-27T17:34:11.4162487Z PASS presethoverborder no scale retainedcards fixedgeometry selectedtick160 Moreonegroup160; savedsetupselection Loadvalidonly cancelnoeffect restoreconfirmed; rejectednamefocus+invalid removalconfirmdismisszero/acceptone fixture3201280Reduce
+2026-10-27T17:34:11.4163335Z 
+2026-10-27T17:34:16.6637965Z CASE prompt_generation_states_browser.cjs default PASS exit=0 seconds=5.2
+2026-10-27T17:34:16.6638822Z PASS prompt timeout retainsmanualtext/buttons;newerinputnotreplacedbylateAI;actualsuccessdraftmarkedreviewthensave;no paidcalls
+2026-10-27T17:34:16.6639302Z 
+2026-10-27T17:34:47.9854114Z CASE provider_four_state_motion_browser.cjs default PASS exit=0 seconds=31.3
+2026-10-27T17:34:47.9855725Z VALIDATION 320 no-preference openai
+2026-10-27T17:34:47.9856065Z VALIDATION 320 no-preference claude
+2026-10-27T17:34:47.9856351Z VALIDATION 320 no-preference gemini
+2026-10-27T17:34:47.9857022Z VALIDATION 320 no-preference deepseek
+2026-10-27T17:34:47.9857305Z VALIDATION 320 no-preference ollama
+2026-10-27T17:34:47.9857578Z VALIDATION 320 no-preference mock
+2026-10-27T17:34:47.9857772Z VALIDATION 320 no-preference groq
+2026-10-27T17:34:47.9857938Z VALIDATION 320 no-preference mimo
+2026-10-27T17:34:47.9858122Z VALIDATION 320 no-preference minimax
+2026-10-27T17:34:47.9858308Z VALIDATION 320 no-preference mistral
+2026-10-27T17:34:47.9858504Z VALIDATION 320 no-preference openai_compatible
+2026-10-27T17:34:47.9858709Z VALIDATION 320 no-preference openrouter
+2026-10-27T17:34:47.9858881Z VALIDATION 320 reduce openai
+2026-10-27T17:34:47.9859035Z VALIDATION 320 reduce claude
+2026-10-27T17:34:47.9859178Z VALIDATION 320 reduce gemini
+2026-10-27T17:34:47.9859331Z VALIDATION 320 reduce deepseek
+2026-10-27T17:34:47.9859478Z VALIDATION 320 reduce ollama
+2026-10-27T17:34:47.9859812Z VALIDATION 320 reduce mock
+2026-10-27T17:34:47.9859954Z VALIDATION 320 reduce groq
+2026-10-27T17:34:47.9860096Z VALIDATION 320 reduce mimo
+2026-10-27T17:34:47.9860240Z VALIDATION 320 reduce minimax
+2026-10-27T17:34:47.9860388Z VALIDATION 320 reduce mistral
+2026-10-27T17:34:47.9860556Z VALIDATION 320 reduce openai_compatible
+2026-10-27T17:34:47.9860735Z VALIDATION 320 reduce openrouter
+2026-10-27T17:34:47.9860904Z VALIDATION 1280 no-preference openai
+2026-10-27T17:34:47.9861085Z VALIDATION 1280 no-preference claude
+2026-10-27T17:34:47.9861255Z VALIDATION 1280 no-preference gemini
+2026-10-27T17:34:47.9861430Z VALIDATION 1280 no-preference deepseek
+2026-10-27T17:34:47.9861602Z VALIDATION 1280 no-preference ollama
+2026-10-27T17:34:47.9861771Z VALIDATION 1280 no-preference mock
+2026-10-27T17:34:47.9861936Z VALIDATION 1280 no-preference groq
+2026-10-27T17:34:47.9862103Z VALIDATION 1280 no-preference mimo
+2026-10-27T17:34:47.9862270Z VALIDATION 1280 no-preference minimax
+2026-10-27T17:34:47.9862443Z VALIDATION 1280 no-preference mistral
+2026-10-27T17:34:47.9862637Z VALIDATION 1280 no-preference openai_compatible
+2026-10-27T17:34:47.9862837Z VALIDATION 1280 no-preference openrouter
+2026-10-27T17:34:47.9863001Z VALIDATION 1280 reduce openai
+2026-10-27T17:34:47.9863154Z VALIDATION 1280 reduce claude
+2026-10-27T17:34:47.9863301Z VALIDATION 1280 reduce gemini
+2026-10-27T17:34:47.9863456Z VALIDATION 1280 reduce deepseek
+2026-10-27T17:34:47.9863607Z VALIDATION 1280 reduce ollama
+2026-10-27T17:34:47.9863756Z VALIDATION 1280 reduce mock
+2026-10-27T17:34:47.9863898Z VALIDATION 1280 reduce groq
+2026-10-27T17:34:47.9864043Z VALIDATION 1280 reduce mimo
+2026-10-27T17:34:47.9864195Z VALIDATION 1280 reduce minimax
+2026-10-27T17:34:47.9864350Z VALIDATION 1280 reduce mistral
+2026-10-27T17:34:47.9864517Z VALIDATION 1280 reduce openai_compatible
+2026-10-27T17:34:47.9864692Z VALIDATION 1280 reduce openrouter
+2026-10-27T17:34:47.9865106Z PASS all12providerchips nottested testingbusy connected failed statestruthful Demoofflinespecialcase3201280normalReduce fixturesnopaidcalls
+2026-10-27T17:34:47.9865408Z 
+2026-10-27T17:34:52.6364706Z CASE reading_view_states_browser.cjs default PASS exit=0 seconds=4.6
+2026-10-27T17:34:52.6365306Z PASS readingradio-sizewidth directfont21 noanimatedmessagecontent node/draftpreserved localstored reopenchecked closefocus Escape3201280normalreduce
+2026-10-27T17:34:52.6365644Z 
+2026-10-27T17:34:57.4797975Z CASE save_guards_browser.cjs default PASS exit=0 seconds=4.8
+2026-10-27T17:34:57.4799254Z PASS cancelled overwrite no write;single pending save;failed save retains setup;invalid hex blocks persistence;corrected hex retry
+2026-10-27T17:34:57.4799888Z 
+2026-10-27T17:35:28.8972812Z CASE settings_finder_clarity_browser.cjs default PASS exit=0 seconds=31.4
+2026-10-27T17:35:28.8973369Z PASS fixedshortplaceholder/noidlecycling/local0modelrequests/AskAIopensnotauto-submit/visiblehint3207601280
+2026-10-27T17:35:28.8973626Z 
+2026-10-27T17:35:37.2070362Z CASE settings_native_browser_zoom_tab_order_browser.cjs default FAIL exit=1 seconds=8.3
+2026-10-27T17:35:37.2071014Z NATIVEZOOM { width: 1280, dpr: 1, scale: 1 } { width: 320, dpr: 4, scale: 1 }
+2026-10-27T17:35:37.2071787Z ZOOMSECTION #sec-finish 10
+2026-10-27T17:35:37.2072082Z ZOOMSECTION #sec-portable 14
+2026-10-27T17:35:37.2072333Z ZOOMSECTION #sec-model 33
+2026-10-27T17:35:37.2072563Z ZOOMSECTION #sec-search 50
+2026-10-27T17:35:37.2072797Z ZOOMSECTION #sec-prompts 69
+2026-10-27T17:35:37.2073172Z AssertionError [ERR_ASSERTION]: nativeEditorCaretClipped #sec-code
+2026-10-27T17:35:37.2073651Z     at /home/runner/work/Chatify/Chatify/tests/settings_native_browser_zoom_tab_order_browser.cjs:1:2987 {
+2026-10-27T17:35:37.2074096Z   generatedMessage: false,
+2026-10-27T17:35:37.2074314Z   code: 'ERR_ASSERTION',
+2026-10-27T17:35:37.2074515Z   actual: false,
+2026-10-27T17:35:37.2074670Z   expected: true,
+2026-10-27T17:35:37.2074789Z   operator: '==',
+2026-10-27T17:35:37.2074906Z   diff: 'simple'
+2026-10-27T17:35:37.2075024Z }
+2026-10-27T17:35:37.2075087Z 
+2026-10-27T17:35:49.0260556Z CASE settings_title_inventory_browser.cjs default PASS exit=0 seconds=11.8
+2026-10-27T17:35:49.0261000Z 320 #sec-finish 1
+2026-10-27T17:35:49.0261246Z 320 #sec-portable 1
+2026-10-27T17:35:49.0261466Z 320 #sec-workspace-list 1
+2026-10-27T17:35:49.0261705Z 320 #sec-workspace-changes 1
+2026-10-27T17:35:49.0261942Z 320 #sec-workspace-backup 1
+2026-10-27T17:35:49.0262161Z 320 #sec-workspace-tests 1
+2026-10-27T17:35:49.0262391Z 320 #sec-workspace-deploy 1
+2026-10-27T17:35:49.0262547Z 320 #sec-model 1
+2026-10-27T17:35:49.0262671Z 320 #sec-search 1
+2026-10-27T17:35:49.0262796Z 320 #sec-prompts 1
+2026-10-27T17:35:49.0262914Z 320 #sec-code 2
+2026-10-27T17:35:49.0263034Z 320 #sec-presets 8
+2026-10-27T17:35:49.0263158Z 320 #sec-wording 3
+2026-10-27T17:35:49.0263276Z 320 #sec-colors 9
+2026-10-27T17:35:49.0263396Z 320 #sec-background 3
+2026-10-27T17:35:49.0263518Z 320 #sec-fonts 3
+2026-10-27T17:35:49.0263629Z 320 #sec-shape 3
+2026-10-27T17:35:49.0263796Z 320 #sec-emoji 9
+2026-10-27T17:35:49.0263972Z 320 #sec-motion 3
+2026-10-27T17:35:49.0264154Z 320 #sec-layout 3
+2026-10-27T17:35:49.0264338Z 320 #sec-freshness 2
+2026-10-27T17:35:49.0264525Z 320 #sec-budget 1
+2026-10-27T17:35:49.0264684Z 1280 #sec-finish 1
+2026-10-27T17:35:49.0264808Z 1280 #sec-portable 1
+2026-10-27T17:35:49.0264943Z 1280 #sec-workspace-list 1
+2026-10-27T17:35:49.0265094Z 1280 #sec-workspace-changes 1
+2026-10-27T17:35:49.0265246Z 1280 #sec-workspace-backup 1
+2026-10-27T17:35:49.0265393Z 1280 #sec-workspace-tests 1
+2026-10-27T17:35:49.0265645Z 1280 #sec-workspace-deploy 1
+2026-10-27T17:35:49.0265789Z 1280 #sec-model 1
+2026-10-27T17:35:49.0265906Z 1280 #sec-search 1
+2026-10-27T17:35:49.0266027Z 1280 #sec-prompts 1
+2026-10-27T17:35:49.0266149Z 1280 #sec-code 2
+2026-10-27T17:35:49.0266267Z 1280 #sec-presets 8
+2026-10-27T17:35:49.0266387Z 1280 #sec-wording 3
+2026-10-27T17:35:49.0266502Z 1280 #sec-colors 9
+2026-10-27T17:35:49.0266657Z 1280 #sec-background 3
+2026-10-27T17:35:49.0266848Z 1280 #sec-fonts 3
+2026-10-27T17:35:49.0266969Z 1280 #sec-shape 3
+2026-10-27T17:35:49.0267083Z 1280 #sec-emoji 9
+2026-10-27T17:35:49.0267196Z 1280 #sec-motion 3
+2026-10-27T17:35:49.0267311Z 1280 #sec-layout 3
+2026-10-27T17:35:49.0267435Z 1280 #sec-freshness 2
+2026-10-27T17:35:49.0267558Z 1280 #sec-budget 1
+2026-10-27T17:35:49.0267630Z 
+2026-10-27T17:36:15.2078682Z CASE setup_workspace_consent_toggle_motion_browser.cjs default PASS exit=0 seconds=26.2
+2026-10-27T17:36:15.2079197Z CONSENT 320 no-preference full setup/workspace immediate/restored
+2026-10-27T17:36:15.2080274Z CONSENT 320 no-preference subtle setup/workspace immediate/restored
+2026-10-27T17:36:15.2080722Z CONSENT 320 no-preference none setup/workspace immediate/restored
+2026-10-27T17:36:15.2081145Z CONSENT 320 no-preference calm setup/workspace immediate/restored
+2026-10-27T17:36:15.2081561Z CONSENT 320 reduce full setup/workspace immediate/restored
+2026-10-27T17:36:15.2081969Z CONSENT 320 reduce subtle setup/workspace immediate/restored
+2026-10-27T17:36:15.2082366Z CONSENT 320 reduce none setup/workspace immediate/restored
+2026-10-27T17:36:15.2082758Z CONSENT 320 reduce calm setup/workspace immediate/restored
+2026-10-27T17:36:15.2083379Z CONSENT 1280 no-preference full setup/workspace immediate/restored
+2026-10-27T17:36:15.2083829Z CONSENT 1280 no-preference subtle setup/workspace immediate/restored
+2026-10-27T17:36:15.2084225Z CONSENT 1280 no-preference none setup/workspace immediate/restored
+2026-10-27T17:36:15.2084492Z CONSENT 1280 no-preference calm setup/workspace immediate/restored
+2026-10-27T17:36:15.2084757Z CONSENT 1280 reduce full setup/workspace immediate/restored
+2026-10-27T17:36:15.2085013Z CONSENT 1280 reduce subtle setup/workspace immediate/restored
+2026-10-27T17:36:15.2085263Z CONSENT 1280 reduce none setup/workspace immediate/restored
+2026-10-27T17:36:15.2085507Z CONSENT 1280 reduce calm setup/workspace immediate/restored
+2026-10-27T17:36:15.2085839Z PASS setup/workspaceReview nativeSpace2x immediatebuttonprerequisite focus16matrix noExecute
+2026-10-27T17:36:15.2086051Z 
+2026-10-27T17:36:37.6266428Z CASE sidebar_timestamp_icon_alignment_browser.cjs default PASS exit=0 seconds=22.4
+2026-10-27T17:36:37.6268128Z ALIGNED left full no-preference timestamp-hidden-actions-visible {"row":{"x":16,"y":355,"width":217,"height":60,"top":355,"right":233,"bottom":415,"left":16},"icons":[{"width":18,"height":18,"dy":0,"transform":"none"},{"width":18,"height":18,"dy":0,"transform":"none"},{"width":18,"height":18,"dy":0,"transform":"none"},{"width":18,"height":18,"dy":0,"transform":"none"}]}
+2026-10-27T17:36:37.6270077Z ALIGNED right full no-preference timestamp-hidden-actions-visible {"row":{"x":1047,"y":355,"width":217,"height":60,"top":355,"right":1264,"bottom":415,"left":1047},"icons":[{"width":18,"height":18,"dy":0,"transform":"none"},{"width":18,"height":18,"dy":0,"transform":"none"},{"width":18,"height":18,"dy":0,"transform":"none"},{"width":18,"height":18,"dy":0,"transform":"none"}]}
+2026-10-27T17:36:37.6271814Z ALIGNED left subtle no-preference timestamp-hidden-actions-visible {"row":{"x":16,"y":355,"width":217,"height":60,"top":355,"right":233,"bottom":415,"left":16},"icons":[{"width":18,"height":18,"dy":0,"transform":"none"},{"width":18,"height":18,"dy":0,"transform":"none"},{"width":18,"height":18,"dy":0,"transform":"none"},{"width":18,"height":18,"dy":0,"transform":"none"}]}
+2026-10-27T17:36:37.6273288Z ALIGNED right subtle no-preference timestamp-hidden-actions-visible {"row":{"x":1047,"y":355,"width":217,"height":60,"top":355,"right":1264,"bottom":415,"left":1047},"icons":[{"width":18,"height":18,"dy":0,"transform":"none"},{"width":18,"height":18,"dy":0,"transform":"none"},{"width":18,"height":18,"dy":0,"transform":"none"},{"width":18,"height":18,"dy":0,"transform":"none"}]}
+2026-10-27T17:36:37.6274743Z ALIGNED left none no-preference timestamp-hidden-actions-visible {"row":{"x":16,"y":355,"width":217,"height":60,"top":355,"right":233,"bottom":415,"left":16},"icons":[{"width":18,"height":18,"dy":0,"transform":"none"},{"width":18,"height":18,"dy":0,"transform":"none"},{"width":18,"height":18,"dy":0,"transform":"none"},{"width":18,"height":18,"dy":0,"transform":"none"}]}
+2026-10-27T17:36:37.6276192Z ALIGNED right none no-preference timestamp-hidden-actions-visible {"row":{"x":1047,"y":355,"width":217,"height":60,"top":355,"right":1264,"bottom":415,"left":1047},"icons":[{"width":18,"height":18,"dy":0,"transform":"none"},{"width":18,"height":18,"dy":0,"transform":"none"},{"width":18,"height":18,"dy":0,"transform":"none"},{"width":18,"height":18,"dy":0,"transform":"none"}]}
+2026-10-27T17:36:37.6278026Z ALIGNED left calm no-preference timestamp-hidden-actions-visible {"row":{"x":16,"y":355,"width":217,"height":60,"top":355,"right":233,"bottom":415,"left":16},"icons":[{"width":18,"height":18,"dy":0,"transform":"none"},{"width":18,"height":18,"dy":0,"transform":"none"},{"width":18,"height":18,"dy":0,"transform":"none"},{"width":18,"height":18,"dy":0,"transform":"none"}]}
+2026-10-27T17:36:37.6279781Z ALIGNED right calm no-preference timestamp-hidden-actions-visible {"row":{"x":1047,"y":355,"width":217,"height":60,"top":355,"right":1264,"bottom":415,"left":1047},"icons":[{"width":18,"height":18,"dy":0,"transform":"none"},{"width":18,"height":18,"dy":0,"transform":"none"},{"width":18,"height":18,"dy":0,"transform":"none"},{"width":18,"height":18,"dy":0,"transform":"none"}]}
+2026-10-27T17:36:37.6281949Z ALIGNED left full reduce timestamp-hidden-actions-visible {"row":{"x":16,"y":355,"width":217,"height":60,"top":355,"right":233,"bottom":415,"left":16},"icons":[{"width":18,"height":18,"dy":0,"transform":"none"},{"width":18,"height":18,"dy":0,"transform":"none"},{"width":18,"height":18,"dy":0,"transform":"none"},{"width":18,"height":18,"dy":0,"transform":"none"}]}
+2026-10-27T17:36:37.6284066Z ALIGNED right full reduce timestamp-hidden-actions-visible {"row":{"x":1047,"y":355,"width":217,"height":60,"top":355,"right":1264,"bottom":415,"left":1047},"icons":[{"width":18,"height":18,"dy":0,"transform":"none"},{"width":18,"height":18,"dy":0,"transform":"none"},{"width":18,"height":18,"dy":0,"transform":"none"},{"width":18,"height":18,"dy":0,"transform":"none"}]}
+2026-10-27T17:36:37.6286243Z ALIGNED left subtle reduce timestamp-hidden-actions-visible {"row":{"x":16,"y":355,"width":217,"height":60,"top":355,"right":233,"bottom":415,"left":16},"icons":[{"width":18,"height":18,"dy":0,"transform":"none"},{"width":18,"height":18,"dy":0,"transform":"none"},{"width":18,"height":18,"dy":0,"transform":"none"},{"width":18,"height":18,"dy":0,"transform":"none"}]}
+2026-10-27T17:36:37.6288528Z ALIGNED right subtle reduce timestamp-hidden-actions-visible {"row":{"x":1047,"y":355,"width":217,"height":60,"top":355,"right":1264,"bottom":415,"left":1047},"icons":[{"width":18,"height":18,"dy":0,"transform":"none"},{"width":18,"height":18,"dy":0,"transform":"none"},{"width":18,"height":18,"dy":0,"transform":"none"},{"width":18,"height":18,"dy":0,"transform":"none"}]}
+2026-10-27T17:36:37.6290909Z ALIGNED left none reduce timestamp-hidden-actions-visible {"row":{"x":16,"y":355,"width":217,"height":60,"top":355,"right":233,"bottom":415,"left":16},"icons":[{"width":18,"height":18,"dy":0,"transform":"none"},{"width":18,"height":18,"dy":0,"transform":"none"},{"width":18,"height":18,"dy":0,"transform":"none"},{"width":18,"height":18,"dy":0,"transform":"none"}]}
+2026-10-27T17:36:37.6292326Z ALIGNED right none reduce timestamp-hidden-actions-visible {"row":{"x":1047,"y":355,"width":217,"height":60,"top":355,"right":1264,"bottom":415,"left":1047},"icons":[{"width":18,"height":18,"dy":0,"transform":"none"},{"width":18,"height":18,"dy":0,"transform":"none"},{"width":18,"height":18,"dy":0,"transform":"none"},{"width":18,"height":18,"dy":0,"transform":"none"}]}
+2026-10-27T17:36:37.6294159Z ALIGNED left calm reduce timestamp-hidden-actions-visible {"row":{"x":16,"y":355,"width":217,"height":60,"top":355,"right":233,"bottom":415,"left":16},"icons":[{"width":18,"height":18,"dy":0,"transform":"none"},{"width":18,"height":18,"dy":0,"transform":"none"},{"width":18,"height":18,"dy":0,"transform":"none"},{"width":18,"height":18,"dy":0,"transform":"none"}]}
+2026-10-27T17:36:37.6296251Z ALIGNED right calm reduce timestamp-hidden-actions-visible {"row":{"x":1047,"y":355,"width":217,"height":60,"top":355,"right":1264,"bottom":415,"left":1047},"icons":[{"width":18,"height":18,"dy":0,"transform":"none"},{"width":18,"height":18,"dy":0,"transform":"none"},{"width":18,"height":18,"dy":0,"transform":"none"},{"width":18,"height":18,"dy":0,"transform":"none"}]}
+2026-10-27T17:36:37.6297156Z PASS timestamplabel hides/restores hover icons sameverticalalignment/size16states dockedLeftRight
+2026-10-27T17:36:37.6297582Z 
+2026-10-27T17:36:46.7965907Z CASE source_panel_runtime_quiet_browser.cjs default PASS exit=0 seconds=9.2
+2026-10-27T17:36:46.7966582Z PASS openSourcepanelruntimeReduceNoneCalm cancelsactiveMotion6matrix fixtureonly
+2026-10-27T17:36:46.7966919Z 
+2026-10-27T17:36:52.6968822Z CASE source_services_browser.cjs default PASS exit=0 seconds=5.9
+2026-10-27T17:36:52.6969861Z PASS configurednotreachable/sourceOff/pausedkey/failedsave-retains/newerkey-kept/enablednot-tested/keyfreelibrary/no-key-controls,320 fixture
+2026-10-27T17:36:52.6970376Z 
+2026-10-27T17:36:55.3328300Z CASE stream-buttons.cjs default PASS exit=0 seconds=2.6
+2026-10-27T17:36:55.3328864Z [
+2026-10-27T17:36:55.3329473Z   {
+2026-10-27T17:36:55.3330159Z     case: 'Stop cancels pending stream and preserves question',
+2026-10-27T17:36:55.3330558Z     status: 'PASS',
+2026-10-27T17:36:55.3330911Z     mode: 'ACTUAL UI / intercepted transport fixture, not model'
+2026-10-27T17:36:55.3331238Z   },
+2026-10-27T17:36:55.3331460Z   {
+2026-10-27T17:36:55.3331727Z     case: 'Retry sends preserved question again',
+2026-10-27T17:36:55.3332038Z     status: 'PASS',
+2026-10-27T17:36:55.3332385Z     mode: 'ACTUAL UI / intercepted transport fixture, not model'
+2026-10-27T17:36:55.3332718Z   }
+2026-10-27T17:36:55.3332898Z ]
+2026-10-27T17:36:55.3333004Z 
+2026-10-27T17:36:57.5669954Z CASE topic-temp.cjs default PASS exit=0 seconds=2.2
+2026-10-27T17:36:57.5670338Z {
+2026-10-27T17:36:57.5670560Z   temporaryPillVisible: true,
+2026-10-27T17:36:57.5670813Z   appClass: 'app',
+2026-10-27T17:36:57.5671030Z   title: 'Conversation',
+2026-10-27T17:36:57.5671268Z   temp: ''
+2026-10-27T17:36:57.5671476Z }
+2026-10-27T17:36:57.5671583Z 
+2026-10-27T17:37:07.8555567Z CASE workspace_all_late_reviews_browser.cjs default PASS exit=0 seconds=10.3
+2026-10-27T17:37:07.8556179Z PASS oldLiveHistoryArchiveReview200503 noDeployedreview/status/focuscontamination3201280
+2026-10-27T17:37:07.8556399Z 
+2026-10-27T17:37:07.8890648Z CASE workspace_review_confirm_harness.cjs consent-gate PASS exit=0 seconds=0.0
+2026-10-27T17:37:07.8891194Z PASS consent-gate: Confirm without consent fired zero requests, button stayed disabled-guarded
+2026-10-27T17:37:07.8891405Z 
+2026-10-27T17:37:07.9217439Z CASE workspace_review_confirm_harness.cjs confirm-once PASS exit=0 seconds=0.0
+2026-10-27T17:37:07.9218619Z PASS confirm-once: consent -> exactly one confirmed remove, panel closed
+2026-10-27T17:37:07.9218818Z 
+2026-10-27T17:37:07.9547409Z CASE workspace_review_confirm_harness.cjs failure-retry PASS exit=0 seconds=0.0
+2026-10-27T17:37:07.9548040Z PASS failure-retry: error visible, label restored, retry fired exactly one more request
+2026-10-27T17:37:07.9548421Z 
+2026-10-27T17:37:07.9886525Z CASE workspace_review_confirm_harness.cjs no-zombies PASS exit=0 seconds=0.0
+2026-10-27T17:37:07.9888329Z PASS no-zombies: repeated reviews leave exactly one panel
+2026-10-27T17:37:07.9889666Z 
+2026-10-27T17:37:07.9893551Z {"executions": 46, "failed": 1, "passed": 45, "scripts": 40}
+2026-10-27T17:37:08.0161034Z ##[error]Process completed with exit code 1.
+2026-10-27T17:37:08.0350514Z Post job cleanup.
+2026-10-27T17:37:08.0975744Z [command]/usr/bin/git version
+2026-10-27T17:37:08.1013417Z git version 2.56.0
+2026-10-27T17:37:08.1037967Z Temporarily overriding HOME='/home/runner/work/_temp/2f30a99f-7218-46f1-a2b8-cc0379d939d6' before making global git config changes
+2026-10-27T17:37:08.1039123Z Adding repository directory to the temporary git global config as a safe directory
+2026-10-27T17:37:08.1041872Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/Chatify/Chatify
+2026-10-27T17:37:08.1081600Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-10-27T17:37:08.1119712Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-10-27T17:37:08.1346881Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-10-27T17:37:08.1390170Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-10-27T17:37:08.1621665Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-10-27T17:37:08.1665885Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-10-27T17:37:08.2027899Z Cleaning up orphan processes
+2026-10-27T17:37:08.2287515Z ##[warning]Node.js 20 is deprecated. The following actions target Node.js 20 but are being forced to run on Node.js 24: actions/checkout@v4, actions/setup-node@v4, actions/setup-python@v5. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
