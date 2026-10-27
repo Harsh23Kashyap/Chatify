@@ -27,7 +27,9 @@ jobs:
       - name: Install offline regression dependencies
         run: |
           python -m pip install '.[documents]' playwright==1.56.0
-          mkdir -p /tmp/cc-ui-tools /downloads
+          mkdir -p /tmp/cc-ui-tools
+          sudo mkdir -p /downloads
+          sudo chown "$(id -u):$(id -g)" /downloads
           npm install --prefix /tmp/cc-ui-tools --no-audit --no-fund playwright-core@1.56.1 axe-core@4.14.0
           sudo apt-get update -qq
           sudo apt-get install -y xvfb xdotool imagemagick

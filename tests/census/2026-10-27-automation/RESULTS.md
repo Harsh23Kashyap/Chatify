@@ -17,3 +17,13 @@ No product code/testassertions/timerschanged. Original historical failures retai
 Actualfirstliveworkflowresult remains awaited afterpush. No artifact/cacheupload;
 publicordinarylogs contain onlyofflinefixtures/testoutput. No account/service
 credentials forwarded to fixture/testchildren. No deploy/restart/paidrunner.
+
+## First live run: setup FAIL, no browser executions
+
+https://github.com/Harsh23Kashyap/Chatify/actions/runs/40461381292
+head57cb553,11:59:11-11:59:37IST. Syntax/packagePASS; all12shardsFAIL
+at dependency step: mkdir /downloads Permission denied on hostedrunner. Browser
+preflight/cases skipped,0/500executions. Python package/documents/Playwright
+installation succeeded beforemkdir. Fixedworkflow to sudo-create and chown
+/downloads, retaining legacytestoutputpaths/assertions. No product/testchanges.
+Companionunit40461381340 andinstaller40461381298 terminalSuccess.
