@@ -1,0 +1,60 @@
+test_rtl_pdf.py
+test_arabic_hebrew_answer_exports (test_rtl_pdf.RtlPdfTest.test_arabic_hebrew_answer_exports) ... ok
+test_coverage_includes_arabic_and_hebrew (test_rtl_pdf.RtlPdfTest.test_coverage_includes_arabic_and_hebrew) ... ok
+test_latin_unchanged (test_rtl_pdf.RtlPdfTest.test_latin_unchanged) ... ok
+test_rtl_vote (test_rtl_pdf.RtlPdfTest.test_rtl_vote) ... ok
+test_uncovered_script_still_rejected (test_rtl_pdf.RtlPdfTest.test_uncovered_script_still_rejected) ... ok
+
+----------------------------------------------------------------------
+Ran 5 tests in 2.746s
+
+OK
+
+EXIT=0
+
+test_answer_export.py
+test_accent_not_pdf_injection (test_answer_export.Export.test_accent_not_pdf_injection) ... ok
+test_accented_latin_renders_via_font (test_answer_export.Export.test_accented_latin_renders_via_font) ... ok
+test_bibtex_missing_optional_metadata (test_answer_export.Export.test_bibtex_missing_optional_metadata) ... ok
+test_branded_template_fonts_paper_and_metadata (test_answer_export.Export.test_branded_template_fonts_paper_and_metadata) ... ok
+test_devanagari_renders_not_rejected (test_answer_export.Export.test_devanagari_renders_not_rejected) ... ok
+test_escaped_pipe_table_label_retained (test_answer_export.Export.test_escaped_pipe_table_label_retained) ... ok
+test_markdown_snapshot_private (test_answer_export.Export.test_markdown_snapshot_private) ... ok
+test_multi_page_no_cut (test_answer_export.Export.test_multi_page_no_cut) ... ok
+test_null_optional_url_exports (test_answer_export.Export.test_null_optional_url_exports) ... ok
+test_stylized_latin_and_accents_render_as_themselves (test_answer_export.Export.test_stylized_latin_and_accents_render_as_themselves) ... ok
+test_table_extra_cells_and_following_pipe_prose_not_lost (test_answer_export.Export.test_table_extra_cells_and_following_pipe_prose_not_lost) ... ok
+test_table_recomposed_as_labeled_rows (test_answer_export.Export.test_table_recomposed_as_labeled_rows) ... ok
+test_typographic_unicode_no_longer_rejected (test_answer_export.Export.test_typographic_unicode_no_longer_rejected) ... ok
+test_typographic_unicode_renders_real_pdf (test_answer_export.Export.test_typographic_unicode_renders_real_pdf) ... ok
+test_uncovered_scripts_still_rejected_honestly (test_answer_export.Export.test_uncovered_scripts_still_rejected_honestly) ... ok
+test_wide_unbroken_text_preserved (test_answer_export.Export.test_wide_unbroken_text_preserved) ... ok
+test_markdown_and_latex_normalized_in_exports (test_answer_export.PlainTextDisplay.test_markdown_and_latex_normalized_in_exports) ... ok
+test_pdf_keeps_sources_heading_with_first_source (test_answer_export.PlainTextDisplay.test_pdf_keeps_sources_heading_with_first_source) ... ok
+test_preview_bullets_normalized (test_answer_export.PlainTextDisplay.test_preview_bullets_normalized) ... ok
+test_script_markers_keep_explicit_notation (test_answer_export.PlainTextDisplay.test_script_markers_keep_explicit_notation) ... ok
+test_all_failed_wording (test_answer_export.SourceNoteExports.test_all_failed_wording) ... ok
+test_markdown_carries_named_note (test_answer_export.SourceNoteExports.test_markdown_carries_named_note) ... ok
+test_no_note_without_errors (test_answer_export.SourceNoteExports.test_no_note_without_errors) ... ok
+test_pdf_carries_named_note (test_answer_export.SourceNoteExports.test_pdf_carries_named_note) ... ok
+test_server_imports_and_pdf_fails_clear_without_fpdf (test_answer_export.WheelInstallImport.test_server_imports_and_pdf_fails_clear_without_fpdf) ... ok
+
+----------------------------------------------------------------------
+Ran 25 tests in 22.001s
+
+OK
+
+EXIT=0
+
+test_pdf_source_keep.py
+test_infinity_turn_renders (test_pdf_source_keep.PdfSourceKeep.test_infinity_turn_renders) ... ok
+test_keep_together_logic_present (test_pdf_source_keep.PdfSourceKeep.test_keep_together_logic_present) ... ok
+test_long_source_list_renders (test_pdf_source_keep.PdfSourceKeep.test_long_source_list_renders) ... ok
+test_math_operator_coverage (test_pdf_source_keep.PdfSourceKeep.test_math_operator_coverage) ... ok
+
+----------------------------------------------------------------------
+Ran 4 tests in 2.520s
+
+OK
+
+EXIT=0
