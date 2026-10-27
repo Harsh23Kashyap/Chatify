@@ -25,3 +25,24 @@ class InstalledStartTests(unittest.TestCase):
         from chatify.launcher import start
         source=inspect.getsource(start)
         self.assertLess(source.index('if lock_config:'),source.index('from .server import serve'))
+
+class PortProbeFlags(unittest.TestCase):
+    def test_probe_uses_actual_http_server_reuse_flags(self):
+        from unittest.mock import patch,MagicMock,call
+        from chatify.server import LocalHTTPServer
+        self.assertTrue(LocalHTTPServer.allow_reuse_address)
+        self.assertFalse(getattr(LocalHTTPServer,'allow_reuse_port',False))
+        sock=MagicMock()
+        with patch('chatify.launcher.socket.socket') as factory:
+            factory.return_value.__enter__.return_value=sock
+            self.assertEqual(pick_port(8080),8080)
+        self.assertEqual(sock.method_calls[:2],[call.setsockopt(socket.SOL_SOCKET,socket.SO_REUSEADDR,1),call.bind(('127.0.0.1',8080))])
+    def test_denied_reuse_bind_skips_candidate(self):
+        from unittest.mock import patch,MagicMock
+        first=MagicMock();first.bind.side_effect=PermissionError(10013,'reserved')
+        second=MagicMock()
+        with patch('chatify.launcher.socket.socket') as factory:
+            factory.side_effect=[MagicMock(__enter__=MagicMock(return_value=first)),MagicMock(__enter__=MagicMock(return_value=second))]
+            self.assertEqual(pick_port(8080),8081)
+        first.setsockopt.assert_called_once_with(socket.SOL_SOCKET,socket.SO_REUSEADDR,1)
+        second.bind.assert_called_once_with(('127.0.0.1',8081))

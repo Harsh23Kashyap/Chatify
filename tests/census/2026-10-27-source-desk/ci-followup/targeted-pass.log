@@ -1,0 +1,13 @@
+test_locked_start_sets_flag_before_server_import (tests.test_launcher.InstalledStartTests) ... ok
+test_bad_port (tests.test_launcher.LauncherTests) ... ok
+test_busy_port_fallback (tests.test_launcher.LauncherTests) ... ok
+test_existing_directory_not_overwritten (tests.test_launcher.LauncherTests) ... ok
+test_packaged_template_and_rerun (tests.test_launcher.LauncherTests) ... ok
+test_denied_reuse_bind_skips_candidate (tests.test_launcher.PortProbeFlags) ... ok
+test_probe_uses_actual_http_server_reuse_flags (tests.test_launcher.PortProbeFlags) ... ok
+test_final_branding_redrafts_identity_only (tests.test_buildjobs.BrandingRetryTests) ... ok
+
+----------------------------------------------------------------------
+Ran 8 tests in 0.221s
+
+OK

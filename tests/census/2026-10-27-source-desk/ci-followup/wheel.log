@@ -1,0 +1,732 @@
+Building wheel...
+/home/sandbox/.cache/uv/builds-v0/.tmpPEq7P0/lib/python3.14/site-packages/setuptools/config/_apply_pyprojecttoml.py:82: SetuptoolsDeprecationWarning: `project.license` as a TOML table is deprecated
+!!
+
+        ********************************************************************************
+        Please use a simple string containing a SPDX expression for `project.license`. You can also use `project.license-files`. (Both options available on setuptools>=77.0.0).
+
+        By 2027-Feb-18, you need to update your project and remove deprecated calls
+        or your builds will no longer be supported.
+
+        See https://packaging.python.org/en/latest/guides/writing-pyproject-toml/#license for details.
+        ********************************************************************************
+
+!!
+  corresp(dist, value, root_dir)
+running egg_info
+writing chatify_app.egg-info/PKG-INFO
+writing dependency_links to chatify_app.egg-info/dependency_links.txt
+writing entry points to chatify_app.egg-info/entry_points.txt
+writing requirements to chatify_app.egg-info/requires.txt
+writing top-level names to chatify_app.egg-info/top_level.txt
+reading manifest file 'chatify_app.egg-info/SOURCES.txt'
+adding license file 'LICENSE'
+writing manifest file 'chatify_app.egg-info/SOURCES.txt'
+/home/sandbox/.cache/uv/builds-v0/.tmpPEq7P0/lib/python3.14/site-packages/setuptools/config/_apply_pyprojecttoml.py:82: SetuptoolsDeprecationWarning: `project.license` as a TOML table is deprecated
+!!
+
+        ********************************************************************************
+        Please use a simple string containing a SPDX expression for `project.license`. You can also use `project.license-files`. (Both options available on setuptools>=77.0.0).
+
+        By 2027-Feb-18, you need to update your project and remove deprecated calls
+        or your builds will no longer be supported.
+
+        See https://packaging.python.org/en/latest/guides/writing-pyproject-toml/#license for details.
+        ********************************************************************************
+
+!!
+  corresp(dist, value, root_dir)
+running bdist_wheel
+running build
+running build_py
+copying chatify/launcher.py -> build/lib/chatify
+running egg_info
+writing chatify_app.egg-info/PKG-INFO
+writing dependency_links to chatify_app.egg-info/dependency_links.txt
+writing entry points to chatify_app.egg-info/entry_points.txt
+writing requirements to chatify_app.egg-info/requires.txt
+writing top-level names to chatify_app.egg-info/top_level.txt
+reading manifest file 'chatify_app.egg-info/SOURCES.txt'
+adding license file 'LICENSE'
+writing manifest file 'chatify_app.egg-info/SOURCES.txt'
+installing to build/bdist.linux-x86_64/wheel
+running install
+running install_lib
+creating build/bdist.linux-x86_64/wheel
+creating build/bdist.linux-x86_64/wheel/chatify
+copying build/lib/chatify/schema.py -> build/bdist.linux-x86_64/wheel/./chatify
+copying build/lib/chatify/management.py -> build/bdist.linux-x86_64/wheel/./chatify
+copying build/lib/chatify/ollama_setup.py -> build/bdist.linux-x86_64/wheel/./chatify
+copying build/lib/chatify/websearch.py -> build/bdist.linux-x86_64/wheel/./chatify
+copying build/lib/chatify/mysqlstore.py -> build/bdist.linux-x86_64/wheel/./chatify
+copying build/lib/chatify/source_credentials.py -> build/bdist.linux-x86_64/wheel/./chatify
+copying build/lib/chatify/fetch.py -> build/bdist.linux-x86_64/wheel/./chatify
+copying build/lib/chatify/keybundle.py -> build/bdist.linux-x86_64/wheel/./chatify
+copying build/lib/chatify/gallery.py -> build/bdist.linux-x86_64/wheel/./chatify
+copying build/lib/chatify/workspace.py -> build/bdist.linux-x86_64/wheel/./chatify
+copying build/lib/chatify/portable.py -> build/bdist.linux-x86_64/wheel/./chatify
+copying build/lib/chatify/apipicks.py -> build/bdist.linux-x86_64/wheel/./chatify
+copying build/lib/chatify/hardware.py -> build/bdist.linux-x86_64/wheel/./chatify
+copying build/lib/chatify/pdfread.py -> build/bdist.linux-x86_64/wheel/./chatify
+copying build/lib/chatify/__init__.py -> build/bdist.linux-x86_64/wheel/./chatify
+copying build/lib/chatify/generator_design.py -> build/bdist.linux-x86_64/wheel/./chatify
+copying build/lib/chatify/configdoctor.py -> build/bdist.linux-x86_64/wheel/./chatify
+copying build/lib/chatify/apiterms.py -> build/bdist.linux-x86_64/wheel/./chatify
+creating build/bdist.linux-x86_64/wheel/chatify/web
+copying build/lib/chatify/web/reading.js -> build/bdist.linux-x86_64/wheel/./chatify/web
+creating build/bdist.linux-x86_64/wheel/chatify/web/icons
+copying build/lib/chatify/web/icons/chatify.svg -> build/bdist.linux-x86_64/wheel/./chatify/web/icons
+copying build/lib/chatify/web/customselect.js -> build/bdist.linux-x86_64/wheel/./chatify/web
+copying build/lib/chatify/web/feedback.js -> build/bdist.linux-x86_64/wheel/./chatify/web
+copying build/lib/chatify/web/panels.js -> build/bdist.linux-x86_64/wheel/./chatify/web
+copying build/lib/chatify/web/brand.js -> build/bdist.linux-x86_64/wheel/./chatify/web
+copying build/lib/chatify/web/emoji.js -> build/bdist.linux-x86_64/wheel/./chatify/web
+copying build/lib/chatify/web/about.js -> build/bdist.linux-x86_64/wheel/./chatify/web
+copying build/lib/chatify/web/run-locally.html -> build/bdist.linux-x86_64/wheel/./chatify/web
+copying build/lib/chatify/web/gallery.html -> build/bdist.linux-x86_64/wheel/./chatify/web
+copying build/lib/chatify/web/featurecatalog.js -> build/bdist.linux-x86_64/wheel/./chatify/web
+copying build/lib/chatify/web/settingstop.js -> build/bdist.linux-x86_64/wheel/./chatify/web
+copying build/lib/chatify/web/tour.css -> build/bdist.linux-x86_64/wheel/./chatify/web
+copying build/lib/chatify/web/settingsfind.js -> build/bdist.linux-x86_64/wheel/./chatify/web
+copying build/lib/chatify/web/configurationhome.css -> build/bdist.linux-x86_64/wheel/./chatify/web
+copying build/lib/chatify/web/navflow.js -> build/bdist.linux-x86_64/wheel/./chatify/web
+copying build/lib/chatify/web/about.css -> build/bdist.linux-x86_64/wheel/./chatify/web
+copying build/lib/chatify/web/appearanceextras.js -> build/bdist.linux-x86_64/wheel/./chatify/web
+copying build/lib/chatify/web/build.html -> build/bdist.linux-x86_64/wheel/./chatify/web
+copying build/lib/chatify/web/pipeline.js -> build/bdist.linux-x86_64/wheel/./chatify/web
+copying build/lib/chatify/web/components.css -> build/bdist.linux-x86_64/wheel/./chatify/web
+copying build/lib/chatify/web/sourcekeys.js -> build/bdist.linux-x86_64/wheel/./chatify/web
+copying build/lib/chatify/web/appbuilder.js -> build/bdist.linux-x86_64/wheel/./chatify/web
+copying build/lib/chatify/web/codeeditor.js -> build/bdist.linux-x86_64/wheel/./chatify/web
+copying build/lib/chatify/web/feedback.css -> build/bdist.linux-x86_64/wheel/./chatify/web
+copying build/lib/chatify/web/settingstabs.css -> build/bdist.linux-x86_64/wheel/./chatify/web
+copying build/lib/chatify/web/confirmdialog.js -> build/bdist.linux-x86_64/wheel/./chatify/web
+copying build/lib/chatify/web/settingsguide.js -> build/bdist.linux-x86_64/wheel/./chatify/web
+copying build/lib/chatify/web/settings.html -> build/bdist.linux-x86_64/wheel/./chatify/web
+creating build/bdist.linux-x86_64/wheel/chatify/web/emoji
+copying build/lib/chatify/web/emoji/static-1f319.png -> build/bdist.linux-x86_64/wheel/./chatify/web/emoji
+copying build/lib/chatify/web/emoji/1f60d.png -> build/bdist.linux-x86_64/wheel/./chatify/web/emoji
+copying build/lib/chatify/web/emoji/static-1f914.png -> build/bdist.linux-x86_64/wheel/./chatify/web/emoji
+copying build/lib/chatify/web/emoji/1f916.webp -> build/bdist.linux-x86_64/wheel/./chatify/web/emoji
+copying build/lib/chatify/web/emoji/static-2b06-fe0f.png -> build/bdist.linux-x86_64/wheel/./chatify/web/emoji
+copying build/lib/chatify/web/emoji/static-274c.png -> build/bdist.linux-x86_64/wheel/./chatify/web/emoji
+copying build/lib/chatify/web/emoji/static-1f49a.png -> build/bdist.linux-x86_64/wheel/./chatify/web/emoji
+copying build/lib/chatify/web/emoji/1f60e.png -> build/bdist.linux-x86_64/wheel/./chatify/web/emoji
+copying build/lib/chatify/web/emoji/1f680.webp -> build/bdist.linux-x86_64/wheel/./chatify/web/emoji
+copying build/lib/chatify/web/emoji/static-1f308.png -> build/bdist.linux-x86_64/wheel/./chatify/web/emoji
+copying build/lib/chatify/web/emoji/static-1f62e.png -> build/bdist.linux-x86_64/wheel/./chatify/web/emoji
+copying build/lib/chatify/web/emoji/static-1f3af.png -> build/bdist.linux-x86_64/wheel/./chatify/web/emoji
+copying build/lib/chatify/web/emoji/static-2600-fe0f.png -> build/bdist.linux-x86_64/wheel/./chatify/web/emoji
+copying build/lib/chatify/web/emoji/1f60d.webp -> build/bdist.linux-x86_64/wheel/./chatify/web/emoji
+copying build/lib/chatify/web/emoji/static-1f60a.png -> build/bdist.linux-x86_64/wheel/./chatify/web/emoji
+copying build/lib/chatify/web/emoji/STATIC-NOTO-LICENSE.txt -> build/bdist.linux-x86_64/wheel/./chatify/web/emoji
+copying build/lib/chatify/web/emoji/static-1f44d.png -> build/bdist.linux-x86_64/wheel/./chatify/web/emoji
+copying build/lib/chatify/web/emoji/static-1f64f.png -> build/bdist.linux-x86_64/wheel/./chatify/web/emoji
+copying build/lib/chatify/web/emoji/static-1f43c.png -> build/bdist.linux-x86_64/wheel/./chatify/web/emoji
+copying build/lib/chatify/web/emoji/static-1f431.png -> build/bdist.linux-x86_64/wheel/./chatify/web/emoji
+copying build/lib/chatify/web/emoji/static-1f331.png -> build/bdist.linux-x86_64/wheel/./chatify/web/emoji
+copying build/lib/chatify/web/emoji/static-1f98b.png -> build/bdist.linux-x86_64/wheel/./chatify/web/emoji
+copying build/lib/chatify/web/emoji/static-1f680.png -> build/bdist.linux-x86_64/wheel/./chatify/web/emoji
+copying build/lib/chatify/web/emoji/static-1f9d1-200d-1f680.png -> build/bdist.linux-x86_64/wheel/./chatify/web/emoji
+copying build/lib/chatify/web/emoji/static-1f4f0.png -> build/bdist.linux-x86_64/wheel/./chatify/web/emoji
+copying build/lib/chatify/web/emoji/static-1f4a1.png -> build/bdist.linux-x86_64/wheel/./chatify/web/emoji
+copying build/lib/chatify/web/emoji/1f60a.webp -> build/bdist.linux-x86_64/wheel/./chatify/web/emoji
+copying build/lib/chatify/web/emoji/static-1f375.png -> build/bdist.linux-x86_64/wheel/./chatify/web/emoji
+copying build/lib/chatify/web/emoji/1f602.webp -> build/bdist.linux-x86_64/wheel/./chatify/web/emoji
+copying build/lib/chatify/web/emoji/static-1f525.png -> build/bdist.linux-x86_64/wheel/./chatify/web/emoji
+copying build/lib/chatify/web/emoji/ATTRIBUTION.txt -> build/bdist.linux-x86_64/wheel/./chatify/web/emoji
+copying build/lib/chatify/web/emoji/static-1f34e.png -> build/bdist.linux-x86_64/wheel/./chatify/web/emoji
+copying build/lib/chatify/web/emoji/static-1f4aa.png -> build/bdist.linux-x86_64/wheel/./chatify/web/emoji
+copying build/lib/chatify/web/emoji/static-1f4c4.png -> build/bdist.linux-x86_64/wheel/./chatify/web/emoji
+copying build/lib/chatify/web/emoji/static-1f438.png -> build/bdist.linux-x86_64/wheel/./chatify/web/emoji
+copying build/lib/chatify/web/emoji/static-1f917.png -> build/bdist.linux-x86_64/wheel/./chatify/web/emoji
+copying build/lib/chatify/web/emoji/1f62d.webp -> build/bdist.linux-x86_64/wheel/./chatify/web/emoji
+copying build/lib/chatify/web/emoji/1f64c.webp -> build/bdist.linux-x86_64/wheel/./chatify/web/emoji
+copying build/lib/chatify/web/emoji/static-2728.png -> build/bdist.linux-x86_64/wheel/./chatify/web/emoji
+copying build/lib/chatify/web/emoji/static-1f49c.png -> build/bdist.linux-x86_64/wheel/./chatify/web/emoji
+copying build/lib/chatify/web/emoji/static-2615.png -> build/bdist.linux-x86_64/wheel/./chatify/web/emoji
+copying build/lib/chatify/web/emoji/static-1f62d.png -> build/bdist.linux-x86_64/wheel/./chatify/web/emoji
+copying build/lib/chatify/web/emoji/1f973.webp -> build/bdist.linux-x86_64/wheel/./chatify/web/emoji
+copying build/lib/chatify/web/emoji/static-1f92f.png -> build/bdist.linux-x86_64/wheel/./chatify/web/emoji
+copying build/lib/chatify/web/emoji/static-1f389.png -> build/bdist.linux-x86_64/wheel/./chatify/web/emoji
+copying build/lib/chatify/web/emoji/static-1f973.png -> build/bdist.linux-x86_64/wheel/./chatify/web/emoji
+copying build/lib/chatify/web/emoji/1f44b.png -> build/bdist.linux-x86_64/wheel/./chatify/web/emoji
+copying build/lib/chatify/web/emoji/static-2b50.png -> build/bdist.linux-x86_64/wheel/./chatify/web/emoji
+copying build/lib/chatify/web/emoji/2728.png -> build/bdist.linux-x86_64/wheel/./chatify/web/emoji
+copying build/lib/chatify/web/emoji/static-2764-fe0f.png -> build/bdist.linux-x86_64/wheel/./chatify/web/emoji
+copying build/lib/chatify/web/emoji/static-1f436.png -> build/bdist.linux-x86_64/wheel/./chatify/web/emoji
+copying build/lib/chatify/web/emoji/static-1f44e.png -> build/bdist.linux-x86_64/wheel/./chatify/web/emoji
+copying build/lib/chatify/web/emoji/static-1f604.png -> build/bdist.linux-x86_64/wheel/./chatify/web/emoji
+copying build/lib/chatify/web/emoji/static-1f4ac.png -> build/bdist.linux-x86_64/wheel/./chatify/web/emoji
+copying build/lib/chatify/web/emoji/1f916.png -> build/bdist.linux-x86_64/wheel/./chatify/web/emoji
+copying build/lib/chatify/web/emoji/static-1f64c.png -> build/bdist.linux-x86_64/wheel/./chatify/web/emoji
+copying build/lib/chatify/web/emoji/static-1f38a.png -> build/bdist.linux-x86_64/wheel/./chatify/web/emoji
+copying build/lib/chatify/web/emoji/static-2795.png -> build/bdist.linux-x86_64/wheel/./chatify/web/emoji
+copying build/lib/chatify/web/emoji/static-1f600.png -> build/bdist.linux-x86_64/wheel/./chatify/web/emoji
+copying build/lib/chatify/web/emoji/static-27a1-fe0f.png -> build/bdist.linux-x86_64/wheel/./chatify/web/emoji
+copying build/lib/chatify/web/emoji/static-1f634.png -> build/bdist.linux-x86_64/wheel/./chatify/web/emoji
+copying build/lib/chatify/web/emoji/1f914.webp -> build/bdist.linux-x86_64/wheel/./chatify/web/emoji
+copying build/lib/chatify/web/emoji/static-1f36a.png -> build/bdist.linux-x86_64/wheel/./chatify/web/emoji
+copying build/lib/chatify/web/emoji/1f44b.webp -> build/bdist.linux-x86_64/wheel/./chatify/web/emoji
+copying build/lib/chatify/web/emoji/static-1f44b.png -> build/bdist.linux-x86_64/wheel/./chatify/web/emoji
+copying build/lib/chatify/web/emoji/1f64c.png -> build/bdist.linux-x86_64/wheel/./chatify/web/emoji
+copying build/lib/chatify/web/emoji/static-1f33b.png -> build/bdist.linux-x86_64/wheel/./chatify/web/emoji
+copying build/lib/chatify/web/emoji/static-1f642.png -> build/bdist.linux-x86_64/wheel/./chatify/web/emoji
+copying build/lib/chatify/web/emoji/static-1f60c.png -> build/bdist.linux-x86_64/wheel/./chatify/web/emoji
+copying build/lib/chatify/web/emoji/static-1f60d.png -> build/bdist.linux-x86_64/wheel/./chatify/web/emoji
+copying build/lib/chatify/web/emoji/static-1f382.png -> build/bdist.linux-x86_64/wheel/./chatify/web/emoji
+copying build/lib/chatify/web/emoji/2728.webp -> build/bdist.linux-x86_64/wheel/./chatify/web/emoji
+copying build/lib/chatify/web/emoji/1f62d.png -> build/bdist.linux-x86_64/wheel/./chatify/web/emoji
+copying build/lib/chatify/web/emoji/1f389.webp -> build/bdist.linux-x86_64/wheel/./chatify/web/emoji
+copying build/lib/chatify/web/emoji/static-1f603.png -> build/bdist.linux-x86_64/wheel/./chatify/web/emoji
+copying build/lib/chatify/web/emoji/static-1f50d.png -> build/bdist.linux-x86_64/wheel/./chatify/web/emoji
+copying build/lib/chatify/web/emoji/1f680.png -> build/bdist.linux-x86_64/wheel/./chatify/web/emoji
+copying build/lib/chatify/web/emoji/static-1fae1.png -> build/bdist.linux-x86_64/wheel/./chatify/web/emoji
+copying build/lib/chatify/web/emoji/static-1f916.png -> build/bdist.linux-x86_64/wheel/./chatify/web/emoji
+copying build/lib/chatify/web/emoji/1f44d.png -> build/bdist.linux-x86_64/wheel/./chatify/web/emoji
+copying build/lib/chatify/web/emoji/static-23f1-fe0f.png -> build/bdist.linux-x86_64/wheel/./chatify/web/emoji
+copying build/lib/chatify/web/emoji/1f600.png -> build/bdist.linux-x86_64/wheel/./chatify/web/emoji
+copying build/lib/chatify/web/emoji/static-1f970.png -> build/bdist.linux-x86_64/wheel/./chatify/web/emoji
+copying build/lib/chatify/web/emoji/static-2705.png -> build/bdist.linux-x86_64/wheel/./chatify/web/emoji
+copying build/lib/chatify/web/emoji/1f602.png -> build/bdist.linux-x86_64/wheel/./chatify/web/emoji
+copying build/lib/chatify/web/emoji/1f44d.webp -> build/bdist.linux-x86_64/wheel/./chatify/web/emoji
+copying build/lib/chatify/web/emoji/static-1f50e.png -> build/bdist.linux-x86_64/wheel/./chatify/web/emoji
+copying build/lib/chatify/web/emoji/static-267e-fe0f.png -> build/bdist.linux-x86_64/wheel/./chatify/web/emoji
+copying build/lib/chatify/web/emoji/static-1f3c6.png -> build/bdist.linux-x86_64/wheel/./chatify/web/emoji
+copying build/lib/chatify/web/emoji/static-1f355.png -> build/bdist.linux-x86_64/wheel/./chatify/web/emoji
+copying build/lib/chatify/web/emoji/static-1f49b.png -> build/bdist.linux-x86_64/wheel/./chatify/web/emoji
+copying build/lib/chatify/web/emoji/static-1f354.png -> build/bdist.linux-x86_64/wheel/./chatify/web/emoji
+copying build/lib/chatify/web/emoji/1f600.webp -> build/bdist.linux-x86_64/wheel/./chatify/web/emoji
+copying build/lib/chatify/web/emoji/static-1f9d1-200d-1f4bb.png -> build/bdist.linux-x86_64/wheel/./chatify/web/emoji
+copying build/lib/chatify/web/emoji/static-1f951.png -> build/bdist.linux-x86_64/wheel/./chatify/web/emoji
+copying build/lib/chatify/web/emoji/static-1f4da.png -> build/bdist.linux-x86_64/wheel/./chatify/web/emoji
+copying build/lib/chatify/web/emoji/1f525.webp -> build/bdist.linux-x86_64/wheel/./chatify/web/emoji
+copying build/lib/chatify/web/emoji/static-1f601.png -> build/bdist.linux-x86_64/wheel/./chatify/web/emoji
+copying build/lib/chatify/web/emoji/1f60e.webp -> build/bdist.linux-x86_64/wheel/./chatify/web/emoji
+copying build/lib/chatify/web/emoji/1f44f.png -> build/bdist.linux-x86_64/wheel/./chatify/web/emoji
+copying build/lib/chatify/web/emoji/1f60a.png -> build/bdist.linux-x86_64/wheel/./chatify/web/emoji
+copying build/lib/chatify/web/emoji/static-1f57a.png -> build/bdist.linux-x86_64/wheel/./chatify/web/emoji
+copying build/lib/chatify/web/emoji/static-1f98a.png -> build/bdist.linux-x86_64/wheel/./chatify/web/emoji
+copying build/lib/chatify/web/emoji/static-1f44f.png -> build/bdist.linux-x86_64/wheel/./chatify/web/emoji
+copying build/lib/chatify/web/emoji/1f44f.webp -> build/bdist.linux-x86_64/wheel/./chatify/web/emoji
+copying build/lib/chatify/web/emoji/static-1f979.png -> build/bdist.linux-x86_64/wheel/./chatify/web/emoji
+copying build/lib/chatify/web/emoji/static-26a1.png -> build/bdist.linux-x86_64/wheel/./chatify/web/emoji
+copying build/lib/chatify/web/emoji/1f389.png -> build/bdist.linux-x86_64/wheel/./chatify/web/emoji
+copying build/lib/chatify/web/emoji/static-1f4ce.png -> build/bdist.linux-x86_64/wheel/./chatify/web/emoji
+copying build/lib/chatify/web/emoji/1f914.png -> build/bdist.linux-x86_64/wheel/./chatify/web/emoji
+copying build/lib/chatify/web/emoji/static-1f913.png -> build/bdist.linux-x86_64/wheel/./chatify/web/emoji
+copying build/lib/chatify/web/emoji/static-1f602.png -> build/bdist.linux-x86_64/wheel/./chatify/web/emoji
+copying build/lib/chatify/web/emoji/1f973.png -> build/bdist.linux-x86_64/wheel/./chatify/web/emoji
+copying build/lib/chatify/web/emoji/static-1f60e.png -> build/bdist.linux-x86_64/wheel/./chatify/web/emoji
+copying build/lib/chatify/web/emoji/static-1f91d.png -> build/bdist.linux-x86_64/wheel/./chatify/web/emoji
+copying build/lib/chatify/web/emoji/1f525.png -> build/bdist.linux-x86_64/wheel/./chatify/web/emoji
+creating build/bdist.linux-x86_64/wheel/chatify/web/fonts
+copying build/lib/chatify/web/fonts/NotoSansDevanagari-Regular.ttf -> build/bdist.linux-x86_64/wheel/./chatify/web/fonts
+copying build/lib/chatify/web/fonts/OFL.txt -> build/bdist.linux-x86_64/wheel/./chatify/web/fonts
+copying build/lib/chatify/web/fonts/NotoSans-Regular.ttf -> build/bdist.linux-x86_64/wheel/./chatify/web/fonts
+copying build/lib/chatify/web/fonts/NotoNaskhArabic[wght].ttf -> build/bdist.linux-x86_64/wheel/./chatify/web/fonts
+copying build/lib/chatify/web/fonts/NotoSansDevanagari-Bold.ttf -> build/bdist.linux-x86_64/wheel/./chatify/web/fonts
+copying build/lib/chatify/web/fonts/NotoSansMath-OFL.txt -> build/bdist.linux-x86_64/wheel/./chatify/web/fonts
+copying build/lib/chatify/web/fonts/NotoSansSymbols2-Regular.ttf -> build/bdist.linux-x86_64/wheel/./chatify/web/fonts
+copying build/lib/chatify/web/fonts/NotoSans-Bold.ttf -> build/bdist.linux-x86_64/wheel/./chatify/web/fonts
+copying build/lib/chatify/web/fonts/FONTS.md -> build/bdist.linux-x86_64/wheel/./chatify/web/fonts
+copying build/lib/chatify/web/fonts/NotoSansHebrew[wdth,wght].ttf -> build/bdist.linux-x86_64/wheel/./chatify/web/fonts
+copying build/lib/chatify/web/fonts/NotoSansMath-Regular.ttf -> build/bdist.linux-x86_64/wheel/./chatify/web/fonts
+copying build/lib/chatify/web/fonts/NotoSansSymbols-Regular.ttf -> build/bdist.linux-x86_64/wheel/./chatify/web/fonts
+copying build/lib/chatify/web/workspace.css -> build/bdist.linux-x86_64/wheel/./chatify/web
+copying build/lib/chatify/web/codeeditor.LICENSE.txt -> build/bdist.linux-x86_64/wheel/./chatify/web
+copying build/lib/chatify/web/configstate.js -> build/bdist.linux-x86_64/wheel/./chatify/web
+copying build/lib/chatify/web/customselect.css -> build/bdist.linux-x86_64/wheel/./chatify/web
+copying build/lib/chatify/web/refinements.css -> build/bdist.linux-x86_64/wheel/./chatify/web
+copying build/lib/chatify/web/workspace.js -> build/bdist.linux-x86_64/wheel/./chatify/web
+copying build/lib/chatify/web/settingssimple.js -> build/bdist.linux-x86_64/wheel/./chatify/web
+copying build/lib/chatify/web/loading.js -> build/bdist.linux-x86_64/wheel/./chatify/web
+copying build/lib/chatify/web/loading.css -> build/bdist.linux-x86_64/wheel/./chatify/web
+copying build/lib/chatify/web/style.css -> build/bdist.linux-x86_64/wheel/./chatify/web
+copying build/lib/chatify/web/motion.js -> build/bdist.linux-x86_64/wheel/./chatify/web
+copying build/lib/chatify/web/motion.css -> build/bdist.linux-x86_64/wheel/./chatify/web
+copying build/lib/chatify/web/build.css -> build/bdist.linux-x86_64/wheel/./chatify/web
+copying build/lib/chatify/web/tour.js -> build/bdist.linux-x86_64/wheel/./chatify/web
+copying build/lib/chatify/web/settings.js -> build/bdist.linux-x86_64/wheel/./chatify/web
+copying build/lib/chatify/web/settings.css -> build/bdist.linux-x86_64/wheel/./chatify/web
+copying build/lib/chatify/web/settingssearch.js -> build/bdist.linux-x86_64/wheel/./chatify/web
+copying build/lib/chatify/web/nerdload.js -> build/bdist.linux-x86_64/wheel/./chatify/web
+copying build/lib/chatify/web/theme.js -> build/bdist.linux-x86_64/wheel/./chatify/web
+copying build/lib/chatify/web/build.js -> build/bdist.linux-x86_64/wheel/./chatify/web
+copying build/lib/chatify/web/app.js -> build/bdist.linux-x86_64/wheel/./chatify/web
+creating build/bdist.linux-x86_64/wheel/chatify/web/logos
+copying build/lib/chatify/web/logos/ollama.svg -> build/bdist.linux-x86_64/wheel/./chatify/web/logos
+copying build/lib/chatify/web/logos/groq.svg -> build/bdist.linux-x86_64/wheel/./chatify/web/logos
+copying build/lib/chatify/web/logos/gemini.svg -> build/bdist.linux-x86_64/wheel/./chatify/web/logos
+copying build/lib/chatify/web/logos/mimo.svg -> build/bdist.linux-x86_64/wheel/./chatify/web/logos
+copying build/lib/chatify/web/logos/deepseek.svg -> build/bdist.linux-x86_64/wheel/./chatify/web/logos
+copying build/lib/chatify/web/logos/minimax.svg -> build/bdist.linux-x86_64/wheel/./chatify/web/logos
+copying build/lib/chatify/web/logos/mistral.svg -> build/bdist.linux-x86_64/wheel/./chatify/web/logos
+copying build/lib/chatify/web/logos/openrouter.svg -> build/bdist.linux-x86_64/wheel/./chatify/web/logos
+copying build/lib/chatify/web/logos/openai.svg -> build/bdist.linux-x86_64/wheel/./chatify/web/logos
+copying build/lib/chatify/web/logos/claude.svg -> build/bdist.linux-x86_64/wheel/./chatify/web/logos
+copying build/lib/chatify/web/builderstudio.css -> build/bdist.linux-x86_64/wheel/./chatify/web
+copying build/lib/chatify/web/index.html -> build/bdist.linux-x86_64/wheel/./chatify/web
+copying build/lib/chatify/web/upgrade.css -> build/bdist.linux-x86_64/wheel/./chatify/web
+creating build/bdist.linux-x86_64/wheel/chatify/web/team
+copying build/lib/chatify/web/team/harsh.jpg -> build/bdist.linux-x86_64/wheel/./chatify/web/team
+copying build/lib/chatify/web/team/dennis.jpg -> build/bdist.linux-x86_64/wheel/./chatify/web/team
+copying build/lib/chatify/web/error.html -> build/bdist.linux-x86_64/wheel/./chatify/web
+copying build/lib/chatify/web/about.html -> build/bdist.linux-x86_64/wheel/./chatify/web
+copying build/lib/chatify/web/splitters.js -> build/bdist.linux-x86_64/wheel/./chatify/web
+copying build/lib/chatify/web/navigation.css -> build/bdist.linux-x86_64/wheel/./chatify/web
+copying build/lib/chatify/web/navflow.css -> build/bdist.linux-x86_64/wheel/./chatify/web
+copying build/lib/chatify/launcher.py -> build/bdist.linux-x86_64/wheel/./chatify
+copying build/lib/chatify/cli.py -> build/bdist.linux-x86_64/wheel/./chatify
+copying build/lib/chatify/store.py -> build/bdist.linux-x86_64/wheel/./chatify
+copying build/lib/chatify/secrets.py -> build/bdist.linux-x86_64/wheel/./chatify
+copying build/lib/chatify/theme.py -> build/bdist.linux-x86_64/wheel/./chatify
+copying build/lib/chatify/draftaudit.py -> build/bdist.linux-x86_64/wheel/./chatify
+copying build/lib/chatify/suggestions.py -> build/bdist.linux-x86_64/wheel/./chatify
+copying build/lib/chatify/pipeline.py -> build/bdist.linux-x86_64/wheel/./chatify
+copying build/lib/chatify/modelcatalog.py -> build/bdist.linux-x86_64/wheel/./chatify
+copying build/lib/chatify/fileread.py -> build/bdist.linux-x86_64/wheel/./chatify
+copying build/lib/chatify/configchange.py -> build/bdist.linux-x86_64/wheel/./chatify
+copying build/lib/chatify/builddrafts.py -> build/bdist.linux-x86_64/wheel/./chatify
+copying build/lib/chatify/stage_contracts.py -> build/bdist.linux-x86_64/wheel/./chatify
+copying build/lib/chatify/generators.py -> build/bdist.linux-x86_64/wheel/./chatify
+copying build/lib/chatify/settingsguide.py -> build/bdist.linux-x86_64/wheel/./chatify
+copying build/lib/chatify/prompts.py -> build/bdist.linux-x86_64/wheel/./chatify
+copying build/lib/chatify/rerank.py -> build/bdist.linux-x86_64/wheel/./chatify
+creating build/bdist.linux-x86_64/wheel/chatify/templates
+creating build/bdist.linux-x86_64/wheel/chatify/templates/minimal
+creating build/bdist.linux-x86_64/wheel/chatify/templates/minimal/docs
+copying build/lib/chatify/templates/minimal/docs/about.md -> build/bdist.linux-x86_64/wheel/./chatify/templates/minimal/docs
+copying build/lib/chatify/templates/minimal/app.yaml -> build/bdist.linux-x86_64/wheel/./chatify/templates/minimal
+copying build/lib/chatify/server.py -> build/bdist.linux-x86_64/wheel/./chatify
+copying build/lib/chatify/appbuilder.py -> build/bdist.linux-x86_64/wheel/./chatify
+copying build/lib/chatify/budget.py -> build/bdist.linux-x86_64/wheel/./chatify
+copying build/lib/chatify/editstate.py -> build/bdist.linux-x86_64/wheel/./chatify
+copying build/lib/chatify/permissions.py -> build/bdist.linux-x86_64/wheel/./chatify
+copying build/lib/chatify/exports.py -> build/bdist.linux-x86_64/wheel/./chatify
+copying build/lib/chatify/actions.py -> build/bdist.linux-x86_64/wheel/./chatify
+copying build/lib/chatify/providers.py -> build/bdist.linux-x86_64/wheel/./chatify
+copying build/lib/chatify/bundle_review.py -> build/bdist.linux-x86_64/wheel/./chatify
+copying build/lib/chatify/nerdload.py -> build/bdist.linux-x86_64/wheel/./chatify
+copying build/lib/chatify/publish.py -> build/bdist.linux-x86_64/wheel/./chatify
+copying build/lib/chatify/__main__.py -> build/bdist.linux-x86_64/wheel/./chatify
+copying build/lib/chatify/versions.py -> build/bdist.linux-x86_64/wheel/./chatify
+copying build/lib/chatify/buildjobs.py -> build/bdist.linux-x86_64/wheel/./chatify
+copying build/lib/chatify/accounts.py -> build/bdist.linux-x86_64/wheel/./chatify
+copying build/lib/chatify/readiness.py -> build/bdist.linux-x86_64/wheel/./chatify
+copying build/lib/chatify/terminal.py -> build/bdist.linux-x86_64/wheel/./chatify
+copying build/lib/chatify/buildimages.py -> build/bdist.linux-x86_64/wheel/./chatify
+creating build/bdist.linux-x86_64/wheel/chatify/connectors
+copying build/lib/chatify/connectors/__init__.py -> build/bdist.linux-x86_64/wheel/./chatify/connectors
+copying build/lib/chatify/connectors/local_files.py -> build/bdist.linux-x86_64/wheel/./chatify/connectors
+copying build/lib/chatify/connectors/recovery.py -> build/bdist.linux-x86_64/wheel/./chatify/connectors
+copying build/lib/chatify/connectors/http_json.py -> build/bdist.linux-x86_64/wheel/./chatify/connectors
+copying build/lib/chatify/connectors/base.py -> build/bdist.linux-x86_64/wheel/./chatify/connectors
+copying build/lib/chatify/connectors/pubmed.py -> build/bdist.linux-x86_64/wheel/./chatify/connectors
+copying build/lib/chatify/connectors/web_search.py -> build/bdist.linux-x86_64/wheel/./chatify/connectors
+copying build/lib/chatify/connectors/bounded.py -> build/bdist.linux-x86_64/wheel/./chatify/connectors
+copying build/lib/chatify/connectors/open_sources.py -> build/bdist.linux-x86_64/wheel/./chatify/connectors
+copying build/lib/chatify/connectors/arxiv.py -> build/bdist.linux-x86_64/wheel/./chatify/connectors
+creating build/bdist.linux-x86_64/wheel/apps
+creating build/bdist.linux-x86_64/wheel/apps/fitchat
+creating build/bdist.linux-x86_64/wheel/apps/fitchat/docs
+copying build/lib/apps/fitchat/docs/03-exercise-fitness.md -> build/bdist.linux-x86_64/wheel/./apps/fitchat/docs
+copying build/lib/apps/fitchat/docs/01-pag-executive-summary.pdf -> build/bdist.linux-x86_64/wheel/./apps/fitchat/docs
+copying build/lib/apps/fitchat/docs/04-older-adults.md -> build/bdist.linux-x86_64/wheel/./apps/fitchat/docs
+copying build/lib/apps/fitchat/docs/02-benefits.md -> build/bdist.linux-x86_64/wheel/./apps/fitchat/docs
+copying build/lib/apps/fitchat/app.yaml -> build/bdist.linux-x86_64/wheel/./apps/fitchat
+creating build/bdist.linux-x86_64/wheel/apps/formulaone
+copying build/lib/apps/formulaone/README.md -> build/bdist.linux-x86_64/wheel/./apps/formulaone
+copying build/lib/apps/formulaone/app.yaml -> build/bdist.linux-x86_64/wheel/./apps/formulaone
+copying build/lib/apps/formulaone/f1_sources.py -> build/bdist.linux-x86_64/wheel/./apps/formulaone
+creating build/bdist.linux-x86_64/wheel/apps/formulaone/sources
+copying build/lib/apps/formulaone/sources/fia-sporting.md -> build/bdist.linux-x86_64/wheel/./apps/formulaone/sources
+copying build/lib/apps/formulaone/sources/ferrari-first-win.md -> build/bdist.linux-x86_64/wheel/./apps/formulaone/sources
+copying build/lib/apps/formulaone/sources/ferrari-debut.md -> build/bdist.linux-x86_64/wheel/./apps/formulaone/sources
+copying build/lib/apps/formulaone/sources/ferrari-history.md -> build/bdist.linux-x86_64/wheel/./apps/formulaone/sources
+copying build/lib/apps/formulaone/sources/fia-technical.md -> build/bdist.linux-x86_64/wheel/./apps/formulaone/sources
+creating build/bdist.linux-x86_64/wheel/apps/minimal
+creating build/bdist.linux-x86_64/wheel/apps/minimal/docs
+copying build/lib/apps/minimal/docs/about.md -> build/bdist.linux-x86_64/wheel/./apps/minimal/docs
+creating build/bdist.linux-x86_64/wheel/apps/minimal/data
+creating build/bdist.linux-x86_64/wheel/apps/minimal/data/build-drafts
+creating build/bdist.linux-x86_64/wheel/apps/minimal/data/build-drafts/25bf8e1a2393f1108d37029b3df5593236c755742ec93465bbafa9b290bddcf6
+copying build/lib/apps/minimal/data/build-drafts/25bf8e1a2393f1108d37029b3df5593236c755742ec93465bbafa9b290bddcf6/a8acb4950fd547dc981eba615c1a42f3.json -> build/bdist.linux-x86_64/wheel/./apps/minimal/data/build-drafts/25bf8e1a2393f1108d37029b3df5593236c755742ec93465bbafa9b290bddcf6
+copying build/lib/apps/minimal/data/build-drafts/25bf8e1a2393f1108d37029b3df5593236c755742ec93465bbafa9b290bddcf6/71cb60a96bcb426089298ff1ec8b97cb.json -> build/bdist.linux-x86_64/wheel/./apps/minimal/data/build-drafts/25bf8e1a2393f1108d37029b3df5593236c755742ec93465bbafa9b290bddcf6
+copying build/lib/apps/minimal/data/build-drafts/25bf8e1a2393f1108d37029b3df5593236c755742ec93465bbafa9b290bddcf6/272e1f9e79f44639ad99f005f48928aa.json -> build/bdist.linux-x86_64/wheel/./apps/minimal/data/build-drafts/25bf8e1a2393f1108d37029b3df5593236c755742ec93465bbafa9b290bddcf6
+copying build/lib/apps/minimal/data/build-spend.json -> build/bdist.linux-x86_64/wheel/./apps/minimal/data
+copying build/lib/apps/minimal/app.yaml -> build/bdist.linux-x86_64/wheel/./apps/minimal
+creating build/bdist.linux-x86_64/wheel/apps/peacechat
+copying build/lib/apps/peacechat/README.md -> build/bdist.linux-x86_64/wheel/./apps/peacechat
+copying build/lib/apps/peacechat/app.yaml -> build/bdist.linux-x86_64/wheel/./apps/peacechat
+copying build/lib/apps/peacechat/peace_sources.py -> build/bdist.linux-x86_64/wheel/./apps/peacechat
+creating build/bdist.linux-x86_64/wheel/apps/newsnerd-sample
+creating build/bdist.linux-x86_64/wheel/apps/newsnerd-sample/docs
+copying build/lib/apps/newsnerd-sample/docs/01-how-newsnerd-works.txt -> build/bdist.linux-x86_64/wheel/./apps/newsnerd-sample/docs
+copying build/lib/apps/newsnerd-sample/test_newsnerd.py -> build/bdist.linux-x86_64/wheel/./apps/newsnerd-sample
+copying build/lib/apps/newsnerd-sample/README.md -> build/bdist.linux-x86_64/wheel/./apps/newsnerd-sample
+copying build/lib/apps/newsnerd-sample/SETUP.md -> build/bdist.linux-x86_64/wheel/./apps/newsnerd-sample
+copying build/lib/apps/newsnerd-sample/news_connector.py -> build/bdist.linux-x86_64/wheel/./apps/newsnerd-sample
+copying build/lib/apps/newsnerd-sample/CONFIG-FIELDS.md -> build/bdist.linux-x86_64/wheel/./apps/newsnerd-sample
+copying build/lib/apps/newsnerd-sample/app.yaml -> build/bdist.linux-x86_64/wheel/./apps/newsnerd-sample
+copying build/lib/apps/newsnerd-sample/PROMPTS.md -> build/bdist.linux-x86_64/wheel/./apps/newsnerd-sample
+copying build/lib/apps/newsnerd-sample/app-newsapi.yaml -> build/bdist.linux-x86_64/wheel/./apps/newsnerd-sample
+copying build/lib/apps/newsnerd-sample/app-gnews.yaml -> build/bdist.linux-x86_64/wheel/./apps/newsnerd-sample
+creating build/bdist.linux-x86_64/wheel/apps/hosted
+creating build/bdist.linux-x86_64/wheel/apps/hosted/docs
+copying build/lib/apps/hosted/docs/about.md -> build/bdist.linux-x86_64/wheel/./apps/hosted/docs
+copying build/lib/apps/hosted/docs/build-your-own.md -> build/bdist.linux-x86_64/wheel/./apps/hosted/docs
+copying build/lib/apps/hosted/app.yaml -> build/bdist.linux-x86_64/wheel/./apps/hosted
+creating build/bdist.linux-x86_64/wheel/apps/spacechat
+creating build/bdist.linux-x86_64/wheel/apps/spacechat/docs
+copying build/lib/apps/spacechat/docs/04-iss.md -> build/bdist.linux-x86_64/wheel/./apps/spacechat/docs
+copying build/lib/apps/spacechat/docs/01-mars.md -> build/bdist.linux-x86_64/wheel/./apps/spacechat/docs
+copying build/lib/apps/spacechat/docs/03-webb.md -> build/bdist.linux-x86_64/wheel/./apps/spacechat/docs
+copying build/lib/apps/spacechat/docs/02-artemis.md -> build/bdist.linux-x86_64/wheel/./apps/spacechat/docs
+copying build/lib/apps/spacechat/app.yaml -> build/bdist.linux-x86_64/wheel/./apps/spacechat
+copying build/lib/apps/gallery.yaml -> build/bdist.linux-x86_64/wheel/./apps
+creating build/bdist.linux-x86_64/wheel/apps/dietchat
+copying build/lib/apps/dietchat/app.yaml -> build/bdist.linux-x86_64/wheel/./apps/dietchat
+creating build/bdist.linux-x86_64/wheel/apps/dietchat-sample
+creating build/bdist.linux-x86_64/wheel/apps/dietchat-sample/docs
+copying build/lib/apps/dietchat-sample/docs/addons.txt -> build/bdist.linux-x86_64/wheel/./apps/dietchat-sample/docs
+copying build/lib/apps/dietchat-sample/docs/home.txt -> build/bdist.linux-x86_64/wheel/./apps/dietchat-sample/docs
+copying build/lib/apps/dietchat-sample/docs/contact.txt -> build/bdist.linux-x86_64/wheel/./apps/dietchat-sample/docs
+copying build/lib/apps/dietchat-sample/docs/about.txt -> build/bdist.linux-x86_64/wheel/./apps/dietchat-sample/docs
+copying build/lib/apps/dietchat-sample/README.md -> build/bdist.linux-x86_64/wheel/./apps/dietchat-sample
+copying build/lib/apps/dietchat-sample/app.yaml -> build/bdist.linux-x86_64/wheel/./apps/dietchat-sample
+creating build/bdist.linux-x86_64/wheel/apps/recipechat
+copying build/lib/apps/recipechat/recipe_sources.py -> build/bdist.linux-x86_64/wheel/./apps/recipechat
+copying build/lib/apps/recipechat/app.yaml -> build/bdist.linux-x86_64/wheel/./apps/recipechat
+creating build/bdist.linux-x86_64/wheel/apps/wirelesschat
+copying build/lib/apps/wirelesschat/app.yaml -> build/bdist.linux-x86_64/wheel/./apps/wirelesschat
+creating build/bdist.linux-x86_64/wheel/apps/wirelesschat/papers
+copying build/lib/apps/wirelesschat/papers/README.md -> build/bdist.linux-x86_64/wheel/./apps/wirelesschat/papers
+running install_egg_info
+Copying chatify_app.egg-info to build/bdist.linux-x86_64/wheel/./chatify_app-0.4.32-py3.14.egg-info
+running install_scripts
+creating build/bdist.linux-x86_64/wheel/chatify_app-0.4.32.dist-info/WHEEL
+creating '/tmp/chatify-ci-followup/wheel/.tmp-yu3rsu_c/chatify_app-0.4.32-py3-none-any.whl' and adding 'build/bdist.linux-x86_64/wheel' to it
+adding 'apps/gallery.yaml'
+adding 'apps/dietchat/app.yaml'
+adding 'apps/dietchat-sample/README.md'
+adding 'apps/dietchat-sample/app.yaml'
+adding 'apps/dietchat-sample/docs/about.txt'
+adding 'apps/dietchat-sample/docs/addons.txt'
+adding 'apps/dietchat-sample/docs/contact.txt'
+adding 'apps/dietchat-sample/docs/home.txt'
+adding 'apps/fitchat/app.yaml'
+adding 'apps/fitchat/docs/01-pag-executive-summary.pdf'
+adding 'apps/fitchat/docs/02-benefits.md'
+adding 'apps/fitchat/docs/03-exercise-fitness.md'
+adding 'apps/fitchat/docs/04-older-adults.md'
+adding 'apps/formulaone/README.md'
+adding 'apps/formulaone/app.yaml'
+adding 'apps/formulaone/f1_sources.py'
+adding 'apps/formulaone/sources/ferrari-debut.md'
+adding 'apps/formulaone/sources/ferrari-first-win.md'
+adding 'apps/formulaone/sources/ferrari-history.md'
+adding 'apps/formulaone/sources/fia-sporting.md'
+adding 'apps/formulaone/sources/fia-technical.md'
+adding 'apps/hosted/app.yaml'
+adding 'apps/hosted/docs/about.md'
+adding 'apps/hosted/docs/build-your-own.md'
+adding 'apps/minimal/app.yaml'
+adding 'apps/minimal/data/build-spend.json'
+adding 'apps/minimal/data/build-drafts/25bf8e1a2393f1108d37029b3df5593236c755742ec93465bbafa9b290bddcf6/272e1f9e79f44639ad99f005f48928aa.json'
+adding 'apps/minimal/data/build-drafts/25bf8e1a2393f1108d37029b3df5593236c755742ec93465bbafa9b290bddcf6/71cb60a96bcb426089298ff1ec8b97cb.json'
+adding 'apps/minimal/data/build-drafts/25bf8e1a2393f1108d37029b3df5593236c755742ec93465bbafa9b290bddcf6/a8acb4950fd547dc981eba615c1a42f3.json'
+adding 'apps/minimal/docs/about.md'
+adding 'apps/newsnerd-sample/CONFIG-FIELDS.md'
+adding 'apps/newsnerd-sample/PROMPTS.md'
+adding 'apps/newsnerd-sample/README.md'
+adding 'apps/newsnerd-sample/SETUP.md'
+adding 'apps/newsnerd-sample/app-gnews.yaml'
+adding 'apps/newsnerd-sample/app-newsapi.yaml'
+adding 'apps/newsnerd-sample/app.yaml'
+adding 'apps/newsnerd-sample/news_connector.py'
+adding 'apps/newsnerd-sample/test_newsnerd.py'
+adding 'apps/newsnerd-sample/docs/01-how-newsnerd-works.txt'
+adding 'apps/peacechat/README.md'
+adding 'apps/peacechat/app.yaml'
+adding 'apps/peacechat/peace_sources.py'
+adding 'apps/recipechat/app.yaml'
+adding 'apps/recipechat/recipe_sources.py'
+adding 'apps/spacechat/app.yaml'
+adding 'apps/spacechat/docs/01-mars.md'
+adding 'apps/spacechat/docs/02-artemis.md'
+adding 'apps/spacechat/docs/03-webb.md'
+adding 'apps/spacechat/docs/04-iss.md'
+adding 'apps/wirelesschat/app.yaml'
+adding 'apps/wirelesschat/papers/README.md'
+adding 'chatify/__init__.py'
+adding 'chatify/__main__.py'
+adding 'chatify/accounts.py'
+adding 'chatify/actions.py'
+adding 'chatify/apipicks.py'
+adding 'chatify/apiterms.py'
+adding 'chatify/appbuilder.py'
+adding 'chatify/budget.py'
+adding 'chatify/builddrafts.py'
+adding 'chatify/buildimages.py'
+adding 'chatify/buildjobs.py'
+adding 'chatify/bundle_review.py'
+adding 'chatify/cli.py'
+adding 'chatify/configchange.py'
+adding 'chatify/configdoctor.py'
+adding 'chatify/draftaudit.py'
+adding 'chatify/editstate.py'
+adding 'chatify/exports.py'
+adding 'chatify/fetch.py'
+adding 'chatify/fileread.py'
+adding 'chatify/gallery.py'
+adding 'chatify/generator_design.py'
+adding 'chatify/generators.py'
+adding 'chatify/hardware.py'
+adding 'chatify/keybundle.py'
+adding 'chatify/launcher.py'
+adding 'chatify/management.py'
+adding 'chatify/modelcatalog.py'
+adding 'chatify/mysqlstore.py'
+adding 'chatify/nerdload.py'
+adding 'chatify/ollama_setup.py'
+adding 'chatify/pdfread.py'
+adding 'chatify/permissions.py'
+adding 'chatify/pipeline.py'
+adding 'chatify/portable.py'
+adding 'chatify/prompts.py'
+adding 'chatify/providers.py'
+adding 'chatify/publish.py'
+adding 'chatify/readiness.py'
+adding 'chatify/rerank.py'
+adding 'chatify/schema.py'
+adding 'chatify/secrets.py'
+adding 'chatify/server.py'
+adding 'chatify/settingsguide.py'
+adding 'chatify/source_credentials.py'
+adding 'chatify/stage_contracts.py'
+adding 'chatify/store.py'
+adding 'chatify/suggestions.py'
+adding 'chatify/terminal.py'
+adding 'chatify/theme.py'
+adding 'chatify/versions.py'
+adding 'chatify/websearch.py'
+adding 'chatify/workspace.py'
+adding 'chatify/connectors/__init__.py'
+adding 'chatify/connectors/arxiv.py'
+adding 'chatify/connectors/base.py'
+adding 'chatify/connectors/bounded.py'
+adding 'chatify/connectors/http_json.py'
+adding 'chatify/connectors/local_files.py'
+adding 'chatify/connectors/open_sources.py'
+adding 'chatify/connectors/pubmed.py'
+adding 'chatify/connectors/recovery.py'
+adding 'chatify/connectors/web_search.py'
+adding 'chatify/templates/minimal/app.yaml'
+adding 'chatify/templates/minimal/docs/about.md'
+adding 'chatify/web/about.css'
+adding 'chatify/web/about.html'
+adding 'chatify/web/about.js'
+adding 'chatify/web/app.js'
+adding 'chatify/web/appbuilder.js'
+adding 'chatify/web/appearanceextras.js'
+adding 'chatify/web/brand.js'
+adding 'chatify/web/build.css'
+adding 'chatify/web/build.html'
+adding 'chatify/web/build.js'
+adding 'chatify/web/builderstudio.css'
+adding 'chatify/web/codeeditor.LICENSE.txt'
+adding 'chatify/web/codeeditor.js'
+adding 'chatify/web/components.css'
+adding 'chatify/web/configstate.js'
+adding 'chatify/web/configurationhome.css'
+adding 'chatify/web/confirmdialog.js'
+adding 'chatify/web/customselect.css'
+adding 'chatify/web/customselect.js'
+adding 'chatify/web/emoji.js'
+adding 'chatify/web/error.html'
+adding 'chatify/web/featurecatalog.js'
+adding 'chatify/web/feedback.css'
+adding 'chatify/web/feedback.js'
+adding 'chatify/web/gallery.html'
+adding 'chatify/web/index.html'
+adding 'chatify/web/loading.css'
+adding 'chatify/web/loading.js'
+adding 'chatify/web/motion.css'
+adding 'chatify/web/motion.js'
+adding 'chatify/web/navflow.css'
+adding 'chatify/web/navflow.js'
+adding 'chatify/web/navigation.css'
+adding 'chatify/web/nerdload.js'
+adding 'chatify/web/panels.js'
+adding 'chatify/web/pipeline.js'
+adding 'chatify/web/reading.js'
+adding 'chatify/web/refinements.css'
+adding 'chatify/web/run-locally.html'
+adding 'chatify/web/settings.css'
+adding 'chatify/web/settings.html'
+adding 'chatify/web/settings.js'
+adding 'chatify/web/settingsfind.js'
+adding 'chatify/web/settingsguide.js'
+adding 'chatify/web/settingssearch.js'
+adding 'chatify/web/settingssimple.js'
+adding 'chatify/web/settingstabs.css'
+adding 'chatify/web/settingstop.js'
+adding 'chatify/web/sourcekeys.js'
+adding 'chatify/web/splitters.js'
+adding 'chatify/web/style.css'
+adding 'chatify/web/theme.js'
+adding 'chatify/web/tour.css'
+adding 'chatify/web/tour.js'
+adding 'chatify/web/upgrade.css'
+adding 'chatify/web/workspace.css'
+adding 'chatify/web/workspace.js'
+adding 'chatify/web/emoji/1f389.png'
+adding 'chatify/web/emoji/1f389.webp'
+adding 'chatify/web/emoji/1f44b.png'
+adding 'chatify/web/emoji/1f44b.webp'
+adding 'chatify/web/emoji/1f44d.png'
+adding 'chatify/web/emoji/1f44d.webp'
+adding 'chatify/web/emoji/1f44f.png'
+adding 'chatify/web/emoji/1f44f.webp'
+adding 'chatify/web/emoji/1f525.png'
+adding 'chatify/web/emoji/1f525.webp'
+adding 'chatify/web/emoji/1f600.png'
+adding 'chatify/web/emoji/1f600.webp'
+adding 'chatify/web/emoji/1f602.png'
+adding 'chatify/web/emoji/1f602.webp'
+adding 'chatify/web/emoji/1f60a.png'
+adding 'chatify/web/emoji/1f60a.webp'
+adding 'chatify/web/emoji/1f60d.png'
+adding 'chatify/web/emoji/1f60d.webp'
+adding 'chatify/web/emoji/1f60e.png'
+adding 'chatify/web/emoji/1f60e.webp'
+adding 'chatify/web/emoji/1f62d.png'
+adding 'chatify/web/emoji/1f62d.webp'
+adding 'chatify/web/emoji/1f64c.png'
+adding 'chatify/web/emoji/1f64c.webp'
+adding 'chatify/web/emoji/1f680.png'
+adding 'chatify/web/emoji/1f680.webp'
+adding 'chatify/web/emoji/1f914.png'
+adding 'chatify/web/emoji/1f914.webp'
+adding 'chatify/web/emoji/1f916.png'
+adding 'chatify/web/emoji/1f916.webp'
+adding 'chatify/web/emoji/1f973.png'
+adding 'chatify/web/emoji/1f973.webp'
+adding 'chatify/web/emoji/2728.png'
+adding 'chatify/web/emoji/2728.webp'
+adding 'chatify/web/emoji/ATTRIBUTION.txt'
+adding 'chatify/web/emoji/STATIC-NOTO-LICENSE.txt'
+adding 'chatify/web/emoji/static-1f308.png'
+adding 'chatify/web/emoji/static-1f319.png'
+adding 'chatify/web/emoji/static-1f331.png'
+adding 'chatify/web/emoji/static-1f33b.png'
+adding 'chatify/web/emoji/static-1f34e.png'
+adding 'chatify/web/emoji/static-1f354.png'
+adding 'chatify/web/emoji/static-1f355.png'
+adding 'chatify/web/emoji/static-1f36a.png'
+adding 'chatify/web/emoji/static-1f375.png'
+adding 'chatify/web/emoji/static-1f382.png'
+adding 'chatify/web/emoji/static-1f389.png'
+adding 'chatify/web/emoji/static-1f38a.png'
+adding 'chatify/web/emoji/static-1f3af.png'
+adding 'chatify/web/emoji/static-1f3c6.png'
+adding 'chatify/web/emoji/static-1f431.png'
+adding 'chatify/web/emoji/static-1f436.png'
+adding 'chatify/web/emoji/static-1f438.png'
+adding 'chatify/web/emoji/static-1f43c.png'
+adding 'chatify/web/emoji/static-1f44b.png'
+adding 'chatify/web/emoji/static-1f44d.png'
+adding 'chatify/web/emoji/static-1f44e.png'
+adding 'chatify/web/emoji/static-1f44f.png'
+adding 'chatify/web/emoji/static-1f49a.png'
+adding 'chatify/web/emoji/static-1f49b.png'
+adding 'chatify/web/emoji/static-1f49c.png'
+adding 'chatify/web/emoji/static-1f4a1.png'
+adding 'chatify/web/emoji/static-1f4aa.png'
+adding 'chatify/web/emoji/static-1f4ac.png'
+adding 'chatify/web/emoji/static-1f4c4.png'
+adding 'chatify/web/emoji/static-1f4ce.png'
+adding 'chatify/web/emoji/static-1f4da.png'
+adding 'chatify/web/emoji/static-1f4f0.png'
+adding 'chatify/web/emoji/static-1f50d.png'
+adding 'chatify/web/emoji/static-1f50e.png'
+adding 'chatify/web/emoji/static-1f525.png'
+adding 'chatify/web/emoji/static-1f57a.png'
+adding 'chatify/web/emoji/static-1f600.png'
+adding 'chatify/web/emoji/static-1f601.png'
+adding 'chatify/web/emoji/static-1f602.png'
+adding 'chatify/web/emoji/static-1f603.png'
+adding 'chatify/web/emoji/static-1f604.png'
+adding 'chatify/web/emoji/static-1f60a.png'
+adding 'chatify/web/emoji/static-1f60c.png'
+adding 'chatify/web/emoji/static-1f60d.png'
+adding 'chatify/web/emoji/static-1f60e.png'
+adding 'chatify/web/emoji/static-1f62d.png'
+adding 'chatify/web/emoji/static-1f62e.png'
+adding 'chatify/web/emoji/static-1f634.png'
+adding 'chatify/web/emoji/static-1f642.png'
+adding 'chatify/web/emoji/static-1f64c.png'
+adding 'chatify/web/emoji/static-1f64f.png'
+adding 'chatify/web/emoji/static-1f680.png'
+adding 'chatify/web/emoji/static-1f913.png'
+adding 'chatify/web/emoji/static-1f914.png'
+adding 'chatify/web/emoji/static-1f916.png'
+adding 'chatify/web/emoji/static-1f917.png'
+adding 'chatify/web/emoji/static-1f91d.png'
+adding 'chatify/web/emoji/static-1f92f.png'
+adding 'chatify/web/emoji/static-1f951.png'
+adding 'chatify/web/emoji/static-1f970.png'
+adding 'chatify/web/emoji/static-1f973.png'
+adding 'chatify/web/emoji/static-1f979.png'
+adding 'chatify/web/emoji/static-1f98a.png'
+adding 'chatify/web/emoji/static-1f98b.png'
+adding 'chatify/web/emoji/static-1f9d1-200d-1f4bb.png'
+adding 'chatify/web/emoji/static-1f9d1-200d-1f680.png'
+adding 'chatify/web/emoji/static-1fae1.png'
+adding 'chatify/web/emoji/static-23f1-fe0f.png'
+adding 'chatify/web/emoji/static-2600-fe0f.png'
+adding 'chatify/web/emoji/static-2615.png'
+adding 'chatify/web/emoji/static-267e-fe0f.png'
+adding 'chatify/web/emoji/static-26a1.png'
+adding 'chatify/web/emoji/static-2705.png'
+adding 'chatify/web/emoji/static-2728.png'
+adding 'chatify/web/emoji/static-274c.png'
+adding 'chatify/web/emoji/static-2764-fe0f.png'
+adding 'chatify/web/emoji/static-2795.png'
+adding 'chatify/web/emoji/static-27a1-fe0f.png'
+adding 'chatify/web/emoji/static-2b06-fe0f.png'
+adding 'chatify/web/emoji/static-2b50.png'
+adding 'chatify/web/fonts/FONTS.md'
+adding 'chatify/web/fonts/NotoNaskhArabic[wght].ttf'
+adding 'chatify/web/fonts/NotoSans-Bold.ttf'
+adding 'chatify/web/fonts/NotoSans-Regular.ttf'
+adding 'chatify/web/fonts/NotoSansDevanagari-Bold.ttf'
+adding 'chatify/web/fonts/NotoSansDevanagari-Regular.ttf'
+adding 'chatify/web/fonts/NotoSansHebrew[wdth,wght].ttf'
+adding 'chatify/web/fonts/NotoSansMath-OFL.txt'
+adding 'chatify/web/fonts/NotoSansMath-Regular.ttf'
+adding 'chatify/web/fonts/NotoSansSymbols-Regular.ttf'
+adding 'chatify/web/fonts/NotoSansSymbols2-Regular.ttf'
+adding 'chatify/web/fonts/OFL.txt'
+adding 'chatify/web/icons/chatify.svg'
+adding 'chatify/web/logos/claude.svg'
+adding 'chatify/web/logos/deepseek.svg'
+adding 'chatify/web/logos/gemini.svg'
+adding 'chatify/web/logos/groq.svg'
+adding 'chatify/web/logos/mimo.svg'
+adding 'chatify/web/logos/minimax.svg'
+adding 'chatify/web/logos/mistral.svg'
+adding 'chatify/web/logos/ollama.svg'
+adding 'chatify/web/logos/openai.svg'
+adding 'chatify/web/logos/openrouter.svg'
+adding 'chatify/web/team/dennis.jpg'
+adding 'chatify/web/team/harsh.jpg'
+adding 'chatify_app-0.4.32.dist-info/licenses/LICENSE'
+adding 'chatify_app-0.4.32.dist-info/METADATA'
+adding 'chatify_app-0.4.32.dist-info/WHEEL'
+adding 'chatify_app-0.4.32.dist-info/entry_points.txt'
+adding 'chatify_app-0.4.32.dist-info/top_level.txt'
+adding 'chatify_app-0.4.32.dist-info/RECORD'
+removing build/bdist.linux-x86_64/wheel
+Successfully built /tmp/chatify-ci-followup/wheel/chatify_app-0.4.32-py3-none-any.whl

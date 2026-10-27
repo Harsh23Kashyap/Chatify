@@ -321,9 +321,11 @@ class BrandingRetryTests(unittest.TestCase):
   job={'id':'x','owner':'owner','state':'partial','calls':31,'errors':{'final':'App branding was not tailored to the request'},'parts':{k:copy.deepcopy(v['defaults']) if 'defaults' in v else {} for k,v in buildjobs.PARTS},'cfg':cfg,'active':set(),'phase':'Final local validation','notice':'fixture','yaml':None,'created':time.time()}
   jobs.jobs['x']=job
   before=copy.deepcopy(job['parts'])
-  with patch('chatify.buildjobs.threading.Thread') as thread:
+  # Patch the module binding, not threading.Thread process-wide: unrelated
+  # executor workers can otherwise overwrite this mock's last call.
+  with patch('chatify.buildjobs.threading') as threads:
    jobs.retry('owner','x')
-   selected=thread.call_args.kwargs['args'][1]
+   selected=threads.Thread.call_args.kwargs['args'][1]
   self.assertEqual([k for k,_ in selected],['config:app'])
   self.assertNotIn('config:app',job['parts'])
   for k,v in before.items():

@@ -16,6 +16,9 @@ def pick_port(port):
     if not 1<=port<=65515:raise ConfigError('Choose a port between 1 and 65515.')
     for candidate in range(port,port+20):
         with socket.socket() as sock:
+            # Match LocalHTTPServer/TCPServer's bind flags. Windows can allow a
+            # plain probe but deny the real SO_REUSEADDR bind on a reserved port.
+            sock.setsockopt(socket.SOL_SOCKET,socket.SO_REUSEADDR,1)
             try:sock.bind(('127.0.0.1',candidate));return candidate
             except OSError:pass
     raise ConfigError('No free port in the requested 20-port range.')

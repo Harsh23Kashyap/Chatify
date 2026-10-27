@@ -1,0 +1,153 @@
+test_blank_wording_retry_retains_successful_parts (tests.test_buildjobs.APIDescriptionChecks) ... ok
+test_invalid_helper_json_reports_exact_corrective_contract (tests.test_buildjobs.APIDescriptionChecks) ... ok
+test_json_escape_not_silently_repaired (tests.test_buildjobs.APIDescriptionChecks) ... ok
+test_known_api_wrapper_only (tests.test_buildjobs.APIDescriptionChecks) ... ok
+test_name_only_api_description_rejected (tests.test_buildjobs.APIDescriptionChecks) ... ok
+test_review_context_keeps_unknowns_and_real_concerns (tests.test_buildjobs.APIDescriptionChecks) ... ok
+test_review_verdict_never_erases_concerns_or_uncertainty (tests.test_buildjobs.APIDescriptionChecks) ... ok
+test_too_few_api_picks_rejected (tests.test_buildjobs.APIDescriptionChecks) ... ok
+test_topic_language_never_sets_app_quotas (tests.test_buildjobs.APIDescriptionChecks) ... ok
+test_active_empty (tests.test_buildjobs.ActiveView) ... ok
+test_active_scopes_details_to_owner (tests.test_buildjobs.ActiveView) ... ok
+test_final_branding_redrafts_identity_only (tests.test_buildjobs.BrandingRetryTests) ... ok
+test_cancelled_inflight_writes_no_checkpoint (tests.test_buildjobs.CheckpointEdges) ... ok
+test_changed_budget_settings_start_fresh (tests.test_buildjobs.CheckpointEdges) ... /home/sandbox/chatify/chatify/buildjobs.py:107: ResourceWarning: unclosed file <_io.TextIOWrapper name='/tmp/tmpj4ka8l9a/build-spend.json' mode='w' encoding='UTF-8'>
+  try:json.dump(self.spend,open(self.spend_path,'w'))
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/home/sandbox/chatify/chatify/buildjobs.py:78: ResourceWarning: unclosed file <_io.TextIOWrapper name='/tmp/tmpj4ka8l9a/build-checkpoints/4c1029697ee35871.json.tmp' mode='w' encoding='UTF-8'>
+  tmp=path+'.tmp';json.dump(payload,open(tmp,'w'));os.replace(tmp,path)
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/home/sandbox/chatify/chatify/buildjobs.py:65: ResourceWarning: unclosed file <_io.TextIOWrapper name='/tmp/tmpj4ka8l9a/build-spend.json' mode='r' encoding='UTF-8'>
+  try:self.spend=json.load(open(self.spend_path))
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/home/sandbox/chatify/chatify/buildjobs.py:91: ResourceWarning: unclosed file <_io.TextIOWrapper name='/tmp/tmpj4ka8l9a/build-checkpoints/4c1029697ee35871.json' mode='r' encoding='UTF-8'>
+  try:payload=json.load(open(path))
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+ok
+test_corrupt_checkpoint_starts_fresh (tests.test_buildjobs.CheckpointEdges) ... /home/sandbox/chatify/tests/test_buildjobs.py:100: ResourceWarning: unclosed file <_io.TextIOWrapper name='/tmp/tmpwfsnia1_/build-checkpoints/4c1029697ee35871.json' mode='w' encoding='UTF-8'>
+  path=jobs._checkpoint_path('owner');os.makedirs(os.path.dirname(path));open(path,'w').write('{not json')
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/home/sandbox/chatify/chatify/buildjobs.py:92: ResourceWarning: unclosed file <_io.TextIOWrapper name='/tmp/tmpwfsnia1_/build-checkpoints/4c1029697ee35871.json' mode='r' encoding='UTF-8'>
+  except Exception:return
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/home/sandbox/chatify/chatify/buildjobs.py:107: ResourceWarning: unclosed file <_io.TextIOWrapper name='/tmp/tmpwfsnia1_/build-spend.json' mode='w' encoding='UTF-8'>
+  try:json.dump(self.spend,open(self.spend_path,'w'))
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/home/sandbox/chatify/chatify/buildjobs.py:78: ResourceWarning: unclosed file <_io.TextIOWrapper name='/tmp/tmpwfsnia1_/build-checkpoints/4c1029697ee35871.json.tmp' mode='w' encoding='UTF-8'>
+  tmp=path+'.tmp';json.dump(payload,open(tmp,'w'));os.replace(tmp,path)
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+ok
+test_model_change_starts_fresh (tests.test_buildjobs.CheckpointEdges) ... /home/sandbox/chatify/chatify/buildjobs.py:107: ResourceWarning: unclosed file <_io.TextIOWrapper name='/tmp/tmptwqv05xa/build-spend.json' mode='w' encoding='UTF-8'>
+  try:json.dump(self.spend,open(self.spend_path,'w'))
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/home/sandbox/chatify/chatify/buildjobs.py:78: ResourceWarning: unclosed file <_io.TextIOWrapper name='/tmp/tmptwqv05xa/build-checkpoints/4c1029697ee35871.json.tmp' mode='w' encoding='UTF-8'>
+  tmp=path+'.tmp';json.dump(payload,open(tmp,'w'));os.replace(tmp,path)
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/home/sandbox/chatify/chatify/buildjobs.py:65: ResourceWarning: unclosed file <_io.TextIOWrapper name='/tmp/tmptwqv05xa/build-spend.json' mode='r' encoding='UTF-8'>
+  try:self.spend=json.load(open(self.spend_path))
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/home/sandbox/chatify/chatify/buildjobs.py:91: ResourceWarning: unclosed file <_io.TextIOWrapper name='/tmp/tmptwqv05xa/build-checkpoints/4c1029697ee35871.json' mode='r' encoding='UTF-8'>
+  try:payload=json.load(open(path))
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+ok
+test_resume_never_touches_persisted_spend (tests.test_buildjobs.CheckpointEdges) ... /home/sandbox/chatify/chatify/buildjobs.py:107: ResourceWarning: unclosed file <_io.TextIOWrapper name='/tmp/tmph6ppy4a2/build-spend.json' mode='w' encoding='UTF-8'>
+  try:json.dump(self.spend,open(self.spend_path,'w'))
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/home/sandbox/chatify/tests/test_buildjobs.py:149: ResourceWarning: unclosed file <_io.TextIOWrapper name='/tmp/tmph6ppy4a2/build-spend.json' mode='r' encoding='UTF-8'>
+  before=open(jobs.spend_path).read()
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/home/sandbox/chatify/tests/test_buildjobs.py:151: ResourceWarning: unclosed file <_io.TextIOWrapper name='/tmp/tmph6ppy4a2/build-checkpoints/4c1029697ee35871.json' mode='w' encoding='UTF-8'>
+  json.dump({'brief':'Garden advice','fingerprint':self.fp(schema.DEFAULTS),'writer':'old','parts':{'config:app':{'title':'Kept'}},'errors':{},'calls':5,'retry_calls':0,'updated':time.time()},open(path,'w'))
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/home/sandbox/chatify/chatify/buildjobs.py:65: ResourceWarning: unclosed file <_io.TextIOWrapper name='/tmp/tmph6ppy4a2/build-spend.json' mode='r' encoding='UTF-8'>
+  try:self.spend=json.load(open(self.spend_path))
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/home/sandbox/chatify/chatify/buildjobs.py:91: ResourceWarning: unclosed file <_io.TextIOWrapper name='/tmp/tmph6ppy4a2/build-checkpoints/4c1029697ee35871.json' mode='r' encoding='UTF-8'>
+  try:payload=json.load(open(path))
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/home/sandbox/chatify/chatify/buildjobs.py:78: ResourceWarning: unclosed file <_io.TextIOWrapper name='/tmp/tmph6ppy4a2/build-checkpoints/4c1029697ee35871.json.tmp' mode='w' encoding='UTF-8'>
+  tmp=path+'.tmp';json.dump(payload,open(tmp,'w'));os.replace(tmp,path)
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/home/sandbox/chatify/tests/test_buildjobs.py:157: ResourceWarning: unclosed file <_io.TextIOWrapper name='/tmp/tmph6ppy4a2/build-spend.json' mode='r' encoding='UTF-8'>
+  self.assertEqual(open(jobs.spend_path).read(),before,'resume path must not reset persisted spend')
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+ok
+test_stale_writer_cannot_clear_newer_checkpoint (tests.test_buildjobs.CheckpointEdges) ... /home/sandbox/chatify/tests/test_buildjobs.py:126: ResourceWarning: unclosed file <_io.TextIOWrapper name='/tmp/tmpzlm4czm1/build-checkpoints/4c1029697ee35871.json' mode='w' encoding='UTF-8'>
+  json.dump({'brief':'B','writer':'newer-job','parts':{},'errors':{},'calls':0,'updated':time.time()},open(path,'w'))
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/home/sandbox/chatify/chatify/buildjobs.py:83: ResourceWarning: unclosed file <_io.TextIOWrapper name='/tmp/tmpzlm4czm1/build-checkpoints/4c1029697ee35871.json' mode='r' encoding='UTF-8'>
+  try:writer=json.load(open(path)).get('writer')
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+ok
+test_unknown_part_keys_filtered_on_resume (tests.test_buildjobs.CheckpointEdges) ... /home/sandbox/chatify/tests/test_buildjobs.py:109: ResourceWarning: unclosed file <_io.TextIOWrapper name='/tmp/tmpx1vn7ueg/build-checkpoints/4c1029697ee35871.json' mode='w' encoding='UTF-8'>
+  json.dump({'brief':'Garden advice','fingerprint':self.fp(schema.DEFAULTS),'writer':'old','parts':{'config:app':{'title':'Kept garden'},'bogus:key':{'x':1}},'errors':{},'calls':5,'retry_calls':0,'updated':time.time()},open(path,'w'))
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/home/sandbox/chatify/chatify/buildjobs.py:91: ResourceWarning: unclosed file <_io.TextIOWrapper name='/tmp/tmpx1vn7ueg/build-checkpoints/4c1029697ee35871.json' mode='r' encoding='UTF-8'>
+  try:payload=json.load(open(path))
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/home/sandbox/chatify/chatify/buildjobs.py:78: ResourceWarning: unclosed file <_io.TextIOWrapper name='/tmp/tmpx1vn7ueg/build-checkpoints/4c1029697ee35871.json.tmp' mode='w' encoding='UTF-8'>
+  tmp=path+'.tmp';json.dump(payload,open(tmp,'w'));os.replace(tmp,path)
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+ok
+test_different_brief_starts_fresh (tests.test_buildjobs.Checkpoints) ... /home/sandbox/chatify/chatify/buildjobs.py:107: ResourceWarning: unclosed file <_io.TextIOWrapper name='/tmp/tmpdube6jhi/build-spend.json' mode='w' encoding='UTF-8'>
+  try:json.dump(self.spend,open(self.spend_path,'w'))
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/home/sandbox/chatify/chatify/buildjobs.py:78: ResourceWarning: unclosed file <_io.TextIOWrapper name='/tmp/tmpdube6jhi/build-checkpoints/4c1029697ee35871.json.tmp' mode='w' encoding='UTF-8'>
+  tmp=path+'.tmp';json.dump(payload,open(tmp,'w'));os.replace(tmp,path)
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/home/sandbox/chatify/chatify/buildjobs.py:65: ResourceWarning: unclosed file <_io.TextIOWrapper name='/tmp/tmpdube6jhi/build-spend.json' mode='r' encoding='UTF-8'>
+  try:self.spend=json.load(open(self.spend_path))
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/home/sandbox/chatify/chatify/buildjobs.py:91: ResourceWarning: unclosed file <_io.TextIOWrapper name='/tmp/tmpdube6jhi/build-checkpoints/4c1029697ee35871.json' mode='r' encoding='UTF-8'>
+  try:payload=json.load(open(path))
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+ok
+test_resume_keeps_finished_parts_after_restart (tests.test_buildjobs.Checkpoints) ... /home/sandbox/chatify/chatify/buildjobs.py:107: ResourceWarning: unclosed file <_io.TextIOWrapper name='/tmp/tmpyoz6vcd9/build-spend.json' mode='w' encoding='UTF-8'>
+  try:json.dump(self.spend,open(self.spend_path,'w'))
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/home/sandbox/chatify/chatify/buildjobs.py:78: ResourceWarning: unclosed file <_io.TextIOWrapper name='/tmp/tmpyoz6vcd9/build-checkpoints/4c1029697ee35871.json.tmp' mode='w' encoding='UTF-8'>
+  tmp=path+'.tmp';json.dump(payload,open(tmp,'w'));os.replace(tmp,path)
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/home/sandbox/chatify/tests/test_buildjobs.py:37: ResourceWarning: unclosed file <_io.TextIOWrapper name='/tmp/tmpyoz6vcd9/build-checkpoints/4c1029697ee35871.json' mode='r' encoding='UTF-8'>
+  payload=json.load(open(os.path.join(tmp,'build-checkpoints',saved[0])))
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/home/sandbox/chatify/chatify/buildjobs.py:65: ResourceWarning: unclosed file <_io.TextIOWrapper name='/tmp/tmpyoz6vcd9/build-spend.json' mode='r' encoding='UTF-8'>
+  try:self.spend=json.load(open(self.spend_path))
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/home/sandbox/chatify/chatify/buildjobs.py:91: ResourceWarning: unclosed file <_io.TextIOWrapper name='/tmp/tmpyoz6vcd9/build-checkpoints/4c1029697ee35871.json' mode='r' encoding='UTF-8'>
+  try:payload=json.load(open(path))
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/home/sandbox/chatify/chatify/buildjobs.py:83: ResourceWarning: unclosed file <_io.TextIOWrapper name='/tmp/tmpyoz6vcd9/build-checkpoints/4c1029697ee35871.json' mode='r' encoding='UTF-8'>
+  try:writer=json.load(open(path)).get('writer')
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+ok
+test_blank_wording_retry_retains_successful_parts (tests.test_buildjobs.DomainPromptChecks) ... ok
+test_builtin_generic_stage_is_rejected (tests.test_buildjobs.DomainPromptChecks) ... ok
+test_every_stage_request_has_domain_and_stage_contract (tests.test_buildjobs.DomainPromptChecks) ... ok
+test_invalid_helper_json_reports_exact_corrective_contract (tests.test_buildjobs.DomainPromptChecks) ... ok
+test_json_escape_not_silently_repaired (tests.test_buildjobs.DomainPromptChecks) ... ok
+test_known_api_wrapper_only (tests.test_buildjobs.DomainPromptChecks) ... ok
+test_review_context_keeps_unknowns_and_real_concerns (tests.test_buildjobs.DomainPromptChecks) ... ok
+test_review_verdict_never_erases_concerns_or_uncertainty (tests.test_buildjobs.DomainPromptChecks) ... ok
+test_topic_language_never_sets_app_quotas (tests.test_buildjobs.DomainPromptChecks) ... ok
+test_illegal_escape_preserves_literal_regex (tests.test_buildjobs.DraftJSONRepairTests) ... ok
+test_truncated_and_missing_fields_never_invented (tests.test_buildjobs.DraftJSONRepairTests) ... ok
+test_complete (tests.test_buildjobs.Jobs) ... ok
+test_optional_logo_failure_keeps_text_draft_and_finishes_review (tests.test_buildjobs.Jobs) ... ok
+test_optional_logo_reaches_final_review_and_completed_draft (tests.test_buildjobs.Jobs) ... ok
+test_provider_block_stops_pending_calls (tests.test_buildjobs.Jobs) ... ok
+test_retry_only_failed (tests.test_buildjobs.Jobs) ... ok
+test_targeted_contract_failures_retry_only_owner_and_keep_success (tests.test_buildjobs.RetainedFailureMatrix) ... ok
+test_stubborn_part_filled_locally_and_build_completes (tests.test_buildjobs.RetryCompletion) ... ok
+test_blank_wording_retry_retains_successful_parts (tests.test_buildjobs.SafePatchChecks) ... ok
+test_invalid_helper_json_reports_exact_corrective_contract (tests.test_buildjobs.SafePatchChecks) ... ok
+test_json_escape_not_silently_repaired (tests.test_buildjobs.SafePatchChecks) ... ok
+test_known_api_wrapper_only (tests.test_buildjobs.SafePatchChecks) ... ok
+test_review_context_keeps_unknowns_and_real_concerns (tests.test_buildjobs.SafePatchChecks) ... ok
+test_review_verdict_never_erases_concerns_or_uncertainty (tests.test_buildjobs.SafePatchChecks) ... ok
+test_topic_language_never_sets_app_quotas (tests.test_buildjobs.SafePatchChecks) ... ok
+
+----------------------------------------------------------------------
+Ran 46 tests in 19.821s
+
+OK
