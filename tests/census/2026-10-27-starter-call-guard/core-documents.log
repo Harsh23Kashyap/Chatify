@@ -1,0 +1,29 @@
+........./home/sandbox/chatify/tests/test_core.py:181: ResourceWarning: unclosed file <_io.TextIOWrapper name='/tmp/tmp53ng04gt/.env' mode='w' encoding='utf-8'>
+  open(os.path.join(d, ".env"), "w").write("CC_A=1\nCC_B='two'\n# c\n")
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/home/sandbox/chatify/tests/test_core.py:182: ResourceWarning: unclosed file <_io.TextIOWrapper name='/tmp/tmp53ng04gt/app.yaml' mode='w' encoding='utf-8'>
+  open(os.path.join(d, "app.yaml"), "w").write("app: {title: T}\n")
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+...../home/sandbox/chatify/tests/test_core.py:212: ResourceWarning: unclosed file <_io.TextIOWrapper name='/home/sandbox/chatify/schema/chat-app.schema.json' mode='r' encoding='utf-8'>
+  js = json.load(open(os.path.join(ROOT, "schema", "chat-app.schema.json")))
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+......................................../home/sandbox/chatify/tests/test_core.py:387: ResourceWarning: unclosed file <_io.TextIOWrapper name='/tmp/tmp64t86erl/q.txt' mode='w' encoding='utf-8'>
+  open(q, "w").write("# c\nwhat is this\n")
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+.......................
+----------------------------------------------------------------------
+Ran 77 tests in 14.176s
+
+OK
+accounts ok
+pdf text: 'Hello from a PDF with enough words.\nSecond line here.'
+pdf ok
+provider retry ok
+secret store ok
+hardware ok
+logo ok
+prompts and generators ok
+websearch ok
+web toggle ok
+open sources ok
+ollama fit/pull ok

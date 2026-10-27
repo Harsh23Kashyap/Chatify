@@ -1,0 +1,63 @@
+test_demo_never_calls_model (test_suggestions.Suggestions) ... ok
+test_empty_examples_fallback_without_model_or_budget (test_suggestions.Suggestions) ... ERROR
+test_examples_change_without_old_generated_cache (test_suggestions.Suggestions) ... ok
+test_filter_bounded_safe_distinct (test_suggestions.Suggestions) ... ok
+test_http_temporary_hides_recent (test_suggestions.Suggestions) ... ERROR
+test_non_mock_cold_and_repeat_loads_never_call_model (test_suggestions.Suggestions) ... FAIL
+test_recent_private_deleted_and_deduped (test_suggestions.Suggestions) ... ok
+test_recent_ui_cross_group_dedupe (test_suggestions.Suggestions) ... ok
+
+======================================================================
+ERROR: test_empty_examples_fallback_without_model_or_budget (test_suggestions.Suggestions)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/sandbox/chatify/tests/test_suggestions.py", line 31, in test_empty_examples_fallback_without_model_or_budget
+    self.assertEqual(starters(e)['origin'],'fallback');self.assertTrue(starters(e)['questions'])
+  File "/home/sandbox/chatify/chatify/suggestions.py", line 34, in starters
+    generated=clean(answer.splitlines())
+  File "/home/sandbox/chatify/chatify/suggestions.py", line 8, in clean
+    for value in rows:
+TypeError: 'Mock' object is not iterable
+
+======================================================================
+ERROR: test_http_temporary_hides_recent (test_suggestions.Suggestions)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/sandbox/chatify/tests/test_suggestions.py", line 51, in test_http_temporary_hides_recent
+    self.assertEqual(call(True)['recent'],[])
+  File "/home/sandbox/chatify/tests/test_suggestions.py", line 50, in call
+    return json.load(urllib.request.urlopen(req))
+  File "/usr/lib/python3.10/urllib/request.py", line 216, in urlopen
+    return opener.open(url, data, timeout)
+  File "/usr/lib/python3.10/urllib/request.py", line 525, in open
+    response = meth(req, response)
+  File "/usr/lib/python3.10/urllib/request.py", line 634, in http_response
+    response = self.parent.error(
+  File "/usr/lib/python3.10/urllib/request.py", line 563, in error
+    return self._call_chain(*args)
+  File "/usr/lib/python3.10/urllib/request.py", line 496, in _call_chain
+    result = func(*args)
+  File "/usr/lib/python3.10/urllib/request.py", line 643, in http_error_default
+    raise HTTPError(req.full_url, code, msg, hdrs, fp)
+urllib.error.HTTPError: HTTP Error 500: Internal Server Error
+
+======================================================================
+FAIL: test_non_mock_cold_and_repeat_loads_never_call_model (test_suggestions.Suggestions)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/sandbox/chatify/tests/test_suggestions.py", line 17, in test_non_mock_cold_and_repeat_loads_never_call_model
+    self.assertEqual(starters(e),expected);self.assertEqual(starters(e),expected)
+  File "/home/sandbox/chatify/chatify/suggestions.py", line 31, in starters
+    answer=engine.provider.complete([
+  File "/usr/lib/python3.10/unittest/mock.py", line 1114, in __call__
+    return self._mock_call(*args, **kwargs)
+  File "/usr/lib/python3.10/unittest/mock.py", line 1118, in _mock_call
+    return self._execute_mock_call(*args, **kwargs)
+  File "/usr/lib/python3.10/unittest/mock.py", line 1173, in _execute_mock_call
+    raise effect
+AssertionError: page load must not infer
+
+----------------------------------------------------------------------
+Ran 8 tests in 0.547s
+
+FAILED (failures=1, errors=2)

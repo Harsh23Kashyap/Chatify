@@ -1,0 +1,15 @@
+test_endpoint_auth_and_lock (test_budget.BudgetPermissions) ... ok
+test_atomic_concurrency (test_budget.BudgetTests) ... ok
+test_bad_values (test_budget.BudgetTests) ... ok
+test_cross_instance (test_budget.BudgetTests) ... ok
+test_day_reset (test_budget.BudgetTests) ... ok
+test_dollar_cap_fail_closed (test_budget.BudgetTests) ... ok
+test_global_user_quotas (test_budget.BudgetTests) ... ok
+test_model_limit (test_budget.BudgetTests) ... ok
+test_restart (test_budget.BudgetTests) ... ok
+test_schema (test_budget.BudgetTests) ... ok
+
+----------------------------------------------------------------------
+Ran 10 tests in 0.558s
+
+OK

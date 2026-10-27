@@ -1,0 +1,13 @@
+test_demo_never_calls_model (test_suggestions.Suggestions.test_demo_never_calls_model) ... ok
+test_empty_examples_fallback_without_model_or_budget (test_suggestions.Suggestions.test_empty_examples_fallback_without_model_or_budget) ... ok
+test_examples_change_without_old_generated_cache (test_suggestions.Suggestions.test_examples_change_without_old_generated_cache) ... ok
+test_filter_bounded_safe_distinct (test_suggestions.Suggestions.test_filter_bounded_safe_distinct) ... ok
+test_http_temporary_hides_recent (test_suggestions.Suggestions.test_http_temporary_hides_recent) ... ok
+test_non_mock_cold_and_repeat_loads_never_call_model (test_suggestions.Suggestions.test_non_mock_cold_and_repeat_loads_never_call_model) ... ok
+test_recent_private_deleted_and_deduped (test_suggestions.Suggestions.test_recent_private_deleted_and_deduped) ... ok
+test_recent_ui_cross_group_dedupe (test_suggestions.Suggestions.test_recent_ui_cross_group_dedupe) ... ok
+
+----------------------------------------------------------------------
+Ran 8 tests in 0.761s
+
+OK

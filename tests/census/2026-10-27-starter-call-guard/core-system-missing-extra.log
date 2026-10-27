@@ -1,0 +1,55 @@
+.......E./home/sandbox/chatify/tests/test_core.py:181: ResourceWarning: unclosed file <_io.TextIOWrapper name='/tmp/tmpvk9gggv_/.env' mode='w' encoding='UTF-8'>
+  open(os.path.join(d, ".env"), "w").write("CC_A=1\nCC_B='two'\n# c\n")
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/home/sandbox/chatify/tests/test_core.py:182: ResourceWarning: unclosed file <_io.TextIOWrapper name='/tmp/tmpvk9gggv_/app.yaml' mode='w' encoding='UTF-8'>
+  open(os.path.join(d, "app.yaml"), "w").write("app: {title: T}\n")
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+..F../home/sandbox/chatify/tests/test_core.py:212: ResourceWarning: unclosed file <_io.TextIOWrapper name='/home/sandbox/chatify/schema/chat-app.schema.json' mode='r' encoding='UTF-8'>
+  js = json.load(open(os.path.join(ROOT, "schema", "chat-app.schema.json")))
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+......................................../home/sandbox/chatify/tests/test_core.py:387: ResourceWarning: unclosed file <_io.TextIOWrapper name='/tmp/tmphu_dn9ky/q.txt' mode='w' encoding='UTF-8'>
+  open(q, "w").write("# c\nwhat is this\n")
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+...............F.......
+======================================================================
+ERROR: test_bibtex_and_pdf (test_core.Exports)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/sandbox/chatify/tests/test_core.py", line 128, in test_bibtex_and_pdf
+    p = pdf_bytes("App", {"question": "q (1)", "answer": "a [1]", "evidence": ev})
+  File "/home/sandbox/chatify/chatify/exports.py", line 143, in pdf_bytes
+    raise RuntimeError("PDF export needs the pdf extra: pip install 'chatify[documents]'.")
+RuntimeError: PDF export needs the pdf extra: pip install 'chatify[documents]'.
+
+======================================================================
+FAIL: test_flow (test_core.Http)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/sandbox/chatify/tests/test_core.py", line 155, in test_flow
+    self.assertEqual(self.call("/api/pdf?turn=" + r["id"])[1][:4], b"%PDF")
+AssertionError: b'{"er' != b'%PDF'
+
+======================================================================
+FAIL: test_flow (test_core.SettingsApi)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/sandbox/chatify/tests/test_core.py", line 155, in test_flow
+    self.assertEqual(self.call("/api/pdf?turn=" + r["id"])[1][:4], b"%PDF")
+AssertionError: b'{"er' != b'%PDF'
+
+----------------------------------------------------------------------
+Ran 77 tests in 10.364s
+
+FAILED (failures=2, errors=1)
+accounts ok
+pdf text: 'Hello from a PDF with enough words.\nSecond line here.'
+pdf ok
+provider retry ok
+secret store ok
+hardware ok
+logo ok
+prompts and generators ok
+websearch ok
+web toggle ok
+open sources ok
+ollama fit/pull ok
