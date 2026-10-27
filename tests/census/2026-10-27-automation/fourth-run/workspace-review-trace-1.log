@@ -1,0 +1,63 @@
+ARCHIVE_FAILURE 320 archive-error {
+  events: [
+    {
+      at: 928.0999999996275,
+      name: 'Setup',
+      stack: 'Error\n' +
+        '    at HTMLDocument.<anonymous> (<anonymous>:2:143)\n' +
+        '    at buildMenu (http://127.0.0.1:54065/settings.js:700:797)\n' +
+        '    at init (http://127.0.0.1:54065/pipeline.js:156:39)'
+    },
+    {
+      at: 1061.300000000745,
+      name: 'Setup',
+      stack: 'Error\n' +
+        '    at HTMLDocument.<anonymous> (<anonymous>:2:143)\n' +
+        '    at buildMenu (http://127.0.0.1:54065/settings.js:700:797)\n' +
+        '    at drawLook (http://127.0.0.1:54065/settings.js:665:3)\n' +
+        '    at init (http://127.0.0.1:54065/settings.js:745:43)'
+    },
+    {
+      at: 1101.199999999255,
+      name: 'Backup',
+      stack: 'Error\n' +
+        '    at HTMLDocument.<anonymous> (<anonymous>:2:143)\n' +
+        '    at eval (eval at evaluate (:370:30), <anonymous>:1:16)\n' +
+        '    at UtilityScript.evaluate (<anonymous>:372:16)\n' +
+        '    at UtilityScript.<anonymous> (<anonymous>:1:44)'
+    },
+    {
+      at: 1117.0999999996275,
+      name: 'Setup',
+      stack: 'Error\n' +
+        '    at HTMLDocument.<anonymous> (<anonymous>:2:143)\n' +
+        '    at buildMenu (http://127.0.0.1:54065/settings.js:700:797)\n' +
+        '    at boot (http://127.0.0.1:54065/panels.js:143:67)'
+    }
+  ],
+  hash: '#sec-finish',
+  body: 'Local checks only. Live services have not been tested.\n' +
+    '\n' +
+    'Model\n' +
+    'Offline Demo\n' +
+    'Credential\n' +
+    'No key needed\n' +
+    'Evidence sources\n' +
+    'Sources added\n' +
+    'Data audience\n' +
+    'Review before sharing\n' +
+    'Connector code\n' +
+    'No Python connector\n' +
+    'My documents\n' +
+    'Local documents indexed\n' +
+    'Check details and limits\n' +
+    'Choose live checks'
+}
+locator.setInputFiles: Timeout 30000ms exceeded.
+Call log:
+  - waiting for getByLabel('Private chat archive to restore')
+
+    at async /tmp/workspace-review-trace.cjs:1:1776 {
+  log: [ "  - waiting for getByLabel('Private chat archive to restore')" ],
+  name: 'TimeoutError'
+}

@@ -1,0 +1,1373 @@
+2026-10-27T08:04:05.7076212Z CASE action_failure_moved_focus_motion_browser.cjs default PASS exit=0 seconds=17.8
+2026-10-27T08:04:05.7079139Z PASS noteform-humanlabels exactreview-noJSON guardedrequests failedexecute-freshreview draftretained resultcards focusreturn3201280fixture
+2026-10-27T08:04:05.7080820Z 
+2026-10-27T08:04:12.8232048Z CASE additional_fields_save_feedback_browser.cjs default PASS exit=0 seconds=7.1
+2026-10-27T08:04:12.8233890Z PASS additionalfieldsave200 sharedsuccess160Reduceoff nativeEnterfocus scopesavedrestart
+2026-10-27T08:04:12.8235141Z 
+2026-10-27T08:04:19.3901462Z CASE appbuilder_progress_browser.cjs default PASS exit=0 seconds=6.6
+2026-10-27T08:04:19.3905484Z PASS in-flight activity animation 320/390/1280, request-only visibility, reduced motion static status, duplicate prevention, cancel+text recovery, hide on response/cancel, no JS errors
+2026-10-27T08:04:19.3907138Z 
+2026-10-27T08:04:31.1709848Z CASE appearance_wording_states_browser.cjs default PASS exit=0 seconds=11.8
+2026-10-27T08:04:31.1713131Z PASS wording title/welcome reflected actualpreview customvaluesretainedsectionnavigation colorlightdarkclearsstaleinvalid inertpreview3201280normal/reduce
+2026-10-27T08:04:31.1714913Z 
+2026-10-27T08:04:51.6848168Z CASE builder_apply_saved_e2e_browser.cjs default PASS exit=0 seconds=20.5
+2026-10-27T08:04:51.6850077Z DRAFTSTATE 320 Draft received. Local schema checks passed, not safety verification.
+2026-10-27T08:04:51.6850875Z 
+2026-10-27T08:04:51.6851722Z Model suggestions, not verification: Offline fixture; APIs not live tested.
+2026-10-27T08:04:51.6852620Z 
+2026-10-27T08:04:51.6853317Z The model returned concerns. Check them yourself before saving.
+2026-10-27T08:04:51.6854781Z 
+2026-10-27T08:04:51.6856522Z A model can miss unsafe prompts or code. No findings does not establish safety. Review prompts, helper destinations and deployment access before use. all
+2026-10-27T08:04:51.6858179Z REVIEWSTATE Validated. Review changes before saving.
+2026-10-27T08:04:51.6860141Z SAVESTATE Reviewed configuration saved. Choose Use this app to start a separate workspace. Current chat stays unchanged. No helper code installed or executed. Saved configuration and setup drafts
+2026-10-27T08:04:51.6861507Z 
+2026-10-27T08:04:51.6862595Z Reviewed configuration saved. Choose Use this app to start a separate workspace. Current chat stays unchanged. No helper code installed or executed.
+2026-10-27T08:04:51.6864069Z DRAFTSTATE 390 Draft received. Local schema checks passed, not safety verification.
+2026-10-27T08:04:51.6864851Z 
+2026-10-27T08:04:51.6865288Z Model suggestions, not verification: Offline fixture; APIs not live tested.
+2026-10-27T08:04:51.6865635Z 
+2026-10-27T08:04:51.6865909Z The model returned concerns. Check them yourself before saving.
+2026-10-27T08:04:51.6866218Z 
+2026-10-27T08:04:51.6866948Z A model can miss unsafe prompts or code. No findings does not establish safety. Review prompts, helper destinations and deployment access before use. all
+2026-10-27T08:04:51.6868056Z REVIEWSTATE Validated. Review changes before saving.
+2026-10-27T08:04:51.6869284Z SAVESTATE Reviewed configuration saved. Choose Use this app to start a separate workspace. Current chat stays unchanged. No helper code installed or executed. Saved configuration and setup drafts
+2026-10-27T08:04:51.6870106Z 
+2026-10-27T08:04:51.6870813Z Reviewed configuration saved. Choose Use this app to start a separate workspace. Current chat stays unchanged. No helper code installed or executed.
+2026-10-27T08:04:51.6871828Z DRAFTSTATE 1280 Draft received. Local schema checks passed, not safety verification.
+2026-10-27T08:04:51.6872223Z 
+2026-10-27T08:04:51.6872553Z Model suggestions, not verification: Offline fixture; APIs not live tested.
+2026-10-27T08:04:51.6872909Z 
+2026-10-27T08:04:51.6873181Z The model returned concerns. Check them yourself before saving.
+2026-10-27T08:04:51.6873472Z 
+2026-10-27T08:04:51.6874206Z A model can miss unsafe prompts or code. No findings does not establish safety. Review prompts, helper destinations and deployment access before use. all
+2026-10-27T08:04:51.6875296Z REVIEWSTATE Validated. Review changes before saving.
+2026-10-27T08:04:51.6876431Z SAVESTATE Reviewed configuration saved. Choose Use this app to start a separate workspace. Current chat stays unchanged. No helper code installed or executed. Saved configuration and setup drafts
+2026-10-27T08:04:51.6877203Z 
+2026-10-27T08:04:51.6877861Z Reviewed configuration saved. Choose Use this app to start a separate workspace. Current chat stays unchanged. No helper code installed or executed.
+2026-10-27T08:04:51.6879519Z PASS offline fixture draft -> real review -> real Apply ->9prompts4selectedhelpereditors(2API+2base),3generatedAPIhelpers3APIcards4verifiedlinks -> reload retains setup note3203901280; no model calls or helper execution
+2026-10-27T08:04:51.6880432Z 
+2026-10-27T08:05:17.8829371Z CASE builder_example_motion_levels_browser.cjs default PASS exit=0 seconds=26.2
+2026-10-27T08:05:17.8832189Z PASS builderexamples4500timer FullSubtle NoneCalm OSReduce3201280 focused/typingquiet runtimeReduceAndNoneguard noProviderCalls
+2026-10-27T08:05:17.8833270Z 
+2026-10-27T08:05:25.1178826Z CASE builder_mounted_preview_browser.cjs default PASS exit=0 seconds=7.2
+2026-10-27T08:05:25.1180359Z PASS mounted draft preview / Garden Field Guide
+2026-10-27T08:05:25.1181654Z PASS mounted draft preview /chatify/ Garden Field Guide
+2026-10-27T08:05:25.1182322Z 
+2026-10-27T08:05:32.4876914Z CASE builder_use_app_browser.cjs default PASS exit=0 seconds=7.4
+2026-10-27T08:05:32.4878512Z PASS reviewed save/use-app navigation3201280 controlled UI fixture
+2026-10-27T08:05:32.4879343Z 
+2026-10-27T08:05:32.5210273Z CASE chart_integrity.cjs default PASS exit=0 seconds=0.0
+2026-10-27T08:05:32.5211548Z PASS 15 production chart parser cases
+2026-10-27T08:05:32.5211962Z 
+2026-10-27T08:05:45.0369705Z CASE chat_icon_targets_browser.cjs default PASS exit=0 seconds=12.5
+2026-10-27T08:05:45.0372670Z PASS visiblechaticon44x44/name/tooltip/newchat44/nohorizontaloverflow+multilineexpand/shrink+stabletooltargets3203607601280
+2026-10-27T08:05:45.0374489Z 
+2026-10-27T08:05:49.1378250Z CASE code_states_browser.cjs default PASS exit=0 seconds=4.1
+2026-10-27T08:05:49.1382091Z PASS code helper mobile full width, missing prerequisites, generation failure retains input, draft save distinct, execution failure retains sample, warning visible, no preview, no overflow;fixture only
+2026-10-27T08:05:49.1384080Z 
+2026-10-27T08:06:11.1510146Z CASE config_design_batch_browser.cjs default PASS exit=0 seconds=22.0
+2026-10-27T08:06:11.1511348Z PASS design batch 390
+2026-10-27T08:06:11.1511955Z PASS design batch 1280
+2026-10-27T08:06:11.1512363Z 
+2026-10-27T08:06:19.7068318Z CASE connector_geometry_browser.cjs default PASS exit=0 seconds=8.6
+2026-10-27T08:06:19.7069867Z PASS connectorfullinnerwidth/exampledistinctdisclosure/warningsretained/unsavednavigation/noseparatescroll3207601280
+2026-10-27T08:06:19.7070723Z 
+2026-10-27T08:06:37.8400095Z CASE editing_actions_browser.cjs default PASS exit=0 seconds=18.1
+2026-10-27T08:06:37.8403300Z PASS editingactions44px/focus2px+paperhalo8sections/disabledshape+cursor/deleteexplicit3201280
+2026-10-27T08:06:37.8404881Z 
+2026-10-27T08:06:44.1941127Z CASE first_paint_browser.cjs default PASS exit=0 seconds=6.4
+2026-10-27T08:06:44.1942296Z PASS first visible frame theme light dark false 8
+2026-10-27T08:06:44.1943381Z PASS first visible frame theme dark light false 7
+2026-10-27T08:06:44.1944725Z PASS first visible frame theme auto dark false 7
+2026-10-27T08:06:44.1945860Z PASS first visible frame theme null light false 7
+2026-10-27T08:06:44.1946934Z PASS first visible frame theme null dark true 9
+2026-10-27T08:06:44.1947554Z 
+2026-10-27T08:07:05.1403510Z CASE helper_copy_focus_motion_browser.cjs default PASS exit=0 seconds=20.9
+2026-10-27T08:07:05.1406799Z PASS helper clipboard200/failure singleflight exactcode copyfocus/movedbrief preserved3201280normalReduce
+2026-10-27T08:07:05.1408166Z 
+2026-10-27T08:07:09.2400434Z CASE helper_key_states_browser.cjs default PASS exit=0 seconds=4.1
+2026-10-27T08:07:09.2403484Z PASS helper key failure retainsinput;successfulsave keeps newerkey;late detect doesnotclaimwrongconnector;fixture routes only no secretstorage/modelcall
+2026-10-27T08:07:09.2405510Z 
+2026-10-27T08:07:14.8452621Z CASE hero_motion_audit_browser.cjs default PASS exit=0 seconds=5.6
+2026-10-27T08:07:14.8455262Z 320 no-preference [{"name":"m-in","duration":"0.16s","delay":"0s"},{"name":"none","duration":"0s","delay":"0s"},{"name":"rise","duration":"0.5s","delay":"0s"},{"name":"none","duration":"0s","delay":"0s"}]
+2026-10-27T08:07:14.8457756Z 320 reduce [{"name":"none","duration":"0s","delay":"0s"},{"name":"none","duration":"0s","delay":"0s"},{"name":"none","duration":"0s","delay":"0s"},{"name":"none","duration":"0s","delay":"0s"}]
+2026-10-27T08:07:14.8460258Z 1280 no-preference [{"name":"m-in","duration":"0.16s","delay":"0s"},{"name":"none","duration":"0s","delay":"0s"},{"name":"rise","duration":"0.5s","delay":"0s"},{"name":"none","duration":"0s","delay":"0s"}]
+2026-10-27T08:07:14.8462547Z 1280 reduce [{"name":"none","duration":"0s","delay":"0s"},{"name":"none","duration":"0s","delay":"0s"},{"name":"none","duration":"0s","delay":"0s"},{"name":"none","duration":"0s","delay":"0s"}]
+2026-10-27T08:07:14.8464172Z PASS scopedheroentrancesboundedstaggerandsettlednoactiveanimation3201280normalReduce
+2026-10-27T08:07:14.8465017Z 
+2026-10-27T08:07:33.6342756Z CASE history_skeleton_browser.cjs default PASS exit=0 seconds=18.8
+2026-10-27T08:07:33.6346947Z PASS delayedemptyhistory only250ms3rows44px subtleafter1s Reduceoff actualcontentreplaces retainedhistory noskeleton/errorretry no spinner fixture3201280
+2026-10-27T08:07:33.6348894Z 
+2026-10-27T08:07:35.6717847Z CASE local-actions.cjs default PASS exit=0 seconds=2.0
+2026-10-27T08:07:35.6718778Z [
+2026-10-27T08:07:35.6718979Z   {
+2026-10-27T08:07:35.6719318Z     case: 'Local note preview preserves exact arguments',
+2026-10-27T08:07:35.6719696Z     status: 'PASS',
+2026-10-27T08:07:35.6719986Z     mode: 'ACTUAL fixture UI'
+2026-10-27T08:07:35.6720250Z   },
+2026-10-27T08:07:35.6720455Z   {
+2026-10-27T08:07:35.6720716Z     case: 'Local note confirm saves fixture',
+2026-10-27T08:07:35.6721037Z     status: 'PASS',
+2026-10-27T08:07:35.6721275Z     mode: 'ACTUAL fixture UI'
+2026-10-27T08:07:35.6721526Z   },
+2026-10-27T08:07:35.6721711Z   {
+2026-10-27T08:07:35.6722019Z     case: 'Local list-notes result contains saved fixture',
+2026-10-27T08:07:35.6722384Z     status: 'PASS',
+2026-10-27T08:07:35.6722616Z     mode: 'ACTUAL fixture UI'
+2026-10-27T08:07:35.6722871Z   }
+2026-10-27T08:07:35.6723060Z ]
+2026-10-27T08:07:35.6723175Z 
+2026-10-27T08:07:40.7740046Z CASE logo_states_browser.cjs default PASS exit=0 seconds=5.1
+2026-10-27T08:07:40.7741567Z PASS invalidimage nofalse-ready;validlogo preview+softness;failedreplacement keepsold;cancelremove keepslogo;confirmremove controlsdisabled;320 fixture no model
+2026-10-27T08:07:40.7742544Z 
+2026-10-27T08:08:15.9649367Z CASE mode_preview_stationary_motion_audit_browser.cjs default PASS exit=0 seconds=35.2
+2026-10-27T08:08:15.9651814Z PREVIEW 320 no-preference wording simple x/width/identity fixed noanimation 240
+2026-10-27T08:08:15.9654122Z PREVIEW 320 no-preference wording advanced x/width/identity fixed noanimation 240
+2026-10-27T08:08:15.9656176Z PREVIEW 320 no-preference colors simple x/width/identity fixed noanimation 240
+2026-10-27T08:08:15.9657287Z PREVIEW 320 no-preference colors advanced x/width/identity fixed noanimation 240
+2026-10-27T08:08:15.9658412Z PREVIEW 320 no-preference background simple x/width/identity fixed noanimation 240
+2026-10-27T08:08:15.9659621Z PREVIEW 320 no-preference background advanced x/width/identity fixed noanimation 240
+2026-10-27T08:08:15.9660835Z PREVIEW 320 no-preference fonts simple x/width/identity fixed noanimation 240
+2026-10-27T08:08:15.9661979Z PREVIEW 320 no-preference fonts advanced x/width/identity fixed noanimation 240
+2026-10-27T08:08:15.9663042Z PREVIEW 320 no-preference layout simple x/width/identity fixed noanimation 240
+2026-10-27T08:08:15.9664044Z PREVIEW 320 no-preference layout advanced x/width/identity fixed noanimation 240
+2026-10-27T08:08:15.9665443Z PREVIEW 320 no-preference model simple x/width/identity fixed noanimation 240
+2026-10-27T08:08:15.9666440Z PREVIEW 320 no-preference model advanced x/width/identity fixed noanimation 240
+2026-10-27T08:08:15.9667282Z PREVIEW 320 no-preference finish simple x/width/identity fixed noanimation 240
+2026-10-27T08:08:15.9667976Z PREVIEW 320 no-preference finish advanced x/width/identity fixed noanimation 240
+2026-10-27T08:08:15.9668641Z PREVIEW 320 reduce wording simple x/width/identity fixed noanimation 240
+2026-10-27T08:08:15.9669284Z PREVIEW 320 reduce wording advanced x/width/identity fixed noanimation 240
+2026-10-27T08:08:15.9669924Z PREVIEW 320 reduce colors simple x/width/identity fixed noanimation 240
+2026-10-27T08:08:15.9670559Z PREVIEW 320 reduce colors advanced x/width/identity fixed noanimation 240
+2026-10-27T08:08:15.9671204Z PREVIEW 320 reduce background simple x/width/identity fixed noanimation 240
+2026-10-27T08:08:15.9671873Z PREVIEW 320 reduce background advanced x/width/identity fixed noanimation 240
+2026-10-27T08:08:15.9672513Z PREVIEW 320 reduce fonts simple x/width/identity fixed noanimation 240
+2026-10-27T08:08:15.9673120Z PREVIEW 320 reduce fonts advanced x/width/identity fixed noanimation 240
+2026-10-27T08:08:15.9673738Z PREVIEW 320 reduce layout simple x/width/identity fixed noanimation 240
+2026-10-27T08:08:15.9674594Z PREVIEW 320 reduce layout advanced x/width/identity fixed noanimation 240
+2026-10-27T08:08:15.9675214Z PREVIEW 320 reduce model simple x/width/identity fixed noanimation 240
+2026-10-27T08:08:15.9675829Z PREVIEW 320 reduce model advanced x/width/identity fixed noanimation 240
+2026-10-27T08:08:15.9676441Z PREVIEW 320 reduce finish simple x/width/identity fixed noanimation 240
+2026-10-27T08:08:15.9677261Z PREVIEW 320 reduce finish advanced x/width/identity fixed noanimation 240
+2026-10-27T08:08:15.9677903Z PREVIEW 1280 no-preference wording simple x/width/identity fixed noanimation 442
+2026-10-27T08:08:15.9678578Z PREVIEW 1280 no-preference wording advanced x/width/identity fixed noanimation 442
+2026-10-27T08:08:15.9679232Z PREVIEW 1280 no-preference colors simple x/width/identity fixed noanimation 442
+2026-10-27T08:08:15.9679860Z PREVIEW 1280 no-preference colors advanced x/width/identity fixed noanimation 442
+2026-10-27T08:08:15.9680504Z PREVIEW 1280 no-preference background simple x/width/identity fixed noanimation 442
+2026-10-27T08:08:15.9681161Z PREVIEW 1280 no-preference background advanced x/width/identity fixed noanimation 442
+2026-10-27T08:08:15.9681804Z PREVIEW 1280 no-preference fonts simple x/width/identity fixed noanimation 442
+2026-10-27T08:08:15.9682422Z PREVIEW 1280 no-preference fonts advanced x/width/identity fixed noanimation 442
+2026-10-27T08:08:15.9683042Z PREVIEW 1280 no-preference layout simple x/width/identity fixed noanimation 442
+2026-10-27T08:08:15.9683662Z PREVIEW 1280 no-preference layout advanced x/width/identity fixed noanimation 442
+2026-10-27T08:08:15.9684552Z PREVIEW 1280 no-preference model simple x/width/identity fixed noanimation 442
+2026-10-27T08:08:15.9685217Z PREVIEW 1280 no-preference model advanced x/width/identity fixed noanimation 442
+2026-10-27T08:08:15.9685846Z PREVIEW 1280 no-preference finish simple x/width/identity fixed noanimation 442
+2026-10-27T08:08:15.9686468Z PREVIEW 1280 no-preference finish advanced x/width/identity fixed noanimation 442
+2026-10-27T08:08:15.9687060Z PREVIEW 1280 reduce wording simple x/width/identity fixed noanimation 442
+2026-10-27T08:08:15.9687615Z PREVIEW 1280 reduce wording advanced x/width/identity fixed noanimation 442
+2026-10-27T08:08:15.9688160Z PREVIEW 1280 reduce colors simple x/width/identity fixed noanimation 442
+2026-10-27T08:08:15.9688710Z PREVIEW 1280 reduce colors advanced x/width/identity fixed noanimation 442
+2026-10-27T08:08:15.9689274Z PREVIEW 1280 reduce background simple x/width/identity fixed noanimation 442
+2026-10-27T08:08:15.9689850Z PREVIEW 1280 reduce background advanced x/width/identity fixed noanimation 442
+2026-10-27T08:08:15.9690418Z PREVIEW 1280 reduce fonts simple x/width/identity fixed noanimation 442
+2026-10-27T08:08:15.9690963Z PREVIEW 1280 reduce fonts advanced x/width/identity fixed noanimation 442
+2026-10-27T08:08:15.9691511Z PREVIEW 1280 reduce layout simple x/width/identity fixed noanimation 442
+2026-10-27T08:08:15.9692052Z PREVIEW 1280 reduce layout advanced x/width/identity fixed noanimation 442
+2026-10-27T08:08:15.9692587Z PREVIEW 1280 reduce model simple x/width/identity fixed noanimation 442
+2026-10-27T08:08:15.9693111Z PREVIEW 1280 reduce model advanced x/width/identity fixed noanimation 442
+2026-10-27T08:08:15.9693646Z PREVIEW 1280 reduce finish simple x/width/identity fixed noanimation 442
+2026-10-27T08:08:15.9694186Z PREVIEW 1280 reduce finish advanced x/width/identity fixed noanimation 442
+2026-10-27T08:08:15.9695299Z PASS modeSimpleAdvancedpreviewxwidthiframeidentityfixed noanimations/nopreviewtransform7sections3201280normalReduce ymayreflowmobile contentdocument
+2026-10-27T08:08:15.9695934Z 
+2026-10-27T08:08:19.3513290Z CASE multi-topic-cancel.cjs default PASS exit=0 seconds=3.4
+2026-10-27T08:08:19.3514532Z [
+2026-10-27T08:08:19.3515006Z   {
+2026-10-27T08:08:19.3515892Z     case: 'Multi-chat topic answer delete/undo preserves both chats',
+2026-10-27T08:08:19.3516783Z     status: 'PASS',
+2026-10-27T08:08:19.3517425Z     mode: 'ACTUAL local fixture UI'
+2026-10-27T08:08:19.3518125Z   },
+2026-10-27T08:08:19.3518661Z   {
+2026-10-27T08:08:19.3519464Z     case: 'Closing local note preview does not save note',
+2026-10-27T08:08:19.3520246Z     status: 'PASS',
+2026-10-27T08:08:19.3521173Z     mode: 'ACTUAL local fixture UI; list-notes result verified'
+2026-10-27T08:08:19.3522090Z   }
+2026-10-27T08:08:19.3522822Z ]
+2026-10-27T08:08:19.3522982Z 
+2026-10-27T08:08:31.7192819Z CASE pickers_browser.cjs default PASS exit=0 seconds=12.4
+2026-10-27T08:08:31.7194956Z PASS picker open/End/Home/Enter/Escape, dynamic select coverage, reduced motion, no Search, alignment Simple/Advanced320/390/1280
+2026-10-27T08:08:31.7196027Z 
+2026-10-27T08:08:57.2968000Z CASE prompt_all_reset_failure_focus_motion_browser.cjs default PASS exit=0 seconds=25.6
+2026-10-27T08:08:57.2969454Z PASS allpromptreset503 nativeEntersingleflightdraftkeptrecoveryfocus3201280normalReduce
+2026-10-27T08:08:57.2970220Z 
+2026-10-27T08:09:05.1673683Z CASE prompt_toggle_tab_away_motion_browser.cjs default PASS exit=0 seconds=7.9
+2026-10-27T08:09:05.1675021Z PROMPTFOCUS 320 no-preference 2 false
+2026-10-27T08:09:05.1675837Z PROMPTFOCUS 320 reduce 2 false
+2026-10-27T08:09:05.1676582Z PROMPTFOCUS 1280 no-preference 2 false
+2026-10-27T08:09:05.1677257Z PROMPTFOCUS 1280 reduce 2 false
+2026-10-27T08:09:05.1679305Z PASS promptautosaveTabawaywhilepending preservesnewfocus stateimmediate singleflight/repeatedSpaceclickignored success/failurerollback3201280normalReduce fixtureonly
+2026-10-27T08:09:05.1680975Z 
+2026-10-27T08:09:26.2773715Z CASE provider_validation_adjacent_error_motion_browser.cjs default PASS exit=0 seconds=21.1
+2026-10-27T08:09:26.2776443Z VALIDATION 320 no-preference openai { gap: 16, same: true }
+2026-10-27T08:09:26.2777270Z VALIDATION 320 no-preference claude { gap: 16, same: true }
+2026-10-27T08:09:26.2778045Z VALIDATION 320 no-preference gemini { gap: 16, same: true }
+2026-10-27T08:09:26.2778999Z VALIDATION 320 no-preference deepseek { gap: 16, same: true }
+2026-10-27T08:09:26.2779926Z VALIDATION 320 no-preference ollama { gap: 16, same: true }
+2026-10-27T08:09:26.2780805Z VALIDATION 320 no-preference mock { gap: 16, same: true }
+2026-10-27T08:09:26.2781651Z VALIDATION 320 no-preference groq { gap: 16, same: true }
+2026-10-27T08:09:26.2782426Z VALIDATION 320 no-preference mimo { gap: 16, same: true }
+2026-10-27T08:09:26.2783226Z VALIDATION 320 no-preference minimax { gap: 16, same: true }
+2026-10-27T08:09:26.2784006Z VALIDATION 320 no-preference mistral { gap: 16, same: true }
+2026-10-27T08:09:26.2785066Z VALIDATION 320 no-preference openai_compatible { gap: 16, same: true }
+2026-10-27T08:09:26.2785912Z VALIDATION 320 no-preference openrouter { gap: 16, same: true }
+2026-10-27T08:09:26.2786618Z VALIDATION 320 reduce openai { gap: 16, same: true }
+2026-10-27T08:09:26.2787142Z VALIDATION 320 reduce claude { gap: 16, same: true }
+2026-10-27T08:09:26.2787657Z VALIDATION 320 reduce gemini { gap: 16, same: true }
+2026-10-27T08:09:26.2788193Z VALIDATION 320 reduce deepseek { gap: 16, same: true }
+2026-10-27T08:09:26.2788721Z VALIDATION 320 reduce ollama { gap: 16, same: true }
+2026-10-27T08:09:26.2789231Z VALIDATION 320 reduce mock { gap: 16, same: true }
+2026-10-27T08:09:26.2789735Z VALIDATION 320 reduce groq { gap: 16, same: true }
+2026-10-27T08:09:26.2790231Z VALIDATION 320 reduce mimo { gap: 16, same: true }
+2026-10-27T08:09:26.2790745Z VALIDATION 320 reduce minimax { gap: 16, same: true }
+2026-10-27T08:09:26.2791278Z VALIDATION 320 reduce mistral { gap: 16, same: true }
+2026-10-27T08:09:26.2791865Z VALIDATION 320 reduce openai_compatible { gap: 16, same: true }
+2026-10-27T08:09:26.2792468Z VALIDATION 320 reduce openrouter { gap: 16, same: true }
+2026-10-27T08:09:26.2793058Z VALIDATION 1280 no-preference openai { gap: 16, same: true }
+2026-10-27T08:09:26.2793663Z VALIDATION 1280 no-preference claude { gap: 16, same: true }
+2026-10-27T08:09:26.2794443Z VALIDATION 1280 no-preference gemini { gap: 16, same: true }
+2026-10-27T08:09:26.2795065Z VALIDATION 1280 no-preference deepseek { gap: 16, same: true }
+2026-10-27T08:09:26.2795679Z VALIDATION 1280 no-preference ollama { gap: 16, same: true }
+2026-10-27T08:09:26.2796274Z VALIDATION 1280 no-preference mock { gap: 16, same: true }
+2026-10-27T08:09:26.2796793Z VALIDATION 1280 no-preference groq { gap: 16, same: true }
+2026-10-27T08:09:26.2797293Z VALIDATION 1280 no-preference mimo { gap: 16, same: true }
+2026-10-27T08:09:26.2798023Z VALIDATION 1280 no-preference minimax { gap: 16, same: true }
+2026-10-27T08:09:26.2798547Z VALIDATION 1280 no-preference mistral { gap: 16, same: true }
+2026-10-27T08:09:26.2799122Z VALIDATION 1280 no-preference openai_compatible { gap: 16, same: true }
+2026-10-27T08:09:26.2799706Z VALIDATION 1280 no-preference openrouter { gap: 16, same: true }
+2026-10-27T08:09:26.2800205Z VALIDATION 1280 reduce openai { gap: 16, same: true }
+2026-10-27T08:09:26.2800660Z VALIDATION 1280 reduce claude { gap: 16, same: true }
+2026-10-27T08:09:26.2801107Z VALIDATION 1280 reduce gemini { gap: 16, same: true }
+2026-10-27T08:09:26.2801582Z VALIDATION 1280 reduce deepseek { gap: 16, same: true }
+2026-10-27T08:09:26.2802048Z VALIDATION 1280 reduce ollama { gap: 16, same: true }
+2026-10-27T08:09:26.2802493Z VALIDATION 1280 reduce mock { gap: 16, same: true }
+2026-10-27T08:09:26.2802926Z VALIDATION 1280 reduce groq { gap: 16, same: true }
+2026-10-27T08:09:26.2803364Z VALIDATION 1280 reduce mimo { gap: 16, same: true }
+2026-10-27T08:09:26.2803815Z VALIDATION 1280 reduce minimax { gap: 16, same: true }
+2026-10-27T08:09:26.2804496Z VALIDATION 1280 reduce mistral { gap: 16, same: true }
+2026-10-27T08:09:26.2805030Z VALIDATION 1280 reduce openai_compatible { gap: 16, same: true }
+2026-10-27T08:09:26.2805679Z VALIDATION 1280 reduce openrouter { gap: 16, same: true }
+2026-10-27T08:09:26.2806633Z PASS allavailableproviderchips actualfixturerejectedtest nearby!persistentconcisetext retainedretrybutton3201280normalReduce nopaidcalls
+2026-10-27T08:09:26.2807234Z 
+2026-10-27T08:09:52.8285107Z CASE review_capabilities_browser.cjs default PASS exit=0 seconds=26.5
+2026-10-27T08:09:52.8288670Z SOURCE STATUS Proposed source added. Check its path and label, then validate before saving. App identity
+2026-10-27T08:09:52.8290131Z 9 draft settings
+2026-10-27T08:09:52.8290749Z Title
+2026-10-27T08:09:52.8291442Z Tagline
+2026-10-27T08:09:52.8292147Z More app settings
+2026-10-27T08:09:52.8292974Z Design, colors, fonts and layout
+2026-10-27T08:09:52.8293875Z 80 draft settings
+2026-10-27T08:09:52.8294504Z Theme
+2026-10-27T08:09:52.8296684Z Light theme
+2026-10-27T08:09:52.8297207Z Brand
+2026-10-27T08:09:52.8297741Z Accent
+2026-10-27T08:09:52.8298195Z Page background
+2026-10-27T08:09:52.8298719Z Surface
+2026-10-27T08:09:52.8299037Z Text color
+2026-10-27T08:09:52.8299362Z Secondary text
+2026-10-27T08:09:52.8310447Z Borders and dividers
+2026-10-27T08:09:52.8310848Z Sidebar
+2026-10-27T08:09:52.8311132Z Choose
+2026-10-27T08:09:52.8311468Z Assistant messages
+2026-10-27T08:09:52.8311819Z Your messages
+2026-10-27T08:09:52.8312147Z Error color
+2026-10-27T08:09:52.8312452Z Brand
+2026-10-27T08:09:52.8312730Z Accent
+2026-10-27T08:09:52.8313043Z Page background
+2026-10-27T08:09:52.8313370Z Surface
+2026-10-27T08:09:52.8313667Z Text color
+2026-10-27T08:09:52.8313918Z Secondary text
+2026-10-27T08:09:52.8314170Z Borders and dividers
+2026-10-27T08:09:52.8314704Z Sidebar
+2026-10-27T08:09:52.8314904Z Choose
+2026-10-27T08:09:52.8315125Z Assistant messages
+2026-10-27T08:09:52.8315369Z Your messages
+2026-10-27T08:09:52.8315580Z Error color
+2026-10-27T08:09:52.8315785Z Background style
+2026-10-27T08:09:52.8316004Z Solid
+2026-10-27T08:09:52.8316229Z Second background color
+2026-10-27T08:09:52.8316472Z Background angle
+2026-10-27T08:09:52.8316758Z degrees: 0 to 360 (whole numbers)
+2026-10-27T08:09:52.8317034Z Background image
+2026-10-27T08:09:52.8317247Z Pattern
+2026-10-27T08:09:52.8317438Z Dots
+2026-10-27T08:09:52.8317640Z Pattern opacity
+2026-10-27T08:09:52.8317930Z % opacity: 0 to 60 (whole numbers)
+2026-10-27T08:09:52.8318217Z Pattern size
+2026-10-27T08:09:52.8318515Z px pattern size: 8 to 80 (whole numbers)
+2026-10-27T08:09:52.8318800Z Pattern color
+2026-10-27T08:09:52.8318999Z Body font
+2026-10-27T08:09:52.8319113Z 
+2026-10-27T08:09:52.8319290Z The quick brown fox jumps over the lazy dog.
+2026-10-27T08:09:52.8319501Z 
+2026-10-27T08:09:52.8319590Z Aa
+2026-10-27T08:09:52.8319770Z Georgia
+2026-10-27T08:09:52.8319961Z Heading font
+2026-10-27T08:09:52.8320079Z 
+2026-10-27T08:09:52.8320487Z The quick brown fox jumps over the lazy dog.
+2026-10-27T08:09:52.8320696Z 
+2026-10-27T08:09:52.8320780Z Aa
+2026-10-27T08:09:52.8320956Z Georgia
+2026-10-27T08:09:52.8321154Z Custom font address
+2026-10-27T08:09:52.8321362Z Text size
+2026-10-27T08:09:52.8321620Z % text size: 80 to 140 (whole numbers)
+2026-10-27T08:09:52.8321895Z Line spacing
+2026-10-27T08:09:52.8322163Z % line spacing: 120 to 200 (whole numbers)
+2026-10-27T08:09:52.8322451Z Corner roundness
+2026-10-27T08:09:52.8322735Z % corner roundness: 0 to 160 (whole numbers)
+2026-10-27T08:09:52.8323015Z Spacing
+2026-10-27T08:09:52.8323200Z Cozy spacing
+2026-10-27T08:09:52.8323387Z Shadows
+2026-10-27T08:09:52.8323566Z Soft shadow
+2026-10-27T08:09:52.8323766Z Assistant icon
+2026-10-27T08:09:52.8323979Z Your profile icon
+2026-10-27T08:09:52.8324186Z Welcome icon
+2026-10-27T08:09:52.8324608Z Send icon
+2026-10-27T08:09:52.8324801Z Attachment icon
+2026-10-27T08:09:52.8325008Z Temperature icon
+2026-10-27T08:09:52.8325210Z Motion
+2026-10-27T08:09:52.8325398Z Subtle
+2026-10-27T08:09:52.8325587Z Entrance
+2026-10-27T08:09:52.8325770Z Fade
+2026-10-27T08:09:52.8325946Z Speed
+2026-10-27T08:09:52.8326207Z % motion speed: 40 to 250 (whole numbers)
+2026-10-27T08:09:52.8326488Z Lift on hover
+2026-10-27T08:09:52.8326680Z Sidebar
+2026-10-27T08:09:52.8326869Z Right sidebar
+2026-10-27T08:09:52.8327232Z Sidebar width
+2026-10-27T08:09:52.8327518Z px sidebar width: 200 to 460 (whole numbers)
+2026-10-27T08:09:52.8327809Z Chat width
+2026-10-27T08:09:52.8328011Z Wide chat width
+2026-10-27T08:09:52.8328223Z Profile pictures
+2026-10-27T08:09:52.8328464Z Hide profile pictures
+2026-10-27T08:09:52.8328683Z Message style
+2026-10-27T08:09:52.8328883Z Flat message style
+2026-10-27T08:09:52.8329077Z Logo
+2026-10-27T08:09:52.8329252Z Logo watermark
+2026-10-27T08:09:52.8329427Z Heading
+2026-10-27T08:09:52.8329603Z Introduction
+2026-10-27T08:09:52.8329806Z Starter questions
+2026-10-27T08:09:52.8330021Z Question placeholder
+2026-10-27T08:09:52.8330225Z Footer text
+2026-10-27T08:09:52.8330426Z Answer limitation note
+2026-10-27T08:09:52.8330640Z Question hint
+2026-10-27T08:09:52.8330838Z Chat list heading
+2026-10-27T08:09:52.8331057Z Your message alignment
+2026-10-27T08:09:52.8331273Z Right
+2026-10-27T08:09:52.8331451Z Composer
+2026-10-27T08:09:52.8331625Z Inline
+2026-10-27T08:09:52.8331804Z Toolbar
+2026-10-27T08:09:52.8331981Z Show
+2026-10-27T08:09:52.8332161Z Source panel
+2026-10-27T08:09:52.8332390Z Assistant icon animation
+2026-10-27T08:09:52.8332633Z Assistant icon motion
+2026-10-27T08:09:52.8332864Z Your profile icon animation
+2026-10-27T08:09:52.8333116Z Your profile icon motion
+2026-10-27T08:09:52.8333351Z Welcome icon animation
+2026-10-27T08:09:52.8333574Z Welcome icon motion
+2026-10-27T08:09:52.8333785Z Send icon animation
+2026-10-27T08:09:52.8333991Z Send icon motion
+2026-10-27T08:09:52.8334397Z Attachment icon animation
+2026-10-27T08:09:52.8334698Z Attachment icon motion
+2026-10-27T08:09:52.8334940Z Temperature icon animation
+2026-10-27T08:09:52.8335186Z Temperature icon motion
+2026-10-27T08:09:52.8335429Z All nine answer prompts
+2026-10-27T08:09:52.8335661Z 20 draft settings
+2026-10-27T08:09:52.8335909Z Answer style and system prompt
+2026-10-27T08:09:52.8336146Z 7 draft settings
+2026-10-27T08:09:52.8336333Z Sources
+2026-10-27T08:09:52.8336511Z 5 draft settings
+2026-10-27T08:09:52.8336702Z My documents
+2026-10-27T08:09:52.8336824Z 
+2026-10-27T08:09:52.8336981Z Proposed source. Not tested or active.
+2026-10-27T08:09:52.8337164Z 
+2026-10-27T08:09:52.8337251Z Id
+2026-10-27T08:09:52.8337416Z Label
+2026-10-27T08:09:52.8337593Z Provider type
+2026-10-27T08:09:52.8337862Z Local files
+2026-10-27T08:09:52.8338068Z File or folder path
+2026-10-27T08:09:52.8338296Z Remove this proposed source
+2026-10-27T08:09:52.8338571Z Add proposed local-file source
+2026-10-27T08:09:52.8338866Z Advanced: edit all sources as JSON
+2026-10-27T08:09:52.8339155Z API recommendations
+2026-10-27T08:09:52.8339356Z 1 draft setting
+2026-10-27T08:09:52.8339547Z Model connection
+2026-10-27T08:09:52.8339741Z 8 draft settings
+2026-10-27T08:09:52.8340141Z Code drafts: not installed
+2026-10-27T08:09:52.8340361Z 6 draft settings
+2026-10-27T08:09:52.8340566Z Evidence retrieval
+2026-10-27T08:09:52.8340765Z 5 draft settings
+2026-10-27T08:09:52.8340966Z Conversation memory
+2026-10-27T08:09:52.8341163Z 4 draft settings
+2026-10-27T08:09:52.8341347Z Citations
+2026-10-27T08:09:52.8341528Z 2 draft settings
+2026-10-27T08:09:52.8341715Z Usage limits
+2026-10-27T08:09:52.8341895Z 4 draft settings
+2026-10-27T08:09:52.8342098Z Access and accounts
+2026-10-27T08:09:52.8342291Z 3 draft settings
+2026-10-27T08:09:52.8342476Z Allowed actions
+2026-10-27T08:09:52.8342664Z 2 draft settings
+2026-10-27T08:09:52.8342852Z Chat storage
+2026-10-27T08:09:52.8343031Z 1 draft setting
+2026-10-27T08:09:52.8343222Z Local server
+2026-10-27T08:09:52.8343403Z 3 draft settings
+2026-10-27T08:09:52.8343703Z REVIEW STATUS Validated. Review changes before saving.
+2026-10-27T08:09:52.8344119Z REVIEW STATUS Validated. Review changes before saving.
+2026-10-27T08:09:52.8344976Z SOURCE STATUS Proposed source added. Check its path and label, then validate before saving. App identity
+2026-10-27T08:09:52.8345461Z 9 draft settings
+2026-10-27T08:09:52.8345657Z Title
+2026-10-27T08:09:52.8345827Z Tagline
+2026-10-27T08:09:52.8346013Z More app settings
+2026-10-27T08:09:52.8346257Z Design, colors, fonts and layout
+2026-10-27T08:09:52.8346625Z 80 draft settings
+2026-10-27T08:09:52.8346821Z Theme
+2026-10-27T08:09:52.8347003Z Light theme
+2026-10-27T08:09:52.8347183Z Brand
+2026-10-27T08:09:52.8347348Z Accent
+2026-10-27T08:09:52.8347525Z Page background
+2026-10-27T08:09:52.8347714Z Surface
+2026-10-27T08:09:52.8347886Z Text color
+2026-10-27T08:09:52.8348064Z Secondary text
+2026-10-27T08:09:52.8348276Z Borders and dividers
+2026-10-27T08:09:52.8348476Z Sidebar
+2026-10-27T08:09:52.8348641Z Choose
+2026-10-27T08:09:52.8348826Z Assistant messages
+2026-10-27T08:09:52.8349021Z Your messages
+2026-10-27T08:09:52.8349208Z Error color
+2026-10-27T08:09:52.8349382Z Brand
+2026-10-27T08:09:52.8349558Z Accent
+2026-10-27T08:09:52.8349735Z Page background
+2026-10-27T08:09:52.8349918Z Surface
+2026-10-27T08:09:52.8350087Z Text color
+2026-10-27T08:09:52.8350263Z Secondary text
+2026-10-27T08:09:52.8350465Z Borders and dividers
+2026-10-27T08:09:52.8350661Z Sidebar
+2026-10-27T08:09:52.8350829Z Choose
+2026-10-27T08:09:52.8351011Z Assistant messages
+2026-10-27T08:09:52.8351211Z Your messages
+2026-10-27T08:09:52.8351391Z Error color
+2026-10-27T08:09:52.8351570Z Background style
+2026-10-27T08:09:52.8351754Z Solid
+2026-10-27T08:09:52.8351952Z Second background color
+2026-10-27T08:09:52.8352165Z Background angle
+2026-10-27T08:09:52.8352409Z degrees: 0 to 360 (whole numbers)
+2026-10-27T08:09:52.8352650Z Background image
+2026-10-27T08:09:52.8352838Z Pattern
+2026-10-27T08:09:52.8353004Z Dots
+2026-10-27T08:09:52.8353175Z Pattern opacity
+2026-10-27T08:09:52.8353426Z % opacity: 0 to 60 (whole numbers)
+2026-10-27T08:09:52.8353669Z Pattern size
+2026-10-27T08:09:52.8353924Z px pattern size: 8 to 80 (whole numbers)
+2026-10-27T08:09:52.8354188Z Pattern color
+2026-10-27T08:09:52.8354658Z Body font
+2026-10-27T08:09:52.8354769Z 
+2026-10-27T08:09:52.8354926Z The quick brown fox jumps over the lazy dog.
+2026-10-27T08:09:52.8355131Z 
+2026-10-27T08:09:52.8355211Z Aa
+2026-10-27T08:09:52.8355377Z Georgia
+2026-10-27T08:09:52.8355552Z Heading font
+2026-10-27T08:09:52.8355662Z 
+2026-10-27T08:09:52.8355820Z The quick brown fox jumps over the lazy dog.
+2026-10-27T08:09:52.8356017Z 
+2026-10-27T08:09:52.8356089Z Aa
+2026-10-27T08:09:52.8356264Z Georgia
+2026-10-27T08:09:52.8356455Z Custom font address
+2026-10-27T08:09:52.8356651Z Text size
+2026-10-27T08:09:52.8356895Z % text size: 80 to 140 (whole numbers)
+2026-10-27T08:09:52.8357144Z Line spacing
+2026-10-27T08:09:52.8357391Z % line spacing: 120 to 200 (whole numbers)
+2026-10-27T08:09:52.8357650Z Corner roundness
+2026-10-27T08:09:52.8357919Z % corner roundness: 0 to 160 (whole numbers)
+2026-10-27T08:09:52.8358177Z Spacing
+2026-10-27T08:09:52.8358348Z Cozy spacing
+2026-10-27T08:09:52.8358524Z Shadows
+2026-10-27T08:09:52.8358695Z Soft shadow
+2026-10-27T08:09:52.8359016Z Assistant icon
+2026-10-27T08:09:52.8359222Z Your profile icon
+2026-10-27T08:09:52.8359418Z Welcome icon
+2026-10-27T08:09:52.8359594Z Send icon
+2026-10-27T08:09:52.8359774Z Attachment icon
+2026-10-27T08:09:52.8359970Z Temperature icon
+2026-10-27T08:09:52.8360155Z Motion
+2026-10-27T08:09:52.8360326Z Subtle
+2026-10-27T08:09:52.8360500Z Entrance
+2026-10-27T08:09:52.8360670Z Fade
+2026-10-27T08:09:52.8360834Z Speed
+2026-10-27T08:09:52.8361072Z % motion speed: 40 to 250 (whole numbers)
+2026-10-27T08:09:52.8361331Z Lift on hover
+2026-10-27T08:09:52.8361511Z Sidebar
+2026-10-27T08:09:52.8361681Z Right sidebar
+2026-10-27T08:09:52.8361868Z Sidebar width
+2026-10-27T08:09:52.8362123Z px sidebar width: 200 to 460 (whole numbers)
+2026-10-27T08:09:52.8362390Z Chat width
+2026-10-27T08:09:52.8362568Z Wide chat width
+2026-10-27T08:09:52.8362760Z Profile pictures
+2026-10-27T08:09:52.8362973Z Hide profile pictures
+2026-10-27T08:09:52.8363183Z Message style
+2026-10-27T08:09:52.8363380Z Flat message style
+2026-10-27T08:09:52.8363575Z Logo
+2026-10-27T08:09:52.8363745Z Logo watermark
+2026-10-27T08:09:52.8363925Z Heading
+2026-10-27T08:09:52.8364096Z Introduction
+2026-10-27T08:09:52.8364510Z Starter questions
+2026-10-27T08:09:52.8364733Z Question placeholder
+2026-10-27T08:09:52.8364936Z Footer text
+2026-10-27T08:09:52.8365258Z Answer limitation note
+2026-10-27T08:09:52.8365469Z Question hint
+2026-10-27T08:09:52.8365667Z Chat list heading
+2026-10-27T08:09:52.8365875Z Your message alignment
+2026-10-27T08:09:52.8366079Z Right
+2026-10-27T08:09:52.8366248Z Composer
+2026-10-27T08:09:52.8366415Z Inline
+2026-10-27T08:09:52.8366583Z Toolbar
+2026-10-27T08:09:52.8366747Z Show
+2026-10-27T08:09:52.8366915Z Source panel
+2026-10-27T08:09:52.8367121Z Assistant icon animation
+2026-10-27T08:09:52.8367360Z Assistant icon motion
+2026-10-27T08:09:52.8367590Z Your profile icon animation
+2026-10-27T08:09:52.8367834Z Your profile icon motion
+2026-10-27T08:09:52.8368064Z Welcome icon animation
+2026-10-27T08:09:52.8368278Z Welcome icon motion
+2026-10-27T08:09:52.8368494Z Send icon animation
+2026-10-27T08:09:52.8368689Z Send icon motion
+2026-10-27T08:09:52.8368909Z Attachment icon animation
+2026-10-27T08:09:52.8369147Z Attachment icon motion
+2026-10-27T08:09:52.8369380Z Temperature icon animation
+2026-10-27T08:09:52.8369628Z Temperature icon motion
+2026-10-27T08:09:52.8369861Z All nine answer prompts
+2026-10-27T08:09:52.8370079Z 20 draft settings
+2026-10-27T08:09:52.8370328Z Answer style and system prompt
+2026-10-27T08:09:52.8370559Z 7 draft settings
+2026-10-27T08:09:52.8370742Z Sources
+2026-10-27T08:09:52.8370914Z 5 draft settings
+2026-10-27T08:09:52.8371098Z My documents
+2026-10-27T08:09:52.8371210Z 
+2026-10-27T08:09:52.8371353Z Proposed source. Not tested or active.
+2026-10-27T08:09:52.8371537Z 
+2026-10-27T08:09:52.8371613Z Id
+2026-10-27T08:09:52.8371776Z Label
+2026-10-27T08:09:52.8371953Z Provider type
+2026-10-27T08:09:52.8372134Z Local files
+2026-10-27T08:09:52.8372369Z File or folder path
+2026-10-27T08:09:52.8372593Z Remove this proposed source
+2026-10-27T08:09:52.8372875Z Add proposed local-file source
+2026-10-27T08:09:52.8373169Z Advanced: edit all sources as JSON
+2026-10-27T08:09:52.8373425Z API recommendations
+2026-10-27T08:09:52.8373620Z 1 draft setting
+2026-10-27T08:09:52.8373807Z Model connection
+2026-10-27T08:09:52.8373998Z 8 draft settings
+2026-10-27T08:09:52.8374414Z Code drafts: not installed
+2026-10-27T08:09:52.8374706Z 6 draft settings
+2026-10-27T08:09:52.8374907Z Evidence retrieval
+2026-10-27T08:09:52.8375098Z 5 draft settings
+2026-10-27T08:09:52.8375300Z Conversation memory
+2026-10-27T08:09:52.8375492Z 4 draft settings
+2026-10-27T08:09:52.8375677Z Citations
+2026-10-27T08:09:52.8375856Z 2 draft settings
+2026-10-27T08:09:52.8376038Z Usage limits
+2026-10-27T08:09:52.8376217Z 4 draft settings
+2026-10-27T08:09:52.8376412Z Access and accounts
+2026-10-27T08:09:52.8376607Z 3 draft settings
+2026-10-27T08:09:52.8376791Z Allowed actions
+2026-10-27T08:09:52.8376976Z 2 draft settings
+2026-10-27T08:09:52.8377163Z Chat storage
+2026-10-27T08:09:52.8377487Z 1 draft setting
+2026-10-27T08:09:52.8377673Z Local server
+2026-10-27T08:09:52.8377854Z 3 draft settings
+2026-10-27T08:09:52.8378156Z REVIEW STATUS Validated. Review changes before saving.
+2026-10-27T08:09:52.8378564Z REVIEW STATUS Validated. Review changes before saving.
+2026-10-27T08:09:52.8379186Z SOURCE STATUS Proposed source added. Check its path and label, then validate before saving. App identity
+2026-10-27T08:09:52.8379651Z 9 draft settings
+2026-10-27T08:09:52.8379826Z Title
+2026-10-27T08:09:52.8379992Z Tagline
+2026-10-27T08:09:52.8380176Z More app settings
+2026-10-27T08:09:52.8380421Z Design, colors, fonts and layout
+2026-10-27T08:09:52.8380671Z 80 draft settings
+2026-10-27T08:09:52.8380852Z Theme
+2026-10-27T08:09:52.8381019Z Light theme
+2026-10-27T08:09:52.8381195Z Brand
+2026-10-27T08:09:52.8381361Z Accent
+2026-10-27T08:09:52.8381541Z Page background
+2026-10-27T08:09:52.8381733Z Surface
+2026-10-27T08:09:52.8381906Z Text color
+2026-10-27T08:09:52.8382088Z Secondary text
+2026-10-27T08:09:52.8382297Z Borders and dividers
+2026-10-27T08:09:52.8382495Z Sidebar
+2026-10-27T08:09:52.8382657Z Choose
+2026-10-27T08:09:52.8382841Z Assistant messages
+2026-10-27T08:09:52.8383035Z Your messages
+2026-10-27T08:09:52.8383221Z Error color
+2026-10-27T08:09:52.8383393Z Brand
+2026-10-27T08:09:52.8383557Z Accent
+2026-10-27T08:09:52.8383853Z Page background
+2026-10-27T08:09:52.8384042Z Surface
+2026-10-27T08:09:52.8384417Z Text color
+2026-10-27T08:09:52.8384641Z Secondary text
+2026-10-27T08:09:52.8384853Z Borders and dividers
+2026-10-27T08:09:52.8385050Z Sidebar
+2026-10-27T08:09:52.8385212Z Choose
+2026-10-27T08:09:52.8385398Z Assistant messages
+2026-10-27T08:09:52.8385592Z Your messages
+2026-10-27T08:09:52.8385771Z Error color
+2026-10-27T08:09:52.8385959Z Background style
+2026-10-27T08:09:52.8386142Z Solid
+2026-10-27T08:09:52.8386334Z Second background color
+2026-10-27T08:09:52.8386547Z Background angle
+2026-10-27T08:09:52.8386791Z degrees: 0 to 360 (whole numbers)
+2026-10-27T08:09:52.8387031Z Background image
+2026-10-27T08:09:52.8387220Z Pattern
+2026-10-27T08:09:52.8387389Z Dots
+2026-10-27T08:09:52.8387560Z Pattern opacity
+2026-10-27T08:09:52.8387806Z % opacity: 0 to 60 (whole numbers)
+2026-10-27T08:09:52.8388054Z Pattern size
+2026-10-27T08:09:52.8388305Z px pattern size: 8 to 80 (whole numbers)
+2026-10-27T08:09:52.8388567Z Pattern color
+2026-10-27T08:09:52.8388752Z Body font
+2026-10-27T08:09:52.8388853Z 
+2026-10-27T08:09:52.8389015Z The quick brown fox jumps over the lazy dog.
+2026-10-27T08:09:52.8389209Z 
+2026-10-27T08:09:52.8389288Z Aa
+2026-10-27T08:09:52.8389454Z Georgia
+2026-10-27T08:09:52.8389623Z Heading font
+2026-10-27T08:09:52.8389733Z 
+2026-10-27T08:09:52.8389885Z The quick brown fox jumps over the lazy dog.
+2026-10-27T08:09:52.8390080Z 
+2026-10-27T08:09:52.8390156Z Aa
+2026-10-27T08:09:52.8390317Z Georgia
+2026-10-27T08:09:52.8390502Z Custom font address
+2026-10-27T08:09:52.8390695Z Text size
+2026-10-27T08:09:52.8390932Z % text size: 80 to 140 (whole numbers)
+2026-10-27T08:09:52.8391183Z Line spacing
+2026-10-27T08:09:52.8391445Z % line spacing: 120 to 200 (whole numbers)
+2026-10-27T08:09:52.8391709Z Corner roundness
+2026-10-27T08:09:52.8391975Z % corner roundness: 0 to 160 (whole numbers)
+2026-10-27T08:09:52.8392235Z Spacing
+2026-10-27T08:09:52.8392407Z Cozy spacing
+2026-10-27T08:09:52.8392581Z Shadows
+2026-10-27T08:09:52.8392758Z Soft shadow
+2026-10-27T08:09:52.8392935Z Assistant icon
+2026-10-27T08:09:52.8393133Z Your profile icon
+2026-10-27T08:09:52.8393326Z Welcome icon
+2026-10-27T08:09:52.8393499Z Send icon
+2026-10-27T08:09:52.8393673Z Attachment icon
+2026-10-27T08:09:52.8393894Z Temperature icon
+2026-10-27T08:09:52.8394084Z Motion
+2026-10-27T08:09:52.8394476Z Subtle
+2026-10-27T08:09:52.8394661Z Entrance
+2026-10-27T08:09:52.8394829Z Fade
+2026-10-27T08:09:52.8394993Z Speed
+2026-10-27T08:09:52.8395234Z % motion speed: 40 to 250 (whole numbers)
+2026-10-27T08:09:52.8395497Z Lift on hover
+2026-10-27T08:09:52.8395681Z Sidebar
+2026-10-27T08:09:52.8395852Z Right sidebar
+2026-10-27T08:09:52.8396033Z Sidebar width
+2026-10-27T08:09:52.8396432Z px sidebar width: 200 to 460 (whole numbers)
+2026-10-27T08:09:52.8396698Z Chat width
+2026-10-27T08:09:52.8396875Z Wide chat width
+2026-10-27T08:09:52.8397071Z Profile pictures
+2026-10-27T08:09:52.8397288Z Hide profile pictures
+2026-10-27T08:09:52.8397495Z Message style
+2026-10-27T08:09:52.8397694Z Flat message style
+2026-10-27T08:09:52.8397881Z Logo
+2026-10-27T08:09:52.8398051Z Logo watermark
+2026-10-27T08:09:52.8398230Z Heading
+2026-10-27T08:09:52.8398407Z Introduction
+2026-10-27T08:09:52.8398599Z Starter questions
+2026-10-27T08:09:52.8398809Z Question placeholder
+2026-10-27T08:09:52.8399013Z Footer text
+2026-10-27T08:09:52.8399211Z Answer limitation note
+2026-10-27T08:09:52.8399416Z Question hint
+2026-10-27T08:09:52.8399612Z Chat list heading
+2026-10-27T08:09:52.8399819Z Your message alignment
+2026-10-27T08:09:52.8400015Z Right
+2026-10-27T08:09:52.8400184Z Composer
+2026-10-27T08:09:52.8400355Z Inline
+2026-10-27T08:09:52.8400521Z Toolbar
+2026-10-27T08:09:52.8400681Z Show
+2026-10-27T08:09:52.8400859Z Source panel
+2026-10-27T08:09:52.8401065Z Assistant icon animation
+2026-10-27T08:09:52.8401300Z Assistant icon motion
+2026-10-27T08:09:52.8401528Z Your profile icon animation
+2026-10-27T08:09:52.8401778Z Your profile icon motion
+2026-10-27T08:09:52.8402013Z Welcome icon animation
+2026-10-27T08:09:52.8402343Z Welcome icon motion
+2026-10-27T08:09:52.8402562Z Send icon animation
+2026-10-27T08:09:52.8402756Z Send icon motion
+2026-10-27T08:09:52.8402969Z Attachment icon animation
+2026-10-27T08:09:52.8403206Z Attachment icon motion
+2026-10-27T08:09:52.8403434Z Temperature icon animation
+2026-10-27T08:09:52.8403673Z Temperature icon motion
+2026-10-27T08:09:52.8403907Z All nine answer prompts
+2026-10-27T08:09:52.8404124Z 20 draft settings
+2026-10-27T08:09:52.8404573Z Answer style and system prompt
+2026-10-27T08:09:52.8404813Z 7 draft settings
+2026-10-27T08:09:52.8405001Z Sources
+2026-10-27T08:09:52.8405174Z 5 draft settings
+2026-10-27T08:09:52.8405361Z My documents
+2026-10-27T08:09:52.8405478Z 
+2026-10-27T08:09:52.8405626Z Proposed source. Not tested or active.
+2026-10-27T08:09:52.8405805Z 
+2026-10-27T08:09:52.8405883Z Id
+2026-10-27T08:09:52.8406049Z Label
+2026-10-27T08:09:52.8406223Z Provider type
+2026-10-27T08:09:52.8406407Z Local files
+2026-10-27T08:09:52.8406607Z File or folder path
+2026-10-27T08:09:52.8406837Z Remove this proposed source
+2026-10-27T08:09:52.8407111Z Add proposed local-file source
+2026-10-27T08:09:52.8407406Z Advanced: edit all sources as JSON
+2026-10-27T08:09:52.8407662Z API recommendations
+2026-10-27T08:09:52.8407858Z 1 draft setting
+2026-10-27T08:09:52.8408045Z Model connection
+2026-10-27T08:09:52.8408236Z 8 draft settings
+2026-10-27T08:09:52.8408449Z Code drafts: not installed
+2026-10-27T08:09:52.8408676Z 6 draft settings
+2026-10-27T08:09:52.8408880Z Evidence retrieval
+2026-10-27T08:09:52.8409072Z 5 draft settings
+2026-10-27T08:09:52.8409275Z Conversation memory
+2026-10-27T08:09:52.8409474Z 4 draft settings
+2026-10-27T08:09:52.8409657Z Citations
+2026-10-27T08:09:52.8409837Z 2 draft settings
+2026-10-27T08:09:52.8410021Z Usage limits
+2026-10-27T08:09:52.8410201Z 4 draft settings
+2026-10-27T08:09:52.8410401Z Access and accounts
+2026-10-27T08:09:52.8410596Z 3 draft settings
+2026-10-27T08:09:52.8410789Z Allowed actions
+2026-10-27T08:09:52.8410976Z 2 draft settings
+2026-10-27T08:09:52.8411166Z Chat storage
+2026-10-27T08:09:52.8411347Z 1 draft setting
+2026-10-27T08:09:52.8411530Z Local server
+2026-10-27T08:09:52.8411710Z 3 draft settings
+2026-10-27T08:09:52.8412013Z REVIEW STATUS Validated. Review changes before saving.
+2026-10-27T08:09:52.8412431Z REVIEW STATUS Validated. Review changes before saving.
+2026-10-27T08:09:52.8413466Z PASS360/320/1280 short-height header/footer, hex correction+invalid navigation, font enum, structured source add+edit, mark reviewed/reject/revalidate, close/reopen retention; no model/save calls
+2026-10-27T08:09:52.8414173Z 
+2026-10-27T08:09:59.9951832Z CASE settings_dynamic_hover_inventory_browser.cjs default PASS exit=0 seconds=7.2
+2026-10-27T08:09:59.9953508Z PASS configured-source-key/preset-review/fontpicker hover4matrix noWrites 112
+2026-10-27T08:09:59.9954071Z 
+2026-10-27T08:10:18.6456526Z CASE settings_native_browser_zoom_all_focus_browser.cjs default PASS exit=0 seconds=18.6
+2026-10-27T08:10:18.6458445Z NATIVEZOOM { width: 1280, dpr: 1, scale: 1 } { width: 320, dpr: 4, scale: 1 }
+2026-10-27T08:10:18.6459495Z ZOOMSECTION #sec-finish 9
+2026-10-27T08:10:18.6459964Z ZOOMSECTION #sec-portable 12
+2026-10-27T08:10:18.6460623Z ZOOMSECTION #sec-model 31
+2026-10-27T08:10:18.6461294Z ZOOMSECTION #sec-search 48
+2026-10-27T08:10:18.6461833Z ZOOMSECTION #sec-prompts 67
+2026-10-27T08:10:18.6462410Z ZOOMSECTION #sec-code 82
+2026-10-27T08:10:18.6462950Z ZOOMSECTION #sec-presets 93
+2026-10-27T08:10:18.6463540Z ZOOMSECTION #sec-wording 106
+2026-10-27T08:10:18.6464135Z ZOOMSECTION #sec-colors 119
+2026-10-27T08:10:18.6465698Z ZOOMSECTION #sec-background 129
+2026-10-27T08:10:18.6466346Z ZOOMSECTION #sec-fonts 136
+2026-10-27T08:10:18.6466953Z ZOOMSECTION #sec-shape 148
+2026-10-27T08:10:18.6467465Z ZOOMSECTION #sec-emoji 153
+2026-10-27T08:10:18.6467963Z ZOOMSECTION #sec-motion 161
+2026-10-27T08:10:18.6468436Z ZOOMSECTION #sec-layout 176
+2026-10-27T08:10:18.6468918Z ZOOMSECTION #sec-freshness 179
+2026-10-27T08:10:18.6469381Z ZOOMSECTION #sec-budget 187
+2026-10-27T08:10:18.6470988Z PASS actualheadedChrome400 allvisibleSettingsSectionsControlsfocusstickyboundsnohorizontaloverflow
+2026-10-27T08:10:18.6471856Z 
+2026-10-27T08:10:29.9532265Z CASE settings_saved_motion_late_theme_browser.cjs default PASS exit=0 seconds=11.3
+2026-10-27T08:10:29.9535522Z PASS heldthemeafteriframecomplete authenticGETmotionappliedbeforebuiltUI NoneCalmSubtleFull3201280 nativeinputkeptnoidleloop
+2026-10-27T08:10:29.9537538Z 
+2026-10-27T08:10:46.4337894Z CASE setup_roundtrip_browser.cjs default PASS exit=0 seconds=16.5
+2026-10-27T08:10:46.4340783Z PASS real offline namedsetup save/load cancel+confirmed/theme+model scope, JSON export/import roundtrip, delete cancel+confirmed/prerequisite,1280 fixture restored
+2026-10-27T08:10:46.4342092Z 
+2026-10-27T08:11:31.0357752Z CASE sidebar_menu_icon_motion_browser.cjs default PASS exit=0 seconds=44.6
+2026-10-27T08:11:31.0358896Z MENUICON 320 no-preference left true matrix(0, 1, -1, 0, 0, 0)
+2026-10-27T08:11:31.0359676Z MENUICON 320 no-preference left false none
+2026-10-27T08:11:31.0360495Z MENUICON 320 no-preference right true matrix(0, 1, -1, 0, 0, 0)
+2026-10-27T08:11:31.0361248Z MENUICON 320 no-preference right false none
+2026-10-27T08:11:31.0362011Z MENUICON 320 no-preference hidden true matrix(0, 1, -1, 0, 0, 0)
+2026-10-27T08:11:31.0362752Z MENUICON 320 no-preference hidden false none
+2026-10-27T08:11:31.0363501Z MENUICON 320 no-preference left true matrix(0, 1, -1, 0, 0, 0)
+2026-10-27T08:11:31.0364512Z MENUICON 320 no-preference left false none
+2026-10-27T08:11:31.0365309Z MENUICON 320 no-preference right true matrix(0, 1, -1, 0, 0, 0)
+2026-10-27T08:11:31.0366057Z MENUICON 320 no-preference right false none
+2026-10-27T08:11:31.0366836Z MENUICON 320 no-preference hidden true matrix(0, 1, -1, 0, 0, 0)
+2026-10-27T08:11:31.0367602Z MENUICON 320 no-preference hidden false none
+2026-10-27T08:11:31.0368364Z MENUICON 320 no-preference left true matrix(0, 1, -1, 0, 0, 0)
+2026-10-27T08:11:31.0369094Z MENUICON 320 no-preference left false none
+2026-10-27T08:11:31.0369854Z MENUICON 320 no-preference right true matrix(0, 1, -1, 0, 0, 0)
+2026-10-27T08:11:31.0370583Z MENUICON 320 no-preference right false none
+2026-10-27T08:11:31.0371346Z MENUICON 320 no-preference hidden true matrix(0, 1, -1, 0, 0, 0)
+2026-10-27T08:11:31.0372093Z MENUICON 320 no-preference hidden false none
+2026-10-27T08:11:31.0372853Z MENUICON 320 no-preference left true matrix(0, 1, -1, 0, 0, 0)
+2026-10-27T08:11:31.0373576Z MENUICON 320 no-preference left false none
+2026-10-27T08:11:31.0374438Z MENUICON 320 no-preference right true matrix(0, 1, -1, 0, 0, 0)
+2026-10-27T08:11:31.0375173Z MENUICON 320 no-preference right false none
+2026-10-27T08:11:31.0375715Z MENUICON 320 no-preference hidden true matrix(0, 1, -1, 0, 0, 0)
+2026-10-27T08:11:31.0376516Z MENUICON 320 no-preference hidden false none
+2026-10-27T08:11:31.0376953Z MENUICON 320 reduce left true none
+2026-10-27T08:11:31.0377348Z MENUICON 320 reduce left false none
+2026-10-27T08:11:31.0377739Z MENUICON 320 reduce right true none
+2026-10-27T08:11:31.0378135Z MENUICON 320 reduce right false none
+2026-10-27T08:11:31.0378533Z MENUICON 320 reduce hidden true none
+2026-10-27T08:11:31.0378935Z MENUICON 320 reduce hidden false none
+2026-10-27T08:11:31.0379336Z MENUICON 320 reduce left true none
+2026-10-27T08:11:31.0379725Z MENUICON 320 reduce left false none
+2026-10-27T08:11:31.0380117Z MENUICON 320 reduce right true none
+2026-10-27T08:11:31.0380544Z MENUICON 320 reduce right false none
+2026-10-27T08:11:31.0380934Z MENUICON 320 reduce hidden true none
+2026-10-27T08:11:31.0381331Z MENUICON 320 reduce hidden false none
+2026-10-27T08:11:31.0381725Z MENUICON 320 reduce left true none
+2026-10-27T08:11:31.0382111Z MENUICON 320 reduce left false none
+2026-10-27T08:11:31.0382503Z MENUICON 320 reduce right true none
+2026-10-27T08:11:31.0382887Z MENUICON 320 reduce right false none
+2026-10-27T08:11:31.0383274Z MENUICON 320 reduce hidden true none
+2026-10-27T08:11:31.0383662Z MENUICON 320 reduce hidden false none
+2026-10-27T08:11:31.0384049Z MENUICON 320 reduce left true none
+2026-10-27T08:11:31.0384709Z MENUICON 320 reduce left false none
+2026-10-27T08:11:31.0385086Z MENUICON 320 reduce right true none
+2026-10-27T08:11:31.0385418Z MENUICON 320 reduce right false none
+2026-10-27T08:11:31.0385748Z MENUICON 320 reduce hidden true none
+2026-10-27T08:11:31.0386084Z MENUICON 320 reduce hidden false none
+2026-10-27T08:11:31.0386557Z MENUICON 1280 no-preference left false matrix(-1, 0, 0, -1, 0, 0)
+2026-10-27T08:11:31.0387116Z MENUICON 1280 no-preference left true matrix(1, 0, 0, 1, 0, 0)
+2026-10-27T08:11:31.0387649Z MENUICON 1280 no-preference right false matrix(1, 0, 0, 1, 0, 0)
+2026-10-27T08:11:31.0388197Z MENUICON 1280 no-preference right true matrix(-1, 0, 0, -1, 0, 0)
+2026-10-27T08:11:31.0388750Z MENUICON 1280 no-preference hidden true matrix(0, 1, -1, 0, 0, 0)
+2026-10-27T08:11:31.0389219Z MENUICON 1280 no-preference hidden false none
+2026-10-27T08:11:31.0389705Z MENUICON 1280 no-preference left false matrix(-1, 0, 0, -1, 0, 0)
+2026-10-27T08:11:31.0390241Z MENUICON 1280 no-preference left true matrix(1, 0, 0, 1, 0, 0)
+2026-10-27T08:11:31.0390768Z MENUICON 1280 no-preference right false matrix(1, 0, 0, 1, 0, 0)
+2026-10-27T08:11:31.0391303Z MENUICON 1280 no-preference right true matrix(-1, 0, 0, -1, 0, 0)
+2026-10-27T08:11:31.0391844Z MENUICON 1280 no-preference hidden true matrix(0, 1, -1, 0, 0, 0)
+2026-10-27T08:11:31.0392309Z MENUICON 1280 no-preference hidden false none
+2026-10-27T08:11:31.0392785Z MENUICON 1280 no-preference left false matrix(-1, 0, 0, -1, 0, 0)
+2026-10-27T08:11:31.0393315Z MENUICON 1280 no-preference left true matrix(1, 0, 0, 1, 0, 0)
+2026-10-27T08:11:31.0393845Z MENUICON 1280 no-preference right false matrix(1, 0, 0, 1, 0, 0)
+2026-10-27T08:11:31.0394533Z MENUICON 1280 no-preference right true matrix(-1, 0, 0, -1, 0, 0)
+2026-10-27T08:11:31.0395193Z MENUICON 1280 no-preference hidden true matrix(0, 1, -1, 0, 0, 0)
+2026-10-27T08:11:31.0395637Z MENUICON 1280 no-preference hidden false none
+2026-10-27T08:11:31.0396092Z MENUICON 1280 no-preference left false matrix(-1, 0, 0, -1, 0, 0)
+2026-10-27T08:11:31.0396579Z MENUICON 1280 no-preference left true matrix(1, 0, 0, 1, 0, 0)
+2026-10-27T08:11:31.0397063Z MENUICON 1280 no-preference right false matrix(1, 0, 0, 1, 0, 0)
+2026-10-27T08:11:31.0397557Z MENUICON 1280 no-preference right true matrix(-1, 0, 0, -1, 0, 0)
+2026-10-27T08:11:31.0398051Z MENUICON 1280 no-preference hidden true matrix(0, 1, -1, 0, 0, 0)
+2026-10-27T08:11:31.0398463Z MENUICON 1280 no-preference hidden false none
+2026-10-27T08:11:31.0398874Z MENUICON 1280 reduce left false matrix(-1, 0, 0, -1, 0, 0)
+2026-10-27T08:11:31.0399303Z MENUICON 1280 reduce left true matrix(1, 0, 0, 1, 0, 0)
+2026-10-27T08:11:31.0399726Z MENUICON 1280 reduce right false matrix(1, 0, 0, 1, 0, 0)
+2026-10-27T08:11:31.0400305Z MENUICON 1280 reduce right true matrix(-1, 0, 0, -1, 0, 0)
+2026-10-27T08:11:31.0400679Z MENUICON 1280 reduce hidden true none
+2026-10-27T08:11:31.0400993Z MENUICON 1280 reduce hidden false none
+2026-10-27T08:11:31.0401371Z MENUICON 1280 reduce left false matrix(-1, 0, 0, -1, 0, 0)
+2026-10-27T08:11:31.0401794Z MENUICON 1280 reduce left true matrix(1, 0, 0, 1, 0, 0)
+2026-10-27T08:11:31.0402209Z MENUICON 1280 reduce right false matrix(1, 0, 0, 1, 0, 0)
+2026-10-27T08:11:31.0402640Z MENUICON 1280 reduce right true matrix(-1, 0, 0, -1, 0, 0)
+2026-10-27T08:11:31.0403020Z MENUICON 1280 reduce hidden true none
+2026-10-27T08:11:31.0403340Z MENUICON 1280 reduce hidden false none
+2026-10-27T08:11:31.0403724Z MENUICON 1280 reduce left false matrix(-1, 0, 0, -1, 0, 0)
+2026-10-27T08:11:31.0404155Z MENUICON 1280 reduce left true matrix(1, 0, 0, 1, 0, 0)
+2026-10-27T08:11:31.0404803Z MENUICON 1280 reduce right false matrix(1, 0, 0, 1, 0, 0)
+2026-10-27T08:11:31.0405244Z MENUICON 1280 reduce right true matrix(-1, 0, 0, -1, 0, 0)
+2026-10-27T08:11:31.0405613Z MENUICON 1280 reduce hidden true none
+2026-10-27T08:11:31.0405921Z MENUICON 1280 reduce hidden false none
+2026-10-27T08:11:31.0406288Z MENUICON 1280 reduce left false matrix(-1, 0, 0, -1, 0, 0)
+2026-10-27T08:11:31.0406825Z MENUICON 1280 reduce left true matrix(1, 0, 0, 1, 0, 0)
+2026-10-27T08:11:31.0407247Z MENUICON 1280 reduce right false matrix(1, 0, 0, 1, 0, 0)
+2026-10-27T08:11:31.0407665Z MENUICON 1280 reduce right true matrix(-1, 0, 0, -1, 0, 0)
+2026-10-27T08:11:31.0408023Z MENUICON 1280 reduce hidden true none
+2026-10-27T08:11:31.0408326Z MENUICON 1280 reduce hidden false none
+2026-10-27T08:11:31.0409041Z PASS dockedLeftRightchevron140rotation pointerkeyboardfocusboundsstable overlayhamburgerretained reducedimmediate3201280
+2026-10-27T08:11:31.0409564Z 
+2026-10-27T08:11:35.9009280Z CASE source_busy_off_motion_inventory_browser.cjs default PASS exit=0 seconds=4.9
+2026-10-27T08:11:35.9011460Z PASS wholebusysourcemodal CSSnodepseudooff NoneCalmOSReduceFull + serialmixedbatchtruthfocus3201280
+2026-10-27T08:11:35.9012657Z 
+2026-10-27T08:12:01.8656242Z CASE source_scope_persistent_error_browser.cjs default PASS exit=0 seconds=26.0
+2026-10-27T08:12:01.8657266Z SCOPELOAD 320 no-preference 2
+2026-10-27T08:12:01.8657936Z SCOPELOAD 320 reduce 2
+2026-10-27T08:12:01.8658579Z SCOPELOAD 1280 no-preference 2
+2026-10-27T08:12:01.8659262Z SCOPELOAD 1280 reduce 2
+2026-10-27T08:12:01.8661317Z PASS actualscopeloadingpendingtext/busy/singleflighterrorrecovertrueemptydialogfocusdraftretained3201280normalReduce fixtureonly
+2026-10-27T08:12:01.8662940Z 
+2026-10-27T08:12:05.4655476Z CASE source_upload_long_filename_motion_browser.cjs default PASS exit=0 seconds=3.6
+2026-10-27T08:12:05.4657193Z PASS longsourcefilename/error wraps short400 modalDonefocusnativeEnter3201280normalReduce
+2026-10-27T08:12:05.4657999Z 
+2026-10-27T08:12:25.4686384Z CASE text_button_tooltip_inventory_browser.cjs default PASS exit=0 seconds=20.0
+2026-10-27T08:12:25.4687412Z [
+2026-10-27T08:12:25.4688293Z   {
+2026-10-27T08:12:25.4689051Z     "text": "Temporary",
+2026-10-27T08:12:25.4689792Z     "title": "Temporary chat: nothing is saved",
+2026-10-27T08:12:25.4690399Z     "id": "tempPill",
+2026-10-27T08:12:25.4690828Z     "cls": "btn-out"
+2026-10-27T08:12:25.4691226Z   },
+2026-10-27T08:12:25.4691568Z   {
+2026-10-27T08:12:25.4692470Z     "text": "Aa",
+2026-10-27T08:12:25.4693554Z     "title": "Reading preferences",
+2026-10-27T08:12:25.4694523Z     "id": "readingBtn",
+2026-10-27T08:12:25.4694998Z     "cls": "icon"
+2026-10-27T08:12:25.4695300Z   },
+2026-10-27T08:12:25.4695576Z   {
+2026-10-27T08:12:25.4696170Z     "text": "•••",
+2026-10-27T08:12:25.4696632Z     "title": "More question tools",
+2026-10-27T08:12:25.4697139Z     "id": "toolsToggle",
+2026-10-27T08:12:25.4697563Z     "cls": "chip"
+2026-10-27T08:12:25.4697935Z   },
+2026-10-27T08:12:25.4698210Z   {
+2026-10-27T08:12:25.4698603Z     "text": "Test connection",
+2026-10-27T08:12:25.4699052Z     "title": "",
+2026-10-27T08:12:25.4699438Z     "id": "testconn",
+2026-10-27T08:12:25.4700071Z     "cls": "go ghost"
+2026-10-27T08:12:25.4700391Z   },
+2026-10-27T08:12:25.4700664Z   {
+2026-10-27T08:12:25.4700957Z     "text": "Use default",
+2026-10-27T08:12:25.4701575Z     "title": "Replace this prompt with the default and save it immediately",
+2026-10-27T08:12:25.4702179Z     "id": "",
+2026-10-27T08:12:25.4702494Z     "cls": "go ghost"
+2026-10-27T08:12:25.4702812Z   },
+2026-10-27T08:12:25.4703081Z   {
+2026-10-27T08:12:25.4703356Z     "text": "Try it",
+2026-10-27T08:12:25.4704164Z     "title": "Runs reviewed code once in a bounded process, NOT a sandbox. Host files/network remain accessible.",
+2026-10-27T08:12:25.4705002Z     "id": "",
+2026-10-27T08:12:25.4705235Z     "cls": "go ghost"
+2026-10-27T08:12:25.4705473Z   },
+2026-10-27T08:12:25.4705684Z   {
+2026-10-27T08:12:25.4706034Z     "text": "Forest\nDM Sans + Fraunces\n✓",
+2026-10-27T08:12:25.4706649Z     "title": "Preview Forest colors before applying. No change until you choose Apply preset.",
+2026-10-27T08:12:25.4707190Z     "id": "",
+2026-10-27T08:12:25.4707416Z     "cls": "preset"
+2026-10-27T08:12:25.4707646Z   },
+2026-10-27T08:12:25.4707848Z   {
+2026-10-27T08:12:25.4708133Z     "text": "Ocean\nInter\n✓",
+2026-10-27T08:12:25.4708687Z     "title": "Preview Ocean colors before applying. No change until you choose Apply preset.",
+2026-10-27T08:12:25.4709402Z     "id": "",
+2026-10-27T08:12:25.4709634Z     "cls": "preset"
+2026-10-27T08:12:25.4709865Z   },
+2026-10-27T08:12:25.4710074Z   {
+2026-10-27T08:12:25.4710430Z     "text": "Sunset\nPoppins + Playfair Display\n✓",
+2026-10-27T08:12:25.4711075Z     "title": "Preview Sunset colors before applying. No change until you choose Apply preset.",
+2026-10-27T08:12:25.4711607Z     "id": "",
+2026-10-27T08:12:25.4711829Z     "cls": "preset"
+2026-10-27T08:12:25.4712060Z   },
+2026-10-27T08:12:25.4712265Z   {
+2026-10-27T08:12:25.4712563Z     "text": "Mono\nJetBrains Mono\n✓",
+2026-10-27T08:12:25.4713246Z     "title": "Preview Mono colors before applying. No change until you choose Apply preset.",
+2026-10-27T08:12:25.4713839Z     "id": "",
+2026-10-27T08:12:25.4714072Z     "cls": "preset"
+2026-10-27T08:12:25.4714540Z   },
+2026-10-27T08:12:25.4714788Z   {
+2026-10-27T08:12:25.4715096Z     "text": "Midnight\nSpace Grotesk\n✓",
+2026-10-27T08:12:25.4715672Z     "title": "Preview Midnight colors before applying. No change until you choose Apply preset.",
+2026-10-27T08:12:25.4716158Z     "id": "",
+2026-10-27T08:12:25.4716364Z     "cls": "preset"
+2026-10-27T08:12:25.4716574Z   },
+2026-10-27T08:12:25.4716804Z   {
+2026-10-27T08:12:25.4717231Z     "text": "Paper\nLora + Playfair Display\n✓",
+2026-10-27T08:12:25.4717792Z     "title": "Preview Paper colors before applying. No change until you choose Apply preset.",
+2026-10-27T08:12:25.4718451Z     "id": "",
+2026-10-27T08:12:25.4718708Z     "cls": "preset"
+2026-10-27T08:12:25.4718915Z   },
+2026-10-27T08:12:25.4719090Z   {
+2026-10-27T08:12:25.4719527Z     "text": "Lavender\nNunito + Fraunces\n✓",
+2026-10-27T08:12:25.4720110Z     "title": "Preview Lavender colors before applying. No change until you choose Apply preset.",
+2026-10-27T08:12:25.4720740Z     "id": "",
+2026-10-27T08:12:25.4720951Z     "cls": "preset"
+2026-10-27T08:12:25.4721169Z   },
+2026-10-27T08:12:25.4721348Z   {
+2026-10-27T08:12:25.4721714Z     "text": "Slate\nInter\n✓",
+2026-10-27T08:12:25.4722264Z     "title": "Preview Slate colors before applying. No change until you choose Apply preset.",
+2026-10-27T08:12:25.4722782Z     "id": "",
+2026-10-27T08:12:25.4723061Z     "cls": "preset"
+2026-10-27T08:12:25.4723279Z   },
+2026-10-27T08:12:25.4723459Z   {
+2026-10-27T08:12:25.4723757Z     "text": "Terracotta\nLora + Fraunces\n✓",
+2026-10-27T08:12:25.4724739Z     "title": "Preview Terracotta colors before applying. No change until you choose Apply preset.",
+2026-10-27T08:12:25.4725273Z     "id": "",
+2026-10-27T08:12:25.4725579Z     "cls": "preset"
+2026-10-27T08:12:25.4725789Z   },
+2026-10-27T08:12:25.4725959Z   {
+2026-10-27T08:12:25.4726290Z     "text": "Matcha\nDM Sans + Playfair Display\n✓",
+2026-10-27T08:12:25.4727003Z     "title": "Preview Matcha colors before applying. No change until you choose Apply preset.",
+2026-10-27T08:12:25.4727440Z     "id": "",
+2026-10-27T08:12:25.4727645Z     "cls": "preset"
+2026-10-27T08:12:25.4727844Z   },
+2026-10-27T08:12:25.4728014Z   {
+2026-10-27T08:12:25.4728314Z     "text": "Rose\nPoppins + Playfair Display\n✓",
+2026-10-27T08:12:25.4728826Z     "title": "Preview Rose colors before applying. No change until you choose Apply preset.",
+2026-10-27T08:12:25.4729248Z     "id": "",
+2026-10-27T08:12:25.4729450Z     "cls": "preset"
+2026-10-27T08:12:25.4729650Z   },
+2026-10-27T08:12:25.4729818Z   {
+2026-10-27T08:12:25.4730042Z     "text": "Nord\nInter\n✓",
+2026-10-27T08:12:25.4730498Z     "title": "Preview Nord colors before applying. No change until you choose Apply preset.",
+2026-10-27T08:12:25.4730928Z     "id": "",
+2026-10-27T08:12:25.4731125Z     "cls": "preset"
+2026-10-27T08:12:25.4731315Z   },
+2026-10-27T08:12:25.4731483Z   {
+2026-10-27T08:12:25.4731759Z     "text": "Ink\nLora + Playfair Display\n✓",
+2026-10-27T08:12:25.4732261Z     "title": "Preview Ink colors before applying. No change until you choose Apply preset.",
+2026-10-27T08:12:25.4732687Z     "id": "",
+2026-10-27T08:12:25.4732887Z     "cls": "preset"
+2026-10-27T08:12:25.4733079Z   },
+2026-10-27T08:12:25.4733246Z   {
+2026-10-27T08:12:25.4733603Z     "text": "Sand\nGeorgia\n✓",
+2026-10-27T08:12:25.4734075Z     "title": "Preview Sand colors before applying. No change until you choose Apply preset.",
+2026-10-27T08:12:25.4734760Z     "id": "",
+2026-10-27T08:12:25.4734971Z     "cls": "preset"
+2026-10-27T08:12:25.4735162Z   },
+2026-10-27T08:12:25.4735330Z   {
+2026-10-27T08:12:25.4735505Z     "text": "Load",
+2026-10-27T08:12:25.4735760Z     "title": "Choose a saved setup first.",
+2026-10-27T08:12:25.4736031Z     "id": "load",
+2026-10-27T08:12:25.4736229Z     "cls": "go blue"
+2026-10-27T08:12:25.4736424Z   },
+2026-10-27T08:12:25.4736587Z   {
+2026-10-27T08:12:25.4736795Z     "text": "Save appearance",
+2026-10-27T08:12:25.4737437Z     "title": "Save appearance only. Prompts and budget use their own Save buttons. Helper drafts save when you write or check the code.",
+2026-10-27T08:12:25.4738011Z     "id": "saveLook",
+2026-10-27T08:12:25.4738218Z     "cls": "go blue"
+2026-10-27T08:12:25.4738411Z   },
+2026-10-27T08:12:25.4738575Z   {
+2026-10-27T08:12:25.4738788Z     "text": "Save appearance",
+2026-10-27T08:12:25.4739407Z     "title": "Save appearance only. Prompts and budget use their own Save buttons. Helper drafts save when you write or check the code.",
+2026-10-27T08:12:25.4739970Z     "id": "saveLook",
+2026-10-27T08:12:25.4740177Z     "cls": "go blue"
+2026-10-27T08:12:25.4740368Z   },
+2026-10-27T08:12:25.4740531Z   {
+2026-10-27T08:12:25.4740737Z     "text": "Save appearance",
+2026-10-27T08:12:25.4741363Z     "title": "Save appearance only. Prompts and budget use their own Save buttons. Helper drafts save when you write or check the code.",
+2026-10-27T08:12:25.4741926Z     "id": "saveLook",
+2026-10-27T08:12:25.4742127Z     "cls": "go blue"
+2026-10-27T08:12:25.4742336Z   },
+2026-10-27T08:12:25.4742499Z   {
+2026-10-27T08:12:25.4742702Z     "text": "Save appearance",
+2026-10-27T08:12:25.4743302Z     "title": "Save appearance only. Prompts and budget use their own Save buttons. Helper drafts save when you write or check the code.",
+2026-10-27T08:12:25.4743865Z     "id": "saveLook",
+2026-10-27T08:12:25.4744068Z     "cls": "go blue"
+2026-10-27T08:12:25.4744378Z   },
+2026-10-27T08:12:25.4744551Z   {
+2026-10-27T08:12:25.4744754Z     "text": "Save appearance",
+2026-10-27T08:12:25.4745350Z     "title": "Save appearance only. Prompts and budget use their own Save buttons. Helper drafts save when you write or check the code.",
+2026-10-27T08:12:25.4745906Z     "id": "saveLook",
+2026-10-27T08:12:25.4746108Z     "cls": "go blue"
+2026-10-27T08:12:25.4746298Z   },
+2026-10-27T08:12:25.4746469Z   {
+2026-10-27T08:12:25.4746670Z     "text": "Save appearance",
+2026-10-27T08:12:25.4747268Z     "title": "Save appearance only. Prompts and budget use their own Save buttons. Helper drafts save when you write or check the code.",
+2026-10-27T08:12:25.4747967Z     "id": "saveLook",
+2026-10-27T08:12:25.4748168Z     "cls": "go blue"
+2026-10-27T08:12:25.4748362Z   },
+2026-10-27T08:12:25.4748525Z   {
+2026-10-27T08:12:25.4748696Z     "text": "You",
+2026-10-27T08:12:25.4748931Z     "title": "Choose your avatar",
+2026-10-27T08:12:25.4749184Z     "id": "f-emoji_you",
+2026-10-27T08:12:25.4749407Z     "cls": "emoji-tile"
+2026-10-27T08:12:25.4749610Z   },
+2026-10-27T08:12:25.4749779Z   {
+2026-10-27T08:12:25.4749993Z     "text": "↑",
+2026-10-27T08:12:25.4750221Z     "title": "Choose send button",
+2026-10-27T08:12:25.4750470Z     "id": "f-emoji_send",
+2026-10-27T08:12:25.4750690Z     "cls": "emoji-tile"
+2026-10-27T08:12:25.4750895Z   },
+2026-10-27T08:12:25.4751063Z   {
+2026-10-27T08:12:25.4751273Z     "text": "🕐",
+2026-10-27T08:12:25.4751521Z     "title": "Choose temporary chat button",
+2026-10-27T08:12:25.4751804Z     "id": "f-emoji_temp",
+2026-10-27T08:12:25.4752027Z     "cls": "emoji-tile"
+2026-10-27T08:12:25.4752234Z   },
+2026-10-27T08:12:25.4752409Z   {
+2026-10-27T08:12:25.4752612Z     "text": "Save appearance",
+2026-10-27T08:12:25.4753219Z     "title": "Save appearance only. Prompts and budget use their own Save buttons. Helper drafts save when you write or check the code.",
+2026-10-27T08:12:25.4753898Z     "id": "saveLook",
+2026-10-27T08:12:25.4754107Z     "cls": "go blue"
+2026-10-27T08:12:25.4754418Z   },
+2026-10-27T08:12:25.4754686Z   {
+2026-10-27T08:12:25.4754939Z     "text": "Save appearance",
+2026-10-27T08:12:25.4755548Z     "title": "Save appearance only. Prompts and budget use their own Save buttons. Helper drafts save when you write or check the code.",
+2026-10-27T08:12:25.4756104Z     "id": "saveLook",
+2026-10-27T08:12:25.4756305Z     "cls": "go blue"
+2026-10-27T08:12:25.4756500Z   },
+2026-10-27T08:12:25.4756662Z   {
+2026-10-27T08:12:25.4756860Z     "text": "Save appearance",
+2026-10-27T08:12:25.4757459Z     "title": "Save appearance only. Prompts and budget use their own Save buttons. Helper drafts save when you write or check the code.",
+2026-10-27T08:12:25.4758026Z     "id": "saveLook",
+2026-10-27T08:12:25.4758227Z     "cls": "go blue"
+2026-10-27T08:12:25.4758421Z   },
+2026-10-27T08:12:25.4758583Z   {
+2026-10-27T08:12:25.4758801Z     "text": "Close ×",
+2026-10-27T08:12:25.4759260Z     "title": "A server build continues when closed. A single pending setup question is cancelled.",
+2026-10-27T08:12:25.4759711Z     "id": "builderClose",
+2026-10-27T08:12:25.4759926Z     "cls": ""
+2026-10-27T08:12:25.4760113Z   },
+2026-10-27T08:12:25.4760276Z   {
+2026-10-27T08:12:25.4760449Z     "text": "[1]",
+2026-10-27T08:12:25.4760657Z     "title": "Show source 1",
+2026-10-27T08:12:25.4760882Z     "id": "",
+2026-10-27T08:12:25.4761073Z     "cls": "cite"
+2026-10-27T08:12:25.4761261Z   },
+2026-10-27T08:12:25.4761423Z   {
+2026-10-27T08:12:25.4761824Z     "text": "[1]\nfixture / Fixture source title\nFixture support\nfixture\n›",
+2026-10-27T08:12:25.4762233Z     "title": "Fixture source title",
+2026-10-27T08:12:25.4762495Z     "id": "",
+2026-10-27T08:12:25.4762678Z     "cls": "s"
+2026-10-27T08:12:25.4762863Z   },
+2026-10-27T08:12:25.4763024Z   {
+2026-10-27T08:12:25.4763197Z     "text": "Context",
+2026-10-27T08:12:25.4763447Z     "title": "How this answer was built",
+2026-10-27T08:12:25.4763706Z     "id": "",
+2026-10-27T08:12:25.4763896Z     "cls": "chip"
+2026-10-27T08:12:25.4764087Z   },
+2026-10-27T08:12:25.4764373Z   {
+2026-10-27T08:12:25.4764553Z     "text": "Delete",
+2026-10-27T08:12:25.4764792Z     "title": "Delete this answer",
+2026-10-27T08:12:25.4765030Z     "id": "",
+2026-10-27T08:12:25.4765222Z     "cls": "chip del"
+2026-10-27T08:12:25.4765414Z   },
+2026-10-27T08:12:25.4765580Z   {
+2026-10-27T08:12:25.4765757Z     "text": "Temporary",
+2026-10-27T08:12:25.4766038Z     "title": "Temporary chat: nothing is saved",
+2026-10-27T08:12:25.4766322Z     "id": "tempPill",
+2026-10-27T08:12:25.4766526Z     "cls": "btn-out"
+2026-10-27T08:12:25.4766717Z   },
+2026-10-27T08:12:25.4766884Z   {
+2026-10-27T08:12:25.4767206Z     "text": "Aa",
+2026-10-27T08:12:25.4767437Z     "title": "Reading preferences",
+2026-10-27T08:12:25.4767690Z     "id": "readingBtn",
+2026-10-27T08:12:25.4767897Z     "cls": "icon"
+2026-10-27T08:12:25.4768082Z   },
+2026-10-27T08:12:25.4768255Z   {
+2026-10-27T08:12:25.4768435Z     "text": "Source scope",
+2026-10-27T08:12:25.4768733Z     "title": "Choose documents for the next answer",
+2026-10-27T08:12:25.4769027Z     "id": "scopeBtn",
+2026-10-27T08:12:25.4769229Z     "cls": "chip"
+2026-10-27T08:12:25.4769413Z   },
+2026-10-27T08:12:25.4769580Z   {
+2026-10-27T08:12:25.4769752Z     "text": "Actions",
+2026-10-27T08:12:25.4770033Z     "title": "Preview and confirm a local note action",
+2026-10-27T08:12:25.4770332Z     "id": "actionsBtn",
+2026-10-27T08:12:25.4770540Z     "cls": "chip"
+2026-10-27T08:12:25.4770722Z   },
+2026-10-27T08:12:25.4770886Z   {
+2026-10-27T08:12:25.4771096Z     "text": "•••",
+2026-10-27T08:12:25.4771330Z     "title": "More question tools",
+2026-10-27T08:12:25.4771582Z     "id": "toolsToggle",
+2026-10-27T08:12:25.4771807Z     "cls": "chip"
+2026-10-27T08:12:25.4771991Z   },
+2026-10-27T08:12:25.4772154Z   {
+2026-10-27T08:12:25.4772358Z     "text": "Test connection",
+2026-10-27T08:12:25.4772584Z     "title": "",
+2026-10-27T08:12:25.4772782Z     "id": "testconn",
+2026-10-27T08:12:25.4773101Z     "cls": "go ghost"
+2026-10-27T08:12:25.4773302Z   },
+2026-10-27T08:12:25.4773472Z   {
+2026-10-27T08:12:25.4773658Z     "text": "Use default",
+2026-10-27T08:12:25.4774040Z     "title": "Replace this prompt with the default and save it immediately",
+2026-10-27T08:12:25.4774640Z     "id": "",
+2026-10-27T08:12:25.4774841Z     "cls": "go ghost"
+2026-10-27T08:12:25.4775038Z   },
+2026-10-27T08:12:25.4775205Z   {
+2026-10-27T08:12:25.4775387Z     "text": "Try it",
+2026-10-27T08:12:25.4775882Z     "title": "Runs reviewed code once in a bounded process, NOT a sandbox. Host files/network remain accessible.",
+2026-10-27T08:12:25.4776364Z     "id": "",
+2026-10-27T08:12:25.4776556Z     "cls": "go ghost"
+2026-10-27T08:12:25.4776756Z   },
+2026-10-27T08:12:25.4776919Z   {
+2026-10-27T08:12:25.4777200Z     "text": "Forest\nDM Sans + Fraunces\n✓",
+2026-10-27T08:12:25.4777695Z     "title": "Preview Forest colors before applying. No change until you choose Apply preset.",
+2026-10-27T08:12:25.4778124Z     "id": "",
+2026-10-27T08:12:25.4778318Z     "cls": "preset"
+2026-10-27T08:12:25.4778509Z   },
+2026-10-27T08:12:25.4778676Z   {
+2026-10-27T08:12:25.4778916Z     "text": "Ocean\nInter\n✓",
+2026-10-27T08:12:25.4779366Z     "title": "Preview Ocean colors before applying. No change until you choose Apply preset.",
+2026-10-27T08:12:25.4779786Z     "id": "",
+2026-10-27T08:12:25.4779973Z     "cls": "preset"
+2026-10-27T08:12:25.4780161Z   },
+2026-10-27T08:12:25.4780323Z   {
+2026-10-27T08:12:25.4780618Z     "text": "Sunset\nPoppins + Playfair Display\n✓",
+2026-10-27T08:12:25.4781127Z     "title": "Preview Sunset colors before applying. No change until you choose Apply preset.",
+2026-10-27T08:12:25.4781553Z     "id": "",
+2026-10-27T08:12:25.4781747Z     "cls": "preset"
+2026-10-27T08:12:25.4781934Z   },
+2026-10-27T08:12:25.4782096Z   {
+2026-10-27T08:12:25.4782350Z     "text": "Mono\nJetBrains Mono\n✓",
+2026-10-27T08:12:25.4782816Z     "title": "Preview Mono colors before applying. No change until you choose Apply preset.",
+2026-10-27T08:12:25.4783238Z     "id": "",
+2026-10-27T08:12:25.4783423Z     "cls": "preset"
+2026-10-27T08:12:25.4783614Z   },
+2026-10-27T08:12:25.4783782Z   {
+2026-10-27T08:12:25.4784037Z     "text": "Midnight\nSpace Grotesk\n✓",
+2026-10-27T08:12:25.4784659Z     "title": "Preview Midnight colors before applying. No change until you choose Apply preset.",
+2026-10-27T08:12:25.4785100Z     "id": "",
+2026-10-27T08:12:25.4785295Z     "cls": "preset"
+2026-10-27T08:12:25.4785484Z   },
+2026-10-27T08:12:25.4785658Z   {
+2026-10-27T08:12:25.4785942Z     "text": "Paper\nLora + Playfair Display\n✓",
+2026-10-27T08:12:25.4786449Z     "title": "Preview Paper colors before applying. No change until you choose Apply preset.",
+2026-10-27T08:12:25.4787016Z     "id": "",
+2026-10-27T08:12:25.4787206Z     "cls": "preset"
+2026-10-27T08:12:25.4787394Z   },
+2026-10-27T08:12:25.4787562Z   {
+2026-10-27T08:12:25.4787830Z     "text": "Lavender\nNunito + Fraunces\n✓",
+2026-10-27T08:12:25.4788339Z     "title": "Preview Lavender colors before applying. No change until you choose Apply preset.",
+2026-10-27T08:12:25.4788769Z     "id": "",
+2026-10-27T08:12:25.4788956Z     "cls": "preset"
+2026-10-27T08:12:25.4789145Z   },
+2026-10-27T08:12:25.4789315Z   {
+2026-10-27T08:12:25.4789547Z     "text": "Slate\nInter\n✓",
+2026-10-27T08:12:25.4789999Z     "title": "Preview Slate colors before applying. No change until you choose Apply preset.",
+2026-10-27T08:12:25.4790418Z     "id": "",
+2026-10-27T08:12:25.4790603Z     "cls": "preset"
+2026-10-27T08:12:25.4790789Z   },
+2026-10-27T08:12:25.4790955Z   {
+2026-10-27T08:12:25.4791216Z     "text": "Terracotta\nLora + Fraunces\n✓",
+2026-10-27T08:12:25.4791728Z     "title": "Preview Terracotta colors before applying. No change until you choose Apply preset.",
+2026-10-27T08:12:25.4792184Z     "id": "",
+2026-10-27T08:12:25.4792370Z     "cls": "preset"
+2026-10-27T08:12:25.4792562Z   },
+2026-10-27T08:12:25.4792727Z   {
+2026-10-27T08:12:25.4793013Z     "text": "Matcha\nDM Sans + Playfair Display\n✓",
+2026-10-27T08:12:25.4793639Z     "title": "Preview Matcha colors before applying. No change until you choose Apply preset.",
+2026-10-27T08:12:25.4794074Z     "id": "",
+2026-10-27T08:12:25.4794377Z     "cls": "preset"
+2026-10-27T08:12:25.4794727Z   },
+2026-10-27T08:12:25.4794901Z   {
+2026-10-27T08:12:25.4795275Z     "text": "Rose\nPoppins + Playfair Display\n✓",
+2026-10-27T08:12:25.4795781Z     "title": "Preview Rose colors before applying. No change until you choose Apply preset.",
+2026-10-27T08:12:25.4796199Z     "id": "",
+2026-10-27T08:12:25.4796386Z     "cls": "preset"
+2026-10-27T08:12:25.4796577Z   },
+2026-10-27T08:12:25.4796741Z   {
+2026-10-27T08:12:25.4796959Z     "text": "Nord\nInter\n✓",
+2026-10-27T08:12:25.4797404Z     "title": "Preview Nord colors before applying. No change until you choose Apply preset.",
+2026-10-27T08:12:25.4797828Z     "id": "",
+2026-10-27T08:12:25.4798014Z     "cls": "preset"
+2026-10-27T08:12:25.4798209Z   },
+2026-10-27T08:12:25.4798372Z   {
+2026-10-27T08:12:25.4798646Z     "text": "Ink\nLora + Playfair Display\n✓",
+2026-10-27T08:12:25.4799141Z     "title": "Preview Ink colors before applying. No change until you choose Apply preset.",
+2026-10-27T08:12:25.4799552Z     "id": "",
+2026-10-27T08:12:25.4799740Z     "cls": "preset"
+2026-10-27T08:12:25.4799933Z   },
+2026-10-27T08:12:25.4800097Z   {
+2026-10-27T08:12:25.4800359Z     "text": "Sand\nGeorgia\n✓",
+2026-10-27T08:12:25.4800812Z     "title": "Preview Sand colors before applying. No change until you choose Apply preset.",
+2026-10-27T08:12:25.4801229Z     "id": "",
+2026-10-27T08:12:25.4801415Z     "cls": "preset"
+2026-10-27T08:12:25.4801604Z   },
+2026-10-27T08:12:25.4801766Z   {
+2026-10-27T08:12:25.4801937Z     "text": "Load",
+2026-10-27T08:12:25.4802185Z     "title": "Choose a saved setup first.",
+2026-10-27T08:12:25.4802465Z     "id": "load",
+2026-10-27T08:12:25.4802661Z     "cls": "go blue"
+2026-10-27T08:12:25.4802859Z   },
+2026-10-27T08:12:25.4803022Z   {
+2026-10-27T08:12:25.4803224Z     "text": "Save appearance",
+2026-10-27T08:12:25.4803853Z     "title": "Save appearance only. Prompts and budget use their own Save buttons. Helper drafts save when you write or check the code.",
+2026-10-27T08:12:25.4804632Z     "id": "saveLook",
+2026-10-27T08:12:25.4804851Z     "cls": "go blue"
+2026-10-27T08:12:25.4805052Z   },
+2026-10-27T08:12:25.4805214Z   {
+2026-10-27T08:12:25.4805417Z     "text": "Save appearance",
+2026-10-27T08:12:25.4806030Z     "title": "Save appearance only. Prompts and budget use their own Save buttons. Helper drafts save when you write or check the code.",
+2026-10-27T08:12:25.4806596Z     "id": "saveLook",
+2026-10-27T08:12:25.4806806Z     "cls": "go blue"
+2026-10-27T08:12:25.4806997Z   },
+2026-10-27T08:12:25.4807159Z   {
+2026-10-27T08:12:25.4807358Z     "text": "Save appearance",
+2026-10-27T08:12:25.4808117Z     "title": "Save appearance only. Prompts and budget use their own Save buttons. Helper drafts save when you write or check the code.",
+2026-10-27T08:12:25.4808680Z     "id": "saveLook",
+2026-10-27T08:12:25.4808895Z     "cls": "go blue"
+2026-10-27T08:12:25.4809083Z   },
+2026-10-27T08:12:25.4809252Z   {
+2026-10-27T08:12:25.4809452Z     "text": "Save appearance",
+2026-10-27T08:12:25.4810049Z     "title": "Save appearance only. Prompts and budget use their own Save buttons. Helper drafts save when you write or check the code.",
+2026-10-27T08:12:25.4810613Z     "id": "saveLook",
+2026-10-27T08:12:25.4810816Z     "cls": "go blue"
+2026-10-27T08:12:25.4811005Z   },
+2026-10-27T08:12:25.4811168Z   {
+2026-10-27T08:12:25.4811364Z     "text": "Save appearance",
+2026-10-27T08:12:25.4811964Z     "title": "Save appearance only. Prompts and budget use their own Save buttons. Helper drafts save when you write or check the code.",
+2026-10-27T08:12:25.4812527Z     "id": "saveLook",
+2026-10-27T08:12:25.4812735Z     "cls": "go blue"
+2026-10-27T08:12:25.4812925Z   },
+2026-10-27T08:12:25.4813087Z   {
+2026-10-27T08:12:25.4813285Z     "text": "Save appearance",
+2026-10-27T08:12:25.4813998Z     "title": "Save appearance only. Prompts and budget use their own Save buttons. Helper drafts save when you write or check the code.",
+2026-10-27T08:12:25.4814787Z     "id": "saveLook",
+2026-10-27T08:12:25.4814996Z     "cls": "go blue"
+2026-10-27T08:12:25.4815188Z   },
+2026-10-27T08:12:25.4815357Z   {
+2026-10-27T08:12:25.4815528Z     "text": "You",
+2026-10-27T08:12:25.4815756Z     "title": "Choose your avatar",
+2026-10-27T08:12:25.4816013Z     "id": "f-emoji_you",
+2026-10-27T08:12:25.4816236Z     "cls": "emoji-tile"
+2026-10-27T08:12:25.4816437Z   },
+2026-10-27T08:12:25.4816602Z   {
+2026-10-27T08:12:25.4816814Z     "text": "↑",
+2026-10-27T08:12:25.4817044Z     "title": "Choose send button",
+2026-10-27T08:12:25.4817299Z     "id": "f-emoji_send",
+2026-10-27T08:12:25.4817523Z     "cls": "emoji-tile"
+2026-10-27T08:12:25.4817735Z   },
+2026-10-27T08:12:25.4817899Z   {
+2026-10-27T08:12:25.4818101Z     "text": "🕐",
+2026-10-27T08:12:25.4818353Z     "title": "Choose temporary chat button",
+2026-10-27T08:12:25.4818638Z     "id": "f-emoji_temp",
+2026-10-27T08:12:25.4818859Z     "cls": "emoji-tile"
+2026-10-27T08:12:25.4819068Z   },
+2026-10-27T08:12:25.4819233Z   {
+2026-10-27T08:12:25.4819431Z     "text": "Save appearance",
+2026-10-27T08:12:25.4820036Z     "title": "Save appearance only. Prompts and budget use their own Save buttons. Helper drafts save when you write or check the code.",
+2026-10-27T08:12:25.4820605Z     "id": "saveLook",
+2026-10-27T08:12:25.4820812Z     "cls": "go blue"
+2026-10-27T08:12:25.4821004Z   },
+2026-10-27T08:12:25.4821168Z   {
+2026-10-27T08:12:25.4821366Z     "text": "Save appearance",
+2026-10-27T08:12:25.4821973Z     "title": "Save appearance only. Prompts and budget use their own Save buttons. Helper drafts save when you write or check the code.",
+2026-10-27T08:12:25.4822539Z     "id": "saveLook",
+2026-10-27T08:12:25.4822749Z     "cls": "go blue"
+2026-10-27T08:12:25.4822941Z   },
+2026-10-27T08:12:25.4823108Z   {
+2026-10-27T08:12:25.4823309Z     "text": "Save appearance",
+2026-10-27T08:12:25.4823924Z     "title": "Save appearance only. Prompts and budget use their own Save buttons. Helper drafts save when you write or check the code.",
+2026-10-27T08:12:25.4824608Z     "id": "saveLook",
+2026-10-27T08:12:25.4824812Z     "cls": "go blue"
+2026-10-27T08:12:25.4825001Z   },
+2026-10-27T08:12:25.4825167Z   {
+2026-10-27T08:12:25.4825369Z     "text": "Close ×",
+2026-10-27T08:12:25.4825824Z     "title": "A server build continues when closed. A single pending setup question is cancelled.",
+2026-10-27T08:12:25.4826274Z     "id": "builderClose",
+2026-10-27T08:12:25.4826492Z     "cls": ""
+2026-10-27T08:12:25.4826670Z   },
+2026-10-27T08:12:25.4826833Z   {
+2026-10-27T08:12:25.4827003Z     "text": "[1]",
+2026-10-27T08:12:25.4827215Z     "title": "Show source 1",
+2026-10-27T08:12:25.4827442Z     "id": "",
+2026-10-27T08:12:25.4827776Z     "cls": "cite"
+2026-10-27T08:12:25.4827962Z   },
+2026-10-27T08:12:25.4828126Z   {
+2026-10-27T08:12:25.4828524Z     "text": "[1]\nfixture / Fixture source title\nFixture support\nfixture\n›",
+2026-10-27T08:12:25.4828935Z     "title": "Fixture source title",
+2026-10-27T08:12:25.4829184Z     "id": "",
+2026-10-27T08:12:25.4829376Z     "cls": "s"
+2026-10-27T08:12:25.4829561Z   },
+2026-10-27T08:12:25.4829723Z   {
+2026-10-27T08:12:25.4829900Z     "text": "Context",
+2026-10-27T08:12:25.4830154Z     "title": "How this answer was built",
+2026-10-27T08:12:25.4830418Z     "id": "",
+2026-10-27T08:12:25.4830604Z     "cls": "chip"
+2026-10-27T08:12:25.4830790Z   },
+2026-10-27T08:12:25.4830954Z   {
+2026-10-27T08:12:25.4831128Z     "text": "Delete",
+2026-10-27T08:12:25.4831366Z     "title": "Delete this answer",
+2026-10-27T08:12:25.4831618Z     "id": "",
+2026-10-27T08:12:25.4831805Z     "cls": "chip del"
+2026-10-27T08:12:25.4831999Z   }
+2026-10-27T08:12:25.4832167Z ]
+2026-10-27T08:12:25.4832423Z PASS currenttextbuttontitleinventory 78
+2026-10-27T08:12:25.4832637Z 
+2026-10-27T08:12:34.3384095Z CASE wording_geometry_audit_browser.cjs default PASS exit=0 seconds=8.9
+2026-10-27T08:12:34.3386397Z PASS wordinglabels/adjacenthelp/fieldheights/subordinateddefaultnotes/Moreall6fields3203901280
+2026-10-27T08:12:34.3387362Z 
+2026-10-27T08:12:37.9860574Z CASE workspace_late_permission_init_browser.cjs default PASS exit=0 seconds=3.6
+2026-10-27T08:12:37.9862908Z PASS lateworkspacepermissioninit cannotreplaceEarlyDeploydraftfocus3201280
+2026-10-27T08:12:37.9863948Z 
+2026-10-27T08:12:37.9873184Z {"executions": 39, "failed": 0, "passed": 39, "scripts": 39}

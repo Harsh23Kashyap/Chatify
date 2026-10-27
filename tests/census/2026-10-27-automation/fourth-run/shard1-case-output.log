@@ -1,0 +1,1974 @@
+2026-10-27T08:04:03.7289323Z CASE about_continuity_browser.cjs default PASS exit=0 seconds=14.8
+2026-10-27T08:04:03.7290273Z PASS catalog expansion preserves first6 nodes/positions and selectedpanel;4shortstaggerednewchips/reducedmotion;collapse outofrange selection fallback3203901280normalreduce
+2026-10-27T08:04:03.7290839Z 
+2026-10-27T08:04:07.4749083Z CASE action_long_result_keyboard_motion_browser.cjs default PASS exit=0 seconds=3.7
+2026-10-27T08:04:07.4749664Z PASS 30noteslongresult shortviewport headingfocusvisible TabClosevisible modalfocuscontained Escape focusreturn3201280normalReduce
+2026-10-27T08:04:07.4749984Z 
+2026-10-27T08:04:13.1230182Z CASE ai_activity_browser.cjs default PASS exit=0 seconds=5.6
+2026-10-27T08:04:13.1230591Z start
+2026-10-27T08:04:13.1230761Z 320 deploy run
+2026-10-27T08:04:13.1230935Z 320 prompt run
+2026-10-27T08:04:13.1231106Z 320 code run
+2026-10-27T08:04:13.1231436Z 320 PASS ask/deploy/prompt/helper request-only animation and cleanup
+2026-10-27T08:04:13.1231746Z 390 deploy run
+2026-10-27T08:04:13.1231962Z 390 prompt run
+2026-10-27T08:04:13.1232121Z 390 code run
+2026-10-27T08:04:13.1232423Z 390 PASS ask/deploy/prompt/helper request-only animation and cleanup
+2026-10-27T08:04:13.1232717Z 1280 deploy run
+2026-10-27T08:04:13.1232881Z 1280 prompt run
+2026-10-27T08:04:13.1233043Z 1280 code run
+2026-10-27T08:04:13.1233246Z 1280 PASS ask/deploy/prompt/helper request-only animation and cleanup
+2026-10-27T08:04:13.1233402Z 
+2026-10-27T08:04:27.2951848Z CASE appearance_alignment_audit_browser.cjs default PASS exit=0 seconds=14.2
+2026-10-27T08:04:27.2953170Z PASS all8Appearancesections3203901280 everyvisiblefieldlabelleft edge/flexstart8gap/panel12mininset/nooverflow openadvanced screenshots24 no paidcalls
+2026-10-27T08:04:27.2953666Z 
+2026-10-27T08:04:37.7693182Z CASE background_transition_browser.cjs default PASS exit=0 seconds=10.5
+2026-10-27T08:04:37.7693582Z DISCLOSURE 320 reduce true []
+2026-10-27T08:04:37.7693780Z DISCLOSURE 320 no-preference true [ 160, 160 ]
+2026-10-27T08:04:37.7694000Z DISCLOSURE 390 reduce true []
+2026-10-27T08:04:37.7694177Z DISCLOSURE 390 no-preference true [ 160, 160 ]
+2026-10-27T08:04:37.7694359Z DISCLOSURE 1280 reduce true []
+2026-10-27T08:04:37.7694540Z DISCLOSURE 1280 no-preference true [ 160, 160 ]
+2026-10-27T08:04:37.7695045Z PASS eight patterns single180msopacitylayer no drift newestwins cleanfinish image/removecrossfade stablegeometry draftidentity savedcalm deviceReduce disclosure160ms 3203901280
+2026-10-27T08:04:37.7695398Z 
+2026-10-27T08:05:32.8820242Z CASE builder_checklist_keyboard_motion_browser.cjs default PASS exit=0 seconds=55.1
+2026-10-27T08:05:32.8820594Z REVIEWAXE 320 []
+2026-10-27T08:05:32.8820718Z REVIEWAXE 320 []
+2026-10-27T08:05:32.8820837Z REVIEWAXE 320 []
+2026-10-27T08:05:32.8820946Z REVIEWAXE 320 []
+2026-10-27T08:05:32.8821053Z REVIEWAXE 320 []
+2026-10-27T08:05:32.8821160Z REVIEWAXE 320 []
+2026-10-27T08:05:32.8821268Z REVIEWAXE 320 []
+2026-10-27T08:05:32.8821374Z REVIEWAXE 320 []
+2026-10-27T08:05:32.8821497Z REVIEWAXE 1280 []
+2026-10-27T08:05:32.8822026Z REVIEWAXE 1280 []
+2026-10-27T08:05:32.8822145Z REVIEWAXE 1280 []
+2026-10-27T08:05:32.8822258Z REVIEWAXE 1280 []
+2026-10-27T08:05:32.8822372Z REVIEWAXE 1280 []
+2026-10-27T08:05:32.8822484Z REVIEWAXE 1280 []
+2026-10-27T08:05:32.8822595Z REVIEWAXE 1280 []
+2026-10-27T08:05:32.8822709Z REVIEWAXE 1280 []
+2026-10-27T08:05:32.8823089Z PASS4buildermanualchecklist nativeSpacetwiceselectedstate/focusretained stablecheckboxnodes16motionmatrix3201280 noSave/modelcalls
+2026-10-27T08:05:32.8823389Z 
+2026-10-27T08:05:40.2475241Z CASE builder_import_route_browser.cjs default PASS exit=0 seconds=7.4
+2026-10-27T08:05:40.2476111Z PASS ZIP/YAML route focuses actual file controls,invalidrealofflineparse namesfile/no-load,briefretainedonreturn,focusbordertransition/reduce3201280
+2026-10-27T08:05:40.2476727Z 
+2026-10-27T08:06:10.6318540Z CASE builder_proposed_checkbox_immediate_motion_browser.cjs default PASS exit=0 seconds=30.4
+2026-10-27T08:06:10.6319143Z BUILDERCHECKBOX 320 no-preference appearance.hover_lift
+2026-10-27T08:06:10.6319446Z BUILDERCHECKBOX 320 no-preference appearance.logo_watermark
+2026-10-27T08:06:10.6319702Z BUILDERCHECKBOX 320 no-preference appearance.sources_panel
+2026-10-27T08:06:10.6319970Z BUILDERCHECKBOX 320 no-preference appearance.emoji_bot_animated
+2026-10-27T08:06:10.6320237Z BUILDERCHECKBOX 320 no-preference appearance.emoji_you_animated
+2026-10-27T08:06:10.6320505Z BUILDERCHECKBOX 320 no-preference appearance.emoji_hero_animated
+2026-10-27T08:06:10.6320766Z BUILDERCHECKBOX 320 no-preference appearance.emoji_send_animated
+2026-10-27T08:06:10.6321049Z BUILDERCHECKBOX 320 no-preference appearance.emoji_attach_animated
+2026-10-27T08:06:10.6321317Z BUILDERCHECKBOX 320 no-preference appearance.emoji_temp_animated
+2026-10-27T08:06:10.6321594Z BUILDERCHECKBOX 320 no-preference pipeline_prompts.on.question_check
+2026-10-27T08:06:10.6321874Z BUILDERCHECKBOX 320 no-preference pipeline_prompts.on.standalone
+2026-10-27T08:06:10.6322135Z BUILDERCHECKBOX 320 no-preference pipeline_prompts.on.queries
+2026-10-27T08:06:10.6322396Z BUILDERCHECKBOX 320 no-preference pipeline_prompts.on.expand
+2026-10-27T08:06:10.6322655Z BUILDERCHECKBOX 320 no-preference pipeline_prompts.on.relevance
+2026-10-27T08:06:10.6322914Z BUILDERCHECKBOX 320 no-preference pipeline_prompts.on.answer
+2026-10-27T08:06:10.6323181Z BUILDERCHECKBOX 320 no-preference pipeline_prompts.on.faithfulness
+2026-10-27T08:06:10.6323445Z BUILDERCHECKBOX 320 no-preference pipeline_prompts.on.revise
+2026-10-27T08:06:10.6323705Z BUILDERCHECKBOX 320 no-preference pipeline_prompts.on.followups
+2026-10-27T08:06:10.6324280Z BUILDERCHECKBOX 320 no-preference pipeline_prompts.on.summary
+2026-10-27T08:06:10.6324508Z BUILDERCHECKBOX 320 no-preference prompt.revise
+2026-10-27T08:06:10.6324734Z BUILDERCHECKBOX 320 no-preference retrieval.query_rewrite
+2026-10-27T08:06:10.6324976Z BUILDERCHECKBOX 320 no-preference retrieval.query_expansion
+2026-10-27T08:06:10.6325200Z BUILDERCHECKBOX 320 no-preference memory.enabled
+2026-10-27T08:06:10.6325419Z BUILDERCHECKBOX 320 no-preference citations.required
+2026-10-27T08:06:10.6325634Z BUILDERCHECKBOX 320 no-preference citations.ledger
+2026-10-27T08:06:10.6325839Z BUILDERCHECKBOX 320 no-preference auth.signup
+2026-10-27T08:06:10.6326040Z BUILDERCHECKBOX 320 no-preference actions.writes
+2026-10-27T08:06:10.6326241Z BUILDERCHECKBOX 320 no-preference server.public
+2026-10-27T08:06:10.6326443Z BUILDERCHECKBOX 320 reduce appearance.hover_lift
+2026-10-27T08:06:10.6326795Z BUILDERCHECKBOX 320 reduce appearance.logo_watermark
+2026-10-27T08:06:10.6327014Z BUILDERCHECKBOX 320 reduce appearance.sources_panel
+2026-10-27T08:06:10.6327241Z BUILDERCHECKBOX 320 reduce appearance.emoji_bot_animated
+2026-10-27T08:06:10.6327472Z BUILDERCHECKBOX 320 reduce appearance.emoji_you_animated
+2026-10-27T08:06:10.6327704Z BUILDERCHECKBOX 320 reduce appearance.emoji_hero_animated
+2026-10-27T08:06:10.6327938Z BUILDERCHECKBOX 320 reduce appearance.emoji_send_animated
+2026-10-27T08:06:10.6328172Z BUILDERCHECKBOX 320 reduce appearance.emoji_attach_animated
+2026-10-27T08:06:10.6328538Z BUILDERCHECKBOX 320 reduce appearance.emoji_temp_animated
+2026-10-27T08:06:10.6328783Z BUILDERCHECKBOX 320 reduce pipeline_prompts.on.question_check
+2026-10-27T08:06:10.6329028Z BUILDERCHECKBOX 320 reduce pipeline_prompts.on.standalone
+2026-10-27T08:06:10.6329258Z BUILDERCHECKBOX 320 reduce pipeline_prompts.on.queries
+2026-10-27T08:06:10.6329484Z BUILDERCHECKBOX 320 reduce pipeline_prompts.on.expand
+2026-10-27T08:06:10.6329711Z BUILDERCHECKBOX 320 reduce pipeline_prompts.on.relevance
+2026-10-27T08:06:10.6329942Z BUILDERCHECKBOX 320 reduce pipeline_prompts.on.answer
+2026-10-27T08:06:10.6330178Z BUILDERCHECKBOX 320 reduce pipeline_prompts.on.faithfulness
+2026-10-27T08:06:10.6330417Z BUILDERCHECKBOX 320 reduce pipeline_prompts.on.revise
+2026-10-27T08:06:10.6330645Z BUILDERCHECKBOX 320 reduce pipeline_prompts.on.followups
+2026-10-27T08:06:10.6330870Z BUILDERCHECKBOX 320 reduce pipeline_prompts.on.summary
+2026-10-27T08:06:10.6331070Z BUILDERCHECKBOX 320 reduce prompt.revise
+2026-10-27T08:06:10.6331269Z BUILDERCHECKBOX 320 reduce retrieval.query_rewrite
+2026-10-27T08:06:10.6331483Z BUILDERCHECKBOX 320 reduce retrieval.query_expansion
+2026-10-27T08:06:10.6331681Z BUILDERCHECKBOX 320 reduce memory.enabled
+2026-10-27T08:06:10.6331874Z BUILDERCHECKBOX 320 reduce citations.required
+2026-10-27T08:06:10.6332065Z BUILDERCHECKBOX 320 reduce citations.ledger
+2026-10-27T08:06:10.6332248Z BUILDERCHECKBOX 320 reduce auth.signup
+2026-10-27T08:06:10.6332423Z BUILDERCHECKBOX 320 reduce actions.writes
+2026-10-27T08:06:10.6332603Z BUILDERCHECKBOX 320 reduce server.public
+2026-10-27T08:06:10.6332812Z BUILDERCHECKBOX 1280 no-preference appearance.hover_lift
+2026-10-27T08:06:10.6333057Z BUILDERCHECKBOX 1280 no-preference appearance.logo_watermark
+2026-10-27T08:06:10.6333311Z BUILDERCHECKBOX 1280 no-preference appearance.sources_panel
+2026-10-27T08:06:10.6333569Z BUILDERCHECKBOX 1280 no-preference appearance.emoji_bot_animated
+2026-10-27T08:06:10.6333833Z BUILDERCHECKBOX 1280 no-preference appearance.emoji_you_animated
+2026-10-27T08:06:10.6334102Z BUILDERCHECKBOX 1280 no-preference appearance.emoji_hero_animated
+2026-10-27T08:06:10.6334372Z BUILDERCHECKBOX 1280 no-preference appearance.emoji_send_animated
+2026-10-27T08:06:10.6334643Z BUILDERCHECKBOX 1280 no-preference appearance.emoji_attach_animated
+2026-10-27T08:06:10.6334913Z BUILDERCHECKBOX 1280 no-preference appearance.emoji_temp_animated
+2026-10-27T08:06:10.6335195Z BUILDERCHECKBOX 1280 no-preference pipeline_prompts.on.question_check
+2026-10-27T08:06:10.6335582Z BUILDERCHECKBOX 1280 no-preference pipeline_prompts.on.standalone
+2026-10-27T08:06:10.6335851Z BUILDERCHECKBOX 1280 no-preference pipeline_prompts.on.queries
+2026-10-27T08:06:10.6336110Z BUILDERCHECKBOX 1280 no-preference pipeline_prompts.on.expand
+2026-10-27T08:06:10.6336371Z BUILDERCHECKBOX 1280 no-preference pipeline_prompts.on.relevance
+2026-10-27T08:06:10.6336719Z BUILDERCHECKBOX 1280 no-preference pipeline_prompts.on.answer
+2026-10-27T08:06:10.6336989Z BUILDERCHECKBOX 1280 no-preference pipeline_prompts.on.faithfulness
+2026-10-27T08:06:10.6337255Z BUILDERCHECKBOX 1280 no-preference pipeline_prompts.on.revise
+2026-10-27T08:06:10.6337517Z BUILDERCHECKBOX 1280 no-preference pipeline_prompts.on.followups
+2026-10-27T08:06:10.6337779Z BUILDERCHECKBOX 1280 no-preference pipeline_prompts.on.summary
+2026-10-27T08:06:10.6338007Z BUILDERCHECKBOX 1280 no-preference prompt.revise
+2026-10-27T08:06:10.6338232Z BUILDERCHECKBOX 1280 no-preference retrieval.query_rewrite
+2026-10-27T08:06:10.6338476Z BUILDERCHECKBOX 1280 no-preference retrieval.query_expansion
+2026-10-27T08:06:10.6338708Z BUILDERCHECKBOX 1280 no-preference memory.enabled
+2026-10-27T08:06:10.6338923Z BUILDERCHECKBOX 1280 no-preference citations.required
+2026-10-27T08:06:10.6339138Z BUILDERCHECKBOX 1280 no-preference citations.ledger
+2026-10-27T08:06:10.6339344Z BUILDERCHECKBOX 1280 no-preference auth.signup
+2026-10-27T08:06:10.6339546Z BUILDERCHECKBOX 1280 no-preference actions.writes
+2026-10-27T08:06:10.6339749Z BUILDERCHECKBOX 1280 no-preference server.public
+2026-10-27T08:06:10.6340047Z BUILDERCHECKBOX 1280 reduce appearance.hover_lift
+2026-10-27T08:06:10.6340261Z BUILDERCHECKBOX 1280 reduce appearance.logo_watermark
+2026-10-27T08:06:10.6340478Z BUILDERCHECKBOX 1280 reduce appearance.sources_panel
+2026-10-27T08:06:10.6340704Z BUILDERCHECKBOX 1280 reduce appearance.emoji_bot_animated
+2026-10-27T08:06:10.6340938Z BUILDERCHECKBOX 1280 reduce appearance.emoji_you_animated
+2026-10-27T08:06:10.6341171Z BUILDERCHECKBOX 1280 reduce appearance.emoji_hero_animated
+2026-10-27T08:06:10.6341410Z BUILDERCHECKBOX 1280 reduce appearance.emoji_send_animated
+2026-10-27T08:06:10.6341651Z BUILDERCHECKBOX 1280 reduce appearance.emoji_attach_animated
+2026-10-27T08:06:10.6341892Z BUILDERCHECKBOX 1280 reduce appearance.emoji_temp_animated
+2026-10-27T08:06:10.6342139Z BUILDERCHECKBOX 1280 reduce pipeline_prompts.on.question_check
+2026-10-27T08:06:10.6342387Z BUILDERCHECKBOX 1280 reduce pipeline_prompts.on.standalone
+2026-10-27T08:06:10.6342626Z BUILDERCHECKBOX 1280 reduce pipeline_prompts.on.queries
+2026-10-27T08:06:10.6342853Z BUILDERCHECKBOX 1280 reduce pipeline_prompts.on.expand
+2026-10-27T08:06:10.6343083Z BUILDERCHECKBOX 1280 reduce pipeline_prompts.on.relevance
+2026-10-27T08:06:10.6343311Z BUILDERCHECKBOX 1280 reduce pipeline_prompts.on.answer
+2026-10-27T08:06:10.6343548Z BUILDERCHECKBOX 1280 reduce pipeline_prompts.on.faithfulness
+2026-10-27T08:06:10.6343810Z BUILDERCHECKBOX 1280 reduce pipeline_prompts.on.revise
+2026-10-27T08:06:10.6344039Z BUILDERCHECKBOX 1280 reduce pipeline_prompts.on.followups
+2026-10-27T08:06:10.6344272Z BUILDERCHECKBOX 1280 reduce pipeline_prompts.on.summary
+2026-10-27T08:06:10.6344471Z BUILDERCHECKBOX 1280 reduce prompt.revise
+2026-10-27T08:06:10.6344667Z BUILDERCHECKBOX 1280 reduce retrieval.query_rewrite
+2026-10-27T08:06:10.6344882Z BUILDERCHECKBOX 1280 reduce retrieval.query_expansion
+2026-10-27T08:06:10.6345082Z BUILDERCHECKBOX 1280 reduce memory.enabled
+2026-10-27T08:06:10.6345274Z BUILDERCHECKBOX 1280 reduce citations.required
+2026-10-27T08:06:10.6345470Z BUILDERCHECKBOX 1280 reduce citations.ledger
+2026-10-27T08:06:10.6345656Z BUILDERCHECKBOX 1280 reduce auth.signup
+2026-10-27T08:06:10.6345836Z BUILDERCHECKBOX 1280 reduce actions.writes
+2026-10-27T08:06:10.6346014Z BUILDERCHECKBOX 1280 reduce server.public
+2026-10-27T08:06:10.6346380Z PASS builderproposedcheckboxallsections nativeSpace2x immediatechecked focus restore3201280normalReduce noSave/model
+2026-10-27T08:06:10.6346713Z 
+2026-10-27T08:06:27.2038459Z CASE button_hover_exact_duration_inventory_browser.cjs 320-no-preference PASS exit=0 seconds=16.6
+2026-10-27T08:06:27.2039939Z RELEASE 320 no-preference BUTTON|icon nav-toggle|navToggle navToggle
+2026-10-27T08:06:27.2040661Z RELEASE 320 no-preference BUTTON|theme-btn themeBtn
+2026-10-27T08:06:27.2041032Z RELEASE 320 no-preference BUTTON|icon menu|menu menu
+2026-10-27T08:06:27.2041329Z RELEASE 320 no-preference BUTTON|icon|readingBtn readingBtn
+2026-10-27T08:06:27.2041668Z RELEASE 320 no-preference BUTTON|cs-btn null
+2026-10-27T08:06:27.2042006Z RELEASE 320 no-preference BUTTON|icon|prevQ prevQ
+2026-10-27T08:06:27.2042326Z RELEASE 320 no-preference BUTTON|icon|nextQ nextQ
+2026-10-27T08:06:27.2042661Z RELEASE 320 no-preference BUTTON|icon|tempBtn tempBtn
+2026-10-27T08:06:27.2043025Z RELEASE 320 no-preference BUTTON|icon|profileBtn profileBtn
+2026-10-27T08:06:27.2043389Z RELEASE 320 no-preference BUTTON|icon|newTopic newTopic
+2026-10-27T08:06:27.2043752Z RELEASE 320 no-preference BUTTON|icon|exportChat exportChat
+2026-10-27T08:06:27.2044001Z RELEASE 320 no-preference BUTTON|icon|upload upload
+2026-10-27T08:06:27.2044211Z RELEASE 320 no-preference BUTTON|icon|mic mic
+2026-10-27T08:06:27.2044412Z RELEASE 320 no-preference BUTTON|chip toolsToggle
+2026-10-27T08:06:27.2044637Z RELEASE 320 no-preference BUTTON|cc-guide-replay aboutGuide
+2026-10-27T08:06:27.2044859Z RELEASE 320 no-preference BUTTON| feature-tab-chat
+2026-10-27T08:06:27.2045101Z RELEASE 320 no-preference BUTTON|feature-added feature-tab-search
+2026-10-27T08:06:27.2045519Z RELEASE 320 no-preference SUMMARY| null
+2026-10-27T08:06:27.2045710Z RELEASE 320 no-preference BUTTON|go ghost null
+2026-10-27T08:06:27.2045911Z RELEASE 320 no-preference BUTTON|go green null
+2026-10-27T08:06:27.2046103Z RELEASE 320 no-preference BUTTON|info-tip null
+2026-10-27T08:06:27.2046293Z RELEASE 320 no-preference BUTTON|chipmore null
+2026-10-27T08:06:27.2046627Z RELEASE 320 no-preference BUTTON|go blue big apply
+2026-10-27T08:06:27.2046836Z RELEASE 320 no-preference BUTTON|editor-choice null
+2026-10-27T08:06:27.2047043Z RELEASE 320 no-preference BUTTON|go blue null
+2026-10-27T08:06:27.2047266Z RELEASE 320 no-preference BUTTON|go ghost helper-detect null
+2026-10-27T08:06:27.2047508Z RELEASE 320 no-preference BUTTON|go ghost helper-copy null
+2026-10-27T08:06:27.2047719Z RELEASE 320 no-preference BUTTON|preset null
+2026-10-27T08:06:27.2047913Z RELEASE 320 no-preference BUTTON|preset more null
+2026-10-27T08:06:27.2048127Z RELEASE 320 no-preference BUTTON|emoji-tile f-emoji_bot
+2026-10-27T08:06:27.2048333Z RELEASE 320 no-preference BUTTON|mini null
+2026-10-27T08:06:27.2048540Z RELEASE 320 no-preference BUTTON|settings-help-open null
+2026-10-27T08:06:27.2048831Z PASS hovercomputedinventory 32 no mutations; requested matrix 320 no-preference
+2026-10-27T08:06:27.2049007Z 
+2026-10-27T08:06:43.1263132Z CASE button_hover_exact_duration_inventory_browser.cjs 320-reduce PASS exit=0 seconds=15.9
+2026-10-27T08:06:43.1263747Z RELEASE 320 reduce BUTTON|icon nav-toggle|navToggle navToggle
+2026-10-27T08:06:43.1264096Z RELEASE 320 reduce BUTTON|theme-btn themeBtn
+2026-10-27T08:06:43.1264451Z RELEASE 320 reduce BUTTON|icon menu|menu menu
+2026-10-27T08:06:43.1264784Z RELEASE 320 reduce BUTTON|icon|readingBtn readingBtn
+2026-10-27T08:06:43.1265093Z RELEASE 320 reduce BUTTON|cs-btn null
+2026-10-27T08:06:43.1265378Z RELEASE 320 reduce BUTTON|icon|prevQ prevQ
+2026-10-27T08:06:43.1265657Z RELEASE 320 reduce BUTTON|icon|nextQ nextQ
+2026-10-27T08:06:43.1265941Z RELEASE 320 reduce BUTTON|icon|tempBtn tempBtn
+2026-10-27T08:06:43.1266236Z RELEASE 320 reduce BUTTON|icon|profileBtn profileBtn
+2026-10-27T08:06:43.1266648Z RELEASE 320 reduce BUTTON|icon|newTopic newTopic
+2026-10-27T08:06:43.1266925Z RELEASE 320 reduce BUTTON|icon|exportChat exportChat
+2026-10-27T08:06:43.1267127Z RELEASE 320 reduce BUTTON|icon|upload upload
+2026-10-27T08:06:43.1267363Z RELEASE 320 reduce BUTTON|icon|mic mic
+2026-10-27T08:06:43.1267638Z RELEASE 320 reduce BUTTON|chip toolsToggle
+2026-10-27T08:06:43.1267947Z RELEASE 320 reduce BUTTON|cc-guide-replay aboutGuide
+2026-10-27T08:06:43.1268455Z RELEASE 320 reduce BUTTON| feature-tab-chat
+2026-10-27T08:06:43.1268678Z RELEASE 320 reduce BUTTON|feature-added feature-tab-search
+2026-10-27T08:06:43.1268881Z RELEASE 320 reduce SUMMARY| null
+2026-10-27T08:06:43.1269053Z RELEASE 320 reduce BUTTON|go ghost null
+2026-10-27T08:06:43.1269336Z RELEASE 320 reduce BUTTON|go green null
+2026-10-27T08:06:43.1269509Z RELEASE 320 reduce BUTTON|info-tip null
+2026-10-27T08:06:43.1269680Z RELEASE 320 reduce BUTTON|chipmore null
+2026-10-27T08:06:43.1269859Z RELEASE 320 reduce BUTTON|go blue big apply
+2026-10-27T08:06:43.1270046Z RELEASE 320 reduce BUTTON|editor-choice null
+2026-10-27T08:06:43.1270232Z RELEASE 320 reduce BUTTON|go blue null
+2026-10-27T08:06:43.1270506Z RELEASE 320 reduce BUTTON|go ghost helper-detect null
+2026-10-27T08:06:43.1270754Z RELEASE 320 reduce BUTTON|go ghost helper-copy null
+2026-10-27T08:06:43.1270951Z RELEASE 320 reduce BUTTON|preset null
+2026-10-27T08:06:43.1271129Z RELEASE 320 reduce BUTTON|preset more null
+2026-10-27T08:06:43.1271325Z RELEASE 320 reduce BUTTON|emoji-tile f-emoji_bot
+2026-10-27T08:06:43.1271603Z RELEASE 320 reduce BUTTON|mini null
+2026-10-27T08:06:43.1271794Z RELEASE 320 reduce BUTTON|settings-help-open null
+2026-10-27T08:06:43.1272060Z PASS hovercomputedinventory 32 no mutations; requested matrix 320 reduce
+2026-10-27T08:06:43.1272228Z 
+2026-10-27T08:07:00.2539609Z CASE button_hover_exact_duration_inventory_browser.cjs 1280-no-preference PASS exit=0 seconds=17.1
+2026-10-27T08:07:00.2540819Z RELEASE 1280 no-preference BUTTON|cc-guide-replay chatGuide
+2026-10-27T08:07:00.2541332Z RELEASE 1280 no-preference BUTTON|theme-btn themeBtn
+2026-10-27T08:07:00.2541745Z RELEASE 1280 no-preference BUTTON|btn-dark newChat
+2026-10-27T08:07:00.2542078Z RELEASE 1280 no-preference BUTTON|btn-out tempPill
+2026-10-27T08:07:00.2542429Z RELEASE 1280 no-preference BUTTON|tab on history-chats
+2026-10-27T08:07:00.2542785Z RELEASE 1280 no-preference BUTTON|tab history-topics
+2026-10-27T08:07:00.2543133Z RELEASE 1280 no-preference BUTTON|icon menu|menu menu
+2026-10-27T08:07:00.2543520Z RELEASE 1280 no-preference BUTTON|icon|readingBtn readingBtn
+2026-10-27T08:07:00.2543867Z RELEASE 1280 no-preference BUTTON|cs-btn null
+2026-10-27T08:07:00.2544188Z RELEASE 1280 no-preference BUTTON|icon|prevQ prevQ
+2026-10-27T08:07:00.2544520Z RELEASE 1280 no-preference BUTTON|icon|nextQ nextQ
+2026-10-27T08:07:00.2544848Z RELEASE 1280 no-preference BUTTON|icon|tempBtn tempBtn
+2026-10-27T08:07:00.2545092Z RELEASE 1280 no-preference BUTTON|icon|profileBtn profileBtn
+2026-10-27T08:07:00.2545350Z RELEASE 1280 no-preference BUTTON|icon|exportChat exportChat
+2026-10-27T08:07:00.2545581Z RELEASE 1280 no-preference BUTTON|icon|upload upload
+2026-10-27T08:07:00.2545787Z RELEASE 1280 no-preference BUTTON|icon|mic mic
+2026-10-27T08:07:00.2545993Z RELEASE 1280 no-preference BUTTON|chip scopeBtn
+2026-10-27T08:07:00.2546203Z RELEASE 1280 no-preference BUTTON| feature-tab-chat
+2026-10-27T08:07:00.2546624Z RELEASE 1280 no-preference BUTTON|feature-added feature-tab-search
+2026-10-27T08:07:00.2546864Z RELEASE 1280 no-preference SUMMARY| null
+2026-10-27T08:07:00.2547060Z RELEASE 1280 no-preference BUTTON|go ghost null
+2026-10-27T08:07:00.2547263Z RELEASE 1280 no-preference BUTTON|go green null
+2026-10-27T08:07:00.2547462Z RELEASE 1280 no-preference BUTTON|info-tip null
+2026-10-27T08:07:00.2547656Z RELEASE 1280 no-preference BUTTON|chipmore null
+2026-10-27T08:07:00.2547859Z RELEASE 1280 no-preference BUTTON|go blue big apply
+2026-10-27T08:07:00.2548080Z RELEASE 1280 no-preference BUTTON|editor-choice null
+2026-10-27T08:07:00.2548288Z RELEASE 1280 no-preference BUTTON|go blue null
+2026-10-27T08:07:00.2548517Z RELEASE 1280 no-preference BUTTON|go ghost helper-detect null
+2026-10-27T08:07:00.2548767Z RELEASE 1280 no-preference BUTTON|go ghost helper-copy null
+2026-10-27T08:07:00.2548991Z RELEASE 1280 no-preference BUTTON|preset null
+2026-10-27T08:07:00.2549194Z RELEASE 1280 no-preference BUTTON|preset more null
+2026-10-27T08:07:00.2549421Z RELEASE 1280 no-preference BUTTON|emoji-tile f-emoji_bot
+2026-10-27T08:07:00.2549868Z RELEASE 1280 no-preference BUTTON|mini null
+2026-10-27T08:07:00.2550086Z RELEASE 1280 no-preference BUTTON|settings-help-open null
+2026-10-27T08:07:00.2550381Z PASS hovercomputedinventory 34 no mutations; requested matrix 1280 no-preference
+2026-10-27T08:07:00.2550565Z 
+2026-10-27T08:07:16.3217820Z CASE button_hover_exact_duration_inventory_browser.cjs 1280-reduce PASS exit=0 seconds=16.1
+2026-10-27T08:07:16.3218416Z RELEASE 1280 reduce BUTTON|cc-guide-replay chatGuide
+2026-10-27T08:07:16.3218794Z RELEASE 1280 reduce BUTTON|theme-btn themeBtn
+2026-10-27T08:07:16.3219104Z RELEASE 1280 reduce BUTTON|btn-dark newChat
+2026-10-27T08:07:16.3219443Z RELEASE 1280 reduce BUTTON|btn-out tempPill
+2026-10-27T08:07:16.3219748Z RELEASE 1280 reduce BUTTON|tab on history-chats
+2026-10-27T08:07:16.3220066Z RELEASE 1280 reduce BUTTON|tab history-topics
+2026-10-27T08:07:16.3220375Z RELEASE 1280 reduce BUTTON|icon menu|menu menu
+2026-10-27T08:07:16.3220709Z RELEASE 1280 reduce BUTTON|icon|readingBtn readingBtn
+2026-10-27T08:07:16.3220974Z RELEASE 1280 reduce BUTTON|cs-btn null
+2026-10-27T08:07:16.3221155Z RELEASE 1280 reduce BUTTON|icon|prevQ prevQ
+2026-10-27T08:07:16.3221339Z RELEASE 1280 reduce BUTTON|icon|nextQ nextQ
+2026-10-27T08:07:16.3221529Z RELEASE 1280 reduce BUTTON|icon|tempBtn tempBtn
+2026-10-27T08:07:16.3221747Z RELEASE 1280 reduce BUTTON|icon|profileBtn profileBtn
+2026-10-27T08:07:16.3221968Z RELEASE 1280 reduce BUTTON|icon|exportChat exportChat
+2026-10-27T08:07:16.3222454Z RELEASE 1280 reduce BUTTON|icon|upload upload
+2026-10-27T08:07:16.3222639Z RELEASE 1280 reduce BUTTON|icon|mic mic
+2026-10-27T08:07:16.3222816Z RELEASE 1280 reduce BUTTON|chip scopeBtn
+2026-10-27T08:07:16.3223001Z RELEASE 1280 reduce BUTTON| feature-tab-chat
+2026-10-27T08:07:16.3223455Z RELEASE 1280 reduce BUTTON|feature-added feature-tab-search
+2026-10-27T08:07:16.3223751Z RELEASE 1280 reduce SUMMARY| null
+2026-10-27T08:07:16.3223997Z RELEASE 1280 reduce BUTTON|go ghost null
+2026-10-27T08:07:16.3224293Z RELEASE 1280 reduce BUTTON|go green null
+2026-10-27T08:07:16.3224547Z RELEASE 1280 reduce BUTTON|info-tip null
+2026-10-27T08:07:16.3224830Z RELEASE 1280 reduce BUTTON|chipmore null
+2026-10-27T08:07:16.3225156Z RELEASE 1280 reduce BUTTON|go blue big apply
+2026-10-27T08:07:16.3225417Z RELEASE 1280 reduce BUTTON|editor-choice null
+2026-10-27T08:07:16.3225707Z RELEASE 1280 reduce BUTTON|go blue null
+2026-10-27T08:07:16.3226010Z RELEASE 1280 reduce BUTTON|go ghost helper-detect null
+2026-10-27T08:07:16.3235196Z RELEASE 1280 reduce BUTTON|go ghost helper-copy null
+2026-10-27T08:07:16.3235615Z RELEASE 1280 reduce BUTTON|preset null
+2026-10-27T08:07:16.3235887Z RELEASE 1280 reduce BUTTON|preset more null
+2026-10-27T08:07:16.3236188Z RELEASE 1280 reduce BUTTON|emoji-tile f-emoji_bot
+2026-10-27T08:07:16.3236590Z RELEASE 1280 reduce BUTTON|mini null
+2026-10-27T08:07:16.3236795Z RELEASE 1280 reduce BUTTON|settings-help-open null
+2026-10-27T08:07:16.3237096Z PASS hovercomputedinventory 34 no mutations; requested matrix 1280 reduce
+2026-10-27T08:07:16.3237364Z 
+2026-10-27T08:07:22.4834313Z CASE chat_about_off_motion_inventory_browser.cjs default PASS exit=0 seconds=6.2
+2026-10-27T08:07:22.4834748Z MODE / none none
+2026-10-27T08:07:22.4834958Z MODE /about.html none none
+2026-10-27T08:07:22.4835158Z MODE / calm none
+2026-10-27T08:07:22.4835347Z MODE /about.html calm none
+2026-10-27T08:07:22.4835537Z MODE / full full
+2026-10-27T08:07:22.4835716Z MODE /about.html full full
+2026-10-27T08:07:22.4835902Z MODE / none none
+2026-10-27T08:07:22.4836127Z MODE /about.html none none
+2026-10-27T08:07:22.4836301Z MODE / calm none
+2026-10-27T08:07:22.4836668Z MODE /about.html calm none
+2026-10-27T08:07:22.4836813Z MODE / full full
+2026-10-27T08:07:22.4836935Z MODE /about.html full full
+2026-10-27T08:07:22.4837170Z PASS chat/About renderCSSnodepseudooffmotion NoneCalmOSReduceFull3201280
+2026-10-27T08:07:22.4837338Z 
+2026-10-27T08:07:27.4871472Z CASE chat_notification_actions_browser.cjs default PASS exit=0 seconds=5.0
+2026-10-27T08:07:27.4872251Z PASS undo/retrykeyboard actualfixtureendpoints failurekeepsaction newdraftpreserved composerresize motion3201280reduce/normal
+2026-10-27T08:07:27.4874644Z 
+2026-10-27T08:07:36.7977902Z CASE color_scroll_audit_browser.cjs default PASS exit=0 seconds=9.3
+2026-10-27T08:07:36.7978580Z 320 { x: 53, y: 74, width: 214, height: 76.5625 } { x: 40, y: -1933.828125, width: 240, height: 66 }
+2026-10-27T08:07:36.7978931Z 390 { x: 53, y: 74, width: 284, height: 58.375 } { x: 40, y: -1905.203125, width: 310, height: 66 }
+2026-10-27T08:07:36.7979331Z 1280 { x: 357, y: 81.390625, width: 368, height: 58.375 } { x: 52, y: 0, width: 1176, height: 73.390625 }
+2026-10-27T08:07:36.7979723Z PASS selectedcolor sticky label/value/chip3203901280 scroll/reedit/lightdark/invalidkeepslastvalid
+2026-10-27T08:07:36.7979932Z 
+2026-10-27T08:07:44.6001356Z CASE config_layout_browser.cjs default PASS exit=0 seconds=7.8
+2026-10-27T08:07:44.6002146Z PASS desktopwidth/gaps+previewstable, narrowstacked, resetreachable700height, previewtoggle, noPromptCodepreview3207601280
+2026-10-27T08:07:44.6002613Z 
+2026-10-27T08:08:04.0327755Z CASE deployment_long_configuration_geometry_browser.cjs default PASS exit=0 seconds=19.4
+2026-10-27T08:08:04.0328320Z DEPLOYLONG 320 no-preference Target / service 597
+2026-10-27T08:08:04.0328668Z DEPLOYLONG 320 no-preference Target / service 500
+2026-10-27T08:08:04.0329068Z DEPLOYLONG 320 no-preference Account label (not a credential) 597
+2026-10-27T08:08:04.0329495Z DEPLOYLONG 320 no-preference Account label (not a credential) 500
+2026-10-27T08:08:04.0330131Z DEPLOYLONG 320 no-preference Region 597
+2026-10-27T08:08:04.0330319Z DEPLOYLONG 320 no-preference Region 500
+2026-10-27T08:08:04.0330543Z DEPLOYLONG 320 no-preference Monthly cost limit / constraints 597
+2026-10-27T08:08:04.0330805Z DEPLOYLONG 320 no-preference Monthly cost limit / constraints 500
+2026-10-27T08:08:04.0331056Z DEPLOYLONG 320 no-preference Rollback and backup plan 597
+2026-10-27T08:08:04.0331424Z DEPLOYLONG 320 no-preference Rollback and backup plan 500
+2026-10-27T08:08:04.0331818Z DEPLOYLONG 320 no-preference Copyable deployment prompt 597
+2026-10-27T08:08:04.0332135Z DEPLOYLONG 320 no-preference Copyable deployment prompt 500
+2026-10-27T08:08:04.0332348Z DEPLOYLONG 320 reduce Target / service 597
+2026-10-27T08:08:04.0332531Z DEPLOYLONG 320 reduce Target / service 500
+2026-10-27T08:08:04.0332742Z DEPLOYLONG 320 reduce Account label (not a credential) 597
+2026-10-27T08:08:04.0332988Z DEPLOYLONG 320 reduce Account label (not a credential) 500
+2026-10-27T08:08:04.0333289Z DEPLOYLONG 320 reduce Region 597
+2026-10-27T08:08:04.0333458Z DEPLOYLONG 320 reduce Region 500
+2026-10-27T08:08:04.0333655Z DEPLOYLONG 320 reduce Monthly cost limit / constraints 597
+2026-10-27T08:08:04.0333889Z DEPLOYLONG 320 reduce Monthly cost limit / constraints 500
+2026-10-27T08:08:04.0334107Z DEPLOYLONG 320 reduce Rollback and backup plan 597
+2026-10-27T08:08:04.0334320Z DEPLOYLONG 320 reduce Rollback and backup plan 500
+2026-10-27T08:08:04.0334637Z DEPLOYLONG 320 reduce Copyable deployment prompt 597
+2026-10-27T08:08:04.0334861Z DEPLOYLONG 320 reduce Copyable deployment prompt 500
+2026-10-27T08:08:04.0335069Z DEPLOYLONG 1280 no-preference Target / service 597
+2026-10-27T08:08:04.0335272Z DEPLOYLONG 1280 no-preference Target / service 500
+2026-10-27T08:08:04.0335558Z DEPLOYLONG 1280 no-preference Account label (not a credential) 597
+2026-10-27T08:08:04.0335995Z DEPLOYLONG 1280 no-preference Account label (not a credential) 500
+2026-10-27T08:08:04.0336219Z DEPLOYLONG 1280 no-preference Region 597
+2026-10-27T08:08:04.0336400Z DEPLOYLONG 1280 no-preference Region 500
+2026-10-27T08:08:04.0336876Z DEPLOYLONG 1280 no-preference Monthly cost limit / constraints 597
+2026-10-27T08:08:04.0337143Z DEPLOYLONG 1280 no-preference Monthly cost limit / constraints 500
+2026-10-27T08:08:04.0337398Z DEPLOYLONG 1280 no-preference Rollback and backup plan 597
+2026-10-27T08:08:04.0337633Z DEPLOYLONG 1280 no-preference Rollback and backup plan 500
+2026-10-27T08:08:04.0337939Z DEPLOYLONG 1280 no-preference Copyable deployment prompt 597
+2026-10-27T08:08:04.0338340Z DEPLOYLONG 1280 no-preference Copyable deployment prompt 500
+2026-10-27T08:08:04.0338557Z DEPLOYLONG 1280 reduce Target / service 597
+2026-10-27T08:08:04.0338746Z DEPLOYLONG 1280 reduce Target / service 500
+2026-10-27T08:08:04.0339004Z DEPLOYLONG 1280 reduce Account label (not a credential) 597
+2026-10-27T08:08:04.0339297Z DEPLOYLONG 1280 reduce Account label (not a credential) 500
+2026-10-27T08:08:04.0339510Z DEPLOYLONG 1280 reduce Region 597
+2026-10-27T08:08:04.0339677Z DEPLOYLONG 1280 reduce Region 500
+2026-10-27T08:08:04.0339878Z DEPLOYLONG 1280 reduce Monthly cost limit / constraints 597
+2026-10-27T08:08:04.0340217Z DEPLOYLONG 1280 reduce Monthly cost limit / constraints 500
+2026-10-27T08:08:04.0340439Z DEPLOYLONG 1280 reduce Rollback and backup plan 597
+2026-10-27T08:08:04.0340652Z DEPLOYLONG 1280 reduce Rollback and backup plan 500
+2026-10-27T08:08:04.0340869Z DEPLOYLONG 1280 reduce Copyable deployment prompt 597
+2026-10-27T08:08:04.0341165Z DEPLOYLONG 1280 reduce Copyable deployment prompt 500
+2026-10-27T08:08:04.0341819Z PASS deploymentall6textfields600chars/100lines fixedvisiblecontrolgeometry focus3201280normalReduce noPlans/provider/mutations
+2026-10-27T08:08:04.0342246Z 
+2026-10-27T08:08:08.4783552Z CASE editing_typography_browser.cjs default PASS exit=0 seconds=4.4
+2026-10-27T08:08:08.4784195Z PASS editorsectiontype18/1.3SimpleAdvanced/fieldgap8/bodymonoheadingGeorgiaactualpreview+sample3201280
+2026-10-27T08:08:08.4784436Z 
+2026-10-27T08:08:12.0690460Z CASE font_menu_truth_browser.cjs default PASS exit=0 seconds=3.6
+2026-10-27T08:08:12.0690819Z PREDS { fonts: '1', cs: '1' }
+2026-10-27T08:08:12.0691211Z PASS settings font menu makes actual documentfont requests;system fontready,blockedfontfallback,cursor stable during async labels
+2026-10-27T08:08:12.0691483Z 
+2026-10-27T08:08:20.1960449Z CASE helper_cross_card_pending_motion_browser.cjs default PASS exit=0 seconds=8.1
+2026-10-27T08:08:20.1961044Z PASS search/querycleaning persist pending card switch retains independent drafts/savedstatus nohiddencompletionfocussteal3201280normalReduce
+2026-10-27T08:08:20.1961369Z 
+2026-10-27T08:08:28.2075017Z CASE helper_real_response_scroll_motion_browser.cjs default PASS exit=0 seconds=8.0
+2026-10-27T08:08:28.2075869Z RESPONSESCROLL 320 no-preference { scroll: 4594, bottom: 5194, height: 294.6875, width: 214 } { scroll: 4594, height: 294.6875, width: 214, transform: 'none' }
+2026-10-27T08:08:28.2076946Z RESPONSESCROLL 320 reduce { scroll: 4594, bottom: 5194, height: 294.6875, width: 214 } { scroll: 4594, height: 294.6875, width: 214, transform: 'none' }
+2026-10-27T08:08:28.2077805Z RESPONSESCROLL 1280 no-preference { scroll: 1885, bottom: 2485, height: 294.6875, width: 830 } { scroll: 1885, height: 294.6875, width: 830, transform: 'none' }
+2026-10-27T08:08:28.2078455Z RESPONSESCROLL 1280 reduce { scroll: 1885, bottom: 2485, height: 294.6875, width: 830 } { scroll: 1885, height: 294.6875, width: 830, transform: 'none' }
+2026-10-27T08:08:28.2079012Z PASS actualcodegenfixtureResponse assignmentreviewcomplete preservesuserwheelupscrollTop/bounds3201280normalReduce notrealproviderstream
+2026-10-27T08:08:28.2079307Z 
+2026-10-27T08:08:31.6045942Z CASE history_delete_pending_error_browser.cjs default PASS exit=0 seconds=3.4
+2026-10-27T08:08:31.6046750Z PASS delete delayedsingleflight keepsrowfocus adjacentfailure retry3201280normalReduce
+2026-10-27T08:08:31.6047045Z 
+2026-10-27T08:08:50.0355157Z CASE icon_title_inventory_browser.cjs default PASS exit=0 seconds=18.4
+2026-10-27T08:08:50.0357300Z [
+2026-10-27T08:08:50.0357508Z   {
+2026-10-27T08:08:50.0357680Z     "text": "",
+2026-10-27T08:08:50.0357936Z     "title": "Switch between light and dark theme",
+2026-10-27T08:08:50.0358194Z     "id": "themeBtn",
+2026-10-27T08:08:50.0358391Z     "cls": "theme-btn",
+2026-10-27T08:08:50.0358581Z     "aria": "Toggle theme",
+2026-10-27T08:08:50.0359131Z     "html": "<button class=\"theme-btn\" id=\"themeBtn\" aria-label=\"Toggle theme\" title=\"Switch between light and dark theme\"><i></i></button>"
+2026-10-27T08:08:50.0359935Z   },
+2026-10-27T08:08:50.0360121Z   {
+2026-10-27T08:08:50.0360277Z     "text": "",
+2026-10-27T08:08:50.0360460Z     "title": "Open chats",
+2026-10-27T08:08:50.0360643Z     "id": "menu",
+2026-10-27T08:08:50.0360815Z     "cls": "icon menu",
+2026-10-27T08:08:50.0360981Z     "aria": "Open chats",
+2026-10-27T08:08:50.0361757Z     "html": "<button class=\"icon menu\" id=\"menu\" aria-label=\"Open chats\" title=\"Open chats\" aria-controls=\"side\" data-docked=\"false\" aria-expanded=\"false\"><svg viewBox=\"0 0 24 24\" width=\"18\" height=\"18\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M4 7h16M4 12h16M4 17h16\"></path></svg></button>"
+2026-10-27T08:08:50.0362433Z   },
+2026-10-27T08:08:50.0362571Z   {
+2026-10-27T08:08:50.0362726Z     "text": "",
+2026-10-27T08:08:50.0362935Z     "title": "Previous question (k)",
+2026-10-27T08:08:50.0363159Z     "id": "prevQ",
+2026-10-27T08:08:50.0363330Z     "cls": "icon",
+2026-10-27T08:08:50.0363539Z     "aria": "Previous question",
+2026-10-27T08:08:50.0364577Z     "html": "<button class=\"icon\" id=\"prevQ\" title=\"Previous question (k)\" aria-label=\"Previous question\" aria-keyshortcuts=\"k\"><svg viewBox=\"0 0 24 24\" width=\"18\" height=\"18\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M12 20V8M6 12l6-6 6 6\"></path></svg></button>"
+2026-10-27T08:08:50.0365316Z   },
+2026-10-27T08:08:50.0365412Z   {
+2026-10-27T08:08:50.0365705Z     "text": "",
+2026-10-27T08:08:50.0365873Z     "title": "Next question (j)",
+2026-10-27T08:08:50.0366074Z     "id": "nextQ",
+2026-10-27T08:08:50.0366186Z     "cls": "icon",
+2026-10-27T08:08:50.0366303Z     "aria": "Next question",
+2026-10-27T08:08:50.0367200Z     "html": "<button class=\"icon\" id=\"nextQ\" title=\"Next question (j)\" aria-label=\"Next question\" aria-keyshortcuts=\"j\"><svg viewBox=\"0 0 24 24\" width=\"18\" height=\"18\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M12 4v12M6 12l6 6 6-6\"></path></svg></button>"
+2026-10-27T08:08:50.0367784Z   },
+2026-10-27T08:08:50.0367881Z   {
+2026-10-27T08:08:50.0367978Z     "text": "",
+2026-10-27T08:08:50.0368122Z     "title": "Temporary chat: nothing is saved",
+2026-10-27T08:08:50.0368367Z     "id": "tempBtn",
+2026-10-27T08:08:50.0368497Z     "cls": "icon",
+2026-10-27T08:08:50.0368619Z     "aria": "Temporary chat",
+2026-10-27T08:08:50.0369362Z     "html": "<button class=\"icon\" id=\"tempBtn\" hidden=\"\" title=\"Temporary chat: nothing is saved\" aria-label=\"Temporary chat\" aria-pressed=\"false\"><svg viewBox=\"0 0 24 24\" width=\"18\" height=\"18\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M12 3a9 9 0 100 18 9 9 0 000-18zM12 7v5l3 2\"></path></svg></b"
+2026-10-27T08:08:50.0370107Z   },
+2026-10-27T08:08:50.0370202Z   {
+2026-10-27T08:08:50.0370303Z     "text": "",
+2026-10-27T08:08:50.0370423Z     "title": "My profile",
+2026-10-27T08:08:50.0370626Z     "id": "profileBtn",
+2026-10-27T08:08:50.0370912Z     "cls": "icon",
+2026-10-27T08:08:50.0371027Z     "aria": "My profile",
+2026-10-27T08:08:50.0371773Z     "html": "<button class=\"icon\" id=\"profileBtn\" title=\"My profile\" aria-label=\"My profile\"><svg viewBox=\"0 0 24 24\" width=\"18\" height=\"18\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M12 12a4 4 0 100-8 4 4 0 000 8zM4 21a8 8 0 0116 0\"></path></svg></button>"
+2026-10-27T08:08:50.0372341Z   },
+2026-10-27T08:08:50.0372436Z   {
+2026-10-27T08:08:50.0372533Z     "text": "",
+2026-10-27T08:08:50.0372751Z     "title": "Start a new conversation in this chat",
+2026-10-27T08:08:50.0373005Z     "id": "newTopic",
+2026-10-27T08:08:50.0373179Z     "cls": "icon",
+2026-10-27T08:08:50.0373379Z     "aria": "New conversation",
+2026-10-27T08:08:50.0374416Z     "html": "<button class=\"icon\" id=\"newTopic\" title=\"Start a new conversation in this chat\" aria-label=\"New conversation\"><svg viewBox=\"0 0 24 24\" width=\"18\" height=\"18\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M12 5v14M5 12h14\"></path></svg></button>"
+2026-10-27T08:08:50.0375455Z   },
+2026-10-27T08:08:50.0375604Z   {
+2026-10-27T08:08:50.0375753Z     "text": "",
+2026-10-27T08:08:50.0375965Z     "title": "Export chat as Markdown",
+2026-10-27T08:08:50.0376195Z     "id": "exportChat",
+2026-10-27T08:08:50.0376397Z     "cls": "icon",
+2026-10-27T08:08:50.0376716Z     "aria": "Export chat",
+2026-10-27T08:08:50.0377729Z     "html": "<button class=\"icon\" id=\"exportChat\" title=\"Export chat as Markdown\" aria-label=\"Export chat\"><svg viewBox=\"0 0 24 24\" width=\"18\" height=\"18\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M12 3v11M7 10l5 5 5-5M5 20h14\"></path></svg></button>"
+2026-10-27T08:08:50.0378628Z   },
+2026-10-27T08:08:50.0378784Z   {
+2026-10-27T08:08:50.0378932Z     "text": "",
+2026-10-27T08:08:50.0379137Z     "title": "Add files or a web link",
+2026-10-27T08:08:50.0379367Z     "id": "upload",
+2026-10-27T08:08:50.0379540Z     "cls": "icon",
+2026-10-27T08:08:50.0379723Z     "aria": "Add file",
+2026-10-27T08:08:50.0380990Z     "html": "<button class=\"icon\" id=\"upload\" title=\"Add files or a web link\" aria-label=\"Add file\"><svg viewBox=\"0 0 24 24\" width=\"18\" height=\"18\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M21 11.5l-8.6 8.6a5 5 0 01-7-7l9-9a3.3 3.3 0 014.7 4.7l-9 9a1.7 1.7 0 01-2.4-2.4l8.3-8.3\"></path></svg></but"
+2026-10-27T08:08:50.0381995Z   },
+2026-10-27T08:08:50.0382148Z   {
+2026-10-27T08:08:50.0382303Z     "text": "",
+2026-10-27T08:08:50.0382504Z     "title": "Dictate a question",
+2026-10-27T08:08:50.0382719Z     "id": "mic",
+2026-10-27T08:08:50.0382874Z     "cls": "icon",
+2026-10-27T08:08:50.0382988Z     "aria": "Dictate",
+2026-10-27T08:08:50.0383722Z     "html": "<button class=\"icon\" id=\"mic\" title=\"Dictate a question\" aria-label=\"Dictate\" aria-pressed=\"false\"><svg viewBox=\"0 0 24 24\" width=\"18\" height=\"18\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M12 15a3 3 0 003-3V6a3 3 0 00-6 0v6a3 3 0 003 3zM6 11a6 6 0 0012 0M12 17v4\"></path></svg></butto"
+2026-10-27T08:08:50.0384428Z   },
+2026-10-27T08:08:50.0384573Z   {
+2026-10-27T08:08:50.0384731Z     "text": "",
+2026-10-27T08:08:50.0384895Z     "title": "",
+2026-10-27T08:08:50.0385062Z     "id": "",
+2026-10-27T08:08:50.0385231Z     "cls": "info-tip",
+2026-10-27T08:08:50.0385441Z     "aria": "More information",
+2026-10-27T08:08:50.0386021Z     "html": "<button type=\"button\" class=\"info-tip\" aria-label=\"More information\" aria-expanded=\"false\" aria-describedby=\"field-help-10\"></button>"
+2026-10-27T08:08:50.0386643Z   },
+2026-10-27T08:08:50.0386785Z   {
+2026-10-27T08:08:50.0386935Z     "text": "",
+2026-10-27T08:08:50.0387092Z     "title": "",
+2026-10-27T08:08:50.0387249Z     "id": "",
+2026-10-27T08:08:50.0387416Z     "cls": "info-tip",
+2026-10-27T08:08:50.0387624Z     "aria": "More information",
+2026-10-27T08:08:50.0388090Z     "html": "<button type=\"button\" class=\"info-tip\" aria-label=\"More information\" aria-expanded=\"false\" aria-describedby=\"field-help-5\"></button>"
+2026-10-27T08:08:50.0388407Z   },
+2026-10-27T08:08:50.0388502Z   {
+2026-10-27T08:08:50.0388599Z     "text": "",
+2026-10-27T08:08:50.0388713Z     "title": "",
+2026-10-27T08:08:50.0388820Z     "id": "",
+2026-10-27T08:08:50.0388932Z     "cls": "info-tip",
+2026-10-27T08:08:50.0389066Z     "aria": "More information",
+2026-10-27T08:08:50.0389416Z     "html": "<button type=\"button\" class=\"info-tip\" aria-label=\"More information\" aria-expanded=\"false\" aria-describedby=\"field-help-7\"></button>"
+2026-10-27T08:08:50.0389732Z   },
+2026-10-27T08:08:50.0389826Z   {
+2026-10-27T08:08:50.0389921Z     "text": "",
+2026-10-27T08:08:50.0390174Z     "title": "",
+2026-10-27T08:08:50.0390280Z     "id": "",
+2026-10-27T08:08:50.0390391Z     "cls": "info-tip",
+2026-10-27T08:08:50.0390524Z     "aria": "More information",
+2026-10-27T08:08:50.0390871Z     "html": "<button type=\"button\" class=\"info-tip\" aria-label=\"More information\" aria-expanded=\"false\" aria-describedby=\"field-help-8\"></button>"
+2026-10-27T08:08:50.0391182Z   },
+2026-10-27T08:08:50.0391277Z   {
+2026-10-27T08:08:50.0391375Z     "text": "",
+2026-10-27T08:08:50.0391487Z     "title": "",
+2026-10-27T08:08:50.0391596Z     "id": "",
+2026-10-27T08:08:50.0391705Z     "cls": "info-tip",
+2026-10-27T08:08:50.0391837Z     "aria": "More information",
+2026-10-27T08:08:50.0392181Z     "html": "<button type=\"button\" class=\"info-tip\" aria-label=\"More information\" aria-expanded=\"false\" aria-describedby=\"field-help-9\"></button>"
+2026-10-27T08:08:50.0392492Z   },
+2026-10-27T08:08:50.0392587Z   {
+2026-10-27T08:08:50.0392686Z     "text": "",
+2026-10-27T08:08:50.0392797Z     "title": "",
+2026-10-27T08:08:50.0392902Z     "id": "",
+2026-10-27T08:08:50.0393011Z     "cls": "info-tip",
+2026-10-27T08:08:50.0393142Z     "aria": "More information",
+2026-10-27T08:08:50.0393488Z     "html": "<button type=\"button\" class=\"info-tip\" aria-label=\"More information\" aria-expanded=\"false\" aria-describedby=\"field-help-48\"></button>"
+2026-10-27T08:08:50.0393920Z   },
+2026-10-27T08:08:50.0394025Z   {
+2026-10-27T08:08:50.0394122Z     "text": "",
+2026-10-27T08:08:50.0394230Z     "title": "",
+2026-10-27T08:08:50.0394501Z     "id": "",
+2026-10-27T08:08:50.0394613Z     "cls": "info-tip",
+2026-10-27T08:08:50.0394745Z     "aria": "More information",
+2026-10-27T08:08:50.0395090Z     "html": "<button type=\"button\" class=\"info-tip\" aria-label=\"More information\" aria-expanded=\"false\" aria-describedby=\"field-help-1\"></button>"
+2026-10-27T08:08:50.0395402Z   },
+2026-10-27T08:08:50.0395497Z   {
+2026-10-27T08:08:50.0395593Z     "text": "",
+2026-10-27T08:08:50.0395701Z     "title": "",
+2026-10-27T08:08:50.0395812Z     "id": "",
+2026-10-27T08:08:50.0395921Z     "cls": "info-tip",
+2026-10-27T08:08:50.0396054Z     "aria": "More information",
+2026-10-27T08:08:50.0396396Z     "html": "<button type=\"button\" class=\"info-tip\" aria-label=\"More information\" aria-expanded=\"false\" aria-describedby=\"field-help-2\"></button>"
+2026-10-27T08:08:50.0396886Z   },
+2026-10-27T08:08:50.0396981Z   {
+2026-10-27T08:08:50.0397332Z     "text": "⋯",
+2026-10-27T08:08:50.0397469Z     "title": "More appearance actions",
+2026-10-27T08:08:50.0397629Z     "id": "",
+2026-10-27T08:08:50.0397737Z     "cls": "",
+2026-10-27T08:08:50.0397865Z     "aria": "More look actions",
+2026-10-27T08:08:50.0398173Z     "html": "<summary aria-label=\"More look actions\" title=\"More appearance actions\">⋯</summary>"
+2026-10-27T08:08:50.0398406Z   },
+2026-10-27T08:08:50.0398501Z   {
+2026-10-27T08:08:50.0398598Z     "text": "",
+2026-10-27T08:08:50.0398705Z     "title": "",
+2026-10-27T08:08:50.0398811Z     "id": "",
+2026-10-27T08:08:50.0398929Z     "cls": "info-tip",
+2026-10-27T08:08:50.0399061Z     "aria": "More information",
+2026-10-27T08:08:50.0399416Z     "html": "<button type=\"button\" class=\"info-tip\" aria-label=\"More information\" aria-expanded=\"false\" aria-describedby=\"field-help-14\"></button>"
+2026-10-27T08:08:50.0399733Z   },
+2026-10-27T08:08:50.0399827Z   {
+2026-10-27T08:08:50.0399925Z     "text": "",
+2026-10-27T08:08:50.0400031Z     "title": "",
+2026-10-27T08:08:50.0400137Z     "id": "",
+2026-10-27T08:08:50.0400253Z     "cls": "info-tip",
+2026-10-27T08:08:50.0400400Z     "aria": "More information",
+2026-10-27T08:08:50.0400746Z     "html": "<button type=\"button\" class=\"info-tip\" aria-label=\"More information\" aria-expanded=\"false\" aria-describedby=\"field-help-15\"></button>"
+2026-10-27T08:08:50.0401060Z   },
+2026-10-27T08:08:50.0401156Z   {
+2026-10-27T08:08:50.0401252Z     "text": "",
+2026-10-27T08:08:50.0401363Z     "title": "",
+2026-10-27T08:08:50.0401469Z     "id": "",
+2026-10-27T08:08:50.0401577Z     "cls": "info-tip",
+2026-10-27T08:08:50.0401819Z     "aria": "More information",
+2026-10-27T08:08:50.0402163Z     "html": "<button type=\"button\" class=\"info-tip\" aria-label=\"More information\" aria-expanded=\"false\" aria-describedby=\"field-help-16\"></button>"
+2026-10-27T08:08:50.0402479Z   },
+2026-10-27T08:08:50.0402573Z   {
+2026-10-27T08:08:50.0402669Z     "text": "",
+2026-10-27T08:08:50.0402777Z     "title": "",
+2026-10-27T08:08:50.0402883Z     "id": "",
+2026-10-27T08:08:50.0402992Z     "cls": "info-tip",
+2026-10-27T08:08:50.0403127Z     "aria": "More information",
+2026-10-27T08:08:50.0403474Z     "html": "<button type=\"button\" class=\"info-tip\" aria-label=\"More information\" aria-expanded=\"false\" aria-describedby=\"field-help-17\"></button>"
+2026-10-27T08:08:50.0403787Z   },
+2026-10-27T08:08:50.0403880Z   {
+2026-10-27T08:08:50.0403976Z     "text": "",
+2026-10-27T08:08:50.0404084Z     "title": "",
+2026-10-27T08:08:50.0404192Z     "id": "",
+2026-10-27T08:08:50.0404300Z     "cls": "info-tip",
+2026-10-27T08:08:50.0404435Z     "aria": "More information",
+2026-10-27T08:08:50.0404778Z     "html": "<button type=\"button\" class=\"info-tip\" aria-label=\"More information\" aria-expanded=\"false\" aria-describedby=\"field-help-18\"></button>"
+2026-10-27T08:08:50.0405090Z   },
+2026-10-27T08:08:50.0405184Z   {
+2026-10-27T08:08:50.0405306Z     "text": "⋯",
+2026-10-27T08:08:50.0405440Z     "title": "More appearance actions",
+2026-10-27T08:08:50.0405583Z     "id": "",
+2026-10-27T08:08:50.0405688Z     "cls": "",
+2026-10-27T08:08:50.0405910Z     "aria": "More look actions",
+2026-10-27T08:08:50.0406212Z     "html": "<summary aria-label=\"More look actions\" title=\"More appearance actions\">⋯</summary>"
+2026-10-27T08:08:50.0406438Z   },
+2026-10-27T08:08:50.0406693Z   {
+2026-10-27T08:08:50.0406808Z     "text": "",
+2026-10-27T08:08:50.0406916Z     "title": "",
+2026-10-27T08:08:50.0407021Z     "id": "",
+2026-10-27T08:08:50.0407130Z     "cls": "info-tip",
+2026-10-27T08:08:50.0407268Z     "aria": "More information",
+2026-10-27T08:08:50.0407621Z     "html": "<button type=\"button\" class=\"info-tip\" aria-label=\"More information\" aria-expanded=\"false\" aria-describedby=\"field-help-19\"></button>"
+2026-10-27T08:08:50.0407931Z   },
+2026-10-27T08:08:50.0408024Z   {
+2026-10-27T08:08:50.0408120Z     "text": "",
+2026-10-27T08:08:50.0408230Z     "title": "",
+2026-10-27T08:08:50.0408336Z     "id": "",
+2026-10-27T08:08:50.0408446Z     "cls": "info-tip",
+2026-10-27T08:08:50.0408579Z     "aria": "More information",
+2026-10-27T08:08:50.0408928Z     "html": "<button type=\"button\" class=\"info-tip\" aria-label=\"More information\" aria-expanded=\"false\" aria-describedby=\"field-help-20\"></button>"
+2026-10-27T08:08:50.0409237Z   },
+2026-10-27T08:08:50.0409333Z   {
+2026-10-27T08:08:50.0409449Z     "text": "⋯",
+2026-10-27T08:08:50.0409582Z     "title": "More appearance actions",
+2026-10-27T08:08:50.0409723Z     "id": "",
+2026-10-27T08:08:50.0409831Z     "cls": "",
+2026-10-27T08:08:50.0409955Z     "aria": "More look actions",
+2026-10-27T08:08:50.0410254Z     "html": "<summary aria-label=\"More look actions\" title=\"More appearance actions\">⋯</summary>"
+2026-10-27T08:08:50.0410479Z   },
+2026-10-27T08:08:50.0410573Z   {
+2026-10-27T08:08:50.0410668Z     "text": "",
+2026-10-27T08:08:50.0410775Z     "title": "",
+2026-10-27T08:08:50.0410880Z     "id": "",
+2026-10-27T08:08:50.0410991Z     "cls": "info-tip",
+2026-10-27T08:08:50.0411123Z     "aria": "More information",
+2026-10-27T08:08:50.0411474Z     "html": "<button type=\"button\" class=\"info-tip\" aria-label=\"More information\" aria-expanded=\"false\" aria-describedby=\"field-help-21\"></button>"
+2026-10-27T08:08:50.0411787Z   },
+2026-10-27T08:08:50.0411881Z   {
+2026-10-27T08:08:50.0411979Z     "text": "",
+2026-10-27T08:08:50.0412086Z     "title": "",
+2026-10-27T08:08:50.0412193Z     "id": "",
+2026-10-27T08:08:50.0412302Z     "cls": "info-tip",
+2026-10-27T08:08:50.0412433Z     "aria": "More information",
+2026-10-27T08:08:50.0412776Z     "html": "<button type=\"button\" class=\"info-tip\" aria-label=\"More information\" aria-expanded=\"false\" aria-describedby=\"field-help-22\"></button>"
+2026-10-27T08:08:50.0413193Z   },
+2026-10-27T08:08:50.0413288Z   {
+2026-10-27T08:08:50.0413401Z     "text": "⋯",
+2026-10-27T08:08:50.0413532Z     "title": "More appearance actions",
+2026-10-27T08:08:50.0413673Z     "id": "",
+2026-10-27T08:08:50.0413778Z     "cls": "",
+2026-10-27T08:08:50.0413905Z     "aria": "More look actions",
+2026-10-27T08:08:50.0414200Z     "html": "<summary aria-label=\"More look actions\" title=\"More appearance actions\">⋯</summary>"
+2026-10-27T08:08:50.0414428Z   },
+2026-10-27T08:08:50.0414522Z   {
+2026-10-27T08:08:50.0414618Z     "text": "",
+2026-10-27T08:08:50.0414724Z     "title": "",
+2026-10-27T08:08:50.0414833Z     "id": "",
+2026-10-27T08:08:50.0414942Z     "cls": "info-tip",
+2026-10-27T08:08:50.0415073Z     "aria": "More information",
+2026-10-27T08:08:50.0415420Z     "html": "<button type=\"button\" class=\"info-tip\" aria-label=\"More information\" aria-expanded=\"false\" aria-describedby=\"field-help-24\"></button>"
+2026-10-27T08:08:50.0415737Z   },
+2026-10-27T08:08:50.0415833Z   {
+2026-10-27T08:08:50.0415932Z     "text": "",
+2026-10-27T08:08:50.0416039Z     "title": "",
+2026-10-27T08:08:50.0416145Z     "id": "",
+2026-10-27T08:08:50.0416254Z     "cls": "info-tip",
+2026-10-27T08:08:50.0416385Z     "aria": "More information",
+2026-10-27T08:08:50.0417017Z     "html": "<button type=\"button\" class=\"info-tip\" aria-label=\"More information\" aria-expanded=\"false\" aria-describedby=\"field-help-25\"></button>"
+2026-10-27T08:08:50.0417328Z   },
+2026-10-27T08:08:50.0417422Z   {
+2026-10-27T08:08:50.0417537Z     "text": "⋯",
+2026-10-27T08:08:50.0417666Z     "title": "More appearance actions",
+2026-10-27T08:08:50.0417807Z     "id": "",
+2026-10-27T08:08:50.0417916Z     "cls": "",
+2026-10-27T08:08:50.0418040Z     "aria": "More look actions",
+2026-10-27T08:08:50.0418328Z     "html": "<summary aria-label=\"More look actions\" title=\"More appearance actions\">⋯</summary>"
+2026-10-27T08:08:50.0418552Z   },
+2026-10-27T08:08:50.0418653Z   {
+2026-10-27T08:08:50.0418749Z     "text": "",
+2026-10-27T08:08:50.0418859Z     "title": "",
+2026-10-27T08:08:50.0418965Z     "id": "",
+2026-10-27T08:08:50.0419075Z     "cls": "info-tip",
+2026-10-27T08:08:50.0419207Z     "aria": "More information",
+2026-10-27T08:08:50.0419550Z     "html": "<button type=\"button\" class=\"info-tip\" aria-label=\"More information\" aria-expanded=\"false\" aria-describedby=\"field-help-26\"></button>"
+2026-10-27T08:08:50.0419862Z   },
+2026-10-27T08:08:50.0419964Z   {
+2026-10-27T08:08:50.0420061Z     "text": "",
+2026-10-27T08:08:50.0420167Z     "title": "",
+2026-10-27T08:08:50.0420273Z     "id": "",
+2026-10-27T08:08:50.0420383Z     "cls": "info-tip",
+2026-10-27T08:08:50.0420513Z     "aria": "More information",
+2026-10-27T08:08:50.0420859Z     "html": "<button type=\"button\" class=\"info-tip\" aria-label=\"More information\" aria-expanded=\"false\" aria-describedby=\"field-help-27\"></button>"
+2026-10-27T08:08:50.0421170Z   },
+2026-10-27T08:08:50.0421267Z   {
+2026-10-27T08:08:50.0421363Z     "text": "",
+2026-10-27T08:08:50.0421470Z     "title": "",
+2026-10-27T08:08:50.0421577Z     "id": "",
+2026-10-27T08:08:50.0421685Z     "cls": "info-tip",
+2026-10-27T08:08:50.0421815Z     "aria": "More information",
+2026-10-27T08:08:50.0422158Z     "html": "<button type=\"button\" class=\"info-tip\" aria-label=\"More information\" aria-expanded=\"false\" aria-describedby=\"field-help-28\"></button>"
+2026-10-27T08:08:50.0422469Z   },
+2026-10-27T08:08:50.0422563Z   {
+2026-10-27T08:08:50.0422663Z     "text": "",
+2026-10-27T08:08:50.0422770Z     "title": "",
+2026-10-27T08:08:50.0422876Z     "id": "",
+2026-10-27T08:08:50.0422984Z     "cls": "info-tip",
+2026-10-27T08:08:50.0423116Z     "aria": "More information",
+2026-10-27T08:08:50.0423459Z     "html": "<button type=\"button\" class=\"info-tip\" aria-label=\"More information\" aria-expanded=\"false\" aria-describedby=\"field-help-29\"></button>"
+2026-10-27T08:08:50.0423772Z   },
+2026-10-27T08:08:50.0423867Z   {
+2026-10-27T08:08:50.0424083Z     "text": "⋯",
+2026-10-27T08:08:50.0424214Z     "title": "More appearance actions",
+2026-10-27T08:08:50.0424355Z     "id": "",
+2026-10-27T08:08:50.0424459Z     "cls": "",
+2026-10-27T08:08:50.0424584Z     "aria": "More look actions",
+2026-10-27T08:08:50.0424874Z     "html": "<summary aria-label=\"More look actions\" title=\"More appearance actions\">⋯</summary>"
+2026-10-27T08:08:50.0425096Z   },
+2026-10-27T08:08:50.0425190Z   {
+2026-10-27T08:08:50.0425287Z     "text": "",
+2026-10-27T08:08:50.0425400Z     "title": "",
+2026-10-27T08:08:50.0425506Z     "id": "",
+2026-10-27T08:08:50.0425614Z     "cls": "info-tip",
+2026-10-27T08:08:50.0425746Z     "aria": "More information",
+2026-10-27T08:08:50.0426089Z     "html": "<button type=\"button\" class=\"info-tip\" aria-label=\"More information\" aria-expanded=\"false\" aria-describedby=\"field-help-30\"></button>"
+2026-10-27T08:08:50.0426397Z   },
+2026-10-27T08:08:50.0426654Z   {
+2026-10-27T08:08:50.0426750Z     "text": "",
+2026-10-27T08:08:50.0426864Z     "title": "",
+2026-10-27T08:08:50.0426970Z     "id": "",
+2026-10-27T08:08:50.0427079Z     "cls": "info-tip",
+2026-10-27T08:08:50.0427209Z     "aria": "More information",
+2026-10-27T08:08:50.0427556Z     "html": "<button type=\"button\" class=\"info-tip\" aria-label=\"More information\" aria-expanded=\"false\" aria-describedby=\"field-help-31\"></button>"
+2026-10-27T08:08:50.0427864Z   },
+2026-10-27T08:08:50.0427957Z   {
+2026-10-27T08:08:50.0428054Z     "text": "",
+2026-10-27T08:08:50.0428280Z     "title": "Choose assistant avatar",
+2026-10-27T08:08:50.0428430Z     "id": "f-emoji_bot",
+2026-10-27T08:08:50.0428563Z     "cls": "emoji-tile",
+2026-10-27T08:08:50.0428707Z     "aria": "Choose assistant avatar",
+2026-10-27T08:08:50.0429382Z     "html": "<button id=\"f-emoji_bot\" type=\"button\" class=\"emoji-tile\" aria-label=\"Choose assistant avatar\" title=\"Choose assistant avatar\" value=\"\"><img class=\"animated-emoji static-emoji\" alt=\"🤖\" src=\"/emoji/static-1f916.png\"></button>"
+2026-10-27T08:08:50.0429868Z   },
+2026-10-27T08:08:50.0429965Z   {
+2026-10-27T08:08:50.0430061Z     "text": "",
+2026-10-27T08:08:50.0430169Z     "title": "",
+2026-10-27T08:08:50.0430276Z     "id": "",
+2026-10-27T08:08:50.0430385Z     "cls": "info-tip",
+2026-10-27T08:08:50.0430519Z     "aria": "More information",
+2026-10-27T08:08:50.0430871Z     "html": "<button type=\"button\" class=\"info-tip\" aria-label=\"More information\" aria-expanded=\"false\" aria-describedby=\"field-help-32\"></button>"
+2026-10-27T08:08:50.0431183Z   },
+2026-10-27T08:08:50.0431282Z   {
+2026-10-27T08:08:50.0431379Z     "text": "",
+2026-10-27T08:08:50.0431485Z     "title": "",
+2026-10-27T08:08:50.0431593Z     "id": "",
+2026-10-27T08:08:50.0431704Z     "cls": "info-tip",
+2026-10-27T08:08:50.0431834Z     "aria": "More information",
+2026-10-27T08:08:50.0432176Z     "html": "<button type=\"button\" class=\"info-tip\" aria-label=\"More information\" aria-expanded=\"false\" aria-describedby=\"field-help-33\"></button>"
+2026-10-27T08:08:50.0432486Z   },
+2026-10-27T08:08:50.0432582Z   {
+2026-10-27T08:08:50.0432695Z     "text": "↑",
+2026-10-27T08:08:50.0432825Z     "title": "Choose send button",
+2026-10-27T08:08:50.0432969Z     "id": "f-emoji_send",
+2026-10-27T08:08:50.0433098Z     "cls": "emoji-tile",
+2026-10-27T08:08:50.0433235Z     "aria": "Choose send button",
+2026-10-27T08:08:50.0433662Z     "html": "<button id=\"f-emoji_send\" type=\"button\" class=\"emoji-tile\" aria-label=\"Choose send button\" title=\"Choose send button\" value=\"\">↑</button>"
+2026-10-27T08:08:50.0433992Z   },
+2026-10-27T08:08:50.0434086Z   {
+2026-10-27T08:08:50.0434182Z     "text": "",
+2026-10-27T08:08:50.0434289Z     "title": "",
+2026-10-27T08:08:50.0434395Z     "id": "",
+2026-10-27T08:08:50.0434503Z     "cls": "info-tip",
+2026-10-27T08:08:50.0434637Z     "aria": "More information",
+2026-10-27T08:08:50.0434982Z     "html": "<button type=\"button\" class=\"info-tip\" aria-label=\"More information\" aria-expanded=\"false\" aria-describedby=\"field-help-34\"></button>"
+2026-10-27T08:08:50.0435394Z   },
+2026-10-27T08:08:50.0435488Z   {
+2026-10-27T08:08:50.0435584Z     "text": "",
+2026-10-27T08:08:50.0435710Z     "title": "Choose welcome emoji",
+2026-10-27T08:08:50.0435861Z     "id": "f-emoji_hero",
+2026-10-27T08:08:50.0435990Z     "cls": "emoji-tile",
+2026-10-27T08:08:50.0436130Z     "aria": "Choose welcome emoji",
+2026-10-27T08:08:50.0436896Z     "html": "<button id=\"f-emoji_hero\" type=\"button\" class=\"emoji-tile\" aria-label=\"Choose welcome emoji\" title=\"Choose welcome emoji\" value=\"\"><img class=\"animated-emoji static-emoji\" alt=\"👋\" src=\"/emoji/static-1f44b.png\"></button>"
+2026-10-27T08:08:50.0437357Z   },
+2026-10-27T08:08:50.0437451Z   {
+2026-10-27T08:08:50.0437547Z     "text": "",
+2026-10-27T08:08:50.0437656Z     "title": "",
+2026-10-27T08:08:50.0437762Z     "id": "",
+2026-10-27T08:08:50.0437870Z     "cls": "info-tip",
+2026-10-27T08:08:50.0438002Z     "aria": "More information",
+2026-10-27T08:08:50.0438376Z     "html": "<button type=\"button\" class=\"info-tip\" aria-label=\"More information\" aria-expanded=\"false\" aria-describedby=\"field-help-35\"></button>"
+2026-10-27T08:08:50.0438733Z   },
+2026-10-27T08:08:50.0438827Z   {
+2026-10-27T08:08:50.0438923Z     "text": "",
+2026-10-27T08:08:50.0439049Z     "title": "Choose attach button",
+2026-10-27T08:08:50.0439199Z     "id": "f-emoji_attach",
+2026-10-27T08:08:50.0439331Z     "cls": "emoji-tile",
+2026-10-27T08:08:50.0439469Z     "aria": "Choose attach button",
+2026-10-27T08:08:50.0440183Z     "html": "<button id=\"f-emoji_attach\" type=\"button\" class=\"emoji-tile\" aria-label=\"Choose attach button\" title=\"Choose attach button\" value=\"\"><img class=\"animated-emoji static-emoji\" alt=\"📎\" src=\"/emoji/static-1f4ce.png\"></button>"
+2026-10-27T08:08:50.0440644Z   },
+2026-10-27T08:08:50.0440740Z   {
+2026-10-27T08:08:50.0440837Z     "text": "",
+2026-10-27T08:08:50.0440943Z     "title": "",
+2026-10-27T08:08:50.0441050Z     "id": "",
+2026-10-27T08:08:50.0441162Z     "cls": "info-tip",
+2026-10-27T08:08:50.0441293Z     "aria": "More information",
+2026-10-27T08:08:50.0441647Z     "html": "<button type=\"button\" class=\"info-tip\" aria-label=\"More information\" aria-expanded=\"false\" aria-describedby=\"field-help-36\"></button>"
+2026-10-27T08:08:50.0441959Z   },
+2026-10-27T08:08:50.0442052Z   {
+2026-10-27T08:08:50.0442163Z     "text": "⋯",
+2026-10-27T08:08:50.0442296Z     "title": "More appearance actions",
+2026-10-27T08:08:50.0442441Z     "id": "",
+2026-10-27T08:08:50.0442547Z     "cls": "",
+2026-10-27T08:08:50.0442677Z     "aria": "More look actions",
+2026-10-27T08:08:50.0442973Z     "html": "<summary aria-label=\"More look actions\" title=\"More appearance actions\">⋯</summary>"
+2026-10-27T08:08:50.0443199Z   },
+2026-10-27T08:08:50.0443292Z   {
+2026-10-27T08:08:50.0443391Z     "text": "",
+2026-10-27T08:08:50.0443500Z     "title": "",
+2026-10-27T08:08:50.0443607Z     "id": "",
+2026-10-27T08:08:50.0443716Z     "cls": "info-tip",
+2026-10-27T08:08:50.0443848Z     "aria": "More information",
+2026-10-27T08:08:50.0444193Z     "html": "<button type=\"button\" class=\"info-tip\" aria-label=\"More information\" aria-expanded=\"false\" aria-describedby=\"field-help-37\"></button>"
+2026-10-27T08:08:50.0444512Z   },
+2026-10-27T08:08:50.0444606Z   {
+2026-10-27T08:08:50.0444702Z     "text": "",
+2026-10-27T08:08:50.0444809Z     "title": "",
+2026-10-27T08:08:50.0444915Z     "id": "",
+2026-10-27T08:08:50.0445024Z     "cls": "info-tip",
+2026-10-27T08:08:50.0445158Z     "aria": "More information",
+2026-10-27T08:08:50.0445505Z     "html": "<button type=\"button\" class=\"info-tip\" aria-label=\"More information\" aria-expanded=\"false\" aria-describedby=\"field-help-38\"></button>"
+2026-10-27T08:08:50.0445815Z   },
+2026-10-27T08:08:50.0445910Z   {
+2026-10-27T08:08:50.0446005Z     "text": "",
+2026-10-27T08:08:50.0446112Z     "title": "",
+2026-10-27T08:08:50.0446221Z     "id": "",
+2026-10-27T08:08:50.0446330Z     "cls": "info-tip",
+2026-10-27T08:08:50.0446590Z     "aria": "More information",
+2026-10-27T08:08:50.0446976Z     "html": "<button type=\"button\" class=\"info-tip\" aria-label=\"More information\" aria-expanded=\"false\" aria-describedby=\"field-help-39\"></button>"
+2026-10-27T08:08:50.0447432Z   },
+2026-10-27T08:08:50.0447528Z   {
+2026-10-27T08:08:50.0447624Z     "text": "",
+2026-10-27T08:08:50.0447730Z     "title": "",
+2026-10-27T08:08:50.0447837Z     "id": "",
+2026-10-27T08:08:50.0447948Z     "cls": "info-tip",
+2026-10-27T08:08:50.0448079Z     "aria": "More information",
+2026-10-27T08:08:50.0448429Z     "html": "<button type=\"button\" class=\"info-tip\" aria-label=\"More information\" aria-expanded=\"false\" aria-describedby=\"field-help-40\"></button>"
+2026-10-27T08:08:50.0448742Z   },
+2026-10-27T08:08:50.0448835Z   {
+2026-10-27T08:08:50.0448951Z     "text": "⋯",
+2026-10-27T08:08:50.0449083Z     "title": "More appearance actions",
+2026-10-27T08:08:50.0449225Z     "id": "",
+2026-10-27T08:08:50.0449331Z     "cls": "",
+2026-10-27T08:08:50.0449455Z     "aria": "More look actions",
+2026-10-27T08:08:50.0449747Z     "html": "<summary aria-label=\"More look actions\" title=\"More appearance actions\">⋯</summary>"
+2026-10-27T08:08:50.0449976Z   },
+2026-10-27T08:08:50.0450070Z   {
+2026-10-27T08:08:50.0450166Z     "text": "",
+2026-10-27T08:08:50.0450275Z     "title": "",
+2026-10-27T08:08:50.0450381Z     "id": "",
+2026-10-27T08:08:50.0450490Z     "cls": "info-tip",
+2026-10-27T08:08:50.0450622Z     "aria": "More information",
+2026-10-27T08:08:50.0451059Z     "html": "<button type=\"button\" class=\"info-tip\" aria-label=\"More information\" aria-expanded=\"false\" aria-describedby=\"field-help-41\"></button>"
+2026-10-27T08:08:50.0451377Z   },
+2026-10-27T08:08:50.0451471Z   {
+2026-10-27T08:08:50.0451568Z     "text": "",
+2026-10-27T08:08:50.0451674Z     "title": "",
+2026-10-27T08:08:50.0451783Z     "id": "",
+2026-10-27T08:08:50.0451891Z     "cls": "info-tip",
+2026-10-27T08:08:50.0452021Z     "aria": "More information",
+2026-10-27T08:08:50.0452367Z     "html": "<button type=\"button\" class=\"info-tip\" aria-label=\"More information\" aria-expanded=\"false\" aria-describedby=\"field-help-42\"></button>"
+2026-10-27T08:08:50.0452683Z   },
+2026-10-27T08:08:50.0452777Z   {
+2026-10-27T08:08:50.0452872Z     "text": "",
+2026-10-27T08:08:50.0452979Z     "title": "",
+2026-10-27T08:08:50.0453088Z     "id": "",
+2026-10-27T08:08:50.0453196Z     "cls": "info-tip",
+2026-10-27T08:08:50.0453328Z     "aria": "More information",
+2026-10-27T08:08:50.0453675Z     "html": "<button type=\"button\" class=\"info-tip\" aria-label=\"More information\" aria-expanded=\"false\" aria-describedby=\"field-help-43\"></button>"
+2026-10-27T08:08:50.0453987Z   },
+2026-10-27T08:08:50.0454081Z   {
+2026-10-27T08:08:50.0454178Z     "text": "",
+2026-10-27T08:08:50.0454285Z     "title": "",
+2026-10-27T08:08:50.0454394Z     "id": "",
+2026-10-27T08:08:50.0454503Z     "cls": "info-tip",
+2026-10-27T08:08:50.0454633Z     "aria": "More information",
+2026-10-27T08:08:50.0454979Z     "html": "<button type=\"button\" class=\"info-tip\" aria-label=\"More information\" aria-expanded=\"false\" aria-describedby=\"field-help-44\"></button>"
+2026-10-27T08:08:50.0455292Z   },
+2026-10-27T08:08:50.0455386Z   {
+2026-10-27T08:08:50.0455481Z     "text": "",
+2026-10-27T08:08:50.0455587Z     "title": "",
+2026-10-27T08:08:50.0455694Z     "id": "",
+2026-10-27T08:08:50.0455807Z     "cls": "info-tip",
+2026-10-27T08:08:50.0455937Z     "aria": "More information",
+2026-10-27T08:08:50.0456284Z     "html": "<button type=\"button\" class=\"info-tip\" aria-label=\"More information\" aria-expanded=\"false\" aria-describedby=\"field-help-45\"></button>"
+2026-10-27T08:08:50.0456728Z   },
+2026-10-27T08:08:50.0456823Z   {
+2026-10-27T08:08:50.0456922Z     "text": "",
+2026-10-27T08:08:50.0457035Z     "title": "",
+2026-10-27T08:08:50.0457146Z     "id": "",
+2026-10-27T08:08:50.0457255Z     "cls": "info-tip",
+2026-10-27T08:08:50.0457386Z     "aria": "More information",
+2026-10-27T08:08:50.0457730Z     "html": "<button type=\"button\" class=\"info-tip\" aria-label=\"More information\" aria-expanded=\"false\" aria-describedby=\"field-help-46\"></button>"
+2026-10-27T08:08:50.0458157Z   },
+2026-10-27T08:08:50.0458251Z   {
+2026-10-27T08:08:50.0467957Z     "text": "",
+2026-10-27T08:08:50.0468136Z     "title": "",
+2026-10-27T08:08:50.0468287Z     "id": "",
+2026-10-27T08:08:50.0468405Z     "cls": "info-tip",
+2026-10-27T08:08:50.0468547Z     "aria": "More information",
+2026-10-27T08:08:50.0468918Z     "html": "<button type=\"button\" class=\"info-tip\" aria-label=\"More information\" aria-expanded=\"false\" aria-describedby=\"field-help-47\"></button>"
+2026-10-27T08:08:50.0469252Z   },
+2026-10-27T08:08:50.0469352Z   {
+2026-10-27T08:08:50.0469497Z     "text": "⋯",
+2026-10-27T08:08:50.0469637Z     "title": "More appearance actions",
+2026-10-27T08:08:50.0469788Z     "id": "",
+2026-10-27T08:08:50.0469901Z     "cls": "",
+2026-10-27T08:08:50.0470031Z     "aria": "More look actions",
+2026-10-27T08:08:50.0470338Z     "html": "<summary aria-label=\"More look actions\" title=\"More appearance actions\">⋯</summary>"
+2026-10-27T08:08:50.0470569Z   },
+2026-10-27T08:08:50.0470667Z   {
+2026-10-27T08:08:50.0470774Z     "text": "",
+2026-10-27T08:08:50.0470890Z     "title": "",
+2026-10-27T08:08:50.0470999Z     "id": "",
+2026-10-27T08:08:50.0471111Z     "cls": "info-tip",
+2026-10-27T08:08:50.0471249Z     "aria": "More information",
+2026-10-27T08:08:50.0471599Z     "html": "<button type=\"button\" class=\"info-tip\" aria-label=\"More information\" aria-expanded=\"false\" aria-describedby=\"field-help-11\"></button>"
+2026-10-27T08:08:50.0471914Z   },
+2026-10-27T08:08:50.0472014Z   {
+2026-10-27T08:08:50.0472247Z     "text": "",
+2026-10-27T08:08:50.0472359Z     "title": "",
+2026-10-27T08:08:50.0472469Z     "id": "",
+2026-10-27T08:08:50.0472582Z     "cls": "info-tip",
+2026-10-27T08:08:50.0472717Z     "aria": "More information",
+2026-10-27T08:08:50.0473070Z     "html": "<button type=\"button\" class=\"info-tip\" aria-label=\"More information\" aria-expanded=\"false\" aria-describedby=\"field-help-12\"></button>"
+2026-10-27T08:08:50.0473385Z   },
+2026-10-27T08:08:50.0473482Z   {
+2026-10-27T08:08:50.0473586Z     "text": "",
+2026-10-27T08:08:50.0473695Z     "title": "",
+2026-10-27T08:08:50.0473804Z     "id": "",
+2026-10-27T08:08:50.0473922Z     "cls": "info-tip",
+2026-10-27T08:08:50.0474056Z     "aria": "More information",
+2026-10-27T08:08:50.0474404Z     "html": "<button type=\"button\" class=\"info-tip\" aria-label=\"More information\" aria-expanded=\"false\" aria-describedby=\"field-help-13\"></button>"
+2026-10-27T08:08:50.0474719Z   },
+2026-10-27T08:08:50.0474816Z   {
+2026-10-27T08:08:50.0474946Z     "text": "×",
+2026-10-27T08:08:50.0475061Z     "title": "Close",
+2026-10-27T08:08:50.0475183Z     "id": "sideClose",
+2026-10-27T08:08:50.0475313Z     "cls": "icon side-close",
+2026-10-27T08:08:50.0475453Z     "aria": "Close chats"
+2026-10-27T08:08:50.0475576Z   },
+2026-10-27T08:08:50.0475678Z   {
+2026-10-27T08:08:50.0475777Z     "text": "",
+2026-10-27T08:08:50.0475926Z     "title": "Switch between light and dark theme",
+2026-10-27T08:08:50.0476098Z     "id": "themeBtn",
+2026-10-27T08:08:50.0476223Z     "cls": "theme-btn",
+2026-10-27T08:08:50.0476358Z     "aria": "Toggle theme",
+2026-10-27T08:08:50.0476828Z     "html": "<button class=\"theme-btn\" id=\"themeBtn\" aria-label=\"Toggle theme\" title=\"Switch between light and dark theme\"><i></i></button>"
+2026-10-27T08:08:50.0477128Z   },
+2026-10-27T08:08:50.0477227Z   {
+2026-10-27T08:08:50.0477327Z     "text": "",
+2026-10-27T08:08:50.0477445Z     "title": "Close chats",
+2026-10-27T08:08:50.0477573Z     "id": "menu",
+2026-10-27T08:08:50.0477696Z     "cls": "icon menu",
+2026-10-27T08:08:50.0477830Z     "aria": "Close chats",
+2026-10-27T08:08:50.0478564Z     "html": "<button class=\"icon menu\" id=\"menu\" aria-label=\"Close chats\" title=\"Close chats\" aria-controls=\"side\" data-docked=\"true\" aria-expanded=\"true\"><svg viewBox=\"0 0 24 24\" width=\"18\" height=\"18\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M15 5l-7 7 7 7\"></path></svg></button>"
+2026-10-27T08:08:50.0479250Z   },
+2026-10-27T08:08:50.0479458Z   {
+2026-10-27T08:08:50.0479562Z     "text": "",
+2026-10-27T08:08:50.0479698Z     "title": "Previous question (k)",
+2026-10-27T08:08:50.0479848Z     "id": "prevQ",
+2026-10-27T08:08:50.0479964Z     "cls": "icon",
+2026-10-27T08:08:50.0480097Z     "aria": "Previous question",
+2026-10-27T08:08:50.0480794Z     "html": "<button class=\"icon\" id=\"prevQ\" title=\"Previous question (k)\" aria-label=\"Previous question\" aria-keyshortcuts=\"k\"><svg viewBox=\"0 0 24 24\" width=\"18\" height=\"18\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M12 20V8M6 12l6-6 6 6\"></path></svg></button>"
+2026-10-27T08:08:50.0481392Z   },
+2026-10-27T08:08:50.0481491Z   {
+2026-10-27T08:08:50.0481592Z     "text": "",
+2026-10-27T08:08:50.0481726Z     "title": "Next question (j)",
+2026-10-27T08:08:50.0481866Z     "id": "nextQ",
+2026-10-27T08:08:50.0481978Z     "cls": "icon",
+2026-10-27T08:08:50.0482099Z     "aria": "Next question",
+2026-10-27T08:08:50.0482763Z     "html": "<button class=\"icon\" id=\"nextQ\" title=\"Next question (j)\" aria-label=\"Next question\" aria-keyshortcuts=\"j\"><svg viewBox=\"0 0 24 24\" width=\"18\" height=\"18\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M12 4v12M6 12l6 6 6-6\"></path></svg></button>"
+2026-10-27T08:08:50.0483344Z   },
+2026-10-27T08:08:50.0483442Z   {
+2026-10-27T08:08:50.0483542Z     "text": "",
+2026-10-27T08:08:50.0483779Z     "title": "Temporary chat: nothing is saved",
+2026-10-27T08:08:50.0483947Z     "id": "tempBtn",
+2026-10-27T08:08:50.0484066Z     "cls": "icon",
+2026-10-27T08:08:50.0484192Z     "aria": "Temporary chat",
+2026-10-27T08:08:50.0484929Z     "html": "<button class=\"icon\" id=\"tempBtn\" hidden=\"\" title=\"Temporary chat: nothing is saved\" aria-label=\"Temporary chat\" aria-pressed=\"false\"><svg viewBox=\"0 0 24 24\" width=\"18\" height=\"18\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M12 3a9 9 0 100 18 9 9 0 000-18zM12 7v5l3 2\"></path></svg></b"
+2026-10-27T08:08:50.0485579Z   },
+2026-10-27T08:08:50.0485679Z   {
+2026-10-27T08:08:50.0485784Z     "text": "",
+2026-10-27T08:08:50.0485903Z     "title": "My profile",
+2026-10-27T08:08:50.0486037Z     "id": "profileBtn",
+2026-10-27T08:08:50.0486161Z     "cls": "icon",
+2026-10-27T08:08:50.0486280Z     "aria": "My profile",
+2026-10-27T08:08:50.0487134Z     "html": "<button class=\"icon\" id=\"profileBtn\" title=\"My profile\" aria-label=\"My profile\"><svg viewBox=\"0 0 24 24\" width=\"18\" height=\"18\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M12 12a4 4 0 100-8 4 4 0 000 8zM4 21a8 8 0 0116 0\"></path></svg></button>"
+2026-10-27T08:08:50.0487698Z   },
+2026-10-27T08:08:50.0487796Z   {
+2026-10-27T08:08:50.0487896Z     "text": "",
+2026-10-27T08:08:50.0488030Z     "title": "Export chat as Markdown",
+2026-10-27T08:08:50.0488189Z     "id": "exportChat",
+2026-10-27T08:08:50.0488312Z     "cls": "icon",
+2026-10-27T08:08:50.0488432Z     "aria": "Export chat",
+2026-10-27T08:08:50.0489073Z     "html": "<button class=\"icon\" id=\"exportChat\" title=\"Export chat as Markdown\" aria-label=\"Export chat\"><svg viewBox=\"0 0 24 24\" width=\"18\" height=\"18\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M12 3v11M7 10l5 5 5-5M5 20h14\"></path></svg></button>"
+2026-10-27T08:08:50.0489640Z   },
+2026-10-27T08:08:50.0489742Z   {
+2026-10-27T08:08:50.0489844Z     "text": "",
+2026-10-27T08:08:50.0489975Z     "title": "Add files or a web link",
+2026-10-27T08:08:50.0490122Z     "id": "upload",
+2026-10-27T08:08:50.0490237Z     "cls": "icon",
+2026-10-27T08:08:50.0490353Z     "aria": "Add file",
+2026-10-27T08:08:50.0491060Z     "html": "<button class=\"icon\" id=\"upload\" title=\"Add files or a web link\" aria-label=\"Add file\"><svg viewBox=\"0 0 24 24\" width=\"18\" height=\"18\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M21 11.5l-8.6 8.6a5 5 0 01-7-7l9-9a3.3 3.3 0 014.7 4.7l-9 9a1.7 1.7 0 01-2.4-2.4l8.3-8.3\"></path></svg></but"
+2026-10-27T08:08:50.0491780Z   },
+2026-10-27T08:08:50.0491877Z   {
+2026-10-27T08:08:50.0491976Z     "text": "",
+2026-10-27T08:08:50.0492110Z     "title": "Dictate a question",
+2026-10-27T08:08:50.0492251Z     "id": "mic",
+2026-10-27T08:08:50.0492365Z     "cls": "icon",
+2026-10-27T08:08:50.0492483Z     "aria": "Dictate",
+2026-10-27T08:08:50.0493189Z     "html": "<button class=\"icon\" id=\"mic\" title=\"Dictate a question\" aria-label=\"Dictate\" aria-pressed=\"false\"><svg viewBox=\"0 0 24 24\" width=\"18\" height=\"18\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M12 15a3 3 0 003-3V6a3 3 0 00-6 0v6a3 3 0 003 3zM6 11a6 6 0 0012 0M12 17v4\"></path></svg></butto"
+2026-10-27T08:08:50.0493818Z   },
+2026-10-27T08:08:50.0493921Z   {
+2026-10-27T08:08:50.0494021Z     "text": "",
+2026-10-27T08:08:50.0494130Z     "title": "",
+2026-10-27T08:08:50.0494240Z     "id": "",
+2026-10-27T08:08:50.0494357Z     "cls": "info-tip",
+2026-10-27T08:08:50.0494494Z     "aria": "More information",
+2026-10-27T08:08:50.0494847Z     "html": "<button type=\"button\" class=\"info-tip\" aria-label=\"More information\" aria-expanded=\"false\" aria-describedby=\"field-help-11\"></button>"
+2026-10-27T08:08:50.0495164Z   },
+2026-10-27T08:08:50.0495257Z   {
+2026-10-27T08:08:50.0495438Z     "text": "",
+2026-10-27T08:08:50.0495548Z     "title": "",
+2026-10-27T08:08:50.0495656Z     "id": "",
+2026-10-27T08:08:50.0495765Z     "cls": "info-tip",
+2026-10-27T08:08:50.0495896Z     "aria": "More information",
+2026-10-27T08:08:50.0496243Z     "html": "<button type=\"button\" class=\"info-tip\" aria-label=\"More information\" aria-expanded=\"false\" aria-describedby=\"field-help-5\"></button>"
+2026-10-27T08:08:50.0496712Z   },
+2026-10-27T08:08:50.0496809Z   {
+2026-10-27T08:08:50.0496906Z     "text": "",
+2026-10-27T08:08:50.0497013Z     "title": "",
+2026-10-27T08:08:50.0497117Z     "id": "",
+2026-10-27T08:08:50.0497224Z     "cls": "info-tip",
+2026-10-27T08:08:50.0497352Z     "aria": "More information",
+2026-10-27T08:08:50.0497698Z     "html": "<button type=\"button\" class=\"info-tip\" aria-label=\"More information\" aria-expanded=\"false\" aria-describedby=\"field-help-7\"></button>"
+2026-10-27T08:08:50.0498004Z   },
+2026-10-27T08:08:50.0498101Z   {
+2026-10-27T08:08:50.0498203Z     "text": "",
+2026-10-27T08:08:50.0498309Z     "title": "",
+2026-10-27T08:08:50.0498416Z     "id": "",
+2026-10-27T08:08:50.0498525Z     "cls": "info-tip",
+2026-10-27T08:08:50.0498658Z     "aria": "More information",
+2026-10-27T08:08:50.0498998Z     "html": "<button type=\"button\" class=\"info-tip\" aria-label=\"More information\" aria-expanded=\"false\" aria-describedby=\"field-help-8\"></button>"
+2026-10-27T08:08:50.0499310Z   },
+2026-10-27T08:08:50.0499403Z   {
+2026-10-27T08:08:50.0499500Z     "text": "",
+2026-10-27T08:08:50.0499607Z     "title": "",
+2026-10-27T08:08:50.0499715Z     "id": "",
+2026-10-27T08:08:50.0499822Z     "cls": "info-tip",
+2026-10-27T08:08:50.0499952Z     "aria": "More information",
+2026-10-27T08:08:50.0500292Z     "html": "<button type=\"button\" class=\"info-tip\" aria-label=\"More information\" aria-expanded=\"false\" aria-describedby=\"field-help-9\"></button>"
+2026-10-27T08:08:50.0500601Z   },
+2026-10-27T08:08:50.0500695Z   {
+2026-10-27T08:08:50.0500790Z     "text": "",
+2026-10-27T08:08:50.0500903Z     "title": "",
+2026-10-27T08:08:50.0501009Z     "id": "",
+2026-10-27T08:08:50.0501118Z     "cls": "info-tip",
+2026-10-27T08:08:50.0501249Z     "aria": "More information",
+2026-10-27T08:08:50.0501592Z     "html": "<button type=\"button\" class=\"info-tip\" aria-label=\"More information\" aria-expanded=\"false\" aria-describedby=\"field-help-10\"></button>"
+2026-10-27T08:08:50.0501901Z   },
+2026-10-27T08:08:50.0501993Z   {
+2026-10-27T08:08:50.0502089Z     "text": "",
+2026-10-27T08:08:50.0502300Z     "title": "",
+2026-10-27T08:08:50.0502407Z     "id": "",
+2026-10-27T08:08:50.0502521Z     "cls": "info-tip",
+2026-10-27T08:08:50.0502651Z     "aria": "More information",
+2026-10-27T08:08:50.0502992Z     "html": "<button type=\"button\" class=\"info-tip\" aria-label=\"More information\" aria-expanded=\"false\" aria-describedby=\"field-help-1\"></button>"
+2026-10-27T08:08:50.0503300Z   },
+2026-10-27T08:08:50.0503395Z   {
+2026-10-27T08:08:50.0503490Z     "text": "",
+2026-10-27T08:08:50.0503600Z     "title": "",
+2026-10-27T08:08:50.0503706Z     "id": "",
+2026-10-27T08:08:50.0503815Z     "cls": "info-tip",
+2026-10-27T08:08:50.0503945Z     "aria": "More information",
+2026-10-27T08:08:50.0504284Z     "html": "<button type=\"button\" class=\"info-tip\" aria-label=\"More information\" aria-expanded=\"false\" aria-describedby=\"field-help-2\"></button>"
+2026-10-27T08:08:50.0504594Z   },
+2026-10-27T08:08:50.0504687Z   {
+2026-10-27T08:08:50.0504803Z     "text": "⋯",
+2026-10-27T08:08:50.0504941Z     "title": "More appearance actions",
+2026-10-27T08:08:50.0505083Z     "id": "",
+2026-10-27T08:08:50.0505186Z     "cls": "",
+2026-10-27T08:08:50.0505312Z     "aria": "More look actions",
+2026-10-27T08:08:50.0505608Z     "html": "<summary aria-label=\"More look actions\" title=\"More appearance actions\">⋯</summary>"
+2026-10-27T08:08:50.0505835Z   },
+2026-10-27T08:08:50.0505929Z   {
+2026-10-27T08:08:50.0506024Z     "text": "",
+2026-10-27T08:08:50.0506130Z     "title": "",
+2026-10-27T08:08:50.0506330Z     "id": "",
+2026-10-27T08:08:50.0506441Z     "cls": "info-tip",
+2026-10-27T08:08:50.0506704Z     "aria": "More information",
+2026-10-27T08:08:50.0507048Z     "html": "<button type=\"button\" class=\"info-tip\" aria-label=\"More information\" aria-expanded=\"false\" aria-describedby=\"field-help-15\"></button>"
+2026-10-27T08:08:50.0507357Z   },
+2026-10-27T08:08:50.0507453Z   {
+2026-10-27T08:08:50.0507550Z     "text": "",
+2026-10-27T08:08:50.0507656Z     "title": "",
+2026-10-27T08:08:50.0507761Z     "id": "",
+2026-10-27T08:08:50.0507876Z     "cls": "info-tip",
+2026-10-27T08:08:50.0508008Z     "aria": "More information",
+2026-10-27T08:08:50.0508351Z     "html": "<button type=\"button\" class=\"info-tip\" aria-label=\"More information\" aria-expanded=\"false\" aria-describedby=\"field-help-16\"></button>"
+2026-10-27T08:08:50.0508659Z   },
+2026-10-27T08:08:50.0508752Z   {
+2026-10-27T08:08:50.0508848Z     "text": "",
+2026-10-27T08:08:50.0508953Z     "title": "",
+2026-10-27T08:08:50.0509060Z     "id": "",
+2026-10-27T08:08:50.0509171Z     "cls": "info-tip",
+2026-10-27T08:08:50.0509305Z     "aria": "More information",
+2026-10-27T08:08:50.0509646Z     "html": "<button type=\"button\" class=\"info-tip\" aria-label=\"More information\" aria-expanded=\"false\" aria-describedby=\"field-help-17\"></button>"
+2026-10-27T08:08:50.0509955Z   },
+2026-10-27T08:08:50.0510048Z   {
+2026-10-27T08:08:50.0510144Z     "text": "",
+2026-10-27T08:08:50.0510255Z     "title": "",
+2026-10-27T08:08:50.0510360Z     "id": "",
+2026-10-27T08:08:50.0510470Z     "cls": "info-tip",
+2026-10-27T08:08:50.0510601Z     "aria": "More information",
+2026-10-27T08:08:50.0510942Z     "html": "<button type=\"button\" class=\"info-tip\" aria-label=\"More information\" aria-expanded=\"false\" aria-describedby=\"field-help-18\"></button>"
+2026-10-27T08:08:50.0511253Z   },
+2026-10-27T08:08:50.0511346Z   {
+2026-10-27T08:08:50.0511442Z     "text": "",
+2026-10-27T08:08:50.0511548Z     "title": "",
+2026-10-27T08:08:50.0511654Z     "id": "",
+2026-10-27T08:08:50.0511768Z     "cls": "info-tip",
+2026-10-27T08:08:50.0511900Z     "aria": "More information",
+2026-10-27T08:08:50.0512242Z     "html": "<button type=\"button\" class=\"info-tip\" aria-label=\"More information\" aria-expanded=\"false\" aria-describedby=\"field-help-19\"></button>"
+2026-10-27T08:08:50.0512551Z   },
+2026-10-27T08:08:50.0512645Z   {
+2026-10-27T08:08:50.0512759Z     "text": "⋯",
+2026-10-27T08:08:50.0512890Z     "title": "More appearance actions",
+2026-10-27T08:08:50.0513033Z     "id": "",
+2026-10-27T08:08:50.0513240Z     "cls": "",
+2026-10-27T08:08:50.0513364Z     "aria": "More look actions",
+2026-10-27T08:08:50.0513658Z     "html": "<summary aria-label=\"More look actions\" title=\"More appearance actions\">⋯</summary>"
+2026-10-27T08:08:50.0513884Z   },
+2026-10-27T08:08:50.0513976Z   {
+2026-10-27T08:08:50.0514073Z     "text": "",
+2026-10-27T08:08:50.0514180Z     "title": "",
+2026-10-27T08:08:50.0514285Z     "id": "",
+2026-10-27T08:08:50.0514395Z     "cls": "info-tip",
+2026-10-27T08:08:50.0514531Z     "aria": "More information",
+2026-10-27T08:08:50.0514873Z     "html": "<button type=\"button\" class=\"info-tip\" aria-label=\"More information\" aria-expanded=\"false\" aria-describedby=\"field-help-20\"></button>"
+2026-10-27T08:08:50.0515184Z   },
+2026-10-27T08:08:50.0515278Z   {
+2026-10-27T08:08:50.0515374Z     "text": "",
+2026-10-27T08:08:50.0515480Z     "title": "",
+2026-10-27T08:08:50.0515587Z     "id": "",
+2026-10-27T08:08:50.0515695Z     "cls": "info-tip",
+2026-10-27T08:08:50.0515827Z     "aria": "More information",
+2026-10-27T08:08:50.0516174Z     "html": "<button type=\"button\" class=\"info-tip\" aria-label=\"More information\" aria-expanded=\"false\" aria-describedby=\"field-help-21\"></button>"
+2026-10-27T08:08:50.0516620Z   },
+2026-10-27T08:08:50.0516716Z   {
+2026-10-27T08:08:50.0516829Z     "text": "⋯",
+2026-10-27T08:08:50.0516961Z     "title": "More appearance actions",
+2026-10-27T08:08:50.0517102Z     "id": "",
+2026-10-27T08:08:50.0517207Z     "cls": "",
+2026-10-27T08:08:50.0517427Z     "aria": "More look actions",
+2026-10-27T08:08:50.0517719Z     "html": "<summary aria-label=\"More look actions\" title=\"More appearance actions\">⋯</summary>"
+2026-10-27T08:08:50.0517942Z   },
+2026-10-27T08:08:50.0518038Z   {
+2026-10-27T08:08:50.0518133Z     "text": "",
+2026-10-27T08:08:50.0518238Z     "title": "",
+2026-10-27T08:08:50.0518346Z     "id": "",
+2026-10-27T08:08:50.0518454Z     "cls": "info-tip",
+2026-10-27T08:08:50.0518587Z     "aria": "More information",
+2026-10-27T08:08:50.0518932Z     "html": "<button type=\"button\" class=\"info-tip\" aria-label=\"More information\" aria-expanded=\"false\" aria-describedby=\"field-help-22\"></button>"
+2026-10-27T08:08:50.0519244Z   },
+2026-10-27T08:08:50.0519340Z   {
+2026-10-27T08:08:50.0519436Z     "text": "",
+2026-10-27T08:08:50.0519541Z     "title": "",
+2026-10-27T08:08:50.0519647Z     "id": "",
+2026-10-27T08:08:50.0519759Z     "cls": "info-tip",
+2026-10-27T08:08:50.0519890Z     "aria": "More information",
+2026-10-27T08:08:50.0520237Z     "html": "<button type=\"button\" class=\"info-tip\" aria-label=\"More information\" aria-expanded=\"false\" aria-describedby=\"field-help-23\"></button>"
+2026-10-27T08:08:50.0520543Z   },
+2026-10-27T08:08:50.0520637Z   {
+2026-10-27T08:08:50.0520747Z     "text": "⋯",
+2026-10-27T08:08:50.0520879Z     "title": "More appearance actions",
+2026-10-27T08:08:50.0521019Z     "id": "",
+2026-10-27T08:08:50.0521124Z     "cls": "",
+2026-10-27T08:08:50.0521246Z     "aria": "More look actions",
+2026-10-27T08:08:50.0521535Z     "html": "<summary aria-label=\"More look actions\" title=\"More appearance actions\">⋯</summary>"
+2026-10-27T08:08:50.0521765Z   },
+2026-10-27T08:08:50.0521859Z   {
+2026-10-27T08:08:50.0521954Z     "text": "",
+2026-10-27T08:08:50.0522061Z     "title": "",
+2026-10-27T08:08:50.0522165Z     "id": "",
+2026-10-27T08:08:50.0522273Z     "cls": "info-tip",
+2026-10-27T08:08:50.0522404Z     "aria": "More information",
+2026-10-27T08:08:50.0522756Z     "html": "<button type=\"button\" class=\"info-tip\" aria-label=\"More information\" aria-expanded=\"false\" aria-describedby=\"field-help-25\"></button>"
+2026-10-27T08:08:50.0523066Z   },
+2026-10-27T08:08:50.0523161Z   {
+2026-10-27T08:08:50.0523256Z     "text": "",
+2026-10-27T08:08:50.0523361Z     "title": "",
+2026-10-27T08:08:50.0523468Z     "id": "",
+2026-10-27T08:08:50.0523578Z     "cls": "info-tip",
+2026-10-27T08:08:50.0523709Z     "aria": "More information",
+2026-10-27T08:08:50.0524052Z     "html": "<button type=\"button\" class=\"info-tip\" aria-label=\"More information\" aria-expanded=\"false\" aria-describedby=\"field-help-26\"></button>"
+2026-10-27T08:08:50.0524502Z   },
+2026-10-27T08:08:50.0524597Z   {
+2026-10-27T08:08:50.0524713Z     "text": "⋯",
+2026-10-27T08:08:50.0524843Z     "title": "More appearance actions",
+2026-10-27T08:08:50.0524984Z     "id": "",
+2026-10-27T08:08:50.0525089Z     "cls": "",
+2026-10-27T08:08:50.0525212Z     "aria": "More look actions",
+2026-10-27T08:08:50.0525504Z     "html": "<summary aria-label=\"More look actions\" title=\"More appearance actions\">⋯</summary>"
+2026-10-27T08:08:50.0525733Z   },
+2026-10-27T08:08:50.0525826Z   {
+2026-10-27T08:08:50.0525923Z     "text": "",
+2026-10-27T08:08:50.0526030Z     "title": "",
+2026-10-27T08:08:50.0526137Z     "id": "",
+2026-10-27T08:08:50.0526247Z     "cls": "info-tip",
+2026-10-27T08:08:50.0526380Z     "aria": "More information",
+2026-10-27T08:08:50.0526900Z     "html": "<button type=\"button\" class=\"info-tip\" aria-label=\"More information\" aria-expanded=\"false\" aria-describedby=\"field-help-27\"></button>"
+2026-10-27T08:08:50.0527217Z   },
+2026-10-27T08:08:50.0527311Z   {
+2026-10-27T08:08:50.0527406Z     "text": "",
+2026-10-27T08:08:50.0527514Z     "title": "",
+2026-10-27T08:08:50.0527619Z     "id": "",
+2026-10-27T08:08:50.0527729Z     "cls": "info-tip",
+2026-10-27T08:08:50.0527859Z     "aria": "More information",
+2026-10-27T08:08:50.0528198Z     "html": "<button type=\"button\" class=\"info-tip\" aria-label=\"More information\" aria-expanded=\"false\" aria-describedby=\"field-help-28\"></button>"
+2026-10-27T08:08:50.0528603Z   },
+2026-10-27T08:08:50.0528700Z   {
+2026-10-27T08:08:50.0528796Z     "text": "",
+2026-10-27T08:08:50.0528903Z     "title": "",
+2026-10-27T08:08:50.0529008Z     "id": "",
+2026-10-27T08:08:50.0529116Z     "cls": "info-tip",
+2026-10-27T08:08:50.0529247Z     "aria": "More information",
+2026-10-27T08:08:50.0529590Z     "html": "<button type=\"button\" class=\"info-tip\" aria-label=\"More information\" aria-expanded=\"false\" aria-describedby=\"field-help-29\"></button>"
+2026-10-27T08:08:50.0529898Z   },
+2026-10-27T08:08:50.0529994Z   {
+2026-10-27T08:08:50.0530091Z     "text": "",
+2026-10-27T08:08:50.0530197Z     "title": "",
+2026-10-27T08:08:50.0530303Z     "id": "",
+2026-10-27T08:08:50.0530413Z     "cls": "info-tip",
+2026-10-27T08:08:50.0530545Z     "aria": "More information",
+2026-10-27T08:08:50.0530886Z     "html": "<button type=\"button\" class=\"info-tip\" aria-label=\"More information\" aria-expanded=\"false\" aria-describedby=\"field-help-30\"></button>"
+2026-10-27T08:08:50.0531194Z   },
+2026-10-27T08:08:50.0531293Z   {
+2026-10-27T08:08:50.0531411Z     "text": "⋯",
+2026-10-27T08:08:50.0531541Z     "title": "More appearance actions",
+2026-10-27T08:08:50.0531682Z     "id": "",
+2026-10-27T08:08:50.0531785Z     "cls": "",
+2026-10-27T08:08:50.0531907Z     "aria": "More look actions",
+2026-10-27T08:08:50.0532196Z     "html": "<summary aria-label=\"More look actions\" title=\"More appearance actions\">⋯</summary>"
+2026-10-27T08:08:50.0532423Z   },
+2026-10-27T08:08:50.0532516Z   {
+2026-10-27T08:08:50.0532616Z     "text": "",
+2026-10-27T08:08:50.0532721Z     "title": "",
+2026-10-27T08:08:50.0532826Z     "id": "",
+2026-10-27T08:08:50.0532934Z     "cls": "info-tip",
+2026-10-27T08:08:50.0533067Z     "aria": "More information",
+2026-10-27T08:08:50.0533411Z     "html": "<button type=\"button\" class=\"info-tip\" aria-label=\"More information\" aria-expanded=\"false\" aria-describedby=\"field-help-31\"></button>"
+2026-10-27T08:08:50.0533723Z   },
+2026-10-27T08:08:50.0533817Z   {
+2026-10-27T08:08:50.0533912Z     "text": "",
+2026-10-27T08:08:50.0534024Z     "title": "",
+2026-10-27T08:08:50.0534131Z     "id": "",
+2026-10-27T08:08:50.0534240Z     "cls": "info-tip",
+2026-10-27T08:08:50.0534369Z     "aria": "More information",
+2026-10-27T08:08:50.0534709Z     "html": "<button type=\"button\" class=\"info-tip\" aria-label=\"More information\" aria-expanded=\"false\" aria-describedby=\"field-help-32\"></button>"
+2026-10-27T08:08:50.0535020Z   },
+2026-10-27T08:08:50.0535117Z   {
+2026-10-27T08:08:50.0535214Z     "text": "",
+2026-10-27T08:08:50.0535446Z     "title": "Choose assistant avatar",
+2026-10-27T08:08:50.0535595Z     "id": "f-emoji_bot",
+2026-10-27T08:08:50.0535725Z     "cls": "emoji-tile",
+2026-10-27T08:08:50.0535870Z     "aria": "Choose assistant avatar",
+2026-10-27T08:08:50.0536658Z     "html": "<button id=\"f-emoji_bot\" type=\"button\" class=\"emoji-tile\" aria-label=\"Choose assistant avatar\" title=\"Choose assistant avatar\" value=\"\"><img class=\"animated-emoji static-emoji\" alt=\"🤖\" src=\"/emoji/static-1f916.png\"></button>"
+2026-10-27T08:08:50.0537133Z   },
+2026-10-27T08:08:50.0537227Z   {
+2026-10-27T08:08:50.0537322Z     "text": "",
+2026-10-27T08:08:50.0537430Z     "title": "",
+2026-10-27T08:08:50.0537542Z     "id": "",
+2026-10-27T08:08:50.0537650Z     "cls": "info-tip",
+2026-10-27T08:08:50.0537782Z     "aria": "More information",
+2026-10-27T08:08:50.0538150Z     "html": "<button type=\"button\" class=\"info-tip\" aria-label=\"More information\" aria-expanded=\"false\" aria-describedby=\"field-help-33\"></button>"
+2026-10-27T08:08:50.0538467Z   },
+2026-10-27T08:08:50.0538560Z   {
+2026-10-27T08:08:50.0538658Z     "text": "",
+2026-10-27T08:08:50.0538765Z     "title": "",
+2026-10-27T08:08:50.0538872Z     "id": "",
+2026-10-27T08:08:50.0538980Z     "cls": "info-tip",
+2026-10-27T08:08:50.0539111Z     "aria": "More information",
+2026-10-27T08:08:50.0539455Z     "html": "<button type=\"button\" class=\"info-tip\" aria-label=\"More information\" aria-expanded=\"false\" aria-describedby=\"field-help-34\"></button>"
+2026-10-27T08:08:50.0539858Z   },
+2026-10-27T08:08:50.0539954Z   {
+2026-10-27T08:08:50.0540067Z     "text": "↑",
+2026-10-27T08:08:50.0540195Z     "title": "Choose send button",
+2026-10-27T08:08:50.0540337Z     "id": "f-emoji_send",
+2026-10-27T08:08:50.0540469Z     "cls": "emoji-tile",
+2026-10-27T08:08:50.0540607Z     "aria": "Choose send button",
+2026-10-27T08:08:50.0541031Z     "html": "<button id=\"f-emoji_send\" type=\"button\" class=\"emoji-tile\" aria-label=\"Choose send button\" title=\"Choose send button\" value=\"\">↑</button>"
+2026-10-27T08:08:50.0541355Z   },
+2026-10-27T08:08:50.0541523Z   {
+2026-10-27T08:08:50.0541621Z     "text": "",
+2026-10-27T08:08:50.0541731Z     "title": "",
+2026-10-27T08:08:50.0541837Z     "id": "",
+2026-10-27T08:08:50.0541947Z     "cls": "info-tip",
+2026-10-27T08:08:50.0542078Z     "aria": "More information",
+2026-10-27T08:08:50.0542427Z     "html": "<button type=\"button\" class=\"info-tip\" aria-label=\"More information\" aria-expanded=\"false\" aria-describedby=\"field-help-35\"></button>"
+2026-10-27T08:08:50.0542741Z   },
+2026-10-27T08:08:50.0542835Z   {
+2026-10-27T08:08:50.0542931Z     "text": "",
+2026-10-27T08:08:50.0543057Z     "title": "Choose welcome emoji",
+2026-10-27T08:08:50.0543202Z     "id": "f-emoji_hero",
+2026-10-27T08:08:50.0543330Z     "cls": "emoji-tile",
+2026-10-27T08:08:50.0543471Z     "aria": "Choose welcome emoji",
+2026-10-27T08:08:50.0544087Z     "html": "<button id=\"f-emoji_hero\" type=\"button\" class=\"emoji-tile\" aria-label=\"Choose welcome emoji\" title=\"Choose welcome emoji\" value=\"\"><img class=\"animated-emoji static-emoji\" alt=\"👋\" src=\"/emoji/static-1f44b.png\"></button>"
+2026-10-27T08:08:50.0544543Z   },
+2026-10-27T08:08:50.0544639Z   {
+2026-10-27T08:08:50.0544735Z     "text": "",
+2026-10-27T08:08:50.0544844Z     "title": "",
+2026-10-27T08:08:50.0544952Z     "id": "",
+2026-10-27T08:08:50.0545059Z     "cls": "info-tip",
+2026-10-27T08:08:50.0545193Z     "aria": "More information",
+2026-10-27T08:08:50.0545546Z     "html": "<button type=\"button\" class=\"info-tip\" aria-label=\"More information\" aria-expanded=\"false\" aria-describedby=\"field-help-36\"></button>"
+2026-10-27T08:08:50.0545859Z   },
+2026-10-27T08:08:50.0545953Z   {
+2026-10-27T08:08:50.0546049Z     "text": "",
+2026-10-27T08:08:50.0546177Z     "title": "Choose attach button",
+2026-10-27T08:08:50.0546322Z     "id": "f-emoji_attach",
+2026-10-27T08:08:50.0546567Z     "cls": "emoji-tile",
+2026-10-27T08:08:50.0546723Z     "aria": "Choose attach button",
+2026-10-27T08:08:50.0547339Z     "html": "<button id=\"f-emoji_attach\" type=\"button\" class=\"emoji-tile\" aria-label=\"Choose attach button\" title=\"Choose attach button\" value=\"\"><img class=\"animated-emoji static-emoji\" alt=\"📎\" src=\"/emoji/static-1f4ce.png\"></button>"
+2026-10-27T08:08:50.0547897Z   },
+2026-10-27T08:08:50.0547991Z   {
+2026-10-27T08:08:50.0548087Z     "text": "",
+2026-10-27T08:08:50.0548195Z     "title": "",
+2026-10-27T08:08:50.0548304Z     "id": "",
+2026-10-27T08:08:50.0548412Z     "cls": "info-tip",
+2026-10-27T08:08:50.0548548Z     "aria": "More information",
+2026-10-27T08:08:50.0548897Z     "html": "<button type=\"button\" class=\"info-tip\" aria-label=\"More information\" aria-expanded=\"false\" aria-describedby=\"field-help-37\"></button>"
+2026-10-27T08:08:50.0549208Z   },
+2026-10-27T08:08:50.0549304Z   {
+2026-10-27T08:08:50.0549415Z     "text": "⋯",
+2026-10-27T08:08:50.0549551Z     "title": "More appearance actions",
+2026-10-27T08:08:50.0549692Z     "id": "",
+2026-10-27T08:08:50.0549797Z     "cls": "",
+2026-10-27T08:08:50.0549928Z     "aria": "More look actions",
+2026-10-27T08:08:50.0550226Z     "html": "<summary aria-label=\"More look actions\" title=\"More appearance actions\">⋯</summary>"
+2026-10-27T08:08:50.0550452Z   },
+2026-10-27T08:08:50.0550546Z   {
+2026-10-27T08:08:50.0550642Z     "text": "",
+2026-10-27T08:08:50.0550749Z     "title": "",
+2026-10-27T08:08:50.0550855Z     "id": "",
+2026-10-27T08:08:50.0550965Z     "cls": "info-tip",
+2026-10-27T08:08:50.0551097Z     "aria": "More information",
+2026-10-27T08:08:50.0551533Z     "html": "<button type=\"button\" class=\"info-tip\" aria-label=\"More information\" aria-expanded=\"false\" aria-describedby=\"field-help-38\"></button>"
+2026-10-27T08:08:50.0551846Z   },
+2026-10-27T08:08:50.0551939Z   {
+2026-10-27T08:08:50.0552036Z     "text": "",
+2026-10-27T08:08:50.0552145Z     "title": "",
+2026-10-27T08:08:50.0552252Z     "id": "",
+2026-10-27T08:08:50.0552361Z     "cls": "info-tip",
+2026-10-27T08:08:50.0552493Z     "aria": "More information",
+2026-10-27T08:08:50.0552845Z     "html": "<button type=\"button\" class=\"info-tip\" aria-label=\"More information\" aria-expanded=\"false\" aria-describedby=\"field-help-39\"></button>"
+2026-10-27T08:08:50.0553157Z   },
+2026-10-27T08:08:50.0553253Z   {
+2026-10-27T08:08:50.0553351Z     "text": "",
+2026-10-27T08:08:50.0553457Z     "title": "",
+2026-10-27T08:08:50.0553563Z     "id": "",
+2026-10-27T08:08:50.0553672Z     "cls": "info-tip",
+2026-10-27T08:08:50.0553804Z     "aria": "More information",
+2026-10-27T08:08:50.0554150Z     "html": "<button type=\"button\" class=\"info-tip\" aria-label=\"More information\" aria-expanded=\"false\" aria-describedby=\"field-help-40\"></button>"
+2026-10-27T08:08:50.0554459Z   },
+2026-10-27T08:08:50.0554553Z   {
+2026-10-27T08:08:50.0554647Z     "text": "",
+2026-10-27T08:08:50.0554758Z     "title": "",
+2026-10-27T08:08:50.0554868Z     "id": "",
+2026-10-27T08:08:50.0554977Z     "cls": "info-tip",
+2026-10-27T08:08:50.0555107Z     "aria": "More information",
+2026-10-27T08:08:50.0555453Z     "html": "<button type=\"button\" class=\"info-tip\" aria-label=\"More information\" aria-expanded=\"false\" aria-describedby=\"field-help-41\"></button>"
+2026-10-27T08:08:50.0555764Z   },
+2026-10-27T08:08:50.0555859Z   {
+2026-10-27T08:08:50.0555975Z     "text": "⋯",
+2026-10-27T08:08:50.0556107Z     "title": "More appearance actions",
+2026-10-27T08:08:50.0556247Z     "id": "",
+2026-10-27T08:08:50.0556350Z     "cls": "",
+2026-10-27T08:08:50.0556620Z     "aria": "More look actions",
+2026-10-27T08:08:50.0556921Z     "html": "<summary aria-label=\"More look actions\" title=\"More appearance actions\">⋯</summary>"
+2026-10-27T08:08:50.0557148Z   },
+2026-10-27T08:08:50.0557241Z   {
+2026-10-27T08:08:50.0557339Z     "text": "",
+2026-10-27T08:08:50.0557445Z     "title": "",
+2026-10-27T08:08:50.0557550Z     "id": "",
+2026-10-27T08:08:50.0557657Z     "cls": "info-tip",
+2026-10-27T08:08:50.0557790Z     "aria": "More information",
+2026-10-27T08:08:50.0558134Z     "html": "<button type=\"button\" class=\"info-tip\" aria-label=\"More information\" aria-expanded=\"false\" aria-describedby=\"field-help-42\"></button>"
+2026-10-27T08:08:50.0558551Z   },
+2026-10-27T08:08:50.0558645Z   {
+2026-10-27T08:08:50.0558739Z     "text": "",
+2026-10-27T08:08:50.0558848Z     "title": "",
+2026-10-27T08:08:50.0558954Z     "id": "",
+2026-10-27T08:08:50.0559063Z     "cls": "info-tip",
+2026-10-27T08:08:50.0559193Z     "aria": "More information",
+2026-10-27T08:08:50.0559539Z     "html": "<button type=\"button\" class=\"info-tip\" aria-label=\"More information\" aria-expanded=\"false\" aria-describedby=\"field-help-43\"></button>"
+2026-10-27T08:08:50.0559848Z   },
+2026-10-27T08:08:50.0559941Z   {
+2026-10-27T08:08:50.0560036Z     "text": "",
+2026-10-27T08:08:50.0560143Z     "title": "",
+2026-10-27T08:08:50.0560247Z     "id": "",
+2026-10-27T08:08:50.0560356Z     "cls": "info-tip",
+2026-10-27T08:08:50.0560486Z     "aria": "More information",
+2026-10-27T08:08:50.0560828Z     "html": "<button type=\"button\" class=\"info-tip\" aria-label=\"More information\" aria-expanded=\"false\" aria-describedby=\"field-help-44\"></button>"
+2026-10-27T08:08:50.0561142Z   },
+2026-10-27T08:08:50.0561235Z   {
+2026-10-27T08:08:50.0561330Z     "text": "",
+2026-10-27T08:08:50.0561437Z     "title": "",
+2026-10-27T08:08:50.0561545Z     "id": "",
+2026-10-27T08:08:50.0561654Z     "cls": "info-tip",
+2026-10-27T08:08:50.0561784Z     "aria": "More information",
+2026-10-27T08:08:50.0562217Z     "html": "<button type=\"button\" class=\"info-tip\" aria-label=\"More information\" aria-expanded=\"false\" aria-describedby=\"field-help-45\"></button>"
+2026-10-27T08:08:50.0562527Z   },
+2026-10-27T08:08:50.0562622Z   {
+2026-10-27T08:08:50.0562719Z     "text": "",
+2026-10-27T08:08:50.0562826Z     "title": "",
+2026-10-27T08:08:50.0562932Z     "id": "",
+2026-10-27T08:08:50.0563040Z     "cls": "info-tip",
+2026-10-27T08:08:50.0563171Z     "aria": "More information",
+2026-10-27T08:08:50.0563512Z     "html": "<button type=\"button\" class=\"info-tip\" aria-label=\"More information\" aria-expanded=\"false\" aria-describedby=\"field-help-46\"></button>"
+2026-10-27T08:08:50.0563829Z   },
+2026-10-27T08:08:50.0563872Z   {
+2026-10-27T08:08:50.0563919Z     "text": "",
+2026-10-27T08:08:50.0563968Z     "title": "",
+2026-10-27T08:08:50.0564013Z     "id": "",
+2026-10-27T08:08:50.0564066Z     "cls": "info-tip",
+2026-10-27T08:08:50.0564126Z     "aria": "More information",
+2026-10-27T08:08:50.0564388Z     "html": "<button type=\"button\" class=\"info-tip\" aria-label=\"More information\" aria-expanded=\"false\" aria-describedby=\"field-help-47\"></button>"
+2026-10-27T08:08:50.0564433Z   },
+2026-10-27T08:08:50.0564475Z   {
+2026-10-27T08:08:50.0564522Z     "text": "",
+2026-10-27T08:08:50.0564570Z     "title": "",
+2026-10-27T08:08:50.0564614Z     "id": "",
+2026-10-27T08:08:50.0564666Z     "cls": "info-tip",
+2026-10-27T08:08:50.0564729Z     "aria": "More information",
+2026-10-27T08:08:50.0564988Z     "html": "<button type=\"button\" class=\"info-tip\" aria-label=\"More information\" aria-expanded=\"false\" aria-describedby=\"field-help-48\"></button>"
+2026-10-27T08:08:50.0565036Z   },
+2026-10-27T08:08:50.0565081Z   {
+2026-10-27T08:08:50.0565144Z     "text": "⋯",
+2026-10-27T08:08:50.0565217Z     "title": "More appearance actions",
+2026-10-27T08:08:50.0565262Z     "id": "",
+2026-10-27T08:08:50.0565310Z     "cls": "",
+2026-10-27T08:08:50.0565375Z     "aria": "More look actions",
+2026-10-27T08:08:50.0565582Z     "html": "<summary aria-label=\"More look actions\" title=\"More appearance actions\">⋯</summary>"
+2026-10-27T08:08:50.0565627Z   },
+2026-10-27T08:08:50.0565677Z   {
+2026-10-27T08:08:50.0565722Z     "text": "",
+2026-10-27T08:08:50.0565772Z     "title": "",
+2026-10-27T08:08:50.0565818Z     "id": "",
+2026-10-27T08:08:50.0565868Z     "cls": "info-tip",
+2026-10-27T08:08:50.0565930Z     "aria": "More information",
+2026-10-27T08:08:50.0566190Z     "html": "<button type=\"button\" class=\"info-tip\" aria-label=\"More information\" aria-expanded=\"false\" aria-describedby=\"field-help-12\"></button>"
+2026-10-27T08:08:50.0566233Z   },
+2026-10-27T08:08:50.0566351Z   {
+2026-10-27T08:08:50.0566396Z     "text": "",
+2026-10-27T08:08:50.0566445Z     "title": "",
+2026-10-27T08:08:50.0566618Z     "id": "",
+2026-10-27T08:08:50.0566694Z     "cls": "info-tip",
+2026-10-27T08:08:50.0566762Z     "aria": "More information",
+2026-10-27T08:08:50.0567023Z     "html": "<button type=\"button\" class=\"info-tip\" aria-label=\"More information\" aria-expanded=\"false\" aria-describedby=\"field-help-13\"></button>"
+2026-10-27T08:08:50.0567065Z   },
+2026-10-27T08:08:50.0567112Z   {
+2026-10-27T08:08:50.0567160Z     "text": "",
+2026-10-27T08:08:50.0567206Z     "title": "",
+2026-10-27T08:08:50.0567252Z     "id": "",
+2026-10-27T08:08:50.0567301Z     "cls": "info-tip",
+2026-10-27T08:08:50.0567363Z     "aria": "More information",
+2026-10-27T08:08:50.0567623Z     "html": "<button type=\"button\" class=\"info-tip\" aria-label=\"More information\" aria-expanded=\"false\" aria-describedby=\"field-help-14\"></button>"
+2026-10-27T08:08:50.0567665Z   }
+2026-10-27T08:08:50.0567717Z ]
+2026-10-27T08:08:50.0567786Z PASS iconinventory 134
+2026-10-27T08:08:50.0567796Z 
+2026-10-27T08:09:05.7057903Z CASE local_download_position_audit_browser.cjs default PASS exit=0 seconds=15.7
+2026-10-27T08:09:05.7059002Z POSITIONS 320 reduce {"before":{"x":15,"y":143.25,"transform":"none","cardAnimation":"none"},"running":{"x":15,"y":143.25,"transform":"none","cardAnimation":"none"},"failed":{"x":15,"y":143.25,"transform":"none","cardAnimation":"none"}}
+2026-10-27T08:09:05.7060671Z POSITIONS 320 no-preference {"before":{"x":15,"y":143.25,"transform":"none","cardAnimation":"none"},"running":{"x":15,"y":143.25,"transform":"none","cardAnimation":"none"},"failed":{"x":15,"y":143.25,"transform":"none","cardAnimation":"none"}}
+2026-10-27T08:09:05.7061604Z POSITIONS 1280 reduce {"before":{"x":15,"y":109.25,"transform":"none","cardAnimation":"none"},"running":{"x":15,"y":109.25,"transform":"none","cardAnimation":"none"},"failed":{"x":15,"y":109.25,"transform":"none","cardAnimation":"none"}}
+2026-10-27T08:09:05.7062520Z POSITIONS 1280 no-preference {"before":{"x":15,"y":109.25,"transform":"none","cardAnimation":"none"},"running":{"x":15,"y":109.25,"transform":"none","cardAnimation":"none"},"failed":{"x":15,"y":109.25,"transform":"none","cardAnimation":"none"}}
+2026-10-27T08:09:05.7063390Z PASS localdownloadprimaryactiontop-leftstable cardanimationnone pending37/failureRetry3201280normalReduce
+2026-10-27T08:09:05.7063627Z 
+2026-10-27T08:09:11.1572055Z CASE metadata_geometry_audit_browser.cjs default PASS exit=0 seconds=5.4
+2026-10-27T08:09:11.1572743Z PASS appmetadata allnonappearancefields schemaequal Id+Language preserved/existingvalue/help/dedicateddisclosure distinctfromuserwording/focus44bounds3203901280 no saveorprovider calls
+2026-10-27T08:09:11.1573107Z 
+2026-10-27T08:09:21.1225675Z CASE model_connection_truth_browser.cjs default PASS exit=0 seconds=10.0
+2026-10-27T08:09:21.1228361Z PASS connectionfixturepass invalidatedbyendpointedit pendingtestolderendpointresultignored staticnot-tested3201280normalreduce
+2026-10-27T08:09:21.1228696Z 
+2026-10-27T08:09:43.0092121Z CASE navigation_text_only_audit_browser.cjs default PASS exit=0 seconds=21.9
+2026-10-27T08:09:43.0093322Z SHELLS 320 reduce / [{"tag":"HTML","cls":"reading-view","transform":"none","frames":[]},{"tag":"BODY","cls":"nav-open","transform":"none","frames":[]},{"tag":"DIV","cls":"app","transform":"none","frames":[]},{"tag":"MAIN","cls":"main","transform":"none","frames":[]}]
+2026-10-27T08:09:43.0096348Z GLOBAL 320 reduce / [{"active":true,"transform":"none","animation":"none","before":"none","after":"none","color":"rgb(255, 255, 255)","bg":"rgb(23, 63, 53)"},{"active":false,"transform":"none","animation":"none","before":"none","after":"none","color":"rgb(95, 109, 103)","bg":"rgba(0, 0, 0, 0)"},{"active":false,"transform":"none","animation":"none","before":"none","after":"none","color":"rgb(95, 109, 103)","bg":"rgba(0, 0, 0, 0)"},{"active":false,"transform":"none","animation":"none","before":"none","after":"none","color":"rgb(95, 109, 103)","bg":"rgba(0, 0, 0, 0)"},{"active":false,"transform":"none","animation":"none","before":"none","after":"none","color":"rgb(95, 109, 103)","bg":"rgba(0, 0, 0, 0)"}]
+2026-10-27T08:09:43.0099009Z SHELLS 320 reduce /about.html [{"tag":"HTML","cls":"","transform":"none","frames":[]},{"tag":"BODY","cls":"","transform":"none","frames":[]},{"tag":"MAIN","cls":"","transform":"none","frames":[]}]
+2026-10-27T08:09:43.0101219Z GLOBAL 320 reduce /about.html [{"active":false,"transform":"none","animation":"none","before":"none","after":"none","color":"rgb(99, 115, 108)","bg":"rgba(0, 0, 0, 0)"},{"active":false,"transform":"none","animation":"none","before":"none","after":"none","color":"rgb(99, 115, 108)","bg":"rgba(0, 0, 0, 0)"},{"active":true,"transform":"none","animation":"none","before":"none","after":"none","color":"rgb(255, 255, 255)","bg":"rgb(23, 63, 53)"},{"active":false,"transform":"none","animation":"none","before":"none","after":"none","color":"rgb(99, 115, 108)","bg":"rgba(0, 0, 0, 0)"},{"active":false,"transform":"none","animation":"none","before":"none","after":"none","color":"rgb(99, 115, 108)","bg":"rgba(0, 0, 0, 0)"}]
+2026-10-27T08:09:43.0102668Z SHELLS 320 reduce /settings.html [{"tag":"HTML","cls":"","transform":"none","frames":[]},{"tag":"BODY","cls":"cfgtop-builder settings-tabs","transform":"none","frames":[]},{"tag":"MAIN","cls":"card","transform":"none","frames":[]}]
+2026-10-27T08:09:43.0104485Z GLOBAL 320 reduce /settings.html [{"active":false,"transform":"none","animation":"none","before":"none","after":"none","color":"rgb(102, 117, 109)","bg":"rgba(0, 0, 0, 0)"},{"active":false,"transform":"none","animation":"none","before":"none","after":"none","color":"rgb(102, 117, 109)","bg":"rgba(0, 0, 0, 0)"},{"active":false,"transform":"none","animation":"none","before":"none","after":"none","color":"rgb(102, 117, 109)","bg":"rgba(0, 0, 0, 0)"},{"active":true,"transform":"none","animation":"none","before":"none","after":"none","color":"rgb(255, 255, 255)","bg":"rgb(23, 63, 53)"},{"active":false,"transform":"none","animation":"none","before":"none","after":"none","color":"rgb(102, 117, 109)","bg":"rgba(0, 0, 0, 0)"}]
+2026-10-27T08:09:43.0105611Z CATEGORIES no sliding underline; icons decorative only
+2026-10-27T08:09:43.0106261Z SHELLS 320 no-preference / [{"tag":"HTML","cls":"reading-view","transform":"none","frames":[]},{"tag":"BODY","cls":"nav-open","transform":"none","frames":[]},{"tag":"DIV","cls":"app","transform":"none","frames":[]},{"tag":"MAIN","cls":"main","transform":"none","frames":[]}]
+2026-10-27T08:09:43.0108137Z GLOBAL 320 no-preference / [{"active":true,"transform":"none","animation":"none","before":"none","after":"none","color":"rgb(255, 255, 255)","bg":"rgb(23, 63, 53)"},{"active":false,"transform":"none","animation":"none","before":"none","after":"none","color":"rgb(95, 109, 103)","bg":"rgba(0, 0, 0, 0)"},{"active":false,"transform":"none","animation":"none","before":"none","after":"none","color":"rgb(95, 109, 103)","bg":"rgba(0, 0, 0, 0)"},{"active":false,"transform":"none","animation":"none","before":"none","after":"none","color":"rgb(95, 109, 103)","bg":"rgba(0, 0, 0, 0)"},{"active":false,"transform":"none","animation":"none","before":"none","after":"none","color":"rgb(95, 109, 103)","bg":"rgba(0, 0, 0, 0)"}]
+2026-10-27T08:09:43.0109514Z SHELLS 320 no-preference /about.html [{"tag":"HTML","cls":"","transform":"none","frames":[]},{"tag":"BODY","cls":"","transform":"none","frames":[]},{"tag":"MAIN","cls":"","transform":"none","frames":[]}]
+2026-10-27T08:09:43.0111163Z GLOBAL 320 no-preference /about.html [{"active":false,"transform":"none","animation":"none","before":"none","after":"none","color":"rgb(99, 115, 108)","bg":"rgba(0, 0, 0, 0)"},{"active":false,"transform":"none","animation":"none","before":"none","after":"none","color":"rgb(99, 115, 108)","bg":"rgba(0, 0, 0, 0)"},{"active":true,"transform":"none","animation":"none","before":"none","after":"none","color":"rgb(255, 255, 255)","bg":"rgb(23, 63, 53)"},{"active":false,"transform":"none","animation":"none","before":"none","after":"none","color":"rgb(99, 115, 108)","bg":"rgba(0, 0, 0, 0)"},{"active":false,"transform":"none","animation":"none","before":"none","after":"none","color":"rgb(99, 115, 108)","bg":"rgba(0, 0, 0, 0)"}]
+2026-10-27T08:09:43.0112705Z SHELLS 320 no-preference /settings.html [{"tag":"HTML","cls":"","transform":"none","frames":[]},{"tag":"BODY","cls":"cfgtop-builder settings-tabs","transform":"none","frames":[]},{"tag":"MAIN","cls":"card","transform":"none","frames":[]}]
+2026-10-27T08:09:43.0114431Z GLOBAL 320 no-preference /settings.html [{"active":false,"transform":"none","animation":"none","before":"none","after":"none","color":"rgb(102, 117, 109)","bg":"rgba(0, 0, 0, 0)"},{"active":false,"transform":"none","animation":"none","before":"none","after":"none","color":"rgb(102, 117, 109)","bg":"rgba(0, 0, 0, 0)"},{"active":false,"transform":"none","animation":"none","before":"none","after":"none","color":"rgb(102, 117, 109)","bg":"rgba(0, 0, 0, 0)"},{"active":true,"transform":"none","animation":"none","before":"none","after":"none","color":"rgb(255, 255, 255)","bg":"rgb(23, 63, 53)"},{"active":false,"transform":"none","animation":"none","before":"none","after":"none","color":"rgb(102, 117, 109)","bg":"rgba(0, 0, 0, 0)"}]
+2026-10-27T08:09:43.0115560Z CATEGORIES no sliding underline; icons decorative only
+2026-10-27T08:09:43.0116243Z SHELLS 1280 reduce / [{"tag":"HTML","cls":"reading-view","transform":"none","frames":[]},{"tag":"BODY","cls":"","transform":"none","frames":[]},{"tag":"DIV","cls":"app","transform":"none","frames":[]},{"tag":"MAIN","cls":"main","transform":"none","frames":[]}]
+2026-10-27T08:09:43.0118043Z GLOBAL 1280 reduce / [{"active":true,"transform":"none","animation":"none","before":"none","after":"none","color":"rgb(255, 255, 255)","bg":"rgb(23, 63, 53)"},{"active":false,"transform":"none","animation":"none","before":"none","after":"none","color":"rgb(95, 109, 103)","bg":"rgba(0, 0, 0, 0)"},{"active":false,"transform":"none","animation":"none","before":"none","after":"none","color":"rgb(95, 109, 103)","bg":"rgba(0, 0, 0, 0)"},{"active":false,"transform":"none","animation":"none","before":"none","after":"none","color":"rgb(95, 109, 103)","bg":"rgba(0, 0, 0, 0)"},{"active":false,"transform":"none","animation":"none","before":"none","after":"none","color":"rgb(95, 109, 103)","bg":"rgba(0, 0, 0, 0)"}]
+2026-10-27T08:09:43.0119381Z SHELLS 1280 reduce /about.html [{"tag":"HTML","cls":"","transform":"none","frames":[]},{"tag":"BODY","cls":"","transform":"none","frames":[]},{"tag":"MAIN","cls":"","transform":"none","frames":[]}]
+2026-10-27T08:09:43.0120999Z GLOBAL 1280 reduce /about.html [{"active":false,"transform":"none","animation":"none","before":"none","after":"none","color":"rgb(99, 115, 108)","bg":"rgba(0, 0, 0, 0)"},{"active":false,"transform":"none","animation":"none","before":"none","after":"none","color":"rgb(99, 115, 108)","bg":"rgba(0, 0, 0, 0)"},{"active":true,"transform":"none","animation":"none","before":"none","after":"none","color":"rgb(255, 255, 255)","bg":"rgb(23, 63, 53)"},{"active":false,"transform":"none","animation":"none","before":"none","after":"none","color":"rgb(99, 115, 108)","bg":"rgba(0, 0, 0, 0)"},{"active":false,"transform":"none","animation":"none","before":"none","after":"none","color":"rgb(99, 115, 108)","bg":"rgba(0, 0, 0, 0)"}]
+2026-10-27T08:09:43.0122428Z SHELLS 1280 reduce /settings.html [{"tag":"HTML","cls":"","transform":"none","frames":[]},{"tag":"BODY","cls":"cfgtop-builder settings-tabs","transform":"none","frames":[]},{"tag":"MAIN","cls":"card","transform":"none","frames":[]}]
+2026-10-27T08:09:43.0124123Z GLOBAL 1280 reduce /settings.html [{"active":false,"transform":"none","animation":"none","before":"none","after":"none","color":"rgb(102, 117, 109)","bg":"rgba(0, 0, 0, 0)"},{"active":false,"transform":"none","animation":"none","before":"none","after":"none","color":"rgb(102, 117, 109)","bg":"rgba(0, 0, 0, 0)"},{"active":false,"transform":"none","animation":"none","before":"none","after":"none","color":"rgb(102, 117, 109)","bg":"rgba(0, 0, 0, 0)"},{"active":true,"transform":"none","animation":"none","before":"none","after":"none","color":"rgb(255, 255, 255)","bg":"rgb(23, 63, 53)"},{"active":false,"transform":"none","animation":"none","before":"none","after":"none","color":"rgb(102, 117, 109)","bg":"rgba(0, 0, 0, 0)"}]
+2026-10-27T08:09:43.0125320Z CATEGORIES no sliding underline; icons decorative only
+2026-10-27T08:09:43.0125935Z SHELLS 1280 no-preference / [{"tag":"HTML","cls":"reading-view","transform":"none","frames":[]},{"tag":"BODY","cls":"","transform":"none","frames":[]},{"tag":"DIV","cls":"app","transform":"none","frames":[]},{"tag":"MAIN","cls":"main","transform":"none","frames":[]}]
+2026-10-27T08:09:43.0127870Z GLOBAL 1280 no-preference / [{"active":true,"transform":"none","animation":"none","before":"none","after":"none","color":"rgb(255, 255, 255)","bg":"rgb(23, 63, 53)"},{"active":false,"transform":"none","animation":"none","before":"none","after":"none","color":"rgb(95, 109, 103)","bg":"rgba(0, 0, 0, 0)"},{"active":false,"transform":"none","animation":"none","before":"none","after":"none","color":"rgb(95, 109, 103)","bg":"rgba(0, 0, 0, 0)"},{"active":false,"transform":"none","animation":"none","before":"none","after":"none","color":"rgb(95, 109, 103)","bg":"rgba(0, 0, 0, 0)"},{"active":false,"transform":"none","animation":"none","before":"none","after":"none","color":"rgb(95, 109, 103)","bg":"rgba(0, 0, 0, 0)"}]
+2026-10-27T08:09:43.0129318Z SHELLS 1280 no-preference /about.html [{"tag":"HTML","cls":"","transform":"none","frames":[]},{"tag":"BODY","cls":"","transform":"none","frames":[]},{"tag":"MAIN","cls":"","transform":"none","frames":[]}]
+2026-10-27T08:09:43.0130966Z GLOBAL 1280 no-preference /about.html [{"active":false,"transform":"none","animation":"none","before":"none","after":"none","color":"rgb(99, 115, 108)","bg":"rgba(0, 0, 0, 0)"},{"active":false,"transform":"none","animation":"none","before":"none","after":"none","color":"rgb(99, 115, 108)","bg":"rgba(0, 0, 0, 0)"},{"active":true,"transform":"none","animation":"none","before":"none","after":"none","color":"rgb(255, 255, 255)","bg":"rgb(23, 63, 53)"},{"active":false,"transform":"none","animation":"none","before":"none","after":"none","color":"rgb(99, 115, 108)","bg":"rgba(0, 0, 0, 0)"},{"active":false,"transform":"none","animation":"none","before":"none","after":"none","color":"rgb(99, 115, 108)","bg":"rgba(0, 0, 0, 0)"}]
+2026-10-27T08:09:43.0132434Z SHELLS 1280 no-preference /settings.html [{"tag":"HTML","cls":"","transform":"none","frames":[]},{"tag":"BODY","cls":"cfgtop-builder settings-tabs","transform":"none","frames":[]},{"tag":"MAIN","cls":"card","transform":"none","frames":[]}]
+2026-10-27T08:09:43.0134164Z GLOBAL 1280 no-preference /settings.html [{"active":false,"transform":"none","animation":"none","before":"none","after":"none","color":"rgb(102, 117, 109)","bg":"rgba(0, 0, 0, 0)"},{"active":false,"transform":"none","animation":"none","before":"none","after":"none","color":"rgb(102, 117, 109)","bg":"rgba(0, 0, 0, 0)"},{"active":false,"transform":"none","animation":"none","before":"none","after":"none","color":"rgb(102, 117, 109)","bg":"rgba(0, 0, 0, 0)"},{"active":true,"transform":"none","animation":"none","before":"none","after":"none","color":"rgb(255, 255, 255)","bg":"rgb(23, 63, 53)"},{"active":false,"transform":"none","animation":"none","before":"none","after":"none","color":"rgb(102, 117, 109)","bg":"rgba(0, 0, 0, 0)"}]
+2026-10-27T08:09:43.0135293Z CATEGORIES no sliding underline; icons decorative only
+2026-10-27T08:09:43.0135717Z PASS all3globalpages staticselectedsurfaces inactivecolorsneutral no slidingpseudoindicator/categoryunderline3201280normalReduce
+2026-10-27T08:09:43.0135996Z 
+2026-10-27T08:09:48.2609969Z CASE preset_preview_browser.cjs default PASS exit=0 seconds=5.2
+2026-10-27T08:09:48.2610894Z PASS preset sample beforecommit/cancelnochange/focusrestore;Applyautosaves realpreset once;320 fixture
+2026-10-27T08:09:48.2611323Z 
+2026-10-27T08:09:57.7788876Z CASE prompt_all_toggles_pending_focus_motion_browser.cjs default PASS exit=0 seconds=9.5
+2026-10-27T08:09:57.7789328Z STAGEFOCUS 320 no-preference question_check
+2026-10-27T08:09:57.7789828Z STAGEFOCUS 320 no-preference relevance
+2026-10-27T08:09:57.7790023Z STAGEFOCUS 320 no-preference faithfulness
+2026-10-27T08:09:57.7790209Z STAGEFOCUS 320 no-preference revise
+2026-10-27T08:09:57.7790387Z PROMPTFOCUS 320 no-preference 8 4
+2026-10-27T08:09:57.7790560Z STAGEFOCUS 320 reduce question_check
+2026-10-27T08:09:57.7790732Z STAGEFOCUS 320 reduce relevance
+2026-10-27T08:09:57.7790902Z STAGEFOCUS 320 reduce faithfulness
+2026-10-27T08:09:57.7791065Z STAGEFOCUS 320 reduce revise
+2026-10-27T08:09:57.7791223Z PROMPTFOCUS 320 reduce 8 4
+2026-10-27T08:09:57.7791401Z STAGEFOCUS 1280 no-preference question_check
+2026-10-27T08:09:57.7791597Z STAGEFOCUS 1280 no-preference relevance
+2026-10-27T08:09:57.7791784Z STAGEFOCUS 1280 no-preference faithfulness
+2026-10-27T08:09:57.7791968Z STAGEFOCUS 1280 no-preference revise
+2026-10-27T08:09:57.7792153Z PROMPTFOCUS 1280 no-preference 8 4
+2026-10-27T08:09:57.7792328Z STAGEFOCUS 1280 reduce question_check
+2026-10-27T08:09:57.7792502Z STAGEFOCUS 1280 reduce relevance
+2026-10-27T08:09:57.7792676Z STAGEFOCUS 1280 reduce faithfulness
+2026-10-27T08:09:57.7792839Z STAGEFOCUS 1280 reduce revise
+2026-10-27T08:09:57.7792991Z PROMPTFOCUS 1280 reduce 8 4
+2026-10-27T08:09:57.7793476Z PASS alloptionalpromptautosavependingkeyboardfocus stateimmediate singleflight/repeatedSpaceclickignored success/failurerollback3201280normalReduce fixtureonly
+2026-10-27T08:09:57.7793828Z 
+2026-10-27T08:10:06.1892540Z CASE provider_extra_state_browser.cjs default PASS exit=0 seconds=8.4
+2026-10-27T08:10:06.1893842Z PASS extras open/closed retained near slider edits and section visits; timeout draft retained; numeric44pxsameheight/invalidempty/nooverflow3203901280; fixture no saves/model
+2026-10-27T08:10:06.1894377Z 
+2026-10-27T08:10:12.7885679Z CASE reading-persistence.cjs default PASS exit=0 seconds=6.6
+2026-10-27T08:10:12.7885999Z 12 reading combinations pass
+2026-10-27T08:10:12.7886098Z 
+2026-10-27T08:10:21.5089420Z CASE sample_runtime_quiet_motion_browser.cjs default PASS exit=0 seconds=8.7
+2026-10-27T08:10:21.5089941Z QUIETSAMPLE 320 reduce fonts actual160cancelled focusretained opacity1
+2026-10-27T08:10:21.5090398Z QUIETSAMPLE 320 reduce colors actual160cancelled focusretained opacity1
+2026-10-27T08:10:21.5090830Z QUIETSAMPLE 320 none fonts actual160cancelled focusretained opacity1
+2026-10-27T08:10:21.5091286Z QUIETSAMPLE 320 none colors actual160cancelled focusretained opacity1
+2026-10-27T08:10:21.5091723Z QUIETSAMPLE 320 calm fonts actual160cancelled focusretained opacity1
+2026-10-27T08:10:21.5092178Z QUIETSAMPLE 320 calm colors actual160cancelled focusretained opacity1
+2026-10-27T08:10:21.5092625Z QUIETSAMPLE 1280 reduce fonts actual160cancelled focusretained opacity1
+2026-10-27T08:10:21.5093082Z QUIETSAMPLE 1280 reduce colors actual160cancelled focusretained opacity1
+2026-10-27T08:10:21.5093530Z QUIETSAMPLE 1280 none fonts actual160cancelled focusretained opacity1
+2026-10-27T08:10:21.5093973Z QUIETSAMPLE 1280 none colors actual160cancelled focusretained opacity1
+2026-10-27T08:10:21.5094423Z QUIETSAMPLE 1280 calm fonts actual160cancelled focusretained opacity1
+2026-10-27T08:10:21.5094811Z QUIETSAMPLE 1280 calm colors actual160cancelled focusretained opacity1
+2026-10-27T08:10:21.5095183Z PASS fontheadingandcontrastsample runtimeReduceNoneCalmcancel12states3201280 fixturethemeSaveonly
+2026-10-27T08:10:21.5095415Z 
+2026-10-27T08:11:08.0749563Z CASE settings_field_focus_levels_browser.cjs default PASS exit=0 seconds=46.6
+2026-10-27T08:11:08.0749972Z 320 no-preference full full {
+2026-10-27T08:11:08.0750236Z   properties: 'background-color, border-color, box-shadow',
+2026-10-27T08:11:08.0750453Z   duration: '0.16s, 0.16s, 0.16s'
+2026-10-27T08:11:08.0750609Z }
+2026-10-27T08:11:08.0750744Z 320 no-preference subtle subtle {
+2026-10-27T08:11:08.0750943Z   properties: 'background-color, border-color, box-shadow',
+2026-10-27T08:11:08.0751143Z   duration: '0.16s, 0.16s, 0.16s'
+2026-10-27T08:11:08.0751273Z }
+2026-10-27T08:11:08.0751461Z 320 no-preference none none { properties: 'none', duration: '0s' }
+2026-10-27T08:11:08.0752011Z 320 no-preference calm none { properties: 'none', duration: '0s' }
+2026-10-27T08:11:08.0752260Z 320 reduce full full { properties: 'none', duration: '0s' }
+2026-10-27T08:11:08.0752506Z 320 reduce subtle subtle { properties: 'none', duration: '0s' }
+2026-10-27T08:11:08.0752748Z 320 reduce none none { properties: 'none', duration: '0s' }
+2026-10-27T08:11:08.0752974Z 320 reduce calm none { properties: 'none', duration: '0s' }
+2026-10-27T08:11:08.0753166Z 1280 no-preference full full {
+2026-10-27T08:11:08.0753362Z   properties: 'background-color, border-color, box-shadow',
+2026-10-27T08:11:08.0753550Z   duration: '0.16s, 0.16s, 0.16s'
+2026-10-27T08:11:08.0753676Z }
+2026-10-27T08:11:08.0753803Z 1280 no-preference subtle subtle {
+2026-10-27T08:11:08.0753988Z   properties: 'background-color, border-color, box-shadow',
+2026-10-27T08:11:08.0754172Z   duration: '0.16s, 0.16s, 0.16s'
+2026-10-27T08:11:08.0754296Z }
+2026-10-27T08:11:08.0754476Z 1280 no-preference none none { properties: 'none', duration: '0s' }
+2026-10-27T08:11:08.0754749Z 1280 no-preference calm none { properties: 'none', duration: '0s' }
+2026-10-27T08:11:08.0755003Z 1280 reduce full full { properties: 'none', duration: '0s' }
+2026-10-27T08:11:08.0755247Z 1280 reduce subtle subtle { properties: 'none', duration: '0s' }
+2026-10-27T08:11:08.0755493Z 1280 reduce none none { properties: 'none', duration: '0s' }
+2026-10-27T08:11:08.0755726Z 1280 reduce calm none { properties: 'none', duration: '0s' }
+2026-10-27T08:11:08.0756203Z PASS defaulttextfocus+nativeTabblur actualring160 FullSubtle NoneCalmReduceoff geometry/valuepreserved3201280
+2026-10-27T08:11:08.0756441Z 
+2026-10-27T08:11:13.2210829Z CASE settings_native_browser_zoom_drop_chooser_browser.cjs default PASS exit=0 seconds=5.1
+2026-10-27T08:11:13.2211412Z NATIVEZOOM { width: 1280, dpr: 1, scale: 1 } { width: 320, dpr: 4, scale: 1 }
+2026-10-27T08:11:13.2211630Z KEY Enter true
+2026-10-27T08:11:13.2211749Z KEY Space true
+2026-10-27T08:11:13.2212044Z PASS nativeChrome400dropEnterSpace actualchooser fixtureReview503 focuskept Nothingloaded noLoad
+2026-10-27T08:11:13.2212300Z 
+2026-10-27T08:11:20.5235393Z CASE settings_theme_init_race_browser.cjs default PASS exit=0 seconds=7.3
+2026-10-27T08:11:20.5235885Z PASS delayedtheme pipelinefirstnavigation harmless/previeweventuallyready/noJSerror3201280
+2026-10-27T08:11:20.5236102Z 
+2026-10-27T08:11:26.5853406Z CASE setup_status_retry_late_recheck_browser.cjs default PASS exit=0 seconds=6.1
+2026-10-27T08:11:26.5853899Z PASS statusRetryPendingSingleflight/lateRetryCannotReplaceRecheck4matrix noNewSetup
+2026-10-27T08:11:26.5854110Z 
+2026-10-27T08:11:54.7584859Z CASE sidebar_secondary_labels_motion_browser.cjs default PASS exit=0 seconds=28.2
+2026-10-27T08:11:54.7587107Z LABEL full left no-preference {
+2026-10-27T08:11:54.7587353Z   display: 'grid',
+2026-10-27T08:11:54.7587547Z   opacity: '1',
+2026-10-27T08:11:54.7587689Z   visibility: 'visible',
+2026-10-27T08:11:54.7587821Z   rect: {
+2026-10-27T08:11:54.7587924Z     x: 37,
+2026-10-27T08:11:54.7588071Z     y: 828.21875,
+2026-10-27T08:11:54.7588191Z     width: 217,
+2026-10-27T08:11:54.7588307Z     height: 34.78125,
+2026-10-27T08:11:54.7588430Z     top: 828.21875,
+2026-10-27T08:11:54.7588541Z     right: 254,
+2026-10-27T08:11:54.7588652Z     bottom: 863,
+2026-10-27T08:11:54.7588799Z     left: 37
+2026-10-27T08:11:54.7588903Z   }
+2026-10-27T08:11:54.7589008Z }
+2026-10-27T08:11:54.7589198Z ENTRY full left { duration: 120, delay: 180, mid: 0.684643 } {
+2026-10-27T08:11:54.7589383Z   o: '0.684643',
+2026-10-27T08:11:54.7589502Z   vis: 'visible',
+2026-10-27T08:11:54.7589642Z   an: [ { p: 'opacity', s: 'paused' } ]
+2026-10-27T08:11:54.7589788Z }
+2026-10-27T08:11:54.7590575Z CLOCKS full left no-preference [{"key":"exit","at":828.9000000000233,"visibility":"visible","visibilityTime":0,"visibilityTiming":{"delay":120,"direction":"normal","duration":0,"easing":"ease","endDelay":0,"fill":"backwards","iterationStart":0,"iterations":1},"gridTime":0},{"key":"entry","at":1222.3000000000466,"visibility":"visible","gridTime":0}]
+2026-10-27T08:11:54.7591675Z NATURAL full left no-preference { elapsed: 215.40000000002328, visibility: 'visible', opacity: '1' }
+2026-10-27T08:11:54.7591949Z LABEL full right no-preference {
+2026-10-27T08:11:54.7592094Z   display: 'grid',
+2026-10-27T08:11:54.7592212Z   opacity: '1',
+2026-10-27T08:11:54.7592331Z   visibility: 'visible',
+2026-10-27T08:11:54.7592453Z   rect: {
+2026-10-27T08:11:54.7592577Z     x: 1026,
+2026-10-27T08:11:54.7592681Z     y: 828.21875,
+2026-10-27T08:11:54.7592787Z     width: 217,
+2026-10-27T08:11:54.7592900Z     height: 34.78125,
+2026-10-27T08:11:54.7593022Z     top: 828.21875,
+2026-10-27T08:11:54.7593134Z     right: 1243,
+2026-10-27T08:11:54.7593242Z     bottom: 863,
+2026-10-27T08:11:54.7593349Z     left: 1026
+2026-10-27T08:11:54.7593453Z   }
+2026-10-27T08:11:54.7593551Z }
+2026-10-27T08:11:54.7593727Z ENTRY full right { duration: 120, delay: 180, mid: 0.684643 } {
+2026-10-27T08:11:54.7593906Z   o: '0.684643',
+2026-10-27T08:11:54.7594015Z   vis: 'visible',
+2026-10-27T08:11:54.7594151Z   an: [ { p: 'opacity', s: 'paused' } ]
+2026-10-27T08:11:54.7594291Z }
+2026-10-27T08:11:54.7595041Z CLOCKS full right no-preference [{"key":"exit","at":771.7000000000698,"visibility":"visible","visibilityTime":0,"visibilityTiming":{"delay":120,"direction":"normal","duration":0,"easing":"ease","endDelay":0,"fill":"backwards","iterationStart":0,"iterations":1},"gridTime":0},{"key":"entry","at":1150.3000000000466,"visibility":"visible","gridTime":0}]
+2026-10-27T08:11:54.7595931Z NATURAL full right no-preference { elapsed: 201.40000000002328, visibility: 'visible', opacity: '1' }
+2026-10-27T08:11:54.7596202Z LABEL subtle left no-preference {
+2026-10-27T08:11:54.7596341Z   display: 'grid',
+2026-10-27T08:11:54.7596547Z   opacity: '1',
+2026-10-27T08:11:54.7596662Z   visibility: 'visible',
+2026-10-27T08:11:54.7596785Z   rect: {
+2026-10-27T08:11:54.7596884Z     x: 37,
+2026-10-27T08:11:54.7596984Z     y: 828.21875,
+2026-10-27T08:11:54.7597090Z     width: 217,
+2026-10-27T08:11:54.7597198Z     height: 34.78125,
+2026-10-27T08:11:54.7597316Z     top: 828.21875,
+2026-10-27T08:11:54.7597427Z     right: 254,
+2026-10-27T08:11:54.7597533Z     bottom: 863,
+2026-10-27T08:11:54.7597639Z     left: 37
+2026-10-27T08:11:54.7597738Z   }
+2026-10-27T08:11:54.7597833Z }
+2026-10-27T08:11:54.7598008Z ENTRY subtle left { duration: 80, delay: 60, mid: 0.684643 } {
+2026-10-27T08:11:54.7598186Z   o: '0.684643',
+2026-10-27T08:11:54.7598295Z   vis: 'visible',
+2026-10-27T08:11:54.7598426Z   an: [ { p: 'opacity', s: 'paused' } ]
+2026-10-27T08:11:54.7598568Z }
+2026-10-27T08:11:54.7599313Z CLOCKS subtle left no-preference [{"key":"exit","at":805.8000000000466,"visibility":"visible","visibilityTime":0,"visibilityTiming":{"delay":120,"direction":"normal","duration":0,"easing":"ease","endDelay":0,"fill":"backwards","iterationStart":0,"iterations":1},"gridTime":0},{"key":"entry","at":1187.8000000000466,"visibility":"visible","gridTime":0}]
+2026-10-27T08:11:54.7600075Z NATURAL subtle left no-preference { elapsed: 221.09999999997672, visibility: 'visible', opacity: '1' }
+2026-10-27T08:11:54.7600350Z LABEL subtle right no-preference {
+2026-10-27T08:11:54.7600490Z   display: 'grid',
+2026-10-27T08:11:54.7600600Z   opacity: '1',
+2026-10-27T08:11:54.7600713Z   visibility: 'visible',
+2026-10-27T08:11:54.7600831Z   rect: {
+2026-10-27T08:11:54.7600935Z     x: 1026,
+2026-10-27T08:11:54.7601037Z     y: 828.21875,
+2026-10-27T08:11:54.7601143Z     width: 217,
+2026-10-27T08:11:54.7601252Z     height: 34.78125,
+2026-10-27T08:11:54.7601369Z     top: 828.21875,
+2026-10-27T08:11:54.7601481Z     right: 1243,
+2026-10-27T08:11:54.7601588Z     bottom: 863,
+2026-10-27T08:11:54.7601696Z     left: 1026
+2026-10-27T08:11:54.7601799Z   }
+2026-10-27T08:11:54.7601893Z }
+2026-10-27T08:11:54.7602064Z ENTRY subtle right { duration: 80, delay: 60, mid: 0.684643 } {
+2026-10-27T08:11:54.7602240Z   o: '0.684643',
+2026-10-27T08:11:54.7602346Z   vis: 'visible',
+2026-10-27T08:11:54.7602478Z   an: [ { p: 'opacity', s: 'paused' } ]
+2026-10-27T08:11:54.7602614Z }
+2026-10-27T08:11:54.7603362Z CLOCKS subtle right no-preference [{"key":"exit","at":811.9000000000233,"visibility":"visible","visibilityTime":0,"visibilityTiming":{"delay":120,"direction":"normal","duration":0,"easing":"ease","endDelay":0,"fill":"backwards","iterationStart":0,"iterations":1},"gridTime":0},{"key":"entry","at":1193.3000000000466,"visibility":"visible","gridTime":0}]
+2026-10-27T08:11:54.7604221Z NATURAL subtle right no-preference { elapsed: 210.5, visibility: 'visible', opacity: '1' }
+2026-10-27T08:11:54.7604480Z LABEL none left no-preference {
+2026-10-27T08:11:54.7604618Z   display: 'grid',
+2026-10-27T08:11:54.7604730Z   opacity: '1',
+2026-10-27T08:11:54.7604844Z   visibility: 'visible',
+2026-10-27T08:11:54.7604963Z   rect: {
+2026-10-27T08:11:54.7605062Z     x: 37,
+2026-10-27T08:11:54.7605164Z     y: 828.21875,
+2026-10-27T08:11:54.7605274Z     width: 217,
+2026-10-27T08:11:54.7605386Z     height: 34.78125,
+2026-10-27T08:11:54.7605500Z     top: 828.21875,
+2026-10-27T08:11:54.7605609Z     right: 254,
+2026-10-27T08:11:54.7605718Z     bottom: 863,
+2026-10-27T08:11:54.7605824Z     left: 37
+2026-10-27T08:11:54.7605927Z   }
+2026-10-27T08:11:54.7606021Z }
+2026-10-27T08:11:54.7606176Z ENTRY none left null { o: '1', vis: 'visible', an: [] }
+2026-10-27T08:11:54.7606797Z CLOCKS none left no-preference [{"key":"exit","at":778.0999999999767,"visibility":"hidden"},{"key":"entry","at":1148.6999999999534,"visibility":"visible"}]
+2026-10-27T08:11:54.7607368Z NATURAL none left no-preference { elapsed: 24.400000000023283, visibility: 'visible', opacity: '1' }
+2026-10-27T08:11:54.7607635Z LABEL none right no-preference {
+2026-10-27T08:11:54.7607774Z   display: 'grid',
+2026-10-27T08:11:54.7607887Z   opacity: '1',
+2026-10-27T08:11:54.7608000Z   visibility: 'visible',
+2026-10-27T08:11:54.7608117Z   rect: {
+2026-10-27T08:11:54.7608215Z     x: 1026,
+2026-10-27T08:11:54.7608317Z     y: 828.21875,
+2026-10-27T08:11:54.7608428Z     width: 217,
+2026-10-27T08:11:54.7608535Z     height: 34.78125,
+2026-10-27T08:11:54.7608649Z     top: 828.21875,
+2026-10-27T08:11:54.7608761Z     right: 1243,
+2026-10-27T08:11:54.7608869Z     bottom: 863,
+2026-10-27T08:11:54.7608975Z     left: 1026
+2026-10-27T08:11:54.7609080Z   }
+2026-10-27T08:11:54.7609173Z }
+2026-10-27T08:11:54.7609330Z ENTRY none right null { o: '1', vis: 'visible', an: [] }
+2026-10-27T08:11:54.7609745Z CLOCKS none right no-preference [{"key":"exit","at":787.3999999999069,"visibility":"hidden"},{"key":"entry","at":1154.3999999999069,"visibility":"visible"}]
+2026-10-27T08:11:54.7610203Z NATURAL none right no-preference { elapsed: 31.20000000006985, visibility: 'visible', opacity: '1' }
+2026-10-27T08:11:54.7610467Z LABEL calm left no-preference {
+2026-10-27T08:11:54.7610603Z   display: 'grid',
+2026-10-27T08:11:54.7610714Z   opacity: '1',
+2026-10-27T08:11:54.7610828Z   visibility: 'visible',
+2026-10-27T08:11:54.7610946Z   rect: {
+2026-10-27T08:11:54.7611045Z     x: 37,
+2026-10-27T08:11:54.7611145Z     y: 828.21875,
+2026-10-27T08:11:54.7611254Z     width: 217,
+2026-10-27T08:11:54.7611361Z     height: 34.78125,
+2026-10-27T08:11:54.7611477Z     top: 828.21875,
+2026-10-27T08:11:54.7611585Z     right: 254,
+2026-10-27T08:11:54.7611690Z     bottom: 863,
+2026-10-27T08:11:54.7611796Z     left: 37
+2026-10-27T08:11:54.7611899Z   }
+2026-10-27T08:11:54.7611992Z }
+2026-10-27T08:11:54.7612146Z ENTRY calm left null { o: '1', vis: 'visible', an: [] }
+2026-10-27T08:11:54.7612561Z CLOCKS calm left no-preference [{"key":"exit","at":767.3000000000466,"visibility":"hidden"},{"key":"entry","at":1135.4000000000233,"visibility":"visible"}]
+2026-10-27T08:11:54.7613018Z NATURAL calm left no-preference { elapsed: 24.900000000023283, visibility: 'visible', opacity: '1' }
+2026-10-27T08:11:54.7613279Z LABEL calm right no-preference {
+2026-10-27T08:11:54.7613418Z   display: 'grid',
+2026-10-27T08:11:54.7613530Z   opacity: '1',
+2026-10-27T08:11:54.7613642Z   visibility: 'visible',
+2026-10-27T08:11:54.7613761Z   rect: {
+2026-10-27T08:11:54.7613859Z     x: 1026,
+2026-10-27T08:11:54.7613961Z     y: 828.21875,
+2026-10-27T08:11:54.7614069Z     width: 217,
+2026-10-27T08:11:54.7614290Z     height: 34.78125,
+2026-10-27T08:11:54.7614404Z     top: 828.21875,
+2026-10-27T08:11:54.7614513Z     right: 1243,
+2026-10-27T08:11:54.7614620Z     bottom: 863,
+2026-10-27T08:11:54.7614726Z     left: 1026
+2026-10-27T08:11:54.7614831Z   }
+2026-10-27T08:11:54.7614923Z }
+2026-10-27T08:11:54.7615079Z ENTRY calm right null { o: '1', vis: 'visible', an: [] }
+2026-10-27T08:11:54.7615468Z CLOCKS calm right no-preference [{"key":"exit","at":778.5,"visibility":"hidden"},{"key":"entry","at":1151.2000000000698,"visibility":"visible"}]
+2026-10-27T08:11:54.7615908Z NATURAL calm right no-preference { elapsed: 22.599999999976717, visibility: 'visible', opacity: '1' }
+2026-10-27T08:11:54.7616155Z LABEL full left reduce {
+2026-10-27T08:11:54.7616280Z   display: 'grid',
+2026-10-27T08:11:54.7616391Z   opacity: '1',
+2026-10-27T08:11:54.7616577Z   visibility: 'visible',
+2026-10-27T08:11:54.7616693Z   rect: {
+2026-10-27T08:11:54.7616791Z     x: 37,
+2026-10-27T08:11:54.7616890Z     y: 828.21875,
+2026-10-27T08:11:54.7617002Z     width: 217,
+2026-10-27T08:11:54.7617110Z     height: 34.78125,
+2026-10-27T08:11:54.7617225Z     top: 828.21875,
+2026-10-27T08:11:54.7617334Z     right: 254,
+2026-10-27T08:11:54.7617439Z     bottom: 863,
+2026-10-27T08:11:54.7617545Z     left: 37
+2026-10-27T08:11:54.7617646Z   }
+2026-10-27T08:11:54.7617739Z }
+2026-10-27T08:11:54.7617893Z ENTRY full left null { o: '1', vis: 'visible', an: [] }
+2026-10-27T08:11:54.7618371Z CLOCKS full left reduce [{"key":"exit","at":771.9000000000233,"visibility":"hidden"},{"key":"entry","at":1137.5,"visibility":"visible"}]
+2026-10-27T08:11:54.7618785Z NATURAL full left reduce { elapsed: 23.300000000046566, visibility: 'visible', opacity: '1' }
+2026-10-27T08:11:54.7619026Z LABEL full right reduce {
+2026-10-27T08:11:54.7619158Z   display: 'grid',
+2026-10-27T08:11:54.7619269Z   opacity: '1',
+2026-10-27T08:11:54.7619381Z   visibility: 'visible',
+2026-10-27T08:11:54.7619498Z   rect: {
+2026-10-27T08:11:54.7619597Z     x: 1026,
+2026-10-27T08:11:54.7619700Z     y: 828.21875,
+2026-10-27T08:11:54.7619811Z     width: 217,
+2026-10-27T08:11:54.7619918Z     height: 34.78125,
+2026-10-27T08:11:54.7620032Z     top: 828.21875,
+2026-10-27T08:11:54.7620145Z     right: 1243,
+2026-10-27T08:11:54.7620251Z     bottom: 863,
+2026-10-27T08:11:54.7620358Z     left: 1026
+2026-10-27T08:11:54.7620460Z   }
+2026-10-27T08:11:54.7620559Z }
+2026-10-27T08:11:54.7620715Z ENTRY full right null { o: '1', vis: 'visible', an: [] }
+2026-10-27T08:11:54.7621111Z CLOCKS full right reduce [{"key":"exit","at":762.4000000000233,"visibility":"hidden"},{"key":"entry","at":1123.5999999999767,"visibility":"visible"}]
+2026-10-27T08:11:54.7621538Z NATURAL full right reduce { elapsed: 25.599999999976717, visibility: 'visible', opacity: '1' }
+2026-10-27T08:11:54.7621779Z LABEL subtle left reduce {
+2026-10-27T08:11:54.7621908Z   display: 'grid',
+2026-10-27T08:11:54.7622019Z   opacity: '1',
+2026-10-27T08:11:54.7622131Z   visibility: 'visible',
+2026-10-27T08:11:54.7622250Z   rect: {
+2026-10-27T08:11:54.7622347Z     x: 37,
+2026-10-27T08:11:54.7622449Z     y: 828.21875,
+2026-10-27T08:11:54.7622558Z     width: 217,
+2026-10-27T08:11:54.7622665Z     height: 34.78125,
+2026-10-27T08:11:54.7622778Z     top: 828.21875,
+2026-10-27T08:11:54.7622887Z     right: 254,
+2026-10-27T08:11:54.7622991Z     bottom: 863,
+2026-10-27T08:11:54.7623100Z     left: 37
+2026-10-27T08:11:54.7623198Z   }
+2026-10-27T08:11:54.7623294Z }
+2026-10-27T08:11:54.7623451Z ENTRY subtle left null { o: '1', vis: 'visible', an: [] }
+2026-10-27T08:11:54.7623851Z CLOCKS subtle left reduce [{"key":"exit","at":771.9000000000233,"visibility":"hidden"},{"key":"entry","at":1134.6000000000931,"visibility":"visible"}]
+2026-10-27T08:11:54.7624258Z NATURAL subtle left reduce { elapsed: 21.5, visibility: 'visible', opacity: '1' }
+2026-10-27T08:11:54.7624481Z LABEL subtle right reduce {
+2026-10-27T08:11:54.7624612Z   display: 'grid',
+2026-10-27T08:11:54.7624723Z   opacity: '1',
+2026-10-27T08:11:54.7624834Z   visibility: 'visible',
+2026-10-27T08:11:54.7624952Z   rect: {
+2026-10-27T08:11:54.7625161Z     x: 1026,
+2026-10-27T08:11:54.7625264Z     y: 828.21875,
+2026-10-27T08:11:54.7625373Z     width: 217,
+2026-10-27T08:11:54.7625480Z     height: 34.78125,
+2026-10-27T08:11:54.7625594Z     top: 828.21875,
+2026-10-27T08:11:54.7625704Z     right: 1243,
+2026-10-27T08:11:54.7625811Z     bottom: 863,
+2026-10-27T08:11:54.7625917Z     left: 1026
+2026-10-27T08:11:54.7626019Z   }
+2026-10-27T08:11:54.7626116Z }
+2026-10-27T08:11:54.7626278Z ENTRY subtle right null { o: '1', vis: 'visible', an: [] }
+2026-10-27T08:11:54.7626845Z CLOCKS subtle right reduce [{"key":"exit","at":781.1999999999534,"visibility":"hidden"},{"key":"entry","at":1143.4000000000233,"visibility":"visible"}]
+2026-10-27T08:11:54.7627286Z NATURAL subtle right reduce { elapsed: 33.40000000002328, visibility: 'visible', opacity: '1' }
+2026-10-27T08:11:54.7627529Z LABEL none left reduce {
+2026-10-27T08:11:54.7627654Z   display: 'grid',
+2026-10-27T08:11:54.7627763Z   opacity: '1',
+2026-10-27T08:11:54.7627875Z   visibility: 'visible',
+2026-10-27T08:11:54.7627994Z   rect: {
+2026-10-27T08:11:54.7628092Z     x: 37,
+2026-10-27T08:11:54.7628192Z     y: 828.21875,
+2026-10-27T08:11:54.7628299Z     width: 217,
+2026-10-27T08:11:54.7628411Z     height: 34.78125,
+2026-10-27T08:11:54.7628524Z     top: 828.21875,
+2026-10-27T08:11:54.7628634Z     right: 254,
+2026-10-27T08:11:54.7628739Z     bottom: 863,
+2026-10-27T08:11:54.7628844Z     left: 37
+2026-10-27T08:11:54.7628942Z   }
+2026-10-27T08:11:54.7629037Z }
+2026-10-27T08:11:54.7629291Z ENTRY none left null { o: '1', vis: 'visible', an: [] }
+2026-10-27T08:11:54.7629681Z CLOCKS none left reduce [{"key":"exit","at":765.0999999999767,"visibility":"hidden"},{"key":"entry","at":1126.8000000000466,"visibility":"visible"}]
+2026-10-27T08:11:54.7630103Z NATURAL none left reduce { elapsed: 23.199999999953434, visibility: 'visible', opacity: '1' }
+2026-10-27T08:11:54.7630340Z LABEL none right reduce {
+2026-10-27T08:11:54.7630466Z   display: 'grid',
+2026-10-27T08:11:54.7630577Z   opacity: '1',
+2026-10-27T08:11:54.7630689Z   visibility: 'visible',
+2026-10-27T08:11:54.7630808Z   rect: {
+2026-10-27T08:11:54.7630905Z     x: 1026,
+2026-10-27T08:11:54.7631007Z     y: 828.21875,
+2026-10-27T08:11:54.7631114Z     width: 217,
+2026-10-27T08:11:54.7631224Z     height: 34.78125,
+2026-10-27T08:11:54.7631338Z     top: 828.21875,
+2026-10-27T08:11:54.7631448Z     right: 1243,
+2026-10-27T08:11:54.7631555Z     bottom: 863,
+2026-10-27T08:11:54.7631661Z     left: 1026
+2026-10-27T08:11:54.7631761Z   }
+2026-10-27T08:11:54.7631856Z }
+2026-10-27T08:11:54.7632013Z ENTRY none right null { o: '1', vis: 'visible', an: [] }
+2026-10-27T08:11:54.7632408Z CLOCKS none right reduce [{"key":"exit","at":773.5999999999767,"visibility":"hidden"},{"key":"entry","at":1135.1999999999534,"visibility":"visible"}]
+2026-10-27T08:11:54.7632837Z NATURAL none right reduce { elapsed: 24.70000000006985, visibility: 'visible', opacity: '1' }
+2026-10-27T08:11:54.7633073Z LABEL calm left reduce {
+2026-10-27T08:11:54.7633199Z   display: 'grid',
+2026-10-27T08:11:54.7633311Z   opacity: '1',
+2026-10-27T08:11:54.7633425Z   visibility: 'visible',
+2026-10-27T08:11:54.7633542Z   rect: {
+2026-10-27T08:11:54.7633640Z     x: 37,
+2026-10-27T08:11:54.7633740Z     y: 828.21875,
+2026-10-27T08:11:54.7633846Z     width: 217,
+2026-10-27T08:11:54.7633957Z     height: 34.78125,
+2026-10-27T08:11:54.7634072Z     top: 828.21875,
+2026-10-27T08:11:54.7634180Z     right: 254,
+2026-10-27T08:11:54.7634287Z     bottom: 863,
+2026-10-27T08:11:54.7634392Z     left: 37
+2026-10-27T08:11:54.7634491Z   }
+2026-10-27T08:11:54.7634589Z }
+2026-10-27T08:11:54.7634743Z ENTRY calm left null { o: '1', vis: 'visible', an: [] }
+2026-10-27T08:11:54.7635129Z CLOCKS calm left reduce [{"key":"exit","at":775.2999999999302,"visibility":"hidden"},{"key":"entry","at":1137.9000000000233,"visibility":"visible"}]
+2026-10-27T08:11:54.7635548Z NATURAL calm left reduce { elapsed: 23.099999999976717, visibility: 'visible', opacity: '1' }
+2026-10-27T08:11:54.7635784Z LABEL calm right reduce {
+2026-10-27T08:11:54.7635908Z   display: 'grid',
+2026-10-27T08:11:54.7636125Z   opacity: '1',
+2026-10-27T08:11:54.7636237Z   visibility: 'visible',
+2026-10-27T08:11:54.7636355Z   rect: {
+2026-10-27T08:11:54.7636531Z     x: 1026,
+2026-10-27T08:11:54.7636672Z     y: 828.21875,
+2026-10-27T08:11:54.7636846Z     width: 217,
+2026-10-27T08:11:54.7636958Z     height: 34.78125,
+2026-10-27T08:11:54.7637072Z     top: 828.21875,
+2026-10-27T08:11:54.7637180Z     right: 1243,
+2026-10-27T08:11:54.7637287Z     bottom: 863,
+2026-10-27T08:11:54.7637394Z     left: 1026
+2026-10-27T08:11:54.7637496Z   }
+2026-10-27T08:11:54.7637592Z }
+2026-10-27T08:11:54.7637746Z ENTRY calm right null { o: '1', vis: 'visible', an: [] }
+2026-10-27T08:11:54.7638117Z CLOCKS calm right reduce [{"key":"exit","at":778.2000000000698,"visibility":"hidden"},{"key":"entry","at":1145,"visibility":"visible"}]
+2026-10-27T08:11:54.7638503Z NATURAL calm right reduce { elapsed: 26, visibility: 'visible', opacity: '1' }
+2026-10-27T08:11:54.7638971Z PASS dockedsecondarynote/date100exit120entrydelay180Full60Subtle reducedNoneCalmimmediate retainedkeyboardfocus inert left/right16states
+2026-10-27T08:11:54.7639263Z 
+2026-10-27T08:12:11.0435923Z CASE source_long_credential_inventory_motion_browser.cjs default PASS exit=0 seconds=16.3
+2026-10-27T08:12:11.0436698Z SOURCEKEYLONG 320 no-preference Fixture custom source API key
+2026-10-27T08:12:11.0437076Z SOURCEKEYLONG 320 no-preference Tavily API key
+2026-10-27T08:12:11.0437386Z SOURCEKEYLONG 320 no-preference Exa API key
+2026-10-27T08:12:11.0438052Z SOURCEKEYLONG 320 no-preference Firecrawl API key
+2026-10-27T08:12:11.0438385Z SOURCEKEYLONG 320 no-preference Parallel API key
+2026-10-27T08:12:11.0438716Z SOURCEKEYLONG 320 reduce Fixture custom source API key
+2026-10-27T08:12:11.0438919Z SOURCEKEYLONG 320 reduce Tavily API key
+2026-10-27T08:12:11.0439090Z SOURCEKEYLONG 320 reduce Exa API key
+2026-10-27T08:12:11.0439263Z SOURCEKEYLONG 320 reduce Firecrawl API key
+2026-10-27T08:12:11.0439448Z SOURCEKEYLONG 320 reduce Parallel API key
+2026-10-27T08:12:11.0439682Z SOURCEKEYLONG 1280 no-preference Fixture custom source API key
+2026-10-27T08:12:11.0439986Z SOURCEKEYLONG 1280 no-preference Tavily API key
+2026-10-27T08:12:11.0440293Z SOURCEKEYLONG 1280 no-preference Exa API key
+2026-10-27T08:12:11.0440602Z SOURCEKEYLONG 1280 no-preference Firecrawl API key
+2026-10-27T08:12:11.0440867Z SOURCEKEYLONG 1280 no-preference Parallel API key
+2026-10-27T08:12:11.0441084Z SOURCEKEYLONG 1280 reduce Fixture custom source API key
+2026-10-27T08:12:11.0441284Z SOURCEKEYLONG 1280 reduce Tavily API key
+2026-10-27T08:12:11.0441463Z SOURCEKEYLONG 1280 reduce Exa API key
+2026-10-27T08:12:11.0441638Z SOURCEKEYLONG 1280 reduce Firecrawl API key
+2026-10-27T08:12:11.0441868Z SOURCEKEYLONG 1280 reduce Parallel API key
+2026-10-27T08:12:11.0442267Z PASS allvisibleweb/catalog/customSourcekey1219/819/clear masked fixedcardcontrols3201280normalReduce noSave
+2026-10-27T08:12:11.0442504Z 
+2026-10-27T08:12:15.7407437Z CASE source_scope_short_height_keyboard_motion_browser.cjs default PASS exit=0 seconds=4.7
+2026-10-27T08:12:15.7408100Z PASS source scope80longdocs nativeTab/ShiftTab oversizedlabel start/end scrollreachable Doneandheaderinviewport scrollcontained3201280normalReduce
+2026-10-27T08:12:15.7408406Z 
+2026-10-27T08:12:17.9821103Z CASE splitters_browser.cjs default PASS exit=0 seconds=2.2
+2026-10-27T08:12:17.9821677Z PASS new tabs layout no legacy resize handles, preview hide/show/persistence/mobile
+2026-10-27T08:12:17.9821956Z 
+2026-10-27T08:12:19.5625872Z CASE topic-export.cjs default PASS exit=0 seconds=1.6
+2026-10-27T08:12:19.5626191Z # Multi-chat fixture 2
+2026-10-27T08:12:19.5626276Z 
+2026-10-27T08:12:19.5626404Z **Q:** Multi-chat question 2
+2026-10-27T08:12:19.5626574Z 
+2026-10-27T08:12:19.5626636Z Multi-chat answer 2
+2026-10-27T08:12:19.5626704Z 
+2026-10-27T08:12:19.5626708Z 
+2026-10-27T08:12:19.5626711Z 
+2026-10-27T08:12:25.4759366Z CASE workspace_all_late_reads_browser.cjs default PASS exit=0 seconds=5.9
+2026-10-27T08:12:25.4759853Z PASS WorkspaceChangesQuestions staleGETguards keepnewerDeploydraftfocus3201280
+2026-10-27T08:12:25.4760418Z 
+2026-10-27T08:12:31.0865600Z CASE workspace_questions_save_states_browser.cjs default PASS exit=0 seconds=5.6
+2026-10-27T08:12:31.0866108Z PASS workspacequestions200newerdraftfocusunsaved sharedsuccess503retryfocus3201280normalReduce
+2026-10-27T08:12:31.0866340Z 
+2026-10-27T08:12:31.0896735Z {"executions": 43, "failed": 0, "passed": 43, "scripts": 40}

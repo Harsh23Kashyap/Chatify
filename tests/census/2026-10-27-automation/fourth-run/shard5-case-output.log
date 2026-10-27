@@ -1,0 +1,657 @@
+2026-10-27T08:03:55.0793623Z CASE about_team_browser.cjs default PASS exit=0 seconds=8.5
+2026-10-27T08:03:55.0795066Z PASS portraitsloaded/teamfooter nooverflow3207601280/keyboardoutline/footer12px;externaldestinationsnotverified
+2026-10-27T08:03:55.0795702Z 
+2026-10-27T08:04:07.6077344Z CASE action_success_moved_focus_motion_browser.cjs default PASS exit=0 seconds=12.5
+2026-10-27T08:04:07.6078640Z PASS noteform-humanlabels exactreview-noJSON guardedrequests failedexecute-freshreview draftretained resultcards focusreturn3201280fixture
+2026-10-27T08:04:07.6079261Z 
+2026-10-27T08:04:19.1854212Z CASE answer_copy_pending_browser.cjs default PASS exit=0 seconds=11.6
+2026-10-27T08:04:19.1855029Z CASE 320 no-preference
+2026-10-27T08:04:19.1855697Z TURNS http://127.0.0.1:44785/api/turns?chat=fixture
+2026-10-27T08:04:19.1856204Z CASE 320 reduce
+2026-10-27T08:04:19.1856790Z TURNS http://127.0.0.1:44785/api/turns?chat=fixture
+2026-10-27T08:04:19.1857386Z CASE 1280 no-preference
+2026-10-27T08:04:19.1858041Z TURNS http://127.0.0.1:44785/api/turns?chat=fixture
+2026-10-27T08:04:19.1858642Z CASE 1280 reduce
+2026-10-27T08:04:19.1859258Z TURNS http://127.0.0.1:44785/api/turns?chat=fixture
+2026-10-27T08:04:19.1860778Z PASS answerCopy pending singleflight exactcontent clearsoldtimer persistentadjacenterror retryrestored3201280normalReduce
+2026-10-27T08:04:19.1861801Z 
+2026-10-27T08:04:50.3795839Z CASE appearance_navigation_audit_browser.cjs default PASS exit=0 seconds=31.2
+2026-10-27T08:04:50.3797370Z {"width":320,"mode":"simple","panelTop":634.171875,"firstPresetTop":718.8125}
+2026-10-27T08:04:50.3798380Z Preset initial viewport 718.8125 82
+2026-10-27T08:04:50.3799465Z {"width":320,"mode":"advanced","panelTop":628.171875,"firstPresetTop":843.8125}
+2026-10-27T08:04:50.3800602Z Preset initial viewport 843.8125 82
+2026-10-27T08:04:50.3801404Z {"width":390,"mode":"simple","panelTop":581.796875,"firstPresetTop":666.4375}
+2026-10-27T08:04:50.3802118Z Preset initial viewport 666.4375 82
+2026-10-27T08:04:50.3803311Z {"width":390,"mode":"advanced","panelTop":581.796875,"firstPresetTop":755.4375}
+2026-10-27T08:04:50.3804122Z Preset initial viewport 755.4375 82
+2026-10-27T08:04:50.3804918Z {"width":1280,"mode":"simple","panelTop":645.78125,"firstPresetTop":736.421875}
+2026-10-27T08:04:50.3805820Z {"width":1280,"mode":"advanced","panelTop":629.78125,"firstPresetTop":809.421875}
+2026-10-27T08:04:50.3807540Z PASS compact mobile9destinations/44px/firstpresetstartwithin800phoneMeasuredFullcardNOTclaimed/categorysubsectionSync/fullcardkeyboard/dialogcancel/finalcontrols3203901280SimpleAdvanced
+2026-10-27T08:04:50.3808686Z 
+2026-10-27T08:04:54.5289296Z CASE budget_captured_browser.cjs default PASS exit=0 seconds=4.1
+2026-10-27T08:04:54.5290406Z PASS captured budget saves3;newer7 retained and labelledunsaved
+2026-10-27T08:04:54.5290809Z 
+2026-10-27T08:05:07.9712177Z CASE builder_dashboard_longphase_motion_browser.cjs default PASS exit=0 seconds=13.4
+2026-10-27T08:05:07.9713619Z BOARD 320 {"height":94,"cards":[{"height":94,"title":19}]}
+2026-10-27T08:05:07.9714737Z BOARD 1280 {"height":94,"cards":[{"height":94,"title":19}]}
+2026-10-27T08:05:07.9716097Z PASS longphase/stressedfont actualgroupboardcardheight/titleoffsetexact queued/running/received/error3201280
+2026-10-27T08:05:07.9717023Z 
+2026-10-27T08:05:16.3965743Z CASE builder_library_empty_motion_browser.cjs default PASS exit=0 seconds=8.4
+2026-10-27T08:05:16.3966702Z LIBRARYEMPTY 320 no-preference {
+2026-10-27T08:05:16.3967084Z   name: 'm-in',
+2026-10-27T08:05:16.3967388Z   duration: '0.14s',
+2026-10-27T08:05:16.3967696Z   transform: 'none',
+2026-10-27T08:05:16.3968012Z   role: 'status',
+2026-10-27T08:05:16.3968304Z   decorations: 0,
+2026-10-27T08:05:16.3968621Z   frames: [
+2026-10-27T08:05:16.3968959Z     { opacity: '0', transform: 'none' },
+2026-10-27T08:05:16.3969590Z     { opacity: '1', transform: 'none' }
+2026-10-27T08:05:16.3969958Z   ]
+2026-10-27T08:05:16.3970217Z }
+2026-10-27T08:05:16.3970592Z LIBRARYEMPTY 320 reduce {
+2026-10-27T08:05:16.3970930Z   name: 'none',
+2026-10-27T08:05:16.3971341Z   duration: '0s',
+2026-10-27T08:05:16.3971714Z   transform: 'none',
+2026-10-27T08:05:16.3972084Z   role: 'status',
+2026-10-27T08:05:16.3972870Z   decorations: 0,
+2026-10-27T08:05:16.3973378Z   frames: []
+2026-10-27T08:05:16.3973720Z }
+2026-10-27T08:05:16.3974059Z LIBRARYEMPTY 1280 no-preference {
+2026-10-27T08:05:16.3974420Z   name: 'm-in',
+2026-10-27T08:05:16.3974702Z   duration: '0.14s',
+2026-10-27T08:05:16.3974999Z   transform: 'none',
+2026-10-27T08:05:16.3975298Z   role: 'status',
+2026-10-27T08:05:16.3975577Z   decorations: 0,
+2026-10-27T08:05:16.3975850Z   frames: [
+2026-10-27T08:05:16.3976175Z     { opacity: '0', transform: 'none' },
+2026-10-27T08:05:16.3976617Z     { opacity: '1', transform: 'none' }
+2026-10-27T08:05:16.3976972Z   ]
+2026-10-27T08:05:16.3977217Z }
+2026-10-27T08:05:16.3977502Z LIBRARYEMPTY 1280 reduce {
+2026-10-27T08:05:16.3977824Z   name: 'none',
+2026-10-27T08:05:16.3978101Z   duration: '0s',
+2026-10-27T08:05:16.3978386Z   transform: 'none',
+2026-10-27T08:05:16.3978673Z   role: 'status',
+2026-10-27T08:05:16.3978965Z   decorations: 0,
+2026-10-27T08:05:16.3979241Z   frames: []
+2026-10-27T08:05:16.3979495Z }
+2026-10-27T08:05:16.3980698Z PASS savedDraftsactualempty140opacitynoheadingmovement/nolargedecoration populatedreplacesnoempty/stablesummary/focus noAIrequests3201280normalReduce/None
+2026-10-27T08:05:16.3981369Z 
+2026-10-27T08:05:23.4105277Z CASE builder_review_a11y_browser.cjs default PASS exit=0 seconds=7.0
+2026-10-27T08:05:23.4107271Z REVIEWAXE 320 []
+2026-10-27T08:05:23.4107903Z REVIEWAXE 1280 []
+2026-10-27T08:05:23.4109179Z PASS markReviewed140statusOnly stableGroup FullSubtleNoneCalmOSReduce3201280 noModelSavecalls
+2026-10-27T08:05:23.4110702Z 
+2026-10-27T08:05:54.2045978Z CASE card_stagger_inventory_browser.cjs default PASS exit=0 seconds=30.8
+2026-10-27T08:05:54.2049950Z STAGGERINVENTORY 320 no-preference hero [{"tag":"BUTTON","cls":"playground-question","inEx":false,"name":"m-in","delay":0.028,"iterations":"1","text":"How does conversation memory work?↗"}]
+2026-10-27T08:05:54.2053096Z STAGGERINVENTORY 320 no-preference answer-without-evidence []
+2026-10-27T08:05:54.2054270Z STAGGERINVENTORY 320 no-preference answer-with-evidence []
+2026-10-27T08:05:54.2058997Z STAGGERINVENTORY 320 no-preference about-feature-0 [{"tag":"BUTTON","cls":"feature-added","inEx":false,"name":"feature-reveal","delay":0.025,"iterations":"1","text":"Temporary chat"},{"tag":"BUTTON","cls":"feature-added","inEx":false,"name":"feature-reveal","delay":0.05,"iterations":"1","text":"Drop in a Nerd"},{"tag":"BUTTON","cls":"feature-added","inEx":false,"name":"feature-reveal","delay":0.075,"iterations":"1","text":"Share an app ZIP"}]
+2026-10-27T08:05:54.2066325Z STAGGERINVENTORY 320 no-preference about-feature-1 [{"tag":"BUTTON","cls":"feature-added","inEx":false,"name":"feature-reveal","delay":0.025,"iterations":"1","text":"Temporary chat"},{"tag":"BUTTON","cls":"feature-added","inEx":false,"name":"feature-reveal","delay":0.05,"iterations":"1","text":"Drop in a Nerd"},{"tag":"BUTTON","cls":"feature-added","inEx":false,"name":"feature-reveal","delay":0.075,"iterations":"1","text":"Share an app ZIP"}]
+2026-10-27T08:05:54.2071671Z STAGGERINVENTORY 320 no-preference about-feature-2 [{"tag":"BUTTON","cls":"feature-added","inEx":false,"name":"feature-reveal","delay":0.025,"iterations":"1","text":"Temporary chat"},{"tag":"BUTTON","cls":"feature-added","inEx":false,"name":"feature-reveal","delay":0.05,"iterations":"1","text":"Drop in a Nerd"},{"tag":"BUTTON","cls":"feature-added","inEx":false,"name":"feature-reveal","delay":0.075,"iterations":"1","text":"Share an app ZIP"}]
+2026-10-27T08:05:54.2076649Z STAGGERINVENTORY 320 no-preference about-feature-3 [{"tag":"BUTTON","cls":"feature-added","inEx":false,"name":"feature-reveal","delay":0.025,"iterations":"1","text":"Temporary chat"},{"tag":"BUTTON","cls":"feature-added","inEx":false,"name":"feature-reveal","delay":0.05,"iterations":"1","text":"Drop in a Nerd"},{"tag":"BUTTON","cls":"feature-added","inEx":false,"name":"feature-reveal","delay":0.075,"iterations":"1","text":"Share an app ZIP"}]
+2026-10-27T08:05:54.2079858Z STAGGERINVENTORY 320 no-preference about-feature-4 [{"tag":"BUTTON","cls":"feature-added","inEx":false,"name":"feature-reveal","delay":0.025,"iterations":"1","text":"Temporary chat"},{"tag":"BUTTON","cls":"feature-added","inEx":false,"name":"feature-reveal","delay":0.05,"iterations":"1","text":"Drop in a Nerd"},{"tag":"BUTTON","cls":"feature-added","inEx":false,"name":"feature-reveal","delay":0.075,"iterations":"1","text":"Share an app ZIP"}]
+2026-10-27T08:05:54.2083320Z STAGGERINVENTORY 320 no-preference about-feature-5 [{"tag":"BUTTON","cls":"feature-added","inEx":false,"name":"feature-reveal","delay":0.025,"iterations":"1","text":"Temporary chat"},{"tag":"BUTTON","cls":"feature-added","inEx":false,"name":"feature-reveal","delay":0.05,"iterations":"1","text":"Drop in a Nerd"},{"tag":"BUTTON","cls":"feature-added","inEx":false,"name":"feature-reveal","delay":0.075,"iterations":"1","text":"Share an app ZIP"}]
+2026-10-27T08:05:54.2086472Z STAGGERINVENTORY 320 no-preference about-feature-6 [{"tag":"BUTTON","cls":"feature-added","inEx":false,"name":"feature-reveal","delay":0.025,"iterations":"1","text":"Temporary chat"},{"tag":"BUTTON","cls":"feature-added","inEx":false,"name":"feature-reveal","delay":0.05,"iterations":"1","text":"Drop in a Nerd"},{"tag":"BUTTON","cls":"feature-added","inEx":false,"name":"feature-reveal","delay":0.075,"iterations":"1","text":"Share an app ZIP"}]
+2026-10-27T08:05:54.2089558Z STAGGERINVENTORY 320 no-preference about-feature-7 [{"tag":"BUTTON","cls":"feature-added","inEx":false,"name":"feature-reveal","delay":0.025,"iterations":"1","text":"Temporary chat"},{"tag":"BUTTON","cls":"feature-added","inEx":false,"name":"feature-reveal","delay":0.05,"iterations":"1","text":"Drop in a Nerd"},{"tag":"BUTTON","cls":"feature-added","inEx":false,"name":"feature-reveal","delay":0.075,"iterations":"1","text":"Share an app ZIP"}]
+2026-10-27T08:05:54.2093216Z STAGGERINVENTORY 320 no-preference about-feature-8 [{"tag":"BUTTON","cls":"feature-added","inEx":false,"name":"feature-reveal","delay":0.025,"iterations":"1","text":"Temporary chat"},{"tag":"BUTTON","cls":"feature-added","inEx":false,"name":"feature-reveal","delay":0.05,"iterations":"1","text":"Drop in a Nerd"},{"tag":"BUTTON","cls":"feature-added","inEx":false,"name":"feature-reveal","delay":0.075,"iterations":"1","text":"Share an app ZIP"}]
+2026-10-27T08:05:54.2096318Z STAGGERINVENTORY 320 no-preference about-feature-9 [{"tag":"BUTTON","cls":"feature-added","inEx":false,"name":"feature-reveal","delay":0.025,"iterations":"1","text":"Temporary chat"},{"tag":"BUTTON","cls":"feature-added","inEx":false,"name":"feature-reveal","delay":0.05,"iterations":"1","text":"Drop in a Nerd"},{"tag":"BUTTON","cls":"feature-added","inEx":false,"name":"feature-reveal","delay":0.075,"iterations":"1","text":"Share an app ZIP"}]
+2026-10-27T08:05:54.2099650Z STAGGERINVENTORY 320 no-preference about-feature-10 [{"tag":"BUTTON","cls":"feature-added","inEx":false,"name":"feature-reveal","delay":0.025,"iterations":"1","text":"Temporary chat"},{"tag":"BUTTON","cls":"feature-added","inEx":false,"name":"feature-reveal","delay":0.05,"iterations":"1","text":"Drop in a Nerd"},{"tag":"BUTTON","cls":"feature-added","inEx":false,"name":"feature-reveal","delay":0.075,"iterations":"1","text":"Share an app ZIP"}]
+2026-10-27T08:05:54.2102978Z STAGGERINVENTORY 320 no-preference about-feature-11 [{"tag":"BUTTON","cls":"feature-added","inEx":false,"name":"feature-reveal","delay":0.025,"iterations":"1","text":"Temporary chat"},{"tag":"BUTTON","cls":"feature-added","inEx":false,"name":"feature-reveal","delay":0.05,"iterations":"1","text":"Drop in a Nerd"},{"tag":"BUTTON","cls":"feature-added","inEx":false,"name":"feature-reveal","delay":0.075,"iterations":"1","text":"Share an app ZIP"}]
+2026-10-27T08:05:54.2106129Z STAGGERINVENTORY 320 no-preference about-feature-12 [{"tag":"BUTTON","cls":"feature-added","inEx":false,"name":"feature-reveal","delay":0.025,"iterations":"1","text":"Temporary chat"},{"tag":"BUTTON","cls":"feature-added","inEx":false,"name":"feature-reveal","delay":0.05,"iterations":"1","text":"Drop in a Nerd"},{"tag":"BUTTON","cls":"feature-added","inEx":false,"name":"feature-reveal","delay":0.075,"iterations":"1","text":"Share an app ZIP"}]
+2026-10-27T08:05:54.2109242Z STAGGERINVENTORY 320 no-preference about-feature-13 [{"tag":"BUTTON","cls":"feature-added","inEx":false,"name":"feature-reveal","delay":0.025,"iterations":"1","text":"Temporary chat"},{"tag":"BUTTON","cls":"feature-added","inEx":false,"name":"feature-reveal","delay":0.05,"iterations":"1","text":"Drop in a Nerd"},{"tag":"BUTTON","cls":"feature-added","inEx":false,"name":"feature-reveal","delay":0.075,"iterations":"1","text":"Share an app ZIP"}]
+2026-10-27T08:05:54.2112589Z STAGGERINVENTORY 320 no-preference about-feature-14 [{"tag":"BUTTON","cls":"feature-added","inEx":false,"name":"feature-reveal","delay":0.025,"iterations":"1","text":"Temporary chat"},{"tag":"BUTTON","cls":"feature-added","inEx":false,"name":"feature-reveal","delay":0.05,"iterations":"1","text":"Drop in a Nerd"},{"tag":"BUTTON","cls":"feature-added","inEx":false,"name":"feature-reveal","delay":0.075,"iterations":"1","text":"Share an app ZIP"}]
+2026-10-27T08:05:54.2115743Z STAGGERINVENTORY 320 no-preference about-feature-15 [{"tag":"BUTTON","cls":"feature-added","inEx":false,"name":"feature-reveal","delay":0.025,"iterations":"1","text":"Temporary chat"},{"tag":"BUTTON","cls":"feature-added","inEx":false,"name":"feature-reveal","delay":0.05,"iterations":"1","text":"Drop in a Nerd"},{"tag":"BUTTON","cls":"feature-added","inEx":false,"name":"feature-reveal","delay":0.075,"iterations":"1","text":"Share an app ZIP"}]
+2026-10-27T08:05:54.2119477Z STAGGERINVENTORY 320 no-preference about-feature-16 [{"tag":"BUTTON","cls":"feature-added","inEx":false,"name":"feature-reveal","delay":0.025,"iterations":"1","text":"Temporary chat"},{"tag":"BUTTON","cls":"feature-added","inEx":false,"name":"feature-reveal","delay":0.05,"iterations":"1","text":"Drop in a Nerd"},{"tag":"BUTTON","cls":"feature-added","inEx":false,"name":"feature-reveal","delay":0.075,"iterations":"1","text":"Share an app ZIP"}]
+2026-10-27T08:05:54.2123159Z STAGGERINVENTORY 320 no-preference about-feature-17 [{"tag":"BUTTON","cls":"feature-added","inEx":false,"name":"feature-reveal","delay":0.025,"iterations":"1","text":"Temporary chat"},{"tag":"BUTTON","cls":"feature-added","inEx":false,"name":"feature-reveal","delay":0.05,"iterations":"1","text":"Drop in a Nerd"},{"tag":"BUTTON","cls":"feature-added","inEx":false,"name":"feature-reveal","delay":0.075,"iterations":"1","text":"Share an app ZIP"}]
+2026-10-27T08:05:54.2126277Z STAGGERINVENTORY 320 no-preference about-feature-18 [{"tag":"BUTTON","cls":"feature-added","inEx":false,"name":"feature-reveal","delay":0.025,"iterations":"1","text":"Temporary chat"},{"tag":"BUTTON","cls":"feature-added","inEx":false,"name":"feature-reveal","delay":0.05,"iterations":"1","text":"Drop in a Nerd"},{"tag":"BUTTON","cls":"feature-added","inEx":false,"name":"feature-reveal","delay":0.075,"iterations":"1","text":"Share an app ZIP"}]
+2026-10-27T08:05:54.2129522Z STAGGERINVENTORY 320 no-preference about-feature-19 [{"tag":"BUTTON","cls":"feature-added","inEx":false,"name":"feature-reveal","delay":0.025,"iterations":"1","text":"Temporary chat"},{"tag":"BUTTON","cls":"feature-added","inEx":false,"name":"feature-reveal","delay":0.05,"iterations":"1","text":"Drop in a Nerd"},{"tag":"BUTTON","cls":"feature-added","inEx":false,"name":"feature-reveal","delay":0.075,"iterations":"1","text":"Share an app ZIP"}]
+2026-10-27T08:05:54.2133016Z STAGGERINVENTORY 320 no-preference about-feature-20 [{"tag":"BUTTON","cls":"feature-added","inEx":false,"name":"feature-reveal","delay":0.025,"iterations":"1","text":"Temporary chat"},{"tag":"BUTTON","cls":"feature-added","inEx":false,"name":"feature-reveal","delay":0.05,"iterations":"1","text":"Drop in a Nerd"},{"tag":"BUTTON","cls":"feature-added","inEx":false,"name":"feature-reveal","delay":0.075,"iterations":"1","text":"Share an app ZIP"}]
+2026-10-27T08:05:54.2136178Z STAGGERINVENTORY 320 no-preference about-feature-21 [{"tag":"BUTTON","cls":"feature-added","inEx":false,"name":"feature-reveal","delay":0.025,"iterations":"1","text":"Temporary chat"},{"tag":"BUTTON","cls":"feature-added","inEx":false,"name":"feature-reveal","delay":0.05,"iterations":"1","text":"Drop in a Nerd"},{"tag":"BUTTON","cls":"feature-added","inEx":false,"name":"feature-reveal","delay":0.075,"iterations":"1","text":"Share an app ZIP"}]
+2026-10-27T08:05:54.2139273Z STAGGERINVENTORY 320 no-preference about-feature-22 [{"tag":"BUTTON","cls":"feature-added","inEx":false,"name":"feature-reveal","delay":0.025,"iterations":"1","text":"Temporary chat"},{"tag":"BUTTON","cls":"feature-added","inEx":false,"name":"feature-reveal","delay":0.05,"iterations":"1","text":"Drop in a Nerd"},{"tag":"BUTTON","cls":"feature-added","inEx":false,"name":"feature-reveal","delay":0.075,"iterations":"1","text":"Share an app ZIP"}]
+2026-10-27T08:05:54.2140955Z STAGGERINVENTORY 320 no-preference settings-#sec-finish []
+2026-10-27T08:05:54.2141459Z STAGGERINVENTORY 320 no-preference settings-#sec-portable []
+2026-10-27T08:05:54.2141984Z STAGGERINVENTORY 320 no-preference settings-#sec-workspace-list []
+2026-10-27T08:05:54.2142781Z STAGGERINVENTORY 320 no-preference settings-#sec-workspace-changes []
+2026-10-27T08:05:54.2143338Z STAGGERINVENTORY 320 no-preference settings-#sec-workspace-backup []
+2026-10-27T08:05:54.2143880Z STAGGERINVENTORY 320 no-preference settings-#sec-workspace-tests []
+2026-10-27T08:05:54.2144409Z STAGGERINVENTORY 320 no-preference settings-#sec-workspace-deploy []
+2026-10-27T08:05:54.2144895Z STAGGERINVENTORY 320 no-preference settings-#sec-model []
+2026-10-27T08:05:54.2145348Z STAGGERINVENTORY 320 no-preference settings-#sec-search []
+2026-10-27T08:05:54.2145987Z STAGGERINVENTORY 320 no-preference settings-#sec-prompts []
+2026-10-27T08:05:54.2146454Z STAGGERINVENTORY 320 no-preference settings-#sec-code []
+2026-10-27T08:05:54.2146903Z STAGGERINVENTORY 320 no-preference settings-#sec-presets []
+2026-10-27T08:05:54.2147359Z STAGGERINVENTORY 320 no-preference settings-#sec-wording []
+2026-10-27T08:05:54.2147801Z STAGGERINVENTORY 320 no-preference settings-#sec-colors []
+2026-10-27T08:05:54.2148267Z STAGGERINVENTORY 320 no-preference settings-#sec-background []
+2026-10-27T08:05:54.2148735Z STAGGERINVENTORY 320 no-preference settings-#sec-fonts []
+2026-10-27T08:05:54.2149174Z STAGGERINVENTORY 320 no-preference settings-#sec-shape []
+2026-10-27T08:05:54.2149609Z STAGGERINVENTORY 320 no-preference settings-#sec-emoji []
+2026-10-27T08:05:54.2150044Z STAGGERINVENTORY 320 no-preference settings-#sec-motion []
+2026-10-27T08:05:54.2150487Z STAGGERINVENTORY 320 no-preference settings-#sec-layout []
+2026-10-27T08:05:54.2150948Z STAGGERINVENTORY 320 no-preference settings-#sec-freshness []
+2026-10-27T08:05:54.2151417Z STAGGERINVENTORY 320 no-preference settings-#sec-budget []
+2026-10-27T08:05:54.2151850Z STAGGERINVENTORY 320 no-preference builder-initial []
+2026-10-27T08:05:54.2152213Z STAGGERINVENTORY 320 reduce hero []
+2026-10-27T08:05:54.2152965Z STAGGERINVENTORY 320 reduce answer-without-evidence []
+2026-10-27T08:05:54.2153391Z STAGGERINVENTORY 320 reduce answer-with-evidence []
+2026-10-27T08:05:54.2153794Z STAGGERINVENTORY 320 reduce about-feature-0 []
+2026-10-27T08:05:54.2154165Z STAGGERINVENTORY 320 reduce about-feature-1 []
+2026-10-27T08:05:54.2154525Z STAGGERINVENTORY 320 reduce about-feature-2 []
+2026-10-27T08:05:54.2154885Z STAGGERINVENTORY 320 reduce about-feature-3 []
+2026-10-27T08:05:54.2155242Z STAGGERINVENTORY 320 reduce about-feature-4 []
+2026-10-27T08:05:54.2155602Z STAGGERINVENTORY 320 reduce about-feature-5 []
+2026-10-27T08:05:54.2155969Z STAGGERINVENTORY 320 reduce about-feature-6 []
+2026-10-27T08:05:54.2156322Z STAGGERINVENTORY 320 reduce about-feature-7 []
+2026-10-27T08:05:54.2156681Z STAGGERINVENTORY 320 reduce about-feature-8 []
+2026-10-27T08:05:54.2157048Z STAGGERINVENTORY 320 reduce about-feature-9 []
+2026-10-27T08:05:54.2157423Z STAGGERINVENTORY 320 reduce about-feature-10 []
+2026-10-27T08:05:54.2157794Z STAGGERINVENTORY 320 reduce about-feature-11 []
+2026-10-27T08:05:54.2158257Z STAGGERINVENTORY 320 reduce about-feature-12 []
+2026-10-27T08:05:54.2158673Z STAGGERINVENTORY 320 reduce about-feature-13 []
+2026-10-27T08:05:54.2159039Z STAGGERINVENTORY 320 reduce about-feature-14 []
+2026-10-27T08:05:54.2159422Z STAGGERINVENTORY 320 reduce about-feature-15 []
+2026-10-27T08:05:54.2159797Z STAGGERINVENTORY 320 reduce about-feature-16 []
+2026-10-27T08:05:54.2160160Z STAGGERINVENTORY 320 reduce about-feature-17 []
+2026-10-27T08:05:54.2160528Z STAGGERINVENTORY 320 reduce about-feature-18 []
+2026-10-27T08:05:54.2160891Z STAGGERINVENTORY 320 reduce about-feature-19 []
+2026-10-27T08:05:54.2161256Z STAGGERINVENTORY 320 reduce about-feature-20 []
+2026-10-27T08:05:54.2161627Z STAGGERINVENTORY 320 reduce about-feature-21 []
+2026-10-27T08:05:54.2161996Z STAGGERINVENTORY 320 reduce about-feature-22 []
+2026-10-27T08:05:54.2162634Z STAGGERINVENTORY 320 reduce settings-#sec-finish []
+2026-10-27T08:05:54.2163059Z STAGGERINVENTORY 320 reduce settings-#sec-portable []
+2026-10-27T08:05:54.2163504Z STAGGERINVENTORY 320 reduce settings-#sec-workspace-list []
+2026-10-27T08:05:54.2163996Z STAGGERINVENTORY 320 reduce settings-#sec-workspace-changes []
+2026-10-27T08:05:54.2164582Z STAGGERINVENTORY 320 reduce settings-#sec-workspace-backup []
+2026-10-27T08:05:54.2165058Z STAGGERINVENTORY 320 reduce settings-#sec-workspace-tests []
+2026-10-27T08:05:54.2165527Z STAGGERINVENTORY 320 reduce settings-#sec-workspace-deploy []
+2026-10-27T08:05:54.2165955Z STAGGERINVENTORY 320 reduce settings-#sec-model []
+2026-10-27T08:05:54.2166355Z STAGGERINVENTORY 320 reduce settings-#sec-search []
+2026-10-27T08:05:54.2166762Z STAGGERINVENTORY 320 reduce settings-#sec-prompts []
+2026-10-27T08:05:54.2167396Z STAGGERINVENTORY 320 reduce settings-#sec-code []
+2026-10-27T08:05:54.2167800Z STAGGERINVENTORY 320 reduce settings-#sec-presets []
+2026-10-27T08:05:54.2168205Z STAGGERINVENTORY 320 reduce settings-#sec-wording []
+2026-10-27T08:05:54.2168599Z STAGGERINVENTORY 320 reduce settings-#sec-colors []
+2026-10-27T08:05:54.2169019Z STAGGERINVENTORY 320 reduce settings-#sec-background []
+2026-10-27T08:05:54.2169432Z STAGGERINVENTORY 320 reduce settings-#sec-fonts []
+2026-10-27T08:05:54.2169820Z STAGGERINVENTORY 320 reduce settings-#sec-shape []
+2026-10-27T08:05:54.2170203Z STAGGERINVENTORY 320 reduce settings-#sec-emoji []
+2026-10-27T08:05:54.2170588Z STAGGERINVENTORY 320 reduce settings-#sec-motion []
+2026-10-27T08:05:54.2170976Z STAGGERINVENTORY 320 reduce settings-#sec-layout []
+2026-10-27T08:05:54.2171377Z STAGGERINVENTORY 320 reduce settings-#sec-freshness []
+2026-10-27T08:05:54.2171783Z STAGGERINVENTORY 320 reduce settings-#sec-budget []
+2026-10-27T08:05:54.2172162Z STAGGERINVENTORY 320 reduce builder-initial []
+2026-10-27T08:05:54.2173738Z STAGGERINVENTORY 1280 no-preference hero [{"tag":"BUTTON","cls":"playground-question","inEx":false,"name":"m-in","delay":0.028,"iterations":"1","text":"How does conversation memory work?↗"}]
+2026-10-27T08:05:54.2174624Z STAGGERINVENTORY 1280 no-preference answer-without-evidence []
+2026-10-27T08:05:54.2175248Z STAGGERINVENTORY 1280 no-preference answer-with-evidence []
+2026-10-27T08:05:54.2177272Z STAGGERINVENTORY 1280 no-preference about-feature-0 [{"tag":"BUTTON","cls":"feature-added","inEx":false,"name":"feature-reveal","delay":0.025,"iterations":"1","text":"Temporary chat"},{"tag":"BUTTON","cls":"feature-added","inEx":false,"name":"feature-reveal","delay":0.05,"iterations":"1","text":"Drop in a Nerd"},{"tag":"BUTTON","cls":"feature-added","inEx":false,"name":"feature-reveal","delay":0.075,"iterations":"1","text":"Share an app ZIP"}]
+2026-10-27T08:05:54.2180402Z STAGGERINVENTORY 1280 no-preference about-feature-1 [{"tag":"BUTTON","cls":"feature-added","inEx":false,"name":"feature-reveal","delay":0.025,"iterations":"1","text":"Temporary chat"},{"tag":"BUTTON","cls":"feature-added","inEx":false,"name":"feature-reveal","delay":0.05,"iterations":"1","text":"Drop in a Nerd"},{"tag":"BUTTON","cls":"feature-added","inEx":false,"name":"feature-reveal","delay":0.075,"iterations":"1","text":"Share an app ZIP"}]
+2026-10-27T08:05:54.2183761Z STAGGERINVENTORY 1280 no-preference about-feature-2 [{"tag":"BUTTON","cls":"feature-added","inEx":false,"name":"feature-reveal","delay":0.025,"iterations":"1","text":"Temporary chat"},{"tag":"BUTTON","cls":"feature-added","inEx":false,"name":"feature-reveal","delay":0.05,"iterations":"1","text":"Drop in a Nerd"},{"tag":"BUTTON","cls":"feature-added","inEx":false,"name":"feature-reveal","delay":0.075,"iterations":"1","text":"Share an app ZIP"}]
+2026-10-27T08:05:54.2186870Z STAGGERINVENTORY 1280 no-preference about-feature-3 [{"tag":"BUTTON","cls":"feature-added","inEx":false,"name":"feature-reveal","delay":0.025,"iterations":"1","text":"Temporary chat"},{"tag":"BUTTON","cls":"feature-added","inEx":false,"name":"feature-reveal","delay":0.05,"iterations":"1","text":"Drop in a Nerd"},{"tag":"BUTTON","cls":"feature-added","inEx":false,"name":"feature-reveal","delay":0.075,"iterations":"1","text":"Share an app ZIP"}]
+2026-10-27T08:05:54.2189992Z STAGGERINVENTORY 1280 no-preference about-feature-4 [{"tag":"BUTTON","cls":"feature-added","inEx":false,"name":"feature-reveal","delay":0.025,"iterations":"1","text":"Temporary chat"},{"tag":"BUTTON","cls":"feature-added","inEx":false,"name":"feature-reveal","delay":0.05,"iterations":"1","text":"Drop in a Nerd"},{"tag":"BUTTON","cls":"feature-added","inEx":false,"name":"feature-reveal","delay":0.075,"iterations":"1","text":"Share an app ZIP"}]
+2026-10-27T08:05:54.2193412Z STAGGERINVENTORY 1280 no-preference about-feature-5 [{"tag":"BUTTON","cls":"feature-added","inEx":false,"name":"feature-reveal","delay":0.025,"iterations":"1","text":"Temporary chat"},{"tag":"BUTTON","cls":"feature-added","inEx":false,"name":"feature-reveal","delay":0.05,"iterations":"1","text":"Drop in a Nerd"},{"tag":"BUTTON","cls":"feature-added","inEx":false,"name":"feature-reveal","delay":0.075,"iterations":"1","text":"Share an app ZIP"}]
+2026-10-27T08:05:54.2196708Z STAGGERINVENTORY 1280 no-preference about-feature-6 [{"tag":"BUTTON","cls":"feature-added","inEx":false,"name":"feature-reveal","delay":0.025,"iterations":"1","text":"Temporary chat"},{"tag":"BUTTON","cls":"feature-added","inEx":false,"name":"feature-reveal","delay":0.05,"iterations":"1","text":"Drop in a Nerd"},{"tag":"BUTTON","cls":"feature-added","inEx":false,"name":"feature-reveal","delay":0.075,"iterations":"1","text":"Share an app ZIP"}]
+2026-10-27T08:05:54.2199836Z STAGGERINVENTORY 1280 no-preference about-feature-7 [{"tag":"BUTTON","cls":"feature-added","inEx":false,"name":"feature-reveal","delay":0.025,"iterations":"1","text":"Temporary chat"},{"tag":"BUTTON","cls":"feature-added","inEx":false,"name":"feature-reveal","delay":0.05,"iterations":"1","text":"Drop in a Nerd"},{"tag":"BUTTON","cls":"feature-added","inEx":false,"name":"feature-reveal","delay":0.075,"iterations":"1","text":"Share an app ZIP"}]
+2026-10-27T08:05:54.2203284Z STAGGERINVENTORY 1280 no-preference about-feature-8 [{"tag":"BUTTON","cls":"feature-added","inEx":false,"name":"feature-reveal","delay":0.025,"iterations":"1","text":"Temporary chat"},{"tag":"BUTTON","cls":"feature-added","inEx":false,"name":"feature-reveal","delay":0.05,"iterations":"1","text":"Drop in a Nerd"},{"tag":"BUTTON","cls":"feature-added","inEx":false,"name":"feature-reveal","delay":0.075,"iterations":"1","text":"Share an app ZIP"}]
+2026-10-27T08:05:54.2206427Z STAGGERINVENTORY 1280 no-preference about-feature-9 [{"tag":"BUTTON","cls":"feature-added","inEx":false,"name":"feature-reveal","delay":0.025,"iterations":"1","text":"Temporary chat"},{"tag":"BUTTON","cls":"feature-added","inEx":false,"name":"feature-reveal","delay":0.05,"iterations":"1","text":"Drop in a Nerd"},{"tag":"BUTTON","cls":"feature-added","inEx":false,"name":"feature-reveal","delay":0.075,"iterations":"1","text":"Share an app ZIP"}]
+2026-10-27T08:05:54.2209550Z STAGGERINVENTORY 1280 no-preference about-feature-10 [{"tag":"BUTTON","cls":"feature-added","inEx":false,"name":"feature-reveal","delay":0.025,"iterations":"1","text":"Temporary chat"},{"tag":"BUTTON","cls":"feature-added","inEx":false,"name":"feature-reveal","delay":0.05,"iterations":"1","text":"Drop in a Nerd"},{"tag":"BUTTON","cls":"feature-added","inEx":false,"name":"feature-reveal","delay":0.075,"iterations":"1","text":"Share an app ZIP"}]
+2026-10-27T08:05:54.2212975Z STAGGERINVENTORY 1280 no-preference about-feature-11 [{"tag":"BUTTON","cls":"feature-added","inEx":false,"name":"feature-reveal","delay":0.025,"iterations":"1","text":"Temporary chat"},{"tag":"BUTTON","cls":"feature-added","inEx":false,"name":"feature-reveal","delay":0.05,"iterations":"1","text":"Drop in a Nerd"},{"tag":"BUTTON","cls":"feature-added","inEx":false,"name":"feature-reveal","delay":0.075,"iterations":"1","text":"Share an app ZIP"}]
+2026-10-27T08:05:54.2216161Z STAGGERINVENTORY 1280 no-preference about-feature-12 [{"tag":"BUTTON","cls":"feature-added","inEx":false,"name":"feature-reveal","delay":0.025,"iterations":"1","text":"Temporary chat"},{"tag":"BUTTON","cls":"feature-added","inEx":false,"name":"feature-reveal","delay":0.05,"iterations":"1","text":"Drop in a Nerd"},{"tag":"BUTTON","cls":"feature-added","inEx":false,"name":"feature-reveal","delay":0.075,"iterations":"1","text":"Share an app ZIP"}]
+2026-10-27T08:05:54.2219302Z STAGGERINVENTORY 1280 no-preference about-feature-13 [{"tag":"BUTTON","cls":"feature-added","inEx":false,"name":"feature-reveal","delay":0.025,"iterations":"1","text":"Temporary chat"},{"tag":"BUTTON","cls":"feature-added","inEx":false,"name":"feature-reveal","delay":0.05,"iterations":"1","text":"Drop in a Nerd"},{"tag":"BUTTON","cls":"feature-added","inEx":false,"name":"feature-reveal","delay":0.075,"iterations":"1","text":"Share an app ZIP"}]
+2026-10-27T08:05:54.2222647Z STAGGERINVENTORY 1280 no-preference about-feature-14 [{"tag":"BUTTON","cls":"feature-added","inEx":false,"name":"feature-reveal","delay":0.025,"iterations":"1","text":"Temporary chat"},{"tag":"BUTTON","cls":"feature-added","inEx":false,"name":"feature-reveal","delay":0.05,"iterations":"1","text":"Drop in a Nerd"},{"tag":"BUTTON","cls":"feature-added","inEx":false,"name":"feature-reveal","delay":0.075,"iterations":"1","text":"Share an app ZIP"}]
+2026-10-27T08:05:54.2225937Z STAGGERINVENTORY 1280 no-preference about-feature-15 [{"tag":"BUTTON","cls":"feature-added","inEx":false,"name":"feature-reveal","delay":0.025,"iterations":"1","text":"Temporary chat"},{"tag":"BUTTON","cls":"feature-added","inEx":false,"name":"feature-reveal","delay":0.05,"iterations":"1","text":"Drop in a Nerd"},{"tag":"BUTTON","cls":"feature-added","inEx":false,"name":"feature-reveal","delay":0.075,"iterations":"1","text":"Share an app ZIP"}]
+2026-10-27T08:05:54.2229163Z STAGGERINVENTORY 1280 no-preference about-feature-16 [{"tag":"BUTTON","cls":"feature-added","inEx":false,"name":"feature-reveal","delay":0.025,"iterations":"1","text":"Temporary chat"},{"tag":"BUTTON","cls":"feature-added","inEx":false,"name":"feature-reveal","delay":0.05,"iterations":"1","text":"Drop in a Nerd"},{"tag":"BUTTON","cls":"feature-added","inEx":false,"name":"feature-reveal","delay":0.075,"iterations":"1","text":"Share an app ZIP"}]
+2026-10-27T08:05:54.2232568Z STAGGERINVENTORY 1280 no-preference about-feature-17 [{"tag":"BUTTON","cls":"feature-added","inEx":false,"name":"feature-reveal","delay":0.025,"iterations":"1","text":"Temporary chat"},{"tag":"BUTTON","cls":"feature-added","inEx":false,"name":"feature-reveal","delay":0.05,"iterations":"1","text":"Drop in a Nerd"},{"tag":"BUTTON","cls":"feature-added","inEx":false,"name":"feature-reveal","delay":0.075,"iterations":"1","text":"Share an app ZIP"}]
+2026-10-27T08:05:54.2235723Z STAGGERINVENTORY 1280 no-preference about-feature-18 [{"tag":"BUTTON","cls":"feature-added","inEx":false,"name":"feature-reveal","delay":0.025,"iterations":"1","text":"Temporary chat"},{"tag":"BUTTON","cls":"feature-added","inEx":false,"name":"feature-reveal","delay":0.05,"iterations":"1","text":"Drop in a Nerd"},{"tag":"BUTTON","cls":"feature-added","inEx":false,"name":"feature-reveal","delay":0.075,"iterations":"1","text":"Share an app ZIP"}]
+2026-10-27T08:05:54.2238864Z STAGGERINVENTORY 1280 no-preference about-feature-19 [{"tag":"BUTTON","cls":"feature-added","inEx":false,"name":"feature-reveal","delay":0.025,"iterations":"1","text":"Temporary chat"},{"tag":"BUTTON","cls":"feature-added","inEx":false,"name":"feature-reveal","delay":0.05,"iterations":"1","text":"Drop in a Nerd"},{"tag":"BUTTON","cls":"feature-added","inEx":false,"name":"feature-reveal","delay":0.075,"iterations":"1","text":"Share an app ZIP"}]
+2026-10-27T08:05:54.2242020Z STAGGERINVENTORY 1280 no-preference about-feature-20 [{"tag":"BUTTON","cls":"feature-added","inEx":false,"name":"feature-reveal","delay":0.025,"iterations":"1","text":"Temporary chat"},{"tag":"BUTTON","cls":"feature-added","inEx":false,"name":"feature-reveal","delay":0.05,"iterations":"1","text":"Drop in a Nerd"},{"tag":"BUTTON","cls":"feature-added","inEx":false,"name":"feature-reveal","delay":0.075,"iterations":"1","text":"Share an app ZIP"}]
+2026-10-27T08:05:54.2245398Z STAGGERINVENTORY 1280 no-preference about-feature-21 [{"tag":"BUTTON","cls":"feature-added","inEx":false,"name":"feature-reveal","delay":0.025,"iterations":"1","text":"Temporary chat"},{"tag":"BUTTON","cls":"feature-added","inEx":false,"name":"feature-reveal","delay":0.05,"iterations":"1","text":"Drop in a Nerd"},{"tag":"BUTTON","cls":"feature-added","inEx":false,"name":"feature-reveal","delay":0.075,"iterations":"1","text":"Share an app ZIP"}]
+2026-10-27T08:05:54.2248535Z STAGGERINVENTORY 1280 no-preference about-feature-22 [{"tag":"BUTTON","cls":"feature-added","inEx":false,"name":"feature-reveal","delay":0.025,"iterations":"1","text":"Temporary chat"},{"tag":"BUTTON","cls":"feature-added","inEx":false,"name":"feature-reveal","delay":0.05,"iterations":"1","text":"Drop in a Nerd"},{"tag":"BUTTON","cls":"feature-added","inEx":false,"name":"feature-reveal","delay":0.075,"iterations":"1","text":"Share an app ZIP"}]
+2026-10-27T08:05:54.2250294Z STAGGERINVENTORY 1280 no-preference settings-#sec-finish []
+2026-10-27T08:05:54.2250789Z STAGGERINVENTORY 1280 no-preference settings-#sec-portable []
+2026-10-27T08:05:54.2251308Z STAGGERINVENTORY 1280 no-preference settings-#sec-workspace-list []
+2026-10-27T08:05:54.2251858Z STAGGERINVENTORY 1280 no-preference settings-#sec-workspace-changes []
+2026-10-27T08:05:54.2252653Z STAGGERINVENTORY 1280 no-preference settings-#sec-workspace-backup []
+2026-10-27T08:05:54.2253200Z STAGGERINVENTORY 1280 no-preference settings-#sec-workspace-tests []
+2026-10-27T08:05:54.2253734Z STAGGERINVENTORY 1280 no-preference settings-#sec-workspace-deploy []
+2026-10-27T08:05:54.2254231Z STAGGERINVENTORY 1280 no-preference settings-#sec-model []
+2026-10-27T08:05:54.2254688Z STAGGERINVENTORY 1280 no-preference settings-#sec-search []
+2026-10-27T08:05:54.2255166Z STAGGERINVENTORY 1280 no-preference settings-#sec-prompts []
+2026-10-27T08:05:54.2255626Z STAGGERINVENTORY 1280 no-preference settings-#sec-code []
+2026-10-27T08:05:54.2256086Z STAGGERINVENTORY 1280 no-preference settings-#sec-presets []
+2026-10-27T08:05:54.2256553Z STAGGERINVENTORY 1280 no-preference settings-#sec-wording []
+2026-10-27T08:05:54.2257189Z STAGGERINVENTORY 1280 no-preference settings-#sec-colors []
+2026-10-27T08:05:54.2257681Z STAGGERINVENTORY 1280 no-preference settings-#sec-background []
+2026-10-27T08:05:54.2258155Z STAGGERINVENTORY 1280 no-preference settings-#sec-fonts []
+2026-10-27T08:05:54.2258604Z STAGGERINVENTORY 1280 no-preference settings-#sec-shape []
+2026-10-27T08:05:54.2259051Z STAGGERINVENTORY 1280 no-preference settings-#sec-emoji []
+2026-10-27T08:05:54.2259503Z STAGGERINVENTORY 1280 no-preference settings-#sec-motion []
+2026-10-27T08:05:54.2259959Z STAGGERINVENTORY 1280 no-preference settings-#sec-layout []
+2026-10-27T08:05:54.2260423Z STAGGERINVENTORY 1280 no-preference settings-#sec-freshness []
+2026-10-27T08:05:54.2260894Z STAGGERINVENTORY 1280 no-preference settings-#sec-budget []
+2026-10-27T08:05:54.2261334Z STAGGERINVENTORY 1280 no-preference builder-initial []
+2026-10-27T08:05:54.2261710Z STAGGERINVENTORY 1280 reduce hero []
+2026-10-27T08:05:54.2262093Z STAGGERINVENTORY 1280 reduce answer-without-evidence []
+2026-10-27T08:05:54.2262771Z STAGGERINVENTORY 1280 reduce answer-with-evidence []
+2026-10-27T08:05:54.2263180Z STAGGERINVENTORY 1280 reduce about-feature-0 []
+2026-10-27T08:05:54.2263563Z STAGGERINVENTORY 1280 reduce about-feature-1 []
+2026-10-27T08:05:54.2263934Z STAGGERINVENTORY 1280 reduce about-feature-2 []
+2026-10-27T08:05:54.2264308Z STAGGERINVENTORY 1280 reduce about-feature-3 []
+2026-10-27T08:05:54.2264673Z STAGGERINVENTORY 1280 reduce about-feature-4 []
+2026-10-27T08:05:54.2265035Z STAGGERINVENTORY 1280 reduce about-feature-5 []
+2026-10-27T08:05:54.2265400Z STAGGERINVENTORY 1280 reduce about-feature-6 []
+2026-10-27T08:05:54.2265768Z STAGGERINVENTORY 1280 reduce about-feature-7 []
+2026-10-27T08:05:54.2266143Z STAGGERINVENTORY 1280 reduce about-feature-8 []
+2026-10-27T08:05:54.2266508Z STAGGERINVENTORY 1280 reduce about-feature-9 []
+2026-10-27T08:05:54.2266877Z STAGGERINVENTORY 1280 reduce about-feature-10 []
+2026-10-27T08:05:54.2267261Z STAGGERINVENTORY 1280 reduce about-feature-11 []
+2026-10-27T08:05:54.2267638Z STAGGERINVENTORY 1280 reduce about-feature-12 []
+2026-10-27T08:05:54.2268023Z STAGGERINVENTORY 1280 reduce about-feature-13 []
+2026-10-27T08:05:54.2268397Z STAGGERINVENTORY 1280 reduce about-feature-14 []
+2026-10-27T08:05:54.2268767Z STAGGERINVENTORY 1280 reduce about-feature-15 []
+2026-10-27T08:05:54.2269136Z STAGGERINVENTORY 1280 reduce about-feature-16 []
+2026-10-27T08:05:54.2269507Z STAGGERINVENTORY 1280 reduce about-feature-17 []
+2026-10-27T08:05:54.2269889Z STAGGERINVENTORY 1280 reduce about-feature-18 []
+2026-10-27T08:05:54.2270260Z STAGGERINVENTORY 1280 reduce about-feature-19 []
+2026-10-27T08:05:54.2270640Z STAGGERINVENTORY 1280 reduce about-feature-20 []
+2026-10-27T08:05:54.2271151Z STAGGERINVENTORY 1280 reduce about-feature-21 []
+2026-10-27T08:05:54.2271523Z STAGGERINVENTORY 1280 reduce about-feature-22 []
+2026-10-27T08:05:54.2271912Z STAGGERINVENTORY 1280 reduce settings-#sec-finish []
+2026-10-27T08:05:54.2272610Z STAGGERINVENTORY 1280 reduce settings-#sec-portable []
+2026-10-27T08:05:54.2273113Z STAGGERINVENTORY 1280 reduce settings-#sec-workspace-list []
+2026-10-27T08:05:54.2273619Z STAGGERINVENTORY 1280 reduce settings-#sec-workspace-changes []
+2026-10-27T08:05:54.2274120Z STAGGERINVENTORY 1280 reduce settings-#sec-workspace-backup []
+2026-10-27T08:05:54.2274610Z STAGGERINVENTORY 1280 reduce settings-#sec-workspace-tests []
+2026-10-27T08:05:54.2275093Z STAGGERINVENTORY 1280 reduce settings-#sec-workspace-deploy []
+2026-10-27T08:05:54.2275528Z STAGGERINVENTORY 1280 reduce settings-#sec-model []
+2026-10-27T08:05:54.2275938Z STAGGERINVENTORY 1280 reduce settings-#sec-search []
+2026-10-27T08:05:54.2276354Z STAGGERINVENTORY 1280 reduce settings-#sec-prompts []
+2026-10-27T08:05:54.2276759Z STAGGERINVENTORY 1280 reduce settings-#sec-code []
+2026-10-27T08:05:54.2277160Z STAGGERINVENTORY 1280 reduce settings-#sec-presets []
+2026-10-27T08:05:54.2277568Z STAGGERINVENTORY 1280 reduce settings-#sec-wording []
+2026-10-27T08:05:54.2277971Z STAGGERINVENTORY 1280 reduce settings-#sec-colors []
+2026-10-27T08:05:54.2278533Z STAGGERINVENTORY 1280 reduce settings-#sec-background []
+2026-10-27T08:05:54.2278963Z STAGGERINVENTORY 1280 reduce settings-#sec-fonts []
+2026-10-27T08:05:54.2279358Z STAGGERINVENTORY 1280 reduce settings-#sec-shape []
+2026-10-27T08:05:54.2279746Z STAGGERINVENTORY 1280 reduce settings-#sec-emoji []
+2026-10-27T08:05:54.2280143Z STAGGERINVENTORY 1280 reduce settings-#sec-motion []
+2026-10-27T08:05:54.2280570Z STAGGERINVENTORY 1280 reduce settings-#sec-layout []
+2026-10-27T08:05:54.2280986Z STAGGERINVENTORY 1280 reduce settings-#sec-freshness []
+2026-10-27T08:05:54.2281399Z STAGGERINVENTORY 1280 reduce settings-#sec-budget []
+2026-10-27T08:05:54.2281793Z STAGGERINVENTORY 1280 reduce builder-initial []
+2026-10-27T08:05:54.2282686Z PASS finitecard/controlstagger limitednewheroquestions/Aboutloadmore only 196renderedcontexts3201280normalReduce
+2026-10-27T08:05:54.2283167Z 
+2026-10-27T08:05:59.4585685Z CASE chat_composer_browser.cjs default PASS exit=0 seconds=5.3
+2026-10-27T08:05:59.4587423Z PASS fixture suggestion submits once, empty/whitespace disabled, populated/stop/retry enabled, restored error question/focus, grow/shrink, target sizes, keyboard/focus, nooverflow 3203901280
+2026-10-27T08:05:59.4588458Z 
+2026-10-27T08:06:12.6515892Z CASE chat_stream_reading_browser.cjs default PASS exit=0 seconds=13.2
+2026-10-27T08:06:12.6517589Z PASS controlled ReadableStream actual tokens/no fake typing/followbottom/user scroll retention/completion indicator/jump reset/hidden focus/error cleanup3203901280reduce+normal
+2026-10-27T08:06:12.6518634Z 
+2026-10-27T08:06:22.8751420Z CASE composer_multiline_caret_motion_audit_browser.cjs default PASS exit=0 seconds=10.2
+2026-10-27T08:06:22.8753535Z PASS composer nativeShiftEnter typing twelve lines caretselectionend/focus preserved growthsameframe cappedscroll shrinkimmediate noheighttween normalReduce3201280 physicalIME/keyboardunverified
+2026-10-27T08:06:22.8754673Z 
+2026-10-27T08:06:33.2406730Z CASE config_workspace_browser.cjs default PASS exit=0 seconds=10.4
+2026-10-27T08:06:33.2409107Z PASS distinctgroups/workspacetoolsdiscoverable/localnotlivecopy/Openchat/draftsretainedacrossnavigation/modelretained/Simplecalm3207601280
+2026-10-27T08:06:33.2410183Z 
+2026-10-27T08:06:59.1075391Z CASE drawer_motion_audit_browser.cjs default PASS exit=0 seconds=25.9
+2026-10-27T08:06:59.1076518Z STATE 320 no-preference full {
+2026-10-27T08:06:59.1077167Z   duration: '0.22s, 0.18s, 0.18s, 0.18s',
+2026-10-27T08:06:59.1078077Z   properties: 'transform, background-color, color, border-color',
+2026-10-27T08:06:59.1078981Z   animations: [ { duration: 220, property: 'transform' } ],
+2026-10-27T08:06:59.1079663Z   x: -292
+2026-10-27T08:06:59.1080433Z }
+2026-10-27T08:06:59.1082606Z DRAWER 320 no-preference full {"duration":"0.22s, 0.18s, 0.18s, 0.18s","properties":"transform, background-color, color, border-color","animations":[{"duration":220,"property":"transform"}],"x":-292}
+2026-10-27T08:06:59.1084205Z STATE 320 no-preference subtle {
+2026-10-27T08:06:59.1084711Z   duration: '0.16s',
+2026-10-27T08:06:59.1085420Z   properties: 'transform, background-color, color, border-color',
+2026-10-27T08:06:59.1086336Z   animations: [ { duration: 160, property: 'transform' } ],
+2026-10-27T08:06:59.1087035Z   x: -292
+2026-10-27T08:06:59.1087429Z }
+2026-10-27T08:06:59.1088969Z DRAWER 320 no-preference subtle {"duration":"0.16s","properties":"transform, background-color, color, border-color","animations":[{"duration":160,"property":"transform"}],"x":-292}
+2026-10-27T08:06:59.1090716Z STATE 320 no-preference none { duration: '0s', properties: 'none', animations: [], x: 0 }
+2026-10-27T08:06:59.1091910Z DRAWER 320 no-preference none {"duration":"0s","properties":"none","animations":[],"x":0}
+2026-10-27T08:06:59.1093335Z STATE 320 reduce full { duration: '0s', properties: 'none', animations: [], x: 0 }
+2026-10-27T08:06:59.1094484Z DRAWER 320 reduce full {"duration":"0s","properties":"none","animations":[],"x":0}
+2026-10-27T08:06:59.1095876Z STATE 320 reduce subtle { duration: '0s', properties: 'none', animations: [], x: 0 }
+2026-10-27T08:06:59.1097083Z DRAWER 320 reduce subtle {"duration":"0s","properties":"none","animations":[],"x":0}
+2026-10-27T08:06:59.1098232Z STATE 320 reduce none { duration: '0s', properties: 'none', animations: [], x: 0 }
+2026-10-27T08:06:59.1098919Z DRAWER 320 reduce none {"duration":"0s","properties":"none","animations":[],"x":0}
+2026-10-27T08:06:59.1099389Z STATE 390 no-preference full {
+2026-10-27T08:06:59.1099692Z   duration: '0.22s, 0.18s, 0.18s, 0.18s',
+2026-10-27T08:06:59.1100424Z   properties: 'transform, background-color, color, border-color',
+2026-10-27T08:06:59.1101217Z   animations: [ { duration: 220, property: 'transform' } ],
+2026-10-27T08:06:59.1101803Z   x: -292
+2026-10-27T08:06:59.1102117Z }
+2026-10-27T08:06:59.1103708Z DRAWER 390 no-preference full {"duration":"0.22s, 0.18s, 0.18s, 0.18s","properties":"transform, background-color, color, border-color","animations":[{"duration":220,"property":"transform"}],"x":-292}
+2026-10-27T08:06:59.1104545Z STATE 390 no-preference subtle {
+2026-10-27T08:06:59.1104825Z   duration: '0.16s',
+2026-10-27T08:06:59.1105181Z   properties: 'transform, background-color, color, border-color',
+2026-10-27T08:06:59.1105644Z   animations: [ { duration: 160, property: 'transform' } ],
+2026-10-27T08:06:59.1106014Z   x: -292
+2026-10-27T08:06:59.1106200Z }
+2026-10-27T08:06:59.1107027Z DRAWER 390 no-preference subtle {"duration":"0.16s","properties":"transform, background-color, color, border-color","animations":[{"duration":160,"property":"transform"}],"x":-292}
+2026-10-27T08:06:59.1107997Z STATE 390 no-preference none { duration: '0s', properties: 'none', animations: [], x: 0 }
+2026-10-27T08:06:59.1108670Z DRAWER 390 no-preference none {"duration":"0s","properties":"none","animations":[],"x":0}
+2026-10-27T08:06:59.1109316Z STATE 390 reduce full { duration: '0s', properties: 'none', animations: [], x: 0 }
+2026-10-27T08:06:59.1109917Z DRAWER 390 reduce full {"duration":"0s","properties":"none","animations":[],"x":0}
+2026-10-27T08:06:59.1110529Z STATE 390 reduce subtle { duration: '0s', properties: 'none', animations: [], x: 0 }
+2026-10-27T08:06:59.1111142Z DRAWER 390 reduce subtle {"duration":"0s","properties":"none","animations":[],"x":0}
+2026-10-27T08:06:59.1111744Z STATE 390 reduce none { duration: '0s', properties: 'none', animations: [], x: 0 }
+2026-10-27T08:06:59.1112594Z DRAWER 390 reduce none {"duration":"0s","properties":"none","animations":[],"x":0}
+2026-10-27T08:06:59.1113058Z STATE 1280 no-preference full {
+2026-10-27T08:06:59.1113354Z   duration: '0.22s, 0.18s, 0.18s, 0.18s',
+2026-10-27T08:06:59.1113749Z   properties: 'transform, background-color, color, border-color',
+2026-10-27T08:06:59.1114195Z   animations: [ { duration: 220, property: 'transform' } ],
+2026-10-27T08:06:59.1114710Z   x: -292
+2026-10-27T08:06:59.1114893Z }
+2026-10-27T08:06:59.1115784Z DRAWER 1280 no-preference full {"duration":"0.22s, 0.18s, 0.18s, 0.18s","properties":"transform, background-color, color, border-color","animations":[{"duration":220,"property":"transform"}],"x":-292}
+2026-10-27T08:06:59.1116592Z STATE 1280 no-preference subtle {
+2026-10-27T08:06:59.1116853Z   duration: '0.16s',
+2026-10-27T08:06:59.1117193Z   properties: 'transform, background-color, color, border-color',
+2026-10-27T08:06:59.1117636Z   animations: [ { duration: 160, property: 'transform' } ],
+2026-10-27T08:06:59.1117950Z   x: -292
+2026-10-27T08:06:59.1118130Z }
+2026-10-27T08:06:59.1118951Z DRAWER 1280 no-preference subtle {"duration":"0.16s","properties":"transform, background-color, color, border-color","animations":[{"duration":160,"property":"transform"}],"x":-292}
+2026-10-27T08:06:59.1119921Z STATE 1280 no-preference none { duration: '0s', properties: 'none', animations: [], x: 0 }
+2026-10-27T08:06:59.1120596Z DRAWER 1280 no-preference none {"duration":"0s","properties":"none","animations":[],"x":0}
+2026-10-27T08:06:59.1121228Z STATE 1280 reduce full { duration: '0s', properties: 'none', animations: [], x: 0 }
+2026-10-27T08:06:59.1121953Z DRAWER 1280 reduce full {"duration":"0s","properties":"none","animations":[],"x":0}
+2026-10-27T08:06:59.1122849Z STATE 1280 reduce subtle { duration: '0s', properties: 'none', animations: [], x: 0 }
+2026-10-27T08:06:59.1123475Z DRAWER 1280 reduce subtle {"duration":"0s","properties":"none","animations":[],"x":0}
+2026-10-27T08:06:59.1124075Z STATE 1280 reduce none { duration: '0s', properties: 'none', animations: [], x: 0 }
+2026-10-27T08:06:59.1124662Z DRAWER 1280 reduce none {"duration":"0s","properties":"none","animations":[],"x":0}
+2026-10-27T08:06:59.1125482Z PASS mobile/desktop-hidden drawer220Full160Subtle NoneOSReduceimmediate actualmidpoint maingeometrydraftstable Escapeinert
+2026-10-27T08:06:59.1125996Z 
+2026-10-27T08:07:11.0213475Z CASE emoji_runtime_quiet_motion_browser.cjs default PASS exit=0 seconds=11.9
+2026-10-27T08:07:11.0215290Z QUIETEMOJI 320 reduce opening cancelled active animations focus retained close restored
+2026-10-27T08:07:11.0217152Z QUIETEMOJI 320 reduce category cancelled active animations focus retained close restored
+2026-10-27T08:07:11.0218817Z QUIETEMOJI 320 none opening cancelled active animations focus retained close restored
+2026-10-27T08:07:11.0220420Z QUIETEMOJI 320 none category cancelled active animations focus retained close restored
+2026-10-27T08:07:11.0222115Z QUIETEMOJI 320 calm opening cancelled active animations focus retained close restored
+2026-10-27T08:07:11.0223812Z QUIETEMOJI 320 calm category cancelled active animations focus retained close restored
+2026-10-27T08:07:11.0225253Z QUIETEMOJI 1280 reduce opening cancelled active animations focus retained close restored
+2026-10-27T08:07:11.0226636Z QUIETEMOJI 1280 reduce category cancelled active animations focus retained close restored
+2026-10-27T08:07:11.0228106Z QUIETEMOJI 1280 none opening cancelled active animations focus retained close restored
+2026-10-27T08:07:11.0229539Z QUIETEMOJI 1280 none category cancelled active animations focus retained close restored
+2026-10-27T08:07:11.0231036Z QUIETEMOJI 1280 calm opening cancelled active animations focus retained close restored
+2026-10-27T08:07:11.0232776Z QUIETEMOJI 1280 calm category cancelled active animations focus retained close restored
+2026-10-27T08:07:11.0234318Z PASS runtimeReduceNoneCalm cancelsactualpausedpickeropening/category animation12states3201280 noSavecalls
+2026-10-27T08:07:11.0235172Z 
+2026-10-27T08:07:55.5393638Z CASE guide_calm_audit_browser.cjs default PASS exit=0 seconds=44.5
+2026-10-27T08:07:55.5395743Z FOCUS / 320 chatGuide
+2026-10-27T08:07:55.5396648Z FOCUS /settings.html 320 configGuide
+2026-10-27T08:07:55.5397339Z FOCUS / 320 chatGuide
+2026-10-27T08:07:55.5397994Z FOCUS /settings.html 320 configGuide
+2026-10-27T08:07:55.5398590Z FOCUS / 1280 q
+2026-10-27T08:07:55.5399589Z FOCUS /settings.html 1280 configGuide
+2026-10-27T08:07:55.5399999Z FOCUS / 1280 q
+2026-10-27T08:07:55.5400483Z FOCUS /settings.html 1280 configGuide
+2026-10-27T08:07:55.5401810Z PASS guide chat12/config13 steps3201280normalReduce naturalcase/no scene/no halo/no transform/settled220ms bounds/escape/replay/focus
+2026-10-27T08:07:55.5403273Z 
+2026-10-27T08:08:05.8414077Z CASE helper_draft_save_focus_motion_browser.cjs default PASS exit=0 seconds=10.3
+2026-10-27T08:08:05.8415399Z PASS helper draft persist503 singleflight preservedbrief accuratedirty retryfocus3201280normalReduce
+2026-10-27T08:08:05.8416009Z 
+2026-10-27T08:08:16.2323047Z CASE helper_try_review_failure_focus_motion_browser.cjs default PASS exit=0 seconds=10.4
+2026-10-27T08:08:16.2324383Z PASS helperTryit checking503 nativeEnterguard noexecution samplepreserved own/movedfocus3201280normalReduce
+2026-10-27T08:08:16.2325078Z 
+2026-10-27T08:08:33.4185395Z CASE history_retry_focus_motion_browser.cjs default PASS exit=0 seconds=17.2
+2026-10-27T08:08:33.4187434Z PASS historyloadingkeepsrows/failedrefreshretry/emptysearch/stalefailureignored/chatdeleteUndo reopens restoredanswer3201280
+2026-10-27T08:08:33.4188503Z 
+2026-10-27T08:08:49.3135845Z CASE import_inventory_readable_browser.cjs default PASS exit=0 seconds=15.9
+2026-10-27T08:08:49.3137413Z IMPORT 320 no-preference realofflineYAMLreview nativeEnter160chevron noheight/transform NoneReduceoff load0
+2026-10-27T08:08:49.3138715Z IMPORT 320 reduce realofflineYAMLreview nativeEnter160chevron noheight/transform NoneReduceoff load0
+2026-10-27T08:08:49.3140131Z IMPORT 1280 no-preference realofflineYAMLreview nativeEnter160chevron noheight/transform NoneReduceoff load0
+2026-10-27T08:08:49.3141462Z IMPORT 1280 reduce realofflineYAMLreview nativeEnter160chevron noheight/transform NoneReduceoff load0
+2026-10-27T08:08:49.3143623Z PASS successfulofflineImportreview boundedkeyboardinventoryscroll/containedwheel disclosures read/keyboard/motion noLoad3201280normalReduce
+2026-10-27T08:08:49.3144745Z 
+2026-10-27T08:09:00.0400106Z CASE local_model_estimates_browser.cjs default PASS exit=0 seconds=10.7
+2026-10-27T08:09:00.0401062Z LOCAL Suggested local models
+2026-10-27T08:09:00.0401424Z Simple
+2026-10-27T08:09:00.0401700Z Details
+2026-10-27T08:09:00.0401944Z Balanced
+2026-10-27T08:09:00.0402223Z Fixture local model
+2026-10-27T08:09:00.0403085Z Estimated suitable for this budget.
+2026-10-27T08:09:00.0403503Z Comfortable estimated fit
+2026-10-27T08:09:00.0403815Z Installed
+2026-10-27T08:09:00.0404070Z Use this model
+2026-10-27T08:09:00.0404587Z Rough estimate from 16 GB of memory. Choose Details to see the math.
+2026-10-27T08:09:00.0405122Z Estimates, not benchmarks.
+2026-10-27T08:09:00.0405475Z LOCAL Suggested local models
+2026-10-27T08:09:00.0405800Z Simple
+2026-10-27T08:09:00.0406040Z Details
+2026-10-27T08:09:00.0406278Z Balanced
+2026-10-27T08:09:00.0406548Z Fixture local model
+2026-10-27T08:09:00.0406907Z Estimated suitable for this budget.
+2026-10-27T08:09:00.0407293Z Comfortable estimated fit
+2026-10-27T08:09:00.0407627Z Installed
+2026-10-27T08:09:00.0407923Z Use this model
+2026-10-27T08:09:00.0408426Z Rough estimate from 16 GB of memory. Choose Details to see the math.
+2026-10-27T08:09:00.0408923Z Estimates, not benchmarks.
+2026-10-27T08:09:00.0409254Z LOCAL Suggested local models
+2026-10-27T08:09:00.0409546Z Simple
+2026-10-27T08:09:00.0409767Z Details
+2026-10-27T08:09:00.0410001Z Balanced
+2026-10-27T08:09:00.0410253Z Fixture local model
+2026-10-27T08:09:00.0410589Z Estimated suitable for this budget.
+2026-10-27T08:09:00.0410948Z Comfortable estimated fit
+2026-10-27T08:09:00.0411233Z Installed
+2026-10-27T08:09:00.0411465Z Use this model
+2026-10-27T08:09:00.0411930Z Rough estimate from 16 GB of memory. Choose Details to see the math.
+2026-10-27T08:09:00.0412624Z Estimates, not benchmarks.
+2026-10-27T08:09:00.0413704Z PASS providerarrowsfocus/installed-nodownload/SimpleDetailsviewonly/download-vs-memory/7.2budget+8.8reserve=16/estimatedspeed/fitcaveats3207601280
+2026-10-27T08:09:00.0414504Z 
+2026-10-27T08:09:35.3324508Z CASE mobile_a11y_sections_browser.cjs default PASS exit=0 seconds=35.3
+2026-10-27T08:09:35.3327033Z 320 #sec-finish 
+2026-10-27T08:09:35.3327680Z 320 #sec-portable 
+2026-10-27T08:09:35.3328420Z 320 #sec-workspace-list 
+2026-10-27T08:09:35.3329180Z 320 #sec-workspace-changes 
+2026-10-27T08:09:35.3329949Z 320 #sec-workspace-backup 
+2026-10-27T08:09:35.3330754Z 320 #sec-workspace-tests 
+2026-10-27T08:09:35.3331493Z 320 #sec-workspace-deploy 
+2026-10-27T08:09:35.3332068Z 320 #sec-model 
+2026-10-27T08:09:35.3332845Z 320 #sec-search 
+2026-10-27T08:09:35.3333213Z 320 #sec-prompts 
+2026-10-27T08:09:35.3333496Z 320 #sec-code 
+2026-10-27T08:09:35.3333782Z 320 #sec-presets 
+2026-10-27T08:09:35.3334077Z 320 #sec-wording 
+2026-10-27T08:09:35.3334348Z 320 #sec-colors 
+2026-10-27T08:09:35.3334658Z 320 #sec-background 
+2026-10-27T08:09:35.3334951Z 320 #sec-fonts 
+2026-10-27T08:09:35.3335226Z 320 #sec-shape 
+2026-10-27T08:09:35.3335494Z 320 #sec-emoji 
+2026-10-27T08:09:35.3335761Z 320 #sec-motion 
+2026-10-27T08:09:35.3336047Z 320 #sec-layout 
+2026-10-27T08:09:35.3336351Z 320 #sec-freshness 
+2026-10-27T08:09:35.3336636Z 320 #sec-budget 
+2026-10-27T08:09:35.3336924Z 1280 #sec-finish 
+2026-10-27T08:09:35.3337221Z 1280 #sec-portable 
+2026-10-27T08:09:35.3337547Z 1280 #sec-workspace-list 
+2026-10-27T08:09:35.3337910Z 1280 #sec-workspace-changes 
+2026-10-27T08:09:35.3338563Z 1280 #sec-workspace-backup 
+2026-10-27T08:09:35.3338938Z 1280 #sec-workspace-tests 
+2026-10-27T08:09:35.3339299Z 1280 #sec-workspace-deploy 
+2026-10-27T08:09:35.3339620Z 1280 #sec-model 
+2026-10-27T08:09:35.3339908Z 1280 #sec-search 
+2026-10-27T08:09:35.3340205Z 1280 #sec-prompts 
+2026-10-27T08:09:35.3340484Z 1280 #sec-code 
+2026-10-27T08:09:35.3340775Z 1280 #sec-presets 
+2026-10-27T08:09:35.3341069Z 1280 #sec-wording 
+2026-10-27T08:09:35.3341356Z 1280 #sec-colors 
+2026-10-27T08:09:35.3341657Z 1280 #sec-background 
+2026-10-27T08:09:35.3341948Z 1280 #sec-fonts 
+2026-10-27T08:09:35.3342221Z 1280 #sec-shape 
+2026-10-27T08:09:35.3342800Z 1280 #sec-emoji 
+2026-10-27T08:09:35.3343118Z 1280 #sec-motion 
+2026-10-27T08:09:35.3343407Z 1280 #sec-layout 
+2026-10-27T08:09:35.3343701Z 1280 #sec-freshness 
+2026-10-27T08:09:35.3343958Z 1280 #sec-budget 
+2026-10-27T08:09:35.3344095Z 
+2026-10-27T08:09:35.3986131Z CASE model_shortlist.cjs default PASS exit=0 seconds=0.1
+2026-10-27T08:09:35.3987418Z PASS shortlist bounds, known IDs, affordable generations, exclusions, empty and local lists
+2026-10-27T08:09:35.3988028Z 
+2026-10-27T08:10:23.9398684Z CASE page_loading_guide_browser.cjs default PASS exit=0 seconds=48.5
+2026-10-27T08:10:23.9400919Z PASS loading/nav/Guide 320 light reduce
+2026-10-27T08:10:23.9401627Z PASS loading/nav/Guide 320 light no-preference
+2026-10-27T08:10:23.9402646Z PASS loading/nav/Guide 320 dark reduce
+2026-10-27T08:10:23.9403335Z PASS loading/nav/Guide 320 dark no-preference
+2026-10-27T08:10:23.9404044Z PASS loading/nav/Guide 390 light reduce
+2026-10-27T08:10:23.9404772Z PASS loading/nav/Guide 390 light no-preference
+2026-10-27T08:10:23.9405451Z PASS loading/nav/Guide 390 dark reduce
+2026-10-27T08:10:23.9406184Z PASS loading/nav/Guide 390 dark no-preference
+2026-10-27T08:10:23.9406865Z PASS loading/nav/Guide 1280 light reduce
+2026-10-27T08:10:23.9407525Z PASS loading/nav/Guide 1280 light no-preference
+2026-10-27T08:10:23.9407991Z PASS loading/nav/Guide 1280 dark reduce
+2026-10-27T08:10:23.9408422Z PASS loading/nav/Guide 1280 dark no-preference
+2026-10-27T08:10:23.9408670Z 
+2026-10-27T08:10:40.2926916Z CASE preview_immediate_states_browser.cjs default PASS exit=0 seconds=16.4
+2026-10-27T08:10:40.2932353Z THEMECOLOR 320 reduce {
+2026-10-27T08:10:40.2933136Z   middle: {
+2026-10-27T08:10:40.2933506Z     color: 'rgb(18, 29, 25)',
+2026-10-27T08:10:40.2933904Z     start: 'rgb(255, 253, 247)',
+2026-10-27T08:10:40.2934255Z     duration: '0s',
+2026-10-27T08:10:40.2934547Z     rows: [ 0, 0 ]
+2026-10-27T08:10:40.2934823Z   },
+2026-10-27T08:10:40.2935090Z   last: 'rgb(18, 29, 25)'
+2026-10-27T08:10:40.2935405Z }
+2026-10-27T08:10:40.2935737Z THEMECOLOR 320 no-preference {
+2026-10-27T08:10:40.2936445Z   middle: {
+2026-10-27T08:10:40.2936756Z     color: 'rgb(196, 197, 192)',
+2026-10-27T08:10:40.2937136Z     start: 'rgb(255, 253, 247)',
+2026-10-27T08:10:40.2937583Z     duration: '0.22s, 0.22s, 0.22s, 0.24s, 0.28s, 0.28s',
+2026-10-27T08:10:40.2938010Z     rows: [ 0, 0 ]
+2026-10-27T08:10:40.2938293Z   },
+2026-10-27T08:10:40.2938566Z   last: 'rgb(19, 30, 26)'
+2026-10-27T08:10:40.2938813Z }
+2026-10-27T08:10:40.2939031Z THEMECOLOR 1280 reduce {
+2026-10-27T08:10:40.2939268Z   middle: {
+2026-10-27T08:10:40.2939481Z     color: 'rgb(18, 29, 25)',
+2026-10-27T08:10:40.2939766Z     start: 'rgb(255, 253, 247)',
+2026-10-27T08:10:40.2940031Z     duration: '0s',
+2026-10-27T08:10:40.2940252Z     rows: [ 0, 0 ]
+2026-10-27T08:10:40.2940462Z   },
+2026-10-27T08:10:40.2940663Z   last: 'rgb(18, 29, 25)'
+2026-10-27T08:10:40.2940895Z }
+2026-10-27T08:10:40.2941149Z THEMECOLOR 1280 no-preference {
+2026-10-27T08:10:40.2941432Z   middle: {
+2026-10-27T08:10:40.2941671Z     color: 'rgb(165, 168, 163)',
+2026-10-27T08:10:40.2941966Z     start: 'rgb(255, 253, 247)',
+2026-10-27T08:10:40.2942564Z     duration: '0.22s, 0.22s, 0.22s, 0.24s, 0.28s, 0.28s',
+2026-10-27T08:10:40.2942943Z     rows: [ 0, 0 ]
+2026-10-27T08:10:40.2943162Z   },
+2026-10-27T08:10:40.2943373Z   last: 'rgb(18, 29, 25)'
+2026-10-27T08:10:40.2943606Z }
+2026-10-27T08:10:40.2944846Z PASS sliderimmediateSameEvent20/80/140 model+CSStoken no wholecontaineranimation themeactualintermediate180mscolor no messageentrance node/toolbar/inputpositionretained3201280Reduce
+2026-10-27T08:10:40.2945715Z 
+2026-10-27T08:10:51.7828426Z CASE prompt_initial_navigation_focus_motion_browser.cjs default PASS exit=0 seconds=11.5
+2026-10-27T08:10:51.7831336Z PASS earlyprompt lateinit/resize focus value caret scroll nativekeypress3201280normalReduce
+2026-10-27T08:10:51.7833097Z 
+2026-10-27T08:11:01.1107157Z CASE provider_long_credentials_geometry_motion_browser.cjs default PASS exit=0 seconds=9.3
+2026-10-27T08:11:01.1108436Z LONGCREDENTIAL 320 no-preference 1219
+2026-10-27T08:11:01.1109233Z LONGCREDENTIAL 320 no-preference 819
+2026-10-27T08:11:01.1109964Z LONGCREDENTIAL 320 no-preference 0
+2026-10-27T08:11:01.1110976Z LONGCREDENTIAL 320 reduce 1219
+2026-10-27T08:11:01.1111582Z LONGCREDENTIAL 320 reduce 819
+2026-10-27T08:11:01.1112046Z LONGCREDENTIAL 320 reduce 0
+2026-10-27T08:11:01.1112854Z LONGCREDENTIAL 1280 no-preference 1219
+2026-10-27T08:11:01.1113490Z LONGCREDENTIAL 1280 no-preference 819
+2026-10-27T08:11:01.1114025Z LONGCREDENTIAL 1280 no-preference 0
+2026-10-27T08:11:01.1114524Z LONGCREDENTIAL 1280 reduce 1219
+2026-10-27T08:11:01.1114993Z LONGCREDENTIAL 1280 reduce 819
+2026-10-27T08:11:01.1115363Z LONGCREDENTIAL 1280 reduce 0
+2026-10-27T08:11:01.1116397Z PASS provider1200800charfixturepasswordfield/save/model/test/applypositionsfixedmaskednoecho3201280normalReduce noSavekeys
+2026-10-27T08:11:01.1117166Z 
+2026-10-27T08:11:09.5760094Z CASE reduced_motion_surfaces_browser.cjs default PASS exit=0 seconds=8.5
+2026-10-27T08:11:09.5763065Z PASS OSreduceChat/About/Configuration/preview/BuildwithAIidle noactiveanimation;buildersteptransition0
+2026-10-27T08:11:09.5764407Z 
+2026-10-27T08:11:26.0798721Z CASE settings_all_toggles_keyboard_motion_browser.cjs default PASS exit=0 seconds=16.5
+2026-10-27T08:11:26.0799731Z TOGGLE 320 no-preference model rewrite
+2026-10-27T08:11:26.0800292Z TOGGLE 320 no-preference wording f-logo_watermark
+2026-10-27T08:11:26.0800889Z TOGGLE 320 no-preference motion f-hover_lift
+2026-10-27T08:11:26.0801435Z TOGGLE 320 no-preference layout f-sources_panel
+2026-10-27T08:11:26.0802033Z TOGGLE 320 reduce model rewrite
+2026-10-27T08:11:26.0802823Z TOGGLE 320 reduce wording f-logo_watermark
+2026-10-27T08:11:26.0803475Z TOGGLE 320 reduce motion f-hover_lift
+2026-10-27T08:11:26.0804004Z TOGGLE 320 reduce layout f-sources_panel
+2026-10-27T08:11:26.0804580Z TOGGLE 1280 no-preference model rewrite
+2026-10-27T08:11:26.0805195Z TOGGLE 1280 no-preference wording f-logo_watermark
+2026-10-27T08:11:26.0805923Z TOGGLE 1280 no-preference motion f-hover_lift
+2026-10-27T08:11:26.0806556Z TOGGLE 1280 no-preference layout f-sources_panel
+2026-10-27T08:11:26.0807526Z TOGGLE 1280 reduce model rewrite
+2026-10-27T08:11:26.0807984Z TOGGLE 1280 reduce wording f-logo_watermark
+2026-10-27T08:11:26.0808467Z TOGGLE 1280 reduce motion f-hover_lift
+2026-10-27T08:11:26.0808934Z TOGGLE 1280 reduce layout f-sources_panel
+2026-10-27T08:11:26.0810452Z PASS allavailablevisiblelocalSettingscheckboxes excludesnetworkprompt/sourceautosaves nativekeyboardSpace checkedandfocusimmediate restore3201280normalReduce excludeskeyexport noSave
+2026-10-27T08:11:26.0811568Z 
+2026-10-27T08:11:39.1162907Z CASE settings_guide_states_browser.cjs default PASS exit=0 seconds=13.0
+2026-10-27T08:11:39.1164915Z PASS AskAI immediatebuttonAsking busydisabled nearbyindicator realfixturepending successguide explicitNoChange sectionnav failureusefulrestore retry focusReturn3201280
+2026-10-27T08:11:39.1165838Z 
+2026-10-27T08:12:00.8593742Z CASE settings_navigation_motion_levels_browser.cjs default PASS exit=0 seconds=21.7
+2026-10-27T08:12:00.8594923Z PASS settingsnavigation sectionAndField FullSubtleSmooth NoneCalmOSReduceAuto3201280 focusTarget noModelCalls
+2026-10-27T08:12:00.8595545Z 
+2026-10-27T08:12:03.9629278Z CASE settingsguide_browser.cjs default PASS exit=0 seconds=3.1
+2026-10-27T08:12:03.9631646Z PASS assistant consent/reset, explicit single request, payload privacy, text-only response, links, 320 dialog
+2026-10-27T08:12:03.9632645Z 
+2026-10-27T08:12:16.4899189Z CASE shared_selection_motion_browser.cjs default PASS exit=0 seconds=12.5
+2026-10-27T08:12:16.4900427Z PASS sharedsegmented160coloronly/immediatesameeventmode/customchevrons160/reduceNoneOff3201280
+2026-10-27T08:12:16.4901115Z 
+2026-10-27T08:12:19.8934448Z CASE simple_config_browser.cjs default PASS exit=0 seconds=3.4
+2026-10-27T08:12:19.8935920Z PASS default Simple, live provider matches, preview visible by default, conditional key, mode values retained, search opens Advanced
+2026-10-27T08:12:19.8936664Z 
+2026-10-27T08:12:35.9686061Z CASE source_scope_empty_motion_browser.cjs default PASS exit=0 seconds=16.1
+2026-10-27T08:12:35.9688229Z PASS scope empty140opacityonly status full/subtle NoneCalmReduceoff replacedbycollection nativeEnterdocument focus/draft3201280
+2026-10-27T08:12:35.9689468Z 
+2026-10-27T08:12:44.8506392Z CASE source_summary_runtime_quiet_motion_browser.cjs default PASS exit=0 seconds=8.9
+2026-10-27T08:12:44.8508640Z QUIETSOURCESUMMARY 320 reduce changedrow160cancelled samevaluerender noreplay stablefocus no source verification claim
+2026-10-27T08:12:44.8510912Z QUIETSOURCESUMMARY 320 none changedrow160cancelled samevaluerender noreplay stablefocus no source verification claim
+2026-10-27T08:12:44.8513357Z QUIETSOURCESUMMARY 320 calm changedrow160cancelled samevaluerender noreplay stablefocus no source verification claim
+2026-10-27T08:12:44.8515571Z QUIETSOURCESUMMARY 1280 reduce changedrow160cancelled samevaluerender noreplay stablefocus no source verification claim
+2026-10-27T08:12:44.8517821Z QUIETSOURCESUMMARY 1280 none changedrow160cancelled samevaluerender noreplay stablefocus no source verification claim
+2026-10-27T08:12:44.8520128Z QUIETSOURCESUMMARY 1280 calm changedrow160cancelled samevaluerender noreplay stablefocus no source verification claim
+2026-10-27T08:12:44.8522055Z PASS sourceconfiguration-summary actualsaveeventfeedback runtimeReduceNoneCalm6states3201280 localfixtureevent noSave/modelcalls
+2026-10-27T08:12:44.8523364Z 
+2026-10-27T08:12:56.8214540Z CASE suggestion_press_motion_audit_browser.cjs default PASS exit=0 seconds=12.0
+2026-10-27T08:12:56.8216445Z SUGGESTIONPRESS 320 no-preference matrix(0.98, 0, 0, 0.98, 0, 0) release1 outside no request draftretained Noneoff
+2026-10-27T08:12:56.8218159Z SUGGESTIONPRESS 320 reduce none release1 outside no request draftretained Noneoff
+2026-10-27T08:12:56.8219728Z SUGGESTIONPRESS 1280 no-preference matrix(0.98, 0, 0, 0.98, 0, 0) release1 outside no request draftretained Noneoff
+2026-10-27T08:12:56.8220831Z SUGGESTIONPRESS 1280 reduce none release1 outside no request draftretained Noneoff
+2026-10-27T08:12:56.8222607Z PASS suggestionhoverarrow2px98pctpress120ms nohovergrowth release1 noovershoot ReduceNoneoff3201280
+2026-10-27T08:12:56.8223294Z 
+2026-10-27T08:13:10.5384230Z CASE tour_browser.py default PASS exit=0 seconds=13.7
+2026-10-27T08:13:10.5386462Z PASS: independent first-open flags, Skip both guides, thirteen config steps, replay, Back, Escape/arrows/focus, reduced motion, 4 viewport sizes, no setting changes, no preview guide, no JS errors
+2026-10-27T08:13:10.5387767Z 
+2026-10-27T08:13:38.8843320Z CASE workspace_empty_motion_browser.cjs default PASS exit=0 seconds=28.3
+2026-10-27T08:13:38.8845488Z WORKSPACEEMPTY 320 no-preference full #sec-workspace-list {"name":"m-in","time":"0.14s","transform":"none","decorations":0,"keys":["none","none"]}
+2026-10-27T08:13:38.8848085Z WORKSPACEEMPTY 320 no-preference full #sec-workspace-changes {"name":"m-in","time":"0.14s","transform":"none","decorations":0,"keys":["none","none"]}
+2026-10-27T08:13:38.8850182Z WORKSPACEEMPTY 320 no-preference subtle #sec-workspace-list {"name":"m-in","time":"0.14s","transform":"none","decorations":0,"keys":["none","none"]}
+2026-10-27T08:13:38.8852673Z WORKSPACEEMPTY 320 no-preference subtle #sec-workspace-changes {"name":"m-in","time":"0.14s","transform":"none","decorations":0,"keys":["none","none"]}
+2026-10-27T08:13:38.8855215Z WORKSPACEEMPTY 320 no-preference none #sec-workspace-list {"name":"none","time":"0s","transform":"none","decorations":0,"keys":[]}
+2026-10-27T08:13:38.8857351Z WORKSPACEEMPTY 320 no-preference none #sec-workspace-changes {"name":"none","time":"0s","transform":"none","decorations":0,"keys":[]}
+2026-10-27T08:13:38.8859141Z WORKSPACEEMPTY 320 no-preference calm #sec-workspace-list {"name":"none","time":"0s","transform":"none","decorations":0,"keys":[]}
+2026-10-27T08:13:38.8860791Z WORKSPACEEMPTY 320 no-preference calm #sec-workspace-changes {"name":"none","time":"0s","transform":"none","decorations":0,"keys":[]}
+2026-10-27T08:13:38.8862619Z WORKSPACEEMPTY 320 reduce full #sec-workspace-list {"name":"none","time":"0s","transform":"none","decorations":0,"keys":[]}
+2026-10-27T08:13:38.8864178Z WORKSPACEEMPTY 320 reduce full #sec-workspace-changes {"name":"none","time":"0s","transform":"none","decorations":0,"keys":[]}
+2026-10-27T08:13:38.8865643Z WORKSPACEEMPTY 320 reduce subtle #sec-workspace-list {"name":"none","time":"0s","transform":"none","decorations":0,"keys":[]}
+2026-10-27T08:13:38.8867135Z WORKSPACEEMPTY 320 reduce subtle #sec-workspace-changes {"name":"none","time":"0s","transform":"none","decorations":0,"keys":[]}
+2026-10-27T08:13:38.8868588Z WORKSPACEEMPTY 320 reduce none #sec-workspace-list {"name":"none","time":"0s","transform":"none","decorations":0,"keys":[]}
+2026-10-27T08:13:38.8870063Z WORKSPACEEMPTY 320 reduce none #sec-workspace-changes {"name":"none","time":"0s","transform":"none","decorations":0,"keys":[]}
+2026-10-27T08:13:38.8871499Z WORKSPACEEMPTY 320 reduce calm #sec-workspace-list {"name":"none","time":"0s","transform":"none","decorations":0,"keys":[]}
+2026-10-27T08:13:38.8873139Z WORKSPACEEMPTY 320 reduce calm #sec-workspace-changes {"name":"none","time":"0s","transform":"none","decorations":0,"keys":[]}
+2026-10-27T08:13:38.8874776Z WORKSPACEEMPTY 1280 no-preference full #sec-workspace-list {"name":"m-in","time":"0.14s","transform":"none","decorations":0,"keys":["none","none"]}
+2026-10-27T08:13:38.8876701Z WORKSPACEEMPTY 1280 no-preference full #sec-workspace-changes {"name":"m-in","time":"0.14s","transform":"none","decorations":0,"keys":["none","none"]}
+2026-10-27T08:13:38.8878615Z WORKSPACEEMPTY 1280 no-preference subtle #sec-workspace-list {"name":"m-in","time":"0.14s","transform":"none","decorations":0,"keys":["none","none"]}
+2026-10-27T08:13:38.8880591Z WORKSPACEEMPTY 1280 no-preference subtle #sec-workspace-changes {"name":"m-in","time":"0.14s","transform":"none","decorations":0,"keys":["none","none"]}
+2026-10-27T08:13:38.8882635Z WORKSPACEEMPTY 1280 no-preference none #sec-workspace-list {"name":"none","time":"0s","transform":"none","decorations":0,"keys":[]}
+2026-10-27T08:13:38.8884417Z WORKSPACEEMPTY 1280 no-preference none #sec-workspace-changes {"name":"none","time":"0s","transform":"none","decorations":0,"keys":[]}
+2026-10-27T08:13:38.8886311Z WORKSPACEEMPTY 1280 no-preference calm #sec-workspace-list {"name":"none","time":"0s","transform":"none","decorations":0,"keys":[]}
+2026-10-27T08:13:38.8888106Z WORKSPACEEMPTY 1280 no-preference calm #sec-workspace-changes {"name":"none","time":"0s","transform":"none","decorations":0,"keys":[]}
+2026-10-27T08:13:38.8889866Z WORKSPACEEMPTY 1280 reduce full #sec-workspace-list {"name":"none","time":"0s","transform":"none","decorations":0,"keys":[]}
+2026-10-27T08:13:38.8891586Z WORKSPACEEMPTY 1280 reduce full #sec-workspace-changes {"name":"none","time":"0s","transform":"none","decorations":0,"keys":[]}
+2026-10-27T08:13:38.8893530Z WORKSPACEEMPTY 1280 reduce subtle #sec-workspace-list {"name":"none","time":"0s","transform":"none","decorations":0,"keys":[]}
+2026-10-27T08:13:38.8895223Z WORKSPACEEMPTY 1280 reduce subtle #sec-workspace-changes {"name":"none","time":"0s","transform":"none","decorations":0,"keys":[]}
+2026-10-27T08:13:38.8896928Z WORKSPACEEMPTY 1280 reduce none #sec-workspace-list {"name":"none","time":"0s","transform":"none","decorations":0,"keys":[]}
+2026-10-27T08:13:38.8898706Z WORKSPACEEMPTY 1280 reduce none #sec-workspace-changes {"name":"none","time":"0s","transform":"none","decorations":0,"keys":[]}
+2026-10-27T08:13:38.8900408Z WORKSPACEEMPTY 1280 reduce calm #sec-workspace-list {"name":"none","time":"0s","transform":"none","decorations":0,"keys":[]}
+2026-10-27T08:13:38.8902028Z WORKSPACEEMPTY 1280 reduce calm #sec-workspace-changes {"name":"none","time":"0s","transform":"none","decorations":0,"keys":[]}
+2026-10-27T08:13:38.8904114Z PASS2workspaceemptylist states singleopacityfade noillustration stableheading populatedreplacement 32states no mutation/modelcalls
+2026-10-27T08:13:38.8905054Z 
+2026-10-27T08:13:38.8905414Z {"executions": 39, "failed": 0, "passed": 39, "scripts": 39}

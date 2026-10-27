@@ -1,0 +1,625 @@
+2026-10-27T08:03:51.0066226Z CASE about_intro_states_browser.cjs default PASS exit=0 seconds=6.7
+2026-10-27T08:03:51.0068576Z PASS Aboutintro once/session title180msopacity paragraphdelay40total220 stablegeometry no glyph/move no feature/reload/chatreplay CalmNoneReduceoff3201280
+2026-10-27T08:03:51.0069892Z 
+2026-10-27T08:04:12.9673250Z CASE action_short_height_keyboard_motion_browser.cjs default PASS exit=0 seconds=22.0
+2026-10-27T08:04:12.9674679Z PASS action shortheight longreview nativeTab prepare/confirm503 BackEnter draftretained Escape focusreturn3201280normalReduce
+2026-10-27T08:04:12.9675356Z 
+2026-10-27T08:04:20.1207501Z CASE answer_captured_browser.cjs default PASS exit=0 seconds=7.2
+2026-10-27T08:04:20.1209054Z PASS answer saved3;newer7 retained;successfulsave baseline3 stays dirty,320 fixture
+2026-10-27T08:04:20.1209903Z 
+2026-10-27T08:04:31.0431752Z CASE appearance_input_recovery_browser.cjs default PASS exit=0 seconds=10.9
+2026-10-27T08:04:31.0433902Z PASS appearancehexinvalid Auto/validswatch/clearempty clearscustomvalidity keyboardrange keepsfocus3201280reduce/normal
+2026-10-27T08:04:31.0434971Z 
+2026-10-27T08:04:33.5372241Z CASE budget_blocked_action_browser.cjs default PASS exit=0 seconds=2.5
+2026-10-27T08:04:33.5374194Z PASS actualfixture429budgetcause nearaffectedcomposer Retryvisible no billingclaim noimplicitretry newerDraftretained3201280
+2026-10-27T08:04:33.5375069Z 
+2026-10-27T08:04:48.5746730Z CASE builder_dashboard_height_motion_audit_browser.cjs default PASS exit=0 seconds=15.0
+2026-10-27T08:04:48.5748353Z BOARD 320 {"height":94,"cards":[{"height":94,"title":19}]}
+2026-10-27T08:04:48.5749518Z BOARD 1280 {"height":94,"cards":[{"height":94,"title":19}]}
+2026-10-27T08:04:48.5751267Z PASS actualgroupboardcardheight/titleoffsetexact queued/running/received/error3201280
+2026-10-27T08:04:48.5752279Z 
+2026-10-27T08:05:03.2390414Z CASE builder_keep_current_singleflight_browser.cjs default PASS exit=0 seconds=14.7
+2026-10-27T08:05:03.2392627Z PASS Keepcurrent immediateinvalidatesreview heldparse singleflightdisablededitor ccdialogEnterfocusrestore3201280normalReduce noModelSavecalls
+2026-10-27T08:05:03.2394110Z 
+2026-10-27T08:05:07.6943435Z CASE builder_retry_states_browser.cjs default PASS exit=0 seconds=4.5
+2026-10-27T08:05:07.6945671Z PASS recovery secondary/failedcount/duplicateguard/delayedretryfailurekeepsreadydrafts/retryallowedagain/runningnotenabled3201280fixture
+2026-10-27T08:05:07.6947047Z 
+2026-10-27T08:05:37.5164683Z CASE button_release_inventory_motion_browser.cjs 320-no-preference PASS exit=0 seconds=29.8
+2026-10-27T08:05:37.5165741Z RELEASE 320 no-preference BUTTON|icon nav-toggle|navToggle navToggle
+2026-10-27T08:05:37.5166469Z RELEASE 320 no-preference BUTTON|theme-btn themeBtn
+2026-10-27T08:05:37.5167065Z RELEASE 320 no-preference BUTTON|icon menu|menu menu
+2026-10-27T08:05:37.5167696Z RELEASE 320 no-preference BUTTON|icon|readingBtn readingBtn
+2026-10-27T08:05:37.5168434Z RELEASE 320 no-preference BUTTON|cs-btn null
+2026-10-27T08:05:37.5169401Z RELEASE 320 no-preference BUTTON|icon|prevQ prevQ
+2026-10-27T08:05:37.5170109Z RELEASE 320 no-preference BUTTON|icon|nextQ nextQ
+2026-10-27T08:05:37.5170864Z RELEASE 320 no-preference BUTTON|icon|tempBtn tempBtn
+2026-10-27T08:05:37.5171605Z RELEASE 320 no-preference BUTTON|icon|profileBtn profileBtn
+2026-10-27T08:05:37.5172431Z RELEASE 320 no-preference BUTTON|icon|newTopic newTopic
+2026-10-27T08:05:37.5173435Z RELEASE 320 no-preference BUTTON|icon|exportChat exportChat
+2026-10-27T08:05:37.5174054Z RELEASE 320 no-preference BUTTON|icon|upload upload
+2026-10-27T08:05:37.5174607Z RELEASE 320 no-preference BUTTON|icon|mic mic
+2026-10-27T08:05:37.5175157Z RELEASE 320 no-preference BUTTON|chip toolsToggle
+2026-10-27T08:05:37.5175748Z RELEASE 320 no-preference BUTTON|cc-guide-replay aboutGuide
+2026-10-27T08:05:37.5176197Z RELEASE 320 no-preference BUTTON| feature-tab-chat
+2026-10-27T08:05:37.5176686Z RELEASE 320 no-preference BUTTON|feature-added feature-tab-search
+2026-10-27T08:05:37.5177129Z RELEASE 320 no-preference SUMMARY| null
+2026-10-27T08:05:37.5177519Z RELEASE 320 no-preference BUTTON|go ghost null
+2026-10-27T08:05:37.5177910Z RELEASE 320 no-preference BUTTON|go green null
+2026-10-27T08:05:37.5178291Z RELEASE 320 no-preference BUTTON|info-tip null
+2026-10-27T08:05:37.5178673Z RELEASE 320 no-preference BUTTON|chipmore null
+2026-10-27T08:05:37.5179068Z RELEASE 320 no-preference BUTTON|go blue big apply
+2026-10-27T08:05:37.5179485Z RELEASE 320 no-preference BUTTON|editor-choice null
+2026-10-27T08:05:37.5179895Z RELEASE 320 no-preference BUTTON|go blue null
+2026-10-27T08:05:37.5180341Z RELEASE 320 no-preference BUTTON|go ghost helper-detect null
+2026-10-27T08:05:37.5180838Z RELEASE 320 no-preference BUTTON|go ghost helper-copy null
+2026-10-27T08:05:37.5181265Z RELEASE 320 no-preference BUTTON|preset null
+2026-10-27T08:05:37.5181656Z RELEASE 320 no-preference BUTTON|preset more null
+2026-10-27T08:05:37.5182099Z RELEASE 320 no-preference BUTTON|emoji-tile f-emoji_bot
+2026-10-27T08:05:37.5182523Z RELEASE 320 no-preference BUTTON|mini null
+2026-10-27T08:05:37.5183185Z RELEASE 320 no-preference BUTTON|settings-help-open null
+2026-10-27T08:05:37.5184023Z PASS release noOvershoot scale94to100 translate<=3.1 classfamilyinventory 32 no mutations; requested matrix 320 no-preference
+2026-10-27T08:05:37.5184552Z 
+2026-10-27T08:06:05.8707368Z CASE button_release_inventory_motion_browser.cjs 320-reduce PASS exit=0 seconds=28.4
+2026-10-27T08:06:05.8709850Z RELEASE 320 reduce BUTTON|icon nav-toggle|navToggle navToggle
+2026-10-27T08:06:05.8711347Z RELEASE 320 reduce BUTTON|theme-btn themeBtn
+2026-10-27T08:06:05.8712233Z RELEASE 320 reduce BUTTON|icon menu|menu menu
+2026-10-27T08:06:05.8713868Z RELEASE 320 reduce BUTTON|icon|readingBtn readingBtn
+2026-10-27T08:06:05.8714928Z RELEASE 320 reduce BUTTON|cs-btn null
+2026-10-27T08:06:05.8715821Z RELEASE 320 reduce BUTTON|icon|prevQ prevQ
+2026-10-27T08:06:05.8716747Z RELEASE 320 reduce BUTTON|icon|nextQ nextQ
+2026-10-27T08:06:05.8717575Z RELEASE 320 reduce BUTTON|icon|tempBtn tempBtn
+2026-10-27T08:06:05.8718351Z RELEASE 320 reduce BUTTON|icon|profileBtn profileBtn
+2026-10-27T08:06:05.8718889Z RELEASE 320 reduce BUTTON|icon|newTopic newTopic
+2026-10-27T08:06:05.8719408Z RELEASE 320 reduce BUTTON|icon|exportChat exportChat
+2026-10-27T08:06:05.8719903Z RELEASE 320 reduce BUTTON|icon|upload upload
+2026-10-27T08:06:05.8720283Z RELEASE 320 reduce BUTTON|icon|mic mic
+2026-10-27T08:06:05.8720629Z RELEASE 320 reduce BUTTON|chip toolsToggle
+2026-10-27T08:06:05.8721015Z RELEASE 320 reduce BUTTON|cc-guide-replay aboutGuide
+2026-10-27T08:06:05.8721415Z RELEASE 320 reduce BUTTON| feature-tab-chat
+2026-10-27T08:06:05.8721853Z RELEASE 320 reduce BUTTON|feature-added feature-tab-search
+2026-10-27T08:06:05.8722254Z RELEASE 320 reduce SUMMARY| null
+2026-10-27T08:06:05.8722576Z RELEASE 320 reduce BUTTON|go ghost null
+2026-10-27T08:06:05.8723214Z RELEASE 320 reduce BUTTON|go green null
+2026-10-27T08:06:05.8723644Z RELEASE 320 reduce BUTTON|info-tip null
+2026-10-27T08:06:05.8723994Z RELEASE 320 reduce BUTTON|chipmore null
+2026-10-27T08:06:05.8724548Z RELEASE 320 reduce BUTTON|go blue big apply
+2026-10-27T08:06:05.8724931Z RELEASE 320 reduce BUTTON|editor-choice null
+2026-10-27T08:06:05.8725287Z RELEASE 320 reduce BUTTON|go blue null
+2026-10-27T08:06:05.8725675Z RELEASE 320 reduce BUTTON|go ghost helper-detect null
+2026-10-27T08:06:05.8726109Z RELEASE 320 reduce BUTTON|go ghost helper-copy null
+2026-10-27T08:06:05.8726487Z RELEASE 320 reduce BUTTON|preset null
+2026-10-27T08:06:05.8726826Z RELEASE 320 reduce BUTTON|preset more null
+2026-10-27T08:06:05.8727198Z RELEASE 320 reduce BUTTON|emoji-tile f-emoji_bot
+2026-10-27T08:06:05.8727553Z RELEASE 320 reduce BUTTON|mini null
+2026-10-27T08:06:05.8727914Z RELEASE 320 reduce BUTTON|settings-help-open null
+2026-10-27T08:06:05.8728640Z PASS release noOvershoot scale94to100 translate<=3.1 classfamilyinventory 32 no mutations; requested matrix 320 reduce
+2026-10-27T08:06:05.8729110Z 
+2026-10-27T08:06:37.0948492Z CASE button_release_inventory_motion_browser.cjs 1280-no-preference PASS exit=0 seconds=31.2
+2026-10-27T08:06:37.0951265Z RELEASE 1280 no-preference BUTTON|cc-guide-replay chatGuide
+2026-10-27T08:06:37.0951921Z RELEASE 1280 no-preference BUTTON|theme-btn themeBtn
+2026-10-27T08:06:37.0952463Z RELEASE 1280 no-preference BUTTON|btn-dark newChat
+2026-10-27T08:06:37.0953327Z RELEASE 1280 no-preference BUTTON|btn-out tempPill
+2026-10-27T08:06:37.0953880Z RELEASE 1280 no-preference BUTTON|tab on history-chats
+2026-10-27T08:06:37.0954421Z RELEASE 1280 no-preference BUTTON|tab history-topics
+2026-10-27T08:06:37.0955048Z RELEASE 1280 no-preference BUTTON|icon menu|menu menu
+2026-10-27T08:06:37.0955634Z RELEASE 1280 no-preference BUTTON|icon|readingBtn readingBtn
+2026-10-27T08:06:37.0956262Z RELEASE 1280 no-preference BUTTON|cs-btn null
+2026-10-27T08:06:37.0956754Z RELEASE 1280 no-preference BUTTON|icon|prevQ prevQ
+2026-10-27T08:06:37.0957253Z RELEASE 1280 no-preference BUTTON|icon|nextQ nextQ
+2026-10-27T08:06:37.0957848Z RELEASE 1280 no-preference BUTTON|icon|tempBtn tempBtn
+2026-10-27T08:06:37.0958467Z RELEASE 1280 no-preference BUTTON|icon|profileBtn profileBtn
+2026-10-27T08:06:37.0959148Z RELEASE 1280 no-preference BUTTON|icon|exportChat exportChat
+2026-10-27T08:06:37.0959758Z RELEASE 1280 no-preference BUTTON|icon|upload upload
+2026-10-27T08:06:37.0960247Z RELEASE 1280 no-preference BUTTON|icon|mic mic
+2026-10-27T08:06:37.0960720Z RELEASE 1280 no-preference BUTTON|chip scopeBtn
+2026-10-27T08:06:37.0961211Z RELEASE 1280 no-preference BUTTON| feature-tab-chat
+2026-10-27T08:06:37.0961705Z RELEASE 1280 no-preference BUTTON|feature-added feature-tab-search
+2026-10-27T08:06:37.0962148Z RELEASE 1280 no-preference SUMMARY| null
+2026-10-27T08:06:37.0962830Z RELEASE 1280 no-preference BUTTON|go ghost null
+2026-10-27T08:06:37.0963596Z RELEASE 1280 no-preference BUTTON|go green null
+2026-10-27T08:06:37.0963999Z RELEASE 1280 no-preference BUTTON|info-tip null
+2026-10-27T08:06:37.0964392Z RELEASE 1280 no-preference BUTTON|chipmore null
+2026-10-27T08:06:37.0964804Z RELEASE 1280 no-preference BUTTON|go blue big apply
+2026-10-27T08:06:37.0965237Z RELEASE 1280 no-preference BUTTON|editor-choice null
+2026-10-27T08:06:37.0965645Z RELEASE 1280 no-preference BUTTON|go blue null
+2026-10-27T08:06:37.0966097Z RELEASE 1280 no-preference BUTTON|go ghost helper-detect null
+2026-10-27T08:06:37.0966590Z RELEASE 1280 no-preference BUTTON|go ghost helper-copy null
+2026-10-27T08:06:37.0967022Z RELEASE 1280 no-preference BUTTON|preset null
+2026-10-27T08:06:37.0967419Z RELEASE 1280 no-preference BUTTON|preset more null
+2026-10-27T08:06:37.0967862Z RELEASE 1280 no-preference BUTTON|emoji-tile f-emoji_bot
+2026-10-27T08:06:37.0968272Z RELEASE 1280 no-preference BUTTON|mini null
+2026-10-27T08:06:37.0968690Z RELEASE 1280 no-preference BUTTON|settings-help-open null
+2026-10-27T08:06:37.0969446Z PASS release noOvershoot scale94to100 translate<=3.1 classfamilyinventory 34 no mutations; requested matrix 1280 no-preference
+2026-10-27T08:06:37.0969946Z 
+2026-10-27T08:07:06.6519803Z CASE button_release_inventory_motion_browser.cjs 1280-reduce PASS exit=0 seconds=29.6
+2026-10-27T08:07:06.6521505Z RELEASE 1280 reduce BUTTON|cc-guide-replay chatGuide
+2026-10-27T08:07:06.6522476Z RELEASE 1280 reduce BUTTON|theme-btn themeBtn
+2026-10-27T08:07:06.6523569Z RELEASE 1280 reduce BUTTON|btn-dark newChat
+2026-10-27T08:07:06.6524103Z RELEASE 1280 reduce BUTTON|btn-out tempPill
+2026-10-27T08:07:06.6525000Z RELEASE 1280 reduce BUTTON|tab on history-chats
+2026-10-27T08:07:06.6525728Z RELEASE 1280 reduce BUTTON|tab history-topics
+2026-10-27T08:07:06.6526509Z RELEASE 1280 reduce BUTTON|icon menu|menu menu
+2026-10-27T08:07:06.6527370Z RELEASE 1280 reduce BUTTON|icon|readingBtn readingBtn
+2026-10-27T08:07:06.6528151Z RELEASE 1280 reduce BUTTON|cs-btn null
+2026-10-27T08:07:06.6528892Z RELEASE 1280 reduce BUTTON|icon|prevQ prevQ
+2026-10-27T08:07:06.6529697Z RELEASE 1280 reduce BUTTON|icon|nextQ nextQ
+2026-10-27T08:07:06.6530573Z RELEASE 1280 reduce BUTTON|icon|tempBtn tempBtn
+2026-10-27T08:07:06.6531548Z RELEASE 1280 reduce BUTTON|icon|profileBtn profileBtn
+2026-10-27T08:07:06.6532433Z RELEASE 1280 reduce BUTTON|icon|exportChat exportChat
+2026-10-27T08:07:06.6533570Z RELEASE 1280 reduce BUTTON|icon|upload upload
+2026-10-27T08:07:06.6534434Z RELEASE 1280 reduce BUTTON|icon|mic mic
+2026-10-27T08:07:06.6535273Z RELEASE 1280 reduce BUTTON|chip scopeBtn
+2026-10-27T08:07:06.6535917Z RELEASE 1280 reduce BUTTON| feature-tab-chat
+2026-10-27T08:07:06.6536684Z RELEASE 1280 reduce BUTTON|feature-added feature-tab-search
+2026-10-27T08:07:06.6537390Z RELEASE 1280 reduce SUMMARY| null
+2026-10-27T08:07:06.6537976Z RELEASE 1280 reduce BUTTON|go ghost null
+2026-10-27T08:07:06.6538605Z RELEASE 1280 reduce BUTTON|go green null
+2026-10-27T08:07:06.6539233Z RELEASE 1280 reduce BUTTON|info-tip null
+2026-10-27T08:07:06.6539857Z RELEASE 1280 reduce BUTTON|chipmore null
+2026-10-27T08:07:06.6540493Z RELEASE 1280 reduce BUTTON|go blue big apply
+2026-10-27T08:07:06.6541167Z RELEASE 1280 reduce BUTTON|editor-choice null
+2026-10-27T08:07:06.6541818Z RELEASE 1280 reduce BUTTON|go blue null
+2026-10-27T08:07:06.6542521Z RELEASE 1280 reduce BUTTON|go ghost helper-detect null
+2026-10-27T08:07:06.6543457Z RELEASE 1280 reduce BUTTON|go ghost helper-copy null
+2026-10-27T08:07:06.6543859Z RELEASE 1280 reduce BUTTON|preset null
+2026-10-27T08:07:06.6544250Z RELEASE 1280 reduce BUTTON|preset more null
+2026-10-27T08:07:06.6544631Z RELEASE 1280 reduce BUTTON|emoji-tile f-emoji_bot
+2026-10-27T08:07:06.6545081Z RELEASE 1280 reduce BUTTON|mini null
+2026-10-27T08:07:06.6545701Z RELEASE 1280 reduce BUTTON|settings-help-open null
+2026-10-27T08:07:06.6546942Z PASS release noOvershoot scale94to100 translate<=3.1 classfamilyinventory 34 no mutations; requested matrix 1280 reduce
+2026-10-27T08:07:06.6548017Z 
+2026-10-27T08:07:18.6764684Z CASE chat_action_step_focus_motion_browser.cjs default PASS exit=0 seconds=12.0
+2026-10-27T08:07:18.6766567Z PASS noteform-humanlabels exactreview-noJSON guardedrequests failedexecute-freshreview draftretained resultcards focusreturn3201280fixture
+2026-10-27T08:07:18.6767395Z 
+2026-10-27T08:07:24.8912168Z CASE chat_shortcuts_audit_browser.cjs default PASS exit=0 seconds=6.2
+2026-10-27T08:07:24.8914338Z PASS fourshortcutactualdestinations/uploadSourcesReadingModel/backChat3203901280
+2026-10-27T08:07:24.8915298Z 
+2026-10-27T08:07:28.9910013Z CASE composer_footer_text_flow_browser.cjs default PASS exit=0 seconds=4.1
+2026-10-27T08:07:28.9911322Z PASS composerFooter continuousTextFlow noStrayDot noFlexColumns3201280LeftRight
+2026-10-27T08:07:28.9911828Z 
+2026-10-27T08:07:34.7546556Z CASE config_utility_browser.cjs default PASS exit=0 seconds=5.8
+2026-10-27T08:07:34.7548398Z PASS utility grouping/aligned44pxcontrols3207601280/local-noresult/Demo-disabled/guidebusy503retainedquestion+nochanges
+2026-10-27T08:07:34.7549332Z 
+2026-10-27T08:07:45.4515506Z CASE disclosure_runtime_quiet_motion_browser.cjs default PASS exit=0 seconds=10.7
+2026-10-27T08:07:45.4516885Z QUIETREVEAL 320 reduce provider active160cancelled focused control unchanged
+2026-10-27T08:07:45.4518253Z QUIETREVEAL 320 reduce preset active160cancelled focused control unchanged
+2026-10-27T08:07:45.4520043Z QUIETREVEAL 320 reduce fields active160cancelled focused control unchanged
+2026-10-27T08:07:45.4521333Z QUIETREVEAL 320 none provider active160cancelled focused control unchanged
+2026-10-27T08:07:45.4522599Z QUIETREVEAL 320 none preset active160cancelled focused control unchanged
+2026-10-27T08:07:45.4524252Z QUIETREVEAL 320 none fields active160cancelled focused control unchanged
+2026-10-27T08:07:45.4525418Z QUIETREVEAL 320 calm provider active160cancelled focused control unchanged
+2026-10-27T08:07:45.4526429Z QUIETREVEAL 320 calm preset active160cancelled focused control unchanged
+2026-10-27T08:07:45.4527189Z QUIETREVEAL 320 calm fields active160cancelled focused control unchanged
+2026-10-27T08:07:45.4527837Z QUIETREVEAL 1280 reduce provider active160cancelled focused control unchanged
+2026-10-27T08:07:45.4528502Z QUIETREVEAL 1280 reduce preset active160cancelled focused control unchanged
+2026-10-27T08:07:45.4529151Z QUIETREVEAL 1280 reduce fields active160cancelled focused control unchanged
+2026-10-27T08:07:45.4529794Z QUIETREVEAL 1280 none provider active160cancelled focused control unchanged
+2026-10-27T08:07:45.4530434Z QUIETREVEAL 1280 none preset active160cancelled focused control unchanged
+2026-10-27T08:07:45.4531055Z QUIETREVEAL 1280 none fields active160cancelled focused control unchanged
+2026-10-27T08:07:45.4531690Z QUIETREVEAL 1280 calm provider active160cancelled focused control unchanged
+2026-10-27T08:07:45.4532320Z QUIETREVEAL 1280 calm preset active160cancelled focused control unchanged
+2026-10-27T08:07:45.4533144Z QUIETREVEAL 1280 calm fields active160cancelled focused control unchanged
+2026-10-27T08:07:45.4534078Z PASS providerextras/presetmore/fielddisclosure runtimeReduceNoneCalm18states3201280 noSavecalls
+2026-10-27T08:07:45.4534554Z 
+2026-10-27T08:08:06.4612015Z CASE emoji_motion_browser.cjs default PASS exit=0 seconds=21.0
+2026-10-27T08:08:06.4613224Z SYNCHRONOUSSEARCH 320 reduce [
+2026-10-27T08:08:06.4613712Z   { value: 'bea', count: 1, beaming: true },
+2026-10-27T08:08:06.4614250Z   { value: 'beaming', count: 1, beaming: true },
+2026-10-27T08:08:06.4614795Z   { value: 'unmatched-fixture', count: 0, beaming: false },
+2026-10-27T08:08:06.4615328Z   { value: 'beaming', count: 1, beaming: true }
+2026-10-27T08:08:06.4615725Z ]
+2026-10-27T08:08:06.4616072Z SYNCHRONOUSSEARCH 320 no-preference [
+2026-10-27T08:08:06.4616519Z   { value: 'bea', count: 1, beaming: true },
+2026-10-27T08:08:06.4616976Z   { value: 'beaming', count: 1, beaming: true },
+2026-10-27T08:08:06.4617501Z   { value: 'unmatched-fixture', count: 0, beaming: false },
+2026-10-27T08:08:06.4618014Z   { value: 'beaming', count: 1, beaming: true }
+2026-10-27T08:08:06.4618768Z ]
+2026-10-27T08:08:06.4619083Z SYNCHRONOUSSEARCH 1280 reduce [
+2026-10-27T08:08:06.4619489Z   { value: 'bea', count: 1, beaming: true },
+2026-10-27T08:08:06.4619934Z   { value: 'beaming', count: 1, beaming: true },
+2026-10-27T08:08:06.4620469Z   { value: 'unmatched-fixture', count: 0, beaming: false },
+2026-10-27T08:08:06.4621046Z   { value: 'beaming', count: 1, beaming: true }
+2026-10-27T08:08:06.4621393Z ]
+2026-10-27T08:08:06.4621706Z SYNCHRONOUSSEARCH 1280 no-preference [
+2026-10-27T08:08:06.4622115Z   { value: 'bea', count: 1, beaming: true },
+2026-10-27T08:08:06.4622528Z   { value: 'beaming', count: 1, beaming: true },
+2026-10-27T08:08:06.4623151Z   { value: 'unmatched-fixture', count: 0, beaming: false },
+2026-10-27T08:08:06.4623627Z   { value: 'beaming', count: 1, beaming: true }
+2026-10-27T08:08:06.4623970Z ]
+2026-10-27T08:08:06.4625306Z PASS picker160ms.98scale noovershoot singlecategory120msfade searchresults selectedhighlight staticnormalemoji avatarinplace rows/bubblesnotrebuilt/noanimation resetdefault Escape/focus3201280bothmotion
+2026-10-27T08:08:06.4626370Z 
+2026-10-27T08:08:11.9089471Z CASE freshness_states_browser.cjs default PASS exit=0 seconds=5.4
+2026-10-27T08:08:11.9090734Z PASS freshness changes/count units, preserved last status/error recovery, duplicate guard,320 fixture
+2026-10-27T08:08:11.9091297Z 
+2026-10-27T08:08:19.4304818Z CASE helper_detect_geometry_motion_browser.cjs default PASS exit=0 seconds=7.5
+2026-10-27T08:08:19.4306464Z PASS helperDetectAPI Detecting geometry and adjacentSavekey stable3201280normalReduce
+2026-10-27T08:08:19.4307305Z 
+2026-10-27T08:08:29.5670681Z CASE helper_try_review_blocked_motion_browser.cjs default PASS exit=0 seconds=10.1
+2026-10-27T08:08:29.5672487Z PASS helperTry invalidreview/stalesample blockexecution preservevaluesfocus3201280normalReduce
+2026-10-27T08:08:29.5673731Z 
+2026-10-27T08:08:38.2317270Z CASE history_insertion_motion_audit_browser.cjs default PASS exit=0 seconds=8.7
+2026-10-27T08:08:38.2321696Z SEARCH 320 no-preference [{"name":"m-in","time":"0.18s","easing":"cubic-bezier(0.2, 0.8, 0.2, 1)","transform":"none","keyframes":["none","none"]},{"name":"m-in","time":"0.18s","easing":"cubic-bezier(0.2, 0.8, 0.2, 1)","transform":"none","keyframes":["none","none"]},{"name":"m-in","time":"0.18s","easing":"cubic-bezier(0.2, 0.8, 0.2, 1)","transform":"none","keyframes":["none","none"]},{"name":"m-in","time":"0.18s","easing":"cubic-bezier(0.2, 0.8, 0.2, 1)","transform":"none","keyframes":["none","none"]}] single replacement fade no mutation replay
+2026-10-27T08:08:38.2327049Z SEARCH 320 reduce [{"name":"none","time":"0s","easing":"ease","transform":"none","keyframes":[]},{"name":"none","time":"0s","easing":"ease","transform":"none","keyframes":[]},{"name":"none","time":"0s","easing":"ease","transform":"none","keyframes":[]},{"name":"none","time":"0s","easing":"ease","transform":"none","keyframes":[]}] single replacement fade no mutation replay
+2026-10-27T08:08:38.2330594Z SEARCH 1280 no-preference [{"name":"m-in","time":"0.18s","easing":"cubic-bezier(0.2, 0.8, 0.2, 1)","transform":"none","keyframes":["none","none"]},{"name":"m-in","time":"0.18s","easing":"cubic-bezier(0.2, 0.8, 0.2, 1)","transform":"none","keyframes":["none","none"]},{"name":"m-in","time":"0.18s","easing":"cubic-bezier(0.2, 0.8, 0.2, 1)","transform":"none","keyframes":["none","none"]},{"name":"m-in","time":"0.18s","easing":"cubic-bezier(0.2, 0.8, 0.2, 1)","transform":"none","keyframes":["none","none"]}] single replacement fade no mutation replay
+2026-10-27T08:08:38.2333724Z SEARCH 1280 reduce [{"name":"none","time":"0s","easing":"ease","transform":"none","keyframes":[]},{"name":"none","time":"0s","easing":"ease","transform":"none","keyframes":[]},{"name":"none","time":"0s","easing":"ease","transform":"none","keyframes":[]},{"name":"none","time":"0s","easing":"ease","transform":"none","keyframes":[]}] single replacement fade no mutation replay
+2026-10-27T08:08:38.2335277Z PASS receivednewhistoryrow180opacity only afterresponse once staticmutations no reanimation3201280normalReduce
+2026-10-27T08:08:38.2337772Z 
+2026-10-27T08:08:50.1130756Z CASE import_disclosure_motion_audit_browser.cjs default PASS exit=0 seconds=11.9
+2026-10-27T08:08:50.1132463Z IMPORT 320 no-preference realofflineYAMLreview nativeEnter160chevron noheight/transform NoneReduceoff load0
+2026-10-27T08:08:50.1134074Z IMPORT 320 reduce realofflineYAMLreview nativeEnter160chevron noheight/transform NoneReduceoff load0
+2026-10-27T08:08:50.1135468Z IMPORT 1280 no-preference realofflineYAMLreview nativeEnter160chevron noheight/transform NoneReduceoff load0
+2026-10-27T08:08:50.1136983Z IMPORT 1280 reduce realofflineYAMLreview nativeEnter160chevron noheight/transform NoneReduceoff load0
+2026-10-27T08:08:50.1138411Z PASS successfulofflineImportreview disclosures read/keyboard/motion noLoad3201280normalReduce
+2026-10-27T08:08:50.1139182Z 
+2026-10-27T08:09:11.0195913Z CASE local_memory_motion_audit_browser.cjs default PASS exit=0 seconds=20.9
+2026-10-27T08:09:11.0197468Z MEMORY 320 reduce Details [{"width":"50%","name":"none"},{"width":"45%","name":"none"},{"width":"55%","name":"none"},{"width":"85%","name":"none"}]
+2026-10-27T08:09:11.0198912Z MEMORY 320 reduce Details [{"width":"50%","name":"none"},{"width":"45%","name":"none"},{"width":"55%","name":"none"},{"width":"85%","name":"none"}]
+2026-10-27T08:09:11.0200687Z MEMORY 320 no-preference Details [{"width":"50%","name":"none"},{"width":"45%","name":"none"},{"width":"55%","name":"none"},{"width":"85%","name":"none"}]
+2026-10-27T08:09:11.0202233Z MEMORY 320 no-preference Details [{"width":"50%","name":"none"},{"width":"45%","name":"none"},{"width":"55%","name":"none"},{"width":"85%","name":"none"}]
+2026-10-27T08:09:11.0203922Z MEMORY 1280 reduce Details [{"width":"50%","name":"none"},{"width":"45%","name":"none"},{"width":"55%","name":"none"},{"width":"85%","name":"none"}]
+2026-10-27T08:09:11.0205329Z MEMORY 1280 reduce Details [{"width":"50%","name":"none"},{"width":"45%","name":"none"},{"width":"55%","name":"none"},{"width":"85%","name":"none"}]
+2026-10-27T08:09:11.0206741Z MEMORY 1280 no-preference Details [{"width":"50%","name":"none"},{"width":"45%","name":"none"},{"width":"55%","name":"none"},{"width":"85%","name":"none"}]
+2026-10-27T08:09:11.0207986Z MEMORY 1280 no-preference Details [{"width":"50%","name":"none"},{"width":"45%","name":"none"},{"width":"55%","name":"none"},{"width":"85%","name":"none"}]
+2026-10-27T08:09:11.0209076Z PASS localothers160msgroupopacity only no moves existingcards geometryexact reduceoff fixture3201280
+2026-10-27T08:09:11.0209582Z 
+2026-10-27T08:09:51.4615991Z CASE mobile_a11y_expanded_sections_browser.cjs default PASS exit=0 seconds=40.4
+2026-10-27T08:09:51.4617844Z 320 #sec-finish 
+2026-10-27T08:09:51.4618368Z 320 #sec-portable 
+2026-10-27T08:09:51.4619406Z 320 #sec-workspace-list 
+2026-10-27T08:09:51.4619968Z 320 #sec-workspace-changes 
+2026-10-27T08:09:51.4620604Z 320 #sec-workspace-backup 
+2026-10-27T08:09:51.4621212Z 320 #sec-workspace-tests 
+2026-10-27T08:09:51.4621823Z 320 #sec-workspace-deploy 
+2026-10-27T08:09:51.4622402Z 320 #sec-model 
+2026-10-27T08:09:51.4622870Z 320 #sec-search 
+2026-10-27T08:09:51.4623665Z 320 #sec-prompts 
+2026-10-27T08:09:51.4624215Z 320 #sec-code 
+2026-10-27T08:09:51.4624710Z 320 #sec-presets 
+2026-10-27T08:09:51.4625185Z 320 #sec-wording 
+2026-10-27T08:09:51.4625612Z 320 #sec-colors 
+2026-10-27T08:09:51.4626050Z 320 #sec-background 
+2026-10-27T08:09:51.4626376Z 320 #sec-fonts 
+2026-10-27T08:09:51.4626655Z 320 #sec-shape 
+2026-10-27T08:09:51.4626880Z 320 #sec-emoji 
+2026-10-27T08:09:51.4627118Z 320 #sec-motion 
+2026-10-27T08:09:51.4627352Z 320 #sec-layout 
+2026-10-27T08:09:51.4627593Z 320 #sec-freshness 
+2026-10-27T08:09:51.4627836Z 320 #sec-budget 
+2026-10-27T08:09:51.4628079Z 1280 #sec-finish 
+2026-10-27T08:09:51.4628325Z 1280 #sec-portable 
+2026-10-27T08:09:51.4628597Z 1280 #sec-workspace-list 
+2026-10-27T08:09:51.4628906Z 1280 #sec-workspace-changes 
+2026-10-27T08:09:51.4629226Z 1280 #sec-workspace-backup 
+2026-10-27T08:09:51.4629536Z 1280 #sec-workspace-tests 
+2026-10-27T08:09:51.4630120Z 1280 #sec-workspace-deploy 
+2026-10-27T08:09:51.4630401Z 1280 #sec-model 
+2026-10-27T08:09:51.4630648Z 1280 #sec-search 
+2026-10-27T08:09:51.4630904Z 1280 #sec-prompts 
+2026-10-27T08:09:51.4631141Z 1280 #sec-code 
+2026-10-27T08:09:51.4631383Z 1280 #sec-presets 
+2026-10-27T08:09:51.4631627Z 1280 #sec-wording 
+2026-10-27T08:09:51.4631868Z 1280 #sec-colors 
+2026-10-27T08:09:51.4632121Z 1280 #sec-background 
+2026-10-27T08:09:51.4632366Z 1280 #sec-fonts 
+2026-10-27T08:09:51.4632599Z 1280 #sec-shape 
+2026-10-27T08:09:51.4632828Z 1280 #sec-emoji 
+2026-10-27T08:09:51.4633398Z 1280 #sec-motion 
+2026-10-27T08:09:51.4633650Z 1280 #sec-layout 
+2026-10-27T08:09:51.4633899Z 1280 #sec-freshness 
+2026-10-27T08:09:51.4634149Z 1280 #sec-budget 
+2026-10-27T08:09:51.4634293Z 
+2026-10-27T08:10:00.1204962Z CASE model_refresh_states_browser.cjs default PASS exit=0 seconds=8.7
+2026-10-27T08:10:00.1206617Z PASS delayedmodelrefresh keepsnewertypedmodel selectedlistedmodel retained aria-busylifecycle3201280fixture
+2026-10-27T08:10:00.1207615Z 
+2026-10-27T08:10:16.3124997Z CASE offline_status_motion_audit_browser.cjs default PASS exit=0 seconds=16.2
+2026-10-27T08:10:16.3126736Z OFFLINE 320 no-preference Chatbadge/landing explanation settingsbadge static no animation/pulse no paidmodel claim
+2026-10-27T08:10:16.3128880Z OFFLINE 320 reduce Chatbadge/landing explanation settingsbadge static no animation/pulse no paidmodel claim
+2026-10-27T08:10:16.3130660Z OFFLINE 1280 no-preference Chatbadge/landing explanation settingsbadge static no animation/pulse no paidmodel claim
+2026-10-27T08:10:16.3132424Z OFFLINE 1280 reduce Chatbadge/landing explanation settingsbadge static no animation/pulse no paidmodel claim
+2026-10-27T08:10:16.3134117Z PASS offlineDemo staticbadges and visibleplainmeaning3201280normalReduce
+2026-10-27T08:10:16.3134701Z 
+2026-10-27T08:10:36.0116767Z CASE preview_continuity_browser.cjs default PASS exit=0 seconds=19.7
+2026-10-27T08:10:36.0120487Z PREVIEW {
+2026-10-27T08:10:36.0121084Z   src: 'http://127.0.0.1:40137/?preview=1',
+2026-10-27T08:10:36.0121865Z   body: 'Skip to question box\n' +
+2026-10-27T08:10:36.0122297Z     'Chats\n' +
+2026-10-27T08:10:36.0122749Z     'New chat\n' +
+2026-10-27T08:10:36.0123503Z     'Temporary\n' +
+2026-10-27T08:10:36.0123946Z     'Chats\n' +
+2026-10-27T08:10:36.0124425Z     'Topics\n' +
+2026-10-27T08:10:36.0124842Z     'Sample conversation\n' +
+2026-10-27T08:10:36.0125247Z     'Another conversation\n' +
+2026-10-27T08:10:36.0125552Z     'Aa\n' +
+2026-10-27T08:10:36.0125794Z     'Standard\n' +
+2026-10-27T08:10:36.0126050Z     'Chatify\n' +
+2026-10-27T08:10:36.0126304Z     '\n' +
+2026-10-27T08:10:36.0126609Z     'Ask questions about your documents\n' +
+2026-10-27T08:10:36.0126959Z     '\n' +
+2026-10-27T08:10:36.0127268Z     'How will answers look in this app?\n' +
+2026-10-27T08:10:36.0127609Z     '\n' +
+2026-10-27T08:10:36.0128235Z     'This is a sample answer with a source citation [1]⁠.\n' +
+2026-10-27T08:10:36.0128665Z     '\n' +
+2026-10-27T08:10:36.0129280Z     'Adjust the appearance on the left to see it here. This preview does not contact your model or sources.\n' +
+2026-10-27T08:10:36.0129909Z     '\n' +
+2026-10-27T08:10:36.0130139Z     'Copy\n' +
+2026-10-27T08:10:36.0130382Z     'More\n' +
+2026-10-27T08:10:36.0130692Z     'Sample chart: groups of documents\n' +
+2026-10-27T08:10:36.0131058Z     'Group A 46%\n' +
+2026-10-27T08:10:36.0131328Z     'Group B 31%\n' +
+2026-10-27T08:10:36.0131600Z     'Group C 23%\n' +
+2026-10-27T08:10:36.0131882Z     '•••\n' +
+2026-10-27T08:10:36.0132128Z     'Not a substitut'
+2026-10-27T08:10:36.0132386Z }
+2026-10-27T08:10:36.0132616Z labels 390 [
+2026-10-27T08:10:36.0132874Z   'Main color hex code',
+2026-10-27T08:10:36.0133460Z   'Page background hex code',
+2026-10-27T08:10:36.0133781Z   'Accent color hex code',
+2026-10-27T08:10:36.0134118Z   'Cards and chat area hex code',
+2026-10-27T08:10:36.0134439Z   'Sidebar hex code',
+2026-10-27T08:10:36.0134715Z   'Text hex code',
+2026-10-27T08:10:36.0134987Z   'Soft text hex code',
+2026-10-27T08:10:36.0135261Z   'Lines hex code',
+2026-10-27T08:10:36.0135825Z   'Assistant message hex code',
+2026-10-27T08:10:36.0136097Z   'Your avatar hex code',
+2026-10-27T08:10:36.0136338Z   'Warning color hex code'
+2026-10-27T08:10:36.0136565Z ]
+2026-10-27T08:10:36.0136746Z PREVIEW {
+2026-10-27T08:10:36.0136996Z   src: 'http://127.0.0.1:40137/?preview=1',
+2026-10-27T08:10:36.0137328Z   body: 'Skip to question box\n' +
+2026-10-27T08:10:36.0137592Z     'Chats\n' +
+2026-10-27T08:10:36.0137801Z     'New chat\n' +
+2026-10-27T08:10:36.0138017Z     'Temporary\n' +
+2026-10-27T08:10:36.0138223Z     'Chats\n' +
+2026-10-27T08:10:36.0138421Z     'Topics\n' +
+2026-10-27T08:10:36.0138639Z     'Sample conversation\n' +
+2026-10-27T08:10:36.0138911Z     'Another conversation\n' +
+2026-10-27T08:10:36.0139146Z     'Aa\n' +
+2026-10-27T08:10:36.0139346Z     'Standard\n' +
+2026-10-27T08:10:36.0139547Z     'Chatify\n' +
+2026-10-27T08:10:36.0139746Z     '\n' +
+2026-10-27T08:10:36.0139988Z     'Ask questions about your documents\n' +
+2026-10-27T08:10:36.0140283Z     '\n' +
+2026-10-27T08:10:36.0140528Z     'How will answers look in this app?\n' +
+2026-10-27T08:10:36.0140811Z     '\n' +
+2026-10-27T08:10:36.0141176Z     'This is a sample answer with a source citation [1]⁠.\n' +
+2026-10-27T08:10:36.0141502Z     '\n' +
+2026-10-27T08:10:36.0141968Z     'Adjust the appearance on the left to see it here. This preview does not contact your model or sources.\n' +
+2026-10-27T08:10:36.0142605Z     '\n' +
+2026-10-27T08:10:36.0142803Z     'Copy\n' +
+2026-10-27T08:10:36.0143174Z     'More\n' +
+2026-10-27T08:10:36.0143611Z     'Sample chart: groups of documents\n' +
+2026-10-27T08:10:36.0143907Z     'Group A 46%\n' +
+2026-10-27T08:10:36.0144122Z     'Group B 31%\n' +
+2026-10-27T08:10:36.0144337Z     'Group C 23%\n' +
+2026-10-27T08:10:36.0144582Z     '•••\n' +
+2026-10-27T08:10:36.0144781Z     'Not a substitut'
+2026-10-27T08:10:36.0144984Z }
+2026-10-27T08:10:36.0145165Z labels 390 [
+2026-10-27T08:10:36.0145369Z   'Main color hex code',
+2026-10-27T08:10:36.0145614Z   'Page background hex code',
+2026-10-27T08:10:36.0145881Z   'Accent color hex code',
+2026-10-27T08:10:36.0146143Z   'Cards and chat area hex code',
+2026-10-27T08:10:36.0146413Z   'Sidebar hex code',
+2026-10-27T08:10:36.0146628Z   'Text hex code',
+2026-10-27T08:10:36.0146839Z   'Soft text hex code',
+2026-10-27T08:10:36.0147060Z   'Lines hex code',
+2026-10-27T08:10:36.0147296Z   'Assistant message hex code',
+2026-10-27T08:10:36.0147554Z   'Your avatar hex code',
+2026-10-27T08:10:36.0147788Z   'Warning color hex code'
+2026-10-27T08:10:36.0148007Z ]
+2026-10-27T08:10:36.0148185Z PREVIEW {
+2026-10-27T08:10:36.0148432Z   src: 'http://127.0.0.1:40137/?preview=1',
+2026-10-27T08:10:36.0148750Z   body: 'Skip to question box\n' +
+2026-10-27T08:10:36.0149008Z     'Chats\n' +
+2026-10-27T08:10:36.0149209Z     'New chat\n' +
+2026-10-27T08:10:36.0149415Z     'Temporary\n' +
+2026-10-27T08:10:36.0149617Z     'Chats\n' +
+2026-10-27T08:10:36.0149812Z     'Topics\n' +
+2026-10-27T08:10:36.0150028Z     'Sample conversation\n' +
+2026-10-27T08:10:36.0150308Z     'Another conversation\n' +
+2026-10-27T08:10:36.0150559Z     'Sample conversation\n' +
+2026-10-27T08:10:36.0150795Z     'Aa\n' +
+2026-10-27T08:10:36.0150991Z     'Standard\n' +
+2026-10-27T08:10:36.0151189Z     'Chatify\n' +
+2026-10-27T08:10:36.0151388Z     '\n' +
+2026-10-27T08:10:36.0151630Z     'Ask questions about your documents\n' +
+2026-10-27T08:10:36.0151903Z     '\n' +
+2026-10-27T08:10:36.0152141Z     'How will answers look in this app?\n' +
+2026-10-27T08:10:36.0152407Z     '\n' +
+2026-10-27T08:10:36.0152754Z     'This is a sample answer with a source citation [1]⁠.\n' +
+2026-10-27T08:10:36.0153336Z     '\n' +
+2026-10-27T08:10:36.0153817Z     'Adjust the appearance on the left to see it here. This preview does not contact your model or sources.\n' +
+2026-10-27T08:10:36.0154295Z     '\n' +
+2026-10-27T08:10:36.0154479Z     'Copy\n' +
+2026-10-27T08:10:36.0154671Z     'More\n' +
+2026-10-27T08:10:36.0154912Z     'Sample chart: groups of documents\n' +
+2026-10-27T08:10:36.0155192Z     'Group A 46%\n' +
+2026-10-27T08:10:36.0155576Z     'Group B 31%\n' +
+2026-10-27T08:10:36.0155787Z     'Group C 23%'
+2026-10-27T08:10:36.0155984Z }
+2026-10-27T08:10:36.0156162Z labels 1280 [
+2026-10-27T08:10:36.0156370Z   'Main color hex code',
+2026-10-27T08:10:36.0156610Z   'Page background hex code',
+2026-10-27T08:10:36.0156865Z   'Accent color hex code',
+2026-10-27T08:10:36.0157128Z   'Cards and chat area hex code',
+2026-10-27T08:10:36.0157381Z   'Sidebar hex code',
+2026-10-27T08:10:36.0157595Z   'Text hex code',
+2026-10-27T08:10:36.0157806Z   'Soft text hex code',
+2026-10-27T08:10:36.0158024Z   'Lines hex code',
+2026-10-27T08:10:36.0158263Z   'Assistant message hex code',
+2026-10-27T08:10:36.0158529Z   'Your avatar hex code',
+2026-10-27T08:10:36.0158779Z   'Warning color hex code'
+2026-10-27T08:10:36.0159006Z ]
+2026-10-27T08:10:36.0159184Z PREVIEW {
+2026-10-27T08:10:36.0159425Z   src: 'http://127.0.0.1:40137/?preview=1',
+2026-10-27T08:10:36.0159768Z   body: 'Skip to question box\n' +
+2026-10-27T08:10:36.0160019Z     'Chats\n' +
+2026-10-27T08:10:36.0160222Z     'New chat\n' +
+2026-10-27T08:10:36.0160430Z     'Temporary\n' +
+2026-10-27T08:10:36.0160631Z     'Chats\n' +
+2026-10-27T08:10:36.0160826Z     'Topics\n' +
+2026-10-27T08:10:36.0161039Z     'Sample conversation\n' +
+2026-10-27T08:10:36.0161309Z     'Another conversation\n' +
+2026-10-27T08:10:36.0161556Z     'Sample conversation\n' +
+2026-10-27T08:10:36.0161914Z     'Aa\n' +
+2026-10-27T08:10:36.0162113Z     'Standard\n' +
+2026-10-27T08:10:36.0162318Z     'Chatify\n' +
+2026-10-27T08:10:36.0162516Z     '\n' +
+2026-10-27T08:10:36.0162759Z     'Ask questions about your documents\n' +
+2026-10-27T08:10:36.0163190Z     '\n' +
+2026-10-27T08:10:36.0163434Z     'How will answers look in this app?\n' +
+2026-10-27T08:10:36.0163698Z     '\n' +
+2026-10-27T08:10:36.0164056Z     'This is a sample answer with a source citation [1]⁠.\n' +
+2026-10-27T08:10:36.0164377Z     '\n' +
+2026-10-27T08:10:36.0164840Z     'Adjust the appearance on the left to see it here. This preview does not contact your model or sources.\n' +
+2026-10-27T08:10:36.0165326Z     '\n' +
+2026-10-27T08:10:36.0165516Z     'Copy\n' +
+2026-10-27T08:10:36.0165709Z     'More\n' +
+2026-10-27T08:10:36.0165954Z     'Sample chart: groups of documents\n' +
+2026-10-27T08:10:36.0166232Z     'Group A 46%\n' +
+2026-10-27T08:10:36.0166444Z     'Group B 31%\n' +
+2026-10-27T08:10:36.0166656Z     'Group C 23%'
+2026-10-27T08:10:36.0166867Z }
+2026-10-27T08:10:36.0167046Z labels 1280 [
+2026-10-27T08:10:36.0167257Z   'Main color hex code',
+2026-10-27T08:10:36.0167499Z   'Page background hex code',
+2026-10-27T08:10:36.0167763Z   'Accent color hex code',
+2026-10-27T08:10:36.0168024Z   'Cards and chat area hex code',
+2026-10-27T08:10:36.0168283Z   'Sidebar hex code',
+2026-10-27T08:10:36.0168502Z   'Text hex code',
+2026-10-27T08:10:36.0168711Z   'Soft text hex code',
+2026-10-27T08:10:36.0168932Z   'Lines hex code',
+2026-10-27T08:10:36.0169169Z   'Assistant message hex code',
+2026-10-27T08:10:36.0169420Z   'Your avatar hex code',
+2026-10-27T08:10:36.0169668Z   'Warning color hex code'
+2026-10-27T08:10:36.0169887Z ]
+2026-10-27T08:10:36.0170478Z PASS color focus/precisehex/preview nodeidentity+scroll/dark sample separate/sectionnav continuity3901280normalreduce
+2026-10-27T08:10:36.0170955Z 
+2026-10-27T08:10:43.6185347Z CASE prompt_growth_states_browser.cjs default PASS exit=0 seconds=7.6
+2026-10-27T08:10:43.6186340Z PASS promptautogrow bounded560 fixedtopwidth noheightperwordatcap keyboardfocus retained no preview3201280
+2026-10-27T08:10:43.6186860Z 
+2026-10-27T08:10:56.9999693Z CASE provider_long_configuration_geometry_motion_browser.cjs default PASS exit=0 seconds=13.4
+2026-10-27T08:10:57.0000819Z LONGCONFIG 320 no-preference base 1207
+2026-10-27T08:10:57.0001461Z LONGCONFIG 320 no-preference base 807
+2026-10-27T08:10:57.0002095Z LONGCONFIG 320 no-preference null 1207
+2026-10-27T08:10:57.0002671Z LONGCONFIG 320 no-preference null 807
+2026-10-27T08:10:57.0003493Z LONGCONFIG 320 reduce base 1207
+2026-10-27T08:10:57.0004047Z LONGCONFIG 320 reduce base 807
+2026-10-27T08:10:57.0004940Z LONGCONFIG 320 reduce null 1207
+2026-10-27T08:10:57.0005416Z LONGCONFIG 320 reduce null 807
+2026-10-27T08:10:57.0005959Z LONGCONFIG 1280 no-preference base 1207
+2026-10-27T08:10:57.0006553Z LONGCONFIG 1280 no-preference base 807
+2026-10-27T08:10:57.0007128Z LONGCONFIG 1280 no-preference null 1207
+2026-10-27T08:10:57.0007749Z LONGCONFIG 1280 no-preference null 807
+2026-10-27T08:10:57.0008320Z LONGCONFIG 1280 reduce base 1207
+2026-10-27T08:10:57.0008831Z LONGCONFIG 1280 reduce base 807
+2026-10-27T08:10:57.0009368Z LONGCONFIG 1280 reduce null 1207
+2026-10-27T08:10:57.0009937Z LONGCONFIG 1280 reduce null 807
+2026-10-27T08:10:57.0011262Z PASS providerbaseaddress/keyenvironmentname1200800charfixture allvisibleModelcontrolpositionsfixed3201280normalReduce noSave
+2026-10-27T08:10:57.0012250Z 
+2026-10-27T08:11:01.1476357Z CASE recommendation_restore_browser.cjs default PASS exit=0 seconds=4.1
+2026-10-27T08:11:01.1477762Z PASS recommendationUndo restores exact previous provider/model/base/temp,keyboardreturn zeroSave/connectionCalls3201280fixture
+2026-10-27T08:11:01.1478473Z 
+2026-10-27T08:11:11.9125859Z CASE send_press_motion_audit_browser.cjs default PASS exit=0 seconds=10.8
+2026-10-27T08:11:11.9127885Z SENDPRESS 320 no-preference matrix(0.98, 0, 0, 0.98, 0, 0) release1 outside no request draftretained Noneoff
+2026-10-27T08:11:11.9130085Z SENDPRESS 320 reduce none release1 outside no request draftretained Noneoff
+2026-10-27T08:11:11.9131381Z SENDPRESS 1280 no-preference matrix(0.98, 0, 0, 0.98, 0, 0) release1 outside no request draftretained Noneoff
+2026-10-27T08:11:11.9132626Z SENDPRESS 1280 reduce none release1 outside no request draftretained Noneoff
+2026-10-27T08:11:11.9134104Z PASS Send98pctpress120ms nohovergrowth release1 noovershoot ReduceNoneoff3201280
+2026-10-27T08:11:11.9134745Z 
+2026-10-27T08:11:14.6623394Z CASE settings_fuzzy_browser.cjs default PASS exit=0 seconds=2.7
+2026-10-27T08:11:14.6624307Z [
+2026-10-27T08:11:14.6624801Z   { q: 'how to add someones zip', top: 'Load and shareSection' },
+2026-10-27T08:11:14.6625456Z   { q: 'increase make big font', top: 'Text sizeFonts' },
+2026-10-27T08:11:14.6626013Z   { q: 'connect claude', top: 'Model and keySection' },
+2026-10-27T08:11:14.6626635Z   { q: 'classify relevance', top: 'Relevance filterPrompt step' },
+2026-10-27T08:11:14.6627268Z   { q: 'temprature', top: 'TemperatureModel and key' },
+2026-10-27T08:11:14.6627839Z   { q: 'context chars', top: 'Memory Context CharsSetup' }
+2026-10-27T08:11:14.6628262Z ]
+2026-10-27T08:11:14.6628409Z 
+2026-10-27T08:11:54.4108432Z CASE settings_nav_selection_stationary_motion_browser.cjs default PASS exit=0 seconds=39.7
+2026-10-27T08:11:54.4109682Z NAVHOVER 320 no-preference 22
+2026-10-27T08:11:54.4110110Z NAVHOVER 320 reduce 22
+2026-10-27T08:11:54.4110601Z NAVHOVER 1280 no-preference 22
+2026-10-27T08:11:54.4111091Z NAVHOVER 1280 reduce 22
+2026-10-27T08:11:54.4112543Z PASS all22visible4categorysectionlinks selectionactualnavigation currenton noanimationorcontinuouspulse focusimmediate3201280normalReduce mobilehiddenrail
+2026-10-27T08:11:54.4113759Z 
+2026-10-27T08:12:19.9298753Z CASE settings_workspace_toggles_levels_motion_browser.cjs default PASS exit=0 seconds=25.5
+2026-10-27T08:12:19.9299895Z TOGGLE 320 no-preference model rewrite
+2026-10-27T08:12:19.9300700Z TOGGLE 320 no-preference model provider.fallback.enabled
+2026-10-27T08:12:19.9301616Z TOGGLE 320 no-preference model retrieval.query_expansion
+2026-10-27T08:12:19.9302312Z TOGGLE 320 no-preference wording f-logo_watermark
+2026-10-27T08:12:19.9302877Z TOGGLE 320 no-preference motion f-hover_lift
+2026-10-27T08:12:19.9303803Z TOGGLE 320 no-preference layout f-sources_panel
+2026-10-27T08:12:19.9304505Z TOGGLE 320 no-preference finish actions.writes
+2026-10-27T08:12:19.9305192Z TOGGLE 320 no-preference finish memory.enabled
+2026-10-27T08:12:19.9305842Z TOGGLE 320 no-preference finish citations.required
+2026-10-27T08:12:19.9306552Z TOGGLE 320 no-preference finish citations.ledger
+2026-10-27T08:12:19.9307182Z TOGGLE 320 no-preference finish auth.signup
+2026-10-27T08:12:19.9308254Z TOGGLE 320 no-preference finish server.public
+2026-10-27T08:12:19.9308943Z TOGGLE 320 reduce model rewrite
+2026-10-27T08:12:19.9309608Z TOGGLE 320 reduce model provider.fallback.enabled
+2026-10-27T08:12:19.9310316Z TOGGLE 320 reduce model retrieval.query_expansion
+2026-10-27T08:12:19.9310970Z TOGGLE 320 reduce wording f-logo_watermark
+2026-10-27T08:12:19.9311564Z TOGGLE 320 reduce motion f-hover_lift
+2026-10-27T08:12:19.9312148Z TOGGLE 320 reduce layout f-sources_panel
+2026-10-27T08:12:19.9312768Z TOGGLE 320 reduce finish actions.writes
+2026-10-27T08:12:19.9313615Z TOGGLE 320 reduce finish memory.enabled
+2026-10-27T08:12:19.9314234Z TOGGLE 320 reduce finish citations.required
+2026-10-27T08:12:19.9314883Z TOGGLE 320 reduce finish citations.ledger
+2026-10-27T08:12:19.9315487Z TOGGLE 320 reduce finish auth.signup
+2026-10-27T08:12:19.9316089Z TOGGLE 320 reduce finish server.public
+2026-10-27T08:12:19.9316718Z TOGGLE 1280 no-preference model rewrite
+2026-10-27T08:12:19.9317461Z TOGGLE 1280 no-preference model provider.fallback.enabled
+2026-10-27T08:12:19.9318328Z TOGGLE 1280 no-preference model retrieval.query_expansion
+2026-10-27T08:12:19.9319133Z TOGGLE 1280 no-preference wording f-logo_watermark
+2026-10-27T08:12:19.9319848Z TOGGLE 1280 no-preference motion f-hover_lift
+2026-10-27T08:12:19.9320539Z TOGGLE 1280 no-preference layout f-sources_panel
+2026-10-27T08:12:19.9321380Z TOGGLE 1280 no-preference finish actions.writes
+2026-10-27T08:12:19.9321789Z TOGGLE 1280 no-preference finish memory.enabled
+2026-10-27T08:12:19.9322195Z TOGGLE 1280 no-preference finish citations.required
+2026-10-27T08:12:19.9322810Z TOGGLE 1280 no-preference finish citations.ledger
+2026-10-27T08:12:19.9323793Z TOGGLE 1280 no-preference finish auth.signup
+2026-10-27T08:12:19.9324464Z TOGGLE 1280 no-preference finish server.public
+2026-10-27T08:12:19.9325069Z TOGGLE 1280 reduce model rewrite
+2026-10-27T08:12:19.9325630Z TOGGLE 1280 reduce model provider.fallback.enabled
+2026-10-27T08:12:19.9326304Z TOGGLE 1280 reduce model retrieval.query_expansion
+2026-10-27T08:12:19.9326704Z TOGGLE 1280 reduce wording f-logo_watermark
+2026-10-27T08:12:19.9327058Z TOGGLE 1280 reduce motion f-hover_lift
+2026-10-27T08:12:19.9327392Z TOGGLE 1280 reduce layout f-sources_panel
+2026-10-27T08:12:19.9327739Z TOGGLE 1280 reduce finish actions.writes
+2026-10-27T08:12:19.9328072Z TOGGLE 1280 reduce finish memory.enabled
+2026-10-27T08:12:19.9328430Z TOGGLE 1280 reduce finish citations.required
+2026-10-27T08:12:19.9328787Z TOGGLE 1280 reduce finish citations.ledger
+2026-10-27T08:12:19.9329147Z TOGGLE 1280 reduce finish auth.signup
+2026-10-27T08:12:19.9329478Z TOGGLE 1280 reduce finish server.public
+2026-10-27T08:12:19.9330667Z PASS allavailablevisiblelocalandworkspaceSettingscheckboxes excludesnetworkprompt/sourceautosaves nativekeyboardSpace checkedandfocusimmediate restorefullSubtleNoneCalm3201280normalReduce excludeskeyexport noSave
+2026-10-27T08:12:19.9331554Z 
+2026-10-27T08:12:28.9465719Z CASE shared_components_browser.cjs default PASS exit=0 seconds=9.0
+2026-10-27T08:12:28.9466941Z PASS sharedcream/editingtokens/nav44pxfocus/nooverflow3207601280
+2026-10-27T08:12:28.9467385Z 
+2026-10-27T08:12:34.1969718Z CASE simple_branches_browser.cjs default PASS exit=0 seconds=5.2
+2026-10-27T08:12:34.1970764Z group config sec-model
+2026-10-27T08:12:34.1971284Z group frontend sec-presets
+2026-10-27T08:12:34.1973534Z PASS specialist deep link opens Advanced; loaded non-Demo provider kept; compatible GPT-5 temperature visible, OpenAI required key visible; all four Simple routes enter Advanced
+2026-10-27T08:12:34.1975027Z 
+2026-10-27T08:12:38.2505087Z CASE source_scope_dialog_keyboard_motion_browser.cjs default PASS exit=0 seconds=4.1
+2026-10-27T08:12:38.2506292Z SCOPELOAD 320 no-preference 3
+2026-10-27T08:12:38.2506975Z SCOPELOAD 320 reduce 3
+2026-10-27T08:12:38.2507635Z SCOPELOAD 1280 no-preference 3
+2026-10-27T08:12:38.2508274Z SCOPELOAD 1280 reduce 3
+2026-10-27T08:12:38.2510243Z PASS actualscopeloadingpendingtext/busy/singleflighterrorrecovernamedDialogEscapefocus/documentkeyboardselectiondraftretained3201280normalReduce fixtureonly
+2026-10-27T08:12:38.2512196Z 
+2026-10-27T08:12:51.2834623Z CASE source_summary_motion_browser.cjs default PASS exit=0 seconds=13.0
+2026-10-27T08:12:51.2836836Z PASS changedsource rowonly160fade unchangednode/notanimated headingretained removaloldrowonly no transform reduceoff summarysavedrestart fixture3201280
+2026-10-27T08:12:51.2838197Z 
+2026-10-27T08:13:27.4298164Z CASE studio_polish_browser.cjs default PASS exit=0 seconds=36.1
+2026-10-27T08:13:27.4299609Z PASS saved draft reload/reopen no calls, TODO check+jump/highlight, real live preview, remaining 30/30 work, inspectable parts, plain changes, no leaked boards,320/390/1280
+2026-10-27T08:13:27.4300698Z 
+2026-10-27T08:13:27.4634959Z CASE topic_navigation_integrity.cjs default PASS exit=0 seconds=0.0
+2026-10-27T08:13:27.4636155Z PASS topic mode, existing-chat selection, no empty-chat creation, real question selector, topic rename scope
+2026-10-27T08:13:27.4636875Z 
+2026-10-27T08:13:36.4705278Z CASE workspace_drop_browser.py default PASS exit=0 seconds=9.0
+2026-10-27T08:13:36.4708562Z PASS localR24 desktop/phone genuine DataTransfer ZIP drop; review before load; child start/open/cited answer; manager list/stop/remove/cancel removal; current app preserved; path traversal rejected; Python review/consent and bounded cited answer; no JS errors.
+2026-10-27T08:13:36.4710154Z 
+2026-10-27T08:13:36.4710937Z {"executions": 42, "failed": 0, "passed": 42, "scripts": 39}

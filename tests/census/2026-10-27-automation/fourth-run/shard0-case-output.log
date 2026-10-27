@@ -1,0 +1,1759 @@
+2026-10-27T08:04:15.1249575Z CASE about_all_features_idle_motion_browser.cjs default PASS exit=0 seconds=27.4
+2026-10-27T08:04:15.1251336Z PASS all23actualAboutfeatures nativeArrowselection noidleInfinity FullSubtleNoneCalm none0animations3201280
+2026-10-27T08:04:15.1252123Z 
+2026-10-27T08:04:21.3398241Z CASE action_inventory_loading_recovery_motion_browser.cjs default PASS exit=0 seconds=6.2
+2026-10-27T08:04:21.3399732Z SCOPELOAD 320 no-preference 2
+2026-10-27T08:04:21.3400194Z SCOPELOAD 320 reduce 2
+2026-10-27T08:04:21.3400645Z SCOPELOAD 1280 no-preference 2
+2026-10-27T08:04:21.3401105Z SCOPELOAD 1280 reduce 2
+2026-10-27T08:04:21.3402469Z PASS actualscopeloadingpendingtext/busy/singleflighterrorrecovertrueemptydialogfocusdraftretained3201280normalReduce fixtureonly
+2026-10-27T08:04:21.3404200Z 
+2026-10-27T08:04:41.5665227Z CASE advanced_controls_group_motion_browser.cjs default PASS exit=0 seconds=20.2
+2026-10-27T08:04:41.5666454Z ADVANCEDGROUP 320 no-preference full cc-settings-mode-in 0.14s
+2026-10-27T08:04:41.5667490Z ADVANCEDGROUP 320 no-preference subtle cc-settings-mode-in 0.12s
+2026-10-27T08:04:41.5668313Z ADVANCEDGROUP 320 no-preference none none 0s
+2026-10-27T08:04:41.5669292Z ADVANCEDGROUP 320 reduce full none 0s
+2026-10-27T08:04:41.5669889Z ADVANCEDGROUP 320 reduce subtle none 0s
+2026-10-27T08:04:41.5670471Z ADVANCEDGROUP 320 reduce none none 0s
+2026-10-27T08:04:41.5671233Z ADVANCEDGROUP 1280 no-preference full cc-settings-mode-in 0.14s
+2026-10-27T08:04:41.5672054Z ADVANCEDGROUP 1280 no-preference subtle cc-settings-mode-in 0.12s
+2026-10-27T08:04:41.5672941Z ADVANCEDGROUP 1280 no-preference none none 0s
+2026-10-27T08:04:41.5673409Z ADVANCEDGROUP 1280 reduce full none 0s
+2026-10-27T08:04:41.5673838Z ADVANCEDGROUP 1280 reduce subtle none 0s
+2026-10-27T08:04:41.5674266Z ADVANCEDGROUP 1280 reduce none none 0s
+2026-10-27T08:04:41.5675232Z PASS advancedmodeactualkeyboard140full120subtle onegroupopacity2px nofieldcascade focusimmediate ReduceNoneoff3201280
+2026-10-27T08:04:41.5675927Z 
+2026-10-27T08:05:29.5483117Z CASE appbuilder_studio_browser.cjs default PASS exit=0 seconds=48.0
+2026-10-27T08:05:29.5485034Z PASS studio six states at320/390/1280, error recovery, described errors, no overflow, saved-button separation, no old dots
+2026-10-27T08:05:29.5486138Z 
+2026-10-27T08:05:53.9802610Z CASE background_states_browser.cjs default PASS exit=0 seconds=24.4
+2026-10-27T08:05:53.9803874Z PASS background ready local upload pendingURLcancel newestselection invalidremote/local retain saved image remove clears status3201280 bothmotion
+2026-10-27T08:05:53.9804590Z 
+2026-10-27T08:06:03.1164648Z CASE builder_busy_off_motion_inventory_browser.cjs default PASS exit=0 seconds=9.1
+2026-10-27T08:06:03.1167079Z PASS wholeBuilderStartBusy allrenderednodepseudoCSSoff NoneCalmOSReduceFull503draftkept3201280 fixture0paidcalls
+2026-10-27T08:06:03.1168356Z 
+2026-10-27T08:06:25.5877397Z CASE builder_focus_motion_audit_browser.cjs default PASS exit=0 seconds=22.5
+2026-10-27T08:06:25.5880782Z FOCUS 320 no-preference full firstlastTabwrap30tabscontained EscapeClosefocusreturn descriptionretained
+2026-10-27T08:06:25.5883315Z FOCUS 320 no-preference none firstlastTabwrap30tabscontained EscapeClosefocusreturn descriptionretained
+2026-10-27T08:06:25.5885548Z FOCUS 320 reduce full firstlastTabwrap30tabscontained EscapeClosefocusreturn descriptionretained
+2026-10-27T08:06:25.5887826Z FOCUS 320 reduce none firstlastTabwrap30tabscontained EscapeClosefocusreturn descriptionretained
+2026-10-27T08:06:25.5890222Z FOCUS 1280 no-preference full firstlastTabwrap30tabscontained EscapeClosefocusreturn descriptionretained
+2026-10-27T08:06:25.5892301Z FOCUS 1280 no-preference none firstlastTabwrap30tabscontained EscapeClosefocusreturn descriptionretained
+2026-10-27T08:06:25.5894114Z FOCUS 1280 reduce full firstlastTabwrap30tabscontained EscapeClosefocusreturn descriptionretained
+2026-10-27T08:06:25.5895885Z FOCUS 1280 reduce none firstlastTabwrap30tabscontained EscapeClosefocusreturn descriptionretained
+2026-10-27T08:06:25.5897564Z PASS builder focus containment/reopen/focusreturn NoneReduceimmediateclose3201280
+2026-10-27T08:06:25.5898443Z 
+2026-10-27T08:06:37.6310573Z CASE builder_progress_truth_browser.cjs default PASS exit=0 seconds=12.0
+2026-10-27T08:06:37.6312882Z PASS immediate start status, source-stateQueued/Running/Received, group33/67%actualcounts, stationarytitle,unchangedrowsnotsettling,twoexplicitinspectioncontentsretained,reducechevron/reveal3201280
+2026-10-27T08:06:37.6314358Z 
+2026-10-27T08:07:07.5885822Z CASE builder_whole_dashboard_status_motion_browser.cjs default PASS exit=0 seconds=30.0
+2026-10-27T08:07:07.5888400Z PROGRESSAXE []
+2026-10-27T08:07:07.5890019Z BOARD 320 {"progress":534.953125,"height":94,"cards":[{"height":94,"title":19}]}
+2026-10-27T08:07:07.5891087Z PROGRESSAXE []
+2026-10-27T08:07:07.5891989Z BOARD 320 {"progress":534.953125,"height":94,"cards":[{"height":94,"title":19}]}
+2026-10-27T08:07:07.5892704Z PROGRESSAXE []
+2026-10-27T08:07:07.5893576Z BOARD 1280 {"progress":528.359375,"height":94,"cards":[{"height":94,"title":19}]}
+2026-10-27T08:07:07.5894330Z PROGRESSAXE []
+2026-10-27T08:07:07.5895097Z BOARD 1280 {"progress":528.359375,"height":94,"cards":[{"height":94,"title":19}]}
+2026-10-27T08:07:07.5896663Z PASS wholeprogressdashboard andgroupboardheight exact queued/running/received/error longphase with nativeEndscroll readable3201280normalReduce
+2026-10-27T08:07:07.5897632Z 
+2026-10-27T08:07:13.6639776Z CASE chat_about_idle_loops_inventory_browser.cjs default PASS exit=0 seconds=6.1
+2026-10-27T08:07:13.6640446Z MODE / full full
+2026-10-27T08:07:13.6640759Z MODE /about.html full full
+2026-10-27T08:07:13.6641453Z MODE / subtle subtle
+2026-10-27T08:07:13.6641803Z MODE /about.html subtle subtle
+2026-10-27T08:07:13.6642119Z MODE / full full
+2026-10-27T08:07:13.6642408Z MODE /about.html full full
+2026-10-27T08:07:13.6642781Z MODE / subtle subtle
+2026-10-27T08:07:13.6643169Z MODE /about.html subtle subtle
+2026-10-27T08:07:13.6643711Z PASS actualidleChatAbout FullSubtle noInfiniteanimations3201280
+2026-10-27T08:07:13.6644187Z 
+2026-10-27T08:07:19.6702363Z CASE chat_navigation_browser.cjs default PASS exit=0 seconds=6.0
+2026-10-27T08:07:19.6703803Z PASS empty sidebar/openclose/inert/returnfocus/chattopicsselection/44pxactions/offlinedemocopy/nooverflow3203901280
+2026-10-27T08:07:19.6704667Z 
+2026-10-27T08:07:32.9231329Z CASE color_rows_geometry_audit_browser.cjs default PASS exit=0 seconds=13.3
+2026-10-27T08:07:32.9237228Z 320 light [{"label":"Main color","height":140,"swatch":40,"hex":112},{"label":"Page background","height":140,"swatch":40,"hex":112},{"label":"Accent color","height":140,"swatch":40,"hex":112},{"label":"Cards and chat area","height":140,"swatch":40,"hex":112},{"label":"Sidebar","height":140,"swatch":40,"hex":112},{"label":"Text","height":140,"swatch":40,"hex":112},{"label":"Soft text","height":140,"swatch":40,"hex":112},{"label":"Lines","height":140,"swatch":40,"hex":112},{"label":"Assistant message","height":140,"swatch":40,"hex":112},{"label":"Your avatar","height":140,"swatch":40,"hex":112},{"label":"Warning color","height":140,"swatch":40,"hex":112}]
+2026-10-27T08:07:32.9244062Z 320 dark [{"label":"Main color","height":140,"swatch":40,"hex":112},{"label":"Page background","height":140,"swatch":40,"hex":112},{"label":"Accent color","height":140,"swatch":40,"hex":112},{"label":"Cards and chat area","height":140,"swatch":40,"hex":112},{"label":"Sidebar","height":140,"swatch":40,"hex":112},{"label":"Text","height":140,"swatch":40,"hex":112},{"label":"Soft text","height":140,"swatch":40,"hex":112},{"label":"Lines","height":140,"swatch":40,"hex":112},{"label":"Assistant message","height":140,"swatch":40,"hex":112},{"label":"Your avatar","height":140,"swatch":40,"hex":112},{"label":"Warning color","height":140,"swatch":40,"hex":112}]
+2026-10-27T08:07:32.9248839Z 390 light [{"label":"Main color","height":140,"swatch":40,"hex":112},{"label":"Page background","height":140,"swatch":40,"hex":112},{"label":"Accent color","height":140,"swatch":40,"hex":112},{"label":"Cards and chat area","height":140,"swatch":40,"hex":112},{"label":"Sidebar","height":140,"swatch":40,"hex":112},{"label":"Text","height":140,"swatch":40,"hex":112},{"label":"Soft text","height":140,"swatch":40,"hex":112},{"label":"Lines","height":140,"swatch":40,"hex":112},{"label":"Assistant message","height":140,"swatch":40,"hex":112},{"label":"Your avatar","height":140,"swatch":40,"hex":112},{"label":"Warning color","height":140,"swatch":40,"hex":112}]
+2026-10-27T08:07:32.9253236Z 390 dark [{"label":"Main color","height":140,"swatch":40,"hex":112},{"label":"Page background","height":140,"swatch":40,"hex":112},{"label":"Accent color","height":140,"swatch":40,"hex":112},{"label":"Cards and chat area","height":140,"swatch":40,"hex":112},{"label":"Sidebar","height":140,"swatch":40,"hex":112},{"label":"Text","height":140,"swatch":40,"hex":112},{"label":"Soft text","height":140,"swatch":40,"hex":112},{"label":"Lines","height":140,"swatch":40,"hex":112},{"label":"Assistant message","height":140,"swatch":40,"hex":112},{"label":"Your avatar","height":140,"swatch":40,"hex":112},{"label":"Warning color","height":140,"swatch":40,"hex":112}]
+2026-10-27T08:07:32.9257507Z 760 light [{"label":"Main color","height":92,"swatch":40,"hex":112},{"label":"Page background","height":92,"swatch":40,"hex":112},{"label":"Accent color","height":92,"swatch":40,"hex":112},{"label":"Cards and chat area","height":92,"swatch":40,"hex":112},{"label":"Sidebar","height":92,"swatch":40,"hex":112},{"label":"Text","height":92,"swatch":40,"hex":112},{"label":"Soft text","height":92,"swatch":40,"hex":112},{"label":"Lines","height":92,"swatch":40,"hex":112},{"label":"Assistant message","height":92,"swatch":40,"hex":112},{"label":"Your avatar","height":92,"swatch":40,"hex":112},{"label":"Warning color","height":92,"swatch":40,"hex":112}]
+2026-10-27T08:07:32.9262437Z 760 dark [{"label":"Main color","height":92,"swatch":40,"hex":112},{"label":"Page background","height":92,"swatch":40,"hex":112},{"label":"Accent color","height":92,"swatch":40,"hex":112},{"label":"Cards and chat area","height":92,"swatch":40,"hex":112},{"label":"Sidebar","height":92,"swatch":40,"hex":112},{"label":"Text","height":92,"swatch":40,"hex":112},{"label":"Soft text","height":92,"swatch":40,"hex":112},{"label":"Lines","height":92,"swatch":40,"hex":112},{"label":"Assistant message","height":92,"swatch":40,"hex":112},{"label":"Your avatar","height":92,"swatch":40,"hex":112},{"label":"Warning color","height":92,"swatch":40,"hex":112}]
+2026-10-27T08:07:32.9266833Z 1280 light [{"label":"Main color","height":92,"swatch":40,"hex":112},{"label":"Page background","height":92,"swatch":40,"hex":112},{"label":"Accent color","height":92,"swatch":40,"hex":112},{"label":"Cards and chat area","height":92,"swatch":40,"hex":112},{"label":"Sidebar","height":92,"swatch":40,"hex":112},{"label":"Text","height":92,"swatch":40,"hex":112},{"label":"Soft text","height":92,"swatch":40,"hex":112},{"label":"Lines","height":92,"swatch":40,"hex":112},{"label":"Assistant message","height":92,"swatch":40,"hex":112},{"label":"Your avatar","height":92,"swatch":40,"hex":112},{"label":"Warning color","height":92,"swatch":40,"hex":112}]
+2026-10-27T08:07:32.9271318Z 1280 dark [{"label":"Main color","height":92,"swatch":40,"hex":112},{"label":"Page background","height":92,"swatch":40,"hex":112},{"label":"Accent color","height":92,"swatch":40,"hex":112},{"label":"Cards and chat area","height":92,"swatch":40,"hex":112},{"label":"Sidebar","height":92,"swatch":40,"hex":112},{"label":"Text","height":92,"swatch":40,"hex":112},{"label":"Soft text","height":92,"swatch":40,"hex":112},{"label":"Lines","height":92,"swatch":40,"hex":112},{"label":"Assistant message","height":92,"swatch":40,"hex":112},{"label":"Your avatar","height":92,"swatch":40,"hex":112},{"label":"Warning color","height":92,"swatch":40,"hex":112}]
+2026-10-27T08:07:32.9273595Z PASS all11colorroles4widths2themes swatch32to44/hex80plus/fullvalues/separatedlabelshelp/insideviewport/focus
+2026-10-27T08:07:32.9274060Z 
+2026-10-27T08:07:37.7297118Z CASE config_labels_browser.cjs default PASS exit=0 seconds=4.8
+2026-10-27T08:07:37.7299421Z PASS advancedkeyenvname-notsecret/timeout0invalid30valid/fallbackfields/no-provider-call/database-filepath/restartlabels preserved320
+2026-10-27T08:07:37.7300808Z 
+2026-10-27T08:07:40.6701881Z CASE deleted-chat-topic.cjs default PASS exit=0 seconds=2.9
+2026-10-27T08:07:40.6702875Z PASS deleted chat topic isolation
+2026-10-27T08:07:40.6703321Z 
+2026-10-27T08:07:48.2294725Z CASE editing_surface_tokens_browser.cjs default PASS exit=0 seconds=7.6
+2026-10-27T08:07:48.2295507Z PASS editingcontrols8px/cards12pxnoShadow/menu12px/dialog16px3201280
+2026-10-27T08:07:48.2295864Z 
+2026-10-27T08:08:00.9114051Z CASE font_geometry_audit_browser.cjs default PASS exit=0 seconds=12.7
+2026-10-27T08:08:00.9117075Z PASS fontpickercurrentGeorgiaidentified closed/open boundslabeledabovebelow focus3203901280 bodyheadingdistinctcorrectsampleANDiframe welcome/message families change bodyindependent140scrollstable labels size/spacing no paidcalls
+2026-10-27T08:08:00.9119338Z 
+2026-10-27T08:08:06.9640096Z CASE helper_copy_states_browser.cjs default PASS exit=0 seconds=6.1
+2026-10-27T08:08:06.9641612Z PASS code actualdraft/staticcheck distinct;Copy successverifiedcontent;clipboardfailure adjacent keepsoutput;no paidcalls
+2026-10-27T08:08:06.9642541Z 
+2026-10-27T08:08:18.4405738Z CASE helper_long_credential_configuration_motion_browser.cjs default PASS exit=0 seconds=11.5
+2026-10-27T08:08:18.4407004Z HELPERLONG 320 no-preference Optional connector API key 1219
+2026-10-27T08:08:18.4407916Z HELPERLONG 320 no-preference Optional connector API key 819
+2026-10-27T08:08:18.4409305Z HELPERLONG 320 no-preference Sample question 1219
+2026-10-27T08:08:18.4410438Z HELPERLONG 320 no-preference Sample question 819
+2026-10-27T08:08:18.4411198Z HELPERLONG 320 reduce Optional connector API key 1219
+2026-10-27T08:08:18.4411949Z HELPERLONG 320 reduce Optional connector API key 819
+2026-10-27T08:08:18.4412712Z HELPERLONG 320 reduce Sample question 1219
+2026-10-27T08:08:18.4413345Z HELPERLONG 320 reduce Sample question 819
+2026-10-27T08:08:18.4414103Z HELPERLONG 1280 no-preference Optional connector API key 1219
+2026-10-27T08:08:18.4414967Z HELPERLONG 1280 no-preference Optional connector API key 819
+2026-10-27T08:08:18.4415694Z HELPERLONG 1280 no-preference Sample question 1219
+2026-10-27T08:08:18.4416347Z HELPERLONG 1280 no-preference Sample question 819
+2026-10-27T08:08:18.4417020Z HELPERLONG 1280 reduce Optional connector API key 1219
+2026-10-27T08:08:18.4417701Z HELPERLONG 1280 reduce Optional connector API key 819
+2026-10-27T08:08:18.4418285Z HELPERLONG 1280 reduce Sample question 1219
+2026-10-27T08:08:18.4419503Z HELPERLONG 1280 reduce Sample question 819
+2026-10-27T08:08:18.4420997Z PASS helperConnector masked1219/819key samplequestion fixedvisiblecontrolgeometry focusRetained3201280normalReduce noSave/API
+2026-10-27T08:08:18.4422012Z 
+2026-10-27T08:08:34.9270938Z CASE history_delete_motion_audit_browser.cjs default PASS exit=0 seconds=16.5
+2026-10-27T08:08:34.9277291Z DELETE 320 no-preference pending retains rows, success removes last, first exact stationary, Undo actual restores
+2026-10-27T08:08:34.9279238Z DELETE 320 reduce pending retains rows, success removes last, first exact stationary, Undo actual restores
+2026-10-27T08:08:34.9281030Z DELETE 1280 no-preference pending retains rows, success removes last, first exact stationary, Undo actual restores
+2026-10-27T08:08:34.9282641Z DELETE 1280 reduce pending retains rows, success removes last, first exact stationary, Undo actual restores
+2026-10-27T08:08:34.9283906Z PASS delayed actual historydelete aftersuccess stationaryremaining Undo3201280normalReduce
+2026-10-27T08:08:34.9284488Z 
+2026-10-27T08:08:50.8773965Z CASE icon_slider_feedback_browser.cjs default PASS exit=0 seconds=15.9
+2026-10-27T08:08:50.8775129Z PASS iconshared160mshoverfocusgeometrystable/no transforms Reduceoff slidertrack+label synchronous20/80/1403201280
+2026-10-27T08:08:50.8775800Z 
+2026-10-27T08:09:16.9031684Z CASE local_download_multipart_truth_browser.cjs default PASS exit=0 seconds=26.0
+2026-10-27T08:09:16.9034263Z PASS multipart90to10actualbytes/unknownnodeterminate100errorNotInstalled/retryfreshreview/completeexplicitUse3201280normalReduce
+2026-10-27T08:09:16.9035534Z 
+2026-10-27T08:10:41.3495649Z CASE memory_bars_changed_estimate_motion_browser.cjs default PASS exit=0 seconds=84.4
+2026-10-27T08:10:41.3496509Z MEMORYCHANGED 320 reduce [
+2026-10-27T08:10:41.3497349Z   { width: '50%', animation: 'none', count: 0 },
+2026-10-27T08:10:41.3497973Z   { width: '45%', animation: 'none', count: 0 },
+2026-10-27T08:10:41.3498824Z   { width: '55%', animation: 'none', count: 0 },
+2026-10-27T08:10:41.3499480Z   { width: '85%', animation: 'none', count: 0 }
+2026-10-27T08:10:41.3500032Z ] [
+2026-10-27T08:10:41.3500640Z   { width: '45%', animation: 'none', count: 0 },
+2026-10-27T08:10:41.3501221Z   { width: '50%', animation: 'none', count: 0 },
+2026-10-27T08:10:41.3501787Z   { width: '50%', animation: 'none', count: 0 },
+2026-10-27T08:10:41.3502513Z   { width: '85%', animation: 'none', count: 0 }
+2026-10-27T08:10:41.3502979Z ]
+2026-10-27T08:10:41.3503351Z MEMORYCHANGED 320 reduce [
+2026-10-27T08:10:41.3503852Z   { width: '50%', animation: 'none', count: 0 },
+2026-10-27T08:10:41.3504620Z   { width: '45%', animation: 'none', count: 0 },
+2026-10-27T08:10:41.3505643Z   { width: '55%', animation: 'none', count: 0 },
+2026-10-27T08:10:41.3507081Z   { width: '85%', animation: 'none', count: 0 }
+2026-10-27T08:10:41.3509621Z ] [
+2026-10-27T08:10:41.3510099Z   { width: '45%', animation: 'none', count: 0 },
+2026-10-27T08:10:41.3510723Z   { width: '50%', animation: 'none', count: 0 },
+2026-10-27T08:10:41.3511304Z   { width: '50%', animation: 'none', count: 0 },
+2026-10-27T08:10:41.3512278Z   { width: '85%', animation: 'none', count: 0 }
+2026-10-27T08:10:41.3512679Z ]
+2026-10-27T08:10:41.3512975Z MEMORYCHANGED 320 reduce [
+2026-10-27T08:10:41.3513412Z   { width: '50%', animation: 'none', count: 0 },
+2026-10-27T08:10:41.3513909Z   { width: '45%', animation: 'none', count: 0 },
+2026-10-27T08:10:41.3514393Z   { width: '55%', animation: 'none', count: 0 },
+2026-10-27T08:10:41.3515293Z   { width: '85%', animation: 'none', count: 0 }
+2026-10-27T08:10:41.3515988Z ] [
+2026-10-27T08:10:41.3516340Z   { width: '45%', animation: 'none', count: 0 },
+2026-10-27T08:10:41.3516826Z   { width: '50%', animation: 'none', count: 0 },
+2026-10-27T08:10:41.3517294Z   { width: '50%', animation: 'none', count: 0 },
+2026-10-27T08:10:41.3517678Z   { width: '85%', animation: 'none', count: 0 }
+2026-10-27T08:10:41.3517995Z ]
+2026-10-27T08:10:41.3518228Z MEMORYCHANGED 320 reduce [
+2026-10-27T08:10:41.3518850Z   { width: '50%', animation: 'none', count: 0 },
+2026-10-27T08:10:41.3519255Z   { width: '45%', animation: 'none', count: 0 },
+2026-10-27T08:10:41.3519634Z   { width: '55%', animation: 'none', count: 0 },
+2026-10-27T08:10:41.3520008Z   { width: '85%', animation: 'none', count: 0 }
+2026-10-27T08:10:41.3520308Z ] [
+2026-10-27T08:10:41.3520575Z   { width: '45%', animation: 'none', count: 0 },
+2026-10-27T08:10:41.3520964Z   { width: '50%', animation: 'none', count: 0 },
+2026-10-27T08:10:41.3521572Z   { width: '50%', animation: 'none', count: 0 },
+2026-10-27T08:10:41.3521960Z   { width: '85%', animation: 'none', count: 0 }
+2026-10-27T08:10:41.3522269Z ]
+2026-10-27T08:10:41.3522539Z MEMORYCHANGED 320 no-preference [
+2026-10-27T08:10:41.3522898Z   { width: '50%', animation: 'none', count: 0 },
+2026-10-27T08:10:41.3523271Z   { width: '45%', animation: 'none', count: 0 },
+2026-10-27T08:10:41.3523675Z   { width: '55%', animation: 'none', count: 0 },
+2026-10-27T08:10:41.3524056Z   { width: '85%', animation: 'none', count: 0 }
+2026-10-27T08:10:41.3524371Z ] [
+2026-10-27T08:10:41.3524640Z   { width: '45%', animation: 'none', count: 1 },
+2026-10-27T08:10:41.3525017Z   { width: '50%', animation: 'none', count: 1 },
+2026-10-27T08:10:41.3525387Z   { width: '50%', animation: 'none', count: 1 },
+2026-10-27T08:10:41.3525755Z   { width: '85%', animation: 'none', count: 0 }
+2026-10-27T08:10:41.3526059Z ]
+2026-10-27T08:10:41.3526328Z MEMORYCHANGED 320 no-preference [
+2026-10-27T08:10:41.3526682Z   { width: '50%', animation: 'none', count: 0 },
+2026-10-27T08:10:41.3527056Z   { width: '45%', animation: 'none', count: 0 },
+2026-10-27T08:10:41.3527418Z   { width: '55%', animation: 'none', count: 0 },
+2026-10-27T08:10:41.3527742Z   { width: '85%', animation: 'none', count: 0 }
+2026-10-27T08:10:41.3528009Z ] [
+2026-10-27T08:10:41.3528240Z   { width: '45%', animation: 'none', count: 1 },
+2026-10-27T08:10:41.3528790Z   { width: '50%', animation: 'none', count: 1 },
+2026-10-27T08:10:41.3529117Z   { width: '50%', animation: 'none', count: 1 },
+2026-10-27T08:10:41.3529435Z   { width: '85%', animation: 'none', count: 0 }
+2026-10-27T08:10:41.3529713Z ]
+2026-10-27T08:10:41.3529958Z MEMORYCHANGED 320 no-preference [
+2026-10-27T08:10:41.3530275Z   { width: '50%', animation: 'none', count: 0 },
+2026-10-27T08:10:41.3530619Z   { width: '45%', animation: 'none', count: 0 },
+2026-10-27T08:10:41.3530949Z   { width: '55%', animation: 'none', count: 0 },
+2026-10-27T08:10:41.3531270Z   { width: '85%', animation: 'none', count: 0 }
+2026-10-27T08:10:41.3531544Z ] [
+2026-10-27T08:10:41.3531782Z   { width: '45%', animation: 'none', count: 0 },
+2026-10-27T08:10:41.3532110Z   { width: '50%', animation: 'none', count: 0 },
+2026-10-27T08:10:41.3532436Z   { width: '50%', animation: 'none', count: 0 },
+2026-10-27T08:10:41.3532766Z   { width: '85%', animation: 'none', count: 0 }
+2026-10-27T08:10:41.3533042Z ]
+2026-10-27T08:10:41.3533284Z MEMORYCHANGED 320 no-preference [
+2026-10-27T08:10:41.3533609Z   { width: '50%', animation: 'none', count: 0 },
+2026-10-27T08:10:41.3533942Z   { width: '45%', animation: 'none', count: 0 },
+2026-10-27T08:10:41.3534436Z   { width: '55%', animation: 'none', count: 0 },
+2026-10-27T08:10:41.3534761Z   { width: '85%', animation: 'none', count: 0 }
+2026-10-27T08:10:41.3535028Z ] [
+2026-10-27T08:10:41.3535262Z   { width: '45%', animation: 'none', count: 0 },
+2026-10-27T08:10:41.3535583Z   { width: '50%', animation: 'none', count: 0 },
+2026-10-27T08:10:41.3535902Z   { width: '50%', animation: 'none', count: 0 },
+2026-10-27T08:10:41.3536225Z   { width: '85%', animation: 'none', count: 0 }
+2026-10-27T08:10:41.3536491Z ]
+2026-10-27T08:10:41.3536701Z MEMORYCHANGED 1280 reduce [
+2026-10-27T08:10:41.3536996Z   { width: '50%', animation: 'none', count: 0 },
+2026-10-27T08:10:41.3537321Z   { width: '45%', animation: 'none', count: 0 },
+2026-10-27T08:10:41.3537643Z   { width: '55%', animation: 'none', count: 0 },
+2026-10-27T08:10:41.3537964Z   { width: '85%', animation: 'none', count: 0 }
+2026-10-27T08:10:41.3538225Z ] [
+2026-10-27T08:10:41.3541558Z   { width: '45%', animation: 'none', count: 0 },
+2026-10-27T08:10:41.3541962Z   { width: '50%', animation: 'none', count: 0 },
+2026-10-27T08:10:41.3542309Z   { width: '50%', animation: 'none', count: 0 },
+2026-10-27T08:10:41.3542646Z   { width: '85%', animation: 'none', count: 0 }
+2026-10-27T08:10:41.3542914Z ]
+2026-10-27T08:10:41.3543133Z MEMORYCHANGED 1280 reduce [
+2026-10-27T08:10:41.3543428Z   { width: '50%', animation: 'none', count: 0 },
+2026-10-27T08:10:41.3543756Z   { width: '45%', animation: 'none', count: 0 },
+2026-10-27T08:10:41.3544232Z   { width: '55%', animation: 'none', count: 0 },
+2026-10-27T08:10:41.3544826Z   { width: '85%', animation: 'none', count: 0 }
+2026-10-27T08:10:41.3545283Z ] [
+2026-10-27T08:10:41.3545601Z   { width: '45%', animation: 'none', count: 0 },
+2026-10-27T08:10:41.3546109Z   { width: '50%', animation: 'none', count: 0 },
+2026-10-27T08:10:41.3546587Z   { width: '50%', animation: 'none', count: 0 },
+2026-10-27T08:10:41.3547067Z   { width: '85%', animation: 'none', count: 0 }
+2026-10-27T08:10:41.3547463Z ]
+2026-10-27T08:10:41.3547751Z MEMORYCHANGED 1280 reduce [
+2026-10-27T08:10:41.3548210Z   { width: '50%', animation: 'none', count: 0 },
+2026-10-27T08:10:41.3559454Z   { width: '45%', animation: 'none', count: 0 },
+2026-10-27T08:10:41.3560050Z   { width: '55%', animation: 'none', count: 0 },
+2026-10-27T08:10:41.3560544Z   { width: '85%', animation: 'none', count: 0 }
+2026-10-27T08:10:41.3560831Z ] [
+2026-10-27T08:10:41.3561078Z   { width: '45%', animation: 'none', count: 0 },
+2026-10-27T08:10:41.3561442Z   { width: '50%', animation: 'none', count: 0 },
+2026-10-27T08:10:41.3561775Z   { width: '50%', animation: 'none', count: 0 },
+2026-10-27T08:10:41.3562100Z   { width: '85%', animation: 'none', count: 0 }
+2026-10-27T08:10:41.3562369Z ]
+2026-10-27T08:10:41.3562580Z MEMORYCHANGED 1280 reduce [
+2026-10-27T08:10:41.3562876Z   { width: '50%', animation: 'none', count: 0 },
+2026-10-27T08:10:41.3563215Z   { width: '45%', animation: 'none', count: 0 },
+2026-10-27T08:10:41.3563536Z   { width: '55%', animation: 'none', count: 0 },
+2026-10-27T08:10:41.3563861Z   { width: '85%', animation: 'none', count: 0 }
+2026-10-27T08:10:41.3564132Z ] [
+2026-10-27T08:10:41.3564366Z   { width: '45%', animation: 'none', count: 0 },
+2026-10-27T08:10:41.3564740Z   { width: '50%', animation: 'none', count: 0 },
+2026-10-27T08:10:41.3565078Z   { width: '50%', animation: 'none', count: 0 },
+2026-10-27T08:10:41.3565403Z   { width: '85%', animation: 'none', count: 0 }
+2026-10-27T08:10:41.3565677Z ]
+2026-10-27T08:10:41.3565948Z MEMORYCHANGED 1280 no-preference [
+2026-10-27T08:10:41.3566277Z   { width: '50%', animation: 'none', count: 0 },
+2026-10-27T08:10:41.3566605Z   { width: '45%', animation: 'none', count: 0 },
+2026-10-27T08:10:41.3566925Z   { width: '55%', animation: 'none', count: 0 },
+2026-10-27T08:10:41.3567250Z   { width: '85%', animation: 'none', count: 0 }
+2026-10-27T08:10:41.3567514Z ] [
+2026-10-27T08:10:41.3567743Z   { width: '45%', animation: 'none', count: 1 },
+2026-10-27T08:10:41.3568064Z   { width: '50%', animation: 'none', count: 1 },
+2026-10-27T08:10:41.3568383Z   { width: '50%', animation: 'none', count: 1 },
+2026-10-27T08:10:41.3569255Z   { width: '85%', animation: 'none', count: 0 }
+2026-10-27T08:10:41.3569526Z ]
+2026-10-27T08:10:41.3569767Z MEMORYCHANGED 1280 no-preference [
+2026-10-27T08:10:41.3570079Z   { width: '50%', animation: 'none', count: 0 },
+2026-10-27T08:10:41.3570406Z   { width: '45%', animation: 'none', count: 0 },
+2026-10-27T08:10:41.3570732Z   { width: '55%', animation: 'none', count: 0 },
+2026-10-27T08:10:41.3571069Z   { width: '85%', animation: 'none', count: 0 }
+2026-10-27T08:10:41.3571344Z ] [
+2026-10-27T08:10:41.3571583Z   { width: '45%', animation: 'none', count: 1 },
+2026-10-27T08:10:41.3571921Z   { width: '50%', animation: 'none', count: 1 },
+2026-10-27T08:10:41.3572246Z   { width: '50%', animation: 'none', count: 1 },
+2026-10-27T08:10:41.3572570Z   { width: '85%', animation: 'none', count: 0 }
+2026-10-27T08:10:41.3572847Z ]
+2026-10-27T08:10:41.3573093Z MEMORYCHANGED 1280 no-preference [
+2026-10-27T08:10:41.3573411Z   { width: '50%', animation: 'none', count: 0 },
+2026-10-27T08:10:41.3573752Z   { width: '45%', animation: 'none', count: 0 },
+2026-10-27T08:10:41.3574074Z   { width: '55%', animation: 'none', count: 0 },
+2026-10-27T08:10:41.3574397Z   { width: '85%', animation: 'none', count: 0 }
+2026-10-27T08:10:41.3574674Z ] [
+2026-10-27T08:10:41.3574901Z   { width: '45%', animation: 'none', count: 0 },
+2026-10-27T08:10:41.3575217Z   { width: '50%', animation: 'none', count: 0 },
+2026-10-27T08:10:41.3575674Z   { width: '50%', animation: 'none', count: 0 },
+2026-10-27T08:10:41.3576003Z   { width: '85%', animation: 'none', count: 0 }
+2026-10-27T08:10:41.3576274Z ]
+2026-10-27T08:10:41.3576507Z MEMORYCHANGED 1280 no-preference [
+2026-10-27T08:10:41.3576817Z   { width: '50%', animation: 'none', count: 0 },
+2026-10-27T08:10:41.3577140Z   { width: '45%', animation: 'none', count: 0 },
+2026-10-27T08:10:41.3577454Z   { width: '55%', animation: 'none', count: 0 },
+2026-10-27T08:10:41.3577768Z   { width: '85%', animation: 'none', count: 0 }
+2026-10-27T08:10:41.3578045Z ] [
+2026-10-27T08:10:41.3578280Z   { width: '45%', animation: 'none', count: 0 },
+2026-10-27T08:10:41.3578760Z   { width: '50%', animation: 'none', count: 0 },
+2026-10-27T08:10:41.3579087Z   { width: '50%', animation: 'none', count: 0 },
+2026-10-27T08:10:41.3579408Z   { width: '85%', animation: 'none', count: 0 }
+2026-10-27T08:10:41.3579667Z ]
+2026-10-27T08:10:41.3580435Z PASS memorybarsstationaryunchanged estimatesfullsubtleNone andnewfixturehardwareestimate160mschangeonly accurate/noidleloop3201280normalReduce
+2026-10-27T08:10:41.3581043Z 
+2026-10-27T08:11:01.8599410Z CASE mode_selected_background_audit_browser.cjs default PASS exit=0 seconds=20.5
+2026-10-27T08:11:01.8600925Z MODEBG 320 no-preference simple {
+2026-10-27T08:11:01.8601485Z   captionOpacity: '0.889625',
+2026-10-27T08:11:01.8602120Z   caption: 'Everyday settings. Switching views keeps saved values.',
+2026-10-27T08:11:01.8602884Z   captionAnimations: [ { duration: 140, frames: [Array] } ],
+2026-10-27T08:11:01.8603439Z   before: 'rgb(82, 102, 80)',
+2026-10-27T08:11:01.8603849Z   mid: 'rgb(200, 205, 194)',
+2026-10-27T08:11:01.8604249Z   after: 'rgb(255, 253, 247)',
+2026-10-27T08:11:01.8604626Z   transition: true,
+2026-10-27T08:11:01.8604954Z   state: 'true',
+2026-10-27T08:11:01.8605274Z   transform: 'none',
+2026-10-27T08:11:01.8605614Z   indBefore: 161.5,
+2026-10-27T08:11:01.8605935Z   indAfter: 44,
+2026-10-27T08:11:01.8606255Z   indBg: 'rgb(23, 63, 53)'
+2026-10-27T08:11:01.8606604Z }
+2026-10-27T08:11:01.8607005Z MODEBG 320 no-preference advanced {
+2026-10-27T08:11:01.8607436Z   captionOpacity: '0.889625',
+2026-10-27T08:11:01.8608163Z   caption: 'All settings and technical controls. Switching views keeps saved values.',
+2026-10-27T08:11:01.8609216Z   captionAnimations: [ { duration: 140, frames: [Array] } ],
+2026-10-27T08:11:01.8609766Z   before: 'rgb(82, 102, 80)',
+2026-10-27T08:11:01.8610145Z   mid: 'rgb(200, 205, 194)',
+2026-10-27T08:11:01.8610538Z   after: 'rgb(255, 253, 247)',
+2026-10-27T08:11:01.8610909Z   transition: true,
+2026-10-27T08:11:01.8611572Z   state: 'true',
+2026-10-27T08:11:01.8611877Z   transform: 'none',
+2026-10-27T08:11:01.8612109Z   indBefore: 44,
+2026-10-27T08:11:01.8612328Z   indAfter: 161.5,
+2026-10-27T08:11:01.8612558Z   indBg: 'rgb(23, 63, 53)'
+2026-10-27T08:11:01.8612800Z }
+2026-10-27T08:11:01.8613026Z MODEBG 320 reduce simple {
+2026-10-27T08:11:01.8613287Z   captionOpacity: '1',
+2026-10-27T08:11:01.8613688Z   caption: 'Everyday settings. Switching views keeps saved values.',
+2026-10-27T08:11:01.8614100Z   captionAnimations: [],
+2026-10-27T08:11:01.8614360Z   before: 'rgb(82, 102, 80)',
+2026-10-27T08:11:01.8614623Z   mid: 'rgb(255, 253, 247)',
+2026-10-27T08:11:01.8614912Z   after: 'rgb(255, 253, 247)',
+2026-10-27T08:11:01.8615172Z   transition: false,
+2026-10-27T08:11:01.8615403Z   state: 'true',
+2026-10-27T08:11:01.8615625Z   transform: 'none',
+2026-10-27T08:11:01.8615857Z   indBefore: 161.5,
+2026-10-27T08:11:01.8616079Z   indAfter: 44,
+2026-10-27T08:11:01.8616307Z   indBg: 'rgb(23, 63, 53)'
+2026-10-27T08:11:01.8616547Z }
+2026-10-27T08:11:01.8616785Z MODEBG 320 reduce advanced {
+2026-10-27T08:11:01.8617065Z   captionOpacity: '1',
+2026-10-27T08:11:01.8617534Z   caption: 'All settings and technical controls. Switching views keeps saved values.',
+2026-10-27T08:11:01.8618014Z   captionAnimations: [],
+2026-10-27T08:11:01.8618265Z   before: 'rgb(82, 102, 80)',
+2026-10-27T08:11:01.8618703Z   mid: 'rgb(255, 253, 247)',
+2026-10-27T08:11:01.8618977Z   after: 'rgb(255, 253, 247)',
+2026-10-27T08:11:01.8619403Z   transition: false,
+2026-10-27T08:11:01.8619637Z   state: 'true',
+2026-10-27T08:11:01.8619854Z   transform: 'none',
+2026-10-27T08:11:01.8620074Z   indBefore: 44,
+2026-10-27T08:11:01.8620297Z   indAfter: 161.5,
+2026-10-27T08:11:01.8620521Z   indBg: 'rgb(23, 63, 53)'
+2026-10-27T08:11:01.8620754Z }
+2026-10-27T08:11:01.8621012Z MODEBG 1280 no-preference simple {
+2026-10-27T08:11:01.8621301Z   captionOpacity: '0.889625',
+2026-10-27T08:11:01.8621710Z   caption: 'Everyday settings. Switching views keeps saved values.',
+2026-10-27T08:11:01.8622194Z   captionAnimations: [ { duration: 140, frames: [Array] } ],
+2026-10-27T08:11:01.8622517Z   before: 'rgb(82, 102, 80)',
+2026-10-27T08:11:01.8622740Z   mid: 'rgb(200, 205, 194)',
+2026-10-27T08:11:01.8622980Z   after: 'rgb(255, 253, 247)',
+2026-10-27T08:11:01.8623206Z   transition: true,
+2026-10-27T08:11:01.8623402Z   state: 'true',
+2026-10-27T08:11:01.8623601Z   transform: 'none',
+2026-10-27T08:11:01.8623802Z   indBefore: 173.5,
+2026-10-27T08:11:01.8624007Z   indAfter: 56,
+2026-10-27T08:11:01.8624210Z   indBg: 'rgb(23, 63, 53)'
+2026-10-27T08:11:01.8624420Z }
+2026-10-27T08:11:01.8624654Z MODEBG 1280 no-preference advanced {
+2026-10-27T08:11:01.8624917Z   captionOpacity: '0.889625',
+2026-10-27T08:11:01.8625333Z   caption: 'All settings and technical controls. Switching views keeps saved values.',
+2026-10-27T08:11:01.8625849Z   captionAnimations: [ { duration: 140, frames: [Array] } ],
+2026-10-27T08:11:01.8626172Z   before: 'rgb(82, 102, 80)',
+2026-10-27T08:11:01.8626397Z   mid: 'rgb(200, 205, 194)',
+2026-10-27T08:11:01.8626637Z   after: 'rgb(255, 253, 247)',
+2026-10-27T08:11:01.8626864Z   transition: true,
+2026-10-27T08:11:01.8627069Z   state: 'true',
+2026-10-27T08:11:01.8627259Z   transform: 'none',
+2026-10-27T08:11:01.8627455Z   indBefore: 56,
+2026-10-27T08:11:01.8627684Z   indAfter: 173.5,
+2026-10-27T08:11:01.8627883Z   indBg: 'rgb(23, 63, 53)'
+2026-10-27T08:11:01.8628092Z }
+2026-10-27T08:11:01.8628283Z MODEBG 1280 reduce simple {
+2026-10-27T08:11:01.8628652Z   captionOpacity: '1',
+2026-10-27T08:11:01.8628995Z   caption: 'Everyday settings. Switching views keeps saved values.',
+2026-10-27T08:11:01.8629349Z   captionAnimations: [],
+2026-10-27T08:11:01.8629572Z   before: 'rgb(82, 102, 80)',
+2026-10-27T08:11:01.8629804Z   mid: 'rgb(255, 253, 247)',
+2026-10-27T08:11:01.8630037Z   after: 'rgb(255, 253, 247)',
+2026-10-27T08:11:01.8630256Z   transition: false,
+2026-10-27T08:11:01.8630451Z   state: 'true',
+2026-10-27T08:11:01.8630640Z   transform: 'none',
+2026-10-27T08:11:01.8630837Z   indBefore: 173.5,
+2026-10-27T08:11:01.8631183Z   indAfter: 56,
+2026-10-27T08:11:01.8631378Z   indBg: 'rgb(23, 63, 53)'
+2026-10-27T08:11:01.8631587Z }
+2026-10-27T08:11:01.8631784Z MODEBG 1280 reduce advanced {
+2026-10-27T08:11:01.8632025Z   captionOpacity: '1',
+2026-10-27T08:11:01.8632495Z   caption: 'All settings and technical controls. Switching views keeps saved values.',
+2026-10-27T08:11:01.8632921Z   captionAnimations: [],
+2026-10-27T08:11:01.8633151Z   before: 'rgb(82, 102, 80)',
+2026-10-27T08:11:01.8633374Z   mid: 'rgb(255, 253, 247)',
+2026-10-27T08:11:01.8633610Z   after: 'rgb(255, 253, 247)',
+2026-10-27T08:11:01.8633832Z   transition: false,
+2026-10-27T08:11:01.8634031Z   state: 'true',
+2026-10-27T08:11:01.8634232Z   transform: 'none',
+2026-10-27T08:11:01.8634428Z   indBefore: 56,
+2026-10-27T08:11:01.8634617Z   indAfter: 173.5,
+2026-10-27T08:11:01.8634813Z   indBg: 'rgb(23, 63, 53)'
+2026-10-27T08:11:01.8635016Z }
+2026-10-27T08:11:01.8635601Z PASS SimpleAdvancedactualbackground160 interpolation80midpoint immediateARIA no movement Reduceimmediate3201280
+2026-10-27T08:11:01.8636087Z 
+2026-10-27T08:11:09.0223041Z CASE navigation_races_browser.cjs default PASS exit=0 seconds=7.2
+2026-10-27T08:11:09.0224338Z KEY STATE Not filled (no API key saved). Gemini
+2026-10-27T08:11:09.0225192Z No model chosen yet
+2026-10-27T08:11:09.0225711Z No key yet
+2026-10-27T08:11:09.0226215Z Not tested yet
+2026-10-27T08:11:09.0226775Z Save a key first, then test.
+2026-10-27T08:11:09.0230197Z PASS back/forward preview exceptions, custom-model consistent status, duplicate test guarded, late response discarded, save-key/provider race isolated, missing/saved/env statuses; fixture only
+2026-10-27T08:11:09.0232138Z 
+2026-10-27T08:11:19.4951891Z CASE preset_inventory_audit_browser.cjs default PASS exit=0 seconds=10.5
+2026-10-27T08:11:19.4952946Z 320 [
+2026-10-27T08:11:19.4953250Z   {
+2026-10-27T08:11:19.4953537Z     name: 'Forest',
+2026-10-27T08:11:19.4953835Z     x: 53,
+2026-10-27T08:11:19.4954092Z     w: 214,
+2026-10-27T08:11:19.4954347Z     h: 82,
+2026-10-27T08:11:19.4955273Z     sw: 'linear-gradient(135deg, rgb(248, 244, 233) 0px, rgb(248, 244, 233) 50%, rgb(23, 63, 53) 50%, rgb(23, 63, 53) 75%, rgb(215, 239, 114) 75%)',
+2026-10-27T08:11:19.4956104Z     font: 'DM Sans + Fraunces',
+2026-10-27T08:11:19.4956465Z     clipped: false
+2026-10-27T08:11:19.4956842Z   },
+2026-10-27T08:11:19.4957092Z   {
+2026-10-27T08:11:19.4957401Z     name: 'Ocean',
+2026-10-27T08:11:19.4957707Z     x: 53,
+2026-10-27T08:11:19.4958046Z     w: 214,
+2026-10-27T08:11:19.4958312Z     h: 82,
+2026-10-27T08:11:19.4959614Z     sw: 'linear-gradient(135deg, rgb(238, 246, 251) 0px, rgb(238, 246, 251) 50%, rgb(11, 61, 102) 50%, rgb(11, 61, 102) 75%, rgb(127, 209, 245) 75%)',
+2026-10-27T08:11:19.4960504Z     font: 'Inter',
+2026-10-27T08:11:19.4960878Z     clipped: false
+2026-10-27T08:11:19.4961157Z   },
+2026-10-27T08:11:19.4961477Z   {
+2026-10-27T08:11:19.4961735Z     name: 'Sunset',
+2026-10-27T08:11:19.4962018Z     x: 53,
+2026-10-27T08:11:19.4962268Z     w: 214,
+2026-10-27T08:11:19.4962517Z     h: 82,
+2026-10-27T08:11:19.4963135Z     sw: 'linear-gradient(135deg, rgb(255, 244, 234) 0px, rgb(255, 244, 234) 50%, rgb(122, 46, 29) 50%, rgb(122, 46, 29) 75%, rgb(255, 184, 107) 75%)',
+2026-10-27T08:11:19.4963799Z     font: 'Poppins + Playfair Display',
+2026-10-27T08:11:19.4964106Z     clipped: false
+2026-10-27T08:11:19.4964325Z   },
+2026-10-27T08:11:19.4964521Z   {
+2026-10-27T08:11:19.4964715Z     name: 'Mono',
+2026-10-27T08:11:19.4964927Z     x: 53,
+2026-10-27T08:11:19.4965128Z     w: 214,
+2026-10-27T08:11:19.4965330Z     h: 82,
+2026-10-27T08:11:19.4965925Z     sw: 'linear-gradient(135deg, rgb(244, 244, 244) 0px, rgb(244, 244, 244) 50%, rgb(17, 17, 17) 50%, rgb(17, 17, 17) 75%, rgb(229, 229, 229) 75%)',
+2026-10-27T08:11:19.4966529Z     font: 'JetBrains Mono',
+2026-10-27T08:11:19.4966788Z     clipped: false
+2026-10-27T08:11:19.4966998Z   },
+2026-10-27T08:11:19.4967188Z   {
+2026-10-27T08:11:19.4967387Z     name: 'Midnight',
+2026-10-27T08:11:19.4967614Z     x: 53,
+2026-10-27T08:11:19.4967808Z     w: 214,
+2026-10-27T08:11:19.4968274Z     h: 82,
+2026-10-27T08:11:19.4969250Z     sw: 'linear-gradient(135deg, rgb(11, 11, 23) 0px, rgb(11, 11, 23) 50%, rgb(184, 166, 255) 50%, rgb(184, 166, 255) 75%, rgb(255, 143, 216) 75%)',
+2026-10-27T08:11:19.4969873Z     font: 'Space Grotesk',
+2026-10-27T08:11:19.4970132Z     clipped: false
+2026-10-27T08:11:19.4970349Z   },
+2026-10-27T08:11:19.4970538Z   {
+2026-10-27T08:11:19.4970733Z     name: 'Paper',
+2026-10-27T08:11:19.4970954Z     x: 53,
+2026-10-27T08:11:19.4971162Z     w: 214,
+2026-10-27T08:11:19.4971358Z     h: 82,
+2026-10-27T08:11:19.4971964Z     sw: 'linear-gradient(135deg, rgb(246, 239, 224) 0px, rgb(246, 239, 224) 50%, rgb(59, 47, 35) 50%, rgb(59, 47, 35) 75%, rgb(224, 196, 138) 75%)',
+2026-10-27T08:11:19.4972601Z     font: 'Lora + Playfair Display',
+2026-10-27T08:11:19.4972869Z     clipped: false
+2026-10-27T08:11:19.4973062Z   },
+2026-10-27T08:11:19.4973242Z   {
+2026-10-27T08:11:19.4973423Z     name: 'Lavender',
+2026-10-27T08:11:19.4973625Z     x: 53,
+2026-10-27T08:11:19.4973804Z     w: 214,
+2026-10-27T08:11:19.4973977Z     h: 82,
+2026-10-27T08:11:19.4974498Z     sw: 'linear-gradient(135deg, rgb(246, 243, 252) 0px, rgb(246, 243, 252) 50%, rgb(75, 63, 143) 50%, rgb(75, 63, 143) 75%, rgb(203, 188, 255) 75%)',
+2026-10-27T08:11:19.4975064Z     font: 'Nunito + Fraunces',
+2026-10-27T08:11:19.4975305Z     clipped: false
+2026-10-27T08:11:19.4975494Z   },
+2026-10-27T08:11:19.4975659Z   {
+2026-10-27T08:11:19.4975830Z     name: 'Slate',
+2026-10-27T08:11:19.4976194Z     x: 53,
+2026-10-27T08:11:19.4976383Z     w: 214,
+2026-10-27T08:11:19.4976553Z     h: 82,
+2026-10-27T08:11:19.4977060Z     sw: 'linear-gradient(135deg, rgb(242, 244, 246) 0px, rgb(242, 244, 246) 50%, rgb(47, 62, 78) 50%, rgb(47, 62, 78) 75%, rgb(159, 182, 201) 75%)',
+2026-10-27T08:11:19.4977564Z     font: 'Inter',
+2026-10-27T08:11:19.4977759Z     clipped: false
+2026-10-27T08:11:19.4978181Z   },
+2026-10-27T08:11:19.4978537Z   {
+2026-10-27T08:11:19.4978866Z     name: 'Terracotta',
+2026-10-27T08:11:19.4979375Z     x: 53,
+2026-10-27T08:11:19.4979584Z     w: 214,
+2026-10-27T08:11:19.4979765Z     h: 82,
+2026-10-27T08:11:19.4980297Z     sw: 'linear-gradient(135deg, rgb(250, 241, 234) 0px, rgb(250, 241, 234) 50%, rgb(156, 74, 47) 50%, rgb(156, 74, 47) 75%, rgb(232, 183, 154) 75%)',
+2026-10-27T08:11:19.4980830Z     font: 'Lora + Fraunces',
+2026-10-27T08:11:19.4981065Z     clipped: false
+2026-10-27T08:11:19.4981254Z   },
+2026-10-27T08:11:19.4981420Z   {
+2026-10-27T08:11:19.4981598Z     name: 'Matcha',
+2026-10-27T08:11:19.4981796Z     x: 53,
+2026-10-27T08:11:19.4981974Z     w: 214,
+2026-10-27T08:11:19.4982149Z     h: 82,
+2026-10-27T08:11:19.4982656Z     sw: 'linear-gradient(135deg, rgb(244, 246, 234) 0px, rgb(244, 246, 234) 50%, rgb(74, 93, 35) 50%, rgb(74, 93, 35) 75%, rgb(201, 220, 138) 75%)',
+2026-10-27T08:11:19.4983213Z     font: 'DM Sans + Playfair Display',
+2026-10-27T08:11:19.4983482Z     clipped: false
+2026-10-27T08:11:19.4983676Z   },
+2026-10-27T08:11:19.4983838Z   {
+2026-10-27T08:11:19.4984007Z     name: 'Rose',
+2026-10-27T08:11:19.4984200Z     x: 53,
+2026-10-27T08:11:19.4984376Z     w: 214,
+2026-10-27T08:11:19.4984546Z     h: 82,
+2026-10-27T08:11:19.4985070Z     sw: 'linear-gradient(135deg, rgb(252, 242, 245) 0px, rgb(252, 242, 245) 50%, rgb(138, 47, 77) 50%, rgb(138, 47, 77) 75%, rgb(242, 181, 200) 75%)',
+2026-10-27T08:11:19.4985625Z     font: 'Poppins + Playfair Display',
+2026-10-27T08:11:19.4985884Z     clipped: false
+2026-10-27T08:11:19.4986070Z   },
+2026-10-27T08:11:19.4986234Z   {
+2026-10-27T08:11:19.4986431Z     name: 'Nord',
+2026-10-27T08:11:19.4986621Z     x: 53,
+2026-10-27T08:11:19.4986790Z     w: 214,
+2026-10-27T08:11:19.4986959Z     h: 82,
+2026-10-27T08:11:19.4987458Z     sw: 'linear-gradient(135deg, rgb(32, 38, 47) 0px, rgb(32, 38, 47) 50%, rgb(136, 192, 208) 50%, rgb(136, 192, 208) 75%, rgb(163, 190, 140) 75%)',
+2026-10-27T08:11:19.4987962Z     font: 'Inter',
+2026-10-27T08:11:19.4988152Z     clipped: false
+2026-10-27T08:11:19.4988337Z   },
+2026-10-27T08:11:19.4988786Z   {
+2026-10-27T08:11:19.4989069Z     name: 'Ink',
+2026-10-27T08:11:19.4989543Z     x: 53,
+2026-10-27T08:11:19.4989724Z     w: 214,
+2026-10-27T08:11:19.4989895Z     h: 82,
+2026-10-27T08:11:19.4990410Z     sw: 'linear-gradient(135deg, rgb(12, 12, 12) 0px, rgb(12, 12, 12) 50%, rgb(242, 242, 242) 50%, rgb(242, 242, 242) 75%, rgb(212, 175, 55) 75%)',
+2026-10-27T08:11:19.4990960Z     font: 'Lora + Playfair Display',
+2026-10-27T08:11:19.4991221Z     clipped: false
+2026-10-27T08:11:19.4991410Z   },
+2026-10-27T08:11:19.4991585Z   {
+2026-10-27T08:11:19.4991753Z     name: 'Sand',
+2026-10-27T08:11:19.4991936Z     x: 53,
+2026-10-27T08:11:19.4992108Z     w: 214,
+2026-10-27T08:11:19.4992274Z     h: 82,
+2026-10-27T08:11:19.4992782Z     sw: 'linear-gradient(135deg, rgb(247, 243, 234) 0px, rgb(247, 243, 234) 50%, rgb(107, 90, 62) 50%, rgb(107, 90, 62) 75%, rgb(217, 199, 160) 75%)',
+2026-10-27T08:11:19.4993300Z     font: 'Georgia',
+2026-10-27T08:11:19.4993505Z     clipped: false
+2026-10-27T08:11:19.4993691Z   }
+2026-10-27T08:11:19.4993859Z ]
+2026-10-27T08:11:19.4994030Z 390 [
+2026-10-27T08:11:19.4994204Z   {
+2026-10-27T08:11:19.4994381Z     name: 'Forest',
+2026-10-27T08:11:19.4994573Z     x: 53,
+2026-10-27T08:11:19.4994742Z     w: 284,
+2026-10-27T08:11:19.4994913Z     h: 82,
+2026-10-27T08:11:19.4995418Z     sw: 'linear-gradient(135deg, rgb(248, 244, 233) 0px, rgb(248, 244, 233) 50%, rgb(23, 63, 53) 50%, rgb(23, 63, 53) 75%, rgb(215, 239, 114) 75%)',
+2026-10-27T08:11:19.4995954Z     font: 'DM Sans + Fraunces',
+2026-10-27T08:11:19.4996329Z     clipped: false
+2026-10-27T08:11:19.4996523Z   },
+2026-10-27T08:11:19.4996691Z   {
+2026-10-27T08:11:19.4996860Z     name: 'Ocean',
+2026-10-27T08:11:19.4997044Z     x: 53,
+2026-10-27T08:11:19.4997216Z     w: 284,
+2026-10-27T08:11:19.4997392Z     h: 82,
+2026-10-27T08:11:19.4997902Z     sw: 'linear-gradient(135deg, rgb(238, 246, 251) 0px, rgb(238, 246, 251) 50%, rgb(11, 61, 102) 50%, rgb(11, 61, 102) 75%, rgb(127, 209, 245) 75%)',
+2026-10-27T08:11:19.4998409Z     font: 'Inter',
+2026-10-27T08:11:19.4998912Z     clipped: false
+2026-10-27T08:11:19.4999109Z   },
+2026-10-27T08:11:19.4999271Z   {
+2026-10-27T08:11:19.4999448Z     name: 'Sunset',
+2026-10-27T08:11:19.4999636Z     x: 53,
+2026-10-27T08:11:19.4999805Z     w: 284,
+2026-10-27T08:11:19.4999975Z     h: 82,
+2026-10-27T08:11:19.5000485Z     sw: 'linear-gradient(135deg, rgb(255, 244, 234) 0px, rgb(255, 244, 234) 50%, rgb(122, 46, 29) 50%, rgb(122, 46, 29) 75%, rgb(255, 184, 107) 75%)',
+2026-10-27T08:11:19.5001048Z     font: 'Poppins + Playfair Display',
+2026-10-27T08:11:19.5001313Z     clipped: false
+2026-10-27T08:11:19.5001497Z   },
+2026-10-27T08:11:19.5001658Z   {
+2026-10-27T08:11:19.5001825Z     name: 'Mono',
+2026-10-27T08:11:19.5002017Z     x: 53,
+2026-10-27T08:11:19.5002185Z     w: 284,
+2026-10-27T08:11:19.5002365Z     h: 82,
+2026-10-27T08:11:19.5002880Z     sw: 'linear-gradient(135deg, rgb(244, 244, 244) 0px, rgb(244, 244, 244) 50%, rgb(17, 17, 17) 50%, rgb(17, 17, 17) 75%, rgb(229, 229, 229) 75%)',
+2026-10-27T08:11:19.5003414Z     font: 'JetBrains Mono',
+2026-10-27T08:11:19.5003648Z     clipped: false
+2026-10-27T08:11:19.5003842Z   },
+2026-10-27T08:11:19.5004012Z   {
+2026-10-27T08:11:19.5004192Z     name: 'Midnight',
+2026-10-27T08:11:19.5004401Z     x: 53,
+2026-10-27T08:11:19.5004577Z     w: 284,
+2026-10-27T08:11:19.5004751Z     h: 82,
+2026-10-27T08:11:19.5005274Z     sw: 'linear-gradient(135deg, rgb(11, 11, 23) 0px, rgb(11, 11, 23) 50%, rgb(184, 166, 255) 50%, rgb(184, 166, 255) 75%, rgb(255, 143, 216) 75%)',
+2026-10-27T08:11:19.5005808Z     font: 'Space Grotesk',
+2026-10-27T08:11:19.5006036Z     clipped: false
+2026-10-27T08:11:19.5006227Z   },
+2026-10-27T08:11:19.5006392Z   {
+2026-10-27T08:11:19.5006564Z     name: 'Paper',
+2026-10-27T08:11:19.5006750Z     x: 53,
+2026-10-27T08:11:19.5006927Z     w: 284,
+2026-10-27T08:11:19.5007099Z     h: 82,
+2026-10-27T08:11:19.5007613Z     sw: 'linear-gradient(135deg, rgb(246, 239, 224) 0px, rgb(246, 239, 224) 50%, rgb(59, 47, 35) 50%, rgb(59, 47, 35) 75%, rgb(224, 196, 138) 75%)',
+2026-10-27T08:11:19.5008159Z     font: 'Lora + Playfair Display',
+2026-10-27T08:11:19.5008911Z     clipped: false
+2026-10-27T08:11:19.5009103Z   },
+2026-10-27T08:11:19.5009271Z   {
+2026-10-27T08:11:19.5009447Z     name: 'Lavender',
+2026-10-27T08:11:19.5009646Z     x: 53,
+2026-10-27T08:11:19.5009815Z     w: 284,
+2026-10-27T08:11:19.5009985Z     h: 82,
+2026-10-27T08:11:19.5010505Z     sw: 'linear-gradient(135deg, rgb(246, 243, 252) 0px, rgb(246, 243, 252) 50%, rgb(75, 63, 143) 50%, rgb(75, 63, 143) 75%, rgb(203, 188, 255) 75%)',
+2026-10-27T08:11:19.5011078Z     font: 'Nunito + Fraunces',
+2026-10-27T08:11:19.5011325Z     clipped: false
+2026-10-27T08:11:19.5011520Z   },
+2026-10-27T08:11:19.5011684Z   {
+2026-10-27T08:11:19.5011853Z     name: 'Slate',
+2026-10-27T08:11:19.5012052Z     x: 53,
+2026-10-27T08:11:19.5012234Z     w: 284,
+2026-10-27T08:11:19.5012407Z     h: 82,
+2026-10-27T08:11:19.5012920Z     sw: 'linear-gradient(135deg, rgb(242, 244, 246) 0px, rgb(242, 244, 246) 50%, rgb(47, 62, 78) 50%, rgb(47, 62, 78) 75%, rgb(159, 182, 201) 75%)',
+2026-10-27T08:11:19.5013427Z     font: 'Inter',
+2026-10-27T08:11:19.5013629Z     clipped: false
+2026-10-27T08:11:19.5013823Z   },
+2026-10-27T08:11:19.5013984Z   {
+2026-10-27T08:11:19.5014165Z     name: 'Terracotta',
+2026-10-27T08:11:19.5014375Z     x: 53,
+2026-10-27T08:11:19.5014548Z     w: 284,
+2026-10-27T08:11:19.5014721Z     h: 82,
+2026-10-27T08:11:19.5015241Z     sw: 'linear-gradient(135deg, rgb(250, 241, 234) 0px, rgb(250, 241, 234) 50%, rgb(156, 74, 47) 50%, rgb(156, 74, 47) 75%, rgb(232, 183, 154) 75%)',
+2026-10-27T08:11:19.5015899Z     font: 'Lora + Fraunces',
+2026-10-27T08:11:19.5016140Z     clipped: false
+2026-10-27T08:11:19.5016329Z   },
+2026-10-27T08:11:19.5016492Z   {
+2026-10-27T08:11:19.5016665Z     name: 'Matcha',
+2026-10-27T08:11:19.5016858Z     x: 53,
+2026-10-27T08:11:19.5017027Z     w: 284,
+2026-10-27T08:11:19.5017195Z     h: 82,
+2026-10-27T08:11:19.5017700Z     sw: 'linear-gradient(135deg, rgb(244, 246, 234) 0px, rgb(244, 246, 234) 50%, rgb(74, 93, 35) 50%, rgb(74, 93, 35) 75%, rgb(201, 220, 138) 75%)',
+2026-10-27T08:11:19.5018243Z     font: 'DM Sans + Playfair Display',
+2026-10-27T08:11:19.5018795Z     clipped: false
+2026-10-27T08:11:19.5018999Z   },
+2026-10-27T08:11:19.5019168Z   {
+2026-10-27T08:11:19.5019338Z     name: 'Rose',
+2026-10-27T08:11:19.5019528Z     x: 53,
+2026-10-27T08:11:19.5019702Z     w: 284,
+2026-10-27T08:11:19.5019876Z     h: 82,
+2026-10-27T08:11:19.5020402Z     sw: 'linear-gradient(135deg, rgb(252, 242, 245) 0px, rgb(252, 242, 245) 50%, rgb(138, 47, 77) 50%, rgb(138, 47, 77) 75%, rgb(242, 181, 200) 75%)',
+2026-10-27T08:11:19.5020961Z     font: 'Poppins + Playfair Display',
+2026-10-27T08:11:19.5021228Z     clipped: false
+2026-10-27T08:11:19.5021417Z   },
+2026-10-27T08:11:19.5021583Z   {
+2026-10-27T08:11:19.5021753Z     name: 'Nord',
+2026-10-27T08:11:19.5021946Z     x: 53,
+2026-10-27T08:11:19.5022118Z     w: 284,
+2026-10-27T08:11:19.5022291Z     h: 82,
+2026-10-27T08:11:19.5022796Z     sw: 'linear-gradient(135deg, rgb(32, 38, 47) 0px, rgb(32, 38, 47) 50%, rgb(136, 192, 208) 50%, rgb(136, 192, 208) 75%, rgb(163, 190, 140) 75%)',
+2026-10-27T08:11:19.5023302Z     font: 'Inter',
+2026-10-27T08:11:19.5023505Z     clipped: false
+2026-10-27T08:11:19.5023690Z   },
+2026-10-27T08:11:19.5023852Z   {
+2026-10-27T08:11:19.5024019Z     name: 'Ink',
+2026-10-27T08:11:19.5024207Z     x: 53,
+2026-10-27T08:11:19.5024377Z     w: 284,
+2026-10-27T08:11:19.5024545Z     h: 82,
+2026-10-27T08:11:19.5025056Z     sw: 'linear-gradient(135deg, rgb(12, 12, 12) 0px, rgb(12, 12, 12) 50%, rgb(242, 242, 242) 50%, rgb(242, 242, 242) 75%, rgb(212, 175, 55) 75%)',
+2026-10-27T08:11:19.5025593Z     font: 'Lora + Playfair Display',
+2026-10-27T08:11:19.5025846Z     clipped: false
+2026-10-27T08:11:19.5026032Z   },
+2026-10-27T08:11:19.5026193Z   {
+2026-10-27T08:11:19.5026362Z     name: 'Sand',
+2026-10-27T08:11:19.5026549Z     x: 53,
+2026-10-27T08:11:19.5026718Z     w: 284,
+2026-10-27T08:11:19.5026885Z     h: 82,
+2026-10-27T08:11:19.5027395Z     sw: 'linear-gradient(135deg, rgb(247, 243, 234) 0px, rgb(247, 243, 234) 50%, rgb(107, 90, 62) 50%, rgb(107, 90, 62) 75%, rgb(217, 199, 160) 75%)',
+2026-10-27T08:11:19.5028053Z     font: 'Georgia',
+2026-10-27T08:11:19.5028264Z     clipped: false
+2026-10-27T08:11:19.5028599Z   }
+2026-10-27T08:11:19.5028780Z ]
+2026-10-27T08:11:19.5029124Z 1280 [
+2026-10-27T08:11:19.5029306Z   {
+2026-10-27T08:11:19.5029478Z     name: 'Forest',
+2026-10-27T08:11:19.5029670Z     x: 359,
+2026-10-27T08:11:19.5029847Z     w: 177,
+2026-10-27T08:11:19.5030017Z     h: 82,
+2026-10-27T08:11:19.5030543Z     sw: 'linear-gradient(135deg, rgb(248, 244, 233) 0px, rgb(248, 244, 233) 50%, rgb(23, 63, 53) 50%, rgb(23, 63, 53) 75%, rgb(215, 239, 114) 75%)',
+2026-10-27T08:11:19.5031085Z     font: 'DM Sans + Fraunces',
+2026-10-27T08:11:19.5031324Z     clipped: false
+2026-10-27T08:11:19.5031518Z   },
+2026-10-27T08:11:19.5031680Z   {
+2026-10-27T08:11:19.5031848Z     name: 'Ocean',
+2026-10-27T08:11:19.5032040Z     x: 546,
+2026-10-27T08:11:19.5032209Z     w: 177,
+2026-10-27T08:11:19.5032379Z     h: 82,
+2026-10-27T08:11:19.5032900Z     sw: 'linear-gradient(135deg, rgb(238, 246, 251) 0px, rgb(238, 246, 251) 50%, rgb(11, 61, 102) 50%, rgb(11, 61, 102) 75%, rgb(127, 209, 245) 75%)',
+2026-10-27T08:11:19.5033417Z     font: 'Inter',
+2026-10-27T08:11:19.5033611Z     clipped: false
+2026-10-27T08:11:19.5033797Z   },
+2026-10-27T08:11:19.5033958Z   {
+2026-10-27T08:11:19.5034128Z     name: 'Sunset',
+2026-10-27T08:11:19.5034321Z     x: 359,
+2026-10-27T08:11:19.5034494Z     w: 177,
+2026-10-27T08:11:19.5034662Z     h: 82,
+2026-10-27T08:11:19.5035300Z     sw: 'linear-gradient(135deg, rgb(255, 244, 234) 0px, rgb(255, 244, 234) 50%, rgb(122, 46, 29) 50%, rgb(122, 46, 29) 75%, rgb(255, 184, 107) 75%)',
+2026-10-27T08:11:19.5035863Z     font: 'Poppins + Playfair Display',
+2026-10-27T08:11:19.5036125Z     clipped: false
+2026-10-27T08:11:19.5036315Z   },
+2026-10-27T08:11:19.5036478Z   {
+2026-10-27T08:11:19.5036648Z     name: 'Mono',
+2026-10-27T08:11:19.5036830Z     x: 546,
+2026-10-27T08:11:19.5036998Z     w: 177,
+2026-10-27T08:11:19.5037167Z     h: 82,
+2026-10-27T08:11:19.5037677Z     sw: 'linear-gradient(135deg, rgb(244, 244, 244) 0px, rgb(244, 244, 244) 50%, rgb(17, 17, 17) 50%, rgb(17, 17, 17) 75%, rgb(229, 229, 229) 75%)',
+2026-10-27T08:11:19.5038195Z     font: 'JetBrains Mono',
+2026-10-27T08:11:19.5038559Z     clipped: false
+2026-10-27T08:11:19.5038756Z   },
+2026-10-27T08:11:19.5038916Z   {
+2026-10-27T08:11:19.5039093Z     name: 'Midnight',
+2026-10-27T08:11:19.5039296Z     x: 359,
+2026-10-27T08:11:19.5039463Z     w: 177,
+2026-10-27T08:11:19.5039670Z     h: 82,
+2026-10-27T08:11:19.5040173Z     sw: 'linear-gradient(135deg, rgb(11, 11, 23) 0px, rgb(11, 11, 23) 50%, rgb(184, 166, 255) 50%, rgb(184, 166, 255) 75%, rgb(255, 143, 216) 75%)',
+2026-10-27T08:11:19.5040681Z     font: 'Space Grotesk',
+2026-10-27T08:11:19.5040911Z     clipped: false
+2026-10-27T08:11:19.5041095Z   },
+2026-10-27T08:11:19.5041258Z   {
+2026-10-27T08:11:19.5041433Z     name: 'Paper',
+2026-10-27T08:11:19.5041620Z     x: 546,
+2026-10-27T08:11:19.5041790Z     w: 177,
+2026-10-27T08:11:19.5041960Z     h: 82,
+2026-10-27T08:11:19.5042470Z     sw: 'linear-gradient(135deg, rgb(246, 239, 224) 0px, rgb(246, 239, 224) 50%, rgb(59, 47, 35) 50%, rgb(59, 47, 35) 75%, rgb(224, 196, 138) 75%)',
+2026-10-27T08:11:19.5043013Z     font: 'Lora + Playfair Display',
+2026-10-27T08:11:19.5043267Z     clipped: false
+2026-10-27T08:11:19.5043452Z   },
+2026-10-27T08:11:19.5043615Z   {
+2026-10-27T08:11:19.5043796Z     name: 'Lavender',
+2026-10-27T08:11:19.5043992Z     x: 359,
+2026-10-27T08:11:19.5044169Z     w: 177,
+2026-10-27T08:11:19.5044345Z     h: 82,
+2026-10-27T08:11:19.5044857Z     sw: 'linear-gradient(135deg, rgb(246, 243, 252) 0px, rgb(246, 243, 252) 50%, rgb(75, 63, 143) 50%, rgb(75, 63, 143) 75%, rgb(203, 188, 255) 75%)',
+2026-10-27T08:11:19.5045397Z     font: 'Nunito + Fraunces',
+2026-10-27T08:11:19.5045635Z     clipped: false
+2026-10-27T08:11:19.5045822Z   },
+2026-10-27T08:11:19.5045984Z   {
+2026-10-27T08:11:19.5046154Z     name: 'Slate',
+2026-10-27T08:11:19.5046340Z     x: 546,
+2026-10-27T08:11:19.5046509Z     w: 177,
+2026-10-27T08:11:19.5046684Z     h: 82,
+2026-10-27T08:11:19.5047313Z     sw: 'linear-gradient(135deg, rgb(242, 244, 246) 0px, rgb(242, 244, 246) 50%, rgb(47, 62, 78) 50%, rgb(47, 62, 78) 75%, rgb(159, 182, 201) 75%)',
+2026-10-27T08:11:19.5047818Z     font: 'Inter',
+2026-10-27T08:11:19.5048009Z     clipped: false
+2026-10-27T08:11:19.5048193Z   },
+2026-10-27T08:11:19.5048357Z   {
+2026-10-27T08:11:19.5048831Z     name: 'Terracotta',
+2026-10-27T08:11:19.5049047Z     x: 359,
+2026-10-27T08:11:19.5049217Z     w: 177,
+2026-10-27T08:11:19.5049396Z     h: 82,
+2026-10-27T08:11:19.5049908Z     sw: 'linear-gradient(135deg, rgb(250, 241, 234) 0px, rgb(250, 241, 234) 50%, rgb(156, 74, 47) 50%, rgb(156, 74, 47) 75%, rgb(232, 183, 154) 75%)',
+2026-10-27T08:11:19.5050434Z     font: 'Lora + Fraunces',
+2026-10-27T08:11:19.5050672Z     clipped: false
+2026-10-27T08:11:19.5050858Z   },
+2026-10-27T08:11:19.5051019Z   {
+2026-10-27T08:11:19.5051203Z     name: 'Matcha',
+2026-10-27T08:11:19.5051397Z     x: 546,
+2026-10-27T08:11:19.5051565Z     w: 177,
+2026-10-27T08:11:19.5051743Z     h: 82,
+2026-10-27T08:11:19.5052249Z     sw: 'linear-gradient(135deg, rgb(244, 246, 234) 0px, rgb(244, 246, 234) 50%, rgb(74, 93, 35) 50%, rgb(74, 93, 35) 75%, rgb(201, 220, 138) 75%)',
+2026-10-27T08:11:19.5052790Z     font: 'DM Sans + Playfair Display',
+2026-10-27T08:11:19.5053046Z     clipped: false
+2026-10-27T08:11:19.5053228Z   },
+2026-10-27T08:11:19.5053395Z   {
+2026-10-27T08:11:19.5053563Z     name: 'Rose',
+2026-10-27T08:11:19.5053748Z     x: 359,
+2026-10-27T08:11:19.5054048Z     w: 177,
+2026-10-27T08:11:19.5054229Z     h: 82,
+2026-10-27T08:11:19.5054744Z     sw: 'linear-gradient(135deg, rgb(252, 242, 245) 0px, rgb(252, 242, 245) 50%, rgb(138, 47, 77) 50%, rgb(138, 47, 77) 75%, rgb(242, 181, 200) 75%)',
+2026-10-27T08:11:19.5055302Z     font: 'Poppins + Playfair Display',
+2026-10-27T08:11:19.5055560Z     clipped: false
+2026-10-27T08:11:19.5055745Z   },
+2026-10-27T08:11:19.5055910Z   {
+2026-10-27T08:11:19.5056082Z     name: 'Nord',
+2026-10-27T08:11:19.5056266Z     x: 546,
+2026-10-27T08:11:19.5056440Z     w: 177,
+2026-10-27T08:11:19.5056614Z     h: 82,
+2026-10-27T08:11:19.5057127Z     sw: 'linear-gradient(135deg, rgb(32, 38, 47) 0px, rgb(32, 38, 47) 50%, rgb(136, 192, 208) 50%, rgb(136, 192, 208) 75%, rgb(163, 190, 140) 75%)',
+2026-10-27T08:11:19.5057636Z     font: 'Inter',
+2026-10-27T08:11:19.5057832Z     clipped: false
+2026-10-27T08:11:19.5058020Z   },
+2026-10-27T08:11:19.5058189Z   {
+2026-10-27T08:11:19.5058361Z     name: 'Ink',
+2026-10-27T08:11:19.5058841Z     x: 359,
+2026-10-27T08:11:19.5059025Z     w: 177,
+2026-10-27T08:11:19.5059198Z     h: 82,
+2026-10-27T08:11:19.5059708Z     sw: 'linear-gradient(135deg, rgb(12, 12, 12) 0px, rgb(12, 12, 12) 50%, rgb(242, 242, 242) 50%, rgb(242, 242, 242) 75%, rgb(212, 175, 55) 75%)',
+2026-10-27T08:11:19.5060271Z     font: 'Lora + Playfair Display',
+2026-10-27T08:11:19.5060538Z     clipped: false
+2026-10-27T08:11:19.5060725Z   },
+2026-10-27T08:11:19.5060888Z   {
+2026-10-27T08:11:19.5061062Z     name: 'Sand',
+2026-10-27T08:11:19.5061249Z     x: 546,
+2026-10-27T08:11:19.5061430Z     w: 177,
+2026-10-27T08:11:19.5061608Z     h: 82,
+2026-10-27T08:11:19.5062126Z     sw: 'linear-gradient(135deg, rgb(247, 243, 234) 0px, rgb(247, 243, 234) 50%, rgb(107, 90, 62) 50%, rgb(107, 90, 62) 75%, rgb(217, 199, 160) 75%)',
+2026-10-27T08:11:19.5062647Z     font: 'Georgia',
+2026-10-27T08:11:19.5062853Z     clipped: false
+2026-10-27T08:11:19.5063044Z   }
+2026-10-27T08:11:19.5063214Z ]
+2026-10-27T08:11:19.5063784Z PASS exact14presets preserved colors/fonts thumbnails fulltext/equalcarddimensions/targets/nooverflow3203901280
+2026-10-27T08:11:19.5064232Z 
+2026-10-27T08:11:59.4528388Z CASE prompt_all_success_ownership_browser.cjs default PASS exit=0 seconds=40.0
+2026-10-27T08:11:59.4530240Z PASS all9promptsave/reset/generate200 originals/neweredits exactsnapshotsfocusstatus3201280normalReduce
+2026-10-27T08:11:59.4530998Z 
+2026-10-27T08:12:12.7978101Z CASE provider_entrance_audit_browser.cjs default PASS exit=0 seconds=13.3
+2026-10-27T08:12:12.7979302Z PASS all12providercardsnoinitialorstaggeranimation 320 reduce
+2026-10-27T08:12:12.7980779Z PASS all12providercardsnoinitialorstaggeranimation 320 no-preference
+2026-10-27T08:12:12.7981739Z PASS all12providercardsnoinitialorstaggeranimation 1280 reduce
+2026-10-27T08:12:12.7982590Z PASS all12providercardsnoinitialorstaggeranimation 1280 no-preference
+2026-10-27T08:12:12.7983516Z PASS providerentrancesall12 noindependentstagger/transform3201280normalReduce
+2026-10-27T08:12:12.7984013Z 
+2026-10-27T08:12:37.4805027Z CASE range_feedback_audit_browser.cjs default PASS exit=0 seconds=24.7
+2026-10-27T08:12:37.4820572Z ALLRANGES 320 reduce [{"id":"temp","min":"0","max":"2","samples":[{"value":"0","track":"0%","output":"0.00","transition":"none"},{"value":"2","track":"100%","output":"2.00","transition":"none"}]},{"id":"topk","min":"1","max":"50","samples":[{"value":"1","track":"0%","output":"1","transition":"none"},{"value":"50","track":"100%","output":"50","transition":"none"}]},{"id":"f-bg_angle","min":"0","max":"360","samples":[{"value":"0","track":"0%","output":"0°","transition":"none"},{"value":"360","track":"100%","output":"360°","transition":"none"}]},{"id":"f-pattern_opacity","min":"0","max":"60","samples":[{"value":"0","track":"0%","output":"0%","transition":"none"},{"value":"60","track":"100%","output":"60%","transition":"none"}]},{"id":"f-pattern_size","min":"8","max":"80","samples":[{"value":"8","track":"0%","output":"8px","transition":"none"},{"value":"80","track":"100%","output":"80px","transition":"none"}]},{"id":"f-font_size","min":"80","max":"140","samples":[{"value":"80","track":"0%","output":"80%","transition":"none"},{"value":"140","track":"100%","output":"140%","transition":"none"}]},{"id":"f-line_height","min":"120","max":"200","samples":[{"value":"120","track":"0%","output":"120%","transition":"none"},{"value":"200","track":"100%","output":"200%","transition":"none"}]},{"id":"f-radius","min":"0","max":"160","samples":[{"value":"0","track":"0%","output":"0%","transition":"none"},{"value":"160","track":"100%","output":"160%","transition":"none"}]},{"id":"f-speed","min":"40","max":"250","samples":[{"value":"40","track":"0%","output":"40%","transition":"none"},{"value":"250","track":"100%","output":"250%","transition":"none"}]},{"id":"f-sidebar_width","min":"200","max":"460","samples":[{"value":"200","track":"0%","output":"200px","transition":"none"},{"value":"460","track":"100%","output":"460px","transition":"none"}]}]
+2026-10-27T08:12:37.4836173Z ALLRANGES 320 no-preference [{"id":"temp","min":"0","max":"2","samples":[{"value":"0","track":"0%","output":"0.00","transition":"filter"},{"value":"2","track":"100%","output":"2.00","transition":"filter"}]},{"id":"topk","min":"1","max":"50","samples":[{"value":"1","track":"0%","output":"1","transition":"filter"},{"value":"50","track":"100%","output":"50","transition":"filter"}]},{"id":"f-bg_angle","min":"0","max":"360","samples":[{"value":"0","track":"0%","output":"0°","transition":"filter"},{"value":"360","track":"100%","output":"360°","transition":"filter"}]},{"id":"f-pattern_opacity","min":"0","max":"60","samples":[{"value":"0","track":"0%","output":"0%","transition":"filter"},{"value":"60","track":"100%","output":"60%","transition":"filter"}]},{"id":"f-pattern_size","min":"8","max":"80","samples":[{"value":"8","track":"0%","output":"8px","transition":"filter"},{"value":"80","track":"100%","output":"80px","transition":"filter"}]},{"id":"f-font_size","min":"80","max":"140","samples":[{"value":"80","track":"0%","output":"80%","transition":"filter"},{"value":"140","track":"100%","output":"140%","transition":"filter"}]},{"id":"f-line_height","min":"120","max":"200","samples":[{"value":"120","track":"0%","output":"120%","transition":"filter"},{"value":"200","track":"100%","output":"200%","transition":"filter"}]},{"id":"f-radius","min":"0","max":"160","samples":[{"value":"0","track":"0%","output":"0%","transition":"filter"},{"value":"160","track":"100%","output":"160%","transition":"filter"}]},{"id":"f-speed","min":"40","max":"250","samples":[{"value":"40","track":"0%","output":"40%","transition":"filter"},{"value":"250","track":"100%","output":"250%","transition":"filter"}]},{"id":"f-sidebar_width","min":"200","max":"460","samples":[{"value":"200","track":"0%","output":"200px","transition":"filter"},{"value":"460","track":"100%","output":"460px","transition":"filter"}]}]
+2026-10-27T08:12:37.4850162Z ALLRANGES 1280 reduce [{"id":"temp","min":"0","max":"2","samples":[{"value":"0","track":"0%","output":"0.00","transition":"none"},{"value":"2","track":"100%","output":"2.00","transition":"none"}]},{"id":"topk","min":"1","max":"50","samples":[{"value":"1","track":"0%","output":"1","transition":"none"},{"value":"50","track":"100%","output":"50","transition":"none"}]},{"id":"f-bg_angle","min":"0","max":"360","samples":[{"value":"0","track":"0%","output":"0°","transition":"none"},{"value":"360","track":"100%","output":"360°","transition":"none"}]},{"id":"f-pattern_opacity","min":"0","max":"60","samples":[{"value":"0","track":"0%","output":"0%","transition":"none"},{"value":"60","track":"100%","output":"60%","transition":"none"}]},{"id":"f-pattern_size","min":"8","max":"80","samples":[{"value":"8","track":"0%","output":"8px","transition":"none"},{"value":"80","track":"100%","output":"80px","transition":"none"}]},{"id":"f-font_size","min":"80","max":"140","samples":[{"value":"80","track":"0%","output":"80%","transition":"none"},{"value":"140","track":"100%","output":"140%","transition":"none"}]},{"id":"f-line_height","min":"120","max":"200","samples":[{"value":"120","track":"0%","output":"120%","transition":"none"},{"value":"200","track":"100%","output":"200%","transition":"none"}]},{"id":"f-radius","min":"0","max":"160","samples":[{"value":"0","track":"0%","output":"0%","transition":"none"},{"value":"160","track":"100%","output":"160%","transition":"none"}]},{"id":"f-speed","min":"40","max":"250","samples":[{"value":"40","track":"0%","output":"40%","transition":"none"},{"value":"250","track":"100%","output":"250%","transition":"none"}]},{"id":"f-sidebar_width","min":"200","max":"460","samples":[{"value":"200","track":"0%","output":"200px","transition":"none"},{"value":"460","track":"100%","output":"460px","transition":"none"}]}]
+2026-10-27T08:12:37.4863430Z ALLRANGES 1280 no-preference [{"id":"temp","min":"0","max":"2","samples":[{"value":"0","track":"0%","output":"0.00","transition":"filter"},{"value":"2","track":"100%","output":"2.00","transition":"filter"}]},{"id":"topk","min":"1","max":"50","samples":[{"value":"1","track":"0%","output":"1","transition":"filter"},{"value":"50","track":"100%","output":"50","transition":"filter"}]},{"id":"f-bg_angle","min":"0","max":"360","samples":[{"value":"0","track":"0%","output":"0°","transition":"filter"},{"value":"360","track":"100%","output":"360°","transition":"filter"}]},{"id":"f-pattern_opacity","min":"0","max":"60","samples":[{"value":"0","track":"0%","output":"0%","transition":"filter"},{"value":"60","track":"100%","output":"60%","transition":"filter"}]},{"id":"f-pattern_size","min":"8","max":"80","samples":[{"value":"8","track":"0%","output":"8px","transition":"filter"},{"value":"80","track":"100%","output":"80px","transition":"filter"}]},{"id":"f-font_size","min":"80","max":"140","samples":[{"value":"80","track":"0%","output":"80%","transition":"filter"},{"value":"140","track":"100%","output":"140%","transition":"filter"}]},{"id":"f-line_height","min":"120","max":"200","samples":[{"value":"120","track":"0%","output":"120%","transition":"filter"},{"value":"200","track":"100%","output":"200%","transition":"filter"}]},{"id":"f-radius","min":"0","max":"160","samples":[{"value":"0","track":"0%","output":"0%","transition":"filter"},{"value":"160","track":"100%","output":"160%","transition":"filter"}]},{"id":"f-speed","min":"40","max":"250","samples":[{"value":"40","track":"0%","output":"40%","transition":"filter"},{"value":"250","track":"100%","output":"250%","transition":"filter"}]},{"id":"f-sidebar_width","min":"200","max":"460","samples":[{"value":"200","track":"0%","output":"200px","transition":"filter"},{"value":"460","track":"100%","output":"460px","transition":"filter"}]}]
+2026-10-27T08:12:37.4876365Z PASS all enabledrange minmax synchronous numericoutput track0/100 all sections activevisible pointer+keyboard immediate value/focus labelystable no transform3201280normalReduce
+2026-10-27T08:12:37.4877443Z 
+2026-10-27T08:13:04.5205697Z CASE review_precision_browser.cjs default PASS exit=0 seconds=27.0
+2026-10-27T08:13:04.5207569Z SOURCE STATUS Proposed source added. Check its path and label, then validate before saving. App identity
+2026-10-27T08:13:04.5209564Z 9 draft settings
+2026-10-27T08:13:04.5210659Z Title
+2026-10-27T08:13:04.5211125Z Tagline
+2026-10-27T08:13:04.5211491Z More app settings
+2026-10-27T08:13:04.5212036Z Design, colors, fonts and layout
+2026-10-27T08:13:04.5212471Z 80 draft settings
+2026-10-27T08:13:04.5212788Z Theme
+2026-10-27T08:13:04.5213068Z Light theme
+2026-10-27T08:13:04.5213354Z Brand
+2026-10-27T08:13:04.5213621Z Accent
+2026-10-27T08:13:04.5213909Z Page background
+2026-10-27T08:13:04.5214277Z Surface
+2026-10-27T08:13:04.5214563Z Text color
+2026-10-27T08:13:04.5214866Z Secondary text
+2026-10-27T08:13:04.5215247Z Borders and dividers
+2026-10-27T08:13:04.5215575Z Sidebar
+2026-10-27T08:13:04.5215852Z Choose
+2026-10-27T08:13:04.5216158Z Assistant messages
+2026-10-27T08:13:04.5216480Z Your messages
+2026-10-27T08:13:04.5216777Z Error color
+2026-10-27T08:13:04.5217065Z Brand
+2026-10-27T08:13:04.5217338Z Accent
+2026-10-27T08:13:04.5217623Z Page background
+2026-10-27T08:13:04.5217927Z Surface
+2026-10-27T08:13:04.5218200Z Text color
+2026-10-27T08:13:04.5219134Z Secondary text
+2026-10-27T08:13:04.5219514Z Borders and dividers
+2026-10-27T08:13:04.5219837Z Sidebar
+2026-10-27T08:13:04.5220105Z Choose
+2026-10-27T08:13:04.5220406Z Assistant messages
+2026-10-27T08:13:04.5220727Z Your messages
+2026-10-27T08:13:04.5221027Z Error color
+2026-10-27T08:13:04.5221321Z Background style
+2026-10-27T08:13:04.5221615Z Solid
+2026-10-27T08:13:04.5221870Z Second background color
+2026-10-27T08:13:04.5222159Z Background angle
+2026-10-27T08:13:04.5222494Z degrees: 0 to 360 (whole numbers)
+2026-10-27T08:13:04.5222825Z Background image
+2026-10-27T08:13:04.5223083Z Pattern
+2026-10-27T08:13:04.5223307Z Dots
+2026-10-27T08:13:04.5223543Z Pattern opacity
+2026-10-27T08:13:04.5223879Z % opacity: 0 to 60 (whole numbers)
+2026-10-27T08:13:04.5224205Z Pattern size
+2026-10-27T08:13:04.5224547Z px pattern size: 8 to 80 (whole numbers)
+2026-10-27T08:13:04.5224896Z Pattern color
+2026-10-27T08:13:04.5225137Z Body font
+2026-10-27T08:13:04.5225275Z 
+2026-10-27T08:13:04.5225494Z The quick brown fox jumps over the lazy dog.
+2026-10-27T08:13:04.5225755Z 
+2026-10-27T08:13:04.5225863Z Aa
+2026-10-27T08:13:04.5226082Z Georgia
+2026-10-27T08:13:04.5226311Z Heading font
+2026-10-27T08:13:04.5226461Z 
+2026-10-27T08:13:04.5226665Z The quick brown fox jumps over the lazy dog.
+2026-10-27T08:13:04.5226925Z 
+2026-10-27T08:13:04.5227024Z Aa
+2026-10-27T08:13:04.5227239Z Georgia
+2026-10-27T08:13:04.5227492Z Custom font address
+2026-10-27T08:13:04.5227748Z Text size
+2026-10-27T08:13:04.5228063Z % text size: 80 to 140 (whole numbers)
+2026-10-27T08:13:04.5228395Z Line spacing
+2026-10-27T08:13:04.5229013Z % line spacing: 120 to 200 (whole numbers)
+2026-10-27T08:13:04.5229427Z Corner roundness
+2026-10-27T08:13:04.5229785Z % corner roundness: 0 to 160 (whole numbers)
+2026-10-27T08:13:04.5230137Z Spacing
+2026-10-27T08:13:04.5230365Z Cozy spacing
+2026-10-27T08:13:04.5230595Z Shadows
+2026-10-27T08:13:04.5230816Z Soft shadow
+2026-10-27T08:13:04.5231065Z Assistant icon
+2026-10-27T08:13:04.5231330Z Your profile icon
+2026-10-27T08:13:04.5231593Z Welcome icon
+2026-10-27T08:13:04.5231784Z Send icon
+2026-10-27T08:13:04.5231975Z Attachment icon
+2026-10-27T08:13:04.5232186Z Temperature icon
+2026-10-27T08:13:04.5232386Z Motion
+2026-10-27T08:13:04.5232569Z Subtle
+2026-10-27T08:13:04.5232749Z Entrance
+2026-10-27T08:13:04.5232928Z Fade
+2026-10-27T08:13:04.5233103Z Speed
+2026-10-27T08:13:04.5233366Z % motion speed: 40 to 250 (whole numbers)
+2026-10-27T08:13:04.5233645Z Lift on hover
+2026-10-27T08:13:04.5233843Z Sidebar
+2026-10-27T08:13:04.5234027Z Right sidebar
+2026-10-27T08:13:04.5234222Z Sidebar width
+2026-10-27T08:13:04.5234696Z px sidebar width: 200 to 460 (whole numbers)
+2026-10-27T08:13:04.5234989Z Chat width
+2026-10-27T08:13:04.5235180Z Wide chat width
+2026-10-27T08:13:04.5235386Z Profile pictures
+2026-10-27T08:13:04.5235620Z Hide profile pictures
+2026-10-27T08:13:04.5235841Z Message style
+2026-10-27T08:13:04.5236056Z Flat message style
+2026-10-27T08:13:04.5236258Z Logo
+2026-10-27T08:13:04.5236441Z Logo watermark
+2026-10-27T08:13:04.5236638Z Heading
+2026-10-27T08:13:04.5236824Z Introduction
+2026-10-27T08:13:04.5237038Z Starter questions
+2026-10-27T08:13:04.5237267Z Question placeholder
+2026-10-27T08:13:04.5237483Z Footer text
+2026-10-27T08:13:04.5237698Z Answer limitation note
+2026-10-27T08:13:04.5237919Z Question hint
+2026-10-27T08:13:04.5238126Z Chat list heading
+2026-10-27T08:13:04.5238354Z Your message alignment
+2026-10-27T08:13:04.5238855Z Right
+2026-10-27T08:13:04.5239047Z Composer
+2026-10-27T08:13:04.5239240Z Inline
+2026-10-27T08:13:04.5239423Z Toolbar
+2026-10-27T08:13:04.5239599Z Show
+2026-10-27T08:13:04.5239792Z Source panel
+2026-10-27T08:13:04.5240029Z Assistant icon animation
+2026-10-27T08:13:04.5240285Z Assistant icon motion
+2026-10-27T08:13:04.5240537Z Your profile icon animation
+2026-10-27T08:13:04.5240811Z Your profile icon motion
+2026-10-27T08:13:04.5241072Z Welcome icon animation
+2026-10-27T08:13:04.5241309Z Welcome icon motion
+2026-10-27T08:13:04.5241539Z Send icon animation
+2026-10-27T08:13:04.5241738Z Send icon motion
+2026-10-27T08:13:04.5242106Z Attachment icon animation
+2026-10-27T08:13:04.5242361Z Attachment icon motion
+2026-10-27T08:13:04.5242594Z Temperature icon animation
+2026-10-27T08:13:04.5242837Z Temperature icon motion
+2026-10-27T08:13:04.5243079Z All nine answer prompts
+2026-10-27T08:13:04.5243301Z 20 draft settings
+2026-10-27T08:13:04.5243548Z Answer style and system prompt
+2026-10-27T08:13:04.5243783Z 7 draft settings
+2026-10-27T08:13:04.5243969Z Sources
+2026-10-27T08:13:04.5244142Z 5 draft settings
+2026-10-27T08:13:04.5244332Z My documents
+2026-10-27T08:13:04.5244443Z 
+2026-10-27T08:13:04.5244596Z Proposed source. Not tested or active.
+2026-10-27T08:13:04.5244778Z 
+2026-10-27T08:13:04.5244859Z Id
+2026-10-27T08:13:04.5245023Z Label
+2026-10-27T08:13:04.5245200Z Provider type
+2026-10-27T08:13:04.5245386Z Local files
+2026-10-27T08:13:04.5245593Z File or folder path
+2026-10-27T08:13:04.5245820Z Remove this proposed source
+2026-10-27T08:13:04.5246099Z Add proposed local-file source
+2026-10-27T08:13:04.5246395Z Advanced: edit all sources as JSON
+2026-10-27T08:13:04.5246659Z API recommendations
+2026-10-27T08:13:04.5246857Z 1 draft setting
+2026-10-27T08:13:04.5247051Z Model connection
+2026-10-27T08:13:04.5247241Z 8 draft settings
+2026-10-27T08:13:04.5247453Z Code drafts: not installed
+2026-10-27T08:13:04.5247672Z 6 draft settings
+2026-10-27T08:13:04.5247892Z Evidence retrieval
+2026-10-27T08:13:04.5248090Z 5 draft settings
+2026-10-27T08:13:04.5248291Z Conversation memory
+2026-10-27T08:13:04.5248643Z 4 draft settings
+2026-10-27T08:13:04.5249042Z Citations
+2026-10-27T08:13:04.5249247Z 2 draft settings
+2026-10-27T08:13:04.5249439Z Usage limits
+2026-10-27T08:13:04.5249623Z 4 draft settings
+2026-10-27T08:13:04.5249822Z Access and accounts
+2026-10-27T08:13:04.5250017Z 3 draft settings
+2026-10-27T08:13:04.5250210Z Allowed actions
+2026-10-27T08:13:04.5250396Z 2 draft settings
+2026-10-27T08:13:04.5250578Z Chat storage
+2026-10-27T08:13:04.5250756Z 1 draft setting
+2026-10-27T08:13:04.5250938Z Local server
+2026-10-27T08:13:04.5251127Z 3 draft settings
+2026-10-27T08:13:04.5251443Z REVIEW STATUS Validated. Review changes before saving.
+2026-10-27T08:13:04.5251865Z REVIEW STATUS Validated. Review changes before saving.
+2026-10-27T08:13:04.5252494Z SOURCE STATUS Proposed source added. Check its path and label, then validate before saving. App identity
+2026-10-27T08:13:04.5252963Z 9 draft settings
+2026-10-27T08:13:04.5253149Z Title
+2026-10-27T08:13:04.5253320Z Tagline
+2026-10-27T08:13:04.5253507Z More app settings
+2026-10-27T08:13:04.5253752Z Design, colors, fonts and layout
+2026-10-27T08:13:04.5254159Z 80 draft settings
+2026-10-27T08:13:04.5254344Z Theme
+2026-10-27T08:13:04.5254511Z Light theme
+2026-10-27T08:13:04.5254686Z Brand
+2026-10-27T08:13:04.5254845Z Accent
+2026-10-27T08:13:04.5255024Z Page background
+2026-10-27T08:13:04.5255207Z Surface
+2026-10-27T08:13:04.5255380Z Text color
+2026-10-27T08:13:04.5255565Z Secondary text
+2026-10-27T08:13:04.5255772Z Borders and dividers
+2026-10-27T08:13:04.5255971Z Sidebar
+2026-10-27T08:13:04.5256146Z Choose
+2026-10-27T08:13:04.5256336Z Assistant messages
+2026-10-27T08:13:04.5256532Z Your messages
+2026-10-27T08:13:04.5256713Z Error color
+2026-10-27T08:13:04.5256887Z Brand
+2026-10-27T08:13:04.5257051Z Accent
+2026-10-27T08:13:04.5257229Z Page background
+2026-10-27T08:13:04.5257419Z Surface
+2026-10-27T08:13:04.5257589Z Text color
+2026-10-27T08:13:04.5257766Z Secondary text
+2026-10-27T08:13:04.5257973Z Borders and dividers
+2026-10-27T08:13:04.5258177Z Sidebar
+2026-10-27T08:13:04.5258345Z Choose
+2026-10-27T08:13:04.5258705Z Assistant messages
+2026-10-27T08:13:04.5258915Z Your messages
+2026-10-27T08:13:04.5259099Z Error color
+2026-10-27T08:13:04.5259287Z Background style
+2026-10-27T08:13:04.5259474Z Solid
+2026-10-27T08:13:04.5259672Z Second background color
+2026-10-27T08:13:04.5259885Z Background angle
+2026-10-27T08:13:04.5260164Z degrees: 0 to 360 (whole numbers)
+2026-10-27T08:13:04.5260411Z Background image
+2026-10-27T08:13:04.5260597Z Pattern
+2026-10-27T08:13:04.5260765Z Dots
+2026-10-27T08:13:04.5261057Z Pattern opacity
+2026-10-27T08:13:04.5261313Z % opacity: 0 to 60 (whole numbers)
+2026-10-27T08:13:04.5261556Z Pattern size
+2026-10-27T08:13:04.5261825Z px pattern size: 8 to 80 (whole numbers)
+2026-10-27T08:13:04.5262088Z Pattern color
+2026-10-27T08:13:04.5262273Z Body font
+2026-10-27T08:13:04.5262373Z 
+2026-10-27T08:13:04.5262540Z The quick brown fox jumps over the lazy dog.
+2026-10-27T08:13:04.5262743Z 
+2026-10-27T08:13:04.5262816Z Aa
+2026-10-27T08:13:04.5262989Z Georgia
+2026-10-27T08:13:04.5263170Z Heading font
+2026-10-27T08:13:04.5263275Z 
+2026-10-27T08:13:04.5263438Z The quick brown fox jumps over the lazy dog.
+2026-10-27T08:13:04.5263626Z 
+2026-10-27T08:13:04.5263704Z Aa
+2026-10-27T08:13:04.5263867Z Georgia
+2026-10-27T08:13:04.5264055Z Custom font address
+2026-10-27T08:13:04.5264248Z Text size
+2026-10-27T08:13:04.5264490Z % text size: 80 to 140 (whole numbers)
+2026-10-27T08:13:04.5264738Z Line spacing
+2026-10-27T08:13:04.5264985Z % line spacing: 120 to 200 (whole numbers)
+2026-10-27T08:13:04.5265254Z Corner roundness
+2026-10-27T08:13:04.5265518Z % corner roundness: 0 to 160 (whole numbers)
+2026-10-27T08:13:04.5265775Z Spacing
+2026-10-27T08:13:04.5265956Z Cozy spacing
+2026-10-27T08:13:04.5266130Z Shadows
+2026-10-27T08:13:04.5266297Z Soft shadow
+2026-10-27T08:13:04.5266477Z Assistant icon
+2026-10-27T08:13:04.5266677Z Your profile icon
+2026-10-27T08:13:04.5266869Z Welcome icon
+2026-10-27T08:13:04.5267044Z Send icon
+2026-10-27T08:13:04.5267229Z Attachment icon
+2026-10-27T08:13:04.5267422Z Temperature icon
+2026-10-27T08:13:04.5267607Z Motion
+2026-10-27T08:13:04.5267785Z Subtle
+2026-10-27T08:13:04.5267953Z Entrance
+2026-10-27T08:13:04.5268118Z Fade
+2026-10-27T08:13:04.5268285Z Speed
+2026-10-27T08:13:04.5268663Z % motion speed: 40 to 250 (whole numbers)
+2026-10-27T08:13:04.5268924Z Lift on hover
+2026-10-27T08:13:04.5269104Z Sidebar
+2026-10-27T08:13:04.5269280Z Right sidebar
+2026-10-27T08:13:04.5269474Z Sidebar width
+2026-10-27T08:13:04.5269736Z px sidebar width: 200 to 460 (whole numbers)
+2026-10-27T08:13:04.5270006Z Chat width
+2026-10-27T08:13:04.5270187Z Wide chat width
+2026-10-27T08:13:04.5270381Z Profile pictures
+2026-10-27T08:13:04.5270594Z Hide profile pictures
+2026-10-27T08:13:04.5270802Z Message style
+2026-10-27T08:13:04.5270996Z Flat message style
+2026-10-27T08:13:04.5271191Z Logo
+2026-10-27T08:13:04.5271361Z Logo watermark
+2026-10-27T08:13:04.5271540Z Heading
+2026-10-27T08:13:04.5271714Z Introduction
+2026-10-27T08:13:04.5271906Z Starter questions
+2026-10-27T08:13:04.5272120Z Question placeholder
+2026-10-27T08:13:04.5272322Z Footer text
+2026-10-27T08:13:04.5272662Z Answer limitation note
+2026-10-27T08:13:04.5272874Z Question hint
+2026-10-27T08:13:04.5273068Z Chat list heading
+2026-10-27T08:13:04.5273277Z Your message alignment
+2026-10-27T08:13:04.5273478Z Right
+2026-10-27T08:13:04.5273646Z Composer
+2026-10-27T08:13:04.5273815Z Inline
+2026-10-27T08:13:04.5273987Z Toolbar
+2026-10-27T08:13:04.5274150Z Show
+2026-10-27T08:13:04.5274319Z Source panel
+2026-10-27T08:13:04.5274527Z Assistant icon animation
+2026-10-27T08:13:04.5274763Z Assistant icon motion
+2026-10-27T08:13:04.5274999Z Your profile icon animation
+2026-10-27T08:13:04.5275252Z Your profile icon motion
+2026-10-27T08:13:04.5275480Z Welcome icon animation
+2026-10-27T08:13:04.5275697Z Welcome icon motion
+2026-10-27T08:13:04.5275907Z Send icon animation
+2026-10-27T08:13:04.5276100Z Send icon motion
+2026-10-27T08:13:04.5276314Z Attachment icon animation
+2026-10-27T08:13:04.5276550Z Attachment icon motion
+2026-10-27T08:13:04.5276786Z Temperature icon animation
+2026-10-27T08:13:04.5277024Z Temperature icon motion
+2026-10-27T08:13:04.5277258Z All nine answer prompts
+2026-10-27T08:13:04.5277474Z 20 draft settings
+2026-10-27T08:13:04.5277714Z Answer style and system prompt
+2026-10-27T08:13:04.5277949Z 7 draft settings
+2026-10-27T08:13:04.5278142Z Sources
+2026-10-27T08:13:04.5278315Z 5 draft settings
+2026-10-27T08:13:04.5278624Z My documents
+2026-10-27T08:13:04.5278730Z 
+2026-10-27T08:13:04.5278880Z Proposed source. Not tested or active.
+2026-10-27T08:13:04.5279060Z 
+2026-10-27T08:13:04.5279262Z Id
+2026-10-27T08:13:04.5279433Z Label
+2026-10-27T08:13:04.5279617Z Provider type
+2026-10-27T08:13:04.5279799Z Local files
+2026-10-27T08:13:04.5279994Z File or folder path
+2026-10-27T08:13:04.5280220Z Remove this proposed source
+2026-10-27T08:13:04.5280495Z Add proposed local-file source
+2026-10-27T08:13:04.5280788Z Advanced: edit all sources as JSON
+2026-10-27T08:13:04.5281058Z API recommendations
+2026-10-27T08:13:04.5281258Z 1 draft setting
+2026-10-27T08:13:04.5281448Z Model connection
+2026-10-27T08:13:04.5281636Z 8 draft settings
+2026-10-27T08:13:04.5281855Z Code drafts: not installed
+2026-10-27T08:13:04.5282071Z 6 draft settings
+2026-10-27T08:13:04.5282271Z Evidence retrieval
+2026-10-27T08:13:04.5282469Z 5 draft settings
+2026-10-27T08:13:04.5282671Z Conversation memory
+2026-10-27T08:13:04.5282864Z 4 draft settings
+2026-10-27T08:13:04.5283047Z Citations
+2026-10-27T08:13:04.5283230Z 2 draft settings
+2026-10-27T08:13:04.5283415Z Usage limits
+2026-10-27T08:13:04.5283595Z 4 draft settings
+2026-10-27T08:13:04.5283802Z Access and accounts
+2026-10-27T08:13:04.5283994Z 3 draft settings
+2026-10-27T08:13:04.5284178Z Allowed actions
+2026-10-27T08:13:04.5284363Z 2 draft settings
+2026-10-27T08:13:04.5284545Z Chat storage
+2026-10-27T08:13:04.5284722Z 1 draft setting
+2026-10-27T08:13:04.5284908Z Local server
+2026-10-27T08:13:04.5285086Z 3 draft settings
+2026-10-27T08:13:04.5285390Z REVIEW STATUS Validated. Review changes before saving.
+2026-10-27T08:13:04.5285807Z REVIEW STATUS Validated. Review changes before saving.
+2026-10-27T08:13:04.5286430Z SOURCE STATUS Proposed source added. Check its path and label, then validate before saving. App identity
+2026-10-27T08:13:04.5286900Z 9 draft settings
+2026-10-27T08:13:04.5287090Z Title
+2026-10-27T08:13:04.5287259Z Tagline
+2026-10-27T08:13:04.5287443Z More app settings
+2026-10-27T08:13:04.5287694Z Design, colors, fonts and layout
+2026-10-27T08:13:04.5287942Z 80 draft settings
+2026-10-27T08:13:04.5288128Z Theme
+2026-10-27T08:13:04.5288296Z Light theme
+2026-10-27T08:13:04.5288598Z Brand
+2026-10-27T08:13:04.5288893Z Accent
+2026-10-27T08:13:04.5289175Z Page background
+2026-10-27T08:13:04.5289370Z Surface
+2026-10-27T08:13:04.5289540Z Text color
+2026-10-27T08:13:04.5289722Z Secondary text
+2026-10-27T08:13:04.5289937Z Borders and dividers
+2026-10-27T08:13:04.5290134Z Sidebar
+2026-10-27T08:13:04.5290298Z Choose
+2026-10-27T08:13:04.5290484Z Assistant messages
+2026-10-27T08:13:04.5290680Z Your messages
+2026-10-27T08:13:04.5290863Z Error color
+2026-10-27T08:13:04.5291033Z Brand
+2026-10-27T08:13:04.5291204Z Accent
+2026-10-27T08:13:04.5291527Z Page background
+2026-10-27T08:13:04.5291710Z Surface
+2026-10-27T08:13:04.5291874Z Text color
+2026-10-27T08:13:04.5292054Z Secondary text
+2026-10-27T08:13:04.5292257Z Borders and dividers
+2026-10-27T08:13:04.5292451Z Sidebar
+2026-10-27T08:13:04.5292619Z Choose
+2026-10-27T08:13:04.5292801Z Assistant messages
+2026-10-27T08:13:04.5292992Z Your messages
+2026-10-27T08:13:04.5293175Z Error color
+2026-10-27T08:13:04.5293352Z Background style
+2026-10-27T08:13:04.5293538Z Solid
+2026-10-27T08:13:04.5293732Z Second background color
+2026-10-27T08:13:04.5293954Z Background angle
+2026-10-27T08:13:04.5294197Z degrees: 0 to 360 (whole numbers)
+2026-10-27T08:13:04.5294437Z Background image
+2026-10-27T08:13:04.5294620Z Pattern
+2026-10-27T08:13:04.5294787Z Dots
+2026-10-27T08:13:04.5294963Z Pattern opacity
+2026-10-27T08:13:04.5295210Z % opacity: 0 to 60 (whole numbers)
+2026-10-27T08:13:04.5295451Z Pattern size
+2026-10-27T08:13:04.5295701Z px pattern size: 8 to 80 (whole numbers)
+2026-10-27T08:13:04.5295961Z Pattern color
+2026-10-27T08:13:04.5296146Z Body font
+2026-10-27T08:13:04.5296250Z 
+2026-10-27T08:13:04.5296403Z The quick brown fox jumps over the lazy dog.
+2026-10-27T08:13:04.5296602Z 
+2026-10-27T08:13:04.5296683Z Aa
+2026-10-27T08:13:04.5296848Z Georgia
+2026-10-27T08:13:04.5297019Z Heading font
+2026-10-27T08:13:04.5297125Z 
+2026-10-27T08:13:04.5297279Z The quick brown fox jumps over the lazy dog.
+2026-10-27T08:13:04.5297470Z 
+2026-10-27T08:13:04.5297541Z Aa
+2026-10-27T08:13:04.5297819Z Georgia
+2026-10-27T08:13:04.5298019Z Custom font address
+2026-10-27T08:13:04.5298219Z Text size
+2026-10-27T08:13:04.5298595Z % text size: 80 to 140 (whole numbers)
+2026-10-27T08:13:04.5298854Z Line spacing
+2026-10-27T08:13:04.5299106Z % line spacing: 120 to 200 (whole numbers)
+2026-10-27T08:13:04.5299368Z Corner roundness
+2026-10-27T08:13:04.5299639Z % corner roundness: 0 to 160 (whole numbers)
+2026-10-27T08:13:04.5299896Z Spacing
+2026-10-27T08:13:04.5300066Z Cozy spacing
+2026-10-27T08:13:04.5300240Z Shadows
+2026-10-27T08:13:04.5300413Z Soft shadow
+2026-10-27T08:13:04.5300589Z Assistant icon
+2026-10-27T08:13:04.5300790Z Your profile icon
+2026-10-27T08:13:04.5300986Z Welcome icon
+2026-10-27T08:13:04.5301161Z Send icon
+2026-10-27T08:13:04.5301335Z Attachment icon
+2026-10-27T08:13:04.5301529Z Temperature icon
+2026-10-27T08:13:04.5301712Z Motion
+2026-10-27T08:13:04.5301875Z Subtle
+2026-10-27T08:13:04.5302044Z Entrance
+2026-10-27T08:13:04.5302210Z Fade
+2026-10-27T08:13:04.5302372Z Speed
+2026-10-27T08:13:04.5302614Z % motion speed: 40 to 250 (whole numbers)
+2026-10-27T08:13:04.5302870Z Lift on hover
+2026-10-27T08:13:04.5303047Z Sidebar
+2026-10-27T08:13:04.5303215Z Right sidebar
+2026-10-27T08:13:04.5303407Z Sidebar width
+2026-10-27T08:13:04.5303662Z px sidebar width: 200 to 460 (whole numbers)
+2026-10-27T08:13:04.5303921Z Chat width
+2026-10-27T08:13:04.5304096Z Wide chat width
+2026-10-27T08:13:04.5304285Z Profile pictures
+2026-10-27T08:13:04.5304494Z Hide profile pictures
+2026-10-27T08:13:04.5304700Z Message style
+2026-10-27T08:13:04.5304910Z Flat message style
+2026-10-27T08:13:04.5305095Z Logo
+2026-10-27T08:13:04.5305265Z Logo watermark
+2026-10-27T08:13:04.5305442Z Heading
+2026-10-27T08:13:04.5305615Z Introduction
+2026-10-27T08:13:04.5305804Z Starter questions
+2026-10-27T08:13:04.5306019Z Question placeholder
+2026-10-27T08:13:04.5306220Z Footer text
+2026-10-27T08:13:04.5306422Z Answer limitation note
+2026-10-27T08:13:04.5306630Z Question hint
+2026-10-27T08:13:04.5306822Z Chat list heading
+2026-10-27T08:13:04.5307035Z Your message alignment
+2026-10-27T08:13:04.5307230Z Right
+2026-10-27T08:13:04.5307404Z Composer
+2026-10-27T08:13:04.5307575Z Inline
+2026-10-27T08:13:04.5307741Z Toolbar
+2026-10-27T08:13:04.5307906Z Show
+2026-10-27T08:13:04.5308073Z Source panel
+2026-10-27T08:13:04.5308281Z Assistant icon animation
+2026-10-27T08:13:04.5308640Z Assistant icon motion
+2026-10-27T08:13:04.5308881Z Your profile icon animation
+2026-10-27T08:13:04.5309129Z Your profile icon motion
+2026-10-27T08:13:04.5309367Z Welcome icon animation
+2026-10-27T08:13:04.5309717Z Welcome icon motion
+2026-10-27T08:13:04.5309924Z Send icon animation
+2026-10-27T08:13:04.5310118Z Send icon motion
+2026-10-27T08:13:04.5310336Z Attachment icon animation
+2026-10-27T08:13:04.5310572Z Attachment icon motion
+2026-10-27T08:13:04.5310807Z Temperature icon animation
+2026-10-27T08:13:04.5311050Z Temperature icon motion
+2026-10-27T08:13:04.5311285Z All nine answer prompts
+2026-10-27T08:13:04.5311501Z 20 draft settings
+2026-10-27T08:13:04.5311750Z Answer style and system prompt
+2026-10-27T08:13:04.5311980Z 7 draft settings
+2026-10-27T08:13:04.5312166Z Sources
+2026-10-27T08:13:04.5312338Z 5 draft settings
+2026-10-27T08:13:04.5312522Z My documents
+2026-10-27T08:13:04.5312631Z 
+2026-10-27T08:13:04.5312778Z Proposed source. Not tested or active.
+2026-10-27T08:13:04.5312960Z 
+2026-10-27T08:13:04.5313038Z Id
+2026-10-27T08:13:04.5313201Z Label
+2026-10-27T08:13:04.5313372Z Provider type
+2026-10-27T08:13:04.5313555Z Local files
+2026-10-27T08:13:04.5313746Z File or folder path
+2026-10-27T08:13:04.5314004Z Remove this proposed source
+2026-10-27T08:13:04.5314285Z Add proposed local-file source
+2026-10-27T08:13:04.5314578Z Advanced: edit all sources as JSON
+2026-10-27T08:13:04.5314836Z API recommendations
+2026-10-27T08:13:04.5315029Z 1 draft setting
+2026-10-27T08:13:04.5315215Z Model connection
+2026-10-27T08:13:04.5315405Z 8 draft settings
+2026-10-27T08:13:04.5315619Z Code drafts: not installed
+2026-10-27T08:13:04.5315844Z 6 draft settings
+2026-10-27T08:13:04.5316159Z Evidence retrieval
+2026-10-27T08:13:04.5316361Z 5 draft settings
+2026-10-27T08:13:04.5316565Z Conversation memory
+2026-10-27T08:13:04.5316756Z 4 draft settings
+2026-10-27T08:13:04.5316936Z Citations
+2026-10-27T08:13:04.5317114Z 2 draft settings
+2026-10-27T08:13:04.5317304Z Usage limits
+2026-10-27T08:13:04.5317484Z 4 draft settings
+2026-10-27T08:13:04.5317682Z Access and accounts
+2026-10-27T08:13:04.5317876Z 3 draft settings
+2026-10-27T08:13:04.5318066Z Allowed actions
+2026-10-27T08:13:04.5318249Z 2 draft settings
+2026-10-27T08:13:04.5318553Z Chat storage
+2026-10-27T08:13:04.5318741Z 1 draft setting
+2026-10-27T08:13:04.5318921Z Local server
+2026-10-27T08:13:04.5319099Z 3 draft settings
+2026-10-27T08:13:04.5319396Z REVIEW STATUS Validated. Review changes before saving.
+2026-10-27T08:13:04.5319808Z REVIEW STATUS Validated. Review changes before saving.
+2026-10-27T08:13:04.5320860Z PASS360/320/1280 short-height header/footer, hex correction+invalid navigation, font enum, structured source add+edit, mark reviewed/reject/revalidate, close/reopen retention; no model/save calls
+2026-10-27T08:13:04.5321573Z 
+2026-10-27T08:14:00.7905569Z CASE settings_field_focus_inventory_motion_browser.cjs default PASS exit=0 seconds=56.3
+2026-10-27T08:14:00.7909210Z FIELDFOCUS 320 no-preference #sec-finish {"id":"","path":"actions.allow","cls":"","type":"text","tag":"INPUT","props":"background-color, box-shadow, border-color","time":"0.16s, 0.16s, 0.16s","outline":"solid","shadow":"rgba(0, 0, 0, 0) 0px 0px 0px 0px","focused":true}
+2026-10-27T08:14:00.7913441Z FIELDFOCUS 320 no-preference #sec-finish {"id":"","path":"actions.writes","cls":"","type":"checkbox","tag":"INPUT","props":"background-color, border-color","time":"0.16s, 0.16s","outline":"solid","shadow":"rgb(255, 253, 247) 0px 0px 0px 2px","focused":true}
+2026-10-27T08:14:00.7916452Z FIELDFOCUS 320 no-preference #sec-finish {"id":"","path":"memory.recent_turns","cls":"","type":"number","tag":"INPUT","props":"background-color, box-shadow, border-color","time":"0.16s, 0.16s, 0.16s","outline":"solid","shadow":"rgba(0, 0, 0, 0) 0px 0px 0px 0px","focused":true}
+2026-10-27T08:14:00.7918385Z FIELDFOCUS 320 no-preference #sec-portable {"id":"exportKeys","cls":"","type":"checkbox","tag":"INPUT","props":"background-color, border-color","time":"0.16s, 0.16s","outline":"solid","shadow":"rgb(255, 253, 247) 0px 0px 0px 2px","focused":true}
+2026-10-27T08:14:00.7920814Z FIELDFOCUS 320 no-preference #sec-model {"id":"temp","cls":"","type":"range","tag":"INPUT","props":"filter","time":"0.14s","outline":"solid","shadow":"rgb(255, 253, 247) 0px 0px 0px 2px","focused":true}
+2026-10-27T08:14:00.7924503Z FIELDFOCUS 320 no-preference #sec-model {"id":"outputLimit","cls":"","type":"number","tag":"INPUT","props":"background-color, box-shadow, border-color","time":"0.16s, 0.16s, 0.16s","outline":"solid","shadow":"rgba(0, 0, 0, 0.04) 0px 2px 8px 0px","focused":true}
+2026-10-27T08:14:00.7927685Z FIELDFOCUS 320 no-preference #sec-model {"id":"rewrite","cls":"","type":"checkbox","tag":"INPUT","props":"background-color","time":"0.18s","outline":"solid","shadow":"rgb(255, 253, 247) 0px 0px 0px 2px","focused":true}
+2026-10-27T08:14:00.7931095Z FIELDFOCUS 320 no-preference #sec-model {"id":"","path":"provider.api_key_env","cls":"","type":"text","tag":"INPUT","props":"background-color, box-shadow, border-color","time":"0.16s, 0.16s, 0.16s","outline":"solid","shadow":"rgba(0, 0, 0, 0) 0px 0px 0px 0px","focused":true}
+2026-10-27T08:14:00.7934211Z FIELDFOCUS 320 no-preference #sec-search {"id":"","cls":"","type":"checkbox","tag":"INPUT","props":"background-color","time":"0.18s","outline":"solid","shadow":"rgb(255, 253, 247) 0px 0px 0px 2px","focused":true}
+2026-10-27T08:14:00.7937522Z FIELDFOCUS 320 no-preference #sec-search {"id":"","path":"sources.0.id","cls":"","type":"text","tag":"INPUT","props":"background-color, box-shadow, border-color","time":"0.16s, 0.16s, 0.16s","outline":"solid","shadow":"rgba(0, 0, 0, 0) 0px 0px 0px 0px","focused":true}
+2026-10-27T08:14:00.7941438Z FIELDFOCUS 320 no-preference #sec-prompts {"id":"","path":"prompt.style.quick","cls":"","type":"textarea","tag":"TEXTAREA","props":"background-color, box-shadow, border-color","time":"0.16s, 0.16s, 0.16s","outline":"solid","shadow":"rgba(0, 0, 0, 0) 0px 0px 0px 0px","focused":true}
+2026-10-27T08:14:00.7944022Z FIELDFOCUS 320 no-preference #sec-prompts {"id":"on-question_check","cls":"","type":"checkbox","tag":"INPUT","props":"background-color","time":"0.18s","outline":"solid","shadow":"rgb(255, 253, 247) 0px 0px 0px 2px","focused":true}
+2026-10-27T08:14:00.7946661Z FIELDFOCUS 320 no-preference #sec-prompts {"id":"","cls":"","type":"text","tag":"INPUT","props":"background-color, border-color, box-shadow","time":"0.16s, 0.16s, 0.16s","outline":"solid","shadow":"rgba(0, 0, 0, 0.04) 0px 2px 8px 0px","focused":true}
+2026-10-27T08:14:00.7948759Z FIELDFOCUS 320 no-preference #sec-code {"id":"","cls":"","type":"textarea","tag":"TEXTAREA","props":"background-color, border-color, box-shadow","time":"0.16s, 0.16s, 0.16s","outline":"solid","shadow":"rgba(0, 0, 0, 0) 0px 0px 0px 0px","focused":true}
+2026-10-27T08:14:00.7950467Z FIELDFOCUS 320 no-preference #sec-code {"id":"","cls":"","type":"password","tag":"INPUT","props":"background-color, border-color, box-shadow","time":"0.16s, 0.16s, 0.16s","outline":"solid","shadow":"none","focused":true}
+2026-10-27T08:14:00.7952129Z FIELDFOCUS 320 no-preference #sec-code {"id":"","cls":"","type":"text","tag":"INPUT","props":"background-color, border-color, box-shadow","time":"0.16s, 0.16s, 0.16s","outline":"solid","shadow":"rgba(0, 0, 0, 0.04) 0px 2px 8px 0px","focused":true}
+2026-10-27T08:14:00.7953879Z FIELDFOCUS 320 no-preference #sec-code {"id":"","cls":"code","type":"textarea","tag":"TEXTAREA","props":"background-color, border-color, box-shadow","time":"0.16s, 0.16s, 0.16s","outline":"solid","shadow":"rgba(0, 0, 0, 0) 0px 0px 0px 0px","focused":true}
+2026-10-27T08:14:00.7955659Z FIELDFOCUS 320 no-preference #sec-presets {"id":"sname","cls":"","type":"text","tag":"INPUT","props":"background-color, box-shadow, border-color","time":"0.16s, 0.16s, 0.16s","outline":"solid","shadow":"rgba(0, 0, 0, 0.04) 0px 2px 8px 0px","focused":true}
+2026-10-27T08:14:00.7957249Z FIELDFOCUS 320 no-preference #sec-wording {"id":"f-logo-file","cls":"","type":"file","tag":"INPUT","props":"all","time":"0s","outline":"solid","shadow":"rgb(255, 253, 247) 0px 0px 0px 2px","focused":true}
+2026-10-27T08:14:00.7959180Z FIELDFOCUS 320 no-preference #sec-wording {"id":"f-logo_watermark","cls":"","type":"checkbox","tag":"INPUT","props":"background-color","time":"0.18s","outline":"solid","shadow":"rgb(255, 253, 247) 0px 0px 0px 2px","focused":true}
+2026-10-27T08:14:00.7961191Z FIELDFOCUS 320 no-preference #sec-wording {"id":"f-txt_title","cls":"","type":"text","tag":"INPUT","props":"background-color, box-shadow, border-color","time":"0.16s, 0.16s, 0.16s","outline":"solid","shadow":"rgba(0, 0, 0, 0.04) 0px 2px 8px 0px","focused":true}
+2026-10-27T08:14:00.7963065Z FIELDFOCUS 320 no-preference #sec-wording {"id":"f-txt_tagline","cls":"","type":"textarea","tag":"TEXTAREA","props":"background-color, box-shadow, border-color","time":"0.16s, 0.16s, 0.16s","outline":"solid","shadow":"rgba(0, 0, 0, 0) 0px 0px 0px 0px","focused":true}
+2026-10-27T08:14:00.7964813Z FIELDFOCUS 320 no-preference #sec-colors {"id":"f-brand","cls":"","type":"color","tag":"INPUT","props":"background-color, border-color","time":"0.16s, 0.16s","outline":"solid","shadow":"rgb(255, 253, 247) 0px 0px 0px 2px","focused":true}
+2026-10-27T08:14:00.7966521Z FIELDFOCUS 320 no-preference #sec-colors {"id":"","cls":"hex","type":"text","tag":"INPUT","props":"background-color, box-shadow, border-color","time":"0.16s, 0.16s, 0.16s","outline":"solid","shadow":"rgba(0, 0, 0, 0.04) 0px 2px 8px 0px","focused":true}
+2026-10-27T08:14:00.7968299Z FIELDFOCUS 320 no-preference #sec-fonts {"id":"f-custom_font","cls":"","type":"text","tag":"INPUT","props":"background-color, box-shadow, border-color","time":"0.16s, 0.16s, 0.16s","outline":"solid","shadow":"rgba(0, 0, 0, 0.04) 0px 2px 8px 0px","focused":true}
+2026-10-27T08:14:00.7970479Z FIELDFOCUS 320 no-preference #sec-fonts {"id":"f-font_size","cls":"","type":"range","tag":"INPUT","props":"filter","time":"0.14s","outline":"solid","shadow":"rgb(255, 253, 247) 0px 0px 0px 2px","focused":true}
+2026-10-27T08:14:00.7971998Z FIELDFOCUS 320 no-preference #sec-shape {"id":"f-radius","cls":"","type":"range","tag":"INPUT","props":"filter","time":"0.14s","outline":"solid","shadow":"rgb(255, 253, 247) 0px 0px 0px 2px","focused":true}
+2026-10-27T08:14:00.7973415Z FIELDFOCUS 320 no-preference #sec-motion {"id":"f-speed","cls":"","type":"range","tag":"INPUT","props":"filter","time":"0.14s","outline":"solid","shadow":"rgb(255, 253, 247) 0px 0px 0px 2px","focused":true}
+2026-10-27T08:14:00.7974917Z FIELDFOCUS 320 no-preference #sec-motion {"id":"f-hover_lift","cls":"","type":"checkbox","tag":"INPUT","props":"background-color","time":"0.18s","outline":"solid","shadow":"rgb(255, 253, 247) 0px 0px 0px 2px","focused":true}
+2026-10-27T08:14:00.7976430Z FIELDFOCUS 320 no-preference #sec-layout {"id":"f-sidebar_width","cls":"","type":"range","tag":"INPUT","props":"filter","time":"0.14s","outline":"solid","shadow":"rgb(255, 253, 247) 0px 0px 0px 2px","focused":true}
+2026-10-27T08:14:00.7978920Z FIELDFOCUS 320 no-preference #sec-layout {"id":"f-sources_panel","cls":"","type":"checkbox","tag":"INPUT","props":"background-color","time":"0.18s","outline":"solid","shadow":"rgb(255, 253, 247) 0px 0px 0px 2px","focused":true}
+2026-10-27T08:14:00.7980752Z FIELDFOCUS 320 no-preference #sec-budget {"id":"budgetQuestions","cls":"","type":"number","tag":"INPUT","props":"background-color, box-shadow, border-color","time":"0.16s, 0.16s, 0.16s","outline":"solid","shadow":"rgba(0, 0, 0, 0.04) 0px 2px 8px 0px","focused":true}
+2026-10-27T08:14:00.7982354Z EXTRAFIELDS 320 no-preference {"utility":{"props":"box-shadow, border-color","time":"0.16s, 0.16s"},"builder":{"props":"border-color, box-shadow","time":"0.18s, 0.18s","outline":"solid"}}
+2026-10-27T08:14:00.7983752Z FIELDFOCUS 320 reduce #sec-finish {"id":"","path":"actions.allow","cls":"","type":"text","tag":"INPUT","props":"none","time":"0s","outline":"solid","shadow":"rgb(255, 253, 247) 0px 0px 0px 2px","focused":true}
+2026-10-27T08:14:00.7985192Z FIELDFOCUS 320 reduce #sec-finish {"id":"","path":"actions.writes","cls":"","type":"checkbox","tag":"INPUT","props":"none","time":"0s","outline":"solid","shadow":"rgb(255, 253, 247) 0px 0px 0px 2px","focused":true}
+2026-10-27T08:14:00.7986694Z FIELDFOCUS 320 reduce #sec-finish {"id":"","path":"memory.recent_turns","cls":"","type":"number","tag":"INPUT","props":"none","time":"0s","outline":"solid","shadow":"rgb(255, 253, 247) 0px 0px 0px 2px","focused":true}
+2026-10-27T08:14:00.7988335Z FIELDFOCUS 320 reduce #sec-portable {"id":"exportKeys","cls":"","type":"checkbox","tag":"INPUT","props":"none","time":"0s","outline":"solid","shadow":"rgb(255, 253, 247) 0px 0px 0px 2px","focused":true}
+2026-10-27T08:14:00.7989985Z FIELDFOCUS 320 reduce #sec-model {"id":"temp","cls":"","type":"range","tag":"INPUT","props":"none","time":"0s","outline":"solid","shadow":"rgb(255, 253, 247) 0px 0px 0px 2px","focused":true}
+2026-10-27T08:14:00.7991297Z FIELDFOCUS 320 reduce #sec-model {"id":"outputLimit","cls":"","type":"number","tag":"INPUT","props":"none","time":"0s","outline":"solid","shadow":"rgb(255, 253, 247) 0px 0px 0px 2px","focused":true}
+2026-10-27T08:14:00.7992621Z FIELDFOCUS 320 reduce #sec-model {"id":"rewrite","cls":"","type":"checkbox","tag":"INPUT","props":"none","time":"0s","outline":"solid","shadow":"rgb(255, 253, 247) 0px 0px 0px 2px","focused":true}
+2026-10-27T08:14:00.7994030Z FIELDFOCUS 320 reduce #sec-model {"id":"","path":"provider.api_key_env","cls":"","type":"text","tag":"INPUT","props":"none","time":"0s","outline":"solid","shadow":"rgb(255, 253, 247) 0px 0px 0px 2px","focused":true}
+2026-10-27T08:14:00.7995392Z FIELDFOCUS 320 reduce #sec-search {"id":"","cls":"","type":"checkbox","tag":"INPUT","props":"none","time":"0s","outline":"solid","shadow":"rgb(255, 253, 247) 0px 0px 0px 2px","focused":true}
+2026-10-27T08:14:00.7996875Z FIELDFOCUS 320 reduce #sec-search {"id":"","path":"sources.0.id","cls":"","type":"text","tag":"INPUT","props":"none","time":"0s","outline":"solid","shadow":"rgb(255, 253, 247) 0px 0px 0px 2px","focused":true}
+2026-10-27T08:14:00.7998357Z FIELDFOCUS 320 reduce #sec-prompts {"id":"","path":"prompt.style.quick","cls":"","type":"textarea","tag":"TEXTAREA","props":"none","time":"0s","outline":"solid","shadow":"rgb(255, 253, 247) 0px 0px 0px 2px","focused":true}
+2026-10-27T08:14:00.8000745Z FIELDFOCUS 320 reduce #sec-prompts {"id":"on-question_check","cls":"","type":"checkbox","tag":"INPUT","props":"none","time":"0s","outline":"solid","shadow":"rgb(255, 253, 247) 0px 0px 0px 2px","focused":true}
+2026-10-27T08:14:00.8002101Z FIELDFOCUS 320 reduce #sec-prompts {"id":"","cls":"","type":"text","tag":"INPUT","props":"none","time":"0s","outline":"solid","shadow":"rgb(255, 253, 247) 0px 0px 0px 2px","focused":true}
+2026-10-27T08:14:00.8003381Z FIELDFOCUS 320 reduce #sec-code {"id":"","cls":"","type":"textarea","tag":"TEXTAREA","props":"none","time":"0s","outline":"solid","shadow":"rgb(255, 253, 247) 0px 0px 0px 2px","focused":true}
+2026-10-27T08:14:00.8004549Z FIELDFOCUS 320 reduce #sec-code {"id":"","cls":"","type":"password","tag":"INPUT","props":"none","time":"0s","outline":"solid","shadow":"none","focused":true}
+2026-10-27T08:14:00.8005702Z FIELDFOCUS 320 reduce #sec-code {"id":"","cls":"","type":"text","tag":"INPUT","props":"none","time":"0s","outline":"solid","shadow":"rgb(255, 253, 247) 0px 0px 0px 2px","focused":true}
+2026-10-27T08:14:00.8006974Z FIELDFOCUS 320 reduce #sec-code {"id":"","cls":"code","type":"textarea","tag":"TEXTAREA","props":"none","time":"0s","outline":"solid","shadow":"rgb(255, 253, 247) 0px 0px 0px 2px","focused":true}
+2026-10-27T08:14:00.8008273Z FIELDFOCUS 320 reduce #sec-presets {"id":"sname","cls":"","type":"text","tag":"INPUT","props":"none","time":"0s","outline":"solid","shadow":"rgb(255, 253, 247) 0px 0px 0px 2px","focused":true}
+2026-10-27T08:14:00.8010026Z FIELDFOCUS 320 reduce #sec-wording {"id":"f-logo-file","cls":"","type":"file","tag":"INPUT","props":"none","time":"0s","outline":"solid","shadow":"rgb(255, 253, 247) 0px 0px 0px 2px","focused":true}
+2026-10-27T08:14:00.8011452Z FIELDFOCUS 320 reduce #sec-wording {"id":"f-logo_watermark","cls":"","type":"checkbox","tag":"INPUT","props":"none","time":"0s","outline":"solid","shadow":"rgb(255, 253, 247) 0px 0px 0px 2px","focused":true}
+2026-10-27T08:14:00.8012841Z FIELDFOCUS 320 reduce #sec-wording {"id":"f-txt_title","cls":"","type":"text","tag":"INPUT","props":"none","time":"0s","outline":"solid","shadow":"rgb(255, 253, 247) 0px 0px 0px 2px","focused":true}
+2026-10-27T08:14:00.8014419Z FIELDFOCUS 320 reduce #sec-wording {"id":"f-txt_tagline","cls":"","type":"textarea","tag":"TEXTAREA","props":"none","time":"0s","outline":"solid","shadow":"rgb(255, 253, 247) 0px 0px 0px 2px","focused":true}
+2026-10-27T08:14:00.8015800Z FIELDFOCUS 320 reduce #sec-colors {"id":"f-brand","cls":"","type":"color","tag":"INPUT","props":"none","time":"0s","outline":"solid","shadow":"rgb(255, 253, 247) 0px 0px 0px 2px","focused":true}
+2026-10-27T08:14:00.8017093Z FIELDFOCUS 320 reduce #sec-colors {"id":"","cls":"hex","type":"text","tag":"INPUT","props":"none","time":"0s","outline":"solid","shadow":"rgb(255, 253, 247) 0px 0px 0px 2px","focused":true}
+2026-10-27T08:14:00.8018401Z FIELDFOCUS 320 reduce #sec-fonts {"id":"f-custom_font","cls":"","type":"text","tag":"INPUT","props":"none","time":"0s","outline":"solid","shadow":"rgb(255, 253, 247) 0px 0px 0px 2px","focused":true}
+2026-10-27T08:14:00.8020163Z FIELDFOCUS 320 reduce #sec-fonts {"id":"f-font_size","cls":"","type":"range","tag":"INPUT","props":"none","time":"0s","outline":"solid","shadow":"rgb(255, 253, 247) 0px 0px 0px 2px","focused":true}
+2026-10-27T08:14:00.8021507Z FIELDFOCUS 320 reduce #sec-shape {"id":"f-radius","cls":"","type":"range","tag":"INPUT","props":"none","time":"0s","outline":"solid","shadow":"rgb(255, 253, 247) 0px 0px 0px 2px","focused":true}
+2026-10-27T08:14:00.8022961Z FIELDFOCUS 320 reduce #sec-motion {"id":"f-speed","cls":"","type":"range","tag":"INPUT","props":"none","time":"0s","outline":"solid","shadow":"rgb(255, 253, 247) 0px 0px 0px 2px","focused":true}
+2026-10-27T08:14:00.8024322Z FIELDFOCUS 320 reduce #sec-motion {"id":"f-hover_lift","cls":"","type":"checkbox","tag":"INPUT","props":"none","time":"0s","outline":"solid","shadow":"rgb(255, 253, 247) 0px 0px 0px 2px","focused":true}
+2026-10-27T08:14:00.8025713Z FIELDFOCUS 320 reduce #sec-layout {"id":"f-sidebar_width","cls":"","type":"range","tag":"INPUT","props":"none","time":"0s","outline":"solid","shadow":"rgb(255, 253, 247) 0px 0px 0px 2px","focused":true}
+2026-10-27T08:14:00.8027118Z FIELDFOCUS 320 reduce #sec-layout {"id":"f-sources_panel","cls":"","type":"checkbox","tag":"INPUT","props":"none","time":"0s","outline":"solid","shadow":"rgb(255, 253, 247) 0px 0px 0px 2px","focused":true}
+2026-10-27T08:14:00.8028818Z FIELDFOCUS 320 reduce #sec-budget {"id":"budgetQuestions","cls":"","type":"number","tag":"INPUT","props":"none","time":"0s","outline":"solid","shadow":"rgb(255, 253, 247) 0px 0px 0px 2px","focused":true}
+2026-10-27T08:14:00.8029953Z EXTRAFIELDS 320 reduce {"utility":{"props":"none","time":"0s"},"builder":{"props":"none","time":"0s","outline":"solid"}}
+2026-10-27T08:14:00.8031469Z FIELDFOCUS 1280 no-preference #sec-finish {"id":"","path":"actions.allow","cls":"","type":"text","tag":"INPUT","props":"background-color, box-shadow, border-color","time":"0.16s, 0.16s, 0.16s","outline":"solid","shadow":"rgba(0, 0, 0, 0) 0px 0px 0px 0px","focused":true}
+2026-10-27T08:14:00.8033343Z FIELDFOCUS 1280 no-preference #sec-finish {"id":"","path":"actions.writes","cls":"","type":"checkbox","tag":"INPUT","props":"background-color, border-color","time":"0.16s, 0.16s","outline":"solid","shadow":"rgb(255, 253, 247) 0px 0px 0px 2px","focused":true}
+2026-10-27T08:14:00.8035266Z FIELDFOCUS 1280 no-preference #sec-finish {"id":"","path":"memory.recent_turns","cls":"","type":"number","tag":"INPUT","props":"background-color, box-shadow, border-color","time":"0.16s, 0.16s, 0.16s","outline":"solid","shadow":"rgba(0, 0, 0, 0) 0px 0px 0px 0px","focused":true}
+2026-10-27T08:14:00.8037109Z FIELDFOCUS 1280 no-preference #sec-portable {"id":"exportKeys","cls":"","type":"checkbox","tag":"INPUT","props":"background-color, border-color","time":"0.16s, 0.16s","outline":"solid","shadow":"rgb(255, 253, 247) 0px 0px 0px 2px","focused":true}
+2026-10-27T08:14:00.8038810Z FIELDFOCUS 1280 no-preference #sec-model {"id":"temp","cls":"","type":"range","tag":"INPUT","props":"filter","time":"0.14s","outline":"solid","shadow":"rgb(255, 253, 247) 0px 0px 0px 2px","focused":true}
+2026-10-27T08:14:00.8040894Z FIELDFOCUS 1280 no-preference #sec-model {"id":"outputLimit","cls":"","type":"number","tag":"INPUT","props":"background-color, box-shadow, border-color","time":"0.16s, 0.16s, 0.16s","outline":"solid","shadow":"rgba(0, 0, 0, 0.04) 0px 2px 8px 0px","focused":true}
+2026-10-27T08:14:00.8042617Z FIELDFOCUS 1280 no-preference #sec-model {"id":"rewrite","cls":"","type":"checkbox","tag":"INPUT","props":"background-color","time":"0.18s","outline":"solid","shadow":"rgb(255, 253, 247) 0px 0px 0px 2px","focused":true}
+2026-10-27T08:14:00.8044477Z FIELDFOCUS 1280 no-preference #sec-model {"id":"","path":"provider.api_key_env","cls":"","type":"text","tag":"INPUT","props":"background-color, box-shadow, border-color","time":"0.16s, 0.16s, 0.16s","outline":"solid","shadow":"rgba(0, 0, 0, 0) 0px 0px 0px 0px","focused":true}
+2026-10-27T08:14:00.8046177Z FIELDFOCUS 1280 no-preference #sec-search {"id":"","cls":"","type":"checkbox","tag":"INPUT","props":"background-color","time":"0.18s","outline":"solid","shadow":"rgb(255, 253, 247) 0px 0px 0px 2px","focused":true}
+2026-10-27T08:14:00.8047902Z FIELDFOCUS 1280 no-preference #sec-search {"id":"","path":"sources.0.id","cls":"","type":"text","tag":"INPUT","props":"background-color, box-shadow, border-color","time":"0.16s, 0.16s, 0.16s","outline":"solid","shadow":"rgba(0, 0, 0, 0) 0px 0px 0px 0px","focused":true}
+2026-10-27T08:14:00.8050346Z FIELDFOCUS 1280 no-preference #sec-prompts {"id":"","path":"prompt.style.quick","cls":"","type":"textarea","tag":"TEXTAREA","props":"background-color, box-shadow, border-color","time":"0.16s, 0.16s, 0.16s","outline":"solid","shadow":"rgba(0, 0, 0, 0) 0px 0px 0px 0px","focused":true}
+2026-10-27T08:14:00.8052187Z FIELDFOCUS 1280 no-preference #sec-prompts {"id":"on-question_check","cls":"","type":"checkbox","tag":"INPUT","props":"background-color","time":"0.18s","outline":"solid","shadow":"rgb(255, 253, 247) 0px 0px 0px 2px","focused":true}
+2026-10-27T08:14:00.8053908Z FIELDFOCUS 1280 no-preference #sec-prompts {"id":"","cls":"","type":"text","tag":"INPUT","props":"background-color, border-color, box-shadow","time":"0.16s, 0.16s, 0.16s","outline":"solid","shadow":"rgba(0, 0, 0, 0.04) 0px 2px 8px 0px","focused":true}
+2026-10-27T08:14:00.8055688Z FIELDFOCUS 1280 no-preference #sec-code {"id":"","cls":"","type":"textarea","tag":"TEXTAREA","props":"background-color, border-color, box-shadow","time":"0.16s, 0.16s, 0.16s","outline":"solid","shadow":"rgba(0, 0, 0, 0) 0px 0px 0px 0px","focused":true}
+2026-10-27T08:14:00.8057347Z FIELDFOCUS 1280 no-preference #sec-code {"id":"","cls":"","type":"password","tag":"INPUT","props":"background-color, border-color, box-shadow","time":"0.16s, 0.16s, 0.16s","outline":"solid","shadow":"none","focused":true}
+2026-10-27T08:14:00.8059177Z FIELDFOCUS 1280 no-preference #sec-code {"id":"","cls":"","type":"text","tag":"INPUT","props":"background-color, border-color, box-shadow","time":"0.16s, 0.16s, 0.16s","outline":"solid","shadow":"rgba(0, 0, 0, 0.04) 0px 2px 8px 0px","focused":true}
+2026-10-27T08:14:00.8060976Z FIELDFOCUS 1280 no-preference #sec-code {"id":"","cls":"code","type":"textarea","tag":"TEXTAREA","props":"background-color, border-color, box-shadow","time":"0.16s, 0.16s, 0.16s","outline":"solid","shadow":"rgba(0, 0, 0, 0) 0px 0px 0px 0px","focused":true}
+2026-10-27T08:14:00.8062818Z FIELDFOCUS 1280 no-preference #sec-presets {"id":"sname","cls":"","type":"text","tag":"INPUT","props":"background-color, box-shadow, border-color","time":"0.16s, 0.16s, 0.16s","outline":"solid","shadow":"rgba(0, 0, 0, 0.04) 0px 2px 8px 0px","focused":true}
+2026-10-27T08:14:00.8064423Z FIELDFOCUS 1280 no-preference #sec-wording {"id":"f-logo-file","cls":"","type":"file","tag":"INPUT","props":"all","time":"0s","outline":"solid","shadow":"rgb(255, 253, 247) 0px 0px 0px 2px","focused":true}
+2026-10-27T08:14:00.8065965Z FIELDFOCUS 1280 no-preference #sec-wording {"id":"f-logo_watermark","cls":"","type":"checkbox","tag":"INPUT","props":"background-color","time":"0.18s","outline":"solid","shadow":"rgb(255, 253, 247) 0px 0px 0px 2px","focused":true}
+2026-10-27T08:14:00.8067865Z FIELDFOCUS 1280 no-preference #sec-wording {"id":"f-txt_title","cls":"","type":"text","tag":"INPUT","props":"background-color, box-shadow, border-color","time":"0.16s, 0.16s, 0.16s","outline":"solid","shadow":"rgba(0, 0, 0, 0.04) 0px 2px 8px 0px","focused":true}
+2026-10-27T08:14:00.8070008Z FIELDFOCUS 1280 no-preference #sec-wording {"id":"f-txt_tagline","cls":"","type":"textarea","tag":"TEXTAREA","props":"background-color, box-shadow, border-color","time":"0.16s, 0.16s, 0.16s","outline":"solid","shadow":"rgba(0, 0, 0, 0) 0px 0px 0px 0px","focused":true}
+2026-10-27T08:14:00.8071795Z FIELDFOCUS 1280 no-preference #sec-colors {"id":"f-brand","cls":"","type":"color","tag":"INPUT","props":"background-color, border-color","time":"0.16s, 0.16s","outline":"solid","shadow":"rgb(255, 253, 247) 0px 0px 0px 2px","focused":true}
+2026-10-27T08:14:00.8073527Z FIELDFOCUS 1280 no-preference #sec-colors {"id":"","cls":"hex","type":"text","tag":"INPUT","props":"background-color, box-shadow, border-color","time":"0.16s, 0.16s, 0.16s","outline":"solid","shadow":"rgba(0, 0, 0, 0.04) 0px 2px 8px 0px","focused":true}
+2026-10-27T08:14:00.8075487Z FIELDFOCUS 1280 no-preference #sec-fonts {"id":"f-custom_font","cls":"","type":"text","tag":"INPUT","props":"background-color, box-shadow, border-color","time":"0.16s, 0.16s, 0.16s","outline":"solid","shadow":"rgba(0, 0, 0, 0.04) 0px 2px 8px 0px","focused":true}
+2026-10-27T08:14:00.8077139Z FIELDFOCUS 1280 no-preference #sec-fonts {"id":"f-font_size","cls":"","type":"range","tag":"INPUT","props":"filter","time":"0.14s","outline":"solid","shadow":"rgb(255, 253, 247) 0px 0px 0px 2px","focused":true}
+2026-10-27T08:14:00.8078721Z FIELDFOCUS 1280 no-preference #sec-shape {"id":"f-radius","cls":"","type":"range","tag":"INPUT","props":"filter","time":"0.14s","outline":"solid","shadow":"rgb(255, 253, 247) 0px 0px 0px 2px","focused":true}
+2026-10-27T08:14:00.8080441Z FIELDFOCUS 1280 no-preference #sec-motion {"id":"f-speed","cls":"","type":"range","tag":"INPUT","props":"filter","time":"0.14s","outline":"solid","shadow":"rgb(255, 253, 247) 0px 0px 0px 2px","focused":true}
+2026-10-27T08:14:00.8081974Z FIELDFOCUS 1280 no-preference #sec-motion {"id":"f-hover_lift","cls":"","type":"checkbox","tag":"INPUT","props":"background-color","time":"0.18s","outline":"solid","shadow":"rgb(255, 253, 247) 0px 0px 0px 2px","focused":true}
+2026-10-27T08:14:00.8084184Z FIELDFOCUS 1280 no-preference #sec-layout {"id":"f-sidebar_width","cls":"","type":"range","tag":"INPUT","props":"filter","time":"0.14s","outline":"solid","shadow":"rgb(255, 253, 247) 0px 0px 0px 2px","focused":true}
+2026-10-27T08:14:00.8086151Z FIELDFOCUS 1280 no-preference #sec-layout {"id":"f-sources_panel","cls":"","type":"checkbox","tag":"INPUT","props":"background-color","time":"0.18s","outline":"solid","shadow":"rgb(255, 253, 247) 0px 0px 0px 2px","focused":true}
+2026-10-27T08:14:00.8087997Z FIELDFOCUS 1280 no-preference #sec-budget {"id":"budgetQuestions","cls":"","type":"number","tag":"INPUT","props":"background-color, box-shadow, border-color","time":"0.16s, 0.16s, 0.16s","outline":"solid","shadow":"rgba(0, 0, 0, 0.04) 0px 2px 8px 0px","focused":true}
+2026-10-27T08:14:00.8089929Z EXTRAFIELDS 1280 no-preference {"utility":{"props":"box-shadow, border-color","time":"0.16s, 0.16s"},"builder":{"props":"border-color, box-shadow","time":"0.18s, 0.18s","outline":"solid"}}
+2026-10-27T08:14:00.8091360Z FIELDFOCUS 1280 reduce #sec-finish {"id":"","path":"actions.allow","cls":"","type":"text","tag":"INPUT","props":"none","time":"0s","outline":"solid","shadow":"rgb(255, 253, 247) 0px 0px 0px 2px","focused":true}
+2026-10-27T08:14:00.8092827Z FIELDFOCUS 1280 reduce #sec-finish {"id":"","path":"actions.writes","cls":"","type":"checkbox","tag":"INPUT","props":"none","time":"0s","outline":"solid","shadow":"rgb(255, 253, 247) 0px 0px 0px 2px","focused":true}
+2026-10-27T08:14:00.8094308Z FIELDFOCUS 1280 reduce #sec-finish {"id":"","path":"memory.recent_turns","cls":"","type":"number","tag":"INPUT","props":"none","time":"0s","outline":"solid","shadow":"rgb(255, 253, 247) 0px 0px 0px 2px","focused":true}
+2026-10-27T08:14:00.8095941Z FIELDFOCUS 1280 reduce #sec-portable {"id":"exportKeys","cls":"","type":"checkbox","tag":"INPUT","props":"none","time":"0s","outline":"solid","shadow":"rgb(255, 253, 247) 0px 0px 0px 2px","focused":true}
+2026-10-27T08:14:00.8097299Z FIELDFOCUS 1280 reduce #sec-model {"id":"temp","cls":"","type":"range","tag":"INPUT","props":"none","time":"0s","outline":"solid","shadow":"rgb(255, 253, 247) 0px 0px 0px 2px","focused":true}
+2026-10-27T08:14:00.8098781Z FIELDFOCUS 1280 reduce #sec-model {"id":"outputLimit","cls":"","type":"number","tag":"INPUT","props":"none","time":"0s","outline":"solid","shadow":"rgb(255, 253, 247) 0px 0px 0px 2px","focused":true}
+2026-10-27T08:14:00.8100287Z FIELDFOCUS 1280 reduce #sec-model {"id":"rewrite","cls":"","type":"checkbox","tag":"INPUT","props":"none","time":"0s","outline":"solid","shadow":"rgb(255, 253, 247) 0px 0px 0px 2px","focused":true}
+2026-10-27T08:14:00.8101977Z FIELDFOCUS 1280 reduce #sec-model {"id":"","path":"provider.api_key_env","cls":"","type":"text","tag":"INPUT","props":"none","time":"0s","outline":"solid","shadow":"rgb(255, 253, 247) 0px 0px 0px 2px","focused":true}
+2026-10-27T08:14:00.8103853Z FIELDFOCUS 1280 reduce #sec-search {"id":"","cls":"","type":"checkbox","tag":"INPUT","props":"none","time":"0s","outline":"solid","shadow":"rgb(255, 253, 247) 0px 0px 0px 2px","focused":true}
+2026-10-27T08:14:00.8105253Z FIELDFOCUS 1280 reduce #sec-search {"id":"","path":"sources.0.id","cls":"","type":"text","tag":"INPUT","props":"none","time":"0s","outline":"solid","shadow":"rgb(255, 253, 247) 0px 0px 0px 2px","focused":true}
+2026-10-27T08:14:00.8106751Z FIELDFOCUS 1280 reduce #sec-prompts {"id":"","path":"prompt.style.quick","cls":"","type":"textarea","tag":"TEXTAREA","props":"none","time":"0s","outline":"solid","shadow":"rgb(255, 253, 247) 0px 0px 0px 2px","focused":true}
+2026-10-27T08:14:00.8108250Z FIELDFOCUS 1280 reduce #sec-prompts {"id":"on-question_check","cls":"","type":"checkbox","tag":"INPUT","props":"none","time":"0s","outline":"solid","shadow":"rgb(255, 253, 247) 0px 0px 0px 2px","focused":true}
+2026-10-27T08:14:00.8109793Z FIELDFOCUS 1280 reduce #sec-prompts {"id":"","cls":"","type":"text","tag":"INPUT","props":"none","time":"0s","outline":"solid","shadow":"rgb(255, 253, 247) 0px 0px 0px 2px","focused":true}
+2026-10-27T08:14:00.8111087Z FIELDFOCUS 1280 reduce #sec-code {"id":"","cls":"","type":"textarea","tag":"TEXTAREA","props":"none","time":"0s","outline":"solid","shadow":"rgb(255, 253, 247) 0px 0px 0px 2px","focused":true}
+2026-10-27T08:14:00.8112280Z FIELDFOCUS 1280 reduce #sec-code {"id":"","cls":"","type":"password","tag":"INPUT","props":"none","time":"0s","outline":"solid","shadow":"none","focused":true}
+2026-10-27T08:14:00.8113454Z FIELDFOCUS 1280 reduce #sec-code {"id":"","cls":"","type":"text","tag":"INPUT","props":"none","time":"0s","outline":"solid","shadow":"rgb(255, 253, 247) 0px 0px 0px 2px","focused":true}
+2026-10-27T08:14:00.8114785Z FIELDFOCUS 1280 reduce #sec-code {"id":"","cls":"code","type":"textarea","tag":"TEXTAREA","props":"none","time":"0s","outline":"solid","shadow":"rgb(255, 253, 247) 0px 0px 0px 2px","focused":true}
+2026-10-27T08:14:00.8116109Z FIELDFOCUS 1280 reduce #sec-presets {"id":"sname","cls":"","type":"text","tag":"INPUT","props":"none","time":"0s","outline":"solid","shadow":"rgb(255, 253, 247) 0px 0px 0px 2px","focused":true}
+2026-10-27T08:14:00.8117460Z FIELDFOCUS 1280 reduce #sec-wording {"id":"f-logo-file","cls":"","type":"file","tag":"INPUT","props":"none","time":"0s","outline":"solid","shadow":"rgb(255, 253, 247) 0px 0px 0px 2px","focused":true}
+2026-10-27T08:14:00.8119173Z FIELDFOCUS 1280 reduce #sec-wording {"id":"f-logo_watermark","cls":"","type":"checkbox","tag":"INPUT","props":"none","time":"0s","outline":"solid","shadow":"rgb(255, 253, 247) 0px 0px 0px 2px","focused":true}
+2026-10-27T08:14:00.8120648Z FIELDFOCUS 1280 reduce #sec-wording {"id":"f-txt_title","cls":"","type":"text","tag":"INPUT","props":"none","time":"0s","outline":"solid","shadow":"rgb(255, 253, 247) 0px 0px 0px 2px","focused":true}
+2026-10-27T08:14:00.8122194Z FIELDFOCUS 1280 reduce #sec-wording {"id":"f-txt_tagline","cls":"","type":"textarea","tag":"TEXTAREA","props":"none","time":"0s","outline":"solid","shadow":"rgb(255, 253, 247) 0px 0px 0px 2px","focused":true}
+2026-10-27T08:14:00.8123584Z FIELDFOCUS 1280 reduce #sec-colors {"id":"f-brand","cls":"","type":"color","tag":"INPUT","props":"none","time":"0s","outline":"solid","shadow":"rgb(255, 253, 247) 0px 0px 0px 2px","focused":true}
+2026-10-27T08:14:00.8124902Z FIELDFOCUS 1280 reduce #sec-colors {"id":"","cls":"hex","type":"text","tag":"INPUT","props":"none","time":"0s","outline":"solid","shadow":"rgb(255, 253, 247) 0px 0px 0px 2px","focused":true}
+2026-10-27T08:14:00.8126220Z FIELDFOCUS 1280 reduce #sec-fonts {"id":"f-custom_font","cls":"","type":"text","tag":"INPUT","props":"none","time":"0s","outline":"solid","shadow":"rgb(255, 253, 247) 0px 0px 0px 2px","focused":true}
+2026-10-27T08:14:00.8127579Z FIELDFOCUS 1280 reduce #sec-fonts {"id":"f-font_size","cls":"","type":"range","tag":"INPUT","props":"none","time":"0s","outline":"solid","shadow":"rgb(255, 253, 247) 0px 0px 0px 2px","focused":true}
+2026-10-27T08:14:00.8129306Z FIELDFOCUS 1280 reduce #sec-shape {"id":"f-radius","cls":"","type":"range","tag":"INPUT","props":"none","time":"0s","outline":"solid","shadow":"rgb(255, 253, 247) 0px 0px 0px 2px","focused":true}
+2026-10-27T08:14:00.8141942Z FIELDFOCUS 1280 reduce #sec-motion {"id":"f-speed","cls":"","type":"range","tag":"INPUT","props":"none","time":"0s","outline":"solid","shadow":"rgb(255, 253, 247) 0px 0px 0px 2px","focused":true}
+2026-10-27T08:14:00.8143362Z FIELDFOCUS 1280 reduce #sec-motion {"id":"f-hover_lift","cls":"","type":"checkbox","tag":"INPUT","props":"none","time":"0s","outline":"solid","shadow":"rgb(255, 253, 247) 0px 0px 0px 2px","focused":true}
+2026-10-27T08:14:00.8144755Z FIELDFOCUS 1280 reduce #sec-layout {"id":"f-sidebar_width","cls":"","type":"range","tag":"INPUT","props":"none","time":"0s","outline":"solid","shadow":"rgb(255, 253, 247) 0px 0px 0px 2px","focused":true}
+2026-10-27T08:14:00.8146197Z FIELDFOCUS 1280 reduce #sec-layout {"id":"f-sources_panel","cls":"","type":"checkbox","tag":"INPUT","props":"none","time":"0s","outline":"solid","shadow":"rgb(255, 253, 247) 0px 0px 0px 2px","focused":true}
+2026-10-27T08:14:00.8147655Z FIELDFOCUS 1280 reduce #sec-budget {"id":"budgetQuestions","cls":"","type":"number","tag":"INPUT","props":"none","time":"0s","outline":"solid","shadow":"rgb(255, 253, 247) 0px 0px 0px 2px","focused":true}
+2026-10-27T08:14:00.8148931Z EXTRAFIELDS 1280 reduce {"utility":{"props":"none","time":"0s"},"builder":{"props":"none","time":"0s","outline":"solid"}}
+2026-10-27T08:14:00.8149490Z PASS nativefocus inventory 128
+2026-10-27T08:14:00.8149668Z 
+2026-10-27T08:14:21.4512002Z CASE settings_native_browser_zoom_caret_browser.cjs default PASS exit=0 seconds=20.7
+2026-10-27T08:14:21.4513725Z NATIVEZOOM { width: 1280, dpr: 1, scale: 1 } { width: 320, dpr: 4, scale: 1 }
+2026-10-27T08:14:21.4515419Z PASS actualChrome400 prompt/code60line nativeCtrlEnd/Home typeandTab caretinternalScrollfocusfullybelowsticky
+2026-10-27T08:14:21.4516465Z 
+2026-10-27T08:14:21.5166587Z CASE settings_search_rank.cjs default PASS exit=0 seconds=0.1
+2026-10-27T08:14:21.5167784Z PASS rank user phrases, typo, prompt stages, no match
+2026-10-27T08:14:21.5168334Z 
+2026-10-27T08:14:29.6954143Z CASE setup_status_failure_retry_browser.cjs default PASS exit=0 seconds=8.2
+2026-10-27T08:14:29.6956581Z PASS setupStatusfailure/retrySameJobNoSecondExecute/terminalfocus4matrix fixtureonly
+2026-10-27T08:14:29.6957893Z 
+2026-10-27T08:14:33.3337303Z CASE sidebar_profile_browser.cjs default PASS exit=0 seconds=3.6
+2026-10-27T08:14:33.3338210Z [
+2026-10-27T08:14:33.3338824Z   {
+2026-10-27T08:14:33.3339305Z     case: 'Nonempty topic tab renders',
+2026-10-27T08:14:33.3339864Z     status: 'PASS',
+2026-10-27T08:14:33.3340303Z     mode: 'ACTUAL browser UI'
+2026-10-27T08:14:33.3341154Z   },
+2026-10-27T08:14:33.3341783Z   { case: 'Topic rename', status: 'PASS', mode: 'ACTUAL browser UI' },
+2026-10-27T08:14:33.3342861Z   { case: 'Pin chat', status: 'PASS', mode: 'ACTUAL browser UI' },
+2026-10-27T08:14:33.3343927Z   { case: 'Unpin chat', status: 'PASS', mode: 'ACTUAL browser UI' },
+2026-10-27T08:14:33.3344702Z   {
+2026-10-27T08:14:33.3345087Z     case: 'Profile save/reload',
+2026-10-27T08:14:33.3345454Z     status: 'PASS',
+2026-10-27T08:14:33.3345788Z     mode: 'ACTUAL browser UI'
+2026-10-27T08:14:33.3346124Z   },
+2026-10-27T08:14:33.3346372Z   {
+2026-10-27T08:14:33.3346678Z     case: 'Profile remove/save',
+2026-10-27T08:14:33.3347036Z     status: 'PASS',
+2026-10-27T08:14:33.3347340Z     mode: 'ACTUAL browser UI'
+2026-10-27T08:14:33.3347662Z   }
+2026-10-27T08:14:33.3347900Z ]
+2026-10-27T08:14:33.3348041Z 
+2026-10-27T08:14:39.9522605Z CASE source_keys_browser.cjs default PASS exit=0 seconds=6.6
+2026-10-27T08:14:39.9523682Z PASS key fixture actual UI persistence no live calls
+2026-10-27T08:14:39.9524288Z 
+2026-10-27T08:14:45.2204158Z CASE source_scope_selected_long_motion_browser.cjs default PASS exit=0 seconds=5.3
+2026-10-27T08:14:45.2204862Z SCOPELOAD 320 no-preference 3
+2026-10-27T08:14:45.2205222Z SCOPELOAD 320 reduce 3
+2026-10-27T08:14:45.2205567Z SCOPELOAD 1280 no-preference 3
+2026-10-27T08:14:45.2205898Z SCOPELOAD 1280 reduce 3
+2026-10-27T08:14:45.2207561Z PASS actualscopeloadingpendingtext/busy/singleflighterrorrecovernamedDialogEscapefocus/documentkeyboardselectiondraftretained3201280normalReduce fixtureonly
+2026-10-27T08:14:45.2208902Z 
+2026-10-27T08:14:56.6607886Z CASE source_upload_states_browser.cjs default PASS exit=0 seconds=11.4
+2026-10-27T08:14:56.6610599Z PASS perfile queued/read/saving/success/error, serialfixturecalls,no fakepercentage,new batch clears stale results,busyguards,composer preserved,closefocus3203901280normalreduce
+2026-10-27T08:14:56.6611936Z 
+2026-10-27T08:15:19.8899436Z CASE theme_contrast_settle_browser.cjs default PASS exit=0 seconds=23.2
+2026-10-27T08:15:19.8900325Z CONTRAST 320 reduce dark [
+2026-10-27T08:15:19.8900822Z   {
+2026-10-27T08:15:19.8901171Z     node: 'H1',
+2026-10-27T08:15:19.8901567Z     color: '#8fd0b4',
+2026-10-27T08:15:19.8902040Z     background: '#121d19',
+2026-10-27T08:15:19.8902583Z     contrast: 9.748503685443241
+2026-10-27T08:15:19.8903057Z   },
+2026-10-27T08:15:19.8903435Z   {
+2026-10-27T08:15:19.8903803Z     node: 'P',
+2026-10-27T08:15:19.8904202Z     color: '#e8efe9',
+2026-10-27T08:15:19.8904585Z     background: '#1a2823',
+2026-10-27T08:15:19.8904933Z     contrast: 13.089073892375174
+2026-10-27T08:15:19.8905429Z   },
+2026-10-27T08:15:19.8905783Z   {
+2026-10-27T08:15:19.8906137Z     node: 'P',
+2026-10-27T08:15:19.8906467Z     color: '#e8efe9',
+2026-10-27T08:15:19.8906754Z     background: '#1a2823',
+2026-10-27T08:15:19.8907359Z     contrast: 13.089073892375174
+2026-10-27T08:15:19.8907775Z   }
+2026-10-27T08:15:19.8908108Z ]
+2026-10-27T08:15:19.8908781Z CONTRAST 320 reduce light [
+2026-10-27T08:15:19.8909241Z   {
+2026-10-27T08:15:19.8909525Z     node: 'H1',
+2026-10-27T08:15:19.8909940Z     color: '#173f35',
+2026-10-27T08:15:19.8910368Z     background: '#fffdf7',
+2026-10-27T08:15:19.8910852Z     contrast: 11.476930185049042
+2026-10-27T08:15:19.8911200Z   },
+2026-10-27T08:15:19.8911511Z   {
+2026-10-27T08:15:19.8911820Z     node: 'P',
+2026-10-27T08:15:19.8912184Z     color: '#17231f',
+2026-10-27T08:15:19.8912584Z     background: '#f2f3eb',
+2026-10-27T08:15:19.8913018Z     contrast: 14.495511448075684
+2026-10-27T08:15:19.8913409Z   },
+2026-10-27T08:15:19.8913737Z   {
+2026-10-27T08:15:19.8914039Z     node: 'P',
+2026-10-27T08:15:19.8914370Z     color: '#17231f',
+2026-10-27T08:15:19.8914772Z     background: '#f2f3eb',
+2026-10-27T08:15:19.8915265Z     contrast: 14.495511448075684
+2026-10-27T08:15:19.8915704Z   }
+2026-10-27T08:15:19.8916017Z ]
+2026-10-27T08:15:19.8916382Z CONTRAST 320 reduce dark [
+2026-10-27T08:15:19.8916751Z   {
+2026-10-27T08:15:19.8917073Z     node: 'H1',
+2026-10-27T08:15:19.8917442Z     color: '#8fd0b4',
+2026-10-27T08:15:19.8917836Z     background: '#121d19',
+2026-10-27T08:15:19.8919019Z     contrast: 9.748503685443241
+2026-10-27T08:15:19.8919454Z   },
+2026-10-27T08:15:19.8919772Z   {
+2026-10-27T08:15:19.8920100Z     node: 'P',
+2026-10-27T08:15:19.8920481Z     color: '#e8efe9',
+2026-10-27T08:15:19.8920887Z     background: '#1a2823',
+2026-10-27T08:15:19.8921388Z     contrast: 13.089073892375174
+2026-10-27T08:15:19.8921824Z   },
+2026-10-27T08:15:19.8922123Z   {
+2026-10-27T08:15:19.8922461Z     node: 'P',
+2026-10-27T08:15:19.8922838Z     color: '#e8efe9',
+2026-10-27T08:15:19.8923250Z     background: '#1a2823',
+2026-10-27T08:15:19.8923705Z     contrast: 13.089073892375174
+2026-10-27T08:15:19.8924116Z   }
+2026-10-27T08:15:19.8924398Z ]
+2026-10-27T08:15:19.8924795Z CONTRAST 320 no-preference dark [
+2026-10-27T08:15:19.8925137Z   {
+2026-10-27T08:15:19.8925314Z     node: 'H1',
+2026-10-27T08:15:19.8925524Z     color: '#8fd0b4',
+2026-10-27T08:15:19.8925742Z     background: '#121d19',
+2026-10-27T08:15:19.8925992Z     contrast: 9.748503685443241
+2026-10-27T08:15:19.8926224Z   },
+2026-10-27T08:15:19.8926389Z   {
+2026-10-27T08:15:19.8926675Z     node: 'P',
+2026-10-27T08:15:19.8927036Z     color: '#e8efe9',
+2026-10-27T08:15:19.8927401Z     background: '#1a2823',
+2026-10-27T08:15:19.8927843Z     contrast: 13.089073892375174
+2026-10-27T08:15:19.8928235Z   },
+2026-10-27T08:15:19.8928772Z   {
+2026-10-27T08:15:19.8929095Z     node: 'P',
+2026-10-27T08:15:19.8929423Z     color: '#e8efe9',
+2026-10-27T08:15:19.8930065Z     background: '#1a2823',
+2026-10-27T08:15:19.8930530Z     contrast: 13.089073892375174
+2026-10-27T08:15:19.8930760Z   }
+2026-10-27T08:15:19.8930929Z ]
+2026-10-27T08:15:19.8931161Z CONTRAST 320 no-preference light [
+2026-10-27T08:15:19.8931407Z   {
+2026-10-27T08:15:19.8931581Z     node: 'H1',
+2026-10-27T08:15:19.8931776Z     color: '#173f35',
+2026-10-27T08:15:19.8931987Z     background: '#fffdf7',
+2026-10-27T08:15:19.8932230Z     contrast: 11.476930185049042
+2026-10-27T08:15:19.8932448Z   },
+2026-10-27T08:15:19.8932611Z   {
+2026-10-27T08:15:19.8932795Z     node: 'P',
+2026-10-27T08:15:19.8932992Z     color: '#17231f',
+2026-10-27T08:15:19.8933205Z     background: '#f2f3eb',
+2026-10-27T08:15:19.8933450Z     contrast: 14.495511448075684
+2026-10-27T08:15:19.8933671Z   },
+2026-10-27T08:15:19.8933834Z   {
+2026-10-27T08:15:19.8934003Z     node: 'P',
+2026-10-27T08:15:19.8934200Z     color: '#17231f',
+2026-10-27T08:15:19.8934406Z     background: '#f2f3eb',
+2026-10-27T08:15:19.8934647Z     contrast: 14.495511448075684
+2026-10-27T08:15:19.8934874Z   }
+2026-10-27T08:15:19.8935038Z ]
+2026-10-27T08:15:19.8935264Z CONTRAST 320 no-preference dark [
+2026-10-27T08:15:19.8935505Z   {
+2026-10-27T08:15:19.8935673Z     node: 'H1',
+2026-10-27T08:15:19.8935870Z     color: '#8fd0b4',
+2026-10-27T08:15:19.8936079Z     background: '#121d19',
+2026-10-27T08:15:19.8936320Z     contrast: 9.748503685443241
+2026-10-27T08:15:19.8936538Z   },
+2026-10-27T08:15:19.8936704Z   {
+2026-10-27T08:15:19.8936872Z     node: 'P',
+2026-10-27T08:15:19.8937065Z     color: '#e8efe9',
+2026-10-27T08:15:19.8937277Z     background: '#1a2823',
+2026-10-27T08:15:19.8937518Z     contrast: 13.089073892375174
+2026-10-27T08:15:19.8937733Z   },
+2026-10-27T08:15:19.8937895Z   {
+2026-10-27T08:15:19.8938070Z     node: 'P',
+2026-10-27T08:15:19.8938255Z     color: '#e8efe9',
+2026-10-27T08:15:19.8938738Z     background: '#1a2823',
+2026-10-27T08:15:19.8939095Z     contrast: 13.089073892375174
+2026-10-27T08:15:19.8939315Z   }
+2026-10-27T08:15:19.8939477Z ]
+2026-10-27T08:15:19.8939685Z CONTRAST 1280 reduce dark [
+2026-10-27T08:15:19.8939899Z   {
+2026-10-27T08:15:19.8940065Z     node: 'H1',
+2026-10-27T08:15:19.8940257Z     color: '#8fd0b4',
+2026-10-27T08:15:19.8940462Z     background: '#121d19',
+2026-10-27T08:15:19.8940701Z     contrast: 9.748503685443241
+2026-10-27T08:15:19.8940924Z   },
+2026-10-27T08:15:19.8941083Z   {
+2026-10-27T08:15:19.8941249Z     node: 'P',
+2026-10-27T08:15:19.8941437Z     color: '#e8efe9',
+2026-10-27T08:15:19.8941645Z     background: '#1a2823',
+2026-10-27T08:15:19.8941881Z     contrast: 13.089073892375174
+2026-10-27T08:15:19.8942284Z   },
+2026-10-27T08:15:19.8942444Z   {
+2026-10-27T08:15:19.8942607Z     node: 'P',
+2026-10-27T08:15:19.8942795Z     color: '#e8efe9',
+2026-10-27T08:15:19.8942997Z     background: '#1a2823',
+2026-10-27T08:15:19.8943235Z     contrast: 13.089073892375174
+2026-10-27T08:15:19.8943450Z   }
+2026-10-27T08:15:19.8943616Z ]
+2026-10-27T08:15:19.8943811Z CONTRAST 1280 reduce light [
+2026-10-27T08:15:19.8944028Z   {
+2026-10-27T08:15:19.8944198Z     node: 'H1',
+2026-10-27T08:15:19.8944388Z     color: '#173f35',
+2026-10-27T08:15:19.8944588Z     background: '#fffdf7',
+2026-10-27T08:15:19.8944831Z     contrast: 11.476930185049042
+2026-10-27T08:15:19.8945045Z   },
+2026-10-27T08:15:19.8945206Z   {
+2026-10-27T08:15:19.8945373Z     node: 'P',
+2026-10-27T08:15:19.8945560Z     color: '#17231f',
+2026-10-27T08:15:19.8945765Z     background: '#f2f3eb',
+2026-10-27T08:15:19.8946009Z     contrast: 14.495511448075684
+2026-10-27T08:15:19.8946227Z   },
+2026-10-27T08:15:19.8946386Z   {
+2026-10-27T08:15:19.8946554Z     node: 'P',
+2026-10-27T08:15:19.8946744Z     color: '#17231f',
+2026-10-27T08:15:19.8946947Z     background: '#f2f3eb',
+2026-10-27T08:15:19.8947185Z     contrast: 14.495511448075684
+2026-10-27T08:15:19.8947404Z   }
+2026-10-27T08:15:19.8947561Z ]
+2026-10-27T08:15:19.8947756Z CONTRAST 1280 reduce dark [
+2026-10-27T08:15:19.8947967Z   {
+2026-10-27T08:15:19.8948131Z     node: 'H1',
+2026-10-27T08:15:19.8948317Z     color: '#8fd0b4',
+2026-10-27T08:15:19.8948962Z     background: '#121d19',
+2026-10-27T08:15:19.8949233Z     contrast: 9.748503685443241
+2026-10-27T08:15:19.8949449Z   },
+2026-10-27T08:15:19.8949610Z   {
+2026-10-27T08:15:19.8949776Z     node: 'P',
+2026-10-27T08:15:19.8949969Z     color: '#e8efe9',
+2026-10-27T08:15:19.8950173Z     background: '#1a2823',
+2026-10-27T08:15:19.8950440Z     contrast: 13.089073892375174
+2026-10-27T08:15:19.8950656Z   },
+2026-10-27T08:15:19.8950816Z   {
+2026-10-27T08:15:19.8950979Z     node: 'P',
+2026-10-27T08:15:19.8951164Z     color: '#e8efe9',
+2026-10-27T08:15:19.8951367Z     background: '#1a2823',
+2026-10-27T08:15:19.8951613Z     contrast: 13.089073892375174
+2026-10-27T08:15:19.8951828Z   }
+2026-10-27T08:15:19.8951986Z ]
+2026-10-27T08:15:19.8952212Z CONTRAST 1280 no-preference dark [
+2026-10-27T08:15:19.8952451Z   {
+2026-10-27T08:15:19.8952616Z     node: 'H1',
+2026-10-27T08:15:19.8952813Z     color: '#8fd0b4',
+2026-10-27T08:15:19.8953016Z     background: '#121d19',
+2026-10-27T08:15:19.8953258Z     contrast: 9.748503685443241
+2026-10-27T08:15:19.8953477Z   },
+2026-10-27T08:15:19.8953639Z   {
+2026-10-27T08:15:19.8953804Z     node: 'P',
+2026-10-27T08:15:19.8953992Z     color: '#e8efe9',
+2026-10-27T08:15:19.8954208Z     background: '#1a2823',
+2026-10-27T08:15:19.8954449Z     contrast: 13.089073892375174
+2026-10-27T08:15:19.8954664Z   },
+2026-10-27T08:15:19.8954824Z   {
+2026-10-27T08:15:19.8954988Z     node: 'P',
+2026-10-27T08:15:19.8955173Z     color: '#e8efe9',
+2026-10-27T08:15:19.8955382Z     background: '#1a2823',
+2026-10-27T08:15:19.8955625Z     contrast: 13.089073892375174
+2026-10-27T08:15:19.8955845Z   }
+2026-10-27T08:15:19.8956004Z ]
+2026-10-27T08:15:19.8956229Z CONTRAST 1280 no-preference light [
+2026-10-27T08:15:19.8956468Z   {
+2026-10-27T08:15:19.8956638Z     node: 'H1',
+2026-10-27T08:15:19.8956827Z     color: '#173f35',
+2026-10-27T08:15:19.8957035Z     background: '#fffdf7',
+2026-10-27T08:15:19.8957276Z     contrast: 11.476930185049042
+2026-10-27T08:15:19.8957492Z   },
+2026-10-27T08:15:19.8957650Z   {
+2026-10-27T08:15:19.8957822Z     node: 'P',
+2026-10-27T08:15:19.8958015Z     color: '#17231f',
+2026-10-27T08:15:19.8958221Z     background: '#f2f3eb',
+2026-10-27T08:15:19.8958699Z     contrast: 14.495511448075684
+2026-10-27T08:15:19.8958932Z   },
+2026-10-27T08:15:19.8959093Z   {
+2026-10-27T08:15:19.8959260Z     node: 'P',
+2026-10-27T08:15:19.8959453Z     color: '#17231f',
+2026-10-27T08:15:19.8959656Z     background: '#f2f3eb',
+2026-10-27T08:15:19.8959893Z     contrast: 14.495511448075684
+2026-10-27T08:15:19.8960107Z   }
+2026-10-27T08:15:19.8960264Z ]
+2026-10-27T08:15:19.8960636Z CONTRAST 1280 no-preference dark [
+2026-10-27T08:15:19.8960878Z   {
+2026-10-27T08:15:19.8961046Z     node: 'H1',
+2026-10-27T08:15:19.8961235Z     color: '#8fd0b4',
+2026-10-27T08:15:19.8961439Z     background: '#121d19',
+2026-10-27T08:15:19.8961674Z     contrast: 9.748503685443241
+2026-10-27T08:15:19.8961885Z   },
+2026-10-27T08:15:19.8962054Z   {
+2026-10-27T08:15:19.8962219Z     node: 'P',
+2026-10-27T08:15:19.8962422Z     color: '#e8efe9',
+2026-10-27T08:15:19.8962629Z     background: '#1a2823',
+2026-10-27T08:15:19.8962869Z     contrast: 13.089073892375174
+2026-10-27T08:15:19.8963085Z   },
+2026-10-27T08:15:19.8963246Z   {
+2026-10-27T08:15:19.8963416Z     node: 'P',
+2026-10-27T08:15:19.8963601Z     color: '#e8efe9',
+2026-10-27T08:15:19.8963804Z     background: '#1a2823',
+2026-10-27T08:15:19.8964038Z     contrast: 13.089073892375174
+2026-10-27T08:15:19.8964251Z   }
+2026-10-27T08:15:19.8964413Z ]
+2026-10-27T08:15:19.8964936Z PASS dark/light/darktextcontrastsettled>=4.45 no transientbackgroundused forcorrection3201280Reduce
+2026-10-27T08:15:19.8965386Z 
+2026-10-27T08:15:30.5714671Z CASE wording_structure_audit_browser.cjs default PASS exit=0 seconds=10.7
+2026-10-27T08:15:30.5715994Z PASS logo label/help inventory/defaultstatus/MorewordingMoreAppsplit3203901280
+2026-10-27T08:15:30.5716563Z 
+2026-10-27T08:15:37.7030656Z CASE workspace_questions_late_save_browser.cjs default PASS exit=0 seconds=7.1
+2026-10-27T08:15:37.7032861Z PASS oldquestionSave200503 noDeploystatuscontamination focusdraftkept3201280
+2026-10-27T08:15:37.7033808Z 
+2026-10-27T08:15:37.7043664Z {"executions": 40, "failed": 0, "passed": 40, "scripts": 40}
