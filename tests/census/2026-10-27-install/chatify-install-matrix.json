@@ -1,0 +1,362 @@
+[
+  {
+    "python": "3.10",
+    "pass": true,
+    "steps": [
+      {
+        "command": [
+          "uv",
+          "venv",
+          "/tmp/chatify-clean-fonts-3.10",
+          "--python",
+          "3.10"
+        ],
+        "exit": 0,
+        "stdout": "",
+        "stderr": "Using CPython 3.10.12 interpreter at: /usr/bin/python3.10\nCreating virtual environment at: chatify-clean-fonts-3.10\nActivate with: source chatify-clean-fonts-3.10/bin/activate\n"
+      },
+      {
+        "command": [
+          "uv",
+          "pip",
+          "install",
+          "--python",
+          "/tmp/chatify-clean-fonts-3.10/bin/python",
+          "/tmp/chatify-final-dist-fontfix/chatify_app-0.4.32-py3-none-any.whl"
+        ],
+        "exit": 0,
+        "stdout": "",
+        "stderr": "Using Python 3.10.12 environment at: chatify-clean-fonts-3.10\nResolved 2 packages in 3ms\nPrepared 1 package in 67ms\nInstalled 2 packages in 4ms\n + chatify-app==0.4.32 (from file:///tmp/chatify-final-dist-fontfix/chatify_app-0.4.32-py3-none-any.whl)\n + pyyaml==6.0.3\n"
+      },
+      {
+        "command": [
+          "/tmp/chatify-clean-fonts-3.10/bin/chatify",
+          "--version"
+        ],
+        "exit": 0,
+        "stdout": "0.4.32\n",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "/tmp/chatify-clean-fonts-3.10/bin/chatify",
+          "init",
+          "/tmp/chatify-smoke-fonts-3.10"
+        ],
+        "exit": 0,
+        "stdout": "Created /tmp/chatify-smoke-fonts-3.10/. Next: chatify run /tmp/chatify-smoke-fonts-3.10/app.yaml\n",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "/tmp/chatify-clean-fonts-3.10/bin/chatify",
+          "validate",
+          "/tmp/chatify-smoke-fonts-3.10/app.yaml"
+        ],
+        "exit": 0,
+        "stdout": "OK: Chatify, 1 source(s), provider mock\n",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "/tmp/chatify-clean-fonts-3.10/bin/chatify",
+          "ask",
+          "/tmp/chatify-smoke-fonts-3.10/app.yaml",
+          "What is Chatify?",
+          "--json"
+        ],
+        "exit": 0,
+        "stdout": "{\n  \"question\": \"What is Chatify?\",\n  \"standalone\": \"What is Chatify?\",\n  \"answer\": \"Chatify turns one YAML file into a chat application. [1]\",\n  \"evidence\": [\n    {\n      \"id\": \"about.md#0\",\n      \"title\": \"What is Chatify\",\n      \"text\": \"Chatify turns one YAML file into a chat application. You describe the sources of evidence, the model provider and the look of the app. The engine retrieves evidence, writes an answer that cites it, and keeps the earlier questions of the conversation in mind.\",\n      \"url\": \"\",\n      \"authors\": [],\n      \"year\": \"\",\n      \"venue\": \"\",\n      \"source\": \"docs\",\n      \"score\": 1.1469391642657107,\n      \"document\": \"about.md\",\n      \"version\": \"1195e9dfd021870d743641e85993fdc69999067d0aca2a0063c8c6e651357c12\",\n      \"section\": \"What is Chatify\",\n      \"page\": null,\n      \"ocr\": false,\n      \"n\": 1\n    }\n  ],\n  \"ledger\": [\n    {\n      \"uncited\": false,\n      \"weak_cites\": [],\n      \"claim\": \"Chatify turns one YAML file into a chat application.\",\n      \"overlap\": 1.0,\n      \"cites\": [\n        1\n      ],\n      \"bad_numbers\": [],\n      \"invalid\": [],\n      \"supported\": true,\n      \"vague_regain\": false,\n      \"animal_unmarked\": false,\n      \"unhedged_lead\": false\n    }\n  ]\n}\n",
+        "stderr": ""
+      }
+    ]
+  },
+  {
+    "python": "3.11",
+    "pass": true,
+    "steps": [
+      {
+        "command": [
+          "uv",
+          "venv",
+          "/tmp/chatify-clean-fonts-3.11",
+          "--python",
+          "3.11"
+        ],
+        "exit": 0,
+        "stdout": "",
+        "stderr": "Using CPython 3.11.17\nCreating virtual environment at: chatify-clean-fonts-3.11\nActivate with: source chatify-clean-fonts-3.11/bin/activate\n"
+      },
+      {
+        "command": [
+          "uv",
+          "pip",
+          "install",
+          "--python",
+          "/tmp/chatify-clean-fonts-3.11/bin/python",
+          "/tmp/chatify-final-dist-fontfix/chatify_app-0.4.32-py3-none-any.whl"
+        ],
+        "exit": 0,
+        "stdout": "",
+        "stderr": "Using Python 3.11.17 environment at: chatify-clean-fonts-3.11\nResolved 2 packages in 45ms\nPrepared 1 package in 49ms\nInstalled 2 packages in 5ms\n + chatify-app==0.4.32 (from file:///tmp/chatify-final-dist-fontfix/chatify_app-0.4.32-py3-none-any.whl)\n + pyyaml==6.0.3\n"
+      },
+      {
+        "command": [
+          "/tmp/chatify-clean-fonts-3.11/bin/chatify",
+          "--version"
+        ],
+        "exit": 0,
+        "stdout": "0.4.32\n",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "/tmp/chatify-clean-fonts-3.11/bin/chatify",
+          "init",
+          "/tmp/chatify-smoke-fonts-3.11"
+        ],
+        "exit": 0,
+        "stdout": "Created /tmp/chatify-smoke-fonts-3.11/. Next: chatify run /tmp/chatify-smoke-fonts-3.11/app.yaml\n",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "/tmp/chatify-clean-fonts-3.11/bin/chatify",
+          "validate",
+          "/tmp/chatify-smoke-fonts-3.11/app.yaml"
+        ],
+        "exit": 0,
+        "stdout": "OK: Chatify, 1 source(s), provider mock\n",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "/tmp/chatify-clean-fonts-3.11/bin/chatify",
+          "ask",
+          "/tmp/chatify-smoke-fonts-3.11/app.yaml",
+          "What is Chatify?",
+          "--json"
+        ],
+        "exit": 0,
+        "stdout": "{\n  \"question\": \"What is Chatify?\",\n  \"standalone\": \"What is Chatify?\",\n  \"answer\": \"Chatify turns one YAML file into a chat application. [1]\",\n  \"evidence\": [\n    {\n      \"id\": \"about.md#0\",\n      \"title\": \"What is Chatify\",\n      \"text\": \"Chatify turns one YAML file into a chat application. You describe the sources of evidence, the model provider and the look of the app. The engine retrieves evidence, writes an answer that cites it, and keeps the earlier questions of the conversation in mind.\",\n      \"url\": \"\",\n      \"authors\": [],\n      \"year\": \"\",\n      \"venue\": \"\",\n      \"source\": \"docs\",\n      \"score\": 1.1469391642657107,\n      \"document\": \"about.md\",\n      \"version\": \"1195e9dfd021870d743641e85993fdc69999067d0aca2a0063c8c6e651357c12\",\n      \"section\": \"What is Chatify\",\n      \"page\": null,\n      \"ocr\": false,\n      \"n\": 1\n    }\n  ],\n  \"ledger\": [\n    {\n      \"uncited\": false,\n      \"weak_cites\": [],\n      \"claim\": \"Chatify turns one YAML file into a chat application.\",\n      \"overlap\": 1.0,\n      \"cites\": [\n        1\n      ],\n      \"bad_numbers\": [],\n      \"invalid\": [],\n      \"supported\": true,\n      \"vague_regain\": false,\n      \"animal_unmarked\": false,\n      \"unhedged_lead\": false\n    }\n  ]\n}\n",
+        "stderr": ""
+      }
+    ]
+  },
+  {
+    "python": "3.12",
+    "pass": true,
+    "steps": [
+      {
+        "command": [
+          "uv",
+          "venv",
+          "/tmp/chatify-clean-fonts-3.12",
+          "--python",
+          "3.12"
+        ],
+        "exit": 0,
+        "stdout": "",
+        "stderr": "Using CPython 3.12.15\nCreating virtual environment at: chatify-clean-fonts-3.12\nActivate with: source chatify-clean-fonts-3.12/bin/activate\n"
+      },
+      {
+        "command": [
+          "uv",
+          "pip",
+          "install",
+          "--python",
+          "/tmp/chatify-clean-fonts-3.12/bin/python",
+          "/tmp/chatify-final-dist-fontfix/chatify_app-0.4.32-py3-none-any.whl"
+        ],
+        "exit": 0,
+        "stdout": "",
+        "stderr": "Using Python 3.12.15 environment at: chatify-clean-fonts-3.12\nResolved 2 packages in 51ms\nPrepared 1 package in 58ms\nInstalled 2 packages in 9ms\n + chatify-app==0.4.32 (from file:///tmp/chatify-final-dist-fontfix/chatify_app-0.4.32-py3-none-any.whl)\n + pyyaml==6.0.3\n"
+      },
+      {
+        "command": [
+          "/tmp/chatify-clean-fonts-3.12/bin/chatify",
+          "--version"
+        ],
+        "exit": 0,
+        "stdout": "0.4.32\n",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "/tmp/chatify-clean-fonts-3.12/bin/chatify",
+          "init",
+          "/tmp/chatify-smoke-fonts-3.12"
+        ],
+        "exit": 0,
+        "stdout": "Created /tmp/chatify-smoke-fonts-3.12/. Next: chatify run /tmp/chatify-smoke-fonts-3.12/app.yaml\n",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "/tmp/chatify-clean-fonts-3.12/bin/chatify",
+          "validate",
+          "/tmp/chatify-smoke-fonts-3.12/app.yaml"
+        ],
+        "exit": 0,
+        "stdout": "OK: Chatify, 1 source(s), provider mock\n",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "/tmp/chatify-clean-fonts-3.12/bin/chatify",
+          "ask",
+          "/tmp/chatify-smoke-fonts-3.12/app.yaml",
+          "What is Chatify?",
+          "--json"
+        ],
+        "exit": 0,
+        "stdout": "{\n  \"question\": \"What is Chatify?\",\n  \"standalone\": \"What is Chatify?\",\n  \"answer\": \"Chatify turns one YAML file into a chat application. [1]\",\n  \"evidence\": [\n    {\n      \"id\": \"about.md#0\",\n      \"title\": \"What is Chatify\",\n      \"text\": \"Chatify turns one YAML file into a chat application. You describe the sources of evidence, the model provider and the look of the app. The engine retrieves evidence, writes an answer that cites it, and keeps the earlier questions of the conversation in mind.\",\n      \"url\": \"\",\n      \"authors\": [],\n      \"year\": \"\",\n      \"venue\": \"\",\n      \"source\": \"docs\",\n      \"score\": 1.1469391642657107,\n      \"document\": \"about.md\",\n      \"version\": \"1195e9dfd021870d743641e85993fdc69999067d0aca2a0063c8c6e651357c12\",\n      \"section\": \"What is Chatify\",\n      \"page\": null,\n      \"ocr\": false,\n      \"n\": 1\n    }\n  ],\n  \"ledger\": [\n    {\n      \"uncited\": false,\n      \"weak_cites\": [],\n      \"claim\": \"Chatify turns one YAML file into a chat application.\",\n      \"overlap\": 1.0,\n      \"cites\": [\n        1\n      ],\n      \"bad_numbers\": [],\n      \"invalid\": [],\n      \"supported\": true,\n      \"vague_regain\": false,\n      \"animal_unmarked\": false,\n      \"unhedged_lead\": false\n    }\n  ]\n}\n",
+        "stderr": ""
+      }
+    ]
+  },
+  {
+    "python": "3.13",
+    "pass": true,
+    "steps": [
+      {
+        "command": [
+          "uv",
+          "venv",
+          "/tmp/chatify-clean-fonts-3.13",
+          "--python",
+          "3.13"
+        ],
+        "exit": 0,
+        "stdout": "",
+        "stderr": "Using CPython 3.13.17\nCreating virtual environment at: chatify-clean-fonts-3.13\nActivate with: source chatify-clean-fonts-3.13/bin/activate\n"
+      },
+      {
+        "command": [
+          "uv",
+          "pip",
+          "install",
+          "--python",
+          "/tmp/chatify-clean-fonts-3.13/bin/python",
+          "/tmp/chatify-final-dist-fontfix/chatify_app-0.4.32-py3-none-any.whl"
+        ],
+        "exit": 0,
+        "stdout": "",
+        "stderr": "Using Python 3.13.17 environment at: chatify-clean-fonts-3.13\nResolved 2 packages in 135ms\nPrepared 1 package in 365ms\nInstalled 2 packages in 5ms\n + chatify-app==0.4.32 (from file:///tmp/chatify-final-dist-fontfix/chatify_app-0.4.32-py3-none-any.whl)\n + pyyaml==6.0.3\n"
+      },
+      {
+        "command": [
+          "/tmp/chatify-clean-fonts-3.13/bin/chatify",
+          "--version"
+        ],
+        "exit": 0,
+        "stdout": "0.4.32\n",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "/tmp/chatify-clean-fonts-3.13/bin/chatify",
+          "init",
+          "/tmp/chatify-smoke-fonts-3.13"
+        ],
+        "exit": 0,
+        "stdout": "Created /tmp/chatify-smoke-fonts-3.13/. Next: chatify run /tmp/chatify-smoke-fonts-3.13/app.yaml\n",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "/tmp/chatify-clean-fonts-3.13/bin/chatify",
+          "validate",
+          "/tmp/chatify-smoke-fonts-3.13/app.yaml"
+        ],
+        "exit": 0,
+        "stdout": "OK: Chatify, 1 source(s), provider mock\n",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "/tmp/chatify-clean-fonts-3.13/bin/chatify",
+          "ask",
+          "/tmp/chatify-smoke-fonts-3.13/app.yaml",
+          "What is Chatify?",
+          "--json"
+        ],
+        "exit": 0,
+        "stdout": "{\n  \"question\": \"What is Chatify?\",\n  \"standalone\": \"What is Chatify?\",\n  \"answer\": \"Chatify turns one YAML file into a chat application. [1]\",\n  \"evidence\": [\n    {\n      \"id\": \"about.md#0\",\n      \"title\": \"What is Chatify\",\n      \"text\": \"Chatify turns one YAML file into a chat application. You describe the sources of evidence, the model provider and the look of the app. The engine retrieves evidence, writes an answer that cites it, and keeps the earlier questions of the conversation in mind.\",\n      \"url\": \"\",\n      \"authors\": [],\n      \"year\": \"\",\n      \"venue\": \"\",\n      \"source\": \"docs\",\n      \"score\": 1.1469391642657107,\n      \"document\": \"about.md\",\n      \"version\": \"1195e9dfd021870d743641e85993fdc69999067d0aca2a0063c8c6e651357c12\",\n      \"section\": \"What is Chatify\",\n      \"page\": null,\n      \"ocr\": false,\n      \"n\": 1\n    }\n  ],\n  \"ledger\": [\n    {\n      \"uncited\": false,\n      \"weak_cites\": [],\n      \"claim\": \"Chatify turns one YAML file into a chat application.\",\n      \"overlap\": 1.0,\n      \"cites\": [\n        1\n      ],\n      \"bad_numbers\": [],\n      \"invalid\": [],\n      \"supported\": true,\n      \"vague_regain\": false,\n      \"animal_unmarked\": false,\n      \"unhedged_lead\": false\n    }\n  ]\n}\n",
+        "stderr": ""
+      }
+    ]
+  },
+  {
+    "python": "3.14",
+    "pass": true,
+    "steps": [
+      {
+        "command": [
+          "uv",
+          "venv",
+          "/tmp/chatify-clean-fonts-3.14",
+          "--python",
+          "3.14"
+        ],
+        "exit": 0,
+        "stdout": "",
+        "stderr": "Using CPython 3.14.9\nCreating virtual environment at: chatify-clean-fonts-3.14\nActivate with: source chatify-clean-fonts-3.14/bin/activate\n"
+      },
+      {
+        "command": [
+          "uv",
+          "pip",
+          "install",
+          "--python",
+          "/tmp/chatify-clean-fonts-3.14/bin/python",
+          "/tmp/chatify-final-dist-fontfix/chatify_app-0.4.32-py3-none-any.whl"
+        ],
+        "exit": 0,
+        "stdout": "",
+        "stderr": "Using Python 3.14.9 environment at: chatify-clean-fonts-3.14\nResolved 2 packages in 30ms\nPrepared 1 package in 66ms\nInstalled 2 packages in 8ms\n + chatify-app==0.4.32 (from file:///tmp/chatify-final-dist-fontfix/chatify_app-0.4.32-py3-none-any.whl)\n + pyyaml==6.0.3\n"
+      },
+      {
+        "command": [
+          "/tmp/chatify-clean-fonts-3.14/bin/chatify",
+          "--version"
+        ],
+        "exit": 0,
+        "stdout": "0.4.32\n",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "/tmp/chatify-clean-fonts-3.14/bin/chatify",
+          "init",
+          "/tmp/chatify-smoke-fonts-3.14"
+        ],
+        "exit": 0,
+        "stdout": "Created /tmp/chatify-smoke-fonts-3.14/. Next: chatify run /tmp/chatify-smoke-fonts-3.14/app.yaml\n",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "/tmp/chatify-clean-fonts-3.14/bin/chatify",
+          "validate",
+          "/tmp/chatify-smoke-fonts-3.14/app.yaml"
+        ],
+        "exit": 0,
+        "stdout": "OK: Chatify, 1 source(s), provider mock\n",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "/tmp/chatify-clean-fonts-3.14/bin/chatify",
+          "ask",
+          "/tmp/chatify-smoke-fonts-3.14/app.yaml",
+          "What is Chatify?",
+          "--json"
+        ],
+        "exit": 0,
+        "stdout": "{\n  \"question\": \"What is Chatify?\",\n  \"standalone\": \"What is Chatify?\",\n  \"answer\": \"Chatify turns one YAML file into a chat application. [1]\",\n  \"evidence\": [\n    {\n      \"id\": \"about.md#0\",\n      \"title\": \"What is Chatify\",\n      \"text\": \"Chatify turns one YAML file into a chat application. You describe the sources of evidence, the model provider and the look of the app. The engine retrieves evidence, writes an answer that cites it, and keeps the earlier questions of the conversation in mind.\",\n      \"url\": \"\",\n      \"authors\": [],\n      \"year\": \"\",\n      \"venue\": \"\",\n      \"source\": \"docs\",\n      \"score\": 1.1469391642657107,\n      \"document\": \"about.md\",\n      \"version\": \"1195e9dfd021870d743641e85993fdc69999067d0aca2a0063c8c6e651357c12\",\n      \"section\": \"What is Chatify\",\n      \"page\": null,\n      \"ocr\": false,\n      \"n\": 1\n    }\n  ],\n  \"ledger\": [\n    {\n      \"uncited\": false,\n      \"weak_cites\": [],\n      \"claim\": \"Chatify turns one YAML file into a chat application.\",\n      \"overlap\": 1.0,\n      \"cites\": [\n        1\n      ],\n      \"bad_numbers\": [],\n      \"invalid\": [],\n      \"supported\": true,\n      \"vague_regain\": false,\n      \"animal_unmarked\": false,\n      \"unhedged_lead\": false\n    }\n  ]\n}\n",
+        "stderr": ""
+      }
+    ]
+  }
+]
