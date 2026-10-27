@@ -40,7 +40,8 @@ jobs:
         run: |
           set -euo pipefail
           mkdir -p "$RUNNER_TEMP/runtime-fixture"
-          python -m chatify init "$RUNNER_TEMP/runtime-fixture/app"
+          mkdir -p "$RUNNER_TEMP/runtime-fixture/app"
+          cp tests/fixtures/builder-trip.yaml "$RUNNER_TEMP/runtime-fixture/app/app.yaml"
           python -m chatify run "$RUNNER_TEMP/runtime-fixture/app/app.yaml" --host 127.0.0.1 --port 8765 --no-browser > "$RUNNER_TEMP/runtime-server.log" 2>&1 &
           server_pid=$!
           trap 'kill "$server_pid" 2>/dev/null || true' EXIT
