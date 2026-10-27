@@ -1,0 +1,1231 @@
+2026-10-27T16:22:26.2225184Z Current runner version: '2.338.0'
+2026-10-27T16:22:26.2251642Z ##[group]Runner Image Provisioner
+2026-10-27T16:22:26.2252530Z Hosted Compute Agent
+2026-10-27T16:22:26.2253240Z Version: 20261021.618
+2026-10-27T16:22:26.2253877Z Commit: 21505ad2541d5be6135ed84fc33697146cf75b8e
+2026-10-27T16:22:26.2254727Z Build Date: 2026-10-21T00:45:21Z
+2026-10-27T16:22:26.2255402Z Worker ID: {3723becc-1756-4397-8e19-4011b1265065}
+2026-10-27T16:22:26.2256351Z Region: eastus
+2026-10-27T16:22:26.2256932Z Cloud: Azure
+2026-10-27T16:22:26.2257463Z ##[endgroup]
+2026-10-27T16:22:26.2259078Z ##[group]Operating System
+2026-10-27T16:22:26.2259737Z Ubuntu
+2026-10-27T16:22:26.2260249Z 24.04.5
+2026-10-27T16:22:26.2260862Z LTS
+2026-10-27T16:22:26.2261377Z ##[endgroup]
+2026-10-27T16:22:26.2262075Z ##[group]Runner Image
+2026-10-27T16:22:26.2262671Z Image: ubuntu-24.04
+2026-10-27T16:22:26.2263606Z Version: 20261012.334.1
+2026-10-27T16:22:26.2264922Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20261012.334/images/ubuntu/Ubuntu2404-Readme.md
+2026-10-27T16:22:26.2266992Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20261012.334
+2026-10-27T16:22:26.2267990Z ##[endgroup]
+2026-10-27T16:22:26.2269114Z ##[group]GITHUB_TOKEN Permissions
+2026-10-27T16:22:26.2271289Z Contents: read
+2026-10-27T16:22:26.2272008Z Metadata: read
+2026-10-27T16:22:26.2272628Z ##[endgroup]
+2026-10-27T16:22:26.2274696Z Secret source: Actions
+2026-10-27T16:22:26.2275971Z Cache mode: write
+2026-10-27T16:22:26.2276943Z Prepare workflow directory
+2026-10-27T16:22:26.2606604Z Prepare all required actions
+2026-10-27T16:22:26.2654962Z Getting action download info
+2026-10-27T16:22:26.5164816Z Download action repository 'actions/checkout@v4' (SHA:11d5960a326750d5838078e36cf38b85af677262)
+2026-10-27T16:22:26.6140466Z Download action repository 'actions/setup-python@v5' (SHA:a26af69be951a213d495a4c3e4e4022e16d87065)
+2026-10-27T16:22:26.6955098Z Download action repository 'actions/setup-node@v4' (SHA:49933ea5288caeca8642d1e84afbd3f7d6820020)
+2026-10-27T16:22:26.9164146Z Complete job name: Offline browser shard 4 of 12
+2026-10-27T16:22:27.0041633Z ##[group]Run actions/checkout@v4
+2026-10-27T16:22:27.0042527Z with:
+2026-10-27T16:22:27.0042985Z   persist-credentials: false
+2026-10-27T16:22:27.0043536Z   repository: Harsh23Kashyap/Chatify
+2026-10-27T16:22:27.0047839Z   token: ***
+2026-10-27T16:22:27.0048275Z   ssh-strict: true
+2026-10-27T16:22:27.0048715Z   ssh-user: git
+2026-10-27T16:22:27.0049143Z   clean: true
+2026-10-27T16:22:27.0049601Z   sparse-checkout-cone-mode: true
+2026-10-27T16:22:27.0050127Z   fetch-depth: 1
+2026-10-27T16:22:27.0050555Z   fetch-tags: false
+2026-10-27T16:22:27.0050995Z   show-progress: true
+2026-10-27T16:22:27.0051444Z   lfs: false
+2026-10-27T16:22:27.0051857Z   submodules: false
+2026-10-27T16:22:27.0052311Z   set-safe-directory: true
+2026-10-27T16:22:27.0052825Z   allow-unsafe-pr-checkout: false
+2026-10-27T16:22:27.0053620Z ##[endgroup]
+2026-10-27T16:22:27.1091030Z Syncing repository: Harsh23Kashyap/Chatify
+2026-10-27T16:22:27.1093579Z ##[group]Getting Git version info
+2026-10-27T16:22:27.1094833Z Working directory is '/home/runner/work/Chatify/Chatify'
+2026-10-27T16:22:27.1096738Z [command]/usr/bin/git version
+2026-10-27T16:22:27.1170474Z git version 2.55.0
+2026-10-27T16:22:27.1194305Z ##[endgroup]
+2026-10-27T16:22:27.1211998Z Temporarily overriding HOME='/home/runner/work/_temp/7cbc53b4-c722-42c0-9fb2-d087ba2b1966' before making global git config changes
+2026-10-27T16:22:27.1214414Z Adding repository directory to the temporary git global config as a safe directory
+2026-10-27T16:22:27.1218394Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/Chatify/Chatify
+2026-10-27T16:22:27.1272589Z Deleting the contents of '/home/runner/work/Chatify/Chatify'
+2026-10-27T16:22:27.1277190Z ##[group]Initializing the repository
+2026-10-27T16:22:27.1280997Z [command]/usr/bin/git init /home/runner/work/Chatify/Chatify
+2026-10-27T16:22:27.1433291Z hint: Using 'master' as the name for the initial branch. This default branch name
+2026-10-27T16:22:27.1436223Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+2026-10-27T16:22:27.1438122Z hint: to use in all of your new repositories, which will suppress this warning,
+2026-10-27T16:22:27.1439505Z hint: call:
+2026-10-27T16:22:27.1440924Z hint:
+2026-10-27T16:22:27.1441828Z hint: 	git config --global init.defaultBranch <name>
+2026-10-27T16:22:27.1442887Z hint:
+2026-10-27T16:22:27.1443706Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+2026-10-27T16:22:27.1444678Z hint: 'development'. The just-created branch can be renamed via this command:
+2026-10-27T16:22:27.1445460Z hint:
+2026-10-27T16:22:27.1446190Z hint: 	git branch -m <name>
+2026-10-27T16:22:27.1446675Z hint:
+2026-10-27T16:22:27.1447411Z hint: Disable this message with "git config set advice.defaultBranchName false"
+2026-10-27T16:22:27.1448691Z Initialized empty Git repository in /home/runner/work/Chatify/Chatify/.git/
+2026-10-27T16:22:27.1451002Z [command]/usr/bin/git remote add origin https://github.com/Harsh23Kashyap/Chatify
+2026-10-27T16:22:27.1512501Z ##[endgroup]
+2026-10-27T16:22:27.1513398Z ##[group]Disabling automatic garbage collection
+2026-10-27T16:22:27.1516638Z [command]/usr/bin/git config --local gc.auto 0
+2026-10-27T16:22:27.1575080Z ##[endgroup]
+2026-10-27T16:22:27.1576190Z ##[group]Setting up auth
+2026-10-27T16:22:27.1582873Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-10-27T16:22:27.1620006Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-10-27T16:22:27.2055915Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-10-27T16:22:27.2093561Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-10-27T16:22:27.2336966Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-10-27T16:22:27.2376035Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-10-27T16:22:27.2623230Z [command]/usr/bin/git config --local http.https://github.com/.extraheader AUTHORIZATION: basic ***
+2026-10-27T16:22:27.2668263Z ##[endgroup]
+2026-10-27T16:22:27.2669824Z ##[group]Fetching the repository
+2026-10-27T16:22:27.2680004Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +76991499db5f2593051372a7e50e52816e34c8e6:refs/remotes/origin/main
+2026-10-27T16:22:30.1358957Z From https://github.com/Harsh23Kashyap/Chatify
+2026-10-27T16:22:30.1361234Z  * [new ref]         76991499db5f2593051372a7e50e52816e34c8e6 -> origin/main
+2026-10-27T16:22:30.1378772Z ##[endgroup]
+2026-10-27T16:22:30.1380211Z ##[group]Determining the checkout info
+2026-10-27T16:22:30.1382291Z ##[endgroup]
+2026-10-27T16:22:30.1383481Z [command]/usr/bin/git sparse-checkout disable
+2026-10-27T16:22:30.1447589Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+2026-10-27T16:22:30.1486809Z ##[group]Checking out the ref
+2026-10-27T16:22:30.1489621Z [command]/usr/bin/git checkout --progress --force -B main refs/remotes/origin/main
+2026-10-27T16:22:30.4616594Z Switched to a new branch 'main'
+2026-10-27T16:22:30.4621122Z branch 'main' set up to track 'origin/main'.
+2026-10-27T16:22:30.4643301Z ##[endgroup]
+2026-10-27T16:22:30.4700175Z [command]/usr/bin/git log -1 --format=%H
+2026-10-27T16:22:30.4728664Z 76991499db5f2593051372a7e50e52816e34c8e6
+2026-10-27T16:22:30.4738563Z ##[group]Removing auth
+2026-10-27T16:22:30.4742258Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-10-27T16:22:30.4775723Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-10-27T16:22:30.5000034Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-10-27T16:22:30.5028506Z http.https://github.com/.extraheader
+2026-10-27T16:22:30.5037058Z [command]/usr/bin/git config --local --unset-all http.https://github.com/.extraheader
+2026-10-27T16:22:30.5070957Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-10-27T16:22:30.5291439Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-10-27T16:22:30.5323249Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-10-27T16:22:30.5541470Z ##[endgroup]
+2026-10-27T16:22:30.5795245Z ##[group]Run actions/setup-python@v5
+2026-10-27T16:22:30.5795948Z with:
+2026-10-27T16:22:30.5796221Z   python-version: 3.12.15
+2026-10-27T16:22:30.5864440Z   check-latest: false
+2026-10-27T16:22:30.5867918Z   token: ***
+2026-10-27T16:22:30.5868255Z   update-environment: true
+2026-10-27T16:22:30.5868588Z   allow-prereleases: false
+2026-10-27T16:22:30.5868897Z   freethreaded: false
+2026-10-27T16:22:30.5869167Z ##[endgroup]
+2026-10-27T16:22:30.7168947Z ##[group]Installed versions
+2026-10-27T16:22:30.7345989Z (node:2327) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+2026-10-27T16:22:30.7347230Z (Use `node --trace-deprecation ...` to show where the warning was created)
+2026-10-27T16:22:30.7348075Z Successfully set up CPython (3.12.15)
+2026-10-27T16:22:30.7349458Z ##[endgroup]
+2026-10-27T16:22:30.7551232Z ##[group]Run actions/setup-node@v4
+2026-10-27T16:22:30.7551609Z with:
+2026-10-27T16:22:30.7551866Z   node-version: 22.23.3
+2026-10-27T16:22:30.7552141Z   always-auth: false
+2026-10-27T16:22:30.7552422Z   check-latest: false
+2026-10-27T16:22:30.7555285Z   token: ***
+2026-10-27T16:22:30.7555733Z env:
+2026-10-27T16:22:30.7556245Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.15/x64
+2026-10-27T16:22:30.7556850Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.15/x64/lib/pkgconfig
+2026-10-27T16:22:30.7557359Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.15/x64
+2026-10-27T16:22:30.7557805Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.15/x64
+2026-10-27T16:22:30.7558251Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.15/x64
+2026-10-27T16:22:30.7558696Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.15/x64/lib
+2026-10-27T16:22:30.7559094Z ##[endgroup]
+2026-10-27T16:22:30.9045991Z Found in cache @ /opt/hostedtoolcache/node/22.23.3/x64
+2026-10-27T16:22:30.9050908Z (node:2336) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+2026-10-27T16:22:30.9051766Z (Use `node --trace-deprecation ...` to show where the warning was created)
+2026-10-27T16:22:30.9053304Z ##[group]Environment details
+2026-10-27T16:22:33.0193621Z node: v22.23.3
+2026-10-27T16:22:33.0194214Z npm: 10.9.9
+2026-10-27T16:22:33.0194796Z yarn: 1.22.22
+2026-10-27T16:22:33.0196330Z ##[endgroup]
+2026-10-27T16:22:33.0329028Z ##[group]Run python -m pip install '.[documents]' playwright==1.56.0
+2026-10-27T16:22:33.0329612Z [36;1mpython -m pip install '.[documents]' playwright==1.56.0[0m
+2026-10-27T16:22:33.0330005Z [36;1mmkdir -p /tmp/cc-ui-tools[0m
+2026-10-27T16:22:33.0330299Z [36;1msudo mkdir -p /downloads[0m
+2026-10-27T16:22:33.0330597Z [36;1msudo chown "$(id -u):$(id -g)" /downloads[0m
+2026-10-27T16:22:33.0331123Z [36;1mnpm install --prefix /tmp/cc-ui-tools --no-audit --no-fund playwright-core@1.56.1 axe-core@4.14.0[0m
+2026-10-27T16:22:33.0331635Z [36;1msudo apt-get update -qq[0m
+2026-10-27T16:22:33.0332085Z [36;1msudo apt-get install -y xvfb xdotool imagemagick fonts-crosextra-caladea poppler-utils[0m
+2026-10-27T16:22:33.0687274Z shell: /usr/bin/bash -e {0}
+2026-10-27T16:22:33.0687852Z env:
+2026-10-27T16:22:33.0688176Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.15/x64
+2026-10-27T16:22:33.0688720Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.15/x64/lib/pkgconfig
+2026-10-27T16:22:33.0689279Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.15/x64
+2026-10-27T16:22:33.0689741Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.15/x64
+2026-10-27T16:22:33.0690199Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.15/x64
+2026-10-27T16:22:33.0690662Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.15/x64/lib
+2026-10-27T16:22:33.0691050Z ##[endgroup]
+2026-10-27T16:22:35.2889767Z Processing ./.
+2026-10-27T16:22:35.2901145Z   Installing build dependencies: started
+2026-10-27T16:22:36.4679408Z   Installing build dependencies: finished with status 'done'
+2026-10-27T16:22:36.4686712Z   Getting requirements to build wheel: started
+2026-10-27T16:22:37.0452526Z   Getting requirements to build wheel: finished with status 'done'
+2026-10-27T16:22:37.0462335Z   Preparing metadata (pyproject.toml): started
+2026-10-27T16:22:37.2594485Z   Preparing metadata (pyproject.toml): finished with status 'done'
+2026-10-27T16:22:37.3761839Z Collecting playwright==1.56.0
+2026-10-27T16:22:37.4219732Z   Downloading playwright-1.56.0-py3-none-manylinux1_x86_64.whl.metadata (3.5 kB)
+2026-10-27T16:22:37.4714370Z Collecting PyYAML<7,>=6.0.3 (from chatify-app==0.4.32)
+2026-10-27T16:22:37.4753370Z   Downloading pyyaml-6.0.3-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (2.4 kB)
+2026-10-27T16:22:37.5064885Z Collecting pypdf>=4 (from chatify-app==0.4.32)
+2026-10-27T16:22:37.5116566Z   Downloading pypdf-6.21.3-py3-none-any.whl.metadata (7.6 kB)
+2026-10-27T16:22:37.5406658Z Collecting fpdf2>=2.8 (from chatify-app==0.4.32)
+2026-10-27T16:22:37.5447540Z   Downloading fpdf2-2.8.9-py3-none-any.whl.metadata (88 kB)
+2026-10-27T16:22:37.8780253Z Collecting uharfbuzz>=0.39 (from chatify-app==0.4.32)
+2026-10-27T16:22:37.8834372Z   Downloading uharfbuzz-0.57.0-cp311-abi3-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (3.6 kB)
+2026-10-27T16:22:38.8056590Z Collecting pyee<14,>=13 (from playwright==1.56.0)
+2026-10-27T16:22:38.8097607Z   Downloading pyee-13.0.1-py3-none-any.whl.metadata (3.0 kB)
+2026-10-27T16:22:38.9770331Z Collecting greenlet<4.0.0,>=3.1.1 (from playwright==1.56.0)
+2026-10-27T16:22:38.9811910Z   Downloading greenlet-3.5.6-cp312-cp312-manylinux_2_24_x86_64.manylinux_2_28_x86_64.whl.metadata (3.8 kB)
+2026-10-27T16:22:39.0041021Z Collecting typing-extensions (from pyee<14,>=13->playwright==1.56.0)
+2026-10-27T16:22:39.0078813Z   Downloading typing_extensions-4.16.0-py3-none-any.whl.metadata (3.3 kB)
+2026-10-27T16:22:39.0265846Z Collecting defusedxml (from fpdf2>=2.8->chatify-app==0.4.32)
+2026-10-27T16:22:39.0411080Z   Downloading defusedxml-0.7.1-py2.py3-none-any.whl.metadata (32 kB)
+2026-10-27T16:22:39.2399404Z Collecting Pillow!=9.2.*,>=8.3.2 (from fpdf2>=2.8->chatify-app==0.4.32)
+2026-10-27T16:22:39.2448130Z   Downloading pillow-13.0.0-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl.metadata (9.1 kB)
+2026-10-27T16:22:39.4107760Z Collecting fonttools>=4.34.0 (from fpdf2>=2.8->chatify-app==0.4.32)
+2026-10-27T16:22:39.4150502Z   Downloading fonttools-4.67.0-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.whl.metadata (137 kB)
+2026-10-27T16:22:39.4446109Z Downloading playwright-1.56.0-py3-none-manylinux1_x86_64.whl (46.3 MB)
+2026-10-27T16:22:39.8352038Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 46.3/46.3 MB 119.3 MB/s  0:00:00
+2026-10-27T16:22:39.8391400Z Downloading greenlet-3.5.6-cp312-cp312-manylinux_2_24_x86_64.manylinux_2_28_x86_64.whl (621 kB)
+2026-10-27T16:22:39.8444009Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 621.4/621.4 kB 119.3 MB/s  0:00:00
+2026-10-27T16:22:39.8477313Z Downloading pyee-13.0.1-py3-none-any.whl (15 kB)
+2026-10-27T16:22:39.8542988Z Downloading pyyaml-6.0.3-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (807 kB)
+2026-10-27T16:22:39.8593592Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 807.9/807.9 kB 180.5 MB/s  0:00:00
+2026-10-27T16:22:39.8633773Z Downloading fpdf2-2.8.9-py3-none-any.whl (341 kB)
+2026-10-27T16:22:39.8692972Z Downloading fonttools-4.67.0-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.whl (5.4 MB)
+2026-10-27T16:22:39.8916066Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 5.4/5.4 MB 256.0 MB/s  0:00:00
+2026-10-27T16:22:39.8953265Z Downloading pillow-13.0.0-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl (7.1 MB)
+2026-10-27T16:22:39.9278533Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 7.1/7.1 MB 227.4 MB/s  0:00:00
+2026-10-27T16:22:39.9312147Z Downloading pypdf-6.21.3-py3-none-any.whl (409 kB)
+2026-10-27T16:22:39.9376332Z Downloading uharfbuzz-0.57.0-cp311-abi3-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (2.1 MB)
+2026-10-27T16:22:39.9461026Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 2.1/2.1 MB 296.5 MB/s  0:00:00
+2026-10-27T16:22:39.9496093Z Downloading defusedxml-0.7.1-py2.py3-none-any.whl (25 kB)
+2026-10-27T16:22:39.9548743Z Downloading typing_extensions-4.16.0-py3-none-any.whl (45 kB)
+2026-10-27T16:22:40.0463292Z Building wheels for collected packages: chatify-app
+2026-10-27T16:22:40.0472136Z   Building wheel for chatify-app (pyproject.toml): started
+2026-10-27T16:22:41.0771606Z   Building wheel for chatify-app (pyproject.toml): finished with status 'done'
+2026-10-27T16:22:41.0885318Z   Created wheel for chatify-app: filename=chatify_app-0.4.32-py3-none-any.whl size=15009499 sha256=7dee910dd378d8befadf89f34f5449eec2c3e3262cc4de58670533554ce586b2
+2026-10-27T16:22:41.0888304Z   Stored in directory: /tmp/pip-ephem-wheel-cache-feq0lekd/wheels/fa/4a/b7/11ab0cd7112da076720ed506d9de3dd0ead3355746a909ce1c
+2026-10-27T16:22:41.0918461Z Successfully built chatify-app
+2026-10-27T16:22:41.1340423Z Installing collected packages: uharfbuzz, typing-extensions, PyYAML, pypdf, Pillow, greenlet, fonttools, defusedxml, pyee, fpdf2, chatify-app, playwright
+2026-10-27T16:22:44.2065274Z 
+2026-10-27T16:22:44.2084709Z Successfully installed Pillow-13.0.0 PyYAML-6.0.3 chatify-app-0.4.32 defusedxml-0.7.1 fonttools-4.67.0 fpdf2-2.8.9 greenlet-3.5.6 playwright-1.56.0 pyee-13.0.1 pypdf-6.21.3 typing-extensions-4.16.0 uharfbuzz-0.57.0
+2026-10-27T16:22:44.2093488Z 
+2026-10-27T16:22:44.2094026Z [notice] A new release of pip is available: 26.2.1 -> 26.2.2
+2026-10-27T16:22:44.2094788Z [notice] To update, run: pip install --upgrade pip
+2026-10-27T16:22:46.7042210Z 
+2026-10-27T16:22:46.7042871Z added 2 packages in 2s
+2026-10-27T16:22:54.3129486Z Reading package lists...
+2026-10-27T16:22:54.4930060Z Building dependency tree...
+2026-10-27T16:22:54.4937706Z Reading state information...
+2026-10-27T16:22:54.6286975Z The following additional packages will be installed:
+2026-10-27T16:22:54.6288252Z   fonts-droid-fallback fonts-noto-mono fonts-urw-base35 ghostscript
+2026-10-27T16:22:54.6289415Z   imagemagick-6.q16 libdjvulibre-text libdjvulibre21 libgs-common libgs10
+2026-10-27T16:22:54.6290532Z   libgs10-common libidn12 libijs-0.35 libimath-3-1-29t64 libjbig2dec0
+2026-10-27T16:22:54.6291662Z   libjxr-tools libjxr0t64 libmagickcore-6.q16-7-extra libnetpbm11t64
+2026-10-27T16:22:54.6292997Z   libopenexr-3-1-30 libpaper-utils libpaper1 libpoppler134 libwmflite-0.2-7
+2026-10-27T16:22:54.6296309Z   libxdo3 netpbm poppler-data xfonts-encodings xfonts-utils xserver-common
+2026-10-27T16:22:54.6306349Z Suggested packages:
+2026-10-27T16:22:54.6307243Z   fonts-crosextra-carlito fonts-noto fonts-freefont-otf | fonts-freefont-ttf
+2026-10-27T16:22:54.6308150Z   fonts-texgyre texlive-binaries imagemagick-6-doc autotrace cups-bsd | lpr
+2026-10-27T16:22:54.6308797Z   | lprng enscript ffmpeg gimp gnuplot grads graphviz hp2xx html2ps libwmf-bin
+2026-10-27T16:22:54.6309421Z   mplayer povray radiance sane-utils texlive-base-bin transfig libraw-bin
+2026-10-27T16:22:54.6310262Z   inkscape fonts-japanese-mincho | fonts-ipafont-mincho fonts-japanese-gothic
+2026-10-27T16:22:54.6310904Z   | fonts-ipafont-gothic fonts-arphic-ukai fonts-arphic-uming fonts-nanum
+2026-10-27T16:22:54.6311603Z Recommended packages:
+2026-10-27T16:22:54.6311850Z   xfonts-base
+2026-10-27T16:22:54.6818967Z The following NEW packages will be installed:
+2026-10-27T16:22:54.6820044Z   fonts-crosextra-caladea fonts-droid-fallback fonts-noto-mono
+2026-10-27T16:22:54.6821335Z   fonts-urw-base35 ghostscript imagemagick imagemagick-6.q16 libdjvulibre-text
+2026-10-27T16:22:54.6822234Z   libdjvulibre21 libgs-common libgs10 libgs10-common libidn12 libijs-0.35
+2026-10-27T16:22:54.6822970Z   libimath-3-1-29t64 libjbig2dec0 libjxr-tools libjxr0t64
+2026-10-27T16:22:54.6824055Z   libmagickcore-6.q16-7-extra libnetpbm11t64 libopenexr-3-1-30 libpaper-utils
+2026-10-27T16:22:54.6825312Z   libpaper1 libpoppler134 libwmflite-0.2-7 libxdo3 netpbm poppler-data
+2026-10-27T16:22:54.6826503Z   poppler-utils xdotool xfonts-encodings xfonts-utils
+2026-10-27T16:22:54.6833784Z The following packages will be upgraded:
+2026-10-27T16:22:54.6834232Z   xserver-common xvfb
+2026-10-27T16:22:54.7000269Z 2 upgraded, 32 newly installed, 0 to remove and 102 not upgraded.
+2026-10-27T16:22:54.7001046Z Need to get 27.7 MB of archives.
+2026-10-27T16:22:54.7001830Z After this operation, 90.4 MB of additional disk space will be used.
+2026-10-27T16:22:54.7002714Z Get:1 file:/etc/apt/apt-mirrors.txt Mirrorlist [144 B]
+2026-10-27T16:22:55.9896082Z Get:2 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 fonts-droid-fallback all 1:6.0.1r16-1.1build1 [1805 kB]
+2026-10-27T16:23:00.9479485Z Get:3 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 poppler-data all 0.4.12-1 [2060 kB]
+2026-10-27T16:23:11.8076959Z Get:4 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 fonts-crosextra-caladea all 20200211-2 [127 kB]
+2026-10-27T16:23:13.2516778Z Get:5 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 fonts-noto-mono all 20201225-2 [435 kB]
+2026-10-27T16:23:15.4421687Z Get:6 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 xfonts-encodings all 1:1.0.5-0ubuntu2 [578 kB]
+2026-10-27T16:23:17.1752945Z Get:7 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 xfonts-utils amd64 1:7.7+6build3 [94.4 kB]
+2026-10-27T16:23:17.8467772Z Get:8 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 fonts-urw-base35 all 20200910-8 [11.0 MB]
+2026-10-27T16:23:45.8061627Z Get:9 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 libgs-common all 10.02.1~dfsg1-0ubuntu7.10 [176 kB]
+2026-10-27T16:23:46.1687831Z Get:10 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 libgs10-common all 10.02.1~dfsg1-0ubuntu7.10 [488 kB]
+2026-10-27T16:23:47.4295896Z Get:11 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 libidn12 amd64 1.42-1ubuntu0.1 [56.1 kB]
+2026-10-27T16:23:47.9587028Z Get:12 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 libijs-0.35 amd64 0.35-15.1build1 [15.3 kB]
+2026-10-27T16:23:48.7966782Z Get:13 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 libjbig2dec0 amd64 0.20-1ubuntu0.24.04.1 [65.2 kB]
+2026-10-27T16:23:48.9806110Z Get:14 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 libpaper1 amd64 1.1.29build1 [13.4 kB]
+2026-10-27T16:23:49.0861273Z Get:15 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 libgs10 amd64 10.02.1~dfsg1-0ubuntu7.10 [3900 kB]
+2026-10-27T16:23:56.9562165Z Get:16 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 ghostscript amd64 10.02.1~dfsg1-0ubuntu7.10 [43.4 kB]
+2026-10-27T16:23:57.4713017Z Get:17 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 imagemagick-6.q16 amd64 8:6.9.12.98+dfsg1-5.2build2 [254 kB]
+2026-10-27T16:23:58.2564072Z Get:18 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 imagemagick amd64 8:6.9.12.98+dfsg1-5.2build2 [14.2 kB]
+2026-10-27T16:23:58.3947553Z Get:19 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 libdjvulibre-text all 3.5.28-2ubuntu0.24.04.2 [51.1 kB]
+2026-10-27T16:23:58.5936498Z Get:20 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 libdjvulibre21 amd64 3.5.28-2ubuntu0.24.04.2 [638 kB]
+2026-10-27T16:24:00.2059295Z Get:21 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 libimath-3-1-29t64 amd64 3.1.9-3.1ubuntu2 [72.2 kB]
+2026-10-27T16:24:00.8417157Z Get:22 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 libjxr0t64 amd64 1.2~git20170615.f752187-5.1ubuntu2 [181 kB]
+2026-10-27T16:24:01.7883579Z Get:23 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 libjxr-tools amd64 1.2~git20170615.f752187-5.1ubuntu2 [15.8 kB]
+2026-10-27T16:24:02.0082070Z Get:24 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 libopenexr-3-1-30 amd64 3.1.5-5.1build3 [1004 kB]
+2026-10-27T16:24:06.7443263Z Get:25 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 libwmflite-0.2-7 amd64 0.2.13-1.1build3 [68.6 kB]
+2026-10-27T16:24:07.6002534Z Get:26 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 libmagickcore-6.q16-7-extra amd64 8:6.9.12.98+dfsg1-5.2build2 [70.1 kB]
+2026-10-27T16:24:08.4112018Z Get:27 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 libnetpbm11t64 amd64 2:11.05.02-1.1build1 [114 kB]
+2026-10-27T16:24:09.3984854Z Get:28 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 libpaper-utils amd64 1.1.29build1 [8650 B]
+2026-10-27T16:24:09.9001531Z Get:29 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 libpoppler134 amd64 24.02.0-1ubuntu9.11 [1118 kB]
+2026-10-27T16:24:15.0060168Z Get:30 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 netpbm amd64 2:11.05.02-1.1build1 [2054 kB]
+2026-10-27T16:24:24.3960881Z Get:31 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 poppler-utils amd64 24.02.0-1ubuntu9.11 [212 kB]
+2026-10-27T16:24:25.8003415Z Get:32 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 xserver-common all 2:21.1.12-1ubuntu1.9 [35.0 kB]
+2026-10-27T16:24:26.0448055Z Get:33 http://azure.archive.ubuntu.com/ubuntu noble-updates/universe amd64 xvfb amd64 2:21.1.12-1ubuntu1.9 [877 kB]
+2026-10-27T16:24:29.8672971Z Get:34 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 libxdo3 amd64 1:3.20160805.1-5build1 [22.2 kB]
+2026-10-27T16:24:37.3738146Z Get:35 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 xdotool amd64 1:3.20160805.1-5build1 [42.6 kB]
+2026-10-27T16:24:37.9014659Z Preconfiguring packages ...
+2026-10-27T16:24:37.9655184Z Fetched 27.7 MB in 1min 43s (269 kB/s)
+2026-10-27T16:24:37.9995090Z Selecting previously unselected package fonts-droid-fallback.
+2026-10-27T16:24:38.0455670Z (Reading database ... 
+2026-10-27T16:24:38.0456387Z (Reading database ... 5%
+2026-10-27T16:24:38.0456976Z (Reading database ... 10%
+2026-10-27T16:24:38.0457425Z (Reading database ... 15%
+2026-10-27T16:24:38.0457868Z (Reading database ... 20%
+2026-10-27T16:24:38.0458305Z (Reading database ... 25%
+2026-10-27T16:24:38.0458767Z (Reading database ... 30%
+2026-10-27T16:24:38.0459189Z (Reading database ... 35%
+2026-10-27T16:24:38.0459605Z (Reading database ... 40%
+2026-10-27T16:24:38.0460035Z (Reading database ... 45%
+2026-10-27T16:24:38.0460455Z (Reading database ... 50%
+2026-10-27T16:24:38.0727333Z (Reading database ... 55%
+2026-10-27T16:24:38.3153574Z (Reading database ... 60%
+2026-10-27T16:24:38.5524697Z (Reading database ... 65%
+2026-10-27T16:24:38.7603852Z (Reading database ... 70%
+2026-10-27T16:24:38.9846531Z (Reading database ... 75%
+2026-10-27T16:24:39.2308003Z (Reading database ... 80%
+2026-10-27T16:24:39.6011199Z (Reading database ... 85%
+2026-10-27T16:24:40.0383938Z (Reading database ... 90%
+2026-10-27T16:24:40.5256036Z (Reading database ... 95%
+2026-10-27T16:24:40.5256816Z (Reading database ... 100%
+2026-10-27T16:24:40.5257465Z (Reading database ... 203540 files and directories currently installed.)
+2026-10-27T16:24:40.5300710Z Preparing to unpack .../00-fonts-droid-fallback_1%3a6.0.1r16-1.1build1_all.deb ...
+2026-10-27T16:24:40.5518383Z Unpacking fonts-droid-fallback (1:6.0.1r16-1.1build1) ...
+2026-10-27T16:24:40.6910492Z Selecting previously unselected package poppler-data.
+2026-10-27T16:24:40.7035959Z Preparing to unpack .../01-poppler-data_0.4.12-1_all.deb ...
+2026-10-27T16:24:40.7043120Z Unpacking poppler-data (0.4.12-1) ...
+2026-10-27T16:24:40.8224278Z Selecting previously unselected package fonts-crosextra-caladea.
+2026-10-27T16:24:40.8350814Z Preparing to unpack .../02-fonts-crosextra-caladea_20200211-2_all.deb ...
+2026-10-27T16:24:40.8358415Z Unpacking fonts-crosextra-caladea (20200211-2) ...
+2026-10-27T16:24:40.8564345Z Selecting previously unselected package fonts-noto-mono.
+2026-10-27T16:24:40.8687763Z Preparing to unpack .../03-fonts-noto-mono_20201225-2_all.deb ...
+2026-10-27T16:24:40.8695420Z Unpacking fonts-noto-mono (20201225-2) ...
+2026-10-27T16:24:40.8938679Z Selecting previously unselected package xfonts-encodings.
+2026-10-27T16:24:40.9063139Z Preparing to unpack .../04-xfonts-encodings_1%3a1.0.5-0ubuntu2_all.deb ...
+2026-10-27T16:24:40.9071631Z Unpacking xfonts-encodings (1:1.0.5-0ubuntu2) ...
+2026-10-27T16:24:40.9339717Z Selecting previously unselected package xfonts-utils.
+2026-10-27T16:24:40.9462654Z Preparing to unpack .../05-xfonts-utils_1%3a7.7+6build3_amd64.deb ...
+2026-10-27T16:24:40.9470513Z Unpacking xfonts-utils (1:7.7+6build3) ...
+2026-10-27T16:24:41.0018145Z Selecting previously unselected package fonts-urw-base35.
+2026-10-27T16:24:41.0139502Z Preparing to unpack .../06-fonts-urw-base35_20200910-8_all.deb ...
+2026-10-27T16:24:41.0772087Z Unpacking fonts-urw-base35 (20200910-8) ...
+2026-10-27T16:24:41.1649300Z Selecting previously unselected package libgs-common.
+2026-10-27T16:24:41.1778875Z Preparing to unpack .../07-libgs-common_10.02.1~dfsg1-0ubuntu7.10_all.deb ...
+2026-10-27T16:24:41.1786420Z Unpacking libgs-common (10.02.1~dfsg1-0ubuntu7.10) ...
+2026-10-27T16:24:41.2006248Z Selecting previously unselected package libgs10-common.
+2026-10-27T16:24:41.2132056Z Preparing to unpack .../08-libgs10-common_10.02.1~dfsg1-0ubuntu7.10_all.deb ...
+2026-10-27T16:24:41.2139471Z Unpacking libgs10-common (10.02.1~dfsg1-0ubuntu7.10) ...
+2026-10-27T16:24:41.2762306Z Selecting previously unselected package libidn12:amd64.
+2026-10-27T16:24:41.2888450Z Preparing to unpack .../09-libidn12_1.42-1ubuntu0.1_amd64.deb ...
+2026-10-27T16:24:41.2904931Z Unpacking libidn12:amd64 (1.42-1ubuntu0.1) ...
+2026-10-27T16:24:41.3098795Z Selecting previously unselected package libijs-0.35:amd64.
+2026-10-27T16:24:41.3222625Z Preparing to unpack .../10-libijs-0.35_0.35-15.1build1_amd64.deb ...
+2026-10-27T16:24:41.3229550Z Unpacking libijs-0.35:amd64 (0.35-15.1build1) ...
+2026-10-27T16:24:41.3417377Z Selecting previously unselected package libjbig2dec0:amd64.
+2026-10-27T16:24:41.3539318Z Preparing to unpack .../11-libjbig2dec0_0.20-1ubuntu0.24.04.1_amd64.deb ...
+2026-10-27T16:24:41.3546232Z Unpacking libjbig2dec0:amd64 (0.20-1ubuntu0.24.04.1) ...
+2026-10-27T16:24:41.3747987Z Selecting previously unselected package libpaper1:amd64.
+2026-10-27T16:24:41.3867813Z Preparing to unpack .../12-libpaper1_1.1.29build1_amd64.deb ...
+2026-10-27T16:24:41.3874699Z Unpacking libpaper1:amd64 (1.1.29build1) ...
+2026-10-27T16:24:41.4097861Z Selecting previously unselected package libgs10:amd64.
+2026-10-27T16:24:41.4217367Z Preparing to unpack .../13-libgs10_10.02.1~dfsg1-0ubuntu7.10_amd64.deb ...
+2026-10-27T16:24:41.4224481Z Unpacking libgs10:amd64 (10.02.1~dfsg1-0ubuntu7.10) ...
+2026-10-27T16:24:41.5142280Z Selecting previously unselected package ghostscript.
+2026-10-27T16:24:41.5269588Z Preparing to unpack .../14-ghostscript_10.02.1~dfsg1-0ubuntu7.10_amd64.deb ...
+2026-10-27T16:24:41.5275875Z Unpacking ghostscript (10.02.1~dfsg1-0ubuntu7.10) ...
+2026-10-27T16:24:41.5612967Z Selecting previously unselected package imagemagick-6.q16.
+2026-10-27T16:24:41.5738525Z Preparing to unpack .../15-imagemagick-6.q16_8%3a6.9.12.98+dfsg1-5.2build2_amd64.deb ...
+2026-10-27T16:24:41.5745966Z Unpacking imagemagick-6.q16 (8:6.9.12.98+dfsg1-5.2build2) ...
+2026-10-27T16:24:41.6464526Z Selecting previously unselected package imagemagick.
+2026-10-27T16:24:41.6588775Z Preparing to unpack .../16-imagemagick_8%3a6.9.12.98+dfsg1-5.2build2_amd64.deb ...
+2026-10-27T16:24:41.6596105Z Unpacking imagemagick (8:6.9.12.98+dfsg1-5.2build2) ...
+2026-10-27T16:24:41.6777200Z Selecting previously unselected package libdjvulibre-text.
+2026-10-27T16:24:41.6900197Z Preparing to unpack .../17-libdjvulibre-text_3.5.28-2ubuntu0.24.04.2_all.deb ...
+2026-10-27T16:24:41.6907306Z Unpacking libdjvulibre-text (3.5.28-2ubuntu0.24.04.2) ...
+2026-10-27T16:24:41.7128790Z Selecting previously unselected package libdjvulibre21:amd64.
+2026-10-27T16:24:41.7250648Z Preparing to unpack .../18-libdjvulibre21_3.5.28-2ubuntu0.24.04.2_amd64.deb ...
+2026-10-27T16:24:41.7257513Z Unpacking libdjvulibre21:amd64 (3.5.28-2ubuntu0.24.04.2) ...
+2026-10-27T16:24:41.7506877Z Selecting previously unselected package libimath-3-1-29t64:amd64.
+2026-10-27T16:24:41.7629232Z Preparing to unpack .../19-libimath-3-1-29t64_3.1.9-3.1ubuntu2_amd64.deb ...
+2026-10-27T16:24:41.7636314Z Unpacking libimath-3-1-29t64:amd64 (3.1.9-3.1ubuntu2) ...
+2026-10-27T16:24:41.7875991Z Selecting previously unselected package libjxr0t64:amd64.
+2026-10-27T16:24:41.7997551Z Preparing to unpack .../20-libjxr0t64_1.2~git20170615.f752187-5.1ubuntu2_amd64.deb ...
+2026-10-27T16:24:41.8005005Z Unpacking libjxr0t64:amd64 (1.2~git20170615.f752187-5.1ubuntu2) ...
+2026-10-27T16:24:41.8207318Z Selecting previously unselected package libjxr-tools.
+2026-10-27T16:24:41.8327046Z Preparing to unpack .../21-libjxr-tools_1.2~git20170615.f752187-5.1ubuntu2_amd64.deb ...
+2026-10-27T16:24:41.8333528Z Unpacking libjxr-tools (1.2~git20170615.f752187-5.1ubuntu2) ...
+2026-10-27T16:24:41.8537150Z Selecting previously unselected package libopenexr-3-1-30:amd64.
+2026-10-27T16:24:41.8656580Z Preparing to unpack .../22-libopenexr-3-1-30_3.1.5-5.1build3_amd64.deb ...
+2026-10-27T16:24:41.8663467Z Unpacking libopenexr-3-1-30:amd64 (3.1.5-5.1build3) ...
+2026-10-27T16:24:41.9016451Z Selecting previously unselected package libwmflite-0.2-7:amd64.
+2026-10-27T16:24:41.9138676Z Preparing to unpack .../23-libwmflite-0.2-7_0.2.13-1.1build3_amd64.deb ...
+2026-10-27T16:24:41.9144539Z Unpacking libwmflite-0.2-7:amd64 (0.2.13-1.1build3) ...
+2026-10-27T16:24:41.9332668Z Selecting previously unselected package libmagickcore-6.q16-7-extra:amd64.
+2026-10-27T16:24:41.9453566Z Preparing to unpack .../24-libmagickcore-6.q16-7-extra_8%3a6.9.12.98+dfsg1-5.2build2_amd64.deb ...
+2026-10-27T16:24:41.9459835Z Unpacking libmagickcore-6.q16-7-extra:amd64 (8:6.9.12.98+dfsg1-5.2build2) ...
+2026-10-27T16:24:41.9694114Z Selecting previously unselected package libnetpbm11t64:amd64.
+2026-10-27T16:24:41.9814544Z Preparing to unpack .../25-libnetpbm11t64_2%3a11.05.02-1.1build1_amd64.deb ...
+2026-10-27T16:24:41.9822626Z Unpacking libnetpbm11t64:amd64 (2:11.05.02-1.1build1) ...
+2026-10-27T16:24:42.0017132Z Selecting previously unselected package libpaper-utils.
+2026-10-27T16:24:42.0136651Z Preparing to unpack .../26-libpaper-utils_1.1.29build1_amd64.deb ...
+2026-10-27T16:24:42.0143410Z Unpacking libpaper-utils (1.1.29build1) ...
+2026-10-27T16:24:42.0337865Z Selecting previously unselected package libpoppler134:amd64.
+2026-10-27T16:24:42.0455724Z Preparing to unpack .../27-libpoppler134_24.02.0-1ubuntu9.11_amd64.deb ...
+2026-10-27T16:24:42.0462591Z Unpacking libpoppler134:amd64 (24.02.0-1ubuntu9.11) ...
+2026-10-27T16:24:42.0780708Z Selecting previously unselected package netpbm.
+2026-10-27T16:24:42.0906487Z Preparing to unpack .../28-netpbm_2%3a11.05.02-1.1build1_amd64.deb ...
+2026-10-27T16:24:42.0913702Z Unpacking netpbm (2:11.05.02-1.1build1) ...
+2026-10-27T16:24:42.2644044Z Selecting previously unselected package poppler-utils.
+2026-10-27T16:24:42.2772726Z Preparing to unpack .../29-poppler-utils_24.02.0-1ubuntu9.11_amd64.deb ...
+2026-10-27T16:24:42.2778949Z Unpacking poppler-utils (24.02.0-1ubuntu9.11) ...
+2026-10-27T16:24:42.3179177Z Preparing to unpack .../30-xserver-common_2%3a21.1.12-1ubuntu1.9_all.deb ...
+2026-10-27T16:24:42.3199255Z Unpacking xserver-common (2:21.1.12-1ubuntu1.9) over (2:21.1.12-1ubuntu1.8) ...
+2026-10-27T16:24:42.3533294Z Preparing to unpack .../31-xvfb_2%3a21.1.12-1ubuntu1.9_amd64.deb ...
+2026-10-27T16:24:42.3552184Z Unpacking xvfb (2:21.1.12-1ubuntu1.9) over (2:21.1.12-1ubuntu1.8) ...
+2026-10-27T16:24:42.3869265Z Selecting previously unselected package libxdo3:amd64.
+2026-10-27T16:24:42.3994845Z Preparing to unpack .../32-libxdo3_1%3a3.20160805.1-5build1_amd64.deb ...
+2026-10-27T16:24:42.4002216Z Unpacking libxdo3:amd64 (1:3.20160805.1-5build1) ...
+2026-10-27T16:24:42.4182565Z Selecting previously unselected package xdotool.
+2026-10-27T16:24:42.4305889Z Preparing to unpack .../33-xdotool_1%3a3.20160805.1-5build1_amd64.deb ...
+2026-10-27T16:24:42.4313465Z Unpacking xdotool (1:3.20160805.1-5build1) ...
+2026-10-27T16:24:42.4761456Z Setting up libpaper1:amd64 (1.1.29build1) ...
+2026-10-27T16:24:42.6133071Z 
+2026-10-27T16:24:42.6133813Z Creating config file /etc/papersize with new version
+2026-10-27T16:24:42.6655818Z Setting up fonts-noto-mono (20201225-2) ...
+2026-10-27T16:24:42.6683174Z Setting up libwmflite-0.2-7:amd64 (0.2.13-1.1build3) ...
+2026-10-27T16:24:42.6723450Z Setting up libpoppler134:amd64 (24.02.0-1ubuntu9.11) ...
+2026-10-27T16:24:42.6724605Z Setting up libijs-0.35:amd64 (0.35-15.1build1) ...
+2026-10-27T16:24:42.6736124Z Setting up libgs-common (10.02.1~dfsg1-0ubuntu7.10) ...
+2026-10-27T16:24:42.6755267Z Setting up libpaper-utils (1.1.29build1) ...
+2026-10-27T16:24:42.6772769Z Setting up libnetpbm11t64:amd64 (2:11.05.02-1.1build1) ...
+2026-10-27T16:24:42.6791087Z Setting up poppler-data (0.4.12-1) ...
+2026-10-27T16:24:42.6881301Z Setting up libxdo3:amd64 (1:3.20160805.1-5build1) ...
+2026-10-27T16:24:42.6901722Z Setting up libjxr0t64:amd64 (1.2~git20170615.f752187-5.1ubuntu2) ...
+2026-10-27T16:24:42.6919238Z Setting up libjbig2dec0:amd64 (0.20-1ubuntu0.24.04.1) ...
+2026-10-27T16:24:42.6936426Z Setting up xfonts-encodings (1:1.0.5-0ubuntu2) ...
+2026-10-27T16:24:42.6953984Z Setting up libimath-3-1-29t64:amd64 (3.1.9-3.1ubuntu2) ...
+2026-10-27T16:24:42.6972990Z Setting up libidn12:amd64 (1.42-1ubuntu0.1) ...
+2026-10-27T16:24:42.6990487Z Setting up netpbm (2:11.05.02-1.1build1) ...
+2026-10-27T16:24:42.7007401Z Setting up imagemagick-6.q16 (8:6.9.12.98+dfsg1-5.2build2) ...
+2026-10-27T16:24:42.7076573Z update-alternatives: using /usr/bin/compare-im6.q16 to provide /usr/bin/compare (compare) in auto mode
+2026-10-27T16:24:42.7121702Z update-alternatives: using /usr/bin/compare-im6.q16 to provide /usr/bin/compare-im6 (compare-im6) in auto mode
+2026-10-27T16:24:42.7178561Z update-alternatives: using /usr/bin/animate-im6.q16 to provide /usr/bin/animate (animate) in auto mode
+2026-10-27T16:24:42.7223852Z update-alternatives: using /usr/bin/animate-im6.q16 to provide /usr/bin/animate-im6 (animate-im6) in auto mode
+2026-10-27T16:24:42.7283112Z update-alternatives: using /usr/bin/convert-im6.q16 to provide /usr/bin/convert (convert) in auto mode
+2026-10-27T16:24:42.7329436Z update-alternatives: using /usr/bin/convert-im6.q16 to provide /usr/bin/convert-im6 (convert-im6) in auto mode
+2026-10-27T16:24:42.7385966Z update-alternatives: using /usr/bin/composite-im6.q16 to provide /usr/bin/composite (composite) in auto mode
+2026-10-27T16:24:42.7431819Z update-alternatives: using /usr/bin/composite-im6.q16 to provide /usr/bin/composite-im6 (composite-im6) in auto mode
+2026-10-27T16:24:42.7489386Z update-alternatives: using /usr/bin/conjure-im6.q16 to provide /usr/bin/conjure (conjure) in auto mode
+2026-10-27T16:24:42.7536273Z update-alternatives: using /usr/bin/conjure-im6.q16 to provide /usr/bin/conjure-im6 (conjure-im6) in auto mode
+2026-10-27T16:24:42.7593460Z update-alternatives: using /usr/bin/import-im6.q16 to provide /usr/bin/import (import) in auto mode
+2026-10-27T16:24:42.7640639Z update-alternatives: using /usr/bin/import-im6.q16 to provide /usr/bin/import-im6 (import-im6) in auto mode
+2026-10-27T16:24:42.7697565Z update-alternatives: using /usr/bin/identify-im6.q16 to provide /usr/bin/identify (identify) in auto mode
+2026-10-27T16:24:42.7744536Z update-alternatives: using /usr/bin/identify-im6.q16 to provide /usr/bin/identify-im6 (identify-im6) in auto mode
+2026-10-27T16:24:42.7804177Z update-alternatives: using /usr/bin/stream-im6.q16 to provide /usr/bin/stream (stream) in auto mode
+2026-10-27T16:24:42.7852179Z update-alternatives: using /usr/bin/stream-im6.q16 to provide /usr/bin/stream-im6 (stream-im6) in auto mode
+2026-10-27T16:24:42.7909972Z update-alternatives: using /usr/bin/display-im6.q16 to provide /usr/bin/display (display) in auto mode
+2026-10-27T16:24:42.7957176Z update-alternatives: using /usr/bin/display-im6.q16 to provide /usr/bin/display-im6 (display-im6) in auto mode
+2026-10-27T16:24:42.8015105Z update-alternatives: using /usr/bin/montage-im6.q16 to provide /usr/bin/montage (montage) in auto mode
+2026-10-27T16:24:42.8063134Z update-alternatives: using /usr/bin/montage-im6.q16 to provide /usr/bin/montage-im6 (montage-im6) in auto mode
+2026-10-27T16:24:42.8121590Z update-alternatives: using /usr/bin/mogrify-im6.q16 to provide /usr/bin/mogrify (mogrify) in auto mode
+2026-10-27T16:24:42.8169868Z update-alternatives: using /usr/bin/mogrify-im6.q16 to provide /usr/bin/mogrify-im6 (mogrify-im6) in auto mode
+2026-10-27T16:24:42.8186851Z Setting up fonts-crosextra-caladea (20200211-2) ...
+2026-10-27T16:24:42.8205702Z Setting up fonts-droid-fallback (1:6.0.1r16-1.1build1) ...
+2026-10-27T16:24:42.8398680Z Setting up poppler-utils (24.02.0-1ubuntu9.11) ...
+2026-10-27T16:24:42.8417615Z Setting up libdjvulibre-text (3.5.28-2ubuntu0.24.04.2) ...
+2026-10-27T16:24:42.8434875Z Setting up xserver-common (2:21.1.12-1ubuntu1.9) ...
+2026-10-27T16:24:42.8452897Z Setting up libjxr-tools (1.2~git20170615.f752187-5.1ubuntu2) ...
+2026-10-27T16:24:42.8471161Z Setting up xdotool (1:3.20160805.1-5build1) ...
+2026-10-27T16:24:42.8490186Z Setting up xvfb (2:21.1.12-1ubuntu1.9) ...
+2026-10-27T16:24:42.8509303Z Setting up libdjvulibre21:amd64 (3.5.28-2ubuntu0.24.04.2) ...
+2026-10-27T16:24:42.8526763Z Setting up xfonts-utils (1:7.7+6build3) ...
+2026-10-27T16:24:42.8565020Z Setting up libopenexr-3-1-30:amd64 (3.1.5-5.1build3) ...
+2026-10-27T16:24:42.8583888Z Setting up imagemagick (8:6.9.12.98+dfsg1-5.2build2) ...
+2026-10-27T16:24:42.8601449Z Setting up libmagickcore-6.q16-7-extra:amd64 (8:6.9.12.98+dfsg1-5.2build2) ...
+2026-10-27T16:24:42.8619169Z Setting up fonts-urw-base35 (20200910-8) ...
+2026-10-27T16:24:43.0127207Z Setting up libgs10-common (10.02.1~dfsg1-0ubuntu7.10) ...
+2026-10-27T16:24:43.0145726Z Setting up libgs10:amd64 (10.02.1~dfsg1-0ubuntu7.10) ...
+2026-10-27T16:24:43.0163634Z Setting up ghostscript (10.02.1~dfsg1-0ubuntu7.10) ...
+2026-10-27T16:24:43.0231115Z Processing triggers for fontconfig (2.15.0-1.1ubuntu2) ...
+2026-10-27T16:24:43.2505924Z Processing triggers for hicolor-icon-theme (0.17-2) ...
+2026-10-27T16:24:43.5403988Z Processing triggers for libc-bin (2.39-0ubuntu8.9) ...
+2026-10-27T16:24:43.5876375Z Processing triggers for man-db (2.12.0-4build2) ...
+2026-10-27T16:24:43.5897596Z Not building database; man-db/auto-update is not 'true'.
+2026-10-27T16:24:44.5557113Z 
+2026-10-27T16:24:44.5557803Z Running kernel seems to be up-to-date.
+2026-10-27T16:24:44.5558148Z 
+2026-10-27T16:24:44.5558353Z No services need to be restarted.
+2026-10-27T16:24:44.5558579Z 
+2026-10-27T16:24:44.5558769Z No containers need to be restarted.
+2026-10-27T16:24:44.5559004Z 
+2026-10-27T16:24:44.5559265Z No user sessions are running outdated binaries.
+2026-10-27T16:24:44.5559540Z 
+2026-10-27T16:24:44.5559898Z No VM guests are running outdated hypervisor (qemu) binaries on this host.
+2026-10-27T16:24:45.3995331Z ##[group]Run test -x /usr/bin/google-chrome
+2026-10-27T16:24:45.3995900Z [36;1mtest -x /usr/bin/google-chrome[0m
+2026-10-27T16:24:45.3996203Z [36;1m/usr/bin/google-chrome --version[0m
+2026-10-27T16:24:45.3996487Z [36;1mpython --version[0m
+2026-10-27T16:24:45.3996722Z [36;1mnode --version[0m
+2026-10-27T16:24:45.3997043Z [36;1mpython tests/ci/browser_suite.py --list --shard 4 --shards 12[0m
+2026-10-27T16:24:45.4068804Z shell: /usr/bin/bash -e {0}
+2026-10-27T16:24:45.4069057Z env:
+2026-10-27T16:24:45.4069318Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.15/x64
+2026-10-27T16:24:45.4069762Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.15/x64/lib/pkgconfig
+2026-10-27T16:24:45.4070195Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.15/x64
+2026-10-27T16:24:45.4070747Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.15/x64
+2026-10-27T16:24:45.4071118Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.15/x64
+2026-10-27T16:24:45.4071528Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.15/x64/lib
+2026-10-27T16:24:45.4071939Z   PLAYWRIGHT_MODULE: /tmp/cc-ui-tools/node_modules/playwright-core
+2026-10-27T16:24:45.4072326Z ##[endgroup]
+2026-10-27T16:24:46.7057787Z Google Chrome 155.0.8059.39 
+2026-10-27T16:24:46.7308644Z Python 3.12.15
+2026-10-27T16:24:46.7342232Z v22.23.3
+2026-10-27T16:24:46.7929905Z {
+2026-10-27T16:24:46.7930406Z   "total_scripts": 471,
+2026-10-27T16:24:46.7930907Z   "selected": [
+2026-10-27T16:24:46.7931453Z     "about_intro_states_browser.cjs",
+2026-10-27T16:24:46.7932210Z     "action_short_height_keyboard_motion_browser.cjs",
+2026-10-27T16:24:46.7932958Z     "answer_captured_browser.cjs",
+2026-10-27T16:24:46.7933619Z     "appearance_input_recovery_browser.cjs",
+2026-10-27T16:24:46.7934315Z     "budget_blocked_action_browser.cjs",
+2026-10-27T16:24:46.7935050Z     "builder_dashboard_height_motion_audit_browser.cjs",
+2026-10-27T16:24:46.7937438Z     "builder_keep_current_singleflight_browser.cjs",
+2026-10-27T16:24:46.7938214Z     "builder_retry_states_browser.cjs",
+2026-10-27T16:24:46.7938902Z     "button_release_inventory_motion_browser.cjs",
+2026-10-27T16:24:46.7939602Z     "chat_action_step_focus_motion_browser.cjs",
+2026-10-27T16:24:46.7939968Z     "chat_shortcuts_audit_browser.cjs",
+2026-10-27T16:24:46.7940309Z     "composer_footer_text_flow_browser.cjs",
+2026-10-27T16:24:46.7940638Z     "config_utility_browser.cjs",
+2026-10-27T16:24:46.7940977Z     "disclosure_runtime_quiet_motion_browser.cjs",
+2026-10-27T16:24:46.7941321Z     "emoji_motion_browser.cjs",
+2026-10-27T16:24:46.7941619Z     "freshness_states_browser.cjs",
+2026-10-27T16:24:46.7941950Z     "helper_detect_geometry_motion_browser.cjs",
+2026-10-27T16:24:46.7942321Z     "helper_try_review_blocked_motion_browser.cjs",
+2026-10-27T16:24:46.7942701Z     "history_insertion_motion_audit_browser.cjs",
+2026-10-27T16:24:46.7943074Z     "import_disclosure_motion_audit_browser.cjs",
+2026-10-27T16:24:46.7943426Z     "local_memory_motion_audit_browser.cjs",
+2026-10-27T16:24:46.7943786Z     "mobile_a11y_expanded_sections_browser.cjs",
+2026-10-27T16:24:46.7944124Z     "model_refresh_states_browser.cjs",
+2026-10-27T16:24:46.7944455Z     "offline_status_motion_audit_browser.cjs",
+2026-10-27T16:24:46.7944792Z     "preview_continuity_browser.cjs",
+2026-10-27T16:24:46.7945104Z     "prompt_growth_states_browser.cjs",
+2026-10-27T16:24:46.7945666Z     "provider_long_configuration_geometry_motion_browser.cjs",
+2026-10-27T16:24:46.7946078Z     "recommendation_restore_browser.cjs",
+2026-10-27T16:24:46.7946408Z     "send_press_motion_audit_browser.cjs",
+2026-10-27T16:24:46.7946722Z     "settings_fuzzy_browser.cjs",
+2026-10-27T16:24:46.7947081Z     "settings_nav_selection_stationary_motion_browser.cjs",
+2026-10-27T16:24:46.7947517Z     "settings_workspace_toggles_levels_motion_browser.cjs",
+2026-10-27T16:24:46.7947892Z     "shared_components_browser.cjs",
+2026-10-27T16:24:46.7948200Z     "simple_branches_browser.cjs",
+2026-10-27T16:24:46.7948546Z     "source_scope_dialog_keyboard_motion_browser.cjs",
+2026-10-27T16:24:46.7949524Z     "source_summary_motion_browser.cjs",
+2026-10-27T16:24:46.7949924Z     "studio_polish_browser.cjs",
+2026-10-27T16:24:46.7950236Z     "topic_navigation_integrity.cjs",
+2026-10-27T16:24:46.7950539Z     "workspace_drop_browser.py"
+2026-10-27T16:24:46.7950780Z   ],
+2026-10-27T16:24:46.7950969Z   "excluded": {
+2026-10-27T16:24:46.7951530Z     "builder_keep_current_native_event_dispatch_diagnostic.cjs": "Instrumented diagnostic copy, not a regression verdict.",
+2026-10-27T16:24:46.7952415Z     "builder_keep_current_removal_motion_browser.diagnostic.cjs": "Instrumented diagnostic copy, not a regression verdict.",
+2026-10-27T16:24:46.7953274Z     "builder_keep_current_runtime_motion_browser.diagnostic.cjs": "Instrumented diagnostic copy, not a regression verdict.",
+2026-10-27T16:24:46.7954128Z     "builder_mark_reviewed_motion_browser.diagnostic.cjs": "Instrumented diagnostic copy, not a regression verdict.",
+2026-10-27T16:24:46.7955127Z     "builder_mounted_preview_current_server_diagnostic.cjs": "Instrumented diagnostic copy, not a regression verdict.",
+2026-10-27T16:24:46.7956172Z     "builder_whole_dashboard_fontstress_browser.diagnostic.cjs": "Instrumented diagnostic copy, not a regression verdict.",
+2026-10-27T16:24:46.7957050Z     "builder_whole_dashboard_status_motion_browser.diagnostic.cjs": "Instrumented diagnostic copy, not a regression verdict.",
+2026-10-27T16:24:46.7957845Z     "choice_quiet_event_order_diagnostic.cjs": "Instrumented diagnostic copy, not a regression verdict.",
+2026-10-27T16:24:46.7958616Z     "choice_runtime_quiet_motion_browser.diagnostic.cjs": "Instrumented diagnostic copy, not a regression verdict.",
+2026-10-27T16:24:46.7959348Z     "mark_completion_diagnostic.cjs": "Instrumented diagnostic copy, not a regression verdict.",
+2026-10-27T16:24:46.7959952Z     "nav_helpers.cjs": "Shared navigation library, exercised by importing cases.",
+2026-10-27T16:24:46.7960592Z     "runtime_active_cancel_diagnostic.cjs": "Instrumented diagnostic copy, not a regression verdict.",
+2026-10-27T16:24:46.7961345Z     "sidebar_secondary_labels_lifecycle_diagnostic.cjs": "Instrumented diagnostic copy, not a regression verdict."
+2026-10-27T16:24:46.7961846Z   }
+2026-10-27T16:24:46.7962019Z }
+2026-10-27T16:24:46.8034947Z ##[group]Run python tests/ci/browser_suite.py --shard 4 --shards 12
+2026-10-27T16:24:46.8035418Z [36;1mpython tests/ci/browser_suite.py --shard 4 --shards 12[0m
+2026-10-27T16:24:46.8104947Z shell: /usr/bin/bash -e {0}
+2026-10-27T16:24:46.8105192Z env:
+2026-10-27T16:24:46.8105712Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.15/x64
+2026-10-27T16:24:46.8106171Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.15/x64/lib/pkgconfig
+2026-10-27T16:24:46.8106626Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.15/x64
+2026-10-27T16:24:46.8107074Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.15/x64
+2026-10-27T16:24:46.8107471Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.15/x64
+2026-10-27T16:24:46.8107852Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.15/x64/lib
+2026-10-27T16:24:46.8108270Z   PLAYWRIGHT_MODULE: /tmp/cc-ui-tools/node_modules/playwright-core
+2026-10-27T16:24:46.8108624Z   PYTHONUNBUFFERED: 1
+2026-10-27T16:24:46.8108836Z ##[endgroup]
+2026-10-27T16:24:58.1680804Z CASE about_intro_states_browser.cjs default PASS exit=0 seconds=11.3
+2026-10-27T16:24:58.1682681Z PASS Aboutintro once/session title180msopacity paragraphdelay40total220 stablegeometry no glyph/move no feature/reload/chatreplay CalmNoneReduceoff3201280
+2026-10-27T16:24:58.1683829Z 
+2026-10-27T16:25:20.2296944Z CASE action_short_height_keyboard_motion_browser.cjs default PASS exit=0 seconds=22.1
+2026-10-27T16:25:20.2298274Z PASS action shortheight longreview nativeTab prepare/confirm503 BackEnter draftretained Escape focusreturn3201280normalReduce
+2026-10-27T16:25:20.2298998Z 
+2026-10-27T16:25:27.3336281Z CASE answer_captured_browser.cjs default PASS exit=0 seconds=7.1
+2026-10-27T16:25:27.3338877Z PASS answer saved3;newer7 retained;successfulsave baseline3 stays dirty,320 fixture
+2026-10-27T16:25:27.3339896Z 
+2026-10-27T16:25:38.3160421Z CASE appearance_input_recovery_browser.cjs default PASS exit=0 seconds=11.0
+2026-10-27T16:25:38.3162116Z PASS appearancehexinvalid Auto/validswatch/clearempty clearscustomvalidity keyboardrange keepsfocus3201280reduce/normal
+2026-10-27T16:25:38.3163037Z 
+2026-10-27T16:25:40.7556486Z CASE budget_blocked_action_browser.cjs default PASS exit=0 seconds=2.4
+2026-10-27T16:25:40.7558271Z PASS actualfixture429budgetcause nearaffectedcomposer Retryvisible no billingclaim noimplicitretry newerDraftretained3201280
+2026-10-27T16:25:40.7559305Z 
+2026-10-27T16:25:55.0791498Z CASE builder_dashboard_height_motion_audit_browser.cjs default PASS exit=0 seconds=14.3
+2026-10-27T16:25:55.0792892Z BOARD 320 {"height":94,"cards":[{"height":94,"title":19}]}
+2026-10-27T16:25:55.0794342Z BOARD 1280 {"height":94,"cards":[{"height":94,"title":19}]}
+2026-10-27T16:25:55.0796011Z PASS actualgroupboardcardheight/titleoffsetexact queued/running/received/error3201280
+2026-10-27T16:25:55.0796620Z 
+2026-10-27T16:26:08.2193905Z CASE builder_keep_current_singleflight_browser.cjs default PASS exit=0 seconds=13.1
+2026-10-27T16:26:08.2196223Z PASS Keepcurrent immediateinvalidatesreview heldparse singleflightdisablededitor ccdialogEnterfocusrestore3201280normalReduce noModelSavecalls
+2026-10-27T16:26:08.2197137Z 
+2026-10-27T16:26:12.6693437Z CASE builder_retry_states_browser.cjs default PASS exit=0 seconds=4.4
+2026-10-27T16:26:12.6694613Z PASS recovery secondary/failedcount/duplicateguard/delayedretryfailurekeepsreadydrafts/retryallowedagain/runningnotenabled3201280fixture
+2026-10-27T16:26:12.6695283Z 
+2026-10-27T16:26:42.2734882Z CASE button_release_inventory_motion_browser.cjs 320-no-preference PASS exit=0 seconds=29.6
+2026-10-27T16:26:42.2736937Z RELEASE 320 no-preference BUTTON|icon nav-toggle|navToggle navToggle
+2026-10-27T16:26:42.2738103Z RELEASE 320 no-preference BUTTON|theme-btn themeBtn
+2026-10-27T16:26:42.2739091Z RELEASE 320 no-preference BUTTON|icon menu|menu menu
+2026-10-27T16:26:42.2740131Z RELEASE 320 no-preference BUTTON|icon|readingBtn readingBtn
+2026-10-27T16:26:42.2741070Z RELEASE 320 no-preference BUTTON|cs-btn null
+2026-10-27T16:26:42.2742442Z RELEASE 320 no-preference BUTTON|icon|prevQ prevQ
+2026-10-27T16:26:42.2743158Z RELEASE 320 no-preference BUTTON|icon|nextQ nextQ
+2026-10-27T16:26:42.2743681Z RELEASE 320 no-preference BUTTON|icon|tempBtn tempBtn
+2026-10-27T16:26:42.2744166Z RELEASE 320 no-preference BUTTON|icon|profileBtn profileBtn
+2026-10-27T16:26:42.2744662Z RELEASE 320 no-preference BUTTON|icon|newTopic newTopic
+2026-10-27T16:26:42.2745137Z RELEASE 320 no-preference BUTTON|icon|exportChat exportChat
+2026-10-27T16:26:42.2746153Z RELEASE 320 no-preference BUTTON|icon|upload upload
+2026-10-27T16:26:42.2746616Z RELEASE 320 no-preference BUTTON|icon|mic mic
+2026-10-27T16:26:42.2747080Z RELEASE 320 no-preference BUTTON|chip toolsToggle
+2026-10-27T16:26:42.2747542Z RELEASE 320 no-preference BUTTON|cc-guide-replay aboutGuide
+2026-10-27T16:26:42.2748000Z RELEASE 320 no-preference BUTTON| feature-tab-chat
+2026-10-27T16:26:42.2748480Z RELEASE 320 no-preference BUTTON|feature-added feature-tab-search
+2026-10-27T16:26:42.2748913Z RELEASE 320 no-preference SUMMARY| null
+2026-10-27T16:26:42.2749291Z RELEASE 320 no-preference BUTTON|go ghost null
+2026-10-27T16:26:42.2749688Z RELEASE 320 no-preference BUTTON|go green null
+2026-10-27T16:26:42.2750078Z RELEASE 320 no-preference BUTTON|info-tip null
+2026-10-27T16:26:42.2750460Z RELEASE 320 no-preference BUTTON|chipmore null
+2026-10-27T16:26:42.2750864Z RELEASE 320 no-preference BUTTON|go blue big apply
+2026-10-27T16:26:42.2751292Z RELEASE 320 no-preference BUTTON|editor-choice null
+2026-10-27T16:26:42.2751692Z RELEASE 320 no-preference BUTTON|go blue null
+2026-10-27T16:26:42.2752139Z RELEASE 320 no-preference BUTTON|go ghost helper-detect null
+2026-10-27T16:26:42.2752642Z RELEASE 320 no-preference BUTTON|go ghost helper-copy null
+2026-10-27T16:26:42.2753070Z RELEASE 320 no-preference BUTTON|preset null
+2026-10-27T16:26:42.2753472Z RELEASE 320 no-preference BUTTON|preset more null
+2026-10-27T16:26:42.2753905Z RELEASE 320 no-preference BUTTON|emoji-tile f-emoji_bot
+2026-10-27T16:26:42.2754303Z RELEASE 320 no-preference BUTTON|mini null
+2026-10-27T16:26:42.2754705Z RELEASE 320 no-preference BUTTON|settings-help-open null
+2026-10-27T16:26:42.2755459Z PASS release noOvershoot scale94to100 translate<=3.1 classfamilyinventory 32 no mutations; requested matrix 320 no-preference
+2026-10-27T16:26:42.2756232Z 
+2026-10-27T16:27:10.5727552Z CASE button_release_inventory_motion_browser.cjs 320-reduce PASS exit=0 seconds=28.3
+2026-10-27T16:27:10.5729692Z RELEASE 320 reduce BUTTON|icon nav-toggle|navToggle navToggle
+2026-10-27T16:27:10.5731058Z RELEASE 320 reduce BUTTON|theme-btn themeBtn
+2026-10-27T16:27:10.5732121Z RELEASE 320 reduce BUTTON|icon menu|menu menu
+2026-10-27T16:27:10.5733860Z RELEASE 320 reduce BUTTON|icon|readingBtn readingBtn
+2026-10-27T16:27:10.5734732Z RELEASE 320 reduce BUTTON|cs-btn null
+2026-10-27T16:27:10.5735188Z RELEASE 320 reduce BUTTON|icon|prevQ prevQ
+2026-10-27T16:27:10.5736050Z RELEASE 320 reduce BUTTON|icon|nextQ nextQ
+2026-10-27T16:27:10.5736569Z RELEASE 320 reduce BUTTON|icon|tempBtn tempBtn
+2026-10-27T16:27:10.5737152Z RELEASE 320 reduce BUTTON|icon|profileBtn profileBtn
+2026-10-27T16:27:10.5737775Z RELEASE 320 reduce BUTTON|icon|newTopic newTopic
+2026-10-27T16:27:10.5738251Z RELEASE 320 reduce BUTTON|icon|exportChat exportChat
+2026-10-27T16:27:10.5738742Z RELEASE 320 reduce BUTTON|icon|upload upload
+2026-10-27T16:27:10.5739147Z RELEASE 320 reduce BUTTON|icon|mic mic
+2026-10-27T16:27:10.5739541Z RELEASE 320 reduce BUTTON|chip toolsToggle
+2026-10-27T16:27:10.5739999Z RELEASE 320 reduce BUTTON|cc-guide-replay aboutGuide
+2026-10-27T16:27:10.5740446Z RELEASE 320 reduce BUTTON| feature-tab-chat
+2026-10-27T16:27:10.5740937Z RELEASE 320 reduce BUTTON|feature-added feature-tab-search
+2026-10-27T16:27:10.5741391Z RELEASE 320 reduce SUMMARY| null
+2026-10-27T16:27:10.5741756Z RELEASE 320 reduce BUTTON|go ghost null
+2026-10-27T16:27:10.5742152Z RELEASE 320 reduce BUTTON|go green null
+2026-10-27T16:27:10.5742548Z RELEASE 320 reduce BUTTON|info-tip null
+2026-10-27T16:27:10.5742930Z RELEASE 320 reduce BUTTON|chipmore null
+2026-10-27T16:27:10.5743541Z RELEASE 320 reduce BUTTON|go blue big apply
+2026-10-27T16:27:10.5743975Z RELEASE 320 reduce BUTTON|editor-choice null
+2026-10-27T16:27:10.5744312Z RELEASE 320 reduce BUTTON|go blue null
+2026-10-27T16:27:10.5744684Z RELEASE 320 reduce BUTTON|go ghost helper-detect null
+2026-10-27T16:27:10.5745106Z RELEASE 320 reduce BUTTON|go ghost helper-copy null
+2026-10-27T16:27:10.5745468Z RELEASE 320 reduce BUTTON|preset null
+2026-10-27T16:27:10.5746053Z RELEASE 320 reduce BUTTON|preset more null
+2026-10-27T16:27:10.5746416Z RELEASE 320 reduce BUTTON|emoji-tile f-emoji_bot
+2026-10-27T16:27:10.5746756Z RELEASE 320 reduce BUTTON|mini null
+2026-10-27T16:27:10.5747110Z RELEASE 320 reduce BUTTON|settings-help-open null
+2026-10-27T16:27:10.5747805Z PASS release noOvershoot scale94to100 translate<=3.1 classfamilyinventory 32 no mutations; requested matrix 320 reduce
+2026-10-27T16:27:10.5748255Z 
+2026-10-27T16:27:41.5874154Z CASE button_release_inventory_motion_browser.cjs 1280-no-preference PASS exit=0 seconds=31.0
+2026-10-27T16:27:41.5875242Z RELEASE 1280 no-preference BUTTON|cc-guide-replay chatGuide
+2026-10-27T16:27:41.5876421Z RELEASE 1280 no-preference BUTTON|theme-btn themeBtn
+2026-10-27T16:27:41.5877009Z RELEASE 1280 no-preference BUTTON|btn-dark newChat
+2026-10-27T16:27:41.5877704Z RELEASE 1280 no-preference BUTTON|btn-out tempPill
+2026-10-27T16:27:41.5878287Z RELEASE 1280 no-preference BUTTON|tab on history-chats
+2026-10-27T16:27:41.5878965Z RELEASE 1280 no-preference BUTTON|tab history-topics
+2026-10-27T16:27:41.5879543Z RELEASE 1280 no-preference BUTTON|icon menu|menu menu
+2026-10-27T16:27:41.5880257Z RELEASE 1280 no-preference BUTTON|icon|readingBtn readingBtn
+2026-10-27T16:27:41.5880849Z RELEASE 1280 no-preference BUTTON|cs-btn null
+2026-10-27T16:27:41.5881558Z RELEASE 1280 no-preference BUTTON|icon|prevQ prevQ
+2026-10-27T16:27:41.5882188Z RELEASE 1280 no-preference BUTTON|icon|nextQ nextQ
+2026-10-27T16:27:41.5882933Z RELEASE 1280 no-preference BUTTON|icon|tempBtn tempBtn
+2026-10-27T16:27:41.5883741Z RELEASE 1280 no-preference BUTTON|icon|profileBtn profileBtn
+2026-10-27T16:27:41.5884482Z RELEASE 1280 no-preference BUTTON|icon|exportChat exportChat
+2026-10-27T16:27:41.5885051Z RELEASE 1280 no-preference BUTTON|icon|upload upload
+2026-10-27T16:27:41.5885636Z RELEASE 1280 no-preference BUTTON|icon|mic mic
+2026-10-27T16:27:41.5886105Z RELEASE 1280 no-preference BUTTON|chip scopeBtn
+2026-10-27T16:27:41.5886514Z RELEASE 1280 no-preference BUTTON| feature-tab-chat
+2026-10-27T16:27:41.5887007Z RELEASE 1280 no-preference BUTTON|feature-added feature-tab-search
+2026-10-27T16:27:41.5887445Z RELEASE 1280 no-preference SUMMARY| null
+2026-10-27T16:27:41.5888149Z RELEASE 1280 no-preference BUTTON|go ghost null
+2026-10-27T16:27:41.5888555Z RELEASE 1280 no-preference BUTTON|go green null
+2026-10-27T16:27:41.5888944Z RELEASE 1280 no-preference BUTTON|info-tip null
+2026-10-27T16:27:41.5889339Z RELEASE 1280 no-preference BUTTON|chipmore null
+2026-10-27T16:27:41.5889742Z RELEASE 1280 no-preference BUTTON|go blue big apply
+2026-10-27T16:27:41.5890169Z RELEASE 1280 no-preference BUTTON|editor-choice null
+2026-10-27T16:27:41.5890583Z RELEASE 1280 no-preference BUTTON|go blue null
+2026-10-27T16:27:41.5891078Z RELEASE 1280 no-preference BUTTON|go ghost helper-detect null
+2026-10-27T16:27:41.5891580Z RELEASE 1280 no-preference BUTTON|go ghost helper-copy null
+2026-10-27T16:27:41.5892022Z RELEASE 1280 no-preference BUTTON|preset null
+2026-10-27T16:27:41.5892422Z RELEASE 1280 no-preference BUTTON|preset more null
+2026-10-27T16:27:41.5892861Z RELEASE 1280 no-preference BUTTON|emoji-tile f-emoji_bot
+2026-10-27T16:27:41.5893384Z RELEASE 1280 no-preference BUTTON|mini null
+2026-10-27T16:27:41.5893923Z RELEASE 1280 no-preference BUTTON|settings-help-open null
+2026-10-27T16:27:41.5894746Z PASS release noOvershoot scale94to100 translate<=3.1 classfamilyinventory 34 no mutations; requested matrix 1280 no-preference
+2026-10-27T16:27:41.5895270Z 
+2026-10-27T16:28:11.2355356Z CASE button_release_inventory_motion_browser.cjs 1280-reduce PASS exit=0 seconds=29.6
+2026-10-27T16:28:11.2357137Z RELEASE 1280 reduce BUTTON|cc-guide-replay chatGuide
+2026-10-27T16:28:11.2357719Z RELEASE 1280 reduce BUTTON|theme-btn themeBtn
+2026-10-27T16:28:11.2358207Z RELEASE 1280 reduce BUTTON|btn-dark newChat
+2026-10-27T16:28:11.2358663Z RELEASE 1280 reduce BUTTON|btn-out tempPill
+2026-10-27T16:28:11.2359143Z RELEASE 1280 reduce BUTTON|tab on history-chats
+2026-10-27T16:28:11.2359830Z RELEASE 1280 reduce BUTTON|tab history-topics
+2026-10-27T16:28:11.2360397Z RELEASE 1280 reduce BUTTON|icon menu|menu menu
+2026-10-27T16:28:11.2361088Z RELEASE 1280 reduce BUTTON|icon|readingBtn readingBtn
+2026-10-27T16:28:11.2361647Z RELEASE 1280 reduce BUTTON|cs-btn null
+2026-10-27T16:28:11.2362200Z RELEASE 1280 reduce BUTTON|icon|prevQ prevQ
+2026-10-27T16:28:11.2362694Z RELEASE 1280 reduce BUTTON|icon|nextQ nextQ
+2026-10-27T16:28:11.2363196Z RELEASE 1280 reduce BUTTON|icon|tempBtn tempBtn
+2026-10-27T16:28:11.2363822Z RELEASE 1280 reduce BUTTON|icon|profileBtn profileBtn
+2026-10-27T16:28:11.2364328Z RELEASE 1280 reduce BUTTON|icon|exportChat exportChat
+2026-10-27T16:28:11.2364784Z RELEASE 1280 reduce BUTTON|icon|upload upload
+2026-10-27T16:28:11.2365195Z RELEASE 1280 reduce BUTTON|icon|mic mic
+2026-10-27T16:28:11.2365850Z RELEASE 1280 reduce BUTTON|chip scopeBtn
+2026-10-27T16:28:11.2366278Z RELEASE 1280 reduce BUTTON| feature-tab-chat
+2026-10-27T16:28:11.2366788Z RELEASE 1280 reduce BUTTON|feature-added feature-tab-search
+2026-10-27T16:28:11.2367246Z RELEASE 1280 reduce SUMMARY| null
+2026-10-27T16:28:11.2367621Z RELEASE 1280 reduce BUTTON|go ghost null
+2026-10-27T16:28:11.2368019Z RELEASE 1280 reduce BUTTON|go green null
+2026-10-27T16:28:11.2368421Z RELEASE 1280 reduce BUTTON|info-tip null
+2026-10-27T16:28:11.2368810Z RELEASE 1280 reduce BUTTON|chipmore null
+2026-10-27T16:28:11.2369212Z RELEASE 1280 reduce BUTTON|go blue big apply
+2026-10-27T16:28:11.2369637Z RELEASE 1280 reduce BUTTON|editor-choice null
+2026-10-27T16:28:11.2370047Z RELEASE 1280 reduce BUTTON|go blue null
+2026-10-27T16:28:11.2370505Z RELEASE 1280 reduce BUTTON|go ghost helper-detect null
+2026-10-27T16:28:11.2371008Z RELEASE 1280 reduce BUTTON|go ghost helper-copy null
+2026-10-27T16:28:11.2371388Z RELEASE 1280 reduce BUTTON|preset null
+2026-10-27T16:28:11.2371714Z RELEASE 1280 reduce BUTTON|preset more null
+2026-10-27T16:28:11.2372073Z RELEASE 1280 reduce BUTTON|emoji-tile f-emoji_bot
+2026-10-27T16:28:11.2372413Z RELEASE 1280 reduce BUTTON|mini null
+2026-10-27T16:28:11.2372764Z RELEASE 1280 reduce BUTTON|settings-help-open null
+2026-10-27T16:28:11.2373460Z PASS release noOvershoot scale94to100 translate<=3.1 classfamilyinventory 34 no mutations; requested matrix 1280 reduce
+2026-10-27T16:28:11.2374115Z 
+2026-10-27T16:28:23.1588854Z CASE chat_action_step_focus_motion_browser.cjs default PASS exit=0 seconds=11.9
+2026-10-27T16:28:23.1590407Z PASS noteform-humanlabels exactreview-noJSON guardedrequests failedexecute-freshreview draftretained resultcards focusreturn3201280fixture
+2026-10-27T16:28:23.1591301Z 
+2026-10-27T16:28:54.6192657Z CASE chat_shortcuts_audit_browser.cjs default FAIL exit=1 seconds=31.5
+2026-10-27T16:28:54.6193526Z locator.click: Timeout 30000ms exceeded.
+2026-10-27T16:28:54.6193892Z Call log:
+2026-10-27T16:28:54.6194325Z   - waiting for getByRole('button', { name: /Add documents Upload your files/ })
+2026-10-27T16:28:54.6194724Z 
+2026-10-27T16:28:54.6195062Z     at /home/runner/work/Chatify/Chatify/tests/chat_shortcuts_audit_browser.cjs:2:627 {
+2026-10-27T16:28:54.6196062Z   name: 'TimeoutError'
+2026-10-27T16:28:54.6196372Z }
+2026-10-27T16:28:54.6196508Z 
+2026-10-27T16:28:58.6657891Z CASE composer_footer_text_flow_browser.cjs default PASS exit=0 seconds=4.0
+2026-10-27T16:28:58.6659347Z PASS composerFooter continuousTextFlow noStrayDot noFlexColumns3201280LeftRight
+2026-10-27T16:28:58.6659940Z 
+2026-10-27T16:29:04.1768131Z CASE config_utility_browser.cjs default PASS exit=0 seconds=5.5
+2026-10-27T16:29:04.1770154Z PASS utility grouping/aligned44pxcontrols3207601280/local-noresult/Demo-disabled/guidebusy503retainedquestion+nochanges
+2026-10-27T16:29:04.1771777Z 
+2026-10-27T16:29:14.8618393Z CASE disclosure_runtime_quiet_motion_browser.cjs default PASS exit=0 seconds=10.7
+2026-10-27T16:29:14.8619712Z QUIETREVEAL 320 reduce provider active160cancelled focused control unchanged
+2026-10-27T16:29:14.8620552Z QUIETREVEAL 320 reduce preset active160cancelled focused control unchanged
+2026-10-27T16:29:14.8621330Z QUIETREVEAL 320 reduce fields active160cancelled focused control unchanged
+2026-10-27T16:29:14.8622071Z QUIETREVEAL 320 none provider active160cancelled focused control unchanged
+2026-10-27T16:29:14.8622805Z QUIETREVEAL 320 none preset active160cancelled focused control unchanged
+2026-10-27T16:29:14.8623529Z QUIETREVEAL 320 none fields active160cancelled focused control unchanged
+2026-10-27T16:29:14.8624093Z QUIETREVEAL 320 calm provider active160cancelled focused control unchanged
+2026-10-27T16:29:14.8624657Z QUIETREVEAL 320 calm preset active160cancelled focused control unchanged
+2026-10-27T16:29:14.8625224Z QUIETREVEAL 320 calm fields active160cancelled focused control unchanged
+2026-10-27T16:29:14.8626095Z QUIETREVEAL 1280 reduce provider active160cancelled focused control unchanged
+2026-10-27T16:29:14.8626718Z QUIETREVEAL 1280 reduce preset active160cancelled focused control unchanged
+2026-10-27T16:29:14.8627308Z QUIETREVEAL 1280 reduce fields active160cancelled focused control unchanged
+2026-10-27T16:29:14.8627891Z QUIETREVEAL 1280 none provider active160cancelled focused control unchanged
+2026-10-27T16:29:14.8628472Z QUIETREVEAL 1280 none preset active160cancelled focused control unchanged
+2026-10-27T16:29:14.8629037Z QUIETREVEAL 1280 none fields active160cancelled focused control unchanged
+2026-10-27T16:29:14.8629614Z QUIETREVEAL 1280 calm provider active160cancelled focused control unchanged
+2026-10-27T16:29:14.8630190Z QUIETREVEAL 1280 calm preset active160cancelled focused control unchanged
+2026-10-27T16:29:14.8630742Z QUIETREVEAL 1280 calm fields active160cancelled focused control unchanged
+2026-10-27T16:29:14.8631444Z PASS providerextras/presetmore/fielddisclosure runtimeReduceNoneCalm18states3201280 noSavecalls
+2026-10-27T16:29:14.8631869Z 
+2026-10-27T16:29:35.6689531Z CASE emoji_motion_browser.cjs default PASS exit=0 seconds=20.8
+2026-10-27T16:29:35.6690377Z SYNCHRONOUSSEARCH 320 reduce [
+2026-10-27T16:29:35.6691100Z   { value: 'bea', count: 1, beaming: true },
+2026-10-27T16:29:35.6691936Z   { value: 'beaming', count: 1, beaming: true },
+2026-10-27T16:29:35.6692838Z   { value: 'unmatched-fixture', count: 0, beaming: false },
+2026-10-27T16:29:35.6693680Z   { value: 'beaming', count: 1, beaming: true }
+2026-10-27T16:29:35.6694207Z ]
+2026-10-27T16:29:35.6695074Z SYNCHRONOUSSEARCH 320 no-preference [
+2026-10-27T16:29:35.6695979Z   { value: 'bea', count: 1, beaming: true },
+2026-10-27T16:29:35.6696597Z   { value: 'beaming', count: 1, beaming: true },
+2026-10-27T16:29:35.6697298Z   { value: 'unmatched-fixture', count: 0, beaming: false },
+2026-10-27T16:29:35.6697885Z   { value: 'beaming', count: 1, beaming: true }
+2026-10-27T16:29:35.6698212Z ]
+2026-10-27T16:29:35.6698503Z SYNCHRONOUSSEARCH 1280 reduce [
+2026-10-27T16:29:35.6698858Z   { value: 'bea', count: 1, beaming: true },
+2026-10-27T16:29:35.6699244Z   { value: 'beaming', count: 1, beaming: true },
+2026-10-27T16:29:35.6699688Z   { value: 'unmatched-fixture', count: 0, beaming: false },
+2026-10-27T16:29:35.6700126Z   { value: 'beaming', count: 1, beaming: true }
+2026-10-27T16:29:35.6700446Z ]
+2026-10-27T16:29:35.6700746Z SYNCHRONOUSSEARCH 1280 no-preference [
+2026-10-27T16:29:35.6701124Z   { value: 'bea', count: 1, beaming: true },
+2026-10-27T16:29:35.6701510Z   { value: 'beaming', count: 1, beaming: true },
+2026-10-27T16:29:35.6702250Z   { value: 'unmatched-fixture', count: 0, beaming: false },
+2026-10-27T16:29:35.6702800Z   { value: 'beaming', count: 1, beaming: true }
+2026-10-27T16:29:35.6703257Z ]
+2026-10-27T16:29:35.6704684Z PASS picker160ms.98scale noovershoot singlecategory120msfade searchresults selectedhighlight staticnormalemoji avatarinplace rows/bubblesnotrebuilt/noanimation resetdefault Escape/focus3201280bothmotion
+2026-10-27T16:29:35.6705912Z 
+2026-10-27T16:29:41.1177119Z CASE freshness_states_browser.cjs default PASS exit=0 seconds=5.4
+2026-10-27T16:29:41.1178708Z PASS freshness changes/count units, preserved last status/error recovery, duplicate guard,320 fixture
+2026-10-27T16:29:41.1192948Z 
+2026-10-27T16:29:48.4346277Z CASE helper_detect_geometry_motion_browser.cjs default PASS exit=0 seconds=7.3
+2026-10-27T16:29:48.4347700Z PASS helperDetectAPI Detecting geometry and adjacentSavekey stable3201280normalReduce
+2026-10-27T16:29:48.4348185Z 
+2026-10-27T16:29:58.5326943Z CASE helper_try_review_blocked_motion_browser.cjs default PASS exit=0 seconds=10.1
+2026-10-27T16:29:58.5328332Z PASS helperTry invalidreview/stalesample blockexecution preservevaluesfocus3201280normalReduce
+2026-10-27T16:29:58.5328880Z 
+2026-10-27T16:30:07.0934287Z CASE history_insertion_motion_audit_browser.cjs default PASS exit=0 seconds=8.6
+2026-10-27T16:30:07.0940135Z SEARCH 320 no-preference [{"name":"m-in","time":"0.18s","easing":"cubic-bezier(0.2, 0.8, 0.2, 1)","transform":"none","keyframes":["none","none"]},{"name":"m-in","time":"0.18s","easing":"cubic-bezier(0.2, 0.8, 0.2, 1)","transform":"none","keyframes":["none","none"]},{"name":"m-in","time":"0.18s","easing":"cubic-bezier(0.2, 0.8, 0.2, 1)","transform":"none","keyframes":["none","none"]},{"name":"m-in","time":"0.18s","easing":"cubic-bezier(0.2, 0.8, 0.2, 1)","transform":"none","keyframes":["none","none"]}] single replacement fade no mutation replay
+2026-10-27T16:30:07.0946278Z SEARCH 320 reduce [{"name":"none","time":"0s","easing":"ease","transform":"none","keyframes":[]},{"name":"none","time":"0s","easing":"ease","transform":"none","keyframes":[]},{"name":"none","time":"0s","easing":"ease","transform":"none","keyframes":[]},{"name":"none","time":"0s","easing":"ease","transform":"none","keyframes":[]}] single replacement fade no mutation replay
+2026-10-27T16:30:07.0952052Z SEARCH 1280 no-preference [{"name":"m-in","time":"0.18s","easing":"cubic-bezier(0.2, 0.8, 0.2, 1)","transform":"none","keyframes":["none","none"]},{"name":"m-in","time":"0.18s","easing":"cubic-bezier(0.2, 0.8, 0.2, 1)","transform":"none","keyframes":["none","none"]},{"name":"m-in","time":"0.18s","easing":"cubic-bezier(0.2, 0.8, 0.2, 1)","transform":"none","keyframes":["none","none"]},{"name":"m-in","time":"0.18s","easing":"cubic-bezier(0.2, 0.8, 0.2, 1)","transform":"none","keyframes":["none","none"]}] single replacement fade no mutation replay
+2026-10-27T16:30:07.0957729Z SEARCH 1280 reduce [{"name":"none","time":"0s","easing":"ease","transform":"none","keyframes":[]},{"name":"none","time":"0s","easing":"ease","transform":"none","keyframes":[]},{"name":"none","time":"0s","easing":"ease","transform":"none","keyframes":[]},{"name":"none","time":"0s","easing":"ease","transform":"none","keyframes":[]}] single replacement fade no mutation replay
+2026-10-27T16:30:07.0959855Z PASS receivednewhistoryrow180opacity only afterresponse once staticmutations no reanimation3201280normalReduce
+2026-10-27T16:30:07.0960661Z 
+2026-10-27T16:30:18.9662539Z CASE import_disclosure_motion_audit_browser.cjs default PASS exit=0 seconds=11.9
+2026-10-27T16:30:18.9666713Z IMPORT 320 no-preference realofflineYAMLreview nativeEnter160chevron noheight/transform NoneReduceoff load0
+2026-10-27T16:30:18.9668147Z IMPORT 320 reduce realofflineYAMLreview nativeEnter160chevron noheight/transform NoneReduceoff load0
+2026-10-27T16:30:18.9669436Z IMPORT 1280 no-preference realofflineYAMLreview nativeEnter160chevron noheight/transform NoneReduceoff load0
+2026-10-27T16:30:18.9670446Z IMPORT 1280 reduce realofflineYAMLreview nativeEnter160chevron noheight/transform NoneReduceoff load0
+2026-10-27T16:30:18.9671395Z PASS successfulofflineImportreview disclosures read/keyboard/motion noLoad3201280normalReduce
+2026-10-27T16:30:18.9671854Z 
+2026-10-27T16:30:39.7680903Z CASE local_memory_motion_audit_browser.cjs default PASS exit=0 seconds=20.8
+2026-10-27T16:30:39.7683505Z MEMORY 320 reduce Details [{"width":"50%","name":"none"},{"width":"45%","name":"none"},{"width":"55%","name":"none"},{"width":"85%","name":"none"}]
+2026-10-27T16:30:39.7686349Z MEMORY 320 reduce Details [{"width":"50%","name":"none"},{"width":"45%","name":"none"},{"width":"55%","name":"none"},{"width":"85%","name":"none"}]
+2026-10-27T16:30:39.7688958Z MEMORY 320 no-preference Details [{"width":"50%","name":"none"},{"width":"45%","name":"none"},{"width":"55%","name":"none"},{"width":"85%","name":"none"}]
+2026-10-27T16:30:39.7691968Z MEMORY 320 no-preference Details [{"width":"50%","name":"none"},{"width":"45%","name":"none"},{"width":"55%","name":"none"},{"width":"85%","name":"none"}]
+2026-10-27T16:30:39.7693931Z MEMORY 1280 reduce Details [{"width":"50%","name":"none"},{"width":"45%","name":"none"},{"width":"55%","name":"none"},{"width":"85%","name":"none"}]
+2026-10-27T16:30:39.7696106Z MEMORY 1280 reduce Details [{"width":"50%","name":"none"},{"width":"45%","name":"none"},{"width":"55%","name":"none"},{"width":"85%","name":"none"}]
+2026-10-27T16:30:39.7698142Z MEMORY 1280 no-preference Details [{"width":"50%","name":"none"},{"width":"45%","name":"none"},{"width":"55%","name":"none"},{"width":"85%","name":"none"}]
+2026-10-27T16:30:39.7700251Z MEMORY 1280 no-preference Details [{"width":"50%","name":"none"},{"width":"45%","name":"none"},{"width":"55%","name":"none"},{"width":"85%","name":"none"}]
+2026-10-27T16:30:39.7702059Z PASS localothers160msgroupopacity only no moves existingcards geometryexact reduceoff fixture3201280
+2026-10-27T16:30:39.7702843Z 
+2026-10-27T16:31:20.1128355Z CASE mobile_a11y_expanded_sections_browser.cjs default PASS exit=0 seconds=40.3
+2026-10-27T16:31:20.1129391Z 320 #sec-finish 
+2026-10-27T16:31:20.1129773Z 320 #sec-portable 
+2026-10-27T16:31:20.1130265Z 320 #sec-workspace-list 
+2026-10-27T16:31:20.1130892Z 320 #sec-workspace-changes 
+2026-10-27T16:31:20.1131420Z 320 #sec-workspace-backup 
+2026-10-27T16:31:20.1131804Z 320 #sec-workspace-tests 
+2026-10-27T16:31:20.1132231Z 320 #sec-workspace-deploy 
+2026-10-27T16:31:20.1132678Z 320 #sec-model 
+2026-10-27T16:31:20.1133077Z 320 #sec-search 
+2026-10-27T16:31:20.1133466Z 320 #sec-prompts 
+2026-10-27T16:31:20.1133861Z 320 #sec-code 
+2026-10-27T16:31:20.1134255Z 320 #sec-presets 
+2026-10-27T16:31:20.1134675Z 320 #sec-wording 
+2026-10-27T16:31:20.1135066Z 320 #sec-colors 
+2026-10-27T16:31:20.1135734Z 320 #sec-background 
+2026-10-27T16:31:20.1136165Z 320 #sec-fonts 
+2026-10-27T16:31:20.1136541Z 320 #sec-shape 
+2026-10-27T16:31:20.1136906Z 320 #sec-emoji 
+2026-10-27T16:31:20.1137265Z 320 #sec-motion 
+2026-10-27T16:31:20.1137619Z 320 #sec-layout 
+2026-10-27T16:31:20.1138000Z 320 #sec-freshness 
+2026-10-27T16:31:20.1138353Z 320 #sec-budget 
+2026-10-27T16:31:20.1140833Z 1280 #sec-finish 
+2026-10-27T16:31:20.1141274Z 1280 #sec-portable 
+2026-10-27T16:31:20.1141712Z 1280 #sec-workspace-list 
+2026-10-27T16:31:20.1142181Z 1280 #sec-workspace-changes 
+2026-10-27T16:31:20.1142642Z 1280 #sec-workspace-backup 
+2026-10-27T16:31:20.1143082Z 1280 #sec-workspace-tests 
+2026-10-27T16:31:20.1143528Z 1280 #sec-workspace-deploy 
+2026-10-27T16:31:20.1143949Z 1280 #sec-model 
+2026-10-27T16:31:20.1144324Z 1280 #sec-search 
+2026-10-27T16:31:20.1144690Z 1280 #sec-prompts 
+2026-10-27T16:31:20.1145059Z 1280 #sec-code 
+2026-10-27T16:31:20.1145428Z 1280 #sec-presets 
+2026-10-27T16:31:20.1146106Z 1280 #sec-wording 
+2026-10-27T16:31:20.1146464Z 1280 #sec-colors 
+2026-10-27T16:31:20.1146856Z 1280 #sec-background 
+2026-10-27T16:31:20.1147241Z 1280 #sec-fonts 
+2026-10-27T16:31:20.1147600Z 1280 #sec-shape 
+2026-10-27T16:31:20.1147964Z 1280 #sec-emoji 
+2026-10-27T16:31:20.1148416Z 1280 #sec-motion 
+2026-10-27T16:31:20.1148795Z 1280 #sec-layout 
+2026-10-27T16:31:20.1149217Z 1280 #sec-freshness 
+2026-10-27T16:31:20.1149623Z 1280 #sec-budget 
+2026-10-27T16:31:20.1149842Z 
+2026-10-27T16:31:28.6739664Z CASE model_refresh_states_browser.cjs default PASS exit=0 seconds=8.6
+2026-10-27T16:31:28.6740798Z PASS delayedmodelrefresh keepsnewertypedmodel selectedlistedmodel retained aria-busylifecycle3201280fixture
+2026-10-27T16:31:28.6741475Z 
+2026-10-27T16:31:42.9192964Z CASE offline_status_motion_audit_browser.cjs default PASS exit=0 seconds=14.2
+2026-10-27T16:31:42.9195124Z OFFLINE 320 no-preference Chatbadge/landing explanation settingsbadge static no animation/pulse no paidmodel claim
+2026-10-27T16:31:42.9197815Z OFFLINE 320 reduce Chatbadge/landing explanation settingsbadge static no animation/pulse no paidmodel claim
+2026-10-27T16:31:42.9199941Z OFFLINE 1280 no-preference Chatbadge/landing explanation settingsbadge static no animation/pulse no paidmodel claim
+2026-10-27T16:31:42.9202036Z OFFLINE 1280 reduce Chatbadge/landing explanation settingsbadge static no animation/pulse no paidmodel claim
+2026-10-27T16:31:42.9203620Z PASS offlineDemo staticbadges and visibleplainmeaning3201280normalReduce
+2026-10-27T16:31:42.9204204Z 
+2026-10-27T16:32:02.6717003Z CASE preview_continuity_browser.cjs default PASS exit=0 seconds=19.8
+2026-10-27T16:32:02.6717828Z PREVIEW {
+2026-10-27T16:32:02.6718270Z   src: 'http://127.0.0.1:60209/?preview=1',
+2026-10-27T16:32:02.6718832Z   body: 'Skip to question box\n' +
+2026-10-27T16:32:02.6719152Z     'Chats\n' +
+2026-10-27T16:32:02.6719391Z     'New chat\n' +
+2026-10-27T16:32:02.6719641Z     'Temporary\n' +
+2026-10-27T16:32:02.6719883Z     'Chats\n' +
+2026-10-27T16:32:02.6720120Z     'Topics\n' +
+2026-10-27T16:32:02.6720373Z     'Sample conversation\n' +
+2026-10-27T16:32:02.6720700Z     'Another conversation\n' +
+2026-10-27T16:32:02.6720977Z     'Aa\n' +
+2026-10-27T16:32:02.6721204Z     'Standard\n' +
+2026-10-27T16:32:02.6721446Z     'Chatify\n' +
+2026-10-27T16:32:02.6721673Z     '\n' +
+2026-10-27T16:32:02.6721962Z     'Ask questions about your documents\n' +
+2026-10-27T16:32:02.6722294Z     '\n' +
+2026-10-27T16:32:02.6722572Z     'How will answers look in this app?\n' +
+2026-10-27T16:32:02.6722885Z     '\n' +
+2026-10-27T16:32:02.6723496Z     'This is a sample answer with a source citation [1]⁠.\n' +
+2026-10-27T16:32:02.6723884Z     '\n' +
+2026-10-27T16:32:02.6724471Z     'Adjust the appearance on the left to see it here. This preview does not contact your model or sources.\n' +
+2026-10-27T16:32:02.6725047Z     '\n' +
+2026-10-27T16:32:02.6725262Z     'Copy\n' +
+2026-10-27T16:32:02.6725663Z     'More\n' +
+2026-10-27T16:32:02.6725959Z     'Sample chart: groups of documents\n' +
+2026-10-27T16:32:02.6726322Z     'Group A 46%\n' +
+2026-10-27T16:32:02.6726593Z     'Group B 31%\n' +
+2026-10-27T16:32:02.6726838Z     'Group C 23%\n' +
+2026-10-27T16:32:02.6727104Z     '•••\n' +
+2026-10-27T16:32:02.6727333Z     'Not a substitut'
+2026-10-27T16:32:02.6727573Z }
+2026-10-27T16:32:02.6727785Z labels 390 [
+2026-10-27T16:32:02.6728027Z   'Main color hex code',
+2026-10-27T16:32:02.6728623Z   'Page background hex code',
+2026-10-27T16:32:02.6728922Z   'Accent color hex code',
+2026-10-27T16:32:02.6729232Z   'Cards and chat area hex code',
+2026-10-27T16:32:02.6729490Z   'Sidebar hex code',
+2026-10-27T16:32:02.6729708Z   'Text hex code',
+2026-10-27T16:32:02.6729921Z   'Soft text hex code',
+2026-10-27T16:32:02.6730139Z   'Lines hex code',
+2026-10-27T16:32:02.6730376Z   'Assistant message hex code',
+2026-10-27T16:32:02.6730625Z   'Your avatar hex code',
+2026-10-27T16:32:02.6730852Z   'Warning color hex code'
+2026-10-27T16:32:02.6731065Z ]
+2026-10-27T16:32:02.6731238Z PREVIEW {
+2026-10-27T16:32:02.6731492Z   src: 'http://127.0.0.1:60209/?preview=1',
+2026-10-27T16:32:02.6731811Z   body: 'Skip to question box\n' +
+2026-10-27T16:32:02.6732060Z     'Chats\n' +
+2026-10-27T16:32:02.6732260Z     'New chat\n' +
+2026-10-27T16:32:02.6732461Z     'Temporary\n' +
+2026-10-27T16:32:02.6732660Z     'Chats\n' +
+2026-10-27T16:32:02.6732854Z     'Topics\n' +
+2026-10-27T16:32:02.6733063Z     'Sample conversation\n' +
+2026-10-27T16:32:02.6733334Z     'Another conversation\n' +
+2026-10-27T16:32:02.6733562Z     'Aa\n' +
+2026-10-27T16:32:02.6733750Z     'Standard\n' +
+2026-10-27T16:32:02.6733947Z     'Chatify\n' +
+2026-10-27T16:32:02.6734140Z     '\n' +
+2026-10-27T16:32:02.6734373Z     'Ask questions about your documents\n' +
+2026-10-27T16:32:02.6734640Z     '\n' +
+2026-10-27T16:32:02.6735019Z     'How will answers look in this app?\n' +
+2026-10-27T16:32:02.6735290Z     '\n' +
+2026-10-27T16:32:02.6735819Z     'This is a sample answer with a source citation [1]⁠.\n' +
+2026-10-27T16:32:02.6736153Z     '\n' +
+2026-10-27T16:32:02.6736616Z     'Adjust the appearance on the left to see it here. This preview does not contact your model or sources.\n' +
+2026-10-27T16:32:02.6737080Z     '\n' +
+2026-10-27T16:32:02.6737261Z     'Copy\n' +
+2026-10-27T16:32:02.6737449Z     'More\n' +
+2026-10-27T16:32:02.6737698Z     'Sample chart: groups of documents\n' +
+2026-10-27T16:32:02.6737973Z     'Group A 46%\n' +
+2026-10-27T16:32:02.6738185Z     'Group B 31%\n' +
+2026-10-27T16:32:02.6738397Z     'Group C 23%\n' +
+2026-10-27T16:32:02.6738622Z     '•••\n' +
+2026-10-27T16:32:02.6738813Z     'Not a substitut'
+2026-10-27T16:32:02.6739015Z }
+2026-10-27T16:32:02.6739194Z labels 390 [
+2026-10-27T16:32:02.6739391Z   'Main color hex code',
+2026-10-27T16:32:02.6739625Z   'Page background hex code',
+2026-10-27T16:32:02.6739877Z   'Accent color hex code',
+2026-10-27T16:32:02.6740130Z   'Cards and chat area hex code',
+2026-10-27T16:32:02.6740376Z   'Sidebar hex code',
+2026-10-27T16:32:02.6740586Z   'Text hex code',
+2026-10-27T16:32:02.6740788Z   'Soft text hex code',
+2026-10-27T16:32:02.6740997Z   'Lines hex code',
+2026-10-27T16:32:02.6741225Z   'Assistant message hex code',
+2026-10-27T16:32:02.6741467Z   'Your avatar hex code',
+2026-10-27T16:32:02.6741696Z   'Warning color hex code'
+2026-10-27T16:32:02.6741913Z ]
+2026-10-27T16:32:02.6742086Z PREVIEW {
+2026-10-27T16:32:02.6742322Z   src: 'http://127.0.0.1:60209/?preview=1',
+2026-10-27T16:32:02.6742629Z   body: 'Skip to question box\n' +
+2026-10-27T16:32:02.6742879Z     'Chats\n' +
+2026-10-27T16:32:02.6743071Z     'New chat\n' +
+2026-10-27T16:32:02.6743273Z     'Temporary\n' +
+2026-10-27T16:32:02.6743468Z     'Chats\n' +
+2026-10-27T16:32:02.6743658Z     'Topics\n' +
+2026-10-27T16:32:02.6743869Z     'Sample conversation\n' +
+2026-10-27T16:32:02.6744133Z     'Another conversation\n' +
+2026-10-27T16:32:02.6744382Z     'Sample conversation\n' +
+2026-10-27T16:32:02.6744611Z     'Aa\n' +
+2026-10-27T16:32:02.6744797Z     'Standard\n' +
+2026-10-27T16:32:02.6744993Z     'Chatify\n' +
+2026-10-27T16:32:02.6745184Z     '\n' +
+2026-10-27T16:32:02.6745414Z     'Ask questions about your documents\n' +
+2026-10-27T16:32:02.6745812Z     '\n' +
+2026-10-27T16:32:02.6746047Z     'How will answers look in this app?\n' +
+2026-10-27T16:32:02.6746303Z     '\n' +
+2026-10-27T16:32:02.6746636Z     'This is a sample answer with a source citation [1]⁠.\n' +
+2026-10-27T16:32:02.6746945Z     '\n' +
+2026-10-27T16:32:02.6747400Z     'Adjust the appearance on the left to see it here. This preview does not contact your model or sources.\n' +
+2026-10-27T16:32:02.6748026Z     '\n' +
+2026-10-27T16:32:02.6748210Z     'Copy\n' +
+2026-10-27T16:32:02.6748396Z     'More\n' +
+2026-10-27T16:32:02.6748640Z     'Sample chart: groups of documents\n' +
+2026-10-27T16:32:02.6748915Z     'Group A 46%\n' +
+2026-10-27T16:32:02.6749120Z     'Group B 31%\n' +
+2026-10-27T16:32:02.6749327Z     'Group C 23%'
+2026-10-27T16:32:02.6749522Z }
+2026-10-27T16:32:02.6749691Z labels 1280 [
+2026-10-27T16:32:02.6749891Z   'Main color hex code',
+2026-10-27T16:32:02.6750125Z   'Page background hex code',
+2026-10-27T16:32:02.6750363Z   'Accent color hex code',
+2026-10-27T16:32:02.6750614Z   'Cards and chat area hex code',
+2026-10-27T16:32:02.6750861Z   'Sidebar hex code',
+2026-10-27T16:32:02.6751061Z   'Text hex code',
+2026-10-27T16:32:02.6751262Z   'Soft text hex code',
+2026-10-27T16:32:02.6751475Z   'Lines hex code',
+2026-10-27T16:32:02.6751702Z   'Assistant message hex code',
+2026-10-27T16:32:02.6751972Z   'Your avatar hex code',
+2026-10-27T16:32:02.6752208Z   'Warning color hex code'
+2026-10-27T16:32:02.6752414Z ]
+2026-10-27T16:32:02.6752587Z PREVIEW {
+2026-10-27T16:32:02.6752830Z   src: 'http://127.0.0.1:60209/?preview=1',
+2026-10-27T16:32:02.6753129Z   body: 'Skip to question box\n' +
+2026-10-27T16:32:02.6753371Z     'Chats\n' +
+2026-10-27T16:32:02.6753560Z     'New chat\n' +
+2026-10-27T16:32:02.6756125Z     'Temporary\n' +
+2026-10-27T16:32:02.6756495Z     'Chats\n' +
+2026-10-27T16:32:02.6756827Z     'Topics\n' +
+2026-10-27T16:32:02.6757190Z     'Sample conversation\n' +
+2026-10-27T16:32:02.6757633Z     'Another conversation\n' +
+2026-10-27T16:32:02.6758046Z     'Sample conversation\n' +
+2026-10-27T16:32:02.6758428Z     'Aa\n' +
+2026-10-27T16:32:02.6758741Z     'Standard\n' +
+2026-10-27T16:32:02.6759067Z     'Chatify\n' +
+2026-10-27T16:32:02.6759374Z     '\n' +
+2026-10-27T16:32:02.6759771Z     'Ask questions about your documents\n' +
+2026-10-27T16:32:02.6760055Z     '\n' +
+2026-10-27T16:32:02.6760310Z     'How will answers look in this app?\n' +
+2026-10-27T16:32:02.6760582Z     '\n' +
+2026-10-27T16:32:02.6761002Z     'This is a sample answer with a source citation [1]⁠.\n' +
+2026-10-27T16:32:02.6761330Z     '\n' +
+2026-10-27T16:32:02.6761799Z     'Adjust the appearance on the left to see it here. This preview does not contact your model or sources.\n' +
+2026-10-27T16:32:02.6762272Z     '\n' +
+2026-10-27T16:32:02.6762452Z     'Copy\n' +
+2026-10-27T16:32:02.6762640Z     'More\n' +
+2026-10-27T16:32:02.6762891Z     'Sample chart: groups of documents\n' +
+2026-10-27T16:32:02.6763174Z     'Group A 46%\n' +
+2026-10-27T16:32:02.6763386Z     'Group B 31%\n' +
+2026-10-27T16:32:02.6763588Z     'Group C 23%'
+2026-10-27T16:32:02.6763778Z }
+2026-10-27T16:32:02.6763957Z labels 1280 [
+2026-10-27T16:32:02.6764168Z   'Main color hex code',
+2026-10-27T16:32:02.6764410Z   'Page background hex code',
+2026-10-27T16:32:02.6764657Z   'Accent color hex code',
+2026-10-27T16:32:02.6764914Z   'Cards and chat area hex code',
+2026-10-27T16:32:02.6765166Z   'Sidebar hex code',
+2026-10-27T16:32:02.6765376Z   'Text hex code',
+2026-10-27T16:32:02.6765943Z   'Soft text hex code',
+2026-10-27T16:32:02.6766171Z   'Lines hex code',
+2026-10-27T16:32:02.6766404Z   'Assistant message hex code',
+2026-10-27T16:32:02.6766649Z   'Your avatar hex code',
+2026-10-27T16:32:02.6766878Z   'Warning color hex code'
+2026-10-27T16:32:02.6767093Z ]
+2026-10-27T16:32:02.6767686Z PASS color focus/precisehex/preview nodeidentity+scroll/dark sample separate/sectionnav continuity3901280normalreduce
+2026-10-27T16:32:02.6768146Z 
+2026-10-27T16:32:10.2759310Z CASE prompt_growth_states_browser.cjs default PASS exit=0 seconds=7.6
+2026-10-27T16:32:10.2760474Z PASS promptautogrow bounded560 fixedtopwidth noheightperwordatcap keyboardfocus retained no preview3201280
+2026-10-27T16:32:10.2761137Z 
+2026-10-27T16:32:22.6514869Z CASE provider_long_configuration_geometry_motion_browser.cjs default PASS exit=0 seconds=12.4
+2026-10-27T16:32:22.6516282Z LONGCONFIG 320 no-preference base 1207
+2026-10-27T16:32:22.6517232Z LONGCONFIG 320 no-preference base 807
+2026-10-27T16:32:22.6517774Z LONGCONFIG 320 no-preference null 1207
+2026-10-27T16:32:22.6518292Z LONGCONFIG 320 no-preference null 807
+2026-10-27T16:32:22.6518786Z LONGCONFIG 320 reduce base 1207
+2026-10-27T16:32:22.6519248Z LONGCONFIG 320 reduce base 807
+2026-10-27T16:32:22.6519708Z LONGCONFIG 320 reduce null 1207
+2026-10-27T16:32:22.6520176Z LONGCONFIG 320 reduce null 807
+2026-10-27T16:32:22.6520669Z LONGCONFIG 1280 no-preference base 1207
+2026-10-27T16:32:22.6521197Z LONGCONFIG 1280 no-preference base 807
+2026-10-27T16:32:22.6521726Z LONGCONFIG 1280 no-preference null 1207
+2026-10-27T16:32:22.6522262Z LONGCONFIG 1280 no-preference null 807
+2026-10-27T16:32:22.6522764Z LONGCONFIG 1280 reduce base 1207
+2026-10-27T16:32:22.6523229Z LONGCONFIG 1280 reduce base 807
+2026-10-27T16:32:22.6523588Z LONGCONFIG 1280 reduce null 1207
+2026-10-27T16:32:22.6523928Z LONGCONFIG 1280 reduce null 807
+2026-10-27T16:32:22.6524842Z PASS providerbaseaddress/keyenvironmentname1200800charfixture allvisibleModelcontrolpositionsfixed3201280normalReduce noSave
+2026-10-27T16:32:22.6525678Z 
+2026-10-27T16:32:26.8527407Z CASE recommendation_restore_browser.cjs default PASS exit=0 seconds=4.2
+2026-10-27T16:32:26.8532255Z PASS recommendationUndo restores exact previous provider/model/base/temp,keyboardreturn zeroSave/connectionCalls3201280fixture
+2026-10-27T16:32:26.8533331Z 
+2026-10-27T16:32:37.5729434Z CASE send_press_motion_audit_browser.cjs default PASS exit=0 seconds=10.7
+2026-10-27T16:32:37.5730928Z SENDPRESS 320 no-preference matrix(0.98, 0, 0, 0.98, 0, 0) release1 outside no request draftretained Noneoff
+2026-10-27T16:32:37.5732269Z SENDPRESS 320 reduce none release1 outside no request draftretained Noneoff
+2026-10-27T16:32:37.5733626Z SENDPRESS 1280 no-preference matrix(0.98, 0, 0, 0.98, 0, 0) release1 outside no request draftretained Noneoff
+2026-10-27T16:32:37.5735019Z SENDPRESS 1280 reduce none release1 outside no request draftretained Noneoff
+2026-10-27T16:32:37.5736689Z PASS Send98pctpress120ms nohovergrowth release1 noovershoot ReduceNoneoff3201280
+2026-10-27T16:32:37.5737654Z 
+2026-10-27T16:32:40.3212892Z CASE settings_fuzzy_browser.cjs default PASS exit=0 seconds=2.7
+2026-10-27T16:32:40.3213689Z [
+2026-10-27T16:32:40.3214300Z   { q: 'how to add someones zip', top: 'Load and shareSection' },
+2026-10-27T16:32:40.3215200Z   { q: 'increase make big font', top: 'Text sizeFonts' },
+2026-10-27T16:32:40.3216230Z   { q: 'connect claude', top: 'Model and keySection' },
+2026-10-27T16:32:40.3217034Z   { q: 'classify relevance', top: 'Relevance filterPrompt step' },
+2026-10-27T16:32:40.3217616Z   { q: 'temprature', top: 'TemperatureModel and key' },
+2026-10-27T16:32:40.3218176Z   { q: 'context chars', top: 'Memory Context CharsSetup' }
+2026-10-27T16:32:40.3218628Z ]
+2026-10-27T16:32:40.3218840Z 
+2026-10-27T16:33:20.0065924Z CASE settings_nav_selection_stationary_motion_browser.cjs default PASS exit=0 seconds=39.7
+2026-10-27T16:33:20.0067181Z NAVHOVER 320 no-preference 22
+2026-10-27T16:33:20.0067871Z NAVHOVER 320 reduce 22
+2026-10-27T16:33:20.0068517Z NAVHOVER 1280 no-preference 22
+2026-10-27T16:33:20.0068994Z NAVHOVER 1280 reduce 22
+2026-10-27T16:33:20.0070523Z PASS all22visible4categorysectionlinks selectionactualnavigation currenton noanimationorcontinuouspulse focusimmediate3201280normalReduce mobilehiddenrail
+2026-10-27T16:33:20.0071458Z 
+2026-10-27T16:33:45.7255257Z CASE settings_workspace_toggles_levels_motion_browser.cjs default PASS exit=0 seconds=25.7
+2026-10-27T16:33:45.7256445Z TOGGLE 320 no-preference model rewrite
+2026-10-27T16:33:45.7256927Z TOGGLE 320 no-preference model provider.fallback.enabled
+2026-10-27T16:33:45.7257439Z TOGGLE 320 no-preference model retrieval.query_expansion
+2026-10-27T16:33:45.7257899Z TOGGLE 320 no-preference wording f-logo_watermark
+2026-10-27T16:33:45.7258323Z TOGGLE 320 no-preference motion f-hover_lift
+2026-10-27T16:33:45.7258736Z TOGGLE 320 no-preference layout f-sources_panel
+2026-10-27T16:33:45.7259161Z TOGGLE 320 no-preference finish actions.writes
+2026-10-27T16:33:45.7259948Z TOGGLE 320 no-preference finish memory.enabled
+2026-10-27T16:33:45.7260415Z TOGGLE 320 no-preference finish citations.required
+2026-10-27T16:33:45.7260891Z TOGGLE 320 no-preference finish citations.ledger
+2026-10-27T16:33:45.7261338Z TOGGLE 320 no-preference finish auth.signup
+2026-10-27T16:33:45.7261778Z TOGGLE 320 no-preference finish server.public
+2026-10-27T16:33:45.7262178Z TOGGLE 320 reduce model rewrite
+2026-10-27T16:33:45.7262581Z TOGGLE 320 reduce model provider.fallback.enabled
+2026-10-27T16:33:45.7263049Z TOGGLE 320 reduce model retrieval.query_expansion
+2026-10-27T16:33:45.7263483Z TOGGLE 320 reduce wording f-logo_watermark
+2026-10-27T16:33:45.7263885Z TOGGLE 320 reduce motion f-hover_lift
+2026-10-27T16:33:45.7264271Z TOGGLE 320 reduce layout f-sources_panel
+2026-10-27T16:33:45.7264663Z TOGGLE 320 reduce finish actions.writes
+2026-10-27T16:33:45.7265050Z TOGGLE 320 reduce finish memory.enabled
+2026-10-27T16:33:45.7265627Z TOGGLE 320 reduce finish citations.required
+2026-10-27T16:33:45.7266063Z TOGGLE 320 reduce finish citations.ledger
+2026-10-27T16:33:45.7266463Z TOGGLE 320 reduce finish auth.signup
+2026-10-27T16:33:45.7266840Z TOGGLE 320 reduce finish server.public
+2026-10-27T16:33:45.7267228Z TOGGLE 1280 no-preference model rewrite
+2026-10-27T16:33:45.7267703Z TOGGLE 1280 no-preference model provider.fallback.enabled
+2026-10-27T16:33:45.7268415Z TOGGLE 1280 no-preference model retrieval.query_expansion
+2026-10-27T16:33:45.7268940Z TOGGLE 1280 no-preference wording f-logo_watermark
+2026-10-27T16:33:45.7269398Z TOGGLE 1280 no-preference motion f-hover_lift
+2026-10-27T16:33:45.7269847Z TOGGLE 1280 no-preference layout f-sources_panel
+2026-10-27T16:33:45.7270316Z TOGGLE 1280 no-preference finish actions.writes
+2026-10-27T16:33:45.7270732Z TOGGLE 1280 no-preference finish memory.enabled
+2026-10-27T16:33:45.7271119Z TOGGLE 1280 no-preference finish citations.required
+2026-10-27T16:33:45.7271518Z TOGGLE 1280 no-preference finish citations.ledger
+2026-10-27T16:33:45.7271888Z TOGGLE 1280 no-preference finish auth.signup
+2026-10-27T16:33:45.7272240Z TOGGLE 1280 no-preference finish server.public
+2026-10-27T16:33:45.7272566Z TOGGLE 1280 reduce model rewrite
+2026-10-27T16:33:45.7272901Z TOGGLE 1280 reduce model provider.fallback.enabled
+2026-10-27T16:33:45.7273280Z TOGGLE 1280 reduce model retrieval.query_expansion
+2026-10-27T16:33:45.7273650Z TOGGLE 1280 reduce wording f-logo_watermark
+2026-10-27T16:33:45.7273981Z TOGGLE 1280 reduce motion f-hover_lift
+2026-10-27T16:33:45.7274299Z TOGGLE 1280 reduce layout f-sources_panel
+2026-10-27T16:33:45.7274624Z TOGGLE 1280 reduce finish actions.writes
+2026-10-27T16:33:45.7274944Z TOGGLE 1280 reduce finish memory.enabled
+2026-10-27T16:33:45.7275274Z TOGGLE 1280 reduce finish citations.required
+2026-10-27T16:33:45.7275765Z TOGGLE 1280 reduce finish citations.ledger
+2026-10-27T16:33:45.7276091Z TOGGLE 1280 reduce finish auth.signup
+2026-10-27T16:33:45.7276403Z TOGGLE 1280 reduce finish server.public
+2026-10-27T16:33:45.7277583Z PASS allavailablevisiblelocalandworkspaceSettingscheckboxes excludesnetworkprompt/sourceautosaves nativekeyboardSpace checkedandfocusimmediate restorefullSubtleNoneCalm3201280normalReduce excludeskeyexport noSave
+2026-10-27T16:33:45.7278470Z 
+2026-10-27T16:33:54.7924116Z CASE shared_components_browser.cjs default PASS exit=0 seconds=9.1
+2026-10-27T16:33:54.7925165Z PASS sharedcream/editingtokens/nav44pxfocus/nooverflow3207601280
+2026-10-27T16:33:54.7926172Z 
+2026-10-27T16:34:00.0432017Z CASE simple_branches_browser.cjs default PASS exit=0 seconds=5.2
+2026-10-27T16:34:00.0432862Z group config sec-model
+2026-10-27T16:34:00.0433212Z group frontend sec-presets
+2026-10-27T16:34:00.0434444Z PASS specialist deep link opens Advanced; loaded non-Demo provider kept; compatible GPT-5 temperature visible, OpenAI required key visible; all four Simple routes enter Advanced
+2026-10-27T16:34:00.0435343Z 
+2026-10-27T16:34:04.0957638Z CASE source_scope_dialog_keyboard_motion_browser.cjs default PASS exit=0 seconds=4.1
+2026-10-27T16:34:04.0959380Z SCOPELOAD 320 no-preference 3
+2026-10-27T16:34:04.0960183Z SCOPELOAD 320 reduce 3
+2026-10-27T16:34:04.0960849Z SCOPELOAD 1280 no-preference 3
+2026-10-27T16:34:04.0961492Z SCOPELOAD 1280 reduce 3
+2026-10-27T16:34:04.0963857Z PASS actualscopeloadingpendingtext/busy/singleflighterrorrecovernamedDialogEscapefocus/documentkeyboardselectiondraftretained3201280normalReduce fixtureonly
+2026-10-27T16:34:04.0965148Z 
+2026-10-27T16:34:17.1697329Z CASE source_summary_motion_browser.cjs default PASS exit=0 seconds=13.1
+2026-10-27T16:34:17.1699871Z PASS changedsource rowonly160fade unchangednode/notanimated headingretained removaloldrowonly no transform reduceoff summarysavedrestart fixture3201280
+2026-10-27T16:34:17.1701004Z 
+2026-10-27T16:34:52.2442781Z CASE studio_polish_browser.cjs default PASS exit=0 seconds=35.1
+2026-10-27T16:34:52.2444194Z PASS saved draft reload/reopen no calls, TODO check+jump/highlight, real live preview, remaining 30/30 work, inspectable parts, plain changes, no leaked boards,320/390/1280
+2026-10-27T16:34:52.2445146Z 
+2026-10-27T16:34:52.2778417Z CASE topic_navigation_integrity.cjs default PASS exit=0 seconds=0.0
+2026-10-27T16:34:52.2779469Z PASS topic mode, existing-chat selection, no empty-chat creation, real question selector, topic rename scope
+2026-10-27T16:34:52.2779908Z 
+2026-10-27T16:35:01.3714216Z CASE workspace_drop_browser.py default PASS exit=0 seconds=9.1
+2026-10-27T16:35:01.3718403Z PASS localR24 desktop/phone genuine DataTransfer ZIP drop; review before load; child start/open/cited answer; manager list/stop/remove/cancel removal; current app preserved; path traversal rejected; Python review/consent and bounded cited answer; no JS errors.
+2026-10-27T16:35:01.3720247Z 
+2026-10-27T16:35:01.3720880Z {"executions": 42, "failed": 1, "passed": 41, "scripts": 39}
+2026-10-27T16:35:01.3841718Z ##[error]Process completed with exit code 1.
+2026-10-27T16:35:01.3988480Z Post job cleanup.
+2026-10-27T16:35:01.4859426Z [command]/usr/bin/git version
+2026-10-27T16:35:01.4906416Z git version 2.55.0
+2026-10-27T16:35:01.4951951Z Temporarily overriding HOME='/home/runner/work/_temp/0f5bdb57-ec6c-424f-8cdb-10fc53279e44' before making global git config changes
+2026-10-27T16:35:01.4953424Z Adding repository directory to the temporary git global config as a safe directory
+2026-10-27T16:35:01.4961145Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/Chatify/Chatify
+2026-10-27T16:35:01.5004055Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-10-27T16:35:01.5050879Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-10-27T16:35:01.5415107Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-10-27T16:35:01.5480222Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-10-27T16:35:01.5837311Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-10-27T16:35:01.5915366Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-10-27T16:35:01.6383675Z Cleaning up orphan processes
+2026-10-27T16:35:01.6857621Z ##[warning]Node.js 20 is deprecated. The following actions target Node.js 20 but are being forced to run on Node.js 24: actions/checkout@v4, actions/setup-node@v4, actions/setup-python@v5. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/

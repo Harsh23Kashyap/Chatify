@@ -1,0 +1,12 @@
+CASE chat_composer_browser.cjs default FAIL exit=1 seconds=4.9
+AssertionError [ERR_ASSERTION]: composer follows reading column
+    at /home/sandbox/chatify/tests/chat_composer_browser.cjs:2:3173 {
+  generatedMessage: false,
+  code: 'ERR_ASSERTION',
+  actual: false,
+  expected: true,
+  operator: '==',
+  diff: 'simple'
+}
+
+{"executions": 1, "failed": 1, "passed": 0, "scripts": 1}

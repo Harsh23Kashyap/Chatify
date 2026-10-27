@@ -1,0 +1,40 @@
+CASE mode_preview_stationary_motion_audit_browser.cjs default FAIL exit=1 seconds=22.6
+PREVIEW 320 no-preference wording simple x/width/identity fixed noanimation 288
+PREVIEW 320 no-preference wording advanced x/width/identity fixed noanimation 288
+PREVIEW 320 no-preference colors simple x/width/identity fixed noanimation 288
+PREVIEW 320 no-preference colors advanced x/width/identity fixed noanimation 288
+PREVIEW 320 no-preference background simple x/width/identity fixed noanimation 288
+PREVIEW 320 no-preference background advanced x/width/identity fixed noanimation 288
+PREVIEW 320 no-preference fonts simple x/width/identity fixed noanimation 288
+PREVIEW 320 no-preference fonts advanced x/width/identity fixed noanimation 288
+PREVIEW 320 no-preference layout simple x/width/identity fixed noanimation 288
+PREVIEW 320 no-preference layout advanced x/width/identity fixed noanimation 288
+PREVIEW 320 no-preference model simple x/width/identity fixed noanimation 288
+PREVIEW 320 no-preference model advanced x/width/identity fixed noanimation 288
+PREVIEW 320 no-preference finish simple x/width/identity fixed noanimation 288
+PREVIEW 320 no-preference finish advanced x/width/identity fixed noanimation 288
+PREVIEW 320 reduce wording simple x/width/identity fixed noanimation 288
+PREVIEW 320 reduce wording advanced x/width/identity fixed noanimation 288
+PREVIEW 320 reduce colors simple x/width/identity fixed noanimation 288
+PREVIEW 320 reduce colors advanced x/width/identity fixed noanimation 288
+PREVIEW 320 reduce background simple x/width/identity fixed noanimation 288
+PREVIEW 320 reduce background advanced x/width/identity fixed noanimation 288
+PREVIEW 320 reduce fonts simple x/width/identity fixed noanimation 288
+PREVIEW 320 reduce fonts advanced x/width/identity fixed noanimation 288
+PREVIEW 320 reduce layout simple x/width/identity fixed noanimation 288
+PREVIEW 320 reduce layout advanced x/width/identity fixed noanimation 288
+PREVIEW 320 reduce model simple x/width/identity fixed noanimation 288
+PREVIEW 320 reduce model advanced x/width/identity fixed noanimation 288
+PREVIEW 320 reduce finish simple x/width/identity fixed noanimation 288
+PREVIEW 320 reduce finish advanced x/width/identity fixed noanimation 288
+AssertionError [ERR_ASSERTION]: {"width":1280,"section":"wording","mode":"simple","before":{"node":"pvbox","x":786,"width":442,"height":1013,"frame":"pv"},"positions":[{"x":786,"width":474,"height":1013,"transform":"none","animations":0,"frame":"pv"},{"x":786,"width":474,"height":1013,"transform":"none","animations":0,"frame":"pv"},{"x":786,"width":474,"height":1013,"transform":"none","animations":0,"frame":"pv"},{"x":786,"width":474,"height":1013,"transform":"none","animations":0,"frame":"pv"},{"x":786,"width":474,"height":1013,"transform":"none","animations":0,"frame":"pv"},{"x":786,"width":474,"height":1013,"transform":"none","animations":0,"frame":"pv"},{"x":786,"width":474,"height":1013,"transform":"none","animations":0,"frame":"pv"},{"x":786,"width":474,"height":1013,"transform":"none","animations":0,"frame":"pv"},{"x":786,"width":474,"height":1013,"transform":"none","animations":0,"frame":"pv"},{"x":786,"width":474,"height":1013,"transform":"none","animations":0,"frame":"pv"},{"x":786,"width":474,"height":1013,"transform":"none","animations":0,"frame":"pv"},{"x":786,"width":474,"height":1013,"transform":"none","animations":0,"frame":"pv"}]}
+    at /home/sandbox/chatify/tests/mode_preview_stationary_motion_audit_browser.cjs:2:1503 {
+  generatedMessage: false,
+  code: 'ERR_ASSERTION',
+  actual: false,
+  expected: true,
+  operator: '==',
+  diff: 'simple'
+}
+
+{"executions": 1, "failed": 1, "passed": 0, "scripts": 1}

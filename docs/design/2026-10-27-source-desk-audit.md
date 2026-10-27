@@ -27,3 +27,13 @@ The new journey's first two attempts failed on an accessible-name selector and a
 
 ## Remaining limits
 New design is not deployed. Full471script/500execution remote browser qualification is separate and pending after push. Real-provider answer quality, ten full actual E2E journeys, alternating review gates and private video remain open. Reference limitations and licensing judgments are in the companion matrix. Configuration retains its independent light editing palette; dark chat/build are bounded checks, not all-screen dark qualification. No paid component, service or model call.
+
+## Remote gate and local repair, 22:27 IST
+
+Run40540251142 for7699149 failed at22:09:51IST. Syntax/package passed;6of12browser shards passed and6failed. Raw logs from all six failed shards are retained in census/remote-40540251142. Eight failed cases: shape_states, chat_composer, suggestion_press_motion_audit, chat_shortcuts_audit, source_scope_origin_focus_motion, source_scope_removed_origin_focus_motion, mode_preview_stationary_motion_audit and prompt_initial_navigation_focus_motion. This is not a flaky-CI verdict.
+
+The new stylesheet caused real contract regressions: 40px composer target, mobile detail display:none removed accessible names, transparent!important hover suppressed feedback, preview bubble override defeated flat styling, unequal desktop starter rows/reading-column mismatch, and changing outer configuration geometry shifted a focused prompt editor during late initialization. Removed the outer card treatment rather than accepting unstable editing. Its internal source-desk workbench remains. The unchanged eight contracts now pass locally. The8combinationjourney passed again. New390/768/1440captures of all five routes have zero page errors/overflow; full-size phone chat/configuration and desktop configuration inspected, along with contact sheet. Earlier wheel hash applies to7699149before this repair, not repaired CSS. New complete remote/browser gate, current wheel and deployment remain open.
+
+Local combined eight-test command reached120seconds during its last child. Seven complete case logs passed; eighth child log eventually passed, but was not relied on for completion. Separate rerun of the eighth prompt-initialization case passed. Earlier repair attempts and differential no-workspace baseline probe are retained separately; no original assertion weakened. Current changes remain local at this checkpoint.
+
+Repaired production wheel built22:32IST: chatify_app-0.4.32-py3-none-any.whl,15035672bytes, SHA2568cce81039bc0205b8458cc683b17bdf1c64a4316f9fd2e2c4162d5ce54c09e26. Current workspace.css bytes match the wheel exactly. Not published to PyPI.

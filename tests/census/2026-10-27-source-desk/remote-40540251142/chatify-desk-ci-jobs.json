@@ -1,0 +1,1521 @@
+{
+  "total_count": 13,
+  "jobs": [
+    {
+      "id": 122316399004,
+      "run_id": 40540251142,
+      "workflow_name": "offline browser regression",
+      "head_branch": "main",
+      "run_url": "https://api.github.com/repos/Harsh23Kashyap/Chatify/actions/runs/40540251142",
+      "run_attempt": 1,
+      "node_id": "CR_kwDOU7cFAs8AAAAceqAhnA",
+      "head_sha": "76991499db5f2593051372a7e50e52816e34c8e6",
+      "url": "https://api.github.com/repos/Harsh23Kashyap/Chatify/actions/jobs/122316399004",
+      "html_url": "https://github.com/Harsh23Kashyap/Chatify/actions/runs/40540251142/job/122316399004",
+      "status": "completed",
+      "conclusion": "success",
+      "created_at": "2026-10-27T16:22:23Z",
+      "started_at": "2026-10-27T16:22:25Z",
+      "completed_at": "2026-10-27T16:22:46Z",
+      "name": "syntax-and-package",
+      "steps": [
+        {
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 1,
+          "started_at": "2026-10-27T16:22:25Z",
+          "completed_at": "2026-10-27T16:22:26Z"
+        },
+        {
+          "name": "Run actions/checkout@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 2,
+          "started_at": "2026-10-27T16:22:26Z",
+          "completed_at": "2026-10-27T16:22:30Z"
+        },
+        {
+          "name": "Run actions/setup-python@v5",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 3,
+          "started_at": "2026-10-27T16:22:30Z",
+          "completed_at": "2026-10-27T16:22:31Z"
+        },
+        {
+          "name": "Run actions/setup-node@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 4,
+          "started_at": "2026-10-27T16:22:31Z",
+          "completed_at": "2026-10-27T16:22:35Z"
+        },
+        {
+          "name": "Install package and build tools",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 5,
+          "started_at": "2026-10-27T16:22:35Z",
+          "completed_at": "2026-10-27T16:22:40Z"
+        },
+        {
+          "name": "Python and JavaScript syntax",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 6,
+          "started_at": "2026-10-27T16:22:40Z",
+          "completed_at": "2026-10-27T16:22:41Z"
+        },
+        {
+          "name": "Manifest and orchestration tests",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 7,
+          "started_at": "2026-10-27T16:22:41Z",
+          "completed_at": "2026-10-27T16:22:41Z"
+        },
+        {
+          "name": "Build wheel and verify font packaging regression",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 8,
+          "started_at": "2026-10-27T16:22:41Z",
+          "completed_at": "2026-10-27T16:22:44Z"
+        },
+        {
+          "name": "Post Run actions/setup-node@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 14,
+          "started_at": "2026-10-27T16:22:44Z",
+          "completed_at": "2026-10-27T16:22:44Z"
+        },
+        {
+          "name": "Post Run actions/setup-python@v5",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 15,
+          "started_at": "2026-10-27T16:22:44Z",
+          "completed_at": "2026-10-27T16:22:44Z"
+        },
+        {
+          "name": "Post Run actions/checkout@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 16,
+          "started_at": "2026-10-27T16:22:44Z",
+          "completed_at": "2026-10-27T16:22:44Z"
+        },
+        {
+          "name": "Complete job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 17,
+          "started_at": "2026-10-27T16:22:44Z",
+          "completed_at": "2026-10-27T16:22:44Z"
+        }
+      ],
+      "check_run_url": "https://api.github.com/repos/Harsh23Kashyap/Chatify/check-runs/122316399004",
+      "labels": [
+        "ubuntu-latest"
+      ],
+      "runner_id": 1000013631,
+      "runner_name": "GitHub Actions 1000013631",
+      "runner_group_id": 0,
+      "runner_group_name": "GitHub Actions"
+    },
+    {
+      "id": 122316399908,
+      "run_id": 40540251142,
+      "workflow_name": "offline browser regression",
+      "head_branch": "main",
+      "run_url": "https://api.github.com/repos/Harsh23Kashyap/Chatify/actions/runs/40540251142",
+      "run_attempt": 1,
+      "node_id": "CR_kwDOU7cFAs8AAAAceqAlJA",
+      "head_sha": "76991499db5f2593051372a7e50e52816e34c8e6",
+      "url": "https://api.github.com/repos/Harsh23Kashyap/Chatify/actions/jobs/122316399908",
+      "html_url": "https://github.com/Harsh23Kashyap/Chatify/actions/runs/40540251142/job/122316399908",
+      "status": "completed",
+      "conclusion": "success",
+      "created_at": "2026-10-27T16:22:23Z",
+      "started_at": "2026-10-27T16:22:25Z",
+      "completed_at": "2026-10-27T16:32:05Z",
+      "name": "Offline browser shard 1 of 12",
+      "steps": [
+        {
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 1,
+          "started_at": "2026-10-27T16:22:26Z",
+          "completed_at": "2026-10-27T16:22:27Z"
+        },
+        {
+          "name": "Run actions/checkout@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 2,
+          "started_at": "2026-10-27T16:22:27Z",
+          "completed_at": "2026-10-27T16:22:30Z"
+        },
+        {
+          "name": "Run actions/setup-python@v5",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 3,
+          "started_at": "2026-10-27T16:22:30Z",
+          "completed_at": "2026-10-27T16:22:30Z"
+        },
+        {
+          "name": "Run actions/setup-node@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 4,
+          "started_at": "2026-10-27T16:22:30Z",
+          "completed_at": "2026-10-27T16:22:35Z"
+        },
+        {
+          "name": "Install offline regression dependencies",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 5,
+          "started_at": "2026-10-27T16:22:35Z",
+          "completed_at": "2026-10-27T16:22:58Z"
+        },
+        {
+          "name": "Browser and manifest preflight",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 6,
+          "started_at": "2026-10-27T16:22:58Z",
+          "completed_at": "2026-10-27T16:22:58Z"
+        },
+        {
+          "name": "Run all assigned offline regression contracts",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 7,
+          "started_at": "2026-10-27T16:22:58Z",
+          "completed_at": "2026-10-27T16:32:00Z"
+        },
+        {
+          "name": "Post Run actions/setup-node@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 12,
+          "started_at": "2026-10-27T16:32:00Z",
+          "completed_at": "2026-10-27T16:32:01Z"
+        },
+        {
+          "name": "Post Run actions/setup-python@v5",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 13,
+          "started_at": "2026-10-27T16:32:01Z",
+          "completed_at": "2026-10-27T16:32:01Z"
+        },
+        {
+          "name": "Post Run actions/checkout@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 14,
+          "started_at": "2026-10-27T16:32:01Z",
+          "completed_at": "2026-10-27T16:32:01Z"
+        },
+        {
+          "name": "Complete job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 15,
+          "started_at": "2026-10-27T16:32:01Z",
+          "completed_at": "2026-10-27T16:32:01Z"
+        }
+      ],
+      "check_run_url": "https://api.github.com/repos/Harsh23Kashyap/Chatify/check-runs/122316399908",
+      "labels": [
+        "ubuntu-latest"
+      ],
+      "runner_id": 1000013643,
+      "runner_name": "GitHub Actions 1000013643",
+      "runner_group_id": 0,
+      "runner_group_name": "GitHub Actions"
+    },
+    {
+      "id": 122316399909,
+      "run_id": 40540251142,
+      "workflow_name": "offline browser regression",
+      "head_branch": "main",
+      "run_url": "https://api.github.com/repos/Harsh23Kashyap/Chatify/actions/runs/40540251142",
+      "run_attempt": 1,
+      "node_id": "CR_kwDOU7cFAs8AAAAceqAlJQ",
+      "head_sha": "76991499db5f2593051372a7e50e52816e34c8e6",
+      "url": "https://api.github.com/repos/Harsh23Kashyap/Chatify/actions/jobs/122316399909",
+      "html_url": "https://github.com/Harsh23Kashyap/Chatify/actions/runs/40540251142/job/122316399909",
+      "status": "completed",
+      "conclusion": "success",
+      "created_at": "2026-10-27T16:22:23Z",
+      "started_at": "2026-10-27T16:22:25Z",
+      "completed_at": "2026-10-27T16:34:19Z",
+      "name": "Offline browser shard 0 of 12",
+      "steps": [
+        {
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 1,
+          "started_at": "2026-10-27T16:22:26Z",
+          "completed_at": "2026-10-27T16:22:26Z"
+        },
+        {
+          "name": "Run actions/checkout@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 2,
+          "started_at": "2026-10-27T16:22:26Z",
+          "completed_at": "2026-10-27T16:22:36Z"
+        },
+        {
+          "name": "Run actions/setup-python@v5",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 3,
+          "started_at": "2026-10-27T16:22:36Z",
+          "completed_at": "2026-10-27T16:22:36Z"
+        },
+        {
+          "name": "Run actions/setup-node@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 4,
+          "started_at": "2026-10-27T16:22:36Z",
+          "completed_at": "2026-10-27T16:22:36Z"
+        },
+        {
+          "name": "Install offline regression dependencies",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 5,
+          "started_at": "2026-10-27T16:22:36Z",
+          "completed_at": "2026-10-27T16:23:00Z"
+        },
+        {
+          "name": "Browser and manifest preflight",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 6,
+          "started_at": "2026-10-27T16:23:00Z",
+          "completed_at": "2026-10-27T16:23:01Z"
+        },
+        {
+          "name": "Run all assigned offline regression contracts",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 7,
+          "started_at": "2026-10-27T16:23:01Z",
+          "completed_at": "2026-10-27T16:34:16Z"
+        },
+        {
+          "name": "Post Run actions/setup-node@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 12,
+          "started_at": "2026-10-27T16:34:16Z",
+          "completed_at": "2026-10-27T16:34:16Z"
+        },
+        {
+          "name": "Post Run actions/setup-python@v5",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 13,
+          "started_at": "2026-10-27T16:34:16Z",
+          "completed_at": "2026-10-27T16:34:17Z"
+        },
+        {
+          "name": "Post Run actions/checkout@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 14,
+          "started_at": "2026-10-27T16:34:17Z",
+          "completed_at": "2026-10-27T16:34:17Z"
+        },
+        {
+          "name": "Complete job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 15,
+          "started_at": "2026-10-27T16:34:17Z",
+          "completed_at": "2026-10-27T16:34:17Z"
+        }
+      ],
+      "check_run_url": "https://api.github.com/repos/Harsh23Kashyap/Chatify/check-runs/122316399909",
+      "labels": [
+        "ubuntu-latest"
+      ],
+      "runner_id": 1000013633,
+      "runner_name": "GitHub Actions 1000013633",
+      "runner_group_id": 0,
+      "runner_group_name": "GitHub Actions"
+    },
+    {
+      "id": 122316399934,
+      "run_id": 40540251142,
+      "workflow_name": "offline browser regression",
+      "head_branch": "main",
+      "run_url": "https://api.github.com/repos/Harsh23Kashyap/Chatify/actions/runs/40540251142",
+      "run_attempt": 1,
+      "node_id": "CR_kwDOU7cFAs8AAAAceqAlPg",
+      "head_sha": "76991499db5f2593051372a7e50e52816e34c8e6",
+      "url": "https://api.github.com/repos/Harsh23Kashyap/Chatify/actions/jobs/122316399934",
+      "html_url": "https://github.com/Harsh23Kashyap/Chatify/actions/runs/40540251142/job/122316399934",
+      "status": "completed",
+      "conclusion": "failure",
+      "created_at": "2026-10-27T16:22:23Z",
+      "started_at": "2026-10-27T16:22:25Z",
+      "completed_at": "2026-10-27T16:39:51Z",
+      "name": "Offline browser shard 3 of 12",
+      "steps": [
+        {
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 1,
+          "started_at": "2026-10-27T16:22:25Z",
+          "completed_at": "2026-10-27T16:22:26Z"
+        },
+        {
+          "name": "Run actions/checkout@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 2,
+          "started_at": "2026-10-27T16:22:26Z",
+          "completed_at": "2026-10-27T16:22:29Z"
+        },
+        {
+          "name": "Run actions/setup-python@v5",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 3,
+          "started_at": "2026-10-27T16:22:29Z",
+          "completed_at": "2026-10-27T16:22:29Z"
+        },
+        {
+          "name": "Run actions/setup-node@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 4,
+          "started_at": "2026-10-27T16:22:29Z",
+          "completed_at": "2026-10-27T16:22:34Z"
+        },
+        {
+          "name": "Install offline regression dependencies",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 5,
+          "started_at": "2026-10-27T16:22:34Z",
+          "completed_at": "2026-10-27T16:23:38Z"
+        },
+        {
+          "name": "Browser and manifest preflight",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 6,
+          "started_at": "2026-10-27T16:23:38Z",
+          "completed_at": "2026-10-27T16:23:39Z"
+        },
+        {
+          "name": "Run all assigned offline regression contracts",
+          "status": "completed",
+          "conclusion": "failure",
+          "number": 7,
+          "started_at": "2026-10-27T16:23:39Z",
+          "completed_at": "2026-10-27T16:39:49Z"
+        },
+        {
+          "name": "Post Run actions/setup-node@v4",
+          "status": "completed",
+          "conclusion": "skipped",
+          "number": 12,
+          "started_at": "2026-10-27T16:39:49Z",
+          "completed_at": "2026-10-27T16:39:49Z"
+        },
+        {
+          "name": "Post Run actions/setup-python@v5",
+          "status": "completed",
+          "conclusion": "skipped",
+          "number": 13,
+          "started_at": "2026-10-27T16:39:49Z",
+          "completed_at": "2026-10-27T16:39:49Z"
+        },
+        {
+          "name": "Post Run actions/checkout@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 14,
+          "started_at": "2026-10-27T16:39:49Z",
+          "completed_at": "2026-10-27T16:39:49Z"
+        },
+        {
+          "name": "Complete job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 15,
+          "started_at": "2026-10-27T16:39:49Z",
+          "completed_at": "2026-10-27T16:39:49Z"
+        }
+      ],
+      "check_run_url": "https://api.github.com/repos/Harsh23Kashyap/Chatify/check-runs/122316399934",
+      "labels": [
+        "ubuntu-latest"
+      ],
+      "runner_id": 1000013632,
+      "runner_name": "GitHub Actions 1000013632",
+      "runner_group_id": 0,
+      "runner_group_name": "GitHub Actions"
+    },
+    {
+      "id": 122316399972,
+      "run_id": 40540251142,
+      "workflow_name": "offline browser regression",
+      "head_branch": "main",
+      "run_url": "https://api.github.com/repos/Harsh23Kashyap/Chatify/actions/runs/40540251142",
+      "run_attempt": 1,
+      "node_id": "CR_kwDOU7cFAs8AAAAceqAlZA",
+      "head_sha": "76991499db5f2593051372a7e50e52816e34c8e6",
+      "url": "https://api.github.com/repos/Harsh23Kashyap/Chatify/actions/jobs/122316399972",
+      "html_url": "https://github.com/Harsh23Kashyap/Chatify/actions/runs/40540251142/job/122316399972",
+      "status": "completed",
+      "conclusion": "success",
+      "created_at": "2026-10-27T16:22:23Z",
+      "started_at": "2026-10-27T16:22:25Z",
+      "completed_at": "2026-10-27T16:35:35Z",
+      "name": "Offline browser shard 2 of 12",
+      "steps": [
+        {
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 1,
+          "started_at": "2026-10-27T16:22:26Z",
+          "completed_at": "2026-10-27T16:22:27Z"
+        },
+        {
+          "name": "Run actions/checkout@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 2,
+          "started_at": "2026-10-27T16:22:27Z",
+          "completed_at": "2026-10-27T16:22:30Z"
+        },
+        {
+          "name": "Run actions/setup-python@v5",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 3,
+          "started_at": "2026-10-27T16:22:30Z",
+          "completed_at": "2026-10-27T16:22:30Z"
+        },
+        {
+          "name": "Run actions/setup-node@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 4,
+          "started_at": "2026-10-27T16:22:30Z",
+          "completed_at": "2026-10-27T16:22:31Z"
+        },
+        {
+          "name": "Install offline regression dependencies",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 5,
+          "started_at": "2026-10-27T16:22:31Z",
+          "completed_at": "2026-10-27T16:23:01Z"
+        },
+        {
+          "name": "Browser and manifest preflight",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 6,
+          "started_at": "2026-10-27T16:23:01Z",
+          "completed_at": "2026-10-27T16:23:03Z"
+        },
+        {
+          "name": "Run all assigned offline regression contracts",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 7,
+          "started_at": "2026-10-27T16:23:03Z",
+          "completed_at": "2026-10-27T16:35:31Z"
+        },
+        {
+          "name": "Post Run actions/setup-node@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 12,
+          "started_at": "2026-10-27T16:35:31Z",
+          "completed_at": "2026-10-27T16:35:31Z"
+        },
+        {
+          "name": "Post Run actions/setup-python@v5",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 13,
+          "started_at": "2026-10-27T16:35:31Z",
+          "completed_at": "2026-10-27T16:35:31Z"
+        },
+        {
+          "name": "Post Run actions/checkout@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 14,
+          "started_at": "2026-10-27T16:35:31Z",
+          "completed_at": "2026-10-27T16:35:32Z"
+        },
+        {
+          "name": "Complete job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 15,
+          "started_at": "2026-10-27T16:35:32Z",
+          "completed_at": "2026-10-27T16:35:32Z"
+        }
+      ],
+      "check_run_url": "https://api.github.com/repos/Harsh23Kashyap/Chatify/check-runs/122316399972",
+      "labels": [
+        "ubuntu-latest"
+      ],
+      "runner_id": 1000013634,
+      "runner_name": "GitHub Actions 1000013634",
+      "runner_group_id": 0,
+      "runner_group_name": "GitHub Actions"
+    },
+    {
+      "id": 122316400052,
+      "run_id": 40540251142,
+      "workflow_name": "offline browser regression",
+      "head_branch": "main",
+      "run_url": "https://api.github.com/repos/Harsh23Kashyap/Chatify/actions/runs/40540251142",
+      "run_attempt": 1,
+      "node_id": "CR_kwDOU7cFAs8AAAAceqAltA",
+      "head_sha": "76991499db5f2593051372a7e50e52816e34c8e6",
+      "url": "https://api.github.com/repos/Harsh23Kashyap/Chatify/actions/jobs/122316400052",
+      "html_url": "https://github.com/Harsh23Kashyap/Chatify/actions/runs/40540251142/job/122316400052",
+      "status": "completed",
+      "conclusion": "failure",
+      "created_at": "2026-10-27T16:22:23Z",
+      "started_at": "2026-10-27T16:22:25Z",
+      "completed_at": "2026-10-27T16:38:38Z",
+      "name": "Offline browser shard 10 of 12",
+      "steps": [
+        {
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 1,
+          "started_at": "2026-10-27T16:22:26Z",
+          "completed_at": "2026-10-27T16:22:27Z"
+        },
+        {
+          "name": "Run actions/checkout@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 2,
+          "started_at": "2026-10-27T16:22:27Z",
+          "completed_at": "2026-10-27T16:22:31Z"
+        },
+        {
+          "name": "Run actions/setup-python@v5",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 3,
+          "started_at": "2026-10-27T16:22:31Z",
+          "completed_at": "2026-10-27T16:22:31Z"
+        },
+        {
+          "name": "Run actions/setup-node@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 4,
+          "started_at": "2026-10-27T16:22:31Z",
+          "completed_at": "2026-10-27T16:22:36Z"
+        },
+        {
+          "name": "Install offline regression dependencies",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 5,
+          "started_at": "2026-10-27T16:22:36Z",
+          "completed_at": "2026-10-27T16:30:55Z"
+        },
+        {
+          "name": "Browser and manifest preflight",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 6,
+          "started_at": "2026-10-27T16:30:55Z",
+          "completed_at": "2026-10-27T16:30:59Z"
+        },
+        {
+          "name": "Run all assigned offline regression contracts",
+          "status": "completed",
+          "conclusion": "failure",
+          "number": 7,
+          "started_at": "2026-10-27T16:30:59Z",
+          "completed_at": "2026-10-27T16:38:35Z"
+        },
+        {
+          "name": "Post Run actions/setup-node@v4",
+          "status": "completed",
+          "conclusion": "skipped",
+          "number": 12,
+          "started_at": "2026-10-27T16:38:35Z",
+          "completed_at": "2026-10-27T16:38:35Z"
+        },
+        {
+          "name": "Post Run actions/setup-python@v5",
+          "status": "completed",
+          "conclusion": "skipped",
+          "number": 13,
+          "started_at": "2026-10-27T16:38:35Z",
+          "completed_at": "2026-10-27T16:38:35Z"
+        },
+        {
+          "name": "Post Run actions/checkout@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 14,
+          "started_at": "2026-10-27T16:38:35Z",
+          "completed_at": "2026-10-27T16:38:35Z"
+        },
+        {
+          "name": "Complete job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 15,
+          "started_at": "2026-10-27T16:38:35Z",
+          "completed_at": "2026-10-27T16:38:35Z"
+        }
+      ],
+      "check_run_url": "https://api.github.com/repos/Harsh23Kashyap/Chatify/check-runs/122316400052",
+      "labels": [
+        "ubuntu-latest"
+      ],
+      "runner_id": 1000013637,
+      "runner_name": "GitHub Actions 1000013637",
+      "runner_group_id": 0,
+      "runner_group_name": "GitHub Actions"
+    },
+    {
+      "id": 122316400056,
+      "run_id": 40540251142,
+      "workflow_name": "offline browser regression",
+      "head_branch": "main",
+      "run_url": "https://api.github.com/repos/Harsh23Kashyap/Chatify/actions/runs/40540251142",
+      "run_attempt": 1,
+      "node_id": "CR_kwDOU7cFAs8AAAAceqAluA",
+      "head_sha": "76991499db5f2593051372a7e50e52816e34c8e6",
+      "url": "https://api.github.com/repos/Harsh23Kashyap/Chatify/actions/jobs/122316400056",
+      "html_url": "https://github.com/Harsh23Kashyap/Chatify/actions/runs/40540251142/job/122316400056",
+      "status": "completed",
+      "conclusion": "failure",
+      "created_at": "2026-10-27T16:22:23Z",
+      "started_at": "2026-10-27T16:22:25Z",
+      "completed_at": "2026-10-27T16:36:13Z",
+      "name": "Offline browser shard 9 of 12",
+      "steps": [
+        {
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 1,
+          "started_at": "2026-10-27T16:22:26Z",
+          "completed_at": "2026-10-27T16:22:26Z"
+        },
+        {
+          "name": "Run actions/checkout@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 2,
+          "started_at": "2026-10-27T16:22:26Z",
+          "completed_at": "2026-10-27T16:22:30Z"
+        },
+        {
+          "name": "Run actions/setup-python@v5",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 3,
+          "started_at": "2026-10-27T16:22:30Z",
+          "completed_at": "2026-10-27T16:22:30Z"
+        },
+        {
+          "name": "Run actions/setup-node@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 4,
+          "started_at": "2026-10-27T16:22:30Z",
+          "completed_at": "2026-10-27T16:22:33Z"
+        },
+        {
+          "name": "Install offline regression dependencies",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 5,
+          "started_at": "2026-10-27T16:22:33Z",
+          "completed_at": "2026-10-27T16:23:00Z"
+        },
+        {
+          "name": "Browser and manifest preflight",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 6,
+          "started_at": "2026-10-27T16:23:00Z",
+          "completed_at": "2026-10-27T16:23:00Z"
+        },
+        {
+          "name": "Run all assigned offline regression contracts",
+          "status": "completed",
+          "conclusion": "failure",
+          "number": 7,
+          "started_at": "2026-10-27T16:23:00Z",
+          "completed_at": "2026-10-27T16:36:10Z"
+        },
+        {
+          "name": "Post Run actions/setup-node@v4",
+          "status": "completed",
+          "conclusion": "skipped",
+          "number": 12,
+          "started_at": "2026-10-27T16:36:10Z",
+          "completed_at": "2026-10-27T16:36:10Z"
+        },
+        {
+          "name": "Post Run actions/setup-python@v5",
+          "status": "completed",
+          "conclusion": "skipped",
+          "number": 13,
+          "started_at": "2026-10-27T16:36:10Z",
+          "completed_at": "2026-10-27T16:36:10Z"
+        },
+        {
+          "name": "Post Run actions/checkout@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 14,
+          "started_at": "2026-10-27T16:36:10Z",
+          "completed_at": "2026-10-27T16:36:11Z"
+        },
+        {
+          "name": "Complete job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 15,
+          "started_at": "2026-10-27T16:36:11Z",
+          "completed_at": "2026-10-27T16:36:11Z"
+        }
+      ],
+      "check_run_url": "https://api.github.com/repos/Harsh23Kashyap/Chatify/check-runs/122316400056",
+      "labels": [
+        "ubuntu-latest"
+      ],
+      "runner_id": 1000013636,
+      "runner_name": "GitHub Actions 1000013636",
+      "runner_group_id": 0,
+      "runner_group_name": "GitHub Actions"
+    },
+    {
+      "id": 122316400111,
+      "run_id": 40540251142,
+      "workflow_name": "offline browser regression",
+      "head_branch": "main",
+      "run_url": "https://api.github.com/repos/Harsh23Kashyap/Chatify/actions/runs/40540251142",
+      "run_attempt": 1,
+      "node_id": "CR_kwDOU7cFAs8AAAAceqAl7w",
+      "head_sha": "76991499db5f2593051372a7e50e52816e34c8e6",
+      "url": "https://api.github.com/repos/Harsh23Kashyap/Chatify/actions/jobs/122316400111",
+      "html_url": "https://github.com/Harsh23Kashyap/Chatify/actions/runs/40540251142/job/122316400111",
+      "status": "completed",
+      "conclusion": "success",
+      "created_at": "2026-10-27T16:22:23Z",
+      "started_at": "2026-10-27T16:22:26Z",
+      "completed_at": "2026-10-27T16:33:46Z",
+      "name": "Offline browser shard 6 of 12",
+      "steps": [
+        {
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 1,
+          "started_at": "2026-10-27T16:22:27Z",
+          "completed_at": "2026-10-27T16:22:28Z"
+        },
+        {
+          "name": "Run actions/checkout@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 2,
+          "started_at": "2026-10-27T16:22:28Z",
+          "completed_at": "2026-10-27T16:22:42Z"
+        },
+        {
+          "name": "Run actions/setup-python@v5",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 3,
+          "started_at": "2026-10-27T16:22:42Z",
+          "completed_at": "2026-10-27T16:22:42Z"
+        },
+        {
+          "name": "Run actions/setup-node@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 4,
+          "started_at": "2026-10-27T16:22:42Z",
+          "completed_at": "2026-10-27T16:22:42Z"
+        },
+        {
+          "name": "Install offline regression dependencies",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 5,
+          "started_at": "2026-10-27T16:22:42Z",
+          "completed_at": "2026-10-27T16:23:12Z"
+        },
+        {
+          "name": "Browser and manifest preflight",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 6,
+          "started_at": "2026-10-27T16:23:12Z",
+          "completed_at": "2026-10-27T16:23:14Z"
+        },
+        {
+          "name": "Run all assigned offline regression contracts",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 7,
+          "started_at": "2026-10-27T16:23:14Z",
+          "completed_at": "2026-10-27T16:33:42Z"
+        },
+        {
+          "name": "Post Run actions/setup-node@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 12,
+          "started_at": "2026-10-27T16:33:42Z",
+          "completed_at": "2026-10-27T16:33:42Z"
+        },
+        {
+          "name": "Post Run actions/setup-python@v5",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 13,
+          "started_at": "2026-10-27T16:33:42Z",
+          "completed_at": "2026-10-27T16:33:42Z"
+        },
+        {
+          "name": "Post Run actions/checkout@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 14,
+          "started_at": "2026-10-27T16:33:42Z",
+          "completed_at": "2026-10-27T16:33:43Z"
+        },
+        {
+          "name": "Complete job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 15,
+          "started_at": "2026-10-27T16:33:43Z",
+          "completed_at": "2026-10-27T16:33:43Z"
+        }
+      ],
+      "check_run_url": "https://api.github.com/repos/Harsh23Kashyap/Chatify/check-runs/122316400111",
+      "labels": [
+        "ubuntu-latest"
+      ],
+      "runner_id": 1000013635,
+      "runner_name": "GitHub Actions 1000013635",
+      "runner_group_id": 0,
+      "runner_group_name": "GitHub Actions"
+    },
+    {
+      "id": 122316400146,
+      "run_id": 40540251142,
+      "workflow_name": "offline browser regression",
+      "head_branch": "main",
+      "run_url": "https://api.github.com/repos/Harsh23Kashyap/Chatify/actions/runs/40540251142",
+      "run_attempt": 1,
+      "node_id": "CR_kwDOU7cFAs8AAAAceqAmEg",
+      "head_sha": "76991499db5f2593051372a7e50e52816e34c8e6",
+      "url": "https://api.github.com/repos/Harsh23Kashyap/Chatify/actions/jobs/122316400146",
+      "html_url": "https://github.com/Harsh23Kashyap/Chatify/actions/runs/40540251142/job/122316400146",
+      "status": "completed",
+      "conclusion": "failure",
+      "created_at": "2026-10-27T16:22:23Z",
+      "started_at": "2026-10-27T16:22:25Z",
+      "completed_at": "2026-10-27T16:31:05Z",
+      "name": "Offline browser shard 5 of 12",
+      "steps": [
+        {
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 1,
+          "started_at": "2026-10-27T16:22:25Z",
+          "completed_at": "2026-10-27T16:22:26Z"
+        },
+        {
+          "name": "Run actions/checkout@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 2,
+          "started_at": "2026-10-27T16:22:26Z",
+          "completed_at": "2026-10-27T16:22:29Z"
+        },
+        {
+          "name": "Run actions/setup-python@v5",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 3,
+          "started_at": "2026-10-27T16:22:29Z",
+          "completed_at": "2026-10-27T16:22:29Z"
+        },
+        {
+          "name": "Run actions/setup-node@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 4,
+          "started_at": "2026-10-27T16:22:29Z",
+          "completed_at": "2026-10-27T16:22:33Z"
+        },
+        {
+          "name": "Install offline regression dependencies",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 5,
+          "started_at": "2026-10-27T16:22:33Z",
+          "completed_at": "2026-10-27T16:22:58Z"
+        },
+        {
+          "name": "Browser and manifest preflight",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 6,
+          "started_at": "2026-10-27T16:22:58Z",
+          "completed_at": "2026-10-27T16:22:58Z"
+        },
+        {
+          "name": "Run all assigned offline regression contracts",
+          "status": "completed",
+          "conclusion": "failure",
+          "number": 7,
+          "started_at": "2026-10-27T16:22:58Z",
+          "completed_at": "2026-10-27T16:31:02Z"
+        },
+        {
+          "name": "Post Run actions/setup-node@v4",
+          "status": "completed",
+          "conclusion": "skipped",
+          "number": 12,
+          "started_at": "2026-10-27T16:31:02Z",
+          "completed_at": "2026-10-27T16:31:02Z"
+        },
+        {
+          "name": "Post Run actions/setup-python@v5",
+          "status": "completed",
+          "conclusion": "skipped",
+          "number": 13,
+          "started_at": "2026-10-27T16:31:02Z",
+          "completed_at": "2026-10-27T16:31:02Z"
+        },
+        {
+          "name": "Post Run actions/checkout@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 14,
+          "started_at": "2026-10-27T16:31:02Z",
+          "completed_at": "2026-10-27T16:31:03Z"
+        },
+        {
+          "name": "Complete job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 15,
+          "started_at": "2026-10-27T16:31:03Z",
+          "completed_at": "2026-10-27T16:31:03Z"
+        }
+      ],
+      "check_run_url": "https://api.github.com/repos/Harsh23Kashyap/Chatify/check-runs/122316400146",
+      "labels": [
+        "ubuntu-latest"
+      ],
+      "runner_id": 1000013639,
+      "runner_name": "GitHub Actions 1000013639",
+      "runner_group_id": 0,
+      "runner_group_name": "GitHub Actions"
+    },
+    {
+      "id": 122316400152,
+      "run_id": 40540251142,
+      "workflow_name": "offline browser regression",
+      "head_branch": "main",
+      "run_url": "https://api.github.com/repos/Harsh23Kashyap/Chatify/actions/runs/40540251142",
+      "run_attempt": 1,
+      "node_id": "CR_kwDOU7cFAs8AAAAceqAmGA",
+      "head_sha": "76991499db5f2593051372a7e50e52816e34c8e6",
+      "url": "https://api.github.com/repos/Harsh23Kashyap/Chatify/actions/jobs/122316400152",
+      "html_url": "https://github.com/Harsh23Kashyap/Chatify/actions/runs/40540251142/job/122316400152",
+      "status": "completed",
+      "conclusion": "failure",
+      "created_at": "2026-10-27T16:22:23Z",
+      "started_at": "2026-10-27T16:22:25Z",
+      "completed_at": "2026-10-27T16:35:13Z",
+      "name": "Offline browser shard 11 of 12",
+      "steps": [
+        {
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 1,
+          "started_at": "2026-10-27T16:22:26Z",
+          "completed_at": "2026-10-27T16:22:26Z"
+        },
+        {
+          "name": "Run actions/checkout@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 2,
+          "started_at": "2026-10-27T16:22:26Z",
+          "completed_at": "2026-10-27T16:22:30Z"
+        },
+        {
+          "name": "Run actions/setup-python@v5",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 3,
+          "started_at": "2026-10-27T16:22:30Z",
+          "completed_at": "2026-10-27T16:22:30Z"
+        },
+        {
+          "name": "Run actions/setup-node@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 4,
+          "started_at": "2026-10-27T16:22:30Z",
+          "completed_at": "2026-10-27T16:22:35Z"
+        },
+        {
+          "name": "Install offline regression dependencies",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 5,
+          "started_at": "2026-10-27T16:22:35Z",
+          "completed_at": "2026-10-27T16:22:55Z"
+        },
+        {
+          "name": "Browser and manifest preflight",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 6,
+          "started_at": "2026-10-27T16:22:55Z",
+          "completed_at": "2026-10-27T16:22:58Z"
+        },
+        {
+          "name": "Run all assigned offline regression contracts",
+          "status": "completed",
+          "conclusion": "failure",
+          "number": 7,
+          "started_at": "2026-10-27T16:22:58Z",
+          "completed_at": "2026-10-27T16:35:11Z"
+        },
+        {
+          "name": "Post Run actions/setup-node@v4",
+          "status": "completed",
+          "conclusion": "skipped",
+          "number": 12,
+          "started_at": "2026-10-27T16:35:11Z",
+          "completed_at": "2026-10-27T16:35:11Z"
+        },
+        {
+          "name": "Post Run actions/setup-python@v5",
+          "status": "completed",
+          "conclusion": "skipped",
+          "number": 13,
+          "started_at": "2026-10-27T16:35:11Z",
+          "completed_at": "2026-10-27T16:35:11Z"
+        },
+        {
+          "name": "Post Run actions/checkout@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 14,
+          "started_at": "2026-10-27T16:35:11Z",
+          "completed_at": "2026-10-27T16:35:11Z"
+        },
+        {
+          "name": "Complete job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 15,
+          "started_at": "2026-10-27T16:35:11Z",
+          "completed_at": "2026-10-27T16:35:11Z"
+        }
+      ],
+      "check_run_url": "https://api.github.com/repos/Harsh23Kashyap/Chatify/check-runs/122316400152",
+      "labels": [
+        "ubuntu-latest"
+      ],
+      "runner_id": 1000013638,
+      "runner_name": "GitHub Actions 1000013638",
+      "runner_group_id": 0,
+      "runner_group_name": "GitHub Actions"
+    },
+    {
+      "id": 122316400157,
+      "run_id": 40540251142,
+      "workflow_name": "offline browser regression",
+      "head_branch": "main",
+      "run_url": "https://api.github.com/repos/Harsh23Kashyap/Chatify/actions/runs/40540251142",
+      "run_attempt": 1,
+      "node_id": "CR_kwDOU7cFAs8AAAAceqAmHQ",
+      "head_sha": "76991499db5f2593051372a7e50e52816e34c8e6",
+      "url": "https://api.github.com/repos/Harsh23Kashyap/Chatify/actions/jobs/122316400157",
+      "html_url": "https://github.com/Harsh23Kashyap/Chatify/actions/runs/40540251142/job/122316400157",
+      "status": "completed",
+      "conclusion": "failure",
+      "created_at": "2026-10-27T16:22:23Z",
+      "started_at": "2026-10-27T16:22:25Z",
+      "completed_at": "2026-10-27T16:35:03Z",
+      "name": "Offline browser shard 4 of 12",
+      "steps": [
+        {
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 1,
+          "started_at": "2026-10-27T16:22:26Z",
+          "completed_at": "2026-10-27T16:22:26Z"
+        },
+        {
+          "name": "Run actions/checkout@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 2,
+          "started_at": "2026-10-27T16:22:26Z",
+          "completed_at": "2026-10-27T16:22:30Z"
+        },
+        {
+          "name": "Run actions/setup-python@v5",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 3,
+          "started_at": "2026-10-27T16:22:30Z",
+          "completed_at": "2026-10-27T16:22:30Z"
+        },
+        {
+          "name": "Run actions/setup-node@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 4,
+          "started_at": "2026-10-27T16:22:30Z",
+          "completed_at": "2026-10-27T16:22:33Z"
+        },
+        {
+          "name": "Install offline regression dependencies",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 5,
+          "started_at": "2026-10-27T16:22:33Z",
+          "completed_at": "2026-10-27T16:24:45Z"
+        },
+        {
+          "name": "Browser and manifest preflight",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 6,
+          "started_at": "2026-10-27T16:24:45Z",
+          "completed_at": "2026-10-27T16:24:46Z"
+        },
+        {
+          "name": "Run all assigned offline regression contracts",
+          "status": "completed",
+          "conclusion": "failure",
+          "number": 7,
+          "started_at": "2026-10-27T16:24:46Z",
+          "completed_at": "2026-10-27T16:35:01Z"
+        },
+        {
+          "name": "Post Run actions/setup-node@v4",
+          "status": "completed",
+          "conclusion": "skipped",
+          "number": 12,
+          "started_at": "2026-10-27T16:35:01Z",
+          "completed_at": "2026-10-27T16:35:01Z"
+        },
+        {
+          "name": "Post Run actions/setup-python@v5",
+          "status": "completed",
+          "conclusion": "skipped",
+          "number": 13,
+          "started_at": "2026-10-27T16:35:01Z",
+          "completed_at": "2026-10-27T16:35:01Z"
+        },
+        {
+          "name": "Post Run actions/checkout@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 14,
+          "started_at": "2026-10-27T16:35:01Z",
+          "completed_at": "2026-10-27T16:35:01Z"
+        },
+        {
+          "name": "Complete job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 15,
+          "started_at": "2026-10-27T16:35:01Z",
+          "completed_at": "2026-10-27T16:35:01Z"
+        }
+      ],
+      "check_run_url": "https://api.github.com/repos/Harsh23Kashyap/Chatify/check-runs/122316400157",
+      "labels": [
+        "ubuntu-latest"
+      ],
+      "runner_id": 1000013642,
+      "runner_name": "GitHub Actions 1000013642",
+      "runner_group_id": 0,
+      "runner_group_name": "GitHub Actions"
+    },
+    {
+      "id": 122316400268,
+      "run_id": 40540251142,
+      "workflow_name": "offline browser regression",
+      "head_branch": "main",
+      "run_url": "https://api.github.com/repos/Harsh23Kashyap/Chatify/actions/runs/40540251142",
+      "run_attempt": 1,
+      "node_id": "CR_kwDOU7cFAs8AAAAceqAmjA",
+      "head_sha": "76991499db5f2593051372a7e50e52816e34c8e6",
+      "url": "https://api.github.com/repos/Harsh23Kashyap/Chatify/actions/jobs/122316400268",
+      "html_url": "https://github.com/Harsh23Kashyap/Chatify/actions/runs/40540251142/job/122316400268",
+      "status": "completed",
+      "conclusion": "success",
+      "created_at": "2026-10-27T16:22:23Z",
+      "started_at": "2026-10-27T16:22:25Z",
+      "completed_at": "2026-10-27T16:35:15Z",
+      "name": "Offline browser shard 7 of 12",
+      "steps": [
+        {
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 1,
+          "started_at": "2026-10-27T16:22:25Z",
+          "completed_at": "2026-10-27T16:22:26Z"
+        },
+        {
+          "name": "Run actions/checkout@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 2,
+          "started_at": "2026-10-27T16:22:26Z",
+          "completed_at": "2026-10-27T16:22:37Z"
+        },
+        {
+          "name": "Run actions/setup-python@v5",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 3,
+          "started_at": "2026-10-27T16:22:37Z",
+          "completed_at": "2026-10-27T16:22:37Z"
+        },
+        {
+          "name": "Run actions/setup-node@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 4,
+          "started_at": "2026-10-27T16:22:37Z",
+          "completed_at": "2026-10-27T16:22:41Z"
+        },
+        {
+          "name": "Install offline regression dependencies",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 5,
+          "started_at": "2026-10-27T16:22:41Z",
+          "completed_at": "2026-10-27T16:23:06Z"
+        },
+        {
+          "name": "Browser and manifest preflight",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 6,
+          "started_at": "2026-10-27T16:23:06Z",
+          "completed_at": "2026-10-27T16:23:07Z"
+        },
+        {
+          "name": "Run all assigned offline regression contracts",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 7,
+          "started_at": "2026-10-27T16:23:07Z",
+          "completed_at": "2026-10-27T16:35:12Z"
+        },
+        {
+          "name": "Post Run actions/setup-node@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 12,
+          "started_at": "2026-10-27T16:35:12Z",
+          "completed_at": "2026-10-27T16:35:12Z"
+        },
+        {
+          "name": "Post Run actions/setup-python@v5",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 13,
+          "started_at": "2026-10-27T16:35:12Z",
+          "completed_at": "2026-10-27T16:35:13Z"
+        },
+        {
+          "name": "Post Run actions/checkout@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 14,
+          "started_at": "2026-10-27T16:35:13Z",
+          "completed_at": "2026-10-27T16:35:13Z"
+        },
+        {
+          "name": "Complete job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 15,
+          "started_at": "2026-10-27T16:35:13Z",
+          "completed_at": "2026-10-27T16:35:13Z"
+        }
+      ],
+      "check_run_url": "https://api.github.com/repos/Harsh23Kashyap/Chatify/check-runs/122316400268",
+      "labels": [
+        "ubuntu-latest"
+      ],
+      "runner_id": 1000013641,
+      "runner_name": "GitHub Actions 1000013641",
+      "runner_group_id": 0,
+      "runner_group_name": "GitHub Actions"
+    },
+    {
+      "id": 122316400360,
+      "run_id": 40540251142,
+      "workflow_name": "offline browser regression",
+      "head_branch": "main",
+      "run_url": "https://api.github.com/repos/Harsh23Kashyap/Chatify/actions/runs/40540251142",
+      "run_attempt": 1,
+      "node_id": "CR_kwDOU7cFAs8AAAAceqAm6A",
+      "head_sha": "76991499db5f2593051372a7e50e52816e34c8e6",
+      "url": "https://api.github.com/repos/Harsh23Kashyap/Chatify/actions/jobs/122316400360",
+      "html_url": "https://github.com/Harsh23Kashyap/Chatify/actions/runs/40540251142/job/122316400360",
+      "status": "completed",
+      "conclusion": "success",
+      "created_at": "2026-10-27T16:22:23Z",
+      "started_at": "2026-10-27T16:22:25Z",
+      "completed_at": "2026-10-27T16:34:17Z",
+      "name": "Offline browser shard 8 of 12",
+      "steps": [
+        {
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 1,
+          "started_at": "2026-10-27T16:22:26Z",
+          "completed_at": "2026-10-27T16:22:27Z"
+        },
+        {
+          "name": "Run actions/checkout@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 2,
+          "started_at": "2026-10-27T16:22:27Z",
+          "completed_at": "2026-10-27T16:22:30Z"
+        },
+        {
+          "name": "Run actions/setup-python@v5",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 3,
+          "started_at": "2026-10-27T16:22:30Z",
+          "completed_at": "2026-10-27T16:22:30Z"
+        },
+        {
+          "name": "Run actions/setup-node@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 4,
+          "started_at": "2026-10-27T16:22:30Z",
+          "completed_at": "2026-10-27T16:22:31Z"
+        },
+        {
+          "name": "Install offline regression dependencies",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 5,
+          "started_at": "2026-10-27T16:22:31Z",
+          "completed_at": "2026-10-27T16:22:55Z"
+        },
+        {
+          "name": "Browser and manifest preflight",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 6,
+          "started_at": "2026-10-27T16:22:55Z",
+          "completed_at": "2026-10-27T16:22:55Z"
+        },
+        {
+          "name": "Run all assigned offline regression contracts",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 7,
+          "started_at": "2026-10-27T16:22:55Z",
+          "completed_at": "2026-10-27T16:34:13Z"
+        },
+        {
+          "name": "Post Run actions/setup-node@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 12,
+          "started_at": "2026-10-27T16:34:13Z",
+          "completed_at": "2026-10-27T16:34:13Z"
+        },
+        {
+          "name": "Post Run actions/setup-python@v5",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 13,
+          "started_at": "2026-10-27T16:34:13Z",
+          "completed_at": "2026-10-27T16:34:14Z"
+        },
+        {
+          "name": "Post Run actions/checkout@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 14,
+          "started_at": "2026-10-27T16:34:14Z",
+          "completed_at": "2026-10-27T16:34:14Z"
+        },
+        {
+          "name": "Complete job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 15,
+          "started_at": "2026-10-27T16:34:14Z",
+          "completed_at": "2026-10-27T16:34:14Z"
+        }
+      ],
+      "check_run_url": "https://api.github.com/repos/Harsh23Kashyap/Chatify/check-runs/122316400360",
+      "labels": [
+        "ubuntu-latest"
+      ],
+      "runner_id": 1000013640,
+      "runner_name": "GitHub Actions 1000013640",
+      "runner_group_id": 0,
+      "runner_group_name": "GitHub Actions"
+    }
+  ]
+}

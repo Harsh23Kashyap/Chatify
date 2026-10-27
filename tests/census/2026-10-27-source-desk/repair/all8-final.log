@@ -1,0 +1,85 @@
+CASE shape_states_browser.cjs default PASS exit=0 seconds=26.3
+STATES 320 reduce {"result":[{"density":"compact","padding":7.02,"margin":6.24},{"density":"cozy","padding":9,"margin":8},{"density":"roomy","padding":11.7,"margin":10.4}],"styles":[{"bubble":"soft","background":"rgb(242, 243, 235)","border":"1px","shadow":"none","trans":"0s"},{"bubble":"outline","background":"rgb(242, 243, 235)","border":"1px","shadow":"none","trans":"0s"},{"bubble":"flat","background":"rgb(242, 243, 235)","border":"0px","shadow":"none","trans":"0s"}],"shadows":[{"shadow":"none","value":"none"},{"shadow":"soft","value":"rgba(0, 0, 0, 0.04) 0px 1px 2px 0px, rgba(23, 35, 31, 0.06) 0px 8px 24px 0px"},{"shadow":"strong","value":"rgba(0, 0, 0, 0.08) 0px 2px 4px 0px, rgba(23, 35, 31, 0.14) 0px 14px 32px 0px"}],"same":true,"draft":"Retain the draft"}
+STATES 320 no-preference {"result":[{"density":"compact","padding":7.03461,"margin":6.25298},{"density":"cozy","padding":8.98579,"margin":7.98737},{"density":"roomy","padding":11.68,"margin":10.3822}],"styles":[{"bubble":"soft","background":"rgb(242, 243, 235)","border":"1px","shadow":"none","trans":"0.16s, 0.16s, 0.16s, 0.16s"},{"bubble":"outline","background":"rgb(242, 243, 235)","border":"1px","shadow":"none","trans":"0.16s, 0.16s, 0.16s, 0.16s"},{"bubble":"flat","background":"rgb(242, 243, 235)","border":"0px","shadow":"none","trans":"0s"}],"shadows":[{"shadow":"none","value":"none"},{"shadow":"soft","value":"rgba(0, 0, 0, 0.04) 0px 1px 2px 0px, rgba(23, 35, 31, 0.06) 0px 8px 24px 0px"},{"shadow":"strong","value":"rgba(0, 0, 0, 0.08) 0px 2px 4px 0px, rgba(23, 35, 31, 0.14) 0px 14px 32px 0px"}],"same":true,"draft":"Retain the draft"}
+STATES 1280 reduce {"result":[{"density":"compact","padding":7.02,"margin":6.24},{"density":"cozy","padding":9,"margin":8},{"density":"roomy","padding":11.7,"margin":10.4}],"styles":[{"bubble":"soft","background":"rgb(242, 243, 235)","border":"1px","shadow":"none","trans":"0s"},{"bubble":"outline","background":"rgb(242, 243, 235)","border":"1px","shadow":"none","trans":"0s"},{"bubble":"flat","background":"rgb(242, 243, 235)","border":"0px","shadow":"none","trans":"0s"}],"shadows":[{"shadow":"none","value":"none"},{"shadow":"soft","value":"rgba(0, 0, 0, 0.04) 0px 1px 2px 0px, rgba(23, 35, 31, 0.06) 0px 8px 24px 0px"},{"shadow":"strong","value":"rgba(0, 0, 0, 0.08) 0px 2px 4px 0px, rgba(23, 35, 31, 0.14) 0px 14px 32px 0px"}],"same":true,"draft":"Retain the draft"}
+STATES 1280 no-preference {"result":[{"density":"compact","padding":7.03461,"margin":6.25298},{"density":"cozy","padding":8.98579,"margin":7.98737},{"density":"roomy","padding":11.68,"margin":10.3822}],"styles":[{"bubble":"soft","background":"rgb(242, 243, 235)","border":"1px","shadow":"none","trans":"0.16s, 0.16s, 0.16s, 0.16s"},{"bubble":"outline","background":"rgb(242, 243, 235)","border":"1px","shadow":"none","trans":"0.16s, 0.16s, 0.16s, 0.16s"},{"bubble":"flat","background":"rgb(242, 243, 235)","border":"0px","shadow":"none","trans":"0s"}],"shadows":[{"shadow":"none","value":"none"},{"shadow":"soft","value":"rgba(0, 0, 0, 0.04) 0px 1px 2px 0px, rgba(23, 35, 31, 0.06) 0px 8px 24px 0px"},{"shadow":"strong","value":"rgba(0, 0, 0, 0.08) 0px 2px 4px 0px, rgba(23, 35, 31, 0.14) 0px 14px 32px 0px"}],"same":true,"draft":"Retain the draft"}
+PASS radiusinterpolates no scale spacing3coherent softoutlineflat actualstyles shadow3bounded in-place node/draft resetlocalconfirmation no wholepreviewanimation3201280reduce/normal
+
+CASE chat_composer_browser.cjs default PASS exit=0 seconds=5.7
+PASS fixture suggestion submits once, empty/whitespace disabled, populated/stop/retry enabled, restored error question/focus, grow/shrink, target sizes, keyboard/focus, nooverflow 3203901280
+
+CASE suggestion_press_motion_audit_browser.cjs default PASS exit=0 seconds=12.6
+SUGGESTIONPRESS 320 no-preference matrix(0.98, 0, 0, 0.98, 0, 0) release1 outside no request draftretained Noneoff
+SUGGESTIONPRESS 320 reduce none release1 outside no request draftretained Noneoff
+SUGGESTIONPRESS 1280 no-preference matrix(0.98, 0, 0, 0.98, 0, 0) release1 outside no request draftretained Noneoff
+SUGGESTIONPRESS 1280 reduce none release1 outside no request draftretained Noneoff
+PASS suggestionhoverarrow2px98pctpress120ms nohovergrowth release1 noovershoot ReduceNoneoff3201280
+
+CASE chat_shortcuts_audit_browser.cjs default PASS exit=0 seconds=8.0
+PASS fourshortcutactualdestinations/uploadSourcesReadingModel/backChat3203901280
+
+CASE source_scope_origin_focus_motion_browser.cjs default PASS exit=0 seconds=8.9
+PASS source hero card nativeEnter open Escape/Done/document returns actual initiating card3201280normalReduce
+
+CASE source_scope_removed_origin_focus_motion_browser.cjs default PASS exit=0 seconds=8.8
+PASS source hero card nativeEnter open Escape/Done/document removed origin returns toolbar fallback3201280normalReduce
+
+CASE mode_preview_stationary_motion_audit_browser.cjs default PASS exit=0 seconds=38.1
+PREVIEW 320 no-preference wording simple x/width/identity fixed noanimation 240
+PREVIEW 320 no-preference wording advanced x/width/identity fixed noanimation 240
+PREVIEW 320 no-preference colors simple x/width/identity fixed noanimation 240
+PREVIEW 320 no-preference colors advanced x/width/identity fixed noanimation 240
+PREVIEW 320 no-preference background simple x/width/identity fixed noanimation 240
+PREVIEW 320 no-preference background advanced x/width/identity fixed noanimation 240
+PREVIEW 320 no-preference fonts simple x/width/identity fixed noanimation 240
+PREVIEW 320 no-preference fonts advanced x/width/identity fixed noanimation 240
+PREVIEW 320 no-preference layout simple x/width/identity fixed noanimation 240
+PREVIEW 320 no-preference layout advanced x/width/identity fixed noanimation 240
+PREVIEW 320 no-preference model simple x/width/identity fixed noanimation 240
+PREVIEW 320 no-preference model advanced x/width/identity fixed noanimation 240
+PREVIEW 320 no-preference finish simple x/width/identity fixed noanimation 240
+PREVIEW 320 no-preference finish advanced x/width/identity fixed noanimation 240
+PREVIEW 320 reduce wording simple x/width/identity fixed noanimation 240
+PREVIEW 320 reduce wording advanced x/width/identity fixed noanimation 240
+PREVIEW 320 reduce colors simple x/width/identity fixed noanimation 240
+PREVIEW 320 reduce colors advanced x/width/identity fixed noanimation 240
+PREVIEW 320 reduce background simple x/width/identity fixed noanimation 240
+PREVIEW 320 reduce background advanced x/width/identity fixed noanimation 240
+PREVIEW 320 reduce fonts simple x/width/identity fixed noanimation 240
+PREVIEW 320 reduce fonts advanced x/width/identity fixed noanimation 240
+PREVIEW 320 reduce layout simple x/width/identity fixed noanimation 240
+PREVIEW 320 reduce layout advanced x/width/identity fixed noanimation 240
+PREVIEW 320 reduce model simple x/width/identity fixed noanimation 240
+PREVIEW 320 reduce model advanced x/width/identity fixed noanimation 240
+PREVIEW 320 reduce finish simple x/width/identity fixed noanimation 240
+PREVIEW 320 reduce finish advanced x/width/identity fixed noanimation 240
+PREVIEW 1280 no-preference wording simple x/width/identity fixed noanimation 442
+PREVIEW 1280 no-preference wording advanced x/width/identity fixed noanimation 442
+PREVIEW 1280 no-preference colors simple x/width/identity fixed noanimation 442
+PREVIEW 1280 no-preference colors advanced x/width/identity fixed noanimation 442
+PREVIEW 1280 no-preference background simple x/width/identity fixed noanimation 442
+PREVIEW 1280 no-preference background advanced x/width/identity fixed noanimation 442
+PREVIEW 1280 no-preference fonts simple x/width/identity fixed noanimation 442
+PREVIEW 1280 no-preference fonts advanced x/width/identity fixed noanimation 442
+PREVIEW 1280 no-preference layout simple x/width/identity fixed noanimation 442
+PREVIEW 1280 no-preference layout advanced x/width/identity fixed noanimation 442
+PREVIEW 1280 no-preference model simple x/width/identity fixed noanimation 442
+PREVIEW 1280 no-preference model advanced x/width/identity fixed noanimation 442
+PREVIEW 1280 no-preference finish simple x/width/identity fixed noanimation 442
+PREVIEW 1280 no-preference finish advanced x/width/identity fixed noanimation 442
+PREVIEW 1280 reduce wording simple x/width/identity fixed noanimation 442
+PREVIEW 1280 reduce wording advanced x/width/identity fixed noanimation 442
+PREVIEW 1280 reduce colors simple x/width/identity fixed noanimation 442
+PREVIEW 1280 reduce colors advanced x/width/identity fixed noanimation 442
+PREVIEW 1280 reduce background simple x/width/identity fixed noanimation 442
+PREVIEW 1280 reduce background advanced x/width/identity fixed noanimation 442
+PREVIEW 1280 reduce fonts simple x/width/identity fixed noanimation 442
+PREVIEW 1280 reduce fonts advanced x/width/identity fixed noanimation 442
+PREVIEW 1280 reduce layout simple x/width/identity fixed noanimation 442
+PREVIEW 1280 reduce layout advanced x/width/identity fixed noanimation 442
+PREVIEW 1280 reduce model simple x/width/identity fixed noanimation 442
+PREVIEW 1280 reduce model advanced x/width/identity fixed noanimation 442
+PREVIEW 1280 reduce finish simple x/width/identity fixed noanimation 442
+PREVIEW 1280 reduce finish advanced x/width/identity fixed noanimation 442
+PASS modeSimpleAdvancedpreviewxwidthiframeidentityfixed noanimations/nopreviewtransform7sections3201280normalReduce ymayreflowmobile contentdocument
+

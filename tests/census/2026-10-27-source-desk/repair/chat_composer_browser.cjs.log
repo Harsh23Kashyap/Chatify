@@ -1,0 +1,12 @@
+CASE chat_composer_browser.cjs default FAIL exit=1 seconds=5.2
+AssertionError [ERR_ASSERTION]: balanced question rows
+    at /home/sandbox/chatify/tests/chat_composer_browser.cjs:2:2971 {
+  generatedMessage: false,
+  code: 'ERR_ASSERTION',
+  actual: false,
+  expected: true,
+  operator: '==',
+  diff: 'simple'
+}
+
+{"executions": 1, "failed": 1, "passed": 0, "scripts": 1}

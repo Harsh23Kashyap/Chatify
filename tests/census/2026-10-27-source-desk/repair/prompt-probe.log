@@ -1,0 +1,107 @@
+BEFOREGEOM {
+  r: {
+    x: 45,
+    y: 242.1875,
+    width: 230,
+    height: 560,
+    top: 242.1875,
+    right: 275,
+    bottom: 802.1875,
+    left: 45
+  },
+  css: {
+    font: '14px / 22.4px ui-monospace, monospace',
+    width: '230px',
+    height: '560px'
+  },
+  parents: [
+    { tag: 'TEXTAREA', c: '', id: '', width: 230 },
+    { tag: 'DIV', c: 'sbody', id: '', width: 230 },
+    {
+      tag: 'DETAILS',
+      c: 'stage selected-editor',
+      id: 'st-question_check',
+      width: 262
+    },
+    {
+      tag: 'DIV',
+      c: 'pipeline-editor-pane inline-editor',
+      id: 'promptsEditor',
+      width: 262
+    },
+    {
+      tag: 'SECTION',
+      c: 'tile settings-active-panel',
+      id: 'sec-prompts',
+      width: 288
+    },
+    { tag: 'DIV', c: 'col', id: 'col', width: 288 },
+    { tag: 'DIV', c: 'layout', id: '', width: 288 },
+    { tag: 'MAIN', c: 'card', id: '', width: 288 },
+    {
+      tag: 'BODY',
+      c: 'cfgtop-manual settings-tabs',
+      id: '',
+      width: 320
+    },
+    { tag: 'HTML', c: 'is-scrolled', id: '', width: 320 }
+  ]
+}
+AFTERGEOM {
+  r: {
+    x: 51,
+    y: 238.1875,
+    width: 218,
+    height: 560,
+    top: 238.1875,
+    right: 269,
+    bottom: 798.1875,
+    left: 51
+  },
+  css: {
+    font: '14px / 22.4px ui-monospace, monospace',
+    width: '218px',
+    height: '560px'
+  },
+  parents: [
+    { tag: 'TEXTAREA', c: '', id: '', width: 218 },
+    { tag: 'DIV', c: 'sbody', id: '', width: 218 },
+    {
+      tag: 'DETAILS',
+      c: 'stage selected-editor',
+      id: 'st-question_check',
+      width: 250
+    },
+    {
+      tag: 'DIV',
+      c: 'pipeline-editor-pane inline-editor',
+      id: 'promptsEditor',
+      width: 270
+    },
+    {
+      tag: 'SECTION',
+      c: 'tile settings-active-panel',
+      id: 'sec-prompts',
+      width: 288
+    },
+    { tag: 'DIV', c: 'col', id: 'col', width: 288 },
+    { tag: 'DIV', c: 'layout', id: '', width: 288 },
+    { tag: 'MAIN', c: 'card', id: '', width: 288 },
+    {
+      tag: 'BODY',
+      c: 'cfgtop-manual settings-tabs settings-editor-wide',
+      id: '',
+      width: 320
+    },
+    { tag: 'HTML', c: 'is-scrolled', id: '', width: 320 }
+  ]
+}
+AssertionError [ERR_ASSERTION]: {"before":{"value":"Early prompt paragraph\nEarly prompt paragraph\nEarly prompt paragraph\nEarly prompt paragraph\nEarly prompt paragraph\nEarly prompt paragraph\nEarly prompt paragraph\nEarly prompt paragraph\nEarly prompt paragraph\nEarly prompt paragraph\nEarly prompt paragraph\nEarly prompt paragraph\nEarly prompt paragraph\nEarly prompt paragraph\nEarly prompt paragraph\nEarly prompt paragraph\nEarly prompt paragraph\nEarly prompt paragraph\nEarly prompt paragraph\nEarly prompt paragraph\nEarly prompt paragraph\nEarly prompt paragraph\nEarly prompt paragraph\nEarly prompt paragraph\nEarly prompt paragraph\nEarly prompt paragraph\nEarly prompt paragraph\nEarly prompt paragraph\nEarly prompt paragraph\nEarly prompt paragraph\nEarly prompt paragraph\nEarly prompt paragraph\nEarly prompt paragraph\nEarly prompt paragraph\nEarly prompt paragraph\nEarly prompt paragraph\nEarly prompt paragraph\nEarly prompt paragraph\nEarly prompt paragraph\nEarly prompt paragraph\nEarly prompt paragraph\nEarly prompt paragraph\nEarly prompt paragraph\nEarly prompt paragraph\nEarly prompt paragraph\nEarly prompt paragraph\nEarly prompt paragraph\nEarly prompt paragraph\nEarly prompt paragraph\nEarly prompt paragraph\nEarly prompt paragraph\nEarly prompt paragraph\nEarly prompt paragraph\nEarly prompt paragraph\nEarly prompt paragraph\nEarly prompt paragraph\nEarly prompt paragraph\nEarly prompt paragraph\nEarly prompt paragraph\nEarly prompt paragraph\nEarly prompt paragraph\nEarly prompt paragraph\nEarly prompt paragraph\nEarly prompt paragraph\nEarly prompt paragraph\nEarly prompt paragraph\nEarly prompt paragraph\nEarly prompt paragraph\nEarly prompt paragraph\nEarly prompt paragraph\nEarly prompt paragraph\nEarly prompt paragraph\nEarly prompt paragraph\nEarly prompt paragraph\nEarly prompt paragraph\nEarly prompt paragraph\nEarly prompt paragraph\nEarly prompt paragraph\nEarly prompt paragraph\nEarly prompt paragraph\nEarly prompt paragraph\nEarly prompt paragraph\nEarly prompt paragraph\nEarly prompt paragraph\nEarly prompt paragraph\nEarly prompt paragraph\nEarly prompt paragraph\nEarly prompt paragraph\nEarly prompt paragraph\nEarly prompt paragraph\nEarly prompt paragraph\nEarly prompt paragraph\nEarly prompt paragraph\nEarly prompt paragraph\nEarly prompt paragraph\nEarly prompt paragraph\nEarly prompt paragraph\nEarly prompt paragraph\nEarly prompt paragraph\nEarly prompt paragraph\nEarly prompt paragraph\nEarly prompt paragraph\nEarly prompt paragraph\nEarly prompt paragraph\nEarly prompt paragraph\nEarly prompt paragraph\nEarly prompt paragraph\nEarly prompt paragraph\nEarly prompt paragraph\nEarly prompt paragraph\nEarly prompt paragraph\nEarly prompt paragraph\nEarly prompt paragraph\nEarly prompt paragraph\nEarly prompt paragraph\nEarly prompt paragraph\nEarly prompt paragraph\nEarly prompt paragraph\nEarly prompt paragraph\nEarly prompt paragraph\n","start":100,"end":100,"scroll":120},"after":{"value":"Early prompt paragraph\nEarly prompt paragraph\nEarly prompt paragraph\nEarly prompt paragraph\nEarly prompt paragraph\nEarly prompt paragraph\nEarly prompt paragraph\nEarly prompt paragraph\nEarly prompt paragraph\nEarly prompt paragraph\nEarly prompt paragraph\nEarly prompt paragraph\nEarly prompt paragraph\nEarly prompt paragraph\nEarly prompt paragraph\nEarly prompt paragraph\nEarly prompt paragraph\nEarly prompt paragraph\nEarly prompt paragraph\nEarly prompt paragraph\nEarly prompt paragraph\nEarly prompt paragraph\nEarly prompt paragraph\nEarly prompt paragraph\nEarly prompt paragraph\nEarly prompt paragraph\nEarly prompt paragraph\nEarly prompt paragraph\nEarly prompt paragraph\nEarly prompt paragraph\nEarly prompt paragraph\nEarly prompt paragraph\nEarly prompt paragraph\nEarly prompt paragraph\nEarly prompt paragraph\nEarly prompt paragraph\nEarly prompt paragraph\nEarly prompt paragraph\nEarly prompt paragraph\nEarly prompt paragraph\nEarly prompt paragraph\nEarly prompt paragraph\nEarly prompt paragraph\nEarly prompt paragraph\nEarly prompt paragraph\nEarly prompt paragraph\nEarly prompt paragraph\nEarly prompt paragraph\nEarly prompt paragraph\nEarly prompt paragraph\nEarly prompt paragraph\nEarly prompt paragraph\nEarly prompt paragraph\nEarly prompt paragraph\nEarly prompt paragraph\nEarly prompt paragraph\nEarly prompt paragraph\nEarly prompt paragraph\nEarly prompt paragraph\nEarly prompt paragraph\nEarly prompt paragraph\nEarly prompt paragraph\nEarly prompt paragraph\nEarly prompt paragraph\nEarly prompt paragraph\nEarly prompt paragraph\nEarly prompt paragraph\nEarly prompt paragraph\nEarly prompt paragraph\nEarly prompt paragraph\nEarly prompt paragraph\nEarly prompt paragraph\nEarly prompt paragraph\nEarly prompt paragraph\nEarly prompt paragraph\nEarly prompt paragraph\nEarly prompt paragraph\nEarly prompt paragraph\nEarly prompt paragraph\nEarly prompt paragraph\nEarly prompt paragraph\nEarly prompt paragraph\nEarly prompt paragraph\nEarly prompt paragraph\nEarly prompt paragraph\nEarly prompt paragraph\nEarly prompt paragraph\nEarly prompt paragraph\nEarly prompt paragraph\nEarly prompt paragraph\nEarly prompt paragraph\nEarly prompt paragraph\nEarly prompt paragraph\nEarly prompt paragraph\nEarly prompt paragraph\nEarly prompt paragraph\nEarly prompt paragraph\nEarly prompt paragraph\nEarly prompt paragraph\nEarly prompt paragraph\nEarly prompt paragraph\nEarly prompt paragraph\nEarly prompt paragraph\nEarly prompt paragraph\nEarly prompt paragraph\nEarly prompt paragraph\nEarly prompt paragraph\nEarly prompt paragraph\nEarly prompt paragraph\nEarly prompt paragraph\nEarly prompt paragraph\nEarly prompt paragraph\nEarly prompt paragraph\nEarly prompt paragraph\nEarly prompt paragraph\nEarly prompt paragraph\nEarly prompt paragraph\nEarly prompt paragraph\nEarly prompt paragraph\nEarly prompt paragraph\n","start":100,"end":100,"scroll":209,"focus":true}}
+    at /tmp/chatify-desk-ci-repair/prompt-probe.cjs:5:1655 {
+  generatedMessage: false,
+  code: 'ERR_ASSERTION',
+  actual: false,
+  expected: true,
+  operator: '==',
+  diff: 'simple'
+}
