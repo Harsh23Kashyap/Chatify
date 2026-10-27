@@ -16,3 +16,5 @@ choice_runtime_quiet run4 FAIL3s: expected target._revealMotion.playState idle
 30ms after runtime quiet setting; actual false. This is a cancellation-state
 assertion, not absence of an expired animation. Unresolved; preserve original
 contract and inspect identity/state/timing before classification.
+
+05:21 resume: replacement campaign finished (six5/5 streaks incl choice, runtimebroken). Single bounded direct-dispatch diagnosticPASS then freshstreakrun1FAIL expiredCalmsetup, coverageblocked, nofurtherruntimeharnessloops. Confirmed no activebrowserchild before SIGCONT130988. Original coordinator resumed pendingcolor2row then color3. color2 recorded duration13430s is coordinator walltime spanning deliberate SIGSTOP, NOT actual browser execution time or evidence of a13ks test; child had finished while paused. Retain original row, exclude that duration from throughput/ETA. No failures erased. Broadstatusfile not truncated/restarted.
