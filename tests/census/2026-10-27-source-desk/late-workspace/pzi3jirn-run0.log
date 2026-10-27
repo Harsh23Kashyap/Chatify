@@ -1,0 +1,8 @@
+locator.fill: Timeout 30000ms exceeded.
+Call log:
+  - waiting for getByLabel('Target / service', { exact: true })
+
+    at /tmp/chatify-lateperm-forced.cjs:1:1092 {
+  log: [ "  - waiting for getByLabel('Target / service', { exact: true })" ],
+  name: 'TimeoutError'
+}
