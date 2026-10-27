@@ -1,0 +1,150 @@
+NATIVEZOOM { width: 1280, dpr: 1, scale: 1 } { width: 320, dpr: 4, scale: 1 }
+KEY Enter true
+CHOOSER_FAILURE {
+  inputTrace: [
+    {
+      type: 'bubblekey',
+      key: 'Control',
+      prevented: false,
+      at: 2947.5999999996275
+    },
+    {
+      type: 'bubblekey',
+      key: 'Shift',
+      prevented: false,
+      at: 2952.2999999988824
+    },
+    {
+      type: 'bubblekey',
+      key: '+',
+      prevented: false,
+      at: 2952.4000000003725
+    },
+    { type: 'bubblekey', key: 'Control', prevented: false, at: 2997.5 },
+    { type: 'bubblekey', key: 'Shift', prevented: false, at: 2997.5 },
+    { type: 'bubblekey', key: '+', prevented: false, at: 2997.5 },
+    {
+      type: 'bubblekey',
+      key: 'Control',
+      prevented: false,
+      at: 3012.4000000003725
+    },
+    {
+      type: 'bubblekey',
+      key: 'Shift',
+      prevented: false,
+      at: 3012.4000000003725
+    },
+    { type: 'bubblekey', key: '+', prevented: false, at: 3012.5 },
+    {
+      type: 'bubblekey',
+      key: 'Control',
+      prevented: false,
+      at: 3060.2999999988824
+    },
+    {
+      type: 'bubblekey',
+      key: 'Shift',
+      prevented: false,
+      at: 3060.2999999988824
+    },
+    { type: 'bubblekey', key: '+', prevented: false, at: 3060.5 },
+    {
+      type: 'bubblekey',
+      key: 'Control',
+      prevented: false,
+      at: 3060.5999999996275
+    },
+    {
+      type: 'bubblekey',
+      key: 'Shift',
+      prevented: false,
+      at: 3060.5999999996275
+    },
+    {
+      type: 'bubblekey',
+      key: '+',
+      prevented: false,
+      at: 3060.5999999996275
+    },
+    { type: 'bubblekey', key: 'Control', prevented: false, at: 3076 },
+    {
+      type: 'bubblekey',
+      key: 'Shift',
+      prevented: false,
+      at: 3081.7999999988824
+    },
+    { type: 'bubblekey', key: '+', prevented: false, at: 3082 },
+    { type: 'bubblekey', key: 'Control', prevented: false, at: 3135 },
+    {
+      type: 'bubblekey',
+      key: 'Shift',
+      prevented: false,
+      at: 3135.0999999996275
+    },
+    {
+      type: 'bubblekey',
+      key: '+',
+      prevented: false,
+      at: 3135.0999999996275
+    },
+    {
+      type: 'bubblekey',
+      key: 'Control',
+      prevented: false,
+      at: 3135.199999999255
+    },
+    {
+      type: 'bubblekey',
+      key: 'Shift',
+      prevented: false,
+      at: 3135.199999999255
+    },
+    {
+      type: 'bubblekey',
+      key: '+',
+      prevented: false,
+      at: 3135.199999999255
+    },
+    { type: 'bubblekey', key: 'Escape', prevented: false, at: 3902 },
+    {
+      type: 'inputclick',
+      id: 'nerdFile',
+      connected: true,
+      disabled: false,
+      active: true,
+      at: 4029
+    },
+    { type: 'bubblekey', key: 'Enter', prevented: true, at: 4029.5 }
+  ],
+  trace: [
+    {
+      key: 'Enter',
+      trusted: true,
+      active: 'nerdDrop',
+      target: 'nerdDrop',
+      prevented: false
+    }
+  ],
+  active: 'nerdDrop',
+  hasFocus: true,
+  visibility: 'visible',
+  rect: {
+    x: 53,
+    y: 126.98828125,
+    width: 211.5,
+    height: 84.25,
+    top: 126.98828125,
+    right: 264.5,
+    bottom: 211.23828125,
+    left: 53
+  }
+}
+page.waitForEvent: Timeout 30000ms exceeded while waiting for event "filechooser"
+=========================== logs ===========================
+waiting for event "filechooser"
+============================================================
+    at /tmp/native-input-click-trace.cjs:1:2658 {
+  log: [],
+  name: 'TimeoutError'
+}

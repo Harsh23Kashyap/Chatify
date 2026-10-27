@@ -1,0 +1,14 @@
+PREVIEW_STATE 320 reduce { start: 6528, end: 6541.800000000745, changing: false } { now: 6665.800000000745, changing: false, motion: 'full' }
+PREVIEW_STATE 320 no-preference { start: 6531.300000000745, end: 6595.5, changing: true } { now: 6801.9000000003725, changing: true, motion: 'full' }
+AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+
+false !== true
+
+    at /tmp/color-throttled-diagnostic.cjs:2:2007 {
+  generatedMessage: true,
+  code: 'ERR_ASSERTION',
+  actual: false,
+  expected: true,
+  operator: 'strictEqual',
+  diff: 'simple'
+}

@@ -1,0 +1,10 @@
+2026-10-27T07:57:24.043Z pw:protocol SEND ► {"id":65,"method":"Input.dispatchKeyEvent","params":{"type":"keyUp","modifiers":0,"key":"Control","windowsVirtualKeyCode":17,"code":"ControlLeft","location":1,"isKeypad":false},"sessionId":"91982ACB7F3D09915099C0FEBC435D36"}
+2026-10-27T07:57:24.049Z pw:protocol SEND ► {"id":66,"method":"Input.dispatchKeyEvent","params":{"type":"keyUp","modifiers":0,"key":"Shift","windowsVirtualKeyCode":16,"code":"ShiftLeft","location":1,"isKeypad":false},"sessionId":"91982ACB7F3D09915099C0FEBC435D36"}
+2026-10-27T07:57:24.053Z pw:protocol SEND ► {"id":67,"method":"Input.dispatchKeyEvent","params":{"type":"rawKeyDown","modifiers":0,"windowsVirtualKeyCode":27,"code":"Escape","commands":[],"key":"Escape","text":"","unmodifiedText":"","autoRepeat":false,"location":0,"isKeypad":false},"sessionId":"91982ACB7F3D09915099C0FEBC435D36"}
+2026-10-27T07:57:24.055Z pw:protocol SEND ► {"id":68,"method":"Input.dispatchKeyEvent","params":{"type":"keyUp","modifiers":0,"key":"Escape","windowsVirtualKeyCode":27,"code":"Escape","location":0,"isKeypad":false},"sessionId":"91982ACB7F3D09915099C0FEBC435D36"}
+KEY Enter true
+2026-10-27T07:57:24.178Z pw:protocol SEND ► {"id":87,"method":"Page.setInterceptFileChooserDialog","params":{"enabled":true},"sessionId":"91982ACB7F3D09915099C0FEBC435D36"}
+2026-10-27T07:57:24.178Z pw:protocol SEND ► {"id":88,"method":"Input.dispatchKeyEvent","params":{"type":"keyDown","modifiers":0,"windowsVirtualKeyCode":13,"code":"Enter","commands":[],"key":"Enter","text":"\r","unmodifiedText":"\r","autoRepeat":false,"location":0,"isKeypad":false},"sessionId":"91982ACB7F3D09915099C0FEBC435D36"}
+2026-10-27T07:57:24.179Z pw:protocol ◀ RECV {"id":88,"result":{},"sessionId":"91982ACB7F3D09915099C0FEBC435D36"}
+2026-10-27T07:57:24.179Z pw:protocol SEND ► {"id":89,"method":"Input.dispatchKeyEvent","params":{"type":"keyUp","modifiers":0,"key":"Enter","windowsVirtualKeyCode":13,"code":"Enter","location":0,"isKeypad":false},"sessionId":"91982ACB7F3D09915099C0FEBC435D36"}
+2026-10-27T07:57:24.294Z pw:protocol ◀ RECV {"id":87,"result":{},"sessionId":"91982ACB7F3D09915099C0FEBC435D36"}
