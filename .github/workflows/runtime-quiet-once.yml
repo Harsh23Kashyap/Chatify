@@ -1,0 +1,61 @@
+name: bounded runtime quiet contract
+on:
+  push:
+    paths:
+      - .github/workflows/runtime-quiet-once.yml
+permissions:
+  contents: read
+jobs:
+  exact-runtime-contract:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install base application and browser driver only
+        run: |
+          python -m pip install .
+          mkdir -p "$RUNNER_TEMP/runtime-driver"
+          npm install --prefix "$RUNNER_TEMP/runtime-driver" --no-audit --no-fund playwright-core@1.56.1
+      - name: Explicit browser and contract preflight
+        run: |
+          test -x /usr/bin/google-chrome
+          /usr/bin/google-chrome --version
+          python --version
+          node --version
+          sha256sum tests/builder_keep_current_runtime_motion_browser.cjs tests/fixtures/builder-complete.yaml
+          git diff --exit-code -- tests/builder_keep_current_runtime_motion_browser.cjs chatify/web/appbuilder.js
+      - name: Run unchanged full runtime case once against offline fixture
+        env:
+          PLAYWRIGHT_MODULE: ${{ runner.temp }}/runtime-driver/node_modules/playwright-core
+          CHATIFY_TEST_URL: http://127.0.0.1:8765
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p "$RUNNER_TEMP/runtime-fixture"
+          python -m chatify init "$RUNNER_TEMP/runtime-fixture/app"
+          python -m chatify run "$RUNNER_TEMP/runtime-fixture/app/app.yaml" --host 127.0.0.1 --port 8765 --no-browser > "$RUNNER_TEMP/runtime-server.log" 2>&1 &
+          server_pid=$!
+          trap 'kill "$server_pid" 2>/dev/null || true' EXIT
+          python - <<'PY'
+          import time, urllib.request
+          for attempt in range(100):
+              try:
+                  with urllib.request.urlopen('http://127.0.0.1:8765/api/health', timeout=1) as response:
+                      assert response.status == 200
+                  break
+              except Exception:
+                  time.sleep(.1)
+          else:
+              raise SystemExit('offline fixture server did not become ready')
+          PY
+          timeout 300 node tests/builder_keep_current_runtime_motion_browser.cjs
+      # Only ordinary job logs are retained. No artifact or cache uploads, no secrets,
+      # production account access, environment dump or user-state paths are involved.
