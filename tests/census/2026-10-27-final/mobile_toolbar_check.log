@@ -1,0 +1,342 @@
+[
+  {
+    "class": "toolbar",
+    "scrollWidth": 390,
+    "clientWidth": 390,
+    "overflow": "visible",
+    "buttons": [
+      {
+        "label": "Open navigation",
+        "rect": {
+          "x": 340,
+          "y": 11,
+          "width": 38,
+          "height": 38,
+          "top": 11,
+          "right": 378,
+          "bottom": 49,
+          "left": 340
+        }
+      },
+      {
+        "label": "Replay guide",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0,
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      {
+        "label": "Toggle theme",
+        "rect": {
+          "x": 290,
+          "y": 8,
+          "width": 44,
+          "height": 44,
+          "top": 8,
+          "right": 334,
+          "bottom": 52,
+          "left": 290
+        }
+      }
+    ]
+  },
+  {
+    "class": "bar",
+    "scrollWidth": 534,
+    "clientWidth": 372,
+    "overflow": "auto",
+    "buttons": [
+      {
+        "label": "Open chats",
+        "rect": {
+          "x": 11,
+          "y": 75.5,
+          "width": 44,
+          "height": 44,
+          "top": 75.5,
+          "right": 55,
+          "bottom": 119.5,
+          "left": 11
+        }
+      },
+      {
+        "label": "Reading preferences",
+        "rect": {
+          "x": 137,
+          "y": 75.5,
+          "width": 44,
+          "height": 44,
+          "top": 75.5,
+          "right": 181,
+          "bottom": 119.5,
+          "left": 137
+        }
+      },
+      {
+        "label": "Answer depth: Standard",
+        "rect": {
+          "x": 181,
+          "y": 75.5,
+          "width": 96,
+          "height": 44,
+          "top": 75.5,
+          "right": 277,
+          "bottom": 119.5,
+          "left": 181
+        }
+      },
+      {
+        "label": "Previous question",
+        "rect": {
+          "x": 277,
+          "y": 75.5,
+          "width": 44,
+          "height": 44,
+          "top": 75.5,
+          "right": 321,
+          "bottom": 119.5,
+          "left": 277
+        }
+      },
+      {
+        "label": "Next question",
+        "rect": {
+          "x": 321,
+          "y": 75.5,
+          "width": 44,
+          "height": 44,
+          "top": 75.5,
+          "right": 365,
+          "bottom": 119.5,
+          "left": 321
+        }
+      },
+      {
+        "label": "Temporary chat",
+        "rect": {
+          "x": 365,
+          "y": 75.5,
+          "width": 44,
+          "height": 44,
+          "top": 75.5,
+          "right": 409,
+          "bottom": 119.5,
+          "left": 365
+        }
+      },
+      {
+        "label": "My profile",
+        "rect": {
+          "x": 409,
+          "y": 75.5,
+          "width": 44,
+          "height": 44,
+          "top": 75.5,
+          "right": 453,
+          "bottom": 119.5,
+          "left": 409
+        }
+      },
+      {
+        "label": "New conversation",
+        "rect": {
+          "x": 453,
+          "y": 75.5,
+          "width": 44,
+          "height": 44,
+          "top": 75.5,
+          "right": 497,
+          "bottom": 119.5,
+          "left": 453
+        }
+      },
+      {
+        "label": "Export chat",
+        "rect": {
+          "x": 497,
+          "y": 75.5,
+          "width": 44,
+          "height": 44,
+          "top": 75.5,
+          "right": 541,
+          "bottom": 119.5,
+          "left": 497
+        }
+      }
+    ]
+  }
+]
+TAB 0 {
+  tag: 'BUTTON',
+  label: 'Reading preferences',
+  rect: {
+    x: 137,
+    y: 75.5,
+    width: 44,
+    height: 44,
+    top: 75.5,
+    right: 181,
+    bottom: 119.5,
+    left: 137
+  }
+}
+TAB 1 {
+  tag: 'BUTTON',
+  label: 'Answer depth: Standard',
+  rect: {
+    x: 181,
+    y: 75.5,
+    width: 96,
+    height: 44,
+    top: 75.5,
+    right: 277,
+    bottom: 119.5,
+    left: 181
+  }
+}
+TAB 2 {
+  tag: 'BUTTON',
+  label: 'Previous question',
+  rect: {
+    x: 277,
+    y: 75.5,
+    width: 44,
+    height: 44,
+    top: 75.5,
+    right: 321,
+    bottom: 119.5,
+    left: 277
+  }
+}
+TAB 3 {
+  tag: 'BUTTON',
+  label: 'Next question',
+  rect: {
+    x: 321,
+    y: 75.5,
+    width: 44,
+    height: 44,
+    top: 75.5,
+    right: 365,
+    bottom: 119.5,
+    left: 321
+  }
+}
+TAB 4 {
+  tag: 'BUTTON',
+  label: 'Temporary chat',
+  rect: {
+    x: 365,
+    y: 75.5,
+    width: 44,
+    height: 44,
+    top: 75.5,
+    right: 409,
+    bottom: 119.5,
+    left: 365
+  }
+}
+TAB 5 {
+  tag: 'BUTTON',
+  label: 'My profile',
+  rect: {
+    x: 247,
+    y: 75.5,
+    width: 44,
+    height: 44,
+    top: 75.5,
+    right: 291,
+    bottom: 119.5,
+    left: 247
+  }
+}
+TAB 6 {
+  tag: 'BUTTON',
+  label: 'New conversation',
+  rect: {
+    x: 291,
+    y: 75.5,
+    width: 44,
+    height: 44,
+    top: 75.5,
+    right: 335,
+    bottom: 119.5,
+    left: 291
+  }
+}
+TAB 7 {
+  tag: 'BUTTON',
+  label: 'Export chat',
+  rect: {
+    x: 335,
+    y: 75.5,
+    width: 44,
+    height: 44,
+    top: 75.5,
+    right: 379,
+    bottom: 119.5,
+    left: 335
+  }
+}
+TAB 8 {
+  tag: 'BUTTON',
+  label: 'What should I pack for a monsoon trek?↗',
+  rect: {
+    x: 25,
+    y: 306.390625,
+    width: 340,
+    height: 44.1875,
+    top: 306.390625,
+    right: 365,
+    bottom: 350.578125,
+    left: 25
+  }
+}
+TAB 9 {
+  tag: 'BUTTON',
+  label: 'How do I plan three days in Jaipur?↗',
+  rect: {
+    x: 25,
+    y: 358.578125,
+    width: 340,
+    height: 44.1875,
+    top: 358.578125,
+    right: 365,
+    bottom: 402.765625,
+    left: 25
+  }
+}
+TAB 10 {
+  tag: 'BUTTON',
+  label: '↥Add documentsUpload your files',
+  rect: {
+    x: 25,
+    y: 443.765625,
+    width: 147.546875,
+    height: 34,
+    top: 443.765625,
+    right: 172.546875,
+    bottom: 477.765625,
+    left: 25
+  }
+}
+TAB 11 {
+  tag: 'BUTTON',
+  label: '⌕Choose sourcesSelect existing sources',
+  rect: {
+    x: 180.546875,
+    y: 443.765625,
+    width: 147.53125,
+    height: 34,
+    top: 443.765625,
+    right: 328.078125,
+    bottom: 477.765625,
+    left: 180.546875
+  }
+}

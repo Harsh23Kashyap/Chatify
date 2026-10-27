@@ -34,7 +34,14 @@ Preserved research source: https://files.instinct.com/jfjwqlfyzb4s-ui-reference-
 
 ## 3. The major visual and interaction improvements implemented.
 
-Pending source-backed change inventory and visual review. Do not equate research examples with adopted product components.
+Source-backed changes in bounded October25 v2-to-current window, not a claim every feature originated during this brief:
+
+- Chat: welcome kicker/rule, measured introduction, compact tools, evidence cards, busy-answer skeleton, quieter thread texture and active-chat marker (42fcc2c). Composer/answer hierarchy and mobile single-row chrome followed (1c034fe,92ae6de).
+- Settings: configuration-home build prompt with visible cost/review notice and separate manual entry; interactive sample preview labeled as sample, not a live model result. Actual current screenshots show these surfaces at1280/768/390.
+- Navigation/controls: explicit Manual-view activation fixes detached-menu navigation; Remaining-work node retained during unchanged poll updates so native smooth scrolling is not cancelled. Source/mechanism evidence in FLAKE_QUALIFICATION.md. These are actual product changes, unlike the later harness observation repairs.
+- Reduced motion, quiet states, focus/inert, singleflight and shell geometry receive targeted test coverage. Runtime active-retirement quiet-event full-matrix coverage remains blocked; do not present this as universally qualified accessibility/motion.
+
+No source component from a reference library is claimed as adopted without a corresponding code/import provenance. The matrix describes research candidates, not proof of component installation.
 
 ## 4. The exact files and components changed.
 
@@ -63,8 +70,12 @@ Installation/fresh-computer verification must still be reconciled with current a
 
 ## 6. Test, lint, type-check, and build results.
 
-Preserved census:469 unique keys latestPASS, followed by117-key post-change rerun coverage. Coverage is distinct from qualification. Stability paused after multiple failed streaks; targeted observation repairs and replacement runs are in progress. Exact current state lives in tests/census/2026-10-26/rerun_results.tsv, FLAKE_QUALIFICATION.md and preserved logs. No final all-pass, lint/build/hosted claim is made here.
+Preserved census:469 unique keys latestPASS, followed by117-key post-change rerun coverage. Coverage is distinct from qualification. Stability campaign finished:18of19cases have five completed solo PASSes, with sidebar's externally interrupted partial fourth invocation retained as a campaign caveat. Runtime active-retirement quiet-transition fullmatrix remains BLOCKED/UNQUALIFIED after unchanged160ms fallback expired before observation, including a fresh repaired-dispatch attempt. Choice's original unexplained intermittent remains residual risk. No full qualification or hosted release verdict.
+
+Final command checks recorded October27 in tests/census/2026-10-27-final/RESULTS.md and unit-reconciliation.json:1102distinct unit IDs all exercised through per-ID chunks (1104 chunk executions plus5alias verification executions),0failures/0errors/1skip. Monolithic discovery was interrupted and is NOT called a pass. Top-level UIJS syntax and Python bytecompile exit0, not lint/typechecks. Wheel build exit0 at0.4.32, no publication. No dedicated lint/typecheck project command found.
+
+Actual current local offline-fixture screenshots: chat/settings/build x1280/768/390, all nine inspected; no pageerror events and no document horizontal overflow in these captures. Static screenshot review does not verify motion timing or real model answers. Research/before screenshots are not revision-bound to original baseline. Build/install/hosted release qualification remains incomplete.
 
 ## 7. Any inaccessible references, licensing limitations, unfinished tasks, or remaining visual weaknesses.
 
-Reference-only licensing/access limits are in matrix above. Remaining: finish replacement and broad stability runs, retain unexplained incident residual risk, final visual verification, complete exact change/dependency/build inventory, hosted builder and preview-scroll checks, backup/informed-loss gate before destructive deployment, PyPI release gate and instructional video. Additional requested scenarios are queued separately, not automatically counted as executed coverage.
+Reference-only licensing/access limits are in matrix above. Remaining: runtime full active-retirement quiet-event coverage blocked; retained historical risk and sidebar interrupted-campaign caveat; complete original-baseline attribution and mission-wide file inventory; hosted builder/preview-scroll and data-backup checks; backup/informed-loss gate before destructive deployment; release/install matrix, PyPI release and instructional video. Local static visual weaknesses: configuration mobile still spends about150px on global navigation; tablet configuration has a narrow two-column prompt/preview composition; mobile chat toolbar extends beyond visible card width and needs horizontal affordance verification, despite document having no horizontal overflow. Current visual review covers local offline fixture, not production, dark theme or answer-quality proof. Additional requested scenarios are queued separately, not automatically counted as executed coverage.
