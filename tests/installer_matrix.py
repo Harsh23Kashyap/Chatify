@@ -1,7 +1,17 @@
 """Real shared-installer scenario matrix, repeated10x. No cloud or model calls."""
-import argparse,json,os,signal,socket,subprocess,sys,tempfile,time,urllib.request
+import argparse,json,os,signal,socket,subprocess,sys,tempfile,time,urllib.request,random
 from pathlib import Path
 ROOT=Path(__file__).resolve().parents[1]
+
+def occupied_port_socket():
+    # Keep room for the launcher's 20-port fallback; port0 can return65516-65535.
+    for _ in range(100):
+        blocker=socket.socket()
+        try:
+            blocker.bind(('127.0.0.1',random.randrange(20000,60000)));blocker.listen(1)
+            return blocker
+        except OSError:blocker.close()
+    raise RuntimeError('Could not reserve an occupied test port in20000-59999')
 
 def main():
     ap=argparse.ArgumentParser();ap.add_argument('--wheel',required=True);ap.add_argument('--uv',default='uv');ap.add_argument('--repeat',type=int,default=10);args=ap.parse_args()
@@ -21,9 +31,9 @@ def main():
             (state/'installed.json').write_text('{partial');prep();counts['partial_receipt']+=1
             py=state/'venv'/('Scripts/python.exe' if os.name=='nt' else 'bin/python');py.unlink();prep();counts['broken_venv']+=1
             assert 'skipped' in prep(['--offline']);counts['offline_rerun']+=1
-            with socket.socket() as blocker:
-                blocker.bind(('127.0.0.1',0));port=blocker.getsockname()[1];blocker.listen(1)
-                if port>65515:raise RuntimeError('Random test port out of range')
+            with occupied_port_socket() as blocker:
+                port=blocker.getsockname()[1]
+                assert 20000<=port<60000,'Bounded occupied test port'
                 log=state/'test.log'
                 with open(log,'w') as out:p=subprocess.Popen(cmd+['--port',str(port),'--no-browser','--lock-config','--offline','--stop-after-seconds','4'],stdout=out,stderr=subprocess.STDOUT)
                 try:

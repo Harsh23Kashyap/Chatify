@@ -1,0 +1,1874 @@
+2026-10-27T17:50:22.4935678Z Current runner version: '2.338.0'
+2026-10-27T17:50:22.4975117Z ##[group]Runner Image Provisioner
+2026-10-27T17:50:22.4976466Z Hosted Compute Agent
+2026-10-27T17:50:22.4977353Z Version: 20261021.618
+2026-10-27T17:50:22.4978366Z Commit: 21505ad2541d5be6135ed84fc33697146cf75b8e
+2026-10-27T17:50:22.4979715Z Build Date: 2026-10-21T00:45:21Z
+2026-10-27T17:50:22.4981404Z Worker ID: {e186fab2-3444-49ba-a8a4-82e0f53bca66}
+2026-10-27T17:50:22.4982592Z Region: eastus
+2026-10-27T17:50:22.4983433Z Cloud: Azure
+2026-10-27T17:50:22.4984322Z ##[endgroup]
+2026-10-27T17:50:22.4986599Z ##[group]Operating System
+2026-10-27T17:50:22.4987624Z Microsoft Windows Server 2025
+2026-10-27T17:50:22.4988815Z 10.0.26100
+2026-10-27T17:50:22.4989691Z Datacenter
+2026-10-27T17:50:22.4990575Z ##[endgroup]
+2026-10-27T17:50:22.4991473Z ##[group]Runner Image
+2026-10-27T17:50:22.4992531Z Image: windows-2025-vs2026
+2026-10-27T17:50:22.4993607Z Version: 20261021.278.1
+2026-10-27T17:50:22.4996257Z Included Software: https://github.com/actions/runner-images/blob/win25-vs2026/20261021.278/images/windows/Windows2025-VS2026-Readme.md
+2026-10-27T17:50:22.4999938Z Image Release: https://github.com/actions/runner-images/releases/tag/win25-vs2026%2F20261021.278
+2026-10-27T17:50:22.5001723Z ##[endgroup]
+2026-10-27T17:50:22.5003919Z ##[group]GITHUB_TOKEN Permissions
+2026-10-27T17:50:22.5006646Z Contents: read
+2026-10-27T17:50:22.5007697Z Metadata: read
+2026-10-27T17:50:22.5008583Z Packages: read
+2026-10-27T17:50:22.5009500Z ##[endgroup]
+2026-10-27T17:50:22.5012695Z Secret source: Actions
+2026-10-27T17:50:22.5014095Z Cache mode: write
+2026-10-27T17:50:22.5015279Z Prepare workflow directory
+2026-10-27T17:50:22.5381087Z Prepare all required actions
+2026-10-27T17:50:22.5442560Z Getting action download info
+2026-10-27T17:50:22.7217147Z Download action repository 'actions/checkout@v4' (SHA:11d5960a326750d5838078e36cf38b85af677262)
+2026-10-27T17:50:22.8635600Z Download action repository 'actions/setup-python@v5' (SHA:a26af69be951a213d495a4c3e4e4022e16d87065)
+2026-10-27T17:50:23.0268975Z Download action repository 'astral-sh/setup-uv@v6' (SHA:d0cc045d04ccac9d8b7881df0226f9e82c39688e)
+2026-10-27T17:50:23.4389932Z Complete job name: installer (windows-latest)
+2026-10-27T17:50:23.5894615Z ##[group]Run actions/checkout@v4
+2026-10-27T17:50:23.5895967Z with:
+2026-10-27T17:50:23.5896526Z   repository: Harsh23Kashyap/Chatify
+2026-10-27T17:50:23.5900554Z   token: ***
+2026-10-27T17:50:23.5901048Z   ssh-strict: true
+2026-10-27T17:50:23.5901556Z   ssh-user: git
+2026-10-27T17:50:23.5902058Z   persist-credentials: true
+2026-10-27T17:50:23.5902618Z   clean: true
+2026-10-27T17:50:23.5903121Z   sparse-checkout-cone-mode: true
+2026-10-27T17:50:23.5903685Z   fetch-depth: 1
+2026-10-27T17:50:23.5904199Z   fetch-tags: false
+2026-10-27T17:50:23.5904743Z   show-progress: true
+2026-10-27T17:50:23.5905255Z   lfs: false
+2026-10-27T17:50:23.5905714Z   submodules: false
+2026-10-27T17:50:23.5906203Z   set-safe-directory: true
+2026-10-27T17:50:23.5906789Z   allow-unsafe-pr-checkout: false
+2026-10-27T17:50:23.5907625Z ##[endgroup]
+2026-10-27T17:50:23.7341963Z Syncing repository: Harsh23Kashyap/Chatify
+2026-10-27T17:50:23.7343905Z ##[group]Getting Git version info
+2026-10-27T17:50:23.7344727Z Working directory is 'D:\a\Chatify\Chatify'
+2026-10-27T17:50:23.8283949Z [command]"C:\Program Files\Git\bin\git.exe" version
+2026-10-27T17:50:24.2208102Z git version 2.56.0.windows.2
+2026-10-27T17:50:24.2257213Z ##[endgroup]
+2026-10-27T17:50:24.2277759Z Temporarily overriding HOME='D:\a\_temp\7bc7bb15-d647-4f40-899a-53f68ef216c9' before making global git config changes
+2026-10-27T17:50:24.2279429Z Adding repository directory to the temporary git global config as a safe directory
+2026-10-27T17:50:24.2287982Z [command]"C:\Program Files\Git\bin\git.exe" config --global --add safe.directory D:\a\Chatify\Chatify
+2026-10-27T17:50:24.2991429Z Deleting the contents of 'D:\a\Chatify\Chatify'
+2026-10-27T17:50:24.2997886Z ##[group]Initializing the repository
+2026-10-27T17:50:24.3006628Z [command]"C:\Program Files\Git\bin\git.exe" init D:\a\Chatify\Chatify
+2026-10-27T17:50:24.4268811Z Initialized empty Git repository in D:/a/Chatify/Chatify/.git/
+2026-10-27T17:50:24.4326463Z [command]"C:\Program Files\Git\bin\git.exe" remote add origin https://github.com/Harsh23Kashyap/Chatify
+2026-10-27T17:50:24.5092559Z ##[endgroup]
+2026-10-27T17:50:24.5093972Z ##[group]Disabling automatic garbage collection
+2026-10-27T17:50:24.5101747Z [command]"C:\Program Files\Git\bin\git.exe" config --local gc.auto 0
+2026-10-27T17:50:24.5511572Z ##[endgroup]
+2026-10-27T17:50:24.5514167Z ##[group]Setting up auth
+2026-10-27T17:50:24.5527359Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp core\.sshCommand
+2026-10-27T17:50:24.5982451Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "sh -c \"git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :\""
+2026-10-27T17:50:26.1708965Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-10-27T17:50:26.2101264Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "sh -c \"git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :\""
+2026-10-27T17:50:26.7855078Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-10-27T17:50:26.8250181Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "git config --local --show-origin --name-only --get-regexp remote.origin.url"
+2026-10-27T17:50:27.3923247Z [command]"C:\Program Files\Git\bin\git.exe" config --local http.https://github.com/.extraheader "AUTHORIZATION: basic ***"
+2026-10-27T17:50:27.4343623Z ##[endgroup]
+2026-10-27T17:50:27.4344765Z ##[group]Fetching the repository
+2026-10-27T17:50:27.4363260Z [command]"C:\Program Files\Git\bin\git.exe" -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +9c0641a0138368c7ae64918500f9b227b7d2e3cb:refs/remotes/origin/main
+2026-10-27T17:50:33.7086627Z From https://github.com/Harsh23Kashyap/Chatify
+2026-10-27T17:50:33.7088354Z  * [new ref]         9c0641a0138368c7ae64918500f9b227b7d2e3cb -> origin/main
+2026-10-27T17:50:33.7128217Z ##[endgroup]
+2026-10-27T17:50:33.7129124Z ##[group]Determining the checkout info
+2026-10-27T17:50:33.7132588Z ##[endgroup]
+2026-10-27T17:50:33.7142737Z [command]"C:\Program Files\Git\bin\git.exe" sparse-checkout disable
+2026-10-27T17:50:33.7689262Z [command]"C:\Program Files\Git\bin\git.exe" config --local --unset-all extensions.worktreeConfig
+2026-10-27T17:50:33.8083695Z ##[group]Checking out the ref
+2026-10-27T17:50:33.8093035Z [command]"C:\Program Files\Git\bin\git.exe" checkout --progress --force -B main refs/remotes/origin/main
+2026-10-27T17:50:34.6721890Z Switched to a new branch 'main'
+2026-10-27T17:50:34.6747830Z branch 'main' set up to track 'origin/main'.
+2026-10-27T17:50:34.7354779Z ##[endgroup]
+2026-10-27T17:50:34.7368302Z [command]"C:\Program Files\Git\bin\git.exe" log -1 --format=%H
+2026-10-27T17:50:34.7744797Z 9c0641a0138368c7ae64918500f9b227b7d2e3cb
+2026-10-27T17:50:34.8328078Z ##[group]Run actions/setup-python@v5
+2026-10-27T17:50:34.8328430Z with:
+2026-10-27T17:50:34.8328636Z   python-version: 3.12
+2026-10-27T17:50:34.8328869Z   check-latest: false
+2026-10-27T17:50:34.8331284Z   token: ***
+2026-10-27T17:50:34.8331474Z   update-environment: true
+2026-10-27T17:50:34.8331700Z   allow-prereleases: false
+2026-10-27T17:50:34.8331916Z   freethreaded: false
+2026-10-27T17:50:34.8332114Z ##[endgroup]
+2026-10-27T17:50:34.9998494Z ##[group]Installed versions
+2026-10-27T17:50:35.0156067Z (node:2636) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+2026-10-27T17:50:35.0157131Z (Use `node --trace-deprecation ...` to show where the warning was created)
+2026-10-27T17:50:35.0159157Z Successfully set up CPython (3.12.10)
+2026-10-27T17:50:35.0160365Z ##[endgroup]
+2026-10-27T17:50:35.0579459Z ##[group]Run astral-sh/setup-uv@v6
+2026-10-27T17:50:35.0579927Z with:
+2026-10-27T17:50:35.0580192Z   activate-environment: false
+2026-10-27T17:50:35.0580548Z   working-directory: D:\a\Chatify\Chatify
+2026-10-27T17:50:35.0580950Z   server-url: https://github.com
+2026-10-27T17:50:35.0584788Z   github-token: ***
+2026-10-27T17:50:35.0585067Z   enable-cache: auto
+2026-10-27T17:50:35.0585888Z   cache-dependency-glob: **/*requirements*.txt
+**/*requirements*.in
+**/*constraints*.txt
+**/*constraints*.in
+**/pyproject.toml
+**/uv.lock
+**/*.py.lock
+
+2026-10-27T17:50:35.0586782Z   restore-cache: true
+2026-10-27T17:50:35.0587049Z   save-cache: true
+2026-10-27T17:50:35.0587325Z   prune-cache: true
+2026-10-27T17:50:35.0587639Z   ignore-nothing-to-cache: false
+2026-10-27T17:50:35.0587982Z   ignore-empty-workdir: false
+2026-10-27T17:50:35.0588547Z   add-problem-matchers: true
+2026-10-27T17:50:35.0588859Z env:
+2026-10-27T17:50:35.0589258Z   pythonLocation: C:\hostedtoolcache\windows\Python\3.12.10\x64
+2026-10-27T17:50:35.0589936Z   PKG_CONFIG_PATH: C:\hostedtoolcache\windows\Python\3.12.10\x64/lib/pkgconfig
+2026-10-27T17:50:35.0590641Z   Python_ROOT_DIR: C:\hostedtoolcache\windows\Python\3.12.10\x64
+2026-10-27T17:50:35.0591213Z   Python2_ROOT_DIR: C:\hostedtoolcache\windows\Python\3.12.10\x64
+2026-10-27T17:50:35.0591789Z   Python3_ROOT_DIR: C:\hostedtoolcache\windows\Python\3.12.10\x64
+2026-10-27T17:50:35.0592234Z ##[endgroup]
+2026-10-27T17:50:35.3546444Z (node:8476) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+2026-10-27T17:50:35.3548101Z (Use `node --trace-deprecation ...` to show where the warning was created)
+2026-10-27T17:50:35.3551143Z Trying to find version for uv in: D:\a\Chatify\Chatify\uv.toml
+2026-10-27T17:50:35.3552504Z Could not find file: D:\a\Chatify\Chatify\uv.toml
+2026-10-27T17:50:35.3553285Z Trying to find version for uv in: D:\a\Chatify\Chatify\pyproject.toml
+2026-10-27T17:50:35.3576117Z Could not determine uv version from uv.toml or pyproject.toml. Falling back to latest.
+2026-10-27T17:50:35.3577975Z Getting latest version from GitHub API...
+2026-10-27T17:50:35.5764373Z manifest-file not provided, reading from local file.
+2026-10-27T17:50:35.5837576Z manifest-file does not contain version 0.13.6, arch x86_64, platform pc-windows-msvc. Falling back to GitHub releases.
+2026-10-27T17:50:35.5839936Z Downloading uv from "https://github.com/astral-sh/uv/releases/download/0.13.6/uv-x86_64-pc-windows-msvc.zip" ...
+2026-10-27T17:50:36.0264987Z [command]"C:\Program Files\PowerShell\7\pwsh.exe" -NoLogo -NoProfile -NonInteractive -ExecutionPolicy Unrestricted -Command "$ErrorActionPreference = 'Stop' ; try { Add-Type -AssemblyName System.IO.Compression.ZipFile } catch { } ; try { [System.IO.Compression.ZipFile]::ExtractToDirectory('D:\a\_temp\e0b3914b-6f77-41dc-afcc-2c5f867e43de.zip', 'D:\a\_temp\46482dac-0d99-43eb-8820-f97c668f27af', $true) } catch { if (($_.Exception.GetType().FullName -eq 'System.Management.Automation.MethodException') -or ($_.Exception.GetType().FullName -eq 'System.Management.Automation.RuntimeException') ){ Expand-Archive -LiteralPath 'D:\a\_temp\e0b3914b-6f77-41dc-afcc-2c5f867e43de.zip' -DestinationPath 'D:\a\_temp\46482dac-0d99-43eb-8820-f97c668f27af' -Force } else { throw $_ } } ;"
+2026-10-27T17:50:36.6302552Z Set UV_TOOL_BIN_DIR to D:\a\_temp\uv-tool-bin-dir
+2026-10-27T17:50:36.6306317Z Added D:\a\_temp\uv-tool-bin-dir to the path
+2026-10-27T17:50:36.6313247Z Added C:\hostedtoolcache\windows\uv\0.13.6\x86_64 to the path
+2026-10-27T17:50:36.6316496Z Set UV_TOOL_DIR to D:\a\_temp\uv-tool-dir
+2026-10-27T17:50:36.6328249Z Set UV_CACHE_DIR to D:\a\_temp\setup-uv-cache
+2026-10-27T17:50:36.6328790Z Successfully installed uv version 0.13.6
+2026-10-27T17:50:36.6332514Z Searching files using cache dependency glob: D:\a\Chatify\Chatify\**\*requirements*.txt,D:\a\Chatify\Chatify\**\*requirements*.in,D:\a\Chatify\Chatify\**\*constraints*.txt,D:\a\Chatify\Chatify\**\*constraints*.in,D:\a\Chatify\Chatify\**\pyproject.toml,D:\a\Chatify\Chatify\**\uv.lock,D:\a\Chatify\Chatify\**\*.py.lock
+2026-10-27T17:50:36.7514363Z D:\a\Chatify\Chatify\pyproject.toml
+2026-10-27T17:50:36.7542552Z D:\a\Chatify\Chatify\requirements-mysql.txt
+2026-10-27T17:50:36.7555369Z D:\a\Chatify\Chatify\requirements.txt
+2026-10-27T17:50:37.0328197Z Found 3 files to hash.
+2026-10-27T17:50:38.5400035Z Trying to restore uv cache from GitHub Actions cache with key: setup-uv-1-x86_64-pc-windows-msvc-3.12.10-pruned-3347bde099b7b766ba8c8b75c439b6e90cc38be1e597f38ca472d3bef18ea3b0
+2026-10-27T17:50:38.8231705Z Cache hit for: setup-uv-1-x86_64-pc-windows-msvc-3.12.10-pruned-3347bde099b7b766ba8c8b75c439b6e90cc38be1e597f38ca472d3bef18ea3b0
+2026-10-27T17:50:38.8386558Z (node:8476) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.
+2026-10-27T17:50:39.0074486Z Received 233960 of 233960 (100.0%), 1.8 MBs/sec
+2026-10-27T17:50:39.0076280Z Cache Size: ~0 MB (233960 B)
+2026-10-27T17:50:39.0103329Z [command]"C:\Program Files\Git\usr\bin\tar.exe" -xf D:/a/_temp/cfd12af5-8384-4f2b-b598-460d9ec4ebba/cache.tzst -P -C D:/a/Chatify/Chatify --force-local --use-compress-program "zstd -d"
+2026-10-27T17:50:39.1697298Z Cache restored successfully
+2026-10-27T17:50:39.1707932Z uv cache restored from GitHub Actions cache with key: setup-uv-1-x86_64-pc-windows-msvc-3.12.10-pruned-3347bde099b7b766ba8c8b75c439b6e90cc38be1e597f38ca472d3bef18ea3b0
+2026-10-27T17:50:39.2065796Z ##[group]Run uv build
+2026-10-27T17:50:39.2066127Z [36;1muv build[0m
+2026-10-27T17:50:39.2608782Z shell: C:\Program Files\PowerShell\7\pwsh.EXE -command ". '{0}'"
+2026-10-27T17:50:39.2609161Z env:
+2026-10-27T17:50:39.2609445Z   pythonLocation: C:\hostedtoolcache\windows\Python\3.12.10\x64
+2026-10-27T17:50:39.2609941Z   PKG_CONFIG_PATH: C:\hostedtoolcache\windows\Python\3.12.10\x64/lib/pkgconfig
+2026-10-27T17:50:39.2610400Z   Python_ROOT_DIR: C:\hostedtoolcache\windows\Python\3.12.10\x64
+2026-10-27T17:50:39.2610804Z   Python2_ROOT_DIR: C:\hostedtoolcache\windows\Python\3.12.10\x64
+2026-10-27T17:50:39.2611221Z   Python3_ROOT_DIR: C:\hostedtoolcache\windows\Python\3.12.10\x64
+2026-10-27T17:50:39.2611592Z   UV_TOOL_BIN_DIR: D:\a\_temp\uv-tool-bin-dir
+2026-10-27T17:50:39.2611893Z   UV_TOOL_DIR: D:\a\_temp\uv-tool-dir
+2026-10-27T17:50:39.2612149Z   UV_CACHE_DIR: D:\a\_temp\setup-uv-cache
+2026-10-27T17:50:39.2612410Z ##[endgroup]
+2026-10-27T17:50:39.6336811Z Building source distribution...
+2026-10-27T17:50:41.4935039Z D:\a\_temp\setup-uv-cache\builds-v0\.tmpNFtz3e\Lib\site-packages\setuptools\config\_apply_pyprojecttoml.py:82: SetuptoolsDeprecationWarning: `project.license` as a TOML table is deprecated
+2026-10-27T17:50:41.4936593Z !!
+2026-10-27T17:50:41.4936765Z 
+2026-10-27T17:50:41.4937067Z         ********************************************************************************
+2026-10-27T17:50:41.4938545Z         Please use a simple string containing a SPDX expression for `project.license`. You can also use `project.license-files`. (Both options available on setuptools>=77.0.0).
+2026-10-27T17:50:41.4939732Z 
+2026-10-27T17:50:41.4940097Z         By 2027-Feb-18, you need to update your project and remove deprecated calls
+2026-10-27T17:50:41.4940847Z         or your builds will no longer be supported.
+2026-10-27T17:50:41.4941257Z 
+2026-10-27T17:50:41.4941829Z         See https://packaging.python.org/en/latest/guides/writing-pyproject-toml/#license for details.
+2026-10-27T17:50:41.4942804Z         ********************************************************************************
+2026-10-27T17:50:41.4943230Z 
+2026-10-27T17:50:41.4943341Z !!
+2026-10-27T17:50:41.4943637Z   corresp(dist, value, root_dir)
+2026-10-27T17:50:41.6588728Z running egg_info
+2026-10-27T17:50:41.6608945Z creating chatify_app.egg-info
+2026-10-27T17:50:41.6612654Z writing chatify_app.egg-info\PKG-INFO
+2026-10-27T17:50:41.6627543Z writing dependency_links to chatify_app.egg-info\dependency_links.txt
+2026-10-27T17:50:41.6633467Z writing entry points to chatify_app.egg-info\entry_points.txt
+2026-10-27T17:50:41.6639879Z writing requirements to chatify_app.egg-info\requires.txt
+2026-10-27T17:50:41.6642966Z writing top-level names to chatify_app.egg-info\top_level.txt
+2026-10-27T17:50:41.6646424Z writing manifest file 'chatify_app.egg-info\SOURCES.txt'
+2026-10-27T17:50:41.7060491Z reading manifest file 'chatify_app.egg-info\SOURCES.txt'
+2026-10-27T17:50:41.7065154Z adding license file 'LICENSE'
+2026-10-27T17:50:41.7148093Z writing manifest file 'chatify_app.egg-info\SOURCES.txt'
+2026-10-27T17:50:41.9982885Z D:\a\_temp\setup-uv-cache\builds-v0\.tmpNFtz3e\Lib\site-packages\setuptools\config\_apply_pyprojecttoml.py:82: SetuptoolsDeprecationWarning: `project.license` as a TOML table is deprecated
+2026-10-27T17:50:41.9984518Z !!
+2026-10-27T17:50:41.9984650Z 
+2026-10-27T17:50:41.9984827Z         ********************************************************************************
+2026-10-27T17:50:41.9985870Z         Please use a simple string containing a SPDX expression for `project.license`. You can also use `project.license-files`. (Both options available on setuptools>=77.0.0).
+2026-10-27T17:50:41.9986711Z 
+2026-10-27T17:50:41.9986971Z         By 2027-Feb-18, you need to update your project and remove deprecated calls
+2026-10-27T17:50:41.9987503Z         or your builds will no longer be supported.
+2026-10-27T17:50:41.9987766Z 
+2026-10-27T17:50:41.9990936Z         See https://packaging.python.org/en/latest/guides/writing-pyproject-toml/#license for details.
+2026-10-27T17:50:41.9991714Z         ********************************************************************************
+2026-10-27T17:50:41.9992032Z 
+2026-10-27T17:50:41.9992114Z !!
+2026-10-27T17:50:41.9992336Z   corresp(dist, value, root_dir)
+2026-10-27T17:50:42.0287454Z running sdist
+2026-10-27T17:50:42.0288831Z running egg_info
+2026-10-27T17:50:42.0329671Z writing chatify_app.egg-info\PKG-INFO
+2026-10-27T17:50:42.0342583Z writing dependency_links to chatify_app.egg-info\dependency_links.txt
+2026-10-27T17:50:42.0347838Z writing entry points to chatify_app.egg-info\entry_points.txt
+2026-10-27T17:50:42.0354155Z writing requirements to chatify_app.egg-info\requires.txt
+2026-10-27T17:50:42.0357522Z writing top-level names to chatify_app.egg-info\top_level.txt
+2026-10-27T17:50:42.0767617Z reading manifest file 'chatify_app.egg-info\SOURCES.txt'
+2026-10-27T17:50:42.0847605Z adding license file 'LICENSE'
+2026-10-27T17:50:42.0942003Z writing manifest file 'chatify_app.egg-info\SOURCES.txt'
+2026-10-27T17:50:42.0946545Z running check
+2026-10-27T17:50:42.0991786Z creating chatify_app-0.4.32
+2026-10-27T17:50:42.1011619Z creating chatify_app-0.4.32\apps
+2026-10-27T17:50:42.1014925Z creating chatify_app-0.4.32\apps\dietchat
+2026-10-27T17:50:42.1018022Z creating chatify_app-0.4.32\apps\dietchat-sample
+2026-10-27T17:50:42.1021464Z creating chatify_app-0.4.32\apps\dietchat-sample\docs
+2026-10-27T17:50:42.1024661Z creating chatify_app-0.4.32\apps\fitchat
+2026-10-27T17:50:42.1027657Z creating chatify_app-0.4.32\apps\fitchat\docs
+2026-10-27T17:50:42.1030496Z creating chatify_app-0.4.32\apps\formulaone
+2026-10-27T17:50:42.1033877Z creating chatify_app-0.4.32\apps\formulaone\sources
+2026-10-27T17:50:42.1036682Z creating chatify_app-0.4.32\apps\hosted
+2026-10-27T17:50:42.1039491Z creating chatify_app-0.4.32\apps\hosted\docs
+2026-10-27T17:50:42.1042535Z creating chatify_app-0.4.32\apps\minimal
+2026-10-27T17:50:42.1045345Z creating chatify_app-0.4.32\apps\minimal\docs
+2026-10-27T17:50:42.1048168Z creating chatify_app-0.4.32\apps\newsnerd-sample
+2026-10-27T17:50:42.1054297Z creating chatify_app-0.4.32\apps\newsnerd-sample\docs
+2026-10-27T17:50:42.1057165Z creating chatify_app-0.4.32\apps\peacechat
+2026-10-27T17:50:42.1059923Z creating chatify_app-0.4.32\apps\recipechat
+2026-10-27T17:50:42.1063022Z creating chatify_app-0.4.32\apps\spacechat
+2026-10-27T17:50:42.1065712Z creating chatify_app-0.4.32\apps\spacechat\docs
+2026-10-27T17:50:42.1068352Z creating chatify_app-0.4.32\apps\wirelesschat
+2026-10-27T17:50:42.1072228Z creating chatify_app-0.4.32\apps\wirelesschat\papers
+2026-10-27T17:50:42.1074604Z creating chatify_app-0.4.32\chatify
+2026-10-27T17:50:42.1077799Z creating chatify_app-0.4.32\chatify\connectors
+2026-10-27T17:50:42.1080652Z creating chatify_app-0.4.32\chatify\templates\minimal
+2026-10-27T17:50:42.1084889Z creating chatify_app-0.4.32\chatify\templates\minimal\docs
+2026-10-27T17:50:42.1087673Z creating chatify_app-0.4.32\chatify\web
+2026-10-27T17:50:42.1090749Z creating chatify_app-0.4.32\chatify\web\emoji
+2026-10-27T17:50:42.1093412Z creating chatify_app-0.4.32\chatify\web\fonts
+2026-10-27T17:50:42.1096620Z creating chatify_app-0.4.32\chatify\web\icons
+2026-10-27T17:50:42.1099712Z creating chatify_app-0.4.32\chatify\web\logos
+2026-10-27T17:50:42.1102275Z creating chatify_app-0.4.32\chatify\web\team
+2026-10-27T17:50:42.1105096Z creating chatify_app-0.4.32\chatify_app.egg-info
+2026-10-27T17:50:42.1107935Z creating chatify_app-0.4.32\tests
+2026-10-27T17:50:42.1110174Z copying files to chatify_app-0.4.32...
+2026-10-27T17:50:42.1111993Z copying LICENSE -> chatify_app-0.4.32
+2026-10-27T17:50:42.1118214Z copying README.md -> chatify_app-0.4.32
+2026-10-27T17:50:42.1123378Z copying pyproject.toml -> chatify_app-0.4.32
+2026-10-27T17:50:42.1132127Z copying apps\gallery.yaml -> chatify_app-0.4.32\apps
+2026-10-27T17:50:42.1137107Z copying apps\dietchat\app.yaml -> chatify_app-0.4.32\apps\dietchat
+2026-10-27T17:50:42.1143527Z copying apps\dietchat-sample\README.md -> chatify_app-0.4.32\apps\dietchat-sample
+2026-10-27T17:50:42.1148155Z copying apps\dietchat-sample\app.yaml -> chatify_app-0.4.32\apps\dietchat-sample
+2026-10-27T17:50:42.1153039Z copying apps\dietchat-sample\docs\about.txt -> chatify_app-0.4.32\apps\dietchat-sample\docs
+2026-10-27T17:50:42.1158319Z copying apps\dietchat-sample\docs\addons.txt -> chatify_app-0.4.32\apps\dietchat-sample\docs
+2026-10-27T17:50:42.1163427Z copying apps\dietchat-sample\docs\contact.txt -> chatify_app-0.4.32\apps\dietchat-sample\docs
+2026-10-27T17:50:42.1168269Z copying apps\dietchat-sample\docs\home.txt -> chatify_app-0.4.32\apps\dietchat-sample\docs
+2026-10-27T17:50:42.1173642Z copying apps\fitchat\app.yaml -> chatify_app-0.4.32\apps\fitchat
+2026-10-27T17:50:42.1179265Z copying apps\fitchat\docs\01-pag-executive-summary.pdf -> chatify_app-0.4.32\apps\fitchat\docs
+2026-10-27T17:50:42.1214366Z copying apps\fitchat\docs\02-benefits.md -> chatify_app-0.4.32\apps\fitchat\docs
+2026-10-27T17:50:42.1220157Z copying apps\fitchat\docs\03-exercise-fitness.md -> chatify_app-0.4.32\apps\fitchat\docs
+2026-10-27T17:50:42.1225796Z copying apps\fitchat\docs\04-older-adults.md -> chatify_app-0.4.32\apps\fitchat\docs
+2026-10-27T17:50:42.1231628Z copying apps\formulaone\README.md -> chatify_app-0.4.32\apps\formulaone
+2026-10-27T17:50:42.1237193Z copying apps\formulaone\app.yaml -> chatify_app-0.4.32\apps\formulaone
+2026-10-27T17:50:42.1242148Z copying apps\formulaone\f1_sources.py -> chatify_app-0.4.32\apps\formulaone
+2026-10-27T17:50:42.1247244Z copying apps\formulaone\sources\ferrari-debut.md -> chatify_app-0.4.32\apps\formulaone\sources
+2026-10-27T17:50:42.1252314Z copying apps\formulaone\sources\ferrari-first-win.md -> chatify_app-0.4.32\apps\formulaone\sources
+2026-10-27T17:50:42.1257612Z copying apps\formulaone\sources\ferrari-history.md -> chatify_app-0.4.32\apps\formulaone\sources
+2026-10-27T17:50:42.1262618Z copying apps\formulaone\sources\fia-sporting.md -> chatify_app-0.4.32\apps\formulaone\sources
+2026-10-27T17:50:42.1271657Z copying apps\formulaone\sources\fia-technical.md -> chatify_app-0.4.32\apps\formulaone\sources
+2026-10-27T17:50:42.1283986Z copying apps\hosted\app.yaml -> chatify_app-0.4.32\apps\hosted
+2026-10-27T17:50:42.1289813Z copying apps\hosted\docs\about.md -> chatify_app-0.4.32\apps\hosted\docs
+2026-10-27T17:50:42.1295420Z copying apps\hosted\docs\build-your-own.md -> chatify_app-0.4.32\apps\hosted\docs
+2026-10-27T17:50:42.1300293Z copying apps\minimal\app.yaml -> chatify_app-0.4.32\apps\minimal
+2026-10-27T17:50:42.1304936Z copying apps\minimal\docs\about.md -> chatify_app-0.4.32\apps\minimal\docs
+2026-10-27T17:50:42.1310220Z copying apps\newsnerd-sample\CONFIG-FIELDS.md -> chatify_app-0.4.32\apps\newsnerd-sample
+2026-10-27T17:50:42.1315224Z copying apps\newsnerd-sample\PROMPTS.md -> chatify_app-0.4.32\apps\newsnerd-sample
+2026-10-27T17:50:42.1320187Z copying apps\newsnerd-sample\README.md -> chatify_app-0.4.32\apps\newsnerd-sample
+2026-10-27T17:50:42.1346173Z copying apps\newsnerd-sample\SETUP.md -> chatify_app-0.4.32\apps\newsnerd-sample
+2026-10-27T17:50:42.1347696Z copying apps\newsnerd-sample\app-gnews.yaml -> chatify_app-0.4.32\apps\newsnerd-sample
+2026-10-27T17:50:42.1348846Z copying apps\newsnerd-sample\app-newsapi.yaml -> chatify_app-0.4.32\apps\newsnerd-sample
+2026-10-27T17:50:42.1349959Z copying apps\newsnerd-sample\app.yaml -> chatify_app-0.4.32\apps\newsnerd-sample
+2026-10-27T17:50:42.1351044Z copying apps\newsnerd-sample\news_connector.py -> chatify_app-0.4.32\apps\newsnerd-sample
+2026-10-27T17:50:42.1356538Z copying apps\newsnerd-sample\test_newsnerd.py -> chatify_app-0.4.32\apps\newsnerd-sample
+2026-10-27T17:50:42.1361852Z copying apps\newsnerd-sample\docs\01-how-newsnerd-works.txt -> chatify_app-0.4.32\apps\newsnerd-sample\docs
+2026-10-27T17:50:42.1367115Z copying apps\peacechat\README.md -> chatify_app-0.4.32\apps\peacechat
+2026-10-27T17:50:42.1372382Z copying apps\peacechat\app.yaml -> chatify_app-0.4.32\apps\peacechat
+2026-10-27T17:50:42.1377971Z copying apps\peacechat\peace_sources.py -> chatify_app-0.4.32\apps\peacechat
+2026-10-27T17:50:42.1382676Z copying apps\recipechat\app.yaml -> chatify_app-0.4.32\apps\recipechat
+2026-10-27T17:50:42.1388301Z copying apps\recipechat\recipe_sources.py -> chatify_app-0.4.32\apps\recipechat
+2026-10-27T17:50:42.1393634Z copying apps\spacechat\app.yaml -> chatify_app-0.4.32\apps\spacechat
+2026-10-27T17:50:42.1398405Z copying apps\spacechat\docs\01-mars.md -> chatify_app-0.4.32\apps\spacechat\docs
+2026-10-27T17:50:42.1403604Z copying apps\spacechat\docs\02-artemis.md -> chatify_app-0.4.32\apps\spacechat\docs
+2026-10-27T17:50:42.1408592Z copying apps\spacechat\docs\03-webb.md -> chatify_app-0.4.32\apps\spacechat\docs
+2026-10-27T17:50:42.1415022Z copying apps\spacechat\docs\04-iss.md -> chatify_app-0.4.32\apps\spacechat\docs
+2026-10-27T17:50:42.1419626Z copying apps\wirelesschat\app.yaml -> chatify_app-0.4.32\apps\wirelesschat
+2026-10-27T17:50:42.1424567Z copying apps\wirelesschat\papers\README.md -> chatify_app-0.4.32\apps\wirelesschat\papers
+2026-10-27T17:50:42.1429467Z copying chatify\__init__.py -> chatify_app-0.4.32\chatify
+2026-10-27T17:50:42.1434714Z copying chatify\__main__.py -> chatify_app-0.4.32\chatify
+2026-10-27T17:50:42.1439042Z copying chatify\accounts.py -> chatify_app-0.4.32\chatify
+2026-10-27T17:50:42.1443861Z copying chatify\actions.py -> chatify_app-0.4.32\chatify
+2026-10-27T17:50:42.1452945Z copying chatify\apipicks.py -> chatify_app-0.4.32\chatify
+2026-10-27T17:50:42.1458920Z copying chatify\apiterms.py -> chatify_app-0.4.32\chatify
+2026-10-27T17:50:42.1463790Z copying chatify\appbuilder.py -> chatify_app-0.4.32\chatify
+2026-10-27T17:50:42.1469618Z copying chatify\budget.py -> chatify_app-0.4.32\chatify
+2026-10-27T17:50:42.1475666Z copying chatify\builddrafts.py -> chatify_app-0.4.32\chatify
+2026-10-27T17:50:42.1480334Z copying chatify\buildimages.py -> chatify_app-0.4.32\chatify
+2026-10-27T17:50:42.1485243Z copying chatify\buildjobs.py -> chatify_app-0.4.32\chatify
+2026-10-27T17:50:42.1490784Z copying chatify\bundle_review.py -> chatify_app-0.4.32\chatify
+2026-10-27T17:50:42.1496225Z copying chatify\cli.py -> chatify_app-0.4.32\chatify
+2026-10-27T17:50:42.1501106Z copying chatify\configchange.py -> chatify_app-0.4.32\chatify
+2026-10-27T17:50:42.1506043Z copying chatify\configdoctor.py -> chatify_app-0.4.32\chatify
+2026-10-27T17:50:42.1510914Z copying chatify\draftaudit.py -> chatify_app-0.4.32\chatify
+2026-10-27T17:50:42.1516166Z copying chatify\editstate.py -> chatify_app-0.4.32\chatify
+2026-10-27T17:50:42.1521388Z copying chatify\exports.py -> chatify_app-0.4.32\chatify
+2026-10-27T17:50:42.1526304Z copying chatify\fetch.py -> chatify_app-0.4.32\chatify
+2026-10-27T17:50:42.1531386Z copying chatify\fileread.py -> chatify_app-0.4.32\chatify
+2026-10-27T17:50:42.1537182Z copying chatify\gallery.py -> chatify_app-0.4.32\chatify
+2026-10-27T17:50:42.1541971Z copying chatify\generator_design.py -> chatify_app-0.4.32\chatify
+2026-10-27T17:50:42.1551373Z copying chatify\generators.py -> chatify_app-0.4.32\chatify
+2026-10-27T17:50:42.1555966Z copying chatify\hardware.py -> chatify_app-0.4.32\chatify
+2026-10-27T17:50:42.1561009Z copying chatify\keybundle.py -> chatify_app-0.4.32\chatify
+2026-10-27T17:50:42.1565890Z copying chatify\launcher.py -> chatify_app-0.4.32\chatify
+2026-10-27T17:50:42.1571945Z copying chatify\management.py -> chatify_app-0.4.32\chatify
+2026-10-27T17:50:42.1576856Z copying chatify\modelcatalog.py -> chatify_app-0.4.32\chatify
+2026-10-27T17:50:42.1581949Z copying chatify\mysqlstore.py -> chatify_app-0.4.32\chatify
+2026-10-27T17:50:42.1586801Z copying chatify\nerdload.py -> chatify_app-0.4.32\chatify
+2026-10-27T17:50:42.1592781Z copying chatify\ollama_setup.py -> chatify_app-0.4.32\chatify
+2026-10-27T17:50:42.1597612Z copying chatify\pdfread.py -> chatify_app-0.4.32\chatify
+2026-10-27T17:50:42.1602619Z copying chatify\permissions.py -> chatify_app-0.4.32\chatify
+2026-10-27T17:50:42.1607474Z copying chatify\pipeline.py -> chatify_app-0.4.32\chatify
+2026-10-27T17:50:42.1614565Z copying chatify\portable.py -> chatify_app-0.4.32\chatify
+2026-10-27T17:50:42.1622320Z copying chatify\prompts.py -> chatify_app-0.4.32\chatify
+2026-10-27T17:50:42.1627517Z copying chatify\providers.py -> chatify_app-0.4.32\chatify
+2026-10-27T17:50:42.1633000Z copying chatify\publish.py -> chatify_app-0.4.32\chatify
+2026-10-27T17:50:42.1637772Z copying chatify\readiness.py -> chatify_app-0.4.32\chatify
+2026-10-27T17:50:42.1642742Z copying chatify\rerank.py -> chatify_app-0.4.32\chatify
+2026-10-27T17:50:42.1656601Z copying chatify\schema.py -> chatify_app-0.4.32\chatify
+2026-10-27T17:50:42.1661676Z copying chatify\secrets.py -> chatify_app-0.4.32\chatify
+2026-10-27T17:50:42.1666482Z copying chatify\server.py -> chatify_app-0.4.32\chatify
+2026-10-27T17:50:42.1673189Z copying chatify\settingsguide.py -> chatify_app-0.4.32\chatify
+2026-10-27T17:50:42.1678153Z copying chatify\source_credentials.py -> chatify_app-0.4.32\chatify
+2026-10-27T17:50:42.1682952Z copying chatify\stage_contracts.py -> chatify_app-0.4.32\chatify
+2026-10-27T17:50:42.1688045Z copying chatify\store.py -> chatify_app-0.4.32\chatify
+2026-10-27T17:50:42.1693989Z copying chatify\suggestions.py -> chatify_app-0.4.32\chatify
+2026-10-27T17:50:42.1699173Z copying chatify\terminal.py -> chatify_app-0.4.32\chatify
+2026-10-27T17:50:42.1704601Z copying chatify\theme.py -> chatify_app-0.4.32\chatify
+2026-10-27T17:50:42.1710255Z copying chatify\versions.py -> chatify_app-0.4.32\chatify
+2026-10-27T17:50:42.1715196Z copying chatify\websearch.py -> chatify_app-0.4.32\chatify
+2026-10-27T17:50:42.1720043Z copying chatify\workspace.py -> chatify_app-0.4.32\chatify
+2026-10-27T17:50:42.1724978Z copying chatify\connectors\__init__.py -> chatify_app-0.4.32\chatify\connectors
+2026-10-27T17:50:42.1729854Z copying chatify\connectors\arxiv.py -> chatify_app-0.4.32\chatify\connectors
+2026-10-27T17:50:42.1734673Z copying chatify\connectors\base.py -> chatify_app-0.4.32\chatify\connectors
+2026-10-27T17:50:42.1739547Z copying chatify\connectors\bounded.py -> chatify_app-0.4.32\chatify\connectors
+2026-10-27T17:50:42.1744354Z copying chatify\connectors\http_json.py -> chatify_app-0.4.32\chatify\connectors
+2026-10-27T17:50:42.1749168Z copying chatify\connectors\local_files.py -> chatify_app-0.4.32\chatify\connectors
+2026-10-27T17:50:42.1754326Z copying chatify\connectors\open_sources.py -> chatify_app-0.4.32\chatify\connectors
+2026-10-27T17:50:42.1761816Z copying chatify\connectors\pubmed.py -> chatify_app-0.4.32\chatify\connectors
+2026-10-27T17:50:42.1767201Z copying chatify\connectors\recovery.py -> chatify_app-0.4.32\chatify\connectors
+2026-10-27T17:50:42.1771725Z copying chatify\connectors\web_search.py -> chatify_app-0.4.32\chatify\connectors
+2026-10-27T17:50:42.1777126Z copying chatify\templates\minimal\app.yaml -> chatify_app-0.4.32\chatify\templates\minimal
+2026-10-27T17:50:42.1782023Z copying chatify\templates\minimal\docs\about.md -> chatify_app-0.4.32\chatify\templates\minimal\docs
+2026-10-27T17:50:42.1786770Z copying chatify\web\about.css -> chatify_app-0.4.32\chatify\web
+2026-10-27T17:50:42.1791776Z copying chatify\web\about.html -> chatify_app-0.4.32\chatify\web
+2026-10-27T17:50:42.1797075Z copying chatify\web\about.js -> chatify_app-0.4.32\chatify\web
+2026-10-27T17:50:42.1804410Z copying chatify\web\app.js -> chatify_app-0.4.32\chatify\web
+2026-10-27T17:50:42.1810511Z copying chatify\web\appbuilder.js -> chatify_app-0.4.32\chatify\web
+2026-10-27T17:50:42.1817507Z copying chatify\web\appearanceextras.js -> chatify_app-0.4.32\chatify\web
+2026-10-27T17:50:42.1822608Z copying chatify\web\brand.js -> chatify_app-0.4.32\chatify\web
+2026-10-27T17:50:42.1828150Z copying chatify\web\build.css -> chatify_app-0.4.32\chatify\web
+2026-10-27T17:50:42.1832968Z copying chatify\web\build.html -> chatify_app-0.4.32\chatify\web
+2026-10-27T17:50:42.1838458Z copying chatify\web\build.js -> chatify_app-0.4.32\chatify\web
+2026-10-27T17:50:42.1843934Z copying chatify\web\builderstudio.css -> chatify_app-0.4.32\chatify\web
+2026-10-27T17:50:42.1851084Z copying chatify\web\codeeditor.LICENSE.txt -> chatify_app-0.4.32\chatify\web
+2026-10-27T17:50:42.1855196Z copying chatify\web\codeeditor.js -> chatify_app-0.4.32\chatify\web
+2026-10-27T17:50:42.1879492Z copying chatify\web\components.css -> chatify_app-0.4.32\chatify\web
+2026-10-27T17:50:42.1900566Z copying chatify\web\configstate.js -> chatify_app-0.4.32\chatify\web
+2026-10-27T17:50:42.1924569Z copying chatify\web\configurationhome.css -> chatify_app-0.4.32\chatify\web
+2026-10-27T17:50:42.1933250Z copying chatify\web\confirmdialog.js -> chatify_app-0.4.32\chatify\web
+2026-10-27T17:50:42.1952936Z copying chatify\web\customselect.css -> chatify_app-0.4.32\chatify\web
+2026-10-27T17:50:42.1964392Z copying chatify\web\customselect.js -> chatify_app-0.4.32\chatify\web
+2026-10-27T17:50:42.1970666Z copying chatify\web\emoji.js -> chatify_app-0.4.32\chatify\web
+2026-10-27T17:50:42.1975870Z copying chatify\web\error.html -> chatify_app-0.4.32\chatify\web
+2026-10-27T17:50:42.1981642Z copying chatify\web\featurecatalog.js -> chatify_app-0.4.32\chatify\web
+2026-10-27T17:50:42.1987347Z copying chatify\web\feedback.css -> chatify_app-0.4.32\chatify\web
+2026-10-27T17:50:42.1992593Z copying chatify\web\feedback.js -> chatify_app-0.4.32\chatify\web
+2026-10-27T17:50:42.1997374Z copying chatify\web\gallery.html -> chatify_app-0.4.32\chatify\web
+2026-10-27T17:50:42.2002658Z copying chatify\web\index.html -> chatify_app-0.4.32\chatify\web
+2026-10-27T17:50:42.2007817Z copying chatify\web\loading.css -> chatify_app-0.4.32\chatify\web
+2026-10-27T17:50:42.2013311Z copying chatify\web\loading.js -> chatify_app-0.4.32\chatify\web
+2026-10-27T17:50:42.2018579Z copying chatify\web\motion.css -> chatify_app-0.4.32\chatify\web
+2026-10-27T17:50:42.2024656Z copying chatify\web\motion.js -> chatify_app-0.4.32\chatify\web
+2026-10-27T17:50:42.2029489Z copying chatify\web\navflow.css -> chatify_app-0.4.32\chatify\web
+2026-10-27T17:50:42.2034255Z copying chatify\web\navflow.js -> chatify_app-0.4.32\chatify\web
+2026-10-27T17:50:42.2039128Z copying chatify\web\navigation.css -> chatify_app-0.4.32\chatify\web
+2026-10-27T17:50:42.2048175Z copying chatify\web\nerdload.js -> chatify_app-0.4.32\chatify\web
+2026-10-27T17:50:42.2053048Z copying chatify\web\panels.js -> chatify_app-0.4.32\chatify\web
+2026-10-27T17:50:42.2058313Z copying chatify\web\pipeline.js -> chatify_app-0.4.32\chatify\web
+2026-10-27T17:50:42.2064008Z copying chatify\web\reading.js -> chatify_app-0.4.32\chatify\web
+2026-10-27T17:50:42.2069267Z copying chatify\web\refinements.css -> chatify_app-0.4.32\chatify\web
+2026-10-27T17:50:42.2074737Z copying chatify\web\run-locally.html -> chatify_app-0.4.32\chatify\web
+2026-10-27T17:50:42.2079643Z copying chatify\web\settings.css -> chatify_app-0.4.32\chatify\web
+2026-10-27T17:50:42.2087102Z copying chatify\web\settings.html -> chatify_app-0.4.32\chatify\web
+2026-10-27T17:50:42.2094508Z copying chatify\web\settings.js -> chatify_app-0.4.32\chatify\web
+2026-10-27T17:50:42.2104849Z copying chatify\web\settingsfind.js -> chatify_app-0.4.32\chatify\web
+2026-10-27T17:50:42.2112560Z copying chatify\web\settingsguide.js -> chatify_app-0.4.32\chatify\web
+2026-10-27T17:50:42.2118582Z copying chatify\web\settingssearch.js -> chatify_app-0.4.32\chatify\web
+2026-10-27T17:50:42.2123553Z copying chatify\web\settingssimple.js -> chatify_app-0.4.32\chatify\web
+2026-10-27T17:50:42.2129102Z copying chatify\web\settingstabs.css -> chatify_app-0.4.32\chatify\web
+2026-10-27T17:50:42.2134911Z copying chatify\web\settingstop.js -> chatify_app-0.4.32\chatify\web
+2026-10-27T17:50:42.2139844Z copying chatify\web\sourcekeys.js -> chatify_app-0.4.32\chatify\web
+2026-10-27T17:50:42.2145135Z copying chatify\web\splitters.js -> chatify_app-0.4.32\chatify\web
+2026-10-27T17:50:42.2150615Z copying chatify\web\style.css -> chatify_app-0.4.32\chatify\web
+2026-10-27T17:50:42.2159756Z copying chatify\web\theme.js -> chatify_app-0.4.32\chatify\web
+2026-10-27T17:50:42.2165578Z copying chatify\web\tour.css -> chatify_app-0.4.32\chatify\web
+2026-10-27T17:50:42.2170827Z copying chatify\web\tour.js -> chatify_app-0.4.32\chatify\web
+2026-10-27T17:50:42.2176400Z copying chatify\web\upgrade.css -> chatify_app-0.4.32\chatify\web
+2026-10-27T17:50:42.2181272Z copying chatify\web\workspace.css -> chatify_app-0.4.32\chatify\web
+2026-10-27T17:50:42.2188780Z copying chatify\web\workspace.js -> chatify_app-0.4.32\chatify\web
+2026-10-27T17:50:42.2195507Z copying chatify\web\emoji\1f389.png -> chatify_app-0.4.32\chatify\web\emoji
+2026-10-27T17:50:42.2201958Z copying chatify\web\emoji\1f389.webp -> chatify_app-0.4.32\chatify\web\emoji
+2026-10-27T17:50:42.2210571Z copying chatify\web\emoji\1f44b.png -> chatify_app-0.4.32\chatify\web\emoji
+2026-10-27T17:50:42.2216169Z copying chatify\web\emoji\1f44b.webp -> chatify_app-0.4.32\chatify\web\emoji
+2026-10-27T17:50:42.2224414Z copying chatify\web\emoji\1f44d.png -> chatify_app-0.4.32\chatify\web\emoji
+2026-10-27T17:50:42.2230372Z copying chatify\web\emoji\1f44d.webp -> chatify_app-0.4.32\chatify\web\emoji
+2026-10-27T17:50:42.2238270Z copying chatify\web\emoji\1f44f.png -> chatify_app-0.4.32\chatify\web\emoji
+2026-10-27T17:50:42.2247035Z copying chatify\web\emoji\1f44f.webp -> chatify_app-0.4.32\chatify\web\emoji
+2026-10-27T17:50:42.2253606Z copying chatify\web\emoji\1f525.png -> chatify_app-0.4.32\chatify\web\emoji
+2026-10-27T17:50:42.2259425Z copying chatify\web\emoji\1f525.webp -> chatify_app-0.4.32\chatify\web\emoji
+2026-10-27T17:50:42.2266647Z copying chatify\web\emoji\1f600.png -> chatify_app-0.4.32\chatify\web\emoji
+2026-10-27T17:50:42.2272704Z copying chatify\web\emoji\1f600.webp -> chatify_app-0.4.32\chatify\web\emoji
+2026-10-27T17:50:42.2280858Z copying chatify\web\emoji\1f602.png -> chatify_app-0.4.32\chatify\web\emoji
+2026-10-27T17:50:42.2288031Z copying chatify\web\emoji\1f602.webp -> chatify_app-0.4.32\chatify\web\emoji
+2026-10-27T17:50:42.2298423Z copying chatify\web\emoji\1f60a.png -> chatify_app-0.4.32\chatify\web\emoji
+2026-10-27T17:50:42.2304951Z copying chatify\web\emoji\1f60a.webp -> chatify_app-0.4.32\chatify\web\emoji
+2026-10-27T17:50:42.2314923Z copying chatify\web\emoji\1f60d.png -> chatify_app-0.4.32\chatify\web\emoji
+2026-10-27T17:50:42.2321457Z copying chatify\web\emoji\1f60d.webp -> chatify_app-0.4.32\chatify\web\emoji
+2026-10-27T17:50:42.2331365Z copying chatify\web\emoji\1f60e.png -> chatify_app-0.4.32\chatify\web\emoji
+2026-10-27T17:50:42.2337478Z copying chatify\web\emoji\1f60e.webp -> chatify_app-0.4.32\chatify\web\emoji
+2026-10-27T17:50:42.2348925Z copying chatify\web\emoji\1f62d.png -> chatify_app-0.4.32\chatify\web\emoji
+2026-10-27T17:50:42.2355210Z copying chatify\web\emoji\1f62d.webp -> chatify_app-0.4.32\chatify\web\emoji
+2026-10-27T17:50:42.2365879Z copying chatify\web\emoji\1f64c.png -> chatify_app-0.4.32\chatify\web\emoji
+2026-10-27T17:50:42.2370607Z copying chatify\web\emoji\1f64c.webp -> chatify_app-0.4.32\chatify\web\emoji
+2026-10-27T17:50:42.2377677Z copying chatify\web\emoji\1f680.png -> chatify_app-0.4.32\chatify\web\emoji
+2026-10-27T17:50:42.2383959Z copying chatify\web\emoji\1f680.webp -> chatify_app-0.4.32\chatify\web\emoji
+2026-10-27T17:50:42.2390787Z copying chatify\web\emoji\1f914.png -> chatify_app-0.4.32\chatify\web\emoji
+2026-10-27T17:50:42.2397221Z copying chatify\web\emoji\1f914.webp -> chatify_app-0.4.32\chatify\web\emoji
+2026-10-27T17:50:42.2406994Z copying chatify\web\emoji\1f916.png -> chatify_app-0.4.32\chatify\web\emoji
+2026-10-27T17:50:42.2413254Z copying chatify\web\emoji\1f916.webp -> chatify_app-0.4.32\chatify\web\emoji
+2026-10-27T17:50:42.2421420Z copying chatify\web\emoji\1f973.png -> chatify_app-0.4.32\chatify\web\emoji
+2026-10-27T17:50:42.2427608Z copying chatify\web\emoji\1f973.webp -> chatify_app-0.4.32\chatify\web\emoji
+2026-10-27T17:50:42.2437543Z copying chatify\web\emoji\2728.png -> chatify_app-0.4.32\chatify\web\emoji
+2026-10-27T17:50:42.2443201Z copying chatify\web\emoji\2728.webp -> chatify_app-0.4.32\chatify\web\emoji
+2026-10-27T17:50:42.2450702Z copying chatify\web\emoji\ATTRIBUTION.txt -> chatify_app-0.4.32\chatify\web\emoji
+2026-10-27T17:50:42.2455685Z copying chatify\web\emoji\STATIC-NOTO-LICENSE.txt -> chatify_app-0.4.32\chatify\web\emoji
+2026-10-27T17:50:42.2460550Z copying chatify\web\emoji\static-1f308.png -> chatify_app-0.4.32\chatify\web\emoji
+2026-10-27T17:50:42.2465900Z copying chatify\web\emoji\static-1f319.png -> chatify_app-0.4.32\chatify\web\emoji
+2026-10-27T17:50:42.2471456Z copying chatify\web\emoji\static-1f331.png -> chatify_app-0.4.32\chatify\web\emoji
+2026-10-27T17:50:42.2479239Z copying chatify\web\emoji\static-1f33b.png -> chatify_app-0.4.32\chatify\web\emoji
+2026-10-27T17:50:42.2484278Z copying chatify\web\emoji\static-1f34e.png -> chatify_app-0.4.32\chatify\web\emoji
+2026-10-27T17:50:42.2489271Z copying chatify\web\emoji\static-1f354.png -> chatify_app-0.4.32\chatify\web\emoji
+2026-10-27T17:50:42.2494545Z copying chatify\web\emoji\static-1f355.png -> chatify_app-0.4.32\chatify\web\emoji
+2026-10-27T17:50:42.2500324Z copying chatify\web\emoji\static-1f36a.png -> chatify_app-0.4.32\chatify\web\emoji
+2026-10-27T17:50:42.2509521Z copying chatify\web\emoji\static-1f375.png -> chatify_app-0.4.32\chatify\web\emoji
+2026-10-27T17:50:42.2515415Z copying chatify\web\emoji\static-1f382.png -> chatify_app-0.4.32\chatify\web\emoji
+2026-10-27T17:50:42.2520867Z copying chatify\web\emoji\static-1f389.png -> chatify_app-0.4.32\chatify\web\emoji
+2026-10-27T17:50:42.2526043Z copying chatify\web\emoji\static-1f38a.png -> chatify_app-0.4.32\chatify\web\emoji
+2026-10-27T17:50:42.2531376Z copying chatify\web\emoji\static-1f3af.png -> chatify_app-0.4.32\chatify\web\emoji
+2026-10-27T17:50:42.2536808Z copying chatify\web\emoji\static-1f3c6.png -> chatify_app-0.4.32\chatify\web\emoji
+2026-10-27T17:50:42.2542739Z copying chatify\web\emoji\static-1f431.png -> chatify_app-0.4.32\chatify\web\emoji
+2026-10-27T17:50:42.2548431Z copying chatify\web\emoji\static-1f436.png -> chatify_app-0.4.32\chatify\web\emoji
+2026-10-27T17:50:42.2553607Z copying chatify\web\emoji\static-1f438.png -> chatify_app-0.4.32\chatify\web\emoji
+2026-10-27T17:50:42.2559048Z copying chatify\web\emoji\static-1f43c.png -> chatify_app-0.4.32\chatify\web\emoji
+2026-10-27T17:50:42.2564708Z copying chatify\web\emoji\static-1f44b.png -> chatify_app-0.4.32\chatify\web\emoji
+2026-10-27T17:50:42.2570196Z copying chatify\web\emoji\static-1f44d.png -> chatify_app-0.4.32\chatify\web\emoji
+2026-10-27T17:50:42.2579073Z copying chatify\web\emoji\static-1f44e.png -> chatify_app-0.4.32\chatify\web\emoji
+2026-10-27T17:50:42.2584779Z copying chatify\web\emoji\static-1f44f.png -> chatify_app-0.4.32\chatify\web\emoji
+2026-10-27T17:50:42.2590372Z copying chatify\web\emoji\static-1f49a.png -> chatify_app-0.4.32\chatify\web\emoji
+2026-10-27T17:50:42.2595928Z copying chatify\web\emoji\static-1f49b.png -> chatify_app-0.4.32\chatify\web\emoji
+2026-10-27T17:50:42.2601490Z copying chatify\web\emoji\static-1f49c.png -> chatify_app-0.4.32\chatify\web\emoji
+2026-10-27T17:50:42.2606436Z copying chatify\web\emoji\static-1f4a1.png -> chatify_app-0.4.32\chatify\web\emoji
+2026-10-27T17:50:42.2611876Z copying chatify\web\emoji\static-1f4aa.png -> chatify_app-0.4.32\chatify\web\emoji
+2026-10-27T17:50:42.2617114Z copying chatify\web\emoji\static-1f4ac.png -> chatify_app-0.4.32\chatify\web\emoji
+2026-10-27T17:50:42.2622593Z copying chatify\web\emoji\static-1f4c4.png -> chatify_app-0.4.32\chatify\web\emoji
+2026-10-27T17:50:42.2627950Z copying chatify\web\emoji\static-1f4ce.png -> chatify_app-0.4.32\chatify\web\emoji
+2026-10-27T17:50:42.2633434Z copying chatify\web\emoji\static-1f4da.png -> chatify_app-0.4.32\chatify\web\emoji
+2026-10-27T17:50:42.2640029Z copying chatify\web\emoji\static-1f4f0.png -> chatify_app-0.4.32\chatify\web\emoji
+2026-10-27T17:50:42.2646124Z copying chatify\web\emoji\static-1f50d.png -> chatify_app-0.4.32\chatify\web\emoji
+2026-10-27T17:50:42.2651854Z copying chatify\web\emoji\static-1f50e.png -> chatify_app-0.4.32\chatify\web\emoji
+2026-10-27T17:50:42.2657252Z copying chatify\web\emoji\static-1f525.png -> chatify_app-0.4.32\chatify\web\emoji
+2026-10-27T17:50:42.2664736Z copying chatify\web\emoji\static-1f57a.png -> chatify_app-0.4.32\chatify\web\emoji
+2026-10-27T17:50:42.2669869Z copying chatify\web\emoji\static-1f600.png -> chatify_app-0.4.32\chatify\web\emoji
+2026-10-27T17:50:42.2678406Z copying chatify\web\emoji\static-1f601.png -> chatify_app-0.4.32\chatify\web\emoji
+2026-10-27T17:50:42.2684231Z copying chatify\web\emoji\static-1f602.png -> chatify_app-0.4.32\chatify\web\emoji
+2026-10-27T17:50:42.2689560Z copying chatify\web\emoji\static-1f603.png -> chatify_app-0.4.32\chatify\web\emoji
+2026-10-27T17:50:42.2695245Z copying chatify\web\emoji\static-1f604.png -> chatify_app-0.4.32\chatify\web\emoji
+2026-10-27T17:50:42.2700575Z copying chatify\web\emoji\static-1f60a.png -> chatify_app-0.4.32\chatify\web\emoji
+2026-10-27T17:50:42.2706534Z copying chatify\web\emoji\static-1f60c.png -> chatify_app-0.4.32\chatify\web\emoji
+2026-10-27T17:50:42.2711860Z copying chatify\web\emoji\static-1f60d.png -> chatify_app-0.4.32\chatify\web\emoji
+2026-10-27T17:50:42.2717362Z copying chatify\web\emoji\static-1f60e.png -> chatify_app-0.4.32\chatify\web\emoji
+2026-10-27T17:50:42.2724275Z copying chatify\web\emoji\static-1f62d.png -> chatify_app-0.4.32\chatify\web\emoji
+2026-10-27T17:50:42.2730190Z copying chatify\web\emoji\static-1f62e.png -> chatify_app-0.4.32\chatify\web\emoji
+2026-10-27T17:50:42.2735768Z copying chatify\web\emoji\static-1f634.png -> chatify_app-0.4.32\chatify\web\emoji
+2026-10-27T17:50:42.2741090Z copying chatify\web\emoji\static-1f642.png -> chatify_app-0.4.32\chatify\web\emoji
+2026-10-27T17:50:42.2746822Z copying chatify\web\emoji\static-1f64c.png -> chatify_app-0.4.32\chatify\web\emoji
+2026-10-27T17:50:42.2753724Z copying chatify\web\emoji\static-1f64f.png -> chatify_app-0.4.32\chatify\web\emoji
+2026-10-27T17:50:42.2759729Z copying chatify\web\emoji\static-1f680.png -> chatify_app-0.4.32\chatify\web\emoji
+2026-10-27T17:50:42.2765204Z copying chatify\web\emoji\static-1f913.png -> chatify_app-0.4.32\chatify\web\emoji
+2026-10-27T17:50:42.2772745Z copying chatify\web\emoji\static-1f914.png -> chatify_app-0.4.32\chatify\web\emoji
+2026-10-27T17:50:42.2782919Z copying chatify\web\emoji\static-1f916.png -> chatify_app-0.4.32\chatify\web\emoji
+2026-10-27T17:50:42.2789873Z copying chatify\web\emoji\static-1f917.png -> chatify_app-0.4.32\chatify\web\emoji
+2026-10-27T17:50:42.2796771Z copying chatify\web\emoji\static-1f91d.png -> chatify_app-0.4.32\chatify\web\emoji
+2026-10-27T17:50:42.2802882Z copying chatify\web\emoji\static-1f92f.png -> chatify_app-0.4.32\chatify\web\emoji
+2026-10-27T17:50:42.2808730Z copying chatify\web\emoji\static-1f951.png -> chatify_app-0.4.32\chatify\web\emoji
+2026-10-27T17:50:42.2814031Z copying chatify\web\emoji\static-1f970.png -> chatify_app-0.4.32\chatify\web\emoji
+2026-10-27T17:50:42.2822586Z copying chatify\web\emoji\static-1f973.png -> chatify_app-0.4.32\chatify\web\emoji
+2026-10-27T17:50:42.2829605Z copying chatify\web\emoji\static-1f979.png -> chatify_app-0.4.32\chatify\web\emoji
+2026-10-27T17:50:42.2835344Z copying chatify\web\emoji\static-1f98a.png -> chatify_app-0.4.32\chatify\web\emoji
+2026-10-27T17:50:42.2840939Z copying chatify\web\emoji\static-1f98b.png -> chatify_app-0.4.32\chatify\web\emoji
+2026-10-27T17:50:42.2847054Z copying chatify\web\emoji\static-1f9d1-200d-1f4bb.png -> chatify_app-0.4.32\chatify\web\emoji
+2026-10-27T17:50:42.2852441Z copying chatify\web\emoji\static-1f9d1-200d-1f680.png -> chatify_app-0.4.32\chatify\web\emoji
+2026-10-27T17:50:42.2857995Z copying chatify\web\emoji\static-1fae1.png -> chatify_app-0.4.32\chatify\web\emoji
+2026-10-27T17:50:42.2864000Z copying chatify\web\emoji\static-23f1-fe0f.png -> chatify_app-0.4.32\chatify\web\emoji
+2026-10-27T17:50:42.2869997Z copying chatify\web\emoji\static-2600-fe0f.png -> chatify_app-0.4.32\chatify\web\emoji
+2026-10-27T17:50:42.2875432Z copying chatify\web\emoji\static-2615.png -> chatify_app-0.4.32\chatify\web\emoji
+2026-10-27T17:50:42.2881518Z copying chatify\web\emoji\static-267e-fe0f.png -> chatify_app-0.4.32\chatify\web\emoji
+2026-10-27T17:50:42.2893896Z copying chatify\web\emoji\static-26a1.png -> chatify_app-0.4.32\chatify\web\emoji
+2026-10-27T17:50:42.2898349Z copying chatify\web\emoji\static-2705.png -> chatify_app-0.4.32\chatify\web\emoji
+2026-10-27T17:50:42.2903640Z copying chatify\web\emoji\static-2728.png -> chatify_app-0.4.32\chatify\web\emoji
+2026-10-27T17:50:42.2910165Z copying chatify\web\emoji\static-274c.png -> chatify_app-0.4.32\chatify\web\emoji
+2026-10-27T17:50:42.2916182Z copying chatify\web\emoji\static-2764-fe0f.png -> chatify_app-0.4.32\chatify\web\emoji
+2026-10-27T17:50:42.2921500Z copying chatify\web\emoji\static-2795.png -> chatify_app-0.4.32\chatify\web\emoji
+2026-10-27T17:50:42.2926654Z copying chatify\web\emoji\static-27a1-fe0f.png -> chatify_app-0.4.32\chatify\web\emoji
+2026-10-27T17:50:42.2931819Z copying chatify\web\emoji\static-2b06-fe0f.png -> chatify_app-0.4.32\chatify\web\emoji
+2026-10-27T17:50:42.2936724Z copying chatify\web\emoji\static-2b50.png -> chatify_app-0.4.32\chatify\web\emoji
+2026-10-27T17:50:42.2942011Z copying chatify\web\fonts\FONTS.md -> chatify_app-0.4.32\chatify\web\fonts
+2026-10-27T17:50:42.2947368Z copying chatify\web\fonts\NotoNaskhArabic[wght].ttf -> chatify_app-0.4.32\chatify\web\fonts
+2026-10-27T17:50:42.2956279Z copying chatify\web\fonts\NotoSans-Bold.ttf -> chatify_app-0.4.32\chatify\web\fonts
+2026-10-27T17:50:42.2966791Z copying chatify\web\fonts\NotoSans-Regular.ttf -> chatify_app-0.4.32\chatify\web\fonts
+2026-10-27T17:50:42.2976850Z copying chatify\web\fonts\NotoSansDevanagari-Bold.ttf -> chatify_app-0.4.32\chatify\web\fonts
+2026-10-27T17:50:42.2984552Z copying chatify\web\fonts\NotoSansDevanagari-Regular.ttf -> chatify_app-0.4.32\chatify\web\fonts
+2026-10-27T17:50:42.2996966Z copying chatify\web\fonts\NotoSansHebrew[wdth,wght].ttf -> chatify_app-0.4.32\chatify\web\fonts
+2026-10-27T17:50:42.3003702Z copying chatify\web\fonts\NotoSansMath-OFL.txt -> chatify_app-0.4.32\chatify\web\fonts
+2026-10-27T17:50:42.3009456Z copying chatify\web\fonts\NotoSansMath-Regular.ttf -> chatify_app-0.4.32\chatify\web\fonts
+2026-10-27T17:50:42.3022887Z copying chatify\web\fonts\NotoSansSymbols-Regular.ttf -> chatify_app-0.4.32\chatify\web\fonts
+2026-10-27T17:50:42.3030035Z copying chatify\web\fonts\NotoSansSymbols2-Regular.ttf -> chatify_app-0.4.32\chatify\web\fonts
+2026-10-27T17:50:42.3045030Z copying chatify\web\fonts\OFL.txt -> chatify_app-0.4.32\chatify\web\fonts
+2026-10-27T17:50:42.3050479Z copying chatify\web\icons\chatify.svg -> chatify_app-0.4.32\chatify\web\icons
+2026-10-27T17:50:42.3055166Z copying chatify\web\logos\claude.svg -> chatify_app-0.4.32\chatify\web\logos
+2026-10-27T17:50:42.3060424Z copying chatify\web\logos\deepseek.svg -> chatify_app-0.4.32\chatify\web\logos
+2026-10-27T17:50:42.3065435Z copying chatify\web\logos\gemini.svg -> chatify_app-0.4.32\chatify\web\logos
+2026-10-27T17:50:42.3071181Z copying chatify\web\logos\groq.svg -> chatify_app-0.4.32\chatify\web\logos
+2026-10-27T17:50:42.3075824Z copying chatify\web\logos\mimo.svg -> chatify_app-0.4.32\chatify\web\logos
+2026-10-27T17:50:42.3081028Z copying chatify\web\logos\minimax.svg -> chatify_app-0.4.32\chatify\web\logos
+2026-10-27T17:50:42.3085798Z copying chatify\web\logos\mistral.svg -> chatify_app-0.4.32\chatify\web\logos
+2026-10-27T17:50:42.3093478Z copying chatify\web\logos\ollama.svg -> chatify_app-0.4.32\chatify\web\logos
+2026-10-27T17:50:42.3098731Z copying chatify\web\logos\openai.svg -> chatify_app-0.4.32\chatify\web\logos
+2026-10-27T17:50:42.3103925Z copying chatify\web\logos\openrouter.svg -> chatify_app-0.4.32\chatify\web\logos
+2026-10-27T17:50:42.3108894Z copying chatify\web\team\dennis.jpg -> chatify_app-0.4.32\chatify\web\team
+2026-10-27T17:50:42.3114159Z copying chatify\web\team\harsh.jpg -> chatify_app-0.4.32\chatify\web\team
+2026-10-27T17:50:42.3119384Z copying chatify_app.egg-info\PKG-INFO -> chatify_app-0.4.32\chatify_app.egg-info
+2026-10-27T17:50:42.3126326Z copying chatify_app.egg-info\SOURCES.txt -> chatify_app-0.4.32\chatify_app.egg-info
+2026-10-27T17:50:42.3131951Z copying chatify_app.egg-info\dependency_links.txt -> chatify_app-0.4.32\chatify_app.egg-info
+2026-10-27T17:50:42.3137097Z copying chatify_app.egg-info\entry_points.txt -> chatify_app-0.4.32\chatify_app.egg-info
+2026-10-27T17:50:42.3142981Z copying chatify_app.egg-info\requires.txt -> chatify_app-0.4.32\chatify_app.egg-info
+2026-10-27T17:50:42.3147745Z copying chatify_app.egg-info\top_level.txt -> chatify_app-0.4.32\chatify_app.egg-info
+2026-10-27T17:50:42.3155993Z copying tests\test_about_continuity.py -> chatify_app-0.4.32\tests
+2026-10-27T17:50:42.3160877Z copying tests\test_about_feature_states.py -> chatify_app-0.4.32\tests
+2026-10-27T17:50:42.3166264Z copying tests\test_about_intro_states.py -> chatify_app-0.4.32\tests
+2026-10-27T17:50:42.3170973Z copying tests\test_actions.py -> chatify_app-0.4.32\tests
+2026-10-27T17:50:42.3176236Z copying tests\test_adversarial_matrix.py -> chatify_app-0.4.32\tests
+2026-10-27T17:50:42.3181424Z copying tests\test_answer_action_row.py -> chatify_app-0.4.32\tests
+2026-10-27T17:50:42.3188544Z copying tests\test_answer_depth.py -> chatify_app-0.4.32\tests
+2026-10-27T17:50:42.3193968Z copying tests\test_answer_export.py -> chatify_app-0.4.32\tests
+2026-10-27T17:50:42.3198941Z copying tests\test_apiterms.py -> chatify_app-0.4.32\tests
+2026-10-27T17:50:42.3203801Z copying tests\test_appbuilder.py -> chatify_app-0.4.32\tests
+2026-10-27T17:50:42.3208951Z copying tests\test_appbuilder_http.py -> chatify_app-0.4.32\tests
+2026-10-27T17:50:42.3214983Z copying tests\test_appearance_color_recovery.py -> chatify_app-0.4.32\tests
+2026-10-27T17:50:42.3219567Z copying tests\test_appearance_wording_states.py -> chatify_app-0.4.32\tests
+2026-10-27T17:50:42.3225443Z copying tests\test_arxiv_transient_retry.py -> chatify_app-0.4.32\tests
+2026-10-27T17:50:42.3231216Z copying tests\test_background_states.py -> chatify_app-0.4.32\tests
+2026-10-27T17:50:42.3236397Z copying tests\test_background_transition.py -> chatify_app-0.4.32\tests
+2026-10-27T17:50:42.3241770Z copying tests\test_bounded_plugin.py -> chatify_app-0.4.32\tests
+2026-10-27T17:50:42.3248138Z copying tests\test_branch.py -> chatify_app-0.4.32\tests
+2026-10-27T17:50:42.3255448Z copying tests\test_brand.py -> chatify_app-0.4.32\tests
+2026-10-27T17:50:42.3261853Z copying tests\test_budget.py -> chatify_app-0.4.32\tests
+2026-10-27T17:50:42.3269036Z copying tests\test_build_validation_details.py -> chatify_app-0.4.32\tests
+2026-10-27T17:50:42.3276861Z copying tests\test_builddrafts.py -> chatify_app-0.4.32\tests
+2026-10-27T17:50:42.3285928Z copying tests\test_builder_api_picks.py -> chatify_app-0.4.32\tests
+2026-10-27T17:50:42.3292002Z copying tests\test_builder_density_states.py -> chatify_app-0.4.32\tests
+2026-10-27T17:50:42.3298342Z copying tests\test_builder_launch.py -> chatify_app-0.4.32\tests
+2026-10-27T17:50:42.3304639Z copying tests\test_builder_retry_state.py -> chatify_app-0.4.32\tests
+2026-10-27T17:50:42.3310274Z copying tests\test_buildimages.py -> chatify_app-0.4.32\tests
+2026-10-27T17:50:42.3321372Z copying tests\test_buildjobs.py -> chatify_app-0.4.32\tests
+2026-10-27T17:50:42.3327949Z copying tests\test_bundle_review.py -> chatify_app-0.4.32\tests
+2026-10-27T17:50:42.3333995Z copying tests\test_calm.py -> chatify_app-0.4.32\tests
+2026-10-27T17:50:42.3339384Z copying tests\test_chat_account_states.py -> chatify_app-0.4.32\tests
+2026-10-27T17:50:42.3348155Z copying tests\test_chat_action_states.py -> chatify_app-0.4.32\tests
+2026-10-27T17:50:42.3355947Z copying tests\test_chat_history_states.py -> chatify_app-0.4.32\tests
+2026-10-27T17:50:42.3363100Z copying tests\test_chat_notifications.py -> chatify_app-0.4.32\tests
+2026-10-27T17:50:42.3371312Z copying tests\test_chat_title.py -> chatify_app-0.4.32\tests
+2026-10-27T17:50:42.3378565Z copying tests\test_ci_browser_suite.py -> chatify_app-0.4.32\tests
+2026-10-27T17:50:42.3386003Z copying tests\test_color_feedback.py -> chatify_app-0.4.32\tests
+2026-10-27T17:50:42.3392540Z copying tests\test_config_alignment.py -> chatify_app-0.4.32\tests
+2026-10-27T17:50:42.3401808Z copying tests\test_config_lock_names.py -> chatify_app-0.4.32\tests
+2026-10-27T17:50:42.3409023Z copying tests\test_configchange.py -> chatify_app-0.4.32\tests
+2026-10-27T17:50:42.3416243Z copying tests\test_configdoctor.py -> chatify_app-0.4.32\tests
+2026-10-27T17:50:42.3423508Z copying tests\test_connector_recovery.py -> chatify_app-0.4.32\tests
+2026-10-27T17:50:42.3431245Z copying tests\test_continuation_safety.py -> chatify_app-0.4.32\tests
+2026-10-27T17:50:42.3438719Z copying tests\test_core.py -> chatify_app-0.4.32\tests
+2026-10-27T17:50:42.3449172Z copying tests\test_corpus_intent_gate.py -> chatify_app-0.4.32\tests
+2026-10-27T17:50:42.3456786Z copying tests\test_cross_owner_gate.py -> chatify_app-0.4.32\tests
+2026-10-27T17:50:42.3463952Z copying tests\test_degrade.py -> chatify_app-0.4.32\tests
+2026-10-27T17:50:42.3480303Z copying tests\test_diagnosis_actions.py -> chatify_app-0.4.32\tests
+2026-10-27T17:50:42.3486441Z copying tests\test_dictation_states.py -> chatify_app-0.4.32\tests
+2026-10-27T17:50:42.3491542Z copying tests\test_document_dates.py -> chatify_app-0.4.32\tests
+2026-10-27T17:50:42.3497088Z copying tests\test_draft_status_summary.py -> chatify_app-0.4.32\tests
+2026-10-27T17:50:42.3502539Z copying tests\test_draftaudit.py -> chatify_app-0.4.32\tests
+2026-10-27T17:50:42.3508467Z copying tests\test_editstate.py -> chatify_app-0.4.32\tests
+2026-10-27T17:50:42.3513672Z copying tests\test_emoji_motion.py -> chatify_app-0.4.32\tests
+2026-10-27T17:50:42.3519112Z copying tests\test_fallbacks.py -> chatify_app-0.4.32\tests
+2026-10-27T17:50:42.3525266Z copying tests\test_feedback_complete.py -> chatify_app-0.4.32\tests
+2026-10-27T17:50:42.3530137Z copying tests\test_feedback_patch.py -> chatify_app-0.4.32\tests
+2026-10-27T17:50:42.3535577Z copying tests\test_followup_domain_check.py -> chatify_app-0.4.32\tests
+2026-10-27T17:50:42.3540916Z copying tests\test_font_feedback.py -> chatify_app-0.4.32\tests
+2026-10-27T17:50:42.3546345Z copying tests\test_freshness.py -> chatify_app-0.4.32\tests
+2026-10-27T17:50:42.3551971Z copying tests\test_freshness_diagnostics.py -> chatify_app-0.4.32\tests
+2026-10-27T17:50:42.3557991Z copying tests\test_gallery.py -> chatify_app-0.4.32\tests
+2026-10-27T17:50:42.3566961Z copying tests\test_generator_design.py -> chatify_app-0.4.32\tests
+2026-10-27T17:50:42.3572305Z copying tests\test_generator_wiring.py -> chatify_app-0.4.32\tests
+2026-10-27T17:50:42.3577560Z copying tests\test_genre_gate.py -> chatify_app-0.4.32\tests
+2026-10-27T17:50:42.3582703Z copying tests\test_guided_tours.py -> chatify_app-0.4.32\tests
+2026-10-27T17:50:42.3588510Z copying tests\test_helper_code_repair.py -> chatify_app-0.4.32\tests
+2026-10-27T17:50:42.3593520Z copying tests\test_helper_declared_keys.py -> chatify_app-0.4.32\tests
+2026-10-27T17:50:42.3598568Z copying tests\test_history_robustness.py -> chatify_app-0.4.32\tests
+2026-10-27T17:50:42.3604699Z copying tests\test_history_skeleton.py -> chatify_app-0.4.32\tests
+2026-10-27T17:50:42.3609863Z copying tests\test_host_flow.py -> chatify_app-0.4.32\tests
+2026-10-27T17:50:42.3614661Z copying tests\test_hydration.py -> chatify_app-0.4.32\tests
+2026-10-27T17:50:42.3620345Z copying tests\test_key_pause_compile.py -> chatify_app-0.4.32\tests
+2026-10-27T17:50:42.3625559Z copying tests\test_keybundle.py -> chatify_app-0.4.32\tests
+2026-10-27T17:50:42.3630691Z copying tests\test_launcher.py -> chatify_app-0.4.32\tests
+2026-10-27T17:50:42.3635641Z copying tests\test_layout_choice_states.py -> chatify_app-0.4.32\tests
+2026-10-27T17:50:42.3640424Z copying tests\test_light_default.py -> chatify_app-0.4.32\tests
+2026-10-27T17:50:42.3645408Z copying tests\test_lock.py -> chatify_app-0.4.32\tests
+2026-10-27T17:50:42.3650604Z copying tests\test_management.py -> chatify_app-0.4.32\tests
+2026-10-27T17:50:42.3660459Z copying tests\test_mock_provider.py -> chatify_app-0.4.32\tests
+2026-10-27T17:50:42.3665908Z copying tests\test_model_connection_truth.py -> chatify_app-0.4.32\tests
+2026-10-27T17:50:42.3670787Z copying tests\test_model_listing.py -> chatify_app-0.4.32\tests
+2026-10-27T17:50:42.3675473Z copying tests\test_model_refresh_states.py -> chatify_app-0.4.32\tests
+2026-10-27T17:50:42.3680174Z copying tests\test_motion.py -> chatify_app-0.4.32\tests
+2026-10-27T17:50:42.3685560Z copying tests\test_motion_mode_states.py -> chatify_app-0.4.32\tests
+2026-10-27T17:50:42.3690202Z copying tests\test_mysql.py -> chatify_app-0.4.32\tests
+2026-10-27T17:50:42.3695092Z copying tests\test_nerdload.py -> chatify_app-0.4.32\tests
+2026-10-27T17:50:42.3700080Z copying tests\test_news_campaign_regressions.py -> chatify_app-0.4.32\tests
+2026-10-27T17:50:42.3706154Z copying tests\test_numeric_audit.py -> chatify_app-0.4.32\tests
+2026-10-27T17:50:42.3711039Z copying tests\test_ollama_setup.py -> chatify_app-0.4.32\tests
+2026-10-27T17:50:42.3715854Z copying tests\test_onboarding_ui.py -> chatify_app-0.4.32\tests
+2026-10-27T17:50:42.3720719Z copying tests\test_openalex_question_punctuation.py -> chatify_app-0.4.32\tests
+2026-10-27T17:50:42.3725851Z copying tests\test_packaged_fonts.py -> chatify_app-0.4.32\tests
+2026-10-27T17:50:42.3730576Z copying tests\test_pagetransitions.py -> chatify_app-0.4.32\tests
+2026-10-27T17:50:42.3737705Z copying tests\test_pdf_source_keep.py -> chatify_app-0.4.32\tests
+2026-10-27T17:50:42.3742560Z copying tests\test_peace_reliefweb.py -> chatify_app-0.4.32\tests
+2026-10-27T17:50:42.3748463Z copying tests\test_peace_sfcg.py -> chatify_app-0.4.32\tests
+2026-10-27T17:50:42.3753075Z copying tests\test_permissions.py -> chatify_app-0.4.32\tests
+2026-10-27T17:50:42.3757869Z copying tests\test_picker_longlist_states.py -> chatify_app-0.4.32\tests
+2026-10-27T17:50:42.3762464Z copying tests\test_portable.py -> chatify_app-0.4.32\tests
+2026-10-27T17:50:42.3767735Z copying tests\test_preset_states.py -> chatify_app-0.4.32\tests
+2026-10-27T17:50:42.3772302Z copying tests\test_preview_continuity.py -> chatify_app-0.4.32\tests
+2026-10-27T17:50:42.3776941Z copying tests\test_preview_immediate_states.py -> chatify_app-0.4.32\tests
+2026-10-27T17:50:42.3781633Z copying tests\test_preview_readable.py -> chatify_app-0.4.32\tests
+2026-10-27T17:50:42.3786308Z copying tests\test_progress.py -> chatify_app-0.4.32\tests
+2026-10-27T17:50:42.3791227Z copying tests\test_prompt_fact_focus.py -> chatify_app-0.4.32\tests
+2026-10-27T17:50:42.3796112Z copying tests\test_prompt_presentation.py -> chatify_app-0.4.32\tests
+2026-10-27T17:50:42.3801088Z copying tests\test_provider_error_details.py -> chatify_app-0.4.32\tests
+2026-10-27T17:50:42.3806254Z copying tests\test_provider_motion_states.py -> chatify_app-0.4.32\tests
+2026-10-27T17:50:42.3811147Z copying tests\test_public_visitor_isolation.py -> chatify_app-0.4.32\tests
+2026-10-27T17:50:42.3818700Z copying tests\test_publish.py -> chatify_app-0.4.32\tests
+2026-10-27T17:50:42.3823553Z copying tests\test_query_expansion.py -> chatify_app-0.4.32\tests
+2026-10-27T17:50:42.3829619Z copying tests\test_readiness.py -> chatify_app-0.4.32\tests
+2026-10-27T17:50:42.3834429Z copying tests\test_reading.py -> chatify_app-0.4.32\tests
+2026-10-27T17:50:42.3839468Z copying tests\test_reading_view_states.py -> chatify_app-0.4.32\tests
+2026-10-27T17:50:42.3844646Z copying tests\test_recency_query.py -> chatify_app-0.4.32\tests
+2026-10-27T17:50:42.3849680Z copying tests\test_recommendation_motion.py -> chatify_app-0.4.32\tests
+2026-10-27T17:50:42.3854200Z copying tests\test_recommendation_return.py -> chatify_app-0.4.32\tests
+2026-10-27T17:50:42.3858732Z copying tests\test_release_pins.py -> chatify_app-0.4.32\tests
+2026-10-27T17:50:42.3865001Z copying tests\test_rerank.py -> chatify_app-0.4.32\tests
+2026-10-27T17:50:42.3869902Z copying tests\test_rerank_routing.py -> chatify_app-0.4.32\tests
+2026-10-27T17:50:42.3874715Z copying tests\test_retrieval_gate.py -> chatify_app-0.4.32\tests
+2026-10-27T17:50:42.3880116Z copying tests\test_retrieval_plus.py -> chatify_app-0.4.32\tests
+2026-10-27T17:50:42.3885463Z copying tests\test_review_refinements.py -> chatify_app-0.4.32\tests
+2026-10-27T17:50:42.3890243Z copying tests\test_rider_demote.py -> chatify_app-0.4.32\tests
+2026-10-27T17:50:42.3895128Z copying tests\test_rtl_pdf.py -> chatify_app-0.4.32\tests
+2026-10-27T17:50:42.3903413Z copying tests\test_run_browser.py -> chatify_app-0.4.32\tests
+2026-10-27T17:50:42.3908930Z copying tests\test_saved_appearance.py -> chatify_app-0.4.32\tests
+2026-10-27T17:50:42.3913727Z copying tests\test_scope.py -> chatify_app-0.4.32\tests
+2026-10-27T17:50:42.3918619Z copying tests\test_send_readiness.py -> chatify_app-0.4.32\tests
+2026-10-27T17:50:42.3924590Z copying tests\test_server_bind.py -> chatify_app-0.4.32\tests
+2026-10-27T17:50:42.3929211Z copying tests\test_settings_ready_state.py -> chatify_app-0.4.32\tests
+2026-10-27T17:50:42.3934575Z copying tests\test_settingsguide.py -> chatify_app-0.4.32\tests
+2026-10-27T17:50:42.3939410Z copying tests\test_settingsguide_http.py -> chatify_app-0.4.32\tests
+2026-10-27T17:50:42.3945036Z copying tests\test_settingsguide_security.py -> chatify_app-0.4.32\tests
+2026-10-27T17:50:42.3949983Z copying tests\test_setup.py -> chatify_app-0.4.32\tests
+2026-10-27T17:50:42.3955096Z copying tests\test_shape_states.py -> chatify_app-0.4.32\tests
+2026-10-27T17:50:42.3959923Z copying tests\test_sidebar_motion.py -> chatify_app-0.4.32\tests
+2026-10-27T17:50:42.3965137Z copying tests\test_simple_mode_density.py -> chatify_app-0.4.32\tests
+2026-10-27T17:50:42.3969979Z copying tests\test_simplification_evidence.py -> chatify_app-0.4.32\tests
+2026-10-27T17:50:42.3974918Z copying tests\test_small_feedback_states.py -> chatify_app-0.4.32\tests
+2026-10-27T17:50:42.3979715Z copying tests\test_source_credentials.py -> chatify_app-0.4.32\tests
+2026-10-27T17:50:42.3985164Z copying tests\test_source_overlay.py -> chatify_app-0.4.32\tests
+2026-10-27T17:50:42.3989948Z copying tests\test_source_setup_and_wording.py -> chatify_app-0.4.32\tests
+2026-10-27T17:50:42.3994900Z copying tests\test_source_summary_saved.py -> chatify_app-0.4.32\tests
+2026-10-27T17:50:42.4000068Z copying tests\test_source_upload_states.py -> chatify_app-0.4.32\tests
+2026-10-27T17:50:42.4005885Z copying tests\test_sources_drawer.py -> chatify_app-0.4.32\tests
+2026-10-27T17:50:42.4010668Z copying tests\test_stage_contracts.py -> chatify_app-0.4.32\tests
+2026-10-27T17:50:42.4015482Z copying tests\test_start_local.py -> chatify_app-0.4.32\tests
+2026-10-27T17:50:42.4021280Z copying tests\test_state_compat_matrix.py -> chatify_app-0.4.32\tests
+2026-10-27T17:50:42.4026597Z copying tests\test_static_emoji.py -> chatify_app-0.4.32\tests
+2026-10-27T17:50:42.4031757Z copying tests\test_stream_disconnect.py -> chatify_app-0.4.32\tests
+2026-10-27T17:50:42.4036530Z copying tests\test_stream_reading.py -> chatify_app-0.4.32\tests
+2026-10-27T17:50:42.4041499Z copying tests\test_suggestions.py -> chatify_app-0.4.32\tests
+2026-10-27T17:50:42.4047400Z copying tests\test_template_routes.py -> chatify_app-0.4.32\tests
+2026-10-27T17:50:42.4052337Z copying tests\test_terminal.py -> chatify_app-0.4.32\tests
+2026-10-27T17:50:42.4057236Z copying tests\test_theme_color_states.py -> chatify_app-0.4.32\tests
+2026-10-27T17:50:42.4065447Z copying tests\test_theme_contrast_settle.py -> chatify_app-0.4.32\tests
+2026-10-27T17:50:42.4070534Z copying tests\test_transfer_guide_states.py -> chatify_app-0.4.32\tests
+2026-10-27T17:50:42.4075242Z copying tests\test_transient_key_cancel.py -> chatify_app-0.4.32\tests
+2026-10-27T17:50:42.4081577Z copying tests\test_ui_errors.py -> chatify_app-0.4.32\tests
+2026-10-27T17:50:42.4087716Z copying tests\test_version_sync.py -> chatify_app-0.4.32\tests
+2026-10-27T17:50:42.4092832Z copying tests\test_web_reachability.py -> chatify_app-0.4.32\tests
+2026-10-27T17:50:42.4098501Z copying tests\test_web_syntax.py -> chatify_app-0.4.32\tests
+2026-10-27T17:50:42.4103849Z copying tests\test_wikipedia_ranking.py -> chatify_app-0.4.32\tests
+2026-10-27T17:50:42.4108912Z copying tests\test_wizard_launch_retry.py -> chatify_app-0.4.32\tests
+2026-10-27T17:50:42.4114082Z copying tests\test_workspace.py -> chatify_app-0.4.32\tests
+2026-10-27T17:50:42.4119314Z copying tests\test_workspace_api.py -> chatify_app-0.4.32\tests
+2026-10-27T17:50:42.4124777Z copying tests\test_workspace_check.py -> chatify_app-0.4.32\tests
+2026-10-27T17:50:42.4129878Z copying tests\test_workspace_live_states.py -> chatify_app-0.4.32\tests
+2026-10-27T17:50:42.4134743Z copying tests\test_workspace_review_confirm.py -> chatify_app-0.4.32\tests
+2026-10-27T17:50:42.4140736Z copying tests\test_workspace_review_confirm_behavior.py -> chatify_app-0.4.32\tests
+2026-10-27T17:50:42.4157229Z Writing chatify_app-0.4.32\setup.cfg
+2026-10-27T17:50:42.4162451Z Creating tar archive
+2026-10-27T17:50:43.7062792Z removing 'chatify_app-0.4.32' (and everything under it)
+2026-10-27T17:50:44.0068377Z Building wheel from source distribution...
+2026-10-27T17:50:44.5462883Z D:\a\_temp\setup-uv-cache\builds-v0\.tmpYb9AMs\Lib\site-packages\setuptools\config\_apply_pyprojecttoml.py:82: SetuptoolsDeprecationWarning: `project.license` as a TOML table is deprecated
+2026-10-27T17:50:44.5464385Z !!
+2026-10-27T17:50:44.5464545Z 
+2026-10-27T17:50:44.5464772Z         ********************************************************************************
+2026-10-27T17:50:44.5466175Z         Please use a simple string containing a SPDX expression for `project.license`. You can also use `project.license-files`. (Both options available on setuptools>=77.0.0).
+2026-10-27T17:50:44.5467362Z 
+2026-10-27T17:50:44.5467719Z         By 2027-Feb-18, you need to update your project and remove deprecated calls
+2026-10-27T17:50:44.5468440Z         or your builds will no longer be supported.
+2026-10-27T17:50:44.5468800Z 
+2026-10-27T17:50:44.5469794Z         See https://packaging.python.org/en/latest/guides/writing-pyproject-toml/#license for details.
+2026-10-27T17:50:44.5470746Z         ********************************************************************************
+2026-10-27T17:50:44.5471164Z 
+2026-10-27T17:50:44.5471277Z !!
+2026-10-27T17:50:44.5471580Z   corresp(dist, value, root_dir)
+2026-10-27T17:50:44.6709499Z running egg_info
+2026-10-27T17:50:44.6731686Z writing chatify_app.egg-info\PKG-INFO
+2026-10-27T17:50:44.6746299Z writing dependency_links to chatify_app.egg-info\dependency_links.txt
+2026-10-27T17:50:44.6751453Z writing entry points to chatify_app.egg-info\entry_points.txt
+2026-10-27T17:50:44.6758377Z writing requirements to chatify_app.egg-info\requires.txt
+2026-10-27T17:50:44.6761966Z writing top-level names to chatify_app.egg-info\top_level.txt
+2026-10-27T17:50:44.7178193Z reading manifest file 'chatify_app.egg-info\SOURCES.txt'
+2026-10-27T17:50:44.7260994Z adding license file 'LICENSE'
+2026-10-27T17:50:44.7350377Z writing manifest file 'chatify_app.egg-info\SOURCES.txt'
+2026-10-27T17:50:45.0210680Z D:\a\_temp\setup-uv-cache\builds-v0\.tmpYb9AMs\Lib\site-packages\setuptools\config\_apply_pyprojecttoml.py:82: SetuptoolsDeprecationWarning: `project.license` as a TOML table is deprecated
+2026-10-27T17:50:45.0212211Z !!
+2026-10-27T17:50:45.0212398Z 
+2026-10-27T17:50:45.0212614Z         ********************************************************************************
+2026-10-27T17:50:45.0213994Z         Please use a simple string containing a SPDX expression for `project.license`. You can also use `project.license-files`. (Both options available on setuptools>=77.0.0).
+2026-10-27T17:50:45.0215144Z 
+2026-10-27T17:50:45.0215483Z         By 2027-Feb-18, you need to update your project and remove deprecated calls
+2026-10-27T17:50:45.0216186Z         or your builds will no longer be supported.
+2026-10-27T17:50:45.0216539Z 
+2026-10-27T17:50:45.0217075Z         See https://packaging.python.org/en/latest/guides/writing-pyproject-toml/#license for details.
+2026-10-27T17:50:45.0217987Z         ********************************************************************************
+2026-10-27T17:50:45.0218395Z 
+2026-10-27T17:50:45.0218505Z !!
+2026-10-27T17:50:45.0218793Z   corresp(dist, value, root_dir)
+2026-10-27T17:50:45.0509686Z running bdist_wheel
+2026-10-27T17:50:45.0605061Z running build
+2026-10-27T17:50:45.0605827Z running build_py
+2026-10-27T17:50:45.0633638Z creating build\lib\chatify
+2026-10-27T17:50:45.0640384Z copying chatify\accounts.py -> build\lib\chatify
+2026-10-27T17:50:45.0646949Z copying chatify\actions.py -> build\lib\chatify
+2026-10-27T17:50:45.0653012Z copying chatify\apipicks.py -> build\lib\chatify
+2026-10-27T17:50:45.0658338Z copying chatify\apiterms.py -> build\lib\chatify
+2026-10-27T17:50:45.0663432Z copying chatify\appbuilder.py -> build\lib\chatify
+2026-10-27T17:50:45.0670277Z copying chatify\budget.py -> build\lib\chatify
+2026-10-27T17:50:45.0675528Z copying chatify\builddrafts.py -> build\lib\chatify
+2026-10-27T17:50:45.0683882Z copying chatify\buildimages.py -> build\lib\chatify
+2026-10-27T17:50:45.0689507Z copying chatify\buildjobs.py -> build\lib\chatify
+2026-10-27T17:50:45.0695340Z copying chatify\bundle_review.py -> build\lib\chatify
+2026-10-27T17:50:45.0700515Z copying chatify\cli.py -> build\lib\chatify
+2026-10-27T17:50:45.0705738Z copying chatify\configchange.py -> build\lib\chatify
+2026-10-27T17:50:45.0711507Z copying chatify\configdoctor.py -> build\lib\chatify
+2026-10-27T17:50:45.0716845Z copying chatify\draftaudit.py -> build\lib\chatify
+2026-10-27T17:50:45.0722336Z copying chatify\editstate.py -> build\lib\chatify
+2026-10-27T17:50:45.0728636Z copying chatify\exports.py -> build\lib\chatify
+2026-10-27T17:50:45.0734043Z copying chatify\fetch.py -> build\lib\chatify
+2026-10-27T17:50:45.0739270Z copying chatify\fileread.py -> build\lib\chatify
+2026-10-27T17:50:45.0744875Z copying chatify\gallery.py -> build\lib\chatify
+2026-10-27T17:50:45.0750857Z copying chatify\generators.py -> build\lib\chatify
+2026-10-27T17:50:45.0756130Z copying chatify\generator_design.py -> build\lib\chatify
+2026-10-27T17:50:45.0762051Z copying chatify\hardware.py -> build\lib\chatify
+2026-10-27T17:50:45.0767430Z copying chatify\keybundle.py -> build\lib\chatify
+2026-10-27T17:50:45.0772586Z copying chatify\launcher.py -> build\lib\chatify
+2026-10-27T17:50:45.0777775Z copying chatify\management.py -> build\lib\chatify
+2026-10-27T17:50:45.0783760Z copying chatify\modelcatalog.py -> build\lib\chatify
+2026-10-27T17:50:45.0788595Z copying chatify\mysqlstore.py -> build\lib\chatify
+2026-10-27T17:50:45.0794040Z copying chatify\nerdload.py -> build\lib\chatify
+2026-10-27T17:50:45.0799966Z copying chatify\ollama_setup.py -> build\lib\chatify
+2026-10-27T17:50:45.0805527Z copying chatify\pdfread.py -> build\lib\chatify
+2026-10-27T17:50:45.0810634Z copying chatify\permissions.py -> build\lib\chatify
+2026-10-27T17:50:45.0815702Z copying chatify\pipeline.py -> build\lib\chatify
+2026-10-27T17:50:45.0822400Z copying chatify\portable.py -> build\lib\chatify
+2026-10-27T17:50:45.0828190Z copying chatify\prompts.py -> build\lib\chatify
+2026-10-27T17:50:45.0833282Z copying chatify\providers.py -> build\lib\chatify
+2026-10-27T17:50:45.0838755Z copying chatify\publish.py -> build\lib\chatify
+2026-10-27T17:50:45.0844341Z copying chatify\readiness.py -> build\lib\chatify
+2026-10-27T17:50:45.0849636Z copying chatify\rerank.py -> build\lib\chatify
+2026-10-27T17:50:45.0858706Z copying chatify\schema.py -> build\lib\chatify
+2026-10-27T17:50:45.0863884Z copying chatify\secrets.py -> build\lib\chatify
+2026-10-27T17:50:45.0869423Z copying chatify\server.py -> build\lib\chatify
+2026-10-27T17:50:45.0875850Z copying chatify\settingsguide.py -> build\lib\chatify
+2026-10-27T17:50:45.0882458Z copying chatify\source_credentials.py -> build\lib\chatify
+2026-10-27T17:50:45.0889239Z copying chatify\stage_contracts.py -> build\lib\chatify
+2026-10-27T17:50:45.0894418Z copying chatify\store.py -> build\lib\chatify
+2026-10-27T17:50:45.0900331Z copying chatify\suggestions.py -> build\lib\chatify
+2026-10-27T17:50:45.0906178Z copying chatify\terminal.py -> build\lib\chatify
+2026-10-27T17:50:45.0911260Z copying chatify\theme.py -> build\lib\chatify
+2026-10-27T17:50:45.0916636Z copying chatify\versions.py -> build\lib\chatify
+2026-10-27T17:50:45.0922859Z copying chatify\websearch.py -> build\lib\chatify
+2026-10-27T17:50:45.0927943Z copying chatify\workspace.py -> build\lib\chatify
+2026-10-27T17:50:45.0933075Z copying chatify\__init__.py -> build\lib\chatify
+2026-10-27T17:50:45.0937995Z copying chatify\__main__.py -> build\lib\chatify
+2026-10-27T17:50:45.0949059Z creating build\lib\apps\formulaone
+2026-10-27T17:50:45.0953643Z copying apps\formulaone\f1_sources.py -> build\lib\apps\formulaone
+2026-10-27T17:50:45.0962417Z creating build\lib\apps\newsnerd-sample
+2026-10-27T17:50:45.0965297Z copying apps\newsnerd-sample\news_connector.py -> build\lib\apps\newsnerd-sample
+2026-10-27T17:50:45.0970727Z copying apps\newsnerd-sample\test_newsnerd.py -> build\lib\apps\newsnerd-sample
+2026-10-27T17:50:45.0976668Z creating build\lib\apps\peacechat
+2026-10-27T17:50:45.0979653Z copying apps\peacechat\peace_sources.py -> build\lib\apps\peacechat
+2026-10-27T17:50:45.0986105Z creating build\lib\apps\recipechat
+2026-10-27T17:50:45.0989382Z copying apps\recipechat\recipe_sources.py -> build\lib\apps\recipechat
+2026-10-27T17:50:45.1007075Z creating build\lib\chatify\connectors
+2026-10-27T17:50:45.1010019Z copying chatify\connectors\arxiv.py -> build\lib\chatify\connectors
+2026-10-27T17:50:45.1015529Z copying chatify\connectors\base.py -> build\lib\chatify\connectors
+2026-10-27T17:50:45.1020848Z copying chatify\connectors\bounded.py -> build\lib\chatify\connectors
+2026-10-27T17:50:45.1025952Z copying chatify\connectors\http_json.py -> build\lib\chatify\connectors
+2026-10-27T17:50:45.1031173Z copying chatify\connectors\local_files.py -> build\lib\chatify\connectors
+2026-10-27T17:50:45.1036431Z copying chatify\connectors\open_sources.py -> build\lib\chatify\connectors
+2026-10-27T17:50:45.1042372Z copying chatify\connectors\pubmed.py -> build\lib\chatify\connectors
+2026-10-27T17:50:45.1054008Z copying chatify\connectors\recovery.py -> build\lib\chatify\connectors
+2026-10-27T17:50:45.1059219Z copying chatify\connectors\web_search.py -> build\lib\chatify\connectors
+2026-10-27T17:50:45.1065343Z copying chatify\connectors\__init__.py -> build\lib\chatify\connectors
+2026-10-27T17:50:45.1083113Z running egg_info
+2026-10-27T17:50:45.1106522Z writing chatify_app.egg-info\PKG-INFO
+2026-10-27T17:50:45.1118936Z writing dependency_links to chatify_app.egg-info\dependency_links.txt
+2026-10-27T17:50:45.1124598Z writing entry points to chatify_app.egg-info\entry_points.txt
+2026-10-27T17:50:45.1130858Z writing requirements to chatify_app.egg-info\requires.txt
+2026-10-27T17:50:45.1133925Z writing top-level names to chatify_app.egg-info\top_level.txt
+2026-10-27T17:50:45.1499339Z reading manifest file 'chatify_app.egg-info\SOURCES.txt'
+2026-10-27T17:50:45.1584987Z adding license file 'LICENSE'
+2026-10-27T17:50:45.1679554Z writing manifest file 'chatify_app.egg-info\SOURCES.txt'
+2026-10-27T17:50:45.1993788Z copying apps\gallery.yaml -> build\lib\apps
+2026-10-27T17:50:45.2000876Z creating build\lib\apps\dietchat
+2026-10-27T17:50:45.2003902Z copying apps\dietchat\app.yaml -> build\lib\apps\dietchat
+2026-10-27T17:50:45.2009978Z creating build\lib\apps\dietchat-sample
+2026-10-27T17:50:45.2016497Z copying apps\dietchat-sample\app.yaml -> build\lib\apps\dietchat-sample
+2026-10-27T17:50:45.2022381Z creating build\lib\apps\fitchat
+2026-10-27T17:50:45.2025523Z copying apps\fitchat\app.yaml -> build\lib\apps\fitchat
+2026-10-27T17:50:45.2031561Z copying apps\formulaone\app.yaml -> build\lib\apps\formulaone
+2026-10-27T17:50:45.2037731Z creating build\lib\apps\hosted
+2026-10-27T17:50:45.2040597Z copying apps\hosted\app.yaml -> build\lib\apps\hosted
+2026-10-27T17:50:45.2046142Z creating build\lib\apps\minimal
+2026-10-27T17:50:45.2049025Z copying apps\minimal\app.yaml -> build\lib\apps\minimal
+2026-10-27T17:50:45.2054782Z copying apps\newsnerd-sample\app-gnews.yaml -> build\lib\apps\newsnerd-sample
+2026-10-27T17:50:45.2061109Z copying apps\newsnerd-sample\app-newsapi.yaml -> build\lib\apps\newsnerd-sample
+2026-10-27T17:50:45.2068065Z copying apps\newsnerd-sample\app.yaml -> build\lib\apps\newsnerd-sample
+2026-10-27T17:50:45.2081109Z copying apps\peacechat\app.yaml -> build\lib\apps\peacechat
+2026-10-27T17:50:45.2081657Z copying apps\recipechat\app.yaml -> build\lib\apps\recipechat
+2026-10-27T17:50:45.2085600Z creating build\lib\apps\spacechat
+2026-10-27T17:50:45.2088521Z copying apps\spacechat\app.yaml -> build\lib\apps\spacechat
+2026-10-27T17:50:45.2094240Z creating build\lib\apps\wirelesschat
+2026-10-27T17:50:45.2097494Z copying apps\wirelesschat\app.yaml -> build\lib\apps\wirelesschat
+2026-10-27T17:50:45.2103604Z copying apps\dietchat-sample\README.md -> build\lib\apps\dietchat-sample
+2026-10-27T17:50:45.2109064Z creating build\lib\apps\fitchat\docs
+2026-10-27T17:50:45.2112188Z copying apps\fitchat\docs\02-benefits.md -> build\lib\apps\fitchat\docs
+2026-10-27T17:50:45.2118939Z copying apps\fitchat\docs\03-exercise-fitness.md -> build\lib\apps\fitchat\docs
+2026-10-27T17:50:45.2124847Z copying apps\fitchat\docs\04-older-adults.md -> build\lib\apps\fitchat\docs
+2026-10-27T17:50:45.2130603Z copying apps\formulaone\README.md -> build\lib\apps\formulaone
+2026-10-27T17:50:45.2136413Z creating build\lib\apps\formulaone\sources
+2026-10-27T17:50:45.2139994Z copying apps\formulaone\sources\ferrari-debut.md -> build\lib\apps\formulaone\sources
+2026-10-27T17:50:45.2145678Z copying apps\formulaone\sources\ferrari-first-win.md -> build\lib\apps\formulaone\sources
+2026-10-27T17:50:45.2151666Z copying apps\formulaone\sources\ferrari-history.md -> build\lib\apps\formulaone\sources
+2026-10-27T17:50:45.2162578Z copying apps\formulaone\sources\fia-sporting.md -> build\lib\apps\formulaone\sources
+2026-10-27T17:50:45.2172149Z copying apps\formulaone\sources\fia-technical.md -> build\lib\apps\formulaone\sources
+2026-10-27T17:50:45.2186048Z creating build\lib\apps\hosted\docs
+2026-10-27T17:50:45.2188853Z copying apps\hosted\docs\about.md -> build\lib\apps\hosted\docs
+2026-10-27T17:50:45.2195203Z copying apps\hosted\docs\build-your-own.md -> build\lib\apps\hosted\docs
+2026-10-27T17:50:45.2200666Z creating build\lib\apps\minimal\docs
+2026-10-27T17:50:45.2203630Z copying apps\minimal\docs\about.md -> build\lib\apps\minimal\docs
+2026-10-27T17:50:45.2209550Z copying apps\newsnerd-sample\CONFIG-FIELDS.md -> build\lib\apps\newsnerd-sample
+2026-10-27T17:50:45.2218868Z copying apps\newsnerd-sample\PROMPTS.md -> build\lib\apps\newsnerd-sample
+2026-10-27T17:50:45.2224668Z copying apps\newsnerd-sample\README.md -> build\lib\apps\newsnerd-sample
+2026-10-27T17:50:45.2230324Z copying apps\newsnerd-sample\SETUP.md -> build\lib\apps\newsnerd-sample
+2026-10-27T17:50:45.2236154Z copying apps\peacechat\README.md -> build\lib\apps\peacechat
+2026-10-27T17:50:45.2241893Z creating build\lib\apps\spacechat\docs
+2026-10-27T17:50:45.2244830Z copying apps\spacechat\docs\01-mars.md -> build\lib\apps\spacechat\docs
+2026-10-27T17:50:45.2250793Z copying apps\spacechat\docs\02-artemis.md -> build\lib\apps\spacechat\docs
+2026-10-27T17:50:45.2256724Z copying apps\spacechat\docs\03-webb.md -> build\lib\apps\spacechat\docs
+2026-10-27T17:50:45.2263007Z copying apps\spacechat\docs\04-iss.md -> build\lib\apps\spacechat\docs
+2026-10-27T17:50:45.2268422Z creating build\lib\apps\wirelesschat\papers
+2026-10-27T17:50:45.2271453Z copying apps\wirelesschat\papers\README.md -> build\lib\apps\wirelesschat\papers
+2026-10-27T17:50:45.2278802Z creating build\lib\apps\dietchat-sample\docs
+2026-10-27T17:50:45.2281887Z copying apps\dietchat-sample\docs\about.txt -> build\lib\apps\dietchat-sample\docs
+2026-10-27T17:50:45.2288537Z copying apps\dietchat-sample\docs\addons.txt -> build\lib\apps\dietchat-sample\docs
+2026-10-27T17:50:45.2293739Z copying apps\dietchat-sample\docs\contact.txt -> build\lib\apps\dietchat-sample\docs
+2026-10-27T17:50:45.2300313Z copying apps\dietchat-sample\docs\home.txt -> build\lib\apps\dietchat-sample\docs
+2026-10-27T17:50:45.2305699Z creating build\lib\apps\newsnerd-sample\docs
+2026-10-27T17:50:45.2308822Z copying apps\newsnerd-sample\docs\01-how-newsnerd-works.txt -> build\lib\apps\newsnerd-sample\docs
+2026-10-27T17:50:45.2314922Z copying apps\fitchat\docs\01-pag-executive-summary.pdf -> build\lib\apps\fitchat\docs
+2026-10-27T17:50:45.2355421Z creating build\lib\chatify\web
+2026-10-27T17:50:45.2359424Z copying chatify\web\about.css -> build\lib\chatify\web
+2026-10-27T17:50:45.2365180Z copying chatify\web\about.html -> build\lib\chatify\web
+2026-10-27T17:50:45.2370664Z copying chatify\web\about.js -> build\lib\chatify\web
+2026-10-27T17:50:45.2376981Z copying chatify\web\app.js -> build\lib\chatify\web
+2026-10-27T17:50:45.2384069Z copying chatify\web\appbuilder.js -> build\lib\chatify\web
+2026-10-27T17:50:45.2390974Z copying chatify\web\appearanceextras.js -> build\lib\chatify\web
+2026-10-27T17:50:45.2397030Z copying chatify\web\brand.js -> build\lib\chatify\web
+2026-10-27T17:50:45.2405572Z copying chatify\web\build.css -> build\lib\chatify\web
+2026-10-27T17:50:45.2411867Z copying chatify\web\build.html -> build\lib\chatify\web
+2026-10-27T17:50:45.2418121Z copying chatify\web\build.js -> build\lib\chatify\web
+2026-10-27T17:50:45.2424367Z copying chatify\web\builderstudio.css -> build\lib\chatify\web
+2026-10-27T17:50:45.2430957Z copying chatify\web\codeeditor.js -> build\lib\chatify\web
+2026-10-27T17:50:45.2441562Z copying chatify\web\codeeditor.LICENSE.txt -> build\lib\chatify\web
+2026-10-27T17:50:45.2447415Z copying chatify\web\components.css -> build\lib\chatify\web
+2026-10-27T17:50:45.2453566Z copying chatify\web\configstate.js -> build\lib\chatify\web
+2026-10-27T17:50:45.2460456Z copying chatify\web\configurationhome.css -> build\lib\chatify\web
+2026-10-27T17:50:45.2466202Z copying chatify\web\confirmdialog.js -> build\lib\chatify\web
+2026-10-27T17:50:45.2471824Z copying chatify\web\customselect.css -> build\lib\chatify\web
+2026-10-27T17:50:45.2479036Z copying chatify\web\customselect.js -> build\lib\chatify\web
+2026-10-27T17:50:45.2485882Z copying chatify\web\emoji.js -> build\lib\chatify\web
+2026-10-27T17:50:45.2492232Z copying chatify\web\error.html -> build\lib\chatify\web
+2026-10-27T17:50:45.2499524Z copying chatify\web\featurecatalog.js -> build\lib\chatify\web
+2026-10-27T17:50:45.2505386Z copying chatify\web\feedback.css -> build\lib\chatify\web
+2026-10-27T17:50:45.2511934Z copying chatify\web\feedback.js -> build\lib\chatify\web
+2026-10-27T17:50:45.2519184Z copying chatify\web\gallery.html -> build\lib\chatify\web
+2026-10-27T17:50:45.2526070Z copying chatify\web\index.html -> build\lib\chatify\web
+2026-10-27T17:50:45.2532331Z copying chatify\web\loading.css -> build\lib\chatify\web
+2026-10-27T17:50:45.2538948Z copying chatify\web\loading.js -> build\lib\chatify\web
+2026-10-27T17:50:45.2545220Z copying chatify\web\motion.css -> build\lib\chatify\web
+2026-10-27T17:50:45.2551737Z copying chatify\web\motion.js -> build\lib\chatify\web
+2026-10-27T17:50:45.2558509Z copying chatify\web\navflow.css -> build\lib\chatify\web
+2026-10-27T17:50:45.2564541Z copying chatify\web\navflow.js -> build\lib\chatify\web
+2026-10-27T17:50:45.2570778Z copying chatify\web\navigation.css -> build\lib\chatify\web
+2026-10-27T17:50:45.2577423Z copying chatify\web\nerdload.js -> build\lib\chatify\web
+2026-10-27T17:50:45.2584036Z copying chatify\web\panels.js -> build\lib\chatify\web
+2026-10-27T17:50:45.2590535Z copying chatify\web\pipeline.js -> build\lib\chatify\web
+2026-10-27T17:50:45.2597524Z copying chatify\web\reading.js -> build\lib\chatify\web
+2026-10-27T17:50:45.2611764Z copying chatify\web\refinements.css -> build\lib\chatify\web
+2026-10-27T17:50:45.2619384Z copying chatify\web\run-locally.html -> build\lib\chatify\web
+2026-10-27T17:50:45.2625417Z copying chatify\web\settings.css -> build\lib\chatify\web
+2026-10-27T17:50:45.2633896Z copying chatify\web\settings.html -> build\lib\chatify\web
+2026-10-27T17:50:45.2640876Z copying chatify\web\settings.js -> build\lib\chatify\web
+2026-10-27T17:50:45.2648529Z copying chatify\web\settingsfind.js -> build\lib\chatify\web
+2026-10-27T17:50:45.2655069Z copying chatify\web\settingsguide.js -> build\lib\chatify\web
+2026-10-27T17:50:45.2661202Z copying chatify\web\settingssearch.js -> build\lib\chatify\web
+2026-10-27T17:50:45.2666909Z copying chatify\web\settingssimple.js -> build\lib\chatify\web
+2026-10-27T17:50:45.2673402Z copying chatify\web\settingstabs.css -> build\lib\chatify\web
+2026-10-27T17:50:45.2679949Z copying chatify\web\settingstop.js -> build\lib\chatify\web
+2026-10-27T17:50:45.2685815Z copying chatify\web\sourcekeys.js -> build\lib\chatify\web
+2026-10-27T17:50:45.2691495Z copying chatify\web\splitters.js -> build\lib\chatify\web
+2026-10-27T17:50:45.2697780Z copying chatify\web\style.css -> build\lib\chatify\web
+2026-10-27T17:50:45.2704934Z copying chatify\web\theme.js -> build\lib\chatify\web
+2026-10-27T17:50:45.2710676Z copying chatify\web\tour.css -> build\lib\chatify\web
+2026-10-27T17:50:45.2716799Z copying chatify\web\tour.js -> build\lib\chatify\web
+2026-10-27T17:50:45.2722614Z copying chatify\web\upgrade.css -> build\lib\chatify\web
+2026-10-27T17:50:45.2731873Z copying chatify\web\workspace.css -> build\lib\chatify\web
+2026-10-27T17:50:45.2738610Z copying chatify\web\workspace.js -> build\lib\chatify\web
+2026-10-27T17:50:45.2744858Z creating build\lib\chatify\web\fonts
+2026-10-27T17:50:45.2747847Z copying chatify\web\fonts\FONTS.md -> build\lib\chatify\web\fonts
+2026-10-27T17:50:45.2753982Z copying chatify\web\fonts\NotoNaskhArabic[wght].ttf -> build\lib\chatify\web\fonts
+2026-10-27T17:50:45.2763244Z copying chatify\web\fonts\NotoSans-Bold.ttf -> build\lib\chatify\web\fonts
+2026-10-27T17:50:45.2774678Z copying chatify\web\fonts\NotoSans-Regular.ttf -> build\lib\chatify\web\fonts
+2026-10-27T17:50:45.2785668Z copying chatify\web\fonts\NotoSansDevanagari-Bold.ttf -> build\lib\chatify\web\fonts
+2026-10-27T17:50:45.2794794Z copying chatify\web\fonts\NotoSansDevanagari-Regular.ttf -> build\lib\chatify\web\fonts
+2026-10-27T17:50:45.2805588Z copying chatify\web\fonts\NotoSansHebrew[wdth,wght].ttf -> build\lib\chatify\web\fonts
+2026-10-27T17:50:45.2812544Z copying chatify\web\fonts\NotoSansMath-OFL.txt -> build\lib\chatify\web\fonts
+2026-10-27T17:50:45.2818939Z copying chatify\web\fonts\NotoSansMath-Regular.ttf -> build\lib\chatify\web\fonts
+2026-10-27T17:50:45.2832872Z copying chatify\web\fonts\NotoSansSymbols-Regular.ttf -> build\lib\chatify\web\fonts
+2026-10-27T17:50:45.2840782Z copying chatify\web\fonts\NotoSansSymbols2-Regular.ttf -> build\lib\chatify\web\fonts
+2026-10-27T17:50:45.2857921Z copying chatify\web\fonts\OFL.txt -> build\lib\chatify\web\fonts
+2026-10-27T17:50:45.2863694Z creating build\lib\chatify\web\logos
+2026-10-27T17:50:45.2867010Z copying chatify\web\logos\claude.svg -> build\lib\chatify\web\logos
+2026-10-27T17:50:45.2873124Z copying chatify\web\logos\deepseek.svg -> build\lib\chatify\web\logos
+2026-10-27T17:50:45.2879161Z copying chatify\web\logos\gemini.svg -> build\lib\chatify\web\logos
+2026-10-27T17:50:45.2885339Z copying chatify\web\logos\groq.svg -> build\lib\chatify\web\logos
+2026-10-27T17:50:45.2890555Z copying chatify\web\logos\mimo.svg -> build\lib\chatify\web\logos
+2026-10-27T17:50:45.2896891Z copying chatify\web\logos\minimax.svg -> build\lib\chatify\web\logos
+2026-10-27T17:50:45.2902583Z copying chatify\web\logos\mistral.svg -> build\lib\chatify\web\logos
+2026-10-27T17:50:45.2911611Z copying chatify\web\logos\ollama.svg -> build\lib\chatify\web\logos
+2026-10-27T17:50:45.2917879Z copying chatify\web\logos\openai.svg -> build\lib\chatify\web\logos
+2026-10-27T17:50:45.2923733Z copying chatify\web\logos\openrouter.svg -> build\lib\chatify\web\logos
+2026-10-27T17:50:45.2929379Z creating build\lib\chatify\web\icons
+2026-10-27T17:50:45.2932472Z copying chatify\web\icons\chatify.svg -> build\lib\chatify\web\icons
+2026-10-27T17:50:45.2938738Z creating build\lib\chatify\web\team
+2026-10-27T17:50:45.2941877Z copying chatify\web\team\dennis.jpg -> build\lib\chatify\web\team
+2026-10-27T17:50:45.2948120Z copying chatify\web\team\harsh.jpg -> build\lib\chatify\web\team
+2026-10-27T17:50:45.2955101Z creating build\lib\chatify\web\emoji
+2026-10-27T17:50:45.2958593Z copying chatify\web\emoji\1f389.png -> build\lib\chatify\web\emoji
+2026-10-27T17:50:45.2965339Z copying chatify\web\emoji\1f389.webp -> build\lib\chatify\web\emoji
+2026-10-27T17:50:45.2974562Z copying chatify\web\emoji\1f44b.png -> build\lib\chatify\web\emoji
+2026-10-27T17:50:45.2981753Z copying chatify\web\emoji\1f44b.webp -> build\lib\chatify\web\emoji
+2026-10-27T17:50:45.2991421Z copying chatify\web\emoji\1f44d.png -> build\lib\chatify\web\emoji
+2026-10-27T17:50:45.2998757Z copying chatify\web\emoji\1f44d.webp -> build\lib\chatify\web\emoji
+2026-10-27T17:50:45.3005928Z copying chatify\web\emoji\1f44f.png -> build\lib\chatify\web\emoji
+2026-10-27T17:50:45.3016476Z copying chatify\web\emoji\1f44f.webp -> build\lib\chatify\web\emoji
+2026-10-27T17:50:45.3023818Z copying chatify\web\emoji\1f525.png -> build\lib\chatify\web\emoji
+2026-10-27T17:50:45.3030436Z copying chatify\web\emoji\1f525.webp -> build\lib\chatify\web\emoji
+2026-10-27T17:50:45.3038880Z copying chatify\web\emoji\1f600.png -> build\lib\chatify\web\emoji
+2026-10-27T17:50:45.3045770Z copying chatify\web\emoji\1f600.webp -> build\lib\chatify\web\emoji
+2026-10-27T17:50:45.3055664Z copying chatify\web\emoji\1f602.png -> build\lib\chatify\web\emoji
+2026-10-27T17:50:45.3063333Z copying chatify\web\emoji\1f602.webp -> build\lib\chatify\web\emoji
+2026-10-27T17:50:45.3075142Z copying chatify\web\emoji\1f60a.png -> build\lib\chatify\web\emoji
+2026-10-27T17:50:45.3082485Z copying chatify\web\emoji\1f60a.webp -> build\lib\chatify\web\emoji
+2026-10-27T17:50:45.3093950Z copying chatify\web\emoji\1f60d.png -> build\lib\chatify\web\emoji
+2026-10-27T17:50:45.3101880Z copying chatify\web\emoji\1f60d.webp -> build\lib\chatify\web\emoji
+2026-10-27T17:50:45.3111830Z copying chatify\web\emoji\1f60e.png -> build\lib\chatify\web\emoji
+2026-10-27T17:50:45.3119260Z copying chatify\web\emoji\1f60e.webp -> build\lib\chatify\web\emoji
+2026-10-27T17:50:45.3130340Z copying chatify\web\emoji\1f62d.png -> build\lib\chatify\web\emoji
+2026-10-27T17:50:45.3138411Z copying chatify\web\emoji\1f62d.webp -> build\lib\chatify\web\emoji
+2026-10-27T17:50:45.3149763Z copying chatify\web\emoji\1f64c.png -> build\lib\chatify\web\emoji
+2026-10-27T17:50:45.3155518Z copying chatify\web\emoji\1f64c.webp -> build\lib\chatify\web\emoji
+2026-10-27T17:50:45.3163360Z copying chatify\web\emoji\1f680.png -> build\lib\chatify\web\emoji
+2026-10-27T17:50:45.3171072Z copying chatify\web\emoji\1f680.webp -> build\lib\chatify\web\emoji
+2026-10-27T17:50:45.3178955Z copying chatify\web\emoji\1f914.png -> build\lib\chatify\web\emoji
+2026-10-27T17:50:45.3186398Z copying chatify\web\emoji\1f914.webp -> build\lib\chatify\web\emoji
+2026-10-27T17:50:45.3197288Z copying chatify\web\emoji\1f916.png -> build\lib\chatify\web\emoji
+2026-10-27T17:50:45.3204103Z copying chatify\web\emoji\1f916.webp -> build\lib\chatify\web\emoji
+2026-10-27T17:50:45.3213177Z copying chatify\web\emoji\1f973.png -> build\lib\chatify\web\emoji
+2026-10-27T17:50:45.3221167Z copying chatify\web\emoji\1f973.webp -> build\lib\chatify\web\emoji
+2026-10-27T17:50:45.3231839Z copying chatify\web\emoji\2728.png -> build\lib\chatify\web\emoji
+2026-10-27T17:50:45.3239452Z copying chatify\web\emoji\2728.webp -> build\lib\chatify\web\emoji
+2026-10-27T17:50:45.3247181Z copying chatify\web\emoji\ATTRIBUTION.txt -> build\lib\chatify\web\emoji
+2026-10-27T17:50:45.3253120Z copying chatify\web\emoji\static-1f308.png -> build\lib\chatify\web\emoji
+2026-10-27T17:50:45.3259372Z copying chatify\web\emoji\static-1f319.png -> build\lib\chatify\web\emoji
+2026-10-27T17:50:45.3265147Z copying chatify\web\emoji\static-1f331.png -> build\lib\chatify\web\emoji
+2026-10-27T17:50:45.3271419Z copying chatify\web\emoji\static-1f33b.png -> build\lib\chatify\web\emoji
+2026-10-27T17:50:45.3279769Z copying chatify\web\emoji\static-1f34e.png -> build\lib\chatify\web\emoji
+2026-10-27T17:50:45.3285424Z copying chatify\web\emoji\static-1f354.png -> build\lib\chatify\web\emoji
+2026-10-27T17:50:45.3291942Z copying chatify\web\emoji\static-1f355.png -> build\lib\chatify\web\emoji
+2026-10-27T17:50:45.3298122Z copying chatify\web\emoji\static-1f36a.png -> build\lib\chatify\web\emoji
+2026-10-27T17:50:45.3303617Z copying chatify\web\emoji\static-1f375.png -> build\lib\chatify\web\emoji
+2026-10-27T17:50:45.3309994Z copying chatify\web\emoji\static-1f382.png -> build\lib\chatify\web\emoji
+2026-10-27T17:50:45.3316051Z copying chatify\web\emoji\static-1f389.png -> build\lib\chatify\web\emoji
+2026-10-27T17:50:45.3322324Z copying chatify\web\emoji\static-1f38a.png -> build\lib\chatify\web\emoji
+2026-10-27T17:50:45.3328644Z copying chatify\web\emoji\static-1f3af.png -> build\lib\chatify\web\emoji
+2026-10-27T17:50:45.3334226Z copying chatify\web\emoji\static-1f3c6.png -> build\lib\chatify\web\emoji
+2026-10-27T17:50:45.3340094Z copying chatify\web\emoji\static-1f431.png -> build\lib\chatify\web\emoji
+2026-10-27T17:50:45.3345909Z copying chatify\web\emoji\static-1f436.png -> build\lib\chatify\web\emoji
+2026-10-27T17:50:45.3352160Z copying chatify\web\emoji\static-1f438.png -> build\lib\chatify\web\emoji
+2026-10-27T17:50:45.3357956Z copying chatify\web\emoji\static-1f43c.png -> build\lib\chatify\web\emoji
+2026-10-27T17:50:45.3364044Z copying chatify\web\emoji\static-1f44b.png -> build\lib\chatify\web\emoji
+2026-10-27T17:50:45.3370321Z copying chatify\web\emoji\static-1f44d.png -> build\lib\chatify\web\emoji
+2026-10-27T17:50:45.3376420Z copying chatify\web\emoji\static-1f44e.png -> build\lib\chatify\web\emoji
+2026-10-27T17:50:45.3385977Z copying chatify\web\emoji\static-1f44f.png -> build\lib\chatify\web\emoji
+2026-10-27T17:50:45.3392164Z copying chatify\web\emoji\static-1f49a.png -> build\lib\chatify\web\emoji
+2026-10-27T17:50:45.3398045Z copying chatify\web\emoji\static-1f49b.png -> build\lib\chatify\web\emoji
+2026-10-27T17:50:45.3403971Z copying chatify\web\emoji\static-1f49c.png -> build\lib\chatify\web\emoji
+2026-10-27T17:50:45.3409736Z copying chatify\web\emoji\static-1f4a1.png -> build\lib\chatify\web\emoji
+2026-10-27T17:50:45.3415937Z copying chatify\web\emoji\static-1f4aa.png -> build\lib\chatify\web\emoji
+2026-10-27T17:50:45.3421661Z copying chatify\web\emoji\static-1f4ac.png -> build\lib\chatify\web\emoji
+2026-10-27T17:50:45.3427742Z copying chatify\web\emoji\static-1f4c4.png -> build\lib\chatify\web\emoji
+2026-10-27T17:50:45.3434082Z copying chatify\web\emoji\static-1f4ce.png -> build\lib\chatify\web\emoji
+2026-10-27T17:50:45.3439961Z copying chatify\web\emoji\static-1f4da.png -> build\lib\chatify\web\emoji
+2026-10-27T17:50:45.3445800Z copying chatify\web\emoji\static-1f4f0.png -> build\lib\chatify\web\emoji
+2026-10-27T17:50:45.3451976Z copying chatify\web\emoji\static-1f50d.png -> build\lib\chatify\web\emoji
+2026-10-27T17:50:45.3457722Z copying chatify\web\emoji\static-1f50e.png -> build\lib\chatify\web\emoji
+2026-10-27T17:50:45.3463424Z copying chatify\web\emoji\static-1f525.png -> build\lib\chatify\web\emoji
+2026-10-27T17:50:45.3469481Z copying chatify\web\emoji\static-1f57a.png -> build\lib\chatify\web\emoji
+2026-10-27T17:50:45.3475316Z copying chatify\web\emoji\static-1f600.png -> build\lib\chatify\web\emoji
+2026-10-27T17:50:45.3481498Z copying chatify\web\emoji\static-1f601.png -> build\lib\chatify\web\emoji
+2026-10-27T17:50:45.3490470Z copying chatify\web\emoji\static-1f602.png -> build\lib\chatify\web\emoji
+2026-10-27T17:50:45.3496229Z copying chatify\web\emoji\static-1f603.png -> build\lib\chatify\web\emoji
+2026-10-27T17:50:45.3502100Z copying chatify\web\emoji\static-1f604.png -> build\lib\chatify\web\emoji
+2026-10-27T17:50:45.3508096Z copying chatify\web\emoji\static-1f60a.png -> build\lib\chatify\web\emoji
+2026-10-27T17:50:45.3514131Z copying chatify\web\emoji\static-1f60c.png -> build\lib\chatify\web\emoji
+2026-10-27T17:50:45.3520521Z copying chatify\web\emoji\static-1f60d.png -> build\lib\chatify\web\emoji
+2026-10-27T17:50:45.3526629Z copying chatify\web\emoji\static-1f60e.png -> build\lib\chatify\web\emoji
+2026-10-27T17:50:45.3532794Z copying chatify\web\emoji\static-1f62d.png -> build\lib\chatify\web\emoji
+2026-10-27T17:50:45.3538937Z copying chatify\web\emoji\static-1f62e.png -> build\lib\chatify\web\emoji
+2026-10-27T17:50:45.3544446Z copying chatify\web\emoji\static-1f634.png -> build\lib\chatify\web\emoji
+2026-10-27T17:50:45.3550486Z copying chatify\web\emoji\static-1f642.png -> build\lib\chatify\web\emoji
+2026-10-27T17:50:45.3556348Z copying chatify\web\emoji\static-1f64c.png -> build\lib\chatify\web\emoji
+2026-10-27T17:50:45.3562078Z copying chatify\web\emoji\static-1f64f.png -> build\lib\chatify\web\emoji
+2026-10-27T17:50:45.3568526Z copying chatify\web\emoji\static-1f680.png -> build\lib\chatify\web\emoji
+2026-10-27T17:50:45.3574277Z copying chatify\web\emoji\static-1f913.png -> build\lib\chatify\web\emoji
+2026-10-27T17:50:45.3580077Z copying chatify\web\emoji\static-1f914.png -> build\lib\chatify\web\emoji
+2026-10-27T17:50:45.3586415Z copying chatify\web\emoji\static-1f916.png -> build\lib\chatify\web\emoji
+2026-10-27T17:50:45.3595345Z copying chatify\web\emoji\static-1f917.png -> build\lib\chatify\web\emoji
+2026-10-27T17:50:45.3600960Z copying chatify\web\emoji\static-1f91d.png -> build\lib\chatify\web\emoji
+2026-10-27T17:50:45.3606821Z copying chatify\web\emoji\static-1f92f.png -> build\lib\chatify\web\emoji
+2026-10-27T17:50:45.3613352Z copying chatify\web\emoji\static-1f951.png -> build\lib\chatify\web\emoji
+2026-10-27T17:50:45.3619303Z copying chatify\web\emoji\static-1f970.png -> build\lib\chatify\web\emoji
+2026-10-27T17:50:45.3624994Z copying chatify\web\emoji\static-1f973.png -> build\lib\chatify\web\emoji
+2026-10-27T17:50:45.3631292Z copying chatify\web\emoji\static-1f979.png -> build\lib\chatify\web\emoji
+2026-10-27T17:50:45.3637119Z copying chatify\web\emoji\static-1f98a.png -> build\lib\chatify\web\emoji
+2026-10-27T17:50:45.3643396Z copying chatify\web\emoji\static-1f98b.png -> build\lib\chatify\web\emoji
+2026-10-27T17:50:45.3649769Z copying chatify\web\emoji\static-1f9d1-200d-1f4bb.png -> build\lib\chatify\web\emoji
+2026-10-27T17:50:45.3655932Z copying chatify\web\emoji\static-1f9d1-200d-1f680.png -> build\lib\chatify\web\emoji
+2026-10-27T17:50:45.3661685Z copying chatify\web\emoji\static-1fae1.png -> build\lib\chatify\web\emoji
+2026-10-27T17:50:45.3667448Z copying chatify\web\emoji\static-23f1-fe0f.png -> build\lib\chatify\web\emoji
+2026-10-27T17:50:45.3673549Z copying chatify\web\emoji\static-2600-fe0f.png -> build\lib\chatify\web\emoji
+2026-10-27T17:50:45.3679434Z copying chatify\web\emoji\static-2615.png -> build\lib\chatify\web\emoji
+2026-10-27T17:50:45.3685369Z copying chatify\web\emoji\static-267e-fe0f.png -> build\lib\chatify\web\emoji
+2026-10-27T17:50:45.3691607Z copying chatify\web\emoji\static-26a1.png -> build\lib\chatify\web\emoji
+2026-10-27T17:50:45.3702041Z copying chatify\web\emoji\static-2705.png -> build\lib\chatify\web\emoji
+2026-10-27T17:50:45.3708068Z copying chatify\web\emoji\static-2728.png -> build\lib\chatify\web\emoji
+2026-10-27T17:50:45.3714488Z copying chatify\web\emoji\static-274c.png -> build\lib\chatify\web\emoji
+2026-10-27T17:50:45.3720302Z copying chatify\web\emoji\static-2764-fe0f.png -> build\lib\chatify\web\emoji
+2026-10-27T17:50:45.3727077Z copying chatify\web\emoji\static-2795.png -> build\lib\chatify\web\emoji
+2026-10-27T17:50:45.3732648Z copying chatify\web\emoji\static-27a1-fe0f.png -> build\lib\chatify\web\emoji
+2026-10-27T17:50:45.3738479Z copying chatify\web\emoji\static-2b06-fe0f.png -> build\lib\chatify\web\emoji
+2026-10-27T17:50:45.3744780Z copying chatify\web\emoji\static-2b50.png -> build\lib\chatify\web\emoji
+2026-10-27T17:50:45.3751865Z copying chatify\web\emoji\STATIC-NOTO-LICENSE.txt -> build\lib\chatify\web\emoji
+2026-10-27T17:50:45.3758006Z creating build\lib\chatify\templates\minimal
+2026-10-27T17:50:45.3762657Z copying chatify\templates\minimal\app.yaml -> build\lib\chatify\templates\minimal
+2026-10-27T17:50:45.3768265Z creating build\lib\chatify\templates\minimal\docs
+2026-10-27T17:50:45.3771212Z copying chatify\templates\minimal\docs\about.md -> build\lib\chatify\templates\minimal\docs
+2026-10-27T17:50:45.4162854Z installing to build\bdist.win-amd64\wheel
+2026-10-27T17:50:45.4164567Z running install
+2026-10-27T17:50:45.4179624Z running install_lib
+2026-10-27T17:50:45.4204937Z creating build\bdist.win-amd64\wheel
+2026-10-27T17:50:45.4210847Z creating build\bdist.win-amd64\wheel\apps
+2026-10-27T17:50:45.4214853Z creating build\bdist.win-amd64\wheel\apps\dietchat
+2026-10-27T17:50:45.4218010Z copying build\lib\apps\dietchat\app.yaml -> build\bdist.win-amd64\wheel\.\apps\dietchat
+2026-10-27T17:50:45.4225214Z creating build\bdist.win-amd64\wheel\apps\dietchat-sample
+2026-10-27T17:50:45.4228288Z copying build\lib\apps\dietchat-sample\app.yaml -> build\bdist.win-amd64\wheel\.\apps\dietchat-sample
+2026-10-27T17:50:45.4234178Z creating build\bdist.win-amd64\wheel\apps\dietchat-sample\docs
+2026-10-27T17:50:45.4237349Z copying build\lib\apps\dietchat-sample\docs\about.txt -> build\bdist.win-amd64\wheel\.\apps\dietchat-sample\docs
+2026-10-27T17:50:45.4243528Z copying build\lib\apps\dietchat-sample\docs\addons.txt -> build\bdist.win-amd64\wheel\.\apps\dietchat-sample\docs
+2026-10-27T17:50:45.4248524Z copying build\lib\apps\dietchat-sample\docs\contact.txt -> build\bdist.win-amd64\wheel\.\apps\dietchat-sample\docs
+2026-10-27T17:50:45.4253499Z copying build\lib\apps\dietchat-sample\docs\home.txt -> build\bdist.win-amd64\wheel\.\apps\dietchat-sample\docs
+2026-10-27T17:50:45.4258975Z copying build\lib\apps\dietchat-sample\README.md -> build\bdist.win-amd64\wheel\.\apps\dietchat-sample
+2026-10-27T17:50:45.4265079Z creating build\bdist.win-amd64\wheel\apps\fitchat
+2026-10-27T17:50:45.4268101Z copying build\lib\apps\fitchat\app.yaml -> build\bdist.win-amd64\wheel\.\apps\fitchat
+2026-10-27T17:50:45.4273851Z creating build\bdist.win-amd64\wheel\apps\fitchat\docs
+2026-10-27T17:50:45.4277112Z copying build\lib\apps\fitchat\docs\01-pag-executive-summary.pdf -> build\bdist.win-amd64\wheel\.\apps\fitchat\docs
+2026-10-27T17:50:45.4311375Z copying build\lib\apps\fitchat\docs\02-benefits.md -> build\bdist.win-amd64\wheel\.\apps\fitchat\docs
+2026-10-27T17:50:45.4316607Z copying build\lib\apps\fitchat\docs\03-exercise-fitness.md -> build\bdist.win-amd64\wheel\.\apps\fitchat\docs
+2026-10-27T17:50:45.4322489Z copying build\lib\apps\fitchat\docs\04-older-adults.md -> build\bdist.win-amd64\wheel\.\apps\fitchat\docs
+2026-10-27T17:50:45.4332989Z creating build\bdist.win-amd64\wheel\apps\formulaone
+2026-10-27T17:50:45.4336240Z copying build\lib\apps\formulaone\app.yaml -> build\bdist.win-amd64\wheel\.\apps\formulaone
+2026-10-27T17:50:45.4341924Z copying build\lib\apps\formulaone\f1_sources.py -> build\bdist.win-amd64\wheel\.\apps\formulaone
+2026-10-27T17:50:45.4347256Z copying build\lib\apps\formulaone\README.md -> build\bdist.win-amd64\wheel\.\apps\formulaone
+2026-10-27T17:50:45.4353476Z creating build\bdist.win-amd64\wheel\apps\formulaone\sources
+2026-10-27T17:50:45.4356701Z copying build\lib\apps\formulaone\sources\ferrari-debut.md -> build\bdist.win-amd64\wheel\.\apps\formulaone\sources
+2026-10-27T17:50:45.4361834Z copying build\lib\apps\formulaone\sources\ferrari-first-win.md -> build\bdist.win-amd64\wheel\.\apps\formulaone\sources
+2026-10-27T17:50:45.4367129Z copying build\lib\apps\formulaone\sources\ferrari-history.md -> build\bdist.win-amd64\wheel\.\apps\formulaone\sources
+2026-10-27T17:50:45.4372178Z copying build\lib\apps\formulaone\sources\fia-sporting.md -> build\bdist.win-amd64\wheel\.\apps\formulaone\sources
+2026-10-27T17:50:45.4383065Z copying build\lib\apps\formulaone\sources\fia-technical.md -> build\bdist.win-amd64\wheel\.\apps\formulaone\sources
+2026-10-27T17:50:45.4396989Z copying build\lib\apps\gallery.yaml -> build\bdist.win-amd64\wheel\.\apps
+2026-10-27T17:50:45.4404115Z creating build\bdist.win-amd64\wheel\apps\hosted
+2026-10-27T17:50:45.4407324Z copying build\lib\apps\hosted\app.yaml -> build\bdist.win-amd64\wheel\.\apps\hosted
+2026-10-27T17:50:45.4412945Z creating build\bdist.win-amd64\wheel\apps\hosted\docs
+2026-10-27T17:50:45.4416016Z copying build\lib\apps\hosted\docs\about.md -> build\bdist.win-amd64\wheel\.\apps\hosted\docs
+2026-10-27T17:50:45.4422215Z copying build\lib\apps\hosted\docs\build-your-own.md -> build\bdist.win-amd64\wheel\.\apps\hosted\docs
+2026-10-27T17:50:45.4427961Z creating build\bdist.win-amd64\wheel\apps\minimal
+2026-10-27T17:50:45.4434137Z copying build\lib\apps\minimal\app.yaml -> build\bdist.win-amd64\wheel\.\apps\minimal
+2026-10-27T17:50:45.4440164Z creating build\bdist.win-amd64\wheel\apps\minimal\docs
+2026-10-27T17:50:45.4443792Z copying build\lib\apps\minimal\docs\about.md -> build\bdist.win-amd64\wheel\.\apps\minimal\docs
+2026-10-27T17:50:45.4449575Z creating build\bdist.win-amd64\wheel\apps\newsnerd-sample
+2026-10-27T17:50:45.4452906Z copying build\lib\apps\newsnerd-sample\app-gnews.yaml -> build\bdist.win-amd64\wheel\.\apps\newsnerd-sample
+2026-10-27T17:50:45.4458449Z copying build\lib\apps\newsnerd-sample\app-newsapi.yaml -> build\bdist.win-amd64\wheel\.\apps\newsnerd-sample
+2026-10-27T17:50:45.4463857Z copying build\lib\apps\newsnerd-sample\app.yaml -> build\bdist.win-amd64\wheel\.\apps\newsnerd-sample
+2026-10-27T17:50:45.4468914Z copying build\lib\apps\newsnerd-sample\CONFIG-FIELDS.md -> build\bdist.win-amd64\wheel\.\apps\newsnerd-sample
+2026-10-27T17:50:45.4475385Z creating build\bdist.win-amd64\wheel\apps\newsnerd-sample\docs
+2026-10-27T17:50:45.4479150Z copying build\lib\apps\newsnerd-sample\docs\01-how-newsnerd-works.txt -> build\bdist.win-amd64\wheel\.\apps\newsnerd-sample\docs
+2026-10-27T17:50:45.4484793Z copying build\lib\apps\newsnerd-sample\news_connector.py -> build\bdist.win-amd64\wheel\.\apps\newsnerd-sample
+2026-10-27T17:50:45.4492540Z copying build\lib\apps\newsnerd-sample\PROMPTS.md -> build\bdist.win-amd64\wheel\.\apps\newsnerd-sample
+2026-10-27T17:50:45.4497739Z copying build\lib\apps\newsnerd-sample\README.md -> build\bdist.win-amd64\wheel\.\apps\newsnerd-sample
+2026-10-27T17:50:45.4503178Z copying build\lib\apps\newsnerd-sample\SETUP.md -> build\bdist.win-amd64\wheel\.\apps\newsnerd-sample
+2026-10-27T17:50:45.4508234Z copying build\lib\apps\newsnerd-sample\test_newsnerd.py -> build\bdist.win-amd64\wheel\.\apps\newsnerd-sample
+2026-10-27T17:50:45.4514367Z creating build\bdist.win-amd64\wheel\apps\peacechat
+2026-10-27T17:50:45.4517578Z copying build\lib\apps\peacechat\app.yaml -> build\bdist.win-amd64\wheel\.\apps\peacechat
+2026-10-27T17:50:45.4523063Z copying build\lib\apps\peacechat\peace_sources.py -> build\bdist.win-amd64\wheel\.\apps\peacechat
+2026-10-27T17:50:45.4528045Z copying build\lib\apps\peacechat\README.md -> build\bdist.win-amd64\wheel\.\apps\peacechat
+2026-10-27T17:50:45.4533631Z creating build\bdist.win-amd64\wheel\apps\recipechat
+2026-10-27T17:50:45.4537727Z copying build\lib\apps\recipechat\app.yaml -> build\bdist.win-amd64\wheel\.\apps\recipechat
+2026-10-27T17:50:45.4543212Z copying build\lib\apps\recipechat\recipe_sources.py -> build\bdist.win-amd64\wheel\.\apps\recipechat
+2026-10-27T17:50:45.4549297Z creating build\bdist.win-amd64\wheel\apps\spacechat
+2026-10-27T17:50:45.4552399Z copying build\lib\apps\spacechat\app.yaml -> build\bdist.win-amd64\wheel\.\apps\spacechat
+2026-10-27T17:50:45.4558573Z creating build\bdist.win-amd64\wheel\apps\spacechat\docs
+2026-10-27T17:50:45.4561848Z copying build\lib\apps\spacechat\docs\01-mars.md -> build\bdist.win-amd64\wheel\.\apps\spacechat\docs
+2026-10-27T17:50:45.4567101Z copying build\lib\apps\spacechat\docs\02-artemis.md -> build\bdist.win-amd64\wheel\.\apps\spacechat\docs
+2026-10-27T17:50:45.4572180Z copying build\lib\apps\spacechat\docs\03-webb.md -> build\bdist.win-amd64\wheel\.\apps\spacechat\docs
+2026-10-27T17:50:45.4577071Z copying build\lib\apps\spacechat\docs\04-iss.md -> build\bdist.win-amd64\wheel\.\apps\spacechat\docs
+2026-10-27T17:50:45.4583070Z creating build\bdist.win-amd64\wheel\apps\wirelesschat
+2026-10-27T17:50:45.4586156Z copying build\lib\apps\wirelesschat\app.yaml -> build\bdist.win-amd64\wheel\.\apps\wirelesschat
+2026-10-27T17:50:45.4591766Z creating build\bdist.win-amd64\wheel\apps\wirelesschat\papers
+2026-10-27T17:50:45.4595351Z copying build\lib\apps\wirelesschat\papers\README.md -> build\bdist.win-amd64\wheel\.\apps\wirelesschat\papers
+2026-10-27T17:50:45.4601640Z creating build\bdist.win-amd64\wheel\chatify
+2026-10-27T17:50:45.4604608Z copying build\lib\chatify\accounts.py -> build\bdist.win-amd64\wheel\.\chatify
+2026-10-27T17:50:45.4609667Z copying build\lib\chatify\actions.py -> build\bdist.win-amd64\wheel\.\chatify
+2026-10-27T17:50:45.4614695Z copying build\lib\chatify\apipicks.py -> build\bdist.win-amd64\wheel\.\chatify
+2026-10-27T17:50:45.4620363Z copying build\lib\chatify\apiterms.py -> build\bdist.win-amd64\wheel\.\chatify
+2026-10-27T17:50:45.4625163Z copying build\lib\chatify\appbuilder.py -> build\bdist.win-amd64\wheel\.\chatify
+2026-10-27T17:50:45.4631043Z copying build\lib\chatify\budget.py -> build\bdist.win-amd64\wheel\.\chatify
+2026-10-27T17:50:45.4635987Z copying build\lib\chatify\builddrafts.py -> build\bdist.win-amd64\wheel\.\chatify
+2026-10-27T17:50:45.4644184Z copying build\lib\chatify\buildimages.py -> build\bdist.win-amd64\wheel\.\chatify
+2026-10-27T17:50:45.4649410Z copying build\lib\chatify\buildjobs.py -> build\bdist.win-amd64\wheel\.\chatify
+2026-10-27T17:50:45.4655732Z copying build\lib\chatify\bundle_review.py -> build\bdist.win-amd64\wheel\.\chatify
+2026-10-27T17:50:45.4662009Z copying build\lib\chatify\cli.py -> build\bdist.win-amd64\wheel\.\chatify
+2026-10-27T17:50:45.4667023Z copying build\lib\chatify\configchange.py -> build\bdist.win-amd64\wheel\.\chatify
+2026-10-27T17:50:45.4672014Z copying build\lib\chatify\configdoctor.py -> build\bdist.win-amd64\wheel\.\chatify
+2026-10-27T17:50:45.4678483Z creating build\bdist.win-amd64\wheel\chatify\connectors
+2026-10-27T17:50:45.4681907Z copying build\lib\chatify\connectors\arxiv.py -> build\bdist.win-amd64\wheel\.\chatify\connectors
+2026-10-27T17:50:45.4686830Z copying build\lib\chatify\connectors\base.py -> build\bdist.win-amd64\wheel\.\chatify\connectors
+2026-10-27T17:50:45.4691992Z copying build\lib\chatify\connectors\bounded.py -> build\bdist.win-amd64\wheel\.\chatify\connectors
+2026-10-27T17:50:45.4697129Z copying build\lib\chatify\connectors\http_json.py -> build\bdist.win-amd64\wheel\.\chatify\connectors
+2026-10-27T17:50:45.4702434Z copying build\lib\chatify\connectors\local_files.py -> build\bdist.win-amd64\wheel\.\chatify\connectors
+2026-10-27T17:50:45.4707219Z copying build\lib\chatify\connectors\open_sources.py -> build\bdist.win-amd64\wheel\.\chatify\connectors
+2026-10-27T17:50:45.4712367Z copying build\lib\chatify\connectors\pubmed.py -> build\bdist.win-amd64\wheel\.\chatify\connectors
+2026-10-27T17:50:45.4720668Z copying build\lib\chatify\connectors\recovery.py -> build\bdist.win-amd64\wheel\.\chatify\connectors
+2026-10-27T17:50:45.4725511Z copying build\lib\chatify\connectors\web_search.py -> build\bdist.win-amd64\wheel\.\chatify\connectors
+2026-10-27T17:50:45.4730560Z copying build\lib\chatify\connectors\__init__.py -> build\bdist.win-amd64\wheel\.\chatify\connectors
+2026-10-27T17:50:45.4735135Z copying build\lib\chatify\draftaudit.py -> build\bdist.win-amd64\wheel\.\chatify
+2026-10-27T17:50:45.4740600Z copying build\lib\chatify\editstate.py -> build\bdist.win-amd64\wheel\.\chatify
+2026-10-27T17:50:45.4745588Z copying build\lib\chatify\exports.py -> build\bdist.win-amd64\wheel\.\chatify
+2026-10-27T17:50:45.4750519Z copying build\lib\chatify\fetch.py -> build\bdist.win-amd64\wheel\.\chatify
+2026-10-27T17:50:45.4755523Z copying build\lib\chatify\fileread.py -> build\bdist.win-amd64\wheel\.\chatify
+2026-10-27T17:50:45.4761461Z copying build\lib\chatify\gallery.py -> build\bdist.win-amd64\wheel\.\chatify
+2026-10-27T17:50:45.4766303Z copying build\lib\chatify\generators.py -> build\bdist.win-amd64\wheel\.\chatify
+2026-10-27T17:50:45.4771804Z copying build\lib\chatify\generator_design.py -> build\bdist.win-amd64\wheel\.\chatify
+2026-10-27T17:50:45.4777363Z copying build\lib\chatify\hardware.py -> build\bdist.win-amd64\wheel\.\chatify
+2026-10-27T17:50:45.4782625Z copying build\lib\chatify\keybundle.py -> build\bdist.win-amd64\wheel\.\chatify
+2026-10-27T17:50:45.4787988Z copying build\lib\chatify\launcher.py -> build\bdist.win-amd64\wheel\.\chatify
+2026-10-27T17:50:45.4792626Z copying build\lib\chatify\management.py -> build\bdist.win-amd64\wheel\.\chatify
+2026-10-27T17:50:45.4797797Z copying build\lib\chatify\modelcatalog.py -> build\bdist.win-amd64\wheel\.\chatify
+2026-10-27T17:50:45.4803119Z copying build\lib\chatify\mysqlstore.py -> build\bdist.win-amd64\wheel\.\chatify
+2026-10-27T17:50:45.4808082Z copying build\lib\chatify\nerdload.py -> build\bdist.win-amd64\wheel\.\chatify
+2026-10-27T17:50:45.4813373Z copying build\lib\chatify\ollama_setup.py -> build\bdist.win-amd64\wheel\.\chatify
+2026-10-27T17:50:45.4818302Z copying build\lib\chatify\pdfread.py -> build\bdist.win-amd64\wheel\.\chatify
+2026-10-27T17:50:45.4823734Z copying build\lib\chatify\permissions.py -> build\bdist.win-amd64\wheel\.\chatify
+2026-10-27T17:50:45.4828818Z copying build\lib\chatify\pipeline.py -> build\bdist.win-amd64\wheel\.\chatify
+2026-10-27T17:50:45.4835104Z copying build\lib\chatify\portable.py -> build\bdist.win-amd64\wheel\.\chatify
+2026-10-27T17:50:45.4839996Z copying build\lib\chatify\prompts.py -> build\bdist.win-amd64\wheel\.\chatify
+2026-10-27T17:50:45.4845480Z copying build\lib\chatify\providers.py -> build\bdist.win-amd64\wheel\.\chatify
+2026-10-27T17:50:45.4850781Z copying build\lib\chatify\publish.py -> build\bdist.win-amd64\wheel\.\chatify
+2026-10-27T17:50:45.4855955Z copying build\lib\chatify\readiness.py -> build\bdist.win-amd64\wheel\.\chatify
+2026-10-27T17:50:45.4864483Z copying build\lib\chatify\rerank.py -> build\bdist.win-amd64\wheel\.\chatify
+2026-10-27T17:50:45.4869324Z copying build\lib\chatify\schema.py -> build\bdist.win-amd64\wheel\.\chatify
+2026-10-27T17:50:45.4874595Z copying build\lib\chatify\secrets.py -> build\bdist.win-amd64\wheel\.\chatify
+2026-10-27T17:50:45.4880011Z copying build\lib\chatify\server.py -> build\bdist.win-amd64\wheel\.\chatify
+2026-10-27T17:50:45.4885942Z copying build\lib\chatify\settingsguide.py -> build\bdist.win-amd64\wheel\.\chatify
+2026-10-27T17:50:45.4890978Z copying build\lib\chatify\source_credentials.py -> build\bdist.win-amd64\wheel\.\chatify
+2026-10-27T17:50:45.4896042Z copying build\lib\chatify\stage_contracts.py -> build\bdist.win-amd64\wheel\.\chatify
+2026-10-27T17:50:45.4901343Z copying build\lib\chatify\store.py -> build\bdist.win-amd64\wheel\.\chatify
+2026-10-27T17:50:45.4906819Z copying build\lib\chatify\suggestions.py -> build\bdist.win-amd64\wheel\.\chatify
+2026-10-27T17:50:45.4913003Z creating build\bdist.win-amd64\wheel\chatify\templates
+2026-10-27T17:50:45.4917135Z creating build\bdist.win-amd64\wheel\chatify\templates\minimal
+2026-10-27T17:50:45.4920801Z copying build\lib\chatify\templates\minimal\app.yaml -> build\bdist.win-amd64\wheel\.\chatify\templates\minimal
+2026-10-27T17:50:45.4926656Z creating build\bdist.win-amd64\wheel\chatify\templates\minimal\docs
+2026-10-27T17:50:45.4929970Z copying build\lib\chatify\templates\minimal\docs\about.md -> build\bdist.win-amd64\wheel\.\chatify\templates\minimal\docs
+2026-10-27T17:50:45.4934979Z copying build\lib\chatify\terminal.py -> build\bdist.win-amd64\wheel\.\chatify
+2026-10-27T17:50:45.4940220Z copying build\lib\chatify\theme.py -> build\bdist.win-amd64\wheel\.\chatify
+2026-10-27T17:50:45.4945110Z copying build\lib\chatify\versions.py -> build\bdist.win-amd64\wheel\.\chatify
+2026-10-27T17:50:45.4951284Z creating build\bdist.win-amd64\wheel\chatify\web
+2026-10-27T17:50:45.4954430Z copying build\lib\chatify\web\about.css -> build\bdist.win-amd64\wheel\.\chatify\web
+2026-10-27T17:50:45.4960260Z copying build\lib\chatify\web\about.html -> build\bdist.win-amd64\wheel\.\chatify\web
+2026-10-27T17:50:45.4965726Z copying build\lib\chatify\web\about.js -> build\bdist.win-amd64\wheel\.\chatify\web
+2026-10-27T17:50:45.4970713Z copying build\lib\chatify\web\app.js -> build\bdist.win-amd64\wheel\.\chatify\web
+2026-10-27T17:50:45.4977057Z copying build\lib\chatify\web\appbuilder.js -> build\bdist.win-amd64\wheel\.\chatify\web
+2026-10-27T17:50:45.4983962Z copying build\lib\chatify\web\appearanceextras.js -> build\bdist.win-amd64\wheel\.\chatify\web
+2026-10-27T17:50:45.4990461Z copying build\lib\chatify\web\brand.js -> build\bdist.win-amd64\wheel\.\chatify\web
+2026-10-27T17:50:45.4998909Z copying build\lib\chatify\web\build.css -> build\bdist.win-amd64\wheel\.\chatify\web
+2026-10-27T17:50:45.5005747Z copying build\lib\chatify\web\build.html -> build\bdist.win-amd64\wheel\.\chatify\web
+2026-10-27T17:50:45.5011875Z copying build\lib\chatify\web\build.js -> build\bdist.win-amd64\wheel\.\chatify\web
+2026-10-27T17:50:45.5019708Z copying build\lib\chatify\web\builderstudio.css -> build\bdist.win-amd64\wheel\.\chatify\web
+2026-10-27T17:50:45.5026144Z copying build\lib\chatify\web\codeeditor.js -> build\bdist.win-amd64\wheel\.\chatify\web
+2026-10-27T17:50:45.5036488Z copying build\lib\chatify\web\codeeditor.LICENSE.txt -> build\bdist.win-amd64\wheel\.\chatify\web
+2026-10-27T17:50:45.5041757Z copying build\lib\chatify\web\components.css -> build\bdist.win-amd64\wheel\.\chatify\web
+2026-10-27T17:50:45.5048379Z copying build\lib\chatify\web\configstate.js -> build\bdist.win-amd64\wheel\.\chatify\web
+2026-10-27T17:50:45.5055587Z copying build\lib\chatify\web\configurationhome.css -> build\bdist.win-amd64\wheel\.\chatify\web
+2026-10-27T17:50:45.5060395Z copying build\lib\chatify\web\confirmdialog.js -> build\bdist.win-amd64\wheel\.\chatify\web
+2026-10-27T17:50:45.5065983Z copying build\lib\chatify\web\customselect.css -> build\bdist.win-amd64\wheel\.\chatify\web
+2026-10-27T17:50:45.5071517Z copying build\lib\chatify\web\customselect.js -> build\bdist.win-amd64\wheel\.\chatify\web
+2026-10-27T17:50:45.5079304Z creating build\bdist.win-amd64\wheel\chatify\web\emoji
+2026-10-27T17:50:45.5082690Z copying build\lib\chatify\web\emoji\1f389.png -> build\bdist.win-amd64\wheel\.\chatify\web\emoji
+2026-10-27T17:50:45.5088951Z copying build\lib\chatify\web\emoji\1f389.webp -> build\bdist.win-amd64\wheel\.\chatify\web\emoji
+2026-10-27T17:50:45.5097523Z copying build\lib\chatify\web\emoji\1f44b.png -> build\bdist.win-amd64\wheel\.\chatify\web\emoji
+2026-10-27T17:50:45.5103509Z copying build\lib\chatify\web\emoji\1f44b.webp -> build\bdist.win-amd64\wheel\.\chatify\web\emoji
+2026-10-27T17:50:45.5112392Z copying build\lib\chatify\web\emoji\1f44d.png -> build\bdist.win-amd64\wheel\.\chatify\web\emoji
+2026-10-27T17:50:45.5118444Z copying build\lib\chatify\web\emoji\1f44d.webp -> build\bdist.win-amd64\wheel\.\chatify\web\emoji
+2026-10-27T17:50:45.5125386Z copying build\lib\chatify\web\emoji\1f44f.png -> build\bdist.win-amd64\wheel\.\chatify\web\emoji
+2026-10-27T17:50:45.5134402Z copying build\lib\chatify\web\emoji\1f44f.webp -> build\bdist.win-amd64\wheel\.\chatify\web\emoji
+2026-10-27T17:50:45.5141941Z copying build\lib\chatify\web\emoji\1f525.png -> build\bdist.win-amd64\wheel\.\chatify\web\emoji
+2026-10-27T17:50:45.5147522Z copying build\lib\chatify\web\emoji\1f525.webp -> build\bdist.win-amd64\wheel\.\chatify\web\emoji
+2026-10-27T17:50:45.5155169Z copying build\lib\chatify\web\emoji\1f600.png -> build\bdist.win-amd64\wheel\.\chatify\web\emoji
+2026-10-27T17:50:45.5161256Z copying build\lib\chatify\web\emoji\1f600.webp -> build\bdist.win-amd64\wheel\.\chatify\web\emoji
+2026-10-27T17:50:45.5170063Z copying build\lib\chatify\web\emoji\1f602.png -> build\bdist.win-amd64\wheel\.\chatify\web\emoji
+2026-10-27T17:50:45.5177106Z copying build\lib\chatify\web\emoji\1f602.webp -> build\bdist.win-amd64\wheel\.\chatify\web\emoji
+2026-10-27T17:50:45.5187962Z copying build\lib\chatify\web\emoji\1f60a.png -> build\bdist.win-amd64\wheel\.\chatify\web\emoji
+2026-10-27T17:50:45.5193681Z copying build\lib\chatify\web\emoji\1f60a.webp -> build\bdist.win-amd64\wheel\.\chatify\web\emoji
+2026-10-27T17:50:45.5204382Z copying build\lib\chatify\web\emoji\1f60d.png -> build\bdist.win-amd64\wheel\.\chatify\web\emoji
+2026-10-27T17:50:45.5210544Z copying build\lib\chatify\web\emoji\1f60d.webp -> build\bdist.win-amd64\wheel\.\chatify\web\emoji
+2026-10-27T17:50:45.5220763Z copying build\lib\chatify\web\emoji\1f60e.png -> build\bdist.win-amd64\wheel\.\chatify\web\emoji
+2026-10-27T17:50:45.5226462Z copying build\lib\chatify\web\emoji\1f60e.webp -> build\bdist.win-amd64\wheel\.\chatify\web\emoji
+2026-10-27T17:50:45.5236569Z copying build\lib\chatify\web\emoji\1f62d.png -> build\bdist.win-amd64\wheel\.\chatify\web\emoji
+2026-10-27T17:50:45.5242974Z copying build\lib\chatify\web\emoji\1f62d.webp -> build\bdist.win-amd64\wheel\.\chatify\web\emoji
+2026-10-27T17:50:45.5253377Z copying build\lib\chatify\web\emoji\1f64c.png -> build\bdist.win-amd64\wheel\.\chatify\web\emoji
+2026-10-27T17:50:45.5259244Z copying build\lib\chatify\web\emoji\1f64c.webp -> build\bdist.win-amd64\wheel\.\chatify\web\emoji
+2026-10-27T17:50:45.5268965Z copying build\lib\chatify\web\emoji\1f680.png -> build\bdist.win-amd64\wheel\.\chatify\web\emoji
+2026-10-27T17:50:45.5275715Z copying build\lib\chatify\web\emoji\1f680.webp -> build\bdist.win-amd64\wheel\.\chatify\web\emoji
+2026-10-27T17:50:45.5283065Z copying build\lib\chatify\web\emoji\1f914.png -> build\bdist.win-amd64\wheel\.\chatify\web\emoji
+2026-10-27T17:50:45.5289953Z copying build\lib\chatify\web\emoji\1f914.webp -> build\bdist.win-amd64\wheel\.\chatify\web\emoji
+2026-10-27T17:50:45.5300610Z copying build\lib\chatify\web\emoji\1f916.png -> build\bdist.win-amd64\wheel\.\chatify\web\emoji
+2026-10-27T17:50:45.5306648Z copying build\lib\chatify\web\emoji\1f916.webp -> build\bdist.win-amd64\wheel\.\chatify\web\emoji
+2026-10-27T17:50:45.5315463Z copying build\lib\chatify\web\emoji\1f973.png -> build\bdist.win-amd64\wheel\.\chatify\web\emoji
+2026-10-27T17:50:45.5322550Z copying build\lib\chatify\web\emoji\1f973.webp -> build\bdist.win-amd64\wheel\.\chatify\web\emoji
+2026-10-27T17:50:45.5333833Z copying build\lib\chatify\web\emoji\2728.png -> build\bdist.win-amd64\wheel\.\chatify\web\emoji
+2026-10-27T17:50:45.5339931Z copying build\lib\chatify\web\emoji\2728.webp -> build\bdist.win-amd64\wheel\.\chatify\web\emoji
+2026-10-27T17:50:45.5347648Z copying build\lib\chatify\web\emoji\ATTRIBUTION.txt -> build\bdist.win-amd64\wheel\.\chatify\web\emoji
+2026-10-27T17:50:45.5353473Z copying build\lib\chatify\web\emoji\static-1f308.png -> build\bdist.win-amd64\wheel\.\chatify\web\emoji
+2026-10-27T17:50:45.5358847Z copying build\lib\chatify\web\emoji\static-1f319.png -> build\bdist.win-amd64\wheel\.\chatify\web\emoji
+2026-10-27T17:50:45.5364095Z copying build\lib\chatify\web\emoji\static-1f331.png -> build\bdist.win-amd64\wheel\.\chatify\web\emoji
+2026-10-27T17:50:45.5369446Z copying build\lib\chatify\web\emoji\static-1f33b.png -> build\bdist.win-amd64\wheel\.\chatify\web\emoji
+2026-10-27T17:50:45.5378129Z copying build\lib\chatify\web\emoji\static-1f34e.png -> build\bdist.win-amd64\wheel\.\chatify\web\emoji
+2026-10-27T17:50:45.5383651Z copying build\lib\chatify\web\emoji\static-1f354.png -> build\bdist.win-amd64\wheel\.\chatify\web\emoji
+2026-10-27T17:50:45.5389399Z copying build\lib\chatify\web\emoji\static-1f355.png -> build\bdist.win-amd64\wheel\.\chatify\web\emoji
+2026-10-27T17:50:45.5395194Z copying build\lib\chatify\web\emoji\static-1f36a.png -> build\bdist.win-amd64\wheel\.\chatify\web\emoji
+2026-10-27T17:50:45.5400751Z copying build\lib\chatify\web\emoji\static-1f375.png -> build\bdist.win-amd64\wheel\.\chatify\web\emoji
+2026-10-27T17:50:45.5405785Z copying build\lib\chatify\web\emoji\static-1f382.png -> build\bdist.win-amd64\wheel\.\chatify\web\emoji
+2026-10-27T17:50:45.5411220Z copying build\lib\chatify\web\emoji\static-1f389.png -> build\bdist.win-amd64\wheel\.\chatify\web\emoji
+2026-10-27T17:50:45.5418588Z copying build\lib\chatify\web\emoji\static-1f38a.png -> build\bdist.win-amd64\wheel\.\chatify\web\emoji
+2026-10-27T17:50:45.5425140Z copying build\lib\chatify\web\emoji\static-1f3af.png -> build\bdist.win-amd64\wheel\.\chatify\web\emoji
+2026-10-27T17:50:45.5431006Z copying build\lib\chatify\web\emoji\static-1f3c6.png -> build\bdist.win-amd64\wheel\.\chatify\web\emoji
+2026-10-27T17:50:45.5437454Z copying build\lib\chatify\web\emoji\static-1f431.png -> build\bdist.win-amd64\wheel\.\chatify\web\emoji
+2026-10-27T17:50:45.5443911Z copying build\lib\chatify\web\emoji\static-1f436.png -> build\bdist.win-amd64\wheel\.\chatify\web\emoji
+2026-10-27T17:50:45.5450175Z copying build\lib\chatify\web\emoji\static-1f438.png -> build\bdist.win-amd64\wheel\.\chatify\web\emoji
+2026-10-27T17:50:45.5456009Z copying build\lib\chatify\web\emoji\static-1f43c.png -> build\bdist.win-amd64\wheel\.\chatify\web\emoji
+2026-10-27T17:50:45.5462745Z copying build\lib\chatify\web\emoji\static-1f44b.png -> build\bdist.win-amd64\wheel\.\chatify\web\emoji
+2026-10-27T17:50:45.5468400Z copying build\lib\chatify\web\emoji\static-1f44d.png -> build\bdist.win-amd64\wheel\.\chatify\web\emoji
+2026-10-27T17:50:45.5475006Z copying build\lib\chatify\web\emoji\static-1f44e.png -> build\bdist.win-amd64\wheel\.\chatify\web\emoji
+2026-10-27T17:50:45.5484378Z copying build\lib\chatify\web\emoji\static-1f44f.png -> build\bdist.win-amd64\wheel\.\chatify\web\emoji
+2026-10-27T17:50:45.5490195Z copying build\lib\chatify\web\emoji\static-1f49a.png -> build\bdist.win-amd64\wheel\.\chatify\web\emoji
+2026-10-27T17:50:45.5496110Z copying build\lib\chatify\web\emoji\static-1f49b.png -> build\bdist.win-amd64\wheel\.\chatify\web\emoji
+2026-10-27T17:50:45.5501781Z copying build\lib\chatify\web\emoji\static-1f49c.png -> build\bdist.win-amd64\wheel\.\chatify\web\emoji
+2026-10-27T17:50:45.5507400Z copying build\lib\chatify\web\emoji\static-1f4a1.png -> build\bdist.win-amd64\wheel\.\chatify\web\emoji
+2026-10-27T17:50:45.5513835Z copying build\lib\chatify\web\emoji\static-1f4aa.png -> build\bdist.win-amd64\wheel\.\chatify\web\emoji
+2026-10-27T17:50:45.5520546Z copying build\lib\chatify\web\emoji\static-1f4ac.png -> build\bdist.win-amd64\wheel\.\chatify\web\emoji
+2026-10-27T17:50:45.5526432Z copying build\lib\chatify\web\emoji\static-1f4c4.png -> build\bdist.win-amd64\wheel\.\chatify\web\emoji
+2026-10-27T17:50:45.5531691Z copying build\lib\chatify\web\emoji\static-1f4ce.png -> build\bdist.win-amd64\wheel\.\chatify\web\emoji
+2026-10-27T17:50:45.5537684Z copying build\lib\chatify\web\emoji\static-1f4da.png -> build\bdist.win-amd64\wheel\.\chatify\web\emoji
+2026-10-27T17:50:45.5542853Z copying build\lib\chatify\web\emoji\static-1f4f0.png -> build\bdist.win-amd64\wheel\.\chatify\web\emoji
+2026-10-27T17:50:45.5548311Z copying build\lib\chatify\web\emoji\static-1f50d.png -> build\bdist.win-amd64\wheel\.\chatify\web\emoji
+2026-10-27T17:50:45.5553874Z copying build\lib\chatify\web\emoji\static-1f50e.png -> build\bdist.win-amd64\wheel\.\chatify\web\emoji
+2026-10-27T17:50:45.5559656Z copying build\lib\chatify\web\emoji\static-1f525.png -> build\bdist.win-amd64\wheel\.\chatify\web\emoji
+2026-10-27T17:50:45.5564535Z copying build\lib\chatify\web\emoji\static-1f57a.png -> build\bdist.win-amd64\wheel\.\chatify\web\emoji
+2026-10-27T17:50:45.5570061Z copying build\lib\chatify\web\emoji\static-1f600.png -> build\bdist.win-amd64\wheel\.\chatify\web\emoji
+2026-10-27T17:50:45.5575843Z copying build\lib\chatify\web\emoji\static-1f601.png -> build\bdist.win-amd64\wheel\.\chatify\web\emoji
+2026-10-27T17:50:45.5584345Z copying build\lib\chatify\web\emoji\static-1f602.png -> build\bdist.win-amd64\wheel\.\chatify\web\emoji
+2026-10-27T17:50:45.5589632Z copying build\lib\chatify\web\emoji\static-1f603.png -> build\bdist.win-amd64\wheel\.\chatify\web\emoji
+2026-10-27T17:50:45.5596013Z copying build\lib\chatify\web\emoji\static-1f604.png -> build\bdist.win-amd64\wheel\.\chatify\web\emoji
+2026-10-27T17:50:45.5601224Z copying build\lib\chatify\web\emoji\static-1f60a.png -> build\bdist.win-amd64\wheel\.\chatify\web\emoji
+2026-10-27T17:50:45.5606694Z copying build\lib\chatify\web\emoji\static-1f60c.png -> build\bdist.win-amd64\wheel\.\chatify\web\emoji
+2026-10-27T17:50:45.5611965Z copying build\lib\chatify\web\emoji\static-1f60d.png -> build\bdist.win-amd64\wheel\.\chatify\web\emoji
+2026-10-27T17:50:45.5617994Z copying build\lib\chatify\web\emoji\static-1f60e.png -> build\bdist.win-amd64\wheel\.\chatify\web\emoji
+2026-10-27T17:50:45.5623455Z copying build\lib\chatify\web\emoji\static-1f62d.png -> build\bdist.win-amd64\wheel\.\chatify\web\emoji
+2026-10-27T17:50:45.5628720Z copying build\lib\chatify\web\emoji\static-1f62e.png -> build\bdist.win-amd64\wheel\.\chatify\web\emoji
+2026-10-27T17:50:45.5634269Z copying build\lib\chatify\web\emoji\static-1f634.png -> build\bdist.win-amd64\wheel\.\chatify\web\emoji
+2026-10-27T17:50:45.5640380Z copying build\lib\chatify\web\emoji\static-1f642.png -> build\bdist.win-amd64\wheel\.\chatify\web\emoji
+2026-10-27T17:50:45.5645576Z copying build\lib\chatify\web\emoji\static-1f64c.png -> build\bdist.win-amd64\wheel\.\chatify\web\emoji
+2026-10-27T17:50:45.5651503Z copying build\lib\chatify\web\emoji\static-1f64f.png -> build\bdist.win-amd64\wheel\.\chatify\web\emoji
+2026-10-27T17:50:45.5658903Z copying build\lib\chatify\web\emoji\static-1f680.png -> build\bdist.win-amd64\wheel\.\chatify\web\emoji
+2026-10-27T17:50:45.5665736Z copying build\lib\chatify\web\emoji\static-1f913.png -> build\bdist.win-amd64\wheel\.\chatify\web\emoji
+2026-10-27T17:50:45.5671395Z copying build\lib\chatify\web\emoji\static-1f914.png -> build\bdist.win-amd64\wheel\.\chatify\web\emoji
+2026-10-27T17:50:45.5676759Z copying build\lib\chatify\web\emoji\static-1f916.png -> build\bdist.win-amd64\wheel\.\chatify\web\emoji
+2026-10-27T17:50:45.5684926Z copying build\lib\chatify\web\emoji\static-1f917.png -> build\bdist.win-amd64\wheel\.\chatify\web\emoji
+2026-10-27T17:50:45.5690307Z copying build\lib\chatify\web\emoji\static-1f91d.png -> build\bdist.win-amd64\wheel\.\chatify\web\emoji
+2026-10-27T17:50:45.5695750Z copying build\lib\chatify\web\emoji\static-1f92f.png -> build\bdist.win-amd64\wheel\.\chatify\web\emoji
+2026-10-27T17:50:45.5700669Z copying build\lib\chatify\web\emoji\static-1f951.png -> build\bdist.win-amd64\wheel\.\chatify\web\emoji
+2026-10-27T17:50:45.5706020Z copying build\lib\chatify\web\emoji\static-1f970.png -> build\bdist.win-amd64\wheel\.\chatify\web\emoji
+2026-10-27T17:50:45.5711161Z copying build\lib\chatify\web\emoji\static-1f973.png -> build\bdist.win-amd64\wheel\.\chatify\web\emoji
+2026-10-27T17:50:45.5717032Z copying build\lib\chatify\web\emoji\static-1f979.png -> build\bdist.win-amd64\wheel\.\chatify\web\emoji
+2026-10-27T17:50:45.5721841Z copying build\lib\chatify\web\emoji\static-1f98a.png -> build\bdist.win-amd64\wheel\.\chatify\web\emoji
+2026-10-27T17:50:45.5727150Z copying build\lib\chatify\web\emoji\static-1f98b.png -> build\bdist.win-amd64\wheel\.\chatify\web\emoji
+2026-10-27T17:50:45.5732062Z copying build\lib\chatify\web\emoji\static-1f9d1-200d-1f4bb.png -> build\bdist.win-amd64\wheel\.\chatify\web\emoji
+2026-10-27T17:50:45.5737714Z copying build\lib\chatify\web\emoji\static-1f9d1-200d-1f680.png -> build\bdist.win-amd64\wheel\.\chatify\web\emoji
+2026-10-27T17:50:45.5742590Z copying build\lib\chatify\web\emoji\static-1fae1.png -> build\bdist.win-amd64\wheel\.\chatify\web\emoji
+2026-10-27T17:50:45.5747996Z copying build\lib\chatify\web\emoji\static-23f1-fe0f.png -> build\bdist.win-amd64\wheel\.\chatify\web\emoji
+2026-10-27T17:50:45.5752792Z copying build\lib\chatify\web\emoji\static-2600-fe0f.png -> build\bdist.win-amd64\wheel\.\chatify\web\emoji
+2026-10-27T17:50:45.5758437Z copying build\lib\chatify\web\emoji\static-2615.png -> build\bdist.win-amd64\wheel\.\chatify\web\emoji
+2026-10-27T17:50:45.5763215Z copying build\lib\chatify\web\emoji\static-267e-fe0f.png -> build\bdist.win-amd64\wheel\.\chatify\web\emoji
+2026-10-27T17:50:45.5768504Z copying build\lib\chatify\web\emoji\static-26a1.png -> build\bdist.win-amd64\wheel\.\chatify\web\emoji
+2026-10-27T17:50:45.5777132Z copying build\lib\chatify\web\emoji\static-2705.png -> build\bdist.win-amd64\wheel\.\chatify\web\emoji
+2026-10-27T17:50:45.5782405Z copying build\lib\chatify\web\emoji\static-2728.png -> build\bdist.win-amd64\wheel\.\chatify\web\emoji
+2026-10-27T17:50:45.5787042Z copying build\lib\chatify\web\emoji\static-274c.png -> build\bdist.win-amd64\wheel\.\chatify\web\emoji
+2026-10-27T17:50:45.5792448Z copying build\lib\chatify\web\emoji\static-2764-fe0f.png -> build\bdist.win-amd64\wheel\.\chatify\web\emoji
+2026-10-27T17:50:45.5797778Z copying build\lib\chatify\web\emoji\static-2795.png -> build\bdist.win-amd64\wheel\.\chatify\web\emoji
+2026-10-27T17:50:45.5803405Z copying build\lib\chatify\web\emoji\static-27a1-fe0f.png -> build\bdist.win-amd64\wheel\.\chatify\web\emoji
+2026-10-27T17:50:45.5809458Z copying build\lib\chatify\web\emoji\static-2b06-fe0f.png -> build\bdist.win-amd64\wheel\.\chatify\web\emoji
+2026-10-27T17:50:45.5815928Z copying build\lib\chatify\web\emoji\static-2b50.png -> build\bdist.win-amd64\wheel\.\chatify\web\emoji
+2026-10-27T17:50:45.5822929Z copying build\lib\chatify\web\emoji\STATIC-NOTO-LICENSE.txt -> build\bdist.win-amd64\wheel\.\chatify\web\emoji
+2026-10-27T17:50:45.5828285Z copying build\lib\chatify\web\emoji.js -> build\bdist.win-amd64\wheel\.\chatify\web
+2026-10-27T17:50:45.5834060Z copying build\lib\chatify\web\error.html -> build\bdist.win-amd64\wheel\.\chatify\web
+2026-10-27T17:50:45.5839247Z copying build\lib\chatify\web\featurecatalog.js -> build\bdist.win-amd64\wheel\.\chatify\web
+2026-10-27T17:50:45.5848756Z copying build\lib\chatify\web\feedback.css -> build\bdist.win-amd64\wheel\.\chatify\web
+2026-10-27T17:50:45.5854564Z copying build\lib\chatify\web\feedback.js -> build\bdist.win-amd64\wheel\.\chatify\web
+2026-10-27T17:50:45.5860953Z creating build\bdist.win-amd64\wheel\chatify\web\fonts
+2026-10-27T17:50:45.5864498Z copying build\lib\chatify\web\fonts\FONTS.md -> build\bdist.win-amd64\wheel\.\chatify\web\fonts
+2026-10-27T17:50:45.5869685Z copying build\lib\chatify\web\fonts\NotoNaskhArabic[wght].ttf -> build\bdist.win-amd64\wheel\.\chatify\web\fonts
+2026-10-27T17:50:45.5879299Z copying build\lib\chatify\web\fonts\NotoSans-Bold.ttf -> build\bdist.win-amd64\wheel\.\chatify\web\fonts
+2026-10-27T17:50:45.5889477Z copying build\lib\chatify\web\fonts\NotoSans-Regular.ttf -> build\bdist.win-amd64\wheel\.\chatify\web\fonts
+2026-10-27T17:50:45.5900232Z copying build\lib\chatify\web\fonts\NotoSansDevanagari-Bold.ttf -> build\bdist.win-amd64\wheel\.\chatify\web\fonts
+2026-10-27T17:50:45.5907356Z copying build\lib\chatify\web\fonts\NotoSansDevanagari-Regular.ttf -> build\bdist.win-amd64\wheel\.\chatify\web\fonts
+2026-10-27T17:50:45.5919496Z copying build\lib\chatify\web\fonts\NotoSansHebrew[wdth,wght].ttf -> build\bdist.win-amd64\wheel\.\chatify\web\fonts
+2026-10-27T17:50:45.5925150Z copying build\lib\chatify\web\fonts\NotoSansMath-OFL.txt -> build\bdist.win-amd64\wheel\.\chatify\web\fonts
+2026-10-27T17:50:45.5930734Z copying build\lib\chatify\web\fonts\NotoSansMath-Regular.ttf -> build\bdist.win-amd64\wheel\.\chatify\web\fonts
+2026-10-27T17:50:45.5944338Z copying build\lib\chatify\web\fonts\NotoSansSymbols-Regular.ttf -> build\bdist.win-amd64\wheel\.\chatify\web\fonts
+2026-10-27T17:50:45.5951976Z copying build\lib\chatify\web\fonts\NotoSansSymbols2-Regular.ttf -> build\bdist.win-amd64\wheel\.\chatify\web\fonts
+2026-10-27T17:50:45.5968365Z copying build\lib\chatify\web\fonts\OFL.txt -> build\bdist.win-amd64\wheel\.\chatify\web\fonts
+2026-10-27T17:50:45.5973977Z copying build\lib\chatify\web\gallery.html -> build\bdist.win-amd64\wheel\.\chatify\web
+2026-10-27T17:50:45.5980719Z creating build\bdist.win-amd64\wheel\chatify\web\icons
+2026-10-27T17:50:45.5984144Z copying build\lib\chatify\web\icons\chatify.svg -> build\bdist.win-amd64\wheel\.\chatify\web\icons
+2026-10-27T17:50:45.5988934Z copying build\lib\chatify\web\index.html -> build\bdist.win-amd64\wheel\.\chatify\web
+2026-10-27T17:50:45.5994866Z copying build\lib\chatify\web\loading.css -> build\bdist.win-amd64\wheel\.\chatify\web
+2026-10-27T17:50:45.5999861Z copying build\lib\chatify\web\loading.js -> build\bdist.win-amd64\wheel\.\chatify\web
+2026-10-27T17:50:45.6006265Z creating build\bdist.win-amd64\wheel\chatify\web\logos
+2026-10-27T17:50:45.6009452Z copying build\lib\chatify\web\logos\claude.svg -> build\bdist.win-amd64\wheel\.\chatify\web\logos
+2026-10-27T17:50:45.6015226Z copying build\lib\chatify\web\logos\deepseek.svg -> build\bdist.win-amd64\wheel\.\chatify\web\logos
+2026-10-27T17:50:45.6020293Z copying build\lib\chatify\web\logos\gemini.svg -> build\bdist.win-amd64\wheel\.\chatify\web\logos
+2026-10-27T17:50:45.6025170Z copying build\lib\chatify\web\logos\groq.svg -> build\bdist.win-amd64\wheel\.\chatify\web\logos
+2026-10-27T17:50:45.6030175Z copying build\lib\chatify\web\logos\mimo.svg -> build\bdist.win-amd64\wheel\.\chatify\web\logos
+2026-10-27T17:50:45.6035879Z copying build\lib\chatify\web\logos\minimax.svg -> build\bdist.win-amd64\wheel\.\chatify\web\logos
+2026-10-27T17:50:45.6040847Z copying build\lib\chatify\web\logos\mistral.svg -> build\bdist.win-amd64\wheel\.\chatify\web\logos
+2026-10-27T17:50:45.6048582Z copying build\lib\chatify\web\logos\ollama.svg -> build\bdist.win-amd64\wheel\.\chatify\web\logos
+2026-10-27T17:50:45.6053660Z copying build\lib\chatify\web\logos\openai.svg -> build\bdist.win-amd64\wheel\.\chatify\web\logos
+2026-10-27T17:50:45.6058643Z copying build\lib\chatify\web\logos\openrouter.svg -> build\bdist.win-amd64\wheel\.\chatify\web\logos
+2026-10-27T17:50:45.6063268Z copying build\lib\chatify\web\motion.css -> build\bdist.win-amd64\wheel\.\chatify\web
+2026-10-27T17:50:45.6069006Z copying build\lib\chatify\web\motion.js -> build\bdist.win-amd64\wheel\.\chatify\web
+2026-10-27T17:50:45.6074136Z copying build\lib\chatify\web\navflow.css -> build\bdist.win-amd64\wheel\.\chatify\web
+2026-10-27T17:50:45.6079727Z copying build\lib\chatify\web\navflow.js -> build\bdist.win-amd64\wheel\.\chatify\web
+2026-10-27T17:50:45.6084809Z copying build\lib\chatify\web\navigation.css -> build\bdist.win-amd64\wheel\.\chatify\web
+2026-10-27T17:50:45.6089880Z copying build\lib\chatify\web\nerdload.js -> build\bdist.win-amd64\wheel\.\chatify\web
+2026-10-27T17:50:45.6098319Z copying build\lib\chatify\web\panels.js -> build\bdist.win-amd64\wheel\.\chatify\web
+2026-10-27T17:50:45.6103966Z copying build\lib\chatify\web\pipeline.js -> build\bdist.win-amd64\wheel\.\chatify\web
+2026-10-27T17:50:45.6109465Z copying build\lib\chatify\web\reading.js -> build\bdist.win-amd64\wheel\.\chatify\web
+2026-10-27T17:50:45.6114700Z copying build\lib\chatify\web\refinements.css -> build\bdist.win-amd64\wheel\.\chatify\web
+2026-10-27T17:50:45.6120472Z copying build\lib\chatify\web\run-locally.html -> build\bdist.win-amd64\wheel\.\chatify\web
+2026-10-27T17:50:45.6125989Z copying build\lib\chatify\web\settings.css -> build\bdist.win-amd64\wheel\.\chatify\web
+2026-10-27T17:50:45.6132911Z copying build\lib\chatify\web\settings.html -> build\bdist.win-amd64\wheel\.\chatify\web
+2026-10-27T17:50:45.6138403Z copying build\lib\chatify\web\settings.js -> build\bdist.win-amd64\wheel\.\chatify\web
+2026-10-27T17:50:45.6145012Z copying build\lib\chatify\web\settingsfind.js -> build\bdist.win-amd64\wheel\.\chatify\web
+2026-10-27T17:50:45.6150959Z copying build\lib\chatify\web\settingsguide.js -> build\bdist.win-amd64\wheel\.\chatify\web
+2026-10-27T17:50:45.6156317Z copying build\lib\chatify\web\settingssearch.js -> build\bdist.win-amd64\wheel\.\chatify\web
+2026-10-27T17:50:45.6161475Z copying build\lib\chatify\web\settingssimple.js -> build\bdist.win-amd64\wheel\.\chatify\web
+2026-10-27T17:50:45.6166880Z copying build\lib\chatify\web\settingstabs.css -> build\bdist.win-amd64\wheel\.\chatify\web
+2026-10-27T17:50:45.6172881Z copying build\lib\chatify\web\settingstop.js -> build\bdist.win-amd64\wheel\.\chatify\web
+2026-10-27T17:50:45.6177867Z copying build\lib\chatify\web\sourcekeys.js -> build\bdist.win-amd64\wheel\.\chatify\web
+2026-10-27T17:50:45.6182947Z copying build\lib\chatify\web\splitters.js -> build\bdist.win-amd64\wheel\.\chatify\web
+2026-10-27T17:50:45.6188383Z copying build\lib\chatify\web\style.css -> build\bdist.win-amd64\wheel\.\chatify\web
+2026-10-27T17:50:45.6196223Z creating build\bdist.win-amd64\wheel\chatify\web\team
+2026-10-27T17:50:45.6202315Z copying build\lib\chatify\web\team\dennis.jpg -> build\bdist.win-amd64\wheel\.\chatify\web\team
+2026-10-27T17:50:45.6208032Z copying build\lib\chatify\web\team\harsh.jpg -> build\bdist.win-amd64\wheel\.\chatify\web\team
+2026-10-27T17:50:45.6214567Z copying build\lib\chatify\web\theme.js -> build\bdist.win-amd64\wheel\.\chatify\web
+2026-10-27T17:50:45.6219339Z copying build\lib\chatify\web\tour.css -> build\bdist.win-amd64\wheel\.\chatify\web
+2026-10-27T17:50:45.6224129Z copying build\lib\chatify\web\tour.js -> build\bdist.win-amd64\wheel\.\chatify\web
+2026-10-27T17:50:45.6229938Z copying build\lib\chatify\web\upgrade.css -> build\bdist.win-amd64\wheel\.\chatify\web
+2026-10-27T17:50:45.6234923Z copying build\lib\chatify\web\workspace.css -> build\bdist.win-amd64\wheel\.\chatify\web
+2026-10-27T17:50:45.6240546Z copying build\lib\chatify\web\workspace.js -> build\bdist.win-amd64\wheel\.\chatify\web
+2026-10-27T17:50:45.6246241Z copying build\lib\chatify\websearch.py -> build\bdist.win-amd64\wheel\.\chatify
+2026-10-27T17:50:45.6251946Z copying build\lib\chatify\workspace.py -> build\bdist.win-amd64\wheel\.\chatify
+2026-10-27T17:50:45.6256601Z copying build\lib\chatify\__init__.py -> build\bdist.win-amd64\wheel\.\chatify
+2026-10-27T17:50:45.6272342Z copying build\lib\chatify\__main__.py -> build\bdist.win-amd64\wheel\.\chatify
+2026-10-27T17:50:45.6273365Z running install_egg_info
+2026-10-27T17:50:45.6289900Z Copying chatify_app.egg-info to build\bdist.win-amd64\wheel\.\chatify_app-0.4.32-py3.12.egg-info
+2026-10-27T17:50:45.6325687Z running install_scripts
+2026-10-27T17:50:45.6372534Z creating build\bdist.win-amd64\wheel\chatify_app-0.4.32.dist-info\WHEEL
+2026-10-27T17:50:45.6380871Z creating 'D:\\a\\Chatify\\Chatify\\dist\\.tmp-885ckky0\\chatify_app-0.4.32-py3-none-any.whl' and adding 'build\\bdist.win-amd64\\wheel' to it
+2026-10-27T17:50:45.6388483Z adding 'apps/gallery.yaml'
+2026-10-27T17:50:45.6458023Z adding 'apps/dietchat/app.yaml'
+2026-10-27T17:50:45.6462287Z adding 'apps/dietchat-sample/README.md'
+2026-10-27T17:50:45.6466465Z adding 'apps/dietchat-sample/app.yaml'
+2026-10-27T17:50:45.6472573Z adding 'apps/dietchat-sample/docs/about.txt'
+2026-10-27T17:50:45.6476185Z adding 'apps/dietchat-sample/docs/addons.txt'
+2026-10-27T17:50:45.6479703Z adding 'apps/dietchat-sample/docs/contact.txt'
+2026-10-27T17:50:45.6483995Z adding 'apps/dietchat-sample/docs/home.txt'
+2026-10-27T17:50:45.6488652Z adding 'apps/fitchat/app.yaml'
+2026-10-27T17:50:45.7674026Z adding 'apps/fitchat/docs/01-pag-executive-summary.pdf'
+2026-10-27T17:50:45.7704020Z adding 'apps/fitchat/docs/02-benefits.md'
+2026-10-27T17:50:45.7711298Z adding 'apps/fitchat/docs/03-exercise-fitness.md'
+2026-10-27T17:50:45.7717105Z adding 'apps/fitchat/docs/04-older-adults.md'
+2026-10-27T17:50:45.7722280Z adding 'apps/formulaone/README.md'
+2026-10-27T17:50:45.7726894Z adding 'apps/formulaone/app.yaml'
+2026-10-27T17:50:45.7738164Z adding 'apps/formulaone/f1_sources.py'
+2026-10-27T17:50:45.7743926Z adding 'apps/formulaone/sources/ferrari-debut.md'
+2026-10-27T17:50:45.7747223Z adding 'apps/formulaone/sources/ferrari-first-win.md'
+2026-10-27T17:50:45.7751600Z adding 'apps/formulaone/sources/ferrari-history.md'
+2026-10-27T17:50:45.7891354Z adding 'apps/formulaone/sources/fia-sporting.md'
+2026-10-27T17:50:45.8226410Z adding 'apps/formulaone/sources/fia-technical.md'
+2026-10-27T17:50:45.8237502Z adding 'apps/hosted/app.yaml'
+2026-10-27T17:50:45.8241943Z adding 'apps/hosted/docs/about.md'
+2026-10-27T17:50:45.8246688Z adding 'apps/hosted/docs/build-your-own.md'
+2026-10-27T17:50:45.8250814Z adding 'apps/minimal/app.yaml'
+2026-10-27T17:50:45.8255058Z adding 'apps/minimal/docs/about.md'
+2026-10-27T17:50:45.8261105Z adding 'apps/newsnerd-sample/CONFIG-FIELDS.md'
+2026-10-27T17:50:45.8264871Z adding 'apps/newsnerd-sample/PROMPTS.md'
+2026-10-27T17:50:45.8268985Z adding 'apps/newsnerd-sample/README.md'
+2026-10-27T17:50:45.8274158Z adding 'apps/newsnerd-sample/SETUP.md'
+2026-10-27T17:50:45.8278422Z adding 'apps/newsnerd-sample/app-gnews.yaml'
+2026-10-27T17:50:45.8282200Z adding 'apps/newsnerd-sample/app-newsapi.yaml'
+2026-10-27T17:50:45.8286547Z adding 'apps/newsnerd-sample/app.yaml'
+2026-10-27T17:50:45.8290625Z adding 'apps/newsnerd-sample/news_connector.py'
+2026-10-27T17:50:45.8294800Z adding 'apps/newsnerd-sample/test_newsnerd.py'
+2026-10-27T17:50:45.8298968Z adding 'apps/newsnerd-sample/docs/01-how-newsnerd-works.txt'
+2026-10-27T17:50:45.8303113Z adding 'apps/peacechat/README.md'
+2026-10-27T17:50:45.8307479Z adding 'apps/peacechat/app.yaml'
+2026-10-27T17:50:45.8315093Z adding 'apps/peacechat/peace_sources.py'
+2026-10-27T17:50:45.8320110Z adding 'apps/recipechat/app.yaml'
+2026-10-27T17:50:45.8324974Z adding 'apps/recipechat/recipe_sources.py'
+2026-10-27T17:50:45.8329808Z adding 'apps/spacechat/app.yaml'
+2026-10-27T17:50:45.8337043Z adding 'apps/spacechat/docs/01-mars.md'
+2026-10-27T17:50:45.8342812Z adding 'apps/spacechat/docs/02-artemis.md'
+2026-10-27T17:50:45.8349631Z adding 'apps/spacechat/docs/03-webb.md'
+2026-10-27T17:50:45.8356069Z adding 'apps/spacechat/docs/04-iss.md'
+2026-10-27T17:50:45.8360527Z adding 'apps/wirelesschat/app.yaml'
+2026-10-27T17:50:45.8365255Z adding 'apps/wirelesschat/papers/README.md'
+2026-10-27T17:50:45.8369474Z adding 'chatify/__init__.py'
+2026-10-27T17:50:45.8372315Z adding 'chatify/__main__.py'
+2026-10-27T17:50:45.8376573Z adding 'chatify/accounts.py'
+2026-10-27T17:50:45.8380372Z adding 'chatify/actions.py'
+2026-10-27T17:50:45.8385302Z adding 'chatify/apipicks.py'
+2026-10-27T17:50:45.8389769Z adding 'chatify/apiterms.py'
+2026-10-27T17:50:45.8402218Z adding 'chatify/appbuilder.py'
+2026-10-27T17:50:45.8406889Z adding 'chatify/budget.py'
+2026-10-27T17:50:45.8411245Z adding 'chatify/builddrafts.py'
+2026-10-27T17:50:45.8415528Z adding 'chatify/buildimages.py'
+2026-10-27T17:50:45.8432166Z adding 'chatify/buildjobs.py'
+2026-10-27T17:50:45.8436843Z adding 'chatify/bundle_review.py'
+2026-10-27T17:50:45.8443013Z adding 'chatify/cli.py'
+2026-10-27T17:50:45.8447120Z adding 'chatify/configchange.py'
+2026-10-27T17:50:45.8452187Z adding 'chatify/configdoctor.py'
+2026-10-27T17:50:45.8455953Z adding 'chatify/draftaudit.py'
+2026-10-27T17:50:45.8460866Z adding 'chatify/editstate.py'
+2026-10-27T17:50:45.8467508Z adding 'chatify/exports.py'
+2026-10-27T17:50:45.8471677Z adding 'chatify/fetch.py'
+2026-10-27T17:50:45.8476037Z adding 'chatify/fileread.py'
+2026-10-27T17:50:45.8481385Z adding 'chatify/gallery.py'
+2026-10-27T17:50:45.8490298Z adding 'chatify/generator_design.py'
+2026-10-27T17:50:45.8501450Z adding 'chatify/generators.py'
+2026-10-27T17:50:45.8508659Z adding 'chatify/hardware.py'
+2026-10-27T17:50:45.8512755Z adding 'chatify/keybundle.py'
+2026-10-27T17:50:45.8516398Z adding 'chatify/launcher.py'
+2026-10-27T17:50:45.8524393Z adding 'chatify/management.py'
+2026-10-27T17:50:45.8528722Z adding 'chatify/modelcatalog.py'
+2026-10-27T17:50:45.8532997Z adding 'chatify/mysqlstore.py'
+2026-10-27T17:50:45.8541753Z adding 'chatify/nerdload.py'
+2026-10-27T17:50:45.8548039Z adding 'chatify/ollama_setup.py'
+2026-10-27T17:50:45.8552230Z adding 'chatify/pdfread.py'
+2026-10-27T17:50:45.8555872Z adding 'chatify/permissions.py'
+2026-10-27T17:50:45.8602844Z adding 'chatify/pipeline.py'
+2026-10-27T17:50:45.8611089Z adding 'chatify/portable.py'
+2026-10-27T17:50:45.8616482Z adding 'chatify/prompts.py'
+2026-10-27T17:50:45.8626818Z adding 'chatify/providers.py'
+2026-10-27T17:50:45.8632099Z adding 'chatify/publish.py'
+2026-10-27T17:50:45.8636272Z adding 'chatify/readiness.py'
+2026-10-27T17:50:45.8640310Z adding 'chatify/rerank.py'
+2026-10-27T17:50:45.8648373Z adding 'chatify/schema.py'
+2026-10-27T17:50:45.8652023Z adding 'chatify/secrets.py'
+2026-10-27T17:50:45.8685347Z adding 'chatify/server.py'
+2026-10-27T17:50:45.8690981Z adding 'chatify/settingsguide.py'
+2026-10-27T17:50:45.8695506Z adding 'chatify/source_credentials.py'
+2026-10-27T17:50:45.8698812Z adding 'chatify/stage_contracts.py'
+2026-10-27T17:50:45.8707829Z adding 'chatify/store.py'
+2026-10-27T17:50:45.8711468Z adding 'chatify/suggestions.py'
+2026-10-27T17:50:45.8714886Z adding 'chatify/terminal.py'
+2026-10-27T17:50:45.8720017Z adding 'chatify/theme.py'
+2026-10-27T17:50:45.8725965Z adding 'chatify/versions.py'
+2026-10-27T17:50:45.8730153Z adding 'chatify/websearch.py'
+2026-10-27T17:50:45.8734585Z adding 'chatify/workspace.py'
+2026-10-27T17:50:45.8738842Z adding 'chatify/connectors/__init__.py'
+2026-10-27T17:50:45.8742884Z adding 'chatify/connectors/arxiv.py'
+2026-10-27T17:50:45.8746379Z adding 'chatify/connectors/base.py'
+2026-10-27T17:50:45.8750380Z adding 'chatify/connectors/bounded.py'
+2026-10-27T17:50:45.8754438Z adding 'chatify/connectors/http_json.py'
+2026-10-27T17:50:45.8761260Z adding 'chatify/connectors/local_files.py'
+2026-10-27T17:50:45.8766174Z adding 'chatify/connectors/open_sources.py'
+2026-10-27T17:50:45.8770808Z adding 'chatify/connectors/pubmed.py'
+2026-10-27T17:50:45.8774747Z adding 'chatify/connectors/recovery.py'
+2026-10-27T17:50:45.8778689Z adding 'chatify/connectors/web_search.py'
+2026-10-27T17:50:45.8783573Z adding 'chatify/templates/minimal/app.yaml'
+2026-10-27T17:50:45.8788244Z adding 'chatify/templates/minimal/docs/about.md'
+2026-10-27T17:50:45.8796040Z adding 'chatify/web/about.css'
+2026-10-27T17:50:45.8801020Z adding 'chatify/web/about.html'
+2026-10-27T17:50:45.8806166Z adding 'chatify/web/about.js'
+2026-10-27T17:50:45.8854628Z adding 'chatify/web/app.js'
+2026-10-27T17:50:45.8896014Z adding 'chatify/web/appbuilder.js'
+2026-10-27T17:50:45.8902126Z adding 'chatify/web/appearanceextras.js'
+2026-10-27T17:50:45.8906726Z adding 'chatify/web/brand.js'
+2026-10-27T17:50:45.8914479Z adding 'chatify/web/build.css'
+2026-10-27T17:50:45.8921279Z adding 'chatify/web/build.html'
+2026-10-27T17:50:45.8938513Z adding 'chatify/web/build.js'
+2026-10-27T17:50:45.8957727Z adding 'chatify/web/builderstudio.css'
+2026-10-27T17:50:45.8962496Z adding 'chatify/web/codeeditor.LICENSE.txt'
+2026-10-27T17:50:45.9182404Z adding 'chatify/web/codeeditor.js'
+2026-10-27T17:50:45.9193150Z adding 'chatify/web/components.css'
+2026-10-27T17:50:45.9201946Z adding 'chatify/web/configstate.js'
+2026-10-27T17:50:45.9206695Z adding 'chatify/web/configurationhome.css'
+2026-10-27T17:50:45.9211343Z adding 'chatify/web/confirmdialog.js'
+2026-10-27T17:50:45.9215469Z adding 'chatify/web/customselect.css'
+2026-10-27T17:50:45.9221726Z adding 'chatify/web/customselect.js'
+2026-10-27T17:50:45.9226981Z adding 'chatify/web/emoji.js'
+2026-10-27T17:50:45.9230858Z adding 'chatify/web/error.html'
+2026-10-27T17:50:45.9235933Z adding 'chatify/web/featurecatalog.js'
+2026-10-27T17:50:45.9239697Z adding 'chatify/web/feedback.css'
+2026-10-27T17:50:45.9243909Z adding 'chatify/web/feedback.js'
+2026-10-27T17:50:45.9251047Z adding 'chatify/web/gallery.html'
+2026-10-27T17:50:45.9256820Z adding 'chatify/web/index.html'
+2026-10-27T17:50:45.9260659Z adding 'chatify/web/loading.css'
+2026-10-27T17:50:45.9264825Z adding 'chatify/web/loading.js'
+2026-10-27T17:50:45.9277446Z adding 'chatify/web/motion.css'
+2026-10-27T17:50:45.9283399Z adding 'chatify/web/motion.js'
+2026-10-27T17:50:45.9286661Z adding 'chatify/web/navflow.css'
+2026-10-27T17:50:45.9290400Z adding 'chatify/web/navflow.js'
+2026-10-27T17:50:45.9294952Z adding 'chatify/web/navigation.css'
+2026-10-27T17:50:45.9301916Z adding 'chatify/web/nerdload.js'
+2026-10-27T17:50:45.9309755Z adding 'chatify/web/panels.js'
+2026-10-27T17:50:45.9323728Z adding 'chatify/web/pipeline.js'
+2026-10-27T17:50:45.9327929Z adding 'chatify/web/reading.js'
+2026-10-27T17:50:45.9336337Z adding 'chatify/web/refinements.css'
+2026-10-27T17:50:45.9342925Z adding 'chatify/web/run-locally.html'
+2026-10-27T17:50:45.9401763Z adding 'chatify/web/settings.css'
+2026-10-27T17:50:45.9412049Z adding 'chatify/web/settings.html'
+2026-10-27T17:50:45.9474764Z adding 'chatify/web/settings.js'
+2026-10-27T17:50:45.9481986Z adding 'chatify/web/settingsfind.js'
+2026-10-27T17:50:45.9487874Z adding 'chatify/web/settingsguide.js'
+2026-10-27T17:50:45.9492438Z adding 'chatify/web/settingssearch.js'
+2026-10-27T17:50:45.9497635Z adding 'chatify/web/settingssimple.js'
+2026-10-27T17:50:45.9515477Z adding 'chatify/web/settingstabs.css'
+2026-10-27T17:50:45.9521221Z adding 'chatify/web/settingstop.js'
+2026-10-27T17:50:45.9525068Z adding 'chatify/web/sourcekeys.js'
+2026-10-27T17:50:45.9530181Z adding 'chatify/web/splitters.js'
+2026-10-27T17:50:45.9573083Z adding 'chatify/web/style.css'
+2026-10-27T17:50:45.9581485Z adding 'chatify/web/theme.js'
+2026-10-27T17:50:45.9586235Z adding 'chatify/web/tour.css'
+2026-10-27T17:50:45.9592487Z adding 'chatify/web/tour.js'
+2026-10-27T17:50:45.9598396Z adding 'chatify/web/upgrade.css'
+2026-10-27T17:50:45.9605764Z adding 'chatify/web/workspace.css'
+2026-10-27T17:50:45.9614292Z adding 'chatify/web/workspace.js'
+2026-10-27T17:50:45.9636208Z adding 'chatify/web/emoji/1f389.png'
+2026-10-27T17:50:45.9751202Z adding 'chatify/web/emoji/1f389.webp'
+2026-10-27T17:50:45.9794566Z adding 'chatify/web/emoji/1f44b.png'
+2026-10-27T17:50:45.9946722Z adding 'chatify/web/emoji/1f44b.webp'
+2026-10-27T17:50:45.9981790Z adding 'chatify/web/emoji/1f44d.png'
+2026-10-27T17:50:46.0044754Z adding 'chatify/web/emoji/1f44d.webp'
+2026-10-27T17:50:46.0079365Z adding 'chatify/web/emoji/1f44f.png'
+2026-10-27T17:50:46.0143378Z adding 'chatify/web/emoji/1f44f.webp'
+2026-10-27T17:50:46.0173373Z adding 'chatify/web/emoji/1f525.png'
+2026-10-27T17:50:46.0245769Z adding 'chatify/web/emoji/1f525.webp'
+2026-10-27T17:50:46.0286342Z adding 'chatify/web/emoji/1f600.png'
+2026-10-27T17:50:46.0430622Z adding 'chatify/web/emoji/1f600.webp'
+2026-10-27T17:50:46.0487183Z adding 'chatify/web/emoji/1f602.png'
+2026-10-27T17:50:46.0723934Z adding 'chatify/web/emoji/1f602.webp'
+2026-10-27T17:50:46.0768786Z adding 'chatify/web/emoji/1f60a.png'
+2026-10-27T17:50:46.0995462Z adding 'chatify/web/emoji/1f60a.webp'
+2026-10-27T17:50:46.1052580Z adding 'chatify/web/emoji/1f60d.png'
+2026-10-27T17:50:46.1222438Z adding 'chatify/web/emoji/1f60d.webp'
+2026-10-27T17:50:46.1267186Z adding 'chatify/web/emoji/1f60e.png'
+2026-10-27T17:50:46.1467192Z adding 'chatify/web/emoji/1f60e.webp'
+2026-10-27T17:50:46.1513051Z adding 'chatify/web/emoji/1f62d.png'
+2026-10-27T17:50:46.1736513Z adding 'chatify/web/emoji/1f62d.webp'
+2026-10-27T17:50:46.1744412Z adding 'chatify/web/emoji/1f64c.png'
+2026-10-27T17:50:46.1837108Z adding 'chatify/web/emoji/1f64c.webp'
+2026-10-27T17:50:46.1883383Z adding 'chatify/web/emoji/1f680.png'
+2026-10-27T17:50:46.1955559Z adding 'chatify/web/emoji/1f680.webp'
+2026-10-27T17:50:46.2009461Z adding 'chatify/web/emoji/1f914.png'
+2026-10-27T17:50:46.2222222Z adding 'chatify/web/emoji/1f914.webp'
+2026-10-27T17:50:46.2250522Z adding 'chatify/web/emoji/1f916.png'
+2026-10-27T17:50:46.2383930Z adding 'chatify/web/emoji/1f916.webp'
+2026-10-27T17:50:46.2439140Z adding 'chatify/web/emoji/1f973.png'
+2026-10-27T17:50:46.2640540Z adding 'chatify/web/emoji/1f973.webp'
+2026-10-27T17:50:46.2669603Z adding 'chatify/web/emoji/2728.png'
+2026-10-27T17:50:46.2743495Z adding 'chatify/web/emoji/2728.webp'
+2026-10-27T17:50:46.2749884Z adding 'chatify/web/emoji/ATTRIBUTION.txt'
+2026-10-27T17:50:46.2754637Z adding 'chatify/web/emoji/STATIC-NOTO-LICENSE.txt'
+2026-10-27T17:50:46.2759361Z adding 'chatify/web/emoji/static-1f308.png'
+2026-10-27T17:50:46.2763489Z adding 'chatify/web/emoji/static-1f319.png'
+2026-10-27T17:50:46.2768227Z adding 'chatify/web/emoji/static-1f331.png'
+2026-10-27T17:50:46.2773198Z adding 'chatify/web/emoji/static-1f33b.png'
+2026-10-27T17:50:46.2778088Z adding 'chatify/web/emoji/static-1f34e.png'
+2026-10-27T17:50:46.2783258Z adding 'chatify/web/emoji/static-1f354.png'
+2026-10-27T17:50:46.2790764Z adding 'chatify/web/emoji/static-1f355.png'
+2026-10-27T17:50:46.2796343Z adding 'chatify/web/emoji/static-1f36a.png'
+2026-10-27T17:50:46.2801070Z adding 'chatify/web/emoji/static-1f375.png'
+2026-10-27T17:50:46.2806516Z adding 'chatify/web/emoji/static-1f382.png'
+2026-10-27T17:50:46.2812456Z adding 'chatify/web/emoji/static-1f389.png'
+2026-10-27T17:50:46.2818604Z adding 'chatify/web/emoji/static-1f38a.png'
+2026-10-27T17:50:46.2824377Z adding 'chatify/web/emoji/static-1f3af.png'
+2026-10-27T17:50:46.2830067Z adding 'chatify/web/emoji/static-1f3c6.png'
+2026-10-27T17:50:46.2834771Z adding 'chatify/web/emoji/static-1f431.png'
+2026-10-27T17:50:46.2839236Z adding 'chatify/web/emoji/static-1f436.png'
+2026-10-27T17:50:46.2844758Z adding 'chatify/web/emoji/static-1f438.png'
+2026-10-27T17:50:46.2849954Z adding 'chatify/web/emoji/static-1f43c.png'
+2026-10-27T17:50:46.2855061Z adding 'chatify/web/emoji/static-1f44b.png'
+2026-10-27T17:50:46.2859120Z adding 'chatify/web/emoji/static-1f44d.png'
+2026-10-27T17:50:46.2863505Z adding 'chatify/web/emoji/static-1f44e.png'
+2026-10-27T17:50:46.2868584Z adding 'chatify/web/emoji/static-1f44f.png'
+2026-10-27T17:50:46.2872716Z adding 'chatify/web/emoji/static-1f49a.png'
+2026-10-27T17:50:46.2876695Z adding 'chatify/web/emoji/static-1f49b.png'
+2026-10-27T17:50:46.2881266Z adding 'chatify/web/emoji/static-1f49c.png'
+2026-10-27T17:50:46.2885294Z adding 'chatify/web/emoji/static-1f4a1.png'
+2026-10-27T17:50:46.2889745Z adding 'chatify/web/emoji/static-1f4aa.png'
+2026-10-27T17:50:46.2895022Z adding 'chatify/web/emoji/static-1f4ac.png'
+2026-10-27T17:50:46.2899038Z adding 'chatify/web/emoji/static-1f4c4.png'
+2026-10-27T17:50:46.2904777Z adding 'chatify/web/emoji/static-1f4ce.png'
+2026-10-27T17:50:46.2910702Z adding 'chatify/web/emoji/static-1f4da.png'
+2026-10-27T17:50:46.2915782Z adding 'chatify/web/emoji/static-1f4f0.png'
+2026-10-27T17:50:46.2920887Z adding 'chatify/web/emoji/static-1f50d.png'
+2026-10-27T17:50:46.2926057Z adding 'chatify/web/emoji/static-1f50e.png'
+2026-10-27T17:50:46.2930902Z adding 'chatify/web/emoji/static-1f525.png'
+2026-10-27T17:50:46.2935931Z adding 'chatify/web/emoji/static-1f57a.png'
+2026-10-27T17:50:46.2940761Z adding 'chatify/web/emoji/static-1f600.png'
+2026-10-27T17:50:46.2946728Z adding 'chatify/web/emoji/static-1f601.png'
+2026-10-27T17:50:46.2953157Z adding 'chatify/web/emoji/static-1f602.png'
+2026-10-27T17:50:46.2957785Z adding 'chatify/web/emoji/static-1f603.png'
+2026-10-27T17:50:46.2962713Z adding 'chatify/web/emoji/static-1f604.png'
+2026-10-27T17:50:46.2968005Z adding 'chatify/web/emoji/static-1f60a.png'
+2026-10-27T17:50:46.2973504Z adding 'chatify/web/emoji/static-1f60c.png'
+2026-10-27T17:50:46.2978133Z adding 'chatify/web/emoji/static-1f60d.png'
+2026-10-27T17:50:46.2983080Z adding 'chatify/web/emoji/static-1f60e.png'
+2026-10-27T17:50:46.2988489Z adding 'chatify/web/emoji/static-1f62d.png'
+2026-10-27T17:50:46.2993687Z adding 'chatify/web/emoji/static-1f62e.png'
+2026-10-27T17:50:46.2998605Z adding 'chatify/web/emoji/static-1f634.png'
+2026-10-27T17:50:46.3003097Z adding 'chatify/web/emoji/static-1f642.png'
+2026-10-27T17:50:46.3009014Z adding 'chatify/web/emoji/static-1f64c.png'
+2026-10-27T17:50:46.3013562Z adding 'chatify/web/emoji/static-1f64f.png'
+2026-10-27T17:50:46.3018471Z adding 'chatify/web/emoji/static-1f680.png'
+2026-10-27T17:50:46.3024257Z adding 'chatify/web/emoji/static-1f913.png'
+2026-10-27T17:50:46.3050853Z adding 'chatify/web/emoji/static-1f914.png'
+2026-10-27T17:50:46.3059674Z adding 'chatify/web/emoji/static-1f916.png'
+2026-10-27T17:50:46.3067858Z adding 'chatify/web/emoji/static-1f917.png'
+2026-10-27T17:50:46.3075753Z adding 'chatify/web/emoji/static-1f91d.png'
+2026-10-27T17:50:46.3094220Z adding 'chatify/web/emoji/static-1f92f.png'
+2026-10-27T17:50:46.3104464Z adding 'chatify/web/emoji/static-1f951.png'
+2026-10-27T17:50:46.3115591Z adding 'chatify/web/emoji/static-1f970.png'
+2026-10-27T17:50:46.3125697Z adding 'chatify/web/emoji/static-1f973.png'
+2026-10-27T17:50:46.3139924Z adding 'chatify/web/emoji/static-1f979.png'
+2026-10-27T17:50:46.3158913Z adding 'chatify/web/emoji/static-1f98a.png'
+2026-10-27T17:50:46.3166098Z adding 'chatify/web/emoji/static-1f98b.png'
+2026-10-27T17:50:46.3173024Z adding 'chatify/web/emoji/static-1f9d1-200d-1f4bb.png'
+2026-10-27T17:50:46.3182450Z adding 'chatify/web/emoji/static-1f9d1-200d-1f680.png'
+2026-10-27T17:50:46.3192041Z adding 'chatify/web/emoji/static-1fae1.png'
+2026-10-27T17:50:46.3207170Z adding 'chatify/web/emoji/static-23f1-fe0f.png'
+2026-10-27T17:50:46.3212233Z adding 'chatify/web/emoji/static-2600-fe0f.png'
+2026-10-27T17:50:46.3239992Z adding 'chatify/web/emoji/static-2615.png'
+2026-10-27T17:50:46.3253825Z adding 'chatify/web/emoji/static-267e-fe0f.png'
+2026-10-27T17:50:46.3264056Z adding 'chatify/web/emoji/static-26a1.png'
+2026-10-27T17:50:46.3273290Z adding 'chatify/web/emoji/static-2705.png'
+2026-10-27T17:50:46.3286194Z adding 'chatify/web/emoji/static-2728.png'
+2026-10-27T17:50:46.3290839Z adding 'chatify/web/emoji/static-274c.png'
+2026-10-27T17:50:46.3295009Z adding 'chatify/web/emoji/static-2764-fe0f.png'
+2026-10-27T17:50:46.3299287Z adding 'chatify/web/emoji/static-2795.png'
+2026-10-27T17:50:46.3303102Z adding 'chatify/web/emoji/static-27a1-fe0f.png'
+2026-10-27T17:50:46.3307208Z adding 'chatify/web/emoji/static-2b06-fe0f.png'
+2026-10-27T17:50:46.3311342Z adding 'chatify/web/emoji/static-2b50.png'
+2026-10-27T17:50:46.3316307Z adding 'chatify/web/fonts/FONTS.md'
+2026-10-27T17:50:46.3484370Z adding 'chatify/web/fonts/NotoNaskhArabic[wght].ttf'
+2026-10-27T17:50:46.3778777Z adding 'chatify/web/fonts/NotoSans-Bold.ttf'
+2026-10-27T17:50:46.4066840Z adding 'chatify/web/fonts/NotoSans-Regular.ttf'
+2026-10-27T17:50:46.4174124Z adding 'chatify/web/fonts/NotoSansDevanagari-Bold.ttf'
+2026-10-27T17:50:46.4278014Z adding 'chatify/web/fonts/NotoSansDevanagari-Regular.ttf'
+2026-10-27T17:50:46.4349910Z adding 'chatify/web/fonts/NotoSansHebrew[wdth,wght].ttf'
+2026-10-27T17:50:46.4355220Z adding 'chatify/web/fonts/NotoSansMath-OFL.txt'
+2026-10-27T17:50:46.4858550Z adding 'chatify/web/fonts/NotoSansMath-Regular.ttf'
+2026-10-27T17:50:46.4961811Z adding 'chatify/web/fonts/NotoSansSymbols-Regular.ttf'
+2026-10-27T17:50:46.5475724Z adding 'chatify/web/fonts/NotoSansSymbols2-Regular.ttf'
+2026-10-27T17:50:46.5488679Z adding 'chatify/web/fonts/OFL.txt'
+2026-10-27T17:50:46.5493719Z adding 'chatify/web/icons/chatify.svg'
+2026-10-27T17:50:46.5497945Z adding 'chatify/web/logos/claude.svg'
+2026-10-27T17:50:46.5502864Z adding 'chatify/web/logos/deepseek.svg'
+2026-10-27T17:50:46.5506327Z adding 'chatify/web/logos/gemini.svg'
+2026-10-27T17:50:46.5510207Z adding 'chatify/web/logos/groq.svg'
+2026-10-27T17:50:46.5513839Z adding 'chatify/web/logos/mimo.svg'
+2026-10-27T17:50:46.5517820Z adding 'chatify/web/logos/minimax.svg'
+2026-10-27T17:50:46.5521381Z adding 'chatify/web/logos/mistral.svg'
+2026-10-27T17:50:46.5526024Z adding 'chatify/web/logos/ollama.svg'
+2026-10-27T17:50:46.5529425Z adding 'chatify/web/logos/openai.svg'
+2026-10-27T17:50:46.5533190Z adding 'chatify/web/logos/openrouter.svg'
+2026-10-27T17:50:46.5546313Z adding 'chatify/web/team/dennis.jpg'
+2026-10-27T17:50:46.5556294Z adding 'chatify/web/team/harsh.jpg'
+2026-10-27T17:50:46.5562964Z adding 'chatify_app-0.4.32.dist-info/licenses/LICENSE'
+2026-10-27T17:50:46.5567170Z adding 'chatify_app-0.4.32.dist-info/METADATA'
+2026-10-27T17:50:46.5569632Z adding 'chatify_app-0.4.32.dist-info/WHEEL'
+2026-10-27T17:50:46.5572605Z adding 'chatify_app-0.4.32.dist-info/entry_points.txt'
+2026-10-27T17:50:46.5574793Z adding 'chatify_app-0.4.32.dist-info/top_level.txt'
+2026-10-27T17:50:46.5590608Z adding 'chatify_app-0.4.32.dist-info/RECORD'
+2026-10-27T17:50:46.5598502Z removing build\bdist.win-amd64\wheel
+2026-10-27T17:50:46.7500460Z Successfully built dist\chatify_app-0.4.32.tar.gz
+2026-10-27T17:50:46.7502065Z Successfully built dist\chatify_app-0.4.32-py3-none-any.whl
+2026-10-27T17:50:46.8838701Z ##[group]Run python tests/installer_matrix.py --uv uv --wheel "$(ls dist/*.whl)" --repeat 10
+2026-10-27T17:50:46.8839443Z [36;1mpython tests/installer_matrix.py --uv uv --wheel "$(ls dist/*.whl)" --repeat 10[0m
+2026-10-27T17:50:46.8861971Z shell: C:\Program Files\Git\bin\bash.EXE --noprofile --norc -e -o pipefail {0}
+2026-10-27T17:50:46.8862364Z env:
+2026-10-27T17:50:46.8862660Z   pythonLocation: C:\hostedtoolcache\windows\Python\3.12.10\x64
+2026-10-27T17:50:46.8863130Z   PKG_CONFIG_PATH: C:\hostedtoolcache\windows\Python\3.12.10\x64/lib/pkgconfig
+2026-10-27T17:50:46.8863570Z   Python_ROOT_DIR: C:\hostedtoolcache\windows\Python\3.12.10\x64
+2026-10-27T17:50:46.8863961Z   Python2_ROOT_DIR: C:\hostedtoolcache\windows\Python\3.12.10\x64
+2026-10-27T17:50:46.8864346Z   Python3_ROOT_DIR: C:\hostedtoolcache\windows\Python\3.12.10\x64
+2026-10-27T17:50:46.8865203Z   UV_TOOL_BIN_DIR: D:\a\_temp\uv-tool-bin-dir
+2026-10-27T17:50:46.8865479Z   UV_TOOL_DIR: D:\a\_temp\uv-tool-dir
+2026-10-27T17:50:46.8865814Z   UV_CACHE_DIR: D:\a\_temp\setup-uv-cache
+2026-10-27T17:50:46.8866064Z ##[endgroup]
+2026-10-27T17:50:47.2565814Z Iteration 1/10
+2026-10-27T17:50:52.0056456Z Server ready at http://127.0.0.1:65443
+2026-10-27T17:50:56.0853148Z Iteration 2/10
+2026-10-27T17:51:00.0550432Z Server ready at http://127.0.0.1:65454
+2026-10-27T17:51:04.1266835Z Iteration 3/10
+2026-10-27T17:51:07.8448070Z Server ready at http://127.0.0.1:65461
+2026-10-27T17:51:11.9320718Z Iteration 4/10
+2026-10-27T17:51:16.3017044Z Server ready at http://127.0.0.1:65472
+2026-10-27T17:51:20.3911829Z Iteration 5/10
+2026-10-27T17:51:24.7070019Z Server ready at http://127.0.0.1:65479
+2026-10-27T17:51:28.7900050Z Iteration 6/10
+2026-10-27T17:51:32.6384075Z Server ready at http://127.0.0.1:65489
+2026-10-27T17:51:36.7315084Z Iteration 7/10
+2026-10-27T17:51:41.1567064Z Server ready at http://127.0.0.1:65501
+2026-10-27T17:51:45.2697692Z Iteration 8/10
+2026-10-27T17:51:54.6108021Z Traceback (most recent call last):
+2026-10-27T17:51:54.6115258Z   File "D:\a\Chatify\Chatify\tests\installer_matrix.py", line 54, in <module>
+2026-10-27T17:51:54.6115940Z     if __name__=='__main__':main()
+2026-10-27T17:51:54.6116339Z                             ^^^^^^
+2026-10-27T17:51:54.6116928Z   File "D:\a\Chatify\Chatify\tests\installer_matrix.py", line 26, in main
+2026-10-27T17:51:54.6117659Z     if port>65515:raise RuntimeError('Random test port out of range')
+2026-10-27T17:51:54.6118250Z                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2026-10-27T17:51:54.6118733Z RuntimeError: Random test port out of range
+2026-10-27T17:51:54.6349358Z ##[error]Process completed with exit code 1.
+2026-10-27T17:51:54.6694972Z Post job cleanup.
+2026-10-27T17:51:54.8852316Z [command]"C:\Program Files\Git\bin\git.exe" version
+2026-10-27T17:51:54.9214823Z git version 2.56.0.windows.2
+2026-10-27T17:51:54.9285995Z Temporarily overriding HOME='D:\a\_temp\31c8079a-87b9-4df4-b932-2355b4653a9b' before making global git config changes
+2026-10-27T17:51:54.9287162Z Adding repository directory to the temporary git global config as a safe directory
+2026-10-27T17:51:54.9298141Z [command]"C:\Program Files\Git\bin\git.exe" config --global --add safe.directory D:\a\Chatify\Chatify
+2026-10-27T17:51:54.9704158Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp core\.sshCommand
+2026-10-27T17:51:55.0102004Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "sh -c \"git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :\""
+2026-10-27T17:51:56.1220995Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-10-27T17:51:56.1572100Z http.https://github.com/.extraheader
+2026-10-27T17:51:56.1620301Z [command]"C:\Program Files\Git\bin\git.exe" config --local --unset-all http.https://github.com/.extraheader
+2026-10-27T17:51:56.2012567Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "sh -c \"git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :\""
+2026-10-27T17:51:56.7545580Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-10-27T17:51:56.8021502Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "git config --local --show-origin --name-only --get-regexp remote.origin.url"
+2026-10-27T17:51:57.3591906Z Cleaning up orphan processes
+2026-10-27T17:51:57.4225793Z ##[warning]Node.js 20 is deprecated. The following actions target Node.js 20 but are being forced to run on Node.js 24: actions/checkout@v4, actions/setup-python@v5, astral-sh/setup-uv@v6. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/

@@ -1,0 +1,3 @@
+# Windows matrix input outside launcher contract
+
+9c0641a Windows failed before occupied-port startup with Random test port out of range. The OS bind(port0) can return65516-65535; launcher intentionally accepts at most65515 to leave20fallback ports. Allocate an occupied blocker in20000-59999, bounded100attempts with socket cleanup. Original occupied-port/fallback/live-answer/config-lock assertions unchanged. No product change. Three targeted tests PASS including actual reserved port, busy retry and bounded exhaustion; Linux8scenariosx10 PASS. Windows remote required. Do not claim past WinError10013cause fully resolved from this unrelated harness repair.
