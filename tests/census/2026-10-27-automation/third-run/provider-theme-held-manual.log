@@ -1,0 +1,6 @@
+PRE_INIT_VIEW { classes: 'cfgtop-builder settings-tabs', hash: '#sec-finish' }
+PASS real UI mock stale local endpoint→OpenAI model list uses blank/default URL; fake fixture list populated; no provider calls [
+  { provider: 'mock', base_url: 'http://127.0.0.1:11434' },
+  { provider: 'openai', base_url: '' },
+  { provider: 'ollama', base_url: '' }
+]

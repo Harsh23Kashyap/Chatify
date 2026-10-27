@@ -1,0 +1,8 @@
+CASE provider_switch_browser.cjs default PASS exit=0 seconds=4.3
+PASS real UI mock stale local endpoint→OpenAI model list uses blank/default URL; fake fixture list populated; no provider calls [
+  { provider: 'mock', base_url: 'http://127.0.0.1:11434' },
+  { provider: 'openai', base_url: '' },
+  { provider: 'ollama', base_url: '' }
+]
+
+{"executions": 1, "failed": 0, "passed": 1, "scripts": 1}

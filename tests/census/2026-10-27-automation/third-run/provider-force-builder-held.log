@@ -1,0 +1,8 @@
+locator.click: Timeout 30000ms exceeded.
+Call log:
+  - waiting for locator('#seg button[data-p="openai"]')
+
+    at /tmp/provider-force-builder-held.cjs:2:1481 {
+  log: [ `  - waiting for locator('#seg button[data-p="openai"]')` ],
+  name: 'TimeoutError'
+}

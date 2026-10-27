@@ -1,0 +1,7 @@
+CASE settings_native_browser_zoom_drop_chooser_browser.cjs default PASS exit=0 seconds=12.4
+NATIVEZOOM { width: 1280, dpr: 1, scale: 1 } { width: 320, dpr: 4, scale: 1 }
+KEY Enter true
+KEY Space true
+PASS nativeChrome400dropEnterSpace actualchooser fixtureReview503 focuskept Nothingloaded noLoad
+
+{"executions": 1, "failed": 0, "passed": 1, "scripts": 1}

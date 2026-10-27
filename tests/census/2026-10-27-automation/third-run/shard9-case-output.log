@@ -1,0 +1,491 @@
+2026-10-27T07:27:15.7347310Z CASE action_execute_failure_focus_motion_browser.cjs default PASS exit=0 seconds=17.4
+2026-10-27T07:27:15.7348043Z PASS noteform-humanlabels exactreview-noJSON guardedrequests failedexecute-freshreview draftretained resultcards focusreturn3201280fixture
+2026-10-27T07:27:15.7348349Z 
+2026-10-27T07:27:20.7478863Z CASE additional_fields_preflight_singleflight_browser.cjs default PASS exit=0 seconds=5.0
+2026-10-27T07:27:20.7479597Z PASS additionalSavepreflightGETsingleflight POST503retryfocusnoSaved3201280normalReduce
+2026-10-27T07:27:20.7480000Z 
+2026-10-27T07:27:30.9222049Z CASE appbuilder_jobs_browser.cjs default PASS exit=0 seconds=10.2
+2026-10-27T07:27:30.9222836Z PASS complete jobs, closed-dialog animation, partial failures, retry failed only, merged done review, no save,320/390/1280
+2026-10-27T07:27:30.9223361Z 
+2026-10-27T07:27:43.5437125Z CASE appearance_toggle_audit_browser.cjs default PASS exit=0 seconds=12.6
+2026-10-27T07:27:43.5438088Z PASS all3Appearancetoggles keyboardspace immediatechecked+previewvalue no geometry/animation focusretained reversible3201280normalReduce
+2026-10-27T07:27:43.5438574Z 
+2026-10-27T07:28:02.8846219Z CASE builder_all_scope_motion_browser.cjs default PASS exit=0 seconds=19.3
+2026-10-27T07:28:02.8846743Z SCOPE 320 no-preference all
+2026-10-27T07:28:02.8846984Z SCOPE 320 no-preference app
+2026-10-27T07:28:02.8847248Z SCOPE 320 no-preference sources
+2026-10-27T07:28:02.8847520Z SCOPE 320 no-preference prompt
+2026-10-27T07:28:02.8847805Z SCOPE 320 no-preference retrieval
+2026-10-27T07:28:02.8848463Z SCOPE 320 no-preference memory
+2026-10-27T07:28:02.8848720Z SCOPE 320 no-preference provider
+2026-10-27T07:28:02.8848966Z SCOPE 320 no-preference citations
+2026-10-27T07:28:02.8849127Z SCOPE 320 no-preference auth
+2026-10-27T07:28:02.8849290Z SCOPE 320 no-preference budget
+2026-10-27T07:28:02.8849455Z SCOPE 320 no-preference server
+2026-10-27T07:28:02.8849616Z SCOPE 320 no-preference storage
+2026-10-27T07:28:02.8849780Z SCOPE 320 no-preference actions
+2026-10-27T07:28:02.8849957Z SCOPE 320 no-preference appearance
+2026-10-27T07:28:02.8850207Z SCOPE 320 no-preference pipeline_prompts
+2026-10-27T07:28:02.8850505Z SCOPE 320 no-preference helper_drafts
+2026-10-27T07:28:02.8850796Z SCOPE 320 no-preference api_suggestions
+2026-10-27T07:28:02.8851016Z SCOPE 320 reduce all
+2026-10-27T07:28:02.8851148Z SCOPE 320 reduce app
+2026-10-27T07:28:02.8851283Z SCOPE 320 reduce sources
+2026-10-27T07:28:02.8851423Z SCOPE 320 reduce prompt
+2026-10-27T07:28:02.8851565Z SCOPE 320 reduce retrieval
+2026-10-27T07:28:02.8851711Z SCOPE 320 reduce memory
+2026-10-27T07:28:02.8851881Z SCOPE 320 reduce provider
+2026-10-27T07:28:02.8852106Z SCOPE 320 reduce citations
+2026-10-27T07:28:02.8852246Z SCOPE 320 reduce auth
+2026-10-27T07:28:02.8852379Z SCOPE 320 reduce budget
+2026-10-27T07:28:02.8852511Z SCOPE 320 reduce server
+2026-10-27T07:28:02.8852647Z SCOPE 320 reduce storage
+2026-10-27T07:28:02.8852783Z SCOPE 320 reduce actions
+2026-10-27T07:28:02.8852926Z SCOPE 320 reduce appearance
+2026-10-27T07:28:02.8853568Z SCOPE 320 reduce pipeline_prompts
+2026-10-27T07:28:02.8853741Z SCOPE 320 reduce helper_drafts
+2026-10-27T07:28:02.8853904Z SCOPE 320 reduce api_suggestions
+2026-10-27T07:28:02.8854060Z SCOPE 1280 no-preference all
+2026-10-27T07:28:02.8854214Z SCOPE 1280 no-preference app
+2026-10-27T07:28:02.8854375Z SCOPE 1280 no-preference sources
+2026-10-27T07:28:02.8854538Z SCOPE 1280 no-preference prompt
+2026-10-27T07:28:02.8854763Z SCOPE 1280 no-preference retrieval
+2026-10-27T07:28:02.8854980Z SCOPE 1280 no-preference memory
+2026-10-27T07:28:02.8855151Z SCOPE 1280 no-preference provider
+2026-10-27T07:28:02.8855321Z SCOPE 1280 no-preference citations
+2026-10-27T07:28:02.8855479Z SCOPE 1280 no-preference auth
+2026-10-27T07:28:02.8855640Z SCOPE 1280 no-preference budget
+2026-10-27T07:28:02.8855835Z SCOPE 1280 no-preference server
+2026-10-27T07:28:02.8856080Z SCOPE 1280 no-preference storage
+2026-10-27T07:28:02.8856242Z SCOPE 1280 no-preference actions
+2026-10-27T07:28:02.8856415Z SCOPE 1280 no-preference appearance
+2026-10-27T07:28:02.8856603Z SCOPE 1280 no-preference pipeline_prompts
+2026-10-27T07:28:02.8856794Z SCOPE 1280 no-preference helper_drafts
+2026-10-27T07:28:02.8857017Z SCOPE 1280 no-preference api_suggestions
+2026-10-27T07:28:02.8857242Z SCOPE 1280 reduce all
+2026-10-27T07:28:02.8857374Z SCOPE 1280 reduce app
+2026-10-27T07:28:02.8857515Z SCOPE 1280 reduce sources
+2026-10-27T07:28:02.8857656Z SCOPE 1280 reduce prompt
+2026-10-27T07:28:02.8857796Z SCOPE 1280 reduce retrieval
+2026-10-27T07:28:02.8857937Z SCOPE 1280 reduce memory
+2026-10-27T07:28:02.8858081Z SCOPE 1280 reduce provider
+2026-10-27T07:28:02.8858225Z SCOPE 1280 reduce citations
+2026-10-27T07:28:02.8858469Z SCOPE 1280 reduce auth
+2026-10-27T07:28:02.8858604Z SCOPE 1280 reduce budget
+2026-10-27T07:28:02.8858740Z SCOPE 1280 reduce server
+2026-10-27T07:28:02.8858876Z SCOPE 1280 reduce storage
+2026-10-27T07:28:02.8859013Z SCOPE 1280 reduce actions
+2026-10-27T07:28:02.8859155Z SCOPE 1280 reduce appearance
+2026-10-27T07:28:02.8859319Z SCOPE 1280 reduce pipeline_prompts
+2026-10-27T07:28:02.8859596Z SCOPE 1280 reduce helper_drafts
+2026-10-27T07:28:02.8859759Z SCOPE 1280 reduce api_suggestions
+2026-10-27T07:28:02.8860112Z PASS all17builderscopehelp choices immediateaccurate/sharedbriefretained180fadeReduceoff nojobs/calls3201280
+2026-10-27T07:28:02.8860365Z 
+2026-10-27T07:28:39.1928657Z CASE builder_draft_loading_browser.cjs default PASS exit=0 seconds=36.3
+2026-10-27T07:28:39.1930444Z PASS unsent brief survives close/import navigation, modal tab loop, draft loading active/busy and failure keeps previous edits/YAML, fixed stepper and backwards input retention320/1280
+2026-10-27T07:28:39.1931257Z 
+2026-10-27T07:29:05.1691668Z CASE builder_mark_reviewed_motion_browser.cjs default PASS exit=0 seconds=26.0
+2026-10-27T07:29:05.1692316Z PASS markReviewed140statusOnly stableGroup FullSubtleNoneCalmOSReduce3201280 noModelSavecalls
+2026-10-27T07:29:05.1692531Z 
+2026-10-27T07:29:29.4616784Z CASE builder_todo_navigation_motion_levels_browser.cjs default PASS exit=0 seconds=24.3
+2026-10-27T07:29:29.4617636Z PASS builderTodoConfigureSources actualroute delayed150scroll FullSubtleSmooth NoneCalmOSReduceAuto3201280 noModelSaveCalls
+2026-10-27T07:29:29.4618077Z 
+2026-10-27T07:29:33.8576036Z CASE ccdialog_overlay_interaction_browser.cjs default PASS exit=0 seconds=4.4
+2026-10-27T07:29:33.8577746Z PASS ccdialog_overlay_interaction_browser
+2026-10-27T07:29:33.8578097Z 
+2026-10-27T07:29:36.4025944Z CASE chat_history_tabs_browser.cjs default PASS exit=0 seconds=2.5
+2026-10-27T07:29:36.4026348Z []
+2026-10-27T07:29:36.4026615Z PASS history ARIA/keyboard/axe 320
+2026-10-27T07:29:36.4026886Z []
+2026-10-27T07:29:36.4027135Z PASS history ARIA/keyboard/axe 1280
+2026-10-27T07:29:36.4027335Z 
+2026-10-27T07:29:38.5935766Z CASE cloud_recommendation_browser.cjs default PASS exit=0 seconds=2.2
+2026-10-27T07:29:38.5936306Z PASS cloudrecommendationcancelnochange/confirmonlyunsavedprovider-model/0settingsPOST/keyprerequisite320
+2026-10-27T07:29:38.5936547Z 
+2026-10-27T07:29:49.0594184Z CASE config_context_audit_browser.cjs default PASS exit=0 seconds=10.5
+2026-10-27T07:29:49.0594676Z HEADER 320 Chatify {"x":14,"y":-2620,"width":91,"height":25}
+2026-10-27T07:29:49.0594873Z 320 Chatify 91 25
+2026-10-27T07:29:49.0595076Z HEADER 320 Chat {"x":19,"y":-2584,"width":91.328125,"height":44}
+2026-10-27T07:29:49.0595274Z 320 Chat 91.328125 44
+2026-10-27T07:29:49.0595488Z HEADER 320 Build {"x":114.328125,"y":-2584,"width":91.328125,"height":44}
+2026-10-27T07:29:49.0595689Z 320 Build 91.328125 44
+2026-10-27T07:29:49.0595898Z HEADER 320 About {"x":209.65625,"y":-2584,"width":91.34375,"height":44}
+2026-10-27T07:29:49.0596097Z 320 About 91.34375 44
+2026-10-27T07:29:49.0596310Z HEADER 320 Configuration {"x":19,"y":-2536,"width":91.328125,"height":44}
+2026-10-27T07:29:49.0596535Z 320 Configuration 91.328125 44
+2026-10-27T07:29:49.0596767Z HEADER 320 Run locally {"x":114.328125,"y":-2536,"width":91.328125,"height":44}
+2026-10-27T07:29:49.0596979Z 320 Run locally 91.328125 44
+2026-10-27T07:29:49.0597196Z CONTROL Simple {"x":44,"y":-2280.828125,"width":114.5,"height":44}
+2026-10-27T07:29:49.0597469Z CONTROL Advanced {"x":161.5,"y":-2280.828125,"width":114.5,"height":44}
+2026-10-27T07:29:49.0597751Z CONTROL Workspace {"x":40,"y":-2172.828125,"width":121.046875,"height":44}
+2026-10-27T07:29:49.0598047Z CONTROL Answers {"x":171.046875,"y":-2172.828125,"width":104.265625,"height":44}
+2026-10-27T07:29:49.0598355Z CONTROL Appearance {"x":285.3125,"y":-2172.828125,"width":127.515625,"height":44}
+2026-10-27T07:29:49.0598666Z CONTROL Maintenance {"x":422.828125,"y":-2172.828125,"width":134.015625,"height":44}
+2026-10-27T07:29:49.0598942Z HEADER 390 Chatify {"x":14,"y":-2462,"width":91,"height":25}
+2026-10-27T07:29:49.0599121Z 390 Chatify 91 25
+2026-10-27T07:29:49.0599311Z HEADER 390 Chat {"x":19,"y":-2426,"width":114.65625,"height":44}
+2026-10-27T07:29:49.0599492Z 390 Chat 114.65625 44
+2026-10-27T07:29:49.0599696Z HEADER 390 Build {"x":137.65625,"y":-2426,"width":114.671875,"height":44}
+2026-10-27T07:29:49.0599894Z 390 Build 114.671875 44
+2026-10-27T07:29:49.0600098Z HEADER 390 About {"x":256.328125,"y":-2426,"width":114.65625,"height":44}
+2026-10-27T07:29:49.0600292Z 390 About 114.65625 44
+2026-10-27T07:29:49.0600502Z HEADER 390 Configuration {"x":19,"y":-2378,"width":114.65625,"height":44}
+2026-10-27T07:29:49.0600717Z 390 Configuration 114.65625 44
+2026-10-27T07:29:49.0600945Z HEADER 390 Run locally {"x":137.65625,"y":-2378,"width":114.671875,"height":44}
+2026-10-27T07:29:49.0601159Z 390 Run locally 114.671875 44
+2026-10-27T07:29:49.0601368Z CONTROL Simple {"x":44,"y":-2175.203125,"width":149.5,"height":44}
+2026-10-27T07:29:49.0601785Z CONTROL Advanced {"x":196.5,"y":-2175.203125,"width":149.5,"height":44}
+2026-10-27T07:29:49.0602062Z CONTROL Workspace {"x":40,"y":-2067.203125,"width":121.046875,"height":44}
+2026-10-27T07:29:49.0602354Z CONTROL Answers {"x":171.046875,"y":-2067.203125,"width":104.265625,"height":44}
+2026-10-27T07:29:49.0602660Z CONTROL Appearance {"x":285.3125,"y":-2067.203125,"width":127.515625,"height":44}
+2026-10-27T07:29:49.0602976Z CONTROL Maintenance {"x":422.828125,"y":-2067.203125,"width":134.015625,"height":44}
+2026-10-27T07:29:49.0603389Z HEADER 1280 Chatify {"x":24,"y":19,"width":91,"height":25}
+2026-10-27T07:29:49.0603568Z 1280 Chatify 91 25
+2026-10-27T07:29:49.0603762Z HEADER 1280 Chat {"x":418.125,"y":9.5,"width":47.71875,"height":44}
+2026-10-27T07:29:49.0603951Z 1280 Chat 47.71875 44
+2026-10-27T07:29:49.0604149Z HEADER 1280 Build {"x":469.84375,"y":9.5,"width":49.625,"height":44}
+2026-10-27T07:29:49.0604338Z 1280 Build 49.625 44
+2026-10-27T07:29:49.0604543Z HEADER 1280 About {"x":523.46875,"y":9.5,"width":54.53125,"height":44}
+2026-10-27T07:29:49.0604730Z 1280 About 54.53125 44
+2026-10-27T07:29:49.0604942Z HEADER 1280 Configuration {"x":582,"y":9.5,"width":96.609375,"height":44}
+2026-10-27T07:29:49.0605158Z 1280 Configuration 96.609375 44
+2026-10-27T07:29:49.0605393Z HEADER 1280 Run locally {"x":682.609375,"y":9.5,"width":81.796875,"height":44}
+2026-10-27T07:29:49.0605606Z 1280 Run locally 81.796875 44
+2026-10-27T07:29:49.0605907Z CONTROL Simple {"x":56,"y":352.390625,"width":114.5,"height":36}
+2026-10-27T07:29:49.0606173Z CONTROL Advanced {"x":173.5,"y":352.390625,"width":114.5,"height":36}
+2026-10-27T07:29:49.0606367Z CONTROL Workspace
+2026-10-27T07:29:49.0606557Z Your Nerd {"x":52,"y":538.390625,"width":288,"height":65.390625}
+2026-10-27T07:29:49.0606733Z CONTROL Answers
+2026-10-27T07:29:49.0606939Z Models & sources {"x":348,"y":538.390625,"width":288,"height":65.390625}
+2026-10-27T07:29:49.0607137Z CONTROL Appearance
+2026-10-27T07:29:49.0607340Z Theme & wording {"x":644,"y":538.390625,"width":288,"height":65.390625}
+2026-10-27T07:29:49.0607539Z CONTROL Maintenance
+2026-10-27T07:29:49.0607747Z Documents & limits {"x":940,"y":538.390625,"width":288,"height":65.390625}
+2026-10-27T07:29:49.0608357Z PASS loadedworkspace-titlebinding/disclosure44pxopenclose/headerobserved25brand44tabs/mobilemode44builderactionsrow/category44bounds/previewactualstate+label/builderdraftscope3203901280
+2026-10-27T07:29:49.0608755Z 
+2026-10-27T07:29:53.1032131Z CASE connector_clarity_browser.cjs default PASS exit=0 seconds=4.0
+2026-10-27T07:29:53.1032669Z PASS connector editablemaskedkey/explainedlocaldetection/optionalprerequisite/privacyfieldscope/nointernalemptystates/44px3201280
+2026-10-27T07:29:53.1032952Z 
+2026-10-27T07:30:05.0244149Z CASE dynamic_settings_disclosure_motion_audit_browser.cjs default PASS exit=0 seconds=11.9
+2026-10-27T07:30:05.0244940Z PASS dynamicworkspacecurrent+pastcheck andhelperrawnormalizeddetails160opacity Enter/NoneOSReduceofffocus/retainedraw/noheight/nooverflow3201280 fixtureonly noactualcode/service
+2026-10-27T07:30:05.0245341Z 
+2026-10-27T07:30:09.8716833Z CASE final_design_browser.cjs default PASS exit=0 seconds=4.8
+2026-10-27T07:30:09.8717610Z PASS collapsed default setup, collapsed global reset, disabled Load, long setup save/load redraw, multiline wording, local image thumbnail, 320px pixels
+2026-10-27T07:30:09.8717915Z 
+2026-10-27T07:30:13.6693842Z CASE helper_check_stale_code_motion_browser.cjs default PASS exit=0 seconds=3.8
+2026-10-27T07:30:13.6695845Z PASS helperstalecheckedcode discarded neweredit preservedfocus freshreview explicitpassed-notsandbox noexecution3201280normalReduce
+2026-10-27T07:30:13.6696342Z 
+2026-10-27T07:30:20.0766454Z CASE helper_initial_navigation_input_motion_browser.cjs default PASS exit=0 seconds=6.4
+2026-10-27T07:30:20.0766941Z PASS delayed main theme init preserves early helper typing value/focus3201280normalReduce
+2026-10-27T07:30:20.0767151Z 
+2026-10-27T07:31:37.2691364Z CASE hero_about_all_cards_pointer_motion_browser.cjs default PASS exit=0 seconds=77.2
+2026-10-27T07:31:37.2692560Z CARDS / 320 no-preference 6
+2026-10-27T07:31:37.2692844Z CARDS /about.html 320 no-preference 25
+2026-10-27T07:31:37.2693038Z CARDS / 320 reduce 6
+2026-10-27T07:31:37.2693415Z CARDS /about.html 320 reduce 25
+2026-10-27T07:31:37.2693637Z CARDS / 1280 no-preference 6
+2026-10-27T07:31:37.2693880Z CARDS /about.html 1280 no-preference 25
+2026-10-27T07:31:37.2694105Z CARDS / 1280 reduce 6
+2026-10-27T07:31:37.2694335Z CARDS /about.html 1280 reduce 25
+2026-10-27T07:31:37.2694998Z PASS allheroquestion/toolandAboutfeaturetabs/peoplecards nativepointer2pxinsideedge sizestable translationmax3px pointerretained3201280normalReduce
+2026-10-27T07:31:37.2695469Z 
+2026-10-27T07:31:57.3497014Z CASE history_selection_weight_surface_motion_browser.cjs default PASS exit=0 seconds=20.1
+2026-10-27T07:31:57.3500022Z SELECTION 320 reduce 0 [{"text":"Selected fixture 0","selected":true,"current":"true","weight":"700","background":"rgba(23, 63, 53, 0.1)","transition":"none","animation":"none","transform":"none","keyframes":[]},{"text":"Selected fixture 1","selected":false,"current":null,"weight":"500","background":"rgba(0, 0, 0, 0)","transition":"none","animation":"none","transform":"none","keyframes":[]},{"text":"Selected fixture 2","selected":false,"current":null,"weight":"500","background":"rgba(0, 0, 0, 0)","transition":"none","animation":"none","transform":"none","keyframes":[]},{"text":"Selected fixture 3","selected":false,"current":null,"weight":"500","background":"rgba(0, 0, 0, 0)","transition":"none","animation":"none","transform":"none","keyframes":[]}]
+2026-10-27T07:31:57.3503009Z SELECTION 320 reduce 1 [{"text":"Selected fixture 0","selected":false,"current":null,"weight":"500","background":"rgba(0, 0, 0, 0)","transition":"none","animation":"none","transform":"none","keyframes":[]},{"text":"Selected fixture 1","selected":true,"current":"true","weight":"700","background":"rgba(23, 63, 53, 0.1)","transition":"none","animation":"none","transform":"none","keyframes":[]},{"text":"Selected fixture 2","selected":false,"current":null,"weight":"500","background":"rgba(0, 0, 0, 0)","transition":"none","animation":"none","transform":"none","keyframes":[]},{"text":"Selected fixture 3","selected":false,"current":null,"weight":"500","background":"rgba(0, 0, 0, 0)","transition":"none","animation":"none","transform":"none","keyframes":[]}]
+2026-10-27T07:31:57.3505922Z SELECTION 320 reduce 2 [{"text":"Selected fixture 0","selected":false,"current":null,"weight":"500","background":"rgba(0, 0, 0, 0)","transition":"none","animation":"none","transform":"none","keyframes":[]},{"text":"Selected fixture 1","selected":false,"current":null,"weight":"500","background":"rgba(0, 0, 0, 0)","transition":"none","animation":"none","transform":"none","keyframes":[]},{"text":"Selected fixture 2","selected":true,"current":"true","weight":"700","background":"rgba(23, 63, 53, 0.1)","transition":"none","animation":"none","transform":"none","keyframes":[]},{"text":"Selected fixture 3","selected":false,"current":null,"weight":"500","background":"rgba(0, 0, 0, 0)","transition":"none","animation":"none","transform":"none","keyframes":[]}]
+2026-10-27T07:31:57.3508694Z SELECTION 320 reduce 3 [{"text":"Selected fixture 0","selected":false,"current":null,"weight":"500","background":"rgba(0, 0, 0, 0)","transition":"none","animation":"none","transform":"none","keyframes":[]},{"text":"Selected fixture 1","selected":false,"current":null,"weight":"500","background":"rgba(0, 0, 0, 0)","transition":"none","animation":"none","transform":"none","keyframes":[]},{"text":"Selected fixture 2","selected":false,"current":null,"weight":"500","background":"rgba(0, 0, 0, 0)","transition":"none","animation":"none","transform":"none","keyframes":[]},{"text":"Selected fixture 3","selected":true,"current":"true","weight":"700","background":"rgba(23, 63, 53, 0.1)","transition":"none","animation":"none","transform":"none","keyframes":[]}]
+2026-10-27T07:31:57.3513303Z SELECTION 320 no-preference 0 [{"text":"Selected fixture 0","selected":true,"current":"true","weight":"700","background":"rgba(23, 63, 53, 0.1)","transition":"background-color, color","animation":"m-in","transform":"none","keyframes":[{"transform":"none","opacity":"0"},{"transform":"none","opacity":"1"}]},{"text":"Selected fixture 1","selected":false,"current":null,"weight":"500","background":"rgba(0, 0, 0, 0)","transition":"background-color, color","animation":"m-in","transform":"none","keyframes":[{"transform":"none","opacity":"0"},{"transform":"none","opacity":"1"}]},{"text":"Selected fixture 2","selected":false,"current":null,"weight":"500","background":"rgba(0, 0, 0, 0)","transition":"background-color, color","animation":"m-in","transform":"none","keyframes":[{"transform":"none","opacity":"0"},{"transform":"none","opacity":"1"}]},{"text":"Selected fixture 3","selected":false,"current":null,"weight":"500","background":"rgba(0, 0, 0, 0)","transition":"background-color, color","animation":"m-in","transform":"none","keyframes":[{"transform":"none","opacity":"0"},{"transform":"none","opacity":"1"}]}]
+2026-10-27T07:31:57.3519771Z SELECTION 320 no-preference 1 [{"text":"Selected fixture 0","selected":false,"current":null,"weight":"500","background":"rgba(0, 0, 0, 0)","transition":"background-color, color","animation":"m-in","transform":"none","keyframes":[{"transform":"none","opacity":"0"},{"transform":"none","opacity":"1"}]},{"text":"Selected fixture 1","selected":true,"current":"true","weight":"700","background":"rgba(23, 63, 53, 0.1)","transition":"background-color, color","animation":"m-in","transform":"none","keyframes":[{"transform":"none","opacity":"0"},{"transform":"none","opacity":"1"}]},{"text":"Selected fixture 2","selected":false,"current":null,"weight":"500","background":"rgba(0, 0, 0, 0)","transition":"background-color, color","animation":"m-in","transform":"none","keyframes":[{"transform":"none","opacity":"0"},{"transform":"none","opacity":"1"}]},{"text":"Selected fixture 3","selected":false,"current":null,"weight":"500","background":"rgba(0, 0, 0, 0)","transition":"background-color, color","animation":"m-in","transform":"none","keyframes":[{"transform":"none","opacity":"0"},{"transform":"none","opacity":"1"}]}]
+2026-10-27T07:31:57.3525008Z SELECTION 320 no-preference 2 [{"text":"Selected fixture 0","selected":false,"current":null,"weight":"500","background":"rgba(0, 0, 0, 0)","transition":"background-color, color","animation":"m-in","transform":"none","keyframes":[{"transform":"none","opacity":"0"},{"transform":"none","opacity":"1"}]},{"text":"Selected fixture 1","selected":false,"current":null,"weight":"500","background":"rgba(0, 0, 0, 0)","transition":"background-color, color","animation":"m-in","transform":"none","keyframes":[{"transform":"none","opacity":"0"},{"transform":"none","opacity":"1"}]},{"text":"Selected fixture 2","selected":true,"current":"true","weight":"700","background":"rgba(23, 63, 53, 0.1)","transition":"background-color, color","animation":"m-in","transform":"none","keyframes":[{"transform":"none","opacity":"0"},{"transform":"none","opacity":"1"}]},{"text":"Selected fixture 3","selected":false,"current":null,"weight":"500","background":"rgba(0, 0, 0, 0)","transition":"background-color, color","animation":"m-in","transform":"none","keyframes":[{"transform":"none","opacity":"0"},{"transform":"none","opacity":"1"}]}]
+2026-10-27T07:31:57.3528851Z SELECTION 320 no-preference 3 [{"text":"Selected fixture 0","selected":false,"current":null,"weight":"500","background":"rgba(0, 0, 0, 0)","transition":"background-color, color","animation":"m-in","transform":"none","keyframes":[{"transform":"none","opacity":"0"},{"transform":"none","opacity":"1"}]},{"text":"Selected fixture 1","selected":false,"current":null,"weight":"500","background":"rgba(0, 0, 0, 0)","transition":"background-color, color","animation":"m-in","transform":"none","keyframes":[{"transform":"none","opacity":"0"},{"transform":"none","opacity":"1"}]},{"text":"Selected fixture 2","selected":false,"current":null,"weight":"500","background":"rgba(0, 0, 0, 0)","transition":"background-color, color","animation":"m-in","transform":"none","keyframes":[{"transform":"none","opacity":"0"},{"transform":"none","opacity":"1"}]},{"text":"Selected fixture 3","selected":true,"current":"true","weight":"700","background":"rgba(23, 63, 53, 0.1)","transition":"background-color, color","animation":"m-in","transform":"none","keyframes":[{"transform":"none","opacity":"0"},{"transform":"none","opacity":"1"}]}]
+2026-10-27T07:31:57.3532082Z SELECTION 1280 reduce 0 [{"text":"Selected fixture 0","selected":true,"current":"true","weight":"700","background":"rgba(23, 63, 53, 0.1)","transition":"none","animation":"none","transform":"none","keyframes":[]},{"text":"Selected fixture 1","selected":false,"current":null,"weight":"500","background":"rgba(0, 0, 0, 0)","transition":"none","animation":"none","transform":"none","keyframes":[]},{"text":"Selected fixture 2","selected":false,"current":null,"weight":"500","background":"rgba(0, 0, 0, 0)","transition":"none","animation":"none","transform":"none","keyframes":[]},{"text":"Selected fixture 3","selected":false,"current":null,"weight":"500","background":"rgba(0, 0, 0, 0)","transition":"none","animation":"none","transform":"none","keyframes":[]}]
+2026-10-27T07:31:57.3534789Z SELECTION 1280 reduce 1 [{"text":"Selected fixture 0","selected":false,"current":null,"weight":"500","background":"rgba(0, 0, 0, 0)","transition":"none","animation":"none","transform":"none","keyframes":[]},{"text":"Selected fixture 1","selected":true,"current":"true","weight":"700","background":"rgba(23, 63, 53, 0.1)","transition":"none","animation":"none","transform":"none","keyframes":[]},{"text":"Selected fixture 2","selected":false,"current":null,"weight":"500","background":"rgba(0, 0, 0, 0)","transition":"none","animation":"none","transform":"none","keyframes":[]},{"text":"Selected fixture 3","selected":false,"current":null,"weight":"500","background":"rgba(0, 0, 0, 0)","transition":"none","animation":"none","transform":"none","keyframes":[]}]
+2026-10-27T07:31:57.3537286Z SELECTION 1280 reduce 2 [{"text":"Selected fixture 0","selected":false,"current":null,"weight":"500","background":"rgba(0, 0, 0, 0)","transition":"none","animation":"none","transform":"none","keyframes":[]},{"text":"Selected fixture 1","selected":false,"current":null,"weight":"500","background":"rgba(0, 0, 0, 0)","transition":"none","animation":"none","transform":"none","keyframes":[]},{"text":"Selected fixture 2","selected":true,"current":"true","weight":"700","background":"rgba(23, 63, 53, 0.1)","transition":"none","animation":"none","transform":"none","keyframes":[]},{"text":"Selected fixture 3","selected":false,"current":null,"weight":"500","background":"rgba(0, 0, 0, 0)","transition":"none","animation":"none","transform":"none","keyframes":[]}]
+2026-10-27T07:31:57.3539798Z SELECTION 1280 reduce 3 [{"text":"Selected fixture 0","selected":false,"current":null,"weight":"500","background":"rgba(0, 0, 0, 0)","transition":"none","animation":"none","transform":"none","keyframes":[]},{"text":"Selected fixture 1","selected":false,"current":null,"weight":"500","background":"rgba(0, 0, 0, 0)","transition":"none","animation":"none","transform":"none","keyframes":[]},{"text":"Selected fixture 2","selected":false,"current":null,"weight":"500","background":"rgba(0, 0, 0, 0)","transition":"none","animation":"none","transform":"none","keyframes":[]},{"text":"Selected fixture 3","selected":true,"current":"true","weight":"700","background":"rgba(23, 63, 53, 0.1)","transition":"none","animation":"none","transform":"none","keyframes":[]}]
+2026-10-27T07:31:57.3543019Z SELECTION 1280 no-preference 0 [{"text":"Selected fixture 0","selected":true,"current":"true","weight":"700","background":"rgba(23, 63, 53, 0.1)","transition":"background-color, color","animation":"m-in","transform":"none","keyframes":[{"transform":"none","opacity":"0"},{"transform":"none","opacity":"1"}]},{"text":"Selected fixture 1","selected":false,"current":null,"weight":"500","background":"rgba(0, 0, 0, 0)","transition":"background-color, color","animation":"m-in","transform":"none","keyframes":[{"transform":"none","opacity":"0"},{"transform":"none","opacity":"1"}]},{"text":"Selected fixture 2","selected":false,"current":null,"weight":"500","background":"rgba(0, 0, 0, 0)","transition":"background-color, color","animation":"m-in","transform":"none","keyframes":[{"transform":"none","opacity":"0"},{"transform":"none","opacity":"1"}]},{"text":"Selected fixture 3","selected":false,"current":null,"weight":"500","background":"rgba(0, 0, 0, 0)","transition":"background-color, color","animation":"m-in","transform":"none","keyframes":[{"transform":"none","opacity":"0"},{"transform":"none","opacity":"1"}]}]
+2026-10-27T07:31:57.3547147Z SELECTION 1280 no-preference 1 [{"text":"Selected fixture 0","selected":false,"current":null,"weight":"500","background":"rgba(0, 0, 0, 0)","transition":"background-color, color","animation":"m-in","transform":"none","keyframes":[{"transform":"none","opacity":"0"},{"transform":"none","opacity":"1"}]},{"text":"Selected fixture 1","selected":true,"current":"true","weight":"700","background":"rgba(23, 63, 53, 0.1)","transition":"background-color, color","animation":"m-in","transform":"none","keyframes":[{"transform":"none","opacity":"0"},{"transform":"none","opacity":"1"}]},{"text":"Selected fixture 2","selected":false,"current":null,"weight":"500","background":"rgba(0, 0, 0, 0)","transition":"background-color, color","animation":"m-in","transform":"none","keyframes":[{"transform":"none","opacity":"0"},{"transform":"none","opacity":"1"}]},{"text":"Selected fixture 3","selected":false,"current":null,"weight":"500","background":"rgba(0, 0, 0, 0)","transition":"background-color, color","animation":"m-in","transform":"none","keyframes":[{"transform":"none","opacity":"0"},{"transform":"none","opacity":"1"}]}]
+2026-10-27T07:31:57.3550976Z SELECTION 1280 no-preference 2 [{"text":"Selected fixture 0","selected":false,"current":null,"weight":"500","background":"rgba(0, 0, 0, 0)","transition":"background-color, color","animation":"m-in","transform":"none","keyframes":[{"transform":"none","opacity":"0"},{"transform":"none","opacity":"1"}]},{"text":"Selected fixture 1","selected":false,"current":null,"weight":"500","background":"rgba(0, 0, 0, 0)","transition":"background-color, color","animation":"m-in","transform":"none","keyframes":[{"transform":"none","opacity":"0"},{"transform":"none","opacity":"1"}]},{"text":"Selected fixture 2","selected":true,"current":"true","weight":"700","background":"rgba(23, 63, 53, 0.1)","transition":"background-color, color","animation":"m-in","transform":"none","keyframes":[{"transform":"none","opacity":"0"},{"transform":"none","opacity":"1"}]},{"text":"Selected fixture 3","selected":false,"current":null,"weight":"500","background":"rgba(0, 0, 0, 0)","transition":"background-color, color","animation":"m-in","transform":"none","keyframes":[{"transform":"none","opacity":"0"},{"transform":"none","opacity":"1"}]}]
+2026-10-27T07:31:57.3555009Z SELECTION 1280 no-preference 3 [{"text":"Selected fixture 0","selected":false,"current":null,"weight":"500","background":"rgba(0, 0, 0, 0)","transition":"background-color, color","animation":"m-in","transform":"none","keyframes":[{"transform":"none","opacity":"0"},{"transform":"none","opacity":"1"}]},{"text":"Selected fixture 1","selected":false,"current":null,"weight":"500","background":"rgba(0, 0, 0, 0)","transition":"background-color, color","animation":"m-in","transform":"none","keyframes":[{"transform":"none","opacity":"0"},{"transform":"none","opacity":"1"}]},{"text":"Selected fixture 2","selected":false,"current":null,"weight":"500","background":"rgba(0, 0, 0, 0)","transition":"background-color, color","animation":"m-in","transform":"none","keyframes":[{"transform":"none","opacity":"0"},{"transform":"none","opacity":"1"}]},{"text":"Selected fixture 3","selected":true,"current":"true","weight":"700","background":"rgba(23, 63, 53, 0.1)","transition":"background-color, color","animation":"m-in","transform":"none","keyframes":[{"transform":"none","opacity":"0"},{"transform":"none","opacity":"1"}]}]
+2026-10-27T07:31:57.3557070Z PASS fourhistoryselections no sliding rows (normalopacity-onlym-in permitted) selectedidentityactual3201280normalReduce
+2026-10-27T07:31:57.3557326Z 
+2026-10-27T07:32:03.7067382Z CASE layout_geometry_audit_browser.cjs default PASS exit=0 seconds=6.4
+2026-10-27T07:32:03.7069819Z PASS width4plainexplanatorychoices noextraillustration advanced6fields preserved310 disclosure44 selectedone actualpreviewallwidths/sidebarpositions stableouterScroll/nooverflow resetcancelkeeps resetonlylayoutfontsuntouched3203901280 no paidcalls
+2026-10-27T07:32:03.7070400Z 
+2026-10-27T07:32:13.2245597Z CASE local_unknown_progress_motion_audit_browser.cjs default PASS exit=0 seconds=9.5
+2026-10-27T07:32:13.2246316Z PASS downloadreviewlabels2.1GB/3.6GBestimates cancellednoexecute unknownprogressnoinvented0pct/novaluenow width0stationary onlyfixtureexecute fixture3201280
+2026-10-27T07:32:13.2246643Z 
+2026-10-27T07:32:22.8469786Z CASE mode_nested_motion_audit_browser.cjs default PASS exit=0 seconds=9.6
+2026-10-27T07:32:22.8470616Z PANELS 320 no-preference [{"id":"sec-finish","name":"cc-settings-group-in","duration":"0.14s","delay":"0s","frames":[{"opacity":"0.7"},{"opacity":"1"}]}]
+2026-10-27T07:32:22.8471531Z PANELS 320 no-preference [{"id":"sec-model","name":"cc-settings-group-in","duration":"0.14s","delay":"0s","frames":[{"opacity":"0.7"},{"opacity":"1"}]}]
+2026-10-27T07:32:22.8472540Z PANELS 320 no-preference [{"id":"sec-presets","name":"cc-settings-group-in","duration":"0.14s","delay":"0s","frames":[{"opacity":"0.7"},{"opacity":"1"}]}]
+2026-10-27T07:32:22.8473269Z PANELS 320 no-preference [{"id":"sec-freshness","name":"cc-settings-group-in","duration":"0.14s","delay":"0s","frames":[{"opacity":"0.7"},{"opacity":"1"}]}]
+2026-10-27T07:32:22.8473802Z MODE NESTED 320 no-preference simple 41
+2026-10-27T07:32:22.8474077Z MODE NESTED 320 no-preference advanced 41
+2026-10-27T07:32:22.8474381Z PANELS 320 reduce [{"id":"sec-finish","name":"none","duration":"0s","delay":"0s","frames":[]}]
+2026-10-27T07:32:22.8474706Z PANELS 320 reduce [{"id":"sec-model","name":"none","duration":"0s","delay":"0s","frames":[]}]
+2026-10-27T07:32:22.8475040Z PANELS 320 reduce [{"id":"sec-presets","name":"none","duration":"0s","delay":"0s","frames":[]}]
+2026-10-27T07:32:22.8475484Z PANELS 320 reduce [{"id":"sec-freshness","name":"none","duration":"0s","delay":"0s","frames":[]}]
+2026-10-27T07:32:22.8475728Z MODE NESTED 320 reduce simple 41
+2026-10-27T07:32:22.8475888Z MODE NESTED 320 reduce advanced 41
+2026-10-27T07:32:22.8476262Z PANELS 1280 no-preference [{"id":"sec-finish","name":"cc-settings-group-in","duration":"0.14s","delay":"0s","frames":[{"opacity":"0.7"},{"opacity":"1"}]}]
+2026-10-27T07:32:22.8476884Z PANELS 1280 no-preference [{"id":"sec-model","name":"cc-settings-group-in","duration":"0.14s","delay":"0s","frames":[{"opacity":"0.7"},{"opacity":"1"}]}]
+2026-10-27T07:32:22.8477456Z PANELS 1280 no-preference [{"id":"sec-presets","name":"cc-settings-group-in","duration":"0.14s","delay":"0s","frames":[{"opacity":"0.7"},{"opacity":"1"}]}]
+2026-10-27T07:32:22.8478042Z PANELS 1280 no-preference [{"id":"sec-freshness","name":"cc-settings-group-in","duration":"0.14s","delay":"0s","frames":[{"opacity":"0.7"},{"opacity":"1"}]}]
+2026-10-27T07:32:22.8478400Z MODE NESTED 1280 no-preference simple 41
+2026-10-27T07:32:22.8478643Z MODE NESTED 1280 no-preference advanced 41
+2026-10-27T07:32:22.8478904Z PANELS 1280 reduce [{"id":"sec-finish","name":"none","duration":"0s","delay":"0s","frames":[]}]
+2026-10-27T07:32:22.8479231Z PANELS 1280 reduce [{"id":"sec-model","name":"none","duration":"0s","delay":"0s","frames":[]}]
+2026-10-27T07:32:22.8479560Z PANELS 1280 reduce [{"id":"sec-presets","name":"none","duration":"0s","delay":"0s","frames":[]}]
+2026-10-27T07:32:22.8479999Z PANELS 1280 reduce [{"id":"sec-freshness","name":"none","duration":"0s","delay":"0s","frames":[]}]
+2026-10-27T07:32:22.8480243Z MODE NESTED 1280 reduce simple 41
+2026-10-27T07:32:22.8480401Z MODE NESTED 1280 reduce advanced 41
+2026-10-27T07:32:22.8481225Z PASS categoryimmediatearia/160coloronly/rowdimensionsstable/nohorizontaltransform4subsections max6pxentrance/singleactualselected/focusring modewordingdraftretained/previewvisible immediatereflownowidthanimation/modepersistsnavigation/groupfontdisclosure3controls3201280normalReduce
+2026-10-27T07:32:22.8482134Z 
+2026-10-27T07:32:25.5366127Z CASE motion_safety_browser.cjs default PASS exit=0 seconds=2.7
+2026-10-27T07:32:25.5366862Z PASS motion is on-demand only; OS reduced-motion preview/button feedback; shape shortcut real values and active state
+2026-10-27T07:32:25.5367461Z 
+2026-10-27T07:32:29.6838547Z CASE picker_source_icon_help_browser.cjs default PASS exit=0 seconds=4.1
+2026-10-27T07:32:29.6840663Z PASS picker/source iconhelp [{"width":320,"tab":"Recent","count":1},{"width":320,"tab":"Animated","count":17},{"width":320,"tab":"Smileys","count":20},{"width":320,"tab":"People","count":12},{"width":320,"tab":"Nature","count":12},{"width":320,"tab":"Food","count":8},{"width":320,"tab":"Objects","count":14},{"width":320,"tab":"Symbols","count":10},{"width":320,"sourceClose":true},{"width":1280,"tab":"Recent","count":1},{"width":1280,"tab":"Animated","count":17},{"width":1280,"tab":"Smileys","count":20},{"width":1280,"tab":"People","count":12},{"width":1280,"tab":"Nature","count":12},{"width":1280,"tab":"Food","count":8},{"width":1280,"tab":"Objects","count":14},{"width":1280,"tab":"Symbols","count":10},{"width":1280,"sourceClose":true}]
+2026-10-27T07:32:29.6841985Z 
+2026-10-27T07:32:37.8467875Z CASE prompt_all_generate_failure_focus_motion_browser.cjs default PASS exit=0 seconds=8.2
+2026-10-27T07:32:37.8477108Z PASS allpromptgenerate503 nativeEntersingleflightdraftkeptrecoveryfocus3201280normalReduce
+2026-10-27T07:32:37.8477443Z 
+2026-10-27T07:32:43.9517508Z CASE prompt_toggle_pending_focus_motion_browser.cjs default PASS exit=0 seconds=6.1
+2026-10-27T07:32:43.9517873Z PROMPTFOCUS 320 no-preference 2 false
+2026-10-27T07:32:43.9518071Z PROMPTFOCUS 320 reduce 2 false
+2026-10-27T07:32:43.9518245Z PROMPTFOCUS 1280 no-preference 2 false
+2026-10-27T07:32:43.9518419Z PROMPTFOCUS 1280 reduce 2 false
+2026-10-27T07:32:43.9518897Z PASS promptautosavependingkeyboardfocus stateimmediate singleflight/repeatedSpaceclickignored success/failurerollback3201280normalReduce fixtureonly
+2026-10-27T07:32:43.9519218Z 
+2026-10-27T07:33:15.7119506Z CASE provider_switch_browser.cjs default FAIL exit=1 seconds=31.8
+2026-10-27T07:33:15.7121418Z locator.click: Timeout 30000ms exceeded.
+2026-10-27T07:33:15.7121693Z Call log:
+2026-10-27T07:33:15.7122038Z   - waiting for locator('.category-tabs button[data-group=config]')
+2026-10-27T07:33:15.7122893Z     - locator resolved to <button role="tab" type="button" tabindex="-1" data-group="config" aria-selected="false" aria-controls="settings-group-config">…</button>
+2026-10-27T07:33:15.7123446Z   - attempting click action
+2026-10-27T07:33:15.7123742Z     2 × waiting for element to be visible, enabled and stable
+2026-10-27T07:33:15.7124047Z       - element is not visible
+2026-10-27T07:33:15.7124263Z     - retrying click action
+2026-10-27T07:33:15.7124464Z     - waiting 20ms
+2026-10-27T07:33:15.7124691Z     2 × waiting for element to be visible, enabled and stable
+2026-10-27T07:33:15.7124879Z       - element is not visible
+2026-10-27T07:33:15.7125016Z     - retrying click action
+2026-10-27T07:33:15.7125148Z       - waiting 100ms
+2026-10-27T07:33:15.7125356Z     56 × waiting for element to be visible, enabled and stable
+2026-10-27T07:33:15.7125647Z        - element is not visible
+2026-10-27T07:33:15.7125803Z      - retrying click action
+2026-10-27T07:33:15.7125945Z        - waiting 500ms
+2026-10-27T07:33:15.7126025Z 
+2026-10-27T07:33:15.7126180Z     at /home/runner/work/Chatify/Chatify/tests/provider_switch_browser.cjs:2:984 {
+2026-10-27T07:33:15.7126410Z   name: 'TimeoutError'
+2026-10-27T07:33:15.7126534Z }
+2026-10-27T07:33:15.7126591Z 
+2026-10-27T07:33:18.9052804Z CASE reset_scope_browser.cjs default PASS exit=0 seconds=3.2
+2026-10-27T07:33:18.9055416Z PASS section reset leaves other section, cancel global reset unchanged, confirmed global reset restores defaults, fixture restored
+2026-10-27T07:33:18.9055970Z 
+2026-10-27T07:33:40.8944256Z CASE settings_disclosure_cue_audit_browser.cjs 320-no-preference FAIL exit=1 seconds=22.0
+2026-10-27T07:33:40.8946037Z DISCLOSURE 320 no-preference model 0 {"first":"SUMMARY","order":true,"heightTransition":"0s","children":[{"name":"m-in","transform":"none"},{"name":"m-in","transform":"none"},{"name":"m-in","transform":"none"},{"name":"m-in","transform":"none"}]}
+2026-10-27T07:33:40.8947341Z DISCLOSURE 320 no-preference model 1 {"first":"SUMMARY","order":true,"heightTransition":"0s","children":[{"name":"m-in","transform":"none"},{"name":"m-in","transform":"none"},{"name":"m-in","transform":"none"}]}
+2026-10-27T07:33:40.8947954Z DISCLOSURE 320 no-preference search 0 {"first":"SUMMARY","order":true,"heightTransition":"0s","children":[{"name":"m-in","transform":"none"}]}
+2026-10-27T07:33:40.8948476Z DISCLOSURE 320 no-preference search 1 {"first":"SUMMARY","order":true,"heightTransition":"0s","children":[{"name":"m-in","transform":"none"}]}
+2026-10-27T07:33:40.8948999Z DISCLOSURE 320 no-preference search 2 {"first":"SUMMARY","order":true,"heightTransition":"0s","children":[{"name":"m-in","transform":"none"}]}
+2026-10-27T07:33:40.8949506Z DISCLOSURE 320 no-preference search 3 {"first":"SUMMARY","order":true,"heightTransition":"0s","children":[{"name":"m-in","transform":"none"}]}
+2026-10-27T07:33:40.8950257Z DISCLOSURE 320 no-preference search 8 {"first":"SUMMARY","order":true,"heightTransition":"0s","children":[{"name":"m-in","transform":"none"}]}
+2026-10-27T07:33:40.8950761Z DISCLOSURE 320 no-preference search 9 {"first":"SUMMARY","order":true,"heightTransition":"0s","children":[{"name":"m-in","transform":"none"}]}
+2026-10-27T07:33:40.8951393Z DISCLOSURE 320 no-preference prompts 0 {"first":"SUMMARY","order":true,"heightTransition":"0s","children":[{"name":"m-in","transform":"none"},{"name":"m-in","transform":"none"},{"name":"m-in","transform":"none"}]}
+2026-10-27T07:33:40.8951995Z DISCLOSURE 320 no-preference prompts 2 {"first":"SUMMARY","order":true,"heightTransition":"0s","children":[{"name":"m-in","transform":"none"}]}
+2026-10-27T07:33:40.8953794Z DISCLOSURE 320 no-preference code 1 {"first":"SUMMARY","order":true,"heightTransition":"0s","children":[{"name":"m-in","transform":"none"},{"name":"m-in","transform":"none"},{"name":"m-in","transform":"none"},{"name":"m-in","transform":"none"},{"name":"m-in","transform":"none"},{"name":"m-in","transform":"none"},{"name":"m-in","transform":"none"},{"name":"m-in","transform":"none"},{"name":"m-in","transform":"none"},{"name":"m-in","transform":"none"},{"name":"m-in","transform":"none"},{"name":"m-in","transform":"none"},{"name":"m-in","transform":"none"},{"name":"m-in","transform":"none"},{"name":"m-in","transform":"none"},{"name":"m-in","transform":"none"},{"name":"m-in","transform":"none"},{"name":"m-in","transform":"none"},{"name":"m-in","transform":"none"},{"name":"m-in","transform":"none"}]}
+2026-10-27T07:33:40.8955103Z DISCLOSURE 320 no-preference code 2 {"first":"SUMMARY","order":true,"heightTransition":"0s","children":[{"name":"m-in","transform":"none"}]}
+2026-10-27T07:33:40.8955604Z DISCLOSURE 320 no-preference code 3 {"first":"SUMMARY","order":true,"heightTransition":"0s","children":[{"name":"m-in","transform":"none"}]}
+2026-10-27T07:33:40.8956412Z DISCLOSURE 320 no-preference finish 0 {"first":"SUMMARY","order":true,"heightTransition":"0s","children":[{"name":"m-in","transform":"none"},{"name":"m-in","transform":"none"},{"name":"m-in","transform":"none"},{"name":"m-in","transform":"none"},{"name":"m-in","transform":"none"},{"name":"m-in","transform":"none"}]}
+2026-10-27T07:33:40.8957194Z DISCLOSURE 320 no-preference finish 1 {"first":"SUMMARY","order":true,"heightTransition":"0s","children":[{"name":"m-in","transform":"none"},{"name":"m-in","transform":"none"}]}
+2026-10-27T07:33:40.8957923Z DISCLOSURE 320 no-preference finish 2 {"first":"SUMMARY","order":true,"heightTransition":"0s","children":[{"name":"m-in","transform":"none"},{"name":"m-in","transform":"none"},{"name":"m-in","transform":"none"},{"name":"m-in","transform":"none"}]}
+2026-10-27T07:33:40.8958736Z DISCLOSURE 320 no-preference finish 3 {"first":"SUMMARY","order":true,"heightTransition":"0s","children":[{"name":"m-in","transform":"none"},{"name":"m-in","transform":"none"}]}
+2026-10-27T07:33:40.8959404Z DISCLOSURE 320 no-preference finish 4 {"first":"SUMMARY","order":true,"heightTransition":"0s","children":[{"name":"m-in","transform":"none"},{"name":"m-in","transform":"none"},{"name":"m-in","transform":"none"}]}
+2026-10-27T07:33:40.8959999Z DISCLOSURE 320 no-preference finish 5 {"first":"SUMMARY","order":true,"heightTransition":"0s","children":[{"name":"m-in","transform":"none"}]}
+2026-10-27T07:33:40.8960623Z DISCLOSURE 320 no-preference finish 6 {"first":"SUMMARY","order":true,"heightTransition":"0s","children":[{"name":"m-in","transform":"none"},{"name":"m-in","transform":"none"},{"name":"m-in","transform":"none"}]}
+2026-10-27T07:33:40.8961215Z DISCLOSURE 320 no-preference budget 0 {"first":"SUMMARY","order":true,"heightTransition":"0s","children":[{"name":"m-in","transform":"none"}]}
+2026-10-27T07:33:40.8961615Z AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:
+2026-10-27T07:33:40.8961779Z 
+2026-10-27T07:33:40.8961859Z   assert(Math.abs(m[1]+Math.SQRT1_2)<.001)
+2026-10-27T07:33:40.8961964Z 
+2026-10-27T07:33:40.8962139Z     at /home/runner/work/Chatify/Chatify/tests/settings_disclosure_cue_audit_browser.cjs:2:4485 {
+2026-10-27T07:33:40.8962396Z   generatedMessage: true,
+2026-10-27T07:33:40.8962614Z   code: 'ERR_ASSERTION',
+2026-10-27T07:33:40.8962742Z   actual: false,
+2026-10-27T07:33:40.8962855Z   expected: true,
+2026-10-27T07:33:40.8962968Z   operator: '==',
+2026-10-27T07:33:40.8963220Z   diff: 'simple'
+2026-10-27T07:33:40.8963358Z }
+2026-10-27T07:33:40.8963412Z 
+2026-10-27T07:34:15.5946162Z CASE settings_disclosure_cue_audit_browser.cjs 320-reduce PASS exit=0 seconds=34.7
+2026-10-27T07:34:15.5948692Z DISCLOSURE 320 reduce model 0 {"first":"SUMMARY","order":true,"heightTransition":"0s","children":[{"name":"none","transform":"none"},{"name":"none","transform":"none"},{"name":"none","transform":"none"},{"name":"none","transform":"none"}]}
+2026-10-27T07:34:15.5950010Z DISCLOSURE 320 reduce model 1 {"first":"SUMMARY","order":true,"heightTransition":"0s","children":[{"name":"none","transform":"none"},{"name":"none","transform":"none"},{"name":"none","transform":"none"}]}
+2026-10-27T07:34:15.5950933Z DISCLOSURE 320 reduce search 0 {"first":"SUMMARY","order":true,"heightTransition":"0s","children":[{"name":"none","transform":"none"}]}
+2026-10-27T07:34:15.5951741Z DISCLOSURE 320 reduce search 1 {"first":"SUMMARY","order":true,"heightTransition":"0s","children":[{"name":"none","transform":"none"}]}
+2026-10-27T07:34:15.5952231Z DISCLOSURE 320 reduce search 2 {"first":"SUMMARY","order":true,"heightTransition":"0s","children":[{"name":"none","transform":"none"}]}
+2026-10-27T07:34:15.5952768Z DISCLOSURE 320 reduce search 3 {"first":"SUMMARY","order":true,"heightTransition":"0s","children":[{"name":"none","transform":"none"}]}
+2026-10-27T07:34:15.5953693Z DISCLOSURE 320 reduce search 8 {"first":"SUMMARY","order":true,"heightTransition":"0s","children":[{"name":"none","transform":"none"}]}
+2026-10-27T07:34:15.5954256Z DISCLOSURE 320 reduce search 9 {"first":"SUMMARY","order":true,"heightTransition":"0s","children":[{"name":"none","transform":"none"}]}
+2026-10-27T07:34:15.5955007Z DISCLOSURE 320 reduce prompts 0 {"first":"SUMMARY","order":true,"heightTransition":"0s","children":[{"name":"none","transform":"none"},{"name":"none","transform":"none"},{"name":"none","transform":"none"}]}
+2026-10-27T07:34:15.5955727Z DISCLOSURE 320 reduce prompts 2 {"first":"SUMMARY","order":true,"heightTransition":"0s","children":[{"name":"none","transform":"none"}]}
+2026-10-27T07:34:15.5957485Z DISCLOSURE 320 reduce code 1 {"first":"SUMMARY","order":true,"heightTransition":"0s","children":[{"name":"none","transform":"none"},{"name":"none","transform":"none"},{"name":"none","transform":"none"},{"name":"none","transform":"none"},{"name":"none","transform":"none"},{"name":"none","transform":"none"},{"name":"none","transform":"none"},{"name":"none","transform":"none"},{"name":"none","transform":"none"},{"name":"none","transform":"none"},{"name":"none","transform":"none"},{"name":"none","transform":"none"},{"name":"none","transform":"none"},{"name":"none","transform":"none"},{"name":"none","transform":"none"},{"name":"none","transform":"none"},{"name":"none","transform":"none"},{"name":"none","transform":"none"},{"name":"none","transform":"none"},{"name":"none","transform":"none"}]}
+2026-10-27T07:34:15.5959187Z DISCLOSURE 320 reduce code 2 {"first":"SUMMARY","order":true,"heightTransition":"0s","children":[{"name":"none","transform":"none"}]}
+2026-10-27T07:34:15.5959770Z DISCLOSURE 320 reduce code 3 {"first":"SUMMARY","order":true,"heightTransition":"0s","children":[{"name":"none","transform":"none"}]}
+2026-10-27T07:34:15.5960648Z DISCLOSURE 320 reduce finish 0 {"first":"SUMMARY","order":true,"heightTransition":"0s","children":[{"name":"none","transform":"none"},{"name":"none","transform":"none"},{"name":"none","transform":"none"},{"name":"none","transform":"none"},{"name":"none","transform":"none"},{"name":"none","transform":"none"}]}
+2026-10-27T07:34:15.5961510Z DISCLOSURE 320 reduce finish 1 {"first":"SUMMARY","order":true,"heightTransition":"0s","children":[{"name":"none","transform":"none"},{"name":"none","transform":"none"}]}
+2026-10-27T07:34:15.5962399Z DISCLOSURE 320 reduce finish 2 {"first":"SUMMARY","order":true,"heightTransition":"0s","children":[{"name":"none","transform":"none"},{"name":"none","transform":"none"},{"name":"none","transform":"none"},{"name":"none","transform":"none"}]}
+2026-10-27T07:34:15.5963607Z DISCLOSURE 320 reduce finish 3 {"first":"SUMMARY","order":true,"heightTransition":"0s","children":[{"name":"none","transform":"none"},{"name":"none","transform":"none"}]}
+2026-10-27T07:34:15.5964644Z DISCLOSURE 320 reduce finish 4 {"first":"SUMMARY","order":true,"heightTransition":"0s","children":[{"name":"none","transform":"none"},{"name":"none","transform":"none"},{"name":"none","transform":"none"}]}
+2026-10-27T07:34:15.5965595Z DISCLOSURE 320 reduce finish 5 {"first":"SUMMARY","order":true,"heightTransition":"0s","children":[{"name":"none","transform":"none"}]}
+2026-10-27T07:34:15.5966577Z DISCLOSURE 320 reduce finish 6 {"first":"SUMMARY","order":true,"heightTransition":"0s","children":[{"name":"none","transform":"none"},{"name":"none","transform":"none"},{"name":"none","transform":"none"}]}
+2026-10-27T07:34:15.5967516Z DISCLOSURE 320 reduce budget 0 {"first":"SUMMARY","order":true,"heightTransition":"0s","children":[{"name":"none","transform":"none"}]}
+2026-10-27T07:34:15.5968338Z DISCLOSURE 320 reduce freshness 0 {"first":"SUMMARY","order":true,"heightTransition":"0s","children":[{"name":"none","transform":"none"}]}
+2026-10-27T07:34:15.5969146Z DISCLOSURE 320 reduce wording 0 {"first":"SUMMARY","order":true,"heightTransition":"0s","children":[{"name":"none","transform":"none"}]}
+2026-10-27T07:34:15.5970063Z DISCLOSURE 320 reduce wording 1 {"first":"SUMMARY","order":true,"heightTransition":"0s","children":[{"name":"none","transform":"none"},{"name":"none","transform":"none"}]}
+2026-10-27T07:34:15.5970896Z DISCLOSURE 320 reduce wording 2 {"first":"SUMMARY","order":true,"heightTransition":"0s","children":[{"name":"none","transform":"none"}]}
+2026-10-27T07:34:15.5971377Z DISCLOSURE 320 reduce colors 0 {"first":"SUMMARY","order":true,"heightTransition":"0s","children":[{"name":"none","transform":"none"}]}
+2026-10-27T07:34:15.5971857Z DISCLOSURE 320 reduce colors 1 {"first":"SUMMARY","order":true,"heightTransition":"0s","children":[{"name":"none","transform":"none"}]}
+2026-10-27T07:34:15.5972532Z DISCLOSURE 320 reduce background 0 {"first":"SUMMARY","order":true,"heightTransition":"0s","children":[{"name":"none","transform":"none"}]}
+2026-10-27T07:34:15.5973468Z DISCLOSURE 320 reduce background 1 {"first":"SUMMARY","order":true,"heightTransition":"0s","children":[{"name":"none","transform":"none"}]}
+2026-10-27T07:34:15.5974257Z DISCLOSURE 320 reduce fonts 0 {"first":"SUMMARY","order":true,"heightTransition":"0s","children":[{"name":"none","transform":"none"}]}
+2026-10-27T07:34:15.5975154Z DISCLOSURE 320 reduce fonts 1 {"first":"SUMMARY","order":true,"heightTransition":"0s","children":[{"name":"none","transform":"none"}]}
+2026-10-27T07:34:15.5975737Z DISCLOSURE 320 reduce shape 0 {"first":"SUMMARY","order":true,"heightTransition":"0s","children":[{"name":"none","transform":"none"}]}
+2026-10-27T07:34:15.5976212Z DISCLOSURE 320 reduce shape 1 {"first":"SUMMARY","order":true,"heightTransition":"0s","children":[{"name":"none","transform":"none"}]}
+2026-10-27T07:34:15.5976691Z DISCLOSURE 320 reduce emoji 0 {"first":"SUMMARY","order":true,"heightTransition":"0s","children":[{"name":"none","transform":"none"}]}
+2026-10-27T07:34:15.5977157Z DISCLOSURE 320 reduce emoji 1 {"first":"SUMMARY","order":true,"heightTransition":"0s","children":[{"name":"none","transform":"none"}]}
+2026-10-27T07:34:15.5977628Z DISCLOSURE 320 reduce motion 0 {"first":"SUMMARY","order":true,"heightTransition":"0s","children":[{"name":"none","transform":"none"}]}
+2026-10-27T07:34:15.5978111Z DISCLOSURE 320 reduce motion 1 {"first":"SUMMARY","order":true,"heightTransition":"0s","children":[{"name":"none","transform":"none"}]}
+2026-10-27T07:34:15.5978584Z DISCLOSURE 320 reduce layout 0 {"first":"SUMMARY","order":true,"heightTransition":"0s","children":[{"name":"none","transform":"none"}]}
+2026-10-27T07:34:15.5979160Z DISCLOSURE 320 reduce layout 1 {"first":"SUMMARY","order":true,"heightTransition":"0s","children":[{"name":"none","transform":"none"}]}
+2026-10-27T07:34:15.5979396Z 
+2026-10-27T07:34:51.8660232Z CASE settings_disclosure_cue_audit_browser.cjs 1280-no-preference PASS exit=0 seconds=36.3
+2026-10-27T07:34:51.8662186Z DISCLOSURE 1280 no-preference model 0 {"first":"SUMMARY","order":true,"heightTransition":"0s","children":[{"name":"m-in","transform":"none"},{"name":"m-in","transform":"none"},{"name":"m-in","transform":"none"},{"name":"m-in","transform":"none"}]}
+2026-10-27T07:34:51.8663466Z DISCLOSURE 1280 no-preference model 1 {"first":"SUMMARY","order":true,"heightTransition":"0s","children":[{"name":"m-in","transform":"none"},{"name":"m-in","transform":"none"},{"name":"m-in","transform":"none"}]}
+2026-10-27T07:34:51.8664563Z DISCLOSURE 1280 no-preference search 0 {"first":"SUMMARY","order":true,"heightTransition":"0s","children":[{"name":"m-in","transform":"none"}]}
+2026-10-27T07:34:51.8665465Z DISCLOSURE 1280 no-preference search 1 {"first":"SUMMARY","order":true,"heightTransition":"0s","children":[{"name":"m-in","transform":"none"}]}
+2026-10-27T07:34:51.8666265Z DISCLOSURE 1280 no-preference search 2 {"first":"SUMMARY","order":true,"heightTransition":"0s","children":[{"name":"m-in","transform":"none"}]}
+2026-10-27T07:34:51.8666801Z DISCLOSURE 1280 no-preference search 3 {"first":"SUMMARY","order":true,"heightTransition":"0s","children":[{"name":"m-in","transform":"none"}]}
+2026-10-27T07:34:51.8667332Z DISCLOSURE 1280 no-preference search 8 {"first":"SUMMARY","order":true,"heightTransition":"0s","children":[{"name":"m-in","transform":"none"}]}
+2026-10-27T07:34:51.8667863Z DISCLOSURE 1280 no-preference search 9 {"first":"SUMMARY","order":true,"heightTransition":"0s","children":[{"name":"m-in","transform":"none"}]}
+2026-10-27T07:34:51.8668529Z DISCLOSURE 1280 no-preference prompts 0 {"first":"SUMMARY","order":true,"heightTransition":"0s","children":[{"name":"m-in","transform":"none"},{"name":"m-in","transform":"none"},{"name":"m-in","transform":"none"}]}
+2026-10-27T07:34:51.8669171Z DISCLOSURE 1280 no-preference prompts 2 {"first":"SUMMARY","order":true,"heightTransition":"0s","children":[{"name":"m-in","transform":"none"}]}
+2026-10-27T07:34:51.8670925Z DISCLOSURE 1280 no-preference code 1 {"first":"SUMMARY","order":true,"heightTransition":"0s","children":[{"name":"m-in","transform":"none"},{"name":"m-in","transform":"none"},{"name":"m-in","transform":"none"},{"name":"m-in","transform":"none"},{"name":"m-in","transform":"none"},{"name":"m-in","transform":"none"},{"name":"m-in","transform":"none"},{"name":"m-in","transform":"none"},{"name":"m-in","transform":"none"},{"name":"m-in","transform":"none"},{"name":"m-in","transform":"none"},{"name":"m-in","transform":"none"},{"name":"m-in","transform":"none"},{"name":"m-in","transform":"none"},{"name":"m-in","transform":"none"},{"name":"m-in","transform":"none"},{"name":"m-in","transform":"none"},{"name":"m-in","transform":"none"},{"name":"m-in","transform":"none"},{"name":"m-in","transform":"none"}]}
+2026-10-27T07:34:51.8672586Z DISCLOSURE 1280 no-preference code 2 {"first":"SUMMARY","order":true,"heightTransition":"0s","children":[{"name":"m-in","transform":"none"}]}
+2026-10-27T07:34:51.8673256Z DISCLOSURE 1280 no-preference code 3 {"first":"SUMMARY","order":true,"heightTransition":"0s","children":[{"name":"m-in","transform":"none"}]}
+2026-10-27T07:34:51.8674104Z DISCLOSURE 1280 no-preference finish 0 {"first":"SUMMARY","order":true,"heightTransition":"0s","children":[{"name":"m-in","transform":"none"},{"name":"m-in","transform":"none"},{"name":"m-in","transform":"none"},{"name":"m-in","transform":"none"},{"name":"m-in","transform":"none"},{"name":"m-in","transform":"none"}]}
+2026-10-27T07:34:51.8674933Z DISCLOSURE 1280 no-preference finish 1 {"first":"SUMMARY","order":true,"heightTransition":"0s","children":[{"name":"m-in","transform":"none"},{"name":"m-in","transform":"none"}]}
+2026-10-27T07:34:51.8675829Z DISCLOSURE 1280 no-preference finish 2 {"first":"SUMMARY","order":true,"heightTransition":"0s","children":[{"name":"m-in","transform":"none"},{"name":"m-in","transform":"none"},{"name":"m-in","transform":"none"},{"name":"m-in","transform":"none"}]}
+2026-10-27T07:34:51.8676572Z DISCLOSURE 1280 no-preference finish 3 {"first":"SUMMARY","order":true,"heightTransition":"0s","children":[{"name":"m-in","transform":"none"},{"name":"m-in","transform":"none"}]}
+2026-10-27T07:34:51.8677275Z DISCLOSURE 1280 no-preference finish 4 {"first":"SUMMARY","order":true,"heightTransition":"0s","children":[{"name":"m-in","transform":"none"},{"name":"m-in","transform":"none"},{"name":"m-in","transform":"none"}]}
+2026-10-27T07:34:51.8677908Z DISCLOSURE 1280 no-preference finish 5 {"first":"SUMMARY","order":true,"heightTransition":"0s","children":[{"name":"m-in","transform":"none"}]}
+2026-10-27T07:34:51.8678578Z DISCLOSURE 1280 no-preference finish 6 {"first":"SUMMARY","order":true,"heightTransition":"0s","children":[{"name":"m-in","transform":"none"},{"name":"m-in","transform":"none"},{"name":"m-in","transform":"none"}]}
+2026-10-27T07:34:51.8679209Z DISCLOSURE 1280 no-preference budget 0 {"first":"SUMMARY","order":true,"heightTransition":"0s","children":[{"name":"m-in","transform":"none"}]}
+2026-10-27T07:34:51.8679755Z DISCLOSURE 1280 no-preference freshness 0 {"first":"SUMMARY","order":true,"heightTransition":"0s","children":[{"name":"m-in","transform":"none"}]}
+2026-10-27T07:34:51.8680302Z DISCLOSURE 1280 no-preference wording 0 {"first":"SUMMARY","order":true,"heightTransition":"0s","children":[{"name":"m-in","transform":"none"}]}
+2026-10-27T07:34:51.8680907Z DISCLOSURE 1280 no-preference wording 1 {"first":"SUMMARY","order":true,"heightTransition":"0s","children":[{"name":"m-in","transform":"none"},{"name":"m-in","transform":"none"}]}
+2026-10-27T07:34:51.8681496Z DISCLOSURE 1280 no-preference wording 2 {"first":"SUMMARY","order":true,"heightTransition":"0s","children":[{"name":"m-in","transform":"none"}]}
+2026-10-27T07:34:51.8682034Z DISCLOSURE 1280 no-preference colors 0 {"first":"SUMMARY","order":true,"heightTransition":"0s","children":[{"name":"m-in","transform":"none"}]}
+2026-10-27T07:34:51.8682569Z DISCLOSURE 1280 no-preference colors 1 {"first":"SUMMARY","order":true,"heightTransition":"0s","children":[{"name":"m-in","transform":"none"}]}
+2026-10-27T07:34:51.8683228Z DISCLOSURE 1280 no-preference background 0 {"first":"SUMMARY","order":true,"heightTransition":"0s","children":[{"name":"m-in","transform":"none"}]}
+2026-10-27T07:34:51.8683781Z DISCLOSURE 1280 no-preference background 1 {"first":"SUMMARY","order":true,"heightTransition":"0s","children":[{"name":"m-in","transform":"none"}]}
+2026-10-27T07:34:51.8684420Z DISCLOSURE 1280 no-preference fonts 0 {"first":"SUMMARY","order":true,"heightTransition":"0s","children":[{"name":"m-in","transform":"none"}]}
+2026-10-27T07:34:51.8684957Z DISCLOSURE 1280 no-preference fonts 1 {"first":"SUMMARY","order":true,"heightTransition":"0s","children":[{"name":"m-in","transform":"none"}]}
+2026-10-27T07:34:51.8685489Z DISCLOSURE 1280 no-preference shape 0 {"first":"SUMMARY","order":true,"heightTransition":"0s","children":[{"name":"m-in","transform":"none"}]}
+2026-10-27T07:34:51.8686019Z DISCLOSURE 1280 no-preference shape 1 {"first":"SUMMARY","order":true,"heightTransition":"0s","children":[{"name":"m-in","transform":"none"}]}
+2026-10-27T07:34:51.8686545Z DISCLOSURE 1280 no-preference emoji 0 {"first":"SUMMARY","order":true,"heightTransition":"0s","children":[{"name":"m-in","transform":"none"}]}
+2026-10-27T07:34:51.8687072Z DISCLOSURE 1280 no-preference emoji 1 {"first":"SUMMARY","order":true,"heightTransition":"0s","children":[{"name":"m-in","transform":"none"}]}
+2026-10-27T07:34:51.8687610Z DISCLOSURE 1280 no-preference motion 0 {"first":"SUMMARY","order":true,"heightTransition":"0s","children":[{"name":"m-in","transform":"none"}]}
+2026-10-27T07:34:51.8688143Z DISCLOSURE 1280 no-preference motion 1 {"first":"SUMMARY","order":true,"heightTransition":"0s","children":[{"name":"m-in","transform":"none"}]}
+2026-10-27T07:34:51.8688761Z DISCLOSURE 1280 no-preference layout 0 {"first":"SUMMARY","order":true,"heightTransition":"0s","children":[{"name":"m-in","transform":"none"}]}
+2026-10-27T07:34:51.8689295Z DISCLOSURE 1280 no-preference layout 1 {"first":"SUMMARY","order":true,"heightTransition":"0s","children":[{"name":"m-in","transform":"none"}]}
+2026-10-27T07:34:51.8689557Z 
+2026-10-27T07:35:27.1220193Z CASE settings_disclosure_cue_audit_browser.cjs 1280-reduce PASS exit=0 seconds=35.3
+2026-10-27T07:35:27.1222558Z DISCLOSURE 1280 reduce model 0 {"first":"SUMMARY","order":true,"heightTransition":"0s","children":[{"name":"none","transform":"none"},{"name":"none","transform":"none"},{"name":"none","transform":"none"},{"name":"none","transform":"none"}]}
+2026-10-27T07:35:27.1224033Z DISCLOSURE 1280 reduce model 1 {"first":"SUMMARY","order":true,"heightTransition":"0s","children":[{"name":"none","transform":"none"},{"name":"none","transform":"none"},{"name":"none","transform":"none"}]}
+2026-10-27T07:35:27.1225032Z DISCLOSURE 1280 reduce search 0 {"first":"SUMMARY","order":true,"heightTransition":"0s","children":[{"name":"none","transform":"none"}]}
+2026-10-27T07:35:27.1225883Z DISCLOSURE 1280 reduce search 1 {"first":"SUMMARY","order":true,"heightTransition":"0s","children":[{"name":"none","transform":"none"}]}
+2026-10-27T07:35:27.1226513Z DISCLOSURE 1280 reduce search 2 {"first":"SUMMARY","order":true,"heightTransition":"0s","children":[{"name":"none","transform":"none"}]}
+2026-10-27T07:35:27.1227009Z DISCLOSURE 1280 reduce search 3 {"first":"SUMMARY","order":true,"heightTransition":"0s","children":[{"name":"none","transform":"none"}]}
+2026-10-27T07:35:27.1227497Z DISCLOSURE 1280 reduce search 8 {"first":"SUMMARY","order":true,"heightTransition":"0s","children":[{"name":"none","transform":"none"}]}
+2026-10-27T07:35:27.1227994Z DISCLOSURE 1280 reduce search 9 {"first":"SUMMARY","order":true,"heightTransition":"0s","children":[{"name":"none","transform":"none"}]}
+2026-10-27T07:35:27.1228626Z DISCLOSURE 1280 reduce prompts 0 {"first":"SUMMARY","order":true,"heightTransition":"0s","children":[{"name":"none","transform":"none"},{"name":"none","transform":"none"},{"name":"none","transform":"none"}]}
+2026-10-27T07:35:27.1229225Z DISCLOSURE 1280 reduce prompts 2 {"first":"SUMMARY","order":true,"heightTransition":"0s","children":[{"name":"none","transform":"none"}]}
+2026-10-27T07:35:27.1230919Z DISCLOSURE 1280 reduce code 1 {"first":"SUMMARY","order":true,"heightTransition":"0s","children":[{"name":"none","transform":"none"},{"name":"none","transform":"none"},{"name":"none","transform":"none"},{"name":"none","transform":"none"},{"name":"none","transform":"none"},{"name":"none","transform":"none"},{"name":"none","transform":"none"},{"name":"none","transform":"none"},{"name":"none","transform":"none"},{"name":"none","transform":"none"},{"name":"none","transform":"none"},{"name":"none","transform":"none"},{"name":"none","transform":"none"},{"name":"none","transform":"none"},{"name":"none","transform":"none"},{"name":"none","transform":"none"},{"name":"none","transform":"none"},{"name":"none","transform":"none"},{"name":"none","transform":"none"},{"name":"none","transform":"none"}]}
+2026-10-27T07:35:27.1232572Z DISCLOSURE 1280 reduce code 2 {"first":"SUMMARY","order":true,"heightTransition":"0s","children":[{"name":"none","transform":"none"}]}
+2026-10-27T07:35:27.1233209Z DISCLOSURE 1280 reduce code 3 {"first":"SUMMARY","order":true,"heightTransition":"0s","children":[{"name":"none","transform":"none"}]}
+2026-10-27T07:35:27.1234038Z DISCLOSURE 1280 reduce finish 0 {"first":"SUMMARY","order":true,"heightTransition":"0s","children":[{"name":"none","transform":"none"},{"name":"none","transform":"none"},{"name":"none","transform":"none"},{"name":"none","transform":"none"},{"name":"none","transform":"none"},{"name":"none","transform":"none"}]}
+2026-10-27T07:35:27.1234830Z DISCLOSURE 1280 reduce finish 1 {"first":"SUMMARY","order":true,"heightTransition":"0s","children":[{"name":"none","transform":"none"},{"name":"none","transform":"none"}]}
+2026-10-27T07:35:27.1235681Z DISCLOSURE 1280 reduce finish 2 {"first":"SUMMARY","order":true,"heightTransition":"0s","children":[{"name":"none","transform":"none"},{"name":"none","transform":"none"},{"name":"none","transform":"none"},{"name":"none","transform":"none"}]}
+2026-10-27T07:35:27.1236387Z DISCLOSURE 1280 reduce finish 3 {"first":"SUMMARY","order":true,"heightTransition":"0s","children":[{"name":"none","transform":"none"},{"name":"none","transform":"none"}]}
+2026-10-27T07:35:27.1237064Z DISCLOSURE 1280 reduce finish 4 {"first":"SUMMARY","order":true,"heightTransition":"0s","children":[{"name":"none","transform":"none"},{"name":"none","transform":"none"},{"name":"none","transform":"none"}]}
+2026-10-27T07:35:27.1237662Z DISCLOSURE 1280 reduce finish 5 {"first":"SUMMARY","order":true,"heightTransition":"0s","children":[{"name":"none","transform":"none"}]}
+2026-10-27T07:35:27.1238290Z DISCLOSURE 1280 reduce finish 6 {"first":"SUMMARY","order":true,"heightTransition":"0s","children":[{"name":"none","transform":"none"},{"name":"none","transform":"none"},{"name":"none","transform":"none"}]}
+2026-10-27T07:35:27.1238885Z DISCLOSURE 1280 reduce budget 0 {"first":"SUMMARY","order":true,"heightTransition":"0s","children":[{"name":"none","transform":"none"}]}
+2026-10-27T07:35:27.1239392Z DISCLOSURE 1280 reduce freshness 0 {"first":"SUMMARY","order":true,"heightTransition":"0s","children":[{"name":"none","transform":"none"}]}
+2026-10-27T07:35:27.1239900Z DISCLOSURE 1280 reduce wording 0 {"first":"SUMMARY","order":true,"heightTransition":"0s","children":[{"name":"none","transform":"none"}]}
+2026-10-27T07:35:27.1240467Z DISCLOSURE 1280 reduce wording 1 {"first":"SUMMARY","order":true,"heightTransition":"0s","children":[{"name":"none","transform":"none"},{"name":"none","transform":"none"}]}
+2026-10-27T07:35:27.1241017Z DISCLOSURE 1280 reduce wording 2 {"first":"SUMMARY","order":true,"heightTransition":"0s","children":[{"name":"none","transform":"none"}]}
+2026-10-27T07:35:27.1241512Z DISCLOSURE 1280 reduce colors 0 {"first":"SUMMARY","order":true,"heightTransition":"0s","children":[{"name":"none","transform":"none"}]}
+2026-10-27T07:35:27.1242006Z DISCLOSURE 1280 reduce colors 1 {"first":"SUMMARY","order":true,"heightTransition":"0s","children":[{"name":"none","transform":"none"}]}
+2026-10-27T07:35:27.1242514Z DISCLOSURE 1280 reduce background 0 {"first":"SUMMARY","order":true,"heightTransition":"0s","children":[{"name":"none","transform":"none"}]}
+2026-10-27T07:35:27.1243026Z DISCLOSURE 1280 reduce background 1 {"first":"SUMMARY","order":true,"heightTransition":"0s","children":[{"name":"none","transform":"none"}]}
+2026-10-27T07:35:27.1243651Z DISCLOSURE 1280 reduce fonts 0 {"first":"SUMMARY","order":true,"heightTransition":"0s","children":[{"name":"none","transform":"none"}]}
+2026-10-27T07:35:27.1244249Z DISCLOSURE 1280 reduce fonts 1 {"first":"SUMMARY","order":true,"heightTransition":"0s","children":[{"name":"none","transform":"none"}]}
+2026-10-27T07:35:27.1244745Z DISCLOSURE 1280 reduce shape 0 {"first":"SUMMARY","order":true,"heightTransition":"0s","children":[{"name":"none","transform":"none"}]}
+2026-10-27T07:35:27.1245240Z DISCLOSURE 1280 reduce shape 1 {"first":"SUMMARY","order":true,"heightTransition":"0s","children":[{"name":"none","transform":"none"}]}
+2026-10-27T07:35:27.1245732Z DISCLOSURE 1280 reduce emoji 0 {"first":"SUMMARY","order":true,"heightTransition":"0s","children":[{"name":"none","transform":"none"}]}
+2026-10-27T07:35:27.1246227Z DISCLOSURE 1280 reduce emoji 1 {"first":"SUMMARY","order":true,"heightTransition":"0s","children":[{"name":"none","transform":"none"}]}
+2026-10-27T07:35:27.1246722Z DISCLOSURE 1280 reduce motion 0 {"first":"SUMMARY","order":true,"heightTransition":"0s","children":[{"name":"none","transform":"none"}]}
+2026-10-27T07:35:27.1247229Z DISCLOSURE 1280 reduce motion 1 {"first":"SUMMARY","order":true,"heightTransition":"0s","children":[{"name":"none","transform":"none"}]}
+2026-10-27T07:35:27.1247726Z DISCLOSURE 1280 reduce layout 0 {"first":"SUMMARY","order":true,"heightTransition":"0s","children":[{"name":"none","transform":"none"}]}
+2026-10-27T07:35:27.1248300Z DISCLOSURE 1280 reduce layout 1 {"first":"SUMMARY","order":true,"heightTransition":"0s","children":[{"name":"none","transform":"none"}]}
+2026-10-27T07:35:27.1248547Z 
+2026-10-27T07:35:33.6194176Z CASE settings_native_browser_zoom_400_browser.cjs default PASS exit=0 seconds=6.5
+2026-10-27T07:35:33.6194636Z NATIVEZOOM { width: 1280, dpr: 1, scale: 1 } { width: 320, dpr: 4, scale: 1 }
+2026-10-27T07:35:33.6195026Z PASS actualheadedChrome nativeCtrlPlus400 viewportreflow textentryTabfocus nohorizontaloverflow
+2026-10-27T07:35:33.6195242Z 
+2026-10-27T07:35:47.0070196Z CASE settings_reduce_motion_inventory_browser.cjs default PASS exit=0 seconds=13.4
+2026-10-27T07:35:47.0071106Z PASS OSReduceFullSubtleNoneCalm allrenderedSettingssections/openDetails actualnode+pseudocomputed noanimationtransition3201280
+2026-10-27T07:35:47.0071557Z 
+2026-10-27T07:36:07.8889838Z CASE setup_poll_focus_status_browser.cjs default PASS exit=0 seconds=20.9
+2026-10-27T07:36:07.8890489Z PASS setup waitingpoll retainsCancelkeyboardfocus/liveStatus4matrix noCancelNoProcess
+2026-10-27T07:36:07.8890815Z 
+2026-10-27T07:36:29.3491287Z CASE sidebar_label_icon_alignment_browser.cjs default PASS exit=0 seconds=21.5
+2026-10-27T07:36:29.3492299Z ALIGNED left full no-preference 0.684643 {"row":{"x":21,"y":401.75,"width":35.453125,"height":60,"top":401.75,"right":56.453125,"bottom":461.75,"left":21},"icons":[{"width":18,"height":18,"dy":0,"transform":"none"},{"width":18,"height":18,"dy":0,"transform":"none"},{"width":18,"height":18,"dy":0,"transform":"none"},{"width":18,"height":18,"dy":0,"transform":"none"}]}
+2026-10-27T07:36:29.3493682Z ALIGNED right full no-preference 0.684643 {"row":{"x":1223.546875,"y":401.75,"width":35.453125,"height":60,"top":401.75,"right":1259,"bottom":461.75,"left":1223.546875},"icons":[{"width":18,"height":18,"dy":0,"transform":"none"},{"width":18,"height":18,"dy":0,"transform":"none"},{"width":18,"height":18,"dy":0,"transform":"none"},{"width":18,"height":18,"dy":0,"transform":"none"}]}
+2026-10-27T07:36:29.3494828Z ALIGNED left subtle no-preference 0.540535 {"row":{"x":21,"y":401.75,"width":25,"height":60,"top":401.75,"right":46,"bottom":461.75,"left":21},"icons":[{"width":18,"height":18,"dy":0,"transform":"none"},{"width":18,"height":18,"dy":0,"transform":"none"},{"width":18,"height":18,"dy":0,"transform":"none"},{"width":18,"height":18,"dy":0,"transform":"none"}]}
+2026-10-27T07:36:29.3495934Z ALIGNED right subtle no-preference 0.540535 {"row":{"x":1259,"y":401.75,"width":25,"height":60,"top":401.75,"right":1284,"bottom":461.75,"left":1259},"icons":[{"width":18,"height":18,"dy":0,"transform":"none"},{"width":18,"height":18,"dy":0,"transform":"none"},{"width":18,"height":18,"dy":0,"transform":"none"},{"width":18,"height":18,"dy":0,"transform":"none"}]}
+2026-10-27T07:36:29.3497239Z ALIGNED left none no-preference 1 {"row":{"x":21,"y":401.75,"width":25,"height":60,"top":401.75,"right":46,"bottom":461.75,"left":21},"icons":[{"width":18,"height":18,"dy":0,"transform":"none"},{"width":18,"height":18,"dy":0,"transform":"none"},{"width":18,"height":18,"dy":0,"transform":"none"},{"width":18,"height":18,"dy":0,"transform":"none"}]}
+2026-10-27T07:36:29.3498325Z ALIGNED right none no-preference 1 {"row":{"x":1259,"y":401.75,"width":25,"height":60,"top":401.75,"right":1284,"bottom":461.75,"left":1259},"icons":[{"width":18,"height":18,"dy":0,"transform":"none"},{"width":18,"height":18,"dy":0,"transform":"none"},{"width":18,"height":18,"dy":0,"transform":"none"},{"width":18,"height":18,"dy":0,"transform":"none"}]}
+2026-10-27T07:36:29.3499404Z ALIGNED left calm no-preference 1 {"row":{"x":21,"y":401.75,"width":25,"height":60,"top":401.75,"right":46,"bottom":461.75,"left":21},"icons":[{"width":18,"height":18,"dy":0,"transform":"none"},{"width":18,"height":18,"dy":0,"transform":"none"},{"width":18,"height":18,"dy":0,"transform":"none"},{"width":18,"height":18,"dy":0,"transform":"none"}]}
+2026-10-27T07:36:29.3500600Z ALIGNED right calm no-preference 1 {"row":{"x":1259,"y":401.75,"width":25,"height":60,"top":401.75,"right":1284,"bottom":461.75,"left":1259},"icons":[{"width":18,"height":18,"dy":0,"transform":"none"},{"width":18,"height":18,"dy":0,"transform":"none"},{"width":18,"height":18,"dy":0,"transform":"none"},{"width":18,"height":18,"dy":0,"transform":"none"}]}
+2026-10-27T07:36:29.3501652Z ALIGNED left full reduce 1 {"row":{"x":21,"y":401.75,"width":25,"height":60,"top":401.75,"right":46,"bottom":461.75,"left":21},"icons":[{"width":18,"height":18,"dy":0,"transform":"none"},{"width":18,"height":18,"dy":0,"transform":"none"},{"width":18,"height":18,"dy":0,"transform":"none"},{"width":18,"height":18,"dy":0,"transform":"none"}]}
+2026-10-27T07:36:29.3502694Z ALIGNED right full reduce 1 {"row":{"x":1259,"y":401.75,"width":25,"height":60,"top":401.75,"right":1284,"bottom":461.75,"left":1259},"icons":[{"width":18,"height":18,"dy":0,"transform":"none"},{"width":18,"height":18,"dy":0,"transform":"none"},{"width":18,"height":18,"dy":0,"transform":"none"},{"width":18,"height":18,"dy":0,"transform":"none"}]}
+2026-10-27T07:36:29.3503889Z ALIGNED left subtle reduce 1 {"row":{"x":21,"y":401.75,"width":25,"height":60,"top":401.75,"right":46,"bottom":461.75,"left":21},"icons":[{"width":18,"height":18,"dy":0,"transform":"none"},{"width":18,"height":18,"dy":0,"transform":"none"},{"width":18,"height":18,"dy":0,"transform":"none"},{"width":18,"height":18,"dy":0,"transform":"none"}]}
+2026-10-27T07:36:29.3504943Z ALIGNED right subtle reduce 1 {"row":{"x":1259,"y":401.75,"width":25,"height":60,"top":401.75,"right":1284,"bottom":461.75,"left":1259},"icons":[{"width":18,"height":18,"dy":0,"transform":"none"},{"width":18,"height":18,"dy":0,"transform":"none"},{"width":18,"height":18,"dy":0,"transform":"none"},{"width":18,"height":18,"dy":0,"transform":"none"}]}
+2026-10-27T07:36:29.3505991Z ALIGNED left none reduce 1 {"row":{"x":21,"y":401.75,"width":25,"height":60,"top":401.75,"right":46,"bottom":461.75,"left":21},"icons":[{"width":18,"height":18,"dy":0,"transform":"none"},{"width":18,"height":18,"dy":0,"transform":"none"},{"width":18,"height":18,"dy":0,"transform":"none"},{"width":18,"height":18,"dy":0,"transform":"none"}]}
+2026-10-27T07:36:29.3507038Z ALIGNED right none reduce 1 {"row":{"x":1259,"y":401.75,"width":25,"height":60,"top":401.75,"right":1284,"bottom":461.75,"left":1259},"icons":[{"width":18,"height":18,"dy":0,"transform":"none"},{"width":18,"height":18,"dy":0,"transform":"none"},{"width":18,"height":18,"dy":0,"transform":"none"},{"width":18,"height":18,"dy":0,"transform":"none"}]}
+2026-10-27T07:36:29.3508074Z ALIGNED left calm reduce 1 {"row":{"x":21,"y":401.75,"width":25,"height":60,"top":401.75,"right":46,"bottom":461.75,"left":21},"icons":[{"width":18,"height":18,"dy":0,"transform":"none"},{"width":18,"height":18,"dy":0,"transform":"none"},{"width":18,"height":18,"dy":0,"transform":"none"},{"width":18,"height":18,"dy":0,"transform":"none"}]}
+2026-10-27T07:36:29.3509221Z ALIGNED right calm reduce 1 {"row":{"x":1259,"y":401.75,"width":25,"height":60,"top":401.75,"right":1284,"bottom":461.75,"left":1259},"icons":[{"width":18,"height":18,"dy":0,"transform":"none"},{"width":18,"height":18,"dy":0,"transform":"none"},{"width":18,"height":18,"dy":0,"transform":"none"},{"width":18,"height":18,"dy":0,"transform":"none"}]}
+2026-10-27T07:36:29.3509954Z PASS sidebarpin/actionicons sameverticalalignment/size throughsecondarylabelopacitycollapse16states dockedLeftRight
+2026-10-27T07:36:29.3510204Z 
+2026-10-27T07:36:31.6934767Z CASE source_add_link_success_focus_motion_browser.cjs default PASS exit=0 seconds=2.3
+2026-10-27T07:36:31.6935365Z PASS sourceAddlink200pendingEscape nativeEnter singleflight URLclearedvalid completionfocus pendingEscapeDoesNotCancel thenEscapeclose3201280normalReduce
+2026-10-27T07:36:31.6935714Z 
+2026-10-27T07:36:36.9114054Z CASE source_scope_origin_focus_motion_browser.cjs default PASS exit=0 seconds=5.2
+2026-10-27T07:36:36.9115938Z PASS source hero card nativeEnter open Escape/Done/document returns actual initiating card3201280normalReduce
+2026-10-27T07:36:36.9116319Z 
+2026-10-27T07:36:40.8167974Z CASE source_upload_completion_focus_motion_browser.cjs default PASS exit=0 seconds=3.9
+2026-10-27T07:36:40.8168858Z PASS sourcefilefailure completion nativepickerfocus restored Escapeorigin3201280normalReduce
+2026-10-27T07:36:40.8169061Z 
+2026-10-27T07:38:00.2916997Z CASE ten_actual_palettes_browser.cjs default PASS exit=0 seconds=79.5
+2026-10-27T07:38:00.2917702Z PASS ten independent app configurations/theme palettes lightdark3203901280 profile and final Markdown60cases
+2026-10-27T07:38:00.2918050Z 
+2026-10-27T07:38:13.9661799Z CASE wording_default_restore_browser.cjs default PASS exit=0 seconds=13.7
+2026-10-27T07:38:13.9662588Z PASS savedoverrides initialmarkerhidden/clearshowsdefault/newoverridehides/saveblankreloadeffectivefallback; Resetexplicitname+welcomelogoallwording Cancelretains Confirmrestores unaffectedcolors/fonts3201280
+2026-10-27T07:38:13.9663214Z 
+2026-10-27T07:38:16.9607815Z CASE workspace_late_panel_response_browser.cjs default PASS exit=0 seconds=3.0
+2026-10-27T07:38:16.9608476Z PASS oldquestionsGETresponsecannotappendtoNewerDeploy3201280draftfocuskept
+2026-10-27T07:38:16.9608787Z 
+2026-10-27T07:38:16.9622147Z {"executions": 42, "failed": 2, "passed": 40, "scripts": 39}

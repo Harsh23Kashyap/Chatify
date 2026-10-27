@@ -1,0 +1,12 @@
+# Third full regression remains red
+
+Run https://github.com/Harsh23Kashyap/Chatify/actions/runs/40467125286, head02280d15efdb57068161925442449af061a26716. All12 actual raw case-output summaries collected: 471 scripts, 500 executions, 495PASS, 5FAIL. Eight browser jobs passed, four failed. Unit, installer matrix and syntax/package passed. All first-six corrections and the second-run memory-event correction passed in this run. This is not qualification or a stable-green result.
+
+Failures and current evidence:
+- history_delete_motion_audit_browser.cjs: pending flag false after click on1280/reduced. Five consecutive full solo runs with failure-only diagnostic passed; three verbose runs also passed. Exact CI cause remains unproven. A controlled50ms pre-route dispatch gap reproduces assert(pending), proving click completion does not guarantee route entry. An explicit route-entry handshake passes with unchanged650ms response and150ms pending retention checks. This is a possible harness correction, not proof of the CI cause. Original test unchanged.
+- provider_switch_browser.cjs: hidden manual category. Controlled held-theme response lets settingstop initialize Build view first; exact original hidden-category failure reproduced. Source default builder plus automatic navigation hash explains timing-dependent manual view. Actual Open manual settings before category passes under same held-theme order; original provider/base URL assertions unchanged. Local test corrected, not pushed yet.
+- settings_native_browser_zoom_drop_chooser_browser.cjs: Enter did not produce filechooser after real400% zoom; keyboard focus logged true. Unchanged local full case passes once. Unexplained, not waived.
+- settings_disclosure_cue_audit_browser.cjs320/no-preference: closed chevron transform not exact expected-45degree after175ms. Unchanged instrumented same combo passes locally once. Unexplained, not waived.
+- theme_color_states_browser.cjs: preview-changing class false when expected true30ms after dark click. Unchanged full local case and instrumented full case pass. Source removes class160ms after click; actual CI event timing absent. Timing hypothesis remains unproven. No test changed.
+
+No blind complete rerun, timeout changes, retry, assertion weakening, or product changes in response to this run. All historical failures preserved. Local diagnostic experiments are offline, with only case output retained. No hosted deployment/restart/upgrade, no spending.

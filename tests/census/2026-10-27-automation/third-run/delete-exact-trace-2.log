@@ -1,0 +1,5 @@
+DELETE 320 no-preference pending retains rows, success removes last, first exact stationary, Undo actual restores
+DELETE 320 reduce pending retains rows, success removes last, first exact stationary, Undo actual restores
+DELETE 1280 no-preference pending retains rows, success removes last, first exact stationary, Undo actual restores
+DELETE 1280 reduce pending retains rows, success removes last, first exact stationary, Undo actual restores
+PASS delayed actual historydelete aftersuccess stationaryremaining Undo3201280normalReduce
