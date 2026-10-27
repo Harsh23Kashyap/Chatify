@@ -1,0 +1,30 @@
+test_accent_not_pdf_injection (test_answer_export.Export) ... ok
+test_accented_latin_renders_via_font (test_answer_export.Export) ... ok
+test_bibtex_missing_optional_metadata (test_answer_export.Export) ... ok
+test_branded_template_fonts_paper_and_metadata (test_answer_export.Export) ... ok
+test_devanagari_renders_not_rejected (test_answer_export.Export) ... ok
+test_escaped_pipe_table_label_retained (test_answer_export.Export) ... ok
+test_markdown_snapshot_private (test_answer_export.Export) ... ok
+test_multi_page_no_cut (test_answer_export.Export) ... ok
+test_null_optional_url_exports (test_answer_export.Export) ... ok
+test_stylized_latin_and_accents_render_as_themselves (test_answer_export.Export) ... ok
+test_table_extra_cells_and_following_pipe_prose_not_lost (test_answer_export.Export) ... ok
+test_table_recomposed_as_labeled_rows (test_answer_export.Export) ... ok
+test_typographic_unicode_no_longer_rejected (test_answer_export.Export) ... ok
+test_typographic_unicode_renders_real_pdf (test_answer_export.Export) ... ok
+test_uncovered_scripts_still_rejected_honestly (test_answer_export.Export) ... ok
+test_wide_unbroken_text_preserved (test_answer_export.Export) ... ok
+test_markdown_and_latex_normalized_in_exports (test_answer_export.PlainTextDisplay) ... ok
+test_pdf_keeps_sources_heading_with_first_source (test_answer_export.PlainTextDisplay) ... ok
+test_preview_bullets_normalized (test_answer_export.PlainTextDisplay) ... ok
+test_script_markers_keep_explicit_notation (test_answer_export.PlainTextDisplay) ... ok
+test_all_failed_wording (test_answer_export.SourceNoteExports) ... ok
+test_markdown_carries_named_note (test_answer_export.SourceNoteExports) ... ok
+test_no_note_without_errors (test_answer_export.SourceNoteExports) ... ok
+test_pdf_carries_named_note (test_answer_export.SourceNoteExports) ... ok
+test_server_imports_and_pdf_fails_clear_without_fpdf (test_answer_export.WheelInstallImport) ... ok
+
+----------------------------------------------------------------------
+Ran 25 tests in 23.803s
+
+OK

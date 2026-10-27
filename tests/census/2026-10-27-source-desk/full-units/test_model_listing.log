@@ -1,0 +1,15 @@
+test_all_compatible_providers (test_model_listing.ModelListingTests) ... ok
+test_array_response (test_model_listing.ModelListingTests) ... ok
+test_catalog_has_every_provider_and_sources (test_model_listing.ModelListingTests) ... ok
+test_claude_paginated (test_model_listing.ModelListingTests) ... ok
+test_gemini_paginated_normalized (test_model_listing.ModelListingTests) ... ok
+test_invalid_responses_do_not_crash (test_model_listing.ModelListingTests) ... ok
+test_list_error_not_model_generation_error (test_model_listing.ModelListingTests) ... ok
+test_missing_key_is_not_reported_as_refused (test_model_listing.ModelListingTests) ... ok
+test_ollama_and_demo (test_model_listing.ModelListingTests) ... ok
+test_repeated_cursor_stops (test_model_listing.ModelListingTests) ... ok
+
+----------------------------------------------------------------------
+Ran 10 tests in 0.013s
+
+OK

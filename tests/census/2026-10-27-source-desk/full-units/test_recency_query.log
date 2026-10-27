@@ -1,0 +1,15 @@
+test_plain_question_keeps_relevance (test_recency_query.ArxivRecencySortTest) ... ok
+test_recent_question_sorts_by_submitted_date (test_recency_query.ArxivRecencySortTest) ... ok
+test_content_words_survive (test_recency_query.PubMedKeywordHygieneTest) ... ok
+test_empty_question_falls_back (test_recency_query.PubMedKeywordHygieneTest) ... ok
+test_meta_intent_words_are_dropped (test_recency_query.PubMedKeywordHygieneTest) ... ok
+test_plain_question_keeps_relevance_sort (test_recency_query.PubMedRecencySortTest) ... ok
+test_recent_question_sorts_by_pub_date (test_recency_query.PubMedRecencySortTest) ... ok
+test_non_recency_question_sends_no_flag (test_recency_query.RecencyPlumbingTest) ... ok
+test_recent_flag_reaches_modern_connector (test_recency_query.RecencyPlumbingTest) ... ok
+test_recent_not_passed_to_legacy_connector (test_recency_query.RecencyPlumbingTest) ... ok
+
+----------------------------------------------------------------------
+Ran 10 tests in 0.005s
+
+OK

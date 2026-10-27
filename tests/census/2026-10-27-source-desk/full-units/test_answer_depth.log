@@ -1,0 +1,14 @@
+test_claude_limit (test_answer_depth.AnswerDepth) ... ok
+test_deep_mode_reaches_stream_and_fresh (test_answer_depth.AnswerDepth) ... ok
+test_deep_retrieval_and_cache_isolation (test_answer_depth.AnswerDepth) ... ok
+test_defaults_and_prompts (test_answer_depth.AnswerDepth) ... ok
+test_expanded_prompt_fits_default_budget (test_answer_depth.AnswerDepth) ... ok
+test_explicit_limits_preserved (test_answer_depth.AnswerDepth) ... ok
+test_invalid_output_limit (test_answer_depth.AnswerDepth) ... ok
+test_openai_and_reasoning_request_fields (test_answer_depth.AnswerDepth) ... ok
+test_fia_snapshots_have_original_links_and_real_text (test_answer_depth.FormulaOneSources) ... skipped 'F1 app assets are not in this checkout'
+
+----------------------------------------------------------------------
+Ran 9 tests in 0.032s
+
+OK (skipped=1)

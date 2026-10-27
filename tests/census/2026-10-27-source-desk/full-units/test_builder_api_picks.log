@@ -1,0 +1,11 @@
+test_known_legacy_name_gets_docs_and_optional_key_route (test_builder_api_picks.OlderAPICardMetadata) ... ok
+test_api_helper_static_failure_rejected_in_build_part (test_builder_api_picks.Picks) ... ok
+test_links_are_registry_only (test_builder_api_picks.Picks) ... ok
+test_merge_preserves_each_api_helper_and_adds_supported_free_source (test_builder_api_picks.Picks) ... ok
+test_multiple_helper_schema_and_invalid_code_reported (test_builder_api_picks.Picks) ... ok
+test_section_api_generation_is_concrete_and_does_not_widen_scope (test_builder_api_picks.Picks) ... ok
+
+----------------------------------------------------------------------
+Ran 6 tests in 0.242s
+
+OK

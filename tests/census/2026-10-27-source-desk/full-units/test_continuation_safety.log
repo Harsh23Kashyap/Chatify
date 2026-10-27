@@ -1,0 +1,20 @@
+test_attribution_is_idempotent (test_continuation_safety.ContinuationSafety) ... ok
+test_attribution_runs_in_sync_and_stream_paths (test_continuation_safety.ContinuationSafety) ... ok
+test_duplicate_article_chunks_count_once (test_continuation_safety.ContinuationSafety) ... ok
+test_english_opinion_is_attributed (test_continuation_safety.ContinuationSafety) ... ok
+test_hindi_claim_cannot_be_presented_without_attribution (test_continuation_safety.ContinuationSafety) ... ok
+test_missing_publication_dates_is_clear_not_fallback (test_continuation_safety.ContinuationSafety) ... ok
+test_other_apps_unchanged (test_continuation_safety.ContinuationSafety) ... ok
+test_pipe_source_is_escaped (test_continuation_safety.ContinuationSafety) ... ok
+test_prompt_distinguishes_quoted_disagreement (test_continuation_safety.ContinuationSafety) ... ok
+test_same_publisher_disagreement_guard_sync_stream (test_continuation_safety.ContinuationSafety) ... ok
+test_stream_followup_excludes_scoped_turn (test_continuation_safety.ContinuationSafety) ... ok
+test_stream_followup_respects_topic (test_continuation_safety.ContinuationSafety) ... ok
+test_sync_followup_excludes_scoped_turn (test_continuation_safety.ContinuationSafety) ... ok
+test_sync_followup_respects_topic (test_continuation_safety.ContinuationSafety) ... ok
+test_table_remains_parseable (test_continuation_safety.ContinuationSafety) ... ok
+
+----------------------------------------------------------------------
+Ran 15 tests in 0.030s
+
+OK

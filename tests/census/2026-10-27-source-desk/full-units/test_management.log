@@ -1,0 +1,23 @@
+test_archive_additive (test_management.ManagementTests) ... ok
+test_changed_settings_rejected (test_management.ManagementTests) ... ok
+test_deploy_plan_no_mutation (test_management.ManagementTests) ... ok
+test_diagnostics_no_raw_exception (test_management.ManagementTests) ... ok
+test_live_failure_redacted (test_management.ManagementTests) ... ok
+test_live_job_private (test_management.ManagementTests) ... ok
+test_live_never_uses_persistent_cache (test_management.ManagementTests) ... ok
+test_live_requires_choice (test_management.ManagementTests) ... ok
+test_live_requires_confirmation (test_management.ManagementTests) ... ok
+test_model_estimate (test_management.ManagementTests) ... ok
+test_model_local_only (test_management.ManagementTests) ... ok
+test_preflight_respects_readers (test_management.ManagementTests) ... ok
+test_question_limit (test_management.ManagementTests) ... ok
+test_restore_revision_guard (test_management.ManagementTests) ... ok
+test_smoke_multiple_call_notice (test_management.ManagementTests) ... ok
+test_smoke_no_chat_and_comparison (test_management.ManagementTests) ... ok
+test_source_change_invalidates_review (test_management.ManagementTests) ... ok
+test_status_offline (test_management.ManagementTests) ... ok
+
+----------------------------------------------------------------------
+Ran 18 tests in 0.083s
+
+OK

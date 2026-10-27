@@ -1,0 +1,16 @@
+test_accounts_required (test_permissions.Permissions) ... ok
+test_before_topk_and_cache (test_permissions.Permissions) ... ok
+test_collection_denial (test_permissions.Permissions) ... ok
+test_direct_scope_denial (test_permissions.Permissions) ... ok
+test_empty_deny (test_permissions.Permissions) ... ok
+test_http_accounts_and_revocation (test_permissions.Permissions) ... ok
+test_policy_revocation_cache (test_permissions.Permissions) ... ok
+test_remote_document_rule_rejected (test_permissions.Permissions) ... ok
+test_saved_answer_redacted (test_permissions.Permissions) ... ok
+test_source_listing (test_permissions.Permissions) ... ok
+test_temp_permissions_no_uploads (test_permissions.Permissions) ... ok
+
+----------------------------------------------------------------------
+Ran 11 tests in 1.073s
+
+OK

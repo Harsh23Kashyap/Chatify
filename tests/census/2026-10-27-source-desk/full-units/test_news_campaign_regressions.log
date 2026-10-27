@@ -1,0 +1,14 @@
+test_chart_count_is_computed_not_invented (test_news_campaign_regressions.NewsRegression) ... ok
+test_chart_prompt_requires_sample_only_numeric_data (test_news_campaign_regressions.NewsRegression) ... ok
+test_chart_refuses_non_count_world_data (test_news_campaign_regressions.NewsRegression) ... ok
+test_headline_prompt_requires_attribution (test_news_campaign_regressions.NewsRegression) ... ok
+test_natural_language_rest_query_has_keyword_fallback (test_news_campaign_regressions.NewsRegression) ... ok
+test_numeric_cleanup_does_not_leave_fragment (test_news_campaign_regressions.NewsRegression) ... ok
+test_numeric_cleanup_removes_whole_line (test_news_campaign_regressions.NewsRegression) ... ok
+test_short_keyword_not_changed (test_news_campaign_regressions.NewsRegression) ... ok
+test_source_config_change_invalidates_cache (test_news_campaign_regressions.NewsRegression) ... ok
+
+----------------------------------------------------------------------
+Ran 9 tests in 0.015s
+
+OK

@@ -1,0 +1,9 @@
+test_double_escaped_code_is_repaired (test_helper_code_repair.HelperCodeRepair) ... ok
+test_genuinely_broken_code_is_returned_as_is (test_helper_code_repair.HelperCodeRepair) ... ok
+test_legitimate_escapes_are_not_corrupted (test_helper_code_repair.HelperCodeRepair) ... ok
+test_valid_code_is_untouched (test_helper_code_repair.HelperCodeRepair) ... ok
+
+----------------------------------------------------------------------
+Ran 4 tests in 0.000s
+
+OK

@@ -1,0 +1,13 @@
+test_apply_backup_rollback (test_configchange.ConfigChange) ... ok
+test_candidate_stale (test_configchange.ConfigChange) ... ok
+test_current_stale (test_configchange.ConfigChange) ... ok
+test_defaults_not_reported (test_configchange.ConfigChange) ... ok
+test_diff_no_values (test_configchange.ConfigChange) ... ok
+test_invalid_candidate_no_backup (test_configchange.ConfigChange) ... ok
+test_schema_version (test_configchange.ConfigChange) ... ok
+test_symlink_target (test_configchange.ConfigChange) ... ok
+
+----------------------------------------------------------------------
+Ran 8 tests in 0.051s
+
+OK

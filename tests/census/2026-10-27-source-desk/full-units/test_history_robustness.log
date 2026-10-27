@@ -1,0 +1,29 @@
+test_500_turn_thread_fetches_old_relevant_and_recent (test_history_robustness.HistoryRobustness) ... ok
+test_chat_local_summary_survives_sqlite_restart (test_history_robustness.HistoryRobustness) ... ok
+test_deleted_chat_and_branch_do_not_import_summary (test_history_robustness.HistoryRobustness) ... ok
+test_deleted_turn_invalidates_summary_and_history (test_history_robustness.HistoryRobustness) ... ok
+test_elliptical_followups_rewrite (test_history_robustness.HistoryRobustness) ... ok
+test_empty_and_invalid_rewrite_fall_back (test_history_robustness.HistoryRobustness) ... ok
+test_malformed_temporary_history_does_not_crash_or_save (test_history_robustness.HistoryRobustness) ... ok
+test_memory_config_validates_edges (test_history_robustness.HistoryRobustness) ... ok
+test_memory_disabled_ignores_client_and_saved_context (test_history_robustness.HistoryRobustness) ... ok
+test_multiturn_correction_is_kept_for_followup (test_history_robustness.HistoryRobustness) ... ok
+test_new_topic_never_inherits_summary (test_history_robustness.HistoryRobustness) ... ok
+test_no_history_no_rewrite (test_history_robustness.HistoryRobustness) ... ok
+test_oversized_latest_turn_has_marked_head_and_tail (test_history_robustness.HistoryRobustness) ... ok
+test_prompt_reserves_evidence_and_question_space (test_history_robustness.HistoryRobustness) ... ok
+test_recent_order_survives_irrelevant_word_overlap (test_history_robustness.HistoryRobustness) ... ok
+test_rewrite_provider_error_falls_back (test_history_robustness.HistoryRobustness) ... ok
+test_scoped_turn_never_returns_in_general_history (test_history_robustness.HistoryRobustness) ... ok
+test_source_digest_rejects_out_of_band_deletion (test_history_robustness.HistoryRobustness) ... ok
+test_summaries_refresh_after_50_turns (test_history_robustness.HistoryRobustness) ... ok
+test_summary_failure_does_not_lose_saved_turn (test_history_robustness.HistoryRobustness) ... ok
+test_summary_prompt_is_bounded (test_history_robustness.HistoryRobustness) ... ok
+test_three_turn_stream_followup_and_correction_reach_retrieval (test_history_robustness.HistoryRobustness) ... ok
+test_topic_shared_across_chats_does_not_share_summary (test_history_robustness.HistoryRobustness) ... ok
+test_wrong_owner_history_rejected (test_history_robustness.HistoryRobustness) ... ok
+
+----------------------------------------------------------------------
+Ran 24 tests in 0.085s
+
+OK

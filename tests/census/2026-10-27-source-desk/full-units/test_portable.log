@@ -1,0 +1,18 @@
+test_permissions_and_lock (test_portable.ExportPermissions) ... ok
+test_env_names_not_values (test_portable.PortableTests) ... ok
+test_external_root (test_portable.PortableTests) ... ok
+test_include_docs_false_bundles_empty_source (test_portable.PortableTests) ... ok
+test_mysql_removed (test_portable.PortableTests) ... ok
+test_no_overwrite (test_portable.PortableTests) ... ok
+test_override_live_settings (test_portable.PortableTests) ... ok
+test_private_source (test_portable.PortableTests) ... ok
+test_private_state_source (test_portable.PortableTests) ... ok
+test_roundtrip (test_portable.PortableTests) ... ok
+test_secret_config (test_portable.PortableTests) ... ok
+test_size_limit (test_portable.PortableTests) ... ok
+test_symlink (test_portable.PortableTests) ... ok
+
+----------------------------------------------------------------------
+Ran 13 tests in 0.859s
+
+OK

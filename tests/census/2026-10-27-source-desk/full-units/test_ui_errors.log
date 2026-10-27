@@ -1,0 +1,11 @@
+test_plain_messages_not_browser_text (test_ui_errors.UiErrors) ... /home/sandbox/chatify/tests/test_ui_errors.py:8: ResourceWarning: unclosed file <_io.TextIOWrapper name='/home/sandbox/chatify/tests/../chatify/web/app.js' mode='r' encoding='utf-8'>
+  def setUp(self): self.js = open(os.path.join(W, "app.js"), encoding="utf-8").read()
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+ok
+test_question_and_partial_text_are_kept (test_ui_errors.UiErrors) ... ok
+test_unreadable_stream_lines_are_skipped (test_ui_errors.UiErrors) ... ok
+
+----------------------------------------------------------------------
+Ran 3 tests in 0.003s
+
+OK

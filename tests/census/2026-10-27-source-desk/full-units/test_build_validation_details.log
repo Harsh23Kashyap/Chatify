@@ -1,0 +1,17 @@
+test_complete (test_buildjobs.Jobs) ... ok
+test_optional_logo_failure_keeps_text_draft_and_finishes_review (test_buildjobs.Jobs) ... ok
+test_optional_logo_reaches_final_review_and_completed_draft (test_buildjobs.Jobs) ... ok
+test_provider_block_stops_pending_calls (test_buildjobs.Jobs) ... ok
+test_retry_only_failed (test_buildjobs.Jobs) ... ok
+test_complete (test_build_validation_details.ValidationDetails) ... ok
+test_exact_prompt_and_helper_failures_retry_preserves_parts (test_build_validation_details.ValidationDetails) ... ok
+test_helper_missing_brief_and_length_reasons (test_build_validation_details.ValidationDetails) ... ok
+test_optional_logo_failure_keeps_text_draft_and_finishes_review (test_build_validation_details.ValidationDetails) ... ok
+test_optional_logo_reaches_final_review_and_completed_draft (test_build_validation_details.ValidationDetails) ... ok
+test_provider_block_stops_pending_calls (test_build_validation_details.ValidationDetails) ... ok
+test_retry_only_failed (test_build_validation_details.ValidationDetails) ... ok
+
+----------------------------------------------------------------------
+Ran 12 tests in 5.594s
+
+OK

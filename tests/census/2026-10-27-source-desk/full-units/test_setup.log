@@ -1,0 +1,32 @@
+test_ask_key_survives_closed_input (test_setup.T) ... 
+Which AI provider will answer questions?
+  1. OpenAI
+  2. Claude (Anthropic)
+  3. Gemini
+  4. DeepSeek
+  5. Groq
+  6. Mistral
+  7. OpenRouter
+  8. MiniMax
+  9. Xiaomi MiMo
+  10. Ollama (local, no key)
+  Enter. Skip for now (offline Demo)
+
+Skipped the key step. You can add a key later on the Configuration page, Model tab.
+ok
+test_check_reports_without_changing_anything (test_setup.T) ... ok
+test_port_helpers (test_setup.T) ... ok
+test_req_hash_ignores_mtime (test_setup.T) ... /home/sandbox/chatify/tests/../setup_and_run.py:48: ResourceWarning: unclosed file <_io.BufferedReader name='/tmp/tmpb3tmepaq'>
+  return hashlib.sha256(open(path, "rb").read()).hexdigest()
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+ok
+test_venv_python_path (test_setup.T) ... ok
+test_wsl_detect (test_setup.T) ... /home/sandbox/chatify/tests/../setup_and_run.py:29: ResourceWarning: unclosed file <_io.TextIOWrapper name='/proc/version' mode='r' encoding='UTF-8'>
+  return "microsoft" in open("/proc/version").read().lower()
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+ok
+
+----------------------------------------------------------------------
+Ran 6 tests in 0.003s
+
+OK

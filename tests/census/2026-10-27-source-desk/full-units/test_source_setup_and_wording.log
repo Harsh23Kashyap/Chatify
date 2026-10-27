@@ -1,0 +1,10 @@
+test_config_and_exports_follow_theme_wording_overrides (test_source_setup_and_wording.EffectiveWording) ... ok
+test_engine_surfaces_setup_message_in_source_errors (test_source_setup_and_wording.OpenAlexSetupRequired) ... ok
+test_missing_key_raises_named_setup_error (test_source_setup_and_wording.OpenAlexSetupRequired) ... ok
+test_source_errors_roundtrip_and_legacy_db_migration (test_source_setup_and_wording.SourceErrorsPersistence) ... ok
+test_missing_label_defaults_to_readable_type_name (test_source_setup_and_wording.SourceLabelDefaults) ... ok
+
+----------------------------------------------------------------------
+Ran 5 tests in 1.575s
+
+OK

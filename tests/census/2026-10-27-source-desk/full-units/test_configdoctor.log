@@ -1,0 +1,18 @@
+test_all_apps (test_configdoctor.ConfigDoctor) ... ok
+test_bad_shape (test_configdoctor.ConfigDoctor) ... ok
+test_bool_number (test_configdoctor.ConfigDoctor) ... ok
+test_custom_style (test_configdoctor.ConfigDoctor) ... ok
+test_duplicate (test_configdoctor.ConfigDoctor) ... ok
+test_fallback_shape (test_configdoctor.ConfigDoctor) ... ok
+test_good (test_configdoctor.ConfigDoctor) ... ok
+test_line_typo (test_configdoctor.ConfigDoctor) ... ok
+test_missing_model (test_configdoctor.ConfigDoctor) ... ok
+test_no_env_loaded (test_configdoctor.ConfigDoctor) ... ok
+test_schema_serializable (test_configdoctor.ConfigDoctor) ... ok
+test_secret_key (test_configdoctor.ConfigDoctor) ... ok
+test_syntax_hides_secret (test_configdoctor.ConfigDoctor) ... ok
+
+----------------------------------------------------------------------
+Ran 13 tests in 0.136s
+
+OK

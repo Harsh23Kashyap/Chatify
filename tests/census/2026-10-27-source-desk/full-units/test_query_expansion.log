@@ -1,0 +1,31 @@
+test_ambiguous_near_miss_rescued_at_recall_but_semantic_stage_drops_it (test_query_expansion.AdversarialExpansionTest) ... ok
+test_expanded_only_junk_rescued_at_recall_but_semantic_stage_drops_it (test_query_expansion.AdversarialExpansionTest) ... ok
+test_expansion_adding_a_negation_is_rejected (test_query_expansion.AdversarialExpansionTest) ... ok
+test_injected_padding_raises_the_floor_and_abstains (test_query_expansion.AdversarialExpansionTest) ... ok
+test_injection_rewrite_dropping_original_words_is_rejected (test_query_expansion.AdversarialExpansionTest) ... ok
+test_on_intent_negated_question_still_rescues_with_parity (test_query_expansion.AdversarialExpansionTest) ... ok
+test_semantic_backstop_receives_original_question_only (test_query_expansion.AdversarialExpansionTest) ... ok
+test_all_junk_still_abstains (test_query_expansion.QueryExpansionTest) ... ok
+test_corpus_question_never_expands (test_query_expansion.QueryExpansionTest) ... ok
+test_expansion_call_is_bounded_by_cache (test_query_expansion.QueryExpansionTest) ... ok
+test_expansion_substituting_original_words_is_allowed_and_judged (test_query_expansion.QueryExpansionTest) ... ok
+test_mock_provider_output_is_rejected_by_contract (test_query_expansion.QueryExpansionTest) ... ok
+test_mock_provider_type_disables_the_rescue_entirely (test_query_expansion.QueryExpansionTest) ... ok
+test_negation_parity_violation_is_rejected (test_query_expansion.QueryExpansionTest) ... ok
+test_provider_failure_falls_back_to_abstention (test_query_expansion.QueryExpansionTest) ... ok
+test_single_token_laundering_is_blocked (test_query_expansion.QueryExpansionTest) ... ok
+test_synonym_rescue_surfaces_zero_overlap_passage (test_query_expansion.QueryExpansionTest) ... ok
+test_distinctive_original_word_still_anchors_fail_open (test_query_expansion.SubstitutionExpansionTest) ... ok
+test_expanded_only_passage_is_fail_closed_even_when_stems_preserved (test_query_expansion.SubstitutionExpansionTest) ... ok
+test_generic_original_words_do_not_anchor_a_wrong_concept (test_query_expansion.SubstitutionExpansionTest) ... ok
+test_original_word_anchored_passage_stays_fail_open_when_judge_fails (test_query_expansion.SubstitutionExpansionTest) ... ok
+test_substituted_rewrite_abstains_when_judge_says_none (test_query_expansion.SubstitutionExpansionTest) ... ok
+test_substituted_rewrite_is_fail_closed_when_judge_fails (test_query_expansion.SubstitutionExpansionTest) ... ok
+test_substituted_rewrite_rescues_when_judge_confirms (test_query_expansion.SubstitutionExpansionTest) ... ok
+test_substitution_still_enforces_negation_parity (test_query_expansion.SubstitutionExpansionTest) ... ok
+test_substitution_still_rejects_corpus_references (test_query_expansion.SubstitutionExpansionTest) ... ok
+
+----------------------------------------------------------------------
+Ran 26 tests in 0.045s
+
+OK

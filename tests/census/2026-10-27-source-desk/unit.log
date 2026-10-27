@@ -1,0 +1,1397 @@
+test_catalog_keeps_existing_items (test_about_continuity.AboutContinuity) ... ok
+test_controlled_feature_copy_motion (test_about_feature_states.AboutFeatures) ... ok
+test_old_content_fades_without_selection_races (test_about_feature_states.AboutFeatures) ... ok
+test_intro_only_fades_once_and_finishes_in_220ms (test_about_intro_states.AboutIntroStates) ... ok
+test_all_registered_default (test_actions.ActionTests) ... ok
+test_exact_fields (test_actions.ActionTests) ... ok
+test_expire (test_actions.ActionTests) ... ok
+test_one_use_and_no_prepare_effect (test_actions.ActionTests) ... ok
+test_owner_bound (test_actions.ActionTests) ... ok
+test_revoke (test_actions.ActionTests) ... ok
+test_unknown_no_arbitrary (test_actions.ActionTests) ... ok
+test_writes_off (test_actions.ActionTests) ... ok
+test_117_stage_input_constructions (test_adversarial_matrix.Matrix) ... ok
+test_26_code_input_constructions (test_adversarial_matrix.Matrix) ... ok
+test_code_escape_rejections (test_adversarial_matrix.Matrix) ... ok
+test_contract_smuggling_and_citation_namespace (test_adversarial_matrix.Matrix) ... ok
+test_custom_runtime_all9_keep_boundary (test_adversarial_matrix.Matrix) ... ok
+test_enabled_question_failure_prevents_retrieval (test_adversarial_matrix.Matrix) ... ok
+test_fail_closed_question_and_support (test_adversarial_matrix.Matrix) ... ok
+test_generated_maxlength_keeps_boundary (test_adversarial_matrix.Matrix) ... ok
+test_history_not_promoted_to_system (test_adversarial_matrix.Matrix) ... ok
+test_invalid_rewrite_preserves_original (test_adversarial_matrix.Matrix) ... ok
+test_legitimate_data_not_keyword_blocked (test_adversarial_matrix.Matrix) ... ok
+test_feedback_controls_removed_without_losing_answer_actions (test_answer_action_row.AnswerActionRow) ... ok
+test_sidebar_toggle_handles_docked_and_overlay_modes (test_answer_action_row.AnswerActionRow) ... ok
+test_temporary_transition_and_empty_chat_start_at_top (test_answer_action_row.AnswerActionRow) ... ok
+test_claude_limit (test_answer_depth.AnswerDepth) ... ok
+test_deep_mode_reaches_stream_and_fresh (test_answer_depth.AnswerDepth) ... ok
+test_deep_retrieval_and_cache_isolation (test_answer_depth.AnswerDepth) ... ok
+test_defaults_and_prompts (test_answer_depth.AnswerDepth) ... ok
+test_expanded_prompt_fits_default_budget (test_answer_depth.AnswerDepth) ... ok
+test_explicit_limits_preserved (test_answer_depth.AnswerDepth) ... ok
+test_invalid_output_limit (test_answer_depth.AnswerDepth) ... ok
+test_openai_and_reasoning_request_fields (test_answer_depth.AnswerDepth) ... ok
+test_fia_snapshots_have_original_links_and_real_text (test_answer_depth.FormulaOneSources) ... skipped 'F1 app assets are not in this checkout'
+test_accent_not_pdf_injection (test_answer_export.Export) ... ERROR
+test_accented_latin_renders_via_font (test_answer_export.Export) ... ERROR
+test_bibtex_missing_optional_metadata (test_answer_export.Export) ... ok
+test_branded_template_fonts_paper_and_metadata (test_answer_export.Export) ... ERROR
+test_devanagari_renders_not_rejected (test_answer_export.Export) ... ERROR
+test_escaped_pipe_table_label_retained (test_answer_export.Export) ... ERROR
+test_markdown_snapshot_private (test_answer_export.Export) ... ok
+test_multi_page_no_cut (test_answer_export.Export) ... ERROR
+test_null_optional_url_exports (test_answer_export.Export) ... ERROR
+test_stylized_latin_and_accents_render_as_themselves (test_answer_export.Export) ... ERROR
+test_table_extra_cells_and_following_pipe_prose_not_lost (test_answer_export.Export) ... ERROR
+test_table_recomposed_as_labeled_rows (test_answer_export.Export) ... ERROR
+test_typographic_unicode_no_longer_rejected (test_answer_export.Export) ... ERROR
+test_typographic_unicode_renders_real_pdf (test_answer_export.Export) ... ERROR
+test_uncovered_scripts_still_rejected_honestly (test_answer_export.Export) ... ERROR
+test_wide_unbroken_text_preserved (test_answer_export.Export) ... ERROR
+test_markdown_and_latex_normalized_in_exports (test_answer_export.PlainTextDisplay) ... ERROR
+test_pdf_keeps_sources_heading_with_first_source (test_answer_export.PlainTextDisplay) ... ERROR
+test_preview_bullets_normalized (test_answer_export.PlainTextDisplay) ... ok
+test_script_markers_keep_explicit_notation (test_answer_export.PlainTextDisplay) ... ok
+test_all_failed_wording (test_answer_export.SourceNoteExports) ... ok
+test_markdown_carries_named_note (test_answer_export.SourceNoteExports) ... ok
+test_no_note_without_errors (test_answer_export.SourceNoteExports) ... ok
+test_pdf_carries_named_note (test_answer_export.SourceNoteExports) ... ERROR
+test_server_imports_and_pdf_fails_clear_without_fpdf (test_answer_export.WheelInstallImport) ... ok
+test_every_catalog_entry_carries_source_and_docs (test_apiterms.Catalog) ... ok
+test_known_service_gets_verified_terms_and_docs (test_apiterms.Catalog) ... ok
+test_unknown_service_gets_honest_note_not_invented_terms (test_apiterms.Catalog) ... ok
+test_draft_suggestions_carry_verified_terms (test_apiterms.Wiring) ... ok
+test_model_written_terms_fields_are_dropped_then_server_attached (test_apiterms.Wiring) ... ok
+test_unknown_service_gets_note_and_roundtrip_revalidates (test_apiterms.Wiring) ... ok
+test_anchors_rejected (test_appbuilder.BuilderTests) ... ok
+test_app_only_save_preserves_sources_provider_and_setup_files (test_appbuilder.BuilderTests) ... ok
+test_bad_draft_before_call (test_appbuilder.BuilderTests) ... ok
+test_bad_yaml (test_appbuilder.BuilderTests) ... ok
+test_blank_pipeline_prompt_rejected (test_appbuilder.BuilderTests) ... ok
+test_complete_extensions_and_all_prompts (test_appbuilder.BuilderTests) ... ok
+test_complete_save_no_execute_extensions_restart (test_appbuilder.BuilderTests) ... ok
+test_complete_save_rolls_back_each_setup_replace_failure (test_appbuilder.BuilderTests) ... ok
+test_consent_gate (test_appbuilder.BuilderTests) ... ok
+test_demo_gate (test_appbuilder.BuilderTests) ... ok
+test_deploy_requires_consent_no_execution (test_appbuilder.BuilderTests) ... ok
+test_direct_config_response (test_appbuilder.BuilderTests) ... ok
+test_field_changes_against_saved_not_model (test_appbuilder.BuilderTests) ... ok
+test_followup (test_appbuilder.BuilderTests) ... ok
+test_full_draft (test_appbuilder.BuilderTests) ... ok
+test_generated_provider_model_is_clamped_to_host (test_appbuilder.BuilderTests) ... ok
+test_hosted_save_never_touches_served_app_file (test_appbuilder.BuilderTests) ... ok
+test_inline_secret (test_appbuilder.BuilderTests) ... ok
+test_invalid_bool (test_appbuilder.BuilderTests) ... ok
+test_invalid_provider (test_appbuilder.BuilderTests) ... ok
+test_negative_and_numeric_bounds (test_appbuilder.BuilderTests) ... ok
+test_no_changes_empty_diff (test_appbuilder.BuilderTests) ... ok
+test_no_private_config_in_prompt (test_appbuilder.BuilderTests) ... ok
+test_not_mapping (test_appbuilder.BuilderTests) ... ok
+test_out_of_scope (test_appbuilder.BuilderTests) ... ok
+test_partial_defaults_complete (test_appbuilder.BuilderTests) ... ok
+test_python_rejected (test_appbuilder.BuilderTests) ... ok
+test_review_includes_removed_mapping_setting (test_appbuilder.BuilderTests) ... ok
+test_review_includes_removed_nested_source_fields (test_appbuilder.BuilderTests) ... ok
+test_review_missing (test_appbuilder.BuilderTests) ... ok
+test_review_no_write (test_appbuilder.BuilderTests) ... ok
+test_review_scope (test_appbuilder.BuilderTests) ... ok
+test_revision_save (test_appbuilder.BuilderTests) ... ok
+test_revision_save_stale (test_appbuilder.BuilderTests) ... ok
+test_secret_brief (test_appbuilder.BuilderTests) ... ok
+test_setup_rollback_failure_still_restores_app_and_reports_uncertainty (test_appbuilder.BuilderTests) ... ok
+test_source_path_must_be_supplied (test_appbuilder.BuilderTests) ... ok
+test_sources_mapping_rejected (test_appbuilder.BuilderTests) ... ok
+test_tweak_receives_only_draft_not_saved_private_config (test_appbuilder.BuilderTests) ... ok
+test_unknown_nested (test_appbuilder.BuilderTests) ... ok
+test_user_named_model_is_preserved (test_appbuilder.BuilderTests) ... ok
+test_active_non_owner_blocked (test_appbuilder_http.BuildActiveHTTP) ... ok
+test_active_owner_gets_scoped_snapshot (test_appbuilder_http.BuildActiveHTTP) ... ok
+test_archive_invalid_no_chat (test_appbuilder_http.BuildActiveHTTP) ... ok
+test_credential_url_rejected (test_appbuilder_http.BuildActiveHTTP) ... ok
+test_model_review_blocks_remote (test_appbuilder_http.BuildActiveHTTP) ... ok
+test_no_live_without_review (test_appbuilder_http.BuildActiveHTTP) ... ok
+test_owner_only (test_appbuilder_http.BuildActiveHTTP) ... ok
+test_settings_history_and_reserved_hidden (test_appbuilder_http.BuildActiveHTTP) ... ok
+test_source_credentials_admin_only_and_not_echoed (test_appbuilder_http.BuildActiveHTTP) ... ok
+test_source_credentials_locked (test_appbuilder_http.BuildActiveHTTP) ... ok
+test_archive_invalid_no_chat (test_appbuilder_http.BuilderHTTP) ... ok
+test_consent_and_bad_selection_no_transport (test_appbuilder_http.BuilderHTTP) ... ok
+test_credential_url_rejected (test_appbuilder_http.BuilderHTTP) ... ok
+test_download_readme_truthful_when_helper_code_is_bundled (test_appbuilder_http.BuilderHTTP) ... ok
+test_download_zip_can_review_and_load (test_appbuilder_http.BuilderHTTP) ... ok
+test_edit_one_prompt_after_builder_apply_keeps_other_saved_stages (test_appbuilder_http.BuilderHTTP) ... ok
+test_incomplete_rollback_returns_explicit_uncertain_saved_state (test_appbuilder_http.BuilderHTTP) ... ok
+test_launch_failure_reissues_ticket_and_retry_opens_workspace (test_appbuilder_http.BuilderHTTP) ... Traceback (most recent call last):
+  File "/home/sandbox/chatify/chatify/server.py", line 529, in _route
+    return self._send(200,loader.load(reviewed['token'],owner=o))
+  File "/home/sandbox/chatify/tests/test_appbuilder_http.py", line 60, in boom
+    def boom(*a,**k):raise ValueError('simulated workspace start failure')
+ValueError: simulated workspace start failure
+ok
+test_model_review_blocks_remote (test_appbuilder_http.BuilderHTTP) ... ok
+test_no_live_without_review (test_appbuilder_http.BuilderHTTP) ... ok
+test_owner_gate (test_appbuilder_http.BuilderHTTP) ... ok
+test_owner_only (test_appbuilder_http.BuilderHTTP) ... ok
+test_parse_no_model_no_save_and_scope (test_appbuilder_http.BuilderHTTP) ... ok
+test_parse_owner_gate_and_validation (test_appbuilder_http.BuilderHTTP) ... ok
+test_prompt_editor_get_shows_saved_builder_prompts_without_restart (test_appbuilder_http.BuilderHTTP) ... ok
+test_reset_one_prompt_after_builder_apply_keeps_other_saved_stages (test_appbuilder_http.BuilderHTTP) ... ok
+test_review_then_save_one_use (test_appbuilder_http.BuilderHTTP) ... ok
+test_save_requires_review (test_appbuilder_http.BuilderHTTP) ... ok
+test_section_draft_http_retain_reopen_review_keeps_scope (test_appbuilder_http.BuilderHTTP) ... ok
+test_settings_history_and_reserved_hidden (test_appbuilder_http.BuilderHTTP) ... ok
+test_source_credentials_admin_only_and_not_echoed (test_appbuilder_http.BuilderHTTP) ... ok
+test_source_credentials_locked (test_appbuilder_http.BuilderHTTP) ... ok
+test_talk_selected_draft_and_no_state_changes (test_appbuilder_http.BuilderHTTP) ... ok
+test_auto_and_swatch_clear_stale_validation (test_appearance_color_recovery.ColorRecovery) ... ok
+test_preview_welcome_and_color_validation_reset (test_appearance_wording_states.WordingStates) ... ok
+test_loading_and_local_files_share_selection_sequence (test_background_states.BackgroundStates) ... ok
+test_background_only_fades_and_cancels_stale_cover (test_background_transition.BackgroundTransition) ... ok
+test_disclosure_checks_device_and_saved_motion (test_background_transition.BackgroundTransition) ... ok
+test_environment_allowlist (test_bounded_plugin.BoundedTests) ... ok
+test_explicit_source_key_only (test_bounded_plugin.BoundedTests) ... ok
+test_failure_redacted (test_bounded_plugin.BoundedTests) ... ok
+test_result_and_env (test_bounded_plugin.BoundedTests) ... ok
+test_result_limit (test_bounded_plugin.BoundedTests) ... ok
+test_timeout_kills (test_bounded_plugin.BoundedTests) ... ok
+test_wrong_result (test_bounded_plugin.BoundedTests) ... ok
+test_deleted_chat_cannot_branch (test_branch.Branch) ... ok
+test_deleted_turn_cannot_branch (test_branch.Branch) ... ok
+test_first_turn_has_no_history (test_branch.Branch) ... ok
+test_invalid_question_no_chat_created (test_branch.Branch) ... ok
+test_other_owner_rejected_no_writes (test_branch.Branch) ... ok
+test_preserves_original_and_excludes_future (test_branch.Branch) ... ok
+test_svg_is_not_accepted_as_logo (test_brand.BrandTests) ... ok
+test_watermark_default_and_save (test_brand.BrandTests) ... ok
+test_endpoint_auth_and_lock (test_budget.BudgetPermissions) ... ok
+test_atomic_concurrency (test_budget.BudgetTests) ... ok
+test_bad_values (test_budget.BudgetTests) ... ok
+test_cross_instance (test_budget.BudgetTests) ... ok
+test_day_reset (test_budget.BudgetTests) ... ok
+test_dollar_cap_fail_closed (test_budget.BudgetTests) ... ok
+test_global_user_quotas (test_budget.BudgetTests) ... ok
+test_model_limit (test_budget.BudgetTests) ... ok
+test_restart (test_budget.BudgetTests) ... ok
+test_schema (test_budget.BudgetTests) ... ok
+test_complete (test_buildjobs.Jobs) ... ok
+test_optional_logo_failure_keeps_text_draft_and_finishes_review (test_buildjobs.Jobs) ... ok
+test_optional_logo_reaches_final_review_and_completed_draft (test_buildjobs.Jobs) ... ok
+test_provider_block_stops_pending_calls (test_buildjobs.Jobs) ... ok
+test_retry_only_failed (test_buildjobs.Jobs) ... ok
+test_complete (test_build_validation_details.ValidationDetails) ... ok
+test_exact_prompt_and_helper_failures_retry_preserves_parts (test_build_validation_details.ValidationDetails) ... ok
+test_helper_missing_brief_and_length_reasons (test_build_validation_details.ValidationDetails) ... ok
+test_optional_logo_failure_keeps_text_draft_and_finishes_review (test_build_validation_details.ValidationDetails) ... ok
+test_optional_logo_reaches_final_review_and_completed_draft (test_build_validation_details.ValidationDetails) ... ok
+test_provider_block_stops_pending_calls (test_build_validation_details.ValidationDetails) ... ok
+test_retry_only_failed (test_build_validation_details.ValidationDetails) ... ok
+test_inferred_scope_and_legacy_expanded_record_recovery (test_builddrafts.Drafts) ... ok
+test_key_fields_scrubbed (test_builddrafts.Drafts) ... ok
+test_numeric_settings_survive_scrub_and_reopen_validates (test_builddrafts.Drafts) ... ok
+test_restart_owner_isolation_and_no_apply (test_builddrafts.Drafts) ... ok
+test_section_draft_preserves_scope_and_can_be_reviewed_after_restart (test_builddrafts.Drafts) ... ok
+test_selected_section_mismatch_is_rejected_without_retention (test_builddrafts.Drafts) ... ok
+test_temperature_and_timeout_survive_scrub (test_builddrafts.Drafts) ... ok
+test_known_legacy_name_gets_docs_and_optional_key_route (test_builder_api_picks.OlderAPICardMetadata) ... ok
+test_api_helper_static_failure_rejected_in_build_part (test_builder_api_picks.Picks) ... ok
+test_links_are_registry_only (test_builder_api_picks.Picks) ... ok
+test_merge_preserves_each_api_helper_and_adds_supported_free_source (test_builder_api_picks.Picks) ... ok
+test_multiple_helper_schema_and_invalid_code_reported (test_builder_api_picks.Picks) ... ok
+test_section_api_generation_is_concrete_and_does_not_widen_scope (test_builder_api_picks.Picks) ... ok
+test_bounded_editor_and_heading_visibility (test_builder_density_states.BuilderDensity) ... ok
+test_saved_app_starts_separately_preserves_parent (test_builder_launch.BuilderLaunch) ... Traceback (most recent call last):
+  File "/home/sandbox/chatify/chatify/server.py", line 524, in _route
+    if path.is_symlink() or (path.read_text() if path.exists() else None)!=expected:raise ValueError('Saved setup changed. Review and save again before using it')
+ValueError: Saved setup changed. Review and save again before using it
+ok
+test_pending_retry_is_not_reenabled_by_poll (test_builder_retry_state.RetryState) ... ok
+test_logo_draft (test_buildimages.Images) ... ok
+test_openai_probe (test_buildimages.Images) ... /usr/lib/python3.10/copy.py:230: ResourceWarning: unclosed <socket.socket [closed] fd=9, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=6>
+  for key, value in x.items():
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+ok
+test_unsupported_provider (test_buildimages.Images) ... ok
+test_blank_wording_retry_retains_successful_parts (test_buildjobs.APIDescriptionChecks) ... ok
+test_invalid_helper_json_reports_exact_corrective_contract (test_buildjobs.APIDescriptionChecks) ... ok
+test_json_escape_not_silently_repaired (test_buildjobs.APIDescriptionChecks) ... ok
+test_known_api_wrapper_only (test_buildjobs.APIDescriptionChecks) ... ok
+test_name_only_api_description_rejected (test_buildjobs.APIDescriptionChecks) ... ok
+test_review_context_keeps_unknowns_and_real_concerns (test_buildjobs.APIDescriptionChecks) ... ok
+test_review_verdict_never_erases_concerns_or_uncertainty (test_buildjobs.APIDescriptionChecks) ... ok
+test_too_few_api_picks_rejected (test_buildjobs.APIDescriptionChecks) ... ok
+test_topic_language_never_sets_app_quotas (test_buildjobs.APIDescriptionChecks) ... ok
+test_active_empty (test_buildjobs.ActiveView) ... ok
+test_active_scopes_details_to_owner (test_buildjobs.ActiveView) ... ok
+test_final_branding_redrafts_identity_only (test_buildjobs.BrandingRetryTests) ... ok
+test_cancelled_inflight_writes_no_checkpoint (test_buildjobs.CheckpointEdges) ... ok
+test_changed_budget_settings_start_fresh (test_buildjobs.CheckpointEdges) ... /home/sandbox/chatify/chatify/buildjobs.py:107: ResourceWarning: unclosed file <_io.TextIOWrapper name='/tmp/tmp51z4xok4/build-spend.json' mode='w' encoding='UTF-8'>
+  try:json.dump(self.spend,open(self.spend_path,'w'))
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/home/sandbox/chatify/chatify/buildjobs.py:78: ResourceWarning: unclosed file <_io.TextIOWrapper name='/tmp/tmp51z4xok4/build-checkpoints/4c1029697ee35871.json.tmp' mode='w' encoding='UTF-8'>
+  tmp=path+'.tmp';json.dump(payload,open(tmp,'w'));os.replace(tmp,path)
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/home/sandbox/chatify/chatify/buildjobs.py:65: ResourceWarning: unclosed file <_io.TextIOWrapper name='/tmp/tmp51z4xok4/build-spend.json' mode='r' encoding='UTF-8'>
+  try:self.spend=json.load(open(self.spend_path))
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/home/sandbox/chatify/chatify/buildjobs.py:91: ResourceWarning: unclosed file <_io.TextIOWrapper name='/tmp/tmp51z4xok4/build-checkpoints/4c1029697ee35871.json' mode='r' encoding='UTF-8'>
+  try:payload=json.load(open(path))
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/home/sandbox/chatify/chatify/buildjobs.py:83: ResourceWarning: unclosed file <_io.TextIOWrapper name='/tmp/tmp51z4xok4/build-checkpoints/4c1029697ee35871.json' mode='r' encoding='UTF-8'>
+  try:writer=json.load(open(path)).get('writer')
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+ok
+test_corrupt_checkpoint_starts_fresh (test_buildjobs.CheckpointEdges) ... /home/sandbox/chatify/tests/test_buildjobs.py:100: ResourceWarning: unclosed file <_io.TextIOWrapper name='/tmp/tmp3dopjd6d/build-checkpoints/4c1029697ee35871.json' mode='w' encoding='UTF-8'>
+  path=jobs._checkpoint_path('owner');os.makedirs(os.path.dirname(path));open(path,'w').write('{not json')
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/home/sandbox/chatify/chatify/buildjobs.py:92: ResourceWarning: unclosed file <_io.TextIOWrapper name='/tmp/tmp3dopjd6d/build-checkpoints/4c1029697ee35871.json' mode='r' encoding='UTF-8'>
+  except Exception:return
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/home/sandbox/chatify/chatify/buildjobs.py:107: ResourceWarning: unclosed file <_io.TextIOWrapper name='/tmp/tmp3dopjd6d/build-spend.json' mode='w' encoding='UTF-8'>
+  try:json.dump(self.spend,open(self.spend_path,'w'))
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/home/sandbox/chatify/chatify/buildjobs.py:78: ResourceWarning: unclosed file <_io.TextIOWrapper name='/tmp/tmp3dopjd6d/build-checkpoints/4c1029697ee35871.json.tmp' mode='w' encoding='UTF-8'>
+  tmp=path+'.tmp';json.dump(payload,open(tmp,'w'));os.replace(tmp,path)
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/home/sandbox/chatify/chatify/buildjobs.py:83: ResourceWarning: unclosed file <_io.TextIOWrapper name='/tmp/tmp3dopjd6d/build-checkpoints/4c1029697ee35871.json' mode='r' encoding='UTF-8'>
+  try:writer=json.load(open(path)).get('writer')
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+ok
+test_model_change_starts_fresh (test_buildjobs.CheckpointEdges) ... /home/sandbox/chatify/chatify/buildjobs.py:107: ResourceWarning: unclosed file <_io.TextIOWrapper name='/tmp/tmpa088v3zj/build-spend.json' mode='w' encoding='UTF-8'>
+  try:json.dump(self.spend,open(self.spend_path,'w'))
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/home/sandbox/chatify/chatify/buildjobs.py:78: ResourceWarning: unclosed file <_io.TextIOWrapper name='/tmp/tmpa088v3zj/build-checkpoints/4c1029697ee35871.json.tmp' mode='w' encoding='UTF-8'>
+  tmp=path+'.tmp';json.dump(payload,open(tmp,'w'));os.replace(tmp,path)
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/home/sandbox/chatify/chatify/buildjobs.py:65: ResourceWarning: unclosed file <_io.TextIOWrapper name='/tmp/tmpa088v3zj/build-spend.json' mode='r' encoding='UTF-8'>
+  try:self.spend=json.load(open(self.spend_path))
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/home/sandbox/chatify/chatify/buildjobs.py:91: ResourceWarning: unclosed file <_io.TextIOWrapper name='/tmp/tmpa088v3zj/build-checkpoints/4c1029697ee35871.json' mode='r' encoding='UTF-8'>
+  try:payload=json.load(open(path))
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/home/sandbox/chatify/chatify/buildjobs.py:83: ResourceWarning: unclosed file <_io.TextIOWrapper name='/tmp/tmpa088v3zj/build-checkpoints/4c1029697ee35871.json' mode='r' encoding='UTF-8'>
+  try:writer=json.load(open(path)).get('writer')
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+ok
+test_resume_never_touches_persisted_spend (test_buildjobs.CheckpointEdges) ... /home/sandbox/chatify/chatify/buildjobs.py:107: ResourceWarning: unclosed file <_io.TextIOWrapper name='/tmp/tmp4qcmblrr/build-spend.json' mode='w' encoding='UTF-8'>
+  try:json.dump(self.spend,open(self.spend_path,'w'))
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/home/sandbox/chatify/tests/test_buildjobs.py:149: ResourceWarning: unclosed file <_io.TextIOWrapper name='/tmp/tmp4qcmblrr/build-spend.json' mode='r' encoding='UTF-8'>
+  before=open(jobs.spend_path).read()
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/home/sandbox/chatify/tests/test_buildjobs.py:151: ResourceWarning: unclosed file <_io.TextIOWrapper name='/tmp/tmp4qcmblrr/build-checkpoints/4c1029697ee35871.json' mode='w' encoding='UTF-8'>
+  json.dump({'brief':'Garden advice','fingerprint':self.fp(schema.DEFAULTS),'writer':'old','parts':{'config:app':{'title':'Kept'}},'errors':{},'calls':5,'retry_calls':0,'updated':time.time()},open(path,'w'))
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/home/sandbox/chatify/chatify/buildjobs.py:65: ResourceWarning: unclosed file <_io.TextIOWrapper name='/tmp/tmp4qcmblrr/build-spend.json' mode='r' encoding='UTF-8'>
+  try:self.spend=json.load(open(self.spend_path))
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/home/sandbox/chatify/chatify/buildjobs.py:91: ResourceWarning: unclosed file <_io.TextIOWrapper name='/tmp/tmp4qcmblrr/build-checkpoints/4c1029697ee35871.json' mode='r' encoding='UTF-8'>
+  try:payload=json.load(open(path))
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/home/sandbox/chatify/chatify/buildjobs.py:78: ResourceWarning: unclosed file <_io.TextIOWrapper name='/tmp/tmp4qcmblrr/build-checkpoints/4c1029697ee35871.json.tmp' mode='w' encoding='UTF-8'>
+  tmp=path+'.tmp';json.dump(payload,open(tmp,'w'));os.replace(tmp,path)
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/home/sandbox/chatify/tests/test_buildjobs.py:157: ResourceWarning: unclosed file <_io.TextIOWrapper name='/tmp/tmp4qcmblrr/build-spend.json' mode='r' encoding='UTF-8'>
+  self.assertEqual(open(jobs.spend_path).read(),before,'resume path must not reset persisted spend')
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+ok
+test_stale_writer_cannot_clear_newer_checkpoint (test_buildjobs.CheckpointEdges) ... /home/sandbox/chatify/tests/test_buildjobs.py:126: ResourceWarning: unclosed file <_io.TextIOWrapper name='/tmp/tmpu2gzj73t/build-checkpoints/4c1029697ee35871.json' mode='w' encoding='UTF-8'>
+  json.dump({'brief':'B','writer':'newer-job','parts':{},'errors':{},'calls':0,'updated':time.time()},open(path,'w'))
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/home/sandbox/chatify/chatify/buildjobs.py:83: ResourceWarning: unclosed file <_io.TextIOWrapper name='/tmp/tmpu2gzj73t/build-checkpoints/4c1029697ee35871.json' mode='r' encoding='UTF-8'>
+  try:writer=json.load(open(path)).get('writer')
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+ok
+test_unknown_part_keys_filtered_on_resume (test_buildjobs.CheckpointEdges) ... /home/sandbox/chatify/tests/test_buildjobs.py:109: ResourceWarning: unclosed file <_io.TextIOWrapper name='/tmp/tmpvihqmm6e/build-checkpoints/4c1029697ee35871.json' mode='w' encoding='UTF-8'>
+  json.dump({'brief':'Garden advice','fingerprint':self.fp(schema.DEFAULTS),'writer':'old','parts':{'config:app':{'title':'Kept garden'},'bogus:key':{'x':1}},'errors':{},'calls':5,'retry_calls':0,'updated':time.time()},open(path,'w'))
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/home/sandbox/chatify/chatify/buildjobs.py:91: ResourceWarning: unclosed file <_io.TextIOWrapper name='/tmp/tmpvihqmm6e/build-checkpoints/4c1029697ee35871.json' mode='r' encoding='UTF-8'>
+  try:payload=json.load(open(path))
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/home/sandbox/chatify/chatify/buildjobs.py:78: ResourceWarning: unclosed file <_io.TextIOWrapper name='/tmp/tmpvihqmm6e/build-checkpoints/4c1029697ee35871.json.tmp' mode='w' encoding='UTF-8'>
+  tmp=path+'.tmp';json.dump(payload,open(tmp,'w'));os.replace(tmp,path)
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+ok
+test_different_brief_starts_fresh (test_buildjobs.Checkpoints) ... /home/sandbox/chatify/chatify/buildjobs.py:107: ResourceWarning: unclosed file <_io.TextIOWrapper name='/tmp/tmpzk2gugrb/build-spend.json' mode='w' encoding='UTF-8'>
+  try:json.dump(self.spend,open(self.spend_path,'w'))
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/home/sandbox/chatify/chatify/buildjobs.py:78: ResourceWarning: unclosed file <_io.TextIOWrapper name='/tmp/tmpzk2gugrb/build-checkpoints/4c1029697ee35871.json.tmp' mode='w' encoding='UTF-8'>
+  tmp=path+'.tmp';json.dump(payload,open(tmp,'w'));os.replace(tmp,path)
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/home/sandbox/chatify/chatify/buildjobs.py:65: ResourceWarning: unclosed file <_io.TextIOWrapper name='/tmp/tmpzk2gugrb/build-spend.json' mode='r' encoding='UTF-8'>
+  try:self.spend=json.load(open(self.spend_path))
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/home/sandbox/chatify/chatify/buildjobs.py:91: ResourceWarning: unclosed file <_io.TextIOWrapper name='/tmp/tmpzk2gugrb/build-checkpoints/4c1029697ee35871.json' mode='r' encoding='UTF-8'>
+  try:payload=json.load(open(path))
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/home/sandbox/chatify/chatify/buildjobs.py:83: ResourceWarning: unclosed file <_io.TextIOWrapper name='/tmp/tmpzk2gugrb/build-checkpoints/4c1029697ee35871.json' mode='r' encoding='UTF-8'>
+  try:writer=json.load(open(path)).get('writer')
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+ok
+test_resume_keeps_finished_parts_after_restart (test_buildjobs.Checkpoints) ... /home/sandbox/chatify/chatify/buildjobs.py:107: ResourceWarning: unclosed file <_io.TextIOWrapper name='/tmp/tmpv6wn745o/build-spend.json' mode='w' encoding='UTF-8'>
+  try:json.dump(self.spend,open(self.spend_path,'w'))
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/home/sandbox/chatify/chatify/buildjobs.py:78: ResourceWarning: unclosed file <_io.TextIOWrapper name='/tmp/tmpv6wn745o/build-checkpoints/4c1029697ee35871.json.tmp' mode='w' encoding='UTF-8'>
+  tmp=path+'.tmp';json.dump(payload,open(tmp,'w'));os.replace(tmp,path)
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/home/sandbox/chatify/tests/test_buildjobs.py:37: ResourceWarning: unclosed file <_io.TextIOWrapper name='/tmp/tmpv6wn745o/build-checkpoints/4c1029697ee35871.json' mode='r' encoding='UTF-8'>
+  payload=json.load(open(os.path.join(tmp,'build-checkpoints',saved[0])))
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/home/sandbox/chatify/chatify/buildjobs.py:65: ResourceWarning: unclosed file <_io.TextIOWrapper name='/tmp/tmpv6wn745o/build-spend.json' mode='r' encoding='UTF-8'>
+  try:self.spend=json.load(open(self.spend_path))
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/home/sandbox/chatify/chatify/buildjobs.py:91: ResourceWarning: unclosed file <_io.TextIOWrapper name='/tmp/tmpv6wn745o/build-checkpoints/4c1029697ee35871.json' mode='r' encoding='UTF-8'>
+  try:payload=json.load(open(path))
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/home/sandbox/chatify/chatify/buildjobs.py:83: ResourceWarning: unclosed file <_io.TextIOWrapper name='/tmp/tmpv6wn745o/build-checkpoints/4c1029697ee35871.json' mode='r' encoding='UTF-8'>
+  try:writer=json.load(open(path)).get('writer')
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+ok
+test_blank_wording_retry_retains_successful_parts (test_buildjobs.DomainPromptChecks) ... ok
+test_builtin_generic_stage_is_rejected (test_buildjobs.DomainPromptChecks) ... ok
+test_every_stage_request_has_domain_and_stage_contract (test_buildjobs.DomainPromptChecks) ... ok
+test_invalid_helper_json_reports_exact_corrective_contract (test_buildjobs.DomainPromptChecks) ... ok
+test_json_escape_not_silently_repaired (test_buildjobs.DomainPromptChecks) ... ok
+test_known_api_wrapper_only (test_buildjobs.DomainPromptChecks) ... ok
+test_review_context_keeps_unknowns_and_real_concerns (test_buildjobs.DomainPromptChecks) ... ok
+test_review_verdict_never_erases_concerns_or_uncertainty (test_buildjobs.DomainPromptChecks) ... ok
+test_topic_language_never_sets_app_quotas (test_buildjobs.DomainPromptChecks) ... ok
+test_illegal_escape_preserves_literal_regex (test_buildjobs.DraftJSONRepairTests) ... ok
+test_truncated_and_missing_fields_never_invented (test_buildjobs.DraftJSONRepairTests) ... ok
+test_complete (test_buildjobs.Jobs) ... ok
+test_optional_logo_failure_keeps_text_draft_and_finishes_review (test_buildjobs.Jobs) ... ok
+test_optional_logo_reaches_final_review_and_completed_draft (test_buildjobs.Jobs) ... ok
+test_provider_block_stops_pending_calls (test_buildjobs.Jobs) ... ok
+test_retry_only_failed (test_buildjobs.Jobs) ... ok
+test_targeted_contract_failures_retry_only_owner_and_keep_success (test_buildjobs.RetainedFailureMatrix) ... ok
+test_stubborn_part_filled_locally_and_build_completes (test_buildjobs.RetryCompletion) ... ok
+test_blank_wording_retry_retains_successful_parts (test_buildjobs.SafePatchChecks) ... ok
+test_invalid_helper_json_reports_exact_corrective_contract (test_buildjobs.SafePatchChecks) ... ok
+test_json_escape_not_silently_repaired (test_buildjobs.SafePatchChecks) ... ok
+test_known_api_wrapper_only (test_buildjobs.SafePatchChecks) ... ok
+test_review_context_keeps_unknowns_and_real_concerns (test_buildjobs.SafePatchChecks) ... ok
+test_review_verdict_never_erases_concerns_or_uncertainty (test_buildjobs.SafePatchChecks) ... ok
+test_topic_language_never_sets_app_quotas (test_buildjobs.SafePatchChecks) ... ok
+test_empty_not_safe (test_bundle_review.BundleReviewTests) ... ok
+test_no_execution_or_secret_access (test_bundle_review.BundleReviewTests) ... ok
+test_only_names_not_literals (test_bundle_review.BundleReviewTests) ... ok
+test_patterns_and_lines (test_bundle_review.BundleReviewTests) ... ok
+test_static_limit_aliases (test_bundle_review.BundleReviewTests) ... ok
+test_unparsed_and_caps (test_bundle_review.BundleReviewTests) ... ok
+test_no_decoration_and_keyboard (test_calm.Calm) ... ok
+test_profile_roundtrip (test_calm.Calm) ... ok
+test_background_validation_clears_on_remove_or_file (test_chat_account_states.AccountStates) ... ok
+test_validation_and_pending_guards (test_chat_account_states.AccountStates) ... ok
+test_human_review_and_guarded_recovery (test_chat_action_states.ActionStates) ... ok
+test_stale_errors_and_visible_recovery (test_chat_history_states.HistoryStates) ... ok
+test_action_and_position_cleanup (test_chat_notifications.Notices) ... ok
+test_readable_lifetime_and_no_focus_steal (test_chat_notifications.Notices) ... ok
+test_boundary_aligned_keeps_word (test_chat_title.ChatTitle) ... ok
+test_call_sites_use_helper (test_chat_title.ChatTitle) ... ok
+test_short_and_unbreakable (test_chat_title.ChatTitle) ... ok
+test_word_boundary_truncation (test_chat_title.ChatTitle) ... ok
+test_every_script_classified (test_ci_browser_suite.BrowserOrchestrationTests) ... ok
+test_expanded_contracts (test_ci_browser_suite.BrowserOrchestrationTests) ... ok
+test_known_fixture_routes (test_ci_browser_suite.BrowserOrchestrationTests) ... ok
+test_no_credential_forwarding (test_ci_browser_suite.BrowserOrchestrationTests) ... ok
+test_shards_cover_once (test_ci_browser_suite.BrowserOrchestrationTests) ... ok
+test_swatch_and_contrast_feedback_are_local_and_reversible (test_color_feedback.ColorFeedback) ... ok
+test_action_links_not_inline_underlined (test_config_alignment.ConfigAlignment) ... ok
+test_bundle_review_has_one_preview_and_full_content_width (test_config_alignment.ConfigAlignment) ... ok
+test_editors_live_in_their_sections (test_config_alignment.ConfigAlignment) ... ok
+test_export_has_dedicated_card (test_config_alignment.ConfigAlignment) ... ok
+test_label_columns_and_mobile_stack (test_config_alignment.ConfigAlignment) ... ok
+test_navigation_does_not_hide_sections (test_config_alignment.ConfigAlignment) ... ok
+test_setup_details_are_disclosed_on_demand (test_config_alignment.ConfigAlignment) ... ok
+test_setup_rows_have_dedicated_layout (test_config_alignment.ConfigAlignment) ... ok
+test_new_and_legacy_names (test_config_lock_names.ConfigLockNames) ... ok
+test_apply_backup_rollback (test_configchange.ConfigChange) ... ok
+test_candidate_stale (test_configchange.ConfigChange) ... ok
+test_current_stale (test_configchange.ConfigChange) ... ok
+test_defaults_not_reported (test_configchange.ConfigChange) ... ok
+test_diff_no_values (test_configchange.ConfigChange) ... ok
+test_invalid_candidate_no_backup (test_configchange.ConfigChange) ... ok
+test_schema_version (test_configchange.ConfigChange) ... ok
+test_symlink_target (test_configchange.ConfigChange) ... ok
+test_all_apps (test_configdoctor.ConfigDoctor) ... ok
+test_bad_shape (test_configdoctor.ConfigDoctor) ... ok
+test_bool_number (test_configdoctor.ConfigDoctor) ... ok
+test_custom_style (test_configdoctor.ConfigDoctor) ... ok
+test_duplicate (test_configdoctor.ConfigDoctor) ... ok
+test_fallback_shape (test_configdoctor.ConfigDoctor) ... ok
+test_good (test_configdoctor.ConfigDoctor) ... ok
+test_line_typo (test_configdoctor.ConfigDoctor) ... ok
+test_missing_model (test_configdoctor.ConfigDoctor) ... ok
+test_no_env_loaded (test_configdoctor.ConfigDoctor) ... ok
+test_schema_serializable (test_configdoctor.ConfigDoctor) ... ok
+test_secret_key (test_configdoctor.ConfigDoctor) ... ok
+test_syntax_hides_secret (test_configdoctor.ConfigDoctor) ... ok
+test_error_object_not_evidence (test_connector_recovery.HelperResultRecovery) ... ok
+test_plain_string_preserved (test_connector_recovery.HelperResultRecovery) ... ok
+test_bound (test_connector_recovery.RecoveryTests) ... ok
+test_error_not_evidence (test_connector_recovery.RecoveryTests) ... ok
+test_json_string (test_connector_recovery.RecoveryTests) ... ok
+test_no_execution (test_connector_recovery.RecoveryTests) ... ok
+test_shape (test_connector_recovery.RecoveryTests) ... ok
+test_text (test_connector_recovery.RecoveryTests) ... ok
+test_attribution_is_idempotent (test_continuation_safety.ContinuationSafety) ... ok
+test_attribution_runs_in_sync_and_stream_paths (test_continuation_safety.ContinuationSafety) ... ok
+test_duplicate_article_chunks_count_once (test_continuation_safety.ContinuationSafety) ... ok
+test_english_opinion_is_attributed (test_continuation_safety.ContinuationSafety) ... ok
+test_hindi_claim_cannot_be_presented_without_attribution (test_continuation_safety.ContinuationSafety) ... ok
+test_missing_publication_dates_is_clear_not_fallback (test_continuation_safety.ContinuationSafety) ... ok
+test_other_apps_unchanged (test_continuation_safety.ContinuationSafety) ... ok
+test_pipe_source_is_escaped (test_continuation_safety.ContinuationSafety) ... ok
+test_prompt_distinguishes_quoted_disagreement (test_continuation_safety.ContinuationSafety) ... ok
+test_same_publisher_disagreement_guard_sync_stream (test_continuation_safety.ContinuationSafety) ... ok
+test_stream_followup_excludes_scoped_turn (test_continuation_safety.ContinuationSafety) ... ok
+test_stream_followup_respects_topic (test_continuation_safety.ContinuationSafety) ... ok
+test_sync_followup_excludes_scoped_turn (test_continuation_safety.ContinuationSafety) ... ok
+test_sync_followup_respects_topic (test_continuation_safety.ContinuationSafety) ... ok
+test_table_remains_parseable (test_continuation_safety.ContinuationSafety) ... ok
+test_marked_animal_study_passes (test_core.AnimalFlag) ... ok
+test_unmarked_animal_study_is_flagged (test_core.AnimalFlag) ... ok
+test_bold_lead_keeps_its_citation (test_core.CiteFormat) ... ok
+test_citation_moves_outside_bold (test_core.CiteFormat) ... ok
+test_honest_no_evidence_sentence_is_not_flagged_uncited (test_core.CiteFormat) ... ok
+test_uncited_sentence_is_flagged (test_core.CiteFormat) ... ok
+test_uncited_sentences_are_rewritten_with_fewer_flags (test_core.CiteFormat) ... ok
+test_bibtex_and_pdf (test_core.Exports) ... ERROR
+test_chat_markdown (test_core.Extras) ... ok
+test_env_file_loaded_and_existing_wins (test_core.Extras) ... /home/sandbox/chatify/tests/test_core.py:181: ResourceWarning: unclosed file <_io.TextIOWrapper name='/tmp/tmpx6odoun0/.env' mode='w' encoding='UTF-8'>
+  open(os.path.join(d, ".env"), "w").write("CC_A=1\nCC_B='two'\n# c\n")
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/home/sandbox/chatify/tests/test_core.py:182: ResourceWarning: unclosed file <_io.TextIOWrapper name='/tmp/tmpx6odoun0/app.yaml' mode='w' encoding='UTF-8'>
+  open(os.path.join(d, "app.yaml"), "w").write("app: {title: T}\n")
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+ok
+test_provider_retry_on_transient (test_core.Extras) ... ok
+test_flow (test_core.Http) ... FAIL
+test_static_traversal_blocked (test_core.Http) ... ok
+test_token_auth (test_core.Http) ... ok
+test_json_schema_matches_defaults (test_core.JsonSchemaFile) ... /home/sandbox/chatify/tests/test_core.py:212: ResourceWarning: unclosed file <_io.TextIOWrapper name='/home/sandbox/chatify/schema/chat-app.schema.json' mode='r' encoding='UTF-8'>
+  js = json.load(open(os.path.join(ROOT, "schema", "chat-app.schema.json")))
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+ok
+test_confident_lead_with_weight_caveat_passes (test_core.LeadAndAttribution) ... ok
+test_confident_lead_without_weight_caveat_is_flagged (test_core.LeadAndAttribution) ... ok
+test_hedged_lead_passes (test_core.LeadAndAttribution) ... ok
+test_multi_cite_weak_source_is_listed (test_core.LeadAndAttribution) ... ok
+test_empty_records_are_not_usable (test_core.NumberCheck) ... ok
+test_numbers_must_be_in_cited_passage (test_core.NumberCheck) ... ok
+test_pmid_34086376_unmarked_animal_sentence_is_flagged_and_rewrite_names_rats (test_core.NumberCheck) ... ok
+test_regain_without_fat_mass_is_flagged (test_core.NumberCheck) ... ok
+test_rewrite_kept_only_if_flag_is_gone (test_core.NumberCheck) ... ok
+test_rewrite_rejected_if_it_adds_a_number (test_core.NumberCheck) ... ok
+test_rewrite_with_fewer_flags_is_kept (test_core.NumberCheck) ... ok
+test_sentences_split_when_citations_follow_the_period (test_core.NumberCheck) ... ok
+test_answer_cites_and_stores (test_core.Pipeline) ... ok
+test_chat_lifecycle (test_core.Pipeline) ... ok
+test_failing_source_does_not_sink_answer (test_core.Pipeline) ... ok
+test_followup_is_resolved_with_history (test_core.Pipeline) ... ok
+test_ledger_flags_invalid_citation (test_core.Pipeline) ... ok
+test_no_evidence_message (test_core.Pipeline) ... ok
+test_owner_isolation (test_core.Pipeline) ... ok
+test_topics_span_chats_and_new_topic (test_core.Pipeline) ... ok
+test_429_gives_up_after_three_calls_and_waits_between (test_core.PubMedQuery) ... ok
+test_429_is_retried_then_succeeds (test_core.PubMedQuery) ... ok
+test_keywords_drop_question_words (test_core.PubMedQuery) ... ok
+test_relaxes_when_nothing_matches (test_core.PubMedQuery) ... ok
+test_uncited_sentence_with_number_is_dropped (test_core.PubMedQuery) ... ok
+test_bm25_prefers_matching_section (test_core.Retrieval) ... ok
+test_delete_and_restore_turn (test_core.Round10) ... ok
+test_followups_present (test_core.Round10) ... ok
+test_uploads_become_evidence_and_are_private (test_core.Round10) ... ok
+test_url_dedupe (test_core.Round10) ... ok
+test_weight_validated_and_applied (test_core.Round10) ... ok
+test_cli_ask_json (test_core.Round16) ... ok
+test_export_all (test_core.Round16) ... ok
+test_fallback_provider_used_when_primary_fails (test_core.Round16) ... ok
+test_parallel_retrieval_survives_slow_and_failing_sources (test_core.Round16) ... ok
+test_persistent_cache_skips_second_remote_call (test_core.Round16) ... ok
+test_query_rewrite_with_model (test_core.Round16) ... ok
+test_support_score_and_ledger_overlap (test_core.Round16) ... ok
+test_import_roundtrip_and_ping (test_core.Round17) ... ok
+test_eval_command (test_core.Round18) ... /home/sandbox/chatify/tests/test_core.py:387: ResourceWarning: unclosed file <_io.TextIOWrapper name='/tmp/tmpquo1bk70/q.txt' mode='w' encoding='UTF-8'>
+  open(q, "w").write("# c\nwhat is this\n")
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+ok
+test_feedback_and_stats (test_core.Round18) ... ok
+test_profile_roundtrip_and_prompt (test_core.Round19) ... ok
+test_similar_questions (test_core.Round19) ... ok
+test_temporary_chat_saves_nothing (test_core.Round19) ... ok
+test_temporary_uses_bounded_client_history (test_core.Round19) ... ok
+test_claude_request_shape (test_core.Round20) ... ok
+test_gemini_request_shape (test_core.Round20) ... ok
+test_html_to_text (test_core.Round20) ... ok
+test_missing_key_is_a_clear_error (test_core.Round20) ... ok
+test_url_loader_blocks_private_hosts (test_core.Round20) ... ok
+test_defaults_and_validation (test_core.Schema) ... ok
+test_example_apps_validate (test_core.Schema) ... ok
+test_public_view_hides_internals (test_core.Schema) ... ok
+test_bad_settings_rejected (test_core.SettingsApi) ... ok
+test_flow (test_core.SettingsApi) ... FAIL
+test_settings_page_served (test_core.SettingsApi) ... ok
+test_settings_roundtrip_and_states (test_core.SettingsApi) ... ok
+test_static_traversal_blocked (test_core.SettingsApi) ... ok
+test_token_auth (test_core.SettingsApi) ... ok
+test_ask_stream_matches_ask (test_core.Streaming) ... ok
+test_http_stream_and_validation (test_core.Streaming) ... ok
+test_theme_validation_and_render (test_core.Theme) ... ok
+test_corpus_intent_detection (test_corpus_intent_gate.CorpusIntentGateTest) ... ok
+test_corpus_intent_does_not_rescue_off_topic_upload (test_corpus_intent_gate.CorpusIntentGateTest) ... ok
+test_corpus_question_with_domain_words_keeps_topical_public_passages (test_corpus_intent_gate.CorpusIntentGateTest) ... ok
+test_corpus_question_with_topic_words_keeps_topical_public_without_corpus (test_corpus_intent_gate.CorpusIntentGateTest) ... ok
+test_corpus_question_with_zero_corpus_hits_abstains_over_meta_junk (test_corpus_intent_gate.CorpusIntentGateTest) ... ok
+test_meta_only_corpus_question_surfaces_upload_and_drops_keyword_junk (test_corpus_intent_gate.CorpusIntentGateTest) ... ok
+test_question_without_corpus_marker_is_unchanged (test_corpus_intent_gate.CorpusIntentGateTest) ... ok
+test_recency_with_corpus_intent_keeps_corpus_lead (test_corpus_intent_gate.CorpusIntentGateTest) ... ok
+test_recency_without_corpus_intent_sinks_undated_note (test_corpus_intent_gate.CorpusIntentGateTest) ... ok
+test_non_recency_question_keeps_gate_order (test_corpus_intent_gate.RecencyOrderTest) ... ok
+test_recency_question_orders_newest_first (test_corpus_intent_gate.RecencyOrderTest) ... ok
+test_foreign_chat_row_in_owned_topic_is_filtered (test_cross_owner_gate.CrossOwnerGate) ... ok
+test_foreign_topic_rename_no_effect (test_cross_owner_gate.CrossOwnerGate) ... ok
+test_import_export_stay_under_importing_owner (test_cross_owner_gate.CrossOwnerGate) ... ok
+test_note_list_excludes_other_owner_and_failed_ticket_not_consumed (test_cross_owner_gate.CrossOwnerGate) ... ok
+test_topic_list_and_turns_owner_gate (test_cross_owner_gate.CrossOwnerGate) ... ok
+test_all_web_providers_failing_is_reported (test_degrade.T) ... ok
+test_bad_app_file_gives_plain_error (test_degrade.T) ... /home/sandbox/chatify/tests/test_degrade.py:23: ResourceWarning: unclosed file <_io.TextIOWrapper name='/tmp/tmpf7iw9_c2/a.yaml' mode='w' encoding='UTF-8'>
+  d = tempfile.mkdtemp(); p = os.path.join(d, "a.yaml"); open(p, "w").write("app: [broken\n  x:")
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+ok
+test_damaged_data_file_is_set_aside (test_degrade.T) ... /home/sandbox/chatify/tests/test_degrade.py:12: ResourceWarning: unclosed file <_io.BufferedWriter name='/tmp/tmp61js96sf/chatify.db'>
+  open(p, "wb").write(os.urandom(200))
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+ok
+test_fallback_answer_cites_passages (test_degrade.T) ... ok
+test_fallback_answer_with_no_evidence (test_degrade.T) ... ok
+test_followups_are_new_short_and_answerable (test_degrade.T) ... ok
+test_followups_fallback_varies_and_skips_covered_titles (test_degrade.T) ... ok
+test_model_stream_faults_become_plain_errors (test_degrade.T) ... ok
+test_provider_down_fails_fast (test_degrade.T) ... ok
+test_read_only_data_folder_keeps_working (test_degrade.T) ... ok
+test_known_causes_have_private_actionable_guidance (test_diagnosis_actions.DiagnosisActions) ... ok
+test_unknown_cause_does_not_invent_a_network_failure (test_diagnosis_actions.DiagnosisActions) ... ok
+test_truthful_mic_lifecycle (test_dictation_states.DictationStates) ... ok
+test_bare_year_frontmatter (test_document_dates.DocumentDateExtraction) ... ok
+test_body_year_mention_not_promoted (test_document_dates.DocumentDateExtraction) ... ok
+test_frontmatter_date_iso (test_document_dates.DocumentDateExtraction) ... ok
+test_frontmatter_updated_month_name (test_document_dates.DocumentDateExtraction) ... ok
+test_future_body_year_not_promoted (test_document_dates.DocumentDateExtraction) ... ok
+test_invalid_month_rejected (test_document_dates.DocumentDateExtraction) ... ok
+test_late_date_line_not_a_header (test_document_dates.DocumentDateExtraction) ... ok
+test_leading_date_header (test_document_dates.DocumentDateExtraction) ... ok
+test_multiple_body_years_not_promoted (test_document_dates.DocumentDateExtraction) ... ok
+test_future_mentioned_year_still_unconfirmed (test_document_dates.FreshnessLineWording) ... ok
+test_mixed_dated_plus_mentioning_undated (test_document_dates.FreshnessLineWording) ... ok
+test_undated_with_mentioned_year_is_honest (test_document_dates.FreshnessLineWording) ... ok
+test_undated_without_any_year_keeps_no_dates_line (test_document_dates.FreshnessLineWording) ... ok
+test_body_mention_keeps_evidence_undated (test_document_dates.LocalFilesDateFlow) ... ok
+test_frontmatter_date_reaches_evidence_year (test_document_dates.LocalFilesDateFlow) ... ok
+test_busy_surfaces_follow_phase_word (test_draft_status_summary.DraftSummary) ... ok
+test_import_reader_reset_and_timeout (test_draft_status_summary.DraftSummary) ... ok
+test_running_heading_reflects_real_server_phase (test_draft_status_summary.DraftSummary) ... ok
+test_states_have_grounded_sources (test_draft_status_summary.DraftSummary) ... ok
+test_citation_phrase_alone_is_outside_check (test_draftaudit.DraftAudit) ... ok
+test_dynamic_unknown_does_not_produce_fake_host (test_draftaudit.DraftAudit) ... ok
+test_empty_evidence_fallback_without_citations_is_not_flagged (test_draftaudit.DraftAudit) ... ok
+test_explicit_bypass_not_approved_by_empty_model_findings (test_draftaudit.DraftAudit) ... ok
+test_literal_unrelated_host_flagged_without_model (test_draftaudit.DraftAudit) ... ok
+test_negated_occurrence_is_not_claimed_unsafe (test_draftaudit.DraftAudit) ... ok
+test_normal_grounded_contract_not_flagged (test_draftaudit.DraftAudit) ... ok
+test_quoted_bypass_has_explicit_false_positive_caveat (test_draftaudit.DraftAudit) ... ok
+test_active_connector_loaded_as_inert_text (test_editstate.EditStateTests) ... ok
+test_draft_roundtrip_no_execution (test_editstate.EditStateTests) ... ok
+test_exports_drafts_not_saved_secrets (test_editstate.EditStateTests) ... ok
+test_full_values_preserved (test_editstate.EditStateTests) ... ok
+test_invalid_or_symlink_saved_view_rejected (test_editstate.EditStateTests) ... ok
+test_private_values_rejected (test_editstate.EditStateTests) ... ok
+test_revision_safe_save_and_reload (test_editstate.EditStateTests) ... ok
+test_saved_view_does_not_revert_to_runtime_after_save (test_editstate.EditStateTests) ... ok
+test_local_feedback_has_motion_gates_and_no_overshoot (test_emoji_motion.EmojiMotion) ... ok
+test_broken_json_becomes_text (test_fallbacks.T) ... ok
+test_empty_reply_is_no_results (test_fallbacks.T) ... ok
+test_valid_json_unchanged (test_fallbacks.T) ... ok
+test_animated_emoji_validation (test_feedback_complete.FeedbackComplete) ... ok
+test_file_types_and_binary_rejection (test_feedback_complete.FeedbackComplete) ... ok
+test_profile_fields_and_owner_isolation (test_feedback_complete.FeedbackComplete) ... ok
+test_saved_history_chat_topic_isolation (test_feedback_complete.FeedbackComplete) ... ok
+test_whole_answer_prompt_after_old_clip_boundary (test_feedback_complete.FeedbackComplete) ... ok
+test_whole_history_answers_and_relevance (test_feedback_complete.FeedbackComplete) ... ok
+test_word_and_sheet_values (test_feedback_complete.FeedbackComplete) ... ok
+test_degreen_keeps_neutrals_and_nongreens (test_feedback_patch.DraftPaletteGuard) ... ok
+test_degreen_remaps_green_proposals (test_feedback_patch.DraftPaletteGuard) ... ok
+test_explicit_green_request_bypasses_recolor (test_feedback_patch.DraftPaletteGuard) ... ok
+test_local_fallback_palette_is_not_green (test_feedback_patch.DraftPaletteGuard) ... ok
+test_model_draft_palette_is_stored_degreened (test_feedback_patch.DraftPaletteGuard) ... ok
+test_model_draft_palette_survives_when_user_asks_green (test_feedback_patch.DraftPaletteGuard) ... ok
+test_user_chosen_green_survives_validation_save_and_import (test_feedback_patch.DraftPaletteGuard) ... ok
+test_disclosures_are_not_height_clipped (test_feedback_patch.FeedbackPatch) ... ok
+test_preview_and_logo_regressions (test_feedback_patch.FeedbackPatch) ... ok
+test_real_assets_and_package (test_feedback_patch.FeedbackPatch) ... ok
+test_settings_groups_with_helper_loader (test_feedback_patch.FeedbackPatch) ... ok
+test_invalid_question_still_blocked (test_followup_domain_check.DomainCheck) ... ok
+test_recent_question_is_data (test_followup_domain_check.DomainCheck) ... ok
+test_samples_are_stable_and_loading_status_is_truthful (test_font_feedback.FontFeedback) ... ok
+test_add_and_remove (test_freshness.FreshnessTests) ... ok
+test_atomic_failed_scan (test_freshness.FreshnessTests) ... ok
+test_edit_invalidates_same_question_cache (test_freshness.FreshnessTests) ... ok
+test_interval_and_force (test_freshness.FreshnessTests) ... ok
+test_invalid_interval (test_freshness.FreshnessTests) ... ok
+test_missing_at_startup (test_freshness.FreshnessTests) ... ok
+test_missing_folder_no_stale_answer (test_freshness.FreshnessTests) ... ok
+test_no_change (test_freshness.FreshnessTests) ... ok
+test_same_size_mtime_edit (test_freshness.FreshnessTests) ... ok
+test_symlink (test_freshness.FreshnessTests) ... ok
+test_version_metadata (test_freshness.FreshnessTests) ... ok
+test_change_counts_and_retained_last_index (test_freshness_diagnostics.FreshnessDiagnostics) ... ok
+/home/sandbox/chatify/tests/test_gallery.py:10: ResourceWarning: unclosed file <_io.TextIOWrapper name='/tmp/tmp16u375c6/alpha/docs/a.md' mode='w' encoding='UTF-8'>
+  io.open(os.path.join(d, "docs", "a.md"), "w").write("Docs about %s." % title)
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/home/sandbox/chatify/tests/test_gallery.py:11: ResourceWarning: unclosed file <_io.TextIOWrapper name='/tmp/tmp16u375c6/alpha/app.yaml' mode='w' encoding='UTF-8'>
+  io.open(os.path.join(d, "app.yaml"), "w").write(
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/home/sandbox/chatify/tests/test_gallery.py:10: ResourceWarning: unclosed file <_io.TextIOWrapper name='/tmp/tmp16u375c6/beta/docs/a.md' mode='w' encoding='UTF-8'>
+  io.open(os.path.join(d, "docs", "a.md"), "w").write("Docs about %s." % title)
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/home/sandbox/chatify/tests/test_gallery.py:11: ResourceWarning: unclosed file <_io.TextIOWrapper name='/tmp/tmp16u375c6/beta/app.yaml' mode='w' encoding='UTF-8'>
+  io.open(os.path.join(d, "app.yaml"), "w").write(
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/home/sandbox/chatify/tests/test_gallery.py:16: ResourceWarning: unclosed file <_io.TextIOWrapper name='/tmp/tmp16u375c6/gallery.yaml' mode='w' encoding='UTF-8'>
+  io.open(os.path.join(base, "gallery.yaml"), "w").write(
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+test_save_then_launch_carries_everything_but_keys (test_gallery.GalleryBuilderUseThisApp) ... /home/sandbox/chatify/tests/test_gallery.py:374: ResourceWarning: unclosed file <_io.TextIOWrapper name='/tmp/tmp16u375c6/alpha/app.yaml' mode='r' encoding='UTF-8'>
+  saved_cfg = yaml.safe_load(io.open(os.path.join(self.base, "alpha", "app.yaml")))
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/home/sandbox/chatify/tests/test_gallery.py:381: ResourceWarning: unclosed file <_io.TextIOWrapper name='/tmp/tmp16u375c6/alpha/data/build-apps/967e6cffe928/3940309487b3/app.yaml' mode='r' encoding='UTF-8'>
+  saved_cfg = yaml.safe_load(io.open(built[0]))
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/home/sandbox/chatify/tests/test_gallery.py:383: ResourceWarning: unclosed file <_io.TextIOWrapper name='/tmp/tmp16u375c6/alpha/data/build-apps/967e6cffe928/3940309487b3/data/theme.json' mode='r' encoding='UTF-8'>
+  self.assertEqual(json.load(io.open(os.path.join(bdir, "data", "theme.json")))["bubble"], "flat")
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/home/sandbox/chatify/tests/test_gallery.py:384: ResourceWarning: unclosed file <_io.TextIOWrapper name='/tmp/tmp16u375c6/alpha/data/build-apps/967e6cffe928/3940309487b3/data/prompts.json' mode='r' encoding='UTF-8'>
+  self.assertEqual(json.load(io.open(os.path.join(bdir, "data", "prompts.json")))["text"]["answer"], "CUSTOM PROMPT answer")
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/home/sandbox/chatify/tests/test_gallery.py:400: ResourceWarning: unclosed file <_io.TextIOWrapper name='/tmp/tmp16u375c6/alpha/nerds/nerd-lcya6so_/app.yaml' mode='r' encoding='UTF-8'>
+  ws_cfg = yaml.safe_load(io.open(os.path.join(wsdir, "app.yaml")))
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/home/sandbox/chatify/tests/test_gallery.py:405: ResourceWarning: unclosed file <_io.TextIOWrapper name='/tmp/tmp16u375c6/alpha/nerds/nerd-lcya6so_/data/theme.json' mode='r' encoding='UTF-8'>
+  self.assertEqual(json.load(io.open(os.path.join(wsdir, "data", "theme.json")))["bubble"], "flat")
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/home/sandbox/chatify/tests/test_gallery.py:406: ResourceWarning: unclosed file <_io.TextIOWrapper name='/tmp/tmp16u375c6/alpha/nerds/nerd-lcya6so_/data/prompts.json' mode='r' encoding='UTF-8'>
+  self.assertEqual(json.load(io.open(os.path.join(wsdir, "data", "prompts.json")))["text"]["revise"], "CUSTOM PROMPT revise")
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/home/sandbox/chatify/tests/test_gallery.py:407: ResourceWarning: unclosed file <_io.TextIOWrapper name='/tmp/tmp16u375c6/alpha/nerds/nerd-lcya6so_/data/code-drafts.json' mode='r' encoding='UTF-8'>
+  self.assertIn("search", json.load(io.open(os.path.join(wsdir, "data", "code-drafts.json"))))
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+ok
+test_detection (test_gallery.GalleryConfig) ... ok
+test_guardrails_forced (test_gallery.GalleryConfig) ... ok
+test_slugs_validated (test_gallery.GalleryConfig) ... /home/sandbox/chatify/tests/test_gallery.py:53: ResourceWarning: unclosed file <_io.TextIOWrapper name='/tmp/tmpfwv460s5/alpha/docs/a.md' mode='w' encoding='UTF-8'>
+  io.open(os.path.join(d, "docs", "a.md"), "w").write("x")
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/home/sandbox/chatify/tests/test_gallery.py:54: ResourceWarning: unclosed file <_io.TextIOWrapper name='/tmp/tmpfwv460s5/alpha/app.yaml' mode='w' encoding='UTF-8'>
+  io.open(os.path.join(d, "app.yaml"), "w").write("app: {id: alpha, title: A}\nprovider: {type: mock}\nsources: [{id: docs, type: local_files, label: D, path: docs}]\n")
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/home/sandbox/chatify/tests/test_gallery.py:55: ResourceWarning: unclosed file <_io.TextIOWrapper name='/tmp/tmpfwv460s5/gallery.yaml' mode='w' encoding='UTF-8'>
+  io.open(os.path.join(base, "gallery.yaml"), "w").write("gallery:\n  apps:\n    - {dir: alpha, slug: API}\n")
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+ok
+/home/sandbox/chatify/tests/test_gallery.py:10: ResourceWarning: unclosed file <_io.TextIOWrapper name='/tmp/tmp4o4r_pbf/alpha/docs/a.md' mode='w' encoding='UTF-8'>
+  io.open(os.path.join(d, "docs", "a.md"), "w").write("Docs about %s." % title)
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/home/sandbox/chatify/tests/test_gallery.py:11: ResourceWarning: unclosed file <_io.TextIOWrapper name='/tmp/tmp4o4r_pbf/alpha/app.yaml' mode='w' encoding='UTF-8'>
+  io.open(os.path.join(d, "app.yaml"), "w").write(
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/home/sandbox/chatify/tests/test_gallery.py:10: ResourceWarning: unclosed file <_io.TextIOWrapper name='/tmp/tmp4o4r_pbf/beta/docs/a.md' mode='w' encoding='UTF-8'>
+  io.open(os.path.join(d, "docs", "a.md"), "w").write("Docs about %s." % title)
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/home/sandbox/chatify/tests/test_gallery.py:11: ResourceWarning: unclosed file <_io.TextIOWrapper name='/tmp/tmp4o4r_pbf/beta/app.yaml' mode='w' encoding='UTF-8'>
+  io.open(os.path.join(d, "app.yaml"), "w").write(
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/home/sandbox/chatify/tests/test_gallery.py:16: ResourceWarning: unclosed file <_io.TextIOWrapper name='/tmp/tmp4o4r_pbf/gallery.yaml' mode='w' encoding='UTF-8'>
+  io.open(os.path.join(base, "gallery.yaml"), "w").write(
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/home/sandbox/chatify/tests/test_gallery.py:576: ResourceWarning: unclosed file <_io.TextIOWrapper name='/tmp/tmp4o4r_pbf/gallery.yaml' mode='r' encoding='UTF-8'>
+  s = io.open(p).read()
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/home/sandbox/chatify/tests/test_gallery.py:579: ResourceWarning: unclosed file <_io.TextIOWrapper name='/tmp/tmp4o4r_pbf/gallery.yaml' mode='w' encoding='UTF-8'>
+  io.open(p, "w").write(s)
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+test_featured_cta_opens_ai_wizard (test_gallery.GalleryFeaturedBuildCta) ... ok
+/home/sandbox/chatify/tests/test_gallery.py:10: ResourceWarning: unclosed file <_io.TextIOWrapper name='/tmp/tmp4lx4zunp/alpha/docs/a.md' mode='w' encoding='UTF-8'>
+  io.open(os.path.join(d, "docs", "a.md"), "w").write("Docs about %s." % title)
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/home/sandbox/chatify/tests/test_gallery.py:11: ResourceWarning: unclosed file <_io.TextIOWrapper name='/tmp/tmp4lx4zunp/alpha/app.yaml' mode='w' encoding='UTF-8'>
+  io.open(os.path.join(d, "app.yaml"), "w").write(
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/home/sandbox/chatify/tests/test_gallery.py:10: ResourceWarning: unclosed file <_io.TextIOWrapper name='/tmp/tmp4lx4zunp/beta/docs/a.md' mode='w' encoding='UTF-8'>
+  io.open(os.path.join(d, "docs", "a.md"), "w").write("Docs about %s." % title)
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/home/sandbox/chatify/tests/test_gallery.py:11: ResourceWarning: unclosed file <_io.TextIOWrapper name='/tmp/tmp4lx4zunp/beta/app.yaml' mode='w' encoding='UTF-8'>
+  io.open(os.path.join(d, "app.yaml"), "w").write(
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/home/sandbox/chatify/tests/test_gallery.py:16: ResourceWarning: unclosed file <_io.TextIOWrapper name='/tmp/tmp4lx4zunp/gallery.yaml' mode='w' encoding='UTF-8'>
+  io.open(os.path.join(base, "gallery.yaml"), "w").write(
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+test_launch_inside_workspace_registers_same_origin (test_gallery.GalleryNestedWorkspaceLaunch) ... /home/sandbox/chatify/tests/test_gallery.py:493: ResourceWarning: unclosed file <_io.BufferedReader name='/home/sandbox/chatify/tests/../apps/minimal/app.yaml'>
+  minimal = io.open(os.path.join(ROOT, "apps", "minimal", "app.yaml"), "rb").read()
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+ok
+/home/sandbox/chatify/tests/test_gallery.py:10: ResourceWarning: unclosed file <_io.TextIOWrapper name='/tmp/tmpmw9mubh8/alpha/docs/a.md' mode='w' encoding='UTF-8'>
+  io.open(os.path.join(d, "docs", "a.md"), "w").write("Docs about %s." % title)
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/home/sandbox/chatify/tests/test_gallery.py:11: ResourceWarning: unclosed file <_io.TextIOWrapper name='/tmp/tmpmw9mubh8/alpha/app.yaml' mode='w' encoding='UTF-8'>
+  io.open(os.path.join(d, "app.yaml"), "w").write(
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/home/sandbox/chatify/tests/test_gallery.py:10: ResourceWarning: unclosed file <_io.TextIOWrapper name='/tmp/tmpmw9mubh8/beta/docs/a.md' mode='w' encoding='UTF-8'>
+  io.open(os.path.join(d, "docs", "a.md"), "w").write("Docs about %s." % title)
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/home/sandbox/chatify/tests/test_gallery.py:11: ResourceWarning: unclosed file <_io.TextIOWrapper name='/tmp/tmpmw9mubh8/beta/app.yaml' mode='w' encoding='UTF-8'>
+  io.open(os.path.join(d, "app.yaml"), "w").write(
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/home/sandbox/chatify/tests/test_gallery.py:16: ResourceWarning: unclosed file <_io.TextIOWrapper name='/tmp/tmpmw9mubh8/gallery.yaml' mode='w' encoding='UTF-8'>
+  io.open(os.path.join(base, "gallery.yaml"), "w").write(
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+test_app_home_is_rewritten (test_gallery.GalleryServer) ... ok
+test_each_app_answers_on_its_own_endpoint (test_gallery.GalleryServer) ... ok
+test_gallery_page_lists_apps (test_gallery.GalleryServer) ... ok
+test_mock_chat_streams_through_the_proxy (test_gallery.GalleryServer) ... ok
+test_redirect_apps_link_out_and_redirect (test_gallery.GalleryServer) ... ok
+test_statics_work_under_the_prefix (test_gallery.GalleryServer) ... ok
+test_unknown_paths_get_the_designed_404 (test_gallery.GalleryServer) ... ok
+/home/sandbox/chatify/tests/test_gallery.py:10: ResourceWarning: unclosed file <_io.TextIOWrapper name='/tmp/tmpazz7lonx/alpha/docs/a.md' mode='w' encoding='UTF-8'>
+  io.open(os.path.join(d, "docs", "a.md"), "w").write("Docs about %s." % title)
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/home/sandbox/chatify/tests/test_gallery.py:11: ResourceWarning: unclosed file <_io.TextIOWrapper name='/tmp/tmpazz7lonx/alpha/app.yaml' mode='w' encoding='UTF-8'>
+  io.open(os.path.join(d, "app.yaml"), "w").write(
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/home/sandbox/chatify/tests/test_gallery.py:10: ResourceWarning: unclosed file <_io.TextIOWrapper name='/tmp/tmpazz7lonx/beta/docs/a.md' mode='w' encoding='UTF-8'>
+  io.open(os.path.join(d, "docs", "a.md"), "w").write("Docs about %s." % title)
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/home/sandbox/chatify/tests/test_gallery.py:11: ResourceWarning: unclosed file <_io.TextIOWrapper name='/tmp/tmpazz7lonx/beta/app.yaml' mode='w' encoding='UTF-8'>
+  io.open(os.path.join(d, "app.yaml"), "w").write(
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/home/sandbox/chatify/tests/test_gallery.py:16: ResourceWarning: unclosed file <_io.TextIOWrapper name='/tmp/tmpazz7lonx/gallery.yaml' mode='w' encoding='UTF-8'>
+  io.open(os.path.join(base, "gallery.yaml"), "w").write(
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+test_full_hosted_handoff_flow (test_gallery.GalleryWorkspaceHandoff) ... ok
+test_python_connector_stays_off_without_explicit_allow (test_gallery.GalleryWorkspaceHandoff) ... ok
+test_adversarial_inputs_preserve_generator_rules (test_generator_design.DesignTests) ... ok
+test_codegen_contracts (test_generator_design.DesignTests) ... ok
+test_contracts (test_generator_design.DesignTests) ... ok
+test_detailed_single_sentence (test_generator_design.DesignTests) ... ok
+test_domain_examples (test_generator_design.DesignTests) ... ok
+test_draft_contract_preserved (test_generator_design.DesignTests) ... ok
+test_draft_secret_rejected (test_generator_design.DesignTests) ... ok
+test_draft_unknown_fields (test_generator_design.DesignTests) ... ok
+test_every_existing_stage (test_generator_design.DesignTests) ... ok
+test_injected_brief_stays_data (test_generator_design.DesignTests) ... ok
+test_morphology_fix_keeps_example_and_citation_contracts (test_generator_design.DesignTests) ... ok
+test_no_minimum_sources_or_fake_status (test_generator_design.DesignTests) ... ok
+test_plural_runtime_inputs_and_queries_are_accepted (test_generator_design.DesignTests) ... ok
+test_all_stage_routes_offline_and_model (test_generator_wiring.WiringTests) ... ok
+test_bad_contract_retry (test_generator_wiring.WiringTests) ... ok
+test_cleaner_preserves_constraints (test_generator_wiring.WiringTests) ... ok
+test_helpers_never_run_during_generation (test_generator_wiring.WiringTests) ... ok
+test_instance_output_twice_fails_bounded (test_generator_wiring.WiringTests) ... ok
+test_instance_outputs_retry_without_overwriting_user_prompt (test_generator_wiring.WiringTests) ... ok
+test_instruction_with_worked_output_is_not_domain_quality (test_generator_wiring.WiringTests) ... ok
+test_process_without_result_does_not_invent_timeout (test_generator_wiring.WiringTests) ... ok
+test_signature_and_dunder_blocked (test_generator_wiring.WiringTests) ... ok
+test_unknown_endpoint_nonoperational (test_generator_wiring.WiringTests) ... ok
+test_findings_question_drops_genre_rider (test_genre_gate.GenreGate) ... ok
+test_genre_question_keeps_genre_papers (test_genre_gate.GenreGate) ... ok
+test_single_mismatch_drops_to_honest_empty (test_genre_gate.GenreGate) ... ok
+test_statistical_confidence_title_untouched (test_genre_gate.GenreGate) ... ok
+test_strongest_overlap_mismatch_still_drops (test_genre_gate.GenreGate) ... ok
+test_training_question_deactivates_rule (test_genre_gate.GenreGate) ... ok
+test_failure_question_keeps_post_anchor_paper (test_genre_gate.PostAnchorGate) ... ok
+test_post_anchor_reference_dropped (test_genre_gate.PostAnchorGate) ... ok
+test_subject_anchor_kept (test_genre_gate.PostAnchorGate) ... ok
+test_web_root_is_normalized (test_genre_gate.WebRootNormalization) ... ok
+test_both_pages_load_shared_guide_and_replay (test_guided_tours.GuidedTours) ... ok
+test_configuration_has_thirteen_steps_and_independent_first_open (test_guided_tours.GuidedTours) ... ok
+test_current_tabs_and_honest_save_scopes (test_guided_tours.GuidedTours) ... ok
+test_motion_and_small_viewport_limits (test_guided_tours.GuidedTours) ... ok
+test_preview_does_not_autostart_main_guide (test_guided_tours.GuidedTours) ... ok
+test_quiet_guide_has_no_decorative_scene_or_transform (test_guided_tours.GuidedTours) ... ok
+test_skip_keyboard_focus_and_local_only (test_guided_tours.GuidedTours) ... ok
+test_double_escaped_code_is_repaired (test_helper_code_repair.HelperCodeRepair) ... ok
+test_genuinely_broken_code_is_returned_as_is (test_helper_code_repair.HelperCodeRepair) ... ok
+test_legitimate_escapes_are_not_corrupted (test_helper_code_repair.HelperCodeRepair) ... ok
+test_valid_code_is_untouched (test_helper_code_repair.HelperCodeRepair) ... ok
+test_500_turn_thread_fetches_old_relevant_and_recent (test_history_robustness.HistoryRobustness) ... ok
+test_chat_local_summary_survives_sqlite_restart (test_history_robustness.HistoryRobustness) ... ok
+test_deleted_chat_and_branch_do_not_import_summary (test_history_robustness.HistoryRobustness) ... ok
+test_deleted_turn_invalidates_summary_and_history (test_history_robustness.HistoryRobustness) ... ok
+test_elliptical_followups_rewrite (test_history_robustness.HistoryRobustness) ... ok
+test_empty_and_invalid_rewrite_fall_back (test_history_robustness.HistoryRobustness) ... ok
+test_malformed_temporary_history_does_not_crash_or_save (test_history_robustness.HistoryRobustness) ... ok
+test_memory_config_validates_edges (test_history_robustness.HistoryRobustness) ... ok
+test_memory_disabled_ignores_client_and_saved_context (test_history_robustness.HistoryRobustness) ... ok
+test_multiturn_correction_is_kept_for_followup (test_history_robustness.HistoryRobustness) ... ok
+test_new_topic_never_inherits_summary (test_history_robustness.HistoryRobustness) ... ok
+test_no_history_no_rewrite (test_history_robustness.HistoryRobustness) ... ok
+test_oversized_latest_turn_has_marked_head_and_tail (test_history_robustness.HistoryRobustness) ... ok
+test_prompt_reserves_evidence_and_question_space (test_history_robustness.HistoryRobustness) ... ok
+test_recent_order_survives_irrelevant_word_overlap (test_history_robustness.HistoryRobustness) ... ok
+test_rewrite_provider_error_falls_back (test_history_robustness.HistoryRobustness) ... ok
+test_scoped_turn_never_returns_in_general_history (test_history_robustness.HistoryRobustness) ... ok
+test_source_digest_rejects_out_of_band_deletion (test_history_robustness.HistoryRobustness) ... ok
+test_summaries_refresh_after_50_turns (test_history_robustness.HistoryRobustness) ... ok
+test_summary_failure_does_not_lose_saved_turn (test_history_robustness.HistoryRobustness) ... ok
+test_summary_prompt_is_bounded (test_history_robustness.HistoryRobustness) ... ok
+test_three_turn_stream_followup_and_correction_reach_retrieval (test_history_robustness.HistoryRobustness) ... ok
+test_topic_shared_across_chats_does_not_share_summary (test_history_robustness.HistoryRobustness) ... ok
+test_wrong_owner_history_rejected (test_history_robustness.HistoryRobustness) ... ok
+test_delay_scope_actual_replacement_and_reduce (test_history_skeleton.HistorySkeleton) ... ok
+test_actual_locked_health (test_host_flow.HostFlow) ... ok
+test_backup_sqlite_and_secret_permissions (test_host_flow.HostFlow) ... ok
+test_preflight_rejects_unsafe (test_host_flow.HostFlow) ... ok
+test_prepare_no_side_effect (test_host_flow.HostFlow) ... ok
+test_rollback (test_host_flow.HostFlow) ... ok
+test_app_branding (test_hydration.Hydration) ... ok
+test_catalog_disable (test_hydration.Hydration) ... ok
+test_catalog_preserves_fields (test_hydration.Hydration) ... ok
+test_custom_nested_fields (test_hydration.Hydration) ... ok
+test_many_named_catalogs (test_hydration.Hydration) ... ok
+test_many_web_sources (test_hydration.Hydration) ... ok
+test_named_catalog (test_hydration.Hydration) ... ok
+test_named_web (test_hydration.Hydration) ... ok
+test_partial_theme (test_hydration.Hydration) ... ok
+test_raw_dump_removed (test_hydration.Hydration) ... ok
+test_saved_theme_wins (test_hydration.Hydration) ... ok
+test_web_disable (test_hydration.Hydration) ... ok
+test_ast_valid_python_still_must_compile (test_key_pause_compile.KeyPauseAndCompileTests) ... ok
+test_known_connector_inference_and_safe_templates (test_key_pause_compile.KeyPauseAndCompileTests) ... ok
+test_openalex_without_key_sends_nothing (test_key_pause_compile.KeyPauseAndCompileTests) ... ok
+test_templates_compile (test_key_pause_compile.KeyPauseAndCompileTests) ... ok
+test_web_without_key_sends_nothing (test_key_pause_compile.KeyPauseAndCompileTests) ... ok
+test_export_opt_in_only (test_keybundle.Keys) ... ok
+test_header_environment_transport_maps_to_bound_http_key (test_keybundle.Keys) ... ok
+test_import_key_validation (test_keybundle.Keys) ... ok
+test_import_values_not_in_review_or_app_file (test_keybundle.Keys) ... ok
+test_locked_start_sets_flag_before_server_import (test_launcher.InstalledStartTests) ... ok
+test_bad_port (test_launcher.LauncherTests) ... ok
+test_busy_port_fallback (test_launcher.LauncherTests) ... ok
+test_existing_directory_not_overwritten (test_launcher.LauncherTests) ... ok
+test_packaged_template_and_rerun (test_launcher.LauncherTests) ... ok
+test_width_choice_works_without_overwriting_reading_preference (test_layout_choice_states.LayoutChoiceStates) ... ok
+test_explicit_saved_choices_preserved (test_light_default.LightDefault) ... ok
+test_missing_mode_defaults_light (test_light_default.LightDefault) ... ok
+test_locked_server (test_lock.T) ... /usr/lib/python3.10/subprocess.py:1072: ResourceWarning: subprocess 480858 is still running
+  _warn("subprocess %s is still running" % self.pid,
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+ok
+test_archive_additive (test_management.ManagementTests) ... ok
+test_changed_settings_rejected (test_management.ManagementTests) ... ok
+test_deploy_plan_no_mutation (test_management.ManagementTests) ... ok
+test_diagnostics_no_raw_exception (test_management.ManagementTests) ... ok
+test_live_failure_redacted (test_management.ManagementTests) ... ok
+test_live_job_private (test_management.ManagementTests) ... ok
+test_live_never_uses_persistent_cache (test_management.ManagementTests) ... ok
+test_live_requires_choice (test_management.ManagementTests) ... ok
+test_live_requires_confirmation (test_management.ManagementTests) ... ok
+test_model_estimate (test_management.ManagementTests) ... ok
+test_model_local_only (test_management.ManagementTests) ... ok
+test_preflight_respects_readers (test_management.ManagementTests) ... ok
+test_question_limit (test_management.ManagementTests) ... ok
+test_restore_revision_guard (test_management.ManagementTests) ... ok
+test_smoke_multiple_call_notice (test_management.ManagementTests) ... ok
+test_smoke_no_chat_and_comparison (test_management.ManagementTests) ... ok
+test_source_change_invalidates_review (test_management.ManagementTests) ... ok
+test_status_offline (test_management.ManagementTests) ... ok
+test_focus_section_is_not_quoted_twice (test_mock_provider.MockAnswer) ... ok
+test_endpoint_edits_clear_old_pass (test_model_connection_truth.ConnectionTruth) ... ok
+test_all_compatible_providers (test_model_listing.ModelListingTests) ... ok
+test_array_response (test_model_listing.ModelListingTests) ... ok
+test_catalog_has_every_provider_and_sources (test_model_listing.ModelListingTests) ... ok
+test_claude_paginated (test_model_listing.ModelListingTests) ... ok
+test_gemini_paginated_normalized (test_model_listing.ModelListingTests) ... ok
+test_invalid_responses_do_not_crash (test_model_listing.ModelListingTests) ... ok
+test_list_error_not_model_generation_error (test_model_listing.ModelListingTests) ... ok
+test_missing_key_is_not_reported_as_refused (test_model_listing.ModelListingTests) ... ok
+test_ollama_and_demo (test_model_listing.ModelListingTests) ... ok
+test_repeated_cursor_stops (test_model_listing.ModelListingTests) ... ok
+test_latest_model_not_request_snapshot (test_model_refresh_states.ModelRefresh) ... ok
+test_code_editor_and_clear_image (test_motion.Motion) ... /home/sandbox/chatify/tests/test_motion.py:3: ResourceWarning: unclosed file <_io.TextIOWrapper name='/home/sandbox/chatify/tests/../chatify/web/motion.css' mode='r' encoding='utf-8'>
+  rd = lambda n: open(os.path.join(W, n), encoding="utf-8").read()
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/home/sandbox/chatify/tests/test_motion.py:3: ResourceWarning: unclosed file <_io.TextIOWrapper name='/home/sandbox/chatify/tests/../chatify/web/settings.js' mode='r' encoding='utf-8'>
+  rd = lambda n: open(os.path.join(W, n), encoding="utf-8").read()
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+ok
+test_decoration_never_throws (test_motion.Motion) ... /home/sandbox/chatify/tests/test_motion.py:3: ResourceWarning: unclosed file <_io.TextIOWrapper name='/home/sandbox/chatify/tests/../chatify/web/motion.js' mode='r' encoding='utf-8'>
+  rd = lambda n: open(os.path.join(W, n), encoding="utf-8").read()
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+ok
+test_dot_to_tick_and_key_tick (test_motion.Motion) ... ok
+test_drawer_scrim (test_motion.Motion) ... ok
+test_hidden_sidebar_stale_and_demo (test_motion.Motion) ... /home/sandbox/chatify/tests/test_motion.py:3: ResourceWarning: unclosed file <_io.TextIOWrapper name='/home/sandbox/chatify/tests/../chatify/web/appearanceextras.js' mode='r' encoding='utf-8'>
+  rd = lambda n: open(os.path.join(W, n), encoding="utf-8").read()
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+ok
+test_menu_radius_typeprev (test_motion.Motion) ... ok
+test_mode_swap_respects_reduced_motion (test_motion.Motion) ... ok
+test_preview_fade_and_grid (test_motion.Motion) ... ok
+test_pulse_and_picture_settle (test_motion.Motion) ... ok
+test_segment_indicator (test_motion.Motion) ... ok
+test_slider_value_tick (test_motion.Motion) ... ok
+test_spacing_sheet_icons (test_motion.Motion) ... ok
+test_tip_underline_key_status_jump (test_motion.Motion) ... ok
+test_demo_is_local_and_stops_immediately_on_calm (test_motion_mode_states.MotionModeStates) ... ok
+test_bad_url_falls_back (test_mysql.T) ... ok
+test_conn_and_store (test_mysql.T) ... ok
+test_ddl (test_mysql.T) ... ok
+test_default_is_sqlite (test_mysql.T) ... ok
+test_fallback_when_unreachable (test_mysql.T) ... ok
+test_parse (test_mysql.T) ... ok
+test_sql (test_mysql.T) ... ok
+test_desktop_child_keeps_declared_env (test_nerdload.HostedNerdLoadTests) ... /home/sandbox/chatify/tests/test_nerdload.py:111: ResourceWarning: unclosed file <_io.BufferedReader name='/proc/480876/environ'>
+  env=open('/proc/%d/environ'%pid,'rb').read().decode('utf-8','replace')
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+ok
+test_hosted_child_gets_no_host_key_env (test_nerdload.HostedNerdLoadTests) ... /home/sandbox/chatify/tests/test_nerdload.py:97: ResourceWarning: unclosed file <_io.BufferedReader name='/proc/480878/environ'>
+  env=open('/proc/%d/environ'%pid,'rb').read().decode('utf-8','replace')
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+ok
+test_hosted_limit_defaults_two_and_review_enforces (test_nerdload.HostedNerdLoadTests) ... ok
+test_hosted_load_registers_slug_relative_url_and_owner (test_nerdload.HostedNerdLoadTests) ... ok
+test_owner_scoping_and_unregister (test_nerdload.HostedNerdLoadTests) ... ok
+test_article_response_has_routing_hint_without_import (test_nerdload.NerdLoadTests) ... ok
+test_auth_not_silently_replaced (test_nerdload.NerdLoadTests) ... ok
+test_benign_dotfiles_skipped (test_nerdload.NerdLoadTests) ... ok
+test_bounded_import_default (test_nerdload.NerdLoadTests) ... ok
+test_discover_stopped (test_nerdload.NerdLoadTests) ... ok
+test_env_rejected (test_nerdload.NerdLoadTests) ... ok
+test_export_empty_source_roundtrip (test_nerdload.NerdLoadTests) ... ok
+test_inline_secret_rejected (test_nerdload.NerdLoadTests) ... ok
+test_local_roundtrip_start (test_nerdload.NerdLoadTests) ... ok
+test_missing_python (test_nerdload.NerdLoadTests) ... ok
+test_path_traversal (test_nerdload.NerdLoadTests) ... ok
+test_review_does_not_run_python (test_nerdload.NerdLoadTests) ... ok
+test_secrets_in_ignored_metadata_still_rejected (test_nerdload.NerdLoadTests) ... ok
+test_source_archive_explained (test_nerdload.NerdLoadTests) ... ok
+test_static_preview_no_execution (test_nerdload.NerdLoadTests) ... ok
+test_stop_list_remove (test_nerdload.NerdLoadTests) ... ok
+test_unknown_dotfile_named (test_nerdload.NerdLoadTests) ... ok
+test_yaml_without_documents_loads_empty_folder (test_nerdload.NerdLoadTests) ... ok
+test_readiness_budget_covers_slow_free_hosts (test_nerdload.ReadinessBudgetTest) ... ok
+test_remove_persistent_failure_keeps_entry_and_files (test_nerdload.RemoveResilience) ... ok
+test_remove_retries_transient_file_failure_once (test_nerdload.RemoveResilience) ... ok
+test_chart_count_is_computed_not_invented (test_news_campaign_regressions.NewsRegression) ... ok
+test_chart_prompt_requires_sample_only_numeric_data (test_news_campaign_regressions.NewsRegression) ... ok
+test_chart_refuses_non_count_world_data (test_news_campaign_regressions.NewsRegression) ... ok
+test_headline_prompt_requires_attribution (test_news_campaign_regressions.NewsRegression) ... ok
+test_natural_language_rest_query_has_keyword_fallback (test_news_campaign_regressions.NewsRegression) ... ok
+test_numeric_cleanup_does_not_leave_fragment (test_news_campaign_regressions.NewsRegression) ... ok
+test_numeric_cleanup_removes_whole_line (test_news_campaign_regressions.NewsRegression) ... ok
+test_short_keyword_not_changed (test_news_campaign_regressions.NewsRegression) ... ok
+test_source_config_change_invalidates_cache (test_news_campaign_regressions.NewsRegression) ... ok
+test_all_appearance_ranges (test_numeric_audit.NumericAudit) ... ok
+test_every_config_numeric_bad_values (test_numeric_audit.NumericAudit) ... ok
+test_source_numbers_and_fallback (test_numeric_audit.NumericAudit) ... ok
+test_yaml_and_zip_import_reject_negative_budget (test_numeric_audit.NumericAudit) ... ok
+test_cancel_does_not_claim_rollback (test_ollama_setup.OllamaSetupHTTPTests) ... ok
+test_cancel_download (test_ollama_setup.OllamaSetupHTTPTests) ... ok
+test_dns_rebinding_denied (test_ollama_setup.OllamaSetupHTTPTests) ... ok
+test_foreign_origin_denied (test_ollama_setup.OllamaSetupHTTPTests) ... ok
+test_form_post_denied (test_ollama_setup.OllamaSetupHTTPTests) ... ok
+test_json_prepare_no_process (test_ollama_setup.OllamaSetupHTTPTests) ... ok
+test_status_no_effect (test_ollama_setup.OllamaSetupHTTPTests) ... ok
+test_existing_not_reinstalled (test_ollama_setup.OllamaSetupTests) ... ok
+test_expired (test_ollama_setup.OllamaSetupTests) ... ok
+test_explicit_confirmation (test_ollama_setup.OllamaSetupTests) ... ok
+test_fixed_download (test_ollama_setup.OllamaSetupTests) ... ok
+test_linux_failure_is_not_success (test_ollama_setup.OllamaSetupTests) ... ok
+test_low_disk (test_ollama_setup.OllamaSetupTests) ... ok
+test_missing_is_not_connection_only (test_ollama_setup.OllamaSetupTests) ... ok
+test_no_download_during_prepare (test_ollama_setup.OllamaSetupTests) ... ok
+test_one_time_ticket_and_no_real_install (test_ollama_setup.OllamaSetupTests) ... ok
+test_ready_requires_service (test_ollama_setup.OllamaSetupTests) ... ok
+test_redirect_denied (test_ollama_setup.OllamaSetupTests) ... ok
+test_running (test_ollama_setup.OllamaSetupTests) ... ok
+test_stopped (test_ollama_setup.OllamaSetupTests) ... ok
+test_unknown_ticket (test_ollama_setup.OllamaSetupTests) ... ok
+test_compact_fields_and_dropdown_layer (test_onboarding_ui.OnboardingUI) ... ok
+test_designed_status_and_picker (test_onboarding_ui.OnboardingUI) ... ok
+test_plain_demo_and_real_setup_paths (test_onboarding_ui.OnboardingUI) ... ok
+test_preview_and_nested_logo_packaging (test_onboarding_ui.OnboardingUI) ... ok
+test_theme_switch_and_preset_palette (test_onboarding_ui.OnboardingUI) ... ok
+test_tools_below_input (test_onboarding_ui.OnboardingUI) ... ok
+test_font_directory_is_package_data (test_packaged_fonts.PackagedFonts) ... ok
+test_error_page_is_animated_and_calm (test_pagetransitions.ErrorPages) ... /home/sandbox/chatify/tests/test_pagetransitions.py:4: ResourceWarning: unclosed file <_io.TextIOWrapper name='/home/sandbox/chatify/tests/../chatify/web/error.html' mode='r' encoding='utf-8'>
+  rd = lambda n: io.open(os.path.join(W, n), encoding="utf-8").read()
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+ok
+test_every_code_has_a_designed_page (test_pagetransitions.ErrorPages) ... /home/sandbox/chatify/tests/test_pagetransitions.py:47: ResourceWarning: unclosed file <_io.TextIOWrapper name='/home/sandbox/chatify/tests/../chatify/web/../server.py' mode='r' encoding='utf-8'>
+  srv = io.open(os.path.join(W, "..", "server.py"), encoding="utf-8").read()
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+ok
+test_every_page_wires_the_transition (test_pagetransitions.PageTransitions) ... /home/sandbox/chatify/tests/test_pagetransitions.py:4: ResourceWarning: unclosed file <_io.TextIOWrapper name='/home/sandbox/chatify/tests/../chatify/web/index.html' mode='r' encoding='utf-8'>
+  rd = lambda n: io.open(os.path.join(W, n), encoding="utf-8").read()
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/home/sandbox/chatify/tests/test_pagetransitions.py:4: ResourceWarning: unclosed file <_io.TextIOWrapper name='/home/sandbox/chatify/tests/../chatify/web/settings.html' mode='r' encoding='utf-8'>
+  rd = lambda n: io.open(os.path.join(W, n), encoding="utf-8").read()
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/home/sandbox/chatify/tests/test_pagetransitions.py:4: ResourceWarning: unclosed file <_io.TextIOWrapper name='/home/sandbox/chatify/tests/../chatify/web/about.html' mode='r' encoding='utf-8'>
+  rd = lambda n: io.open(os.path.join(W, n), encoding="utf-8").read()
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/home/sandbox/chatify/tests/test_pagetransitions.py:4: ResourceWarning: unclosed file <_io.TextIOWrapper name='/home/sandbox/chatify/tests/../chatify/web/run-locally.html' mode='r' encoding='utf-8'>
+  rd = lambda n: io.open(os.path.join(W, n), encoding="utf-8").read()
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+ok
+test_exit_only_flags_real_page_changes (test_pagetransitions.PageTransitions) ... /home/sandbox/chatify/tests/test_pagetransitions.py:4: ResourceWarning: unclosed file <_io.TextIOWrapper name='/home/sandbox/chatify/tests/../chatify/web/navflow.js' mode='r' encoding='utf-8'>
+  rd = lambda n: io.open(os.path.join(W, n), encoding="utf-8").read()
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+ok
+test_shared_assets_exist (test_pagetransitions.PageTransitions) ... /home/sandbox/chatify/tests/test_pagetransitions.py:4: ResourceWarning: unclosed file <_io.TextIOWrapper name='/home/sandbox/chatify/tests/../chatify/web/navflow.css' mode='r' encoding='utf-8'>
+  rd = lambda n: io.open(os.path.join(W, n), encoding="utf-8").read()
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+ok
+test_transition_is_short_and_gentle (test_pagetransitions.PageTransitions) ... ok
+test_infinity_turn_renders (test_pdf_source_keep.PdfSourceKeep) ... ERROR
+test_keep_together_logic_present (test_pdf_source_keep.PdfSourceKeep) ... ok
+test_long_source_list_renders (test_pdf_source_keep.PdfSourceKeep) ... ERROR
+test_math_operator_coverage (test_pdf_source_keep.PdfSourceKeep) ... ok
+test_empty_results (test_peace_reliefweb.ReliefWebTests) ... ok
+test_error_is_honest_without_appname_leak (test_peace_reliefweb.ReliefWebTests) ... ok
+test_filler_verbs_and_generic_words_are_not_keywords (test_peace_reliefweb.ReliefWebTests) ... ok
+test_keyword_relaxation_recovers_results (test_peace_reliefweb.ReliefWebTests) ... ok
+test_question_keywords_keep_topic_not_question_words (test_peace_reliefweb.ReliefWebTests) ... ok
+test_relaxation_call_count_is_bounded (test_peace_reliefweb.ReliefWebTests) ... ok
+test_report_body_provenance_and_dedup (test_peace_reliefweb.ReliefWebTests) ... ok
+test_requires_appname (test_peace_reliefweb.ReliefWebTests) ... ok
+test_all_classified_errors_are_value_errors (test_peace_sfcg.SfcgTests) ... ok
+test_cf_mitigated_header_is_denied_not_retried (test_peace_sfcg.SfcgTests) ... ok
+test_challenge_bearing_5xx_is_denied_not_retried (test_peace_sfcg.SfcgTests) ... ok
+test_challenge_page_is_denied_not_retried (test_peace_sfcg.SfcgTests) ... ok
+test_denied_not_retried (test_peace_sfcg.SfcgTests) ... ok
+test_empty_results (test_peace_sfcg.SfcgTests) ... ok
+test_error_is_honest (test_peace_sfcg.SfcgTests) ... ok
+test_error_message_free_of_query_url_and_body (test_peace_sfcg.SfcgTests) ... ok
+test_fallback_when_everything_empty_uses_default (test_peace_sfcg.SfcgTests) ... ok
+test_junk_titles_filtered (test_peace_sfcg.SfcgTests) ... ok
+test_keyword_relaxation_until_enough_results (test_peace_sfcg.SfcgTests) ... ok
+test_plain_503_remains_transient_and_retried (test_peace_sfcg.SfcgTests) ... ok
+test_provenance_dedup_and_host_validation (test_peace_sfcg.SfcgTests) ... ok
+test_question_words_removed_from_search (test_peace_sfcg.SfcgTests) ... ok
+test_throttled_not_retried (test_peace_sfcg.SfcgTests) ... ok
+test_transient_retried_once_then_raises (test_peace_sfcg.SfcgTests) ... ok
+test_transient_then_success (test_peace_sfcg.SfcgTests) ... ok
+test_unreachable_retried_once_then_raises (test_peace_sfcg.SfcgTests) ... ok
+test_accounts_required (test_permissions.Permissions) ... ok
+test_before_topk_and_cache (test_permissions.Permissions) ... ok
+test_collection_denial (test_permissions.Permissions) ... ok
+test_direct_scope_denial (test_permissions.Permissions) ... ok
+test_empty_deny (test_permissions.Permissions) ... ok
+test_http_accounts_and_revocation (test_permissions.Permissions) ... ok
+test_policy_revocation_cache (test_permissions.Permissions) ... ok
+test_remote_document_rule_rejected (test_permissions.Permissions) ... ok
+test_saved_answer_redacted (test_permissions.Permissions) ... ok
+test_source_listing (test_permissions.Permissions) ... ok
+test_temp_permissions_no_uploads (test_permissions.Permissions) ... ok
+test_busy_and_all_disabled_guard (test_picker_longlist_states.PickerLong) ... ok
+test_permissions_and_lock (test_portable.ExportPermissions) ... ok
+test_env_names_not_values (test_portable.PortableTests) ... ok
+test_external_root (test_portable.PortableTests) ... ok
+test_include_docs_false_bundles_empty_source (test_portable.PortableTests) ... ok
+test_mysql_removed (test_portable.PortableTests) ... ok
+test_no_overwrite (test_portable.PortableTests) ... ok
+test_override_live_settings (test_portable.PortableTests) ... ok
+test_private_source (test_portable.PortableTests) ... ok
+test_private_state_source (test_portable.PortableTests) ... ok
+test_roundtrip (test_portable.PortableTests) ... ok
+test_secret_config (test_portable.PortableTests) ... ok
+test_size_limit (test_portable.PortableTests) ... ok
+test_symlink (test_portable.PortableTests) ... ok
+test_preset_cards_keep_identity_and_name_errors_keep_focus (test_preset_states.PresetStates) ... ok
+test_theme_does_not_reset_sample (test_preview_continuity.PreviewContinuity) ... ok
+test_local_theme_update_is_not_delayed_by_save_queue (test_preview_immediate_states.PreviewImmediateStates) ... ok
+test_sample_has_space_and_separate_small_type (test_preview_readable.PreviewReadable) ... ok
+test_real_stage_events_empty_sources (test_progress.Progress) ... ok
+test_status_live_region_and_scroll (test_progress.Progress) ... ok
+test_validation_before_events (test_progress.Progress) ... ok
+test_missing_date_does_not_replace_requested_fact (test_prompt_fact_focus.PromptFactFocus) ... ok
+test_named_entity_sentences_are_verbatim_not_canned (test_prompt_fact_focus.PromptFactFocus) ... ok
+test_all_stage_text_survives_reload (test_prompt_presentation.PromptPresentation) ... ok
+test_menu_only_reset_and_theme_svg (test_prompt_presentation.PromptPresentation) ... ok
+test_revise_config_default_and_explicit_override (test_prompt_presentation.PromptPresentation) ... ok
+test_network_timeout_disconnect_are_distinct_and_private (test_provider_error_details.ProviderErrorDetails) ... ok
+test_rejection_codes_plain_reason_without_provider_body (test_provider_error_details.ProviderErrorDetails) ... ok
+test_provider_identity_and_network_state_are_preserved (test_provider_motion_states.ProviderMotionStates) ... ok
+test_hosted_demo_opts_in (test_public_visitor_isolation.PublicVisitorIsolation) ... ok
+test_no_auth_public_mode_uses_a_per_browser_owner (test_public_visitor_isolation.PublicVisitorIsolation) ... ok
+test_schema_allows_server_public_flag (test_public_visitor_isolation.PublicVisitorIsolation) ... ok
+test_dry_run_no_external_commands (test_publish.PublishTests) ... ok
+test_executable (test_publish.PublishTests) ... ok
+test_failed_backup_stops_before_copy (test_publish.PublishTests) ... ok
+test_no_unused_app_file_option (test_publish.PublishTests) ... ok
+test_ambiguous_near_miss_rescued_at_recall_but_semantic_stage_drops_it (test_query_expansion.AdversarialExpansionTest) ... ok
+test_expanded_only_junk_rescued_at_recall_but_semantic_stage_drops_it (test_query_expansion.AdversarialExpansionTest) ... ok
+test_expansion_adding_a_negation_is_rejected (test_query_expansion.AdversarialExpansionTest) ... ok
+test_injected_padding_raises_the_floor_and_abstains (test_query_expansion.AdversarialExpansionTest) ... ok
+test_injection_rewrite_dropping_original_words_is_rejected (test_query_expansion.AdversarialExpansionTest) ... ok
+test_on_intent_negated_question_still_rescues_with_parity (test_query_expansion.AdversarialExpansionTest) ... ok
+test_semantic_backstop_receives_original_question_only (test_query_expansion.AdversarialExpansionTest) ... ok
+test_all_junk_still_abstains (test_query_expansion.QueryExpansionTest) ... ok
+test_corpus_question_never_expands (test_query_expansion.QueryExpansionTest) ... ok
+test_expansion_call_is_bounded_by_cache (test_query_expansion.QueryExpansionTest) ... ok
+test_expansion_substituting_original_words_is_allowed_and_judged (test_query_expansion.QueryExpansionTest) ... ok
+test_mock_provider_output_is_rejected_by_contract (test_query_expansion.QueryExpansionTest) ... ok
+test_mock_provider_type_disables_the_rescue_entirely (test_query_expansion.QueryExpansionTest) ... ok
+test_negation_parity_violation_is_rejected (test_query_expansion.QueryExpansionTest) ... ok
+test_provider_failure_falls_back_to_abstention (test_query_expansion.QueryExpansionTest) ... ok
+test_single_token_laundering_is_blocked (test_query_expansion.QueryExpansionTest) ... ok
+test_synonym_rescue_surfaces_zero_overlap_passage (test_query_expansion.QueryExpansionTest) ... ok
+test_distinctive_original_word_still_anchors_fail_open (test_query_expansion.SubstitutionExpansionTest) ... ok
+test_expanded_only_passage_is_fail_closed_even_when_stems_preserved (test_query_expansion.SubstitutionExpansionTest) ... ok
+test_generic_original_words_do_not_anchor_a_wrong_concept (test_query_expansion.SubstitutionExpansionTest) ... ok
+test_original_word_anchored_passage_stays_fail_open_when_judge_fails (test_query_expansion.SubstitutionExpansionTest) ... ok
+test_substituted_rewrite_abstains_when_judge_says_none (test_query_expansion.SubstitutionExpansionTest) ... ok
+test_substituted_rewrite_is_fail_closed_when_judge_fails (test_query_expansion.SubstitutionExpansionTest) ... ok
+test_substituted_rewrite_rescues_when_judge_confirms (test_query_expansion.SubstitutionExpansionTest) ... ok
+test_substitution_still_enforces_negation_parity (test_query_expansion.SubstitutionExpansionTest) ... ok
+test_substitution_still_rejects_corpus_references (test_query_expansion.SubstitutionExpansionTest) ... ok
+test_bad_python_blocks (test_readiness.ReadinessTests) ... ok
+test_ollama_explicitly_unchecked (test_readiness.ReadinessTests) ... ok
+test_partial_uses_defaults (test_readiness.ReadinessTests) ... ok
+test_python_key_names (test_readiness.ReadinessTests) ... ok
+test_accessible_dialog_and_focus (test_reading.Reading) ... ok
+test_bounds_and_local_prefs (test_reading.Reading) ... ok
+test_keep_scroll_when_reading_earlier (test_reading.Reading) ... ok
+test_plain_sample_and_direct_reading_change (test_reading_view_states.ReadingView) ... ok
+test_plain_question_keeps_relevance (test_recency_query.ArxivRecencySortTest) ... ok
+test_recent_question_sorts_by_submitted_date (test_recency_query.ArxivRecencySortTest) ... ok
+test_content_words_survive (test_recency_query.PubMedKeywordHygieneTest) ... ok
+test_empty_question_falls_back (test_recency_query.PubMedKeywordHygieneTest) ... ok
+test_meta_intent_words_are_dropped (test_recency_query.PubMedKeywordHygieneTest) ... ok
+test_plain_question_keeps_relevance_sort (test_recency_query.PubMedRecencySortTest) ... ok
+test_recent_question_sorts_by_pub_date (test_recency_query.PubMedRecencySortTest) ... ok
+test_non_recency_question_sends_no_flag (test_recency_query.RecencyPlumbingTest) ... ok
+test_recent_flag_reaches_modern_connector (test_recency_query.RecencyPlumbingTest) ... ok
+test_recent_not_passed_to_legacy_connector (test_recency_query.RecencyPlumbingTest) ... ok
+test_status_and_cards_update_without_rebuild (test_recommendation_motion.RecommendationMotion) ... ok
+test_snapshot_and_save_clear (test_recommendation_return.RecommendationReturn) ... ok
+test_installer_and_readme_target_renamed_release (test_release_pins.ReleasePins) ... ok
+test_failure_fallback_order_preserved (test_rerank_routing.RerankRoutingTest) ... ok
+test_mixed_corpus_keeps_score_order_and_skips_rerank (test_rerank_routing.RerankRoutingTest) ... ok
+test_pure_open_api_reaches_rerank (test_rerank_routing.RerankRoutingTest) ... ok
+test_pure_owner_corpus_reaches_rerank (test_rerank_routing.RerankRoutingTest) ... ok
+test_anchored_but_off_intent_dropped (test_retrieval_gate.AcronymAnchorCoverage) ... ok
+test_coverage_rule_inert_without_two_full_matches (test_retrieval_gate.AcronymAnchorCoverage) ... ok
+test_anchor_rule_inert_when_retrieval_lacks_anchor (test_retrieval_gate.AcronymAnchorGate) ... ok
+test_anchorless_context_match_dropped (test_retrieval_gate.AcronymAnchorGate) ... ok
+test_no_anchor_question_unchanged (test_retrieval_gate.AcronymAnchorGate) ... ok
+test_most_specific_passage_leads (test_retrieval_gate.DiscriminatingWordGate) ... ok
+test_rule_inert_without_discriminating_coverage (test_retrieval_gate.DiscriminatingWordGate) ... ok
+test_ubiquitous_only_matches_dropped (test_retrieval_gate.DiscriminatingWordGate) ... ok
+test_rule_only_drops_when_better_coverage_exists (test_retrieval_gate.DiscriminatingWordGuards) ... ok
+test_symptom_query_single_distinctive_word_keeps_common_word_passage (test_retrieval_gate.DiscriminatingWordGuards) ... ok
+test_two_candidates_rule_inert (test_retrieval_gate.DiscriminatingWordGuards) ... ok
+test_generic_overlap_alone_is_not_evidence (test_retrieval_gate.EnglishSpecificityGate) ... ok
+test_most_on_question_passage_leads (test_retrieval_gate.EnglishSpecificityGate) ... ok
+test_one_shared_word_counts_once_despite_inflections (test_retrieval_gate.EnglishSpecificityGate) ... ok
+test_real_cart_evidence_kept_broad_papers_dropped (test_retrieval_gate.EnglishSpecificityGate) ... ok
+test_same_word_family_different_field_dropped (test_retrieval_gate.EnglishSpecificityGate) ... ok
+test_default_is_labeled_source_preview (test_retrieval_gate.FallbackWording) ... ok
+test_excerpt_window_completes_cliff_sentence (test_retrieval_gate.FallbackWording) ... ok
+test_excerpt_window_prefers_rare_distinctive_terms (test_retrieval_gate.FallbackWording) ... ok
+test_excerpt_window_shows_matching_span (test_retrieval_gate.FallbackWording) ... ok
+test_excerpt_window_without_match_keeps_head (test_retrieval_gate.FallbackWording) ... ok
+test_missing_key_wording_points_to_configuration (test_retrieval_gate.FallbackWording) ... ok
+test_no_key_error_shape (test_retrieval_gate.FallbackWording) ... ok
+test_no_question_keeps_old_truncation (test_retrieval_gate.FallbackWording) ... ok
+test_mixed_dated_and_undated_sources_are_explicit (test_retrieval_gate.FreshnessQualification) ... ok
+test_non_recency_question_has_no_freshness_line (test_retrieval_gate.FreshnessQualification) ... ok
+test_recency_question_states_newest_source_year (test_retrieval_gate.FreshnessQualification) ... ok
+test_recency_without_dates_says_so (test_retrieval_gate.FreshnessQualification) ... ok
+test_all_irrelevant_returns_empty_for_clarify (test_retrieval_gate.Gate) ... ok
+test_capitalized_entity_anchors_retrieval (test_retrieval_gate.Gate) ... ok
+test_irrelevant_popular_pages_dropped (test_retrieval_gate.Gate) ... ok
+test_no_question_words_passes_through (test_retrieval_gate.Gate) ... ok
+test_relative_floor_keeps_strong_drops_weak (test_retrieval_gate.Gate) ... ok
+test_single_shared_word_is_a_mention_not_a_match (test_retrieval_gate.Gate) ... ok
+test_variant_stemming_matches_inflections (test_retrieval_gate.Gate) ... ok
+test_digit_tokens_are_not_gate_stems (test_retrieval_gate.MultilingualAndNumericGate) ... ok
+test_mixed_hindi_english_question_gated_on_english_only (test_retrieval_gate.MultilingualAndNumericGate) ... ok
+test_numbers_alone_never_establish_topical_overlap (test_retrieval_gate.MultilingualAndNumericGate) ... ok
+test_punctuation_only_question_still_passes_through (test_retrieval_gate.MultilingualAndNumericGate) ... ok
+test_pure_non_latin_question_cannot_pass_everything_through (test_retrieval_gate.MultilingualAndNumericGate) ... ok
+test_off_question_upload_chunk_dropped (test_retrieval_gate.OwnerCorpusGating) ... ok
+test_owner_chunk_without_question_overlap_does_not_display (test_retrieval_gate.OwnerCorpusGating) ... ok
+test_gate_keeps_stir_frying_for_stir_fry_question (test_retrieval_gate.QueryLadder) ... ok
+test_ladder_dedups_and_keeps_raw_first (test_retrieval_gate.QueryLadder) ... ok
+test_ladder_emits_focused_heads (test_retrieval_gate.QueryLadder) ... ok
+test_no_search_sources_keeps_single_query (test_retrieval_gate.QueryLadder) ... ok
+test_short_query_drops_question_words (test_retrieval_gate.QueryWords) ... ok
+test_no_key_skips_stage_instead_of_blocking_turn (test_retrieval_gate.QuestionCheckNoKey) ... ok
+test_other_provider_errors_still_surface (test_retrieval_gate.QuestionCheckNoKey) ... ok
+test_mixed_corpus_keeps_score_order (test_retrieval_gate.RetrieveOrdering) ... ok
+test_pure_search_keeps_gate_order (test_retrieval_gate.RetrieveOrdering) ... ok
+test_default_never_loads_model (test_retrieval_plus.RetrievalPlus) ... ok
+test_heading_anchor (test_retrieval_plus.RetrievalPlus) ... ok
+test_hybrid_and_rerank_injected (test_retrieval_plus.RetrievalPlus) ... ok
+test_model_path_check (test_retrieval_plus.RetrievalPlus) ... ok
+test_ocr_command_timeout (test_retrieval_plus.RetrievalPlus) ... ok
+test_ocr_missing_tools (test_retrieval_plus.RetrievalPlus) ... ok
+test_pdf_page_limit (test_retrieval_plus.RetrievalPlus) ... ok
+test_scanned_pdf_real_ocr (test_retrieval_plus.RetrievalPlus) ... ok
+test_motion_and_accessible_status (test_review_refinements.ReviewRefinements) ... ok
+test_original_palette_and_scoped_modal (test_review_refinements.ReviewRefinements) ... ok
+test_equal_dates_keep_demote_order (test_rider_demote.RecencyComposition) ... ok
+test_newer_rider_keeps_date_priority (test_rider_demote.RecencyComposition) ... ok
+test_missing_title_record_retained (test_rider_demote.RiderDemote) ... ok
+test_preview_wording_marks_loosely_matched_tail (test_rider_demote.RiderDemote) ... ok
+test_private_sources_exempt (test_rider_demote.RiderDemote) ... ok
+test_riders_sink_genuine_leads_nothing_dropped (test_rider_demote.RiderDemote) ... ok
+test_single_strong_match_leaves_order_unchanged (test_rider_demote.RiderDemote) ... ok
+test_vague_title_genuine_study_retained (test_rider_demote.RiderDemote) ... ok
+test_arabic_hebrew_answer_exports (test_rtl_pdf.RtlPdfTest) ... ERROR
+test_coverage_includes_arabic_and_hebrew (test_rtl_pdf.RtlPdfTest) ... ok
+test_latin_unchanged (test_rtl_pdf.RtlPdfTest) ... ERROR
+test_rtl_vote (test_rtl_pdf.RtlPdfTest) ... ok
+test_uncovered_script_still_rejected (test_rtl_pdf.RtlPdfTest) ... ERROR
+test_default_opens_configured_url (test_run_browser.RunBrowserTests) ... accounts ok
+pdf text: 'Hello from a PDF with enough words.\nSecond line here.'
+pdf ok
+provider retry ok
+secret store ok
+hardware ok
+logo ok
+prompts and generators ok
+websearch ok
+web toggle ok
+open sources ok
+ollama fit/pull ok
+accounts ok
+pdf text: 'Hello from a PDF with enough words.\nSecond line here.'
+pdf ok
+provider retry ok
+secret store ok
+hardware ok
+logo ok
+prompts and generators ok
+websearch ok
+web toggle ok
+open sources ok
+ollama fit/pull ok
+chatify: data file was damaged; moved to /tmp/tmp61js96sf/chatify.db.corrupt-20261027-213136 and started a new one
+chatify: Chats cannot be saved right now (attempt to write a readonly database). Answers still work; history is kept only until the app restarts.
+chatify: Chats cannot be saved right now (cannot create the data folder (Permission denied)). Answers still work; history is kept only until the app restarts.
+chatify: MySQL not available (CHATIFY_DB_URL must look like mysql://user:password@host:3306/dbname); using the local SQLite file instead
+chatify: MySQL not available ((2003, "Can't connect to MySQL server on '127.0.0.1' ([Errno 111] Connection refused)")); using the local SQLite file instead
+HOSTED_CHILD_RSS_KB=25444
+Open http://127.0.0.1:8081 in your browser. Ctrl+C stops the app.
+ok
+test_no_browser (test_run_browser.RunBrowserTests) ... Open http://127.0.0.1:8081 in your browser. Ctrl+C stops the app.
+ok
+test_wildcard_uses_loopback_browser (test_run_browser.RunBrowserTests) ... Open http://127.0.0.1:8082 in your browser. Ctrl+C stops the app.
+ok
+test_named_state_roundtrip_and_legacy_load (test_saved_appearance.SavedAppearance) ... ok
+test_done_contains_scope (test_scope.Scope) ... ok
+test_explicit_empty_sources_is_empty (test_scope.Scope) ... ok
+test_filters_before_top_k_no_other_doc (test_scope.Scope) ... ok
+test_invalid_scope_fails_before_events (test_scope.Scope) ... ok
+test_saved_scope_reload_and_sync (test_scope.Scope) ... ok
+test_scope_excludes_uploads (test_scope.Scope) ... ok
+test_selected_source_intersection_fail_closed (test_scope.Scope) ... ok
+test_temporary_scope_discards_old_answers (test_scope.Scope) ... ok
+test_loading_status_until_ready (test_send_readiness.SendReadiness) ... ok
+test_ready_activation_after_binding (test_send_readiness.SendReadiness) ... ok
+test_send_disabled_until_init_binds (test_send_readiness.SendReadiness) ... ok
+test_bind_never_reverse_resolves (test_server_bind.BindTests) ... ok
+test_no_provider_call_on_settings_load (test_settings_ready_state.SettingsReadyState) ... ok
+test_allowlist_and_private_config (test_settingsguide.TestSettingsGuide) ... ok
+test_bad_query (test_settingsguide.TestSettingsGuide) ... ok
+test_consent (test_settingsguide.TestSettingsGuide) ... ok
+test_demo (test_settingsguide.TestSettingsGuide) ... ok
+test_malformed (test_settingsguide.TestSettingsGuide) ... ok
+test_missing_or_bad_links (test_settingsguide.TestSettingsGuide) ... ok
+test_archive_invalid_no_chat (test_settingsguide_http.GuideHTTP) ... ok
+test_credential_url_rejected (test_settingsguide_http.GuideHTTP) ... ok
+test_guide_auth_and_applied_demo (test_settingsguide_http.GuideHTTP) ... ok
+test_guide_engine_uses_no_private_state (test_settingsguide_http.GuideHTTP) ... ok
+test_guide_owner_gate (test_settingsguide_http.GuideHTTP) ... ok
+test_guide_selected_provider_and_model_transport (test_settingsguide_http.GuideHTTP) ... ok
+test_model_review_blocks_remote (test_settingsguide_http.GuideHTTP) ... ok
+test_no_live_without_review (test_settingsguide_http.GuideHTTP) ... ok
+test_owner_only (test_settingsguide_http.GuideHTTP) ... ok
+test_settings_history_and_reserved_hidden (test_settingsguide_http.GuideHTTP) ... ok
+test_source_credentials_admin_only_and_not_echoed (test_settingsguide_http.GuideHTTP) ... ok
+test_source_credentials_locked (test_settingsguide_http.GuideHTTP) ... ok
+test_budget_preserved (test_settingsguide_security.Security) ... ok
+test_schema_is_names_not_values (test_settingsguide_security.Security) ... ok
+test_ask_key_survives_closed_input (test_setup.T) ... 
+Which AI provider will answer questions?
+  1. OpenAI
+  2. Claude (Anthropic)
+  3. Gemini
+  4. DeepSeek
+  5. Groq
+  6. Mistral
+  7. OpenRouter
+  8. MiniMax
+  9. Xiaomi MiMo
+  10. Ollama (local, no key)
+  Enter. Skip for now (offline Demo)
+
+Skipped the key step. You can add a key later on the Configuration page, Model tab.
+ok
+test_check_reports_without_changing_anything (test_setup.T) ... ok
+test_port_helpers (test_setup.T) ... ok
+test_req_hash_ignores_mtime (test_setup.T) ... /home/sandbox/chatify/tests/../setup_and_run.py:48: ResourceWarning: unclosed file <_io.BufferedReader name='/tmp/tmp4dfee60c'>
+  return hashlib.sha256(open(path, "rb").read()).hexdigest()
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+ok
+test_venv_python_path (test_setup.T) ... ok
+test_wsl_detect (test_setup.T) ... /home/sandbox/chatify/tests/../setup_and_run.py:29: ResourceWarning: unclosed file <_io.TextIOWrapper name='/proc/version' mode='r' encoding='UTF-8'>
+  return "microsoft" in open("/proc/version").read().lower()
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+ok
+test_shape_tokens_are_not_scaled_and_styles_survive_old_overrides (test_shape_states.ShapeStates) ... ok
+test_docked_move_is_paired_and_large_changes_are_immediate (test_sidebar_motion.SidebarMotion) ... ok
+test_simple_mode_hides_model_list_chatter (test_simple_mode_density.SimpleModeDensity) ... ok
+test_focus_and_hover_do_not_require_scale (test_small_feedback_states.SmallFeedbackStates) ... ok
+test_bad_mapping_rejected (test_source_credentials.SourceKeys) ... ok
+test_error_payload_not_empty_success (test_source_credentials.SourceKeys) ... ok
+test_missing_key_fails_before_network (test_source_credentials.SourceKeys) ... ok
+test_no_credential_redirect (test_source_credentials.SourceKeys) ... ok
+test_plain_http_credentials_rejected (test_source_credentials.SourceKeys) ... ok
+test_presence_no_echo_remove_and_export_exclusion (test_source_credentials.SourceKeys) ... ok
+test_private_file_mode (test_source_credentials.SourceKeys) ... ok
+test_private_key_header_and_mapping (test_source_credentials.SourceKeys) ... ok
+test_saved_key_bound_to_destination (test_source_credentials.SourceKeys) ... ok
+test_undeclared_and_python_keys_rejected (test_source_credentials.SourceKeys) ... ok
+test_mobile_sources_have_modal_lifecycle (test_source_overlay.SourceOverlay) ... ok
+test_config_and_exports_follow_theme_wording_overrides (test_source_setup_and_wording.EffectiveWording) ... ERROR
+test_engine_surfaces_setup_message_in_source_errors (test_source_setup_and_wording.OpenAlexSetupRequired) ... ok
+test_missing_key_raises_named_setup_error (test_source_setup_and_wording.OpenAlexSetupRequired) ... ok
+test_source_errors_roundtrip_and_legacy_db_migration (test_source_setup_and_wording.SourceErrorsPersistence) ... ok
+test_missing_label_defaults_to_readable_type_name (test_source_setup_and_wording.SourceLabelDefaults) ... ok
+test_builder_swatch_clears_hex_error (test_source_summary_saved.SourceSummary) ... ok
+test_saved_summary_has_restart_boundary (test_source_summary_saved.SourceSummary) ... ok
+test_close_confirm_guides_to_add_link (test_source_upload_states.SourceUploadStates) ... ok
+test_perfile_states_and_batch_reset (test_source_upload_states.SourceUploadStates) ... ok
+test_drawer_lands_on_support_span (test_sources_drawer.SourcesDrawer) ... ok
+test_boundaries (test_stage_contracts.StageContracts) ... ok
+test_citations_not_truth (test_stage_contracts.StageContracts) ... ok
+test_ids (test_stage_contracts.StageContracts) ... ok
+test_labels (test_stage_contracts.StageContracts) ... ok
+test_lines (test_stage_contracts.StageContracts) ... ok
+test_incomplete_env_not_reset (test_start_local.LocalStartTests) ... ok
+test_install_failure_does_not_launch (test_start_local.LocalStartTests) ... Installing Chatify 0.2.3 from public PyPI into the private environment.
+ok
+test_private_install_and_args_preserve_spaces (test_start_local.LocalStartTests) ... Creating private .chatify-venv (system Python stays unchanged).
+Installing Chatify 0.2.3 from public PyPI into the private environment.
+Installing Chatify 0.2.3 from public PyPI into the private environment.
+ok
+test_bad_import_evidence_fields_rejected_before_writes (test_state_compat_matrix.StateMatrix) ... ok
+test_deleted_chat_hidden_from_topic_until_restore (test_state_compat_matrix.StateMatrix) ... ok
+test_deleted_turn_not_counted_in_topic (test_state_compat_matrix.StateMatrix) ... ok
+test_legacy_model_only_retains_current_appearance (test_state_compat_matrix.StateMatrix) ... ok
+test_malformed_chat_import_batch_has_no_partial_writes (test_state_compat_matrix.StateMatrix) ... ok
+test_malformed_states_do_not_change_settings_or_theme (test_state_compat_matrix.StateMatrix) ... ok
+test_missing_name_returns_400_without_change (test_state_compat_matrix.StateMatrix) ... ok
+test_named_state_image_roundtrip (test_state_compat_matrix.StateMatrix) ... 

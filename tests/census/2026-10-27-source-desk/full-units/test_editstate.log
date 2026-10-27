@@ -1,0 +1,13 @@
+test_active_connector_loaded_as_inert_text (test_editstate.EditStateTests) ... ok
+test_draft_roundtrip_no_execution (test_editstate.EditStateTests) ... ok
+test_exports_drafts_not_saved_secrets (test_editstate.EditStateTests) ... ok
+test_full_values_preserved (test_editstate.EditStateTests) ... ok
+test_invalid_or_symlink_saved_view_rejected (test_editstate.EditStateTests) ... ok
+test_private_values_rejected (test_editstate.EditStateTests) ... ok
+test_revision_safe_save_and_reload (test_editstate.EditStateTests) ... ok
+test_saved_view_does_not_revert_to_runtime_after_save (test_editstate.EditStateTests) ... ok
+
+----------------------------------------------------------------------
+Ran 8 tests in 0.115s
+
+OK

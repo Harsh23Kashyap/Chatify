@@ -1,0 +1,106 @@
+test_marked_animal_study_passes (test_core.AnimalFlag) ... ok
+test_unmarked_animal_study_is_flagged (test_core.AnimalFlag) ... ok
+test_bold_lead_keeps_its_citation (test_core.CiteFormat) ... ok
+test_citation_moves_outside_bold (test_core.CiteFormat) ... ok
+test_honest_no_evidence_sentence_is_not_flagged_uncited (test_core.CiteFormat) ... ok
+test_uncited_sentence_is_flagged (test_core.CiteFormat) ... ok
+test_uncited_sentences_are_rewritten_with_fewer_flags (test_core.CiteFormat) ... ok
+test_bibtex_and_pdf (test_core.Exports) ... ok
+test_chat_markdown (test_core.Extras) ... ok
+test_env_file_loaded_and_existing_wins (test_core.Extras) ... /home/sandbox/chatify/tests/test_core.py:181: ResourceWarning: unclosed file <_io.TextIOWrapper name='/tmp/tmpn6okvjmu/.env' mode='w' encoding='UTF-8'>
+  open(os.path.join(d, ".env"), "w").write("CC_A=1\nCC_B='two'\n# c\n")
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/home/sandbox/chatify/tests/test_core.py:182: ResourceWarning: unclosed file <_io.TextIOWrapper name='/tmp/tmpn6okvjmu/app.yaml' mode='w' encoding='UTF-8'>
+  open(os.path.join(d, "app.yaml"), "w").write("app: {title: T}\n")
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+ok
+test_provider_retry_on_transient (test_core.Extras) ... ok
+test_flow (test_core.Http) ... ok
+test_static_traversal_blocked (test_core.Http) ... ok
+test_token_auth (test_core.Http) ... ok
+test_json_schema_matches_defaults (test_core.JsonSchemaFile) ... /home/sandbox/chatify/tests/test_core.py:212: ResourceWarning: unclosed file <_io.TextIOWrapper name='/home/sandbox/chatify/schema/chat-app.schema.json' mode='r' encoding='UTF-8'>
+  js = json.load(open(os.path.join(ROOT, "schema", "chat-app.schema.json")))
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+ok
+test_confident_lead_with_weight_caveat_passes (test_core.LeadAndAttribution) ... ok
+test_confident_lead_without_weight_caveat_is_flagged (test_core.LeadAndAttribution) ... ok
+test_hedged_lead_passes (test_core.LeadAndAttribution) ... ok
+test_multi_cite_weak_source_is_listed (test_core.LeadAndAttribution) ... ok
+test_empty_records_are_not_usable (test_core.NumberCheck) ... ok
+test_numbers_must_be_in_cited_passage (test_core.NumberCheck) ... ok
+test_pmid_34086376_unmarked_animal_sentence_is_flagged_and_rewrite_names_rats (test_core.NumberCheck) ... ok
+test_regain_without_fat_mass_is_flagged (test_core.NumberCheck) ... ok
+test_rewrite_kept_only_if_flag_is_gone (test_core.NumberCheck) ... ok
+test_rewrite_rejected_if_it_adds_a_number (test_core.NumberCheck) ... ok
+test_rewrite_with_fewer_flags_is_kept (test_core.NumberCheck) ... ok
+test_sentences_split_when_citations_follow_the_period (test_core.NumberCheck) ... ok
+test_answer_cites_and_stores (test_core.Pipeline) ... ok
+test_chat_lifecycle (test_core.Pipeline) ... ok
+test_failing_source_does_not_sink_answer (test_core.Pipeline) ... ok
+test_followup_is_resolved_with_history (test_core.Pipeline) ... ok
+test_ledger_flags_invalid_citation (test_core.Pipeline) ... ok
+test_no_evidence_message (test_core.Pipeline) ... ok
+test_owner_isolation (test_core.Pipeline) ... ok
+test_topics_span_chats_and_new_topic (test_core.Pipeline) ... ok
+test_429_gives_up_after_three_calls_and_waits_between (test_core.PubMedQuery) ... ok
+test_429_is_retried_then_succeeds (test_core.PubMedQuery) ... ok
+test_keywords_drop_question_words (test_core.PubMedQuery) ... ok
+test_relaxes_when_nothing_matches (test_core.PubMedQuery) ... ok
+test_uncited_sentence_with_number_is_dropped (test_core.PubMedQuery) ... ok
+test_bm25_prefers_matching_section (test_core.Retrieval) ... ok
+test_delete_and_restore_turn (test_core.Round10) ... ok
+test_followups_present (test_core.Round10) ... ok
+test_uploads_become_evidence_and_are_private (test_core.Round10) ... ok
+test_url_dedupe (test_core.Round10) ... ok
+test_weight_validated_and_applied (test_core.Round10) ... ok
+test_cli_ask_json (test_core.Round16) ... ok
+test_export_all (test_core.Round16) ... ok
+test_fallback_provider_used_when_primary_fails (test_core.Round16) ... ok
+test_parallel_retrieval_survives_slow_and_failing_sources (test_core.Round16) ... ok
+test_persistent_cache_skips_second_remote_call (test_core.Round16) ... ok
+test_query_rewrite_with_model (test_core.Round16) ... ok
+test_support_score_and_ledger_overlap (test_core.Round16) ... ok
+test_import_roundtrip_and_ping (test_core.Round17) ... ok
+test_eval_command (test_core.Round18) ... /home/sandbox/chatify/tests/test_core.py:387: ResourceWarning: unclosed file <_io.TextIOWrapper name='/tmp/tmpogwn_62g/q.txt' mode='w' encoding='UTF-8'>
+  open(q, "w").write("# c\nwhat is this\n")
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+ok
+test_feedback_and_stats (test_core.Round18) ... ok
+test_profile_roundtrip_and_prompt (test_core.Round19) ... ok
+test_similar_questions (test_core.Round19) ... ok
+test_temporary_chat_saves_nothing (test_core.Round19) ... ok
+test_temporary_uses_bounded_client_history (test_core.Round19) ... ok
+test_claude_request_shape (test_core.Round20) ... ok
+test_gemini_request_shape (test_core.Round20) ... ok
+test_html_to_text (test_core.Round20) ... ok
+test_missing_key_is_a_clear_error (test_core.Round20) ... ok
+test_url_loader_blocks_private_hosts (test_core.Round20) ... ok
+test_defaults_and_validation (test_core.Schema) ... ok
+test_example_apps_validate (test_core.Schema) ... ok
+test_public_view_hides_internals (test_core.Schema) ... ok
+test_bad_settings_rejected (test_core.SettingsApi) ... ok
+test_flow (test_core.SettingsApi) ... ok
+test_settings_page_served (test_core.SettingsApi) ... ok
+test_settings_roundtrip_and_states (test_core.SettingsApi) ... ok
+test_static_traversal_blocked (test_core.SettingsApi) ... ok
+test_token_auth (test_core.SettingsApi) ... ok
+test_ask_stream_matches_ask (test_core.Streaming) ... ok
+test_http_stream_and_validation (test_core.Streaming) ... ok
+test_theme_validation_and_render (test_core.Theme) ... ok
+
+----------------------------------------------------------------------
+Ran 77 tests in 14.672s
+
+OK
+accounts ok
+pdf text: 'Hello from a PDF with enough words.\nSecond line here.'
+pdf ok
+provider retry ok
+secret store ok
+hardware ok
+logo ok
+prompts and generators ok
+websearch ok
+web toggle ok
+open sources ok
+ollama fit/pull ok

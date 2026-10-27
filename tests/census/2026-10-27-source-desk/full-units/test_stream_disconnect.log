@@ -1,0 +1,19 @@
+test_disconnect_while_sending_error_never_escapes (test_stream_disconnect.Disconnect) ... ok
+test_stream_disconnect_closes_generator_no_second_response (test_stream_disconnect.Disconnect) ... ok
+
+----------------------------------------------------------------------
+Ran 2 tests in 0.107s
+
+OK
+accounts ok
+pdf text: 'Hello from a PDF with enough words.\nSecond line here.'
+pdf ok
+provider retry ok
+secret store ok
+hardware ok
+logo ok
+prompts and generators ok
+websearch ok
+web toggle ok
+open sources ok
+ollama fit/pull ok

@@ -1,0 +1,16 @@
+test_bad_import_evidence_fields_rejected_before_writes (test_state_compat_matrix.StateMatrix) ... ok
+test_deleted_chat_hidden_from_topic_until_restore (test_state_compat_matrix.StateMatrix) ... ok
+test_deleted_turn_not_counted_in_topic (test_state_compat_matrix.StateMatrix) ... ok
+test_legacy_model_only_retains_current_appearance (test_state_compat_matrix.StateMatrix) ... ok
+test_malformed_chat_import_batch_has_no_partial_writes (test_state_compat_matrix.StateMatrix) ... ok
+test_malformed_states_do_not_change_settings_or_theme (test_state_compat_matrix.StateMatrix) ... ok
+test_missing_name_returns_400_without_change (test_state_compat_matrix.StateMatrix) ... ok
+test_named_state_image_roundtrip (test_state_compat_matrix.StateMatrix) ... ok
+test_nested_settings_only (test_state_compat_matrix.StateMatrix) ... ok
+test_partial_theme_falls_back (test_state_compat_matrix.StateMatrix) ... ok
+test_unknown_settings_retained_without_execution (test_state_compat_matrix.StateMatrix) ... ok
+
+----------------------------------------------------------------------
+Ran 11 tests in 5.828s
+
+OK

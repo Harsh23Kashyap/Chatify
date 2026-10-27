@@ -1,0 +1,20 @@
+test_bare_year_frontmatter (test_document_dates.DocumentDateExtraction) ... ok
+test_body_year_mention_not_promoted (test_document_dates.DocumentDateExtraction) ... ok
+test_frontmatter_date_iso (test_document_dates.DocumentDateExtraction) ... ok
+test_frontmatter_updated_month_name (test_document_dates.DocumentDateExtraction) ... ok
+test_future_body_year_not_promoted (test_document_dates.DocumentDateExtraction) ... ok
+test_invalid_month_rejected (test_document_dates.DocumentDateExtraction) ... ok
+test_late_date_line_not_a_header (test_document_dates.DocumentDateExtraction) ... ok
+test_leading_date_header (test_document_dates.DocumentDateExtraction) ... ok
+test_multiple_body_years_not_promoted (test_document_dates.DocumentDateExtraction) ... ok
+test_future_mentioned_year_still_unconfirmed (test_document_dates.FreshnessLineWording) ... ok
+test_mixed_dated_plus_mentioning_undated (test_document_dates.FreshnessLineWording) ... ok
+test_undated_with_mentioned_year_is_honest (test_document_dates.FreshnessLineWording) ... ok
+test_undated_without_any_year_keeps_no_dates_line (test_document_dates.FreshnessLineWording) ... ok
+test_body_mention_keeps_evidence_undated (test_document_dates.LocalFilesDateFlow) ... ok
+test_frontmatter_date_reaches_evidence_year (test_document_dates.LocalFilesDateFlow) ... ok
+
+----------------------------------------------------------------------
+Ran 15 tests in 0.005s
+
+OK

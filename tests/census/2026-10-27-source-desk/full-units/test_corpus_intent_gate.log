@@ -1,0 +1,16 @@
+test_corpus_intent_detection (test_corpus_intent_gate.CorpusIntentGateTest) ... ok
+test_corpus_intent_does_not_rescue_off_topic_upload (test_corpus_intent_gate.CorpusIntentGateTest) ... ok
+test_corpus_question_with_domain_words_keeps_topical_public_passages (test_corpus_intent_gate.CorpusIntentGateTest) ... ok
+test_corpus_question_with_topic_words_keeps_topical_public_without_corpus (test_corpus_intent_gate.CorpusIntentGateTest) ... ok
+test_corpus_question_with_zero_corpus_hits_abstains_over_meta_junk (test_corpus_intent_gate.CorpusIntentGateTest) ... ok
+test_meta_only_corpus_question_surfaces_upload_and_drops_keyword_junk (test_corpus_intent_gate.CorpusIntentGateTest) ... ok
+test_question_without_corpus_marker_is_unchanged (test_corpus_intent_gate.CorpusIntentGateTest) ... ok
+test_recency_with_corpus_intent_keeps_corpus_lead (test_corpus_intent_gate.CorpusIntentGateTest) ... ok
+test_recency_without_corpus_intent_sinks_undated_note (test_corpus_intent_gate.CorpusIntentGateTest) ... ok
+test_non_recency_question_keeps_gate_order (test_corpus_intent_gate.RecencyOrderTest) ... ok
+test_recency_question_orders_newest_first (test_corpus_intent_gate.RecencyOrderTest) ... ok
+
+----------------------------------------------------------------------
+Ran 11 tests in 0.016s
+
+OK

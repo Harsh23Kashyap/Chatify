@@ -1,0 +1,44 @@
+test_active_non_owner_blocked (test_appbuilder_http.BuildActiveHTTP) ... ok
+test_active_owner_gets_scoped_snapshot (test_appbuilder_http.BuildActiveHTTP) ... ok
+test_archive_invalid_no_chat (test_appbuilder_http.BuildActiveHTTP) ... ok
+test_credential_url_rejected (test_appbuilder_http.BuildActiveHTTP) ... ok
+test_model_review_blocks_remote (test_appbuilder_http.BuildActiveHTTP) ... ok
+test_no_live_without_review (test_appbuilder_http.BuildActiveHTTP) ... ok
+test_owner_only (test_appbuilder_http.BuildActiveHTTP) ... ok
+test_settings_history_and_reserved_hidden (test_appbuilder_http.BuildActiveHTTP) ... ok
+test_source_credentials_admin_only_and_not_echoed (test_appbuilder_http.BuildActiveHTTP) ... ok
+test_source_credentials_locked (test_appbuilder_http.BuildActiveHTTP) ... ok
+test_archive_invalid_no_chat (test_appbuilder_http.BuilderHTTP) ... ok
+test_consent_and_bad_selection_no_transport (test_appbuilder_http.BuilderHTTP) ... ok
+test_credential_url_rejected (test_appbuilder_http.BuilderHTTP) ... ok
+test_download_readme_truthful_when_helper_code_is_bundled (test_appbuilder_http.BuilderHTTP) ... ok
+test_download_zip_can_review_and_load (test_appbuilder_http.BuilderHTTP) ... ok
+test_edit_one_prompt_after_builder_apply_keeps_other_saved_stages (test_appbuilder_http.BuilderHTTP) ... ok
+test_incomplete_rollback_returns_explicit_uncertain_saved_state (test_appbuilder_http.BuilderHTTP) ... ok
+test_launch_failure_reissues_ticket_and_retry_opens_workspace (test_appbuilder_http.BuilderHTTP) ... Traceback (most recent call last):
+  File "/home/sandbox/chatify/chatify/server.py", line 529, in _route
+    return self._send(200,loader.load(reviewed['token'],owner=o))
+  File "/home/sandbox/chatify/tests/test_appbuilder_http.py", line 60, in boom
+    def boom(*a,**k):raise ValueError('simulated workspace start failure')
+ValueError: simulated workspace start failure
+ok
+test_model_review_blocks_remote (test_appbuilder_http.BuilderHTTP) ... ok
+test_no_live_without_review (test_appbuilder_http.BuilderHTTP) ... ok
+test_owner_gate (test_appbuilder_http.BuilderHTTP) ... ok
+test_owner_only (test_appbuilder_http.BuilderHTTP) ... ok
+test_parse_no_model_no_save_and_scope (test_appbuilder_http.BuilderHTTP) ... ok
+test_parse_owner_gate_and_validation (test_appbuilder_http.BuilderHTTP) ... ok
+test_prompt_editor_get_shows_saved_builder_prompts_without_restart (test_appbuilder_http.BuilderHTTP) ... ok
+test_reset_one_prompt_after_builder_apply_keeps_other_saved_stages (test_appbuilder_http.BuilderHTTP) ... ok
+test_review_then_save_one_use (test_appbuilder_http.BuilderHTTP) ... ok
+test_save_requires_review (test_appbuilder_http.BuilderHTTP) ... ok
+test_section_draft_http_retain_reopen_review_keeps_scope (test_appbuilder_http.BuilderHTTP) ... ok
+test_settings_history_and_reserved_hidden (test_appbuilder_http.BuilderHTTP) ... ok
+test_source_credentials_admin_only_and_not_echoed (test_appbuilder_http.BuilderHTTP) ... ok
+test_source_credentials_locked (test_appbuilder_http.BuilderHTTP) ... ok
+test_talk_selected_draft_and_no_state_changes (test_appbuilder_http.BuilderHTTP) ... ok
+
+----------------------------------------------------------------------
+Ran 33 tests in 27.857s
+
+OK

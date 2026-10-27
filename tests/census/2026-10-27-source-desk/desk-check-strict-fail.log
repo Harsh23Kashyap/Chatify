@@ -1,0 +1,12 @@
+locator.waitFor: Error: strict mode violation: getByText('Verifiable fixture excerpt, not a live model result.', { exact: true }) resolved to 2 elements:
+    1) <span class="source-excerpt">Verifiable fixture excerpt, not a live model resu…</span> aka getByRole('button', { name: '[1] fixture-document / Source' })
+    2) <p class="source-text">…</p> aka getByRole('dialog', { name: 'Sources' }).getByText('Verifiable fixture excerpt,')
+
+Call log:
+  - waiting for getByText('Verifiable fixture excerpt, not a live model result.', { exact: true }) to be visible
+
+    at /tmp/deep-research/chatify-ui-pass2/desk-check.cjs:2:1873 {
+  log: [
+    "  - waiting for getByText('Verifiable fixture excerpt, not a live model result.', { exact: true }) to be visible"
+  ]
+}

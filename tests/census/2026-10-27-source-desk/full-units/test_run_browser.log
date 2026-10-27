@@ -1,0 +1,11 @@
+test_default_opens_configured_url (test_run_browser.RunBrowserTests) ... Open http://127.0.0.1:8081 in your browser. Ctrl+C stops the app.
+ok
+test_no_browser (test_run_browser.RunBrowserTests) ... Open http://127.0.0.1:8081 in your browser. Ctrl+C stops the app.
+ok
+test_wildcard_uses_loopback_browser (test_run_browser.RunBrowserTests) ... Open http://127.0.0.1:8082 in your browser. Ctrl+C stops the app.
+ok
+
+----------------------------------------------------------------------
+Ran 3 tests in 0.221s
+
+OK

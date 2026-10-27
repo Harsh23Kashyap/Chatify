@@ -1,0 +1,30 @@
+test_code_editor_and_clear_image (test_motion.Motion) ... /home/sandbox/chatify/tests/test_motion.py:3: ResourceWarning: unclosed file <_io.TextIOWrapper name='/home/sandbox/chatify/tests/../chatify/web/motion.css' mode='r' encoding='utf-8'>
+  rd = lambda n: open(os.path.join(W, n), encoding="utf-8").read()
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/home/sandbox/chatify/tests/test_motion.py:3: ResourceWarning: unclosed file <_io.TextIOWrapper name='/home/sandbox/chatify/tests/../chatify/web/settings.js' mode='r' encoding='utf-8'>
+  rd = lambda n: open(os.path.join(W, n), encoding="utf-8").read()
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+ok
+test_decoration_never_throws (test_motion.Motion) ... /home/sandbox/chatify/tests/test_motion.py:3: ResourceWarning: unclosed file <_io.TextIOWrapper name='/home/sandbox/chatify/tests/../chatify/web/motion.js' mode='r' encoding='utf-8'>
+  rd = lambda n: open(os.path.join(W, n), encoding="utf-8").read()
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+ok
+test_dot_to_tick_and_key_tick (test_motion.Motion) ... ok
+test_drawer_scrim (test_motion.Motion) ... ok
+test_hidden_sidebar_stale_and_demo (test_motion.Motion) ... /home/sandbox/chatify/tests/test_motion.py:3: ResourceWarning: unclosed file <_io.TextIOWrapper name='/home/sandbox/chatify/tests/../chatify/web/appearanceextras.js' mode='r' encoding='utf-8'>
+  rd = lambda n: open(os.path.join(W, n), encoding="utf-8").read()
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+ok
+test_menu_radius_typeprev (test_motion.Motion) ... ok
+test_mode_swap_respects_reduced_motion (test_motion.Motion) ... ok
+test_preview_fade_and_grid (test_motion.Motion) ... ok
+test_pulse_and_picture_settle (test_motion.Motion) ... ok
+test_segment_indicator (test_motion.Motion) ... ok
+test_slider_value_tick (test_motion.Motion) ... ok
+test_spacing_sheet_icons (test_motion.Motion) ... ok
+test_tip_underline_key_status_jump (test_motion.Motion) ... ok
+
+----------------------------------------------------------------------
+Ran 13 tests in 0.007s
+
+OK

@@ -1,0 +1,24 @@
+test_all_web_providers_failing_is_reported (test_degrade.T) ... ok
+test_bad_app_file_gives_plain_error (test_degrade.T) ... /home/sandbox/chatify/tests/test_degrade.py:23: ResourceWarning: unclosed file <_io.TextIOWrapper name='/tmp/tmp575f9te_/a.yaml' mode='w' encoding='UTF-8'>
+  d = tempfile.mkdtemp(); p = os.path.join(d, "a.yaml"); open(p, "w").write("app: [broken\n  x:")
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+ok
+test_damaged_data_file_is_set_aside (test_degrade.T) ... /home/sandbox/chatify/tests/test_degrade.py:12: ResourceWarning: unclosed file <_io.BufferedWriter name='/tmp/tmp9z97xvzy/chatify.db'>
+  open(p, "wb").write(os.urandom(200))
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+ok
+test_fallback_answer_cites_passages (test_degrade.T) ... ok
+test_fallback_answer_with_no_evidence (test_degrade.T) ... ok
+test_followups_are_new_short_and_answerable (test_degrade.T) ... ok
+test_followups_fallback_varies_and_skips_covered_titles (test_degrade.T) ... ok
+test_model_stream_faults_become_plain_errors (test_degrade.T) ... ok
+test_provider_down_fails_fast (test_degrade.T) ... ok
+test_read_only_data_folder_keeps_working (test_degrade.T) ... ok
+
+----------------------------------------------------------------------
+Ran 10 tests in 7.952s
+
+OK
+chatify: data file was damaged; moved to /tmp/tmp9z97xvzy/chatify.db.corrupt-20261027-214336 and started a new one
+chatify: Chats cannot be saved right now (attempt to write a readonly database). Answers still work; history is kept only until the app restarts.
+chatify: Chats cannot be saved right now (cannot create the data folder (Permission denied)). Answers still work; history is kept only until the app restarts.

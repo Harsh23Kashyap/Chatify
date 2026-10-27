@@ -1,0 +1,28 @@
+CASE mobile_a11y_current_browser.cjs default PASS exit=0 seconds=43.9
+320 no-preference / violations  scroll 320
+320 no-preference /about.html violations  scroll 320
+320 no-preference /settings.html violations  scroll 320
+320 reduce / violations  scroll 320
+320 reduce /about.html violations  scroll 320
+320 reduce /settings.html violations  scroll 320
+390 no-preference / violations  scroll 390
+390 no-preference /about.html violations  scroll 390
+390 no-preference /settings.html violations  scroll 390
+390 reduce / violations  scroll 390
+390 reduce /about.html violations  scroll 390
+390 reduce /settings.html violations  scroll 390
+640 no-preference / violations  scroll 640
+640 no-preference /about.html violations  scroll 640
+640 no-preference /settings.html violations  scroll 640
+640 reduce / violations  scroll 640
+640 reduce /about.html violations  scroll 640
+640 reduce /settings.html violations  scroll 640
+1280 no-preference / violations  scroll 1280
+1280 no-preference /about.html violations  scroll 1280
+1280 no-preference /settings.html violations  scroll 1280
+1280 reduce / violations  scroll 1280
+1280 reduce /about.html violations  scroll 1280
+1280 reduce /settings.html violations  scroll 1280
+audit done 24
+
+{"executions": 1, "failed": 0, "passed": 1, "scripts": 1}

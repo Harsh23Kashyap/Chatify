@@ -1,0 +1,11 @@
+import pathlib,json,subprocess,time,os
+root=pathlib.Path('/home/sandbox/chatify');out=root/'tests/census/2026-10-27-source-desk/full-units';out.mkdir(exist_ok=True);record=out/'results.json';rows=json.loads(record.read_text()) if record.exists() else [];done={x['module'] for x in rows};start=time.monotonic()
+for p in sorted((root/'tests').glob('test*.py')):
+ if p.name in done:continue
+ if time.monotonic()-start>80:break
+ t=time.monotonic()
+ with (out/(p.stem+'.log')).open('w') as f:
+  try:r=subprocess.run(['/tmp/venv310b/bin/python','-m','unittest','discover','-s','tests','-p',p.name,'-v'],cwd=root,stdout=f,stderr=subprocess.STDOUT,timeout=70);code=r.returncode
+  except subprocess.TimeoutExpired:code=124
+ row={'module':p.name,'code':code,'seconds':round(time.monotonic()-t,1)};rows.append(row);record.write_text(json.dumps(rows,indent=2));print(row,flush=True)
+print('TOTAL',len(rows),'of',len(list((root/'tests').glob('test*.py'))),'fail',sum(x['code']!=0 for x in rows),flush=True)

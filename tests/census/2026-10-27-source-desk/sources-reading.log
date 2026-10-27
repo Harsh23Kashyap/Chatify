@@ -1,0 +1,16 @@
+CASE source_scope_short_height_keyboard_motion_browser.cjs source-desk PASS exit=0 seconds=6.8
+PASS source scope80longdocs nativeTab/ShiftTab oversizedlabel start/end scrollreachable Doneandheaderinviewport scrollcontained3201280normalReduce
+
+CASE source_scope_dialog_keyboard_motion_browser.cjs source-desk PASS exit=0 seconds=5.1
+SCOPELOAD 320 no-preference 3
+SCOPELOAD 320 reduce 3
+SCOPELOAD 1280 no-preference 3
+SCOPELOAD 1280 reduce 3
+PASS actualscopeloadingpendingtext/busy/singleflighterrorrecovernamedDialogEscapefocus/documentkeyboardselectiondraftretained3201280normalReduce fixtureonly
+
+CASE reading_view_states_browser.cjs source-desk PASS exit=0 seconds=6.3
+PASS readingradio-sizewidth directfont21 noanimatedmessagecontent node/draftpreserved localstored reopenchecked closefocus Escape3201280normalreduce
+
+CASE chat_stream_reading_browser.cjs source-desk PASS exit=0 seconds=13.8
+PASS controlled ReadableStream actual tokens/no fake typing/followbottom/user scroll retention/completion indicator/jump reset/hidden focus/error cleanup3203901280reduce+normal
+

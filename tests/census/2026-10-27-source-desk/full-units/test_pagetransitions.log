@@ -1,0 +1,35 @@
+test_error_page_is_animated_and_calm (test_pagetransitions.ErrorPages) ... /home/sandbox/chatify/tests/test_pagetransitions.py:4: ResourceWarning: unclosed file <_io.TextIOWrapper name='/home/sandbox/chatify/tests/../chatify/web/error.html' mode='r' encoding='utf-8'>
+  rd = lambda n: io.open(os.path.join(W, n), encoding="utf-8").read()
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+ok
+test_every_code_has_a_designed_page (test_pagetransitions.ErrorPages) ... /home/sandbox/chatify/tests/test_pagetransitions.py:47: ResourceWarning: unclosed file <_io.TextIOWrapper name='/home/sandbox/chatify/tests/../chatify/web/../server.py' mode='r' encoding='utf-8'>
+  srv = io.open(os.path.join(W, "..", "server.py"), encoding="utf-8").read()
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+ok
+test_every_page_wires_the_transition (test_pagetransitions.PageTransitions) ... /home/sandbox/chatify/tests/test_pagetransitions.py:4: ResourceWarning: unclosed file <_io.TextIOWrapper name='/home/sandbox/chatify/tests/../chatify/web/index.html' mode='r' encoding='utf-8'>
+  rd = lambda n: io.open(os.path.join(W, n), encoding="utf-8").read()
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/home/sandbox/chatify/tests/test_pagetransitions.py:4: ResourceWarning: unclosed file <_io.TextIOWrapper name='/home/sandbox/chatify/tests/../chatify/web/settings.html' mode='r' encoding='utf-8'>
+  rd = lambda n: io.open(os.path.join(W, n), encoding="utf-8").read()
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/home/sandbox/chatify/tests/test_pagetransitions.py:4: ResourceWarning: unclosed file <_io.TextIOWrapper name='/home/sandbox/chatify/tests/../chatify/web/about.html' mode='r' encoding='utf-8'>
+  rd = lambda n: io.open(os.path.join(W, n), encoding="utf-8").read()
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/home/sandbox/chatify/tests/test_pagetransitions.py:4: ResourceWarning: unclosed file <_io.TextIOWrapper name='/home/sandbox/chatify/tests/../chatify/web/run-locally.html' mode='r' encoding='utf-8'>
+  rd = lambda n: io.open(os.path.join(W, n), encoding="utf-8").read()
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+ok
+test_exit_only_flags_real_page_changes (test_pagetransitions.PageTransitions) ... /home/sandbox/chatify/tests/test_pagetransitions.py:4: ResourceWarning: unclosed file <_io.TextIOWrapper name='/home/sandbox/chatify/tests/../chatify/web/navflow.js' mode='r' encoding='utf-8'>
+  rd = lambda n: io.open(os.path.join(W, n), encoding="utf-8").read()
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+ok
+test_shared_assets_exist (test_pagetransitions.PageTransitions) ... /home/sandbox/chatify/tests/test_pagetransitions.py:4: ResourceWarning: unclosed file <_io.TextIOWrapper name='/home/sandbox/chatify/tests/../chatify/web/navflow.css' mode='r' encoding='utf-8'>
+  rd = lambda n: io.open(os.path.join(W, n), encoding="utf-8").read()
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+ok
+test_transition_is_short_and_gentle (test_pagetransitions.PageTransitions) ... ok
+
+----------------------------------------------------------------------
+Ran 6 tests in 0.004s
+
+OK

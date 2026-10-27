@@ -1,0 +1,14 @@
+test_bad_url_falls_back (test_mysql.T) ... ok
+test_conn_and_store (test_mysql.T) ... ok
+test_ddl (test_mysql.T) ... ok
+test_default_is_sqlite (test_mysql.T) ... ok
+test_fallback_when_unreachable (test_mysql.T) ... ok
+test_parse (test_mysql.T) ... ok
+test_sql (test_mysql.T) ... ok
+
+----------------------------------------------------------------------
+Ran 7 tests in 0.047s
+
+OK
+chatify: MySQL not available (CHATIFY_DB_URL must look like mysql://user:password@host:3306/dbname); using the local SQLite file instead
+chatify: MySQL not available (No module named 'pymysql'); using the local SQLite file instead

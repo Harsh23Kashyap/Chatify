@@ -1,0 +1,10 @@
+CASE citation_states_browser.cjs source-desk PASS exit=0 seconds=16.9
+PASS citation anchored hover/no pulse/source selected consistency/card selected consistency/missing excerpt safe/close returns focus3203901280normal+reduce
+
+CASE chat_evidence_history_browser.cjs source-desk PASS exit=0 seconds=3.2
+PASS history preserved, suggestions reset, source labels and citation link
+
+CASE settings_navigation_motion_levels_browser.cjs source-desk PASS exit=0 seconds=30.4
+PASS settingsnavigation sectionAndField FullSubtleSmooth NoneCalmOSReduceAuto3201280 focusTarget noModelCalls
+
+NOT FOUND button_hover_exact_duration_browser.cjs

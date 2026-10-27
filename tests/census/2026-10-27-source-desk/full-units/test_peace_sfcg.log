@@ -1,0 +1,23 @@
+test_all_classified_errors_are_value_errors (test_peace_sfcg.SfcgTests) ... ok
+test_cf_mitigated_header_is_denied_not_retried (test_peace_sfcg.SfcgTests) ... ok
+test_challenge_bearing_5xx_is_denied_not_retried (test_peace_sfcg.SfcgTests) ... ok
+test_challenge_page_is_denied_not_retried (test_peace_sfcg.SfcgTests) ... ok
+test_denied_not_retried (test_peace_sfcg.SfcgTests) ... ok
+test_empty_results (test_peace_sfcg.SfcgTests) ... ok
+test_error_is_honest (test_peace_sfcg.SfcgTests) ... ok
+test_error_message_free_of_query_url_and_body (test_peace_sfcg.SfcgTests) ... ok
+test_fallback_when_everything_empty_uses_default (test_peace_sfcg.SfcgTests) ... ok
+test_junk_titles_filtered (test_peace_sfcg.SfcgTests) ... ok
+test_keyword_relaxation_until_enough_results (test_peace_sfcg.SfcgTests) ... ok
+test_plain_503_remains_transient_and_retried (test_peace_sfcg.SfcgTests) ... ok
+test_provenance_dedup_and_host_validation (test_peace_sfcg.SfcgTests) ... ok
+test_question_words_removed_from_search (test_peace_sfcg.SfcgTests) ... ok
+test_throttled_not_retried (test_peace_sfcg.SfcgTests) ... ok
+test_transient_retried_once_then_raises (test_peace_sfcg.SfcgTests) ... ok
+test_transient_then_success (test_peace_sfcg.SfcgTests) ... ok
+test_unreachable_retried_once_then_raises (test_peace_sfcg.SfcgTests) ... ok
+
+----------------------------------------------------------------------
+Ran 18 tests in 4.023s
+
+OK

@@ -1,0 +1,38 @@
+test_desktop_child_keeps_declared_env (test_nerdload.HostedNerdLoadTests) ... /home/sandbox/chatify/tests/test_nerdload.py:111: ResourceWarning: unclosed file <_io.BufferedReader name='/proc/490870/environ'>
+  env=open('/proc/%d/environ'%pid,'rb').read().decode('utf-8','replace')
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+ok
+test_hosted_child_gets_no_host_key_env (test_nerdload.HostedNerdLoadTests) ... /home/sandbox/chatify/tests/test_nerdload.py:97: ResourceWarning: unclosed file <_io.BufferedReader name='/proc/490873/environ'>
+  env=open('/proc/%d/environ'%pid,'rb').read().decode('utf-8','replace')
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+ok
+test_hosted_limit_defaults_two_and_review_enforces (test_nerdload.HostedNerdLoadTests) ... ok
+test_hosted_load_registers_slug_relative_url_and_owner (test_nerdload.HostedNerdLoadTests) ... ok
+test_owner_scoping_and_unregister (test_nerdload.HostedNerdLoadTests) ... ok
+test_article_response_has_routing_hint_without_import (test_nerdload.NerdLoadTests) ... ok
+test_auth_not_silently_replaced (test_nerdload.NerdLoadTests) ... ok
+test_benign_dotfiles_skipped (test_nerdload.NerdLoadTests) ... ok
+test_bounded_import_default (test_nerdload.NerdLoadTests) ... ok
+test_discover_stopped (test_nerdload.NerdLoadTests) ... ok
+test_env_rejected (test_nerdload.NerdLoadTests) ... ok
+test_export_empty_source_roundtrip (test_nerdload.NerdLoadTests) ... ok
+test_inline_secret_rejected (test_nerdload.NerdLoadTests) ... ok
+test_local_roundtrip_start (test_nerdload.NerdLoadTests) ... ok
+test_missing_python (test_nerdload.NerdLoadTests) ... ok
+test_path_traversal (test_nerdload.NerdLoadTests) ... ok
+test_review_does_not_run_python (test_nerdload.NerdLoadTests) ... ok
+test_secrets_in_ignored_metadata_still_rejected (test_nerdload.NerdLoadTests) ... ok
+test_source_archive_explained (test_nerdload.NerdLoadTests) ... ok
+test_static_preview_no_execution (test_nerdload.NerdLoadTests) ... ok
+test_stop_list_remove (test_nerdload.NerdLoadTests) ... ok
+test_unknown_dotfile_named (test_nerdload.NerdLoadTests) ... ok
+test_yaml_without_documents_loads_empty_folder (test_nerdload.NerdLoadTests) ... ok
+test_readiness_budget_covers_slow_free_hosts (test_nerdload.ReadinessBudgetTest) ... ok
+test_remove_persistent_failure_keeps_entry_and_files (test_nerdload.RemoveResilience) ... ok
+test_remove_retries_transient_file_failure_once (test_nerdload.RemoveResilience) ... ok
+
+----------------------------------------------------------------------
+Ran 26 tests in 7.393s
+
+OK
+HOSTED_CHILD_RSS_KB=59272

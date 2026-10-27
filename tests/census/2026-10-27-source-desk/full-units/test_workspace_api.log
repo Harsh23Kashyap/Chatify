@@ -1,0 +1,13 @@
+test_archive_invalid_no_chat (test_workspace_api.WorkspaceAPITests) ... ok
+test_credential_url_rejected (test_workspace_api.WorkspaceAPITests) ... ok
+test_model_review_blocks_remote (test_workspace_api.WorkspaceAPITests) ... ok
+test_no_live_without_review (test_workspace_api.WorkspaceAPITests) ... ok
+test_owner_only (test_workspace_api.WorkspaceAPITests) ... ok
+test_settings_history_and_reserved_hidden (test_workspace_api.WorkspaceAPITests) ... ok
+test_source_credentials_admin_only_and_not_echoed (test_workspace_api.WorkspaceAPITests) ... ok
+test_source_credentials_locked (test_workspace_api.WorkspaceAPITests) ... ok
+
+----------------------------------------------------------------------
+Ran 8 tests in 6.224s
+
+OK

@@ -1,0 +1,17 @@
+test_archive_invalid_no_chat (test_settingsguide_http.GuideHTTP) ... ok
+test_credential_url_rejected (test_settingsguide_http.GuideHTTP) ... ok
+test_guide_auth_and_applied_demo (test_settingsguide_http.GuideHTTP) ... ok
+test_guide_engine_uses_no_private_state (test_settingsguide_http.GuideHTTP) ... ok
+test_guide_owner_gate (test_settingsguide_http.GuideHTTP) ... ok
+test_guide_selected_provider_and_model_transport (test_settingsguide_http.GuideHTTP) ... ok
+test_model_review_blocks_remote (test_settingsguide_http.GuideHTTP) ... ok
+test_no_live_without_review (test_settingsguide_http.GuideHTTP) ... ok
+test_owner_only (test_settingsguide_http.GuideHTTP) ... ok
+test_settings_history_and_reserved_hidden (test_settingsguide_http.GuideHTTP) ... ok
+test_source_credentials_admin_only_and_not_echoed (test_settingsguide_http.GuideHTTP) ... ok
+test_source_credentials_locked (test_settingsguide_http.GuideHTTP) ... ok
+
+----------------------------------------------------------------------
+Ran 12 tests in 9.218s
+
+OK

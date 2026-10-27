@@ -1,0 +1,56 @@
+test_anchored_but_off_intent_dropped (test_retrieval_gate.AcronymAnchorCoverage) ... ok
+test_coverage_rule_inert_without_two_full_matches (test_retrieval_gate.AcronymAnchorCoverage) ... ok
+test_anchor_rule_inert_when_retrieval_lacks_anchor (test_retrieval_gate.AcronymAnchorGate) ... ok
+test_anchorless_context_match_dropped (test_retrieval_gate.AcronymAnchorGate) ... ok
+test_no_anchor_question_unchanged (test_retrieval_gate.AcronymAnchorGate) ... ok
+test_most_specific_passage_leads (test_retrieval_gate.DiscriminatingWordGate) ... ok
+test_rule_inert_without_discriminating_coverage (test_retrieval_gate.DiscriminatingWordGate) ... ok
+test_ubiquitous_only_matches_dropped (test_retrieval_gate.DiscriminatingWordGate) ... ok
+test_rule_only_drops_when_better_coverage_exists (test_retrieval_gate.DiscriminatingWordGuards) ... ok
+test_symptom_query_single_distinctive_word_keeps_common_word_passage (test_retrieval_gate.DiscriminatingWordGuards) ... ok
+test_two_candidates_rule_inert (test_retrieval_gate.DiscriminatingWordGuards) ... ok
+test_generic_overlap_alone_is_not_evidence (test_retrieval_gate.EnglishSpecificityGate) ... ok
+test_most_on_question_passage_leads (test_retrieval_gate.EnglishSpecificityGate) ... ok
+test_one_shared_word_counts_once_despite_inflections (test_retrieval_gate.EnglishSpecificityGate) ... ok
+test_real_cart_evidence_kept_broad_papers_dropped (test_retrieval_gate.EnglishSpecificityGate) ... ok
+test_same_word_family_different_field_dropped (test_retrieval_gate.EnglishSpecificityGate) ... ok
+test_default_is_labeled_source_preview (test_retrieval_gate.FallbackWording) ... ok
+test_excerpt_window_completes_cliff_sentence (test_retrieval_gate.FallbackWording) ... ok
+test_excerpt_window_prefers_rare_distinctive_terms (test_retrieval_gate.FallbackWording) ... ok
+test_excerpt_window_shows_matching_span (test_retrieval_gate.FallbackWording) ... ok
+test_excerpt_window_without_match_keeps_head (test_retrieval_gate.FallbackWording) ... ok
+test_missing_key_wording_points_to_configuration (test_retrieval_gate.FallbackWording) ... ok
+test_no_key_error_shape (test_retrieval_gate.FallbackWording) ... ok
+test_no_question_keeps_old_truncation (test_retrieval_gate.FallbackWording) ... ok
+test_mixed_dated_and_undated_sources_are_explicit (test_retrieval_gate.FreshnessQualification) ... ok
+test_non_recency_question_has_no_freshness_line (test_retrieval_gate.FreshnessQualification) ... ok
+test_recency_question_states_newest_source_year (test_retrieval_gate.FreshnessQualification) ... ok
+test_recency_without_dates_says_so (test_retrieval_gate.FreshnessQualification) ... ok
+test_all_irrelevant_returns_empty_for_clarify (test_retrieval_gate.Gate) ... ok
+test_capitalized_entity_anchors_retrieval (test_retrieval_gate.Gate) ... ok
+test_irrelevant_popular_pages_dropped (test_retrieval_gate.Gate) ... ok
+test_no_question_words_passes_through (test_retrieval_gate.Gate) ... ok
+test_relative_floor_keeps_strong_drops_weak (test_retrieval_gate.Gate) ... ok
+test_single_shared_word_is_a_mention_not_a_match (test_retrieval_gate.Gate) ... ok
+test_variant_stemming_matches_inflections (test_retrieval_gate.Gate) ... ok
+test_digit_tokens_are_not_gate_stems (test_retrieval_gate.MultilingualAndNumericGate) ... ok
+test_mixed_hindi_english_question_gated_on_english_only (test_retrieval_gate.MultilingualAndNumericGate) ... ok
+test_numbers_alone_never_establish_topical_overlap (test_retrieval_gate.MultilingualAndNumericGate) ... ok
+test_punctuation_only_question_still_passes_through (test_retrieval_gate.MultilingualAndNumericGate) ... ok
+test_pure_non_latin_question_cannot_pass_everything_through (test_retrieval_gate.MultilingualAndNumericGate) ... ok
+test_off_question_upload_chunk_dropped (test_retrieval_gate.OwnerCorpusGating) ... ok
+test_owner_chunk_without_question_overlap_does_not_display (test_retrieval_gate.OwnerCorpusGating) ... ok
+test_gate_keeps_stir_frying_for_stir_fry_question (test_retrieval_gate.QueryLadder) ... ok
+test_ladder_dedups_and_keeps_raw_first (test_retrieval_gate.QueryLadder) ... ok
+test_ladder_emits_focused_heads (test_retrieval_gate.QueryLadder) ... ok
+test_no_search_sources_keeps_single_query (test_retrieval_gate.QueryLadder) ... ok
+test_short_query_drops_question_words (test_retrieval_gate.QueryWords) ... ok
+test_no_key_skips_stage_instead_of_blocking_turn (test_retrieval_gate.QuestionCheckNoKey) ... ok
+test_other_provider_errors_still_surface (test_retrieval_gate.QuestionCheckNoKey) ... ok
+test_mixed_corpus_keeps_score_order (test_retrieval_gate.RetrieveOrdering) ... ok
+test_pure_search_keeps_gate_order (test_retrieval_gate.RetrieveOrdering) ... ok
+
+----------------------------------------------------------------------
+Ran 51 tests in 0.063s
+
+OK

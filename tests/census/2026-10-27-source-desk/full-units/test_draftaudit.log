@@ -1,0 +1,13 @@
+test_citation_phrase_alone_is_outside_check (test_draftaudit.DraftAudit) ... ok
+test_dynamic_unknown_does_not_produce_fake_host (test_draftaudit.DraftAudit) ... ok
+test_empty_evidence_fallback_without_citations_is_not_flagged (test_draftaudit.DraftAudit) ... ok
+test_explicit_bypass_not_approved_by_empty_model_findings (test_draftaudit.DraftAudit) ... ok
+test_literal_unrelated_host_flagged_without_model (test_draftaudit.DraftAudit) ... ok
+test_negated_occurrence_is_not_claimed_unsafe (test_draftaudit.DraftAudit) ... ok
+test_normal_grounded_contract_not_flagged (test_draftaudit.DraftAudit) ... ok
+test_quoted_bypass_has_explicit_false_positive_caveat (test_draftaudit.DraftAudit) ... ok
+
+----------------------------------------------------------------------
+Ran 8 tests in 0.001s
+
+OK

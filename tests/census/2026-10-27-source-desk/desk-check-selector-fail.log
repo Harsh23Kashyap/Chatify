@@ -1,0 +1,10 @@
+locator.scrollIntoViewIfNeeded: Timeout 30000ms exceeded.
+Call log:
+  - waiting for getByRole('button', { name: /Reading view Text size/ })
+
+    at /tmp/deep-research/chatify-ui-pass2/desk-check.cjs:2:999 {
+  log: [
+    "  - waiting for getByRole('button', { name: /Reading view Text size/ })"
+  ],
+  name: 'TimeoutError'
+}

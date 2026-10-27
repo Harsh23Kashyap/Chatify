@@ -1,0 +1,13 @@
+test_equal_dates_keep_demote_order (test_rider_demote.RecencyComposition) ... ok
+test_newer_rider_keeps_date_priority (test_rider_demote.RecencyComposition) ... ok
+test_missing_title_record_retained (test_rider_demote.RiderDemote) ... ok
+test_preview_wording_marks_loosely_matched_tail (test_rider_demote.RiderDemote) ... ok
+test_private_sources_exempt (test_rider_demote.RiderDemote) ... ok
+test_riders_sink_genuine_leads_nothing_dropped (test_rider_demote.RiderDemote) ... ok
+test_single_strong_match_leaves_order_unchanged (test_rider_demote.RiderDemote) ... ok
+test_vague_title_genuine_study_retained (test_rider_demote.RiderDemote) ... ok
+
+----------------------------------------------------------------------
+Ran 8 tests in 0.014s
+
+OK

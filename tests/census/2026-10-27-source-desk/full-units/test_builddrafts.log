@@ -1,0 +1,12 @@
+test_inferred_scope_and_legacy_expanded_record_recovery (test_builddrafts.Drafts) ... ok
+test_key_fields_scrubbed (test_builddrafts.Drafts) ... ok
+test_numeric_settings_survive_scrub_and_reopen_validates (test_builddrafts.Drafts) ... ok
+test_restart_owner_isolation_and_no_apply (test_builddrafts.Drafts) ... ok
+test_section_draft_preserves_scope_and_can_be_reviewed_after_restart (test_builddrafts.Drafts) ... ok
+test_selected_section_mismatch_is_rejected_without_retention (test_builddrafts.Drafts) ... ok
+test_temperature_and_timeout_survive_scrub (test_builddrafts.Drafts) ... ok
+
+----------------------------------------------------------------------
+Ran 7 tests in 0.146s
+
+OK

@@ -1,0 +1,142 @@
+/home/sandbox/chatify/tests/test_gallery.py:10: ResourceWarning: unclosed file <_io.TextIOWrapper name='/tmp/tmpg35khv4l/alpha/docs/a.md' mode='w' encoding='UTF-8'>
+  io.open(os.path.join(d, "docs", "a.md"), "w").write("Docs about %s." % title)
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/home/sandbox/chatify/tests/test_gallery.py:11: ResourceWarning: unclosed file <_io.TextIOWrapper name='/tmp/tmpg35khv4l/alpha/app.yaml' mode='w' encoding='UTF-8'>
+  io.open(os.path.join(d, "app.yaml"), "w").write(
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/home/sandbox/chatify/tests/test_gallery.py:10: ResourceWarning: unclosed file <_io.TextIOWrapper name='/tmp/tmpg35khv4l/beta/docs/a.md' mode='w' encoding='UTF-8'>
+  io.open(os.path.join(d, "docs", "a.md"), "w").write("Docs about %s." % title)
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/home/sandbox/chatify/tests/test_gallery.py:11: ResourceWarning: unclosed file <_io.TextIOWrapper name='/tmp/tmpg35khv4l/beta/app.yaml' mode='w' encoding='UTF-8'>
+  io.open(os.path.join(d, "app.yaml"), "w").write(
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/home/sandbox/chatify/tests/test_gallery.py:16: ResourceWarning: unclosed file <_io.TextIOWrapper name='/tmp/tmpg35khv4l/gallery.yaml' mode='w' encoding='UTF-8'>
+  io.open(os.path.join(base, "gallery.yaml"), "w").write(
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+test_save_then_launch_carries_everything_but_keys (test_gallery.GalleryBuilderUseThisApp) ... /home/sandbox/chatify/tests/test_gallery.py:374: ResourceWarning: unclosed file <_io.TextIOWrapper name='/tmp/tmpg35khv4l/alpha/app.yaml' mode='r' encoding='UTF-8'>
+  saved_cfg = yaml.safe_load(io.open(os.path.join(self.base, "alpha", "app.yaml")))
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/home/sandbox/chatify/tests/test_gallery.py:381: ResourceWarning: unclosed file <_io.TextIOWrapper name='/tmp/tmpg35khv4l/alpha/data/build-apps/967e6cffe928/8a6ce45dd220/app.yaml' mode='r' encoding='UTF-8'>
+  saved_cfg = yaml.safe_load(io.open(built[0]))
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/home/sandbox/chatify/tests/test_gallery.py:383: ResourceWarning: unclosed file <_io.TextIOWrapper name='/tmp/tmpg35khv4l/alpha/data/build-apps/967e6cffe928/8a6ce45dd220/data/theme.json' mode='r' encoding='UTF-8'>
+  self.assertEqual(json.load(io.open(os.path.join(bdir, "data", "theme.json")))["bubble"], "flat")
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/home/sandbox/chatify/tests/test_gallery.py:384: ResourceWarning: unclosed file <_io.TextIOWrapper name='/tmp/tmpg35khv4l/alpha/data/build-apps/967e6cffe928/8a6ce45dd220/data/prompts.json' mode='r' encoding='UTF-8'>
+  self.assertEqual(json.load(io.open(os.path.join(bdir, "data", "prompts.json")))["text"]["answer"], "CUSTOM PROMPT answer")
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/home/sandbox/chatify/tests/test_gallery.py:400: ResourceWarning: unclosed file <_io.TextIOWrapper name='/tmp/tmpg35khv4l/alpha/nerds/nerd-trd0j4aa/app.yaml' mode='r' encoding='UTF-8'>
+  ws_cfg = yaml.safe_load(io.open(os.path.join(wsdir, "app.yaml")))
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/home/sandbox/chatify/tests/test_gallery.py:405: ResourceWarning: unclosed file <_io.TextIOWrapper name='/tmp/tmpg35khv4l/alpha/nerds/nerd-trd0j4aa/data/theme.json' mode='r' encoding='UTF-8'>
+  self.assertEqual(json.load(io.open(os.path.join(wsdir, "data", "theme.json")))["bubble"], "flat")
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/home/sandbox/chatify/tests/test_gallery.py:406: ResourceWarning: unclosed file <_io.TextIOWrapper name='/tmp/tmpg35khv4l/alpha/nerds/nerd-trd0j4aa/data/prompts.json' mode='r' encoding='UTF-8'>
+  self.assertEqual(json.load(io.open(os.path.join(wsdir, "data", "prompts.json")))["text"]["revise"], "CUSTOM PROMPT revise")
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/home/sandbox/chatify/tests/test_gallery.py:407: ResourceWarning: unclosed file <_io.TextIOWrapper name='/tmp/tmpg35khv4l/alpha/nerds/nerd-trd0j4aa/data/code-drafts.json' mode='r' encoding='UTF-8'>
+  self.assertIn("search", json.load(io.open(os.path.join(wsdir, "data", "code-drafts.json"))))
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+ok
+test_detection (test_gallery.GalleryConfig) ... ok
+test_guardrails_forced (test_gallery.GalleryConfig) ... ok
+test_slugs_validated (test_gallery.GalleryConfig) ... /home/sandbox/chatify/tests/test_gallery.py:53: ResourceWarning: unclosed file <_io.TextIOWrapper name='/tmp/tmp2ggmz2se/alpha/docs/a.md' mode='w' encoding='UTF-8'>
+  io.open(os.path.join(d, "docs", "a.md"), "w").write("x")
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/home/sandbox/chatify/tests/test_gallery.py:54: ResourceWarning: unclosed file <_io.TextIOWrapper name='/tmp/tmp2ggmz2se/alpha/app.yaml' mode='w' encoding='UTF-8'>
+  io.open(os.path.join(d, "app.yaml"), "w").write("app: {id: alpha, title: A}\nprovider: {type: mock}\nsources: [{id: docs, type: local_files, label: D, path: docs}]\n")
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/home/sandbox/chatify/tests/test_gallery.py:55: ResourceWarning: unclosed file <_io.TextIOWrapper name='/tmp/tmp2ggmz2se/gallery.yaml' mode='w' encoding='UTF-8'>
+  io.open(os.path.join(base, "gallery.yaml"), "w").write("gallery:\n  apps:\n    - {dir: alpha, slug: API}\n")
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+ok
+/home/sandbox/chatify/tests/test_gallery.py:10: ResourceWarning: unclosed file <_io.TextIOWrapper name='/tmp/tmp90feb4ge/alpha/docs/a.md' mode='w' encoding='UTF-8'>
+  io.open(os.path.join(d, "docs", "a.md"), "w").write("Docs about %s." % title)
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/home/sandbox/chatify/tests/test_gallery.py:11: ResourceWarning: unclosed file <_io.TextIOWrapper name='/tmp/tmp90feb4ge/alpha/app.yaml' mode='w' encoding='UTF-8'>
+  io.open(os.path.join(d, "app.yaml"), "w").write(
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/home/sandbox/chatify/tests/test_gallery.py:10: ResourceWarning: unclosed file <_io.TextIOWrapper name='/tmp/tmp90feb4ge/beta/docs/a.md' mode='w' encoding='UTF-8'>
+  io.open(os.path.join(d, "docs", "a.md"), "w").write("Docs about %s." % title)
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/home/sandbox/chatify/tests/test_gallery.py:11: ResourceWarning: unclosed file <_io.TextIOWrapper name='/tmp/tmp90feb4ge/beta/app.yaml' mode='w' encoding='UTF-8'>
+  io.open(os.path.join(d, "app.yaml"), "w").write(
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/home/sandbox/chatify/tests/test_gallery.py:16: ResourceWarning: unclosed file <_io.TextIOWrapper name='/tmp/tmp90feb4ge/gallery.yaml' mode='w' encoding='UTF-8'>
+  io.open(os.path.join(base, "gallery.yaml"), "w").write(
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/home/sandbox/chatify/tests/test_gallery.py:576: ResourceWarning: unclosed file <_io.TextIOWrapper name='/tmp/tmp90feb4ge/gallery.yaml' mode='r' encoding='UTF-8'>
+  s = io.open(p).read()
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/home/sandbox/chatify/tests/test_gallery.py:579: ResourceWarning: unclosed file <_io.TextIOWrapper name='/tmp/tmp90feb4ge/gallery.yaml' mode='w' encoding='UTF-8'>
+  io.open(p, "w").write(s)
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+test_featured_cta_opens_ai_wizard (test_gallery.GalleryFeaturedBuildCta) ... ok
+/home/sandbox/chatify/tests/test_gallery.py:10: ResourceWarning: unclosed file <_io.TextIOWrapper name='/tmp/tmpx09v3g2g/alpha/docs/a.md' mode='w' encoding='UTF-8'>
+  io.open(os.path.join(d, "docs", "a.md"), "w").write("Docs about %s." % title)
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/home/sandbox/chatify/tests/test_gallery.py:11: ResourceWarning: unclosed file <_io.TextIOWrapper name='/tmp/tmpx09v3g2g/alpha/app.yaml' mode='w' encoding='UTF-8'>
+  io.open(os.path.join(d, "app.yaml"), "w").write(
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/home/sandbox/chatify/tests/test_gallery.py:10: ResourceWarning: unclosed file <_io.TextIOWrapper name='/tmp/tmpx09v3g2g/beta/docs/a.md' mode='w' encoding='UTF-8'>
+  io.open(os.path.join(d, "docs", "a.md"), "w").write("Docs about %s." % title)
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/home/sandbox/chatify/tests/test_gallery.py:11: ResourceWarning: unclosed file <_io.TextIOWrapper name='/tmp/tmpx09v3g2g/beta/app.yaml' mode='w' encoding='UTF-8'>
+  io.open(os.path.join(d, "app.yaml"), "w").write(
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/home/sandbox/chatify/tests/test_gallery.py:16: ResourceWarning: unclosed file <_io.TextIOWrapper name='/tmp/tmpx09v3g2g/gallery.yaml' mode='w' encoding='UTF-8'>
+  io.open(os.path.join(base, "gallery.yaml"), "w").write(
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+test_launch_inside_workspace_registers_same_origin (test_gallery.GalleryNestedWorkspaceLaunch) ... /home/sandbox/chatify/tests/test_gallery.py:493: ResourceWarning: unclosed file <_io.BufferedReader name='/home/sandbox/chatify/tests/../apps/minimal/app.yaml'>
+  minimal = io.open(os.path.join(ROOT, "apps", "minimal", "app.yaml"), "rb").read()
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+ok
+/home/sandbox/chatify/tests/test_gallery.py:10: ResourceWarning: unclosed file <_io.TextIOWrapper name='/tmp/tmpu_u7hprc/alpha/docs/a.md' mode='w' encoding='UTF-8'>
+  io.open(os.path.join(d, "docs", "a.md"), "w").write("Docs about %s." % title)
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/home/sandbox/chatify/tests/test_gallery.py:11: ResourceWarning: unclosed file <_io.TextIOWrapper name='/tmp/tmpu_u7hprc/alpha/app.yaml' mode='w' encoding='UTF-8'>
+  io.open(os.path.join(d, "app.yaml"), "w").write(
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/home/sandbox/chatify/tests/test_gallery.py:10: ResourceWarning: unclosed file <_io.TextIOWrapper name='/tmp/tmpu_u7hprc/beta/docs/a.md' mode='w' encoding='UTF-8'>
+  io.open(os.path.join(d, "docs", "a.md"), "w").write("Docs about %s." % title)
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/home/sandbox/chatify/tests/test_gallery.py:11: ResourceWarning: unclosed file <_io.TextIOWrapper name='/tmp/tmpu_u7hprc/beta/app.yaml' mode='w' encoding='UTF-8'>
+  io.open(os.path.join(d, "app.yaml"), "w").write(
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/home/sandbox/chatify/tests/test_gallery.py:16: ResourceWarning: unclosed file <_io.TextIOWrapper name='/tmp/tmpu_u7hprc/gallery.yaml' mode='w' encoding='UTF-8'>
+  io.open(os.path.join(base, "gallery.yaml"), "w").write(
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+test_app_home_is_rewritten (test_gallery.GalleryServer) ... ok
+test_each_app_answers_on_its_own_endpoint (test_gallery.GalleryServer) ... ok
+test_gallery_page_lists_apps (test_gallery.GalleryServer) ... ok
+test_mock_chat_streams_through_the_proxy (test_gallery.GalleryServer) ... ok
+test_redirect_apps_link_out_and_redirect (test_gallery.GalleryServer) ... ok
+test_statics_work_under_the_prefix (test_gallery.GalleryServer) ... ok
+test_unknown_paths_get_the_designed_404 (test_gallery.GalleryServer) ... ok
+/home/sandbox/chatify/tests/test_gallery.py:10: ResourceWarning: unclosed file <_io.TextIOWrapper name='/tmp/tmpoy8d6bbk/alpha/docs/a.md' mode='w' encoding='UTF-8'>
+  io.open(os.path.join(d, "docs", "a.md"), "w").write("Docs about %s." % title)
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/home/sandbox/chatify/tests/test_gallery.py:11: ResourceWarning: unclosed file <_io.TextIOWrapper name='/tmp/tmpoy8d6bbk/alpha/app.yaml' mode='w' encoding='UTF-8'>
+  io.open(os.path.join(d, "app.yaml"), "w").write(
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/home/sandbox/chatify/tests/test_gallery.py:10: ResourceWarning: unclosed file <_io.TextIOWrapper name='/tmp/tmpoy8d6bbk/beta/docs/a.md' mode='w' encoding='UTF-8'>
+  io.open(os.path.join(d, "docs", "a.md"), "w").write("Docs about %s." % title)
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/home/sandbox/chatify/tests/test_gallery.py:11: ResourceWarning: unclosed file <_io.TextIOWrapper name='/tmp/tmpoy8d6bbk/beta/app.yaml' mode='w' encoding='UTF-8'>
+  io.open(os.path.join(d, "app.yaml"), "w").write(
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/home/sandbox/chatify/tests/test_gallery.py:16: ResourceWarning: unclosed file <_io.TextIOWrapper name='/tmp/tmpoy8d6bbk/gallery.yaml' mode='w' encoding='UTF-8'>
+  io.open(os.path.join(base, "gallery.yaml"), "w").write(
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+test_full_hosted_handoff_flow (test_gallery.GalleryWorkspaceHandoff) ... ok
+test_python_connector_stays_off_without_explicit_allow (test_gallery.GalleryWorkspaceHandoff) ... ok
+
+----------------------------------------------------------------------
+Ran 15 tests in 6.976s
+
+OK
+sys:1: ResourceWarning: unclosed file <_io.TextIOWrapper name=3 encoding='UTF-8'>
+sys:1: ResourceWarning: unclosed file <_io.TextIOWrapper name=4 encoding='UTF-8'>
+sys:1: ResourceWarning: unclosed file <_io.TextIOWrapper name=5 encoding='UTF-8'>
+sys:1: ResourceWarning: unclosed file <_io.TextIOWrapper name=6 encoding='UTF-8'>
+sys:1: ResourceWarning: unclosed file <_io.TextIOWrapper name=7 encoding='UTF-8'>

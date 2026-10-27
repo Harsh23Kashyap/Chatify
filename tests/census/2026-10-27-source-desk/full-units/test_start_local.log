@@ -1,0 +1,12 @@
+test_incomplete_env_not_reset (test_start_local.LocalStartTests) ... ok
+test_install_failure_does_not_launch (test_start_local.LocalStartTests) ... Installing Chatify 0.2.3 from public PyPI into the private environment.
+ok
+test_private_install_and_args_preserve_spaces (test_start_local.LocalStartTests) ... Creating private .chatify-venv (system Python stays unchanged).
+Installing Chatify 0.2.3 from public PyPI into the private environment.
+Installing Chatify 0.2.3 from public PyPI into the private environment.
+ok
+
+----------------------------------------------------------------------
+Ran 3 tests in 0.005s
+
+OK

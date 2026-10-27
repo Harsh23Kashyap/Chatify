@@ -1,0 +1,16 @@
+test_add_and_remove (test_freshness.FreshnessTests) ... ok
+test_atomic_failed_scan (test_freshness.FreshnessTests) ... ok
+test_edit_invalidates_same_question_cache (test_freshness.FreshnessTests) ... ok
+test_interval_and_force (test_freshness.FreshnessTests) ... ok
+test_invalid_interval (test_freshness.FreshnessTests) ... ok
+test_missing_at_startup (test_freshness.FreshnessTests) ... ok
+test_missing_folder_no_stale_answer (test_freshness.FreshnessTests) ... ok
+test_no_change (test_freshness.FreshnessTests) ... ok
+test_same_size_mtime_edit (test_freshness.FreshnessTests) ... ok
+test_symlink (test_freshness.FreshnessTests) ... ok
+test_version_metadata (test_freshness.FreshnessTests) ... ok
+
+----------------------------------------------------------------------
+Ran 11 tests in 0.022s
+
+OK

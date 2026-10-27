@@ -1,0 +1,15 @@
+test_findings_question_drops_genre_rider (test_genre_gate.GenreGate) ... ok
+test_genre_question_keeps_genre_papers (test_genre_gate.GenreGate) ... ok
+test_single_mismatch_drops_to_honest_empty (test_genre_gate.GenreGate) ... ok
+test_statistical_confidence_title_untouched (test_genre_gate.GenreGate) ... ok
+test_strongest_overlap_mismatch_still_drops (test_genre_gate.GenreGate) ... ok
+test_training_question_deactivates_rule (test_genre_gate.GenreGate) ... ok
+test_failure_question_keeps_post_anchor_paper (test_genre_gate.PostAnchorGate) ... ok
+test_post_anchor_reference_dropped (test_genre_gate.PostAnchorGate) ... ok
+test_subject_anchor_kept (test_genre_gate.PostAnchorGate) ... ok
+test_web_root_is_normalized (test_genre_gate.WebRootNormalization) ... ok
+
+----------------------------------------------------------------------
+Ran 10 tests in 0.220s
+
+OK

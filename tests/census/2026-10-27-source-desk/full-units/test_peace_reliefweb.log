@@ -1,0 +1,13 @@
+test_empty_results (test_peace_reliefweb.ReliefWebTests) ... ok
+test_error_is_honest_without_appname_leak (test_peace_reliefweb.ReliefWebTests) ... ok
+test_filler_verbs_and_generic_words_are_not_keywords (test_peace_reliefweb.ReliefWebTests) ... ok
+test_keyword_relaxation_recovers_results (test_peace_reliefweb.ReliefWebTests) ... ok
+test_question_keywords_keep_topic_not_question_words (test_peace_reliefweb.ReliefWebTests) ... ok
+test_relaxation_call_count_is_bounded (test_peace_reliefweb.ReliefWebTests) ... ok
+test_report_body_provenance_and_dedup (test_peace_reliefweb.ReliefWebTests) ... ok
+test_requires_appname (test_peace_reliefweb.ReliefWebTests) ... ok
+
+----------------------------------------------------------------------
+Ran 8 tests in 0.005s
+
+OK

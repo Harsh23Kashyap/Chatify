@@ -1,0 +1,20 @@
+CASE chat_navigation_browser.cjs source-desk PASS exit=0 seconds=6.1
+PASS empty sidebar/openclose/inert/returnfocus/chattopicsselection/44pxactions/offlinedemocopy/nooverflow3203901280
+
+CASE brand_navigation_audit_browser.cjs source-desk PASS exit=0 seconds=11.4
+PASS brandkeyboardclickactualChatroute/Configurationreturn/focus3203901280
+
+CASE theme_color_states_browser.cjs source-desk PASS exit=0 seconds=34.3
+PASS themepreview160msopacity+selectedsurface darklight editmodeindependent noPOST noreset color160msdisclosurestableposition invalidredbordernoshake validsettles CalmReduceoff3201280
+
+CASE appearance_states_browser.cjs source-desk PASS exit=0 seconds=12.9
+FONT DEBUG [ 'Font unavailable. The preview uses a system fallback.' ]
+PASS layout selection diagrams+width, reduced-motion on-demand sample, failed background keeps old, blocked font shows fallback,320 fixture
+
+CASE appbuilder_browser.cjs source-desk PASS exit=0 seconds=18.9
+PASS builder conversation, selected Claude model, consent, draft edit/review/save, ZIP route,320/390/1280
+
+CASE about_feature_states_browser.cjs source-desk PASS exit=0 seconds=6.8
+PASS abouttabkeyboard rovingfocus selected truthfulCTA content160ms4px reduceoff card/CTAstability3201280
+
+[('chat_navigation_browser.cjs', 'PASS'), ('brand_navigation_audit_browser.cjs', 'PASS'), ('theme_color_states_browser.cjs', 'PASS'), ('appearance_states_browser.cjs', 'PASS'), ('appbuilder_browser.cjs', 'PASS'), ('about_feature_states_browser.cjs', 'PASS')]

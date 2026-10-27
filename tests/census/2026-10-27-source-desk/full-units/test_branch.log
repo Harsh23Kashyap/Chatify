@@ -1,0 +1,11 @@
+test_deleted_chat_cannot_branch (test_branch.Branch) ... ok
+test_deleted_turn_cannot_branch (test_branch.Branch) ... ok
+test_first_turn_has_no_history (test_branch.Branch) ... ok
+test_invalid_question_no_chat_created (test_branch.Branch) ... ok
+test_other_owner_rejected_no_writes (test_branch.Branch) ... ok
+test_preserves_original_and_excludes_future (test_branch.Branch) ... ok
+
+----------------------------------------------------------------------
+Ran 6 tests in 0.006s
+
+OK

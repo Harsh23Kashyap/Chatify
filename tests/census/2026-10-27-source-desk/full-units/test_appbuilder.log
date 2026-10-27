@@ -1,0 +1,46 @@
+test_anchors_rejected (test_appbuilder.BuilderTests) ... ok
+test_app_only_save_preserves_sources_provider_and_setup_files (test_appbuilder.BuilderTests) ... ok
+test_bad_draft_before_call (test_appbuilder.BuilderTests) ... ok
+test_bad_yaml (test_appbuilder.BuilderTests) ... ok
+test_blank_pipeline_prompt_rejected (test_appbuilder.BuilderTests) ... ok
+test_complete_extensions_and_all_prompts (test_appbuilder.BuilderTests) ... ok
+test_complete_save_no_execute_extensions_restart (test_appbuilder.BuilderTests) ... ok
+test_complete_save_rolls_back_each_setup_replace_failure (test_appbuilder.BuilderTests) ... ok
+test_consent_gate (test_appbuilder.BuilderTests) ... ok
+test_demo_gate (test_appbuilder.BuilderTests) ... ok
+test_deploy_requires_consent_no_execution (test_appbuilder.BuilderTests) ... ok
+test_direct_config_response (test_appbuilder.BuilderTests) ... ok
+test_field_changes_against_saved_not_model (test_appbuilder.BuilderTests) ... ok
+test_followup (test_appbuilder.BuilderTests) ... ok
+test_full_draft (test_appbuilder.BuilderTests) ... ok
+test_generated_provider_model_is_clamped_to_host (test_appbuilder.BuilderTests) ... ok
+test_hosted_save_never_touches_served_app_file (test_appbuilder.BuilderTests) ... ok
+test_inline_secret (test_appbuilder.BuilderTests) ... ok
+test_invalid_bool (test_appbuilder.BuilderTests) ... ok
+test_invalid_provider (test_appbuilder.BuilderTests) ... ok
+test_negative_and_numeric_bounds (test_appbuilder.BuilderTests) ... ok
+test_no_changes_empty_diff (test_appbuilder.BuilderTests) ... ok
+test_no_private_config_in_prompt (test_appbuilder.BuilderTests) ... ok
+test_not_mapping (test_appbuilder.BuilderTests) ... ok
+test_out_of_scope (test_appbuilder.BuilderTests) ... ok
+test_partial_defaults_complete (test_appbuilder.BuilderTests) ... ok
+test_python_rejected (test_appbuilder.BuilderTests) ... ok
+test_review_includes_removed_mapping_setting (test_appbuilder.BuilderTests) ... ok
+test_review_includes_removed_nested_source_fields (test_appbuilder.BuilderTests) ... ok
+test_review_missing (test_appbuilder.BuilderTests) ... ok
+test_review_no_write (test_appbuilder.BuilderTests) ... ok
+test_review_scope (test_appbuilder.BuilderTests) ... ok
+test_revision_save (test_appbuilder.BuilderTests) ... ok
+test_revision_save_stale (test_appbuilder.BuilderTests) ... ok
+test_secret_brief (test_appbuilder.BuilderTests) ... ok
+test_setup_rollback_failure_still_restores_app_and_reports_uncertainty (test_appbuilder.BuilderTests) ... ok
+test_source_path_must_be_supplied (test_appbuilder.BuilderTests) ... ok
+test_sources_mapping_rejected (test_appbuilder.BuilderTests) ... ok
+test_tweak_receives_only_draft_not_saved_private_config (test_appbuilder.BuilderTests) ... ok
+test_unknown_nested (test_appbuilder.BuilderTests) ... ok
+test_user_named_model_is_preserved (test_appbuilder.BuilderTests) ... ok
+
+----------------------------------------------------------------------
+Ran 41 tests in 1.817s
+
+OK

@@ -1,0 +1,10 @@
+test_saved_app_starts_separately_preserves_parent (test_builder_launch.BuilderLaunch) ... Traceback (most recent call last):
+  File "/home/sandbox/chatify/chatify/server.py", line 524, in _route
+    if path.is_symlink() or (path.read_text() if path.exists() else None)!=expected:raise ValueError('Saved setup changed. Review and save again before using it')
+ValueError: Saved setup changed. Review and save again before using it
+ok
+
+----------------------------------------------------------------------
+Ran 1 test in 1.232s
+
+OK

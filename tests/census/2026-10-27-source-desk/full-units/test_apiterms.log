@@ -1,0 +1,11 @@
+test_every_catalog_entry_carries_source_and_docs (test_apiterms.Catalog) ... ok
+test_known_service_gets_verified_terms_and_docs (test_apiterms.Catalog) ... ok
+test_unknown_service_gets_honest_note_not_invented_terms (test_apiterms.Catalog) ... ok
+test_draft_suggestions_carry_verified_terms (test_apiterms.Wiring) ... ok
+test_model_written_terms_fields_are_dropped_then_server_attached (test_apiterms.Wiring) ... ok
+test_unknown_service_gets_note_and_roundtrip_revalidates (test_apiterms.Wiring) ... ok
+
+----------------------------------------------------------------------
+Ran 6 tests in 0.211s
+
+OK
