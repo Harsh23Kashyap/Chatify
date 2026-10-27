@@ -1,0 +1,16 @@
+CASE chat_about_off_motion_inventory_browser.cjs default PASS exit=0 seconds=9.1
+MODE / none none
+MODE /about.html none none
+MODE / calm none
+MODE /about.html calm none
+MODE / full full
+MODE /about.html full full
+MODE / none none
+MODE /about.html none none
+MODE / calm none
+MODE /about.html calm none
+MODE / full full
+MODE /about.html full full
+PASS chat/About renderCSSnodepseudooffmotion NoneCalmOSReduceFull3201280
+
+{"executions": 1, "failed": 0, "passed": 1, "scripts": 1}

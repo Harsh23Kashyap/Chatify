@@ -1,0 +1,180 @@
+MODE / none none
+ROUTE_DELAY_START
+ROUTE_DELAY_START
+MODE /about.html none null
+AssertionError [ERR_ASSERTION]: /about.html 320 none no-preference
++ actual - expected
+
++ [
++   {
++     animation: 'none',
++     class: 'cc-boot cc-boot-out',
++     id: 'cc-boot',
++     pseudo: '',
++     transition: '0.22s'
++   },
++   {
++     animation: 'cc-orbit-spin',
++     class: {},
++     id: '',
++     pseudo: '',
++     transition: '0s'
++   },
++   {
++     animation: 'cc-orbit-chase',
++     class: {},
++     id: '',
++     pseudo: '',
++     transition: '0s'
++   },
++   {
++     animation: 'cc-orbit-breathe',
++     class: '',
++     id: '',
++     pseudo: '',
++     transition: '0s'
++   },
++   {
++     animation: 'none',
++     class: '',
++     id: '',
++     pseudo: '',
++     transition: '0.16s, 0.16s'
++   },
++   {
++     animation: 'none',
++     class: '',
++     id: '',
++     pseudo: '',
++     transition: '0.16s, 0.16s'
++   },
++   {
++     animation: 'none',
++     class: 'active',
++     id: '',
++     pseudo: '',
++     transition: '0.16s, 0.16s'
++   },
++   {
++     animation: 'none',
++     class: '',
++     id: '',
++     pseudo: '',
++     transition: '0.16s, 0.16s'
++   },
++   {
++     animation: 'none',
++     class: '',
++     id: '',
++     pseudo: '',
++     transition: '0.16s, 0.16s'
++   },
++   {
++     animation: 'none',
++     class: 'cc-guide-replay',
++     id: 'aboutGuide',
++     pseudo: '',
++     transition: '0.16s, 0.16s'
++   },
++   {
++     animation: 'none',
++     class: '',
++     id: 'feature-tab-chat',
++     pseudo: '',
++     transition: '0.16s, 0.16s, 0.16s'
++   },
++   {
++     animation: 'none',
++     class: '',
++     id: 'feature-tab-sources',
++     pseudo: '',
++     transition: '0.16s, 0.16s, 0.16s'
++   },
++   {
++     animation: 'none',
++     class: '',
++     id: 'feature-tab-upload',
++     pseudo: '',
++     transition: '0.16s, 0.16s, 0.16s'
++   },
++   {
++     animation: 'none',
++     class: '',
++     id: 'feature-tab-mic',
++     pseudo: '',
++     transition: '0.16s, 0.16s, 0.16s'
++   },
++   {
++     animation: 'none',
++     class: '',
++     id: 'feature-tab-builder',
++     pseudo: '',
++     transition: '0.16s, 0.16s, 0.16s'
++   },
++   {
++     animation: 'none',
++     class: '',
++     id: 'feature-tab-ask',
++     pseudo: '',
++     transition: '0.16s, 0.16s, 0.16s'
++   },
++   {
++     animation: 'scene-draw',
++     class: {},
++     id: '',
++     pseudo: '',
++     transition: '0s'
++   },
++   {
++     animation: 'feature-copy-arrive',
++     class: 'feature-copy feature-copy-arrive',
++     id: '',
++     pseudo: '',
++     transition: '0s'
++   },
++   {
++     animation: 'none',
++     class: '',
++     id: '',
++     pseudo: '',
++     transition: '0.16s, 0.16s'
++   },
++   {
++     animation: 'none',
++     class: '',
++     id: '',
++     pseudo: '',
++     transition: '0.16s, 0.16s'
++   },
++   {
++     animation: 'none',
++     class: '',
++     id: '',
++     pseudo: '',
++     transition: '0.14s'
++   },
++   {
++     animation: 'none',
++     class: '',
++     id: '',
++     pseudo: '',
++     transition: '0.14s'
++   },
++   {
++     animation: 'none',
++     class: '',
++     id: '',
++     pseudo: '',
++     transition: '0.14s'
++   }
++ ]
+- []
+
+    at /home/sandbox/chatify/tests/census/2026-10-27-about-route-lifecycle/original-delayed.cjs.txt:1:1654 {
+  generatedMessage: false,
+  code: 'ERR_ASSERTION',
+  actual: [Array],
+  expected: [],
+  operator: 'deepStrictEqual',
+  diff: 'simple'
+}

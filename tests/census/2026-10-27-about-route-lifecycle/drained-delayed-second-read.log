@@ -1,0 +1,10 @@
+MODE / none none
+ROUTE_DELAY_START
+ROUTE_DELAY_START
+ROUTE_DELAY_END
+ROUTE_DELAY_END
+page.waitForFunction: Timeout 30000ms exceeded.
+    at /home/sandbox/chatify/tests/census/2026-10-27-about-route-lifecycle/drained-delayed-second-read.cjs.txt:1:1073 {
+  log: [],
+  name: 'TimeoutError'
+}
