@@ -220,3 +220,9 @@ html[data-theme=dark] .build-step[data-state=current] .build-step-label{color:va
   #buildStepsToggle{margin-left:auto;font:600 12px 'DM Sans',system-ui;color:var(--pine);background:transparent;border:1px solid var(--line);border-radius:999px;padding:8px 14px;min-height:40px;cursor:pointer}
   html[data-theme=dark] #buildStepsToggle{color:var(--lime)}
 }
+@media(max-width:600px){
+ html body .about-nav{display:flex!important;align-items:center;justify-content:space-between;min-height:64px;gap:12px;padding-top:8px;padding-bottom:8px}
+ .build-mnav{margin-left:auto;justify-self:end}
+ .build-mnav summary{min-height:44px;padding:0 16px}
+ .build-mnav-list{left:auto;right:0;transform:none}
+}

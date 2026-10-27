@@ -1,0 +1,10 @@
+page.goto: net::ERR_CONNECTION_REFUSED at http://127.0.0.1:8142/settings.html
+Call log:
+  - navigating to "http://127.0.0.1:8142/settings.html", waiting until "load"
+
+    at /home/sandbox/chatify/tests/builder_mounted_preview_browser.cjs:1:838 {
+  log: [
+    '  - navigating to "http://127.0.0.1:8142/settings.html", waiting until "load"'
+  ],
+  name: 'Error'
+}
