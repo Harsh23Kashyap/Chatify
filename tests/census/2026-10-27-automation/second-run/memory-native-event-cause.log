@@ -1,0 +1,14 @@
+EXACT_CHECK {"now":4436.799999998882,"matches":true,"events":[],"original":[{"state":"paused","time":49.97399999920127},{"state":"paused","time":49.97399999920127},{"state":"paused","time":49.97399999920127}],"count":3}
+AFTER_EVENT {"now":4444.699999999255,"events":[{"at":4439.199999999255,"value":true,"states":["idle","idle","idle"]}],"states":["idle","idle","idle"]}
+AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+
+3 !== 0
+
+    at /tmp/memory-exact-check.cjs:2:5652 {
+  generatedMessage: true,
+  code: 'ERR_ASSERTION',
+  actual: 3,
+  expected: 0,
+  operator: 'strictEqual',
+  diff: 'simple'
+}

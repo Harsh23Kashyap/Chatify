@@ -1,0 +1,180 @@
+CASE memory_bars_changed_estimate_motion_browser.cjs default PASS exit=0 seconds=88.1
+MEMORYCHANGED 320 reduce [
+  { width: '50%', animation: 'none', count: 0 },
+  { width: '45%', animation: 'none', count: 0 },
+  { width: '55%', animation: 'none', count: 0 },
+  { width: '85%', animation: 'none', count: 0 }
+] [
+  { width: '45%', animation: 'none', count: 0 },
+  { width: '50%', animation: 'none', count: 0 },
+  { width: '50%', animation: 'none', count: 0 },
+  { width: '85%', animation: 'none', count: 0 }
+]
+MEMORYCHANGED 320 reduce [
+  { width: '50%', animation: 'none', count: 0 },
+  { width: '45%', animation: 'none', count: 0 },
+  { width: '55%', animation: 'none', count: 0 },
+  { width: '85%', animation: 'none', count: 0 }
+] [
+  { width: '45%', animation: 'none', count: 0 },
+  { width: '50%', animation: 'none', count: 0 },
+  { width: '50%', animation: 'none', count: 0 },
+  { width: '85%', animation: 'none', count: 0 }
+]
+MEMORYCHANGED 320 reduce [
+  { width: '50%', animation: 'none', count: 0 },
+  { width: '45%', animation: 'none', count: 0 },
+  { width: '55%', animation: 'none', count: 0 },
+  { width: '85%', animation: 'none', count: 0 }
+] [
+  { width: '45%', animation: 'none', count: 0 },
+  { width: '50%', animation: 'none', count: 0 },
+  { width: '50%', animation: 'none', count: 0 },
+  { width: '85%', animation: 'none', count: 0 }
+]
+MEMORYCHANGED 320 reduce [
+  { width: '50%', animation: 'none', count: 0 },
+  { width: '45%', animation: 'none', count: 0 },
+  { width: '55%', animation: 'none', count: 0 },
+  { width: '85%', animation: 'none', count: 0 }
+] [
+  { width: '45%', animation: 'none', count: 0 },
+  { width: '50%', animation: 'none', count: 0 },
+  { width: '50%', animation: 'none', count: 0 },
+  { width: '85%', animation: 'none', count: 0 }
+]
+MEMORYCHANGED 320 no-preference [
+  { width: '50%', animation: 'none', count: 0 },
+  { width: '45%', animation: 'none', count: 0 },
+  { width: '55%', animation: 'none', count: 0 },
+  { width: '85%', animation: 'none', count: 0 }
+] [
+  { width: '45%', animation: 'none', count: 1 },
+  { width: '50%', animation: 'none', count: 1 },
+  { width: '50%', animation: 'none', count: 1 },
+  { width: '85%', animation: 'none', count: 0 }
+]
+MEMORYCHANGED 320 no-preference [
+  { width: '50%', animation: 'none', count: 0 },
+  { width: '45%', animation: 'none', count: 0 },
+  { width: '55%', animation: 'none', count: 0 },
+  { width: '85%', animation: 'none', count: 0 }
+] [
+  { width: '45%', animation: 'none', count: 1 },
+  { width: '50%', animation: 'none', count: 1 },
+  { width: '50%', animation: 'none', count: 1 },
+  { width: '85%', animation: 'none', count: 0 }
+]
+MEMORYCHANGED 320 no-preference [
+  { width: '50%', animation: 'none', count: 0 },
+  { width: '45%', animation: 'none', count: 0 },
+  { width: '55%', animation: 'none', count: 0 },
+  { width: '85%', animation: 'none', count: 0 }
+] [
+  { width: '45%', animation: 'none', count: 0 },
+  { width: '50%', animation: 'none', count: 0 },
+  { width: '50%', animation: 'none', count: 0 },
+  { width: '85%', animation: 'none', count: 0 }
+]
+MEMORYCHANGED 320 no-preference [
+  { width: '50%', animation: 'none', count: 0 },
+  { width: '45%', animation: 'none', count: 0 },
+  { width: '55%', animation: 'none', count: 0 },
+  { width: '85%', animation: 'none', count: 0 }
+] [
+  { width: '45%', animation: 'none', count: 0 },
+  { width: '50%', animation: 'none', count: 0 },
+  { width: '50%', animation: 'none', count: 0 },
+  { width: '85%', animation: 'none', count: 0 }
+]
+MEMORYCHANGED 1280 reduce [
+  { width: '50%', animation: 'none', count: 0 },
+  { width: '45%', animation: 'none', count: 0 },
+  { width: '55%', animation: 'none', count: 0 },
+  { width: '85%', animation: 'none', count: 0 }
+] [
+  { width: '45%', animation: 'none', count: 0 },
+  { width: '50%', animation: 'none', count: 0 },
+  { width: '50%', animation: 'none', count: 0 },
+  { width: '85%', animation: 'none', count: 0 }
+]
+MEMORYCHANGED 1280 reduce [
+  { width: '50%', animation: 'none', count: 0 },
+  { width: '45%', animation: 'none', count: 0 },
+  { width: '55%', animation: 'none', count: 0 },
+  { width: '85%', animation: 'none', count: 0 }
+] [
+  { width: '45%', animation: 'none', count: 0 },
+  { width: '50%', animation: 'none', count: 0 },
+  { width: '50%', animation: 'none', count: 0 },
+  { width: '85%', animation: 'none', count: 0 }
+]
+MEMORYCHANGED 1280 reduce [
+  { width: '50%', animation: 'none', count: 0 },
+  { width: '45%', animation: 'none', count: 0 },
+  { width: '55%', animation: 'none', count: 0 },
+  { width: '85%', animation: 'none', count: 0 }
+] [
+  { width: '45%', animation: 'none', count: 0 },
+  { width: '50%', animation: 'none', count: 0 },
+  { width: '50%', animation: 'none', count: 0 },
+  { width: '85%', animation: 'none', count: 0 }
+]
+MEMORYCHANGED 1280 reduce [
+  { width: '50%', animation: 'none', count: 0 },
+  { width: '45%', animation: 'none', count: 0 },
+  { width: '55%', animation: 'none', count: 0 },
+  { width: '85%', animation: 'none', count: 0 }
+] [
+  { width: '45%', animation: 'none', count: 0 },
+  { width: '50%', animation: 'none', count: 0 },
+  { width: '50%', animation: 'none', count: 0 },
+  { width: '85%', animation: 'none', count: 0 }
+]
+MEMORYCHANGED 1280 no-preference [
+  { width: '50%', animation: 'none', count: 0 },
+  { width: '45%', animation: 'none', count: 0 },
+  { width: '55%', animation: 'none', count: 0 },
+  { width: '85%', animation: 'none', count: 0 }
+] [
+  { width: '45%', animation: 'none', count: 1 },
+  { width: '50%', animation: 'none', count: 1 },
+  { width: '50%', animation: 'none', count: 1 },
+  { width: '85%', animation: 'none', count: 0 }
+]
+MEMORYCHANGED 1280 no-preference [
+  { width: '50%', animation: 'none', count: 0 },
+  { width: '45%', animation: 'none', count: 0 },
+  { width: '55%', animation: 'none', count: 0 },
+  { width: '85%', animation: 'none', count: 0 }
+] [
+  { width: '45%', animation: 'none', count: 1 },
+  { width: '50%', animation: 'none', count: 1 },
+  { width: '50%', animation: 'none', count: 1 },
+  { width: '85%', animation: 'none', count: 0 }
+]
+MEMORYCHANGED 1280 no-preference [
+  { width: '50%', animation: 'none', count: 0 },
+  { width: '45%', animation: 'none', count: 0 },
+  { width: '55%', animation: 'none', count: 0 },
+  { width: '85%', animation: 'none', count: 0 }
+] [
+  { width: '45%', animation: 'none', count: 0 },
+  { width: '50%', animation: 'none', count: 0 },
+  { width: '50%', animation: 'none', count: 0 },
+  { width: '85%', animation: 'none', count: 0 }
+]
+MEMORYCHANGED 1280 no-preference [
+  { width: '50%', animation: 'none', count: 0 },
+  { width: '45%', animation: 'none', count: 0 },
+  { width: '55%', animation: 'none', count: 0 },
+  { width: '85%', animation: 'none', count: 0 }
+] [
+  { width: '45%', animation: 'none', count: 0 },
+  { width: '50%', animation: 'none', count: 0 },
+  { width: '50%', animation: 'none', count: 0 },
+  { width: '85%', animation: 'none', count: 0 }
+]
+PASS memorybarsstationaryunchanged estimatesfullsubtleNone andnewfixturehardwareestimate160mschangeonly accurate/noidleloop3201280normalReduce
+
+{"executions": 1, "failed": 0, "passed": 1, "scripts": 1}
