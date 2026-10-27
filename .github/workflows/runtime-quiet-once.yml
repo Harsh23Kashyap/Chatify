@@ -27,12 +27,17 @@ jobs:
       - name: Explicit browser and contract preflight
         run: |
           test -x /usr/bin/google-chrome
+          test "$(/usr/bin/google-chrome --version | xargs)" = "Google Chrome 155.0.8059.39"
+          test "$(python -c 'import platform; print(platform.python_version())')" = "3.12.15"
+          test "$(node --version)" = "v22.23.3"
+          test "$(sha256sum tests/builder_keep_current_runtime_motion_browser.cjs | cut -d' ' -f1)" = "6ffae0e39e441e5bcfc860f60abca4c3034c29965faf20a1099b6a1b723f2576"
+          test "$(sha256sum tests/fixtures/builder-complete.yaml | cut -d' ' -f1)" = "3c12231e3b66be5535d9233c21542270674107051017a3f1a030805037eb41ca"
           /usr/bin/google-chrome --version
           python --version
           node --version
           sha256sum tests/builder_keep_current_runtime_motion_browser.cjs tests/fixtures/builder-complete.yaml
           git diff --exit-code -- tests/builder_keep_current_runtime_motion_browser.cjs chatify/web/appbuilder.js
-      - name: Run unchanged full runtime case once against offline fixture
+      - name: Run four sequential unchanged full runtime cases against offline fixture
         env:
           PLAYWRIGHT_MODULE: ${{ runner.temp }}/runtime-driver/node_modules/playwright-core
           CHATIFY_TEST_URL: http://127.0.0.1:8765
@@ -57,6 +62,10 @@ jobs:
           else:
               raise SystemExit('offline fixture server did not become ready')
           PY
-          timeout 300 node tests/builder_keep_current_runtime_motion_browser.cjs
+          for execution in 2 3 4 5; do
+            echo "EXACT_RUNTIME_EXECUTION_BEGIN $execution"
+            timeout 120 node tests/builder_keep_current_runtime_motion_browser.cjs
+            echo "EXACT_RUNTIME_EXECUTION_PASS $execution"
+          done
       # Only ordinary job logs are retained. No artifact or cache uploads, no secrets,
       # production account access, environment dump or user-state paths are involved.

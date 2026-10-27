@@ -1,0 +1,94 @@
+Current URL: https://github.com/Harsh23Kashyap/Chatify/actions/runs/40449477425/job/122008564638
+
+Skip to content
+Harsh23Kashyap
+Chatify
+Type / to search
+Repository navigation
+Code
+Issues
+Pull requests
+Agents
+Actions
+Projects
+Security and quality
+Insights
+Settings
+bounded runtime quiet contract
+Use preserved offline trip harness fixture for the independent runtim… #1
+Re-run all jobs
+Summary
+All jobs
+exact-runtime-contract
+Run details
+Usage
+Workflow file
+Lockfile
+Annotations
+1 warning and 1 notice
+exact-runtime-contract
+succeeded  in 56s
+Set up job
+1s
+Run actions/checkout@v4
+2s
+Run actions/setup-python@v5
+0s
+Run actions/setup-node@v4
+3s
+Install base application and browser driver only
+11s
+Explicit browser and contract preflight
+3s
+1
+Run test -x /usr/bin/google-chrome
+
+16
+Google Chrome 155.0.8059.39 
+
+17
+Python 3.12.15
+
+18
+v22.23.3
+
+19
+6ffae0e39e441e5bcfc860f60abca4c3034c29965faf20a1099b6a1b723f2576  tests/builder_keep_current_runtime_motion_browser.cjs
+
+20
+3c12231e3b66be5535d9233c21542270674107051017a3f1a030805037eb41ca  tests/fixtures/builder-complete.yaml
+
+Run unchanged full runtime case once against offline fixture
+33s
+1
+Run set -euo pipefail
+
+32
+ACTIVE-CANCEL 320 os [{"stage":"paused-original-assigned","at":3535.1999999999825,"original":true,"inert":true,"children":4,"state":"paused","time":0,"motion":"full","reduce":false},{"stage":"before-product-media-listener","at":3585.399999999994,"original":true,"inert":true,"children":4,"state":"paused","time":0,"motion":"full","reduce":true},{"stage":"cancel-event","at":3586.6999999999825,"original":true,"inert":true,"children":4,"state":"idle","time":null,"motion":"full","reduce":true}]
+
+33
+ACTIVE-CANCEL 320 none [{"stage":"paused-original-assigned","at":2670.2999999999884,"original":true,"inert":true,"children":4,"state":"paused","time":0,"motion":"full","reduce":false},{"stage":"immediately-before-quiet","at":2691.5,"original":true,"inert":true,"children":4,"state":"paused","time":0,"motion":"full","reduce":false}]
+
+34
+ACTIVE-CANCEL 320 calm [{"stage":"paused-original-assigned","at":2745.6999999999825,"original":true,"inert":true,"children":4,"state":"paused","time":0,"motion":"full","reduce":false},{"stage":"immediately-before-quiet","at":2764.899999999994,"original":true,"inert":true,"children":4,"state":"paused","time":0,"motion":"full","reduce":false}]
+
+35
+ACTIVE-CANCEL 1280 os [{"stage":"paused-original-assigned","at":2859.7000000000116,"original":true,"inert":true,"children":4,"state":"paused","time":0,"motion":"full","reduce":false},{"stage":"before-product-media-listener","at":2915.2000000000116,"original":true,"inert":true,"children":4,"state":"paused","time":0,"motion":"full","reduce":true},{"stage":"cancel-event","at":2916.600000000006,"original":true,"inert":true,"children":4,"state":"idle","time":null,"motion":"full","reduce":true}]
+
+36
+ACTIVE-CANCEL 1280 none [{"stage":"paused-original-assigned","at":3512.399999999994,"original":true,"inert":true,"children":4,"state":"paused","time":0,"motion":"full","reduce":false},{"stage":"immediately-before-quiet","at":3523.7999999999884,"original":true,"inert":true,"children":4,"state":"paused","time":0,"motion":"full","reduce":false}]
+
+37
+ACTIVE-CANCEL 1280 calm [{"stage":"paused-original-assigned","at":2834.1999999999825,"original":true,"inert":true,"children":4,"state":"paused","time":0,"motion":"full","reduce":false},{"stage":"immediately-before-quiet","at":2844.899999999994,"original":true,"inert":true,"children":4,"state":"paused","time":0,"motion":"full","reduce":false}]
+
+38
+PASS KeepcurrentRuntimeOSReduceNoneCalmCancel paused120opacityExit inertReview immediateinvalidatesreview heldparse singleflightdisablededitor nativeEnterfocusrestore3201280normalReduce noModelSavecalls
+
+Post Run actions/setup-node@v4
+0s
+Post Run actions/setup-python@v5
+0s
+Post Run actions/checkout@v4
+0s
+Complete job
+0s
