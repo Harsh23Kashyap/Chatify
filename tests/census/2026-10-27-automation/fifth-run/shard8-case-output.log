@@ -1,0 +1,516 @@
+2026-10-27T08:33:36.1280716Z CASE action_empty_states_motion_browser.cjs default PASS exit=0 seconds=35.5
+2026-10-27T08:33:36.1281447Z PASS action catalog+notes empty140opacity only full/subtle NoneCalmReduceoff keyboard enter focus cleanreplacement3201280
+2026-10-27T08:33:36.1281828Z 
+2026-10-27T08:34:02.9201589Z CASE additional_fields_newer_edits_browser.cjs default PASS exit=0 seconds=26.8
+2026-10-27T08:34:02.9202263Z PASS additionalcapturedSaveGETPOSTnewereditskeptfocusandhonestunsaved3201280normalReduce
+2026-10-27T08:34:02.9202609Z 
+2026-10-27T08:34:16.1806664Z CASE appbuilder_full_browser.cjs default PASS exit=0 seconds=13.3
+2026-10-27T08:34:16.1808383Z PASS complete16-area design/prompt/code/API preview, negative input bounds, real review no save, cost checkboxes removed, Deploy search+copy prompt+selected-model plan, search sweep,320/390/1280
+2026-10-27T08:34:16.1809321Z 
+2026-10-27T08:34:28.3017314Z CASE appearance_states_browser.cjs default PASS exit=0 seconds=12.1
+2026-10-27T08:34:28.3018110Z FONT DEBUG [ 'Font unavailable. The preview uses a system fallback.' ]
+2026-10-27T08:34:28.3019147Z PASS layout selection diagrams+width, reduced-motion on-demand sample, failed background keeps old, blocked font shows fallback,320 fixture
+2026-10-27T08:34:28.3019753Z 
+2026-10-27T08:34:36.8797556Z CASE builder_add_source_singleflight_browser.cjs default PASS exit=0 seconds=8.6
+2026-10-27T08:34:36.8798434Z PASS proposedSourceAdd singleflight heldparseonly1added nativeEnterfocusFirstInput3201280normalReduce noModelSavecalls
+2026-10-27T08:34:36.8798829Z 
+2026-10-27T08:35:33.9639605Z CASE builder_disclosure_motion_audit_browser.cjs default PASS exit=0 seconds=57.1
+2026-10-27T08:35:33.9640354Z BUILDER-DISCLOSURE 320 no-preference App identity
+2026-10-27T08:35:33.9640625Z 9 draft settings
+2026-10-27T08:35:33.9640948Z BUILDER-DISCLOSURE 320 no-preference More app settings
+2026-10-27T08:35:33.9641579Z BUILDER-DISCLOSURE 320 no-preference Design, colors, fonts and layout
+2026-10-27T08:35:33.9642040Z 80 draft settings
+2026-10-27T08:35:33.9642470Z BUILDER-DISCLOSURE 320 no-preference All nine answer prompts
+2026-10-27T08:35:33.9642755Z 20 draft settings
+2026-10-27T08:35:33.9643059Z BUILDER-DISCLOSURE 320 no-preference Answer style and system prompt
+2026-10-27T08:35:33.9643346Z 7 draft settings
+2026-10-27T08:35:33.9643576Z BUILDER-DISCLOSURE 320 no-preference Sources
+2026-10-27T08:35:33.9643792Z 5 draft settings
+2026-10-27T08:35:33.9644043Z BUILDER-DISCLOSURE 320 no-preference Local motion fixture
+2026-10-27T08:35:33.9644451Z BUILDER-DISCLOSURE 320 no-preference Advanced: edit all sources as JSON
+2026-10-27T08:35:33.9644860Z BUILDER-DISCLOSURE 320 no-preference API recommendations
+2026-10-27T08:35:33.9645105Z 1 draft setting
+2026-10-27T08:35:33.9645432Z BUILDER-DISCLOSURE 320 no-preference Advanced: edit recommendation JSON
+2026-10-27T08:35:33.9645822Z BUILDER-DISCLOSURE 320 no-preference Model connection
+2026-10-27T08:35:33.9646067Z 8 draft settings
+2026-10-27T08:35:33.9646722Z BUILDER-DISCLOSURE 320 no-preference Code drafts: not installed
+2026-10-27T08:35:33.9647226Z 6 draft settings
+2026-10-27T08:35:33.9647485Z BUILDER-DISCLOSURE 320 no-preference Evidence retrieval
+2026-10-27T08:35:33.9647729Z 5 draft settings
+2026-10-27T08:35:33.9647976Z BUILDER-DISCLOSURE 320 no-preference Conversation memory
+2026-10-27T08:35:33.9648218Z 4 draft settings
+2026-10-27T08:35:33.9648439Z BUILDER-DISCLOSURE 320 no-preference Citations
+2026-10-27T08:35:33.9648663Z 2 draft settings
+2026-10-27T08:35:33.9648891Z BUILDER-DISCLOSURE 320 no-preference Usage limits
+2026-10-27T08:35:33.9649119Z 4 draft settings
+2026-10-27T08:35:33.9649373Z BUILDER-DISCLOSURE 320 no-preference Access and accounts
+2026-10-27T08:35:33.9649612Z 3 draft settings
+2026-10-27T08:35:33.9649847Z BUILDER-DISCLOSURE 320 no-preference Allowed actions
+2026-10-27T08:35:33.9650082Z 2 draft settings
+2026-10-27T08:35:33.9650302Z BUILDER-DISCLOSURE 320 no-preference Chat storage
+2026-10-27T08:35:33.9650532Z 1 draft setting
+2026-10-27T08:35:33.9650771Z BUILDER-DISCLOSURE 320 no-preference Local server
+2026-10-27T08:35:33.9651000Z 3 draft settings
+2026-10-27T08:35:33.9651293Z BUILDER-DISCLOSURE 320 no-preference Advanced: inspect or edit YAML
+2026-10-27T08:35:33.9651628Z BUILDER-DISCLOSURE 320 reduce App identity
+2026-10-27T08:35:33.9651848Z 9 draft settings
+2026-10-27T08:35:33.9652067Z BUILDER-DISCLOSURE 320 reduce More app settings
+2026-10-27T08:35:33.9652400Z BUILDER-DISCLOSURE 320 reduce Design, colors, fonts and layout
+2026-10-27T08:35:33.9652668Z 80 draft settings
+2026-10-27T08:35:33.9652909Z BUILDER-DISCLOSURE 320 reduce All nine answer prompts
+2026-10-27T08:35:33.9653155Z 20 draft settings
+2026-10-27T08:35:33.9653417Z BUILDER-DISCLOSURE 320 reduce Answer style and system prompt
+2026-10-27T08:35:33.9653667Z 7 draft settings
+2026-10-27T08:35:33.9653870Z BUILDER-DISCLOSURE 320 reduce Sources
+2026-10-27T08:35:33.9654072Z 5 draft settings
+2026-10-27T08:35:33.9654299Z BUILDER-DISCLOSURE 320 reduce Local motion fixture
+2026-10-27T08:35:33.9654647Z BUILDER-DISCLOSURE 320 reduce Advanced: edit all sources as JSON
+2026-10-27T08:35:33.9654983Z BUILDER-DISCLOSURE 320 reduce API recommendations
+2026-10-27T08:35:33.9655205Z 1 draft setting
+2026-10-27T08:35:33.9655472Z BUILDER-DISCLOSURE 320 reduce Advanced: edit recommendation JSON
+2026-10-27T08:35:33.9655794Z BUILDER-DISCLOSURE 320 reduce Model connection
+2026-10-27T08:35:33.9656014Z 8 draft settings
+2026-10-27T08:35:33.9656255Z BUILDER-DISCLOSURE 320 reduce Code drafts: not installed
+2026-10-27T08:35:33.9656497Z 6 draft settings
+2026-10-27T08:35:33.9656727Z BUILDER-DISCLOSURE 320 reduce Evidence retrieval
+2026-10-27T08:35:33.9657294Z 5 draft settings
+2026-10-27T08:35:33.9657527Z BUILDER-DISCLOSURE 320 reduce Conversation memory
+2026-10-27T08:35:33.9657772Z 4 draft settings
+2026-10-27T08:35:33.9657977Z BUILDER-DISCLOSURE 320 reduce Citations
+2026-10-27T08:35:33.9658188Z 2 draft settings
+2026-10-27T08:35:33.9658589Z BUILDER-DISCLOSURE 320 reduce Usage limits
+2026-10-27T08:35:33.9658931Z 4 draft settings
+2026-10-27T08:35:33.9659277Z BUILDER-DISCLOSURE 320 reduce Access and accounts
+2026-10-27T08:35:33.9659662Z 3 draft settings
+2026-10-27T08:35:33.9660038Z BUILDER-DISCLOSURE 320 reduce Allowed actions
+2026-10-27T08:35:33.9660435Z 2 draft settings
+2026-10-27T08:35:33.9660773Z BUILDER-DISCLOSURE 320 reduce Chat storage
+2026-10-27T08:35:33.9661090Z 1 draft setting
+2026-10-27T08:35:33.9713429Z BUILDER-DISCLOSURE 320 reduce Local server
+2026-10-27T08:35:33.9713999Z 3 draft settings
+2026-10-27T08:35:33.9714423Z BUILDER-DISCLOSURE 320 reduce Advanced: inspect or edit YAML
+2026-10-27T08:35:33.9714957Z BUILDER-DISCLOSURE 1280 no-preference App identity
+2026-10-27T08:35:33.9715350Z 9 draft settings
+2026-10-27T08:35:33.9715692Z BUILDER-DISCLOSURE 1280 no-preference More app settings
+2026-10-27T08:35:33.9716239Z BUILDER-DISCLOSURE 1280 no-preference Design, colors, fonts and layout
+2026-10-27T08:35:33.9716625Z 80 draft settings
+2026-10-27T08:35:33.9717163Z BUILDER-DISCLOSURE 1280 no-preference All nine answer prompts
+2026-10-27T08:35:33.9717549Z 20 draft settings
+2026-10-27T08:35:33.9718342Z BUILDER-DISCLOSURE 1280 no-preference Answer style and system prompt
+2026-10-27T08:35:33.9718753Z 7 draft settings
+2026-10-27T08:35:33.9719109Z BUILDER-DISCLOSURE 1280 no-preference Sources
+2026-10-27T08:35:33.9719453Z 5 draft settings
+2026-10-27T08:35:33.9719831Z BUILDER-DISCLOSURE 1280 no-preference Local motion fixture
+2026-10-27T08:35:33.9720424Z BUILDER-DISCLOSURE 1280 no-preference Advanced: edit all sources as JSON
+2026-10-27T08:35:33.9721013Z BUILDER-DISCLOSURE 1280 no-preference API recommendations
+2026-10-27T08:35:33.9721376Z 1 draft setting
+2026-10-27T08:35:33.9721835Z BUILDER-DISCLOSURE 1280 no-preference Advanced: edit recommendation JSON
+2026-10-27T08:35:33.9722398Z BUILDER-DISCLOSURE 1280 no-preference Model connection
+2026-10-27T08:35:33.9722752Z 8 draft settings
+2026-10-27T08:35:33.9723159Z BUILDER-DISCLOSURE 1280 no-preference Code drafts: not installed
+2026-10-27T08:35:33.9723549Z 6 draft settings
+2026-10-27T08:35:33.9723928Z BUILDER-DISCLOSURE 1280 no-preference Evidence retrieval
+2026-10-27T08:35:33.9724283Z 5 draft settings
+2026-10-27T08:35:33.9724657Z BUILDER-DISCLOSURE 1280 no-preference Conversation memory
+2026-10-27T08:35:33.9725013Z 4 draft settings
+2026-10-27T08:35:33.9725331Z BUILDER-DISCLOSURE 1280 no-preference Citations
+2026-10-27T08:35:33.9725658Z 2 draft settings
+2026-10-27T08:35:33.9725982Z BUILDER-DISCLOSURE 1280 no-preference Usage limits
+2026-10-27T08:35:33.9726308Z 4 draft settings
+2026-10-27T08:35:33.9726675Z BUILDER-DISCLOSURE 1280 no-preference Access and accounts
+2026-10-27T08:35:33.9727136Z 3 draft settings
+2026-10-27T08:35:33.9727401Z BUILDER-DISCLOSURE 1280 no-preference Allowed actions
+2026-10-27T08:35:33.9727646Z 2 draft settings
+2026-10-27T08:35:33.9727879Z BUILDER-DISCLOSURE 1280 no-preference Chat storage
+2026-10-27T08:35:33.9728100Z 1 draft setting
+2026-10-27T08:35:33.9728319Z BUILDER-DISCLOSURE 1280 no-preference Local server
+2026-10-27T08:35:33.9728537Z 3 draft settings
+2026-10-27T08:35:33.9728829Z BUILDER-DISCLOSURE 1280 no-preference Advanced: inspect or edit YAML
+2026-10-27T08:35:33.9729164Z BUILDER-DISCLOSURE 1280 reduce App identity
+2026-10-27T08:35:33.9729378Z 9 draft settings
+2026-10-27T08:35:33.9729598Z BUILDER-DISCLOSURE 1280 reduce More app settings
+2026-10-27T08:35:33.9729946Z BUILDER-DISCLOSURE 1280 reduce Design, colors, fonts and layout
+2026-10-27T08:35:33.9730221Z 80 draft settings
+2026-10-27T08:35:33.9730469Z BUILDER-DISCLOSURE 1280 reduce All nine answer prompts
+2026-10-27T08:35:33.9730711Z 20 draft settings
+2026-10-27T08:35:33.9730973Z BUILDER-DISCLOSURE 1280 reduce Answer style and system prompt
+2026-10-27T08:35:33.9731418Z 7 draft settings
+2026-10-27T08:35:33.9731622Z BUILDER-DISCLOSURE 1280 reduce Sources
+2026-10-27T08:35:33.9731820Z 5 draft settings
+2026-10-27T08:35:33.9732052Z BUILDER-DISCLOSURE 1280 reduce Local motion fixture
+2026-10-27T08:35:33.9732402Z BUILDER-DISCLOSURE 1280 reduce Advanced: edit all sources as JSON
+2026-10-27T08:35:33.9732743Z BUILDER-DISCLOSURE 1280 reduce API recommendations
+2026-10-27T08:35:33.9732972Z 1 draft setting
+2026-10-27T08:35:33.9733244Z BUILDER-DISCLOSURE 1280 reduce Advanced: edit recommendation JSON
+2026-10-27T08:35:33.9733562Z BUILDER-DISCLOSURE 1280 reduce Model connection
+2026-10-27T08:35:33.9733827Z 8 draft settings
+2026-10-27T08:35:33.9734098Z BUILDER-DISCLOSURE 1280 reduce Code drafts: not installed
+2026-10-27T08:35:33.9734338Z 6 draft settings
+2026-10-27T08:35:33.9734554Z BUILDER-DISCLOSURE 1280 reduce Evidence retrieval
+2026-10-27T08:35:33.9734783Z 5 draft settings
+2026-10-27T08:35:33.9735030Z BUILDER-DISCLOSURE 1280 reduce Conversation memory
+2026-10-27T08:35:33.9735255Z 4 draft settings
+2026-10-27T08:35:33.9735454Z BUILDER-DISCLOSURE 1280 reduce Citations
+2026-10-27T08:35:33.9735656Z 2 draft settings
+2026-10-27T08:35:33.9735861Z BUILDER-DISCLOSURE 1280 reduce Usage limits
+2026-10-27T08:35:33.9736068Z 4 draft settings
+2026-10-27T08:35:33.9736288Z BUILDER-DISCLOSURE 1280 reduce Access and accounts
+2026-10-27T08:35:33.9736503Z 3 draft settings
+2026-10-27T08:35:33.9737003Z BUILDER-DISCLOSURE 1280 reduce Allowed actions
+2026-10-27T08:35:33.9737230Z 2 draft settings
+2026-10-27T08:35:33.9737437Z BUILDER-DISCLOSURE 1280 reduce Chat storage
+2026-10-27T08:35:33.9737637Z 1 draft setting
+2026-10-27T08:35:33.9737841Z BUILDER-DISCLOSURE 1280 reduce Local server
+2026-10-27T08:35:33.9738042Z 3 draft settings
+2026-10-27T08:35:33.9738297Z BUILDER-DISCLOSURE 1280 reduce Advanced: inspect or edit YAML
+2026-10-27T08:35:33.9739100Z PASS realparsed16area savedfixture dynamicdraft+capability+source+advanced disclosures Enter160opacityonly/NoneReduceoff/focusvaluesretained/nooverflow3201280normalReduce noAI/save
+2026-10-27T08:35:33.9739642Z 
+2026-10-27T08:36:24.4147969Z CASE builder_long_configuration_geometry_browser.cjs default PASS exit=0 seconds=50.4
+2026-10-27T08:36:24.4149939Z BUILDERLONG 320 no-preference 1207
+2026-10-27T08:36:24.4152416Z BUILDERLONG 320 no-preference 807
+2026-10-27T08:36:24.4152966Z BUILDERLONGPROMPT 320 no-preference bounded height 420
+2026-10-27T08:36:24.4153439Z BUILDERLONG 320 reduce 1207
+2026-10-27T08:36:24.4153682Z BUILDERLONG 320 reduce 807
+2026-10-27T08:36:24.4153943Z BUILDERLONGPROMPT 320 reduce bounded height 420
+2026-10-27T08:36:24.4154218Z BUILDERLONG 1280 no-preference 1207
+2026-10-27T08:36:24.4154463Z BUILDERLONG 1280 no-preference 807
+2026-10-27T08:36:24.4154753Z BUILDERLONGPROMPT 1280 no-preference bounded height 420
+2026-10-27T08:36:24.4155025Z BUILDERLONG 1280 reduce 1207
+2026-10-27T08:36:24.4155229Z BUILDERLONG 1280 reduce 807
+2026-10-27T08:36:24.4155473Z BUILDERLONGPROMPT 1280 reduce bounded height 420
+2026-10-27T08:36:24.4155997Z PASS builderproposedtitle1200/800chars stablevisiblefieldgeometry3201280normalReduce fixtureonly noSave/model
+2026-10-27T08:36:24.4156370Z 
+2026-10-27T08:36:40.4652188Z CASE builder_scope_clarity_browser.cjs default PASS exit=0 seconds=16.0
+2026-10-27T08:36:40.4653089Z PASS adjacentscopeplainlabel/separatecalls/unchangedsections,descriptionretained,180msrevealreducenone,nofullheightanimation3201280
+2026-10-27T08:36:40.4653561Z 
+2026-10-27T08:37:02.2164973Z CASE category_selection_browser.cjs default PASS exit=0 seconds=21.8
+2026-10-27T08:37:02.2165885Z PASS singlecategoryborder+tint/aria/focus44px/groupupdates/eightAppearancedestinations3207601280
+2026-10-27T08:37:02.2166407Z 
+2026-10-27T08:37:10.6837436Z CASE chat_history_states_browser.cjs default PASS exit=0 seconds=8.5
+2026-10-27T08:37:10.6838500Z PASS historyloadingkeepsrows/failedrefreshretry/emptysearch/stalefailureignored/chatdeleteUndo reopens restoredanswer3201280
+2026-10-27T08:37:10.6839133Z 
+2026-10-27T08:37:14.5794616Z CASE clipboard_feedback_browser.cjs default PASS exit=0 seconds=3.9
+2026-10-27T08:37:14.5795767Z PASS helpercopiedcheckactualcontent/restored1400ms/failurelabels;deploymentfailureadjacentretainsoutput/successactualcontent
+2026-10-27T08:37:14.5796181Z 
+2026-10-27T08:38:35.9178689Z CASE config_containment_browser.cjs default PASS exit=0 seconds=81.3
+2026-10-27T08:38:35.9180419Z rows 220 failures 0
+2026-10-27T08:38:35.9180625Z 
+2026-10-27T08:38:50.4396294Z CASE connection_runtime_quiet_motion_browser.cjs default PASS exit=0 seconds=14.5
+2026-10-27T08:38:50.4397397Z QUIETCONNECTION 320 reduce true actual160cancelled labelpreserved focusretained
+2026-10-27T08:38:50.4398161Z QUIETCONNECTION 320 reduce false actual160cancelled labelpreserved focusretained
+2026-10-27T08:38:50.4398755Z QUIETCONNECTION 320 none true actual160cancelled labelpreserved focusretained
+2026-10-27T08:38:50.4399390Z QUIETCONNECTION 320 none false actual160cancelled labelpreserved focusretained
+2026-10-27T08:38:50.4400142Z QUIETCONNECTION 320 calm true actual160cancelled labelpreserved focusretained
+2026-10-27T08:38:50.4400923Z QUIETCONNECTION 320 calm false actual160cancelled labelpreserved focusretained
+2026-10-27T08:38:50.4401707Z QUIETCONNECTION 1280 reduce true actual160cancelled labelpreserved focusretained
+2026-10-27T08:38:50.4402515Z QUIETCONNECTION 1280 reduce false actual160cancelled labelpreserved focusretained
+2026-10-27T08:38:50.4403594Z QUIETCONNECTION 1280 none true actual160cancelled labelpreserved focusretained
+2026-10-27T08:38:50.4404355Z QUIETCONNECTION 1280 none false actual160cancelled labelpreserved focusretained
+2026-10-27T08:38:50.4405101Z QUIETCONNECTION 1280 calm true actual160cancelled labelpreserved focusretained
+2026-10-27T08:38:50.4405842Z QUIETCONNECTION 1280 calm false actual160cancelled labelpreserved focusretained
+2026-10-27T08:38:50.4406789Z PASS connectioncompletion160runtimeReduceNoneCalmcancel12states3201280 actual200/failedresponsefixtures nomodelcalls
+2026-10-27T08:38:50.4407370Z 
+2026-10-27T08:38:53.6322603Z CASE dynamic_icon_title_inventory_browser.cjs default PASS exit=0 seconds=3.2
+2026-10-27T08:38:53.6323057Z PASS dynamicicons 19
+2026-10-27T08:38:53.6323189Z 
+2026-10-27T08:39:02.0916353Z CASE field_help_browser.cjs default PASS exit=0 seconds=8.5
+2026-10-27T08:39:02.0917408Z PASS field help delayedhover/immediatefocus/Escape/blur/viewportportal/reducedmotion3201280
+2026-10-27T08:39:02.0917897Z 
+2026-10-27T08:39:10.3755381Z CASE helper_check_pending_motion_browser.cjs default PASS exit=0 seconds=8.3
+2026-10-27T08:39:10.3756227Z PASS helperCheckagain actualbusy singleflight503 focusretained3201280normalReduce
+2026-10-27T08:39:10.3756650Z 
+2026-10-27T08:39:15.9788307Z CASE helper_execution_clarity_browser.cjs default PASS exit=0 seconds=5.6
+2026-10-27T08:39:15.9789247Z PASS helpernativecollapse/reopen/longcodepresentnohorizontalpageoverflow/invalidreviewblocksrun/hostfilesnetworkwarning3201280
+2026-10-27T08:39:15.9789669Z 
+2026-10-27T08:39:36.4280253Z CASE helper_try_stale_run_result_motion_browser.cjs default PASS exit=0 seconds=20.4
+2026-10-27T08:39:36.4281485Z PASS fixtureTryexecution200/503 bothhelperkinds real160result Reduceoff singleflightfocus resulttruth3201280 nohostcodeexecuted
+2026-10-27T08:39:36.4282107Z 
+2026-10-27T08:39:57.0696385Z CASE history_selection_audit_browser.cjs default PASS exit=0 seconds=20.6
+2026-10-27T08:39:57.0698706Z SELECTION 320 reduce 0 [{"text":"Selected fixture 0","selected":true,"animation":"none","transform":"none","keyframes":[]},{"text":"Selected fixture 1","selected":false,"animation":"none","transform":"none","keyframes":[]},{"text":"Selected fixture 2","selected":false,"animation":"none","transform":"none","keyframes":[]},{"text":"Selected fixture 3","selected":false,"animation":"none","transform":"none","keyframes":[]}]
+2026-10-27T08:39:57.0701205Z SELECTION 320 reduce 1 [{"text":"Selected fixture 0","selected":false,"animation":"none","transform":"none","keyframes":[]},{"text":"Selected fixture 1","selected":true,"animation":"none","transform":"none","keyframes":[]},{"text":"Selected fixture 2","selected":false,"animation":"none","transform":"none","keyframes":[]},{"text":"Selected fixture 3","selected":false,"animation":"none","transform":"none","keyframes":[]}]
+2026-10-27T08:39:57.0703689Z SELECTION 320 reduce 2 [{"text":"Selected fixture 0","selected":false,"animation":"none","transform":"none","keyframes":[]},{"text":"Selected fixture 1","selected":false,"animation":"none","transform":"none","keyframes":[]},{"text":"Selected fixture 2","selected":true,"animation":"none","transform":"none","keyframes":[]},{"text":"Selected fixture 3","selected":false,"animation":"none","transform":"none","keyframes":[]}]
+2026-10-27T08:39:57.0705830Z SELECTION 320 reduce 3 [{"text":"Selected fixture 0","selected":false,"animation":"none","transform":"none","keyframes":[]},{"text":"Selected fixture 1","selected":false,"animation":"none","transform":"none","keyframes":[]},{"text":"Selected fixture 2","selected":false,"animation":"none","transform":"none","keyframes":[]},{"text":"Selected fixture 3","selected":true,"animation":"none","transform":"none","keyframes":[]}]
+2026-10-27T08:39:57.0709111Z SELECTION 320 no-preference 0 [{"text":"Selected fixture 0","selected":true,"animation":"m-in","transform":"none","keyframes":[{"transform":"none","opacity":"0"},{"transform":"none","opacity":"1"}]},{"text":"Selected fixture 1","selected":false,"animation":"m-in","transform":"none","keyframes":[{"transform":"none","opacity":"0"},{"transform":"none","opacity":"1"}]},{"text":"Selected fixture 2","selected":false,"animation":"m-in","transform":"none","keyframes":[{"transform":"none","opacity":"0"},{"transform":"none","opacity":"1"}]},{"text":"Selected fixture 3","selected":false,"animation":"m-in","transform":"none","keyframes":[{"transform":"none","opacity":"0"},{"transform":"none","opacity":"1"}]}]
+2026-10-27T08:39:57.0712579Z SELECTION 320 no-preference 1 [{"text":"Selected fixture 0","selected":false,"animation":"m-in","transform":"none","keyframes":[{"transform":"none","opacity":"0"},{"transform":"none","opacity":"1"}]},{"text":"Selected fixture 1","selected":true,"animation":"m-in","transform":"none","keyframes":[{"transform":"none","opacity":"0"},{"transform":"none","opacity":"1"}]},{"text":"Selected fixture 2","selected":false,"animation":"m-in","transform":"none","keyframes":[{"transform":"none","opacity":"0"},{"transform":"none","opacity":"1"}]},{"text":"Selected fixture 3","selected":false,"animation":"m-in","transform":"none","keyframes":[{"transform":"none","opacity":"0"},{"transform":"none","opacity":"1"}]}]
+2026-10-27T08:39:57.0716006Z SELECTION 320 no-preference 2 [{"text":"Selected fixture 0","selected":false,"animation":"m-in","transform":"none","keyframes":[{"transform":"none","opacity":"0"},{"transform":"none","opacity":"1"}]},{"text":"Selected fixture 1","selected":false,"animation":"m-in","transform":"none","keyframes":[{"transform":"none","opacity":"0"},{"transform":"none","opacity":"1"}]},{"text":"Selected fixture 2","selected":true,"animation":"m-in","transform":"none","keyframes":[{"transform":"none","opacity":"0"},{"transform":"none","opacity":"1"}]},{"text":"Selected fixture 3","selected":false,"animation":"m-in","transform":"none","keyframes":[{"transform":"none","opacity":"0"},{"transform":"none","opacity":"1"}]}]
+2026-10-27T08:39:57.0719648Z SELECTION 320 no-preference 3 [{"text":"Selected fixture 0","selected":false,"animation":"m-in","transform":"none","keyframes":[{"transform":"none","opacity":"0"},{"transform":"none","opacity":"1"}]},{"text":"Selected fixture 1","selected":false,"animation":"m-in","transform":"none","keyframes":[{"transform":"none","opacity":"0"},{"transform":"none","opacity":"1"}]},{"text":"Selected fixture 2","selected":false,"animation":"m-in","transform":"none","keyframes":[{"transform":"none","opacity":"0"},{"transform":"none","opacity":"1"}]},{"text":"Selected fixture 3","selected":true,"animation":"m-in","transform":"none","keyframes":[{"transform":"none","opacity":"0"},{"transform":"none","opacity":"1"}]}]
+2026-10-27T08:39:57.0722382Z SELECTION 1280 reduce 0 [{"text":"Selected fixture 0","selected":true,"animation":"none","transform":"none","keyframes":[]},{"text":"Selected fixture 1","selected":false,"animation":"none","transform":"none","keyframes":[]},{"text":"Selected fixture 2","selected":false,"animation":"none","transform":"none","keyframes":[]},{"text":"Selected fixture 3","selected":false,"animation":"none","transform":"none","keyframes":[]}]
+2026-10-27T08:39:57.0724680Z SELECTION 1280 reduce 1 [{"text":"Selected fixture 0","selected":false,"animation":"none","transform":"none","keyframes":[]},{"text":"Selected fixture 1","selected":true,"animation":"none","transform":"none","keyframes":[]},{"text":"Selected fixture 2","selected":false,"animation":"none","transform":"none","keyframes":[]},{"text":"Selected fixture 3","selected":false,"animation":"none","transform":"none","keyframes":[]}]
+2026-10-27T08:39:57.0726967Z SELECTION 1280 reduce 2 [{"text":"Selected fixture 0","selected":false,"animation":"none","transform":"none","keyframes":[]},{"text":"Selected fixture 1","selected":false,"animation":"none","transform":"none","keyframes":[]},{"text":"Selected fixture 2","selected":true,"animation":"none","transform":"none","keyframes":[]},{"text":"Selected fixture 3","selected":false,"animation":"none","transform":"none","keyframes":[]}]
+2026-10-27T08:39:57.0731646Z SELECTION 1280 reduce 3 [{"text":"Selected fixture 0","selected":false,"animation":"none","transform":"none","keyframes":[]},{"text":"Selected fixture 1","selected":false,"animation":"none","transform":"none","keyframes":[]},{"text":"Selected fixture 2","selected":false,"animation":"none","transform":"none","keyframes":[]},{"text":"Selected fixture 3","selected":true,"animation":"none","transform":"none","keyframes":[]}]
+2026-10-27T08:39:57.0736322Z SELECTION 1280 no-preference 0 [{"text":"Selected fixture 0","selected":true,"animation":"m-in","transform":"none","keyframes":[{"transform":"none","opacity":"0"},{"transform":"none","opacity":"1"}]},{"text":"Selected fixture 1","selected":false,"animation":"m-in","transform":"none","keyframes":[{"transform":"none","opacity":"0"},{"transform":"none","opacity":"1"}]},{"text":"Selected fixture 2","selected":false,"animation":"m-in","transform":"none","keyframes":[{"transform":"none","opacity":"0"},{"transform":"none","opacity":"1"}]},{"text":"Selected fixture 3","selected":false,"animation":"m-in","transform":"none","keyframes":[{"transform":"none","opacity":"0"},{"transform":"none","opacity":"1"}]}]
+2026-10-27T08:39:57.0740369Z SELECTION 1280 no-preference 1 [{"text":"Selected fixture 0","selected":false,"animation":"m-in","transform":"none","keyframes":[{"transform":"none","opacity":"0"},{"transform":"none","opacity":"1"}]},{"text":"Selected fixture 1","selected":true,"animation":"m-in","transform":"none","keyframes":[{"transform":"none","opacity":"0"},{"transform":"none","opacity":"1"}]},{"text":"Selected fixture 2","selected":false,"animation":"m-in","transform":"none","keyframes":[{"transform":"none","opacity":"0"},{"transform":"none","opacity":"1"}]},{"text":"Selected fixture 3","selected":false,"animation":"m-in","transform":"none","keyframes":[{"transform":"none","opacity":"0"},{"transform":"none","opacity":"1"}]}]
+2026-10-27T08:39:57.0743878Z SELECTION 1280 no-preference 2 [{"text":"Selected fixture 0","selected":false,"animation":"m-in","transform":"none","keyframes":[{"transform":"none","opacity":"0"},{"transform":"none","opacity":"1"}]},{"text":"Selected fixture 1","selected":false,"animation":"m-in","transform":"none","keyframes":[{"transform":"none","opacity":"0"},{"transform":"none","opacity":"1"}]},{"text":"Selected fixture 2","selected":true,"animation":"m-in","transform":"none","keyframes":[{"transform":"none","opacity":"0"},{"transform":"none","opacity":"1"}]},{"text":"Selected fixture 3","selected":false,"animation":"m-in","transform":"none","keyframes":[{"transform":"none","opacity":"0"},{"transform":"none","opacity":"1"}]}]
+2026-10-27T08:39:57.0747534Z SELECTION 1280 no-preference 3 [{"text":"Selected fixture 0","selected":false,"animation":"m-in","transform":"none","keyframes":[{"transform":"none","opacity":"0"},{"transform":"none","opacity":"1"}]},{"text":"Selected fixture 1","selected":false,"animation":"m-in","transform":"none","keyframes":[{"transform":"none","opacity":"0"},{"transform":"none","opacity":"1"}]},{"text":"Selected fixture 2","selected":false,"animation":"m-in","transform":"none","keyframes":[{"transform":"none","opacity":"0"},{"transform":"none","opacity":"1"}]},{"text":"Selected fixture 3","selected":true,"animation":"m-in","transform":"none","keyframes":[{"transform":"none","opacity":"0"},{"transform":"none","opacity":"1"}]}]
+2026-10-27T08:39:57.0750918Z PASS fourhistoryselections no sliding rows (normalopacity-onlym-in permitted) selectedidentityactual3201280normalReduce
+2026-10-27T08:39:57.0751313Z 
+2026-10-27T08:40:17.2212782Z CASE layout_choice_states_browser.cjs default PASS exit=0 seconds=20.1
+2026-10-27T08:40:17.2213276Z WIDTH 320 reduce {
+2026-10-27T08:40:17.2213577Z   before: 680,
+2026-10-27T08:40:17.2213905Z   middle: {
+2026-10-27T08:40:17.2214248Z     max: 1200,
+2026-10-27T08:40:17.2214506Z     variable: '1200px',
+2026-10-27T08:40:17.2214825Z     root: '1200px',
+2026-10-27T08:40:17.2215096Z     html: 'wide',
+2026-10-27T08:40:17.2215304Z     transform: 'none'
+2026-10-27T08:40:17.2215470Z   },
+2026-10-27T08:40:17.2215616Z   last: 1200
+2026-10-27T08:40:17.2215820Z }
+2026-10-27T08:40:17.2216085Z WIDTH 320 no-preference {
+2026-10-27T08:40:17.2216357Z   before: 680,
+2026-10-27T08:40:17.2217049Z   middle: {
+2026-10-27T08:40:17.2217296Z     max: 846.223,
+2026-10-27T08:40:17.2217516Z     variable: '1200px',
+2026-10-27T08:40:17.2217690Z     root: '1200px',
+2026-10-27T08:40:17.2217847Z     html: 'wide',
+2026-10-27T08:40:17.2218010Z     transform: 'none'
+2026-10-27T08:40:17.2218173Z   },
+2026-10-27T08:40:17.2218313Z   last: 1200
+2026-10-27T08:40:17.2218462Z }
+2026-10-27T08:40:17.2218615Z WIDTH 1280 reduce {
+2026-10-27T08:40:17.2218774Z   before: 680,
+2026-10-27T08:40:17.2218927Z   middle: {
+2026-10-27T08:40:17.2219083Z     max: 1200,
+2026-10-27T08:40:17.2219257Z     variable: '1200px',
+2026-10-27T08:40:17.2219428Z     root: '1200px',
+2026-10-27T08:40:17.2219586Z     html: 'wide',
+2026-10-27T08:40:17.2219747Z     transform: 'none'
+2026-10-27T08:40:17.2219909Z   },
+2026-10-27T08:40:17.2220056Z   last: 1200
+2026-10-27T08:40:17.2220205Z }
+2026-10-27T08:40:17.2220377Z WIDTH 1280 no-preference {
+2026-10-27T08:40:17.2220559Z   before: 680,
+2026-10-27T08:40:17.2220712Z   middle: {
+2026-10-27T08:40:17.2220865Z     max: 846.489,
+2026-10-27T08:40:17.2221029Z     variable: '1200px',
+2026-10-27T08:40:17.2221196Z     root: '1200px',
+2026-10-27T08:40:17.2221350Z     html: 'wide',
+2026-10-27T08:40:17.2221507Z     transform: 'none'
+2026-10-27T08:40:17.2221666Z   },
+2026-10-27T08:40:17.2221806Z   last: 1200
+2026-10-27T08:40:17.2221948Z }
+2026-10-27T08:40:17.2222509Z PASS layoutdiagramsstable selectedsurface160ms hovernomove widthmax680to1200intermediate160ms no scale contentsretained CalmReduceoff3201280
+2026-10-27T08:40:17.2222938Z 
+2026-10-27T08:40:31.5591852Z CASE local_setup_disclosure_motion_audit_browser.cjs default PASS exit=0 seconds=14.3
+2026-10-27T08:40:31.5593429Z PASS localinstallerinstallation+reviewchanges+fingerprintdetails160opacity Enter/NoneOSReduceofffocus/retainedraw/noheight/nooverflow3201280 fixtureonly noactualinstall/download/service
+2026-10-27T08:40:31.5594364Z 
+2026-10-27T08:40:35.3158315Z CASE mobile_toolbar_visibility_browser.cjs default PASS exit=0 seconds=3.8
+2026-10-27T08:40:35.3159134Z PASS visible toolbar controls keyboardreach readingdialog buildmenu 320
+2026-10-27T08:40:35.3159832Z PASS visible toolbar controls keyboardreach readingdialog buildmenu 390
+2026-10-27T08:40:35.3160489Z PASS visible toolbar controls keyboardreach readingdialog buildmenu 768
+2026-10-27T08:40:35.3161072Z PASS visible toolbar controls keyboardreach readingdialog buildmenu 1280
+2026-10-27T08:40:35.3161302Z 
+2026-10-27T08:40:51.3059479Z CASE motion_mode_states_browser.cjs default PASS exit=0 seconds=16.0
+2026-10-27T08:40:51.3060385Z PASS on-demand demo oneanswer840ms notthread instantCalmstop160mslocalcontrolfeedback deviceReduceoff disclosure160msFull/immediateCalm rowidentity retained3201280bothmotion
+2026-10-27T08:40:51.3061260Z 
+2026-10-27T08:40:58.3195347Z CASE picker_source_hover_inventory_browser.cjs no-preference PASS exit=0 seconds=7.0
+2026-10-27T08:40:58.3219074Z PASS picker/source hoverinventory [{"width":320,"tab":"Recent","css":{"prop":"background-color, border-color, transform","dur":"0.16s, 0.16s, 0.12s"}},{"width":320,"tab":"Recent","count":1},{"width":320,"tab":"Animated","css":{"prop":"background-color, border-color, transform","dur":"0.16s, 0.16s, 0.12s"}},{"width":320,"tab":"Animated","count":17},{"width":320,"tab":"Smileys","css":{"prop":"background-color, border-color, transform","dur":"0.16s, 0.16s, 0.12s"}},{"width":320,"tab":"Smileys","count":20},{"width":320,"tab":"People","css":{"prop":"background-color, border-color, transform","dur":"0.16s, 0.16s, 0.12s"}},{"width":320,"tab":"People","count":12},{"width":320,"tab":"Nature","css":{"prop":"background-color, border-color, transform","dur":"0.16s, 0.16s, 0.12s"}},{"width":320,"tab":"Nature","count":12},{"width":320,"tab":"Food","css":{"prop":"background-color, border-color, transform","dur":"0.16s, 0.16s, 0.12s"}},{"width":320,"tab":"Food","count":8},{"width":320,"tab":"Objects","css":{"prop":"background-color, border-color, transform","dur":"0.16s, 0.16s, 0.12s"}},{"width":320,"tab":"Objects","count":14},{"width":320,"tab":"Symbols","css":{"prop":"background-color, border-color, transform","dur":"0.16s, 0.16s, 0.12s"}},{"width":320,"tab":"Symbols","count":10},{"cls":"mini","text":"Close","prop":"background-color, border-color, transform","dur":"0.16s, 0.16s, 0.12s"},{"cls":"mini","text":"Recent","prop":"none","dur":"0s"},{"cls":"mini","text":"Animated","prop":"none","dur":"0s"},{"cls":"mini","text":"Smileys","prop":"none","dur":"0s"},{"cls":"mini","text":"People","prop":"none","dur":"0s"},{"cls":"mini","text":"Nature","prop":"none","dur":"0s"},{"cls":"mini","text":"Food","prop":"none","dur":"0s"},{"cls":"mini","text":"Objects","prop":"none","dur":"0s"},{"cls":"mini selected","text":"Symbols","prop":"none","dur":"0s"},{"cls":"emoji-option","text":"","prop":"background-color, border-color, transform","dur":"0.16s, 0.16s, 0.12s"},{"cls":"emoji-option","text":"","prop":"background-color, border-color, transform","dur":"0.16s, 0.16s, 0.12s"},{"cls":"emoji-option","text":"","prop":"background-color, border-color, transform","dur":"0.16s, 0.16s, 0.12s"},{"cls":"emoji-option","text":"","prop":"background-color, border-color, transform","dur":"0.16s, 0.16s, 0.12s"},{"cls":"emoji-option","text":"","prop":"background-color, border-color, transform","dur":"0.16s, 0.16s, 0.12s"},{"cls":"emoji-option","text":"","prop":"background-color, border-color, transform","dur":"0.16s, 0.16s, 0.12s"},{"cls":"emoji-option","text":"","prop":"background-color, border-color, transform","dur":"0.16s, 0.16s, 0.12s"},{"cls":"emoji-option","text":"","prop":"background-color, border-color, transform","dur":"0.16s, 0.16s, 0.12s"},{"cls":"emoji-option","text":"","prop":"background-color, border-color, transform","dur":"0.16s, 0.16s, 0.12s"},{"cls":"emoji-option","text":"","prop":"background-color, border-color, transform","dur":"0.16s, 0.16s, 0.12s"},{"cls":"mini","text":"Use app default","prop":"background-color, border-color, transform","dur":"0.16s, 0.16s, 0.12s"},{"cls":"icon","prop":"background-color, color, box-shadow","dur":"0.16s, 0.16s, 0.16s"},{"width":320,"sourceClose":true},{"width":1280,"tab":"Recent","css":{"prop":"background-color, border-color, transform","dur":"0.16s, 0.16s, 0.12s"}},{"width":1280,"tab":"Recent","count":1},{"width":1280,"tab":"Animated","css":{"prop":"background-color, border-color, transform","dur":"0.16s, 0.16s, 0.12s"}},{"width":1280,"tab":"Animated","count":17},{"width":1280,"tab":"Smileys","css":{"prop":"background-color, border-color, transform","dur":"0.16s, 0.16s, 0.12s"}},{"width":1280,"tab":"Smileys","count":20},{"width":1280,"tab":"People","css":{"prop":"background-color, border-color, transform","dur":"0.16s, 0.16s, 0.12s"}},{"width":1280,"tab":"People","count":12},{"width":1280,"tab":"Nature","css":{"prop":"background-color, border-color, transform","dur":"0.16s, 0.16s, 0.12s"}},{"width":1280,"tab":"Nature","count":12},{"width":1280,"tab":"Food","css":{"prop":"background-color, border-color, transform","dur":"0.16s, 0.16s, 0.12s"}},{"width":1280,"tab":"Food","count":8},{"width":1280,"tab":"Objects","css":{"prop":"background-color, border-color, transform","dur":"0.16s, 0.16s, 0.12s"}},{"width":1280,"tab":"Objects","count":14},{"width":1280,"tab":"Symbols","css":{"prop":"background-color, border-color, transform","dur":"0.16s, 0.16s, 0.12s"}},{"width":1280,"tab":"Symbols","count":10},{"cls":"mini","text":"Close","prop":"background-color, border-color, transform","dur":"0.16s, 0.16s, 0.12s"},{"cls":"mini","text":"Recent","prop":"none","dur":"0s"},{"cls":"mini","text":"Animated","prop":"none","dur":"0s"},{"cls":"mini","text":"Smileys","prop":"none","dur":"0s"},{"cls":"mini","text":"People","prop":"none","dur":"0s"},{"cls":"mini","text":"Nature","prop":"none","dur":"0s"},{"cls":"mini","text":"Food","prop":"none","dur":"0s"},{"cls":"mini","text":"Objects","prop":"none","dur":"0s"},{"cls":"mini selected","text":"Symbols","prop":"none","dur":"0s"},{"cls":"emoji-option","text":"","prop":"background-color, border-color, transform","dur":"0.16s, 0.16s, 0.12s"},{"cls":"emoji-option","text":"","prop":"background-color, border-color, transform","dur":"0.16s, 0.16s, 0.12s"},{"cls":"emoji-option","text":"","prop":"background-color, border-color, transform","dur":"0.16s, 0.16s, 0.12s"},{"cls":"emoji-option","text":"","prop":"background-color, border-color, transform","dur":"0.16s, 0.16s, 0.12s"},{"cls":"emoji-option","text":"","prop":"background-color, border-color, transform","dur":"0.16s, 0.16s, 0.12s"},{"cls":"emoji-option","text":"","prop":"background-color, border-color, transform","dur":"0.16s, 0.16s, 0.12s"},{"cls":"emoji-option","text":"","prop":"background-color, border-color, transform","dur":"0.16s, 0.16s, 0.12s"},{"cls":"emoji-option","text":"","prop":"background-color, border-color, transform","dur":"0.16s, 0.16s, 0.12s"},{"cls":"emoji-option","text":"","prop":"background-color, border-color, transform","dur":"0.16s, 0.16s, 0.12s"},{"cls":"emoji-option","text":"","prop":"background-color, border-color, transform","dur":"0.16s, 0.16s, 0.12s"},{"cls":"mini","text":"Use app default","prop":"background-color, border-color, transform","dur":"0.16s, 0.16s, 0.12s"},{"cls":"icon","prop":"background-color, color, box-shadow","dur":"0.16s, 0.16s, 0.16s"},{"width":1280,"sourceClose":true}]
+2026-10-27T08:40:58.3234064Z 
+2026-10-27T08:41:03.5248668Z CASE picker_source_hover_inventory_browser.cjs reduce PASS exit=0 seconds=5.2
+2026-10-27T08:41:03.5261934Z PASS picker/source hoverinventory [{"width":320,"tab":"Recent","css":{"prop":"none","dur":"0s"}},{"width":320,"tab":"Recent","count":1},{"width":320,"tab":"Animated","css":{"prop":"none","dur":"0s"}},{"width":320,"tab":"Animated","count":17},{"width":320,"tab":"Smileys","css":{"prop":"none","dur":"0s"}},{"width":320,"tab":"Smileys","count":20},{"width":320,"tab":"People","css":{"prop":"none","dur":"0s"}},{"width":320,"tab":"People","count":12},{"width":320,"tab":"Nature","css":{"prop":"none","dur":"0s"}},{"width":320,"tab":"Nature","count":12},{"width":320,"tab":"Food","css":{"prop":"none","dur":"0s"}},{"width":320,"tab":"Food","count":8},{"width":320,"tab":"Objects","css":{"prop":"none","dur":"0s"}},{"width":320,"tab":"Objects","count":14},{"width":320,"tab":"Symbols","css":{"prop":"none","dur":"0s"}},{"width":320,"tab":"Symbols","count":10},{"cls":"mini","text":"Close","prop":"none","dur":"0s"},{"cls":"mini","text":"Recent","prop":"none","dur":"0s"},{"cls":"mini","text":"Animated","prop":"none","dur":"0s"},{"cls":"mini","text":"Smileys","prop":"none","dur":"0s"},{"cls":"mini","text":"People","prop":"none","dur":"0s"},{"cls":"mini","text":"Nature","prop":"none","dur":"0s"},{"cls":"mini","text":"Food","prop":"none","dur":"0s"},{"cls":"mini","text":"Objects","prop":"none","dur":"0s"},{"cls":"mini selected","text":"Symbols","prop":"none","dur":"0s"},{"cls":"emoji-option","text":"","prop":"none","dur":"0s"},{"cls":"emoji-option","text":"","prop":"none","dur":"0s"},{"cls":"emoji-option","text":"","prop":"none","dur":"0s"},{"cls":"emoji-option","text":"","prop":"none","dur":"0s"},{"cls":"emoji-option","text":"","prop":"none","dur":"0s"},{"cls":"emoji-option","text":"","prop":"none","dur":"0s"},{"cls":"emoji-option","text":"","prop":"none","dur":"0s"},{"cls":"emoji-option","text":"","prop":"none","dur":"0s"},{"cls":"emoji-option","text":"","prop":"none","dur":"0s"},{"cls":"emoji-option","text":"","prop":"none","dur":"0s"},{"cls":"mini","text":"Use app default","prop":"none","dur":"0s"},{"cls":"icon","prop":"none","dur":"0s"},{"width":320,"sourceClose":true},{"width":1280,"tab":"Recent","css":{"prop":"none","dur":"0s"}},{"width":1280,"tab":"Recent","count":1},{"width":1280,"tab":"Animated","css":{"prop":"none","dur":"0s"}},{"width":1280,"tab":"Animated","count":17},{"width":1280,"tab":"Smileys","css":{"prop":"none","dur":"0s"}},{"width":1280,"tab":"Smileys","count":20},{"width":1280,"tab":"People","css":{"prop":"none","dur":"0s"}},{"width":1280,"tab":"People","count":12},{"width":1280,"tab":"Nature","css":{"prop":"none","dur":"0s"}},{"width":1280,"tab":"Nature","count":12},{"width":1280,"tab":"Food","css":{"prop":"none","dur":"0s"}},{"width":1280,"tab":"Food","count":8},{"width":1280,"tab":"Objects","css":{"prop":"none","dur":"0s"}},{"width":1280,"tab":"Objects","count":14},{"width":1280,"tab":"Symbols","css":{"prop":"none","dur":"0s"}},{"width":1280,"tab":"Symbols","count":10},{"cls":"mini","text":"Close","prop":"none","dur":"0s"},{"cls":"mini","text":"Recent","prop":"none","dur":"0s"},{"cls":"mini","text":"Animated","prop":"none","dur":"0s"},{"cls":"mini","text":"Smileys","prop":"none","dur":"0s"},{"cls":"mini","text":"People","prop":"none","dur":"0s"},{"cls":"mini","text":"Nature","prop":"none","dur":"0s"},{"cls":"mini","text":"Food","prop":"none","dur":"0s"},{"cls":"mini","text":"Objects","prop":"none","dur":"0s"},{"cls":"mini selected","text":"Symbols","prop":"none","dur":"0s"},{"cls":"emoji-option","text":"","prop":"none","dur":"0s"},{"cls":"emoji-option","text":"","prop":"none","dur":"0s"},{"cls":"emoji-option","text":"","prop":"none","dur":"0s"},{"cls":"emoji-option","text":"","prop":"none","dur":"0s"},{"cls":"emoji-option","text":"","prop":"none","dur":"0s"},{"cls":"emoji-option","text":"","prop":"none","dur":"0s"},{"cls":"emoji-option","text":"","prop":"none","dur":"0s"},{"cls":"emoji-option","text":"","prop":"none","dur":"0s"},{"cls":"emoji-option","text":"","prop":"none","dur":"0s"},{"cls":"emoji-option","text":"","prop":"none","dur":"0s"},{"cls":"mini","text":"Use app default","prop":"none","dur":"0s"},{"cls":"icon","prop":"none","dur":"0s"},{"width":1280,"sourceClose":true}]
+2026-10-27T08:41:03.5269931Z 
+2026-10-27T08:41:44.9334437Z CASE prompt_all_categories_browser.cjs default PASS exit=0 seconds=41.4
+2026-10-27T08:41:44.9335313Z PASS all9promptcategories dirty/save/capturedkey/savedrestore/resetconfirm/defaultstatus/noPreview3201280
+2026-10-27T08:41:44.9335705Z 
+2026-10-27T08:41:50.9928800Z CASE prompt_toggle_browser.cjs default PASS exit=0 seconds=6.1
+2026-10-27T08:41:50.9929574Z PASS optionalstep capturedstate/singleflight/confirmedstate/failurepreviousrestore3201280
+2026-10-27T08:41:50.9929884Z 
+2026-10-27T08:41:59.8188304Z CASE provider_prerequisite_immediate_disabled_motion_browser.cjs default PASS exit=0 seconds=8.8
+2026-10-27T08:41:59.8189062Z PREREQUISITE 320 no-preference openai disabled no request
+2026-10-27T08:41:59.8189604Z PREREQUISITE 320 no-preference claude disabled no request
+2026-10-27T08:41:59.8190122Z PREREQUISITE 320 no-preference gemini disabled no request
+2026-10-27T08:41:59.8190614Z PREREQUISITE 320 no-preference deepseek disabled no request
+2026-10-27T08:41:59.8191077Z PREREQUISITE 320 no-preference groq disabled no request
+2026-10-27T08:41:59.8191559Z PREREQUISITE 320 no-preference mistral disabled no request
+2026-10-27T08:41:59.8192069Z PREREQUISITE 320 no-preference minimax disabled no request
+2026-10-27T08:41:59.8192873Z PREREQUISITE 320 no-preference mimo disabled no request
+2026-10-27T08:41:59.8193379Z PREREQUISITE 320 no-preference openrouter disabled no request
+2026-10-27T08:41:59.8193945Z PREREQUISITE 320 no-preference openai_compatible disabled no request
+2026-10-27T08:41:59.8194418Z PREREQUISITE 320 reduce openai disabled no request
+2026-10-27T08:41:59.8194863Z PREREQUISITE 320 reduce claude disabled no request
+2026-10-27T08:41:59.8195321Z PREREQUISITE 320 reduce gemini disabled no request
+2026-10-27T08:41:59.8195799Z PREREQUISITE 320 reduce deepseek disabled no request
+2026-10-27T08:41:59.8196258Z PREREQUISITE 320 reduce groq disabled no request
+2026-10-27T08:41:59.8196718Z PREREQUISITE 320 reduce mistral disabled no request
+2026-10-27T08:41:59.8197401Z PREREQUISITE 320 reduce minimax disabled no request
+2026-10-27T08:41:59.8197875Z PREREQUISITE 320 reduce mimo disabled no request
+2026-10-27T08:41:59.8198360Z PREREQUISITE 320 reduce openrouter disabled no request
+2026-10-27T08:41:59.8198899Z PREREQUISITE 320 reduce openai_compatible disabled no request
+2026-10-27T08:41:59.8199446Z PREREQUISITE 1280 no-preference openai disabled no request
+2026-10-27T08:41:59.8200002Z PREREQUISITE 1280 no-preference claude disabled no request
+2026-10-27T08:41:59.8200553Z PREREQUISITE 1280 no-preference gemini disabled no request
+2026-10-27T08:41:59.8201127Z PREREQUISITE 1280 no-preference deepseek disabled no request
+2026-10-27T08:41:59.8201917Z PREREQUISITE 1280 no-preference groq disabled no request
+2026-10-27T08:41:59.8202507Z PREREQUISITE 1280 no-preference mistral disabled no request
+2026-10-27T08:41:59.8203072Z PREREQUISITE 1280 no-preference minimax disabled no request
+2026-10-27T08:41:59.8203618Z PREREQUISITE 1280 no-preference mimo disabled no request
+2026-10-27T08:41:59.8204238Z PREREQUISITE 1280 no-preference openrouter disabled no request
+2026-10-27T08:41:59.8204856Z PREREQUISITE 1280 no-preference openai_compatible disabled no request
+2026-10-27T08:41:59.8205436Z PREREQUISITE 1280 reduce openai disabled no request
+2026-10-27T08:41:59.8205921Z PREREQUISITE 1280 reduce claude disabled no request
+2026-10-27T08:41:59.8206409Z PREREQUISITE 1280 reduce gemini disabled no request
+2026-10-27T08:41:59.8207086Z PREREQUISITE 1280 reduce deepseek disabled no request
+2026-10-27T08:41:59.8207541Z PREREQUISITE 1280 reduce groq disabled no request
+2026-10-27T08:41:59.8208018Z PREREQUISITE 1280 reduce mistral disabled no request
+2026-10-27T08:41:59.8208513Z PREREQUISITE 1280 reduce minimax disabled no request
+2026-10-27T08:41:59.8208972Z PREREQUISITE 1280 reduce mimo disabled no request
+2026-10-27T08:41:59.8209453Z PREREQUISITE 1280 reduce openrouter disabled no request
+2026-10-27T08:41:59.8210002Z PREREQUISITE 1280 reduce openai_compatible disabled no request
+2026-10-27T08:41:59.8210823Z PASS all10keyrequiredproviders missingkey testdisabled withstaticreason no request3201280normalReduce
+2026-10-27T08:41:59.8211342Z 
+2026-10-27T08:42:05.3747848Z CASE rename_saved_browser.cjs default PASS exit=0 seconds=5.6
+2026-10-27T08:42:05.3748720Z PASS live saved rename persistence active heading long140 validation cancel failure 320
+2026-10-27T08:42:05.3749531Z PASS live saved rename persistence active heading long140 validation cancel failure 390
+2026-10-27T08:42:05.3750313Z PASS live saved rename persistence active heading long140 validation cancel failure 1280
+2026-10-27T08:42:05.3750669Z 
+2026-10-27T08:42:16.9593931Z CASE settings_dirty_idle_loops_inventory_browser.cjs default PASS exit=0 seconds=11.6
+2026-10-27T08:42:16.9594971Z PASS FullSubtle actualall17Settingssections openDetails availabletextinputsdirty noidleInfinity3201280
+2026-10-27T08:42:16.9595495Z 
+2026-10-27T08:42:26.5922688Z CASE settings_idle_loops_inventory_browser.cjs default PASS exit=0 seconds=9.6
+2026-10-27T08:42:26.5925296Z PASS FullSubtle actualall17Settingssections openDetails noidleInfinity3201280
+2026-10-27T08:42:26.5925575Z 
+2026-10-27T08:42:44.1794146Z CASE settings_primary_save_success_browser.cjs default PASS exit=0 seconds=17.6
+2026-10-27T08:42:44.1795311Z PASS primaryAnswerAppearance200 sharedsuccess160Reduceoff exactsnapshot/newereditsdirtyfocuskept/originsavefocus3201280
+2026-10-27T08:42:44.1795705Z 
+2026-10-27T08:42:59.6214810Z CASE setup_late_status_recheck_browser.cjs default PASS exit=0 seconds=15.4
+2026-10-27T08:42:59.6215880Z PASS late setupstatus cannot overwrite newer Recheck3201280normalReduce fixturesNoProcess
+2026-10-27T08:42:59.6216391Z 
+2026-10-27T08:43:07.8793079Z CASE sidebar_continuous_width_motion_browser.cjs default PASS exit=0 seconds=8.3
+2026-10-27T08:43:07.8793556Z CONTINUOUS left no-preference true {
+2026-10-27T08:43:07.8793830Z   before: { side: 250, main: 988, x: 271 },
+2026-10-27T08:43:07.8794110Z   mid: { side: 13.46875, main: 1224.53125, x: 34.46875 },
+2026-10-27T08:43:07.8794379Z   after: { side: 0, main: 1238, x: 21 },
+2026-10-27T08:43:07.8794590Z   duration: 240,
+2026-10-27T08:43:07.8794759Z   expanded: 'false',
+2026-10-27T08:43:07.8794933Z   transition: true
+2026-10-27T08:43:07.8795103Z }
+2026-10-27T08:43:07.8795321Z CONTINUOUS left no-preference false {
+2026-10-27T08:43:07.8795567Z   before: { side: 0, main: 1238, x: 21 },
+2026-10-27T08:43:07.8795841Z   mid: { side: 236.515625, main: 1001.484375, x: 257.515625 },
+2026-10-27T08:43:07.8796107Z   after: { side: 250, main: 988, x: 271 },
+2026-10-27T08:43:07.8796309Z   duration: 240,
+2026-10-27T08:43:07.8796471Z   expanded: 'true',
+2026-10-27T08:43:07.8796640Z   transition: true
+2026-10-27T08:43:07.8797213Z }
+2026-10-27T08:43:07.8797406Z CONTINUOUS right no-preference true {
+2026-10-27T08:43:07.8797641Z   before: { side: 250, main: 988, x: 21 },
+2026-10-27T08:43:07.8797890Z   mid: { side: 13.46875, main: 1224.53125, x: 21 },
+2026-10-27T08:43:07.8798139Z   after: { side: 0, main: 1238, x: 21 },
+2026-10-27T08:43:07.8798341Z   duration: 240,
+2026-10-27T08:43:07.8798513Z   expanded: 'false',
+2026-10-27T08:43:07.8798682Z   transition: true
+2026-10-27T08:43:07.8798839Z }
+2026-10-27T08:43:07.8799033Z CONTINUOUS right no-preference false {
+2026-10-27T08:43:07.8799273Z   before: { side: 0, main: 1238, x: 21 },
+2026-10-27T08:43:07.8799524Z   mid: { side: 236.515625, main: 1001.484375, x: 21 },
+2026-10-27T08:43:07.8799781Z   after: { side: 250, main: 988, x: 21 },
+2026-10-27T08:43:07.8799983Z   duration: 240,
+2026-10-27T08:43:07.8800147Z   expanded: 'true',
+2026-10-27T08:43:07.8800311Z   transition: true
+2026-10-27T08:43:07.8800463Z }
+2026-10-27T08:43:07.8800630Z CONTINUOUS left reduce true {
+2026-10-27T08:43:07.8800860Z   before: { side: 250, main: 988, x: 271 },
+2026-10-27T08:43:07.8801094Z   mid: { side: 0, main: 1238, x: 21 },
+2026-10-27T08:43:07.8801315Z   after: { side: 0, main: 1238, x: 21 },
+2026-10-27T08:43:07.8801521Z   duration: undefined,
+2026-10-27T08:43:07.8801693Z   expanded: 'false',
+2026-10-27T08:43:07.8801862Z   transition: false
+2026-10-27T08:43:07.8802023Z }
+2026-10-27T08:43:07.8802208Z CONTINUOUS left reduce false {
+2026-10-27T08:43:07.8802439Z   before: { side: 0, main: 1238, x: 21 },
+2026-10-27T08:43:07.8802671Z   mid: { side: 250, main: 988, x: 271 },
+2026-10-27T08:43:07.8802901Z   after: { side: 250, main: 988, x: 271 },
+2026-10-27T08:43:07.8803109Z   duration: undefined,
+2026-10-27T08:43:07.8803287Z   expanded: 'true',
+2026-10-27T08:43:07.8803458Z   transition: false
+2026-10-27T08:43:07.8803625Z }
+2026-10-27T08:43:07.8803806Z CONTINUOUS right reduce true {
+2026-10-27T08:43:07.8804020Z   before: { side: 250, main: 988, x: 21 },
+2026-10-27T08:43:07.8804247Z   mid: { side: 0, main: 1238, x: 21 },
+2026-10-27T08:43:07.8804468Z   after: { side: 0, main: 1238, x: 21 },
+2026-10-27T08:43:07.8804670Z   duration: undefined,
+2026-10-27T08:43:07.8804837Z   expanded: 'false',
+2026-10-27T08:43:07.8805001Z   transition: false
+2026-10-27T08:43:07.8805152Z }
+2026-10-27T08:43:07.8805326Z CONTINUOUS right reduce false {
+2026-10-27T08:43:07.8805546Z   before: { side: 0, main: 1238, x: 21 },
+2026-10-27T08:43:07.8805768Z   mid: { side: 250, main: 988, x: 21 },
+2026-10-27T08:43:07.8806014Z   after: { side: 250, main: 988, x: 21 },
+2026-10-27T08:43:07.8806211Z   duration: undefined,
+2026-10-27T08:43:07.8806536Z   expanded: 'true',
+2026-10-27T08:43:07.8806698Z   transition: false
+2026-10-27T08:43:07.8806948Z }
+2026-10-27T08:43:07.8807403Z PASS actualdesktopLeftRightcollapseExpandgrid200to280 continuousmainwidth midpointnotjump Reduceimmediate
+2026-10-27T08:43:07.8807756Z 
+2026-10-27T08:43:11.4787458Z CASE source_add_link_failure_focus_motion_browser.cjs default PASS exit=0 seconds=3.6
+2026-10-27T08:43:11.4788242Z PASS sourceAddlink503 nativeEnter singleflight URLretainedinvalid recoveryfocus Escapeapprovedclose3201280normalReduce
+2026-10-27T08:43:11.4788627Z 
+2026-10-27T08:43:14.6841493Z CASE source_scope_long_list_keyboard_motion_browser.cjs default PASS exit=0 seconds=3.2
+2026-10-27T08:43:14.6842674Z PASS source scope80longdocs nativeTab/ShiftTab finaldoc fullvisible Doneandheaderinviewport scrollcontained3201280normalReduce
+2026-10-27T08:43:14.6843311Z 
+2026-10-27T08:43:29.2187797Z CASE source_toggle_tab_away_motion_browser.cjs default PASS exit=0 seconds=14.5
+2026-10-27T08:43:29.2188474Z SOURCEFOCUS 320 no-preference Add live web results
+2026-10-27T08:43:29.2188891Z SOURCEFOCUS 320 no-preference Enable Tavily
+2026-10-27T08:43:29.2189320Z SOURCEFOCUS 320 no-preference Enable Exa
+2026-10-27T08:43:29.2189749Z SOURCEFOCUS 320 no-preference Enable Firecrawl
+2026-10-27T08:43:29.2190180Z SOURCEFOCUS 320 no-preference Enable Parallel
+2026-10-27T08:43:29.2190604Z SOURCEFOCUS 320 no-preference Enable PubMed
+2026-10-27T08:43:29.2191346Z SOURCEFOCUS 320 no-preference Enable arXiv
+2026-10-27T08:43:29.2191786Z SOURCEFOCUS 320 no-preference Enable Wikipedia
+2026-10-27T08:43:29.2192230Z SOURCEFOCUS 320 no-preference Enable Crossref
+2026-10-27T08:43:29.2192660Z SOURCEFOCUS 320 no-preference Enable OpenAlex
+2026-10-27T08:43:29.2193078Z SOURCEFOCUS 320 reduce Add live web results
+2026-10-27T08:43:29.2193470Z SOURCEFOCUS 320 reduce Enable Tavily
+2026-10-27T08:43:29.2193706Z SOURCEFOCUS 320 reduce Enable Exa
+2026-10-27T08:43:29.2193943Z SOURCEFOCUS 320 reduce Enable Firecrawl
+2026-10-27T08:43:29.2194208Z SOURCEFOCUS 320 reduce Enable Parallel
+2026-10-27T08:43:29.2194451Z SOURCEFOCUS 320 reduce Enable PubMed
+2026-10-27T08:43:29.2194688Z SOURCEFOCUS 320 reduce Enable arXiv
+2026-10-27T08:43:29.2194929Z SOURCEFOCUS 320 reduce Enable Wikipedia
+2026-10-27T08:43:29.2195176Z SOURCEFOCUS 320 reduce Enable Crossref
+2026-10-27T08:43:29.2195413Z SOURCEFOCUS 320 reduce Enable OpenAlex
+2026-10-27T08:43:29.2195694Z SOURCEFOCUS 1280 no-preference Add live web results
+2026-10-27T08:43:29.2195982Z SOURCEFOCUS 1280 no-preference Enable Tavily
+2026-10-27T08:43:29.2196264Z SOURCEFOCUS 1280 no-preference Enable Exa
+2026-10-27T08:43:29.2196543Z SOURCEFOCUS 1280 no-preference Enable Firecrawl
+2026-10-27T08:43:29.2197062Z SOURCEFOCUS 1280 no-preference Enable Parallel
+2026-10-27T08:43:29.2197339Z SOURCEFOCUS 1280 no-preference Enable PubMed
+2026-10-27T08:43:29.2197606Z SOURCEFOCUS 1280 no-preference Enable arXiv
+2026-10-27T08:43:29.2197877Z SOURCEFOCUS 1280 no-preference Enable Wikipedia
+2026-10-27T08:43:29.2198151Z SOURCEFOCUS 1280 no-preference Enable Crossref
+2026-10-27T08:43:29.2198428Z SOURCEFOCUS 1280 no-preference Enable OpenAlex
+2026-10-27T08:43:29.2198688Z SOURCEFOCUS 1280 reduce Add live web results
+2026-10-27T08:43:29.2198942Z SOURCEFOCUS 1280 reduce Enable Tavily
+2026-10-27T08:43:29.2199175Z SOURCEFOCUS 1280 reduce Enable Exa
+2026-10-27T08:43:29.2199415Z SOURCEFOCUS 1280 reduce Enable Firecrawl
+2026-10-27T08:43:29.2199664Z SOURCEFOCUS 1280 reduce Enable Parallel
+2026-10-27T08:43:29.2199902Z SOURCEFOCUS 1280 reduce Enable PubMed
+2026-10-27T08:43:29.2200135Z SOURCEFOCUS 1280 reduce Enable arXiv
+2026-10-27T08:43:29.2200381Z SOURCEFOCUS 1280 reduce Enable Wikipedia
+2026-10-27T08:43:29.2200627Z SOURCEFOCUS 1280 reduce Enable Crossref
+2026-10-27T08:43:29.2200869Z SOURCEFOCUS 1280 reduce Enable OpenAlex
+2026-10-27T08:43:29.2201552Z PASS all10source/library/webtoggles Tabawaywhilependingnewfocusretained checkedimmediate singleflight success/failurerollback3201280normalReduce fixtureonlynokeys
+2026-10-27T08:43:29.2202211Z 
+2026-10-27T08:43:44.8497845Z CASE temporary_exit_confirmation_motion_browser.cjs default PASS exit=0 seconds=15.6
+2026-10-27T08:43:44.8501508Z PASS temporarybusy blocksleave cancelledpill/new/chat/topic preserveactualrows/noanimation/draft acceptedexitclearsunsavedturns only afterconfirm3201280normalReduce fixtureonecall
+2026-10-27T08:43:44.8502216Z 
+2026-10-27T08:43:47.4241954Z CASE wizard_launch_retry_harness.cjs retry-ticket PASS exit=0 seconds=2.6
+2026-10-27T08:43:47.4242598Z ["/api/settings/build/save","/api/settings/build/launch","/api/settings/build/launch"]
+2026-10-27T08:43:47.4243119Z PASS retry-ticket save() launch(L1) launch(L2)
+2026-10-27T08:43:47.4243408Z 
+2026-10-27T08:43:49.9973006Z CASE wizard_launch_retry_harness.cjs expired-review PASS exit=0 seconds=2.6
+2026-10-27T08:43:49.9973874Z ["/api/settings/build/save","/api/settings/build/review","/api/settings/build/save","/api/settings/build/launch"]
+2026-10-27T08:43:49.9974396Z PASS expired-review save() review() save(R2) launch(L3)
+2026-10-27T08:43:49.9974619Z 
+2026-10-27T08:43:52.5701894Z CASE wizard_launch_retry_harness.cjs start-wires-url PASS exit=0 seconds=2.6
+2026-10-27T08:43:52.5702773Z ["/api/settings/build/start","/api/settings/build/job?id=cccccccccccccccccccccccccccccccc"]
+2026-10-27T08:43:52.5703494Z PASS start-wires-url start() job?id=cccccccccccccccccccccccccccccccc()
+2026-10-27T08:43:52.5703840Z 
+2026-10-27T08:43:55.1431036Z CASE wizard_launch_retry_harness.cjs back-and-return PASS exit=0 seconds=2.6
+2026-10-27T08:43:55.1431841Z ["/api/settings/build/draft","/api/settings/build/review","/api/settings/build/review"]
+2026-10-27T08:43:55.1432450Z PASS back-and-return draft() review() review()
+2026-10-27T08:43:55.1432695Z 
+2026-10-27T08:43:58.4855417Z CASE workspace_late_deploy_plan_browser.cjs default PASS exit=0 seconds=3.3
+2026-10-27T08:43:58.4856246Z PASS lateDeployPlan200 noNewerQuestionscontaminationdraftfocus3201280
+2026-10-27T08:43:58.4856651Z 
+2026-10-27T08:43:58.4872728Z {"executions": 43, "failed": 0, "passed": 43, "scripts": 39}

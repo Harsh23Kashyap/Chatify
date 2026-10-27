@@ -1,0 +1,996 @@
+2026-10-27T08:23:54.6665655Z CASE action_closed_response_focus_motion_browser.cjs default PASS exit=0 seconds=13.0
+2026-10-27T08:23:54.6666435Z PASS closed prepare/execute success/503 late responses keep reopened draft focus 3201280 normalReduce
+2026-10-27T08:23:54.6666757Z 
+2026-10-27T08:24:19.8197550Z CASE actions_catalog_persistent_error_browser.cjs default PASS exit=0 seconds=25.2
+2026-10-27T08:24:19.8198129Z ACTIONLOAD 320 no-preference 2
+2026-10-27T08:24:19.8198368Z ACTIONLOAD 320 reduce 2
+2026-10-27T08:24:19.8198604Z ACTIONLOAD 1280 no-preference 2
+2026-10-27T08:24:19.8198822Z ACTIONLOAD 1280 reduce 2
+2026-10-27T08:24:19.8199454Z PASS actioncatalogloadingpendingtext/busy/singleflightpersistentErrorrecovertrueEmptydialogfocusdraftretained4matrix fixtureonly
+2026-10-27T08:24:19.8199897Z 
+2026-10-27T08:24:36.0469846Z CASE appbuilder_browser.cjs default PASS exit=0 seconds=16.2
+2026-10-27T08:24:36.0470541Z PASS builder conversation, selected Claude model, consent, draft edit/review/save, ZIP route,320/390/1280
+2026-10-27T08:24:36.0470910Z 
+2026-10-27T08:25:14.6718476Z CASE appearance_scroll_audit_browser.cjs 320-no-preference PASS exit=0 seconds=38.6
+2026-10-27T08:25:14.6719166Z FIELDS 320 no-preference wording 9
+2026-10-27T08:25:14.6719562Z FIELDS 320 no-preference colors 23
+2026-10-27T08:25:14.6719945Z FIELDS 320 no-preference background 3
+2026-10-27T08:25:14.6720320Z FIELDS 320 no-preference fonts 5
+2026-10-27T08:25:14.6720673Z FIELDS 320 no-preference shape 4
+2026-10-27T08:25:14.6721021Z FIELDS 320 no-preference emoji 1
+2026-10-27T08:25:14.6721365Z FIELDS 320 no-preference motion 4
+2026-10-27T08:25:14.6721724Z FIELDS 320 no-preference layout 8
+2026-10-27T08:25:14.6722711Z PASS all8Appearance sectionsvisiblefieldinput/change previewupdatesnoresetToBeginning smallanchoringunder50px nofieldanimation/no stagger3201280normalReduce
+2026-10-27T08:25:14.6723203Z 
+2026-10-27T08:25:48.6417511Z CASE appearance_scroll_audit_browser.cjs 320-reduce PASS exit=0 seconds=34.0
+2026-10-27T08:25:48.6417983Z FIELDS 320 reduce wording 9
+2026-10-27T08:25:48.6418214Z FIELDS 320 reduce colors 23
+2026-10-27T08:25:48.6418444Z FIELDS 320 reduce background 3
+2026-10-27T08:25:48.6418660Z FIELDS 320 reduce fonts 5
+2026-10-27T08:25:48.6418853Z FIELDS 320 reduce shape 4
+2026-10-27T08:25:48.6419040Z FIELDS 320 reduce emoji 1
+2026-10-27T08:25:48.6419228Z FIELDS 320 reduce motion 4
+2026-10-27T08:25:48.6419426Z FIELDS 320 reduce layout 8
+2026-10-27T08:25:48.6420073Z PASS all8Appearance sectionsvisiblefieldinput/change previewupdatesnoresetToBeginning smallanchoringunder50px nofieldanimation/no stagger3201280normalReduce
+2026-10-27T08:25:48.6420568Z 
+2026-10-27T08:26:27.3699753Z CASE appearance_scroll_audit_browser.cjs 1280-no-preference PASS exit=0 seconds=38.7
+2026-10-27T08:26:27.3701347Z FIELDS 1280 no-preference wording 9
+2026-10-27T08:26:27.3701766Z FIELDS 1280 no-preference colors 23
+2026-10-27T08:26:27.3702162Z FIELDS 1280 no-preference background 3
+2026-10-27T08:26:27.3702571Z FIELDS 1280 no-preference fonts 5
+2026-10-27T08:26:27.3703362Z FIELDS 1280 no-preference shape 4
+2026-10-27T08:26:27.3703723Z FIELDS 1280 no-preference emoji 1
+2026-10-27T08:26:27.3704023Z FIELDS 1280 no-preference motion 4
+2026-10-27T08:26:27.3704255Z FIELDS 1280 no-preference layout 8
+2026-10-27T08:26:27.3704924Z PASS all8Appearance sectionsvisiblefieldinput/change previewupdatesnoresetToBeginning smallanchoringunder50px nofieldanimation/no stagger3201280normalReduce
+2026-10-27T08:26:27.3705400Z 
+2026-10-27T08:27:01.3356622Z CASE appearance_scroll_audit_browser.cjs 1280-reduce PASS exit=0 seconds=34.0
+2026-10-27T08:27:01.3357404Z FIELDS 1280 reduce wording 9
+2026-10-27T08:27:01.3357712Z FIELDS 1280 reduce colors 23
+2026-10-27T08:27:01.3357953Z FIELDS 1280 reduce background 3
+2026-10-27T08:27:01.3358174Z FIELDS 1280 reduce fonts 5
+2026-10-27T08:27:01.3358369Z FIELDS 1280 reduce shape 4
+2026-10-27T08:27:01.3358552Z FIELDS 1280 reduce emoji 1
+2026-10-27T08:27:01.3358736Z FIELDS 1280 reduce motion 4
+2026-10-27T08:27:01.3358928Z FIELDS 1280 reduce layout 8
+2026-10-27T08:27:01.3359995Z PASS all8Appearance sectionsvisiblefieldinput/change previewupdatesnoresetToBeginning smallanchoringunder50px nofieldanimation/no stagger3201280normalReduce
+2026-10-27T08:27:01.3360535Z 
+2026-10-27T08:27:14.4778479Z CASE builder_active_only_motion_audit_browser.cjs default PASS exit=0 seconds=13.1
+2026-10-27T08:27:14.4780546Z PASS onlyrunningprogresspulse/NoneOSReduceoff partialcancelleddoneunknownzeroinfinite animations source-stateQueued/Running/Received, group33/67%actualcounts, stationarytitle,unchangedrowsnotsettling,twoexplicitinspectioncontentsretained,reducechevron/reveal3201280
+2026-10-27T08:27:14.4781998Z 
+2026-10-27T08:28:01.5723030Z CASE builder_diff_disclosure_motion_audit_browser.cjs default PASS exit=0 seconds=47.1
+2026-10-27T08:28:01.5725442Z BUILDER-DISCLOSURE 320 no-preference Actions · 1 change
+2026-10-27T08:28:01.5726150Z BUILDER-DISCLOSURE 320 no-preference App identity · 5 changes
+2026-10-27T08:28:01.5726808Z BUILDER-DISCLOSURE 320 no-preference Sources · 1 change
+2026-10-27T08:28:01.5727553Z BUILDER-DISCLOSURE 320 no-preference Evidence retrieval · 1 change
+2026-10-27T08:28:01.5727997Z BUILDER-DISCLOSURE 320 no-preference Answer style · 2 changes
+2026-10-27T08:28:01.5728612Z BUILDER-DISCLOSURE 320 no-preference Design and layout · 60 changes
+2026-10-27T08:28:01.5729241Z BUILDER-DISCLOSURE 320 no-preference Answer prompts · 2 changes
+2026-10-27T08:28:01.5729685Z BUILDER-DISCLOSURE 320 no-preference Helper code drafts · 2 changes
+2026-10-27T08:28:01.5730270Z BUILDER-DISCLOSURE 320 no-preference API recommendations · 1 change
+2026-10-27T08:28:01.5730918Z BUILDER-DISCLOSURE 320 no-preference Actions · 1 change
+2026-10-27T08:28:01.5731688Z BUILDER-DISCLOSURE 320 no-preference App identity · 5 changes
+2026-10-27T08:28:01.5732089Z BUILDER-DISCLOSURE 320 no-preference Sources · 1 change
+2026-10-27T08:28:01.5732704Z BUILDER-DISCLOSURE 320 no-preference Evidence retrieval · 1 change
+2026-10-27T08:28:01.5733271Z BUILDER-DISCLOSURE 320 no-preference Answer style · 2 changes
+2026-10-27T08:28:01.5733717Z BUILDER-DISCLOSURE 320 no-preference Design and layout · 60 changes
+2026-10-27T08:28:01.5734213Z BUILDER-DISCLOSURE 320 no-preference Answer prompts · 2 changes
+2026-10-27T08:28:01.5734701Z BUILDER-DISCLOSURE 320 no-preference Helper code drafts · 2 changes
+2026-10-27T08:28:01.5735126Z BUILDER-DISCLOSURE 320 no-preference API recommendations · 1 change
+2026-10-27T08:28:01.5735578Z BUILDER-DISCLOSURE 320 reduce Actions · 1 change
+2026-10-27T08:28:01.5735950Z BUILDER-DISCLOSURE 320 reduce App identity · 5 changes
+2026-10-27T08:28:01.5736288Z BUILDER-DISCLOSURE 320 reduce Sources · 1 change
+2026-10-27T08:28:01.5736699Z BUILDER-DISCLOSURE 320 reduce Evidence retrieval · 1 change
+2026-10-27T08:28:01.5737288Z BUILDER-DISCLOSURE 320 reduce Answer style · 2 changes
+2026-10-27T08:28:01.5737669Z BUILDER-DISCLOSURE 320 reduce Design and layout · 60 changes
+2026-10-27T08:28:01.5738160Z BUILDER-DISCLOSURE 320 reduce Answer prompts · 2 changes
+2026-10-27T08:28:01.5738732Z BUILDER-DISCLOSURE 320 reduce Helper code drafts · 2 changes
+2026-10-27T08:28:01.5739185Z BUILDER-DISCLOSURE 320 reduce API recommendations · 1 change
+2026-10-27T08:28:01.5739591Z BUILDER-DISCLOSURE 320 reduce Actions · 1 change
+2026-10-27T08:28:01.5739928Z BUILDER-DISCLOSURE 320 reduce App identity · 5 changes
+2026-10-27T08:28:01.5740252Z BUILDER-DISCLOSURE 320 reduce Sources · 1 change
+2026-10-27T08:28:01.5740717Z BUILDER-DISCLOSURE 320 reduce Evidence retrieval · 1 change
+2026-10-27T08:28:01.5741081Z BUILDER-DISCLOSURE 320 reduce Answer style · 2 changes
+2026-10-27T08:28:01.5741440Z BUILDER-DISCLOSURE 320 reduce Design and layout · 60 changes
+2026-10-27T08:28:01.5741831Z BUILDER-DISCLOSURE 320 reduce Answer prompts · 2 changes
+2026-10-27T08:28:01.5742324Z BUILDER-DISCLOSURE 320 reduce Helper code drafts · 2 changes
+2026-10-27T08:28:01.5742712Z BUILDER-DISCLOSURE 320 reduce API recommendations · 1 change
+2026-10-27T08:28:01.5743200Z BUILDER-DISCLOSURE 1280 no-preference Actions · 1 change
+2026-10-27T08:28:01.5743843Z BUILDER-DISCLOSURE 1280 no-preference App identity · 5 changes
+2026-10-27T08:28:01.5744426Z BUILDER-DISCLOSURE 1280 no-preference Sources · 1 change
+2026-10-27T08:28:01.5745036Z BUILDER-DISCLOSURE 1280 no-preference Evidence retrieval · 1 change
+2026-10-27T08:28:01.5745677Z BUILDER-DISCLOSURE 1280 no-preference Answer style · 2 changes
+2026-10-27T08:28:01.5746347Z BUILDER-DISCLOSURE 1280 no-preference Design and layout · 60 changes
+2026-10-27T08:28:01.5747037Z BUILDER-DISCLOSURE 1280 no-preference Answer prompts · 2 changes
+2026-10-27T08:28:01.5747872Z BUILDER-DISCLOSURE 1280 no-preference Helper code drafts · 2 changes
+2026-10-27T08:28:01.5748604Z BUILDER-DISCLOSURE 1280 no-preference API recommendations · 1 change
+2026-10-27T08:28:01.5749251Z BUILDER-DISCLOSURE 1280 no-preference Actions · 1 change
+2026-10-27T08:28:01.5749887Z BUILDER-DISCLOSURE 1280 no-preference App identity · 5 changes
+2026-10-27T08:28:01.5750528Z BUILDER-DISCLOSURE 1280 no-preference Sources · 1 change
+2026-10-27T08:28:01.5751195Z BUILDER-DISCLOSURE 1280 no-preference Evidence retrieval · 1 change
+2026-10-27T08:28:01.5751890Z BUILDER-DISCLOSURE 1280 no-preference Answer style · 2 changes
+2026-10-27T08:28:01.5752566Z BUILDER-DISCLOSURE 1280 no-preference Design and layout · 60 changes
+2026-10-27T08:28:01.5753206Z BUILDER-DISCLOSURE 1280 no-preference Answer prompts · 2 changes
+2026-10-27T08:28:01.5753647Z BUILDER-DISCLOSURE 1280 no-preference Helper code drafts · 2 changes
+2026-10-27T08:28:01.5754083Z BUILDER-DISCLOSURE 1280 no-preference API recommendations · 1 change
+2026-10-27T08:28:01.5754468Z BUILDER-DISCLOSURE 1280 reduce Actions · 1 change
+2026-10-27T08:28:01.5755029Z BUILDER-DISCLOSURE 1280 reduce App identity · 5 changes
+2026-10-27T08:28:01.5755770Z BUILDER-DISCLOSURE 1280 reduce Sources · 1 change
+2026-10-27T08:28:01.5756326Z BUILDER-DISCLOSURE 1280 reduce Evidence retrieval · 1 change
+2026-10-27T08:28:01.5756870Z BUILDER-DISCLOSURE 1280 reduce Answer style · 2 changes
+2026-10-27T08:28:01.5757571Z BUILDER-DISCLOSURE 1280 reduce Design and layout · 60 changes
+2026-10-27T08:28:01.5758053Z BUILDER-DISCLOSURE 1280 reduce Answer prompts · 2 changes
+2026-10-27T08:28:01.5758439Z BUILDER-DISCLOSURE 1280 reduce Helper code drafts · 2 changes
+2026-10-27T08:28:01.5758821Z BUILDER-DISCLOSURE 1280 reduce API recommendations · 1 change
+2026-10-27T08:28:01.5759190Z BUILDER-DISCLOSURE 1280 reduce Actions · 1 change
+2026-10-27T08:28:01.5759525Z BUILDER-DISCLOSURE 1280 reduce App identity · 5 changes
+2026-10-27T08:28:01.5759851Z BUILDER-DISCLOSURE 1280 reduce Sources · 1 change
+2026-10-27T08:28:01.5760206Z BUILDER-DISCLOSURE 1280 reduce Evidence retrieval · 1 change
+2026-10-27T08:28:01.5760575Z BUILDER-DISCLOSURE 1280 reduce Answer style · 2 changes
+2026-10-27T08:28:01.5760940Z BUILDER-DISCLOSURE 1280 reduce Design and layout · 60 changes
+2026-10-27T08:28:01.5761310Z BUILDER-DISCLOSURE 1280 reduce Answer prompts · 2 changes
+2026-10-27T08:28:01.5761681Z BUILDER-DISCLOSURE 1280 reduce Helper code drafts · 2 changes
+2026-10-27T08:28:01.5762222Z BUILDER-DISCLOSURE 1280 reduce API recommendations · 1 change
+2026-10-27T08:28:01.5763040Z PASS realparsed16area savedfixture dynamicreview+saveconfirmationdiffgroups disclosures Enter160opacityonly/NoneReduceoff/focusvaluesretained/nooverflow3201280normalReduce noAI/save
+2026-10-27T08:28:01.5763594Z 
+2026-10-27T08:28:24.9865108Z CASE builder_lifecycle_browser.cjs default PASS exit=0 seconds=23.4
+2026-10-27T08:28:24.9867557Z PASS builder shell180ms/reduce, close focus+ongoing recovery, inspect retention after part failure, save pending duplicate guard, save failure keeps edits/validate retry at320/1280
+2026-10-27T08:28:24.9868306Z 
+2026-10-27T08:28:30.0842674Z CASE builder_saved_panel_refresh_browser.cjs default PASS exit=0 seconds=5.1
+2026-10-27T08:28:30.0843099Z CARDSTATE {
+2026-10-27T08:28:30.0843280Z   cards: 1,
+2026-10-27T08:28:30.0844837Z   source: 't filled)</small></label><label class="workspace-field"><span class="workspace-field-name">Source file or folder</span><input aria-label="Sources 0 Chat database file path" data-workspace-field="sources.0.path" type="text" placeholder=""><small class="config-explanation">Folder or file used by this source. Relative paths start at the app folder.</small><small hidden="">(not filled)</small></label></fieldset></details><button type="button" class="simple-more mini">More settings</button></section>'
+2026-10-27T08:28:30.0846275Z }
+2026-10-27T08:28:30.0846423Z CARDSTATE {
+2026-10-27T08:28:30.0846577Z   cards: 1,
+2026-10-27T08:28:30.0848227Z   source: 't filled)</small></label><label class="workspace-field"><span class="workspace-field-name">Source file or folder</span><input aria-label="Sources 0 Chat database file path" data-workspace-field="sources.0.path" type="text" placeholder=""><small class="config-explanation">Folder or file used by this source. Relative paths start at the app folder.</small><small hidden="">(not filled)</small></label></fieldset></details><button type="button" class="simple-more mini">More settings</button></section>'
+2026-10-27T08:28:30.0849515Z }
+2026-10-27T08:28:30.0849925Z PASS builderSaved refresh9prompts3helpers clean reload;dirtymanualkept noticed3201280 fixtureonly
+2026-10-27T08:28:30.0850244Z 
+2026-10-27T08:28:41.4599062Z CASE category_reveal_audit_browser.cjs default PASS exit=0 seconds=11.4
+2026-10-27T08:28:41.4600238Z PANELS 320 no-preference [{"id":"sec-finish","name":"cc-settings-group-in","duration":"0.14s","delay":"0s","frames":[{"opacity":"0.7"},{"opacity":"1"}]}]
+2026-10-27T08:28:41.4601545Z PANELS 320 no-preference [{"id":"sec-model","name":"cc-settings-group-in","duration":"0.14s","delay":"0s","frames":[{"opacity":"0.7"},{"opacity":"1"}]}]
+2026-10-27T08:28:41.4602495Z PANELS 320 no-preference [{"id":"sec-presets","name":"cc-settings-group-in","duration":"0.14s","delay":"0s","frames":[{"opacity":"0.7"},{"opacity":"1"}]}]
+2026-10-27T08:28:41.4604045Z PANELS 320 no-preference [{"id":"sec-freshness","name":"cc-settings-group-in","duration":"0.14s","delay":"0s","frames":[{"opacity":"0.7"},{"opacity":"1"}]}]
+2026-10-27T08:28:41.4604890Z MOTIONLEVEL 320 no-preference full {"animation":"cc-settings-group-in","duration":"0.14s","delay":"0s","transform":"none"}
+2026-10-27T08:28:41.4605702Z MOTIONLEVEL 320 no-preference subtle {"animation":"cc-settings-group-in","duration":"0.12s","delay":"0s","transform":"none"}
+2026-10-27T08:28:41.4606469Z MOTIONLEVEL 320 no-preference none {"animation":"none","duration":"0s","delay":"0s","transform":"none"}
+2026-10-27T08:28:41.4607014Z PANELS 320 reduce [{"id":"sec-finish","name":"none","duration":"0s","delay":"0s","frames":[]}]
+2026-10-27T08:28:41.4607834Z PANELS 320 reduce [{"id":"sec-model","name":"none","duration":"0s","delay":"0s","frames":[]}]
+2026-10-27T08:28:41.4608340Z PANELS 320 reduce [{"id":"sec-presets","name":"none","duration":"0s","delay":"0s","frames":[]}]
+2026-10-27T08:28:41.4608970Z PANELS 320 reduce [{"id":"sec-freshness","name":"none","duration":"0s","delay":"0s","frames":[]}]
+2026-10-27T08:28:41.4609491Z MOTIONLEVEL 320 reduce full {"animation":"none","duration":"0s","delay":"0s","transform":"none"}
+2026-10-27T08:28:41.4610289Z MOTIONLEVEL 320 reduce subtle {"animation":"none","duration":"0s","delay":"0s","transform":"none"}
+2026-10-27T08:28:41.4610817Z MOTIONLEVEL 320 reduce none {"animation":"none","duration":"0s","delay":"0s","transform":"none"}
+2026-10-27T08:28:41.4611663Z PANELS 1280 no-preference [{"id":"sec-finish","name":"cc-settings-group-in","duration":"0.14s","delay":"0s","frames":[{"opacity":"0.7"},{"opacity":"1"}]}]
+2026-10-27T08:28:41.4612572Z PANELS 1280 no-preference [{"id":"sec-model","name":"cc-settings-group-in","duration":"0.14s","delay":"0s","frames":[{"opacity":"0.7"},{"opacity":"1"}]}]
+2026-10-27T08:28:41.4613415Z PANELS 1280 no-preference [{"id":"sec-presets","name":"cc-settings-group-in","duration":"0.14s","delay":"0s","frames":[{"opacity":"0.7"},{"opacity":"1"}]}]
+2026-10-27T08:28:41.4614712Z PANELS 1280 no-preference [{"id":"sec-freshness","name":"cc-settings-group-in","duration":"0.14s","delay":"0s","frames":[{"opacity":"0.7"},{"opacity":"1"}]}]
+2026-10-27T08:28:41.4615829Z MOTIONLEVEL 1280 no-preference full {"animation":"cc-settings-group-in","duration":"0.14s","delay":"0s","transform":"none"}
+2026-10-27T08:28:41.4616938Z MOTIONLEVEL 1280 no-preference subtle {"animation":"cc-settings-group-in","duration":"0.12s","delay":"0s","transform":"none"}
+2026-10-27T08:28:41.4618092Z MOTIONLEVEL 1280 no-preference none {"animation":"none","duration":"0s","delay":"0s","transform":"none"}
+2026-10-27T08:28:41.4618957Z PANELS 1280 reduce [{"id":"sec-finish","name":"none","duration":"0s","delay":"0s","frames":[]}]
+2026-10-27T08:28:41.4619733Z PANELS 1280 reduce [{"id":"sec-model","name":"none","duration":"0s","delay":"0s","frames":[]}]
+2026-10-27T08:28:41.4620276Z PANELS 1280 reduce [{"id":"sec-presets","name":"none","duration":"0s","delay":"0s","frames":[]}]
+2026-10-27T08:28:41.4620782Z PANELS 1280 reduce [{"id":"sec-freshness","name":"none","duration":"0s","delay":"0s","frames":[]}]
+2026-10-27T08:28:41.4621296Z MOTIONLEVEL 1280 reduce full {"animation":"none","duration":"0s","delay":"0s","transform":"none"}
+2026-10-27T08:28:41.4622148Z MOTIONLEVEL 1280 reduce subtle {"animation":"none","duration":"0s","delay":"0s","transform":"none"}
+2026-10-27T08:28:41.4622951Z MOTIONLEVEL 1280 reduce none {"animation":"none","duration":"0s","delay":"0s","transform":"none"}
+2026-10-27T08:28:41.4624752Z PASS categoryimmediatearia/160coloronly/rowdimensionsstable/nohorizontaltransform4subsections max6pxentrance/singleactualselected/focusring modewordingdraftretained/previewvisible immediatereflownowidthanimation/modepersistsnavigation/groupfontdisclosure3controls3201280normalReduce
+2026-10-27T08:28:41.4625648Z 
+2026-10-27T08:28:44.0947482Z CASE chat_evidence_history_browser.cjs default PASS exit=0 seconds=2.6
+2026-10-27T08:28:44.0948583Z PASS history preserved, suggestions reset, source labels and citation link
+2026-10-27T08:28:44.0948923Z 
+2026-10-27T08:28:58.3688268Z CASE citation_states_browser.cjs default PASS exit=0 seconds=14.3
+2026-10-27T08:28:58.3689514Z PASS citation anchored hover/no pulse/source selected consistency/card selected consistency/missing excerpt safe/close returns focus3203901280normal+reduce
+2026-10-27T08:28:58.3689979Z 
+2026-10-27T08:29:02.3167696Z CASE config_alignment_browser.cjs default PASS exit=0 seconds=3.9
+2026-10-27T08:29:02.3168412Z PASS setup+Appearance content/previewtoolbar topalignment1280
+2026-10-27T08:29:02.3168737Z 
+2026-10-27T08:29:47.5085885Z CASE connection_indicator_lifecycle_motion_browser.cjs default PASS exit=0 seconds=45.2
+2026-10-27T08:29:47.5087268Z CONNECTIONLIFECYCLE 320 no-preference full true [{"name":"m-spin","running":false,"iterations":"infinite","cls":"testres busy","pseudo":"::before"}]
+2026-10-27T08:29:47.5088597Z CONNECTIONLIFECYCLE 320 no-preference full false [{"name":"m-spin","running":false,"iterations":"infinite","cls":"testres busy","pseudo":"::before"}]
+2026-10-27T08:29:47.5089786Z CONNECTIONLIFECYCLE 320 no-preference subtle true [{"name":"m-spin","running":false,"iterations":"infinite","cls":"testres busy","pseudo":"::before"}]
+2026-10-27T08:29:47.5090931Z CONNECTIONLIFECYCLE 320 no-preference subtle false [{"name":"m-spin","running":false,"iterations":"infinite","cls":"testres busy","pseudo":"::before"}]
+2026-10-27T08:29:47.5091482Z CONNECTIONLIFECYCLE 320 no-preference none true []
+2026-10-27T08:29:47.5091803Z CONNECTIONLIFECYCLE 320 no-preference none false []
+2026-10-27T08:29:47.5092118Z CONNECTIONLIFECYCLE 320 no-preference calm true []
+2026-10-27T08:29:47.5092423Z CONNECTIONLIFECYCLE 320 no-preference calm false []
+2026-10-27T08:29:47.5092713Z CONNECTIONLIFECYCLE 320 reduce full true []
+2026-10-27T08:29:47.5092993Z CONNECTIONLIFECYCLE 320 reduce full false []
+2026-10-27T08:29:47.5093277Z CONNECTIONLIFECYCLE 320 reduce subtle true []
+2026-10-27T08:29:47.5093562Z CONNECTIONLIFECYCLE 320 reduce subtle false []
+2026-10-27T08:29:47.5093834Z CONNECTIONLIFECYCLE 320 reduce none true []
+2026-10-27T08:29:47.5094102Z CONNECTIONLIFECYCLE 320 reduce none false []
+2026-10-27T08:29:47.5094377Z CONNECTIONLIFECYCLE 320 reduce calm true []
+2026-10-27T08:29:47.5094646Z CONNECTIONLIFECYCLE 320 reduce calm false []
+2026-10-27T08:29:47.5095249Z CONNECTIONLIFECYCLE 1280 no-preference full true [{"name":"m-spin","running":false,"iterations":"infinite","cls":"testres busy","pseudo":"::before"}]
+2026-10-27T08:29:47.5096067Z CONNECTIONLIFECYCLE 1280 no-preference full false [{"name":"m-spin","running":false,"iterations":"infinite","cls":"testres busy","pseudo":"::before"}]
+2026-10-27T08:29:47.5096878Z CONNECTIONLIFECYCLE 1280 no-preference subtle true [{"name":"m-spin","running":false,"iterations":"infinite","cls":"testres busy","pseudo":"::before"}]
+2026-10-27T08:29:47.5097919Z CONNECTIONLIFECYCLE 1280 no-preference subtle false [{"name":"m-spin","running":false,"iterations":"infinite","cls":"testres busy","pseudo":"::before"}]
+2026-10-27T08:29:47.5098470Z CONNECTIONLIFECYCLE 1280 no-preference none true []
+2026-10-27T08:29:47.5098783Z CONNECTIONLIFECYCLE 1280 no-preference none false []
+2026-10-27T08:29:47.5099096Z CONNECTIONLIFECYCLE 1280 no-preference calm true []
+2026-10-27T08:29:47.5099403Z CONNECTIONLIFECYCLE 1280 no-preference calm false []
+2026-10-27T08:29:47.5099696Z CONNECTIONLIFECYCLE 1280 reduce full true []
+2026-10-27T08:29:47.5099971Z CONNECTIONLIFECYCLE 1280 reduce full false []
+2026-10-27T08:29:47.5100248Z CONNECTIONLIFECYCLE 1280 reduce subtle true []
+2026-10-27T08:29:47.5100529Z CONNECTIONLIFECYCLE 1280 reduce subtle false []
+2026-10-27T08:29:47.5100802Z CONNECTIONLIFECYCLE 1280 reduce none true []
+2026-10-27T08:29:47.5101074Z CONNECTIONLIFECYCLE 1280 reduce none false []
+2026-10-27T08:29:47.5101338Z CONNECTIONLIFECYCLE 1280 reduce calm true []
+2026-10-27T08:29:47.5101603Z CONNECTIONLIFECYCLE 1280 reduce calm false []
+2026-10-27T08:29:47.5103880Z PASS connection noPulse idle/connected/rejected/invalidated spinneronlyduringheldrequest16matrix3201280 noProviderCalls
+2026-10-27T08:29:47.5104491Z 
+2026-10-27T08:29:52.0026852Z CASE dynamic_button_hover_inventory_browser.cjs no-preference PASS exit=0 seconds=4.5
+2026-10-27T08:29:52.0027482Z PASS dynamichover 30
+2026-10-27T08:29:52.0027607Z 
+2026-10-27T08:29:55.7999303Z CASE dynamic_button_hover_inventory_browser.cjs reduce PASS exit=0 seconds=3.8
+2026-10-27T08:29:55.7999715Z PASS dynamichover 27
+2026-10-27T08:29:55.7999849Z 
+2026-10-27T08:30:01.2472119Z CASE features_browser.cjs default PASS exit=0 seconds=5.4
+2026-10-27T08:30:01.2472798Z PASS23 feature tabs,6 collapsed, keyboard navigation, per-feature SVG,320/390/1280 no overflow, reduced motion, no JS errors
+2026-10-27T08:30:01.2473179Z 
+2026-10-27T08:30:07.4088306Z CASE helper_busy_off_motion_inventory_browser.cjs default PASS exit=0 seconds=6.2
+2026-10-27T08:30:07.4089394Z PASS wholeactualHelperReviewBusy nodepseudoCSSoff NoneCalmOSReduceFull nativeEnter503 noexecution samplefocuskept3201280
+2026-10-27T08:30:07.4090032Z 
+2026-10-27T08:30:30.8994002Z CASE helper_editor_choice_keyboard_motion_browser.cjs default PASS exit=0 seconds=23.5
+2026-10-27T08:30:30.8994727Z PASS helpereditorchoice nativeEnter selectedARIA focus immediate full/subtle NoneCalmReduceoff bothdrafts3201280
+2026-10-27T08:30:30.8995375Z 
+2026-10-27T08:30:51.0325179Z CASE helper_try_stale_code_result_motion_browser.cjs default PASS exit=0 seconds=20.1
+2026-10-27T08:30:51.0326579Z PASS fixtureTryexecution200/503 bothhelperkinds real160result Reduceoff singleflightfocus resulttruth3201280 nohostcodeexecuted
+2026-10-27T08:30:51.0327413Z 
+2026-10-27T08:30:55.7791166Z CASE history_selected_surface_midpoint_motion_browser.cjs default PASS exit=0 seconds=4.7
+2026-10-27T08:30:55.7792035Z SURFACE no-preference 0 {
+2026-10-27T08:30:55.7792436Z   before: 'rgba(0, 0, 0, 0)',
+2026-10-27T08:30:55.7792865Z   mid: 'rgba(23, 63, 53, 0.098)',
+2026-10-27T08:30:55.7793331Z   after: 'rgba(23, 63, 53, 0.1)',
+2026-10-27T08:30:55.7802505Z   duration: 140,
+2026-10-27T08:30:55.7802801Z   weight: '700'
+2026-10-27T08:30:55.7803041Z }
+2026-10-27T08:30:55.7803281Z SURFACE no-preference 1 {
+2026-10-27T08:30:55.7803557Z   before: 'rgba(0, 0, 0, 0)',
+2026-10-27T08:30:55.7803846Z   mid: 'rgba(23, 63, 53, 0.098)',
+2026-10-27T08:30:55.7804153Z   after: 'rgba(23, 63, 53, 0.1)',
+2026-10-27T08:30:55.7804418Z   duration: 140,
+2026-10-27T08:30:55.7804643Z   weight: '700'
+2026-10-27T08:30:55.7804858Z }
+2026-10-27T08:30:55.7805031Z SURFACE no-preference 2 {
+2026-10-27T08:30:55.7805240Z   before: 'rgba(0, 0, 0, 0)',
+2026-10-27T08:30:55.7805458Z   mid: 'rgba(23, 63, 53, 0.098)',
+2026-10-27T08:30:55.7805671Z   after: 'rgba(23, 63, 53, 0.1)',
+2026-10-27T08:30:55.7805866Z   duration: 140,
+2026-10-27T08:30:55.7806029Z   weight: '700'
+2026-10-27T08:30:55.7806188Z }
+2026-10-27T08:30:55.7806348Z SURFACE reduce 0 {
+2026-10-27T08:30:55.7806543Z   before: 'rgba(23, 63, 53, 0.1)',
+2026-10-27T08:30:55.7806770Z   mid: 'rgba(23, 63, 53, 0.1)',
+2026-10-27T08:30:55.7806982Z   after: 'rgba(23, 63, 53, 0.1)',
+2026-10-27T08:30:55.7807366Z   duration: null,
+2026-10-27T08:30:55.7807534Z   weight: '700'
+2026-10-27T08:30:55.7807691Z }
+2026-10-27T08:30:55.7807846Z SURFACE reduce 1 {
+2026-10-27T08:30:55.7808033Z   before: 'rgba(23, 63, 53, 0.1)',
+2026-10-27T08:30:55.7808258Z   mid: 'rgba(23, 63, 53, 0.1)',
+2026-10-27T08:30:55.7808474Z   after: 'rgba(23, 63, 53, 0.1)',
+2026-10-27T08:30:55.7808672Z   duration: null,
+2026-10-27T08:30:55.7808837Z   weight: '700'
+2026-10-27T08:30:55.7808995Z }
+2026-10-27T08:30:55.7809154Z SURFACE reduce 2 {
+2026-10-27T08:30:55.7809339Z   before: 'rgba(23, 63, 53, 0.1)',
+2026-10-27T08:30:55.7809556Z   mid: 'rgba(23, 63, 53, 0.1)',
+2026-10-27T08:30:55.7809757Z   after: 'rgba(23, 63, 53, 0.1)',
+2026-10-27T08:30:55.7809944Z   duration: null,
+2026-10-27T08:30:55.7810101Z   weight: '700'
+2026-10-27T08:30:55.7810250Z }
+2026-10-27T08:30:55.7810784Z PASS actualnativehistoryselectedclass retainednodes140realbgtransitionmidpointnonendpoint immediate700weight Reduceimmediate1280
+2026-10-27T08:30:55.7811482Z 
+2026-10-27T08:31:00.0802354Z CASE import_share_browser.cjs default PASS exit=0 seconds=4.3
+2026-10-27T08:31:00.0804111Z PASS YAML import loads provider/model/retrieval/all 9 prompts and UI ZIP download http://127.0.0.1:8090/settings.html {"provider":"openai","model":"gpt-4o-mini","base_url":"","temperature":0.2,"max_output_tokens":4096,"top_k":6,"query_rewrite":false}
+2026-10-27T08:31:00.0805148Z 
+2026-10-27T08:31:19.5829003Z CASE local_refresh_motion_audit_browser.cjs default PASS exit=0 seconds=19.5
+2026-10-27T08:31:19.5829737Z REFRESH 320 reduce same oldcards retainedwhilefetching noflash/currenterroradjacent
+2026-10-27T08:31:19.5830473Z REFRESH 320 reduce changed oldcards retainedwhilefetching noflash/currenterroradjacent
+2026-10-27T08:31:19.5831263Z REFRESH 320 reduce sameagain oldcards retainedwhilefetching noflash/currenterroradjacent
+2026-10-27T08:31:19.5832073Z REFRESH 320 reduce noteonly oldcards retainedwhilefetching noflash/currenterroradjacent
+2026-10-27T08:31:19.5832900Z REFRESH 320 reduce nonechanged oldcards retainedwhilefetching noflash/currenterroradjacent
+2026-10-27T08:31:19.5833624Z REFRESH 320 reduce failure oldcards retainedwhilefetching noflash/currenterroradjacent
+2026-10-27T08:31:19.5834678Z REFRESH 320 no-preference same oldcards retainedwhilefetching noflash/currenterroradjacent
+2026-10-27T08:31:19.5835436Z REFRESH 320 no-preference changed oldcards retainedwhilefetching noflash/currenterroradjacent
+2026-10-27T08:31:19.5836132Z REFRESH 320 no-preference sameagain oldcards retainedwhilefetching noflash/currenterroradjacent
+2026-10-27T08:31:19.5836688Z REFRESH 320 no-preference noteonly oldcards retainedwhilefetching noflash/currenterroradjacent
+2026-10-27T08:31:19.5837459Z REFRESH 320 no-preference nonechanged oldcards retainedwhilefetching noflash/currenterroradjacent
+2026-10-27T08:31:19.5838025Z REFRESH 320 no-preference failure oldcards retainedwhilefetching noflash/currenterroradjacent
+2026-10-27T08:31:19.5838548Z REFRESH 1280 reduce same oldcards retainedwhilefetching noflash/currenterroradjacent
+2026-10-27T08:31:19.5839047Z REFRESH 1280 reduce changed oldcards retainedwhilefetching noflash/currenterroradjacent
+2026-10-27T08:31:19.5839560Z REFRESH 1280 reduce sameagain oldcards retainedwhilefetching noflash/currenterroradjacent
+2026-10-27T08:31:19.5840107Z REFRESH 1280 reduce noteonly oldcards retainedwhilefetching noflash/currenterroradjacent
+2026-10-27T08:31:19.5840643Z REFRESH 1280 reduce nonechanged oldcards retainedwhilefetching noflash/currenterroradjacent
+2026-10-27T08:31:19.5841179Z REFRESH 1280 reduce failure oldcards retainedwhilefetching noflash/currenterroradjacent
+2026-10-27T08:31:19.5841718Z REFRESH 1280 no-preference same oldcards retainedwhilefetching noflash/currenterroradjacent
+2026-10-27T08:31:19.5842280Z REFRESH 1280 no-preference changed oldcards retainedwhilefetching noflash/currenterroradjacent
+2026-10-27T08:31:19.5842837Z REFRESH 1280 no-preference sameagain oldcards retainedwhilefetching noflash/currenterroradjacent
+2026-10-27T08:31:19.5843402Z REFRESH 1280 no-preference noteonly oldcards retainedwhilefetching noflash/currenterroradjacent
+2026-10-27T08:31:19.5843961Z REFRESH 1280 no-preference nonechanged oldcards retainedwhilefetching noflash/currenterroradjacent
+2026-10-27T08:31:19.5844510Z REFRESH 1280 no-preference failure oldcards retainedwhilefetching noflash/currenterroradjacent
+2026-10-27T08:31:19.5845276Z PASS refreshsame/changed/failure retains currentcards duringpending; unchanged/error DOMretained; alternatives160msopacity reduced/Noneoff fixture3201280
+2026-10-27T08:31:19.5845722Z 
+2026-10-27T08:31:26.2294365Z CASE mobile_strict.cjs default PASS exit=0 seconds=6.6
+2026-10-27T08:31:26.2294842Z [
+2026-10-27T08:31:26.2295060Z   {
+2026-10-27T08:31:26.2295401Z     case: 'Mobile 390 saved topic exits Temporary',
+2026-10-27T08:31:26.2295776Z     status: 'PASS',
+2026-10-27T08:31:26.2296086Z     mode: 'ACTUAL fresh fixture UI'
+2026-10-27T08:31:26.2296741Z   },
+2026-10-27T08:31:26.2296950Z   {
+2026-10-27T08:31:26.2297354Z     case: 'Mobile 390 chat delete/undo',
+2026-10-27T08:31:26.2297690Z     status: 'PASS',
+2026-10-27T08:31:26.2297897Z     mode: 'ACTUAL fresh fixture UI'
+2026-10-27T08:31:26.2298089Z   },
+2026-10-27T08:31:26.2298235Z   {
+2026-10-27T08:31:26.2298434Z     case: 'Mobile 390 note preview and cancel',
+2026-10-27T08:31:26.2298690Z     status: 'PASS',
+2026-10-27T08:31:26.2298889Z     mode: 'ACTUAL fresh fixture UI'
+2026-10-27T08:31:26.2299080Z   },
+2026-10-27T08:31:26.2299222Z   {
+2026-10-27T08:31:26.2299416Z     case: 'Mobile 320 saved topic exits Temporary',
+2026-10-27T08:31:26.2299651Z     status: 'PASS',
+2026-10-27T08:31:26.2299836Z     mode: 'ACTUAL fresh fixture UI'
+2026-10-27T08:31:26.2300026Z   },
+2026-10-27T08:31:26.2300161Z   {
+2026-10-27T08:31:26.2300333Z     case: 'Mobile 320 chat delete/undo',
+2026-10-27T08:31:26.2300542Z     status: 'PASS',
+2026-10-27T08:31:26.2300725Z     mode: 'ACTUAL fresh fixture UI'
+2026-10-27T08:31:26.2300916Z   },
+2026-10-27T08:31:26.2301055Z   {
+2026-10-27T08:31:26.2301251Z     case: 'Mobile 320 note preview and cancel',
+2026-10-27T08:31:26.2301471Z     status: 'PASS',
+2026-10-27T08:31:26.2301653Z     mode: 'ACTUAL fresh fixture UI'
+2026-10-27T08:31:26.2301836Z   }
+2026-10-27T08:31:26.2301975Z ]
+2026-10-27T08:31:26.2302060Z 
+2026-10-27T08:31:32.6878206Z CASE motion_choice_off_waapi_browser.cjs default PASS exit=0 seconds=6.5
+2026-10-27T08:31:32.6878963Z PASS selectingNoneCalm noWAAPIfeedback trigger3201280normalReduce
+2026-10-27T08:31:32.6879311Z 
+2026-10-27T08:31:39.4936788Z CASE picker_longlist_states_browser.cjs default PASS exit=0 seconds=6.8
+2026-10-27T08:31:39.4938002Z PASS long80itemmenu selectedvisible/checkmark disabledskipping HomeEnd keyboardselection Escape-retains all-disabled-safe aria-busymirror3201280reduce/normal
+2026-10-27T08:31:39.4938484Z 
+2026-10-27T08:32:09.4039067Z CASE profile_palette_stream_markdown_browser.cjs default PASS exit=0 seconds=29.9
+2026-10-27T08:32:09.4040571Z PASS palette+stream/final 320 light ten app identities both queries
+2026-10-27T08:32:09.4041485Z PASS palette+stream/final 320 dark ten app identities both queries
+2026-10-27T08:32:09.4042258Z PASS palette+stream/final 390 light ten app identities both queries
+2026-10-27T08:32:09.4042878Z PASS palette+stream/final 390 dark ten app identities both queries
+2026-10-27T08:32:09.4043322Z PASS palette+stream/final 1280 light ten app identities both queries
+2026-10-27T08:32:09.4043733Z PASS palette+stream/final 1280 dark ten app identities both queries
+2026-10-27T08:32:09.4043938Z 
+2026-10-27T08:32:18.9618583Z CASE prompt_selection_browser.cjs default PASS exit=0 seconds=9.6
+2026-10-27T08:32:18.9619434Z PASS promptselectiondimensionsfixed/160msbackgroundborder/nomovement/reduce0 3201280
+2026-10-27T08:32:18.9619888Z 
+2026-10-27T08:32:43.8687760Z CASE provider_motion_states_browser.cjs default PASS exit=0 seconds=24.9
+2026-10-27T08:32:43.8689003Z PASS providercards160ms border/surface fixedlogo+DOM+geometry selectedtick no lift Showmoreonegroup160ms selectedextra retained; testimmediateloading disabled nearbyicon successcheck failure!160ms plain persists restoredbutton fixtureonly3201280Reduceoff
+2026-10-27T08:32:43.8689805Z 
+2026-10-27T08:33:09.6165289Z CASE remaining_empty_heading_motion_browser.cjs default PASS exit=0 seconds=25.7
+2026-10-27T08:33:09.6166641Z EMPTYHEADING 320 no-preference full Ask the documents, get the receipts. {"name":"none","transform":"none","movement":["translateY(10px)","translateY(4px) scale(0.985)"]}
+2026-10-27T08:33:09.6168469Z EMPTYHEADING 320 no-preference full Chatify configuration {"name":"none","transform":"none","movement":[]}
+2026-10-27T08:33:09.6169641Z EMPTYHEADING 320 no-preference subtle Ask the documents, get the receipts. {"name":"none","transform":"none","movement":["translateY(10px)","translateY(4px) scale(0.985)"]}
+2026-10-27T08:33:09.6170508Z EMPTYHEADING 320 no-preference subtle Chatify configuration {"name":"none","transform":"none","movement":[]}
+2026-10-27T08:33:09.6171310Z EMPTYHEADING 320 no-preference none Ask the documents, get the receipts. {"name":"none","transform":"none","movement":[]}
+2026-10-27T08:33:09.6172378Z EMPTYHEADING 320 no-preference none Chatify configuration {"name":"none","transform":"none","movement":[]}
+2026-10-27T08:33:09.6173050Z EMPTYHEADING 320 no-preference calm Ask the documents, get the receipts. {"name":"none","transform":"none","movement":[]}
+2026-10-27T08:33:09.6173781Z EMPTYHEADING 320 no-preference calm Chatify configuration {"name":"none","transform":"none","movement":[]}
+2026-10-27T08:33:09.6174407Z EMPTYHEADING 320 reduce full Ask the documents, get the receipts. {"name":"none","transform":"none","movement":[]}
+2026-10-27T08:33:09.6175096Z EMPTYHEADING 320 reduce full Chatify configuration {"name":"none","transform":"none","movement":[]}
+2026-10-27T08:33:09.6175743Z EMPTYHEADING 320 reduce subtle Ask the documents, get the receipts. {"name":"none","transform":"none","movement":[]}
+2026-10-27T08:33:09.6176417Z EMPTYHEADING 320 reduce subtle Chatify configuration {"name":"none","transform":"none","movement":[]}
+2026-10-27T08:33:09.6177469Z EMPTYHEADING 320 reduce none Ask the documents, get the receipts. {"name":"none","transform":"none","movement":[]}
+2026-10-27T08:33:09.6178132Z EMPTYHEADING 320 reduce none Chatify configuration {"name":"none","transform":"none","movement":[]}
+2026-10-27T08:33:09.6179201Z EMPTYHEADING 320 reduce calm Ask the documents, get the receipts. {"name":"none","transform":"none","movement":[]}
+2026-10-27T08:33:09.6180034Z EMPTYHEADING 320 reduce calm Chatify configuration {"name":"none","transform":"none","movement":[]}
+2026-10-27T08:33:09.6181237Z EMPTYHEADING 1280 no-preference full Ask the documents, get the receipts. {"name":"none","transform":"none","movement":["translateY(10px)","translateY(4px) scale(0.985)"]}
+2026-10-27T08:33:09.6182342Z EMPTYHEADING 1280 no-preference full Chatify configuration {"name":"none","transform":"none","movement":[]}
+2026-10-27T08:33:09.6183599Z EMPTYHEADING 1280 no-preference subtle Ask the documents, get the receipts. {"name":"none","transform":"none","movement":["translateY(10px)","translateY(4px) scale(0.985)"]}
+2026-10-27T08:33:09.6184768Z EMPTYHEADING 1280 no-preference subtle Chatify configuration {"name":"none","transform":"none","movement":[]}
+2026-10-27T08:33:09.6185804Z EMPTYHEADING 1280 no-preference none Ask the documents, get the receipts. {"name":"none","transform":"none","movement":[]}
+2026-10-27T08:33:09.6186873Z EMPTYHEADING 1280 no-preference none Chatify configuration {"name":"none","transform":"none","movement":[]}
+2026-10-27T08:33:09.6188156Z EMPTYHEADING 1280 no-preference calm Ask the documents, get the receipts. {"name":"none","transform":"none","movement":[]}
+2026-10-27T08:33:09.6189193Z EMPTYHEADING 1280 no-preference calm Chatify configuration {"name":"none","transform":"none","movement":[]}
+2026-10-27T08:33:09.6190150Z EMPTYHEADING 1280 reduce full Ask the documents, get the receipts. {"name":"none","transform":"none","movement":[]}
+2026-10-27T08:33:09.6190904Z EMPTYHEADING 1280 reduce full Chatify configuration {"name":"none","transform":"none","movement":[]}
+2026-10-27T08:33:09.6191539Z EMPTYHEADING 1280 reduce subtle Ask the documents, get the receipts. {"name":"none","transform":"none","movement":[]}
+2026-10-27T08:33:09.6192144Z EMPTYHEADING 1280 reduce subtle Chatify configuration {"name":"none","transform":"none","movement":[]}
+2026-10-27T08:33:09.6193110Z EMPTYHEADING 1280 reduce none Ask the documents, get the receipts. {"name":"none","transform":"none","movement":[]}
+2026-10-27T08:33:09.6194010Z EMPTYHEADING 1280 reduce none Chatify configuration {"name":"none","transform":"none","movement":[]}
+2026-10-27T08:33:09.6194870Z EMPTYHEADING 1280 reduce calm Ask the documents, get the receipts. {"name":"none","transform":"none","movement":[]}
+2026-10-27T08:33:09.6195688Z EMPTYHEADING 1280 reduce calm Chatify configuration {"name":"none","transform":"none","movement":[]}
+2026-10-27T08:33:09.6196267Z PASS hero/settingsFindempty ancestortransformnone cleanreplacement nativefocus16matrix3201280
+2026-10-27T08:33:09.6196775Z 
+2026-10-27T08:34:24.5511526Z CASE settings_current_motion_inventory_browser.cjs default PASS exit=0 seconds=74.9
+2026-10-27T08:34:24.5512908Z 320 #sec-finish full 6
+2026-10-27T08:34:24.5513229Z 320 #sec-finish subtle 6
+2026-10-27T08:34:24.5514795Z 320 #sec-finish none 0
+2026-10-27T08:34:24.5515133Z 320 #sec-finish calm 0
+2026-10-27T08:34:24.5515546Z 320 #sec-portable full 6
+2026-10-27T08:34:24.5515913Z 320 #sec-portable subtle 6
+2026-10-27T08:34:24.5516221Z 320 #sec-portable none 0
+2026-10-27T08:34:24.5516524Z 320 #sec-portable calm 0
+2026-10-27T08:34:24.5516849Z 320 #sec-workspace-list full 7
+2026-10-27T08:34:24.5517395Z 320 #sec-workspace-list subtle 7
+2026-10-27T08:34:24.5517773Z 320 #sec-workspace-list none 0
+2026-10-27T08:34:24.5518124Z 320 #sec-workspace-list calm 0
+2026-10-27T08:34:24.5518477Z 320 #sec-workspace-changes full 7
+2026-10-27T08:34:24.5518854Z 320 #sec-workspace-changes subtle 7
+2026-10-27T08:34:24.5519236Z 320 #sec-workspace-changes none 0
+2026-10-27T08:34:24.5519611Z 320 #sec-workspace-changes calm 0
+2026-10-27T08:34:24.5519964Z 320 #sec-workspace-backup full 6
+2026-10-27T08:34:24.5520324Z 320 #sec-workspace-backup subtle 6
+2026-10-27T08:34:24.5520680Z 320 #sec-workspace-backup none 0
+2026-10-27T08:34:24.5521023Z 320 #sec-workspace-backup calm 0
+2026-10-27T08:34:24.5521370Z 320 #sec-workspace-tests full 6
+2026-10-27T08:34:24.5522032Z 320 #sec-workspace-tests subtle 6
+2026-10-27T08:34:24.5522386Z 320 #sec-workspace-tests none 0
+2026-10-27T08:34:24.5522621Z 320 #sec-workspace-tests calm 0
+2026-10-27T08:34:24.5522848Z 320 #sec-workspace-deploy full 6
+2026-10-27T08:34:24.5523084Z 320 #sec-workspace-deploy subtle 6
+2026-10-27T08:34:24.5523329Z 320 #sec-workspace-deploy none 0
+2026-10-27T08:34:24.5523555Z 320 #sec-workspace-deploy calm 0
+2026-10-27T08:34:24.5523756Z 320 #sec-model full 6
+2026-10-27T08:34:24.5523940Z 320 #sec-model subtle 6
+2026-10-27T08:34:24.5524151Z 320 #sec-model none 0
+2026-10-27T08:34:24.5524323Z 320 #sec-model calm 0
+2026-10-27T08:34:24.5524506Z 320 #sec-search full 6
+2026-10-27T08:34:24.5524697Z 320 #sec-search subtle 6
+2026-10-27T08:34:24.5524882Z 320 #sec-search none 0
+2026-10-27T08:34:24.5525057Z 320 #sec-search calm 0
+2026-10-27T08:34:24.5525234Z 320 #sec-prompts full 7
+2026-10-27T08:34:24.5525425Z 320 #sec-prompts subtle 7
+2026-10-27T08:34:24.5525616Z 320 #sec-prompts none 0
+2026-10-27T08:34:24.5525799Z 320 #sec-prompts calm 0
+2026-10-27T08:34:24.5525973Z 320 #sec-code full 23
+2026-10-27T08:34:24.5526152Z 320 #sec-code subtle 23
+2026-10-27T08:34:24.5526344Z 320 #sec-code none 0
+2026-10-27T08:34:24.5526516Z 320 #sec-code calm 0
+2026-10-27T08:34:24.5526689Z 320 #sec-presets full 6
+2026-10-27T08:34:24.5526878Z 320 #sec-presets subtle 6
+2026-10-27T08:34:24.5527257Z 320 #sec-presets none 0
+2026-10-27T08:34:24.5527499Z 320 #sec-presets calm 0
+2026-10-27T08:34:24.5527675Z 320 #sec-wording full 6
+2026-10-27T08:34:24.5527854Z 320 #sec-wording subtle 6
+2026-10-27T08:34:24.5528039Z 320 #sec-wording none 0
+2026-10-27T08:34:24.5528249Z 320 #sec-wording calm 0
+2026-10-27T08:34:24.5528460Z 320 #sec-colors full 6
+2026-10-27T08:34:24.5528654Z 320 #sec-colors subtle 6
+2026-10-27T08:34:24.5528847Z 320 #sec-colors none 0
+2026-10-27T08:34:24.5529035Z 320 #sec-colors calm 0
+2026-10-27T08:34:24.5529217Z 320 #sec-background full 6
+2026-10-27T08:34:24.5529420Z 320 #sec-background subtle 6
+2026-10-27T08:34:24.5529636Z 320 #sec-background none 0
+2026-10-27T08:34:24.5529831Z 320 #sec-background calm 0
+2026-10-27T08:34:24.5530024Z 320 #sec-fonts full 6
+2026-10-27T08:34:24.5530203Z 320 #sec-fonts subtle 6
+2026-10-27T08:34:24.5530382Z 320 #sec-fonts none 0
+2026-10-27T08:34:24.5530554Z 320 #sec-fonts calm 0
+2026-10-27T08:34:24.5530730Z 320 #sec-shape full 6
+2026-10-27T08:34:24.5530903Z 320 #sec-shape subtle 6
+2026-10-27T08:34:24.5531077Z 320 #sec-shape none 0
+2026-10-27T08:34:24.5531247Z 320 #sec-shape calm 0
+2026-10-27T08:34:24.5531416Z 320 #sec-emoji full 6
+2026-10-27T08:34:24.5531587Z 320 #sec-emoji subtle 6
+2026-10-27T08:34:24.5531761Z 320 #sec-emoji none 0
+2026-10-27T08:34:24.5532113Z 320 #sec-emoji calm 0
+2026-10-27T08:34:24.5532286Z 320 #sec-motion full 6
+2026-10-27T08:34:24.5532479Z 320 #sec-motion subtle 6
+2026-10-27T08:34:24.5532674Z 320 #sec-motion none 0
+2026-10-27T08:34:24.5532851Z 320 #sec-motion calm 0
+2026-10-27T08:34:24.5533021Z 320 #sec-layout full 6
+2026-10-27T08:34:24.5533204Z 320 #sec-layout subtle 6
+2026-10-27T08:34:24.5533386Z 320 #sec-layout none 0
+2026-10-27T08:34:24.5533561Z 320 #sec-layout calm 0
+2026-10-27T08:34:24.5533761Z 320 #sec-freshness full 6
+2026-10-27T08:34:24.5533964Z 320 #sec-freshness subtle 6
+2026-10-27T08:34:24.5534163Z 320 #sec-freshness none 0
+2026-10-27T08:34:24.5534358Z 320 #sec-freshness calm 0
+2026-10-27T08:34:24.5534542Z 320 #sec-budget full 6
+2026-10-27T08:34:24.5534719Z 320 #sec-budget subtle 6
+2026-10-27T08:34:24.5534898Z 320 #sec-budget none 0
+2026-10-27T08:34:24.5535100Z 320 #sec-budget calm 0
+2026-10-27T08:34:24.5535293Z 1280 #sec-finish full 6
+2026-10-27T08:34:24.5535488Z 1280 #sec-finish subtle 6
+2026-10-27T08:34:24.5535700Z 1280 #sec-finish none 0
+2026-10-27T08:34:24.5535877Z 1280 #sec-finish calm 0
+2026-10-27T08:34:24.5536061Z 1280 #sec-portable full 6
+2026-10-27T08:34:24.5536251Z 1280 #sec-portable subtle 6
+2026-10-27T08:34:24.5536443Z 1280 #sec-portable none 0
+2026-10-27T08:34:24.5536628Z 1280 #sec-portable calm 0
+2026-10-27T08:34:24.5536839Z 1280 #sec-workspace-list full 7
+2026-10-27T08:34:24.5537329Z 1280 #sec-workspace-list subtle 7
+2026-10-27T08:34:24.5537572Z 1280 #sec-workspace-list none 0
+2026-10-27T08:34:24.5537795Z 1280 #sec-workspace-list calm 0
+2026-10-27T08:34:24.5538019Z 1280 #sec-workspace-changes full 7
+2026-10-27T08:34:24.5538260Z 1280 #sec-workspace-changes subtle 7
+2026-10-27T08:34:24.5538498Z 1280 #sec-workspace-changes none 0
+2026-10-27T08:34:24.5538727Z 1280 #sec-workspace-changes calm 0
+2026-10-27T08:34:24.5538955Z 1280 #sec-workspace-backup full 6
+2026-10-27T08:34:24.5539190Z 1280 #sec-workspace-backup subtle 6
+2026-10-27T08:34:24.5539422Z 1280 #sec-workspace-backup none 0
+2026-10-27T08:34:24.5539650Z 1280 #sec-workspace-backup calm 0
+2026-10-27T08:34:24.5539872Z 1280 #sec-workspace-tests full 6
+2026-10-27T08:34:24.5540104Z 1280 #sec-workspace-tests subtle 6
+2026-10-27T08:34:24.5540337Z 1280 #sec-workspace-tests none 0
+2026-10-27T08:34:24.5540563Z 1280 #sec-workspace-tests calm 0
+2026-10-27T08:34:24.5540786Z 1280 #sec-workspace-deploy full 6
+2026-10-27T08:34:24.5541024Z 1280 #sec-workspace-deploy subtle 6
+2026-10-27T08:34:24.5541258Z 1280 #sec-workspace-deploy none 0
+2026-10-27T08:34:24.5541480Z 1280 #sec-workspace-deploy calm 0
+2026-10-27T08:34:24.5541679Z 1280 #sec-model full 6
+2026-10-27T08:34:24.5541869Z 1280 #sec-model subtle 6
+2026-10-27T08:34:24.5542053Z 1280 #sec-model none 0
+2026-10-27T08:34:24.5542226Z 1280 #sec-model calm 0
+2026-10-27T08:34:24.5542401Z 1280 #sec-search full 6
+2026-10-27T08:34:24.5542586Z 1280 #sec-search subtle 6
+2026-10-27T08:34:24.5542776Z 1280 #sec-search none 0
+2026-10-27T08:34:24.5542960Z 1280 #sec-search calm 0
+2026-10-27T08:34:24.5543142Z 1280 #sec-prompts full 7
+2026-10-27T08:34:24.5543336Z 1280 #sec-prompts subtle 7
+2026-10-27T08:34:24.5543529Z 1280 #sec-prompts none 0
+2026-10-27T08:34:24.5543711Z 1280 #sec-prompts calm 0
+2026-10-27T08:34:24.5544019Z 1280 #sec-code full 23
+2026-10-27T08:34:24.5544208Z 1280 #sec-code subtle 23
+2026-10-27T08:34:24.5544388Z 1280 #sec-code none 0
+2026-10-27T08:34:24.5544563Z 1280 #sec-code calm 0
+2026-10-27T08:34:24.5544748Z 1280 #sec-presets full 6
+2026-10-27T08:34:24.5545020Z 1280 #sec-presets subtle 6
+2026-10-27T08:34:24.5545210Z 1280 #sec-presets none 0
+2026-10-27T08:34:24.5545395Z 1280 #sec-presets calm 0
+2026-10-27T08:34:24.5545576Z 1280 #sec-wording full 6
+2026-10-27T08:34:24.5545759Z 1280 #sec-wording subtle 6
+2026-10-27T08:34:24.5545942Z 1280 #sec-wording none 0
+2026-10-27T08:34:24.5546124Z 1280 #sec-wording calm 0
+2026-10-27T08:34:24.5546304Z 1280 #sec-colors full 6
+2026-10-27T08:34:24.5546488Z 1280 #sec-colors subtle 6
+2026-10-27T08:34:24.5546675Z 1280 #sec-colors none 0
+2026-10-27T08:34:24.5546851Z 1280 #sec-colors calm 0
+2026-10-27T08:34:24.5547314Z 1280 #sec-background full 6
+2026-10-27T08:34:24.5547524Z 1280 #sec-background subtle 6
+2026-10-27T08:34:24.5547728Z 1280 #sec-background none 0
+2026-10-27T08:34:24.5547920Z 1280 #sec-background calm 0
+2026-10-27T08:34:24.5548104Z 1280 #sec-fonts full 6
+2026-10-27T08:34:24.5548282Z 1280 #sec-fonts subtle 6
+2026-10-27T08:34:24.5548460Z 1280 #sec-fonts none 0
+2026-10-27T08:34:24.5548643Z 1280 #sec-fonts calm 0
+2026-10-27T08:34:24.5548819Z 1280 #sec-shape full 6
+2026-10-27T08:34:24.5548994Z 1280 #sec-shape subtle 6
+2026-10-27T08:34:24.5549173Z 1280 #sec-shape none 0
+2026-10-27T08:34:24.5549345Z 1280 #sec-shape calm 0
+2026-10-27T08:34:24.5549516Z 1280 #sec-emoji full 6
+2026-10-27T08:34:24.5549693Z 1280 #sec-emoji subtle 6
+2026-10-27T08:34:24.5549877Z 1280 #sec-emoji none 0
+2026-10-27T08:34:24.5550048Z 1280 #sec-emoji calm 0
+2026-10-27T08:34:24.5550224Z 1280 #sec-motion full 6
+2026-10-27T08:34:24.5550403Z 1280 #sec-motion subtle 6
+2026-10-27T08:34:24.5550587Z 1280 #sec-motion none 0
+2026-10-27T08:34:24.5550765Z 1280 #sec-motion calm 0
+2026-10-27T08:34:24.5550945Z 1280 #sec-layout full 6
+2026-10-27T08:34:24.5551124Z 1280 #sec-layout subtle 6
+2026-10-27T08:34:24.5551305Z 1280 #sec-layout none 0
+2026-10-27T08:34:24.5551480Z 1280 #sec-layout calm 0
+2026-10-27T08:34:24.5551659Z 1280 #sec-freshness full 6
+2026-10-27T08:34:24.5551855Z 1280 #sec-freshness subtle 6
+2026-10-27T08:34:24.5552187Z 1280 #sec-freshness none 0
+2026-10-27T08:34:24.5552378Z 1280 #sec-freshness calm 0
+2026-10-27T08:34:24.5552562Z 1280 #sec-budget full 6
+2026-10-27T08:34:24.5552740Z 1280 #sec-budget subtle 6
+2026-10-27T08:34:24.5552923Z 1280 #sec-budget none 0
+2026-10-27T08:34:24.5553100Z 1280 #sec-budget calm 0
+2026-10-27T08:34:24.5553205Z 
+2026-10-27T08:34:31.5084064Z CASE settings_help_design_browser.cjs default PASS exit=0 seconds=7.0
+2026-10-27T08:34:31.5085011Z PASS widths320/390/1280, no stray checkbox pseudo, visible Close, click/Escape, focus return, Demo disabled
+2026-10-27T08:34:31.5085508Z 
+2026-10-27T08:34:39.7408698Z CASE settings_primary_save_focus_browser.cjs default PASS exit=0 seconds=8.2
+2026-10-27T08:34:39.7411411Z PASS answer/appearanceSave503 nativeEntersingleflightretryfocus noSaved3201280normalReduce
+2026-10-27T08:34:39.7411736Z 
+2026-10-27T08:34:45.7018020Z CASE setup_late_prepare_recheck_browser.cjs default PASS exit=0 seconds=6.0
+2026-10-27T08:34:45.7018761Z PASS late setupPrepare cannot replace newer Recheck3201280normalReduce noExecute
+2026-10-27T08:34:45.7019031Z 
+2026-10-27T08:34:58.8459490Z CASE sidebar_coarse_history_alignment_browser.cjs default PASS exit=0 seconds=13.1
+2026-10-27T08:34:58.8460168Z COARSE 320 full no-preference {
+2026-10-27T08:34:58.8460474Z   time: {
+2026-10-27T08:34:58.8460724Z     display: 'block',
+2026-10-27T08:34:58.8461007Z     visibility: 'visible',
+2026-10-27T08:34:58.8461284Z     rect: {
+2026-10-27T08:34:58.8461500Z       x: 27,
+2026-10-27T08:34:58.8461730Z       y: 319.125,
+2026-10-27T08:34:58.8461958Z       width: 90,
+2026-10-27T08:34:58.8462180Z       height: 16.5,
+2026-10-27T08:34:58.8462448Z       top: 319.125,
+2026-10-27T08:34:58.8462611Z       right: 117,
+2026-10-27T08:34:58.8462776Z       bottom: 335.625,
+2026-10-27T08:34:58.8462944Z       left: 27
+2026-10-27T08:34:58.8463098Z     }
+2026-10-27T08:34:58.8463244Z   },
+2026-10-27T08:34:58.8463404Z   acts: [
+2026-10-27T08:34:58.8463820Z     { rect: [Object], width: 44, height: 44, dy: 0, visible: true },
+2026-10-27T08:34:58.8464339Z     { rect: [Object], width: 44, height: 44, dy: 0, visible: true },
+2026-10-27T08:34:58.8464690Z     { rect: [Object], width: 44, height: 44, dy: 0, visible: true }
+2026-10-27T08:34:58.8464944Z   ]
+2026-10-27T08:34:58.8465092Z }
+2026-10-27T08:34:58.8465351Z COARSE 320 subtle no-preference {
+2026-10-27T08:34:58.8465609Z   time: {
+2026-10-27T08:34:58.8465766Z     display: 'block',
+2026-10-27T08:34:58.8465948Z     visibility: 'visible',
+2026-10-27T08:34:58.8466129Z     rect: {
+2026-10-27T08:34:58.8466280Z       x: 27,
+2026-10-27T08:34:58.8466439Z       y: 319.125,
+2026-10-27T08:34:58.8466973Z       width: 90,
+2026-10-27T08:34:58.8467351Z       height: 16.5,
+2026-10-27T08:34:58.8467523Z       top: 319.125,
+2026-10-27T08:34:58.8467681Z       right: 117,
+2026-10-27T08:34:58.8467927Z       bottom: 335.625,
+2026-10-27T08:34:58.8468134Z       left: 27
+2026-10-27T08:34:58.8468285Z     }
+2026-10-27T08:34:58.8468426Z   },
+2026-10-27T08:34:58.8468568Z   acts: [
+2026-10-27T08:34:58.8468820Z     { rect: [Object], width: 44, height: 44, dy: 0, visible: true },
+2026-10-27T08:34:58.8469269Z     { rect: [Object], width: 44, height: 44, dy: 0, visible: true },
+2026-10-27T08:34:58.8469608Z     { rect: [Object], width: 44, height: 44, dy: 0, visible: true }
+2026-10-27T08:34:58.8469848Z   ]
+2026-10-27T08:34:58.8469989Z }
+2026-10-27T08:34:58.8470209Z COARSE 320 none no-preference {
+2026-10-27T08:34:58.8470466Z   time: {
+2026-10-27T08:34:58.8470620Z     display: 'block',
+2026-10-27T08:34:58.8470802Z     visibility: 'visible',
+2026-10-27T08:34:58.8470977Z     rect: {
+2026-10-27T08:34:58.8471127Z       x: 27,
+2026-10-27T08:34:58.8471287Z       y: 319.125,
+2026-10-27T08:34:58.8471540Z       width: 90,
+2026-10-27T08:34:58.8471707Z       height: 16.5,
+2026-10-27T08:34:58.8471868Z       top: 319.125,
+2026-10-27T08:34:58.8472051Z       right: 117,
+2026-10-27T08:34:58.8472207Z       bottom: 335.625,
+2026-10-27T08:34:58.8472371Z       left: 27
+2026-10-27T08:34:58.8472549Z     }
+2026-10-27T08:34:58.8472751Z   },
+2026-10-27T08:34:58.8473063Z   acts: [
+2026-10-27T08:34:58.8473312Z     { rect: [Object], width: 44, height: 44, dy: 0, visible: true },
+2026-10-27T08:34:58.8473700Z     { rect: [Object], width: 44, height: 44, dy: 0, visible: true },
+2026-10-27T08:34:58.8474196Z     { rect: [Object], width: 44, height: 44, dy: 0, visible: true }
+2026-10-27T08:34:58.8474561Z   ]
+2026-10-27T08:34:58.8474758Z }
+2026-10-27T08:34:58.8475017Z COARSE 320 calm no-preference {
+2026-10-27T08:34:58.8475275Z   time: {
+2026-10-27T08:34:58.8475489Z     display: 'block',
+2026-10-27T08:34:58.8475731Z     visibility: 'visible',
+2026-10-27T08:34:58.8475987Z     rect: {
+2026-10-27T08:34:58.8476193Z       x: 27,
+2026-10-27T08:34:58.8476410Z       y: 319.125,
+2026-10-27T08:34:58.8476639Z       width: 90,
+2026-10-27T08:34:58.8476866Z       height: 16.5,
+2026-10-27T08:34:58.8477269Z       top: 319.125,
+2026-10-27T08:34:58.8477507Z       right: 117,
+2026-10-27T08:34:58.8477750Z       bottom: 335.625,
+2026-10-27T08:34:58.8477983Z       left: 27
+2026-10-27T08:34:58.8478203Z     }
+2026-10-27T08:34:58.8478391Z   },
+2026-10-27T08:34:58.8478595Z   acts: [
+2026-10-27T08:34:58.8478938Z     { rect: [Object], width: 44, height: 44, dy: 0, visible: true },
+2026-10-27T08:34:58.8479449Z     { rect: [Object], width: 44, height: 44, dy: 0, visible: true },
+2026-10-27T08:34:58.8479948Z     { rect: [Object], width: 44, height: 44, dy: 0, visible: true }
+2026-10-27T08:34:58.8480330Z   ]
+2026-10-27T08:34:58.8480536Z }
+2026-10-27T08:34:58.8480777Z COARSE 320 full reduce {
+2026-10-27T08:34:58.8481042Z   time: {
+2026-10-27T08:34:58.8481273Z     display: 'block',
+2026-10-27T08:34:58.8481560Z     visibility: 'visible',
+2026-10-27T08:34:58.8481816Z     rect: {
+2026-10-27T08:34:58.8482036Z       x: 27,
+2026-10-27T08:34:58.8482266Z       y: 319.125,
+2026-10-27T08:34:58.8482508Z       width: 90,
+2026-10-27T08:34:58.8482747Z       height: 16.5,
+2026-10-27T08:34:58.8483039Z       top: 319.125,
+2026-10-27T08:34:58.8483280Z       right: 117,
+2026-10-27T08:34:58.8483522Z       bottom: 335.625,
+2026-10-27T08:34:58.8483761Z       left: 27
+2026-10-27T08:34:58.8483998Z     }
+2026-10-27T08:34:58.8484167Z   },
+2026-10-27T08:34:58.8484308Z   acts: [
+2026-10-27T08:34:58.8484554Z     { rect: [Object], width: 44, height: 44, dy: 0, visible: true },
+2026-10-27T08:34:58.8484889Z     { rect: [Object], width: 44, height: 44, dy: 0, visible: true },
+2026-10-27T08:34:58.8485208Z     { rect: [Object], width: 44, height: 44, dy: 0, visible: true }
+2026-10-27T08:34:58.8485465Z   ]
+2026-10-27T08:34:58.8485680Z }
+2026-10-27T08:34:58.8485919Z COARSE 320 subtle reduce {
+2026-10-27T08:34:58.8486168Z   time: {
+2026-10-27T08:34:58.8486589Z     display: 'block',
+2026-10-27T08:34:58.8486843Z     visibility: 'visible',
+2026-10-27T08:34:58.8487244Z     rect: {
+2026-10-27T08:34:58.8487452Z       x: 27,
+2026-10-27T08:34:58.8487672Z       y: 319.125,
+2026-10-27T08:34:58.8487875Z       width: 90,
+2026-10-27T08:34:58.8488089Z       height: 16.5,
+2026-10-27T08:34:58.8488309Z       top: 319.125,
+2026-10-27T08:34:58.8488548Z       right: 117,
+2026-10-27T08:34:58.8488786Z       bottom: 335.625,
+2026-10-27T08:34:58.8488983Z       left: 27
+2026-10-27T08:34:58.8489136Z     }
+2026-10-27T08:34:58.8489282Z   },
+2026-10-27T08:34:58.8489421Z   acts: [
+2026-10-27T08:34:58.8489656Z     { rect: [Object], width: 44, height: 44, dy: 0, visible: true },
+2026-10-27T08:34:58.8489981Z     { rect: [Object], width: 44, height: 44, dy: 0, visible: true },
+2026-10-27T08:34:58.8490297Z     { rect: [Object], width: 44, height: 44, dy: 0, visible: true }
+2026-10-27T08:34:58.8490533Z   ]
+2026-10-27T08:34:58.8490677Z }
+2026-10-27T08:34:58.8490838Z COARSE 320 none reduce {
+2026-10-27T08:34:58.8491019Z   time: {
+2026-10-27T08:34:58.8491169Z     display: 'block',
+2026-10-27T08:34:58.8491342Z     visibility: 'visible',
+2026-10-27T08:34:58.8491520Z     rect: {
+2026-10-27T08:34:58.8491672Z       x: 27,
+2026-10-27T08:34:58.8491823Z       y: 319.125,
+2026-10-27T08:34:58.8491981Z       width: 90,
+2026-10-27T08:34:58.8492139Z       height: 16.5,
+2026-10-27T08:34:58.8492463Z       top: 319.125,
+2026-10-27T08:34:58.8492620Z       right: 117,
+2026-10-27T08:34:58.8492785Z       bottom: 335.625,
+2026-10-27T08:34:58.8492951Z       left: 27
+2026-10-27T08:34:58.8493103Z     }
+2026-10-27T08:34:58.8493244Z   },
+2026-10-27T08:34:58.8493386Z   acts: [
+2026-10-27T08:34:58.8493617Z     { rect: [Object], width: 44, height: 44, dy: 0, visible: true },
+2026-10-27T08:34:58.8493940Z     { rect: [Object], width: 44, height: 44, dy: 0, visible: true },
+2026-10-27T08:34:58.8494261Z     { rect: [Object], width: 44, height: 44, dy: 0, visible: true }
+2026-10-27T08:34:58.8494499Z   ]
+2026-10-27T08:34:58.8494647Z }
+2026-10-27T08:34:58.8494811Z COARSE 320 calm reduce {
+2026-10-27T08:34:58.8494986Z   time: {
+2026-10-27T08:34:58.8495142Z     display: 'block',
+2026-10-27T08:34:58.8495324Z     visibility: 'visible',
+2026-10-27T08:34:58.8495499Z     rect: {
+2026-10-27T08:34:58.8495648Z       x: 27,
+2026-10-27T08:34:58.8495796Z       y: 319.125,
+2026-10-27T08:34:58.8495948Z       width: 90,
+2026-10-27T08:34:58.8496112Z       height: 16.5,
+2026-10-27T08:34:58.8496277Z       top: 319.125,
+2026-10-27T08:34:58.8496433Z       right: 117,
+2026-10-27T08:34:58.8496591Z       bottom: 335.625,
+2026-10-27T08:34:58.8496755Z       left: 27
+2026-10-27T08:34:58.8496904Z     }
+2026-10-27T08:34:58.8497043Z   },
+2026-10-27T08:34:58.8497394Z   acts: [
+2026-10-27T08:34:58.8497621Z     { rect: [Object], width: 44, height: 44, dy: 0, visible: true },
+2026-10-27T08:34:58.8497935Z     { rect: [Object], width: 44, height: 44, dy: 0, visible: true },
+2026-10-27T08:34:58.8498248Z     { rect: [Object], width: 44, height: 44, dy: 0, visible: true }
+2026-10-27T08:34:58.8498490Z   ]
+2026-10-27T08:34:58.8498628Z }
+2026-10-27T08:34:58.8498816Z COARSE 390 full no-preference {
+2026-10-27T08:34:58.8499003Z   time: {
+2026-10-27T08:34:58.8499154Z     display: 'block',
+2026-10-27T08:34:58.8499330Z     visibility: 'visible',
+2026-10-27T08:34:58.8499503Z     rect: {
+2026-10-27T08:34:58.8499652Z       x: 27,
+2026-10-27T08:34:58.8499811Z       y: 319.125,
+2026-10-27T08:34:58.8499964Z       width: 90,
+2026-10-27T08:34:58.8500118Z       height: 16.5,
+2026-10-27T08:34:58.8500278Z       top: 319.125,
+2026-10-27T08:34:58.8500433Z       right: 117,
+2026-10-27T08:34:58.8500590Z       bottom: 335.625,
+2026-10-27T08:34:58.8500758Z       left: 27
+2026-10-27T08:34:58.8500906Z     }
+2026-10-27T08:34:58.8501045Z   },
+2026-10-27T08:34:58.8501183Z   acts: [
+2026-10-27T08:34:58.8501402Z     { rect: [Object], width: 44, height: 44, dy: 0, visible: true },
+2026-10-27T08:34:58.8501717Z     { rect: [Object], width: 44, height: 44, dy: 0, visible: true },
+2026-10-27T08:34:58.8502181Z     { rect: [Object], width: 44, height: 44, dy: 0, visible: true }
+2026-10-27T08:34:58.8502421Z   ]
+2026-10-27T08:34:58.8502562Z }
+2026-10-27T08:34:58.8502748Z COARSE 390 subtle no-preference {
+2026-10-27T08:34:58.8502942Z   time: {
+2026-10-27T08:34:58.8503104Z     display: 'block',
+2026-10-27T08:34:58.8503294Z     visibility: 'visible',
+2026-10-27T08:34:58.8503476Z     rect: {
+2026-10-27T08:34:58.8503633Z       x: 27,
+2026-10-27T08:34:58.8503788Z       y: 319.125,
+2026-10-27T08:34:58.8503947Z       width: 90,
+2026-10-27T08:34:58.8504104Z       height: 16.5,
+2026-10-27T08:34:58.8504267Z       top: 319.125,
+2026-10-27T08:34:58.8504428Z       right: 117,
+2026-10-27T08:34:58.8504589Z       bottom: 335.625,
+2026-10-27T08:34:58.8504755Z       left: 27
+2026-10-27T08:34:58.8504907Z     }
+2026-10-27T08:34:58.8505052Z   },
+2026-10-27T08:34:58.8505194Z   acts: [
+2026-10-27T08:34:58.8505431Z     { rect: [Object], width: 44, height: 44, dy: 0, visible: true },
+2026-10-27T08:34:58.8505757Z     { rect: [Object], width: 44, height: 44, dy: 0, visible: true },
+2026-10-27T08:34:58.8506082Z     { rect: [Object], width: 44, height: 44, dy: 0, visible: true }
+2026-10-27T08:34:58.8506321Z   ]
+2026-10-27T08:34:58.8506458Z }
+2026-10-27T08:34:58.8506641Z COARSE 390 none no-preference {
+2026-10-27T08:34:58.8506831Z   time: {
+2026-10-27T08:34:58.8506983Z     display: 'block',
+2026-10-27T08:34:58.8507464Z     visibility: 'visible',
+2026-10-27T08:34:58.8507646Z     rect: {
+2026-10-27T08:34:58.8507797Z       x: 27,
+2026-10-27T08:34:58.8507951Z       y: 319.125,
+2026-10-27T08:34:58.8508112Z       width: 90,
+2026-10-27T08:34:58.8508272Z       height: 16.5,
+2026-10-27T08:34:58.8508438Z       top: 319.125,
+2026-10-27T08:34:58.8508602Z       right: 117,
+2026-10-27T08:34:58.8508766Z       bottom: 335.625,
+2026-10-27T08:34:58.8508931Z       left: 27
+2026-10-27T08:34:58.8509093Z     }
+2026-10-27T08:34:58.8509237Z   },
+2026-10-27T08:34:58.8518173Z   acts: [
+2026-10-27T08:34:58.8518461Z     { rect: [Object], width: 44, height: 44, dy: 0, visible: true },
+2026-10-27T08:34:58.8518857Z     { rect: [Object], width: 44, height: 44, dy: 0, visible: true },
+2026-10-27T08:34:58.8519191Z     { rect: [Object], width: 44, height: 44, dy: 0, visible: true }
+2026-10-27T08:34:58.8519444Z   ]
+2026-10-27T08:34:58.8519591Z }
+2026-10-27T08:34:58.8519794Z COARSE 390 calm no-preference {
+2026-10-27T08:34:58.8519996Z   time: {
+2026-10-27T08:34:58.8520168Z     display: 'block',
+2026-10-27T08:34:58.8520355Z     visibility: 'visible',
+2026-10-27T08:34:58.8520541Z     rect: {
+2026-10-27T08:34:58.8520696Z       x: 27,
+2026-10-27T08:34:58.8520853Z       y: 319.125,
+2026-10-27T08:34:58.8521012Z       width: 90,
+2026-10-27T08:34:58.8521181Z       height: 16.5,
+2026-10-27T08:34:58.8521346Z       top: 319.125,
+2026-10-27T08:34:58.8521505Z       right: 117,
+2026-10-27T08:34:58.8521668Z       bottom: 335.625,
+2026-10-27T08:34:58.8521835Z       left: 27
+2026-10-27T08:34:58.8521988Z     }
+2026-10-27T08:34:58.8522140Z   },
+2026-10-27T08:34:58.8522287Z   acts: [
+2026-10-27T08:34:58.8522534Z     { rect: [Object], width: 44, height: 44, dy: 0, visible: true },
+2026-10-27T08:34:58.8522870Z     { rect: [Object], width: 44, height: 44, dy: 0, visible: true },
+2026-10-27T08:34:58.8523191Z     { rect: [Object], width: 44, height: 44, dy: 0, visible: true }
+2026-10-27T08:34:58.8523432Z   ]
+2026-10-27T08:34:58.8523581Z }
+2026-10-27T08:34:58.8523748Z COARSE 390 full reduce {
+2026-10-27T08:34:58.8523924Z   time: {
+2026-10-27T08:34:58.8524081Z     display: 'block',
+2026-10-27T08:34:58.8524260Z     visibility: 'visible',
+2026-10-27T08:34:58.8524479Z     rect: {
+2026-10-27T08:34:58.8524636Z       x: 27,
+2026-10-27T08:34:58.8524789Z       y: 319.125,
+2026-10-27T08:34:58.8524944Z       width: 90,
+2026-10-27T08:34:58.8525101Z       height: 16.5,
+2026-10-27T08:34:58.8525263Z       top: 319.125,
+2026-10-27T08:34:58.8525420Z       right: 117,
+2026-10-27T08:34:58.8525580Z       bottom: 335.625,
+2026-10-27T08:34:58.8525750Z       left: 27
+2026-10-27T08:34:58.8525899Z     }
+2026-10-27T08:34:58.8526040Z   },
+2026-10-27T08:34:58.8526334Z   acts: [
+2026-10-27T08:34:58.8526559Z     { rect: [Object], width: 44, height: 44, dy: 0, visible: true },
+2026-10-27T08:34:58.8526874Z     { rect: [Object], width: 44, height: 44, dy: 0, visible: true },
+2026-10-27T08:34:58.8527351Z     { rect: [Object], width: 44, height: 44, dy: 0, visible: true }
+2026-10-27T08:34:58.8527589Z   ]
+2026-10-27T08:34:58.8527731Z }
+2026-10-27T08:34:58.8527898Z COARSE 390 subtle reduce {
+2026-10-27T08:34:58.8528073Z   time: {
+2026-10-27T08:34:58.8528223Z     display: 'block',
+2026-10-27T08:34:58.8528400Z     visibility: 'visible',
+2026-10-27T08:34:58.8528574Z     rect: {
+2026-10-27T08:34:58.8528718Z       x: 27,
+2026-10-27T08:34:58.8528866Z       y: 319.125,
+2026-10-27T08:34:58.8529019Z       width: 90,
+2026-10-27T08:34:58.8529174Z       height: 16.5,
+2026-10-27T08:34:58.8529339Z       top: 319.125,
+2026-10-27T08:34:58.8529495Z       right: 117,
+2026-10-27T08:34:58.8529655Z       bottom: 335.625,
+2026-10-27T08:34:58.8529818Z       left: 27
+2026-10-27T08:34:58.8529972Z     }
+2026-10-27T08:34:58.8530112Z   },
+2026-10-27T08:34:58.8530257Z   acts: [
+2026-10-27T08:34:58.8530478Z     { rect: [Object], width: 44, height: 44, dy: 0, visible: true },
+2026-10-27T08:34:58.8530795Z     { rect: [Object], width: 44, height: 44, dy: 0, visible: true },
+2026-10-27T08:34:58.8531111Z     { rect: [Object], width: 44, height: 44, dy: 0, visible: true }
+2026-10-27T08:34:58.8531464Z   ]
+2026-10-27T08:34:58.8531610Z }
+2026-10-27T08:34:58.8531775Z COARSE 390 none reduce {
+2026-10-27T08:34:58.8531947Z   time: {
+2026-10-27T08:34:58.8532095Z     display: 'block',
+2026-10-27T08:34:58.8532274Z     visibility: 'visible',
+2026-10-27T08:34:58.8532457Z     rect: {
+2026-10-27T08:34:58.8532610Z       x: 27,
+2026-10-27T08:34:58.8532766Z       y: 319.125,
+2026-10-27T08:34:58.8532920Z       width: 90,
+2026-10-27T08:34:58.8533077Z       height: 16.5,
+2026-10-27T08:34:58.8533238Z       top: 319.125,
+2026-10-27T08:34:58.8533398Z       right: 117,
+2026-10-27T08:34:58.8533568Z       bottom: 335.625,
+2026-10-27T08:34:58.8533746Z       left: 27
+2026-10-27T08:34:58.8533905Z     }
+2026-10-27T08:34:58.8534049Z   },
+2026-10-27T08:34:58.8534192Z   acts: [
+2026-10-27T08:34:58.8534432Z     { rect: [Object], width: 44, height: 44, dy: 0, visible: true },
+2026-10-27T08:34:58.8534758Z     { rect: [Object], width: 44, height: 44, dy: 0, visible: true },
+2026-10-27T08:34:58.8535088Z     { rect: [Object], width: 44, height: 44, dy: 0, visible: true }
+2026-10-27T08:34:58.8535331Z   ]
+2026-10-27T08:34:58.8535473Z }
+2026-10-27T08:34:58.8535637Z COARSE 390 calm reduce {
+2026-10-27T08:34:58.8535813Z   time: {
+2026-10-27T08:34:58.8535965Z     display: 'block',
+2026-10-27T08:34:58.8536146Z     visibility: 'visible',
+2026-10-27T08:34:58.8536331Z     rect: {
+2026-10-27T08:34:58.8536481Z       x: 27,
+2026-10-27T08:34:58.8536634Z       y: 319.125,
+2026-10-27T08:34:58.8536793Z       width: 90,
+2026-10-27T08:34:58.8536955Z       height: 16.5,
+2026-10-27T08:34:58.8537270Z       top: 319.125,
+2026-10-27T08:34:58.8537469Z       right: 117,
+2026-10-27T08:34:58.8537636Z       bottom: 335.625,
+2026-10-27T08:34:58.8537807Z       left: 27
+2026-10-27T08:34:58.8537962Z     }
+2026-10-27T08:34:58.8538104Z   },
+2026-10-27T08:34:58.8538244Z   acts: [
+2026-10-27T08:34:58.8538483Z     { rect: [Object], width: 44, height: 44, dy: 0, visible: true },
+2026-10-27T08:34:58.8538809Z     { rect: [Object], width: 44, height: 44, dy: 0, visible: true },
+2026-10-27T08:34:58.8539127Z     { rect: [Object], width: 44, height: 44, dy: 0, visible: true }
+2026-10-27T08:34:58.8539363Z   ]
+2026-10-27T08:34:58.8539502Z }
+2026-10-27T08:34:58.8539914Z PASS coarse history actions visible44 centered duplicatetimestampsreadablenotinterleaved32039016states
+2026-10-27T08:34:58.8540240Z 
+2026-10-27T08:35:12.7782329Z CASE small_feedback_states_browser.cjs default PASS exit=0 seconds=13.9
+2026-10-27T08:35:12.7783223Z PASS searchfocus160ms borderedring swatchhoverborder no grow/transform footer140msopacity.9 fullyreadable3201280Reduce
+2026-10-27T08:35:12.7783601Z 
+2026-10-27T08:35:16.6265746Z CASE source_scope_long_labels_motion_browser.cjs default PASS exit=0 seconds=3.8
+2026-10-27T08:35:16.6266385Z SCOPELOAD 320 no-preference 3
+2026-10-27T08:35:16.6266726Z SCOPELOAD 320 reduce 3
+2026-10-27T08:35:16.6267049Z SCOPELOAD 1280 no-preference 3
+2026-10-27T08:35:16.6267556Z SCOPELOAD 1280 reduce 3
+2026-10-27T08:35:16.6268508Z PASS actualscopeloadingpendingtext/busy/singleflighterrorrecovernamedDialogEscapefocus/documentkeyboardselectiondraftretained3201280normalReduce fixtureonly
+2026-10-27T08:35:16.6269032Z 
+2026-10-27T08:35:30.1007750Z CASE source_toggle_pending_focus_motion_browser.cjs default PASS exit=0 seconds=13.5
+2026-10-27T08:35:30.1008446Z SOURCEFOCUS 320 no-preference Add live web results
+2026-10-27T08:35:30.1008931Z SOURCEFOCUS 320 no-preference Enable Tavily
+2026-10-27T08:35:30.1009368Z SOURCEFOCUS 320 no-preference Enable Exa
+2026-10-27T08:35:30.1009798Z SOURCEFOCUS 320 no-preference Enable Firecrawl
+2026-10-27T08:35:30.1010226Z SOURCEFOCUS 320 no-preference Enable Parallel
+2026-10-27T08:35:30.1010642Z SOURCEFOCUS 320 no-preference Enable PubMed
+2026-10-27T08:35:30.1010935Z SOURCEFOCUS 320 no-preference Enable arXiv
+2026-10-27T08:35:30.1011226Z SOURCEFOCUS 320 no-preference Enable Wikipedia
+2026-10-27T08:35:30.1011553Z SOURCEFOCUS 320 no-preference Enable Crossref
+2026-10-27T08:35:30.1011971Z SOURCEFOCUS 320 no-preference Enable OpenAlex
+2026-10-27T08:35:30.1012674Z SOURCEFOCUS 320 reduce Add live web results
+2026-10-27T08:35:30.1012942Z SOURCEFOCUS 320 reduce Enable Tavily
+2026-10-27T08:35:30.1013192Z SOURCEFOCUS 320 reduce Enable Exa
+2026-10-27T08:35:30.1013434Z SOURCEFOCUS 320 reduce Enable Firecrawl
+2026-10-27T08:35:30.1013771Z SOURCEFOCUS 320 reduce Enable Parallel
+2026-10-27T08:35:30.1014066Z SOURCEFOCUS 320 reduce Enable PubMed
+2026-10-27T08:35:30.1014301Z SOURCEFOCUS 320 reduce Enable arXiv
+2026-10-27T08:35:30.1014545Z SOURCEFOCUS 320 reduce Enable Wikipedia
+2026-10-27T08:35:30.1014804Z SOURCEFOCUS 320 reduce Enable Crossref
+2026-10-27T08:35:30.1015166Z SOURCEFOCUS 320 reduce Enable OpenAlex
+2026-10-27T08:35:30.1015460Z SOURCEFOCUS 1280 no-preference Add live web results
+2026-10-27T08:35:30.1015753Z SOURCEFOCUS 1280 no-preference Enable Tavily
+2026-10-27T08:35:30.1016018Z SOURCEFOCUS 1280 no-preference Enable Exa
+2026-10-27T08:35:30.1016399Z SOURCEFOCUS 1280 no-preference Enable Firecrawl
+2026-10-27T08:35:30.1016694Z SOURCEFOCUS 1280 no-preference Enable Parallel
+2026-10-27T08:35:30.1016974Z SOURCEFOCUS 1280 no-preference Enable PubMed
+2026-10-27T08:35:30.1017419Z SOURCEFOCUS 1280 no-preference Enable arXiv
+2026-10-27T08:35:30.1017810Z SOURCEFOCUS 1280 no-preference Enable Wikipedia
+2026-10-27T08:35:30.1018086Z SOURCEFOCUS 1280 no-preference Enable Crossref
+2026-10-27T08:35:30.1018361Z SOURCEFOCUS 1280 no-preference Enable OpenAlex
+2026-10-27T08:35:30.1018625Z SOURCEFOCUS 1280 reduce Add live web results
+2026-10-27T08:35:30.1018987Z SOURCEFOCUS 1280 reduce Enable Tavily
+2026-10-27T08:35:30.1019228Z SOURCEFOCUS 1280 reduce Enable Exa
+2026-10-27T08:35:30.1019470Z SOURCEFOCUS 1280 reduce Enable Firecrawl
+2026-10-27T08:35:30.1019729Z SOURCEFOCUS 1280 reduce Enable Parallel
+2026-10-27T08:35:30.1020082Z SOURCEFOCUS 1280 reduce Enable PubMed
+2026-10-27T08:35:30.1020321Z SOURCEFOCUS 1280 reduce Enable arXiv
+2026-10-27T08:35:30.1020563Z SOURCEFOCUS 1280 reduce Enable Wikipedia
+2026-10-27T08:35:30.1020807Z SOURCEFOCUS 1280 reduce Enable Crossref
+2026-10-27T08:35:30.1021135Z SOURCEFOCUS 1280 reduce Enable OpenAlex
+2026-10-27T08:35:30.1021794Z PASS all10source/library/webtoggles pendingkeyboardfocus checkedimmediate singleflight success/failurerollback3201280normalReduce fixtureonlynokeys
+2026-10-27T08:35:30.1022357Z 
+2026-10-27T08:35:36.4535592Z CASE tabs_design_browser.cjs default PASS exit=0 seconds=6.4
+2026-10-27T08:35:36.4536466Z PASS 24 Simple group/width cases; one active primary tab; contextual sections visible; keyboard focus/right-arrow; rewrite dirty/save/reload/restored; model/test controls visible
+2026-10-27T08:35:36.4536957Z 
+2026-10-27T08:35:40.4901566Z CASE unicode-export.cjs default PASS exit=0 seconds=4.0
+2026-10-27T08:35:40.4902781Z PDF toast: PDF font cannot represent this text. Download Markdown for full Unicode.×
+2026-10-27T08:35:40.4903244Z PASS hindi markdown+pdf glyphs/cjk rejection toast no download
+2026-10-27T08:35:40.4903462Z 
+2026-10-27T08:35:43.6413907Z CASE workspace_late_button_error_browser.cjs default PASS exit=0 seconds=3.2
+2026-10-27T08:35:43.6414519Z PASS oldgenericworkspacebutton503 noDeploystatus/focuscontamination3201280
+2026-10-27T08:35:43.6414790Z 
+2026-10-27T08:35:43.6429478Z {"executions": 43, "failed": 0, "passed": 43, "scripts": 39}
