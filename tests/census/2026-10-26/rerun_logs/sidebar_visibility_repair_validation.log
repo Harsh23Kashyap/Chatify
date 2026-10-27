@@ -1,0 +1,23 @@
+LABEL full left no-preference {
+  display: 'grid',
+  opacity: '1',
+  visibility: 'visible',
+  rect: {
+    x: 37,
+    y: 828.21875,
+    width: 217,
+    height: 34.78125,
+    top: 828.21875,
+    right: 254,
+    bottom: 863,
+    left: 37
+  }
+}
+ENTRY full left { duration: 120, delay: 180, mid: 0.684643 } { o: '1', vis: 'visible', an: [] }
+locator.evaluate: TypeError: Cannot read properties of undefined (reading 'effect')
+    at eval (eval at evaluate (:370:30), <anonymous>:1:295)
+    at UtilityScript.evaluate (<anonymous>:372:16)
+    at UtilityScript.<anonymous> (<anonymous>:1:44)
+    at /home/sandbox/chatify/tests/sidebar_secondary_labels_motion_browser.cjs:1:4098 {
+  log: []
+}

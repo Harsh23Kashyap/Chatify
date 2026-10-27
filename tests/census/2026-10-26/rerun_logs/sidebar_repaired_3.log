@@ -1,0 +1,301 @@
+LABEL full left no-preference {
+  display: 'grid',
+  opacity: '1',
+  visibility: 'visible',
+  rect: {
+    x: 37,
+    y: 828.21875,
+    width: 217,
+    height: 34.78125,
+    top: 828.21875,
+    right: 254,
+    bottom: 863,
+    left: 37
+  }
+}
+ENTRY full left { duration: 120, delay: 180, mid: 0.684643 } {
+  o: '0.684643',
+  vis: 'visible',
+  an: [ { p: 'opacity', s: 'paused' } ]
+}
+CLOCKS full left no-preference [{"key":"exit","at":1297.0999999996275,"visibility":"visible","visibilityTime":0,"visibilityTiming":{"delay":120,"direction":"normal","duration":0,"easing":"ease","endDelay":0,"fill":"backwards","iterationStart":0,"iterations":1},"gridTime":0},{"key":"entry","at":1710.699999999255,"visibility":"visible","gridTime":0}]
+NATURAL full left no-preference { elapsed: 260.5, visibility: 'visible', opacity: '1' }
+LABEL full right no-preference {
+  display: 'grid',
+  opacity: '1',
+  visibility: 'visible',
+  rect: {
+    x: 1026,
+    y: 828.21875,
+    width: 217,
+    height: 34.78125,
+    top: 828.21875,
+    right: 1243,
+    bottom: 863,
+    left: 1026
+  }
+}
+ENTRY full right { duration: 120, delay: 180, mid: 0.684643 } { o: '1', vis: 'visible', an: [] }
+CLOCKS full right no-preference [{"key":"exit","at":1255.5,"visibility":"visible","visibilityTime":0,"visibilityTiming":{"delay":120,"direction":"normal","duration":0,"easing":"ease","endDelay":0,"fill":"backwards","iterationStart":0,"iterations":1},"gridTime":0},{"key":"entry","at":1686.5,"visibility":"visible","gridTime":0}]
+NATURAL full right no-preference { elapsed: 262.19999999925494, visibility: 'visible', opacity: '1' }
+LABEL subtle left no-preference {
+  display: 'grid',
+  opacity: '1',
+  visibility: 'visible',
+  rect: {
+    x: 37,
+    y: 828.21875,
+    width: 217,
+    height: 34.78125,
+    top: 828.21875,
+    right: 254,
+    bottom: 863,
+    left: 37
+  }
+}
+ENTRY subtle left { duration: 80, delay: 60, mid: 0.684643 } {
+  o: '0.684643',
+  vis: 'visible',
+  an: [ { p: 'opacity', s: 'paused' } ]
+}
+CLOCKS subtle left no-preference [{"key":"exit","at":1222.699999999255,"visibility":"visible","visibilityTime":0,"visibilityTiming":{"delay":120,"direction":"normal","duration":0,"easing":"ease","endDelay":0,"fill":"backwards","iterationStart":0,"iterations":1},"gridTime":0},{"key":"entry","at":1668.5,"visibility":"visible","gridTime":0}]
+NATURAL subtle left no-preference { elapsed: 299.90000000037253, visibility: 'visible', opacity: '1' }
+LABEL subtle right no-preference {
+  display: 'grid',
+  opacity: '1',
+  visibility: 'visible',
+  rect: {
+    x: 1026,
+    y: 828.21875,
+    width: 217,
+    height: 34.78125,
+    top: 828.21875,
+    right: 1243,
+    bottom: 863,
+    left: 1026
+  }
+}
+ENTRY subtle right { duration: 80, delay: 60, mid: 0.684643 } {
+  o: '0.684643',
+  vis: 'visible',
+  an: [ { p: 'opacity', s: 'paused' } ]
+}
+CLOCKS subtle right no-preference [{"key":"exit","at":1073.5,"visibility":"visible","visibilityTime":0,"visibilityTiming":{"delay":120,"direction":"normal","duration":0,"easing":"ease","endDelay":0,"fill":"backwards","iterationStart":0,"iterations":1},"gridTime":0},{"key":"entry","at":1506.0999999996275,"visibility":"visible","gridTime":0}]
+NATURAL subtle right no-preference { elapsed: 233.30000000074506, visibility: 'visible', opacity: '1' }
+LABEL none left no-preference {
+  display: 'grid',
+  opacity: '1',
+  visibility: 'visible',
+  rect: {
+    x: 37,
+    y: 828.21875,
+    width: 217,
+    height: 34.78125,
+    top: 828.21875,
+    right: 254,
+    bottom: 863,
+    left: 37
+  }
+}
+ENTRY none left null { o: '1', vis: 'visible', an: [] }
+CLOCKS none left no-preference [{"key":"exit","at":1199.699999999255,"visibility":"hidden"},{"key":"entry","at":1601.7999999988824,"visibility":"visible"}]
+NATURAL none left no-preference { elapsed: 43.70000000111759, visibility: 'visible', opacity: '1' }
+LABEL none right no-preference {
+  display: 'grid',
+  opacity: '1',
+  visibility: 'visible',
+  rect: {
+    x: 1026,
+    y: 828.21875,
+    width: 217,
+    height: 34.78125,
+    top: 828.21875,
+    right: 1243,
+    bottom: 863,
+    left: 1026
+  }
+}
+ENTRY none right null { o: '1', vis: 'visible', an: [] }
+CLOCKS none right no-preference [{"key":"exit","at":1054.5999999996275,"visibility":"hidden"},{"key":"entry","at":1454.7999999988824,"visibility":"visible"}]
+NATURAL none right no-preference { elapsed: 65.59999999962747, visibility: 'visible', opacity: '1' }
+LABEL calm left no-preference {
+  display: 'grid',
+  opacity: '1',
+  visibility: 'visible',
+  rect: {
+    x: 37,
+    y: 828.21875,
+    width: 217,
+    height: 34.78125,
+    top: 828.21875,
+    right: 254,
+    bottom: 863,
+    left: 37
+  }
+}
+ENTRY calm left null { o: '1', vis: 'visible', an: [] }
+CLOCKS calm left no-preference [{"key":"exit","at":1257.0999999996275,"visibility":"hidden"},{"key":"entry","at":1693,"visibility":"visible"}]
+NATURAL calm left no-preference { elapsed: 115.09999999962747, visibility: 'visible', opacity: '1' }
+LABEL calm right no-preference {
+  display: 'grid',
+  opacity: '1',
+  visibility: 'visible',
+  rect: {
+    x: 1026,
+    y: 828.21875,
+    width: 217,
+    height: 34.78125,
+    top: 828.21875,
+    right: 1243,
+    bottom: 863,
+    left: 1026
+  }
+}
+ENTRY calm right null { o: '1', vis: 'visible', an: [] }
+CLOCKS calm right no-preference [{"key":"exit","at":1138,"visibility":"hidden"},{"key":"entry","at":1552.7000000011176,"visibility":"visible"}]
+NATURAL calm right no-preference { elapsed: 51.5, visibility: 'visible', opacity: '1' }
+LABEL full left reduce {
+  display: 'grid',
+  opacity: '1',
+  visibility: 'visible',
+  rect: {
+    x: 37,
+    y: 828.21875,
+    width: 217,
+    height: 34.78125,
+    top: 828.21875,
+    right: 254,
+    bottom: 863,
+    left: 37
+  }
+}
+ENTRY full left null { o: '1', vis: 'visible', an: [] }
+CLOCKS full left reduce [{"key":"exit","at":1151.699999999255,"visibility":"hidden"},{"key":"entry","at":1540,"visibility":"visible"}]
+NATURAL full left reduce { elapsed: 61.59999999962747, visibility: 'visible', opacity: '1' }
+LABEL full right reduce {
+  display: 'grid',
+  opacity: '1',
+  visibility: 'visible',
+  rect: {
+    x: 1026,
+    y: 828.21875,
+    width: 217,
+    height: 34.78125,
+    top: 828.21875,
+    right: 1243,
+    bottom: 863,
+    left: 1026
+  }
+}
+ENTRY full right null { o: '1', vis: 'visible', an: [] }
+CLOCKS full right reduce [{"key":"exit","at":933.9000000003725,"visibility":"hidden"},{"key":"entry","at":1323.4000000003725,"visibility":"visible"}]
+NATURAL full right reduce { elapsed: 44.40000000037253, visibility: 'visible', opacity: '1' }
+LABEL subtle left reduce {
+  display: 'grid',
+  opacity: '1',
+  visibility: 'visible',
+  rect: {
+    x: 37,
+    y: 828.21875,
+    width: 217,
+    height: 34.78125,
+    top: 828.21875,
+    right: 254,
+    bottom: 863,
+    left: 37
+  }
+}
+ENTRY subtle left null { o: '1', vis: 'visible', an: [] }
+CLOCKS subtle left reduce [{"key":"exit","at":965.6999999992549,"visibility":"hidden"},{"key":"entry","at":1343.9000000003725,"visibility":"visible"}]
+NATURAL subtle left reduce { elapsed: 69.79999999888241, visibility: 'visible', opacity: '1' }
+LABEL subtle right reduce {
+  display: 'grid',
+  opacity: '1',
+  visibility: 'visible',
+  rect: {
+    x: 1026,
+    y: 828.21875,
+    width: 217,
+    height: 34.78125,
+    top: 828.21875,
+    right: 1243,
+    bottom: 863,
+    left: 1026
+  }
+}
+ENTRY subtle right null { o: '1', vis: 'visible', an: [] }
+CLOCKS subtle right reduce [{"key":"exit","at":970.4000000003725,"visibility":"hidden"},{"key":"entry","at":1374.9000000003725,"visibility":"visible"}]
+NATURAL subtle right reduce { elapsed: 54.90000000037253, visibility: 'visible', opacity: '1' }
+LABEL none left reduce {
+  display: 'grid',
+  opacity: '1',
+  visibility: 'visible',
+  rect: {
+    x: 37,
+    y: 828.21875,
+    width: 217,
+    height: 34.78125,
+    top: 828.21875,
+    right: 254,
+    bottom: 863,
+    left: 37
+  }
+}
+ENTRY none left null { o: '1', vis: 'visible', an: [] }
+CLOCKS none left reduce [{"key":"exit","at":1024.800000000745,"visibility":"hidden"},{"key":"entry","at":1429.4000000003725,"visibility":"visible"}]
+NATURAL none left reduce { elapsed: 65.5, visibility: 'visible', opacity: '1' }
+LABEL none right reduce {
+  display: 'grid',
+  opacity: '1',
+  visibility: 'visible',
+  rect: {
+    x: 1026,
+    y: 828.21875,
+    width: 217,
+    height: 34.78125,
+    top: 828.21875,
+    right: 1243,
+    bottom: 863,
+    left: 1026
+  }
+}
+ENTRY none right null { o: '1', vis: 'visible', an: [] }
+CLOCKS none right reduce [{"key":"exit","at":1112.2999999988824,"visibility":"hidden"},{"key":"entry","at":1548,"visibility":"visible"}]
+NATURAL none right reduce { elapsed: 71.80000000074506, visibility: 'visible', opacity: '1' }
+LABEL calm left reduce {
+  display: 'grid',
+  opacity: '1',
+  visibility: 'visible',
+  rect: {
+    x: 37,
+    y: 828.21875,
+    width: 217,
+    height: 34.78125,
+    top: 828.21875,
+    right: 254,
+    bottom: 863,
+    left: 37
+  }
+}
+ENTRY calm left null { o: '1', vis: 'visible', an: [] }
+CLOCKS calm left reduce [{"key":"exit","at":1051.6000000014901,"visibility":"hidden"},{"key":"entry","at":1430.5,"visibility":"visible"}]
+NATURAL calm left reduce { elapsed: 62.5, visibility: 'visible', opacity: '1' }
+LABEL calm right reduce {
+  display: 'grid',
+  opacity: '1',
+  visibility: 'visible',
+  rect: {
+    x: 1026,
+    y: 828.21875,
+    width: 217,
+    height: 34.78125,
+    top: 828.21875,
+    right: 1243,
+    bottom: 863,
+    left: 1026
+  }
+}
+ENTRY calm right null { o: '1', vis: 'visible', an: [] }
+CLOCKS calm right reduce [{"key":"exit","at":1065.5,"visibility":"hidden"},{"key":"entry","at":1450.9000000003725,"visibility":"visible"}]
+NATURAL calm right reduce { elapsed: 51.80000000074506, visibility: 'visible', opacity: '1' }
+PASS dockedsecondarynote/date100exit120entrydelay180Full60Subtle reducedNoneCalmimmediate retainedkeyboardfocus inert left/right16states

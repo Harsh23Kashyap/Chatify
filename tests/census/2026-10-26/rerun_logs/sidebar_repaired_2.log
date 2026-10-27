@@ -1,0 +1,305 @@
+LABEL full left no-preference {
+  display: 'grid',
+  opacity: '1',
+  visibility: 'visible',
+  rect: {
+    x: 37,
+    y: 828.21875,
+    width: 217,
+    height: 34.78125,
+    top: 828.21875,
+    right: 254,
+    bottom: 863,
+    left: 37
+  }
+}
+ENTRY full left { duration: 120, delay: 180, mid: 0.684643 } {
+  o: '0.684643',
+  vis: 'visible',
+  an: [ { p: 'opacity', s: 'paused' } ]
+}
+CLOCKS full left no-preference [{"key":"exit","at":1120,"visibility":"visible","visibilityTime":0,"visibilityTiming":{"delay":120,"direction":"normal","duration":0,"easing":"ease","endDelay":0,"fill":"backwards","iterationStart":0,"iterations":1},"gridTime":0},{"key":"entry","at":1546.3999999985099,"visibility":"visible","gridTime":0}]
+NATURAL full left no-preference { elapsed: 255.90000000037253, visibility: 'visible', opacity: '1' }
+LABEL full right no-preference {
+  display: 'grid',
+  opacity: '1',
+  visibility: 'visible',
+  rect: {
+    x: 1026,
+    y: 828.21875,
+    width: 217,
+    height: 34.78125,
+    top: 828.21875,
+    right: 1243,
+    bottom: 863,
+    left: 1026
+  }
+}
+ENTRY full right { duration: 120, delay: 180, mid: 0.684643 } {
+  o: '0.684643',
+  vis: 'visible',
+  an: [ { p: 'opacity', s: 'paused' } ]
+}
+CLOCKS full right no-preference [{"key":"exit","at":986.5999999996275,"visibility":"visible","visibilityTime":0,"visibilityTiming":{"delay":120,"direction":"normal","duration":0,"easing":"ease","endDelay":0,"fill":"backwards","iterationStart":0,"iterations":1},"gridTime":0},{"key":"entry","at":1392.0999999996275,"visibility":"visible","gridTime":0}]
+NATURAL full right no-preference { elapsed: 254.30000000074506, visibility: 'visible', opacity: '1' }
+LABEL subtle left no-preference {
+  display: 'grid',
+  opacity: '1',
+  visibility: 'visible',
+  rect: {
+    x: 37,
+    y: 828.21875,
+    width: 217,
+    height: 34.78125,
+    top: 828.21875,
+    right: 254,
+    bottom: 863,
+    left: 37
+  }
+}
+ENTRY subtle left { duration: 80, delay: 60, mid: 0.684643 } {
+  o: '0.684643',
+  vis: 'visible',
+  an: [ { p: 'opacity', s: 'paused' } ]
+}
+CLOCKS subtle left no-preference [{"key":"exit","at":1092.4000000003725,"visibility":"visible","visibilityTime":0,"visibilityTiming":{"delay":120,"direction":"normal","duration":0,"easing":"ease","endDelay":0,"fill":"backwards","iterationStart":0,"iterations":1},"gridTime":0},{"key":"entry","at":1519,"visibility":"visible","gridTime":0}]
+NATURAL subtle left no-preference { elapsed: 248.60000000149012, visibility: 'visible', opacity: '1' }
+LABEL subtle right no-preference {
+  display: 'grid',
+  opacity: '1',
+  visibility: 'visible',
+  rect: {
+    x: 1026,
+    y: 828.21875,
+    width: 217,
+    height: 34.78125,
+    top: 828.21875,
+    right: 1243,
+    bottom: 863,
+    left: 1026
+  }
+}
+ENTRY subtle right { duration: 80, delay: 60, mid: 0.684643 } {
+  o: '0.684643',
+  vis: 'visible',
+  an: [ { p: 'opacity', s: 'paused' } ]
+}
+CLOCKS subtle right no-preference [{"key":"exit","at":1027,"visibility":"visible","visibilityTime":0,"visibilityTiming":{"delay":120,"direction":"normal","duration":0,"easing":"ease","endDelay":0,"fill":"backwards","iterationStart":0,"iterations":1},"gridTime":0},{"key":"entry","at":1438.9000000003725,"visibility":"visible","gridTime":0}]
+NATURAL subtle right no-preference { elapsed: 248.59999999962747, visibility: 'visible', opacity: '1' }
+LABEL none left no-preference {
+  display: 'grid',
+  opacity: '1',
+  visibility: 'visible',
+  rect: {
+    x: 37,
+    y: 828.21875,
+    width: 217,
+    height: 34.78125,
+    top: 828.21875,
+    right: 254,
+    bottom: 863,
+    left: 37
+  }
+}
+ENTRY none left null { o: '1', vis: 'visible', an: [] }
+CLOCKS none left no-preference [{"key":"exit","at":939.0999999996275,"visibility":"hidden"},{"key":"entry","at":1341.5,"visibility":"visible"}]
+NATURAL none left no-preference { elapsed: 65.09999999962747, visibility: 'visible', opacity: '1' }
+LABEL none right no-preference {
+  display: 'grid',
+  opacity: '1',
+  visibility: 'visible',
+  rect: {
+    x: 1026,
+    y: 828.21875,
+    width: 217,
+    height: 34.78125,
+    top: 828.21875,
+    right: 1243,
+    bottom: 863,
+    left: 1026
+  }
+}
+ENTRY none right null { o: '1', vis: 'visible', an: [] }
+CLOCKS none right no-preference [{"key":"exit","at":1014.6999999992549,"visibility":"hidden"},{"key":"entry","at":1415.7999999988824,"visibility":"visible"}]
+NATURAL none right no-preference { elapsed: 50, visibility: 'visible', opacity: '1' }
+LABEL calm left no-preference {
+  display: 'grid',
+  opacity: '1',
+  visibility: 'visible',
+  rect: {
+    x: 37,
+    y: 828.21875,
+    width: 217,
+    height: 34.78125,
+    top: 828.21875,
+    right: 254,
+    bottom: 863,
+    left: 37
+  }
+}
+ENTRY calm left null { o: '1', vis: 'visible', an: [] }
+CLOCKS calm left no-preference [{"key":"exit","at":1073.4000000003725,"visibility":"hidden"},{"key":"entry","at":1506.5999999996275,"visibility":"visible"}]
+NATURAL calm left no-preference { elapsed: 50.30000000074506, visibility: 'visible', opacity: '1' }
+LABEL calm right no-preference {
+  display: 'grid',
+  opacity: '1',
+  visibility: 'visible',
+  rect: {
+    x: 1026,
+    y: 828.21875,
+    width: 217,
+    height: 34.78125,
+    top: 828.21875,
+    right: 1243,
+    bottom: 863,
+    left: 1026
+  }
+}
+ENTRY calm right null { o: '1', vis: 'visible', an: [] }
+CLOCKS calm right no-preference [{"key":"exit","at":1029,"visibility":"hidden"},{"key":"entry","at":1427.7000000011176,"visibility":"visible"}]
+NATURAL calm right no-preference { elapsed: 109.09999999962747, visibility: 'visible', opacity: '1' }
+LABEL full left reduce {
+  display: 'grid',
+  opacity: '1',
+  visibility: 'visible',
+  rect: {
+    x: 37,
+    y: 828.21875,
+    width: 217,
+    height: 34.78125,
+    top: 828.21875,
+    right: 254,
+    bottom: 863,
+    left: 37
+  }
+}
+ENTRY full left null { o: '1', vis: 'visible', an: [] }
+CLOCKS full left reduce [{"key":"exit","at":1016.3000000007451,"visibility":"hidden"},{"key":"entry","at":1406.0999999996275,"visibility":"visible"}]
+NATURAL full left reduce { elapsed: 61.59999999962747, visibility: 'visible', opacity: '1' }
+LABEL full right reduce {
+  display: 'grid',
+  opacity: '1',
+  visibility: 'visible',
+  rect: {
+    x: 1026,
+    y: 828.21875,
+    width: 217,
+    height: 34.78125,
+    top: 828.21875,
+    right: 1243,
+    bottom: 863,
+    left: 1026
+  }
+}
+ENTRY full right null { o: '1', vis: 'visible', an: [] }
+CLOCKS full right reduce [{"key":"exit","at":965.0999999996275,"visibility":"hidden"},{"key":"entry","at":1342.5999999996275,"visibility":"visible"}]
+NATURAL full right reduce { elapsed: 29.799999998882413, visibility: 'visible', opacity: '1' }
+LABEL subtle left reduce {
+  display: 'grid',
+  opacity: '1',
+  visibility: 'visible',
+  rect: {
+    x: 37,
+    y: 828.21875,
+    width: 217,
+    height: 34.78125,
+    top: 828.21875,
+    right: 254,
+    bottom: 863,
+    left: 37
+  }
+}
+ENTRY subtle left null { o: '1', vis: 'visible', an: [] }
+CLOCKS subtle left reduce [{"key":"exit","at":1097.2000000011176,"visibility":"hidden"},{"key":"entry","at":1498.7000000011176,"visibility":"visible"}]
+NATURAL subtle left reduce { elapsed: 40.40000000037253, visibility: 'visible', opacity: '1' }
+LABEL subtle right reduce {
+  display: 'grid',
+  opacity: '1',
+  visibility: 'visible',
+  rect: {
+    x: 1026,
+    y: 828.21875,
+    width: 217,
+    height: 34.78125,
+    top: 828.21875,
+    right: 1243,
+    bottom: 863,
+    left: 1026
+  }
+}
+ENTRY subtle right null { o: '1', vis: 'visible', an: [] }
+CLOCKS subtle right reduce [{"key":"exit","at":960.0999999996275,"visibility":"hidden"},{"key":"entry","at":1363.4000000003725,"visibility":"visible"}]
+NATURAL subtle right reduce { elapsed: 76.09999999962747, visibility: 'visible', opacity: '1' }
+LABEL none left reduce {
+  display: 'grid',
+  opacity: '1',
+  visibility: 'visible',
+  rect: {
+    x: 37,
+    y: 828.21875,
+    width: 217,
+    height: 34.78125,
+    top: 828.21875,
+    right: 254,
+    bottom: 863,
+    left: 37
+  }
+}
+ENTRY none left null { o: '1', vis: 'visible', an: [] }
+CLOCKS none left reduce [{"key":"exit","at":1083.5,"visibility":"hidden"},{"key":"entry","at":1470,"visibility":"visible"}]
+NATURAL none left reduce { elapsed: 82.60000000149012, visibility: 'visible', opacity: '1' }
+LABEL none right reduce {
+  display: 'grid',
+  opacity: '1',
+  visibility: 'visible',
+  rect: {
+    x: 1026,
+    y: 828.21875,
+    width: 217,
+    height: 34.78125,
+    top: 828.21875,
+    right: 1243,
+    bottom: 863,
+    left: 1026
+  }
+}
+ENTRY none right null { o: '1', vis: 'visible', an: [] }
+CLOCKS none right reduce [{"key":"exit","at":1088.300000000745,"visibility":"hidden"},{"key":"entry","at":1488.300000000745,"visibility":"visible"}]
+NATURAL none right reduce { elapsed: 72.70000000111759, visibility: 'visible', opacity: '1' }
+LABEL calm left reduce {
+  display: 'grid',
+  opacity: '1',
+  visibility: 'visible',
+  rect: {
+    x: 37,
+    y: 828.21875,
+    width: 217,
+    height: 34.78125,
+    top: 828.21875,
+    right: 254,
+    bottom: 863,
+    left: 37
+  }
+}
+ENTRY calm left null { o: '1', vis: 'visible', an: [] }
+CLOCKS calm left reduce [{"key":"exit","at":1010.5,"visibility":"hidden"},{"key":"entry","at":1397.7999999988824,"visibility":"visible"}]
+NATURAL calm left reduce { elapsed: 52.80000000074506, visibility: 'visible', opacity: '1' }
+LABEL calm right reduce {
+  display: 'grid',
+  opacity: '1',
+  visibility: 'visible',
+  rect: {
+    x: 1026,
+    y: 828.21875,
+    width: 217,
+    height: 34.78125,
+    top: 828.21875,
+    right: 1243,
+    bottom: 863,
+    left: 1026
+  }
+}
+ENTRY calm right null { o: '1', vis: 'visible', an: [] }
+CLOCKS calm right reduce [{"key":"exit","at":1119.2000000011176,"visibility":"hidden"},{"key":"entry","at":1544.7000000011176,"visibility":"visible"}]
+NATURAL calm right reduce { elapsed: 72.09999999962747, visibility: 'visible', opacity: '1' }
+PASS dockedsecondarynote/date100exit120entrydelay180Full60Subtle reducedNoneCalmimmediate retainedkeyboardfocus inert left/right16states

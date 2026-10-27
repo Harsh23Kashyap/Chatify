@@ -1,0 +1,273 @@
+LABEL full left no-preference {
+  display: 'grid',
+  opacity: '1',
+  visibility: 'visible',
+  rect: {
+    x: 37,
+    y: 828.21875,
+    width: 217,
+    height: 34.78125,
+    top: 828.21875,
+    right: 254,
+    bottom: 863,
+    left: 37
+  }
+}
+ENTRY full left { duration: 120, delay: 180, mid: 0.684643 } {
+  o: '0.684643',
+  vis: 'visible',
+  an: [ { p: 'opacity', s: 'paused' } ]
+}
+LABEL full right no-preference {
+  display: 'grid',
+  opacity: '1',
+  visibility: 'visible',
+  rect: {
+    x: 1026,
+    y: 828.21875,
+    width: 217,
+    height: 34.78125,
+    top: 828.21875,
+    right: 1243,
+    bottom: 863,
+    left: 1026
+  }
+}
+ENTRY full right { duration: 120, delay: 180, mid: 0.684643 } {
+  o: '0.684643',
+  vis: 'visible',
+  an: [ { p: 'opacity', s: 'paused' } ]
+}
+LABEL subtle left no-preference {
+  display: 'grid',
+  opacity: '1',
+  visibility: 'visible',
+  rect: {
+    x: 37,
+    y: 828.21875,
+    width: 217,
+    height: 34.78125,
+    top: 828.21875,
+    right: 254,
+    bottom: 863,
+    left: 37
+  }
+}
+ENTRY subtle left { duration: 80, delay: 60, mid: 0.684643 } {
+  o: '0.684643',
+  vis: 'visible',
+  an: [ { p: 'opacity', s: 'paused' } ]
+}
+LABEL subtle right no-preference {
+  display: 'grid',
+  opacity: '1',
+  visibility: 'visible',
+  rect: {
+    x: 1026,
+    y: 828.21875,
+    width: 217,
+    height: 34.78125,
+    top: 828.21875,
+    right: 1243,
+    bottom: 863,
+    left: 1026
+  }
+}
+ENTRY subtle right { duration: 80, delay: 60, mid: 0.684643 } {
+  o: '0.684643',
+  vis: 'visible',
+  an: [ { p: 'opacity', s: 'paused' } ]
+}
+LABEL none left no-preference {
+  display: 'grid',
+  opacity: '1',
+  visibility: 'visible',
+  rect: {
+    x: 37,
+    y: 828.21875,
+    width: 217,
+    height: 34.78125,
+    top: 828.21875,
+    right: 254,
+    bottom: 863,
+    left: 37
+  }
+}
+ENTRY none left null { o: '1', vis: 'visible', an: [] }
+LABEL none right no-preference {
+  display: 'grid',
+  opacity: '1',
+  visibility: 'visible',
+  rect: {
+    x: 1026,
+    y: 828.21875,
+    width: 217,
+    height: 34.78125,
+    top: 828.21875,
+    right: 1243,
+    bottom: 863,
+    left: 1026
+  }
+}
+ENTRY none right null { o: '1', vis: 'visible', an: [] }
+LABEL calm left no-preference {
+  display: 'grid',
+  opacity: '1',
+  visibility: 'visible',
+  rect: {
+    x: 37,
+    y: 828.21875,
+    width: 217,
+    height: 34.78125,
+    top: 828.21875,
+    right: 254,
+    bottom: 863,
+    left: 37
+  }
+}
+ENTRY calm left null { o: '1', vis: 'visible', an: [] }
+LABEL calm right no-preference {
+  display: 'grid',
+  opacity: '1',
+  visibility: 'visible',
+  rect: {
+    x: 1026,
+    y: 828.21875,
+    width: 217,
+    height: 34.78125,
+    top: 828.21875,
+    right: 1243,
+    bottom: 863,
+    left: 1026
+  }
+}
+ENTRY calm right null { o: '1', vis: 'visible', an: [] }
+LABEL full left reduce {
+  display: 'grid',
+  opacity: '1',
+  visibility: 'visible',
+  rect: {
+    x: 37,
+    y: 828.21875,
+    width: 217,
+    height: 34.78125,
+    top: 828.21875,
+    right: 254,
+    bottom: 863,
+    left: 37
+  }
+}
+ENTRY full left null { o: '1', vis: 'visible', an: [] }
+LABEL full right reduce {
+  display: 'grid',
+  opacity: '1',
+  visibility: 'visible',
+  rect: {
+    x: 1026,
+    y: 828.21875,
+    width: 217,
+    height: 34.78125,
+    top: 828.21875,
+    right: 1243,
+    bottom: 863,
+    left: 1026
+  }
+}
+ENTRY full right null { o: '1', vis: 'visible', an: [] }
+LABEL subtle left reduce {
+  display: 'grid',
+  opacity: '1',
+  visibility: 'visible',
+  rect: {
+    x: 37,
+    y: 828.21875,
+    width: 217,
+    height: 34.78125,
+    top: 828.21875,
+    right: 254,
+    bottom: 863,
+    left: 37
+  }
+}
+ENTRY subtle left null { o: '1', vis: 'visible', an: [] }
+LABEL subtle right reduce {
+  display: 'grid',
+  opacity: '1',
+  visibility: 'visible',
+  rect: {
+    x: 1026,
+    y: 828.21875,
+    width: 217,
+    height: 34.78125,
+    top: 828.21875,
+    right: 1243,
+    bottom: 863,
+    left: 1026
+  }
+}
+ENTRY subtle right null { o: '1', vis: 'visible', an: [] }
+LABEL none left reduce {
+  display: 'grid',
+  opacity: '1',
+  visibility: 'visible',
+  rect: {
+    x: 37,
+    y: 828.21875,
+    width: 217,
+    height: 34.78125,
+    top: 828.21875,
+    right: 254,
+    bottom: 863,
+    left: 37
+  }
+}
+ENTRY none left null { o: '1', vis: 'visible', an: [] }
+LABEL none right reduce {
+  display: 'grid',
+  opacity: '1',
+  visibility: 'visible',
+  rect: {
+    x: 1026,
+    y: 828.21875,
+    width: 217,
+    height: 34.78125,
+    top: 828.21875,
+    right: 1243,
+    bottom: 863,
+    left: 1026
+  }
+}
+ENTRY none right null { o: '1', vis: 'visible', an: [] }
+LABEL calm left reduce {
+  display: 'grid',
+  opacity: '1',
+  visibility: 'visible',
+  rect: {
+    x: 37,
+    y: 828.21875,
+    width: 217,
+    height: 34.78125,
+    top: 828.21875,
+    right: 254,
+    bottom: 863,
+    left: 37
+  }
+}
+ENTRY calm left null { o: '1', vis: 'visible', an: [] }
+LABEL calm right reduce {
+  display: 'grid',
+  opacity: '1',
+  visibility: 'visible',
+  rect: {
+    x: 1026,
+    y: 828.21875,
+    width: 217,
+    height: 34.78125,
+    top: 828.21875,
+    right: 1243,
+    bottom: 863,
+    left: 1026
+  }
+}
+ENTRY calm right null { o: '1', vis: 'visible', an: [] }
+PASS dockedsecondarynote/date100exit120entrydelay180Full60Subtle reducedNoneCalmimmediate retainedkeyboardfocus inert left/right16states

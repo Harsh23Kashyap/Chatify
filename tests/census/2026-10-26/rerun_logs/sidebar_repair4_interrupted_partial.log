@@ -1,0 +1,59 @@
+LABEL full left no-preference {
+  display: 'grid',
+  opacity: '1',
+  visibility: 'visible',
+  rect: {
+    x: 37,
+    y: 828.21875,
+    width: 217,
+    height: 34.78125,
+    top: 828.21875,
+    right: 254,
+    bottom: 863,
+    left: 37
+  }
+}
+ENTRY full left { duration: 120, delay: 180, mid: 0.684643 } {
+  o: '0.684643',
+  vis: 'visible',
+  an: [ { p: 'opacity', s: 'paused' } ]
+}
+CLOCKS full left no-preference [{"key":"exit","at":1171.7000000011176,"visibility":"visible","visibilityTime":0,"visibilityTiming":{"delay":120,"direction":"normal","duration":0,"easing":"ease","endDelay":0,"fill":"backwards","iterationStart":0,"iterations":1},"gridTime":0},{"key":"entry","at":1607.2000000011176,"visibility":"visible","gridTime":0}]
+NATURAL full left no-preference { elapsed: 256.59999999962747, visibility: 'visible', opacity: '1' }
+LABEL full right no-preference {
+  display: 'grid',
+  opacity: '1',
+  visibility: 'visible',
+  rect: {
+    x: 1026,
+    y: 828.21875,
+    width: 217,
+    height: 34.78125,
+    top: 828.21875,
+    right: 1243,
+    bottom: 863,
+    left: 1026
+  }
+}
+ENTRY full right { duration: 120, delay: 180, mid: 0.684643 } {
+  o: '0.684643',
+  vis: 'visible',
+  an: [ { p: 'opacity', s: 'paused' } ]
+}
+CLOCKS full right no-preference [{"key":"exit","at":1011.3999999985099,"visibility":"visible","visibilityTime":0,"visibilityTiming":{"delay":120,"direction":"normal","duration":0,"easing":"ease","endDelay":0,"fill":"backwards","iterationStart":0,"iterations":1},"gridTime":0},{"key":"entry","at":1435,"visibility":"visible","gridTime":0}]
+NATURAL full right no-preference { elapsed: 246.40000000037253, visibility: 'visible', opacity: '1' }
+LABEL subtle left no-preference {
+  display: 'grid',
+  opacity: '1',
+  visibility: 'visible',
+  rect: {
+    x: 37,
+    y: 828.21875,
+    width: 217,
+    height: 34.78125,
+    top: 828.21875,
+    right: 254,
+    bottom: 863,
+    left: 37
+  }
+}

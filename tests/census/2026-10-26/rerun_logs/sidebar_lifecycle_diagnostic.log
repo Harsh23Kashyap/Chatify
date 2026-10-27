@@ -1,0 +1,31 @@
+LABEL full left no-preference {
+  display: 'grid',
+  opacity: '1',
+  visibility: 'visible',
+  rect: {
+    x: 37,
+    y: 828.21875,
+    width: 217,
+    height: 34.78125,
+    top: 828.21875,
+    right: 254,
+    bottom: 863,
+    left: 37
+  }
+}
+SIDE-LIFECYCLE [{"stage":"mutation","at":1106.4000000003725,"visibility":"visible","note":"1","sideAnimations":[{"prop":"visibility","time":0,"state":"running","timing":{"delay":120,"direction":"normal","duration":0,"easing":"ease","endDelay":0,"fill":"backwards","iterationStart":0,"iterations":1}},{"time":339.99999999999994,"state":"finished","timing":{"delay":40,"direction":"normal","duration":300,"easing":"linear","endDelay":0,"fill":"both","iterationStart":0,"iterations":1}}],"noteAnimations":[{"prop":"opacity","time":0,"state":"running"}]},{"stage":"natural160ms","at":1268.7999999988824,"visibility":"hidden","note":"0","sideAnimations":[{"time":339.99999999999994,"state":"finished","timing":{"delay":40,"direction":"normal","duration":300,"easing":"linear","endDelay":0,"fill":"both","iterationStart":0,"iterations":1}}],"noteAnimations":[]}]
+SIDE-LATE [{"stage":"mutation","at":1106.4000000003725,"visibility":"visible","note":"1","sideAnimations":[{"prop":"visibility","time":0,"state":"running","timing":{"delay":120,"direction":"normal","duration":0,"easing":"ease","endDelay":0,"fill":"backwards","iterationStart":0,"iterations":1}},{"time":339.99999999999994,"state":"finished","timing":{"delay":40,"direction":"normal","duration":300,"easing":"linear","endDelay":0,"fill":"both","iterationStart":0,"iterations":1}}],"noteAnimations":[{"prop":"opacity","time":0,"state":"running"}]},{"stage":"natural160ms","at":1268.7999999988824,"visibility":"hidden","note":"0","sideAnimations":[{"time":339.99999999999994,"state":"finished","timing":{"delay":40,"direction":"normal","duration":300,"easing":"linear","endDelay":0,"fill":"both","iterationStart":0,"iterations":1}}],"noteAnimations":[]},{"stage":"late-assert","at":1331.699999999255,"visibility":"hidden","note":"0.684643","sideAnimations":[{"time":339.99999999999994,"state":"finished","timing":{"delay":40,"direction":"normal","duration":300,"easing":"linear","endDelay":0,"fill":"both","iterationStart":0,"iterations":1}}],"noteAnimations":[{"prop":"opacity","time":50,"state":"paused"}]}]
+AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
++ actual - expected
+
++ 'hidden'
+- 'visible'
+
+    at /home/sandbox/chatify/tests/sidebar_secondary_labels_lifecycle_diagnostic.cjs:1:3470 {
+  generatedMessage: true,
+  code: 'ERR_ASSERTION',
+  actual: 'hidden',
+  expected: 'visible',
+  operator: 'strictEqual',
+  diff: 'simple'
+}
