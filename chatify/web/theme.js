@@ -45,17 +45,45 @@ let contrastFrame = 0, contrastSettle = 0;
 function readableFonts(){
   if (!window.CCBrand || !document.body) return;
   document.documentElement.classList.add("contrast-measuring");
+  void document.documentElement.offsetWidth;
+  const transitions=new Map();
+  document.querySelectorAll("body *").forEach(node=>{if(node instanceof HTMLElement){transitions.set(node,[node.style.getPropertyValue("transition"),node.style.getPropertyPriority("transition")]);node.style.setProperty("transition","none","important");}});
   autoColors.forEach((value,node)=>{if(node.isConnected){node.style.removeProperty("color");if(value)node.style.color=value;}});autoColors.clear();
+  void document.documentElement.offsetWidth;
   const shadeCache=new Map();
-  const parse=value=>{const m=value.match(/^rgba?\(([^)]+)\)/);if(!m)return null;const v=m[1].split(/[, ]+/).map(Number);if(v.length>3&&v[3]===0)return null;return "#"+v.slice(0,3).map(x=>Math.round(x).toString(16).padStart(2,"0")).join("");};
+  const parse=value=>{
+    const m=value.match(/^rgba?\(([^)]+)\)/);if(m){const v=m[1].split(/[, /]+/).map(Number);return v.length>=3?[...v.slice(0,3),v[3]??1]:null;}
+    const srgb=value.match(/^color\(srgb ([^)]+)\)/);if(srgb){const v=srgb[1].split(/[ /]+/).map(Number);return [...v.slice(0,3).map(x=>x*255),v[3]??1];}return null;
+  };
+  const hex=v=>"#"+v.slice(0,3).map(x=>Math.round(Math.max(0,Math.min(255,x))).toString(16).padStart(2,"0")).join("");
+  const parseHex=value=>[1,3,5].map(i=>parseInt(value.slice(i,i+2),16));
+  const blend=(front,back,alpha)=>front.slice(0,3).map((v,i)=>v*alpha+back[i]*(1-alpha));
+  const styleCache=new Map();
+  const measuredStyle=node=>{let style=styleCache.get(node);if(!style){const cs=getComputedStyle(node);style={color:cs.color,backgroundColor:cs.backgroundColor,opacity:cs.opacity};styleCache.set(node,style);}return style;};
+  const corrections=[];
+  const background=node=>{
+    const layers=[];for(let host=node;host;host=host.parentElement){const c=parse(measuredStyle(host).backgroundColor);if(c&&c[3]>0)layers.push(c);if(c&&c[3]===1)break;}
+    let result=[255,255,255];for(const c of layers.reverse())result=blend(c,result,c[3]);return result;
+  };
   document.querySelectorAll("body *").forEach(node=>{
-    if (!(node instanceof HTMLElement) || node.closest("#cc-watermark") || ![...node.childNodes].some(n=>n.nodeType===3&&n.textContent.trim())) return;
-    const color=parse(getComputedStyle(node).color);if(!color)return;
-    let back=null,host=node;while(host&&!back){const value=getComputedStyle(host).backgroundColor;const m=value.match(/^rgba?\(([^)]+)\)/);const vals=m?m[1].split(/[, ]+/).map(Number):[];if(vals.length===3||vals[3]===1)back=parse(value);host=host.parentElement;}
-    back=back||getComputedStyle(document.documentElement).getPropertyValue("--cream").trim();
-    if(!/^#[0-9a-f]{6}$/i.test(back))return;
-    const key=color+back;const changed=shadeCache.get(key)||CCBrand.shade(color,back);shadeCache.set(key,changed);if(changed!==color){autoColors.set(node,node.style.color);node.style.setProperty("color",changed,"important");}
+    if (!(node instanceof HTMLElement) || node.closest("#cc-watermark") || !([...node.childNodes].some(n=>n.nodeType===3&&n.textContent.trim()) || (node.matches("button,a")&&node.querySelector("svg")))) return;
+    const cs=measuredStyle(node),values=parse(cs.color);if(!values)return;
+    const color=hex(values),backValues=background(node),back=hex(backValues);
+    let opacity=values[3];for(let host=node;host;host=host.parentElement)opacity*=Number(measuredStyle(host).opacity);
+    if(opacity<=0)return;
+    const key=color+back+opacity;let changed=shadeCache.get(key);
+    if(!changed){
+      changed=color;
+      const possible=Math.max(...["#000000","#ffffff"].map(end=>CCBrand.contrast(hex(blend(parseHex(end),backValues,opacity)),back)))>=4.6;
+      if(!possible){changed=CCBrand.shade(color,back,20.9);}
+      else for(let target=4.7;target<=21.01;target+=.2){changed=CCBrand.shade(color,back,target);if(CCBrand.contrast(hex(blend(parseHex(changed),backValues,opacity)),back)>=4.6)break;}
+      shadeCache.set(key,changed);
+    }
+    if(changed!==color)corrections.push([node,changed]);
   });
+  corrections.forEach(([node,changed])=>{autoColors.set(node,node.style.color);node.style.setProperty("color",changed,"important");});
+  void document.documentElement.offsetWidth;
+  transitions.forEach(([value,priority],node)=>{if(value)node.style.setProperty("transition",value,priority);else node.style.removeProperty("transition");});
   document.documentElement.classList.remove("contrast-measuring");
 }
 function queueContrast(){cancelAnimationFrame(contrastFrame);contrastFrame=requestAnimationFrame(readableFonts);clearTimeout(contrastSettle);contrastSettle=setTimeout(readableFonts,400);}
