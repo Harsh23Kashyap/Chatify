@@ -1,6 +1,6 @@
 const {chromium}=require(process.env.PLAYWRIGHT_MODULE||'playwright');
 const assert=require('node:assert/strict');
-(async()=>{const browser=await chromium.launch({headless:true});try{
+(async()=>{const browser=await chromium.launch({headless:true,executablePath:'/usr/bin/google-chrome',args:['--no-sandbox']});try{
  for(const width of [390,1280]){const page=await browser.newPage({viewport:{width,height:900},reducedMotion:'reduce'});await page.addInitScript(()=>localStorage.setItem('cc_tour','1'));
  let refusal=true;
  await page.route('**/api/chats*',r=>r.fulfill({json:[]}));

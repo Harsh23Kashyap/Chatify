@@ -1,6 +1,6 @@
 const {chromium}=require(process.env.PLAYWRIGHT_MODULE||'playwright');
 const assert=require('node:assert/strict');
-(async()=>{const browser=await chromium.launch({headless:true});try{
+(async()=>{const browser=await chromium.launch({headless:true,executablePath:'/usr/bin/google-chrome',args:['--no-sandbox']});try{
 for(const width of [390,1280]){
 const p=await browser.newPage({viewport:{width,height:1000},reducedMotion:'reduce'});
 await p.route('**/api/settings/build/job?*',r=>r.fulfill({json:{id:'a'.repeat(32),state:'done',completed:31,total:31,calls:31,yaml:'app:\n  title: Fixture\n',title:'Fixture'}}));
