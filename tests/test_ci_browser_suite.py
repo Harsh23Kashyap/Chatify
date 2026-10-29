@@ -3,10 +3,10 @@ spec=importlib.util.spec_from_file_location('ci_browser_suite',pathlib.Path(__fi
 suite=importlib.util.module_from_spec(spec);spec.loader.exec_module(suite)
 class BrowserOrchestrationTests(unittest.TestCase):
  def test_every_script_classified(self):
-  m=suite.load_manifest();self.assertEqual(len(m['cases']),474);self.assertEqual(len(m['excluded']),13)
+  m=suite.load_manifest();self.assertEqual(len(m['cases']),475);self.assertEqual(len(m['excluded']),13)
  def test_known_fixture_routes(self):
   m=suite.load_manifest()['cases']
-  for name,kind in [('question-nav.cjs','strict'),('pickers_browser.cjs','strict'),('builder_apply_saved_e2e_browser.cjs','trip'),('builder_mounted_preview_browser.cjs','mounted'),('builder_brand_retry_e2e_browser.cjs','brand'),('ten_actual_palettes_browser.cjs','self')]:self.assertEqual(m[name],kind)
+  for name,kind in [('question-nav.cjs','strict'),('pickers_browser.cjs','strict'),('builder_apply_saved_e2e_browser.cjs','trip'),('builder_confirmed_split_video_browser.cjs','generic'),('builder_mounted_preview_browser.cjs','mounted'),('builder_brand_retry_e2e_browser.cjs','brand'),('ten_actual_palettes_browser.cjs','self')]:self.assertEqual(m[name],kind)
  def test_expanded_contracts(self):
   self.assertEqual(len(suite.variants('button_press_feedback_inventory_browser.cjs')),4)
   self.assertTrue(all(v[2]['RELEASE_LEVEL']=='full' for v in suite.variants('button_press_feedback_inventory_browser.cjs')))

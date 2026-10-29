@@ -21,7 +21,7 @@ customchat-app = "chatify.cli:main"
 include = ["chatify*", "apps*"]
 
 [tool.setuptools.package-data]
-chatify = ["web/*", "web/fonts/*", "web/logos/*.svg", "web/icons/*.svg", "web/team/*.jpg", "web/emoji/*", "templates/minimal/app.yaml", "templates/minimal/docs/*.md"]
+chatify = ["web/*", "web/fonts/*", "web/logos/*.svg", "web/icons/*.svg", "web/media/*.mp4", "web/media/*.jpg", "web/media/*.md", "web/team/*.jpg", "web/emoji/*", "templates/minimal/app.yaml", "templates/minimal/docs/*.md"]
 "apps" = ["*.yaml", "**/*.yaml", "**/*.md", "**/*.txt", "**/*.pdf", "**/*.json", "**/*.py", "**/*.example"]
 
 [project.urls]
