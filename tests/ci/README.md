@@ -5,7 +5,7 @@ including app YAML/question/example changes. `tests` and `installer matrix` rema
 separate automatic workflows. A successful browser workflow alone is not a full
 release result: check all three workflows for the same commit.
 
-The manifest covers 469 CJS regression scripts and two standalone Python browser
+The manifest covers 472 CJS regression scripts and two standalone Python browser
 acceptance scripts. Twelve instrumented diagnostic copies and one shared helper
 are explicitly excluded with reasons. New unclassified CJS files fail preflight,
 not silently disappear. Python `test_*.py` files remain in unittest discovery.
