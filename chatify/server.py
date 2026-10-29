@@ -113,6 +113,8 @@ def make_handler(cfg, engine):
         for row in rows:
             try:
                 if row.get("id"):
+                    try: row["response_kind"]=store.get_state(owner,"reply-kind-" + row["id"])
+                    except ValueError: pass
                     saved=store.get_state(owner, "scope-" + row["id"])
                     if permissions.allowed(cfg,owner,saved["source"],saved.get("document")): row["scope"]=saved
             except ValueError: pass
@@ -245,6 +247,14 @@ def make_handler(cfg, engine):
             if LOCKED and (path in LOCKED_PAGES or path.startswith(LOCKED_API)):
                 return self._error_page(404) if method == "GET" and not path.startswith("/api/") else self._send(404, {"error": "Not found"})
             if method == "GET" and not path.startswith("/api/"):
+                if qs.get("parent") != "1" and path in ("/", "/index.html", "/settings.html"):
+                    from . import workspace_default
+                    try:
+                        route_owner=self._owner()
+                        target = workspace_default.destination(store, loader, route_owner, path) if workspace_default.routing_owner(route_owner,cfg.get("server",{}).get("public")) else ""
+                    except PermissionError: target = ""
+                    if target:
+                        return self._send(302, b"", "text/html", {"Location": target, "X-CC-Workspace-Default": "1"})
                 return self._static(path)
             if path == "/api/guide-seen":
                 self._owner()
@@ -453,6 +463,14 @@ def make_handler(cfg, engine):
             if path.startswith('/api/settings/build/') and method in ('POST','GET'):
                 if not can_edit(self):raise PermissionError('Only the app owner can build configuration')
                 from . import appbuilder,buildjobs as buildjobs_mod
+                if path.endswith('/default'):
+                    from . import workspace_default
+                    if not workspace_default.routing_owner(o,cfg.get('server',{}).get('public')):raise PermissionError('A private visitor or account is required')
+                    if method=='POST':
+                        if b.get('action')!='clear':raise ValueError('Choose clear to return to the parent app')
+                        store.save_state(o,workspace_default.STATE,{})
+                    row=workspace_default.current(store,loader,o)
+                    return self._send(200,{'default':row,'notice':'Default applies to this app while its workspace is running. Clearing it does not stop the workspace or delete data.'})
                 if path.endswith('/drafts') and method=='GET':return self._send(200,{'drafts':draft_store.list(o)})
                 if path.endswith('/draft') and method=='GET':return self._send(200,draft_store.get(o,qs.get('id','')))
                 if path.endswith('/draft') and method=='POST':return self._send(200,draft_store.put(o,b.get('yaml'),b.get('title',''),b.get('id'),b.get('sections')))
@@ -526,7 +544,12 @@ def make_handler(cfg, engine):
                             clean['_dir']=cfg.get('_dir',os.getcwd())
                             payload,_=bundle(clean,theme_value=clean.get('appearance'),prompt_value=clean.get('pipeline_prompts'),include_keys=True,include_docs=not nerdloadmod._hosted())
                             reviewed=loader.review('built-app.zip',base64.b64encode(payload).decode())
-                            return self._send(200,loader.load(reviewed['token'],owner=o))
+                            launched=loader.load(reviewed['token'],owner=o)
+                            from . import workspace_default
+                            if workspace_default.routing_owner(o,cfg.get("server",{}).get("public")):
+                                workspace_default.choose(store,loader,o,Path(launched['workspace']).name)
+                                launched['default_for_owner']=True
+                            return self._send(200,launched)
                     except Exception as e:
                         import traceback;traceback.print_exc()
                         return self._send(400,{'error':str(e),'retry_ticket':management.reviews.put(o,'app-launch',launch)})
@@ -567,10 +590,10 @@ def make_handler(cfg, engine):
                     if management.active:raise ValueError('Wait for the workspace test to finish')
                     result=versions_mod.restore(cfg,str(b.get('id','')))
                 import yaml as _yaml
-                folder=(Path(cfg.get('_dir','.'))/cfg['storage']['path']).parent
                 app_path=Path(cfg.get('_path') or (Path(cfg.get('_dir','.'))/'app.yaml'))
                 clean=_yaml.safe_load(app_path.read_text())
                 clean['_dir']=cfg.get('_dir',os.getcwd())
+                folder=(Path(clean['_dir'])/clean['storage']['path']).parent
                 theme_value=json.loads((folder/'theme.json').read_text()) if (folder/'theme.json').exists() else None
                 prompt_value=json.loads((folder/'prompts.json').read_text()) if (folder/'prompts.json').exists() else None
                 from .portable import bundle
@@ -1144,7 +1167,7 @@ def serve_gallery(path, host=None, port=None):
                 conn.close()
                 loc = resp.getheader("Location")
                 if loc and loc.startswith("/"):
-                    passthrough["Location"] = base + loc
+                    passthrough["Location"] = loc if resp.getheader("X-CC-Workspace-Default")=="1" else base + loc
                 return self._send(resp.status, _rewrite_app_html(data, base), ctype, passthrough)
             # stream everything else so chat answers still arrive token by token
             self.send_response(resp.status)
@@ -1153,7 +1176,7 @@ def serve_gallery(path, host=None, port=None):
                 self.send_header(k, v)
             loc = resp.getheader("Location")
             if loc and loc.startswith("/"):
-                self.send_header("Location", base + loc)
+                self.send_header("Location", loc if resp.getheader("X-CC-Workspace-Default")=="1" else base + loc)
             self.send_header("Connection", "close")
             self.end_headers()
             self.close_connection = True

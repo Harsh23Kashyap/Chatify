@@ -6,7 +6,7 @@ versions.json. Snapshots are never edited in place: a restore writes a chosen
 snapshot back to the live files and records that as a new version, so history
 only grows and every restore stays reversible.
 """
-import hashlib, json, os, re, threading, time
+import hashlib, json, os, re, threading, time, yaml
 from pathlib import Path
 
 FILES = ('app.yaml', 'theme.json', 'prompts.json', 'code-drafts.json')
@@ -18,7 +18,25 @@ SECTION_LABELS = [('app', 'app details'), ('provider', 'model'), ('sources', 'so
                   ('budget', 'budget'), ('auth', 'sign-in'), ('citations', 'citations')]
 
 def _state_folder(cfg):
-    return (Path(cfg.get('_dir', '.')) / cfg['storage']['path']).parent
+    # Version history belongs to the workspace, not a movable chat database.
+    root = Path(cfg.get('_dir', '.'))
+    legacy = (root / cfg['storage']['path']).parent
+    if not (root / 'versions.json').exists() and (legacy / 'versions.json').is_file():
+        return legacy
+    return root
+
+def _content_folder(cfg):
+    # Saves can change storage.path before the running server is restarted.
+    path = _app_yaml_path(cfg)
+    try:
+        raw = yaml.safe_load(path.read_text())
+        storage = raw['storage']['path']
+        folder = (Path(cfg.get('_dir', '.')) / storage).parent.resolve()
+        if not folder.is_relative_to(Path(cfg.get('_dir', '.')).resolve()):
+            raise ValueError('Version state must stay inside the workspace')
+        return folder
+    except (OSError, KeyError, TypeError, yaml.YAMLError):
+        return (Path(cfg.get('_dir', '.')) / cfg['storage']['path']).parent
 
 def _read(folder, name):
     p = folder / name
@@ -43,7 +61,8 @@ def _app_yaml_path(cfg):
     return Path(cfg.get('_path') or (Path(cfg.get('_dir', '.')) / 'app.yaml'))
 
 def _snapshot(folder, cfg=None):
-    snap = {name: _read(folder, name) for name in FILES}
+    content = _content_folder(cfg) if cfg is not None else folder
+    snap = {name: _read(content, name) for name in FILES}
     if cfg is not None:
         p = _app_yaml_path(cfg)
         try:
@@ -53,6 +72,12 @@ def _snapshot(folder, cfg=None):
     return snap
 
 def _write_files(folder, snap, cfg):
+    # Restore assets to the destination named by the restored configuration.
+    target = yaml.safe_load(snap['app.yaml']) if snap.get('app.yaml') else {}
+    content = (Path(cfg.get('_dir', '.')) / target.get('storage', cfg['storage'])['path']).parent.resolve()
+    if not content.is_relative_to(Path(cfg.get('_dir', '.')).resolve()):
+        raise ValueError('Version state must stay inside the workspace')
+    content.mkdir(parents=True, exist_ok=True)
     for name in FILES:
         if name == 'app.yaml':
             if snap[name] is not None:
@@ -61,7 +86,7 @@ def _write_files(folder, snap, cfg):
                 tmp.write_bytes(snap[name])
                 os.replace(tmp, p)
         else:
-            _write(folder, name, snap[name])
+            _write(content, name, snap[name])
 
 def _digest(snap):
     h = hashlib.sha256()

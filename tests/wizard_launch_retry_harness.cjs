@@ -26,6 +26,10 @@ global.navigator={clipboard:{writeText:async()=>{}}};
 function respond(ok,payload,status){return{ok,status:status||(ok?200:400),json:async()=>payload,text:async()=>JSON.stringify(payload)};}
 global.fetch=async(url,opts={})=>{
  const body=opts.body?JSON.parse(opts.body):{};
+ // Independent owner-default status reads do not belong to this harness's
+ // mutation-order contract. Model their real GET payload without consuming a
+ // save/launch scripted response; never hide default-clear POST mutations.
+ if(String(url).endsWith('/api/settings/build/default')&&(!opts.method||opts.method==='GET'))return respond(true,{default:null});
  calls.push({url:String(url),body});
  if(!String(url).includes('/api/settings/build/'))return respond(true,{});
  const ep=String(url).split('/api/settings/build/')[1];

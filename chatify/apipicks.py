@@ -11,11 +11,13 @@ PAGES={
  'openrouteservice':{'name':'openrouteservice','page':'https://api.openrouteservice.org/','docs':'https://api.openrouteservice.org/','key_page':'https://openrouteservice.org/dev/#/signup','key_required':True},
  'mapbox':{'name':'Mapbox','page':'https://www.mapbox.com/','docs':'https://docs.mapbox.com/accounts/guides/tokens/','key_page':'https://docs.mapbox.com/accounts/guides/tokens/','key_required':True},
 }
+ALIASES={'openalexworksapi':'openalex','crossrefrestapi':'crossref','pubmedandthencbientrezeutilities':'pubmed'}
 def enrich(items):
  result=copy.deepcopy(items)
  for item in result:
   for field in ('provider_page','docs_url','key_url','key_required'):item.pop(field,None)
   name=re.sub(r'[^a-z0-9]','',str(item.get('service') or item.get('name','')).lower())
+  name=ALIASES.get(name,name)
   for key,info in PAGES.items():
    if name in {re.sub(r'[^a-z0-9]','',key),re.sub(r'[^a-z0-9]','',info['name'].lower())}:
     item['provider_page']=info['page'];item['key_required']=info['key_required'];item['docs_url']=info.get('docs',info['page']);item['key_url']=info.get('key_page',info['page']) if info['key_required'] or info.get('key_optional') else '';break

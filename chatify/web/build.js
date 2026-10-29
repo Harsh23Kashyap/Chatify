@@ -223,7 +223,7 @@ $("#buildStart").addEventListener("click", async () => {
     ? "\n\nEvidence plan confirmed by the user: " + names + ". Treat these as the chosen sources: recommend and configure exactly these connectors for this app, and do not propose unrelated sources."
     : "\n\nThe user skipped source selection. Propose sensible default sources for this app.";
   try {
-    const d = await api("start", { selection: { provider: state.provider, model: state.model, base_url: "" }, brief: state.brief + plan, sections: SECTIONS_ALL, consent: true });
+    const d = await api("start", { selection: { provider: state.provider, model: state.model, base_url: "" }, brief: state.brief + plan, confirmed_sources: state.selected.slice(), sections: SECTIONS_ALL, consent: true });
     state.jobId = d.id;
     try { history.replaceState(null, "", location.pathname + "?job=" + d.id); } catch (e) {}
     goStep(2);
@@ -401,6 +401,28 @@ async function openReview() {
   } else {
     look.append(el("p", "build-rv-muted", "Keeps this app's current look. Change colors, fonts and motion in Configuration after the app starts."));
   }
+  if (ap && typeof ap.logo === "string" && ap.logo.startsWith("data:image/png;base64,")) {
+    const preview = el("img", "build-logo-review");
+    preview.src = ap.logo; preview.alt = "Generated app logo draft";
+    preview.style.width = "128px"; preview.style.height = "128px"; preview.style.objectFit = "contain";
+    if (ap.logo_rendering === "flat-palette-v1" && ap.logo_original) {
+      const original = el("details", "build-logo-original");
+      original.append(el("summary", null, "Inspect original AI image"));
+      const image = el("img"); image.src = ap.logo_original; image.alt = "Original AI logo before palette rendering"; image.style.width = "128px"; image.style.height = "128px"; image.style.objectFit = "contain"; original.append(image);
+      look.append(el("p", "build-rv-muted", "AI-drafted icon, rendered into a flat palette. Original image retained below. Shape, text and contrast still need review."), original);
+    }
+    look.append(preview, el("p", "build-rv-muted", "Generated logo draft, not quality-verified. Check contrast, small-size readability and your design requirements before saving."));
+  }
+  const helpers = cfg.helper_drafts || {};
+  if (Object.keys(helpers).length) {
+    const code = rvCard("Helper drafts: not installed");
+    code.append(el("p", "build-rv-muted", "These are inert code drafts. Static checks do not prove that the API endpoint works or that the code is safe to run."));
+    Object.entries(helpers).forEach(([kind, draft]) => {
+      const problems = draft.review_problems || [];
+      code.append(rvRow(kind.replaceAll("_", " "), problems.length ? "Needs repair: " + problems.join(" ") : "Static checks passed; endpoint and behavior not verified."));
+    });
+    body.append(code);
+  }
   const apis = (cfg.api_suggestions || []).length;
   if (apis) look.append(el("p", "build-rv-muted", "The build also recommends " + apis + " API" + (apis > 1 ? "s" : "") + " for later - review them in the full builder; nothing is connected."));
   body.append(look);
@@ -410,7 +432,7 @@ async function openReview() {
 }
 $("#reviewBack").addEventListener("click", () => goStep(1));
 $("#buildReturnReview").addEventListener("click", () => { openReview(); });
-$("#reviewAdjust").addEventListener("click", () => { if (state.draftId) location.href = BASE + "/settings.html#build-draft=" + state.draftId; else location.href = BASE + "/settings.html"; });
+$("#reviewAdjust").addEventListener("click", () => { if (state.draftId) location.href = BASE + "/settings.html#build-draft=" + state.draftId; else location.href = BASE + "/settings.html?parent=1"; });
 $("#reviewSave").addEventListener("click", async () => {
   const btn = $("#reviewSave"); btn.disabled = true;
   const busy = $("#reviewBusy"), phase = $("#reviewPhase"), err = $("#reviewError");
@@ -432,11 +454,12 @@ $("#reviewSave").addEventListener("click", async () => {
         } else { throw e; }
       }
     }
-    phase.textContent = "Starting a local preview…";
+    phase.textContent = "Starting your app…";
     try {
       const launched = await api("launch", { ticket: state.launchTicket });
       state.workspace = launched;
-      try { sessionStorage.setItem("cc_build_ws", JSON.stringify({ workspace: launched.workspace, title: launched.title, url: launched.url, at: Date.now() })); } catch (e) {}
+
+      try { sessionStorage.setItem("cc_build_ws", JSON.stringify({ workspace: launched.workspace, title: launched.title, url: launched.url, default_for_owner: !!launched.default_for_owner, at: Date.now() })); } catch (e) {}
       paintYourApp();
       goStep(4);
     } catch (e) {
@@ -455,15 +478,18 @@ $("#reviewSave").addEventListener("click", async () => {
 /* ---------- Step 5: your app ---------- */
 function paintYourApp() {
   const ws = state.workspace; if (!ws) return;
+  paintDefault();
   $("#yourappTitle").textContent = (ws.title || "Your app") + " is running";
   $("#yourappOpen").href = ws.url;
   $("#yourappOpen").replaceChildren(document.createTextNode("Open " + (ws.title || "your app") + " "), el("span", null, "→"));
   $("#yourappUrl").textContent = ws.url;
+  if(ws.default_for_owner)$("#yourappSub").textContent="This is your default chat and configuration for this app while its workspace is running. Other visitors and saved data stay unchanged. Use Build to create another app or return to the parent app.";
+  else $("#yourappSub").textContent="Your workspace is separate from the parent app. Opening it does not change your current default. Saved data stay unchanged.";
   $("#iterPrompts").href = ws.url + "/settings.html#sec-prompts";
   $("#checkResults").replaceChildren();
 }
 $("#iterSources").addEventListener("click", () => goStep(0));
-$("#iterBuilder").addEventListener("click", () => { location.href = BASE + "/settings.html"; });
+$("#iterBuilder").addEventListener("click", () => { location.href = BASE + "/settings.html?parent=1"; });
 
 $("#checkSources").addEventListener("click", async () => {
   const btn = $("#checkSources"), busy = $("#checkBusy"), out = $("#checkResults");
@@ -572,6 +598,18 @@ $("#publishDownload").addEventListener("click", async () => {
   } catch (e) { note.textContent = e.message; }
   finally { btn.disabled = false; }
 });
+
+/* Owner-scoped default entry point. Never stops or removes a workspace. */
+async function paintDefault(){
+  try{const d=await getJson('/api/settings/build/default'),w=d.default;const box=$('#buildDefault');box.hidden=!w;if(w){$('#buildDefaultNotice').textContent=(w.title||'Your app')+' is your default chat and configuration for this app while its workspace is running.';$('#buildDefaultOpen').href=w.url;}}
+  catch(e){$('#buildDefault').hidden=true;}
+}
+$('#buildDefaultClear').addEventListener('click',async()=>{
+ const button=$('#buildDefaultClear'),note=$('#buildDefaultNotice');button.disabled=true;note.textContent='Returning to parent app...';
+ try{await api('default',{action:'clear'});if(state.workspace){state.workspace.default_for_owner=false;try{sessionStorage.setItem('cc_build_ws',JSON.stringify(state.workspace))}catch(e){}}location.href=BASE+'/?parent=1';}
+ catch(e){note.textContent=e.message;button.disabled=false;}
+});
+paintDefault();
 
 /* ---------- resume ---------- */
 const m = (location.search || "").match(/[?&]job=([0-9a-f]{32})/);

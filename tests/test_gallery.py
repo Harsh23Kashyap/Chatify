@@ -390,6 +390,22 @@ class GalleryBuilderUseThisApp(unittest.TestCase):
         url = launched["url"]
         self.assertRegex(url, r"^/nerd-[A-Za-z0-9_-]+/$")
         self.assertEqual(launched["title"], "Space Facts")
+        self.assertTrue(launched["default_for_owner"])
+        s, cleared = self.req("POST", "/alpha/api/settings/build/default", "e6f7a8b9"*4, {"action":"clear"})
+        self.assertEqual(s,200,cleared)
+        self.assertIsNone(json.loads(cleared)["default"])
+        s, owner_default = self.req("GET", "/alpha/api/settings/build/default", A)
+        self.assertEqual(json.loads(owner_default)["default"]["id"],url.strip("/"))
+        origin="http://127.0.0.1:%d" % self.port
+        for suffix in ("/", "/settings.html"):
+            request=urllib.request.Request(origin+"/alpha"+suffix,headers={"Cookie":"cc_visitor="+A,"Accept":"text/html"})
+            with urllib.request.urlopen(request,timeout=30) as response:
+                expected=origin+url+("settings.html" if suffix.endswith("settings.html") else "")
+                self.assertEqual(response.url,expected)
+            other=urllib.request.Request(origin+"/alpha"+suffix,headers={"Cookie":"cc_visitor="+"e6f7a8b9"*4,"Accept":"text/html"})
+            with urllib.request.urlopen(other,timeout=30) as response:self.assertEqual(response.url,origin+"/alpha"+suffix)
+        parent=urllib.request.Request(origin+"/alpha/?parent=1",headers={"Cookie":"cc_visitor="+A,"Accept":"text/html"})
+        with urllib.request.urlopen(parent,timeout=30) as response:self.assertEqual(response.url,origin+"/alpha/?parent=1")
         wsdir = launched["workspace"]
 
         s, b = self.req("GET", url, A)

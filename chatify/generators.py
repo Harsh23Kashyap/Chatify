@@ -21,6 +21,7 @@ KINDS = {
                      "Be defensive, because real APIs differ and change: wrap every network call and all parsing in try/except; set timeout=15 on every request; "
                      "retry up to 2 more times on timeouts, HTTP 429 and 5xx with a short time.sleep back-off; send a User-Agent header; "
                      "decode bytes with errors='replace'; if the body is not valid JSON (or XML if that is what the API returns) return []; "
+                     "For XML use xml.etree.ElementTree.fromstring, find/findall and itertext; preserve elements with attributes and nested inline text. Never parse XML using literal opening-tag string searches. Build each result URL from that same parsed item's actual ID, never its list position or a parallel ID list after filtering; skip a row whose identity is missing and deduplicate by real item ID/URL. "
                      "read every field with .get() or a safe helper because fields can be missing, null, a list instead of a string, or nested differently; "
                      "skip items that have no usable text. Return a list of at most `limit` dicts, each with exactly these keys: "
                      "title (str), text (str, the passage, at most 1500 chars), url (str), year (int or None). Never raise: return [] on any error. "
@@ -156,6 +157,14 @@ def review_marks(kind, code):
     if not has:
         add(1, "It must define %s." % spec["sig"])
     if kind == "search" and has:
+        search = next(n for n in ast.walk(tree) if isinstance(n, ast.FunctionDef) and n.name == spec['func'])
+        for n in ast.walk(search):
+            if isinstance(n, ast.Return) and isinstance(n.value, ast.Dict):
+                add(n.lineno, "search must return a list of passage dicts, never a dict envelope.")
+        for n in ast.walk(tree):
+            if isinstance(n, ast.Call) and isinstance(n.func, ast.Attribute) and n.func.attr in ('split', 'find', 'index'):
+                if n.args and isinstance(n.args[0], ast.Constant) and isinstance(n.args[0].value, str) and n.args[0].value.startswith('<'):
+                    add(n.lineno, "Parse XML with ElementTree, not literal opening-tag string searches.")
         if not any(isinstance(n, ast.Try) for n in ast.walk(tree)):
             add(1, "It has no try/except, so one odd response could crash a question. Wrap the request and the parsing.")
         if "timeout" not in code:

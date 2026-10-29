@@ -79,7 +79,9 @@ class CheckpointEdges(unittest.TestCase):
    changed=copy.deepcopy(schema.DEFAULTS);changed['provider']['model']='some-other-model'
    jobs2=buildjobs.BuildJobs(spend_dir=tmp);f2=Fixture()
    d2=jobs2.start('owner',f2,changed,{'brief':'Garden advice'})
-   self.assertNotIn('Resumed',d2.get('notice',''));self.assertEqual(d2['completed'],0)
+   self.assertNotIn('Resumed',d2.get('notice',''))
+   # start() launches workers before returning; completed may already be positive.
+   # No-resume notice plus a complete fresh call inventory below proves fresh work.
    d2=self.wait(jobs2,d2['id']);self.assertEqual(d2['state'],'done',d2);self.assertGreater(len(f2.calls),20)
  @unittest.mock.patch('chatify.buildimages.capability',return_value={'available':False,'note':'fixture'})
  def test_changed_budget_settings_start_fresh(self,cap2):
@@ -90,7 +92,9 @@ class CheckpointEdges(unittest.TestCase):
    changed=copy.deepcopy(schema.DEFAULTS);changed['budget']['spend_cap_usd']=3.5
    jobs2=buildjobs.BuildJobs(spend_dir=tmp);f2=Fixture()
    d2=jobs2.start('owner',f2,changed,{'brief':'Garden advice'})
-   self.assertNotIn('Resumed',d2.get('notice',''));self.assertEqual(d2['completed'],0)
+   self.assertNotIn('Resumed',d2.get('notice',''))
+   # start() launches workers before returning; completed may already be positive.
+   # No-resume notice plus a complete fresh call inventory below proves fresh work.
    d2=self.wait(jobs2,d2['id']);self.assertEqual(d2['state'],'done',d2);self.assertGreater(len(f2.calls),20)
  @unittest.mock.patch('chatify.buildimages.capability',return_value={'available':False,'note':'fixture'})
  def test_corrupt_checkpoint_starts_fresh(self,cap):
@@ -260,8 +264,11 @@ class SafePatchChecks(unittest.TestCase):
  def test_invalid_helper_json_reports_exact_corrective_contract(self):
   malformed='{"brief":"Cleaner","code":"re.sub(r\'\\s+\', \' \', query)"}'
   job=self.part_job(malformed)
-  buildjobs.BuildJobs()._draft_part(job,'helper:clean_query',dict(buildjobs.PARTS)['helper:clean_query'])
-  self.assertEqual(job['parts']['helper:clean_query']['code'],"re.sub(r'\\s+', ' ', query)");self.assertEqual(job['calls'],1)
+  # JSON salvage is tested separately in DraftJSONRepairTests. Salvage must
+  # not authorize an executable fragment lacking the required helper function.
+  with self.assertRaisesRegex(ValueError,'Helper safety contract failed'):
+   buildjobs.BuildJobs()._draft_part(job,'helper:clean_query',dict(buildjobs.PARTS)['helper:clean_query'])
+  self.assertNotIn('helper:clean_query',job['parts']);self.assertEqual(job['calls'],1)
  @unittest.mock.patch('chatify.buildimages.capability',return_value={'available':False,'note':'fixture'})
  def test_review_context_keeps_unknowns_and_real_concerns(self,cap):
   class Review(Fixture):

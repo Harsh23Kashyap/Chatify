@@ -10,7 +10,7 @@ LOOK={
  'fonts':['font','heading_font','custom_font','font_size','line_height'],
  'shape':['radius','density','shadow','bubble'],
  'layout':['sidebar','sidebar_width','chat_width','avatars','you_align','composer','toolbar','sources_panel'],
- 'wording_motion':[k for k in theme.DEFAULT_CLEAN() if k not in {x for row in [['mode','light','dark'],['bg_style','bg_color2','bg_angle','bg_image','pattern','pattern_opacity','pattern_size','pattern_color'],['font','heading_font','custom_font','font_size','line_height'],['radius','density','shadow','bubble'],['sidebar','sidebar_width','chat_width','avatars','you_align','composer','toolbar','sources_panel']] for x in row}]
+ 'wording_motion':[k for k in theme.DEFAULT_CLEAN() if k not in {'logo_original','logo_rendering'} and k not in {x for row in [['mode','light','dark'],['bg_style','bg_color2','bg_angle','bg_image','pattern','pattern_opacity','pattern_size','pattern_color'],['font','heading_font','custom_font','font_size','line_height'],['radius','density','shadow','bubble'],['sidebar','sidebar_width','chat_width','avatars','you_align','composer','toolbar','sources_panel']] for x in row}]
 }
 PARTS += [('appearance:'+k,{'area':'appearance','defaults':{field:theme.DEFAULT_CLEAN()[field] for field in fields}}) for k,fields in LOOK.items()]
 PARTS += [('prompt:'+k,{'area':'pipeline prompt','stage':k,'contract':v,'default':v['default'] or schema.DEFAULTS['prompt']['system']}) for k,v in prompts.STAGES.items()]
@@ -72,7 +72,7 @@ class BuildJobs:
   if not path:return
   with self.lock:
    if job['cancel']:return
-   payload={'brief':job['brief'],'fingerprint':job.get('fingerprint',''),'writer':job['id'],'parts':copy.deepcopy(job['parts']),'errors':copy.deepcopy(job['errors']),'calls':job['calls'],'retry_calls':job.get('retry_calls',0),'updated':time.time()}
+   payload={'confirmed_sources':job.get('confirmed_sources',[]),'brief':job['brief'],'fingerprint':job.get('fingerprint',''),'writer':job['id'],'parts':copy.deepcopy(job['parts']),'errors':copy.deepcopy(job['errors']),'calls':job['calls'],'retry_calls':job.get('retry_calls',0),'updated':time.time()}
   try:
    os.makedirs(self.checkpoint_dir,exist_ok=True)
    tmp=path+'.tmp';json.dump(payload,open(tmp,'w'));os.replace(tmp,path)
@@ -90,7 +90,7 @@ class BuildJobs:
   if not path or not os.path.exists(path):return
   try:payload=json.load(open(path))
   except Exception:return
-  if payload.get('brief')!=job['brief'] or payload.get('fingerprint','')!=job.get('fingerprint','') or not isinstance(payload.get('parts'),dict):return
+  if payload.get('confirmed_sources',[])!=job.get('confirmed_sources',[]) or payload.get('brief')!=job['brief'] or payload.get('fingerprint','')!=job.get('fingerprint','') or not isinstance(payload.get('parts'),dict):return
   with self.lock:
    job['parts']={key:value for key,value in payload['parts'].items() if key in dict(PARTS)}
    job['calls']=int(payload.get('calls') or 0);job['retry_calls']=int(payload.get('retry_calls') or 0)
@@ -112,9 +112,11 @@ class BuildJobs:
   return job
  def start(self,owner,provider,cfg,data):
   brief=appbuilder.clean_text(data.get('brief'),4000)
+  confirmed=data.get('confirmed_sources',[])
+  if not isinstance(confirmed,list) or any(not isinstance(x,str) or x not in schema.CONNECTORS-{'python'} for x in confirmed) or len(set(confirmed))!=len(confirmed):raise ValueError('Invalid confirmed sources')
   selected=appbuilder.sections(data.get('sections',appbuilder.SECTIONS))
   if set(selected)!=set(appbuilder.SECTIONS):raise ValueError('Background build currently generates a complete app; use section conversation for a focused tweak')
-  job={'id':uuid.uuid4().hex,'owner':owner,'provider':provider,'cfg':copy.deepcopy(cfg),'fingerprint':self._fingerprint(cfg),'brief':brief,'state':'running','cancel':False,'calls':0,'retry_calls':0,'attempts':{},'defaulted':[],'in_retry':False,'parts':{},'active':set(),'remaining_work':['Draft areas','Final local validation','Optional logo capability check','Final model review'],'errors':{},'logo_status':{'state':'checking','note':'Logo capability not checked yet'},'yaml':None,'created':time.time(),'phase':'Drafting separate areas','notice':''}
+  job={'id':uuid.uuid4().hex,'owner':owner,'provider':provider,'cfg':copy.deepcopy(cfg),'fingerprint':self._fingerprint(cfg),'confirmed_sources':confirmed,'brief':brief,'state':'running','cancel':False,'calls':0,'retry_calls':0,'attempts':{},'defaulted':[],'in_retry':False,'parts':{},'active':set(),'remaining_work':['Draft areas','Final local validation','Optional logo capability check','Final model review'],'errors':{},'logo_status':{'state':'checking','note':'Logo capability not checked yet'},'yaml':None,'created':time.time(),'phase':'Drafting separate areas','notice':''}
   with self.lock:
    for key,old in list(self.jobs.items()):
     if time.time()-old['created']>86400 and old['state']!='running':self.jobs.pop(key)
@@ -143,6 +145,7 @@ class BuildJobs:
  def _draft_part(self,job,key,spec):
   spec=copy.deepcopy(spec)
   if key=='config:app':spec['requirements']='Replace id my-chat with a unique domain-specific kebab-case slug. Fill title, tagline, footer and at least 3 domain-specific starter questions in examples, even if the schema examples default is empty. Do not invent a copyright year. Starter questions must be plausible within the domain.'
+  if key=='config:sources':spec['supported_connectors']=sorted(schema.CONNECTORS-{'python'});spec['requirements']='Use only supported_connectors as type values. Recommendations are not configured sources. Return an empty list when no actual source URL, path or explicit configured connector was supplied.'
   if key=='config:provider':spec['defaults']=copy.deepcopy(job['cfg']['provider'])
   if key=='config:prompt':spec['requirements']='Fill answer behavior for this domain. answer_note is a reader-facing footer, not a description of this prompt or instruction. Leave answer_note empty unless the app needs a short truthful reader limitation. Never write This prompt supports or other metadata in reader-facing fields.'
   if key=='config:budget':spec['defaults']=copy.deepcopy(job['cfg'].get('budget',schema.DEFAULTS['budget']));spec['requirements']='Retain the supplied usage limits exactly. App topic words such as budget meals, cost or limit do not authorize new app quotas. Limits can be edited in the reviewed draft.'
@@ -150,14 +153,26 @@ class BuildJobs:
    spec['valid_choices']={k:v for k,v in theme.ENUMS.items() if k in spec['defaults']}
    spec['numeric_ranges']={k:v for k,v in theme.RANGES.items() if k in spec['defaults']}
    if 'font' in spec['defaults']:spec['fonts']=list(theme.FONTS)
+   if key=='appearance:wording_motion':spec['text_limits']={'txt_title':60,'txt_tagline':160,'txt_examples':600,'txt_placeholder':80,'txt_footer':200,'txt_disclaimer':120,'txt_hint':120,'txt_sidebar':40}
    if key=='appearance:wording_motion':spec['requirements']='Return every field. All txt_ interface copy must be nonempty and tailored to the app, including txt_disclaimer (a truthful short limitation, no invented credentials or legal promises) and txt_sidebar (a short chat-list heading). Empty optional assets and numeric defaults remain valid.'
   if key=='api':
    from .apipicks import PAGES
    spec['verified_provider_pages']={info['name']:{'documentation':info.get('docs',info['page']),'key_page':info.get('key_page',''),'key_required':info['key_required']} for info in PAGES.values()}
   if key=='api':spec['requirements']='Suggest three to five APIs that fit this app. Each recommendation needs name, service, what, reason, connector, setup and caveat strings. what must explain what the API provides in a full useful sentence; reason must explain why it fits this app in a separate full sentence, never just repeat its name, plus helper containing brief and code strings for that service using search(query, limit=6). Every selected service needs its own inert helper. Use urllib.request, json, os, time, urllib.parse, urllib.error only, no socket or getattr. Every search helper must include try/except, an explicit timeout on urlopen, bounded reads, defensive parsing and at most limit results. If endpoint/schema is unknown, keep the request code inert using an empty API_URL, but still include the complete guarded request structure. Do not return a blank stub without try/except and timeout. No keys or fake key placeholders such as YOUR_API_KEY in code. Credentials must only come from os.environ.get with an empty default. service must name one concrete provider or public service you recommend, not a category. Pick a service, explain why, and give its integration steps without inventing an endpoint or claiming live verification. Do not defer the provider choice with choose a provider. Mark external details as unverified and let the user verify current documentation before setup.'
-  if key.startswith('helper:'):spec['recommended_apis']=job['parts'].get('api',[]);spec['requirements']='Function name and signature must exactly match the contract, including search(query, limit=6) or clean_query(query). Draft for the recommended API; explicitly mark any endpoint not independently verified. Keep all API keys and fake key values outside code. Use os.environ.get with an empty default. The code value must decode to actual multiline Python, never literal backslash-n separators or a quoted Python string. All search helpers need try/except, urlopen timeout, bounded reads, defensive parsing and at most limit results, including inert placeholders.'
+  if key.startswith('helper:'):spec['recommended_apis']=job['parts'].get('api',[]);spec['requirements']='Function name and signature must exactly match the contract, including search(query, limit=6) or clean_query(query). Draft for the recommended API; explicitly mark any endpoint not independently verified. Keep all API keys and fake key values outside code. Use os.environ.get with an empty default. The code value must decode to actual multiline Python, never literal backslash-n separators or a quoted Python string. All search helpers need try/except, urlopen timeout, bounded reads, defensive parsing and at most limit results, including inert placeholders. Follow the actual helper safety contract: no classes, dunder attributes, socket, html.parser, getattr or top-level executable statements. Search helpers may import only urllib.request, urllib.parse, urllib.error, json, os, time and xml.etree.ElementTree. For XML use ElementTree.fromstring with find/findall and itertext; XML elements can have attributes, namespaces and nested inline tags, so never parse XML with literal opening/closing-tag string searches. PubMed EFetch uses PMID Version attributes and mixed-content ArticleTitle/AbstractText. Read the own PMID of each article and construct its PubMed URL from that PMID; never index the ESearch ID list by result count because articles can be reordered or skipped for missing abstracts. Skip identity-missing articles and deduplicate by real PMID/URL. clean_query may use re, string and unicodedata. Put processing inside functions; only imports, definitions, constants and os.environ.get lookups belong at module level.'
+  if key=='api':
+   spec['helper_contract']=generators.KINDS['search']['contract']
+   spec['requirements']+=' Every API helper must obey helper_contract, including the list output shape, item identity, XML parsing and error behavior. The API recommendation envelope is not the helper return value. Never return a records/error envelope from search.'
+  if (key=='api' or key.startswith('helper:')) and 'pubmed' in job.get('confirmed_sources',[]):
+   # Public source interface, not an instruction recovered from model output.
+   # Verified against official NCBI parameter reference and live PMID37775736.
+   spec['verified_source_interface']={'connector':'pubmed','documentation':'https://www.ncbi.nlm.nih.gov/books/NBK25499/','verified':'2026-10-28','esearch':{'url':'https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi','params':{'db':'pubmed','term':'reader query','retmode':'json','retmax':'bounded limit'},'records':'esearchresult.idlist'},'efetch':{'url':'https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi','params':{'db':'pubmed','id':'comma-separated actual PMIDs','retmode':'xml'},'records':'PubmedArticle/MedlineCitation/PMID; Article/ArticleTitle and Abstract/AbstractText; PMID may carry Version attribute and text may contain inline tags'},'key_required':False}
+   spec['requirements']+=' Use these verified public endpoints and schema, not empty URL placeholders. No secret or endpoint invention is needed for this named source. Keep code inert and uninstalled until reviewed; verified interface does not prove generated code behavior. Never claim a generated helper was live-tested.'
   correction=job.get('retry_corrections',{}).get(key)
   if correction:spec['previous_validation_failure']=correction;spec['requirements']=spec.get('requirements','')+' Correct the previously rejected fields. Do not repeat blank interface wording, invent credentials or remove output contract fields.'
+  if key=='api' and job.get('confirmed_sources'):
+   spec['confirmed_sources']=job['confirmed_sources']
+   spec['requirements']+=' The user has explicitly selected confirmed_sources. This overrides the open-ended three-to-five count: return exactly one recommendation per selected connector, no unrelated services. Preserve each selected connector ID exactly in connector. Local files need an inert document helper, not an unrelated external API.'
   instruction=json.dumps(spec)
   if key.startswith('prompt:'):
    spec={'area':'pipeline prompt','stage':key[7:],'app_domain_brief':job['brief'],'input_contract':generator_design.DESIGNS[key[7:]]['inputs'],'output_contract':generator_design.DESIGNS[key[7:]]['output'],'stage_rules':generator_design.DESIGNS[key[7:]]['rules'],'required_literal_tokens':{'answer':['[n]'],'question_check':['VALID','INVALID'],'relevance':['NONE'],'faithfulness':['OK','UNSUPPORTED']}.get(key[7:],[]),'domain_reference':generator_design.template(key[7:],job['brief'])}
@@ -205,9 +220,14 @@ class BuildJobs:
    result['code']=repair_helper_code(result['code'])
    try:compile(result['code'],'<helper-draft>','exec')
    except (SyntaxError,ValueError,TypeError) as e:raise ValueError('Helper Python compilation failed: '+str(e)) from e
+   ok,problems=generators.review_code(key[7:],result['code'])
+   if not ok:raise ValueError('Helper safety contract failed: '+'; '.join(problems))
   elif key=='api':
    appbuilder.validate_extras({'api_suggestions':result})
-   if not 3<=len(result)<=5:raise ValueError('Recommend three to five APIs')
+   confirmed=job.get('confirmed_sources') or []
+   if confirmed:
+    if len(result)!=len(confirmed) or sorted(str(x.get('connector','')) for x in result)!=sorted(confirmed):raise ValueError('Recommend exactly the confirmed sources, one per selected connector')
+   elif not 3<=len(result)<=5:raise ValueError('Recommend three to five APIs')
    from .apipicks import check_description
    for pick in result:check_description(pick)
    for pick in result:
@@ -224,6 +244,8 @@ class BuildJobs:
     if key=='appearance:wording_motion':
      blank=[n for n in ('txt_title','txt_tagline','txt_examples','txt_placeholder','txt_footer','txt_disclaimer','txt_hint','txt_sidebar') if not str(result.get(n) or '').strip()]
      if blank:raise ValueError('Interface wording left blank: '+', '.join(blank))
+     for name,limit in spec.get('text_limits',{}).items():
+      if len(str(result.get(name) or '').strip())>limit:raise ValueError(name+' exceeds '+str(limit)+' characters; write complete shorter wording rather than truncating')
     if not appbuilder.green_requested(job.get('brief')):result=appbuilder._degreen(result)
     appbuilder.validate_extras({'appearance':result})
    else:
@@ -315,7 +337,9 @@ class BuildJobs:
     if job['errors']:job['in_retry']=False;job['state']='partial';return
     job['phase']='Merged revision and final local validation';job['remaining_work']=['Final local validation','Optional logo capability check','Final model review']
    raw=self._merge(job)
-   if job.get('merged_draft',{}).get('appearance',{}).get('logo'):raw['appearance']['logo']=job['merged_draft']['appearance']['logo']
+   if job.get('merged_draft',{}).get('appearance',{}).get('logo'):
+    for field in ('logo','logo_original','logo_rendering'):
+     if field in job['merged_draft']['appearance']:raw['appearance'][field]=job['merged_draft']['appearance'][field]
    try:
     from . import buildimages
     cap=buildimages.capability(job['cfg']);job['logo_status']=dict(cap,state='done' if raw['appearance'].get('logo') else 'skipped')
@@ -326,7 +350,17 @@ class BuildJobs:
       self._spend_check()  # Logo requests follow the same daily budget gate as text drafts.
       job['calls']+=1
      if hasattr(job['provider'],'_check'):job['provider']._check()
-     raw['appearance']['logo']=buildimages.generate(job['cfg'],cap,job['brief']);job['logo_status']=dict(cap,state='done')
+     if os.environ.get('CHATIFY_LOGO_FLAT_PALETTE')=='1':
+      # Local opt-in qualification candidate. Existing/default production path stays unchanged.
+      import base64
+      icon_brief='One simple symbol for '+raw['app']['title']+'. '+raw['app']['tagline']+' Use one or two large geometric objects only. No people, diagrams, cards, UI panels, words, labels or service branding. This is a tiny app icon, not an infographic.'
+      original=buildimages.generate(job['cfg'],cap,icon_brief,monochrome=True)
+      look=raw['appearance'];colors=look.get('dark') if look.get('mode')=='dark' else look.get('light');colors=colors or look.get('light') or {}
+      foreground=colors.get('ink','#173f35');background=colors.get('bg','#ffffff')
+      rendered=buildimages.flat_palette(base64.b64decode(original.split(',',1)[1]),foreground,background)
+      look['logo_original']=original;look['logo_rendering']='flat-palette-v1';look['logo']='data:image/png;base64,'+base64.b64encode(rendered).decode()
+     else:raw['appearance']['logo']=buildimages.generate(job['cfg'],cap,job['brief'])
+     job['logo_status']=dict(cap,state='done')
    except Exception as e:job['logo_status']={'state':'skipped','note':str(e)[:300]+' Text draft still available.'}
    job['local_review']=draftaudit.findings(raw)
    job['merged_draft']=copy.deepcopy(raw)

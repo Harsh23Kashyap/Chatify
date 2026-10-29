@@ -51,7 +51,7 @@ DEFAULT = {
     "emoji_bot": "", "emoji_you": "", "emoji_hero": "", "emoji_send": "", "emoji_attach": "", "emoji_temp": "",
     "motion": "full", "entrance": "fade", "speed": 100, "hover_lift": True,
     "sidebar": "left", "sidebar_width": 250, "chat_width": "normal", "avatars": "hide", "bubble": "flat",
-    "logo": "", "logo_watermark": False, "txt_title": "", "txt_tagline": "", "txt_examples": "", "txt_placeholder": "", "txt_footer": "", "txt_disclaimer": "", "txt_hint": "", "txt_sidebar": "",
+    "logo": "", "logo_original": "", "logo_rendering": "", "logo_watermark": False, "txt_title": "", "txt_tagline": "", "txt_examples": "", "txt_placeholder": "", "txt_footer": "", "txt_disclaimer": "", "txt_hint": "", "txt_sidebar": "",
     "you_align": "right", "composer": "inline", "toolbar": "show", "sources_panel": True,
 }
 
@@ -106,6 +106,9 @@ def clean(raw):
         try:
             if not base64.b64decode(lg.split(",",1)[1],validate=True).startswith(b"\x89PNG\r\n\x1a\n"):t["logo"]=""
         except ValueError:t["logo"]=""
+    original = str(raw.get("logo_original") or "")
+    t["logo_original"] = original if re.fullmatch(r"data:image/png;base64,[A-Za-z0-9+/=]{20,2800000}", original) else ""
+    t["logo_rendering"] = "flat-palette-v1" if raw.get("logo_rendering") == "flat-palette-v1" and t["logo_original"] and t["logo"] else ""
     for k in ("emoji_bot", "emoji_you", "emoji_hero", "emoji_send", "emoji_attach", "emoji_temp"):
         t[k] = _emoji(raw.get(k))
         t[k+"_animated"] = bool(raw.get(k+"_animated", False))
