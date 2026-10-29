@@ -538,6 +538,7 @@ function syncLatest() {
   const th = $("#thread"), jump = $("#jump"); if (!th || !jump) return;
   jump.style.bottom = ($(".composer")?.offsetHeight || 96) + 16 + "px";
   const away = th.scrollHeight - th.scrollTop - th.clientHeight > 100;
+  th.classList.toggle("reading-earlier", away);
   if (!away) jump.dataset.reply = "";
   const ready = jump.dataset.reply === "ready";
   const showJump = away && !th.querySelector(".hero");

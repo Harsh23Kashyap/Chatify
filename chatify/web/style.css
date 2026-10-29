@@ -1094,4 +1094,6 @@ html.no-sr #toolsDictate{display:none}
 @media(max-width:480px){.hero .playground-intro:has(.playground-logo){display:grid!important;grid-template-columns:minmax(0,1fr) 48px;gap:12px}.playground-scene:has(.playground-logo){height:48px}.playground-scene .playground-logo{width:48px;height:48px}}
 /* Keep the quiet status row reserved so completion feedback never moves answers. */
 .main>#pipelineStatus{min-height:30px;height:30px;box-sizing:border-box;flex:none}
-.main>#pipelineStatus[hidden]{display:block;visibility:hidden}
+.main>#pipelineStatus[hidden][data-state=done]{display:block;visibility:hidden}
+/* Streaming owns follow-bottom and reading position; retiring thinking rows must not re-anchor the viewport. */
+.thread.reading-earlier:has(#live){overflow-anchor:none}
