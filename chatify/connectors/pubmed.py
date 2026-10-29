@@ -19,7 +19,7 @@ def _get(path, **params):
             time.sleep(1.0 + attempt)
 
 
-_STOP = set("a an the and or of to for in on at by with without is are was were be been do does did can could should would will how what which who why when where than then that this these those it its my your our i you we they there their as from about into over under between versus vs better best beat beats compare compared help helps good bad vs. any some more most less not no yes".split())
+_STOP = set("a an the and or of to for in on at by with without is are was were be been do does did can could should would will find found how what which who why when where than then that this these those it its my your our i you we they there their as from about into over under between versus vs better best beat beats compare compared help helps good bad vs. any some more most less not no yes".split())
 # Meta-intent words (recency, genre) are not topical content: PubMed ANDs them literally,
 # so "most recent papers on GLP-1 dosing safety" matched old reviews containing the word
 # "recent" (hosted R2 regression 2026-10-25: 2020/2011 hits for a most-recent question).
@@ -58,6 +58,12 @@ class PubMed:
         for i, art in enumerate(root.findall(".//PubmedArticle")):
             pmid = art.findtext(".//PMID") or ""
             abstract = " ".join("".join(t.itertext()) for t in art.findall(".//AbstractText"))
+            # Collective authors can carry a trial's name when title and abstract
+            # do not. Preserve this explicit source metadata rather than inventing
+            # an alias or letting the acronym gate discard its primary report.
+            groups = ["".join(g.itertext()).strip() for g in art.findall(".//CollectiveName")]
+            if groups:
+                abstract = "Study group: " + "; ".join(groups) + ". " + abstract
             authors = [" ".join(filter(None, [a.findtext("ForeName"), a.findtext("LastName")])) for a in art.findall(".//Author")][:6]
             out.append(Evidence("".join(art.find(".//ArticleTitle").itertext()) if art.find(".//ArticleTitle") is not None else "",
                                 abstract, "https://pubmed.ncbi.nlm.nih.gov/%s/" % pmid, authors,

@@ -67,8 +67,8 @@ class FormulaOneSources(unittest.TestCase):
     def test_fia_snapshots_have_original_links_and_real_text(self):
         import sys
         from pathlib import Path
-        base=Path(__file__).resolve().parents[1]/'Formula One Chat'
-        if not base.exists(): self.skipTest('F1 app assets are not in this checkout')
+        base=Path(__file__).resolve().parents[1]/'apps'/'formulaone'
+        self.assertTrue(base.is_dir(), 'Bundled Formula One app assets must be present')
         sys.path.insert(0,str(base))
         from f1_sources import search
         for query,expected in [('aerodynamic influence bodywork','technical'),('pit lane pit stops','sporting'),('fire extinguishers','technical')]:
@@ -76,7 +76,7 @@ class FormulaOneSources(unittest.TestCase):
             self.assertTrue(0 < len(rows) <= 12)
             self.assertTrue(any(expected in x['url'] for x in rows))
             self.assertTrue(all(x['text'] and x['url'].startswith('https://www.fia.com/system/files/documents/') for x in rows))
-        for name in ['app.yaml','Formula One Chat.yaml']:
+        for name in ['app.yaml']:
             c=schema.load(str(base/name))
             self.assertEqual(c['retrieval']['top_k'],12)
             self.assertEqual(c['provider']['max_output_tokens'],4096)
