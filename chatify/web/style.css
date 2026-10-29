@@ -900,7 +900,7 @@ html body .thread>.wrap{max-width:var(--chat-max,980px)!important}
 
 html.reading-width-selected body .thread>.wrap{max-width:var(--reading-width,720px)!important}
 
-html.contrast-measuring *,html.contrast-measuring *::before,html.contrast-measuring *::after{transition:none!important}
+
 
 /* Placeholder only for a delayed empty history. Existing history stays usable. */
 .history-skeleton{width:100%;flex-basis:100%;display:grid;gap:4px;margin-top:12px;pointer-events:none}
@@ -1092,3 +1092,6 @@ html.no-sr #toolsDictate{display:none}
 .playground-scene:has(.playground-logo){height:64px;align-self:start}
 .playground-scene .playground-logo{position:static;width:64px;height:64px;object-fit:contain}
 @media(max-width:480px){.hero .playground-intro:has(.playground-logo){display:grid!important;grid-template-columns:minmax(0,1fr) 48px;gap:12px}.playground-scene:has(.playground-logo){height:48px}.playground-scene .playground-logo{width:48px;height:48px}}
+/* Keep the quiet status row reserved so completion feedback never moves answers. */
+.main>#pipelineStatus{min-height:30px;height:30px;box-sizing:border-box;flex:none}
+.main>#pipelineStatus[hidden]{display:block;visibility:hidden}
