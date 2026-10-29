@@ -44,10 +44,16 @@ const autoColors = new Map();
 let contrastFrame = 0, contrastSettle = 0;
 function readableFonts(){
   if (!window.CCBrand || !document.body) return;
-  document.documentElement.classList.add("contrast-measuring");
-  void document.documentElement.offsetWidth;
-  const transitions=new Map();
-  document.querySelectorAll("body *").forEach(node=>{if(node instanceof HTMLElement){transitions.set(node,[node.style.getPropertyValue("transition"),node.style.getPropertyPriority("transition")]);node.style.setProperty("transition","none","important");}});
+  // Only text colour is corrected. Keep width, visibility, panel and
+  // background transitions running while reading their final surface colours.
+  const colorTransitions=new Map();
+  document.querySelectorAll("body *").forEach(node=>{if(node instanceof HTMLElement && !node.matches("option,optgroup,select.cs-native")){
+    const cs=getComputedStyle(node),properties=cs.transitionProperty.split(",").map(x=>x.trim());
+    if(properties.includes("color")||properties.includes("all")){
+      colorTransitions.set(node,[node.style.getPropertyValue("transition"),node.style.getPropertyPriority("transition")]);
+      node.style.setProperty("transition",cs.transition+", color 0s","important");
+    }
+  }});
   autoColors.forEach((value,node)=>{if(node.isConnected){node.style.removeProperty("color");if(value)node.style.color=value;}});autoColors.clear();
   void document.documentElement.offsetWidth;
   const shadeCache=new Map();
@@ -59,14 +65,14 @@ function readableFonts(){
   const parseHex=value=>[1,3,5].map(i=>parseInt(value.slice(i,i+2),16));
   const blend=(front,back,alpha)=>front.slice(0,3).map((v,i)=>v*alpha+back[i]*(1-alpha));
   const styleCache=new Map();
-  const measuredStyle=node=>{let style=styleCache.get(node);if(!style){const cs=getComputedStyle(node);style={color:cs.color,backgroundColor:cs.backgroundColor,opacity:cs.opacity};styleCache.set(node,style);}return style;};
+  const measuredStyle=node=>{let style=styleCache.get(node);if(!style){const cs=getComputedStyle(node);style={color:cs.color,backgroundColor:cs.backgroundColor,opacity:cs.opacity};const bg=node.getAnimations().find(a=>a.transitionProperty==="background-color");if(bg){const frames=bg.effect.getKeyframes();style.backgroundColor=frames[frames.length-1].backgroundColor||style.backgroundColor;}styleCache.set(node,style);}return style;};
   const corrections=[];
   const background=node=>{
     const layers=[];for(let host=node;host;host=host.parentElement){const c=parse(measuredStyle(host).backgroundColor);if(c&&c[3]>0)layers.push(c);if(c&&c[3]===1)break;}
     let result=[255,255,255];for(const c of layers.reverse())result=blend(c,result,c[3]);return result;
   };
   document.querySelectorAll("body *").forEach(node=>{
-    if (!(node instanceof HTMLElement) || node.closest("#cc-watermark") || !([...node.childNodes].some(n=>n.nodeType===3&&n.textContent.trim()) || (node.matches("button,a")&&node.querySelector("svg")))) return;
+    if (!(node instanceof HTMLElement) || node.matches("option,optgroup,select.cs-native") || node.closest("#cc-watermark") || !([...node.childNodes].some(n=>n.nodeType===3&&n.textContent.trim()) || (node.matches("button,a")&&node.querySelector("svg")))) return;
     const cs=measuredStyle(node),values=parse(cs.color);if(!values)return;
     const color=hex(values),backValues=background(node),back=hex(backValues);
     let opacity=values[3];for(let host=node;host;host=host.parentElement)opacity*=Number(measuredStyle(host).opacity);
@@ -75,7 +81,8 @@ function readableFonts(){
     if(!changed){
       changed=color;
       const possible=Math.max(...["#000000","#ffffff"].map(end=>CCBrand.contrast(hex(blend(parseHex(end),backValues,opacity)),back)))>=4.6;
-      if(!possible){changed=CCBrand.shade(color,back,20.9);}
+      if(opacity===1){changed=CCBrand.shade(color,back);}
+      else if(!possible){changed=CCBrand.shade(color,back,20.9);}
       else for(let target=4.7;target<=21.01;target+=.2){changed=CCBrand.shade(color,back,target);if(CCBrand.contrast(hex(blend(parseHex(changed),backValues,opacity)),back)>=4.6)break;}
       shadeCache.set(key,changed);
     }
@@ -83,13 +90,14 @@ function readableFonts(){
   });
   corrections.forEach(([node,changed])=>{autoColors.set(node,node.style.color);node.style.setProperty("color",changed,"important");});
   void document.documentElement.offsetWidth;
-  transitions.forEach(([value,priority],node)=>{if(value)node.style.setProperty("transition",value,priority);else node.style.removeProperty("transition");});
-  document.documentElement.classList.remove("contrast-measuring");
+  colorTransitions.forEach(([value,priority],node)=>{if(value)node.style.setProperty("transition",value,priority);else node.style.removeProperty("transition");});
+
 }
 function queueContrast(){cancelAnimationFrame(contrastFrame);contrastFrame=requestAnimationFrame(readableFonts);clearTimeout(contrastSettle);contrastSettle=setTimeout(readableFonts,400);}
 window.CCReadableFonts=queueContrast;
 document.addEventListener("DOMContentLoaded",()=>{
   queueContrast();new MutationObserver(queueContrast).observe(document.body,{childList:true,subtree:true});
+  for(const type of ["pointerover","pointerout","focusin","focusout"])document.addEventListener(type,event=>{if(event.target instanceof Element&&event.target.closest(".srcs button.s"))queueContrast();});
 });
 
 const backgroundStates = new WeakMap();

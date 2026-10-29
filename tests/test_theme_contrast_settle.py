@@ -1,22 +1,23 @@
 import pathlib,unittest
 class ThemeContrastSettle(unittest.TestCase):
- def test_contrast_correction_reads_final_colors_not_transition_frames(self):
+ def test_contrast_correction_keeps_live_motion_intact(self):
   root=pathlib.Path(__file__).resolve().parents[1]/'chatify/web'
   js=(root/'theme.js').read_text();css=(root/'style.css').read_text()
-  self.assertIn('classList.add("contrast-measuring")',js)
-  self.assertIn('classList.remove("contrast-measuring")',js)
-  self.assertIn('html.contrast-measuring *',css)
+  self.assertNotIn('classList.add("contrast-measuring")',js)
+  self.assertNotIn('html.contrast-measuring *',css)
+  self.assertIn('setTimeout(readableFonts,400)',js)
+  self.assertIn('cs.transition+", color 0s"',js)
+  self.assertIn('frames[frames.length-1].backgroundColor',js)
  def test_alpha_backgrounds_and_text_opacity_are_composited(self):
   js=(pathlib.Path(__file__).resolve().parents[1]/'chatify/web/theme.js').read_text()
   self.assertIn('layers.reverse()',js)
   self.assertIn('opacity*=Number(measuredStyle(host).opacity)',js)
   self.assertIn('const cs=getComputedStyle(node);style={color:cs.color,backgroundColor:cs.backgroundColor,opacity:cs.opacity}',js)
   self.assertIn('hex(blend(parseHex(changed),backValues,opacity))',js)
- def test_inline_transition_override_prevents_false_pass_during_reset(self):
+ def test_correction_does_not_override_unrelated_transitions(self):
   js=(pathlib.Path(__file__).resolve().parents[1]/'chatify/web/theme.js').read_text()
-  self.assertIn('node.style.setProperty("transition","none","important")',js)
-  self.assertIn('getPropertyPriority("transition")',js)
-  self.assertIn('transitions.forEach',js)
+  self.assertNotIn('node.style.setProperty("transition","none","important")',js)
+  self.assertNotIn('transitions.forEach',js)
 
  def test_svg_only_controls_and_bundled_icon_fallback(self):
   root=pathlib.Path(__file__).resolve().parents[1]/'chatify/web'
@@ -30,3 +31,7 @@ class ThemeContrastSettle(unittest.TestCase):
   self.assertIn('const corrections=[]',js)
   self.assertIn('corrections.forEach',js)
   self.assertIn('if(!possible){changed=CCBrand.shade(color,back,20.9);}',js)
+
+ def test_native_hidden_picker_nodes_are_not_contrast_targets(self):
+  js=(pathlib.Path(__file__).resolve().parents[1]/'chatify/web/theme.js').read_text()
+  self.assertEqual(js.count('node.matches("option,optgroup,select.cs-native")'),2)
