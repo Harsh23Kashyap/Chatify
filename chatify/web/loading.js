@@ -50,6 +50,7 @@
   window.addEventListener("pageshow", e => { if (e.persisted) dropVeil(); });
 
   document.addEventListener("click", e => {
+    if (e.defaultPrevented || e.button !== 0) return;
     const a = e.target && e.target.closest ? e.target.closest("a[href]") : null;
     if (!a || e.ctrlKey || e.metaKey || e.shiftKey || e.altKey || a.target || a.download) return;
     let u;

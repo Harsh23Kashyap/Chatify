@@ -1,0 +1,113 @@
+/* Chatify source desk. Owned native components, not a React migration.
+   Panel entrance adapted from Transitions.dev Panel reveal (free source).
+   The sliding selection follows the inspected Motion-Primitives Animated Background pattern. */
+:root{--product-paper:#fffdf7;--product-ink:#173f35;--product-lime:#d7ef72;--product-line:#d2ddd2;--product-muted:#52665a;--product-ease:cubic-bezier(.22,1,.36,1);--product-fast:160ms;--product-enter:260ms}
+html body:is(.settings-tabs,:has(.about-nav)) {background:#f4f3eb}
+html body .toolbar,html body .about-nav{box-shadow:0 1px 0 #173f3510;min-height:64px;padding-inline:clamp(16px,3vw,44px)}
+html body .common-nav{gap:18px}
+html body .common-nav a,html body .common-nav button{font-size:13px!important}
+html body .common-nav .active{box-shadow:none!important}
+html body .common-nav .active::before{content:'';position:absolute;bottom:4px;left:4px;right:4px;height:3px;border-radius:2px;background:var(--brand,#173f35)}
+html body.settings-tabs>.card{max-width:1260px;margin:28px auto 64px;padding:32px 36px 28px;border-radius:14px;box-shadow:0 12px 36px #173f3509;border:1px solid #e3e7db}
+html body.settings-tabs #h{font-family:'DM Sans',sans-serif;font-size:27px!important;letter-spacing:-.035em;margin:0 0 10px!important}
+html body.settings-tabs #lead{max-width:65ch;font-size:14px;line-height:1.7;margin:0 0 22px!important;padding:0!important}
+html body.settings-tabs #cfgtop.cfg-path-choice{position:relative;display:flex!important;gap:4px!important;justify-content:flex-start!important;align-items:center;padding:5px!important;background:#edf1e7!important;border:1px solid #dce3d4!important;border-radius:11px!important;box-sizing:border-box;width:max-content!important;max-width:100%!important;isolation:isolate;margin:0 0 26px!important;overflow:visible}
+html body.settings-tabs #cfgtop.cfg-path-choice button{display:block!important;position:relative;flex:0 1 auto;min-height:44px!important;padding:10px 18px!important;border:0!important;border-radius:7px!important;background:transparent!important;color:#52665a!important;font:500 13px/1.5 'DM Sans',sans-serif!important;text-align:center;z-index:1;white-space:normal;box-shadow:none!important;text-decoration:none!important}
+html body.settings-tabs #cfgtop.cfg-path-choice button.on{color:#173f35!important;font-weight:700!important;background:#fffdf7!important;box-shadow:0 1px 3px #173f3515!important}
+html body.settings-tabs #cfgtop.cfg-path-choice button:hover{color:#173f35!important;background:#f8faf3!important}
+html body.settings-tabs #cfgtop button:focus-visible{outline:2px solid #173f35!important;outline-offset:3px!important}
+html body.settings-tabs .cfg-studio{gap:28px;margin:0 0 24px;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr)}
+html body.settings-tabs.cfgtop-builder .cfg-studio .builder-hero{border-radius:12px;padding:32px!important;gap:18px!important;min-height:480px!important;box-shadow:inset 0 1px #ffffff15;background:#173f35}
+html body.settings-tabs .cfg-studio .builder-hero-title{font:600 clamp(26px,2.5vw,36px)/1.14 Fraunces,Georgia,serif!important;letter-spacing:-.025em;max-width:15ch}
+html body.settings-tabs .cfg-studio .builder-hero-sub{max-width:34ch;font-size:14px;line-height:1.7;color:#d0dfce}
+html body.settings-tabs .cfg-studio #cfgIdea{border-radius:8px!important;border:1px solid #7f9b87!important;min-height:142px!important;padding:16px!important;line-height:1.65!important;box-shadow:inset 0 1px 3px #173f350c!important}
+html body.settings-tabs .cfg-studio #cfgIdea:focus{outline:2px solid #d7ef72;outline-offset:3px;box-shadow:none!important}
+html body.settings-tabs .cfg-studio .builder-hero-go{min-height:46px;border-radius:8px;box-shadow:0 3px 0 #102e26;transition:transform 140ms,background-color 140ms}
+html body.settings-tabs .cfg-studio .builder-hero-go:hover{transform:translateY(-1px);background:#e4f6a1!important}
+html body.settings-tabs .cfg-studio .builder-hero-go:active{transform:translateY(1px);box-shadow:none}
+html body.settings-tabs .cfg-video-break{border-radius:12px;align-self:stretch;display:flex;flex-direction:column;background:#f8faf3;box-shadow:none;border-color:#d2ddd2}
+html body.settings-tabs .cfg-preview-head{padding:17px 20px;background:#f0f4e9;min-height:56px;box-sizing:border-box}
+html body.settings-tabs .cfg-video-break video{width:100%;aspect-ratio:16/9;object-fit:cover;background:#173f35}
+html body.settings-tabs .cfg-video-copy{padding:16px 20px 0!important;margin:0!important;font-size:14px;line-height:1.7;color:#52665a}
+html body.settings-tabs .cfg-video-controls{padding:12px 20px!important;gap:10px}
+html body.settings-tabs .cfg-video-credit{padding:0 20px 16px!important;margin-top:auto!important;font-size:11px!important;line-height:1.7;color:#52665a}
+html body.settings-tabs .cfg-walkthrough{order:3;padding:clamp(24px,4vw,48px);border:1px solid #d2ddd2;border-left:4px solid #173f35;border-radius:10px;background:#f3f6ed;max-width:850px;margin:0 0 24px}
+html body.settings-tabs .cfg-walkthrough h2{font:600 clamp(25px,3vw,36px)/1.2 Fraunces,Georgia,serif;letter-spacing:-.02em;margin:0 0 16px;color:#173f35}
+html body.settings-tabs .cfg-walkthrough p{color:#52665a;line-height:1.8;max-width:58ch;margin:0 0 24px}
+html body.settings-tabs .cfg-walkthrough .go{background:#173f35;color:#fffdf7}
+html body.settings-tabs.cfgtop-guide :is(.cfg-studio,.modebar,#settingsNavTop,.layout,#savebar,.loaded-app,#pvfab,.settings-utilities){display:none!important}
+html body.settings-tabs .cfg-walkthrough[hidden]{display:none!important}
+html body.settings-tabs .settings-utilities{border-top:1px solid #d2ddd2;padding-top:20px;margin-top:4px}
+html body.settings-tabs .settings-help.app-builder{border:1px solid #c9d8ca;border-radius:16px;box-shadow:0 28px 90px #0e2b2630}
+html body.settings-tabs .settings-help-head{padding-bottom:18px;border-bottom:1px solid #d2ddd2}
+html body.settings-tabs .settings-help-head h3{font:600 28px/1.2 Fraunces,Georgia,serif;color:#173f35;letter-spacing:-.025em}
+html body.settings-tabs .builder-part-row{border:0;border-bottom:1px solid #d2ddd2;border-radius:0;background:transparent;box-shadow:none}
+html body.settings-tabs .builder-part-chip{border-radius:5px;font-weight:600}
+html body.settings-tabs :is(.go,.cs-btn,.editor-choice){transition:background-color 140ms,border-color 140ms,box-shadow 140ms}
+html:not(.preview) .hero.playground{column-gap:44px;row-gap:24px}
+html:not(.preview) .hero.playground h1{letter-spacing:-.04em;line-height:1.12}
+html:not(.preview) .playground-question{min-height:66px!important}
+html:not(.preview) .playground-question:focus-visible{outline-offset:-3px}
+html:not(.preview) .composer .box{border:1px solid var(--line);box-shadow:0 3px 14px #173f3507}
+html:not(.preview) .side .empty{font-size:13px;color:var(--mut);max-width:23ch}
+/* Transitions.dev - Panel reveal, adapted: no blur on editable text, short travel. */
+@keyframes product-panel-in{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+@media(prefers-reduced-motion:no-preference){html:not([data-motion=none]):not([data-motion=calm]) body.settings-tabs :is(.cfg-walkthrough:not([hidden]),.cfg-studio,.app-builder[open]){animation:product-panel-in var(--product-enter) var(--product-ease)}}
+@media(max-width:760px){html body.settings-tabs>.card{margin:16px 12px 32px;padding:22px 18px;border-radius:12px}html body.settings-tabs #h{font-size:25px!important}html body.settings-tabs #cfgtop.cfg-path-choice{order:-9!important;width:100%!important;gap:2px!important;margin:14px 0 20px!important}html body.settings-tabs #cfgtop.cfg-path-choice button{flex:1;min-width:0;padding:10px 7px!important;font-size:12px!important}html body.settings-tabs.cfgtop-builder .cfg-studio .builder-hero{padding:24px!important;min-height:0!important}html body.settings-tabs .cfg-studio{grid-template-columns:1fr;gap:18px}html body.settings-tabs .cfg-preview-head{padding:14px 16px}html body.settings-tabs .cfg-walkthrough{padding:24px 20px}html body.settings-tabs #lead{order:-8!important;margin-bottom:18px!important}html body.settings-tabs.cfgtop-builder #lead{display:none}}
+@media(prefers-reduced-motion:reduce){html body .common-nav *,html body.settings-tabs :is(.cfg-studio,.cfg-walkthrough,.go,.app-builder,.builder-hero-go){animation:none!important;transition:none!important;transform:none!important}}
+html[data-motion=none] body.settings-tabs :is(.cfg-studio,.cfg-walkthrough,.go,.app-builder,.builder-hero-go),html[data-motion=calm] body.settings-tabs :is(.cfg-studio,.cfg-walkthrough,.go,.app-builder,.builder-hero-go){animation:none!important;transition:none!important;transform:none!important}
+.product-nav-toggle{display:none}
+@media(max-width:640px){html body :is(.toolbar,.about-nav):has(.product-nav-toggle){display:flex!important;flex-wrap:wrap;justify-content:space-between;padding:10px 16px;min-height:64px;gap:8px}.product-nav-toggle{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:8px 14px;border:1px solid #cdd8cf;border-radius:8px;background:#fffdf7;color:#173f35;font:600 13px 'DM Sans',sans-serif}html body :is(.toolbar,.about-nav):has(.product-nav-toggle) .common-nav{display:none!important;flex-basis:100%;grid-template-columns:repeat(3,minmax(0,1fr));gap:4px!important}html body :is(.toolbar,.about-nav):has(.product-nav-toggle) .common-nav.product-nav-open{display:grid!important}html body :is(.toolbar,.about-nav):has(.product-nav-toggle) .nav-status:empty{display:none}}
+/* Override the old one-link route switch in both modes. */
+html body.settings-tabs.cfgtop-builder #cfgtop.cfg-path-choice button[data-t],html body.settings-tabs.cfgtop-manual #cfgtop.cfg-path-choice button[data-t],html body.settings-tabs.cfgtop-guide #cfgtop.cfg-path-choice button[data-t]{display:block!important}
+@media(max-width:760px){html body.settings-tabs.cfgtop-builder #lead{display:none!important}}
+
+html body.settings-tabs #cfgtop.cfg-path-choice .cfg-route-indicator{position:absolute;left:0;top:0;border-radius:7px;background:#fffdf7;box-shadow:0 1px 3px #173f3515;pointer-events:none;z-index:0;transition:transform 240ms var(--product-ease),width 240ms var(--product-ease),height 240ms var(--product-ease)}
+html body.settings-tabs #cfgtop.cfg-path-choice button.on{background:transparent!important;box-shadow:none!important}
+@media(prefers-reduced-motion:reduce){html body.settings-tabs #cfgtop.cfg-path-choice .cfg-route-indicator{transition:none}}
+html[data-motion=none] body.settings-tabs #cfgtop.cfg-path-choice .cfg-route-indicator,html[data-motion=calm] body.settings-tabs #cfgtop.cfg-path-choice .cfg-route-indicator{transition:none}
+/* Manual editor: flat grouped navigation keeps the selected state readable. */
+html body.settings-tabs #settingsNavTop .category-tabs{gap:8px;border-bottom:1px solid #d2ddd2;padding-bottom:10px}
+html body.settings-tabs #settingsNavTop .category-tabs button{border:0!important;border-radius:8px!important;box-shadow:none!important;min-height:56px!important;background:transparent!important}
+html body.settings-tabs #settingsNavTop .category-tabs button[aria-selected=true]{background:#eaf0e2!important;box-shadow:inset 0 -2px #173f35!important}
+html body.settings-tabs #menu a{border:0!important;border-bottom:1px solid #d2ddd2!important;border-radius:0!important;box-shadow:none!important;background:transparent!important;min-height:58px!important}
+html body.settings-tabs #menu a.on{background:#173f35!important;color:#fffdf7!important;border-radius:8px!important}
+html body.settings-tabs #menu a.on :is(small,b){color:#fffdf7!important}
+html body.settings-tabs .tile .head{border-bottom:1px solid #d2ddd2;padding-bottom:16px;margin-bottom:20px}
+html body.settings-tabs .cfg-preview-head small{color:#425b4b}
+/* Supporting feature gallery: keep actual demos readable instead of adding effects. */
+body:has(#featureTabs) .feature-section{margin-top:40px}
+body:has(#featureTabs) .feature-selector{margin-top:24px}
+body:has(#featureTabs) .feature-showcase{border:1px solid #d2ddd2;background:#fffdf7;overflow:hidden}
+body:has(#featureTabs) #featureTabs button{min-height:48px;padding:12px 16px;border-radius:6px 6px 0 0;transition:background-color 160ms,color 160ms}
+body:has(#featureTabs) #featureTabs button:focus-visible{outline-offset:-3px}
+body:has(#featureTabs) #featureMore{min-height:44px;border:1px solid #cdd8cf;border-radius:8px;background:#fffdf7;color:#173f35}
+@media(prefers-reduced-motion:reduce){body:has(#featureTabs) #featureTabs button{transition:none}}
+@media(max-width:640px){html body .about-nav:has(.product-nav-toggle){padding:10px 16px}body:has(#featureTabs) main{padding-inline:20px}body:has(#featureTabs) main>h1{font-size:34px;line-height:1.15;letter-spacing:-.025em}body:has(#featureTabs) .feature-section{margin-top:28px}body:has(#featureTabs) .feature-selector{margin-top:20px}}
+/* Supporting-page palette is independent of the generated chat theme. */
+html:not([data-theme=dark]) body:has(.about-nav) :is(.feature-note,article p,footer){color:#52665a}
+html[data-theme=dark] body:has(.about-nav){background:#101c17;color:#e8eee6}
+html[data-theme=dark] body:has(.about-nav) .about-nav{background:#101c17!important;border-color:#2b4136}
+/* Audiocn-inspired explicit native-media state, original DOM/CSS implementation. */
+html body.settings-tabs .cfg-media-status{font-size:13px;line-height:1.6;padding:10px 12px;background:#e8eee1;border-radius:6px;margin:16px 0 0;color:#173f35}
+html body.settings-tabs .cfg-media-status[data-state=error]{border-left:3px solid #a43a2c}
+
+/* Recovery: keep unavailable media out of the visual layout. */
+#cfgWalkthrough video[hidden]{display:none!important}
+#cfgWalkthroughVideo{display:block;width:100%;max-width:100%;aspect-ratio:16/9;background:#173f35;border-radius:8px;margin:18px 0}
+#cfgWalkthrough>.go{margin-top:18px;margin-right:10px}
+
+/* Evidence desk: a readable document margin, not nested floating cards.
+   Uses the active chat palette and preserves existing citations/filter state. */
+html:not(.preview) .sources{padding:24px 20px;background:var(--paper);border-left:1px solid var(--line)}
+html:not(.preview) .sources h3{font-size:calc(23px*var(--fs,1));letter-spacing:-.025em;margin-bottom:8px}
+html:not(.preview) .sources .sub{font-size:calc(13px*var(--fs,1));margin-bottom:20px}
+html:not(.preview) .sources .filters{display:flex;flex-wrap:wrap;gap:8px;padding-bottom:16px}
+html:not(.preview) .sources .filters button{min-height:40px;padding:8px 12px;border-radius:6px}
+html:not(.preview) .sources .src{border:0;border-bottom:1px solid var(--line);border-radius:0;padding:20px 0;margin:0;background:transparent;box-shadow:none}
+html:not(.preview) .sources .src.hl{border-left:3px solid var(--brand);padding-left:14px;background:var(--soft);padding-right:10px}
+html:not(.preview) .sources .src b{font-size:calc(14px*var(--fs,1));line-height:1.6}
+html:not(.preview) .sources .src small{display:block;font-size:calc(12px*var(--fs,1));line-height:1.7;margin-top:6px}
+html:not(.preview) .sources .src p{display:block;-webkit-line-clamp:unset;overflow:visible;font-size:calc(13px*var(--fs,1));line-height:1.8;margin:12px 0}
+html:not(.preview) .sources .src a{display:inline-flex;align-items:center;min-height:40px;font-size:calc(13px*var(--fs,1));text-underline-offset:4px}
+html:not(.preview) .sources .source-unavailable{font-style:italic}
