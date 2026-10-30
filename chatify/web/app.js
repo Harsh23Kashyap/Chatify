@@ -548,8 +548,8 @@ function syncLatest() {
   jump.classList.toggle("reply-ready", ready);
   jump.replaceChildren(svg("down"), ...(ready ? [el("span", {text:"Reply ready"})] : []));
 }
-function drawThread() {
-  const th = $("#thread"), priorScroll = th.scrollTop, keep = th.dataset.chat === String(S.chat) && th.scrollHeight - th.scrollTop - th.clientHeight > 100; th.replaceChildren();
+function drawThread(resetScroll = false) {
+  const th = $("#thread"), priorScroll = th.scrollTop, keep = !resetScroll && th.scrollHeight - th.scrollTop - th.clientHeight > 100; th.replaceChildren();
   const w = el("div", { class: "wrap" });
   if (!S.turns.length) {
     const a = S.cfg.app;
@@ -629,7 +629,7 @@ async function openChat(id) {
   S.topic = S.turns.length ? S.turns[S.turns.length - 1].topic : null;
   $("#chatTitle").textContent = (await api("/api/chats")).find((c) => c.id === id)?.title || "Chat";
   document.title = $("#chatTitle").textContent + " - " + S.cfg.app.title;
-  $("#app").classList.remove("menu-open", "src"); drawThread(); loadList(); $("#q").focus();
+  $("#app").classList.remove("menu-open", "src"); drawThread(true); loadList(); $("#q").focus();
 }
 async function openTopic(id) {
   if (!(await confirmTemporaryExit())) return;
@@ -639,7 +639,7 @@ async function openTopic(id) {
   S.topic = id; S.newTopic = false;
   S.turns = await api("/api/topic-turns?topic=" + id);
   S.chat = S.turns.length ? S.turns[S.turns.length - 1].chat : null;
-  $("#chatTitle").textContent = "Conversation"; $("#app").classList.remove("menu-open"); drawThread(); loadList(); $("#q").focus();
+  $("#chatTitle").textContent = "Conversation"; $("#app").classList.remove("menu-open"); drawThread(true); loadList(); $("#q").focus();
 }
 async function newChat() { if (!(await confirmTemporaryExit())) return; S.view = "chat"; setTemp(false); loadSuggestions(); S.chat = null; S.topic = null; S.newTopic = false; S.turns = []; $("#chatTitle").textContent = "New chat"; $("#app").classList.remove("src", "menu-open"); drawThread(); loadList(); $("#q").focus(); }
 
