@@ -1096,4 +1096,4 @@ html.no-sr #toolsDictate{display:none}
 .main>#pipelineStatus{min-height:30px;height:30px;box-sizing:border-box;flex:none}
 .main>#pipelineStatus[hidden][data-state=done]{display:block;visibility:hidden}
 /* Streaming owns follow-bottom and reading position; retiring thinking rows must not re-anchor the viewport. */
-.thread.reading-earlier:has(#live){overflow-anchor:none}
+.thread:has(#live){overflow-anchor:none}
