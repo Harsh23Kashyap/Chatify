@@ -16,6 +16,10 @@ def editor_schema():
         return {'type':'string'}
     out=node(schema.DEFAULTS);out.update({'$schema':'https://json-schema.org/draft/2020-12/schema','title':'Chatify app configuration'})
     props=out['properties'];props['schema_version']['const']=1
+    # Portable app extensions are accepted by schema.validate/validate_extras.
+    # The doctor must apply that same validator after its structural checks.
+    for key in ('appearance','pipeline_prompts','helper_drafts','api_suggestions'):
+        props[key]={'type':'array' if key=='api_suggestions' else 'object'}
     props['actions']['properties']['allow']={'type':['array','null'],'items':{'type':'string','enum':['list_notes','save_note']}}
     p=props['provider']['properties'];p['type']['enum']=sorted(schema.PROVIDERS)
     fallback=copy.deepcopy(p);fallback.pop('fallback',None)

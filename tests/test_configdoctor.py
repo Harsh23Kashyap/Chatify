@@ -26,3 +26,19 @@ class ConfigDoctor(unittest.TestCase):
    inspect(f);self.assertNotIn('DOCTOR_NO_READ',os.environ)
  def test_all_apps(self):
   for f in Path('apps').glob('*/app.yaml'):self.assertFalse(inspect(f)[0],str(f))
+
+ def test_native_export_extensions_are_validated_by_runtime_contract(self):
+  from chatify import portable,schema
+  import zipfile,io
+  cfg=schema.validate({'provider':{'type':'mock'}})
+  with tempfile.TemporaryDirectory() as folder:
+   cfg['_dir']=folder
+   payload,_=portable.bundle(cfg,prompt_value={'text':{'answer':'Only answer from passages.'},'on':{}})
+   with zipfile.ZipFile(io.BytesIO(payload)) as z:
+    issues,clean=self.check(z.read('app.yaml').decode())
+   self.assertFalse(issues);self.assertEqual(clean['pipeline_prompts']['text']['answer'],'Only answer from passages.')
+ def test_bad_extension_shape_is_not_ignored(self):
+  for text in ('appearance: broken','pipeline_prompts: []','helper_drafts: []','api_suggestions: {}'):
+   self.assertTrue(self.check(text)[0],text)
+ def test_bad_extension_content_is_not_ignored(self):
+  self.assertTrue(self.check('pipeline_prompts: {text: {answer: 123}}')[0])
