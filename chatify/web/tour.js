@@ -26,7 +26,7 @@
       else{x=Math.max(pad,(innerWidth-w)/2);y=Math.max(pad,innerHeight-h-pad);edge='top'}
       dialog.dataset.edge=edge;Object.assign(dialog.style,{left:x+'px',top:y+'px',bottom:'auto',right:'auto'});
     }
-    function end(){mark(key);if(originalSettingsMode)window.CCSettingsSetMode?.(originalSettingsMode);dialog.close();dialog.remove();glow.remove();window.removeEventListener('resize',locate);window.removeEventListener('scroll',locate);window.scrollTo({top:scroll,behavior:'instant'});if(before?.isConnected)before.focus({preventScroll:true});onClose?.();}
+    function end(){mark(key);if(originalSettingsMode)window.CCSettingsSetMode?.(originalSettingsMode);dialog.close();dialog.remove();glow.remove();window.removeEventListener('resize',locate);window.removeEventListener('scroll',locate);window.scrollTo({top:scroll,behavior:'instant'});const returnTarget=before?.isConnected&&before.getClientRects().length?before:document.querySelector('.product-nav-toggle');if(returnTarget?.getClientRects().length)returnTarget.focus({preventScroll:true});onClose?.();}
     function draw(){
       const s=steps[i];if(s.view)window.CCSettingsTop?.set(s.view,false);if(s.section)window.CCSettingsFind?.openSection(s.section);if(!s.view&&window.CCSettingsTop&&s.target){if(s.target==='.app-builder-open')window.CCSettingsTop.set('builder',false);else if(['#settingsNavTop','#menu','#cfgmode'].includes(s.target))window.CCSettingsTop.set('manual',false)}target=document.querySelector(s.target||'');
       if(target&&(!target.getClientRects().length||getComputedStyle(target).display==='none'))target=document.querySelector('#settingsNavTop')||document.querySelector('#cfgmode');
