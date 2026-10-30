@@ -38,8 +38,12 @@ def run():
                     page.locator('.cc-tour-next').click()
                 assert page.locator('.cc-tour').count()==0;assert page.evaluate('localStorage.getItem("cc_cfg_mode_v2")')==initial
                 page.reload();page.wait_for_selector('#configGuide');page.wait_for_timeout(400);assert page.locator('.cc-tour').count()==0
+                def replay_config():
+                    if not page.locator('#configGuide').is_visible():
+                        page.locator('.product-nav-toggle').click()
+                    page.locator('#configGuide').click()
                 for width,height in [(390,844),(320,568),(820,980),(1280,540)]:
-                    page.set_viewport_size({'width':width,'height':height});page.locator('#configGuide').click();page.wait_for_selector('.cc-tour')
+                    page.set_viewport_size({'width':width,'height':height});replay_config();page.wait_for_selector('.cc-tour')
                     for i in range(13):
                         bounds()
                         if width==390 and i==5:page.wait_for_timeout(450);page.screenshot(path='/tmp/tour-config-mobile.png')

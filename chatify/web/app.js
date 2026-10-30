@@ -549,7 +549,7 @@ function syncLatest() {
   jump.replaceChildren(svg("down"), ...(ready ? [el("span", {text:"Reply ready"})] : []));
 }
 function drawThread() {
-  const th = $("#thread"), priorScroll = th.scrollTop, keep = th.scrollHeight - th.scrollTop - th.clientHeight > 100; th.replaceChildren();
+  const th = $("#thread"), priorScroll = th.scrollTop, keep = th.dataset.chat === String(S.chat) && th.scrollHeight - th.scrollTop - th.clientHeight > 100; th.replaceChildren();
   const w = el("div", { class: "wrap" });
   if (!S.turns.length) {
     const a = S.cfg.app;
