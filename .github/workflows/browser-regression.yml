@@ -47,8 +47,18 @@ jobs:
           PLAYWRIGHT_MODULE: /tmp/cc-ui-tools/node_modules/playwright-core
           PYTHONUNBUFFERED: '1'
         run: python tests/ci/browser_suite.py --shard ${{ matrix.shard }} --shards 12
-      # No cache/artifact uploads, repository secrets, production keys or user data.
-      # Ordinary job logs retain the pass/fail rows and offline test output.
+      - name: Retain synthetic fixture failure pixels and geometry
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: offline-fixture-failure-shard-${{ matrix.shard }}
+          path: |
+            /downloads/chatify-ci-failures/*.png
+            /downloads/chatify-ci-failures/*.json
+          if-no-files-found: ignore
+          retention-days: 7
+      # Only the two explicit synthetic fixture failure captures are uploaded.
+      # No caches, server logs, directory exports, keys, accounts or user data.
   syntax-and-package:
     runs-on: ubuntu-latest
     timeout-minutes: 10
