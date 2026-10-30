@@ -329,12 +329,13 @@ const clone = (o) => JSON.parse(JSON.stringify(o));
 const effectiveWording = () => {const a=window.CCLoadedApp?.app||{};return {txt_title:a.title,txt_tagline:a.tagline,txt_examples:(a.examples||[]).join("\n"),txt_footer:a.footer,txt_placeholder:"Ask a question",txt_hint:"Answers cite their sources. Check important facts.",txt_disclaimer:"Not a substitute for professional advice.",txt_sidebar:"Conversations"};};
 const get = (f) => (f.colors ? theme[editMode][f.key] : theme[f.key] || effectiveWording()[f.key] || theme[f.key]);
 const setv = (f, v) => { const empty=(document.getElementById("f-"+f.key)||document.getElementById("f-"+f.key+"-file"))?.closest(".field")?.querySelector(".empty-field");if(empty)empty.hidden=!!v;const source=(document.getElementById("f-"+f.key))?.closest(".field")?.querySelector(".value-source");if(source)source.hidden=!!v; if (f.colors) theme[editMode][f.key] = v; else theme[f.key] = v; changed(); };
-let sendTimer = 0, lastPreviewMode = null;
+let sendTimer = 0, lastPreviewMode = null, previewModeTimer = 0;
 function pushPreview() {
   document.documentElement.dataset.motion=["calm","none"].includes(theme.motion)?"none":theme.motion;
   const t = clone(theme); const m = $("#pvmode .seg button[aria-checked=true], #pvmode button[aria-checked=true]"); t.mode = m ? m.dataset.m : t.mode;
   const frame=$("#pv");const reduced=matchMedia("(prefers-reduced-motion:reduce)").matches||["calm","none"].includes(t.motion);
-  if(!reduced&&lastPreviewMode!==null&&lastPreviewMode!==t.mode){frame.classList.add("preview-changing");setTimeout(()=>frame.classList.remove("preview-changing"),160)}
+  if(reduced){clearTimeout(previewModeTimer);frame.classList.remove("preview-changing")}
+  else if(lastPreviewMode!==null&&lastPreviewMode!==t.mode){clearTimeout(previewModeTimer);frame.classList.add("preview-changing");previewModeTimer=setTimeout(()=>frame.classList.remove("preview-changing"),160)}
   lastPreviewMode=t.mode;
   const w = $("#pv").contentWindow; if (w) w.postMessage({ ccTheme: t }, location.origin);
   const w2 = $("#pv").contentWindow; if (w2 && w2.CCTheme) { /* same-origin: also apply the wording/emoji source */ w2.__ccPreviewReady = true; w2.CCTheme.apply(t); }
