@@ -53,3 +53,7 @@ uvx --refresh chatify-app start --directory my-chat
 ```
 
 For pip: `python -m pip install --upgrade --no-cache-dir chatify-app`, then `python -m chatify start --directory my-chat`.
+
+### Optional videos in package installs
+
+The website and source checkout keep the original feature videos and narrated walkthroughs. To keep PyPI downloads small, pip/uvx installs bundle posters and the story list but stream optional videos from the Chatify demo website when online. This sends ordinary video requests to that host, not your documents, API keys or chat content. If the host is unavailable or you are offline, video playback shows an error and Retry; local building, chat and the offline Demo still work. A source checkout retains video files for offline playback.

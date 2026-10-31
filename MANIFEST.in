@@ -1,0 +1,2 @@
+# Video files stay in the hosted/source build; PyPI serves optional hosted copies.
+recursive-exclude chatify/web/media *.mp4

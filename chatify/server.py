@@ -6,6 +6,7 @@ from urllib.parse import urlparse, parse_qs
 import base64
 from pathlib import Path
 from . import websearch, schema, providers, fetch, pdfread, secrets, hardware, theme as themes, generators, prompts as promptmod, nerdload as nerdloadmod
+from .optional_media import hosted_video
 from .pipeline import Engine
 from .store import Store
 from .accounts import Accounts
@@ -969,7 +970,12 @@ def make_handler(cfg, engine):
                 self.end_headers()
                 return
             full = os.path.normpath(os.path.join(WEB, name))
-            if not full.startswith(WEB + os.sep) or not os.path.isfile(full):
+            if not full.startswith(WEB + os.sep):
+                return self._error_page(404)
+            if not os.path.isfile(full):
+                destination = hosted_video(name, WEB)
+                if destination:
+                    return self._send(302, b"", "text/plain", extra={"Location": destination})
                 return self._error_page(404)
             ctype = mimetypes.guess_type(full)[0] or "application/octet-stream"
             # Media probes and seeking (including Safari) require real byte ranges.
@@ -1300,6 +1306,9 @@ def serve_gallery(path, host=None, port=None):
                         return self._send(status, handle.read(end - start + 1), ctype, extra=extra)
                 with open(full, "rb") as handle:
                     return self._send(200, handle.read(), ctype + ("; charset=utf-8" if ctype.startswith("text") or "javascript" in ctype else ""))
+            destination = hosted_video(name, WEB) if full.startswith(WEB + os.sep) else None
+            if destination:
+                return self._send(302, b"", "text/plain", extra={"Location": destination})
             if "text/html" in (self.headers.get("Accept") or ""):
                 return self._send(404, error_page_html(404).encode(), "text/html; charset=utf-8")
             return self._send(404, {"error": "Not found"})

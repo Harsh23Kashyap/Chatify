@@ -16,6 +16,9 @@ def run():
         import zipfile
         with zipfile.ZipFile(wheel) as z:
             metadata=z.read(next(n for n in z.namelist() if n.endswith('/METADATA'))).decode()
+            assert not any(n.endswith('.mp4') for n in z.namelist()), 'Optional videos must not inflate PyPI artifacts'
+            assert 'chatify/web/media/stories/manifest.json' in z.namelist()
+            assert 'chatify/web/media/signal-desk-walkthrough-poster.png' in z.namelist()
             assert 'Requires-Python: >=3.10' in metadata
             assert 'Name: chatify-app' in metadata
             assert 'sentence-transformers' in metadata  # optional, not installed by core

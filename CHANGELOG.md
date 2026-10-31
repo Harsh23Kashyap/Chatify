@@ -1,3 +1,11 @@
+## 0.4.33
+- Refine native chat, source-reading and configuration without a frontend framework.
+- Keep the split builder: idea tool and proposed-app preview before explicit Apply.
+- Simplify the feature panel to Features of Chatify and native video controls. Try sound first, respect browser autoplay policy, and stop playback off-route.
+- Keep original video files in the hosted/source build. PyPI packages use allowlisted hosted copies when online, with a clear optional-video error and Retry when unavailable. Offline Demo, chat and building do not require videos.
+- Fix Paperworks H264 playback compatibility, byte-range seeking, restored-scroll alignment and editor-caret visibility at high zoom.
+- Reconcile design/dependency documentation. Free-source answer quality, Agriculture and full soundtrack review remain separate work; see DELIVERABLES.md.
+
 ## 0.4.32
 - Settings: manual settings content no longer slides under the live preview pane on wide screens; the test button, sliders and helper text stay fully visible
 - Settings: prompt, pipeline and code editors keep their full width on the same wide screens instead of shrinking into the preview column

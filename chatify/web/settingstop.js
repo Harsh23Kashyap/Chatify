@@ -27,7 +27,7 @@
   guideVideo.addEventListener('playing',()=>mediaState('ready','Walkthrough playing. Use sound and fullscreen controls below.'));
   guideVideo.addEventListener('pause',()=>{if(guideVideo.readyState>=1&&!guideVideo.error)mediaState('ready','Walkthrough paused. Use Play to continue. Use sound and fullscreen controls below.')});
   guideVideo.addEventListener('loadedmetadata',()=>mediaState('ready','Walkthrough ready. Use Play, sound and fullscreen controls below.'));
-  guideVideo.addEventListener('error',()=>mediaState('error','This walkthrough could not load. Retry checks the selected file again.'));
+  guideVideo.addEventListener('error',()=>mediaState('error','Optional walkthrough unavailable. Package videos need internet; building and chat still work.'));
   mediaRetry.onclick=()=>{mediaState('loading','Loading walkthrough...');const item=walkthroughs.find(x=>x.id===guideSelect.value);guideVideo.src=(window.CC_APP_BASE||'')+'/media/'+item.video;guideVideo.load()};
   const revealGuideCopy=()=>{if(matchMedia('(prefers-reduced-motion: reduce)').matches||['none','calm'].includes(document.documentElement.dataset.motion))return;for(const n of[guideTitle,guideNote]){n.getAnimations().forEach(a=>a.cancel());n.animate([{opacity:.4,transform:'translateY(6px)'},{opacity:1,transform:'translateY(0)'}],{duration:220,easing:'cubic-bezier(.22,1,.36,1)'})}};
   for(const item of walkthroughs){const option=document.createElement('option');option.value=item.id;option.textContent=item.title;guideSelect.append(option)}

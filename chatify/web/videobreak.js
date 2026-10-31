@@ -10,12 +10,12 @@ function mount(host){
  let item=null,generation=0,base=window.CC_APP_BASE?window.CC_APP_BASE.replace(/\/$/,'')+'/media/stories/':new URL('media/stories/',location.href).href;
  const active=()=>!document.hidden&&document.body.classList.contains('cfgtop-builder')&&host.getClientRects().length>0&&!document.querySelector('dialog.app-builder[open]');
  function state(s,text){host.dataset.mediaState=s;status.textContent=text;status.hidden=!text;retry.hidden=s!=='error';video.hidden=s==='error'}
- async function start(){if(!video.src||!active())return;const token=++generation;for(const other of document.querySelectorAll('video'))if(other!==video)other.pause();try{await video.play()}catch(error){if(token!==generation||!active())return;if(video.error||host.dataset.mediaState==='error')return;if(error.name!=='NotAllowedError'){state('idle','Playback did not start. Use Play or Retry if the file cannot load.');return}video.muted=true;try{await video.play()}catch(_){if(token===generation)state('idle','Your browser paused automatic playback. Use Play to start.')}}if(!active())video.pause()}
+ async function start(){if(!video.src||!active())return;const token=++generation;for(const other of document.querySelectorAll('video'))if(other!==video)other.pause();try{await video.play()}catch(error){if(token!==generation||!active())return;if(video.error||host.dataset.mediaState==='error')return;if(error.name!=='NotAllowedError'){state('idle','Playback did not start. Use Play or Retry if the file cannot load.');return}video.muted=true;try{await video.play()}catch(_){if(token===generation&&!video.error&&host.dataset.mediaState!=='error')state('idle','Your browser paused automatic playback. Use Play to start.')}}if(!active())video.pause()}
  function choose(){if(!item)return;generation++;video.pause();video.src=base+item.src;video.poster=base+item.poster;video.setAttribute('aria-label',item.label+'; illustrated feature story');state('idle','');start()}
  video.addEventListener('loadedmetadata',()=>{if(video.paused)state('ready','')});
  video.addEventListener('playing',()=>state('playing',''));
  video.addEventListener('ended',()=>state('ended','Video finished.'));
- video.addEventListener('error',()=>state('error','Could not load this story. Retry it; your build is unaffected.'));
+ video.addEventListener('error',()=>state('error','Optional video unavailable. Package videos need internet; your build works without it.'));
  retry.onclick=choose;
  document.addEventListener('cc-builder-window-open',()=>{generation++;video.pause()});
  document.addEventListener('visibilitychange',()=>{if(document.hidden){generation++;video.pause()}});
