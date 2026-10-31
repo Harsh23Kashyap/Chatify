@@ -9,7 +9,7 @@ function mount(host){
  const status=document.createElement('p');status.className='cfg-video-copy';status.setAttribute('role','status');status.setAttribute('aria-live','polite');
  const video=document.createElement('video');video.controls=true;video.playsInline=true;video.preload='none';video.setAttribute('aria-label','Optional illustrated Chatify story');
  const retry=document.createElement('button');retry.type='button';retry.className='go ghost';retry.textContent='Retry story';retry.hidden=true;
- const caveat=document.createElement('p');caveat.className='cfg-video-copy';caveat.textContent='New reconstructions, not live answers. Sound included; soundtrack mix review is still open. All 60 feature films are visually finished; soundtrack and release checks remain open.';
+ const caveat=document.createElement('p');caveat.className='cfg-video-copy';caveat.textContent='60 illustrated feature stories with sound. These are product examples, not live answers. Choose a story and press Play.';
  host.replaceChildren(title,note,label,status,retry,video,caveat);
  let items=[],base=window.CC_APP_BASE?window.CC_APP_BASE.replace(/\/$/,'')+'/media/stories/':new URL('media/stories/',location.href).href;
  function state(s,text){host.dataset.mediaState=s;status.textContent=text;retry.hidden=s!=='error';video.hidden=s==='error'}
