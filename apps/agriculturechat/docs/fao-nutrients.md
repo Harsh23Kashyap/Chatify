@@ -1,0 +1,14 @@
+# FAO: global nutrient management principles
+
+Source: FAO, Voluntary Guidelines for Sustainable Soil Management, Rome2017. Extract checked31October2026. Global principles, not crop-specific rates.
+
+Plant nutrition should be based on crop needs, local soil characteristics and conditions, and weather patterns. Plant nutrition can be enhanced through nutrient recycling or additions including mineral (chemical) fertilizers, organic fertilizers and other soil amendments including primary sources (e.g. rock phosphate) and secondary sources (e.g. phosphorus from sewage sludge). It is crucial to select an appropriate plant nutrient management system and approach alongside assessing the suitability of the land for a given land use.
+
+The benefits of sufficient and balanced nutrient supply for plant needs are well-established and include: production of food, feed, fibre, timber, and fuel at levels at, or close to, the optimum potential in the specific geographical context; reduced need for pest control measures, external application of organic and inorganic amendments, and mineral fertilizers; less pollution resulting from inappropriate use of agro-chemicals; and enhanced soil carbon sequestration through biomass production and restitution to the soil.
+
+The lack of basic nutrients leads to the underdevelopment of plants and decrease in yields and crop nutritional value. The consequences of excess nutrients in soils are a) the loss of excess nutrients (especially nitrogen and phosphorus) from agricultural fields, causing eutrophication and deterioration of water quality and terrestrial and aquatic ecosystems; b) increased release of the greenhouse gas nitrous oxide from soils to the atmosphere; c) leaching of mobile forms of nitrogen to water used for human consumption, with potential human health impacts; and d) crop failure.
+
+• Natural soil fertility and natural nutrient cycles should be improved and maintained through the preservation or enhancement of soil organic matter. Improved soil fertility can be attained through soil conservation practices such as the use of crop rotations with legumes, green- and animal manures, and cover crops in combination with reduced- or no-tillage with attention to reduced herbicide use, as well as agroforestry. Nutrient cycles are best managed in integrated systems such as crop-livestock systems or crop-livestock forest systems; 
+• Nutrient use efficiency should be optimized by adopting measures such as applying balanced and context adapted soil organic and inorganic amendments (e.g. compost and liming agents, respectively) and/or innovative products (e.g. slow and controlled release fertilizers), as well as the recycling and reuse of nutrients; 
+• Fertilizer application methods, types, rates and timing should be appropriate to limit losses and promote balanced crop nutrient uptake. This should be based on soil and plant analyses and be a long-term endeavor rather than short term action; 
+
