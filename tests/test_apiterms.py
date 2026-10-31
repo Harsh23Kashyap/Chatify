@@ -6,7 +6,7 @@ class Catalog(unittest.TestCase):
     def test_known_service_gets_verified_terms_and_docs(self):
         s = apiterms.attach({'service': 'OpenAlex', 'docs_url': 'https://invented.example/x', 'key_url': 'https://invented.example/key'})
         self.assertIn('free', s['terms'].lower())
-        self.assertEqual(s['docs_url'], 'https://docs.openalex.org/how-to-use-the-api/api-overview')
+        self.assertEqual(s['docs_url'], 'https://developers.openalex.org/guides/authentication')
         self.assertEqual(s['terms_source'], s['docs_url'])
         self.assertTrue(s['terms_verified'])
         self.assertNotIn('invented.example', str(s))
