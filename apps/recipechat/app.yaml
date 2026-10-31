@@ -9,7 +9,7 @@ app:
     - What does a Thai green curry taste like, and what is in it? 🍛
     - How does the nutrition of feta compare to cheddar? 🧀
     - Give me a vegetarian dinner idea with chickpeas 🥘
-  footer: Recipes and nutrition come from community databases; check labels and season to taste.
+  footer: Community food data; recipe source needs authorized production access. Check labels and original sources.
   theme: light
 provider:
   type: ollama          # gallery mode overrides this with the host key
@@ -17,7 +17,7 @@ provider:
 sources:
 - id: recipes
   type: python
-  label: TheMealDB recipes (ingredients, method, cuisine)
+  label: TheMealDB recipes (production key required)
   entry: recipe_sources:mealdb
   weight: 1.0
 - id: nutrition

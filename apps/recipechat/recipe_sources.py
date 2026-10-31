@@ -1,13 +1,18 @@
-"""Key-free food evidence adapters for RecipeChat.
+"""Food evidence adapters for RecipeChat.
 
 TheMealDB (www.themealdb.com): full recipes - ingredients, measures, method,
-cuisine and category. Free v1 API, no key.
+cuisine and category. Production key required; explicit educational demo opt-in.
 Open Food Facts (world.openfoodfacts.org): packaged-food nutrition per 100g
 from the crowdsourced product database. Free, no key, polite UA required.
 Both return plain evidence dicts; untrusted source text is passed through as
 data only.
 """
-import json, re, urllib.parse, urllib.request, urllib.error
+import json, os, re, threading, time, urllib.parse, urllib.request, urllib.error
+from collections import OrderedDict
+
+_OFF_LOCK = threading.Lock()
+_OFF_LAST = 0.0
+_OFF_CACHE = OrderedDict()
 
 _UA = {'User-Agent': 'Chatify-RecipeChat/1.0 (+https://github.com/Harsh23Kashyap/Chatify)', 'Accept': 'application/json'}
 _STOP = {'what','whats','is','are','the','a','an','of','for','how','do','does','can','i','me','my','tell','show','give','make','recipe','recipes','about','in','to','and','with','good','best','some','please'}
@@ -50,15 +55,21 @@ def _meal_text(m):
     return '\n'.join(parts)
 
 def mealdb(query, k=6):
+    key = os.environ.get('THEMEALDB_API_KEY', '').strip()
+    if not key and os.environ.get('CHATIFY_MEALDB_EDUCATIONAL_DEMO') == '1':key = '1'
+    if not key or key == '1' and os.environ.get('CHATIFY_MEALDB_EDUCATIONAL_DEMO') != '1':
+        raise ValueError('TheMealDB production access is not configured. Add an authorized production key, or use explicit educational demo mode locally.')
+    if not re.fullmatch(r'[A-Za-z0-9_-]{1,120}',key):raise ValueError('Invalid TheMealDB key format.')
+    base = 'https://www.themealdb.com/api/json/v1/' + key + '/'
     q = _keywords(query)
-    if not q:
+    if not q or int(k) <= 0:
         return []
     out = []
     count = max(1, min(int(k), 10))
     # Name search first; fall back to first-letter and main-ingredient filter.
     urls = [
-        'https://www.themealdb.com/api/json/v1/1/search.php?' + urllib.parse.urlencode({'s': q}),
-        'https://www.themealdb.com/api/json/v1/1/filter.php?' + urllib.parse.urlencode({'i': q}),
+        base + 'search.php?' + urllib.parse.urlencode({'s': q}),
+        base + 'filter.php?' + urllib.parse.urlencode({'i': q}),
     ]
     seen = set()
     for url in urls:
@@ -73,7 +84,7 @@ def mealdb(query, k=6):
                 continue
             seen.add(mid)
             if 'strInstructions' not in m:  # filter.php returns stubs; look up the full meal
-                full = _get('https://www.themealdb.com/api/json/v1/1/lookup.php?' + urllib.parse.urlencode({'i': mid}))
+                full = _get(base + 'lookup.php?' + urllib.parse.urlencode({'i': mid}))
                 fm = (full.get('meals') or [None])[0]
                 if isinstance(fm, dict):
                     m = fm
@@ -112,7 +123,21 @@ def offfoods(query, k=6):
     url = ('https://world.openfoodfacts.org/cgi/search.pl?search_simple=1&action=process&json=1&'
            + urllib.parse.urlencode({'search_terms': q, 'page_size': count,
                                      'fields': 'product_name,brands,nutriments,nutrition_grades,ingredients_text,url'}))
-    payload = _get(url)
+    # One process-wide request per 6.1s stays below OFF's 10 search/minute/IP
+    # limit for this process. Other processes sharing the IP still need coordination.
+    global _OFF_LAST
+    with _OFF_LOCK:
+        cached = _OFF_CACHE.get(url)
+        if cached and time.monotonic() - cached[0] < 600:
+            payload = cached[1]
+        else:
+            delay = 6.1 - (time.monotonic() - _OFF_LAST)
+            if delay > 0:time.sleep(delay)
+            _OFF_LAST = time.monotonic()
+            payload = _get(url)
+            _OFF_CACHE[url] = (time.monotonic(),payload)
+            _OFF_CACHE.move_to_end(url)
+            while len(_OFF_CACHE)>64:_OFF_CACHE.popitem(last=False)
     products = payload.get('products') or []
     out = []
     for p in products[:count]:
