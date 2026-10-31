@@ -10,6 +10,15 @@ class DesignTests(unittest.TestCase):
   self.assertIn('high-fiber',template('question_check','diet charts'));self.assertIn('diversification',template('answer','investing'))
  def test_contracts(self):
   self.assertIn('VALID',template('question_check','diet'));self.assertIn('numbers separated',template('relevance','diet'));self.assertIn('UNSUPPORTED:',template('faithfulness','diet'));self.assertIn('600 characters',template('summary','diet'))
+ def test_classifier_acceptance_is_exact_not_reasoned(self):
+  contract=DESIGNS['question_check']['output']
+  self.assertIn('exactly VALID with no comma, reason or punctuation',contract)
+  from chatify.pipeline import Engine
+  from chatify.store import Store
+  from chatify.prompts import PromptStore
+  e=Engine({'sources':[], 'provider':{'type':'mock'}, 'app':{'title':'Library'}},Store(':memory:'))
+  e.prompts=PromptStore('',{'text':{'question_check':'A generated classifier with VALID, or INVALID: reason.'}})
+  self.assertIn('exactly the five characters VALID',e.stage_prompt('question_check'))
  def test_no_minimum_sources_or_fake_status(self):
   p=template('answer','diet');self.assertIn('No invented references or mandatory minimum source count',p);self.assertIn('Do not impersonate a licensed expert',p)
  def test_injected_brief_stays_data(self):
