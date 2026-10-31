@@ -681,6 +681,9 @@ function buildMenu() {
   document.body.classList.toggle("settings-appearance-active",link.closest(".nav-group").dataset.group==="frontend");
   const savebar=$("#savebar");if(savebar)$("#sec-"+id)?.append(savebar);
   document.body.dataset.settingsSection=id;activeSec=id;pvFollow();if(location.hash!==link.hash){if(window.ccRestoreNavigation)history.replaceState(null,"",link.hash);else history.pushState(null,"",link.hash)}
+  // A restored deep-link scroll can leave a new panel above the sticky preview.
+  // Bring its top below the same toolbar edge without moving an already visible panel.
+  requestAnimationFrame(()=>{if(innerWidth<=1180)return;const panel=document.getElementById('sec-'+id),toolbar=document.querySelector('.pvhead');if(!panel||!toolbar||!panel.getClientRects().length)return;const gap=panel.getBoundingClientRect().top-toolbar.getBoundingClientRect().top;if(gap < -1)window.scrollBy({top:gap,behavior:'instant'})});
   const mobileSelect=document.getElementById("mobileSection");if(mobileSelect)mobileSelect.value=link.hash;
   m.querySelectorAll("a").forEach(n=>{n.classList.toggle("on",n===link);n.setAttribute("aria-current",n===link?"page":"false")});if(innerWidth<=760){const p=link.parentElement;p.scrollTo({left:Math.max(0,link.offsetLeft-p.offsetLeft-2),behavior:matchMedia('(prefers-reduced-motion:reduce)').matches?'instant':'smooth'})}
  }
