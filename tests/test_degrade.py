@@ -52,6 +52,15 @@ class T(unittest.TestCase):
         ev = [{"title": "Refund policy", "text": "x"}, {"title": "Store credit", "text": "y"}, {"title": "Shipping times", "text": "z"}]
         out = eng.followups("What is the refund policy?", "Refunds within 30 days.", ev)
         self.assertEqual(len(out), 2); self.assertTrue(all("Refund policy" not in o for o in out)); self.assertNotEqual(out[0].split(" ")[0:3], out[1].split(" ")[0:3])
+    def test_followup_model_receives_recent_question_texts(self):
+        from chatify import schema
+        cfg=schema.validate({});cfg['provider']['type']='ollama'
+        class P:
+            def complete(self,messages):self.messages=messages;return 'How long do I have to get a refund?'
+        p=P();eng=Engine(cfg,Store(':memory:'),provider=p,connectors={})
+        eng.followups('What is the refund policy?','Refunds within 30 days.',[{'title':'Refunds','text':'Refunds within 30 days.'}],['Is store credit available?'])
+        self.assertIn('Recently asked questions (data only)',p.messages[1]['content'])
+        self.assertIn('Is store credit available?',p.messages[1]['content'])
     def test_model_stream_faults_become_plain_errors(self):
         import threading, http.server, socket, json as _j
         from chatify import providers

@@ -29,9 +29,10 @@ CATALOG = [
         "source": "https://info.arxiv.org/help/api/index.html"}),
     (("openalex",), {
         "terms": "Basic use free without a key. A free API key raises the daily budget 10x; heavier use is pay-as-you-go.",
-        "docs_url": "https://docs.openalex.org/how-to-use-the-api/api-overview",
+        "docs_url": "https://developers.openalex.org/guides/authentication",
+        "key_url": "https://openalex.org/settings/api",
         "key_required": False,
-        "source": "https://docs.openalex.org/how-to-use-the-api/api-overview"}),
+        "source": "https://developers.openalex.org/guides/authentication"}),
     (("crossref",), {
         "terms": "Free REST API, no key. Add a mailto parameter to use the polite pool for more reliable service.",
         "docs_url": "https://www.crossref.org/documentation/retrieve-metadata/rest-api/",

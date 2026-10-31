@@ -41,3 +41,15 @@ class DesignTests(unittest.TestCase):
   for stage,text in [('queries','Generate queries for input. Expected output: meteor showers, meteor dust.'),('standalone','Rewrite questions. Example question: What are meteors?'),('summary','Summarize conversation history. Sample summary: We discussed meteors.')]:
    self.assertTrue(validate_draft(stage,{'prompt':text}),text)
   self.assertTrue(validate_draft('answer',{'prompt':'Answer questions from numbered evidence and cite each factual claim.'}))
+
+ def test_classifier_does_not_gate_sources_or_ban_citation_requests(self):
+  text=DESIGNS['question_check']['rules']
+  self.assertIn('before source retrieval',text)
+  self.assertIn('never prohibit a reader from requesting citations',text)
+  self.assertIn('may be uploaded later',text)
+
+ def test_api_enrichment_cannot_activate_recommendations_in_background_build(self):
+  from chatify.apipicks import complete_drafts
+  raw={'sources':[],'api_suggestions':[{'service':'Wikipedia'}]}
+  self.assertEqual(complete_drafts(raw,require_helpers=False,activate_sources=False)['sources'],[])
+  self.assertEqual(raw['sources'],[])

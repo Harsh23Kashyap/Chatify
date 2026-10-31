@@ -32,7 +32,7 @@ KINDS = {
         "label": "Query cleaning", "filename": "clean_query.py", "func": "clean_query",
         "sig": "clean_query(query: str) -> str",
         "contract": ("Define clean_query(query) that takes the reader's question and returns a better search string. Use only the standard "
-                     "library (re, string, unicodedata). No network, no files. Always return a non-empty string; if cleaning leaves nothing, return the original query."),
+                     "library (re, string, unicodedata). No network, no files. For a nonempty input return a nonempty string; if cleaning leaves nothing, return the original query. For empty input return an empty string. Never invent topic words or a search query."),
         "allowed": {"re", "string", "unicodedata", "html", "json"},
     },
 }

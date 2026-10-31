@@ -2,7 +2,7 @@
 import copy,re
 PAGES={
  'pubmed':{'name':'PubMed','page':'https://www.ncbi.nlm.nih.gov/books/NBK25501/','docs':'https://eutilities.github.io/site/API_Key/usageandkey/','key_required':False,'source':{'id':'pubmed','label':'PubMed','type':'pubmed'}},
- 'openalex':{'name':'OpenAlex','page':'https://developers.openalex.org/api-reference/introduction','docs':'https://developers.openalex.org/guides/authentication','key_page':'https://openalex.org/settings/api','key_required':True},
+ 'openalex':{'name':'OpenAlex','page':'https://developers.openalex.org/api-reference/introduction','docs':'https://developers.openalex.org/guides/authentication','key_page':'https://openalex.org/settings/api','key_required':False,'key_optional':True},
  'arxiv':{'name':'arXiv','page':'https://info.arxiv.org/help/api/index.html','docs':'https://info.arxiv.org/help/api/user-manual.html','key_required':False,'source':{'id':'arxiv','label':'arXiv','type':'arxiv'}},
  'crossref':{'name':'Crossref','page':'https://www.crossref.org/documentation/retrieve-metadata/rest-api/','key_required':False,'source':{'id':'crossref','label':'Crossref','type':'crossref'}},
  'wikipedia':{'name':'Wikipedia','page':'https://www.mediawiki.org/wiki/API:Main_page','key_required':False,'source':{'id':'wikipedia','label':'Wikipedia','type':'wikipedia','lang':'en'}},
@@ -30,7 +30,7 @@ def check_description(pick):
   text=str(pick.get(field,'')).strip()
   if len(text)<40 or len(text.split())<7 or re.sub(r'[^a-z0-9]','',text.lower())==service:raise ValueError('API '+field+' must be a useful sentence, not only a service name or short label')
 
-def complete_drafts(raw,require_helpers=True):
+def complete_drafts(raw,require_helpers=True,activate_sources=True):
  """Complete generated API setup without activating code or making requests."""
  from . import generators
  raw=copy.deepcopy(raw);raw['api_suggestions']=enrich(raw.get('api_suggestions',[]))
@@ -42,7 +42,7 @@ def complete_drafts(raw,require_helpers=True):
    ok,problems=generators.review_code('search',helper['code'])
    if not ok:raise ValueError('API helper contract failed: '+'; '.join(problems))
    if 'helper_drafts' in raw and pick.get('selected',True):raw['helper_drafts']['search_api_'+str(i+1)]=copy.deepcopy(helper)
-  if 'sources' in raw and pick.get('selected',True) and not pick.get('key_required',True):
+  if activate_sources and 'sources' in raw and pick.get('selected',True) and not pick.get('key_required',True):
    info=next((x for x in PAGES.values() if x['page']==pick.get('provider_page')),None)
    if info and info.get('source') and not any(s.get('type')==info['source']['type'] for s in raw['sources']):raw['sources'].append(copy.deepcopy(info['source']))
  return raw

@@ -44,6 +44,14 @@ class Matrix(unittest.TestCase):
   for stage in d.DESIGNS:
    e.prompts.save(stage,'Custom role says omit all security wording')
    self.assertTrue(e.stage_prompt(stage).endswith(d.BOUNDARY))
+ def test_classifier_contract_clarifies_request_vs_output(self):
+  e=self.engine()
+  e.prompts.save('question_check','Custom classifier: no citations in output')
+  classifier=e.stage_prompt('question_check')
+  self.assertIn('apply ONLY to your one-line classification',classifier)
+  self.assertIn('Source absence must never cause INVALID',classifier)
+  self.assertTrue(classifier.endswith(d.BOUNDARY))
+  self.assertNotIn('Classifier output restrictions',e.stage_prompt('answer'))
  def test_fail_closed_question_and_support(self):
   e=self.engine();e.prompts.save('question_check',on=True);e.prompts.save('faithfulness',on=True)
   class P:
