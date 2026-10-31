@@ -96,6 +96,7 @@
     "builder_saved_hover_inventory_browser.cjs": "generic",
     "builder_saved_panel_refresh_browser.cjs": "generic",
     "builder_scope_clarity_browser.cjs": "generic",
+    "builder_source_plan_browser.cjs": "generic",
     "builder_todo_navigation_motion_levels_browser.cjs": "generic",
     "builder_use_app_browser.cjs": "generic",
     "builder_whole_dashboard_fontstress_browser.cjs": "generic",
@@ -180,6 +181,7 @@
     "emoji_motion_browser.cjs": "generic",
     "emoji_runtime_quiet_motion_browser.cjs": "generic",
     "error_symbol_audit_browser.cjs": "generic",
+    "feature_story_simple_controls_browser.cjs": "generic",
     "features_browser.cjs": "generic",
     "field_help_browser.cjs": "generic",
     "final_design_browser.cjs": "generic",
@@ -478,8 +480,7 @@
     "workspace_live_states_browser.cjs": "generic",
     "workspace_questions_late_save_browser.cjs": "generic",
     "workspace_questions_save_states_browser.cjs": "generic",
-    "workspace_review_confirm_harness.cjs": "node",
-    "feature_story_simple_controls_browser.cjs": "generic"
+    "workspace_review_confirm_harness.cjs": "node"
   },
   "excluded": {
     "builder_keep_current_native_event_dispatch_diagnostic.cjs": "Instrumented diagnostic copy, not a regression verdict.",

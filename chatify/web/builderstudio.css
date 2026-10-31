@@ -312,3 +312,23 @@ dialog.app-builder .builder-useapp-status[data-state=run]{color:#315645}
 dialog.app-builder .builder-useapp-status[data-state=ok]{color:#2c5f3f;font-weight:600}
 dialog.app-builder .builder-useapp-status[data-state=error]{color:#9a3b2e;font-weight:600}
 #builderActionBar[data-state=error]{font-weight:600}
+
+/* Explicit source plan in the existing builder, no automatic activation. */
+.builder-source-plan{margin:12px 0;padding:12px;border:1px solid #cdd9cf;border-radius:10px;min-width:0;font-size:13px;line-height:1.5}
+.builder-source-plan legend{font-weight:700;padding:0 4px;color:#173f35}
+.builder-source-plan p{margin:0 0 10px}
+.builder-source-plan label{display:flex!important;gap:10px;align-items:flex-start;margin:8px 0;font-weight:400;white-space:normal}
+.builder-source-plan input[type=checkbox]{flex:0 0 auto;width:18px;height:18px;margin-top:2px}
+.builder-source-plan span{overflow-wrap:anywhere}
+
+body .cfg-composer .builder-source-options{margin:12px 0;color:#fffdf4}body .cfg-composer .builder-source-options summary{cursor:pointer;font-weight:600;padding:8px 0}
+body .cfg-composer .builder-source-plan,dialog.app-builder .builder-source-plan{background:#f8faf3;color:#173f35!important;grid-column:1/-1;display:block!important}
+body .cfg-composer .builder-source-plan legend,body .cfg-composer .builder-source-plan p{color:#173f35!important;display:block!important;visibility:visible!important;height:auto!important;opacity:1!important}
+body .cfg-composer .builder-source-plan label,dialog.app-builder .builder-source-plan label{display:flex!important;flex-direction:row!important;gap:10px!important;align-items:flex-start!important;font-weight:400!important;color:#173f35!important}
+body .cfg-composer .builder-source-plan input[type=checkbox],dialog.app-builder .builder-source-plan input[type=checkbox]{appearance:auto!important;border-radius:2px!important;flex:0 0 18px;width:18px!important;height:18px!important;margin:2px 0 0!important}
+
+body .cfg-composer .builder-source-plan legend{position:static!important;transform:none!important;clip:auto!important;clip-path:none!important;max-height:none!important;font-size:13px!important;line-height:1.5!important;overflow:visible!important}
+body .cfg-composer .builder-source-plan label::before,body .cfg-composer .builder-source-plan label::after,dialog.app-builder .builder-source-plan label::before,dialog.app-builder .builder-source-plan label::after{display:none!important;content:none!important}
+body .cfg-composer .builder-source-plan input[type=checkbox]::after,dialog.app-builder .builder-source-plan input[type=checkbox]::after{display:none!important;content:none!important}
+body .cfg-composer .builder-source-plan{padding-top:16px!important}
+body .cfg-composer .builder-source-plan legend{display:none!important}
