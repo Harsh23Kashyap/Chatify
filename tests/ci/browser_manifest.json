@@ -478,7 +478,8 @@
     "workspace_live_states_browser.cjs": "generic",
     "workspace_questions_late_save_browser.cjs": "generic",
     "workspace_questions_save_states_browser.cjs": "generic",
-    "workspace_review_confirm_harness.cjs": "node"
+    "workspace_review_confirm_harness.cjs": "node",
+    "feature_story_simple_controls_browser.cjs": "generic"
   },
   "excluded": {
     "builder_keep_current_native_event_dispatch_diagnostic.cjs": "Instrumented diagnostic copy, not a regression verdict.",
