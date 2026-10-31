@@ -6,3 +6,6 @@ Creative Commons Attribution3.0: https://creativecommons.org/licenses/by/3.0/
 Official reuse/excerpt terms: https://peach.blender.org/about/
 
 The clips are entertainment, not generated app output. Playback is opt-in, same-origin, no tracking embed, no autoplay, no automatic loop. Silent scenic clips have descriptive text alongside them. All build/review/save operations work without playing them.
+
+## Signal Desk walkthrough
+Reconstructed functional local walkthrough recorded31October2026.294.641seconds,1440x1000,H264/AAC,English narration,no subtitles. Actual Chatify UI and real NewsAPI/OpenAI requests, edited with reading holds. AI-generated proposals were human-reviewed: final guard rejected example credential strings in inert code, unused helpers were removed, checked nativeHTTP mapping retained. Explicit validation, save and separate local launch, masked source credential entry, real cited answer and opened source panel. Developer NewsAPI is local development/testing only,24-hour delayed excerpts,not full articles. No keys,private chats or generated helper execution in the published file. This is a reconstruction,not recovered original footage.
