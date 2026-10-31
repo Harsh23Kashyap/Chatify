@@ -972,3 +972,29 @@ document.addEventListener("focusin", e => {
     if (box.top < top || box.bottom > innerHeight - 16) control.scrollIntoView({block:"center",behavior:"instant"});
   });
 });
+
+// Native Tab can restore a CodeMirror selection below its nested scroll viewport.
+// Keep that caret visible at browser zoom without moving unrelated controls.
+(function(){
+  let pending=false;
+  function keepCaret(){
+    pending=false;
+    const n=document.activeElement;
+    if(!(n instanceof HTMLElement)||!n.matches('#col .cm-content'))return;
+    const scroller=n.closest('.cm-scroller'),selection=getSelection();
+    if(!scroller||!selection.rangeCount||!n.contains(selection.anchorNode))return;
+    const caret=selection.getRangeAt(0).getClientRects()[0];if(!caret)return;
+    const box=scroller.getBoundingClientRect(),nav=document.getElementById('settingsNavTop');
+    const top=Math.max(0,box.top,nav?.getBoundingClientRect().bottom||0)+2;
+    const bottom=Math.min(innerHeight,box.bottom)-2;
+    if(caret.bottom>bottom)scroller.scrollTop+=caret.bottom-bottom;
+    else if(caret.top<top)scroller.scrollTop-=top-caret.top;
+    const fresh=selection.getRangeAt(0).getClientRects()[0];
+    if(fresh&&fresh.bottom>innerHeight-2)window.scrollBy({top:fresh.bottom-innerHeight+2,behavior:'instant'});
+    else if(fresh&&fresh.top<Math.max(0,nav?.getBoundingClientRect().bottom||0)+2)
+      window.scrollBy({top:fresh.top-Math.max(0,nav?.getBoundingClientRect().bottom||0)-2,behavior:'instant'});
+  }
+  function queue(){if(pending)return;pending=true;requestAnimationFrame(()=>requestAnimationFrame(keepCaret))}
+  document.addEventListener('focusin',e=>{if(e.target.matches?.('#col .cm-content'))queue()});
+  document.addEventListener('selectionchange',()=>{if(document.activeElement?.matches?.('#col .cm-content'))queue()});
+})();
