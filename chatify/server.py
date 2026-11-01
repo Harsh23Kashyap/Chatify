@@ -482,7 +482,7 @@ def make_handler(cfg, engine):
                     selected=b.get('selection') or {};kind=selected.get('provider');model=selected.get('model');base=selected.get('base_url','')
                     if kind not in schema.PROVIDERS or not isinstance(model,str) or not model.strip() or len(model)>120 or not isinstance(base,str) or len(base)>300:raise ValueError('Choose a valid provider and model')
                     cheap=buildjobs_mod.CHEAP_MODEL.get(kind)
-                    if cheap and cheap!=model:
+                    if cheap and cheap!=model and not b.get('explicit_selection'):
                         try:
                             if cheap in providers.list_models(cfg,kind,base):model=cheap
                         except Exception:pass
@@ -500,7 +500,8 @@ def make_handler(cfg, engine):
                         # app must inherit the host's configured provider block
                         # (live evidence 2026-10-25: a child app was saved with the
                         # build-time substitution instead of the configured model).
-                        return self._send(200,build_jobs.start(o,model_provider,cfg,b))
+                        runtime_cfg=providers._block(cfg,kind,selected.get('model'),base) if b.get('explicit_selection') else cfg
+                        return self._send(200,build_jobs.start(o,model_provider,runtime_cfg,b))
                     if path.endswith('/deploy'):return self._send(200,appbuilder.deployment(model_provider,b))
                     return self._send(200,appbuilder.talk(model_provider,build_cfg,b))
                 if path.endswith('/parse'):
@@ -691,6 +692,17 @@ def make_handler(cfg, engine):
                         return self._send(200, {"types": types})
                     if path == "/api/websearch/status":
                         return self._send(200, {"catalog": engine.catalog_state(), "catalog_keys": {"openalex": bool(secrets.saved("catalog:openalex") or os.environ.get("OPENALEX_API_KEY"))}, "source": engine.web_state(), "providers": [{"id": k, "label": v["label"], "has_key": websearch.has_key(k)} for k, v in websearch.PROVIDERS.items()]})
+                    if path == "/api/catalog/test" and method == "POST":
+                        pid = str(b.get("id") or "")
+                        if pid not in ("openalex", "pubmed", "arxiv", "crossref", "wikipedia"):
+                            return self._send(400, {"error": "Unknown reference source"})
+                        try:
+                            from .connectors import make_connector as make_source
+                            connector = make_source({"id": pid, "label": pid, "type": pid}, cfg.get("_dir", "."))
+                            items = connector.search(str(b.get("query") or "habitat loss")[:300], 3)
+                            return self._send(200, {"ok": bool(items), "items": [{"title": row.get("title", ""), "url": row.get("url", "")} for row in items], "error": "" if items else "No results returned. Connection not verified."})
+                        except Exception as error:
+                            return self._send(200, {"ok": False, "items": [], "error": str(error)[:300]})
                     if path == "/api/catalog/key" and method == "POST":
                         if b.get("id") != "openalex":
                             return self._send(400, {"error": "Unknown library"})

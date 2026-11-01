@@ -332,3 +332,27 @@ body .cfg-composer .builder-source-plan label::before,body .cfg-composer .builde
 body .cfg-composer .builder-source-plan input[type=checkbox]::after,dialog.app-builder .builder-source-plan input[type=checkbox]::after{display:none!important;content:none!important}
 body .cfg-composer .builder-source-plan{padding-top:16px!important}
 body .cfg-composer .builder-source-plan legend{display:none!important}
+
+/* Inline guidance stays visible in every guided stage, including saved drafts. */
+dialog.app-builder[data-step] .builder-caption{display:block;max-width:760px}
+dialog.app-builder.is-building .builder-caption{display:none}
+.builder-scope-advanced{margin:8px 0 16px}.builder-scope-advanced summary{cursor:pointer}
+.builder-completion-notice progress{display:block;width:100%;accent-color:#173f35;margin-bottom:10px}
+.builder-completion-notice progress[hidden]{display:none}
+dialog.app-builder .builder-completion-notice{position:static!important;max-width:none!important;margin:8px 0;box-shadow:none!important;padding:12px!important}
+dialog.app-builder .builder-completion-notice button:first-of-type{display:none}
+dialog.app-builder[data-step="0"] .builder-shell-footer .settings-help-actions{display:flex!important}
+dialog.app-builder[data-step="0"] .builder-shell-footer .settings-help-actions[hidden]{display:none!important}
+html body dialog.app-builder[data-step="0"] .builder-shell-footer{display:flex!important}
+html body dialog.app-builder .builder-shell-footer:has(.builder-completion-notice:not([hidden])){display:flex!important}
+html body dialog.app-builder[open]{height:96dvh!important;max-height:96dvh!important}
+.builder-inline-connection{padding:16px;margin:12px 0;border:1px solid #b9cbbb;border-radius:10px;background:#f2f6ec}.builder-inline-connection input{display:block;width:100%;margin:8px 0}.builder-inline-connection button{margin:4px 8px 4px 0}
+dialog.app-builder #builderVisual.expanded .builder-live-preview{height:65vh!important;max-height:none!important}
+@media(min-width:800px){#builderDescribe>.builder-model-setup{grid-column:2;grid-row:auto;border:1px solid #cdd9cf;border-radius:12px;padding:16px}#builderDescribe>#builderConversation{grid-column:1/-1;grid-row:auto;border-left:0;padding-left:0}#builderDescribe>.builder-scope-advanced{grid-column:1/-1}.builder-model-setup input,.builder-model-setup select{width:100%;display:block;margin:10px 0}.builder-model-setup button{margin:4px 8px 4px 0}}
+/* Setup key inputs are full-size credentials, never checkbox-shaped fields. */
+.builder-content .builder-inline-connection label:has(input[type=password]),.builder-content .builder-model-setup label{display:block!important;text-align:left!important}
+.builder-content .builder-inline-connection input[type=password],.builder-content .builder-model-setup input{width:100%!important;min-width:0!important;max-width:none!important;min-height:44px!important;height:auto!important;padding:12px!important;box-sizing:border-box}
+.builder-final-api-grid{grid-template-columns:repeat(auto-fit,minmax(min(100%,360px),1fr))!important}
+@media(min-width:800px){#builderDescribe{display:block!important;position:relative;padding-right:48%;min-height:480px}#builderDescribe>.builder-model-setup{position:absolute;right:0;top:0;width:44%;box-sizing:border-box}#builderDescribe>#builderConversation{padding:0;border:0}#builderDescribe>.builder-scope-advanced{margin-top:12px}.builder-model-setup button{font-size:12px!important}.builder-model-setup summary{font-weight:700;cursor:pointer}}
+
+@media(min-width:800px){#builderDescribe{min-height:740px}.builder-model-setup{min-height:0}}

@@ -25,6 +25,7 @@ const MODEL_GUIDES = {
 };
 const NAME2ID = { OpenAI: "openai", Claude: "claude", Gemini: "gemini", Groq: "groq", Mistral: "mistral", MiniMax: "minimax", "Xiaomi MiMo": "mimo", DeepSeek: "deepseek", OpenRouter: "openrouter" };
 const SEARCH = [
+  { id: "brave", name: "Brave Search", pro: "Web results with source snippets.", free: "Requires an API key and an activated plan. Check current pricing before use.", url: "https://api-dashboard.search.brave.com/", docs: "https://api-dashboard.search.brave.com/documentation/services/web-search" },
   { id: "tavily", name: "Tavily", pro: "Short, clean snippets.", free: "Free: 1,000 credits a month.", url: "https://app.tavily.com/", docs: "https://docs.tavily.com/documentation/quickstart" },
   { id: "exa", name: "Exa", pro: "Finds pages by meaning.", free: "Free: $20 on signup, $10 a month.", url: "https://dashboard.exa.ai/api-keys", docs: "https://exa.ai/docs/reference/pricing" },
   { id: "firecrawl", name: "Firecrawl", pro: "Also reads whole pages.", free: "Free: 500 searches, no card.", url: "https://www.firecrawl.dev/app", docs: "https://docs.firecrawl.dev/billing" },
@@ -96,9 +97,10 @@ let keyStatus = {};
 async function codePanel(host) {
   let state;
   try {state=await api("/api/websearch/status")}catch(e){host.textContent=e.message;return}
-  const selected=new Set(state.source.providers||[]), libraries=new Set(state.catalog||[]);
+  const savedState=await api("/api/configuration-state");const savedWeb=(savedState.config?.sources||[]).filter(s=>s.type==="web_search");
+  const selected=new Set(savedState.restart_required?savedWeb.flatMap(s=>s.providers||[s.provider]).filter(Boolean):state.source.providers||[]), libraries=new Set(state.catalog||[]);
   keyStatus=Object.fromEntries(state.providers.map(p=>[p.id,p.has_key]));
-  let webOn=!!state.source.on;
+  let webOn=savedState.restart_required?savedWeb.length>0:!!state.source.on;
   const notice=el("p",{class:"h",role:"status"});
   const persistWeb=()=>api("/api/websearch/source",{on:webOn,providers:[...selected]});
   const persistLibraries=()=>api("/api/catalog",{types:[...libraries]});
@@ -117,14 +119,15 @@ async function codePanel(host) {
     let has=keyfree||(library?!!(state.catalog_keys||{})[id]:!!keyStatus[id]);
     const cb=el("input",{type:"checkbox","aria-label":"Enable "+name});cb.checked=set.has(id);guardToggle(cb);
     const badge=el("span",{class:"source-key-badge"});const status=el("small",{class:"h",role:"status"});
-    const card=el("section",{class:"source-key-card"});
+    const card=el("section",{class:"source-key-card","data-source-provider":id});
     const input=el("input",{type:"password",autocomplete:"off",spellcheck:"false","aria-label":name+" API key",placeholder:has?"Saved key available (replace only)":"(not filled) - "+name+" API key"});
     const keyrow=el("div",{class:"keyrow source-inline-key"});const help=el("small",{class:"h"});const notes=el("details",{class:"source-key-notes"},el("summary",{text:"Key and setup notes"}),help);
     const refresh=()=>{card.dataset.state=!cb.checked?"disabled":!has?"missing":"untested";badge.textContent=keyfree?"Key-free":has?"Key saved":"Not filled (API key)";status.textContent=!cb.checked?"Off. Not enabled.":has?"Enabled. Not tested.":"Selected. Paused until a key is saved.";if((keyfree||!cb.checked)&&keyrow.contains(document.activeElement))cb.focus();keyrow.hidden=keyfree||!cb.checked;notes.hidden=keyfree;input.placeholder=has?"Saved key available (replace only)":"(not filled) - "+name+" API key";help.textContent=has?"A key is saved. Leave blank to keep it, or paste a replacement.":"Not filled: no API key saved. No requests sent until enabled and saved.";remove.hidden=!has||keyfree;};
     const endpoint=library?"/api/catalog/key":"/api/websearch/key";
     const save=el("button",{type:"button",class:"go blue",text:"Save key",onclick:async()=>{if(save.disabled)return;if(!input.value.trim()){status.textContent="Paste a key first. Existing key kept.";return}const submitted=input.value;save.disabled=remove.disabled=true;save.textContent="Saving...";status.textContent="Saving key...";try{const r=await api(endpoint,{id,key:submitted});if(input.value===submitted)input.value="";has=r.has_key;refresh()}catch(e){status.textContent=e.message}finally{save.disabled=remove.disabled=false;save.textContent="Save key"}}});
+    const test=el("button",{type:"button",class:"go ghost",text:"Test connection",onclick:async()=>{if(test.disabled)return;if(!has){status.textContent="Save the matching provider key first. No request sent.";return}if(!(await CCDialog.confirm("Run one live search through "+name+"? This may use provider credits.",{title:"Test selected connection?",okText:"Run test"})))return;test.disabled=true;status.textContent="Testing "+name+"...";try{const r=await api("/api/websearch/test",{id,query:"habitat loss research"});card.dataset.state=r.ok&&r.items?.length?"tested":"failed";status.textContent=r.ok&&r.items?.length?name+" returned "+r.items.length+" results. This connection worked for this test, not a guarantee of future answers.":r.error||"The request returned no results. Connection not verified."}catch(e){status.textContent=e.message;card.dataset.state="failed"}finally{test.disabled=false}}});
     const remove=el("button",{type:"button",class:"go ghost",text:"Remove key",onclick:async()=>{if(remove.disabled)return;remove.disabled=save.disabled=true;status.textContent="Removing key...";try{const r=await api(endpoint,{id,clear:true});has=r.has_key;refresh()}catch(e){status.textContent=e.message}finally{remove.disabled=save.disabled=false}}});
-    keyrow.append(input,save,remove);
+    keyrow.append(input,save,remove);if(!library)keyrow.append(test);
     cb.addEventListener("change",async()=>{if(togglePending(cb))return;const before=set.has(id);cb.checked?set.add(id):set.delete(id);refresh();lockToggle(cb);try{await(library?persistLibraries():persistWeb())}catch(e){before?set.add(id):set.delete(id);cb.checked=before;refresh();status.textContent=e.message}finally{unlockToggle(cb)}});
     card.append(el("div",{class:"source-key-top"},el("label",{class:"check sw"},cb,el("b",{text:name})),badge),status,keyrow,notes);refresh();host.append(card);
   }

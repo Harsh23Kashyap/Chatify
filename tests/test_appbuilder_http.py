@@ -38,6 +38,16 @@ class BuilderHTTP(test_workspace_api.WorkspaceAPITests):
   with patch('chatify.providers._key',return_value='fixture-only'),patch('chatify.providers._post',side_effect=transport):
    result=self.call(self.clients[0],'/api/settings/build/talk',{'consent':True,'selection':{'provider':'openai','model':'my-specific-model'},'sections':['app'],'messages':[{'role':'user','content':'A garden app'}]})
   self.assertEqual(calls[0]['model'],'my-specific-model');self.assertEqual(yaml.safe_load(result['yaml'])['app']['title'],'New garden');self.assertEqual(before,json.dumps(self.cfg,sort_keys=True))
+ def test_explicit_model_selection_keeps_custom_model_and_base(self):
+  from types import SimpleNamespace
+  from chatify import buildjobs
+  captured={}
+  def start(_jobs,owner,provider,cfg,body):
+   captured.update(cfg['provider']);return {'id':'fixture-explicit','state':'running'}
+  with patch('chatify.providers.make',return_value=SimpleNamespace()),patch('chatify.providers.list_models') as listing,patch.object(buildjobs.BuildJobs,'start',start):
+   result=self.call(self.clients[0],'/api/settings/build/start',{'consent':True,'explicit_selection':True,'brief':'Research app','selection':{'provider':'openai','model':'specific-model','base_url':'https://custom.invalid/v1'}})
+  self.assertEqual(result['id'],'fixture-explicit');self.assertEqual(captured['model'],'specific-model');self.assertEqual(captured['base_url'],'https://custom.invalid/v1');listing.assert_not_called()
+
  def test_save_requires_review(self):
   with self.assertRaises(urllib.error.HTTPError):self.call(self.clients[0],'/api/settings/build/save',{'confirmed':True,'ticket':'missing'})
  def test_review_then_save_one_use(self):
