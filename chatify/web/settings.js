@@ -978,7 +978,6 @@ document.addEventListener("focusin", e => {
 (function(){
   let pending=false;
   function keepCaret(){
-    pending=false;
     const n=document.activeElement;
     if(!(n instanceof HTMLElement)||!n.matches('#col .cm-content'))return;
     const scroller=n.closest('.cm-scroller'),selection=getSelection();
@@ -994,7 +993,14 @@ document.addEventListener("focusin", e => {
     else if(fresh&&fresh.top<Math.max(0,nav?.getBoundingClientRect().bottom||0)+2)
       window.scrollBy({top:fresh.top-Math.max(0,nav?.getBoundingClientRect().bottom||0)-2,behavior:'instant'});
   }
-  function queue(){if(pending)return;pending=true;requestAnimationFrame(()=>requestAnimationFrame(keepCaret))}
+  function queue(){
+    // Correct the current selection before the next Tab can leave this editor.
+    // Two animation frames alone can run after that Tab on a busy renderer.
+    keepCaret();
+    if(pending)return;
+    pending=true;
+    requestAnimationFrame(()=>requestAnimationFrame(()=>{pending=false;keepCaret()}));
+  }
   document.addEventListener('focusin',e=>{if(e.target.matches?.('#col .cm-content'))queue()});
   document.addEventListener('selectionchange',()=>{if(document.activeElement?.matches?.('#col .cm-content'))queue()});
 })();

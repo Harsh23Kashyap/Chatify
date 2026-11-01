@@ -12,6 +12,8 @@ def load_manifest():
     return manifest
 
 def variants(name):
+    if name == 'settings_native_browser_zoom_tab_order_browser.cjs':
+        return [('default', [], {}), ('delayed-caret-frames', ['--delayed-caret-frames'], {})]
     if name in ('wizard_launch_retry_harness.cjs', 'workspace_review_confirm_harness.cjs'):
         scenarios = ('retry-ticket','expired-review','start-wires-url','back-and-return') if name.startswith('wizard') else ('consent-gate','confirm-once','failure-retry','no-zombies')
         return [(s, [s], {}) for s in scenarios]
