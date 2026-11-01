@@ -22,3 +22,12 @@ class PreviewRoute(unittest.TestCase):
   e=self.engine()
   with patch.object(e,'retrieve',return_value=([],{})),patch.object(e,'filter_relevant',side_effect=lambda q,x:x):r=e.ask('o',e.store.new_chat('o'),'What happened?')
   self.assertEqual(r['response_kind'],'answer');self.assertEqual(r['evidence'],[])
+
+ def test_question_refusal_preserved_and_not_preview(self):
+  e=self.engine();e.check_question=lambda *a:'Question outside this app.'
+  with patch.object(e,'retrieve',return_value=(self.evidence(),{})),patch.object(e,'filter_relevant',side_effect=lambda q,x:x):r=e.ask('o',e.store.new_chat('o'),'Unrelated request')
+  self.assertEqual(r['response_kind'],'question_refused');self.assertNotIn('not a verified answer',r['answer'])
+ def test_omitted_large_passage_explicit_without_draft_replacement(self):
+  e=self.engine();ev=self.evidence();ev[0]['text']='UNSAFE PARTIAL '*1500
+  with patch.object(e,'retrieve',return_value=(ev,{})),patch.object(e,'filter_relevant',side_effect=lambda q,x:x):r=e.ask('o',e.store.new_chat('o'),'What happened?')
+  self.assertEqual(r['response_kind'],'source_preview');self.assertIn('1 retrieved sources omitted',r['answer']);self.assertNotIn('UNSAFE PARTIAL',r['answer']);self.assertFalse(r['answer_verified'])
