@@ -120,5 +120,8 @@ class OpenAlex:
             text = _abstract(it.get("abstract_inverted_index"))
             authors = [((a.get("author") or {}).get("display_name") or "") for a in (it.get("authorships") or []) if isinstance(a, dict)][:6]
             src = (((it.get("primary_location") or {}).get("source")) or {}).get("display_name") or "OpenAlex"
-            out.append(Evidence(title, (text or title)[:1500], it.get("doi") or it.get("id") or "", [a for a in authors if a], it.get("publication_year") or "", src, self.id, 1.0 / (n + 1), "openalex:" + str(it.get("id", title[:40]))))
+            row = Evidence(title, (text or title)[:1500], it.get("doi") or it.get("id") or "", [a for a in authors if a], it.get("publication_year") or "", src, self.id, 1.0 / (n + 1), "openalex:" + str(it.get("id", title[:40])))
+            if not text:
+                row["content_kind"] = "title_only"
+            out.append(row)
         return out
