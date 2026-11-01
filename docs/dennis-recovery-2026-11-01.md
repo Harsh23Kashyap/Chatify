@@ -22,3 +22,16 @@ Overnight historical results: fresh local selected-source Build completed31/31,
 citation despite no automatic warning. Those old results do not qualify this
 reconstructed tree. OFF-by-default isolated-citation experiment was NOT recovered
 or enabled. New model/hosted verification and CI remain needed. No deployment.
+
+09:26 actual recovered-tree qualification:
+- Fresh Build8224efe4da3046069b2e565ee74c5c03 initial standalone stage drifted
+  into website/content instructions and was correctly rejected. Selective retry
+  reached31/31,34calls,2retrycalls,no defaults/errors. Not first-attempt clean.
+- Final model review completed schema but inaccurately suggested Brave/Wikipedia
+  keys. Review is not documentation or verified setup advice.
+- Actual fresh runtime retrieves Agreement/Decommissioning and answers, but has
+  uncited factual prose in a multi-sentence bullet and appends support warning.
+  Additional claims about trust/lasting peace exceed the retrieved excerpt.
+  Answer quality remains FAILED, not made good by Python tests or sources existing.
+- Search remains unconfigured in this generated app. No current-news/hosted proof.
+- Source-stage selections survived the full Build; generated helpers stayed inert.
