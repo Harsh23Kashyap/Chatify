@@ -51,24 +51,40 @@ def _meal_text(m):
 
 def mealdb(query, k=6):
     q = _keywords(query)
+    # Meal names are substring queries, not natural-language search. Keep taste
+    # questions tied to the named dish; dietary constraints remain in the query.
+    q = re.sub(r'\btaste like(?: it)?$', '', q, flags=re.I).strip()
+    q = re.sub(r'\bclassic\b', '', q, flags=re.I)
+    q = re.sub(r'\s+', ' ', q).strip()
     if not q:
         return []
     out = []
     count = max(1, min(int(k), 10))
-    # Name search first; fall back to first-letter and main-ingredient filter.
+    # Name search first, then ingredient filter and bounded name-token searches.
     urls = [
         'https://www.themealdb.com/api/json/v1/1/search.php?' + urllib.parse.urlencode({'s': q}),
         'https://www.themealdb.com/api/json/v1/1/filter.php?' + urllib.parse.urlencode({'i': q}),
     ]
+    # A name such as margherita pizza can be stored as Pizza Express Margherita.
+    # Try at most three name tokens, but require every requested name token in
+    # the returned title so a broad pizza match cannot silently replace the dish.
+    name_terms = re.findall(r"[\w'-]+", q.lower())
+    if len(name_terms) > 1:
+        for term in sorted(set(name_terms), key=lambda w: (-len(w), w))[:3]:
+            urls.append('https://www.themealdb.com/api/json/v1/1/search.php?' + urllib.parse.urlencode({'s': term}))
     seen = set()
-    for url in urls:
+    for request_index, url in enumerate(urls):
         payload = _get(url)
         meals = payload.get('meals') or []
-        for m in meals[:count]:
+        for m in meals[:50]:
             if not isinstance(m, dict):
                 continue
             name = str(m.get('strMeal') or '').strip()
             mid = str(m.get('idMeal') or name)
+            if request_index >= 2:
+                title_terms = set(re.findall(r"[\w'-]+", name.lower()))
+                if not all(term in title_terms for term in name_terms):
+                    continue
             if not name or mid in seen:
                 continue
             seen.add(mid)
@@ -84,6 +100,8 @@ def mealdb(query, k=6):
                         'url': 'https://www.themealdb.com/meal/' + mid,
                         'year': '', 'venue': 'TheMealDB community recipe database',
                         'source': 'themealdb', 'score': 1.0 / (len(out) + 1)})
+            if len(out) >= count:
+                break
         if out:
             break
     return out[:count]
