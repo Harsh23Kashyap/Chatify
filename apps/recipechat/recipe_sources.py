@@ -7,7 +7,7 @@ from the crowdsourced product database. Free, no key, polite UA required.
 Both return plain evidence dicts; untrusted source text is passed through as
 data only.
 """
-import json, re, urllib.parse, urllib.request, urllib.error
+import json, math, re, unicodedata, urllib.parse, urllib.request, urllib.error
 
 _UA = {'User-Agent': 'Chatify-RecipeChat/1.0 (+https://github.com/Harsh23Kashyap/Chatify)', 'Accept': 'application/json'}
 _STOP = {'what','whats','is','are','the','a','an','of','for','how','do','does','can','i','me','my','tell','show','give','make','recipe','recipes','about','in','to','and','with','good','best','some','please'}
@@ -106,7 +106,20 @@ def mealdb(query, k=6):
             break
     return out[:count]
 
-_NUM = lambda v: round(v, 1) if isinstance(v, (int, float)) else None
+def _NUM(value):
+    return round(value, 1) if type(value) in (int, float) and math.isfinite(value) and value >= 0 else None
+
+def _nutrition_issue(n):
+    if not isinstance(n, dict):
+        return ''
+    for key in ('energy-kcal_100g', 'fat_100g', 'saturated-fat_100g', 'carbohydrates_100g', 'sugars_100g', 'fiber_100g', 'proteins_100g', 'salt_100g'):
+        value = n.get(key)
+        if value is not None and (type(value) not in (int, float) or not math.isfinite(value) or value < 0 or key != 'energy-kcal_100g' and value > 100):
+            return 'Invalid per-100g nutrient value'
+    for part, total in [('saturated-fat_100g', 'fat_100g'), ('sugars_100g', 'carbohydrates_100g')]:
+        if type(n.get(part)) in (int, float) and type(n.get(total)) in (int, float) and n[part] > n[total]:
+            return 'Nutrient component exceeds its total'
+    return ''
 
 def _nutri_line(n):
     if not isinstance(n, dict):
@@ -123,6 +136,24 @@ def _nutri_line(n):
     return '; '.join(row)
 
 def offfoods(query, k=6):
+    # A two-food comparison is two searches, not one impossible product name.
+    # Only expand this explicit syntax; do not discard free-form constraints.
+    comparison_query = (query or '').rstrip()
+    while comparison_query and (comparison_query[-1] in '?？ \ufe0f' or unicodedata.category(comparison_query[-1]) == 'So'):
+        comparison_query = comparison_query[:-1].rstrip()
+    comparison = re.fullmatch(r"\s*how does (?:the )?nutrition of (.+?) compare to (.+?)\s*", comparison_query, re.I)
+    if comparison:
+        foods = [x.rstrip(' ?？').strip() for x in comparison.groups()]
+        if all(foods) and all(len(x) <= 80 for x in foods):
+            count = max(1, min(int(k), 8))
+            if count < 2:
+                return []  # One result cannot cover both requested foods.
+            per_food = count // 2
+            groups = [[row for row in offfoods(food, per_food) if 'Nutrition per 100g:' in row['text']] for food in foods]
+            if not all(groups):
+                return []  # Do not present one food as a complete comparison.
+            return [{**row, 'text': 'Requested comparison food: ' + food + '\nProduct-specific example, not a typical value for this food.\n' + row['text']}
+                    for food, group in zip(foods, groups) for row in group]
     q = _keywords(query)
     if not q:
         return []
@@ -139,7 +170,12 @@ def offfoods(query, k=6):
         name = str(p.get('product_name') or '').strip()
         if not name:
             continue
-        line = _nutri_line(p.get('nutriments'))
+        nutrients = p.get('nutriments')
+        # Do not turn visibly contradictory crowdsourced numbers into comparison
+        # evidence or silently replace them with inferred values.
+        if _nutrition_issue(nutrients):
+            continue
+        line = _nutri_line(nutrients)
         grade = str(p.get('nutrition_grades') or '').strip().upper()
         brands = str(p.get('brands') or '').strip()
         ings = re.sub(r'\s+', ' ', str(p.get('ingredients_text') or '')).strip()
@@ -160,3 +196,7 @@ def offfoods(query, k=6):
                     'venue': 'Open Food Facts (crowdsourced product data)',
                     'source': 'openfoodfacts', 'score': 1.0 / (len(out) + 1)})
     return out
+
+# Nutrition comparisons and food constraints must not be replaced by a generic
+# query ladder. Other recipe and public-search sources keep their own queries.
+offfoods.preserve_query = True

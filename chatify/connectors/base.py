@@ -37,7 +37,7 @@ def make_connector(block, base_dir="."):
         f = getattr(importlib.import_module(mod), fn)
 
         class Plugin:
-            def __init__(self): self.id = block["id"]; self.label = block["label"]
+            def __init__(self): self.id = block["id"]; self.label = block["label"]; self.preserve_query = getattr(f, "preserve_query", False) is True
             def search(self, q, k):
                 from .recovery import recover_evidence
                 return recover_evidence(f(q,k),self.id,k)

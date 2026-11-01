@@ -740,7 +740,10 @@ class Engine:
 
         def run(sid):
             out = []
-            for qq in qs:
+            # A structured connector may require the intact question. Generic
+            # query ladders can erase comparison sides or dietary constraints.
+            source_queries = [retrieval_topic(question)] if getattr(self.connectors[sid], "preserve_query", False) is True else qs
+            for qq in source_queries:
                 ck = hashlib.sha1(("%s|%s|%d" % (json.dumps(next((s for s in self.cfg["sources"] if s["id"]==sid),{"id":sid}),sort_keys=True), qq.lower(), k)).encode()).hexdigest()
                 hit = None if scope or permissions.restricted(self.cfg) else self._disk_get(ck, sid)
                 if hit is None:
