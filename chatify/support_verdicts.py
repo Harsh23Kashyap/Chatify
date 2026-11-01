@@ -117,3 +117,22 @@ def evaluate_sentences(provider, answer, evidence):
     result=evaluate(provider,[{'id':s['id'],'text':s['text']} for s in spans],evidence)
     result['spans']=spans
     return result
+
+def unverified_source_preview(evidence, max_sources=3, max_chars=12000):
+    """Inert fallback payload: whole retrieved passages, no generated answer.
+
+    Passages may themselves be partial publisher extracts, false or malicious.
+    Never truncate within a passage to meet a limit or reword its negation.
+    Oversize passages are omitted explicitly, not summarized. No truth verdict.
+    """
+    items=[];omitted=0;used=0
+    for e in evidence:
+        text=e.get('text');title=e.get('title');url=e.get('url','')
+        if not isinstance(text,str) or not text.strip() or not isinstance(title,str) or not title.strip():
+            omitted+=1;continue
+        size=len(text)+len(title)+len(str(url))
+        if len(items)>=max_sources or used+size>max_chars:
+            omitted+=1;continue
+        items.append({'evidence_id':e.get('n'),'title':title,'text':text,'url':url,'published_date':e.get('published_date'),'date_provenance':e.get('date_provenance'),'verification':'not_verified'})
+        used+=size
+    return {'kind':'unverified_source_preview','label':'The answer could not be verified. These are retrieved source passages, not a verified answer. A retrieved passage may be only part of the original source.','items':items,'omitted_sources':omitted,'answer_verified':False}
