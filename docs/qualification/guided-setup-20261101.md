@@ -81,3 +81,9 @@ Advanced section scope's preserved 180ms animation was overridden by the generic
 Saved-library test interaction routes now open Other setup options before opening saved drafts; no original safety, geometry, focus or timing assertions removed. Video case now expects the explicitly requested 60-option feature selector instead of the superseded no-picker requirement; media error/retry, controls, pause during build and no implicit apply assertions pass.
 
 Two scoped cases are not qualified: generic disclosure motion audit fails because final API details use their dedicated 140ms builder-api-enter animation rather than the older generic m-in animation; original assertion retained. Example motion levels printed its terminal PASS in the child log after the outer shell timeout, but the orchestration exit result was lost, so no completed pass claim. Both are distinct from citation quality and the earlier parallel pytest gallery503.
+
+## Current sequential suite and remaining scope: 22:15 IST
+
+Fresh all-eight-group sequential Python verdict at local checkpoint 30de87c: 1,385 passed, one skipped, 540 subtests passed, zero failures. This includes the gallery group with 148 passed. Earlier concurrent eight-group gallery HTTP503 is still recorded; sequential success does not establish parallel reliability. A prior 740-subtest summary was an arithmetic error; raw current logs sum to 540. Separate helper safety/key checks: 10 passed.
+
+Example motion levels has now completed a clean orchestrated rerun across its default full width/motion matrix. The scoped builder/appbuilder/guided verdict is 52 of 53 current passing scripts. Generic disclosure motion audit still fails on the new final-API-specific animation versus older generic m-in expectation. No full 481-script browser verdict and no semantic answer-quality release claim.
