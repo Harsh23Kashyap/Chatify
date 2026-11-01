@@ -21,3 +21,17 @@ class VerdictProtocol(unittest.TestCase):
   self.assertEqual(evaluate(P(),self.c,self.e)['status'],'unknown')
  def test_missing_duplicate_extra_claims_rejected(self):
   for rows in [[],self.r['claims']*2]:self.assertRaises(InvalidVerdict,parse,json.dumps({'claims':rows}),self.c,self.e)
+ def test_duplicate_input_ids_and_empty_inputs_fail(self):
+  for claims,evidence in [([],self.e),(self.c,[]),(self.c*2,self.e),(self.c,self.e*2)]:
+   with self.subTest(claims=claims,evidence=evidence):self.assertRaises(InvalidVerdict,parse,json.dumps(self.r),claims,evidence)
+ def test_missing_or_changed_claim_order_fails(self):
+  r=copy.deepcopy(self.r);r['claims'][0]['id']=True;self.assertRaises(InvalidVerdict,parse,json.dumps(r),self.c,self.e)
+  r=copy.deepcopy(self.r);r['claims'][0]['extra']='ignored';self.assertRaises(InvalidVerdict,parse,json.dumps(r),self.c,self.e)
+ def test_positive_claim_cannot_be_supported_as_absence(self):
+  r=copy.deepcopy(self.r);r['claims'][0].update(kind='scoped_absence',quotes=[]);self.assertRaises(InvalidVerdict,parse,json.dumps(r),self.c,self.e)
+ def test_quote_from_wrong_passage_fails(self):
+  r=copy.deepcopy(self.r);r['claims'][0]['quotes'][0]['evidence_id']=2;self.assertRaises(InvalidVerdict,parse,json.dumps(r),self.c,self.e+[{'n':2,'text':'Nothing happened.'}])
+ def test_provider_exception_unknown(self):
+  class P:
+   def complete(self,m):raise RuntimeError('offline')
+  self.assertEqual(evaluate(P(),self.c,self.e)['status'],'unknown')

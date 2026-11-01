@@ -13,11 +13,16 @@ class InvalidVerdict(ValueError): pass
 def parse(text, claims, evidence):
     try: obj=json.loads(text)
     except (ValueError,TypeError): raise InvalidVerdict('invalid JSON')
+    if not claims or not evidence:raise InvalidVerdict('missing claims or evidence')
+    if any(not isinstance(c,dict) or set(c)!={'id','text'} or type(c['id'])!=int or not isinstance(c['text'],str) or not c['text'].strip() for c in claims):raise InvalidVerdict('input claim shape')
+    if len({c['id'] for c in claims})!=len(claims):raise InvalidVerdict('duplicate input claims')
+    if any(type(e.get('n'))!=int or not isinstance(e.get('text'),str) or not e['text'].strip() for e in evidence):raise InvalidVerdict('input evidence shape')
     by_id={e['n']:e for e in evidence}
+    if len(by_id)!=len(evidence):raise InvalidVerdict('duplicate evidence IDs')
     if not isinstance(obj,dict) or set(obj)!={'claims'} or not isinstance(obj['claims'],list) or len(obj['claims'])!=len(claims): raise InvalidVerdict('claim coverage')
     for expected,row in zip(claims,obj['claims']):
         if not isinstance(row,dict) or set(row)!={'id','text','verdict','kind','reason','evidence_ids','quotes'}:raise InvalidVerdict('row shape')
-        if row['id']!=expected['id'] or row['text']!=expected['text']:raise InvalidVerdict('claim changed or reordered')
+        if type(row['id'])!=int or row['id']!=expected['id'] or row['text']!=expected['text']:raise InvalidVerdict('claim changed or reordered')
         if row['verdict'] not in ('supported','unsupported','unknown') or row['kind'] not in ('assertion','scoped_absence'):raise InvalidVerdict('label')
         if not isinstance(row['reason'],str) or not row['reason'].strip():raise InvalidVerdict('reason missing')
         ids=row['evidence_ids'];quotes=row['quotes']
