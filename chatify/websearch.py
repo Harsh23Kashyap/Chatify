@@ -71,7 +71,17 @@ def normalize(pid, data, limit):
         title = _s(it.get("title"))
         if not (text or title):
             continue
-        out.append({"title": title[:200], "text": (text or title)[:1500], "url": _s(it.get("url"))})
+        row = {"title": title[:200], "text": (text or title)[:1500], "url": _s(it.get("url"))}
+        # Preserve provider-reported publication metadata. It is not a fetched
+        # page-date verification or proof the report is current.
+        if pid == "exa":
+            date = _s(it.get("publishedDate"))
+            if date:
+                row["published_date"] = date
+            author = _s(it.get("author"))
+            if author:
+                row["author"] = author
+        out.append(row)
         if len(out) >= limit:
             break
     return out
