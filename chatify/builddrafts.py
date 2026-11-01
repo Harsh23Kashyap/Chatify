@@ -18,12 +18,12 @@ class BuildDrafts:
    if isinstance(value,dict):return {k:(scrub(v) if isinstance(v,(dict,list)) else ('' if cred(k) and isinstance(v,str) else v)) for k,v in value.items()}
    if isinstance(value,list):return [scrub(v) for v in value]
    return value
-  selected=set(yaml.safe_load(yaml_text))
+  declared=set(yaml.safe_load(yaml_text));selected=declared.copy()
   if sections is not None:
    from .appbuilder import sections as checked_sections
    selected=set(checked_sections(sections))
-   if selected-set(yaml.safe_load(yaml_text)):raise ValueError('Draft is missing selected sections')
-   if set(yaml.safe_load(yaml_text))-selected:raise ValueError('Draft contains sections outside your selection')
+   if selected-declared:raise ValueError('Draft is missing selected sections')
+   if declared-selected:raise ValueError('Draft contains sections outside your selection')
   text=yaml.safe_dump(scrub({key:value for key,value in clean.items() if key in selected}),sort_keys=False)
   if len(text.encode())>8000000:raise ValueError('Draft is too large')
   ident=ident or uuid.uuid4().hex;path=self._path(owner,ident);record={'id':ident,'title':str(title or clean['app']['title'])[:120],'yaml':text,'sections':sections if sections is not None else [key for key in clean if key in selected],'updated':time.time(),'notice':'Saved local draft, not applied. Credential fields excluded; review before use.'}

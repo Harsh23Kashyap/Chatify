@@ -59,3 +59,25 @@ class Drafts(unittest.TestCase):
    x=BuildDrafts(d).put('owner','provider: {type: mock, temperature: 0.5, timeout: 90, max_output_tokens: 8192}\n')
    import yaml;raw=yaml.safe_load(x['yaml'])
    self.assertEqual(raw['provider']['temperature'],0.5);self.assertEqual(raw['provider']['timeout'],90);self.assertEqual(raw['provider']['max_output_tokens'],8192)
+
+ def test_retry_with_same_id_keeps_one_owner_scoped_draft(self):
+  with tempfile.TemporaryDirectory() as d:
+   store=BuildDrafts(d);ident='a'*32
+   first=store.put('alice','app: {title: First}',ident=ident)
+   second=store.put('alice','app: {title: Retry}',ident=ident)
+   self.assertEqual(first['id'],second['id']);self.assertEqual(len(store.list('alice')),1)
+   self.assertIn('Retry',store.get('alice',ident)['yaml'])
+   store.put('bob','app: {title: Other owner}',ident=ident)
+   self.assertEqual(len(store.list('bob')),1);self.assertIn('Retry',store.get('alice',ident)['yaml'])
+
+ def test_explicit_sections_parse_declared_scope_once(self):
+  import yaml
+  from unittest.mock import patch
+  from chatify import appbuilder
+  text='app: {title: Scope parse count}'
+  clean=appbuilder.validate(text)
+  with tempfile.TemporaryDirectory() as d:
+   with patch('chatify.appbuilder.validate',return_value=clean),patch('yaml.safe_load',wraps=yaml.safe_load) as parse:
+    record=BuildDrafts(d).put('alice',text,sections=['app'])
+   self.assertEqual(parse.call_count,1)
+   self.assertEqual(record['sections'],['app'])
