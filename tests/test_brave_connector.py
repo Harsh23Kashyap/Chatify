@@ -27,3 +27,10 @@ class BraveConnector(unittest.TestCase):
   with patch('subprocess.run',side_effect=OSError('private path omitted')):
    result=generators.test_code('clean_query',code,'habitat')
   self.assertFalse(result['ok']);self.assertFalse(result['ran']);self.assertIn('could not start (OSError)',result['error']);self.assertNotIn('private path',result['error'])
+
+class HelperStartFailures(unittest.TestCase):
+ def test_unwritable_temp_folder_is_actionable_without_request(self):
+  code='def clean_query(query):\n    return query\n'
+  with patch('tempfile.TemporaryDirectory',side_effect=PermissionError('private server path')),patch('subprocess.run') as run:
+   result=generators.test_code('clean_query',code,'habitat')
+  self.assertFalse(result['ok']);self.assertFalse(result['ran']);self.assertIn('PermissionError',result['error']);self.assertNotIn('private server path',result['error']);run.assert_not_called()

@@ -356,3 +356,13 @@ dialog.app-builder #builderVisual.expanded .builder-live-preview{height:65vh!imp
 @media(min-width:800px){#builderDescribe{display:block!important;position:relative;padding-right:48%;min-height:480px}#builderDescribe>.builder-model-setup{position:absolute;right:0;top:0;width:44%;box-sizing:border-box}#builderDescribe>#builderConversation{padding:0;border:0}#builderDescribe>.builder-scope-advanced{margin-top:12px}.builder-model-setup button{font-size:12px!important}.builder-model-setup summary{font-weight:700;cursor:pointer}}
 
 @media(min-width:800px){#builderDescribe{min-height:740px}.builder-model-setup{min-height:0}}
+
+/* Guided order: description first, optional setup and diagnostics secondary. */
+html body #builderDescribe{display:flex!important;flex-direction:column!important;padding-right:0!important;min-height:0!important}
+html body #builderDescribe>.builder-model-setup{position:static!important;width:100%!important;order:10;max-width:none!important;margin:16px 0}
+html body #builderDescribe>.builder-secondary-setup{order:20;margin:12px 0}
+.builder-secondary-setup>summary,.builder-diagnostics>summary{cursor:pointer;font-weight:600;padding:12px 0}
+html body .builder-shell-footer:has(.builder-completion-notice:not([hidden])) #builderActionBar{display:none!important}
+.builder-diagnostics{margin:16px 0}.builder-diagnostics #builderStatus{margin:12px 0}
+html body dialog.app-builder #builderScopeNotice{font-size:12px;color:#52675a}
+html body #builderDescribe[hidden]{display:none!important}

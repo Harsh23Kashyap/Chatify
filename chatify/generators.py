@@ -320,8 +320,14 @@ def _helper_environment(code):
         direct = isinstance(f, ast.Attribute) and f.attr == "getenv" and isinstance(f.value, ast.Name) and f.value.id == "os"
         lookup = isinstance(f, ast.Attribute) and f.attr == "get" and isinstance(f.value, ast.Attribute) and f.value.attr == "environ" and isinstance(f.value.value, ast.Name) and f.value.value.id == "os"
         arg = node.args[0]
-        if (direct or lookup) and isinstance(arg, ast.Constant) and isinstance(arg.value, str) and re.fullmatch(r"[A-Z][A-Z0-9_]{2,100}", arg.value) and arg.value in os.environ:
-            env[arg.value] = os.environ[arg.value]
+        if (direct or lookup) and isinstance(arg, ast.Constant) and isinstance(arg.value, str) and re.fullmatch(r"[A-Z][A-Z0-9_]{2,100}", arg.value):
+            # The UI saves native source keys privately rather than exporting
+            # them into the server environment. Pass only a declared canonical
+            # source key, never all saved values or a display-name-derived key.
+            from . import websearch, secrets
+            known = next((pid for pid, provider in websearch.PROVIDERS.items() if provider['env'] == arg.value), None)
+            value = websearch.key_for(known) if known else (secrets.saved('catalog:openalex') or os.environ.get(arg.value, '')) if arg.value == 'OPENALEX_API_KEY' else os.environ.get(arg.value, '')
+            if value:env[arg.value] = value
     return env
 
 
