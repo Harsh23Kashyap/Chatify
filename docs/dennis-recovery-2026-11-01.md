@@ -35,3 +35,14 @@ or enabled. New model/hosted verification and CI remain needed. No deployment.
   Answer quality remains FAILED, not made good by Python tests or sources existing.
 - Search remains unconfigured in this generated app. No current-news/hosted proof.
 - Source-stage selections survived the full Build; generated helpers stayed inert.
+
+09:30 ordinal-ledger correction:
+- List markers such as1. were split as standalone numeric/factual claims. The
+  candidate removes only line-leading ordinals before ledger parsing. Three new
+  controls keep actual quantities and uncited sentences within bullets checked.
+- Current full suite447+352+284+180=1,263passes, assertions elsewhere unchanged.
+- A real runtime rerun of the same saved generated draft yields a cited answer
+  without automatic warning. Not a controlled same-output proof: the model's
+  wording varied too. Independent review still finds an unsourced definition of
+  consent (majority approval) beyond the excerpt, so semantic qualification is
+  still incomplete. No source/news/hosted success is inferred from no warning.

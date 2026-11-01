@@ -1160,6 +1160,10 @@ class Engine:
         # A citation after "vs. 0.7 kg" belongs to the entire comparison.
         # Splitting there marks the first half uncited and cleanup deletes it.
         protected = re.sub(r"\b(?:vs|e\.g|i\.e)\.", lambda m: m.group().replace(".", "\uff0e"), answer, flags=re.I)
+        # A list ordinal is formatting, not a factual number or sentence end.
+        # Protect only line-leading ordinals followed by text, never quantities
+        # inside a sentence. The actual sentences inside each item still split.
+        protected = re.sub(r"(?m)^([ \t]*)\d+\.[ \t]+(?=\S)", r"\1", protected)
         for sent in re.split(r"\n\n(?=\#{1,6}\s)|(?<=[.!?])\s+(?!\[\d+\])|(?<=[.!?]\*\*)\s+(?!\[\d+\])|(?<=\])\s+(?=[A-Z0-9*])", protected):
             sent = sent.replace("\uff0e", ".")
             cites = [int(n) for n in re.findall(r"\[(\d+)\]", sent)]
