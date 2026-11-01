@@ -1380,6 +1380,21 @@ class Engine:
 
     _RECENCY = re.compile(r"\b(latest|recent|recently|newest|current|currently|today|this (?:week|month|year))\b", re.I)
 
+    def source_preview(self, evidence):
+        from .support_verdicts import unverified_source_preview
+        preview = unverified_source_preview(evidence)
+        lines = [preview['label']]
+        for item in preview['items']:
+            lines.append("Source [%s]: %s" % (item['evidence_id'], item['title']))
+            if item['published_date']:
+                lines.append("Reported publication date: %s (%s)" % (item['published_date'], item['date_provenance'] or 'connector-supplied, not independently verified'))
+            # Quote each original line to preserve its status as source data.
+            lines.extend("> " + line for line in item['text'].splitlines())
+            lines.append("[%s]" % item['evidence_id'])
+        if preview['omitted_sources']:
+            lines.append("%d retrieved sources omitted because of display limits or missing text." % preview['omitted_sources'])
+        return "\n\n".join(lines)
+
     @staticmethod
     def fallback_answer(evidence, why="", question=""):
         """No model answer: show the best passages as a clearly labeled source preview, never as a model answer."""
@@ -1507,6 +1522,9 @@ class Engine:
         if not evidence:
             answer = blocked or self.cfg["prompt"]["no_evidence"]
             yield "token", answer
+        elif self.cfg["prompt"].get("source_preview_only"):
+            answer = self.source_preview(evidence)
+            yield "token", answer
         elif re.search(r"\b(disagree|disagreement|conflict)\b", q, re.I) and len({e.get("venue") or e.get("source") for e in evidence}) < 2:
             answer = "These retrieved passages come from the same source. They do not establish a disagreement between independent sources. Differing views quoted within one article are not independent source disagreement. " + " ".join("[%d]" % e["n"] for e in evidence)
             yield "token", answer
@@ -1555,12 +1573,14 @@ class Engine:
                 answer=self.fallback_answer(original_evidence, why="The answer could not be fully checked. Here are the cited source passages instead.", question=standalone);answer,evidence=self.tidy(answer,original_evidence)
             ledger = self.ledger(answer, evidence, standalone)
             answer, evidence, ledger = self._fix(answer, evidence, ledger, standalone, full=original_evidence)
-        answer = self.attribute_news(answer, evidence)
+        preview_only = bool(evidence and not blocked and self.cfg["prompt"].get("source_preview_only"))
+        answer = answer if preview_only else self.attribute_news(answer, evidence)
         ledger = self.ledger(answer, evidence, standalone) if evidence else []
         # Check the final corrected answer, not a draft which may change later.
         # Diagnostic warnings remain visible but are not factual answer claims.
-        support_note = self.check_support(answer, evidence) if evidence and not locals().get("degraded") and not blocked else ""
-        if not support_note and evidence and self.cfg["provider"]["type"] != "mock" and not locals().get("degraded") and not blocked:
+        if preview_only: ledger = []
+        support_note = self.check_support(answer, evidence) if evidence and not locals().get("degraded") and not blocked and not preview_only else ""
+        if not support_note and evidence and self.cfg["provider"]["type"] != "mock" and not locals().get("degraded") and not blocked and not preview_only:
             final_flags = [row["claim"] for row in ledger if not row.get("supported") or row.get("uncited")]
             if final_flags:
                 support_note = "Note: the sources may not fully support this: missing citations or unsupported precision in " + "; ".join(final_flags)[:300]
@@ -1570,7 +1590,7 @@ class Engine:
             answer += "\n\n" + support_note
             yield "token", "\n\n" + support_note
         app_note = (self.cfg["prompt"].get("answer_note") or "").strip()
-        if evidence and app_note and app_note not in answer: answer += "\n\n" + app_note
+        if evidence and not preview_only and app_note and app_note not in answer: answer += "\n\n" + app_note
         yield "progress", {"stage": "history", "label": "Finishing temporary reply" if temporary else "Saving reply"}
         if temporary:
             tid = None
@@ -1583,9 +1603,9 @@ class Engine:
             if self.store.chat(owner, chat)["title"] == "New chat":
                 self.store.rename_chat(owner, chat, _chat_title(q))
         yield "progress", {"stage": "followups", "label": "Finding related questions"}
-        fu = self.followups(q, answer, evidence, [t.get("question", "") for t in history[-6:]])
+        fu = [] if preview_only else self.followups(q, answer, evidence, [t.get("question", "") for t in history[-6:]])
         yield "done", {"seconds": round(time.time() - t0, 1), "model_status": locals().get("model_status", "ok"), "followups": fu, "id": tid, "chat": chat, "topic": topic, "question": q, "standalone": standalone, "answer": answer,
-                       "evidence": evidence, "ledger": ledger, "style": style, "source_errors": errors, "response_kind": "question_refused" if blocked else "answer", "temporary": temporary, "scope": scope}
+                       "evidence": evidence, "ledger": ledger, "style": style, "source_errors": errors, "response_kind": "question_refused" if blocked else ("source_preview" if preview_only else "answer"), "answer_verified": False, "temporary": temporary, "scope": scope}
 
     def ask(self, owner, chat, question, sources=None, style="standard", topic=None, new_topic=False, use_cache=True, scope=None):
         if scope is not None or permissions.restricted(self.cfg):
@@ -1629,6 +1649,8 @@ class Engine:
             answer,ledger=blocked,[]
         elif not evidence:
             answer, ledger = self.cfg["prompt"]["no_evidence"], []
+        elif self.cfg["prompt"].get("source_preview_only"):
+            answer, ledger = self.source_preview(evidence), []
         elif re.search(r"\b(disagree|disagreement|conflict)\b", q, re.I) and len({e.get("venue") or e.get("source") for e in evidence}) < 2:
             answer = "These retrieved passages come from the same source. They do not establish a disagreement between independent sources. Differing views quoted within one article are not independent source disagreement. " + " ".join("[%d]" % e["n"] for e in evidence)
             ledger = self.ledger(answer, evidence, standalone)
@@ -1663,10 +1685,12 @@ class Engine:
                     answer=self.fallback_answer(original_evidence, why="The answer could not be fully checked. Here are the cited source passages instead.", question=standalone);answer,evidence=self.tidy(answer,original_evidence)
                 ledger = self.ledger(answer, evidence, standalone)
                 answer, evidence, ledger = self._fix(answer, evidence, ledger, standalone, full=original_evidence)
-        answer = self.attribute_news(answer, evidence)
+        preview_only = bool(evidence and not blocked and self.cfg["prompt"].get("source_preview_only"))
+        answer = answer if preview_only else self.attribute_news(answer, evidence)
         ledger = self.ledger(answer, evidence, standalone) if evidence else []
-        support_note = self.check_support(answer, evidence) if evidence and not locals().get("degraded") and not blocked else ""
-        if not support_note and evidence and self.cfg["provider"]["type"] != "mock" and not locals().get("degraded") and not blocked:
+        if preview_only: ledger = []
+        support_note = self.check_support(answer, evidence) if evidence and not locals().get("degraded") and not blocked and not preview_only else ""
+        if not support_note and evidence and self.cfg["provider"]["type"] != "mock" and not locals().get("degraded") and not blocked and not preview_only:
             final_flags = [row["claim"] for row in ledger if not row.get("supported") or row.get("uncited")]
             if final_flags:
                 support_note = "Note: the sources may not fully support this: missing citations or unsupported precision in " + "; ".join(final_flags)[:300]
@@ -1674,7 +1698,7 @@ class Engine:
             answer, evidence, ledger, support_note = self.repair_support(answer, evidence, standalone, support_note)
         if support_note: answer += "\n\n" + support_note
         app_note = (self.cfg["prompt"].get("answer_note") or "").strip()
-        if evidence and app_note and app_note not in answer: answer += "\n\n" + app_note
+        if evidence and not preview_only and app_note and app_note not in answer: answer += "\n\n" + app_note
         tid = self.store.add_turn(chat, topic, q, standalone, answer, evidence, ledger, style, source_errors=errors)
         if blocked: self.store.save_state(owner, "reply-kind-" + tid, "question_refused")
         if mem_on:
@@ -1682,7 +1706,7 @@ class Engine:
         if self.store.chat(owner, chat)["title"] == "New chat":
             self.store.rename_chat(owner, chat, _chat_title(q))
         return {"id": tid, "chat": chat, "topic": topic, "question": q, "standalone": standalone, "answer": answer,
-                "evidence": evidence, "ledger": ledger, "style": style, "source_errors": errors, "response_kind": "question_refused" if blocked else "answer"}
+                "evidence": evidence, "ledger": ledger, "style": style, "source_errors": errors, "response_kind": "question_refused" if blocked else ("source_preview" if preview_only else "answer"), "answer_verified": False}
 
     def similar(self, owner, question, limit=3, threshold=0.3):
         """Earlier questions of this reader that look like `question` (idf-weighted token overlap)."""
