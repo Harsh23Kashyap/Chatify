@@ -33,7 +33,7 @@ def parse(text, claims, evidence):
         if row['verdict']=='supported':
             if row['kind']=='assertion' and not quotes:raise InvalidVerdict('support quote missing')
             if row['kind']=='scoped_absence':
-                if not re.search(r'\b(?:supplied|provided|cited)\s+(?:passage|material|evidence|source)s?\s+(?:does|do)\s+not\s+(?:establish|confirm|report|state|show)',row['text'],re.I):raise InvalidVerdict('absence scope not explicit')
+                if not re.match(r'^(?:The\s+)?(?:supplied|provided|cited)\s+(?:passage|material|evidence|source)s?\s+(?:does|do)\s+not\s+(?:establish|confirm|report|state|show)',row['text'],re.I):raise InvalidVerdict('absence scope not explicit')
                 if set(ids)!=set(by_id):raise InvalidVerdict('absence coverage')
     return obj
 
@@ -42,8 +42,10 @@ def evaluate(provider, claims, evidence):
     try:
         raw=provider.complete([{'role':'system','content':INSTRUCTION},{'role':'user','content':json.dumps({'claims':claims,'evidence':[{'id':e['n'],'title':e.get('title',''),'text':e['text']} for e in evidence]},ensure_ascii=False)}])
         result=parse(raw,claims,evidence)
-    except Exception as exc:
-        return {'status':'unknown','reason':'Support was not verified: '+type(exc).__name__,'claims':[]}
+    except InvalidVerdict as exc:
+        return {'status':'unknown','reason':'Support was not verified: invalid verdict','validation_error':str(exc),'claims':[]}
+    except Exception:
+        return {'status':'unknown','reason':'Support was not verified: provider or input failure','claims':[]}
     verdicts=[r['verdict'] for r in result['claims']]
     return {'status':'unsupported' if 'unsupported' in verdicts else ('unknown' if 'unknown' in verdicts or not verdicts else 'supported'),'claims':result['claims']}
 

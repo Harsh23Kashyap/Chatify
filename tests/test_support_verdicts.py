@@ -35,3 +35,22 @@ class VerdictProtocol(unittest.TestCase):
   class P:
    def complete(self,m):raise RuntimeError('offline')
   self.assertEqual(evaluate(P(),self.c,self.e)['status'],'unknown')
+ def test_invalid_reason_distinguishes_quote_failure_without_echoing_provider(self):
+  r=copy.deepcopy(self.r);r['claims'][0]['quotes'][0]['text']='injected private marker not in source'
+  class P:
+   def complete(self,m):return json.dumps(r)
+  result=evaluate(P(),self.c,self.e);self.assertEqual(result['validation_error'],'quote provenance');self.assertNotIn('private marker',json.dumps(result));self.assertEqual(result['status'],'unknown')
+ def test_provider_failure_does_not_echo_message(self):
+  class P:
+   def complete(self,m):raise RuntimeError('private marker')
+  result=evaluate(P(),self.c,self.e);self.assertNotIn('private marker',json.dumps(result));self.assertEqual(result['status'],'unknown')
+ def test_mixed_positive_claim_not_absence_qualified(self):
+  self.c[0]['text']='Aid was delivered, but the supplied passage does not establish lasting peace.';r=copy.deepcopy(self.r);r['claims'][0].update(text=self.c[0]['text'],kind='scoped_absence',quotes=[])
+  self.assertRaises(InvalidVerdict,parse,json.dumps(r),self.c,self.e)
+ def test_quote_punctuation_rewrite_not_silently_normalized(self):
+  self.e[0]['text']='The report said “temporary pause”.';r=copy.deepcopy(self.r);r['claims'][0]['quotes'][0]['text']='The report said "temporary pause".'
+  self.assertRaises(InvalidVerdict,parse,json.dumps(r),self.c,self.e)
+ def test_partial_quote_is_provenance_not_entailment(self):
+  self.c[0]['text']='Aid was delivered and lasting peace achieved.';r=copy.deepcopy(self.r);r['claims'][0]['text']=self.c[0]['text']
+  # Deliberately documents the limit: a valid quote is not semantic support.
+  self.assertEqual(parse(json.dumps(r),self.c,self.e)['claims'][0]['verdict'],'supported')
