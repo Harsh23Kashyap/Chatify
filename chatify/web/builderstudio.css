@@ -366,3 +366,5 @@ html body .builder-shell-footer:has(.builder-completion-notice:not([hidden])) #b
 .builder-diagnostics{margin:16px 0}.builder-diagnostics #builderStatus{margin:12px 0}
 html body dialog.app-builder #builderScopeNotice{font-size:12px;color:#52675a}
 html body #builderDescribe[hidden]{display:none!important}
+html body dialog.app-builder .builder-shell-footer #builderPrerequisites{margin:0!important;font-size:12px;line-height:1.5}
+html body dialog.app-builder .builder-shell-footer #builderPrerequisites+.settings-help-actions{margin:0!important;padding-top:0!important}
