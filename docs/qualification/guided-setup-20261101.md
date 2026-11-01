@@ -6,13 +6,13 @@ Local working branch only. No production deployment or main merge. This records 
 
 | Requested behavior | Local implementation and evidence | Remaining limitation |
 |---|---|---|
-| Describe an app, then submit | Describe stage, single persistent Draft configuration footer; advanced section-only drafting collapsed | Real model-generated complete build not rerun after latest changes |
+| Describe an app, then submit | Describe stage, single persistent Draft configuration footer; advanced section-only drafting collapsed | Actual selected-model complete build subsequently passed; see later checkpoint for limits |
 | Clear progress during execution | Actual phase and completed/total counts; indeterminate bar for unmeasured operations; terminal success/failure and next action; status survives closing dialog on same page | No guarantee for closing browser tab; progress is not a percent estimate |
 | Default sources and optional service checkboxes | Native public PubMed/arXiv/Crossref/Wikipedia choices; recommendation checkbox selection flows into saved source blocks | Unknown recommendations are inert, not silently executable |
 | Distinguish free/default from paid services | No blanket equation of key-required with paid. Public-source labels, optional-account labels, provider documentation links | All provider pricing not requalified; no new paid plans/cards/accounts |
 | Skip optional source instead of creating key | Inline Skip and checkbox removal; local revalidation before save | No automatic signup or key creation |
 | Selected API key and code setup in one place | Inline save/test for supported native sources; Brave deterministic code template, fixed BRAVE_API_KEY binding independent of display name; code explicitly not executed | No saved Brave key, so Brave live call not qualified; exact reported Try it 'os error' still not recovered |
-| Model/provider/key/test in same window | Explicit provider, model identifier, custom base URL, provider model discovery, save key and test controls | UI controls and mocked transport qualification are not a live model integration test |
+| Model/provider/key/test in same window | Explicit provider, model identifier, custom base URL, provider model discovery, save key and test controls | Actual gpt-4o-mini complete build and saved child runtime subsequently exercised; citation quality still not accepted |
 | Default design review: logo, color, size, all OK | Expanded always-on preview; design fields include editable/removable logo URL, color/hex and text size. Unchanged draft can validate/save without required cosmetic edit | Broad aesthetic add/remove UX is field-driven, not a new feature-picker wizard |
 | Add/remove sources and aesthetics later | Structured source add/remove, API selection, editable design fields, group keep-current/review; existing configuration controls retained | Generic advanced API/feature setup can remain manual |
 | Taller dialog, no Expand/Compact toggle | 96dvh dialog, always-expanded preview, no toggle buttons; inspected actual desktop screenshots | Long model panel requires internal scroll |
@@ -36,7 +36,7 @@ The guided uncached run traced 23 successful HTTP200 remote responses and one tr
 - Latest guided Brave browser case passed: offline generated draft, real parse/review/save/use, synthetic saved credential copied to child, stable rename key, base URL/model-list request contracts, logo add/clear and color/size edits.
 - Review capabilities case passed at existing widths, retaining original source/edit/review/reopen assertions; only obsolete Expand/Compact assertions changed for the explicit no-toggle request.
 - Jobs case passed partial/closed/retry/done states.
-- Full browser suite and live model-build acceptance remain open.
+- Full browser suite remains open. Subsequent real model build/runtime evidence is recorded below, separately from semantic quality acceptance.
 
 ## Sources checked
 
@@ -67,3 +67,9 @@ Evidence files accompany the task report separately. Synthetic-key fixtures neve
 Current checkpoint initial parallel pytest result: 1,384 passed, one skipped, one gallery default-owner redirect HTTP503 failure. Gallery full file (16 tests) and its entire 28-file pytest group (148 tests) pass in sequential isolated execution. Keep the parallel failure classified as resource-sensitive/intermittent; no assertion weakened or product retry added.
 
 Broader browser tests caught and fixed disclosure reachability after simplification: saved drafts and import remain reachable from review; routine edit status opens the checks disclosure, and final-retry failure remains visible even when the draft stage is hidden. Existing safety/model notes remain secondary, not deleted. Passing current cases include appbuilder_states, builder_apply_saved_e2e with axe, builder_final_failure, builder_import_route, keep-current singleflight, add-source singleflight and the guided native setup case. This is still not a full 481-script browser-suite verdict.
+
+## Follow-through: 21:47 IST
+
+Missing-model guidance now sits above the disabled Draft action. Final-only check failure does not say draft areas failed. Actual desktop screenshot reviewed. Draft loading/beforeunload/close/reopen/keyboard-loop, progress persistence, truthful progress, lifecycle, source planning, retry states, save/use navigation and remove-source singleflight pass on the current local branch. The latter two needed only opening the new secondary setup disclosure in their test interactions, with original assertions retained.
+
+Advanced section scope's preserved 180ms animation was overridden by the generic settings disclosure animation after relocation. Specific CSS restores its original timing, retains reduced-motion and motion-none exceptions. All 17 scope choices retain the description, issue no calls merely by selection, and the original scope keyboard/menu geometry/timing assertions pass after opening both secondary disclosures. Current full 481-script browser verdict is still absent. No main merge, push or deploy.

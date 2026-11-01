@@ -368,3 +368,8 @@ html body dialog.app-builder #builderScopeNotice{font-size:12px;color:#52675a}
 html body #builderDescribe[hidden]{display:none!important}
 html body dialog.app-builder .builder-shell-footer #builderPrerequisites{margin:0!important;font-size:12px;line-height:1.5}
 html body dialog.app-builder .builder-shell-footer #builderPrerequisites+.settings-help-actions{margin:0!important;padding-top:0!important}
+
+/* Keep scope guidance animation stable inside secondary setup disclosures. */
+html body.settings-tabs dialog.app-builder .builder-secondary-setup #builderScopeHelp.arrived{animation:studio-step-panel .18s ease-out!important;transform:none!important}
+html[data-motion=none] body.settings-tabs dialog.app-builder .builder-secondary-setup #builderScopeHelp.arrived{animation:none!important}
+@media(prefers-reduced-motion:reduce){html body.settings-tabs dialog.app-builder .builder-secondary-setup #builderScopeHelp.arrived{animation:none!important}}
