@@ -669,7 +669,11 @@ class Engine:
             for t in set(d["tok"]): df[t] = df.get(t, 0) + 1
         lf.idf = {t: math.log(1 + (n - c + 0.5) / (c + 0.5)) for t, c in df.items()}
         lf.avg = sum(len(d["tok"]) for d in lf.docs) / n
-        return lf.search(question, k or self.cfg["retrieval"]["top_k"])
+        origins = {r["id"]: r.get("source_url") or "" for r in rows}
+        found = lf.search(question, k or self.cfg["retrieval"]["top_k"])
+        for item in found:
+            item["url"] = origins.get(item["id"].rsplit("#", 1)[0], "")
+        return found
 
     def retrieval_limit(self, style="standard"):
         """Deep searches and retains twice the configured evidence, capped at 50."""

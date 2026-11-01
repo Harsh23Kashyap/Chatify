@@ -44,7 +44,7 @@ def check_public(url):
     return u
 
 
-def load(url, opener=None):
+def load(url, opener=None, with_origin=False):
     """Return (name, text) for a public page. Follows up to 3 redirects, re-checking each hop."""
     for _ in range(4):
         check_public(url)
@@ -71,5 +71,5 @@ def load(url, opener=None):
         text = "\n".join(l.strip() for l in text.splitlines() if l.strip())[:150_000]
         if not text:
             raise ValueError("No readable text on that page")
-        return name, text
+        return (name, text, url) if with_origin else (name, text)
     raise ValueError("Too many redirects")

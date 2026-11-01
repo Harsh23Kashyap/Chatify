@@ -942,8 +942,8 @@ def make_handler(cfg, engine):
                 text = pdfread.extract(base64.b64decode(str(b.get("data", "")), validate=True))
                 return self._send(200, {"id": store.add_upload(o, name, text), "name": name, "chars": len(text)})
             if path == "/api/load-url" and method == "POST":
-                name, text = fetch.load(str(b.get("url", "")).strip())
-                engine._cache.clear(); return self._send(200, {"id": store.add_upload(o, name, text), "name": name, "chars": len(text)})
+                name, text, source_url = fetch.load(str(b.get("url", "")).strip(), with_origin=True)
+                engine._cache.clear(); return self._send(200, {"id": store.add_upload(o, name, text, source_url=source_url), "name": name, "chars": len(text)})
             if path == "/api/delete-upload":
                 store.delete_upload(o, b.get("upload")); engine._cache.clear(); return self._send(200, {"ok": True})
             if path == "/api/topics":

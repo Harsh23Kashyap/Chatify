@@ -10,6 +10,7 @@ CREATE TABLE IF NOT EXISTS states(owner TEXT, name TEXT, payload TEXT, updated R
 CREATE TABLE IF NOT EXISTS profile(owner TEXT PRIMARY KEY, text TEXT, updated REAL);
 CREATE TABLE IF NOT EXISTS evidence_cache(key TEXT PRIMARY KEY, payload TEXT, created REAL);
 CREATE TABLE IF NOT EXISTS uploads(id TEXT PRIMARY KEY, owner TEXT, name TEXT, text TEXT, created REAL);
+CREATE TABLE IF NOT EXISTS upload_origins(upload TEXT PRIMARY KEY, source_url TEXT);
 CREATE INDEX IF NOT EXISTS turns_chat ON turns(chat, created);
 CREATE INDEX IF NOT EXISTS turns_topic ON turns(topic, created);
 """
@@ -283,16 +284,45 @@ class Store:
         return {"chat": chat, "question": question, "original_chat": original["id"], "copied_turns": index}
 
     # uploads (private text the owner adds in the UI)
-    def add_upload(self, owner, name, text):
+    def _upload_write(self, statements):
+        """Commit an upload and its origin together; retain storage degradation behavior."""
+        for attempt in (0, 1):
+            c = self.c()
+            try:
+                for sql, args in statements:
+                    c.execute(sql, args)
+                c.commit()
+                return
+            except Exception as exc:
+                if hasattr(c, "rollback"): c.rollback()
+                elif hasattr(c, "db"): c.db.rollback()
+                if isinstance(exc, sqlite3.OperationalError) and attempt == 0 and not self._mem and not self._my and self.kind == "sqlite" and self._unwritable(exc):
+                    self._degrade(str(exc)); continue
+                raise
+            finally:
+                if c is not self._mem: c.close()
+
+    def add_upload(self, owner, name, text, source_url=""):
+        if source_url:
+            from urllib.parse import urlsplit
+            u = urlsplit(source_url)
+            if u.scheme not in ("http", "https") or not u.hostname or u.username or u.password:
+                raise ValueError("Upload origin must be an HTTP(S) address without credentials")
         i = str(uuid.uuid4())
-        self.q("INSERT INTO uploads VALUES(?,?,?,?,?)", (i, owner, name[:120], text, time.time()), write=True)
+        statements = [("INSERT INTO uploads VALUES(?,?,?,?,?)", (i, owner, name[:120], text, time.time()))]
+        if source_url:
+            statements.append(("INSERT INTO upload_origins(upload,source_url) VALUES(?,?)", (i, source_url)))
+        self._upload_write(statements)
         return i
 
     def uploads(self, owner):
-        return self.q("SELECT id,name,text FROM uploads WHERE owner=? ORDER BY created", (owner,))
+        return self.q("SELECT u.id,u.name,u.text,o.source_url FROM uploads u LEFT JOIN upload_origins o ON o.upload=u.id WHERE u.owner=? ORDER BY u.created", (owner,))
 
     def delete_upload(self, owner, upload):
-        self.q("DELETE FROM uploads WHERE id=? AND owner=?", (upload, owner), write=True)
+        self._upload_write([
+            ("DELETE FROM upload_origins WHERE upload IN (SELECT id FROM uploads WHERE id=? AND owner=?)", (upload, owner)),
+            ("DELETE FROM uploads WHERE id=? AND owner=?", (upload, owner)),
+        ])
 
     def rate(self, owner, turn, rating):
         rating = 1 if rating > 0 else -1 if rating < 0 else 0

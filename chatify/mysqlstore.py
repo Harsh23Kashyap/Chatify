@@ -6,7 +6,7 @@ unreachable, Store falls back to SQLite and says so."""
 import os, re
 from urllib.parse import urlparse, unquote
 
-LONG = {"answer", "evidence", "ledger", "text", "payload", "summary", "standalone", "question"}
+LONG = {"answer", "evidence", "ledger", "text", "payload", "summary", "standalone", "question", "source_url"}
 
 
 def parse(url):
