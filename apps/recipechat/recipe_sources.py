@@ -144,6 +144,8 @@ def offfoods(query, k=6):
     comparison = re.fullmatch(r"\s*how does (?:the )?nutrition of (.+?) compare to (.+?)\s*", comparison_query, re.I)
     if comparison:
         foods = [x.rstrip(' ?？').strip() for x in comparison.groups()]
+        if any(re.search(r'\b(?:compare to|nutrition of)\b', food, re.I) for food in foods):
+            return []  # Ambiguous nested comparison is not a two-food query.
         if all(foods) and all(len(x) <= 80 for x in foods):
             count = max(1, min(int(k), 8))
             if count < 2:

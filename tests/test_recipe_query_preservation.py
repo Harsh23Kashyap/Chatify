@@ -183,3 +183,21 @@ class RecipeNameQueryTests(unittest.TestCase):
         question='How does the nutrition of feta compare to cheddar?'
         engine.retrieve(question,source_ids=['public'])
         self.assertEqual(seen,engine.queries(question));self.assertGreater(len(seen),1)
+
+    def test_nested_comparison_does_not_expand_as_several_foods(self):
+        with patch.object(r,'_get') as get:
+            self.assertEqual(r.offfoods('How does the nutrition of feta compare to cheddar compare to brie?',6),[])
+            get.assert_not_called()
+
+    def test_food_qualifiers_do_not_become_generic_food_queries(self):
+        import urllib.parse
+        seen=[]
+        with patch.object(r,'_get',side_effect=lambda url: seen.append(urllib.parse.parse_qs(urllib.parse.urlparse(url).query)['search_terms'][0]) or {'products':[]}):
+            r.offfoods('How does the nutrition of feta without nuts compare to low sodium cheddar?',6)
+        self.assertEqual(seen,['feta without nuts','low sodium cheddar'])
+
+    def test_bounded_plugin_does_not_import_function_metadata_in_parent(self):
+        from chatify.connectors.base import make_connector
+        with patch('importlib.import_module',side_effect=AssertionError('Bounded plugin must not import in parent')):
+            plugin=make_connector({'id':'bounded','label':'Bounded','type':'python','execution':'bounded','entry':'untrusted:search'},'.')
+        self.assertFalse(getattr(plugin,'preserve_query',False))

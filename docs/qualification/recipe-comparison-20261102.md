@@ -15,3 +15,5 @@ Evidence:
 - Full clean Python test files: 1401 passed, 1 skipped, 546 subtests. Earlier released counts are not this candidate's verdict.
 
 Open: current live two-food success, hosted selected-route acceptance, processed-food relevance, generalized nutrition reliability and synthesized-answer entailment. No semantic model/prompt experiment retained. No key, paid resource or helper execution.
+
+Adverse followthrough: reject ambiguous nested comparison syntax without provider calls; food qualifiers remain intact. Bounded plugins do not import function metadata in the parent process. Their existing execution route is unchanged. 57 recipe/gallery/connector-recovery/bounded-plugin tests passed; affected full Python group rerun gives 115 passed / 16 subtests, bringing candidate full-file total to 1404 passed / 1 skipped / 546 subtests. No additional live requests made. Numeric strings remain excluded as the pre-existing adapter did not emit them as numbers; missing nutrition cannot satisfy a comparison side. This is intentionally conservative, not a claim of full Open Food Facts schema coverage.
