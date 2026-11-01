@@ -76,7 +76,10 @@ class Crossref:
                 pass
             venue = _clean((it.get("container-title") or [""])[0] if isinstance(it.get("container-title"), list) else "")
             authors = [" ".join(x for x in (a.get("given"), a.get("family")) if x) for a in (it.get("author") or []) if isinstance(a, dict)][:6]
-            out.append(Evidence(title, (text or title)[:1500], it.get("URL") or "", authors, year, venue or "Crossref", self.id, 1.0 / (n + 1), "doi:" + str(it.get("DOI", title[:40]))))
+            row = Evidence(title, (text or title)[:1500], it.get("URL") or "", authors, year, venue or "Crossref", self.id, 1.0 / (n + 1), "doi:" + str(it.get("DOI", title[:40])))
+            if not text:
+                row["content_kind"] = "title_only"
+            out.append(row)
         return out
 
 
