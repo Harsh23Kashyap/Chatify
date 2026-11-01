@@ -19,7 +19,7 @@ class UncitedSectionRepair(unittest.TestCase):
  def sample(self):
   return ('The survey studied forest habitat conservation across regions.\n\n'+'The survey studied forest habitat conservation across regions. [1]'+'\n\nThe long term outcomes remain uncertain across all regions.', [{'n':1,'title':'Survey','text':'The survey studied forest habitat conservation across regions. The survey lacked a comparator group.'}])
  def run_repair(self,e):
-  a,v=self.sample();return e.repair_support(a,v,'What did this survey address?','Note: the sources may not fully support this: '+a[:30])
+  a,v=self.sample();return e.repair_support(a,v,'What did this survey address?','Note: the sources may not fully support this: missing citations or unsupported precision in '+a[:30])
  def test_all_flags_sent_even_when_warning_truncated(self):
   e=self.setup_engine('{}');self.run_repair(e)
   payload=json.loads(e.provider.messages[-1]['content'])
@@ -36,12 +36,12 @@ class UncitedSectionRepair(unittest.TestCase):
  def test_omnibus_reference_pile_does_not_clear_repair(self):
   a,v=self.sample();v=v+[{'n':2,'title':'Survey two','text':v[0]['text']}]
   e=self.setup_engine(json.dumps({'replacements':{'0':'The survey studied forest habitat conservation across regions. [1] [2]','1':{'text':'The survey lacked a comparator group.','source_id':1}}}))
-  out,_,_,note=e.repair_support(a,v,'Survey','Note: the sources may not fully support this: intro')
+  out,_,_,note=e.repair_support(a,v,'Survey','Note: the sources may not fully support this: missing citations or unsupported precision in intro')
   self.assertEqual(out,a);self.assertTrue(note)
  def test_true_other_topic_borrowed_from_uncited_passage_is_rejected(self):
   a,v=self.sample();v.append({'n':2,'title':'Funding','text':'Crowdfunding conservation mechanisms mobilize funding globally.'})
   e=self.setup_engine(json.dumps({'replacements':{'0':{'text':'Crowdfunding conservation mechanisms mobilize funding globally.','source_id':1},'1':{'text':'The survey lacked a comparator group.','source_id':1}}}))
-  out,_,_,note=e.repair_support(a,v,'Survey','Note: the sources may not fully support this: intro')
+  out,_,_,note=e.repair_support(a,v,'Survey','Note: the sources may not fully support this: missing citations or unsupported precision in intro')
   self.assertEqual(out,a);self.assertTrue(note)
  def test_source_isolated_negative_verdict_keeps_original(self):
   e=self.setup_engine(json.dumps({'replacements':{'0':{'text':'The survey studied forest habitat conservation across regions.','source_id':1},'1':{'text':'The survey lacked a comparator group.','source_id':1}}}));old=e.provider.complete
@@ -52,3 +52,11 @@ class UncitedSectionRepair(unittest.TestCase):
  def test_general_check_failure_stays_visible(self):
   e=self.setup_engine(json.dumps({'replacements':{'0':{'text':'The survey studied forest habitat conservation across regions.','source_id':1},'1':{'text':'The survey lacked a comparator group.','source_id':1}}}));e.check_support=lambda *args,**kwargs:'Note: the support check could not be completed; support was not verified.'
   _,_,_,n=self.run_repair(e);self.assertIn('not verified',n)
+
+ def test_answer_prompt_makes_overview_and_uncertainty_subject_to_evidence(self):
+  e=self.setup_engine('{}');system=e.prompt('Explain conservation',[],'standard',[], '')[0]['content']
+  self.assertIn('not citation-exempt',system);self.assertIn('Do not invent small sample sizes',system)
+
+ def test_semantic_verdict_does_not_get_reduced_to_uncited_only_patch(self):
+  e=self.setup_engine('unchanged');a,v=self.sample();e.repair_support(a,v,'Survey','Note: the sources may not fully support this: invented study limitations')
+  self.assertNotIn('uncited_sentences',e.provider.messages[-1]['content']);self.assertIn('invented study limitations',e.provider.messages[-1]['content'])
