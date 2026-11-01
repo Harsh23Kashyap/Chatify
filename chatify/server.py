@@ -482,7 +482,7 @@ def make_handler(cfg, engine):
                     selected=b.get('selection') or {};kind=selected.get('provider');model=selected.get('model');base=selected.get('base_url','')
                     if kind not in schema.PROVIDERS or not isinstance(model,str) or not model.strip() or len(model)>120 or not isinstance(base,str) or len(base)>300:raise ValueError('Choose a valid provider and model')
                     cheap=buildjobs_mod.CHEAP_MODEL.get(kind)
-                    if cheap and cheap!=model:
+                    if cheap and cheap!=model and not b.get('explicit_selection'):
                         try:
                             if cheap in providers.list_models(cfg,kind,base):model=cheap
                         except Exception:pass
@@ -500,7 +500,8 @@ def make_handler(cfg, engine):
                         # app must inherit the host's configured provider block
                         # (live evidence 2026-10-25: a child app was saved with the
                         # build-time substitution instead of the configured model).
-                        return self._send(200,build_jobs.start(o,model_provider,cfg,b))
+                        runtime_cfg=providers._block(cfg,kind,selected.get('model'),base) if b.get('explicit_selection') else cfg
+                        return self._send(200,build_jobs.start(o,model_provider,runtime_cfg,b))
                     if path.endswith('/deploy'):return self._send(200,appbuilder.deployment(model_provider,b))
                     return self._send(200,appbuilder.talk(model_provider,build_cfg,b))
                 if path.endswith('/parse'):
@@ -691,6 +692,17 @@ def make_handler(cfg, engine):
                         return self._send(200, {"types": types})
                     if path == "/api/websearch/status":
                         return self._send(200, {"catalog": engine.catalog_state(), "catalog_keys": {"openalex": bool(secrets.saved("catalog:openalex") or os.environ.get("OPENALEX_API_KEY"))}, "source": engine.web_state(), "providers": [{"id": k, "label": v["label"], "has_key": websearch.has_key(k)} for k, v in websearch.PROVIDERS.items()]})
+                    if path == "/api/catalog/test" and method == "POST":
+                        pid = str(b.get("id") or "")
+                        if pid not in ("openalex", "pubmed", "arxiv", "crossref", "wikipedia"):
+                            return self._send(400, {"error": "Unknown reference source"})
+                        try:
+                            from .connectors import make_connector as make_source
+                            connector = make_source({"id": pid, "label": pid, "type": pid}, cfg.get("_dir", "."))
+                            items = connector.search(str(b.get("query") or "habitat loss")[:300], 3)
+                            return self._send(200, {"ok": bool(items), "items": [{"title": row.get("title", ""), "url": row.get("url", "")} for row in items], "error": "" if items else "No results returned. Connection not verified."})
+                        except Exception as error:
+                            return self._send(200, {"ok": False, "items": [], "error": str(error)[:300]})
                     if path == "/api/catalog/key" and method == "POST":
                         if b.get("id") != "openalex":
                             return self._send(400, {"error": "Unknown library"})
@@ -972,6 +984,29 @@ def make_handler(cfg, engine):
             if not full.startswith(WEB + os.sep) or not os.path.isfile(full):
                 return self._error_page(404)
             ctype = mimetypes.guess_type(full)[0] or "application/octet-stream"
+            # Media probes and seeking (including Safari) require real byte ranges.
+            if ctype.startswith(("video/", "audio/")):
+                size = os.path.getsize(full)
+                requested = self.headers.get("Range", "")
+                start, end, status = 0, size - 1, 200
+                if requested:
+                    match = re.fullmatch(r"bytes=(\d*)-(\d*)", requested.strip())
+                    if match and any(match.groups()):
+                        left, right = match.groups()
+                        if left:
+                            start = int(left)
+                            end = min(int(right), size - 1) if right else size - 1
+                        else:
+                            start = max(0, size - int(right))
+                        if start >= size or end < start or (not left and int(right) == 0):
+                            return self._send(416, b"", ctype, extra={"Content-Range": "bytes */%d" % size, "Accept-Ranges": "bytes"})
+                        status = 206
+                extra = {"Accept-Ranges": "bytes"}
+                if status == 206:
+                    extra["Content-Range"] = "bytes %d-%d/%d" % (start, end, size)
+                with open(full, "rb") as handle:
+                    handle.seek(start)
+                    return self._send(status, handle.read(end - start + 1), ctype, extra=extra)
             with open(full, "rb") as handle:
                 data = handle.read()
             if name == "index.html":
@@ -1161,7 +1196,7 @@ def serve_gallery(path, host=None, port=None):
                 conn.close()
                 return self._send(503, error_page_html(503).encode(), "text/html; charset=utf-8")
             ctype = resp.getheader("Content-Type") or ""
-            passthrough = {k: v for k, v in resp.getheaders() if k.lower() in ("set-cookie", "cache-control", "content-disposition")}
+            passthrough = {k: v for k, v in resp.getheaders() if k.lower() in ("set-cookie", "cache-control", "content-disposition", "accept-ranges", "content-range")}
             if self.command == "GET" and ctype.startswith("text/html"):
                 data = resp.read()
                 conn.close()
@@ -1169,6 +1204,9 @@ def serve_gallery(path, host=None, port=None):
                 if loc and loc.startswith("/"):
                     passthrough["Location"] = loc if resp.getheader("X-CC-Workspace-Default")=="1" else base + loc
                 return self._send(resp.status, _rewrite_app_html(data, base), ctype, passthrough)
+            # Preserve media framing through mounted routes; keep chat streams streaming.
+            if ctype.startswith(("video/", "audio/")) and resp.getheader("Content-Length"):
+                passthrough["Content-Length"] = resp.getheader("Content-Length")
             # stream everything else so chat answers still arrive token by token
             self.send_response(resp.status)
             self.send_header("Content-Type", ctype or "application/octet-stream")
@@ -1249,6 +1287,29 @@ def serve_gallery(path, host=None, port=None):
             full = os.path.normpath(os.path.join(WEB, name))
             if name and full.startswith(WEB + os.sep) and os.path.isfile(full) and not name.endswith(".html"):
                 ctype = mimetypes.guess_type(full)[0] or "application/octet-stream"
+                # Media probes and seeking (including Safari) require real byte ranges.
+                if ctype.startswith(("video/", "audio/")):
+                    size = os.path.getsize(full)
+                    requested = self.headers.get("Range", "")
+                    start, end, status = 0, size - 1, 200
+                    if requested:
+                        match = re.fullmatch(r"bytes=(\d*)-(\d*)", requested.strip())
+                        if match and any(match.groups()):
+                            left, right = match.groups()
+                            if left:
+                                start = int(left)
+                                end = min(int(right), size - 1) if right else size - 1
+                            else:
+                                start = max(0, size - int(right))
+                            if start >= size or end < start or (not left and int(right) == 0):
+                                return self._send(416, b"", ctype, extra={"Content-Range": "bytes */%d" % size, "Accept-Ranges": "bytes"})
+                            status = 206
+                    extra = {"Accept-Ranges": "bytes"}
+                    if status == 206:
+                        extra["Content-Range"] = "bytes %d-%d/%d" % (start, end, size)
+                    with open(full, "rb") as handle:
+                        handle.seek(start)
+                        return self._send(status, handle.read(end - start + 1), ctype, extra=extra)
                 with open(full, "rb") as handle:
                     return self._send(200, handle.read(), ctype + ("; charset=utf-8" if ctype.startswith("text") or "javascript" in ctype else ""))
             if "text/html" in (self.headers.get("Accept") or ""):

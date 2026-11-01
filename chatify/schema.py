@@ -44,6 +44,7 @@ DEFAULTS = {
                   "standard": "Give a full, source-backed answer. Start with the direct answer, then explain the relevant findings, examples, comparisons and counterpoints supported by the sources. Use readable paragraphs and descriptive sections when useful. For broad questions with ample evidence, give several substantial paragraphs rather than a brief summary. For narrow questions or sparse evidence, stay concise. Cite each factual claim with [n]. Do not pad, repeat points or invent details to reach a length.",
                   "deep": "Give a detailed, source-backed synthesis with a direct answer, organized sections, and comparison of relevant findings across sources. Explain methods, mechanisms, examples, trade-offs, counterpoints and uncertainties only when the sources support them. Cover distinct relevant findings rather than repeating the same point. Be more thorough than standard mode when evidence permits; do not invent background, caveats or open questions to fill space. Cite each factual claim with [n]."},
         "answer_note": "",
+        "source_preview_only": False, # explicit opt-in: retrieved passages, no synthesized answer
         "revise": False,
         "no_evidence": "I could not find evidence for that in the configured sources.",
     },
@@ -213,6 +214,8 @@ def validate(raw):
         raise ConfigError("auth.mode must be none, token or accounts")
     if cfg["retrieval"]["top_k"] < 1 or cfg["retrieval"]["top_k"] > 50:
         raise ConfigError("retrieval.top_k must be 1-50")
+    if type(cfg["prompt"].get("source_preview_only")) is not bool:
+        raise ConfigError("prompt.source_preview_only must be true or false")
     memory = cfg["memory"]
     if not isinstance(memory, dict) or not isinstance(memory.get("enabled"), bool):
         raise ConfigError("memory.enabled must be true or false")

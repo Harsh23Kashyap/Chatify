@@ -38,3 +38,17 @@ class ConfirmedSources(unittest.TestCase):
    new=dict(old,id='new',parts={},calls=0)
    jobs._checkpoint_resume(new)
    self.assertIn('api',new['parts'])
+
+class ExclusiveBriefSources(unittest.TestCase):
+ def test_exact_only_source(self):
+  self.assertEqual(buildjobs.exclusive_brief_sources('Use only the public PubMed built-in source. No extra services.'),['pubmed'])
+ def test_name_alone_does_not_override_default(self):
+  self.assertEqual(buildjobs.exclusive_brief_sources('Biodiversity research with PubMed and related sources'),[])
+ def test_topic_only_does_not_guess_source(self):
+  self.assertEqual(buildjobs.exclusive_brief_sources('Only biodiversity conservation information'),[])
+ def test_source_only_form(self):
+  self.assertEqual(buildjobs.exclusive_brief_sources('Crossref source only'),['crossref'])
+ def test_conflicting_checkboxes_stop_before_model(self):
+  jobs=buildjobs.BuildJobs()
+  with self.assertRaisesRegex(ValueError,'checkboxes'):
+   jobs.start('test',None,schema.DEFAULTS,{'brief':'Use only the public PubMed built-in source.','confirmed_sources':['crossref']})

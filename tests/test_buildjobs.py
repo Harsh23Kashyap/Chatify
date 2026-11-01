@@ -383,3 +383,12 @@ class RetryCompletion(unittest.TestCase):
   self.assertIn('safe defaults',d['notice'])
   self.assertEqual(d['calls'],32+buildjobs.MAX_PART_ATTEMPTS-1);self.assertEqual(d['retry_calls'],buildjobs.MAX_PART_ATTEMPTS-1+1)
   raw=yaml.safe_load(d['yaml']);self.assertEqual(set(raw['appearance']),set(theme.DEFAULT_CLEAN()));self.assertTrue(raw['appearance']['font'])
+
+class SourceSelectionChecks(SafePatchChecks):
+ def test_unnamed_public_connector_is_not_activated(self):
+  job=self.part_job(json.dumps([{'id':'wiki','type':'wikipedia','label':'Wikipedia','weight':1.0}]),'Read uploaded library documents; no live APIs are needed')
+  with self.assertRaisesRegex(ValueError,'not named or selected'):buildjobs.BuildJobs()._draft_part(job,'config:sources',dict(buildjobs.PARTS)['config:sources'])
+ def test_named_public_connector_remains_available(self):
+  job=self.part_job(json.dumps([{'id':'wiki','type':'wikipedia','label':'Wikipedia','weight':1.0}]),'Use Wikipedia for background reading')
+  buildjobs.BuildJobs()._draft_part(job,'config:sources',dict(buildjobs.PARTS)['config:sources'])
+  self.assertEqual(job['parts']['config:sources'][0]['type'],'wikipedia')

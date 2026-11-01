@@ -23,6 +23,10 @@ def search(query, k=12):
         _index = LocalFiles({'id':'fia-regulations','label':'FIA regulations','path':'sources'}, str(BASE))
     out = _index.search(query, k)
     for item in out:
+        # The official documents use F1 while user questions often spell out
+        # Formula One. Keep this source-domain label in metadata, not in the
+        # verbatim excerpt, so named-entity relevance checks see both forms.
+        item['title'] = 'Formula One (F1): ' + item['title']
         item['url'] = URLS.get(item.get('document'), '')
         item['year'] = '2026'
         item['venue'] = 'FIA (dated regulation snapshot)' if item.get('document','').startswith('fia-') else 'Ferrari / Formula 1 (historical excerpt)'

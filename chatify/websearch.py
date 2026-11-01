@@ -3,10 +3,11 @@
 Request and response shapes were read from each provider's official API reference on 5 Oct 2026.
 Keys come from the local secret store (never returned by any API) or from an environment variable.
 """
-import json, os, urllib.request, urllib.error
+import json, os, urllib.request, urllib.error, urllib.parse
 from . import secrets
 
 PROVIDERS = {
+    "brave": {"label": "Brave Search", "env": "BRAVE_API_KEY", "url": "https://api.search.brave.com/res/v1/web/search", "auth": "X-Subscription-Token"},
     "tavily": {"label": "Tavily", "env": "TAVILY_API_KEY", "url": "https://api.tavily.com/search", "auth": "bearer"},
     "exa": {"label": "Exa", "env": "EXA_API_KEY", "url": "https://api.exa.ai/search", "auth": "x-api-key"},
     "firecrawl": {"label": "Firecrawl", "env": "FIRECRAWL_API_KEY", "url": "https://api.firecrawl.dev/v2/search", "auth": "bearer"},
@@ -51,7 +52,10 @@ def normalize(pid, data, limit):
     """Raw response -> [{title, text, url}]. Tolerant of missing or odd fields."""
     if not isinstance(data, dict):
         return []
-    if pid == "firecrawl":
+    if pid == "brave":
+        web = data.get("web")
+        items = web.get("results") if isinstance(web, dict) else []
+    elif pid == "firecrawl":
         d = data.get("data")
         items = d.get("web") if isinstance(d, dict) else d
     else:
@@ -60,7 +64,9 @@ def normalize(pid, data, limit):
     for it in (items if isinstance(items, list) else []):
         if not isinstance(it, dict):
             continue
-        if pid == "tavily":
+        if pid == "brave":
+            text = _s(it.get("description")) or _s(it.get("extra_snippets"))
+        elif pid == "tavily":
             text = _s(it.get("content"))
         elif pid == "exa":
             text = _s(it.get("highlights")) or _s(it.get("text")) or _s(it.get("summary"))
@@ -71,7 +77,17 @@ def normalize(pid, data, limit):
         title = _s(it.get("title"))
         if not (text or title):
             continue
-        out.append({"title": title[:200], "text": (text or title)[:1500], "url": _s(it.get("url"))})
+        row = {"title": title[:200], "text": (text or title)[:1500], "url": _s(it.get("url"))}
+        # Preserve provider-reported publication metadata. It is not a fetched
+        # page-date verification or proof the report is current.
+        if pid == "exa":
+            date = _s(it.get("publishedDate"))
+            if date:
+                row["published_date"] = date
+            author = _s(it.get("author"))
+            if author:
+                row["author"] = author
+        out.append(row)
         if len(out) >= limit:
             break
     return out
@@ -85,8 +101,12 @@ def search(pid, query, limit=5, with_raw=False, key_override=None):
         raise SearchError("No key saved for %s" % PROVIDERS[pid]["label"])
     p = PROVIDERS[pid]
     h = {"Content-Type": "application/json", "User-Agent": "chatify/1.0"}
-    h["Authorization" if p["auth"] == "bearer" else "x-api-key"] = ("Bearer " + key) if p["auth"] == "bearer" else key
-    req = urllib.request.Request(p["url"], json.dumps(_body(pid, str(query)[:400], int(limit))).encode(), h, method="POST")
+    h["Authorization" if p["auth"] == "bearer" else p["auth"]] = ("Bearer " + key) if p["auth"] == "bearer" else key
+    if pid == "brave":
+        params = urllib.parse.urlencode({"q": str(query)[:400], "count": max(1, min(20, int(limit))), "extra_snippets": "true"})
+        req = urllib.request.Request(p["url"] + "?" + params, headers=h, method="GET")
+    else:
+        req = urllib.request.Request(p["url"], json.dumps(_body(pid, str(query)[:400], int(limit))).encode(), h, method="POST")
     last = ""
     for attempt in range(2):
         try:

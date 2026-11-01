@@ -1,0 +1,11 @@
+# FAO: nutrient-management principles
+
+Source: https://www.fao.org/agriculture/crops/thematic-sitemap/theme/compendium/tools-guidelines/how-to-inm/en/
+Fetched: 2026-11-01. Exact selected excerpts, not the full source. No publication date asserted.
+Scope: General principles, not a field prescription.
+
+The need for fertilizer depends on the soil and the tillage practices (see section on Conservation Agriculture). Different crops require different amount of fertilizer in different growing stages. These guidelines will give some main benefits and drawbacks of 4 commonly used application methods.
+
+Placement of fertilizer is another manual application method that is more efficient, but also requires more labour. Different placement practices are: (1) banding i.e. placing fertilizers in bands to one or both sides of the rows (side dressing); (2) drilling in between rows; (3) spot placement i.e. by placing in between the plants (mostly practiced for vegetable crops); and (4) by placing fertilizers in a circular band away from the base of the plants as in the case of fruit trees. No single method can be considered best for all the crops. The method of placement varies with the crop, fertilizer, and weather. Deep placement of urea has shown great economic and environmental benefits in rice crops, but the high labour requirement is still limiting uptake on a large scale in most areas.
+
+General guidelines on timing are hard to provide, since a wide range of factors influences the N-availability and impact on the plant’s health. Surveying the status of rice plants can be done by using a Leaf Colour Chart during a field visit. During this quick survey, which has to be done regularly, the demand for water and occurrence of pests can also be checked, to limit the number of field visits. In the case of rice, the young rice plant before the tillering stage grows slowly and does not need much N. Therefore, only a small to moderate amount of fertilizer N is applied to rice within 14 days after transplanting (for transplanted rice) or 21 days after sowing (for direct-seeded rice). Rice requires more N at the early- and mid-tillering stages to ensure adequate number of panicles; and at panicle initiation stage to increase grain number per panicle.

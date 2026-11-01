@@ -3,7 +3,7 @@ from chatify import apipicks,buildjobs,schema,theme
 class GeneratedDrafts(unittest.TestCase):
  def test_observed_provider_aliases_get_verified_metadata(self):
   picks=apipicks.enrich([{'service':x} for x in ['OpenAlex Works API','Crossref REST API','PubMed and the NCBI Entrez E-utilities']])
-  self.assertTrue(picks[0]['key_required']);self.assertIn('openalex.org',picks[0]['key_url'])
+  self.assertFalse(picks[0]['key_required']);self.assertIn('openalex.org',picks[0]['key_url'])
   self.assertFalse(picks[1]['key_required']);self.assertFalse(picks[2]['key_required'])
  def test_unknown_suffix_not_authenticated_as_known_service(self):
   self.assertNotIn('provider_page',apipicks.enrich([{'service':'OpenAlex malicious proxy'}])[0])

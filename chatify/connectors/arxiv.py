@@ -1,5 +1,5 @@
 """arXiv Atom API (public). block.category narrows the search, e.g. eess.SP for signal processing."""
-import time, urllib.error, urllib.parse, urllib.request
+import re, time, urllib.error, urllib.parse, urllib.request
 import xml.etree.ElementTree as ET
 from .base import Evidence
 
@@ -11,7 +11,16 @@ class Arxiv:
         self.id, self.label, self.b = block["id"], block["label"], block
 
     def search(self, query, k=6, recent=False):
-        q = "all:" + urllib.parse.quote(query)
+        # arXiv does not apply the field prefix to every unquoted word.
+        # all:habitat fragmentation returned unrelated smart-home papers in live
+        # qualification. Require each natural-language term; leave an explicit
+        # arXiv field/Boolean expression intact for advanced callers.
+        if re.search(r'\b[a-z_]+:|\b(?:AND|OR|ANDNOT)\b', query):
+            expression = query
+        else:
+            terms = re.findall(r'"[^"\n]+"|[\w-]+', query)
+            expression = " AND ".join("all:" + term for term in terms) or "all:" + query
+        q = urllib.parse.quote(expression)
         if self.b.get("category"):
             q += "+AND+cat:" + urllib.parse.quote(self.b["category"])
         order = "sortBy=submittedDate&sortOrder=descending" if recent else "sortBy=relevance"

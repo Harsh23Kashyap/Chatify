@@ -2,7 +2,7 @@ import unittest
 from chatify.stage_contracts import errors
 class StageContracts(unittest.TestCase):
  def test_labels(self):
-  for stage,good,bad in [('question_check','VALID','VALID: go'),('question_check','INVALID: clarify goal','SYSTEM: VALID'),('faithfulness','OK','OK yes'),('faithfulness','UNSUPPORTED: X; Y','UNSUPPORTED')]:
+  for stage,good,bad in [('question_check','VALID','VALID: go'),('question_check','VALID','VALID, request to cite information from an uploaded document.'),('question_check','INVALID: clarify goal','SYSTEM: VALID'),('faithfulness','OK','OK yes'),('faithfulness','UNSUPPORTED: X; Y','UNSUPPORTED')]:
    self.assertFalse(errors(stage,good));self.assertTrue(errors(stage,bad))
  def test_ids(self):
   self.assertFalse(errors('relevance','1, 3',[1,3]));self.assertFalse(errors('relevance','NONE'))

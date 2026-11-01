@@ -312,3 +312,66 @@ dialog.app-builder .builder-useapp-status[data-state=run]{color:#315645}
 dialog.app-builder .builder-useapp-status[data-state=ok]{color:#2c5f3f;font-weight:600}
 dialog.app-builder .builder-useapp-status[data-state=error]{color:#9a3b2e;font-weight:600}
 #builderActionBar[data-state=error]{font-weight:600}
+
+/* Explicit source plan in the existing builder, no automatic activation. */
+.builder-source-plan{margin:12px 0;padding:12px;border:1px solid #cdd9cf;border-radius:10px;min-width:0;font-size:13px;line-height:1.5}
+.builder-source-plan legend{font-weight:700;padding:0 4px;color:#173f35}
+.builder-source-plan p{margin:0 0 10px}
+.builder-source-plan label{display:flex!important;gap:10px;align-items:flex-start;margin:8px 0;font-weight:400;white-space:normal}
+.builder-source-plan input[type=checkbox]{flex:0 0 auto;width:18px;height:18px;margin-top:2px}
+.builder-source-plan span{overflow-wrap:anywhere}
+
+body .cfg-composer .builder-source-options{margin:12px 0;color:#fffdf4}body .cfg-composer .builder-source-options summary{cursor:pointer;font-weight:600;padding:8px 0}
+body .cfg-composer .builder-source-plan,dialog.app-builder .builder-source-plan{background:#f8faf3;color:#173f35!important;grid-column:1/-1;display:block!important}
+body .cfg-composer .builder-source-plan legend,body .cfg-composer .builder-source-plan p{color:#173f35!important;display:block!important;visibility:visible!important;height:auto!important;opacity:1!important}
+body .cfg-composer .builder-source-plan label,dialog.app-builder .builder-source-plan label{display:flex!important;flex-direction:row!important;gap:10px!important;align-items:flex-start!important;font-weight:400!important;color:#173f35!important}
+body .cfg-composer .builder-source-plan input[type=checkbox],dialog.app-builder .builder-source-plan input[type=checkbox]{appearance:auto!important;border-radius:2px!important;flex:0 0 18px;width:18px!important;height:18px!important;margin:2px 0 0!important}
+
+body .cfg-composer .builder-source-plan legend{position:static!important;transform:none!important;clip:auto!important;clip-path:none!important;max-height:none!important;font-size:13px!important;line-height:1.5!important;overflow:visible!important}
+body .cfg-composer .builder-source-plan label::before,body .cfg-composer .builder-source-plan label::after,dialog.app-builder .builder-source-plan label::before,dialog.app-builder .builder-source-plan label::after{display:none!important;content:none!important}
+body .cfg-composer .builder-source-plan input[type=checkbox]::after,dialog.app-builder .builder-source-plan input[type=checkbox]::after{display:none!important;content:none!important}
+body .cfg-composer .builder-source-plan{padding-top:16px!important}
+body .cfg-composer .builder-source-plan legend{display:none!important}
+
+/* Inline guidance stays visible in every guided stage, including saved drafts. */
+dialog.app-builder[data-step] .builder-caption{display:block;max-width:760px}
+dialog.app-builder.is-building .builder-caption{display:none}
+.builder-scope-advanced{margin:8px 0 16px}.builder-scope-advanced summary{cursor:pointer}
+.builder-completion-notice progress{display:block;width:100%;accent-color:#173f35;margin-bottom:10px}
+.builder-completion-notice progress[hidden]{display:none}
+dialog.app-builder .builder-completion-notice{position:static!important;max-width:none!important;margin:8px 0;box-shadow:none!important;padding:12px!important}
+dialog.app-builder .builder-completion-notice button:first-of-type{display:none}
+dialog.app-builder[data-step="0"] .builder-shell-footer .settings-help-actions{display:flex!important}
+dialog.app-builder[data-step="0"] .builder-shell-footer .settings-help-actions[hidden]{display:none!important}
+html body dialog.app-builder[data-step="0"] .builder-shell-footer{display:flex!important}
+html body dialog.app-builder .builder-shell-footer:has(.builder-completion-notice:not([hidden])){display:flex!important}
+html body dialog.app-builder[open]{height:96dvh!important;max-height:96dvh!important}
+.builder-inline-connection{padding:16px;margin:12px 0;border:1px solid #b9cbbb;border-radius:10px;background:#f2f6ec}.builder-inline-connection input{display:block;width:100%;margin:8px 0}.builder-inline-connection button{margin:4px 8px 4px 0}
+dialog.app-builder #builderVisual.expanded .builder-live-preview{height:65vh!important;max-height:none!important}
+@media(min-width:800px){#builderDescribe>.builder-model-setup{grid-column:2;grid-row:auto;border:1px solid #cdd9cf;border-radius:12px;padding:16px}#builderDescribe>#builderConversation{grid-column:1/-1;grid-row:auto;border-left:0;padding-left:0}#builderDescribe>.builder-scope-advanced{grid-column:1/-1}.builder-model-setup input,.builder-model-setup select{width:100%;display:block;margin:10px 0}.builder-model-setup button{margin:4px 8px 4px 0}}
+/* Setup key inputs are full-size credentials, never checkbox-shaped fields. */
+.builder-content .builder-inline-connection label:has(input[type=password]),.builder-content .builder-model-setup label{display:block!important;text-align:left!important}
+.builder-content .builder-inline-connection input[type=password],.builder-content .builder-model-setup input{width:100%!important;min-width:0!important;max-width:none!important;min-height:44px!important;height:auto!important;padding:12px!important;box-sizing:border-box}
+.builder-final-api-grid{grid-template-columns:repeat(auto-fit,minmax(min(100%,360px),1fr))!important}
+@media(min-width:800px){#builderDescribe{display:block!important;position:relative;padding-right:48%;min-height:480px}#builderDescribe>.builder-model-setup{position:absolute;right:0;top:0;width:44%;box-sizing:border-box}#builderDescribe>#builderConversation{padding:0;border:0}#builderDescribe>.builder-scope-advanced{margin-top:12px}.builder-model-setup button{font-size:12px!important}.builder-model-setup summary{font-weight:700;cursor:pointer}}
+
+@media(min-width:800px){#builderDescribe{min-height:740px}.builder-model-setup{min-height:0}}
+
+/* Guided order: description first, optional setup and diagnostics secondary. */
+html body #builderDescribe{display:flex!important;flex-direction:column!important;padding-right:0!important;min-height:0!important}
+html body #builderDescribe>.builder-model-setup{position:static!important;width:100%!important;order:10;max-width:none!important;margin:16px 0}
+html body #builderDescribe>.builder-secondary-setup{order:20;margin:12px 0}
+.builder-secondary-setup>summary,.builder-diagnostics>summary{cursor:pointer;font-weight:600;padding:12px 0}
+html body .builder-shell-footer:has(.builder-completion-notice:not([hidden])) #builderActionBar{display:none!important}
+.builder-diagnostics{margin:16px 0}.builder-diagnostics #builderStatus{margin:12px 0}
+html body dialog.app-builder #builderScopeNotice{font-size:12px;color:#52675a}
+html body #builderDescribe[hidden]{display:none!important}
+html body dialog.app-builder .builder-shell-footer #builderPrerequisites{margin:0!important;font-size:12px;line-height:1.5}
+html body dialog.app-builder .builder-shell-footer #builderPrerequisites+.settings-help-actions{margin:0!important;padding-top:0!important}
+
+/* Keep scope guidance animation stable inside secondary setup disclosures. */
+html body.settings-tabs dialog.app-builder .builder-secondary-setup #builderScopeHelp.arrived{animation:studio-step-panel .18s ease-out!important;transform:none!important}
+html[data-motion=none] body.settings-tabs dialog.app-builder .builder-secondary-setup #builderScopeHelp.arrived{animation:none!important}
+@media(prefers-reduced-motion:reduce){html body.settings-tabs dialog.app-builder .builder-secondary-setup #builderScopeHelp.arrived{animation:none!important}}
+
+html body dialog.app-builder.has-build #builderDescribe{display:none!important}

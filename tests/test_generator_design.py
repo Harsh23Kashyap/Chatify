@@ -10,6 +10,15 @@ class DesignTests(unittest.TestCase):
   self.assertIn('high-fiber',template('question_check','diet charts'));self.assertIn('diversification',template('answer','investing'))
  def test_contracts(self):
   self.assertIn('VALID',template('question_check','diet'));self.assertIn('numbers separated',template('relevance','diet'));self.assertIn('UNSUPPORTED:',template('faithfulness','diet'));self.assertIn('600 characters',template('summary','diet'))
+ def test_classifier_acceptance_is_exact_not_reasoned(self):
+  contract=DESIGNS['question_check']['output']
+  self.assertIn('exactly VALID with no comma, reason or punctuation',contract)
+  from chatify.pipeline import Engine
+  from chatify.store import Store
+  from chatify.prompts import PromptStore
+  e=Engine({'sources':[], 'provider':{'type':'mock'}, 'app':{'title':'Library'}},Store(':memory:'))
+  e.prompts=PromptStore('',{'text':{'question_check':'A generated classifier with VALID, or INVALID: reason.'}})
+  self.assertIn('exactly the five characters VALID',e.stage_prompt('question_check'))
  def test_no_minimum_sources_or_fake_status(self):
   p=template('answer','diet');self.assertIn('No invented references or mandatory minimum source count',p);self.assertIn('Do not impersonate a licensed expert',p)
  def test_injected_brief_stays_data(self):
@@ -41,3 +50,15 @@ class DesignTests(unittest.TestCase):
   for stage,text in [('queries','Generate queries for input. Expected output: meteor showers, meteor dust.'),('standalone','Rewrite questions. Example question: What are meteors?'),('summary','Summarize conversation history. Sample summary: We discussed meteors.')]:
    self.assertTrue(validate_draft(stage,{'prompt':text}),text)
   self.assertTrue(validate_draft('answer',{'prompt':'Answer questions from numbered evidence and cite each factual claim.'}))
+
+ def test_classifier_does_not_gate_sources_or_ban_citation_requests(self):
+  text=DESIGNS['question_check']['rules']
+  self.assertIn('before source retrieval',text)
+  self.assertIn('never prohibit a reader from requesting citations',text)
+  self.assertIn('may be uploaded later',text)
+
+ def test_api_enrichment_cannot_activate_recommendations_in_background_build(self):
+  from chatify.apipicks import complete_drafts
+  raw={'sources':[],'api_suggestions':[{'service':'Wikipedia'}]}
+  self.assertEqual(complete_drafts(raw,require_helpers=False,activate_sources=False)['sources'],[])
+  self.assertEqual(raw['sources'],[])

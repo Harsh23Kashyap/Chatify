@@ -89,6 +89,23 @@ class GalleryServer(unittest.TestCase):
         except urllib.error.HTTPError as e:
             return e.code, e.read().decode("utf-8", "replace")
 
+    def test_video_byte_ranges_direct_and_mounted(self):
+        from pathlib import Path
+        expected = (Path(ROOT) / 'chatify/web/media/paperworks-walkthrough.mp4').read_bytes()
+        for prefix in ('', '/alpha'):
+            url = 'http://127.0.0.1:%d%s/media/paperworks-walkthrough.mp4' % (self.port, prefix)
+            for header, start, end in [('bytes=0-1', 0, 1), ('bytes=100-199', 100, 199), ('bytes=-32', len(expected)-32, len(expected)-1)]:
+                with urllib.request.urlopen(urllib.request.Request(url, headers={'Range': header})) as r:
+                    self.assertEqual(r.status, 206)
+                    self.assertEqual(r.headers['Accept-Ranges'], 'bytes')
+                    self.assertEqual(r.headers['Content-Range'], 'bytes %d-%d/%d' % (start,end,len(expected)))
+                    self.assertEqual(int(r.headers['Content-Length']),end-start+1)
+                    self.assertEqual(r.read(),expected[start:end+1])
+            with self.assertRaises(urllib.error.HTTPError) as bad:
+                urllib.request.urlopen(urllib.request.Request(url,headers={'Range':'bytes=%d-' % len(expected)}))
+            self.assertEqual(bad.exception.code,416)
+            self.assertEqual(bad.exception.headers['Content-Range'],'bytes */%d' % len(expected))
+
     def test_gallery_page_lists_apps(self):
         s, b = self.get("/")
         self.assertEqual(s, 200)

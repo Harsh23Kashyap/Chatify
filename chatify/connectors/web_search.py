@@ -1,6 +1,7 @@
 """Live web results through the user's own search keys. Several providers can run together.
 Each provider is fail-safe on its own: one failing or out of credits never blocks the others or the local sources."""
 from concurrent.futures import ThreadPoolExecutor
+from datetime import datetime
 from .base import Evidence
 from .open_sources import SetupRequired
 from .. import websearch
@@ -23,7 +24,7 @@ class WebSearch:
     def search(self, query, k=6, recent=False):
         active = [p for p in self.providers if websearch.has_key(p)]
         if not active:
-            raise SetupRequired("Live web search needs an API key for one of its search providers (Tavily, Exa, Firecrawl or Parallel) before it can search here. The app owner can add a key in Settings under Web search.")
+            raise SetupRequired("Live web search needs an API key for one of its search providers (Brave Search, Tavily, Exa, Firecrawl or Parallel) before it can search here. The app owner can add a key in Settings under Web search.")
         with ThreadPoolExecutor(max_workers=len(active)) as ex:
             results = list(ex.map(lambda p: self._one(p, query, k), active))
         if not any(items for _, items in results) and self._errs and all(p in self._errs for p in active):
@@ -40,5 +41,16 @@ class WebSearch:
                 if key in seen:
                     continue
                 seen.add(key)
-                out.append(Evidence(i["title"], i["text"], i["url"], [], "", "Web (%s)" % websearch.PROVIDERS[pid]["label"], self.id, 1.0 / (len(out) + 1), i["url"] or i["title"][:60]))
+                date = i.get("published_date", "")
+                year = ""
+                if date:
+                    try:
+                        year = str(datetime.fromisoformat(date.replace("Z", "+00:00")).year)
+                    except (ValueError, TypeError):
+                        pass
+                row = Evidence(i["title"], i["text"], i["url"], [i["author"]] if i.get("author") else [], year, "Web (%s)" % websearch.PROVIDERS[pid]["label"], self.id, 1.0 / (len(out) + 1), i["url"] or i["title"][:60])
+                if year:
+                    row["published_date"] = date
+                    row["date_provenance"] = "provider-reported publication date, not independently verified"
+                out.append(row)
         return out[:k * 2]

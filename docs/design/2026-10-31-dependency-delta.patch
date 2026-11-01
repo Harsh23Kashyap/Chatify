@@ -1,0 +1,36 @@
+diff --git a/pyproject.toml b/pyproject.toml
+index 15d5a5b..f3f4cda 100644
+--- a/pyproject.toml
++++ b/pyproject.toml
+@@ -21,12 +21,12 @@ customchat-app = "chatify.cli:main"
+ include = ["chatify*", "apps*"]
+ 
+ [tool.setuptools.package-data]
+-chatify = ["web/*", "web/logos/*.svg", "web/icons/*.svg", "web/team/*.jpg", "web/emoji/*", "templates/minimal/app.yaml", "templates/minimal/docs/*.md"]
++chatify = ["web/*", "web/fonts/*", "web/logos/*.svg", "web/icons/*.svg", "web/media/*.mp4", "web/media/*.jpg", "web/media/*.md", "web/media/stories/*.mp4", "web/media/stories/*.jpg", "web/media/stories/manifest.json", "web/team/*.jpg", "web/emoji/*", "templates/minimal/app.yaml", "templates/minimal/docs/*.md"]
+ "apps" = ["*.yaml", "**/*.yaml", "**/*.md", "**/*.txt", "**/*.pdf", "**/*.json", "**/*.py", "**/*.example"]
+ 
+ [project.urls]
+ Repository = "https://github.com/Harsh23Kashyap/chatify"
+ 
+ [project.optional-dependencies]
+-documents = ["pypdf>=4"]
++documents = ["pypdf>=4", "fpdf2>=2.8", "uharfbuzz>=0.39"]
+ semantic = ["sentence-transformers>=3"]
+diff --git a/requirements.txt b/requirements.txt
+index 21ad5b7..42aac8e 100644
+--- a/requirements.txt
++++ b/requirements.txt
+@@ -3,3 +3,12 @@ PyYAML>=6.0
+ pypdf>=4
+ fpdf2>=2.8
+ uharfbuzz>=0.39
++
++# Evidence re-order stage (chatify/rerank.py); pinned to the verified pair. The app
++# fails open without the model files, but deployed images bundle them under chatify/models/rerank/.
++onnxruntime==1.31.0; python_version >= "3.11"
++# 1.31.0 has no cp310 wheels (Requires-Python >=3.11); 1.23.2 is the newest cp310
++# release and is verified on Python 3.10 against the bundled model (loads and orders
++# frozen control cases correctly, 2026-10-26).
++onnxruntime==1.23.2; python_version < "3.11"
++tokenizers==0.23.3

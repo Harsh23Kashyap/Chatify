@@ -60,3 +60,7 @@ Recent history and older keyword matches are selected from storage; the entire t
 ### Answer depth
 
 `provider.max_output_tokens` sets the response ceiling (256-32768 tokens, default4096), not a target length. `retrieval.top_k` defaults to12 passages. Deep mode searches and retains twice that number, capped at50. Standard and Deep ask for fuller cited synthesis only when the sources support it; Quick stays concise. More passages and higher ceilings may use more tokens and cost more.
+
+### Explicit source-preview-only mode
+
+`prompt.source_preview_only: true` opts into retrieved source passages instead of a generated answer. Default is false. Both sync and streaming routes label this as an unverified source preview, preserve whole retrieved passage text and reported publication metadata, and report omissions. Passages may be incomplete extracts and are not verified facts. This mode does not satisfy a request for a synthesized answer. It skips answer generation, revision, support verdicts and generated follow-ups; other configured retrieval/question stages may still call the model. It is not an automatic response to support-check failures and does not enable the experimental structured checker. Existing apps are unchanged unless explicitly configured.

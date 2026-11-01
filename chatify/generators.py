@@ -32,7 +32,7 @@ KINDS = {
         "label": "Query cleaning", "filename": "clean_query.py", "func": "clean_query",
         "sig": "clean_query(query: str) -> str",
         "contract": ("Define clean_query(query) that takes the reader's question and returns a better search string. Use only the standard "
-                     "library (re, string, unicodedata). No network, no files. Always return a non-empty string; if cleaning leaves nothing, return the original query."),
+                     "library (re, string, unicodedata). No network, no files. For a nonempty input return a nonempty string; if cleaning leaves nothing, return the original query. For empty input return an empty string. Never invent topic words or a search query."),
         "allowed": {"re", "string", "unicodedata", "html", "json"},
     },
 }
@@ -320,8 +320,14 @@ def _helper_environment(code):
         direct = isinstance(f, ast.Attribute) and f.attr == "getenv" and isinstance(f.value, ast.Name) and f.value.id == "os"
         lookup = isinstance(f, ast.Attribute) and f.attr == "get" and isinstance(f.value, ast.Attribute) and f.value.attr == "environ" and isinstance(f.value.value, ast.Name) and f.value.value.id == "os"
         arg = node.args[0]
-        if (direct or lookup) and isinstance(arg, ast.Constant) and isinstance(arg.value, str) and re.fullmatch(r"[A-Z][A-Z0-9_]{2,100}", arg.value) and arg.value in os.environ:
-            env[arg.value] = os.environ[arg.value]
+        if (direct or lookup) and isinstance(arg, ast.Constant) and isinstance(arg.value, str) and re.fullmatch(r"[A-Z][A-Z0-9_]{2,100}", arg.value):
+            # The UI saves native source keys privately rather than exporting
+            # them into the server environment. Pass only a declared canonical
+            # source key, never all saved values or a display-name-derived key.
+            from . import websearch, secrets
+            known = next((pid for pid, provider in websearch.PROVIDERS.items() if provider['env'] == arg.value), None)
+            value = websearch.key_for(known) if known else (secrets.saved('catalog:openalex') or os.environ.get(arg.value, '')) if arg.value == 'OPENALEX_API_KEY' else os.environ.get(arg.value, '')
+            if value:env[arg.value] = value
     return env
 
 
@@ -339,7 +345,8 @@ def test_code(kind, code, query):
     spec = KINDS[kind]
     args = [query, 5] if kind == "search" else [query]
     t0 = _t.time(); err = ""; result = None; ran = True
-    with tempfile.TemporaryDirectory() as d:
+    try:
+      with tempfile.TemporaryDirectory() as d:
         try:
             p = subprocess.run([sys.executable, "-I", "-c", RUNNER], input=_j.dumps({"code": code, "func": spec["func"], "args": args}), capture_output=True,
                                text=True, timeout=60, cwd=d, env=_helper_environment(code))
@@ -353,6 +360,9 @@ def test_code(kind, code, query):
                 err = (p.stderr or "It stopped without a result.").strip().splitlines()[-1][:300] if (p.stderr or "").strip() else "It stopped without a result."
         except subprocess.TimeoutExpired:
             err = "It took longer than 60 seconds and was stopped."
+    except OSError as error:
+        ran = False
+        err = "The helper process could not start (" + type(error).__name__ + "). Check this server\'s temporary-folder and Python process permissions, then retry. No API connection was verified."
     recovered = False
     original_result = result
     if kind == 'search' and result is not None and check_shape(kind,result):
@@ -399,7 +409,7 @@ def fetch_sample(url, query):
 def infer_search(brief, key=''):
     """Local matching only. Keys never go to a model or a guessed host."""
     from . import websearch
-    text = str(brief or '').lower()
+    text = str(brief or '').lower().replace('bravesearch', 'brave')
     named = [pid for pid in websearch.PROVIDERS if re.search(r'\b' + pid + r'\b', text)]
     if len(named) == 1:
         return named[0]
@@ -414,6 +424,8 @@ def known_search_template(pid):
     if pid not in websearch.PROVIDERS:
         raise ValueError('Name the API or provide its docs URL first.')
     provider = websearch.PROVIDERS[pid]
+    if pid == 'brave':
+        return BRAVE_TEMPLATE
     bodies = {'tavily': '{"query": query, "max_results": limit}',
               'exa': '{"query": query, "numResults": limit, "contents": {"highlights": True}}',
               'firecrawl': '{"query": query, "limit": limit}',
@@ -462,3 +474,33 @@ def search(query, limit=6):
             time.sleep(attempt + 1)
     return []
 ''' % (provider['env'], bodies[pid], auth, provider['url'], rows, fields[pid])
+
+# Official web-search contract checked 2026-11-01. No secrets in this template.
+BRAVE_TEMPLATE = '''import json, os, urllib.request, urllib.parse, urllib.error
+
+def search(query, limit=6):
+    key = os.environ.get("BRAVE_API_KEY", "")
+    if not key:
+        return []
+    params = urllib.parse.urlencode({"q": query, "count": max(1, min(20, limit)), "extra_snippets": "true"})
+    request = urllib.request.Request("https://api.search.brave.com/res/v1/web/search?" + params, headers={"Accept": "application/json", "User-Agent": "chatify/1.0", "X-Subscription-Token": key})
+    try:
+        with urllib.request.urlopen(request, timeout=15) as response:
+            data = json.loads(response.read(1500000).decode("utf-8", "replace"))
+        web = data.get("web")
+        rows = web.get("results", []) if isinstance(web, dict) else []
+        out = []
+        for item in rows if isinstance(rows, list) else []:
+            if not isinstance(item, dict):
+                continue
+            title = item.get("title")
+            text = item.get("description")
+            url = item.get("url")
+            if isinstance(text, str) and text.strip():
+                out.append({"title": title if isinstance(title, str) else "", "text": text[:1500], "url": url if isinstance(url, str) else "", "year": None})
+            if len(out) >= limit:
+                break
+        return out
+    except Exception:
+        return []
+'''
