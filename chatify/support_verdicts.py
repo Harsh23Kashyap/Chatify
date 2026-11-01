@@ -69,3 +69,49 @@ def evaluate_answer(provider, answer, evidence):
     except Exception as exc:
         return {'status':'unknown','reason':'Support was not verified: '+type(exc).__name__,'claims':[]}
     return evaluate(provider,units,evidence)
+
+def sentence_spans(answer, max_chars=16000, max_units=80):
+    """Conservative sentence spans with exact offsets, not atomic propositions.
+
+    Citations after terminal punctuation stay with the sentence. Abbreviations,
+    decimals, URLs and tables are kept intact. Conjunctions are not split because
+    doing so can change the scope of negation. Every nonwhitespace character must
+    be covered exactly once or the review is unknown. This remains experimental.
+    """
+    if not isinstance(answer,str) or not answer.strip() or len(answer)>max_chars:raise InvalidVerdict('answer size')
+    spans=[]
+    for line in re.finditer(r'[^\r\n]+',answer):
+        text=line.group();start=0
+        # Tables and headers are whole units, never discarded as nonfactual.
+        boundaries=[]
+        if not text.lstrip().startswith(('|','#')):
+            for m in re.finditer(r'[.!?।](?:["\u201d\u2019\)]*)(?:\s*\[\d+\])*(?=\s+\S|$)',text):
+                stop=m.end();prefix=text[:m.start()+1]
+                if text[m.start()]=='.':
+                    if re.search(r'\b(?:Dr|Mr|Mrs|Ms|Prof|St|vs|etc|e\.g|i\.e)\.$',prefix,re.I):continue
+                    if re.search(r'\b[A-Z]\.$',prefix):continue
+                    token=prefix.rsplit(None,1)[-1] if prefix.strip() else ''
+                    if '://' in token or '@' in token:continue
+                boundaries.append(stop)
+        for stop in boundaries+[len(text)]:
+            if stop<=start:continue
+            segment=text[start:stop];left=len(segment)-len(segment.lstrip());right=len(segment.rstrip())
+            if right>left:
+                lo=line.start()+start+left;hi=line.start()+start+right
+                spans.append({'id':len(spans)+1,'text':answer[lo:hi],'start':lo,'end':hi})
+            start=stop
+    if len(spans)>max_units:raise InvalidVerdict('too many sentences')
+    covered=''.join(s['text'] for s in spans)
+    if re.sub(r'\s+','',covered)!=re.sub(r'\s+','',answer):raise InvalidVerdict('sentence coverage mismatch')
+    return spans
+
+def evaluate_sentences(provider, answer, evidence):
+    """Opt-in experimental diagnostic, not used by Engine. No automatic repair."""
+    try:
+        spans=sentence_spans(answer)
+        if len(evidence)>30 or sum(len(e.get('text','')) for e in evidence)>40000:raise InvalidVerdict('evidence exceeds review limit')
+    except Exception as exc:
+        return {'status':'unknown','reason':'Support was not verified: '+type(exc).__name__,'claims':[]}
+    result=evaluate(provider,[{'id':s['id'],'text':s['text']} for s in spans],evidence)
+    result['spans']=spans
+    return result
