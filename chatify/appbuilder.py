@@ -108,6 +108,10 @@ def validate_extras(extras):
  return extras
 
 def validate(text):
+ return validate_declared(text)[0]
+
+def validate_declared(text):
+ """Return normalized config and original top-level scope from one checked parse."""
  if not isinstance(text,str) or len(text)>4000000:raise ValueError('Keep YAML under4 MB')
  try:
   scanned=list(yaml.scan(text))
@@ -116,6 +120,7 @@ def validate(text):
   raw=yaml.safe_load(text)
  except yaml.YAMLError:raise ValueError('Invalid YAML. Fix it before review.') from None
  if not isinstance(raw,dict):raise ValueError('YAML needs a config mapping')
+ declared=set(raw)
  extras={k:raw.pop(k) for k in EXTRAS if k in raw}
  extras=validate_extras(extras)
  if re.search(r'sk-[A-Za-z0-9_-]{12,}|-----BEGIN|Bearer\s+[A-Za-z0-9._-]{12,}',text,re.I):raise ValueError('Remove secret-looking values from YAML')
@@ -152,7 +157,7 @@ def validate(text):
    for n in v:finite(n)
   elif isinstance(v,float) and not math.isfinite(v):raise ValueError('Config numbers must be finite')
  finite(config)
- result=editstate.view(config);result.update(extras);return result
+ result=editstate.view(config);result.update(extras);return result,declared
 def talk(provider,cfg,data):
  if data.get('consent') is not True:raise ValueError('Agree to send requirements to the selected model first')
  if cfg['provider']['type']=='mock':raise ValueError('Select a real model and save its key first')

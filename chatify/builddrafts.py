@@ -8,9 +8,9 @@ class BuildDrafts:
   if not isinstance(ident,str) or len(ident)>64 or not ident.replace('-','').isalnum():raise ValueError('Invalid draft identifier')
   return self._dir(owner)/(ident+'.json')
  def put(self,owner,yaml_text,title='',ident=None,sections=None):
-  from .appbuilder import validate
+  from .appbuilder import validate_declared
   import yaml
-  clean=validate(yaml_text)
+  clean,declared=validate_declared(yaml_text)
   cred_words={'key','apikey','password','passwd','secret','token','credentials'}
   def cred(name):
    return bool(cred_words & set(re.split(r'[^a-z0-9]+',str(name).lower())))
@@ -18,7 +18,7 @@ class BuildDrafts:
    if isinstance(value,dict):return {k:(scrub(v) if isinstance(v,(dict,list)) else ('' if cred(k) and isinstance(v,str) else v)) for k,v in value.items()}
    if isinstance(value,list):return [scrub(v) for v in value]
    return value
-  declared=set(yaml.safe_load(yaml_text));selected=declared.copy()
+  selected=declared.copy()
   if sections is not None:
    from .appbuilder import sections as checked_sections
    selected=set(checked_sections(sections))
