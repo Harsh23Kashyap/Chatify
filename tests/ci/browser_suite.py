@@ -12,6 +12,8 @@ def load_manifest():
     return manifest
 
 def variants(name):
+    if name == 'category_motion_audit_browser.cjs':
+        return [('default', [], {}), ('delayed-navigation', ['--delayed-navigation'], {})]
     if name == 'settings_native_browser_zoom_tab_order_browser.cjs':
         return [('default', [], {}), ('delayed-caret-frames', ['--delayed-caret-frames'], {})]
     if name in ('wizard_launch_retry_harness.cjs', 'workspace_review_confirm_harness.cjs'):
