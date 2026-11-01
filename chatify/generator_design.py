@@ -81,7 +81,7 @@ def validate_draft(stage,value):
  # Reject obvious instance outputs. This checks reusable instruction structure,
  # not domain quality or whether the instruction will work on a real model.
  structures={
-  'standalone':(r'\b(?:rewrite|rephrase|reformulate|turn|convert)\b',r'\b(?:questions?|follow-ups?|followups?)\b'),
+  'standalone':(r'\b(?:rewrit(?:e|ing)|rephras(?:e|ing)|reformulat(?:e|ing)|turn(?:ing)?|convert(?:ing)?)\b',r'\b(?:questions?|follow-ups?|followups?)\b'),
   'queries':(r'\b(?:write|generate|create|extract|produce|return)\b',r'\b(?:questions?|query|queries|inputs?)\b'),
   'summary':(r'\b(?:summarise|summarize|summary|condense)\b',r'\b(?:conversation|history|messages|previous_summary)\b')}
  if stage in ('standalone','queries','summary') and re.search(r'\b(?:example questions?|expected (?:search queries|output)|sample (?:question|summary))\s*:',text,re.I):return ['Remove worked examples and expected outputs; put the domain in reusable runtime instructions']

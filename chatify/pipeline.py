@@ -262,7 +262,10 @@ def relevance_gate(question, found, public_ids=None):
             # paper, sharing only galaxy/formation of latest/early/galaxy/
             # formation, displayed for an early-galaxy-formation question).
             rest = [(w, v) for w, v in q_variants if w not in anchors]
-            if rest:
+            # A single predicate may be expressed by a synonym in the exact
+            # named-entity page (establish versus created/restored). Retain the
+            # multi-word context rule for JWST/PHANGS-style adjacent riders.
+            if len(rest) >= 2:
                 bar = len(rest) // 2 + 1
                 meets = [(n, e, p) for n, e, p in kept if sum(1 for _, v in rest if v & p) >= bar]
                 if len(meets) >= 2:
