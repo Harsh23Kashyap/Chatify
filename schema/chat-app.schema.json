@@ -181,6 +181,11 @@
         },
         "revise": {
           "type": "boolean"
+        },
+        "source_preview_only": {
+          "type": "boolean",
+          "default": false,
+          "description": "Explicit opt-in unverified retrieved-passage preview, not a synthesized answer."
         }
       }
     },
