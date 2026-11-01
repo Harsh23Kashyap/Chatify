@@ -26,13 +26,15 @@ def bibtex(evidence):
     out = []
     for i, e in enumerate(evidence, 1):
         f = {"title": e.get("title",""), "author": " and ".join(map(str,e.get("authors") or [])), "year": str(e.get("year") or ""), "journal": e.get("venue",""), "url": e.get("url","")}
+        if e.get("content_kind") == "title_only":
+            f["note"] = "Title only; no abstract or article text supplied"
         body = ",\n".join("  %s = {%s}" % (k, re.sub(r"[{}]", "", v)) for k, v in f.items() if v)
         out.append("@article{%s,\n%s\n}" % (_k(e, i), body))
     return "\n\n".join(out) + "\n"
 
 
 def snapshot(e):
-    return " · ".join(str(x) for x in [e.get("document"), "page "+str(e["page"]) if e.get("page") else e.get("section"), "version "+str(e["version"]) if e.get("version") else "", "OCR" if e.get("ocr") else ""] if x)
+    return " · ".join(str(x) for x in [e.get("document"), "page "+str(e["page"]) if e.get("page") else e.get("section"), "version "+str(e["version"]) if e.get("version") else "", "OCR" if e.get("ocr") else "", "Title only; no abstract or article text supplied" if e.get("content_kind") == "title_only" else ""] if x)
 
 
 def source_note(errors, sources):
@@ -134,6 +136,8 @@ def chat_markdown(title, turns, sources=None):
             out += [note, ""]
         for i, e in enumerate(t["evidence"], 1):
             out.append("%d. %s%s" % (i, _plain(e["title"]), " <%s>" % e["url"] if e["url"] else ""))
+            if e.get("content_kind") == "title_only":
+                out.append("Title only; no abstract or article text supplied.")
         out.append("")
     return "\n".join(out)
 

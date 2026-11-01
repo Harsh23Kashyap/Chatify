@@ -134,5 +134,7 @@ def unverified_source_preview(evidence, max_sources=3, max_chars=12000):
         if len(items)>=max_sources or used+size>max_chars:
             omitted+=1;continue
         items.append({'evidence_id':e.get('n'),'title':title,'text':text,'url':url,'published_date':e.get('published_date'),'date_provenance':e.get('date_provenance'),'verification':'not_verified'})
+        if e.get('content_kind') == 'title_only':
+            items[-1]['content_kind'] = 'title_only'
         used+=size
     return {'kind':'unverified_source_preview','label':'The answer could not be verified. These are retrieved source passages, not a verified answer. A retrieved passage may be only part of the original source.','items':items,'omitted_sources':omitted,'answer_verified':False}

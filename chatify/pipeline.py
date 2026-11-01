@@ -1404,6 +1404,8 @@ class Engine:
         lines = [preview['label']]
         for item in preview['items']:
             lines.append("Source [%s]: %s" % (item['evidence_id'], item['title']))
+            if item.get('content_kind') == 'title_only':
+                lines.append('Title only; no abstract or article text supplied.')
             if item['published_date']:
                 lines.append("Reported publication date: %s (%s)" % (item['published_date'], item['date_provenance'] or 'connector-supplied, not independently verified'))
             # Quote each original line to preserve its status as source data.
@@ -1434,7 +1436,8 @@ class Engine:
                     t = _excerpt_window(t, terms)
                 else:
                     t = t[:320].rsplit(" ", 1)[0] + "..."
-            lines.append("- " + t + " [" + str(e.get("n")) + "]")
+            label = "Title only; no abstract or article text supplied. " if e.get("content_kind") == "title_only" else ""
+            lines.append("- " + label + t + " [" + str(e.get("n")) + "]")
         if question and Engine._RECENCY.search(question) and evidence:
             # A "latest" question answered from old hits must say so: the preview
             # showed 2022-2023 passages for a 2026 "latest JWST" question with no
