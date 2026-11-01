@@ -581,7 +581,10 @@ details.helper>*:not(summary){margin-left:16px;margin-right:16px}details.helper>
 /* dark code editor */
 .cmhost{border-radius:12px;overflow:hidden;background:#0f1b16}
 .cmhost .cm-editor,.cmhost .cm-scroller{background:#0f1b16!important;color:#dfe9e2}
-.cmhost .cm-content{caret-color:#fff}.cmhost .cm-gutters{background:#0f1b16!important;color:#6f8a7c;border-right:1px solid rgba(255,255,255,.08)}
+.cmhost .cm-content{caret-color:#fff}
+/* CodeMirror paints its own cursor while the native caret is transparent. */
+.cmhost .cm-cursor,.cmhost .cm-dropCursor{border-left-color:#dfe9e2!important}
+.cmhost .cm-gutters{background:#0f1b16!important;color:#6f8a7c;border-right:1px solid rgba(255,255,255,.08)}
 .cmhost .cm-content .ͼa{color:#9db4a8!important}.cmhost .cm-content .ͼb{color:#82cfff!important}.cmhost .cm-content .ͼc{color:#7ee0b8!important}.cmhost .cm-content .ͼd{color:#f2b866!important}.cmhost .cm-content .ͼe{color:#d7ef72!important}.cmhost .cm-content .ͼf{color:#f0a868!important}.cmhost .cm-content .ͼg{color:#9cc2ee!important}.cmhost .cm-content .ͼh{color:#b8c4d0!important}.cmhost .cm-content .ͼi{color:#7fd4c1!important}.cmhost .cm-content .ͼj{color:#8fd0b4!important}.cmhost .cm-content .ͼk{color:#d0b8e8!important}.cmhost .cm-content .ͼl{color:#a8c8f0!important}.cmhost .cm-content .ͼm{color:#8aa89b!important}.cmhost .cm-content .ͼn{color:#ff8a80!important}
 .cmhost .cm-activeLine,.cmhost .cm-activeLineGutter{background:rgba(255,255,255,.05)!important}
 .cmhost:not(.filled)::after{color:#8fa699}
