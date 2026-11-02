@@ -47,6 +47,11 @@ jobs:
           PLAYWRIGHT_MODULE: /tmp/cc-ui-tools/node_modules/playwright-core
           PYTHONUNBUFFERED: '1'
         run: python tests/ci/browser_suite.py --shard ${{ matrix.shard }} --shards 12
+      - name: Owner build reload recovery contract
+        if: matrix.shard == 0
+        env:
+          PLAYWRIGHT_MODULE: /tmp/cc-ui-tools/node_modules/playwright-core
+        run: python tests/ci/builder_reload.py
       - name: Retain synthetic fixture failure pixels and geometry
         if: failure()
         uses: actions/upload-artifact@v4

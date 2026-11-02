@@ -44,3 +44,9 @@ run must be inspected before claiming this automation passes. A red result is a
 failure to investigate, not authority to skip a case. Offline browser and mock
 provider tests do not qualify live models, paid providers, real retrieval quality,
 production data retention, hosted deployment, every OS/browser or release/video.
+
+Owner build reload recovery runs once on shard0 through `builder_reload.py`, using
+controlled HTTP responses for current running-job discovery, outages, stale reads
+and no duplicate start. Real HTTP/BuildJobs owner isolation is checked in
+`test_builder_active_recovery.py` with a deliberately held worker. Neither test
+qualifies live model behavior, completed-job retention or hosted restart survival.
