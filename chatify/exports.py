@@ -15,6 +15,7 @@ except ImportError:  # optional dependency: wheel installs without the pdf extra
     FPDF = None
 
 from .pipeline import plain_text as _plain
+from .answer_status import answer_note
 
 
 def _k(e, i):
@@ -55,7 +56,9 @@ def source_note(errors, sources):
 
 
 def answer_markdown(app,turn,sources=None):
-    out=["# "+app.get("title","Chat"),app.get("tagline",""),"", "## Question",turn['question'],"", "## Answer",turn['answer']]
+    out=["# "+app.get("title","Chat"),app.get("tagline",""),"", "## Question",turn['question'],"", "## Answer"]
+    if answer_note(turn):out += [answer_note(turn), ""]
+    out += [turn['answer']]
     note=source_note(turn.get('source_errors'),sources if sources is not None else app.get('sources'))
     if note:out+=["",note]
     out+=["", "## Sources at answer time"]
@@ -130,7 +133,9 @@ class _AnswerPDF(FPDF if FPDF is not None else object):
 def chat_markdown(title, turns, sources=None):
     out = ["# " + title, ""]
     for t in turns:
-        out += ["**Q:** " + t["question"], "", t["answer"], ""]
+        out += ["**Q:** " + t["question"], ""]
+        if answer_note(t):out += [answer_note(t), ""]
+        out += [t["answer"], ""]
         note = source_note(t.get("source_errors"), sources)
         if note:
             out += [note, ""]
@@ -146,6 +151,7 @@ def pdf_bytes(title, turn, accent="#173f35", tagline="", sources=None):
     if FPDF is None:
         raise RuntimeError("PDF export needs the pdf extra: pip install 'chatify[documents]'.")
     blocks=[('label','ANSWER NOTE'),('title',title),('muted',tagline),('space',''),('label','YOUR QUESTION'),('question',turn['question']),('space',''),('heading','Answer')]
+    if answer_note(turn):blocks += [('muted',answer_note(turn)),('space','')]
     # Recompose markdown tables into readable labeled rows for narrow PDF pages.
     lines=turn['answer'].split('\n');i=0
     cells=lambda line:[x.strip().replace('\\|','|') for x in re.split(r'(?<!\\)\|',line.strip().strip('|'))]

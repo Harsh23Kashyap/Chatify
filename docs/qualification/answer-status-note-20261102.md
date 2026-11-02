@@ -1,0 +1,11 @@
+# Answer status note qualification, 2 November2026
+
+Local candidate, no semanticfix or release claim. Current API already returns answer_verified:false. Storehistory lacks status and browser previously ignored theflag; clean lexical checks did not mean independent verification. A neutral UI/copy/export note now makes that limitation visible even with no localflags. Citations/retrieved evidence are not promoted to verified claims.
+
+The actual already-captured saved-child biodiversity answer and11passages were used in a localHTTPbrowserfixture, not new model/retrieval. Original Copy prefix is byteexact plus separatednote. Missinglegacyflag/falseflag, zerolexicalflags, previewstrongerlabel and refusaldistinction tested. Unitcontrols cover truecallerflag not establishingverification, noevidenceno false sourcelabel, titleonlymetadata/URLs, supportwarningretention, Store save/read and no answer/evidence mutation on export. No studytype inference, blacklist, modelcalls, warning suppression, previewdefaultchange or prototypepromotion.
+
+Actual desktop and PDFpage1pixels inspected: neutral note readable before full preservedbody, no clipping. PDFexistingrenderer prints rawMarkdownboldtokens. That is an existing formattinggap, not qualifiedPDFtypography or semanticrepair. Sourcepreview retains its explicit stronger not-verified/partialsource framing. Stored body/citations/uncertainty are preserved, including known unsupportedclaims: labeldoesnotrepairthem.
+
+New focusedstatus7tests pass; broader focused33pass/10subtests was before extraStorecase. Fullsuite/currentbrowserregression next. Externalcapturedanswerfixturepath is an explicit CAPTURED_ANSWER_PATH input, not committed private/providercorpus. This diagnosticcase is under tests/ci, preserving484classifiedbrowsermanifest.
+
+Final current sequentialPythonverdict1,431passed/1skipped/566subtests across8groups. New7statuscases account for1424→1431. Existing Crossref title-provenance browser normal/reduced and citation_states complete matrix pass unchanged. New actual-capturedanswer case passes legacy/false/preview/refused transitions, originalCopy prefix exact and separatednote. No full484browserclaim. App/module/export changes are local only, releaseauthstillpending. PDFrawMarkdownformattinggap remains explicitly open.

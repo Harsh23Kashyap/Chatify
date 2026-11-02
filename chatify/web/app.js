@@ -328,11 +328,13 @@ function showSources(evidence, hl, trigger, question) {
   }
 }
 
+const unverifiedAnswerNote='Not independently verified. Citations point to retrieved sources, but do not prove every claim. Check the source passage for uncertainty, attribution and the outcome actually studied.';
 function turnView(t, prev) {
   const nodes = [];
   if (prev && prev.chat !== t.chat) nodes.push(el("div", { class: "divider", text: "Earlier chat" }));
   nodes.push(el("div", { class: "row u" }, avatar("you"), el("div", { class: "bubble ub", text: t.question })));
   const bub = el("div", { class: "bubble bb" + (t.evidence.length ? "" : " none") }, renderAnswer(t.answer, t.evidence, t.question));
+  if(t.evidence.length)bub.prepend(el("div",{class:"src-note answer-status-note",role:"note",text:unverifiedAnswerNote}));
   if(/\b(chart|graph|plot)\b/i.test(t.question)){const chart=answerChart(t.answer,t.evidence);if(chart)bub.append(chart);}
   const failedSources = Object.entries(t.source_errors || {});
   if (failedSources.length) {
@@ -372,7 +374,7 @@ function turnView(t, prev) {
       if(copying)return;copying=true;clearTimeout(resetTimer);copy.classList.remove("done");copy.textContent="Copying...";copy.setAttribute("aria-busy","true");status.hidden=true;
       try{
         if(!navigator.clipboard)throw Error("Clipboard unavailable. Select and copy the answer instead.");
-        await navigator.clipboard.writeText(t.answer);copy.textContent="Copied";copy.classList.add("done");status.textContent="Answer copied.";status.hidden=false;
+        await navigator.clipboard.writeText(t.answer+"\n\n"+unverifiedAnswerNote);copy.textContent="Copied";copy.classList.add("done");status.textContent="Answer copied.";status.hidden=false;
         resetTimer=setTimeout(()=>{copy.textContent="Copy";copy.classList.remove("done");status.hidden=true},1600);
       }catch(e){copy.textContent="Copy";copy.classList.remove("done");status.textContent=e.message||"Could not copy. Select and copy the answer instead.";status.hidden=false}
       finally{copying=false;copy.removeAttribute("aria-busy")}
