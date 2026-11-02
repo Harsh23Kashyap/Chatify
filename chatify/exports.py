@@ -147,6 +147,17 @@ def chat_markdown(title, turns, sources=None):
     return "\n".join(out)
 
 
+def _answer_pdf_line(line):
+    """Small presentation-only Markdown subset; code/unmatched syntax stays literal."""
+    if '`' in line:return 'body',line
+    heading=re.fullmatch(r'#{1,6} +(.+?) *',line)
+    if heading:return 'answer_heading',heading.group(1)
+    strong=re.compile(r'(?<![\w\\*])\*\*(?=\S)(.+?\S|\S)\*\*(?![\w*])')
+    whole=strong.fullmatch(line)
+    if whole:return 'answer_heading',whole.group(1)
+    return 'body',strong.sub(lambda m:m.group(1),line)
+
+
 def pdf_bytes(title, turn, accent="#173f35", tagline="", sources=None):
     if FPDF is None:
         raise RuntimeError("PDF export needs the pdf extra: pip install 'chatify[documents]'.")
@@ -166,7 +177,7 @@ def pdf_bytes(title, turn, accent="#173f35", tagline="", sources=None):
                     blocks.append(('body',lines[i]));i+=1;break
                 blocks.append(('body','; '.join('%s: %s'%(h,values[n]) for n,h in enumerate(headers))));i+=1
             continue
-        blocks.append(('body',line) if line else ('space',''));i+=1
+        blocks.append(_answer_pdf_line(line) if line else ('space',''));i+=1
     note=source_note(turn.get('source_errors'),sources)
     if note:blocks += [('space',''),('muted',note)]
     blocks += [('space',''),('heading','Sources at answer time')]
@@ -183,7 +194,7 @@ def pdf_bytes(title, turn, accent="#173f35", tagline="", sources=None):
     # (style, size, block line pitch, color) - mirrors the former hand-rolled
     # layout: same paper, margins, pitch and palette, now real Unicode fonts.
     ink=(23,36,31);mut=(99,115,107)
-    styles={'label':('B',8,36,rgb),'title':('B',30,38,rgb),'heading':('B',20,30,rgb),'question':('B',16,24,ink),'body':('',11,17,ink),'source':('B',10,17,rgb),'muted':('',9,14,mut)}
+    styles={'label':('B',8,36,rgb),'title':('B',30,38,rgb),'heading':('B',20,30,rgb),'question':('B',16,24,ink),'body':('',11,17,ink),'answer_heading':('B',12,20,ink),'source':('B',10,17,rgb),'muted':('',9,14,mut)}
     pdf=_AnswerPDF(str(title)[:120],rgb)
     pdf.add_page()
     for bi,(kind,text) in enumerate(blocks):

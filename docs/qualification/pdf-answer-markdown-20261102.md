@@ -1,0 +1,7 @@
+# PDF answer presentation, 2 November2026
+
+Local display-only fix for raw**bold**markers seen in inspected actual captured-answer PDF. Balanced inline strong delimiters are projected to their exact inner text; wholeboldline/Markdownheading gets heading style. Original stored answer and Markdown remain exact, not normalized in the database. Literalcode/backticks, unmatched/escapedmarkers, x**2math, underscores/carets stay literal. This is deliberately a small subset, not a fullMarkdownrenderer.
+
+44focused tests pass, including3newcontrols plus original multi-page/sourcekeep/Unicode/Hindi/RTL/table/malformedtable/statusnote checks. Actual captured answer projection equals original except balancedstrongdelimiters; all11bodyitems/uncertainty/limitations/practicalsections/sourceURLs retained. All3renderedPDFpages inspected: no rawboldmarkers, notevisiblebeforeanswer, body/citations/readability retained, no clipping. Longparagraphcontinuationpage1→2remains; does not imply allpaginationlayoutsqualified. No semanticclaim is repaired by formatting. Capturedanswer still contains known overclaims. No model/source/networkcalls or sharedcorpus.
+
+Finalcurrentall8serialgroups:1,434passed/1skipped/566subtests;3newPDFcases account1431→1434. Originalassertions unchanged. Page3source-tailimage separatelyinspected: sources4-11complete, URLs and snapshotwarningreadable, footer3/3, no clipping. No hosted/push/deploy follows from this localtestverdict; foregroundGitHubsudoauthorizationcoordination remains pending.
