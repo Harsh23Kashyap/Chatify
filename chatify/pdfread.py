@@ -54,7 +54,7 @@ def extract(data):
         text = _builtin(data)
     text = re.sub(r"[ \t]+", " ", text).strip()
     if len(text) < 20:
-        raise ValueError("No readable text in this PDF (it may be a scan)")
+        raise ValueError("No readable text in this PDF (it may be a scan). This upload was not added. For scanned PDFs, the local-files connector supports explicit local OCR; ordinary upload does not run it.")
     return text[:150_000]
 
 
