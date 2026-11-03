@@ -42,6 +42,12 @@ const{chromium}=require(process.env.PLAYWRIGHT_MODULE),assert=require('node:asse
    await p.goto(process.env.CHATIFY_TEST_URL+href);const id=href.split('#')[1];
    await p.locator('#'+id).waitFor({state:'visible'});
   }
+  // Gallery-mounted pages must route new guides within their own app, not gallery root.
+  await p.addInitScript(()=>window.CC_APP_BASE='/chatify');
+  await p.goto(process.env.CHATIFY_TEST_URL+'/about.html');
+  assert.equal(await p.locator('.feature-next-step a').getAttribute('href'),'/chatify/');
+  await p.locator('#featureMore').click();await p.locator('#feature-tab-motion').click();
+  await p.waitForFunction(()=>document.querySelector('.feature-next-step a')?.getAttribute('href')==='/chatify/settings.html#sec-motion');
   console.log(JSON.stringify({inlineKey:'saved and error preserved',providerBound:'openai',ownerGate:'passed',automaticProviderOrBuildCalls:calls.length,featureMotionRoute:'real control opened'}));
  }finally{await b.close()}
 })().catch(e=>{console.error(e);process.exit(1)});
