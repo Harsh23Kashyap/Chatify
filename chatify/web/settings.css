@@ -1353,3 +1353,7 @@ body.simple #testres[data-assumed="1"]{display:none}.info-pop-more{margin-top:8p
 .keyrow-act{display:inline-flex;align-items:center;gap:8px}
 
 .crgrid .contrast-suggestion{font:inherit;line-height:1.5;overflow-wrap:anywhere;color:var(--ink,#173f35);padding:3px 0}.crgrid .contrast-suggestion[hidden]{display:none}
+
+.builder-failure-recovery{grid-column:1/-1;flex:1 0 100%;width:100%;min-width:0;padding:10px 0;overflow-wrap:anywhere}.builder-failure-recovery p{margin:0 0 10px;line-height:1.55}.builder-failure-recovery button{white-space:normal;text-align:left;max-width:100%}
+
+dialog.app-builder .builder-job-parts .builder-failure-recovery{display:block!important;grid-template-columns:none!important;max-height:none;overflow:visible}dialog.app-builder .builder-failure-recovery p{display:block;width:100%;max-width:none;grid-column:1/-1}
