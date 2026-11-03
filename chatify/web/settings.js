@@ -531,7 +531,7 @@ function pvExtra() {
     const pairs = [["Text on page", c.ink, c.bg], ["Text on cards", c.ink, c.surface], ["Soft text on page", c.muted, c.bg], ["Your bubble", c.ink, c.you], ["Reply bubble", c.ink, c.bot], ["Title color on page", c.brand, c.bg]];
     if(host.dataset.sample!=="colors"){
       host.dataset.sample="colors";
-      host.replaceChildren(el("b",{text:"Colors and readability"}),el("div",{class:"crgrid"},...pairs.map(([n])=>el("div",{class:"cc"},el("span",{class:"crs"},"Aa"),el("span",{text:n}),el("span",{class:"rt"})))),el("div",{class:"h",text:"WCAG AA for normal text requires 4.5:1. Ratios below that fail for normal-size text. Suggested fallback: dark text on a light surface, or white text on a dark surface. Colors are not changed by this panel."}));
+      host.replaceChildren(el("b",{text:"Colors and readability"}),el("div",{class:"crgrid"},...pairs.map(([n])=>el("div",{class:"cc"},el("span",{class:"crs"},"Aa"),el("span",{text:n}),el("span",{class:"rt"}),el("small",{class:"contrast-suggestion"})))),el("div",{class:"h",text:"WCAG AA for normal text requires 4.5:1. Ratios below that fail for normal-size text. Suggestions change text color only, against the displayed background. Apply a suggested hex value in Colors if you want it. Shared text roles affect several surfaces, so check all pairs again. Colors are never changed by this panel."}));
     }
     const quiet=matchMedia("(prefers-reduced-motion:reduce)").matches||["calm","none"].includes(theme.motion);
     pairs.forEach(([n,a,b],i)=>{
@@ -540,6 +540,13 @@ function pvExtra() {
       sample.style.backgroundColor=b||"#fff";sample.style.color=a||"#000";
       row.title=n+(r==null?": ratio unavailable":r>=4.5?": easy to read":": too low for normal text");
       status.className="rt "+cls;status.textContent=text;
+      const suggestion=row.querySelector(".contrast-suggestion");
+      if(suggestion){
+        const black=ratio("#000000",b),white=ratio("#ffffff",b),known=r!=null&&black!=null&&white!=null;
+        suggestion.hidden=!(known&&r<4.5);
+        if(known&&r<4.5){const color=black>=white?"#000000":"#ffffff",best=Math.max(black,white);suggestion.textContent="Try text "+color+": "+best.toFixed(1)+":1. Not applied.";suggestion.dataset.color=color;suggestion.dataset.ratio=String(best)}
+        else{suggestion.textContent="";delete suggestion.dataset.color;delete suggestion.dataset.ratio}
+      }
       if(quiet)row._statusAnimation?.cancel();
       if(changedStatus){row._statusAnimation?.cancel();if(hadStatus&&!quiet)row._statusAnimation=row.animate([{opacity:.65},{opacity:1}],{duration:160,easing:"ease-out"});}
     });

@@ -1351,3 +1351,5 @@ body.settings-tabs #col>section,body.settings-tabs #sec-prompts .stage,body.sett
 body.simple #testres[data-assumed="1"]{display:none}.info-pop-more{margin-top:8px}
 
 .keyrow-act{display:inline-flex;align-items:center;gap:8px}
+
+.crgrid .contrast-suggestion{font:inherit;line-height:1.5;overflow-wrap:anywhere;color:var(--ink,#173f35);padding:3px 0}.crgrid .contrast-suggestion[hidden]{display:none}
