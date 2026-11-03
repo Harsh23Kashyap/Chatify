@@ -1040,8 +1040,9 @@ async function accountGate() {
   }
   S.user = me.user;
   const tb = $(".toolbar"), menu = el("div", { class: "acct-menu", hidden: "" });
-  const btn = el("button", { class: "acct-btn", "aria-haspopup": "true", "aria-label": "Account" }, el("span", { class: "acct-dot", text: (me.user.name || "?")[0].toUpperCase() }), el("span", { text: me.user.name }));
-  const item = (t, f) => el("button", { class: "acct-item", onclick: () => { menu.hidden = true; f(); } }, t);
+  const btn = el("button", { class: "acct-btn", "aria-haspopup": "true", "aria-expanded":"false", "aria-label": "Account" }, el("span", { class: "acct-dot", text: (me.user.name || "?")[0].toUpperCase() }), el("span", { text: me.user.name }));
+  const closeAccount=()=>{menu.hidden=true;btn.setAttribute("aria-expanded","false")};
+  const item = (t, f) => el("button", { class: "acct-item", onclick: () => { closeAccount();btn.focus({preventScroll:true});f(); } }, t);
   menu.append(el("div", { class: "acct-mail mut", text: me.user.email }),
     item("Change password", () => {
       const o = el("input", { type: "password", placeholder: "Current password", "aria-label": "Current password", autocomplete: "current-password" }), n = el("input", { type: "password", placeholder: "New password (8+ characters)", "aria-label": "New password", autocomplete: "new-password" });
@@ -1053,8 +1054,14 @@ async function accountGate() {
       mountModal(back); o.focus();
     }),
     item("Sign out", async () => { await post("logout", {}); location.reload(); }));
-  btn.addEventListener("click", (e) => { e.stopPropagation(); menu.hidden = !menu.hidden; });
-  document.addEventListener("click", () => (menu.hidden = true));
+  const openAccount=()=>{menu.hidden=false;btn.setAttribute("aria-expanded","true")};
+  const accountItems=()=>[...menu.querySelectorAll("button:not(:disabled)")];
+  btn.addEventListener("click", (e) => { e.stopPropagation();if(menu.hidden)openAccount();else closeAccount(); });
+  btn.addEventListener("keydown",e=>{if(["ArrowDown","ArrowUp"].includes(e.key)){e.preventDefault();openAccount();const items=accountItems();(e.key==="ArrowUp"?items.at(-1):items[0])?.focus()}});
+  menu.addEventListener("keydown",e=>{const items=accountItems(),at=items.indexOf(document.activeElement);if(["ArrowDown","ArrowUp","Home","End"].includes(e.key)){e.preventDefault();(e.key==="Home"?items[0]:e.key==="End"?items.at(-1):items[(at+(e.key==="ArrowDown"?1:items.length-1))%items.length])?.focus()}});
+  document.addEventListener("keydown",e=>{if(e.key==="Escape"&&!menu.hidden){e.preventDefault();closeAccount();btn.focus({preventScroll:true})}});
+  document.addEventListener("click",e=>{if(!menu.contains(e.target)&&!btn.contains(e.target))closeAccount()});
+  document.addEventListener("focusin",e=>{if(!menu.hidden&&!menu.contains(e.target)&&!btn.contains(e.target))closeAccount()});
   $("#themeBtn").parentElement.insertBefore(el("div", { class: "acct" }, btn, menu), $("#themeBtn"));
 }
 function applyWording() {
