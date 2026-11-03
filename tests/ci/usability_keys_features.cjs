@@ -35,7 +35,7 @@ const{chromium}=require(process.env.PLAYWRIGHT_MODULE),assert=require('node:asse
   for(const tab of await p.locator('#featureTabs [role=tab]').all()){
    await tab.click();await p.waitForFunction(()=>!document.querySelector('[aria-busy=true]'));
    assert.ok((await p.locator('.feature-next-step p').innerText()).length>30);
-   guideLinks.push(await p.locator('.feature-next-step a').getAttribute('href'));
+   const target=await p.locator('.feature-next-step a').getAttribute('href');assert.equal(await p.locator('.feature-copy a').getAttribute('href'),target);guideLinks.push(target);
   }
   assert.equal(guideLinks.length,23);
   for(const href of [...new Set(guideLinks)].filter(x=>x.includes('#sec-'))){
@@ -45,9 +45,10 @@ const{chromium}=require(process.env.PLAYWRIGHT_MODULE),assert=require('node:asse
   // Gallery-mounted pages must route new guides within their own app, not gallery root.
   await p.addInitScript(()=>window.CC_APP_BASE='/chatify');
   await p.goto(process.env.CHATIFY_TEST_URL+'/about.html');
-  assert.equal(await p.locator('.feature-next-step a').getAttribute('href'),'/chatify/');
+  assert.equal(await p.locator('.feature-next-step a').getAttribute('href'),'/chatify/');assert.equal(await p.locator('.feature-copy a').getAttribute('href'),'/chatify/');
   await p.locator('#featureMore').click();await p.locator('#feature-tab-motion').click();
   await p.waitForFunction(()=>document.querySelector('.feature-next-step a')?.getAttribute('href')==='/chatify/settings.html#sec-motion');
+  assert.equal(await p.locator('.feature-copy a').getAttribute('href'),'/chatify/settings.html#sec-motion');
   console.log(JSON.stringify({inlineKey:'saved and error preserved',providerBound:'openai',ownerGate:'passed',automaticProviderOrBuildCalls:calls.length,featureMotionRoute:'real control opened'}));
  }finally{await b.close()}
 })().catch(e=>{console.error(e);process.exit(1)});

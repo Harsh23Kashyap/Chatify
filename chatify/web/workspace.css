@@ -231,3 +231,14 @@ html:not(.preview) .app,html:not(.preview) .app.src{box-shadow:var(--shadow)}
 html:not(.preview) .row:not(.u)>.bubble.bb{padding:calc(16px*var(--dens,1)) calc(20px*var(--dens,1))}
 html:not(.preview)[data-bubble=flat] .row:not(.u)>.bubble.bb{background:transparent;border:0;border-radius:0;box-shadow:none;padding:calc(2px*var(--dens,1)) 0}
 html:not(.preview)[data-bubble=outline] .row:not(.u)>.bubble.bb{background:transparent;border:1px solid var(--line)}
+/* Build is the primary entry point: a quiet pine/lime wash, without the
+   retired floating/sparkle decoration. Device and app motion choices win. */
+@media(prefers-reduced-motion:no-preference) {
+ html:not([data-motion=none]):not([data-motion=calm]) body.settings-tabs.cfgtop-builder .cfg-studio .builder-hero {
+  background-image:linear-gradient(115deg,#173f35 30%,#285443 50%,#173f35 70%)!important;
+  background-size:250% 100%; animation:builder-highlight 6s ease-in-out infinite!important;
+ }
+ html[data-motion=subtle] body.settings-tabs.cfgtop-builder .cfg-studio .builder-hero { animation-duration:9s!important; }
+ html body.settings-tabs.cfgtop-builder .cfg-studio .builder-hero.builder-hero-paused { animation-play-state:paused!important; }
+}
+@keyframes builder-highlight { 0%,100% { background-position:100% 0; } 50% { background-position:0 0; } }
