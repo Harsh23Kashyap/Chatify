@@ -226,3 +226,6 @@ html[data-theme=dark] .build-step[data-state=current] .build-step-label{color:va
  .build-mnav summary{min-height:44px;padding:0 16px}
  .build-mnav-list{left:auto;right:0;transform:none}
 }
+#buildModelKeySetup summary{font-weight:600;cursor:pointer;padding:10px 0}#buildModelKeySetup label{display:block;font-size:14px;margin:14px 0 8px}#buildModelKey{display:block;box-sizing:border-box;width:min(100%,620px);padding:12px 14px;border:1px solid #bacbbf;border-radius:10px;background:#fffdf7;color:#173f35;font:inherit}#buildModelKey:focus-visible{outline:2px solid #7fae3c;outline-offset:3px}html[data-theme=dark] #buildModelKey{background:#1f3028;color:#e8eee6;border-color:#587361}
+
+#buildSourceKeySetup summary{font-weight:600;cursor:pointer;padding:10px 0}#buildSourceKeySetup label{display:block;font-size:14px;margin:14px 0 8px}.build-private-key{display:block;box-sizing:border-box;width:min(100%,620px);margin:8px 0 12px;padding:12px 14px;border:1px solid #bacbbf;border-radius:10px;background:#fffdf7;color:#173f35;font:inherit}.build-private-key:focus-visible{outline:2px solid #7fae3c;outline-offset:3px}html[data-theme=dark] .build-private-key{background:#1f3028;color:#e8eee6;border-color:#587361}

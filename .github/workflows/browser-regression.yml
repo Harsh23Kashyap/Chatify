@@ -51,7 +51,9 @@ jobs:
         if: matrix.shard == 0
         env:
           PLAYWRIGHT_MODULE: /tmp/cc-ui-tools/node_modules/playwright-core
-        run: python tests/ci/builder_reload.py
+        run: |
+          python tests/ci/builder_reload.py
+          python tests/ci/usability_keys_features.py
       - name: Retain synthetic fixture failure pixels and geometry
         if: failure()
         uses: actions/upload-artifact@v4

@@ -24,7 +24,7 @@ const ICONS = {
 const CONNECTORS = [
   { id: "pubmed", name: "PubMed", icon: "book", what: "Biomedical research articles and abstracts from the U.S. National Library of Medicine.", why: "Strong fit for health, medicine and life-science questions that need citable studies.", kw: ["medic", "health", "clinic", "biomed", "cancer", "disease", "drug", "therap", "patient", "diet", "nutrition", "immun", "vaccine", "genom", "diabetes", "covid", "surgery", "neuroscience"], names: ["pubmed"] },
   { id: "arxiv", name: "arXiv", icon: "flask", what: "Open preprints in physics, mathematics, computer science and quantitative fields.", why: "Strong fit for technical and preprint research questions.", kw: ["physics", "math", "quantum", "machine learning", "deep learning", "neural", "algorithm", "preprint", "computer science", "astro", "robot", "cryptograph"], names: ["arxiv"] },
-  { id: "openalex", name: "OpenAlex", icon: "graph", what: "Open scholarly metadata: papers, authors, venues and citation links across all fields.", key: "Needs a free OpenAlex API key, saved in Settings under Source keys after the build, before it can answer.", why: "Broad scholarly coverage that fits research questions in any field.", kw: ["research", "paper", "scholar", "citation", "literature", "studies", "study", "journal", "academic", "science"], names: ["openalex", "open alex"] },
+  { id: "openalex", name: "OpenAlex", icon: "graph", what: "Open scholarly metadata: papers, authors, venues and citation links across all fields.", key: "Needs a free OpenAlex API key, saved privately below before it can answer.", why: "Broad scholarly coverage that fits research questions in any field.", kw: ["research", "paper", "scholar", "citation", "literature", "studies", "study", "journal", "academic", "science"], names: ["openalex", "open alex"] },
   { id: "crossref", name: "Crossref", icon: "graph", what: "DOI registration metadata for scholarly works across publishers.", why: "Complements scholarly coverage with publisher metadata and DOIs.", kw: ["doi", "publisher metadata"], names: ["crossref"] },
   { id: "wikipedia", name: "Wikipedia", icon: "globe", what: "General encyclopedic background: people, places, concepts and history.", why: "Reliable background and definitions alongside more specialized sources.", kw: ["history", "biograph", "general", "encyclop", "concept", "geograph", "culture", "war", "politic", "background", "explain"], names: ["wikipedia", "wiki"] },
   { id: "local_files", name: "Your documents", icon: "folder", what: "Files you provide - Markdown, text, CSV or PDF - indexed as the app's evidence.", why: "Grounds every answer in material you supply yourself.", kw: ["document", "file", "pdf", "notes", "upload", "internal", "lecture", "course", "slides", "our data", "my data"], names: ["documents", "files", "local files"] },
@@ -123,9 +123,31 @@ function paintSources() {
     cat.append(b);
   }
   updateStart();
+  paintSourceKeySetup();
 }
 function paintWhy() {
   $("#sourcesWhy").textContent = "Chatify matched words in your description against a small fixed registry of supported source types - no AI was used for these suggestions, and no source has been contacted yet. The build drafts the full configuration for the sources you confirm; you review everything before saving.";
+}
+function paintSourceKeySetup() {
+  const host = $("#buildSourceKeySetup");
+  if (!state.canEdit || !state.selected.includes("openalex")) { host.replaceChildren(); return; }
+  if (host.children.length) return;
+  const box = el("details", "build-block"), summary = el("summary", null, "Update the OpenAlex source API key here");
+  const label = el("label", null, "OpenAlex API key"), input = el("input");
+  input.type = "password"; input.autocomplete = "off"; input.placeholder = "Enter a new OpenAlex key only to save or replace it"; input.className = "build-private-key"; input.setAttribute("aria-label", "OpenAlex source API key"); label.append(input);
+  const save = el("button", "build-ghost", "Save OpenAlex source key"), note = el("p", "build-note", "Not tested. This key is for the OpenAlex source, not your AI model. You can remove this optional source to skip it.");
+  save.type = "button"; note.setAttribute("role", "status");
+  save.onclick = async () => {
+    if (save.disabled) return;
+    if (!input.value.trim()) { note.textContent = "Enter a new OpenAlex key first. Existing key unchanged."; return; }
+    const key = input.value.trim(); save.disabled = true; input.disabled = true;
+    note.textContent = "Saving your OpenAlex source key privately...";
+    try { const result = await postJson("/api/catalog/key", { id: "openalex", key }); input.value = "";
+      note.textContent = result.has_key ? "OpenAlex source key saved privately, not tested. No model or source request was started." : "No OpenAlex key confirmed. No source request was started.";
+    } catch (e) { note.textContent = "Could not confirm the OpenAlex key was saved: " + e.message + ". Recheck before trying again."; }
+    finally { save.disabled = false; input.disabled = false; }
+  };
+  box.append(summary, label, save, note); host.append(box);
 }
 async function checkProvider() {
   const note = $("#buildProviderNote");
@@ -134,21 +156,43 @@ async function checkProvider() {
     const s = await getJson("/api/settings");
     const st = s.settings || {};
     state.provider = st.provider; state.model = st.model; state.canEdit = s.can_edit === true;
-    const pd = await getJson("/api/provider/status").catch(() => ({}));
+    $("#buildModelKeySetup").hidden = true;
+    const pd = await getJson("/api/provider/status");
     const k = (pd.keys || {})[state.provider] || {};
+    const keySetup = $("#buildModelKeySetup");
+    keySetup.hidden = !state.canEdit || !state.provider || ["mock", "ollama", "openai_compatible"].includes(state.provider) || k.needed === false;
+    $("#buildModelKeyScope").textContent = "Selected model: " + (state.model || "not selected") + " · provider: " + (state.provider || "not selected") + ". This saves or replaces your private key for this provider on this server. It does not change the model or configure source APIs.";
+    $("#buildModelKey").placeholder = k.has ? "Saved key present. Enter a new key only to replace it." : "Paste your own provider key";
+
     const hasKey = state.provider === "ollama" || state.provider === "openai_compatible" || k.has || k.needed === false;
     state.providerOk = !!state.model && state.provider && state.provider !== "mock" && !!hasKey && state.canEdit;
     if (!state.providerOk) {
       if (state.canEdit !== true) note.textContent = "Only the app owner can build on this app.";
       else if (!state.provider || state.provider === "mock") note.textContent = "The offline Demo has no AI model, so the AI build is unavailable. The free starter draft still works.";
       else if (!state.model) note.textContent = "Choose a model in Configuration first - or use the free starter draft below.";
-      else note.textContent = "Save an API key for " + state.provider + " in Configuration first - or use the free starter draft below.";
+      else note.textContent = "Save an API key for " + state.provider + " below, or use the free starter draft.";
       if (state.canEdit === true) { const go = el("a", null, "Open Configuration"); go.href = BASE + "/settings.html"; go.style.marginLeft = "6px"; note.append(go); }
     }
-  } catch (e) { note.textContent = "Could not read model settings: " + e.message; state.providerOk = false; }
+  } catch (e) { note.textContent = "Could not read model settings: " + e.message; state.providerOk = false; $("#buildModelKeySetup").hidden = true; }
   $("#buildStarter").disabled = !state.canEdit || !state.selected.length;
+  paintSourceKeySetup();
   updateStart();
 }
+$("#buildModelKeySave").addEventListener("click", async () => {
+  const button = $("#buildModelKeySave"), input = $("#buildModelKey"), note = $("#buildModelKeyStatus");
+  if (button.disabled || !state.canEdit) return;
+  const key = input.value.trim(), provider = state.provider;
+  if (!key) { note.textContent = "Enter a new key first. Your existing key is unchanged."; return; }
+  button.disabled = true; input.disabled = true;
+  note.textContent = "Saving your " + provider + " key privately...";
+  try {
+    await postJson("/api/provider/key", { provider, key });
+    input.value = "";
+    await checkProvider();
+    note.textContent = "Your " + provider + " key was saved privately, not tested. No build was started. Source API keys are separate.";
+  } catch (e) { note.textContent = "Could not confirm the key was saved: " + e.message + ". No build was started. Recheck before trying again."; }
+  finally { button.disabled = false; input.disabled = false; }
+});
 function updateStart() {
   $("#buildStart").disabled = !(state.providerOk && $("#buildConsent").checked);
   $("#buildStarter").disabled = !(state.canEdit && state.selected.length);

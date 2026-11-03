@@ -49,3 +49,6 @@ html[data-theme=dark] .feature-art>small{color:#9db3a4}
 html[data-theme=dark] .feature-copy a{border-color:#40594c;color:#c2d2bf}
 html[data-theme=dark] .team-avatar{border-color:#40594c}
 html[data-theme=dark] footer{border-top-color:#40594c}@media(max-width:650px){}
+
+.feature-next-step{margin:16px 0 28px;padding:18px 22px;border-left:3px solid #7fae3c;background:#edf1e6;min-height:112px;box-sizing:border-box}.feature-next-step h4{margin:0 0 8px;font:600 16px Georgia}.feature-next-step p{margin:0;font-size:14px;line-height:1.7;color:#53685b}html[data-theme=dark] .feature-next-step{background:#1f302c}html[data-theme=dark] .feature-next-step p{color:#b9cabd}
+.feature-next-step a{display:inline-block;margin-top:12px;color:#173f35;font-size:13px;font-weight:600;text-underline-offset:3px}.feature-next-step a:focus-visible{outline:2px solid #759168;outline-offset:3px}html[data-theme=dark] .feature-next-step a{color:#d7ef72}

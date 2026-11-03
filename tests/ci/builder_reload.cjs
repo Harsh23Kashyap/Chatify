@@ -54,6 +54,14 @@ const {chromium}=require(process.env.PLAYWRIGHT_MODULE),assert=require('node:ass
   oldRelease();await oldResponse;
   await p.evaluate(()=>new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve))));
   assert.equal(await p.locator('.builder-background').getAttribute('data-state'),'running');assert.equal(starts,1);
-  console.log(JSON.stringify({controlledBrowserRecovery:'passed',activeReads,starts,checks:['reload reconnect','outage blocked','malformed blocked','reopen recovery','unsaved description preserved','no duplicate start','stale read ignored']}));
+  // A fresh hero click must not auto-start text edited while discovery was pending.
+  await p.reload();await ready();await p.unroute('**/api/settings/build/active');let releaseHero;
+  await p.route('**/api/settings/build/active',async r=>{await new Promise(resolve=>releaseHero=resolve);return r.fulfill({json:{mine:[]}})});
+  await p.getByRole('button',{name:'Build with AI',exact:true}).first().click();
+  await p.locator('#cfgIdea').fill('Original hero description');await p.locator('.app-builder-open').click();
+  await p.locator('#builderBrief').fill('Edited while discovery was pending');releaseHero();
+  await p.waitForFunction(()=>!document.querySelector('#builderSend').disabled);
+  assert.equal(await p.locator('#builderBrief').inputValue(),'Edited while discovery was pending');assert.equal(starts,1);
+  console.log(JSON.stringify({controlledBrowserRecovery:'passed',activeReads,starts,checks:['reload reconnect','outage blocked','malformed blocked','reopen recovery','unsaved description preserved','no duplicate start','stale read ignored','hero edited during discovery preserved']}));
  }finally{await browser.close()}
 })().catch(e=>{console.error(e);process.exit(1)});
