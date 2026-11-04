@@ -38,7 +38,7 @@ class WorkspaceAPITests(unittest.TestCase):
    for data in [None,{'source':'newsapi','env':'NEWSAPI_KEY','key':'FAKE_FIXTURE_ONLY'}]:
     with self.assertRaises(urllib.error.HTTPError):self.call(self.clients[1],'/api/source-credentials',data)
    result=self.call(self.clients[0],'/api/source-credentials',{'source':'newsapi','env':'NEWSAPI_KEY','key':'FAKE_FIXTURE_ONLY'})
-   self.assertTrue(result['credentials'][0]['has_key']);self.assertNotIn('FAKE_FIXTURE_ONLY',json.dumps(result))
+   self.assertTrue(result['credentials'][0]['has_key']);self.assertNotIn('FAKE_FIXTURE_ONLY',json.dumps(result));self.assertIn('rows',result['diagnostics']);self.assertIn('Configuration checks only',result['diagnostics']['scope'])
    self.call(self.clients[0],'/api/source-credentials',{'source':'newsapi','env':'NEWSAPI_KEY','clear':True})
   finally:secrets.STORE=old
  def test_source_credentials_locked(self):
@@ -46,3 +46,13 @@ class WorkspaceAPITests(unittest.TestCase):
   with patch('chatify.server.LOCKED',True):
    with self.assertRaises(urllib.error.HTTPError) as error:self.call(self.clients[0],'/api/source-credentials')
    self.assertEqual(error.exception.code,404)
+
+ def test_key_save_local_diagnostics_no_external_calls(self):
+  from unittest.mock import patch
+  from chatify import secrets
+  old=secrets.STORE;secrets.STORE=secrets.SecretStore(self.tmp.name)
+  try:
+   with patch('chatify.providers._post') as post,patch('chatify.providers.test_connection') as test,patch('chatify.providers.list_models') as models:
+    result=self.call(self.clients[0],'/api/provider/key',{'provider':'openai','key':'FAKE_FIXTURE_ONLY'})
+   post.assert_not_called();test.assert_not_called();models.assert_not_called();self.assertIn('diagnostics',result);self.assertNotIn('FAKE_FIXTURE_ONLY',json.dumps(result));self.assertTrue(result['key']['has'])
+  finally:secrets.STORE=old

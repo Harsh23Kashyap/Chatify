@@ -26,14 +26,18 @@ def validate_archive(data):
   if not isinstance(turns,list) or len(turns)>500:raise ValueError('Chat limit is 500 turns')
   out=[]
   for turn in turns:
-   if not isinstance(turn,dict) or set(turn)-{'question','answer','evidence','created'}:raise ValueError('Invalid turn fields')
+   if not isinstance(turn,dict) or set(turn)-{'question','answer','evidence','created','model_status'}:raise ValueError('Invalid turn fields')
+   status=turn.get('model_status')
+   if status is not None and status not in ('ok','output_limit','cut','no_key','unreachable'):raise ValueError('Unknown model status')
    q,a=turn.get('question'),turn.get('answer')
    if not isinstance(q,str) or not isinstance(a,str) or len(q)>2000 or len(a)>100000:raise ValueError('Invalid question or answer')
    evidence=turn.get('evidence',[])
    if not isinstance(evidence,list) or len(evidence)>100 or not all(isinstance(x,dict) for x in evidence):raise ValueError('Invalid evidence')
    total+=len(json.dumps(turn))
    if total>8*1024*1024:raise ValueError('Archive limit is 8 MB')
-   out.append({'question':q,'answer':a,'evidence':evidence})
+   item={'question':q,'answer':a,'evidence':evidence}
+   if 'model_status' in turn:item['model_status']=status
+   out.append(item)
   clean.append({'title':str(chat.get('title','Imported'))[:120],'turns':out})
  return clean
 class SettingsHistory:

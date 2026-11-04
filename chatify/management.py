@@ -40,11 +40,25 @@ class Management:
   {'item':'Evidence sources','state':'configured' if sources else 'setup','detail':str(len(sources))+' sources configured; remote availability not checked'},
   {'item':'Data audience','state':'review','detail':'Authentication: '+self.cfg['auth']['mode']+'. Review before sharing or hosting.'},
   {'item':'Connector code','state':'review' if any(s['type']=='python' for s in sources) else 'ready','detail':'Bounded mode is NOT a sandbox. Review code; host files and network remain accessible.' if any(s['type']=='python' for s in sources) else 'No Python plugin configured'}]
-  required=sorted({s.get('api_key_env') for s in sources if s.get('api_key_env')})
-  from . import source_credentials
-  missing=[k for k in required if not os.environ.get(k)]
-  missing.extend(item['env'] for item in source_credentials.status(self.cfg) if not item['has_key'])
-  if missing:rows.append({'item':'Source credentials','state':'setup','detail':'Not detected in host environment: '+', '.join(missing)+'. Set them privately; presence does not prove validity.'})
+  from . import source_credentials,secrets,websearch
+  # Mirror each connector's actual credential lookup, without fetching a service.
+  http_keys=source_credentials.status(self.cfg)
+  for source in sources:
+   if source['type']=='web_search':
+    pids=list(dict.fromkeys(source.get('providers') or ([source.get('provider')] if source.get('provider') else [])))
+    if not pids:rows.append({'item':source['label']+' access','state':'setup','detail':'No search provider selected. Choose a provider and add its key privately.'})
+    for pid in pids:
+     known=pid in websearch.PROVIDERS;present=known and websearch.has_key(pid)
+     rows.append({'item':source['label']+' / '+(websearch.PROVIDERS[pid]['label'] if known else pid),'state':'present' if present else 'setup','detail':'Saved or environment credential present; validity and plan not checked.' if present else 'Matching search credential missing or provider unknown. Configure it privately; no live request made.'})
+   elif source['type']=='openalex':
+    present=bool(secrets.saved('catalog:openalex') or os.environ.get('OPENALEX_API_KEY'))
+    rows.append({'item':source['label']+' access','state':'present' if present else 'setup','detail':'Saved or environment OpenAlex key present; validity not checked.' if present else 'OpenAlex key missing. Save it privately in Sources and APIs.'})
+   elif source['type']=='http_json':
+    for item in http_keys:
+     if item['source']==source['id']:rows.append({'item':source['label']+' / '+item['env'],'state':'present' if item['has_key'] else 'setup','detail':'Saved or environment HTTP header credential present; validity and endpoint mapping not checked.' if item['has_key'] else 'Declared HTTP header credential missing. Save it privately in Sources and APIs.'})
+   elif source['type']=='python' and source.get('api_key_env'):
+    name=source['api_key_env'];present=bool(os.environ.get(name))
+    rows.append({'item':source['label']+' / '+name,'state':'present' if present else 'setup','detail':'Environment credential present for Python connector; code and live behavior not checked.' if present else 'Declared Python environment credential missing. Saved native-source keys are not passed into Python code.'})
   for source in sources:
    if source['type']=='local_files':
     conn=self.engine.connectors.get(source['id']);rows.append({'item':source['label'],'state':'review' if getattr(conn,'last_error','') else 'indexed','detail':'Local index needs attention' if getattr(conn,'last_error','') else str(len(getattr(conn,'docs',[])))+' local evidence chunks indexed; no freshness/network check performed'})

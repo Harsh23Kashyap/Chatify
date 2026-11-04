@@ -77,7 +77,7 @@ class BuilderHTTP(test_workspace_api.WorkspaceAPITests):
    retry=body['retry_ticket'];self.assertTrue(retry);self.assertNotEqual(retry,ticket)
   finally:loader.load=real_load
   opened=self.call(self.clients[0],'/api/settings/build/launch',{'ticket':retry})
-  self.assertTrue(opened.get('url'));self.assertTrue(opened.get('title'))
+  self.assertTrue(opened.get('url'));self.assertTrue(opened.get('title'));self.assertEqual(opened['setup_url'],opened['url'].rstrip('/')+'/settings.html?setup=1#sec-model');self.assertTrue(opened['setup_required']);self.assertIn('scope',opened['readiness'])
   with self.assertRaises(urllib.error.HTTPError) as e2:self.call(self.clients[0],'/api/settings/build/launch',{'ticket':retry})
   self.assertIn('Validate and save the draft once more',json.loads(e2.exception.read())['error'])
 
@@ -173,3 +173,22 @@ class BuilderHTTP(test_workspace_api.WorkspaceAPITests):
   with zipfile.ZipFile(io.BytesIO(self.clients[0].open(request).read())) as z:
    self.assertIn('data/code-drafts.json',z.namelist());readme=z.read('README.md').decode()
    self.assertNotIn('No code included',readme);self.assertIn('inert code for review',readme);self.assertIn('No code is installed or run',readme)
+
+class IdeaRefinementHTTP(BuilderHTTP):
+ def test_refine_owner_gate_no_model(self):
+  with patch('chatify.providers.make') as make:
+   with self.assertRaises(urllib.error.HTTPError):self.call(self.clients[1],'/api/settings/build/refine',{'consent':True,'brief':'garden app','selection':{'provider':'openai','model':'chosen'}})
+  make.assert_not_called()
+ def test_refine_explicit_selection_budget_one_call_no_change(self):
+  from unittest.mock import Mock
+  before=json.dumps(self.cfg,sort_keys=True);provider=Mock();provider.complete.return_value=json.dumps({'brief':'Garden app with user-reviewed planting notes.'});selected=[]
+  def make(cfg):selected.append(cfg['provider']);return provider
+  with patch('chatify.providers.make',side_effect=make),patch('chatify.providers.list_models') as listing:
+   result=self.call(self.clients[0],'/api/settings/build/refine',{'consent':True,'brief':'garden app','selection':{'provider':'openai','model':'my-model','base_url':'https://custom.invalid/v1'}})
+  self.assertEqual(selected[0]['model'],'my-model');self.assertEqual(selected[0]['base_url'],'https://custom.invalid/v1');listing.assert_not_called();self.assertEqual(provider.complete.call_count,1);self.assertFalse(result['changed']);self.assertEqual(before,json.dumps(self.cfg,sort_keys=True))
+ def test_refine_no_consent_no_completion(self):
+  from unittest.mock import Mock
+  provider=Mock()
+  with patch('chatify.providers.make',return_value=provider):
+   with self.assertRaises(urllib.error.HTTPError):self.call(self.clients[0],'/api/settings/build/refine',{'brief':'garden app','selection':{'provider':'openai','model':'chosen'}})
+  provider.complete.assert_not_called()

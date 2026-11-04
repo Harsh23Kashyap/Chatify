@@ -173,6 +173,7 @@ class BuildJobs:
   if key.startswith('appearance:'):
    spec['valid_choices']={k:v for k,v in theme.ENUMS.items() if k in spec['defaults']}
    spec['numeric_ranges']={k:v for k,v in theme.RANGES.items() if k in spec['defaults']}
+   spec['design_direction']='Give this app a distinctive vibrant domain-specific palette, not the default Chatify chat palette. Use saturated accents with readable neutral text and surfaces, accessible contrast, and distinct success, attention and error colors. Preserve explicit color choices in the brief. Avoid purple-blue gradients and looping shiny animations.'
    if 'font' in spec['defaults']:spec['fonts']=list(theme.FONTS)
    if key=='appearance:wording_motion':spec['text_limits']={'txt_title':60,'txt_tagline':160,'txt_examples':600,'txt_placeholder':80,'txt_footer':200,'txt_disclaimer':120,'txt_hint':120,'txt_sidebar':40}
    if key=='appearance:wording_motion':spec['requirements']='Return every field. Setup instructions must be conditional and remain truthful after setup: say Add documents to answer questions about them, never say setup is still required or no handbook exists. All txt_ interface copy must be nonempty and tailored to the app, including txt_disclaimer (a truthful short limitation, no invented credentials or legal promises) and txt_sidebar (a short chat-list heading). Empty optional assets and numeric defaults remain valid.'

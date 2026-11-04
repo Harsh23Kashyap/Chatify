@@ -375,3 +375,137 @@ html[data-motion=none] body.settings-tabs dialog.app-builder .builder-secondary-
 @media(prefers-reduced-motion:reduce){html body.settings-tabs dialog.app-builder .builder-secondary-setup #builderScopeHelp.arrived{animation:none!important}}
 
 html body dialog.app-builder.has-build #builderDescribe{display:none!important}
+
+/* Build status is a readable activity surface, never a browser-default moving bar. */
+.builder-completion-notice{--status-ink:#173f35;--status-muted:#53695c;position:fixed;right:24px;bottom:24px;z-index:1500;width:min(380px,calc(100vw - 32px));box-sizing:border-box;padding:24px;background:#fffdf5;color:var(--status-ink);border:1px solid #b9cbbb;border-radius:16px;box-shadow:0 12px 40px #173f3524;display:grid;grid-template-columns:40px minmax(0,1fr);gap:8px 16px;font-family:'DM Sans',sans-serif}
+.builder-completion-notice[hidden]{display:none!important}
+.builder-completion-notice .builder-operation-mark{grid-column:1;grid-row:1/4;width:40px;height:40px;display:grid;place-items:center;background:#e8efd9;color:#173f35;border-radius:12px}
+.builder-completion-notice .builder-operation-mark[hidden]{display:none}
+.builder-operation-mark svg{width:32px;height:32px}
+.builder-completion-heading{grid-column:2;font:600 20px/1.2 Fraunces,Georgia,serif;overflow-wrap:anywhere}
+.builder-completion-stage,.builder-completion-work,.builder-completion-notice p{grid-column:2;margin:0!important;font-size:13px;line-height:1.5;color:var(--status-muted);overflow-wrap:anywhere}
+.builder-completion-stage{font-weight:700;color:var(--status-ink);font-variant-numeric:tabular-nums}
+.builder-completion-work{font-size:14px}
+.builder-completion-notice button{grid-column:2;justify-self:start;min-height:44px;padding:8px 16px!important;font:600 13px/1.3 'DM Sans',sans-serif!important;margin:8px 0 0!important;border-radius:8px!important}
+.builder-completion-notice button:last-child{margin-top:0!important;background:transparent!important;color:#173f35!important;border:0!important}
+.builder-completion-notice[data-state=partial],.builder-completion-notice[data-state=failed],.builder-completion-notice[data-state=unknown]{border-color:#b69b66;background:#fff9eb}
+.builder-completion-notice:not([data-state=run]) .builder-completion-heading,.builder-completion-notice:not([data-state=run]) p,.builder-completion-notice:not([data-state=run]) button{grid-column:1/-1}
+html body dialog.app-builder .builder-completion-notice{width:100%;padding:16px 24px!important;margin:0!important;border-radius:12px;background:#f1f5e9;max-height:35dvh;overflow:auto;flex:none}
+html body dialog.app-builder .builder-completion-heading{font-size:20px!important;block-size:auto!important;overflow:visible}
+html body dialog.app-builder .builder-completion-notice .builder-operation-mark{width:40px;height:40px}
+html body dialog.app-builder #builderProgress .builder-progress-copy strong{block-size:auto;overflow:visible}
+html body dialog.app-builder #builderProgress .builder-progress-copy>small{block-size:auto;overflow:visible;font-size:14px}
+.cfg-idea-tools{display:flex;align-items:center;flex-wrap:wrap;gap:16px;margin:16px 0 8px}
+body .cfg-composer .cfg-improve-idea,body .cfg-composer .cfg-idea-undo,body .cfg-composer .cfg-idea-proposal button{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:8px 16px;border:1px solid #d7ef72;border-radius:8px;background:#d7ef72;color:#173f35;font:600 14px/1.5 'DM Sans',sans-serif;cursor:pointer;box-shadow:none}
+body .cfg-composer .cfg-idea-undo{background:transparent;color:#fffdf5;border-color:#9fb4a5}
+.cfg-improve-idea svg{width:20px;height:20px;flex:none}
+body .cfg-composer .cfg-improve-idea:disabled{opacity:.5;cursor:not-allowed}
+body .cfg-composer .cfg-refine-consent{display:flex!important;align-items:flex-start;gap:8px;font-size:13px!important;font-weight:400!important;line-height:1.5;color:#e0e9d8;margin:0 0 16px}
+body .cfg-composer .cfg-refine-consent input{appearance:auto!important;width:18px!important;height:18px!important;margin:0!important;flex:0 0 18px;accent-color:#d7ef72}
+body .cfg-composer #cfgImproveStatus{font-size:13px!important;line-height:1.5;color:#e0e9d8;margin:8px 0 0!important;min-height:0}
+body .cfg-composer #cfgImproveStatus:empty{display:none}
+body .cfg-composer .cfg-idea-proposal{border:1px solid #9fb4a5;padding:16px;border-radius:12px;margin-top:16px}
+body .cfg-composer .cfg-idea-proposal[hidden],body .cfg-composer .cfg-idea-undo[hidden]{display:none!important}
+body .cfg-composer .cfg-idea-proposal textarea{min-height:180px!important;max-height:40vh!important}
+body .cfg-composer .cfg-idea-proposal button{margin-top:16px}
+.cfg-idea-tools button:focus-visible,.builder-completion-notice button:focus-visible{outline:3px solid #97b943;outline-offset:3px}
+@media(max-width:600px){.builder-completion-notice{right:16px;bottom:16px;padding:16px;gap:8px 16px}.builder-completion-heading{font-size:20px}.builder-completion-notice p{font-size:13px}html body dialog.app-builder .builder-completion-notice{padding:16px!important;max-height:36dvh}.cfg-idea-tools{gap:8px}.builder-completion-notice button{font-size:13px!important}}
+@media(prefers-reduced-motion:reduce){.builder-operation-mark,.builder-operation-mark svg{animation:none!important;transition:none!important}}
+/* One status surface per context: detailed panel inside, compact notification outside. */
+html body dialog.app-builder.is-building:has(#builderProgress:not([hidden])) .builder-completion-notice,html body dialog.app-builder.is-building:has(#builderProgress:not([hidden])) #builderActionBar{display:none!important}
+body .cfg-composer .cfg-refine-consent{position:relative!important;display:grid!important;grid-template-columns:20px minmax(0,1fr)!important;align-items:start!important;cursor:pointer}
+body .cfg-composer .cfg-refine-consent input{position:static!important;opacity:1!important;transform:none!important;inset:auto!important;clip:auto!important;clip-path:none!important;display:block!important}
+body .cfg-composer .cfg-refine-consent::before,body .cfg-composer .cfg-refine-consent::after,body .cfg-composer .cfg-refine-consent input::before,body .cfg-composer .cfg-refine-consent input::after{display:none!important;content:none!important}
+body .cfg-composer .cfg-idea-proposal textarea{display:block!important;width:100%!important;box-sizing:border-box!important;background:#fffdf5!important;color:#173f35!important;border:1px solid #c6d6bc!important;border-radius:8px!important;padding:16px!important;font:400 14px/1.6 'DM Sans',sans-serif!important;resize:vertical}
+html body dialog.app-builder #builderProgress{background:#f1f5e9!important;border:1px solid #ccd7c0!important;border-radius:16px!important;padding:24px!important;grid-template-columns:64px minmax(0,1fr)!important;gap:16px!important}
+html body dialog.app-builder #builderProgress .builder-progress-spin{width:64px!important;height:64px!important}
+html body dialog.app-builder #builderProgress .builder-progress-copy strong{font-size:25px!important;margin:0 0 8px!important}
+html body dialog.app-builder #builderProgress .builder-metrics{font-size:14px!important;padding-top:16px!important;gap:16px!important}
+html body dialog.app-builder #builderProgress .builder-metrics>p{font-size:13px!important;line-height:1.6!important}
+html body dialog.app-builder #builderProgress .builder-metrics>div{display:none!important}
+@media(max-width:600px){html body dialog.app-builder #builderProgress{padding:16px!important;grid-template-columns:48px minmax(0,1fr)!important}html body dialog.app-builder #builderProgress .builder-progress-spin{width:48px!important;height:48px!important}}
+.builder-completion-caveat{grid-column:2;font:400 12px/1.5 'DM Sans',sans-serif;color:#53695c;overflow-wrap:anywhere}
+.builder-completion-notice:not([data-state=run]) .builder-completion-caveat{grid-column:1/-1}
+.builder-completion-notice[data-state=ok]{border-color:#c6d6bc;background:#f9fcf5;box-shadow:none}
+html body dialog.app-builder:has(.builder-completion-notice:not([hidden])) #builderActionBar{display:none!important}
+.builder-step-guide{display:grid;grid-template-columns:180px minmax(0,1fr);gap:16px;margin:16px 0 24px;padding:16px 0;border-top:1px solid #ccd7c0;border-bottom:1px solid #ccd7c0;color:#173f35;font-family:'DM Sans',sans-serif}
+.builder-step-guide>strong{font-size:14px;line-height:1.5}.builder-step-guide>p{font-size:13px!important;line-height:1.6;margin:0!important;color:#53695c}
+html body dialog.app-builder.is-building .builder-step-guide{display:grid!important;margin:0 0 16px}
+html body dialog.app-builder .builder-step-guide p{display:block!important}
+body .cfg-composer .cfg-idea-guide{font:400 14px/1.6 'DM Sans',sans-serif!important;color:#e0e9d8;margin:0 0 24px!important;max-width:60ch}
+html body dialog.app-builder .builder-caption{display:none!important}
+@media(max-width:600px){.builder-step-guide{grid-template-columns:1fr;gap:8px;margin:16px 0;padding:16px 0}}
+body .cfg-composer .cfg-refine-consent>span{position:static!important;display:block!important;margin:0!important;padding:0 0 0 8px!important;transform:none!important;font:400 13px/1.5 'DM Sans',sans-serif!important;color:#e0e9d8!important}
+html body dialog.app-builder .builder-step-guide{flex:none}
+.workspace-first-setup{padding:24px;background:#f1f5e9;border:1px solid #ccd7c0;border-radius:12px;margin:24px 0;color:#173f35}.workspace-first-setup h2{font:600 25px/1.2 Fraunces,Georgia,serif;margin:0 0 16px}.workspace-first-setup ol{padding-left:24px;max-width:85ch;font:400 14px/1.6 'DM Sans',sans-serif}.workspace-first-setup li+li{margin-top:8px}.workspace-first-setup>div{display:flex;gap:16px;flex-wrap:wrap}.workspace-first-setup a{display:inline-flex;min-height:44px;align-items:center;color:#173f35;font-weight:600;text-underline-offset:4px}
+/* Build studio: a vivid cobalt/citrus workspace, separate from the chat theme. */
+body:has(#cfgtop){--studio-ink:#112c51;--studio-blue:#124de0;--studio-cyan:#39d7ed;--studio-orange:#ff9c38;--studio-paper:#f4f7ff}
+body:has(#cfgtop) main.card{background:#f7f9ff;border-color:#d4def4;color:var(--studio-ink)}
+body .cfg-composer{background:#1136a0;border-color:#1136a0;color:#fff}
+body .cfg-composer h2,body .cfg-composer label,body .cfg-composer .cfg-idea-guide,body .cfg-composer .cfg-idea-status{color:#fff}
+body .cfg-composer .cfg-idea-guide{background:#1944b8;border-color:#5c94ff}
+body .cfg-composer #cfgIdea{background:#fff;color:#112c51;border-color:#b6d7ff}
+body .cfg-composer .app-builder-open{background:#ffe154;color:#152c52;border-color:#ffe154}
+body .cfg-composer .cfg-idea-improve{background:#d8f8ff;color:#103568;border:1px solid #62d5ee}
+body .cfg-composer .cfg-idea-cost{color:#d9e8ff}
+body .cfg-composer .cfg-refine-consent>span{color:#fff!important}
+body .cfg-path-choice button.on{background:#124de0;color:white}body .cfg-route-indicator{background:#124de0}
+body .builder-step-guide{background:#e8f1ff;border-color:#9cbeff;color:#113b88}
+body .builder-completion-notice{background:#f7faff;border-color:#82abff;color:#123773;box-shadow:0 8px 26px #143e8019}
+body .builder-completion-notice .go{background:#124de0;color:#fff;border-color:#124de0}
+body .builder-completion-notice .ghost{background:transparent;color:#12418a}
+body .builder-operation-mark{background:#cff7ff;color:#0d5283}
+body .builder-completion-notice[data-state=ok],body .builder-completion-notice[data-state=done]{background:#effcf5;border-color:#3aaf7a;color:#075c3a}
+body .builder-completion-notice[data-state=error],body .builder-completion-notice[data-state=failed]{background:#fff1f3;border-color:#db6078;color:#8e1933}
+body .builder-completion-notice[data-state=partial],body .builder-completion-notice[data-state=unknown]{background:#fff6e5;border-color:#e5a23b;color:#76420c}
+body dialog.app-builder .builder-group-card[data-state=running],body dialog.app-builder .builder-group-board article[data-state=running]{background:#e4f0ff;border-color:#3a7fee}
+body dialog.app-builder .builder-group-board article[data-state=done]{background:#e4faee;border-color:#42af7c}
+body .workspace-first-setup,body .key-diagnostics{background:#e8f1ff;border:1px solid #84b2ff;color:#123773;padding:24px;border-radius:12px;margin:24px 0}
+.key-diagnostics h3{font:600 25px/1.2 Fraunces,Georgia,serif}.key-diagnostics p,.key-diagnostics li{font:400 14px/1.6 'DM Sans',sans-serif}.key-diagnostics li+li{margin-top:8px}.key-diagnostics>button,.key-diagnostics>a{display:inline-flex;margin:8px 16px 0 0;min-height:44px;align-items:center}.key-diagnostics-consent{display:flex!important;gap:8px!important;align-items:flex-start!important}.key-diagnostics-consent input{flex:none;width:20px;height:20px}
+body .builder-hero{background:#1136a0!important;border-color:#1136a0!important;color:white!important}
+body .builder-hero .builder-hero-title,body .builder-hero .builder-hero-sub{color:white!important}
+body .builder-hero .app-builder-open{background:#ffe154!important;color:#152c52!important;border-color:#ffe154!important}
+body #cfgImproveIdea{background:#d8f8ff!important;color:#103568!important;border-color:#62d5ee!important}
+body #cfgtop button[aria-current=page]{background:#124de0!important;color:white!important}
+html body dialog.app-builder{background:#f8faff!important;color:#112c51!important;border-color:#b8cdf4!important}
+html body dialog.app-builder .settings-help-head{background:#edf3ff!important;color:#112c51!important}
+html body dialog.app-builder #builderProgress{background:#e6f0ff!important;border-color:#9cbff4!important;color:#183a70!important}
+html body dialog.app-builder #builderProgress strong{color:#123773!important}
+html body dialog.app-builder .builder-steps button[aria-current=step],html body dialog.app-builder .builder-steps button.on{color:#124de0!important;border-color:#124de0!important}
+html body dialog.app-builder .go:not(.ghost),html body dialog.app-builder .btn:not(.ghost){background:#124de0!important;color:white!important;border-color:#124de0!important}
+html body dialog.app-builder .builder-shell-footer{background:#f1f6ff!important;border-color:#c2d4ef!important}
+html body .builder-background[data-state=running]{background:#e7f2ff!important;color:#123773!important;border-color:#7faaf5!important}
+html body dialog.app-builder #builderProgress .builder-progress-copy strong{color:#113773!important}
+html body dialog.app-builder .builder-completion-notice[data-state=ok]{background:#edfff5!important;border-color:#35ac76!important;color:#075c3a!important}
+html body dialog.app-builder .builder-completion-notice[data-state=run]{background:#e7f0ff!important;border-color:#82abff!important;color:#123773!important}
+html body dialog.app-builder .builder-completion-notice[data-state=error]{background:#fff0f3!important;border-color:#db6078!important;color:#8e1933!important}
+html body dialog.app-builder .builder-steps>button[data-complete=true]{background:#e7f0ff!important;color:#123773!important}
+html body dialog.app-builder .builder-steps>button .builder-step-mark{background:#124de0!important;color:white!important;border-color:#124de0!important}
+html body dialog.app-builder .builder-group-board article[data-state=running]{background:#e4f0ff!important;border-color:#3a7fee!important;padding-left:12px!important;padding-right:12px!important}
+html body dialog.app-builder .builder-group-board article[data-state=done]{background:#e4faee!important;border-color:#42af7c!important}
+html body .cfg-composer .cfg-refine-consent{background:transparent!important}
+html body .key-diagnostics-consent{display:flex!important;flex-direction:row!important;gap:8px!important;align-items:flex-start!important;font:400 13px/1.5 'DM Sans',sans-serif!important}
+html body .key-diagnostics-consent input{appearance:auto!important;display:block!important;position:static!important;width:20px!important;height:20px!important;margin:0!important;transform:none!important}
+html body.settings-tabs .cfg-studio .builder-hero{background:#1136a0!important;background-image:none!important;border-color:#1136a0!important}
+html body.settings-tabs .cfg-studio .cfg-composer{background:transparent!important}
+html body.settings-tabs .cfg-studio #cfgIdea{background:#fff!important;color:#112c51!important;border-color:#8cb9ff!important}
+html body dialog.app-builder:is(.is-building,.has-build) #builderProgress{background:#e6f0ff!important;border-color:#9cbff4!important}
+html body dialog.app-builder .builder-completion-notice{padding:12px 16px!important;max-height:24dvh!important;border-radius:10px!important}
+html body dialog.app-builder .builder-completion-notice strong{font-size:18px!important;line-height:1.2!important}
+html body dialog.app-builder .builder-completion-notice p{margin:4px 0!important;font-size:13px!important}
+html body dialog.app-builder .builder-completion-notice button{min-height:36px!important;margin-top:0!important}
+html body dialog.app-builder .builder-steps>button[aria-current=step]{border-bottom-color:#124de0!important}
+html body dialog.app-builder #builderSave{background:#124de0!important;border-color:#124de0!important;color:white!important}
+html body.settings-tabs #cfgtop.cfg-path-choice button[aria-current=page]{background:#124de0!important;color:white!important;border-color:#124de0!important}
+html body:has(#cfgtop) .cfg-studio .builder-hero{background-color:#1136a0!important;background-image:none!important}
+html body:has(#cfgtop) .cfg-studio .builder-hero::before,html body:has(#cfgtop) .cfg-studio .builder-hero::after{display:none!important;background:none!important;animation:none!important}
+html body:has(#cfgtop) .cfg-studio .builder-hero .builder-hero-ring,html body:has(#cfgtop) .cfg-studio .builder-hero .builder-hero-twinkles{display:none!important}
+html body:has(#cfgtop) .cfg-studio .cfg-composer,html body:has(#cfgtop) .cfg-studio .cfg-composer .cfg-idea-proposal{background:transparent!important}
+html body:has(#cfgtop) .cfg-studio .cfg-composer .cfg-idea-proposal button{background:#ffe154!important;color:#153064!important}
+html body:has(#cfgtop) .builder-completion-notice button.go:not(.ghost){background:#124de0!important;color:white!important;border-color:#124de0!important}
+html body:has(#cfgtop) .builder-completion-notice button.ghost{background:transparent!important;color:#12418a!important}
+html body:has(#cfgtop) .builder-operation-mark{background:#cff7ff!important;color:#0d5283!important}
+/* Explicit action IDs outrank retained legacy button rules. */
+html body dialog.app-builder #builderReview,html body dialog.app-builder #builderNext{background:#124de0!important;color:#fff!important;border-color:#124de0!important}
+html body dialog.app-builder #builderCancel{background:#fff2df!important;color:#824708!important;border:1px solid #cf8a2d!important;border-radius:10px!important;min-height:40px;padding:8px 16px;font-weight:600}
+html body dialog.app-builder #builderReview:focus-visible,html body dialog.app-builder #builderNext:focus-visible,html body dialog.app-builder #builderCancel:focus-visible{outline:3px solid #347ce8!important;outline-offset:3px}

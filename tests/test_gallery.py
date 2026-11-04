@@ -637,12 +637,15 @@ class GalleryFeaturedBuildCta(unittest.TestCase):
         except urllib.error.HTTPError as e:
             return e.code, e.read().decode("utf-8", "replace")
 
-    def test_featured_cta_opens_ai_wizard(self):
+    def test_featured_cta_opens_configuration(self):
         s, b = self.get("/")
         self.assertEqual(s, 200)
-        self.assertIn('class="g-f-cta" href="/alpha/build.html"', b)
-        self.assertNotIn('class="g-f-cta" href="/alpha/settings.html"', b)
-        # the wizard is actually reachable through the proxy and is the AI flow
+        self.assertIn('class="g-f-cta" href="/alpha/settings.html"', b)
+        self.assertNotIn('class="g-f-cta" href="/alpha/build.html"', b)
+        status, settings = self.get('/alpha/settings.html')
+        self.assertEqual(status, 200)
+        self.assertIn('settingstop.js', settings)
+        # Existing separate wizard remains reachable for saved handoffs; CTA no longer targets it.
         s, b = self.get("/alpha/build.html")
         self.assertEqual(s, 200)
         self.assertIn("Chatify builds it.", b)

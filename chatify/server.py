@@ -431,7 +431,7 @@ def make_handler(cfg, engine):
                         if management.active:raise ValueError("Wait for the workspace test to finish before changing keys")
                         result = source_credentials.update(cfg, b)
                         engine._cache.clear()
-                    return self._send(200, {"credentials": result})
+                    return self._send(200, {"credentials": result,"diagnostics":management.status(o)})
                 return self._send(405, {"error": "Method not allowed"})
             if path.startswith("/api/provider/"):
                 if not can_edit(self):
@@ -448,7 +448,7 @@ def make_handler(cfg, engine):
                     else:
                         secrets.STORE.set(kind, b.get("key"))
                     engine.provider = budget.wrap(providers.make(cfg)); engine._cache.clear()
-                    return self._send(200, {"key": providers.has_key(kind)})
+                    return self._send(200, {"key": providers.has_key(kind),"diagnostics":management.status(o)})
                 if path == "/api/provider/models" and method == "POST":
                     from .modelcatalog import suggestions
                     examples = suggestions(kind)
@@ -478,11 +478,11 @@ def make_handler(cfg, engine):
                 if path.endswith('/job') and method=='GET':return self._send(200,build_jobs.view(o,qs.get('id','')))
                 if path.endswith('/cancel'):return self._send(200,build_jobs.cancel(o,str(b.get('id',''))))
                 if path.endswith('/retry'):return self._send(200,build_jobs.retry(o,str(b.get('id',''))))
-                if path.endswith('/talk') or path.endswith('/deploy') or path.endswith('/start'):
+                if path.endswith('/talk') or path.endswith('/deploy') or path.endswith('/start') or path.endswith('/refine'):
                     selected=b.get('selection') or {};kind=selected.get('provider');model=selected.get('model');base=selected.get('base_url','')
                     if kind not in schema.PROVIDERS or not isinstance(model,str) or not model.strip() or len(model)>120 or not isinstance(base,str) or len(base)>300:raise ValueError('Choose a valid provider and model')
                     cheap=buildjobs_mod.CHEAP_MODEL.get(kind)
-                    if cheap and cheap!=model and not b.get('explicit_selection'):
+                    if cheap and cheap!=model and not b.get('explicit_selection') and not path.endswith('/refine'):
                         try:
                             if cheap in providers.list_models(cfg,kind,base):model=cheap
                         except Exception:pass
@@ -502,6 +502,7 @@ def make_handler(cfg, engine):
                         # build-time substitution instead of the configured model).
                         runtime_cfg=providers._block(cfg,kind,selected.get('model'),base) if b.get('explicit_selection') else cfg
                         return self._send(200,build_jobs.start(o,model_provider,runtime_cfg,b))
+                    if path.endswith('/refine'):return self._send(200,appbuilder.refine_idea(model_provider,build_cfg,b))
                     if path.endswith('/deploy'):return self._send(200,appbuilder.deployment(model_provider,b))
                     return self._send(200,appbuilder.talk(model_provider,build_cfg,b))
                 if path.endswith('/parse'):
@@ -546,6 +547,9 @@ def make_handler(cfg, engine):
                             payload,_=bundle(clean,theme_value=clean.get('appearance'),prompt_value=clean.get('pipeline_prompts'),include_keys=True,include_docs=not nerdloadmod._hosted())
                             reviewed=loader.review('built-app.zip',base64.b64encode(payload).decode())
                             launched=loader.load(reviewed['token'],owner=o)
+                            launched['setup_url']=launched['url'].rstrip('/')+'/settings.html?setup=1#sec-model'
+                            launched['setup_required']=True
+                            launched['readiness']=reviewed['readiness']
                             from . import workspace_default
                             if workspace_default.routing_owner(o,cfg.get("server",{}).get("public")):
                                 workspace_default.choose(store,loader,o,Path(launched['workspace']).name)
@@ -711,7 +715,7 @@ def make_handler(cfg, engine):
                         else:
                             secrets.STORE.set("catalog:openalex", b.get("key"))
                         engine._cache.clear()
-                        return self._send(200, {"has_key": bool(secrets.saved("catalog:openalex") or os.environ.get("OPENALEX_API_KEY"))})
+                        return self._send(200, {"has_key": bool(secrets.saved("catalog:openalex") or os.environ.get("OPENALEX_API_KEY")),"diagnostics":management.status(o)})
                     if path == "/api/websearch/key" and method == "POST":
                         pid = str(b.get("id") or "")
                         if pid not in websearch.PROVIDERS:
@@ -720,7 +724,8 @@ def make_handler(cfg, engine):
                             secrets.STORE.delete("search:" + pid)
                         else:
                             secrets.STORE.set("search:" + pid, b.get("key"))
-                        return self._send(200, {"has_key": websearch.has_key(pid)})
+                        engine._cache.clear()
+                        return self._send(200, {"has_key": websearch.has_key(pid),"diagnostics":management.status(o)})
                     if path == "/api/websearch/test" and method == "POST":
                         pid = str(b.get("id") or "")
                         try:
@@ -1156,7 +1161,7 @@ def serve_gallery(path, host=None, port=None):
             if featured:
                 f_title = featured.get("title") or featured["cfg"]["app"]["title"]
                 f_tagline = featured.get("tagline") or featured["cfg"]["app"].get("tagline") or ""
-                f_cta = featured.get("url") or ("/" + featured["slug"] + "/build.html")
+                f_cta = featured.get("url") or ("/" + featured["slug"] + "/settings.html")
                 f_sub = "" if featured.get("url") else '<a class="g-f-sub" href="/%s/">Open the product guide</a>' % _esc(featured["slug"])
                 featured_html = ('<section class="g-feature"><div class="g-f-copy"><span class="g-f-eyebrow">Build your own</span><span class="g-f-name">%s</span><span class="g-f-tag">%s</span><span class="g-f-note">One YAML file plus your sources - every app below was built this way.</span></div><div class="g-f-actions"><a class="g-f-cta" href="%s">Build with AI</a>%s</div></section>'
                     % (_esc(f_title), _esc(f_tagline), _esc(f_cta), f_sub))
