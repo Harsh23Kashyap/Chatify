@@ -31,6 +31,13 @@ class ProviderError(RuntimeError):
         return self.code is None or self.code in RETRY_CODES
 
 
+class OutputLimitReached(ProviderError):
+    """Completed transport, incomplete answer. Never retry or fallback automatically."""
+    def __init__(self, partial=""):
+        super().__init__("The answer reached the configured output limit", 422)
+        self.partial = partial
+
+
 _DOWN = {}
 
 
@@ -219,7 +226,7 @@ class OpenAICompatible(Streams):
 
     def stream(self, messages):
         headers = self._auth()
-        got = done = False
+        got = done = limited = False
         for line in _stream_lines(self.base + "/chat/completions", self._body(messages, stream=True), headers, self.t):
             if not line.startswith("data:"):
                 continue
@@ -237,11 +244,14 @@ class OpenAICompatible(Streams):
                 piece = ch["delta"].get("content")
                 if ch.get("finish_reason"):
                     done = True
+                    limited = limited or ch["finish_reason"] == "length"
             except (KeyError, IndexError, TypeError, AttributeError):
                 continue
             if piece:
                 got = True
                 yield piece
+        if limited:
+            raise OutputLimitReached()
         if not got:
             raise ProviderError("The provider sent an empty reply", 502)
         if not done:
@@ -261,7 +271,11 @@ class OpenAICompatible(Streams):
         headers = self._auth()
         r = _post(self.base + "/chat/completions", self._body(messages), headers, self.t)
         try:
-            return r["choices"][0]["message"]["content"].strip()
+            choice = r["choices"][0]
+            text = (choice["message"]["content"] or "").strip()
+            if choice.get("finish_reason") == "length":
+                raise OutputLimitReached(text)
+            return text
         except (KeyError, IndexError, TypeError):
             raise ProviderError("Unexpected provider response") from None
 
@@ -323,6 +337,8 @@ class WithFallback:
     def complete(self, messages):
         try:
             return self.primary.complete(messages)
+        except OutputLimitReached:
+            raise
         except ProviderError:
             return self.secondary.complete(messages)
 
@@ -332,8 +348,8 @@ class WithFallback:
             for piece in self.primary.stream(messages):
                 started = True
                 yield piece
-        except ProviderError:
-            if started:
+        except ProviderError as exc:
+            if started or isinstance(exc, OutputLimitReached):
                 raise
             yield from self.secondary.stream(messages)
 

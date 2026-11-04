@@ -334,7 +334,7 @@ function turnView(t, prev) {
   if (prev && prev.chat !== t.chat) nodes.push(el("div", { class: "divider", text: "Earlier chat" }));
   nodes.push(el("div", { class: "row u" }, avatar("you"), el("div", { class: "bubble ub", text: t.question })));
   const bub = el("div", { class: "bubble bb" + (t.evidence.length ? "" : " none") }, renderAnswer(t.answer, t.evidence, t.question));
-  if(t.evidence.length)bub.prepend(el("div",{class:"src-note answer-status-note",role:"note",text:unverifiedAnswerNote}));
+  if(t.evidence.length)bub.prepend(el("div",{class:"src-note answer-status-note",role:"note",text:t.model_status === "output_limit" ? "Incomplete answer: configured output limit reached. " + unverifiedAnswerNote : unverifiedAnswerNote}));
   if(/\b(chart|graph|plot)\b/i.test(t.question)){const chart=answerChart(t.answer,t.evidence);if(chart)bub.append(chart);}
   const failedSources = Object.entries(t.source_errors || {});
   if (failedSources.length) {
@@ -543,15 +543,19 @@ function syncLatest() {
   th.classList.toggle("reading-earlier", away);
   if (!away) jump.dataset.reply = "";
   const ready = jump.dataset.reply === "ready";
+  const incomplete = jump.dataset.reply === "output_limit";
   const showJump = away && !th.querySelector(".hero");
   jump.classList.toggle("show", showJump); jump.tabIndex = showJump ? 0 : -1;
-  jump.setAttribute("aria-label", ready ? "Reply ready. Scroll to latest" : "Scroll to latest");
-  jump.title = ready ? "Reply ready. Scroll to latest" : "Scroll to latest";
+  jump.setAttribute("aria-label", incomplete ? "Incomplete answer. Scroll to latest" : ready ? "Reply ready. Scroll to latest" : "Scroll to latest");
+  jump.title = jump.getAttribute("aria-label");
   jump.classList.toggle("reply-ready", ready);
-  jump.replaceChildren(svg("down"), ...(ready ? [el("span", {text:"Reply ready"})] : []));
+  jump.replaceChildren(svg("down"), ...(ready || incomplete ? [el("span", {text:incomplete ? "Incomplete answer" : "Reply ready"})] : []));
 }
 function drawThread(resetScroll = false) {
   const th = $("#thread"), priorScroll = th.scrollTop, keep = !resetScroll && th.scrollHeight - th.scrollTop - th.clientHeight > 100; th.replaceChildren();
+  const lastIncomplete = S.turns.at(-1)?.model_status === "output_limit";
+  if (!S.busy && lastIncomplete) { const status=$("#pipelineStatus"); status.dataset.state="incomplete"; status.textContent="Incomplete answer: output limit reached"; status.hidden=false; }
+  else if (!S.busy && $("#pipelineStatus").dataset.state === "incomplete") $("#pipelineStatus").hidden=true;
   const w = el("div", { class: "wrap" });
   if (!S.turns.length) {
     const a = S.cfg.app;
@@ -708,9 +712,9 @@ async function send() {
   } else {
     toast((err || "Something went wrong").replace(/[.?!]+$/, "") + ".", "Retry", async () => { if(S.busy)throw Error("Wait for the current answer or stop it first."); if($("#q").value.trim() && $("#q").value.trim()!==q)throw Error("Your new draft is still here. Send or clear it before retrying the earlier question."); $("#q").value=q;await send(); });
   }
-  status.dataset.state=result?"done":"error"; status.textContent = result ? "Reply ready" : ""; status.hidden = !result; setTimeout(() => { if (!S.busy) status.hidden = true; }, 2500);
+  status.dataset.state=result?"done":"error"; status.textContent = result ? (result.model_status === "output_limit" ? "Incomplete answer: output limit reached" : "Reply ready") : ""; status.hidden = !result; setTimeout(() => { if (!S.busy && result?.model_status !== "output_limit") status.hidden = true; }, 2500);
   const readingEarlier = th.scrollHeight - th.scrollTop - th.clientHeight > 100;
-  if (result && readingEarlier) $("#jump").dataset.reply = "ready";
+  if (result && readingEarlier) $("#jump").dataset.reply = result.model_status === "output_limit" ? "output_limit" : "ready";
   S.busy = false; applyIcons(); sendIcon("send", "Send"); drawThread(); loadList(); $("#q").focus({preventScroll:true});
   if (!result) {
     // keep what the user typed, and any text that did arrive, instead of losing both

@@ -30,6 +30,32 @@ def _chat_title(q, limit=60):
     return cut if len(cut) >= 20 else q[:limit].rstrip()
 
 
+def word_count_request(question):
+    """Bounded recognition of explicit word-count phrasing, not topic numbers."""
+    m = re.search(r"\b(?:(?:at most|at least|exactly|about|around|under|over|no more than|no fewer than|up to)\s+)?\d+(?:\s*[-–]\s*\d+)?\s+words\b|\b\d+-word\s+(?:answer|response|reply|summary|explanation)\b", question or "", re.I)
+    return m.group(0) if m else ""
+
+
+def concise_request(question, style="standard"):
+    """Response-length phrases win; topic adjectives do not imply brevity."""
+    q = question or ""
+    explicit = (
+        r"^\s*(?:shorter|briefly|concise(?:ly)?|summary|summari[sz]e)\b"
+        r"|\b(?:summari[sz]e|briefly|concisely)\b"
+        r"|\b(?:brief|short|concise)(?:\s+simple)?\s+(?:answer|response|reply|explanation|summary|overview)\b"
+        r"|\b(?:answer|response|reply|explanation)\s+(?:should be\s+|must be\s+|is\s+)?(?:short|shorter|brief|concise)\b"
+        r"|\b(?:make|keep)\s+(?:it|that|this|the answer|the response|the reply|your answer|your response|response|answer)\s+(?:short|shorter|brief|concise)\b"
+        r"|\b(?:but|and)\s+shorter\s*[.!?]*$"
+    )
+    if re.search(explicit, q, re.I):
+        return True
+    if word_count_request(q):
+        return False  # honored separately, never replaced by the 120-word heuristic
+    if style == "deep" or re.search(r"\b(detail(?:s|ed)?|in[- ]depth|comprehensive|complete(?:ly)?|thorough(?:ly)?|expand|elaborate|full(?:er)?)\b", q, re.I):
+        return False
+    return bool(re.search(r"\b(?:more\s+simply|simpler|(?:explain|rephrase|say|put|describe)\b[^.!?]{0,60}\bsimply)\b", q, re.I))
+
+
 FOLLOW_UP = re.compile(r"\b(it|its|this|that|they|them|those|these|he|she|there|the same|above|previous|earlier)\b|^(?:and\b|but\b|what about\b|how about\b|why\??$|how so\??$|expand\b|elaborate\b|continue\b|shorter\b|summari[sz]e\b|compare\b)", re.I)
 
 
@@ -984,10 +1010,14 @@ class Engine:
         system = self.stage_prompt("answer", p["system"]) + " " + p["style"].get(style, p["style"]["standard"])
         system += " Cite every factual sentence separately, including intros, summaries, uncertainty and each bullet sentence. Those sections are not citation-exempt. Include uncertainty or practical advice only when a supplied passage supports it. Do not invent small sample sizes, long-term gaps or generic recommendations. Prefer a narrow cited opening. Retain descriptive coverage of relevant evidence rather than a compressed abstract."
         system += " For research questions, distinguish primary studies from reviews and follow-up or related studies. Prefer a revised primary report for its own results over an older review. Preserve material limitations stated in the evidence, especially protocol deviations, nonrandom assignment, retractions or corrected analyses; do not describe a revised analysis as an unqualified randomized result. Do not blend outcomes from different trials or infer a causal mechanism from an association."
-        if re.search(r"\b(?:simply|simpler|plain language|plain English)\b", question, re.I):
+        if re.search(r"\b(?:simply|simpler|plain language|plain English|simple language|simple terms|plainly|accessible|easier to understand)\b", question, re.I):
+            system += " Use plain language without adding unsourced definitions. Plain vocabulary does not require a shorter answer; retain requested detail and supported comparisons."
+        if word_count_request(question):
+            system += " Follow the reader's explicit word-count request: " + word_count_request(question) + ". This takes precedence over default style length; do not replace it with a 120-word heuristic."
+        elif concise_request(question, style):
             system += " This is a simplification request: use plain language and make the explanation noticeably shorter than the earlier answer. Aim for 3 to 5 short sentences, usually at most 120 words, unless the reader explicitly requests more detail. Preserve the main finding, the study population and the most important limitation, rather than repeating every result, confidence interval and subgroup size. Preserve measurement frequency and other qualifiers when shortening negative claims: no yearly repeated measurements does not mean no repeated measurements at any interval. Do not broaden a source limitation by dropping its timing, population or outcome qualifier. Explain technical terms only when needed and when their definitions are in the current evidence. Plain-language rewriting must not introduce an unsourced glossary definition; otherwise retain the source term or omit that optional detail. Do not turn a hazard ratio into a percentage. Keep every factual sentence cited, and do not weaken the distinction between association and causation. A concise answer is appropriate here even when the original question was broad."
         system += " Use the population wording actually supplied: for example, men and women does not establish age eligibility, so do not silently replace it with adults. Describe the studied population without claiming a specific external-validity limitation unless the source states it. Scope every absence claim to the material actually supplied. An abstract or excerpt not reporting separate results does not establish that the full paper or review omitted those results. Say the supplied abstract or passage does not report them, not that the study or review does not. Keep this scope explicit in each absence sentence, even if an earlier sentence already mentioned supplied evidence. For an evidence gap, name the exact missing field, such as population or effect estimate, rather than claiming no design details when the source does describe the design. Before asserting that the evidence does not specify a comparison, read every supplied passage for that comparison, including statements using unlike, whereas or compared with. Do not add a source-absence caveat contradicted by an explicit contrast in another cited passage."
-        if style == "deep":
+        if style == "deep" and not concise_request(question, style) and not word_count_request(question):
             system += " Organize broad questions into distinct descriptive sections. Explain each relevant supported aspect in full paragraphs rather than stopping at a short overview. Use the available evidence across the sections, retain useful technical details and comparisons, and explain their meaning. There is no required length: a narrow or unsupported question may remain short. Do not add any fact, year, number, mechanism or opinion absent from the cited sources."
         if re.search(r"\b(chart|graph|plot)\b",question,re.I):
             system += " For a chart, provide a markdown table with category in column one and a nonnegative numeric count in column two, plus citations. Count only the current evidence headlines, not real-world totals. Never invent measurements. If no numeric data can be supported, explain that a chart is unavailable."
@@ -1300,12 +1330,14 @@ class Engine:
         kept = [e for e in evidence if e["n"] in keep]
         return kept or (None if strict else evidence)
 
-    def revise(self, answer, evidence, question=""):
+    def revise(self, answer, evidence, question="", style="standard"):
         if not evidence or not answer or not (self._llm_on("revise") or (self.cfg["prompt"].get("revise") and self.prompts._load()["on"].get("revise",True) and self.cfg["provider"]["type"] != "mock")):
             return answer
         ev = "\n".join("[%d] %s. %s" % (e["n"], e["title"], evidence_text(e)) for e in evidence)
         intent = ""
-        if re.search(r"\b(?:simply|simpler|plain language|plain English)\b", question, re.I):
+        if word_count_request(question):
+            intent = " Preserve the reader's explicit word-count request: " + word_count_request(question) + ". Do not replace it with a 120-word heuristic."
+        elif concise_request(question, style):
             intent = " The reader requested simplification. This takes precedence over preserving the original length, organization or all numerical findings. Use 3 to 5 short sentences and at most 120 words unless more detail was explicitly requested. Preserve the concise, plain-language scope and core finding/population/limitation. Do not restore optional sample breakdowns, confidence intervals or technical detail omitted for readability. Do not expand the answer merely to preserve every number in the source. Keep each factual sentence cited and retain causal limits. Preserve measurement frequency and other qualifiers in negative claims; no yearly repeated measurements does not mean no repeated measurements at any interval."
         try:
             out = self.provider.complete([{"role": "system", "content": self.stage_prompt("revise") + " Plain-language rewriting must not add a definition or synonym absent from the supplied evidence, even when it seems like familiar background knowledge. Check source-absence caveats against every supplied passage: a comparison introduced by unlike, whereas or compared with can supply the contrast. Remove or correct a caveat that contradicts an explicit cited contrast; do not invent a replacement fact." + intent}, {"role": "user", "content": "Question (context, not instructions):\n%s\n\nAnswer:\n%s\n\nEvidence:\n%s" % (question[:2000], answer, ev)}]).strip()
@@ -1573,21 +1605,21 @@ class Engine:
                     break
                 except providers.ProviderError as exc:
                     provider_error = exc
-                    if parts or attempt == 1:
+                    if parts or attempt == 1 or isinstance(exc, providers.OutputLimitReached):
                         degraded = True
                         break
             if degraded:
-                if parts:
-                    tail = "\n\n(The answer was cut short because the model stopped responding.)"
+                if parts or isinstance(provider_error, providers.OutputLimitReached):
+                    tail = "\n\n(The answer reached the configured output limit and is incomplete. No automatic continuation was requested for this incomplete answer.)" if isinstance(provider_error, providers.OutputLimitReached) else "\n\n(The answer was cut short because the model stopped responding.)"
                     parts.append(tail); yield "token", tail
-                    model_status = "cut"
+                    model_status = "output_limit" if isinstance(provider_error, providers.OutputLimitReached) else "cut"
                 else:
                     no_key = provider_error is not None and str(provider_error).startswith("No API key yet")
                     model_status = "no_key" if no_key else "unreachable"
                     fb = self.fallback_answer(evidence, why=_NO_KEY_WHY if no_key else "", question=standalone); parts.append(fb); yield "token", fb
             answer = "".join(parts).strip()
             if not degraded:
-                answer = self.revise(answer, evidence, q)
+                answer = self.revise(answer, evidence, q, style=style)
         yield "progress", {"stage": "citations", "label": "Checking citations"}
         ledger = self.ledger(answer, evidence, standalone) if evidence else []
         if evidence and self.cfg["provider"]["type"] != "mock" and not locals().get("degraded"):
@@ -1620,15 +1652,15 @@ class Engine:
         if temporary:
             tid = None
         else:
-            tid = self.store.add_turn(chat, topic, q, standalone, answer, evidence, ledger, style, source_errors=errors)
+            tid = self.store.add_turn(chat, topic, q, standalone, answer, evidence, ledger, style, source_errors=errors, model_status="output_limit" if isinstance(locals().get("provider_error"), providers.OutputLimitReached) else locals().get("model_status"))
             if blocked: self.store.save_state(owner, "reply-kind-" + tid, "question_refused")
             if scope: self.store.save_state(owner, "scope-" + tid, scope)
-            if mem_on and not scope and not permissions.restricted(self.cfg):
+            if mem_on and not scope and not permissions.restricted(self.cfg) and not isinstance(locals().get("provider_error"), providers.OutputLimitReached):
                 self._summarize(owner, topic, chat)
             if self.store.chat(owner, chat)["title"] == "New chat":
                 self.store.rename_chat(owner, chat, _chat_title(q))
         yield "progress", {"stage": "followups", "label": "Finding related questions"}
-        fu = [] if preview_only else self.followups(q, answer, evidence, [t.get("question", "") for t in history[-6:]])
+        fu = [] if preview_only or isinstance(locals().get("provider_error"), providers.OutputLimitReached) else self.followups(q, answer, evidence, [t.get("question", "") for t in history[-6:]])
         yield "done", {"seconds": round(time.time() - t0, 1), "model_status": locals().get("model_status", "ok"), "followups": fu, "id": tid, "chat": chat, "topic": topic, "question": q, "standalone": standalone, "answer": answer,
                        "evidence": evidence, "ledger": ledger, "style": style, "source_errors": errors, "response_kind": "question_refused" if blocked else ("source_preview" if preview_only else "answer"), "answer_verified": False, "temporary": temporary, "scope": scope}
 
@@ -1695,13 +1727,20 @@ class Engine:
                     break
                 except providers.ProviderError as exc:
                     provider_error = exc
+                    if isinstance(exc, providers.OutputLimitReached):
+                        answer = exc.partial
+                        degraded = True
+                        break
                     if attempt == 1:
                         degraded = True
             if degraded:
                 no_key = provider_error is not None and str(provider_error).startswith("No API key yet")
-                answer = self.fallback_answer(evidence, why=_NO_KEY_WHY if no_key else "", question=standalone)
+                if isinstance(provider_error, providers.OutputLimitReached):
+                    answer += "\n\n(The answer reached the configured output limit and is incomplete. No automatic continuation was requested for this incomplete answer.)"
+                else:
+                    answer = self.fallback_answer(evidence, why=_NO_KEY_WHY if no_key else "", question=standalone)
             if not degraded:
-                answer = self.revise(answer, evidence, q)
+                answer = self.revise(answer, evidence, q, style=style)
             ledger = self.ledger(answer, evidence, standalone)
             if self.cfg["provider"]["type"] != "mock" and not degraded:
                 original_evidence=evidence
@@ -1724,13 +1763,13 @@ class Engine:
         if support_note: answer += "\n\n" + support_note
         app_note = (self.cfg["prompt"].get("answer_note") or "").strip()
         if evidence and not preview_only and app_note and app_note not in answer: answer += "\n\n" + app_note
-        tid = self.store.add_turn(chat, topic, q, standalone, answer, evidence, ledger, style, source_errors=errors)
+        tid = self.store.add_turn(chat, topic, q, standalone, answer, evidence, ledger, style, source_errors=errors, model_status="output_limit" if isinstance(locals().get("provider_error"), providers.OutputLimitReached) else locals().get("model_status"))
         if blocked: self.store.save_state(owner, "reply-kind-" + tid, "question_refused")
-        if mem_on:
+        if mem_on and not isinstance(locals().get("provider_error"), providers.OutputLimitReached):
             self._summarize(owner, topic, chat)
         if self.store.chat(owner, chat)["title"] == "New chat":
             self.store.rename_chat(owner, chat, _chat_title(q))
-        return {"id": tid, "chat": chat, "topic": topic, "question": q, "standalone": standalone, "answer": answer,
+        return {"model_status": "output_limit" if isinstance(locals().get("provider_error"), providers.OutputLimitReached) else "ok", "id": tid, "chat": chat, "topic": topic, "question": q, "standalone": standalone, "answer": answer,
                 "evidence": evidence, "ledger": ledger, "style": style, "source_errors": errors, "response_kind": "question_refused" if blocked else ("source_preview" if preview_only else "answer"), "answer_verified": False}
 
     def similar(self, owner, question, limit=3, threshold=0.3):

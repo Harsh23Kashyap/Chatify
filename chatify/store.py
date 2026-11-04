@@ -4,7 +4,7 @@ import json, os, re, sqlite3, time, uuid
 SCHEMA = """
 CREATE TABLE IF NOT EXISTS chats(id TEXT PRIMARY KEY, owner TEXT, title TEXT, pinned INTEGER DEFAULT 0, deleted REAL, created REAL);
 CREATE TABLE IF NOT EXISTS topics(id TEXT PRIMARY KEY, owner TEXT, title TEXT, summary TEXT DEFAULT '', created REAL);
-CREATE TABLE IF NOT EXISTS turns(id TEXT PRIMARY KEY, chat TEXT, topic TEXT, question TEXT, standalone TEXT, answer TEXT, evidence TEXT, ledger TEXT, style TEXT, source_errors TEXT, created REAL);
+CREATE TABLE IF NOT EXISTS turns(id TEXT PRIMARY KEY, chat TEXT, topic TEXT, question TEXT, standalone TEXT, answer TEXT, evidence TEXT, ledger TEXT, style TEXT, source_errors TEXT, model_status TEXT, created REAL);
 CREATE TABLE IF NOT EXISTS feedback(turn TEXT PRIMARY KEY, owner TEXT, rating INTEGER, created REAL);
 CREATE TABLE IF NOT EXISTS states(owner TEXT, name TEXT, payload TEXT, updated REAL, PRIMARY KEY(owner,name));
 CREATE TABLE IF NOT EXISTS profile(owner TEXT PRIMARY KEY, text TEXT, updated REAL);
@@ -77,13 +77,14 @@ class Store:
 
     def _migrate(self):
         # CREATE TABLE IF NOT EXISTS cannot add columns to an existing data file.
-        try:
-            with self.c() as c:
-                c.execute("ALTER TABLE turns ADD COLUMN source_errors TEXT")
-                try: c.commit()
-                except Exception: pass
-        except Exception:
-            pass  # column already present
+        for column in ("source_errors", "model_status"):
+            try:
+                with self.c() as c:
+                    c.execute("ALTER TABLE turns ADD COLUMN " + column + " TEXT")
+                    try: c.commit()
+                    except Exception: pass
+            except Exception:
+                pass  # column already present
 
     @staticmethod
     def _unwritable(e):
@@ -190,10 +191,10 @@ class Store:
         return r["topic"] if r else None
 
     # turns
-    def add_turn(self, chat, topic, question, standalone, answer, evidence, ledger, style, source_errors=None):
+    def add_turn(self, chat, topic, question, standalone, answer, evidence, ledger, style, source_errors=None, model_status=None):
         i = str(uuid.uuid4())
-        self.q("INSERT INTO turns(id,chat,topic,question,standalone,answer,evidence,ledger,style,source_errors,created) VALUES(?,?,?,?,?,?,?,?,?,?,?)", (i, chat, topic, question, standalone, answer,
-               json.dumps(evidence), json.dumps(ledger), style, json.dumps(source_errors or {}), time.time()), write=True)
+        self.q("INSERT INTO turns(id,chat,topic,question,standalone,answer,evidence,ledger,style,source_errors,model_status,created) VALUES(?,?,?,?,?,?,?,?,?,?,?,?)", (i, chat, topic, question, standalone, answer,
+               json.dumps(evidence), json.dumps(ledger), style, json.dumps(source_errors or {}), model_status, time.time()), write=True)
         return i
 
     def turns(self, owner, chat):
@@ -272,7 +273,7 @@ class Store:
                 if old not in topics:
                     topics[old] = str(uuid.uuid4())
                     c.execute("INSERT INTO topics(id,owner,title,summary,created) VALUES(?,?,?,'',?)", (topics[old], owner, r["question"][:120], now))
-                c.execute("INSERT INTO turns(id,chat,topic,question,standalone,answer,evidence,ledger,style,source_errors,created) VALUES(?,?,?,?,?,?,?,?,?,?,?)", (str(uuid.uuid4()), chat, topics[old], r["question"], r["standalone"], r["answer"], json.dumps(r["evidence"]), json.dumps(r["ledger"]), r["style"], r["source_errors"] if isinstance(r.get("source_errors"), str) else json.dumps(r.get("source_errors") or {}), now + i * .001))
+                c.execute("INSERT INTO turns(id,chat,topic,question,standalone,answer,evidence,ledger,style,source_errors,model_status,created) VALUES(?,?,?,?,?,?,?,?,?,?,?,?)", (str(uuid.uuid4()), chat, topics[old], r["question"], r["standalone"], r["answer"], json.dumps(r["evidence"]), json.dumps(r["ledger"]), r["style"], r["source_errors"] if isinstance(r.get("source_errors"), str) else json.dumps(r.get("source_errors") or {}), r.get("model_status"), now + i * .001))
             c.execute("INSERT INTO states VALUES(?,?,?,?)", (owner, "branch-" + chat, json.dumps({"chat": original["id"], "turn": turn}), now))
             c.commit()
         except Exception:
@@ -430,6 +431,8 @@ class Store:
             for t in (turns or [])[:500]:
                 if not isinstance(t, dict) or not t.get("question") or not t.get("answer"):
                     continue
+                if t.get("model_status") is not None and t["model_status"] not in ("ok", "output_limit", "cut", "no_key", "unreachable"):
+                    raise ValueError("Unknown model status")
                 evidence = t.get("evidence")
                 if evidence is not None and (not isinstance(evidence, list) or any(not isinstance(e, dict) for e in evidence)):
                     raise ValueError("Turn evidence must be a list of objects")
@@ -448,13 +451,13 @@ class Store:
             cid = self.new_chat(owner, str(c.get("title") or "Imported")[:120])
             for t in (c.get("turns") or [])[:500]:
                 if isinstance(t, dict) and t.get("question") and t.get("answer"):
-                    self.add_turn(cid, None, str(t["question"])[:2000], str(t["question"])[:2000], str(t["answer"]), t.get("evidence") or [], [], "standard")
+                    self.add_turn(cid, None, str(t["question"])[:2000], str(t["question"])[:2000], str(t["answer"]), t.get("evidence") or [], [], "standard", model_status=t.get("model_status"))
             n += 1
         return n
 
     def export_all(self, owner):
         out = []
         for c in self.q("SELECT id,title,pinned,created FROM chats WHERE owner=? AND deleted IS NULL ORDER BY created", (owner,)):
-            c["turns"] = [{k: t[k] for k in ("question", "answer", "evidence", "created")} for t in self.turns(owner, c["id"])]
+            c["turns"] = [{**{k: t[k] for k in ("question", "answer", "evidence", "created")}, "model_status":t.get("model_status")} for t in self.turns(owner, c["id"])]
             out.append(c)
         return out
