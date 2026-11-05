@@ -1020,4 +1020,9 @@ document.addEventListener("focusin", e => {
     }
   });
   document.addEventListener('selectionchange',()=>{if(document.activeElement?.matches?.('#col .cm-content'))queue()});
+  // Native editor key handling can restore the caret after selectionchange.
+  // Recheck after that key finishes, without intercepting Tab or changing text.
+  for(const type of ['input','keyup'])document.addEventListener(type,e=>{
+    if(e.target.matches?.('#col .cm-content'))queue();
+  });
 })();

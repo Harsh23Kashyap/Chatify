@@ -1,5 +1,7 @@
 # Micro-animation audit
 
+> Historical audit, not current release evidence. This document records round 26 and has not been reconciled with the current interface. Its aggregate counts and "n/a" statements must not be read as current acceptance: prompt edit/toggle, Try it and copy-code controls now exist. The table below is preserved as history, not recertified. Current release acceptance must be checked against the exact checkpoint's CI and component review evidence. Automated checks do not certify native screen-reader behavior, live-provider answer quality or hosted data survival.
+
 Checked against the ChatGPT list of 105 (round 26). Status is from reading the code and, for most items, measuring the DOM or a computed style in a headless browser. Nothing was judged by eye. "n/a" means the app has no such control, so there is nothing to animate.
 
 Built 80, partial 11 (eased), n/a 10, dropped 4 (owner approved), of 105.

@@ -695,7 +695,11 @@ async function send() {
         if (thinking) {
           if (motionAllowed() && thinking.animate) {
             thinking.removeAttribute("id"); thinking.style.overflow = "hidden";
-            const fade = thinking.animate([{opacity:1,height:thinking.getBoundingClientRect().height+"px",padding:"4px 0"},{opacity:0,height:"0px",padding:"0px"}],{duration:120,easing:"ease-out"}); fade.onfinish = () => thinking.remove();
+            const followCollapse = () => { if (th.scrollHeight - th.scrollTop - th.clientHeight < 100) th.scrollTop = th.scrollHeight; syncLatest(); };
+            // Keep an already-following reader pinned as each collapse layout settles.
+            // A reader more than 100px away keeps their position, including mid-collapse.
+            const collapseResize = new ResizeObserver(followCollapse); collapseResize.observe(thinking);
+            const fade = thinking.animate([{opacity:1,height:thinking.getBoundingClientRect().height+"px",padding:"4px 0"},{opacity:0,height:"0px",padding:"0px"}],{duration:120,easing:"ease-out"}); fade.onfinish = () => { collapseResize.disconnect(); const follow = th.scrollHeight - th.scrollTop - th.clientHeight < 100; thinking.remove(); if (follow) th.scrollTop = th.scrollHeight; syncLatest(); }; fade.oncancel = () => collapseResize.disconnect();
             live.classList.add("answer-arrive");
           } else thinking.remove();
         }
