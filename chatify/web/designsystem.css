@@ -330,3 +330,13 @@ html body.settings-tabs #codeEditor details.selected-editor{background:var(--ui-
 /* A partial build has one in-dialog recovery action, not a duplicate alert footer. */
 html body.settings-tabs dialog.app-builder[open][data-recovery=true] .builder-shell-footer>.builder-completion-notice[data-state=partial]{display:none!important}
 html body.settings-tabs dialog.app-builder[data-recovery=true] #builderReset{display:none!important}
+
+/* Keep the established two-pixel keyboard ring and readable code syntax surface. */
+html body.settings-tabs.settings-tabs :is(#apply,#saveLook,#saveBudget,#sec-finish a,button,a,input,textarea,select,summary):focus-visible{outline-width:2px!important}
+html body.settings-tabs #codeEditor :is(.cm-editor,.cm-scroller){background:var(--ui-code)!important;color:var(--ui-code-ink)!important}
+html body.settings-tabs #codeEditor :is(.cm-gutters,.cm-gutter,.cm-gutterElement,.cm-gutterElement span){background:var(--ui-code)!important;color:var(--ui-code-ink)!important}
+html body.settings-tabs #codeEditor :is(.cm-cursor,.cm-dropCursor){border-left-color:var(--ui-code-ink)!important}
+html body.settings-tabs.settings-tabs :is(#apply,#saveLook,#saveBudget,#sec-finish a,button,a,input,textarea,select,summary):focus-visible{box-shadow:0 0 0 3px var(--ui-soft)!important}
+/* Search focus is an action cue; an unselected route is neutral, not success. */
+html body.settings-tabs #settingsFind:focus-visible{border-color:var(--ui-action)!important}
+html body.settings-tabs #cfgtop.cfg-path-choice button:not([aria-current=page]){background:transparent!important;color:var(--ui-muted)!important;border-color:transparent!important}
