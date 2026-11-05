@@ -188,7 +188,7 @@ function apply(t, root = document.documentElement) {
   };
   if (document.body) paintWatermark(); else document.addEventListener("DOMContentLoaded",paintWatermark,{once:true});
   finishSidebarMove(sidebarMove);
-  window.CCTheme.value = t; queueContrast();
+  window.CCTheme.value = t; queueContrast(); window.dispatchEvent(new Event('cc-theme-applied'));
 }
 window.__ccPreview = /[?&]preview=1/.test(location.search);
 const fontRequests=new Map();

@@ -2,7 +2,7 @@
    never readiness. Keep the chat's user-selected theme independent. */
 @font-face{font-family:Workbench Sans;src:url('/fonts/NotoSans-Regular.ttf') format('truetype');font-weight:400;font-display:swap}
 @font-face{font-family:Workbench Sans;src:url('/fonts/NotoSans-Bold.ttf') format('truetype');font-weight:700;font-display:swap}
-:root{--desk-paper:#f2f5f8;--desk-surface:#fff;--desk-ink:#183552;--desk-muted:#4c6073;--desk-action:#244f85;--desk-line:#b8c6d2;--desk-soft:#e8eff6;--desk-amber:#9b5b08;--desk-success:#2f684c;--desk-danger:#a94039}
+:root{--desk-paper:var(--ui-ground);--desk-surface:var(--ui-surface);--desk-ink:var(--ui-ink);--desk-muted:var(--ui-muted);--desk-action:var(--ui-action);--desk-line:var(--ui-line);--desk-soft:var(--ui-soft);--desk-amber:var(--ui-warning);--desk-success:var(--ui-success);--desk-danger:var(--ui-danger)}
 html body.settings-tabs,html body:has(.about-nav){background:var(--desk-paper)!important;color:var(--desk-ink);font-family:Workbench Sans,'DM Sans',sans-serif}
 html body:is(.settings-tabs,:has(.about-nav)) :is(button,input,select,textarea){font-family:Workbench Sans,'DM Sans',sans-serif!important}
 html body:is(.settings-tabs,:has(.about-nav)) :is(.toolbar,.about-nav){background:var(--desk-surface)!important;border-color:var(--desk-line)!important;box-shadow:none}
@@ -106,9 +106,9 @@ html body.settings-tabs dialog.app-builder .builder-step-guide :is(p,strong,span
 html body.settings-tabs dialog.app-builder .builder-message{background:var(--desk-soft)!important;color:var(--desk-ink)!important;border:0!important;border-radius:8px!important;padding:16px!important}
 html body.settings-tabs dialog.app-builder .builder-message :is(small,p){color:var(--desk-muted)!important}
 html body.settings-tabs dialog.app-builder .builder-tools{background:var(--desk-paper)!important;box-shadow:none!important}
-html[data-theme=dark]{--desk-paper:#1f2b37;--desk-surface:#253442;--desk-ink:#edf3f8;--desk-muted:#c0cfdb;--desk-action:#bbd5f5;--desk-line:#8395a5;--desk-soft:#2c4054}
+html[data-theme=dark]{--desk-paper:var(--ui-ground);--desk-surface:var(--ui-surface);--desk-ink:var(--ui-ink);--desk-muted:var(--ui-muted);--desk-action:var(--ui-action);--desk-line:var(--ui-line);--desk-soft:var(--ui-soft)}
 html[data-theme=dark] body:is(.settings-tabs,:has(.about-nav)) :is(.cfg-studio .builder-hero-go,#cfgtop.cfg-path-choice button[aria-current=page]){color:#183552!important}
-html[data-theme=dark] body.settings-tabs .cfg-studio #cfgIdea{background:#253442!important;color:#edf3f8!important}
+html[data-theme=dark] body.settings-tabs .cfg-studio #cfgIdea{background:var(--ui-surface)!important;color:var(--ui-ink)!important}
 /* Match the existing settings navigation specificity at its source; avoid a
    new escalating selector chain for the selected section. */
 html body.settings-tabs #cfgmode{background:var(--desk-soft)!important;border-color:var(--desk-line)!important}
@@ -123,7 +123,7 @@ html body:has(.about-nav) .rl-step :is(pre,.rl-cmd){background:#183552;color:#ff
 html body.settings-tabs :is(.settings-search input,.settings-search button){background:var(--desk-surface)!important;border-color:var(--desk-line)!important;color:var(--desk-ink)!important}
 html body.settings-tabs .loaded-nerd-banner,html body.settings-tabs #modehelp{color:var(--desk-muted)!important}
 html body.settings-tabs #settingsNavTop .category-tabs{background:var(--desk-surface)!important;border-color:var(--desk-line)!important}
-html[data-theme=dark]{--desk-on-action:#183552}
+html[data-theme=dark]{--desk-on-action:var(--ui-on-action)}
 html[data-theme=dark] body.settings-tabs :is(.cfg-studio .builder-hero-go,#cfgtop.cfg-path-choice button[aria-current=page],#menu a.on,#cfgmode.slide button[aria-checked=true],#sec-model #seg button[aria-checked=true]){color:var(--desk-on-action)!important}
 html[data-theme=dark] body.settings-tabs #menu a.on :is(b,small){color:var(--desk-on-action)!important}
 html[data-theme=dark] body.settings-tabs dialog.app-builder :is(#builderSend,#builderReview,#builderNext,#builderSave){color:var(--desk-on-action)!important}
