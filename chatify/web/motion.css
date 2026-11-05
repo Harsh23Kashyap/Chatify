@@ -511,3 +511,8 @@ html[data-toolbar=hide] .toolbar{animation:none}
  .side .list .item{row-gap:4px;padding-left:2px;padding-right:2px;grid-template-rows:auto minmax(17px,auto) minmax(44px,auto)}
  .side .list .item .t,.side .list .item .tm{padding-left:8px;box-sizing:border-box}
 }}
+/* Keep the history's reading width while the dock clips closed. Otherwise the
+   shrinking grid track retriggers narrow-row containers and crushes pin icons. */
+@media(min-width:861px){
+ html:not([data-sidebar=hidden]) .side .list{width:calc(var(--side-w,250px) - 33px);flex-shrink:0}
+}

@@ -7,7 +7,8 @@ html body.settings-tabs,html body:has(.about-nav){background:var(--desk-paper)!i
 html body:is(.settings-tabs,:has(.about-nav)) :is(button,input,select,textarea){font-family:Workbench Sans,'DM Sans',sans-serif!important}
 html body:is(.settings-tabs,:has(.about-nav)) :is(.toolbar,.about-nav){background:var(--desk-surface)!important;border-color:var(--desk-line)!important;box-shadow:none}
 html body:is(.settings-tabs,:has(.about-nav)) :is(.nav-brand,.tb-brand){font:700 18px/1.5 Workbench Sans,sans-serif;color:var(--desk-ink)}
-html body:is(.settings-tabs,:has(.about-nav)) .common-nav :is(a,button){font-family:Workbench Sans,sans-serif!important;color:var(--desk-muted)!important;min-height:40px!important}
+html body:is(.settings-tabs,:has(.about-nav)) .common-nav{--brand:var(--desk-action)}
+html body:is(.settings-tabs,:has(.about-nav)) .common-nav :is(a,button){font-family:Workbench Sans,sans-serif!important;color:var(--desk-muted)!important;min-height:44px!important}
 html body:is(.settings-tabs,:has(.about-nav)) .common-nav .active{color:var(--desk-action)!important}
 html body:is(.settings-tabs,:has(.about-nav)) .common-nav .active::before{background:var(--desk-action)}
 html body.settings-tabs>.card{width:min(1440px,calc(100% - 48px));max-width:1440px;margin:24px auto 48px;padding:24px 32px;background:var(--desk-surface)!important;border:1px solid var(--desk-line)!important;border-radius:12px;box-shadow:none}
@@ -97,7 +98,7 @@ html body.settings-tabs #menu .section-card-icon,html body.settings-tabs #settin
 html body.settings-tabs #menu a.on .section-card-icon{background:var(--desk-surface)!important;color:var(--desk-action)!important}
 html body.settings-tabs #cfgmode button[aria-checked=true]{color:var(--desk-action)!important;background:var(--desk-soft)!important}
 html body.settings-tabs #sec-model #seg button[aria-checked=true]{background:var(--desk-action)!important;border-color:var(--desk-action)!important;color:#fff!important}
-html body.settings-tabs #sec-model .go:not(.ghost){background:var(--desk-action)!important;color:#fff!important;border-color:var(--desk-action)!important}
+html body.settings-tabs :is(#sec-model .go:not(.ghost),#saveBudget,#saveLook){background:var(--desk-action)!important;color:#fff!important;border-color:var(--desk-action)!important}
 html body.settings-tabs .builder-steps .builder-step-mark{background:var(--desk-action)!important;border-color:var(--desk-action)!important;color:#fff!important}
 html body.settings-tabs dialog.app-builder .builder-steps{background:var(--desk-surface)!important}
 html body.settings-tabs dialog.app-builder .builder-step-guide{background:var(--desk-soft)!important;color:var(--desk-ink)!important;border-color:var(--desk-line)!important}
