@@ -1,6 +1,6 @@
 /* Shared Chatify shell. App-selected themes and preview frames are independent. */
 :root{--ui-ground:#f8f3ed;--ui-surface:#fffdf9;--ui-ink:#342e2b;--ui-muted:#695f59;--ui-line:#d8cbc2;--ui-soft:#f0e8e1;--ui-action:#b34329;--ui-action-hover:#92351f;--ui-on-action:#fff;--ui-link:#9b3821;--ui-highlight:#e6b44c;--ui-success:#246247;--ui-warning:#815000;--ui-danger:#a51d48;--ui-danger-soft:#faedf1;--ui-success-soft:#edf4ee;--ui-warning-soft:#f8f0df;--ui-control:#9b8980;--ui-code:#352b27;--ui-code-ink:#fff5ee;--ui-shadow:0 16px 48px #38281e18;--desk-paper:var(--ui-ground);--desk-surface:var(--ui-surface);--desk-ink:var(--ui-ink);--desk-muted:var(--ui-muted);--desk-action:var(--ui-action);--desk-line:var(--ui-line);--desk-soft:var(--ui-soft);--desk-amber:var(--ui-warning);--desk-success:var(--ui-success);--desk-danger:var(--ui-danger);--desk-on-action:var(--ui-on-action)}
-:root[data-theme=dark]{--ui-ground:#211d1a;--ui-surface:#2b2521;--ui-ink:#f5ece5;--ui-muted:#c7b9ae;--ui-line:#67594f;--ui-soft:#38302a;--ui-action:#f39070;--ui-action-hover:#ffa58a;--ui-on-action:#2d1a13;--ui-link:#ffa58a;--ui-highlight:#e6b44c;--ui-success:#93d5b4;--ui-warning:#f0c978;--ui-danger:#ff9fbd;--ui-danger-soft:#442732;--ui-success-soft:#263a2e;--ui-warning-soft:#403521;--ui-control:#a08d80;--ui-code:#171411;--ui-code-ink:#f5ece5;--ui-shadow:0 16px 48px #0005}
+:root[data-theme=dark]{--ui-ground:#242321;--ui-surface:#2e2c29;--ui-ink:#f3eee7;--ui-muted:#c1b8ad;--ui-line:#524d46;--ui-soft:#393630;--ui-action:#ed9274;--ui-action-hover:#f4aa91;--ui-on-action:#302019;--ui-link:#f1a58b;--ui-highlight:#dfba76;--ui-success:#a2cfb4;--ui-warning:#e5c58c;--ui-danger:#f3a6b6;--ui-danger-soft:#493039;--ui-success-soft:#303e34;--ui-warning-soft:#433b2c;--ui-control:#9a8f81;--ui-code:#201f1d;--ui-code-ink:#f3eee7;--ui-shadow:0 16px 48px #15141155}
 html[data-chatify-shell=true]{--brand:var(--ui-action)!important;--accent:var(--ui-action)!important;--on-brand:var(--ui-on-action)!important;--cream:var(--ui-ground)!important;--paper:var(--ui-surface)!important;--ink:var(--ui-ink)!important;--mut:var(--ui-muted)!important;--line:var(--ui-line)!important;--soft:var(--ui-soft)!important;--side-bg:var(--ui-surface)!important;--bot:var(--ui-surface)!important;--you:var(--ui-soft)!important;--danger:var(--ui-danger)!important;--tool:var(--ui-line)!important;--bg-layer:var(--ui-ground)!important}
 html body:is(.settings-tabs,.chatify-settings-shell,:is(.chatify-info,:has(.about-nav)),.gallery-page),html[data-chatify-shell=true] body{background:var(--ui-ground)!important;color:var(--ui-ink);font-family:'DM Sans',system-ui,sans-serif}
 html body:is(.settings-tabs,.chatify-settings-shell,:is(.chatify-info,:has(.about-nav))) :is(button,input,select,textarea){font-family:'DM Sans',system-ui,sans-serif!important}
@@ -24,81 +24,81 @@ html body:is(.settings-tabs,.chatify-settings-shell,:is(.chatify-info,:has(.abou
 .gallery-page .g-ico{background:var(--ui-soft);color:var(--ui-link);border-radius:10px;width:44px;height:44px}.gallery-page .g-ico svg{width:26px;height:26px}.gallery-page .g-name{background:none;padding:0;font-size:18px}.gallery-page .g-arrow{color:var(--ui-link)}
 .gallery-page .g-tags i{background:var(--ui-soft);color:var(--ui-muted);font-size:11px;letter-spacing:0}.gallery-page .g-info{background:var(--ui-soft);border-radius:12px}.gallery-page .g-info-t svg{color:var(--ui-link)}
 /* Settings: task first, one form surface and one action grammar. */
-html body:is(.settings-tabs,.chatify-settings-shell,.chatify-settings-shell)>.card{width:min(1240px,calc(100% - 64px));max-width:1240px;padding:32px 40px;margin:24px auto 48px;border:0!important;border-radius:16px;background:var(--ui-surface)!important}
-html body:is(.settings-tabs,.chatify-settings-shell,.chatify-settings-shell) #h{font:700 30px/1.2 'DM Sans',sans-serif!important;letter-spacing:-.035em}
-html body:is(.settings-tabs,.chatify-settings-shell,.chatify-settings-shell) #lead{font:400 14px/1.6 'DM Sans',sans-serif;color:var(--ui-muted);margin-bottom:24px!important}
-html body:is(.settings-tabs,.chatify-settings-shell,.chatify-settings-shell) #cfgtop.cfg-path-choice{display:inline-flex!important;max-width:100%;width:auto;background:var(--ui-soft)!important;border:0!important;padding:4px!important;border-radius:10px!important;margin-bottom:24px!important}
-html body:is(.settings-tabs,.chatify-settings-shell,.chatify-settings-shell) #cfgtop.cfg-path-choice button{padding:10px 18px!important;border-radius:7px!important;font-weight:600!important}
-html body:is(.settings-tabs,.chatify-settings-shell,.chatify-settings-shell) #cfgtop.cfg-path-choice button[aria-current=page]{background:var(--ui-action)!important;color:var(--ui-on-action)!important}
-html body:is(.settings-tabs,.chatify-settings-shell,.chatify-settings-shell) .cfg-studio{grid-template-columns:minmax(0,1fr) 280px;gap:40px;padding-top:24px;align-items:start}
-html body:is(.settings-tabs,.chatify-settings-shell,.chatify-settings-shell).cfgtop-builder .cfg-studio .builder-hero,html body:has(#cfgtop) .cfg-studio .builder-hero{background:transparent!important;border:0!important;border-radius:0;padding:0!important;gap:16px!important;box-shadow:none!important}
-html body:is(.settings-tabs,.chatify-settings-shell,.chatify-settings-shell) .cfg-studio .builder-hero-title{font:700 30px/1.2 'DM Sans',sans-serif!important;letter-spacing:-.035em;max-width:24ch}
-html body:is(.settings-tabs,.chatify-settings-shell,.chatify-settings-shell) .cfg-studio :is(.builder-hero-sub,.builder-hero-sub-m){font:400 15px/1.6 'DM Sans',sans-serif!important;margin:8px 0 0!important}
-html body:is(.settings-tabs,.chatify-settings-shell,.chatify-settings-shell) .cfg-studio .cfg-idea-guide{font:400 13px/1.5 'DM Sans',sans-serif!important;padding:0!important;margin:0 0 4px!important;color:var(--ui-muted)!important}
-html body:is(.settings-tabs,.chatify-settings-shell,.chatify-settings-shell) .cfg-studio .cfg-composer{gap:10px!important}
-html body:is(.settings-tabs,.chatify-settings-shell,.chatify-settings-shell) .cfg-studio #cfgIdea{background:var(--ui-surface)!important;color:var(--ui-ink)!important;border:1px solid var(--ui-control)!important;border-radius:10px!important;padding:16px!important;min-height:136px!important;font:400 16px/1.6 'DM Sans',sans-serif!important}
-html body:is(.settings-tabs,.chatify-settings-shell,.chatify-settings-shell) .cfg-studio .cfg-refine-consent{font-size:13px!important;line-height:1.5!important;align-items:flex-start!important;padding:0!important;margin:0!important}
-html body:is(.settings-tabs,.chatify-settings-shell,.chatify-settings-shell) .cfg-studio .cfg-refine-consent input{accent-color:var(--ui-action)}
-html body:is(.settings-tabs,.chatify-settings-shell,.chatify-settings-shell) .cfg-studio #cfgImproveIdea{background:transparent!important;border:1px solid var(--ui-action)!important;color:var(--ui-link)!important;border-radius:8px!important;padding:10px 16px!important;min-height:44px!important;font:600 14px/1.3 'DM Sans',sans-serif!important;box-shadow:none!important}
-html body:is(.settings-tabs,.chatify-settings-shell,.chatify-settings-shell) .cfg-studio #cfgImproveIdea:disabled{border-color:var(--ui-line)!important;color:var(--ui-muted)!important;opacity:1!important}
-html body:is(.settings-tabs,.chatify-settings-shell,.chatify-settings-shell) .cfg-studio .cfg-idea-tools{gap:16px!important}
-html body:is(.settings-tabs,.chatify-settings-shell,.chatify-settings-shell) .cfg-studio .builder-hero-go{min-height:44px!important;border-radius:8px!important;padding:12px 24px!important;background:var(--ui-action)!important;border-color:var(--ui-action)!important;color:var(--ui-on-action)!important;font:600 14px/1.4 'DM Sans',sans-serif!important}
-html body:is(.settings-tabs,.chatify-settings-shell,.chatify-settings-shell) .cfg-studio .builder-hero-cost{font:400 13px/1.5 'DM Sans',sans-serif!important;color:var(--ui-muted)!important;max-width:70ch}
-html body:is(.settings-tabs,.chatify-settings-shell,.chatify-settings-shell) .cfg-studio .cfg-chat-preview{background:var(--ui-surface)!important;border:0!important;border-left:1px solid var(--ui-line)!important;border-radius:0;padding-left:24px;box-shadow:none}
-html body:is(.settings-tabs,.chatify-settings-shell,.chatify-settings-shell) .cfg-studio .cfg-chat-preview>h2{font:700 16px/1.4 'DM Sans',sans-serif!important;margin:0 0 12px!important}.cfg-studio .cfg-feature-choice{margin:0 0 16px!important}
-html body:is(.settings-tabs,.chatify-settings-shell,.chatify-settings-shell) .cfg-studio :is(.cfg-idea-proposal,#cfgImproveStatus){color:var(--ui-ink)!important;background:transparent!important;border-color:var(--ui-line)!important}
-html body:is(.settings-tabs,.chatify-settings-shell,.chatify-settings-shell) .cfg-studio #cfgImproveStatus:empty{display:none}
+html body:is(.settings-tabs,.chatify-settings-shell)>.card{width:min(1240px,calc(100% - 64px));max-width:1240px;padding:32px 40px;margin:24px auto 48px;border:0!important;border-radius:16px;background:var(--ui-surface)!important}
+html body:is(.settings-tabs,.chatify-settings-shell) #h{font:700 30px/1.2 'DM Sans',sans-serif!important;letter-spacing:-.035em}
+html body:is(.settings-tabs,.chatify-settings-shell) #lead{font:400 14px/1.6 'DM Sans',sans-serif;color:var(--ui-muted);margin-bottom:24px!important}
+html body:is(.settings-tabs,.chatify-settings-shell) #cfgtop.cfg-path-choice{display:inline-flex!important;max-width:100%;width:auto;background:var(--ui-soft)!important;border:0!important;padding:4px!important;border-radius:10px!important;margin-bottom:24px!important}
+html body:is(.settings-tabs,.chatify-settings-shell) #cfgtop.cfg-path-choice button{padding:10px 18px!important;border-radius:7px!important;font-weight:600!important}
+html body:is(.settings-tabs,.chatify-settings-shell) #cfgtop.cfg-path-choice button[aria-current=page]{background:var(--ui-action)!important;color:var(--ui-on-action)!important}
+html body:is(.settings-tabs,.chatify-settings-shell) .cfg-studio{grid-template-columns:minmax(0,1fr) 280px;gap:40px;padding-top:24px;align-items:start}
+html body:is(.settings-tabs,.chatify-settings-shell).cfgtop-builder .cfg-studio .builder-hero,html body:has(#cfgtop) .cfg-studio .builder-hero{background:transparent!important;border:0!important;border-radius:0;padding:0!important;gap:16px!important;box-shadow:none!important}
+html body:is(.settings-tabs,.chatify-settings-shell) .cfg-studio .builder-hero-title{font:700 30px/1.2 'DM Sans',sans-serif!important;letter-spacing:-.035em;max-width:24ch}
+html body:is(.settings-tabs,.chatify-settings-shell) .cfg-studio :is(.builder-hero-sub,.builder-hero-sub-m){font:400 15px/1.6 'DM Sans',sans-serif!important;margin:8px 0 0!important}
+html body:is(.settings-tabs,.chatify-settings-shell) .cfg-studio .cfg-idea-guide{font:400 13px/1.5 'DM Sans',sans-serif!important;padding:0!important;margin:0 0 4px!important;color:var(--ui-muted)!important}
+html body:is(.settings-tabs,.chatify-settings-shell) .cfg-studio .cfg-composer{gap:10px!important}
+html body:is(.settings-tabs,.chatify-settings-shell) .cfg-studio #cfgIdea{background:var(--ui-surface)!important;color:var(--ui-ink)!important;border:1px solid var(--ui-control)!important;border-radius:10px!important;padding:16px!important;min-height:136px!important;font:400 16px/1.6 'DM Sans',sans-serif!important}
+html body:is(.settings-tabs,.chatify-settings-shell) .cfg-studio .cfg-refine-consent{font-size:13px!important;line-height:1.5!important;align-items:flex-start!important;padding:0!important;margin:0!important}
+html body:is(.settings-tabs,.chatify-settings-shell) .cfg-studio .cfg-refine-consent input{accent-color:var(--ui-action)}
+html body:is(.settings-tabs,.chatify-settings-shell) .cfg-studio #cfgImproveIdea{background:transparent!important;border:1px solid var(--ui-action)!important;color:var(--ui-link)!important;border-radius:8px!important;padding:10px 16px!important;min-height:44px!important;font:600 14px/1.3 'DM Sans',sans-serif!important;box-shadow:none!important}
+html body:is(.settings-tabs,.chatify-settings-shell) .cfg-studio #cfgImproveIdea:disabled{border-color:var(--ui-line)!important;color:var(--ui-muted)!important;opacity:1!important}
+html body:is(.settings-tabs,.chatify-settings-shell) .cfg-studio .cfg-idea-tools{gap:16px!important}
+html body:is(.settings-tabs,.chatify-settings-shell) .cfg-studio .builder-hero-go{min-height:44px!important;border-radius:8px!important;padding:12px 24px!important;background:var(--ui-action)!important;border-color:var(--ui-action)!important;color:var(--ui-on-action)!important;font:600 14px/1.4 'DM Sans',sans-serif!important}
+html body:is(.settings-tabs,.chatify-settings-shell) .cfg-studio .builder-hero-cost{font:400 13px/1.5 'DM Sans',sans-serif!important;color:var(--ui-muted)!important;max-width:70ch}
+html body:is(.settings-tabs,.chatify-settings-shell) .cfg-studio .cfg-chat-preview{background:var(--ui-surface)!important;border:0!important;border-left:1px solid var(--ui-line)!important;border-radius:0;padding-left:24px;box-shadow:none}
+html body:is(.settings-tabs,.chatify-settings-shell) .cfg-studio .cfg-chat-preview>h2{font:700 16px/1.4 'DM Sans',sans-serif!important;margin:0 0 12px!important}.cfg-studio .cfg-feature-choice{margin:0 0 16px!important}
+html body:is(.settings-tabs,.chatify-settings-shell) .cfg-studio :is(.cfg-idea-proposal,#cfgImproveStatus){color:var(--ui-ink)!important;background:transparent!important;border-color:var(--ui-line)!important}
+html body:is(.settings-tabs,.chatify-settings-shell) .cfg-studio #cfgImproveStatus:empty{display:none}
 /* Neutral manual sections, controls and selected items. No swatch/preview overrides. */
-html body:is(.settings-tabs,.chatify-settings-shell,.chatify-settings-shell) #col .tile{background:var(--ui-surface)!important;border-color:var(--ui-line)!important;border-radius:10px;box-shadow:none}
-html body:is(.settings-tabs,.chatify-settings-shell,.chatify-settings-shell) #col .tile .head .ic{background:var(--ui-soft)!important;color:var(--ui-link)!important}
-html body:is(.settings-tabs,.chatify-settings-shell,.chatify-settings-shell) :is(.go,.seg button[aria-checked=true]){background:var(--ui-action)!important;color:var(--ui-on-action)!important;border-color:var(--ui-action)!important;border-radius:8px;box-shadow:none!important}
-html body:is(.settings-tabs,.chatify-settings-shell,.chatify-settings-shell) .go.ghost{background:transparent!important;color:var(--ui-link)!important;border:1px solid var(--ui-control)!important}
-html body:is(.settings-tabs,.chatify-settings-shell,.chatify-settings-shell) .go.ghost:hover{background:var(--ui-soft)!important}
-html body:is(.settings-tabs,.chatify-settings-shell,.chatify-settings-shell) :is(#menu a.on,#menu .nav-group a.on,#cfgmode.slide button[aria-checked=true]){background:var(--ui-action)!important;color:var(--ui-on-action)!important}
-html body:is(.settings-tabs,.chatify-settings-shell,.chatify-settings-shell) #menu a.on :is(b,small){color:var(--ui-on-action)!important}
-html body:is(.settings-tabs,.chatify-settings-shell,.chatify-settings-shell) :is(.cs-btn,.cs-list,.source-provider-card,.source-key-card,.workspace-first-setup,.key-diagnostics){background:var(--ui-surface)!important;color:var(--ui-ink)!important;border-color:var(--ui-line)!important}
-html body:is(.settings-tabs,.chatify-settings-shell,.chatify-settings-shell) :is(.cs-opt.on,.cs-opt:hover){background:var(--ui-soft)!important}
+html body:is(.settings-tabs,.chatify-settings-shell) #col .tile{background:var(--ui-surface)!important;border-color:var(--ui-line)!important;border-radius:10px;box-shadow:none}
+html body:is(.settings-tabs,.chatify-settings-shell) #col .tile .head .ic{background:var(--ui-soft)!important;color:var(--ui-link)!important}
+html body:is(.settings-tabs,.chatify-settings-shell) :is(.go,.seg button[aria-checked=true]){background:var(--ui-action)!important;color:var(--ui-on-action)!important;border-color:var(--ui-action)!important;border-radius:8px;box-shadow:none!important}
+html body:is(.settings-tabs,.chatify-settings-shell) .go.ghost{background:transparent!important;color:var(--ui-link)!important;border:1px solid var(--ui-control)!important}
+html body:is(.settings-tabs,.chatify-settings-shell) .go.ghost:hover{background:var(--ui-soft)!important}
+html body:is(.settings-tabs,.chatify-settings-shell) :is(#menu a.on,#menu .nav-group a.on,#cfgmode.slide button[aria-checked=true]){background:var(--ui-action)!important;color:var(--ui-on-action)!important}
+html body:is(.settings-tabs,.chatify-settings-shell) #menu a.on :is(b,small){color:var(--ui-on-action)!important}
+html body:is(.settings-tabs,.chatify-settings-shell) :is(.cs-btn,.cs-list,.source-provider-card,.source-key-card,.workspace-first-setup,.key-diagnostics){background:var(--ui-surface)!important;color:var(--ui-ink)!important;border-color:var(--ui-line)!important}
+html body:is(.settings-tabs,.chatify-settings-shell) :is(.cs-opt.on,.cs-opt:hover){background:var(--ui-soft)!important}
 /* Dialogs and asynchronous states: neutral surfaces, readable state marks. */
-html body:is(.settings-tabs,.chatify-settings-shell,.chatify-settings-shell) dialog.app-builder{background:var(--ui-surface)!important;color:var(--ui-ink)!important;border:1px solid var(--ui-line)!important;border-radius:16px!important;box-shadow:var(--ui-shadow)}
-html body:is(.settings-tabs,.chatify-settings-shell,.chatify-settings-shell) dialog.app-builder .settings-help-head{background:var(--ui-surface)!important;border-color:var(--ui-line)!important;color:var(--ui-ink)!important;padding:20px 24px!important}
-html body:is(.settings-tabs,.chatify-settings-shell,.chatify-settings-shell) dialog.app-builder .builder-content{padding:24px!important}
-html body:is(.settings-tabs,.chatify-settings-shell,.chatify-settings-shell) dialog.app-builder :is(h3,h4){font-family:'DM Sans',sans-serif!important;color:var(--ui-ink)!important;letter-spacing:-.025em}
-html body:is(.settings-tabs,.chatify-settings-shell,.chatify-settings-shell) dialog.app-builder h3{font-size:28px!important;line-height:1.2!important}
-html body:is(.settings-tabs,.chatify-settings-shell,.chatify-settings-shell) dialog.app-builder .builder-step-guide{padding:12px 0!important;background:transparent!important;border-color:var(--ui-line)!important;color:var(--ui-ink)!important;margin:12px 0 20px!important;grid-template-columns:140px minmax(0,1fr)}
-html body:is(.settings-tabs,.chatify-settings-shell,.chatify-settings-shell) dialog.app-builder .builder-step-guide p{color:var(--ui-muted)!important;font-size:13px!important}
-html body:is(.settings-tabs,.chatify-settings-shell,.chatify-settings-shell) dialog.app-builder :is(.builder-section,#builderBrief,.builder-assistant){background:var(--ui-surface)!important;color:var(--ui-ink)!important;border-color:var(--ui-line)!important;box-shadow:none!important}
-html body:is(.settings-tabs,.chatify-settings-shell,.chatify-settings-shell) dialog.app-builder #builderBrief{border:1px solid var(--ui-control)!important;border-radius:8px!important;font:400 16px/1.6 'DM Sans',sans-serif!important}
-html body:is(.settings-tabs,.chatify-settings-shell,.chatify-settings-shell) dialog.app-builder .builder-steps{background:var(--ui-surface)!important;border-color:var(--ui-line)!important}
-html body:is(.settings-tabs,.chatify-settings-shell,.chatify-settings-shell) dialog.app-builder .builder-steps>button{color:var(--ui-muted)!important;border-color:var(--ui-line)!important;background:transparent!important}
-html body:is(.settings-tabs,.chatify-settings-shell,.chatify-settings-shell) dialog.app-builder .builder-steps>button .builder-step-mark{background:var(--ui-soft)!important;color:var(--ui-muted)!important;border:1px solid var(--ui-line)!important}
-html body:is(.settings-tabs,.chatify-settings-shell,.chatify-settings-shell) dialog.app-builder .builder-steps>button[aria-current=step]{color:var(--ui-link)!important;border-color:var(--ui-action)!important}
-html body:is(.settings-tabs,.chatify-settings-shell,.chatify-settings-shell) dialog.app-builder .builder-steps>button[aria-current=step] .builder-step-mark{background:var(--ui-action)!important;color:var(--ui-on-action)!important;border-color:var(--ui-action)!important}
-html body:is(.settings-tabs,.chatify-settings-shell,.chatify-settings-shell) dialog.app-builder .builder-steps>button[data-complete=true] .builder-step-mark{background:var(--ui-success-soft)!important;color:var(--ui-success)!important;border-color:var(--ui-success)!important}
-html body:is(.settings-tabs,.chatify-settings-shell,.chatify-settings-shell) dialog.app-builder :is(#builderSend,#builderReview,#builderNext,#builderSave){background:var(--ui-action)!important;color:var(--ui-on-action)!important;border-color:var(--ui-action)!important}
-html body:is(.settings-tabs,.chatify-settings-shell,.chatify-settings-shell) dialog.app-builder :is(#builderCancel,#builderReset,#builderClose){background:transparent!important;color:var(--ui-muted)!important;border:1px solid var(--ui-control)!important;box-shadow:none!important;border-radius:8px!important;min-height:40px}
-html body:is(.settings-tabs,.chatify-settings-shell,.chatify-settings-shell) dialog.app-builder :is(.builder-shell-footer,#builderActionBar){background:var(--ui-surface)!important;border-color:var(--ui-line)!important;color:var(--ui-muted)!important}
-html body:is(.settings-tabs,.chatify-settings-shell,.chatify-settings-shell) dialog.app-builder #builderProgress{background:var(--ui-surface)!important;color:var(--ui-ink)!important;border:1px solid var(--ui-line)!important;border-radius:10px!important;box-shadow:none!important}
-html body:is(.settings-tabs,.chatify-settings-shell,.chatify-settings-shell) dialog.app-builder #builderProgress :is(strong,b){color:var(--ui-ink)!important}
-html body:is(.settings-tabs,.chatify-settings-shell,.chatify-settings-shell) dialog.app-builder :is(.builder-progress-copy small,.builder-remaining-work){color:var(--ui-muted)!important}
-html body:is(.settings-tabs,.chatify-settings-shell,.chatify-settings-shell) dialog.app-builder .builder-group-board article{background:var(--ui-surface)!important;border:1px solid var(--ui-line)!important;border-radius:10px!important;color:var(--ui-ink)!important;box-shadow:none!important}
-html body:is(.settings-tabs,.chatify-settings-shell,.chatify-settings-shell) dialog.app-builder .builder-group-board article p{color:var(--ui-muted)!important}
-html body:is(.settings-tabs,.chatify-settings-shell,.chatify-settings-shell) dialog.app-builder .builder-group-board article[data-state=running] .builder-group-mark{color:var(--ui-action)!important;border-color:var(--ui-action)!important}
-html body:is(.settings-tabs,.chatify-settings-shell,.chatify-settings-shell) dialog.app-builder .builder-group-board article[data-state=done] .builder-group-mark{color:var(--ui-success)!important;border-color:var(--ui-success)!important}
-html body:is(.settings-tabs,.chatify-settings-shell,.chatify-settings-shell) dialog.app-builder .builder-group-board article[data-state=error] .builder-group-mark{color:var(--ui-warning)!important;border-color:var(--ui-warning)!important}
-html body:is(.settings-tabs,.chatify-settings-shell,.chatify-settings-shell) dialog.app-builder .builder-live-counts span{background:transparent!important;border:0!important;color:var(--ui-muted)!important}
-html body:is(.settings-tabs,.chatify-settings-shell,.chatify-settings-shell) dialog.app-builder .builder-live-counts span:nth-child(1),html body:is(.settings-tabs,.chatify-settings-shell,.chatify-settings-shell) dialog.app-builder .builder-live-counts span:nth-child(1) b{color:var(--ui-success)!important}
-html body:is(.settings-tabs,.chatify-settings-shell,.chatify-settings-shell) dialog.app-builder .builder-live-counts span:nth-child(2),html body:is(.settings-tabs,.chatify-settings-shell,.chatify-settings-shell) dialog.app-builder .builder-live-counts span:nth-child(2) b{color:var(--ui-action)!important}
-html body:is(.settings-tabs,.chatify-settings-shell,.chatify-settings-shell) dialog.app-builder .builder-live-counts span:nth-child(4),html body:is(.settings-tabs,.chatify-settings-shell,.chatify-settings-shell) dialog.app-builder .builder-live-counts span:nth-child(4) b{color:var(--ui-warning)!important}
-html body:is(.settings-tabs,.chatify-settings-shell,.chatify-settings-shell) dialog.app-builder .builder-group-track{background:var(--ui-soft)!important}
-html body:is(.settings-tabs,.chatify-settings-shell,.chatify-settings-shell) dialog.app-builder .builder-group-track i{background:var(--ui-action)!important}
-html body:is(.settings-tabs,.chatify-settings-shell,.chatify-settings-shell) dialog.app-builder .cc-spin-head{stroke:var(--ui-action)!important}
-html body:is(.settings-tabs,.chatify-settings-shell,.chatify-settings-shell) dialog.app-builder .builder-completion-notice{background:var(--ui-surface)!important;border:1px solid var(--ui-line)!important;color:var(--ui-ink)!important;box-shadow:none!important}
-html body:is(.settings-tabs,.chatify-settings-shell,.chatify-settings-shell) dialog.app-builder .builder-completion-notice[data-state=ok]{border-color:var(--ui-success)!important;background:var(--ui-success-soft)!important;color:var(--ui-success)!important}
-html body:is(.settings-tabs,.chatify-settings-shell,.chatify-settings-shell) dialog.app-builder .builder-completion-notice:is([data-state=partial],[data-state=unknown]){border-color:var(--ui-warning)!important;background:var(--ui-warning-soft)!important;color:var(--ui-warning)!important}
-html body:is(.settings-tabs,.chatify-settings-shell,.chatify-settings-shell) dialog.app-builder .builder-completion-notice:is([data-state=error],[data-state=failed]){border-color:var(--ui-danger)!important;background:var(--ui-danger-soft)!important;color:var(--ui-danger)!important}
-html body:is(.settings-tabs,.chatify-settings-shell,.chatify-settings-shell) .builder-background{background:var(--ui-surface)!important;color:var(--ui-ink)!important;border-color:var(--ui-line)!important}
-html body:is(.settings-tabs,.chatify-settings-shell,.chatify-settings-shell) .builder-background[data-state=partial]{color:var(--ui-warning)!important;border-color:var(--ui-warning)!important}
-html body:is(.settings-tabs,.chatify-settings-shell,.chatify-settings-shell) .builder-job-parts [data-state=error]{background:var(--ui-surface)!important;color:var(--ui-warning)!important;border-color:var(--ui-warning)!important}
+html body:is(.settings-tabs,.chatify-settings-shell) dialog.app-builder{background:var(--ui-surface)!important;color:var(--ui-ink)!important;border:1px solid var(--ui-line)!important;border-radius:16px!important;box-shadow:var(--ui-shadow)}
+html body:is(.settings-tabs,.chatify-settings-shell) dialog.app-builder .settings-help-head{background:var(--ui-surface)!important;border-color:var(--ui-line)!important;color:var(--ui-ink)!important;padding:20px 24px!important}
+html body:is(.settings-tabs,.chatify-settings-shell) dialog.app-builder .builder-content{padding:24px!important}
+html body:is(.settings-tabs,.chatify-settings-shell) dialog.app-builder :is(h3,h4){font-family:'DM Sans',sans-serif!important;color:var(--ui-ink)!important;letter-spacing:-.025em}
+html body:is(.settings-tabs,.chatify-settings-shell) dialog.app-builder h3{font-size:28px!important;line-height:1.2!important}
+html body:is(.settings-tabs,.chatify-settings-shell) dialog.app-builder .builder-step-guide{padding:12px 0!important;background:transparent!important;border-color:var(--ui-line)!important;color:var(--ui-ink)!important;margin:12px 0 20px!important;grid-template-columns:140px minmax(0,1fr)}
+html body:is(.settings-tabs,.chatify-settings-shell) dialog.app-builder .builder-step-guide p{color:var(--ui-muted)!important;font-size:13px!important}
+html body:is(.settings-tabs,.chatify-settings-shell) dialog.app-builder :is(.builder-section,#builderBrief,.builder-assistant){background:var(--ui-surface)!important;color:var(--ui-ink)!important;border-color:var(--ui-line)!important;box-shadow:none!important}
+html body:is(.settings-tabs,.chatify-settings-shell) dialog.app-builder #builderBrief{border:1px solid var(--ui-control)!important;border-radius:8px!important;font:400 16px/1.6 'DM Sans',sans-serif!important}
+html body:is(.settings-tabs,.chatify-settings-shell) dialog.app-builder .builder-steps{background:var(--ui-surface)!important;border-color:var(--ui-line)!important}
+html body:is(.settings-tabs,.chatify-settings-shell) dialog.app-builder .builder-steps>button{color:var(--ui-muted)!important;border-color:var(--ui-line)!important;background:transparent!important}
+html body:is(.settings-tabs,.chatify-settings-shell) dialog.app-builder .builder-steps>button .builder-step-mark{background:var(--ui-soft)!important;color:var(--ui-muted)!important;border:1px solid var(--ui-line)!important}
+html body:is(.settings-tabs,.chatify-settings-shell) dialog.app-builder .builder-steps>button[aria-current=step]{color:var(--ui-link)!important;border-color:var(--ui-action)!important}
+html body:is(.settings-tabs,.chatify-settings-shell) dialog.app-builder .builder-steps>button[aria-current=step] .builder-step-mark{background:var(--ui-action)!important;color:var(--ui-on-action)!important;border-color:var(--ui-action)!important}
+html body:is(.settings-tabs,.chatify-settings-shell) dialog.app-builder .builder-steps>button[data-complete=true] .builder-step-mark{background:var(--ui-success-soft)!important;color:var(--ui-success)!important;border-color:var(--ui-success)!important}
+html body:is(.settings-tabs,.chatify-settings-shell) dialog.app-builder :is(#builderSend,#builderReview,#builderNext,#builderSave){background:var(--ui-action)!important;color:var(--ui-on-action)!important;border-color:var(--ui-action)!important}
+html body:is(.settings-tabs,.chatify-settings-shell) dialog.app-builder :is(#builderCancel,#builderReset,#builderClose){background:transparent!important;color:var(--ui-muted)!important;border:1px solid var(--ui-control)!important;box-shadow:none!important;border-radius:8px!important;min-height:40px}
+html body:is(.settings-tabs,.chatify-settings-shell) dialog.app-builder :is(.builder-shell-footer,#builderActionBar){background:var(--ui-surface)!important;border-color:var(--ui-line)!important;color:var(--ui-muted)!important}
+html body:is(.settings-tabs,.chatify-settings-shell) dialog.app-builder #builderProgress{background:var(--ui-surface)!important;color:var(--ui-ink)!important;border:1px solid var(--ui-line)!important;border-radius:10px!important;box-shadow:none!important}
+html body:is(.settings-tabs,.chatify-settings-shell) dialog.app-builder #builderProgress :is(strong,b){color:var(--ui-ink)!important}
+html body:is(.settings-tabs,.chatify-settings-shell) dialog.app-builder :is(.builder-progress-copy small,.builder-remaining-work){color:var(--ui-muted)!important}
+html body:is(.settings-tabs,.chatify-settings-shell) dialog.app-builder .builder-group-board article{background:var(--ui-surface)!important;border:1px solid var(--ui-line)!important;border-radius:10px!important;color:var(--ui-ink)!important;box-shadow:none!important}
+html body:is(.settings-tabs,.chatify-settings-shell) dialog.app-builder .builder-group-board article p{color:var(--ui-muted)!important}
+html body:is(.settings-tabs,.chatify-settings-shell) dialog.app-builder .builder-group-board article[data-state=running] .builder-group-mark{color:var(--ui-action)!important;border-color:var(--ui-action)!important}
+html body:is(.settings-tabs,.chatify-settings-shell) dialog.app-builder .builder-group-board article[data-state=done] .builder-group-mark{color:var(--ui-success)!important;border-color:var(--ui-success)!important}
+html body:is(.settings-tabs,.chatify-settings-shell) dialog.app-builder .builder-group-board article[data-state=error] .builder-group-mark{color:var(--ui-warning)!important;border-color:var(--ui-warning)!important}
+html body:is(.settings-tabs,.chatify-settings-shell) dialog.app-builder .builder-live-counts span{background:transparent!important;border:0!important;color:var(--ui-muted)!important}
+html body:is(.settings-tabs,.chatify-settings-shell) dialog.app-builder .builder-live-counts span:nth-child(1),html body:is(.settings-tabs,.chatify-settings-shell) dialog.app-builder .builder-live-counts span:nth-child(1) b{color:var(--ui-success)!important}
+html body:is(.settings-tabs,.chatify-settings-shell) dialog.app-builder .builder-live-counts span:nth-child(2),html body:is(.settings-tabs,.chatify-settings-shell) dialog.app-builder .builder-live-counts span:nth-child(2) b{color:var(--ui-action)!important}
+html body:is(.settings-tabs,.chatify-settings-shell) dialog.app-builder .builder-live-counts span:nth-child(4),html body:is(.settings-tabs,.chatify-settings-shell) dialog.app-builder .builder-live-counts span:nth-child(4) b{color:var(--ui-warning)!important}
+html body:is(.settings-tabs,.chatify-settings-shell) dialog.app-builder .builder-group-track{background:var(--ui-soft)!important}
+html body:is(.settings-tabs,.chatify-settings-shell) dialog.app-builder .builder-group-track i{background:var(--ui-action)!important}
+html body:is(.settings-tabs,.chatify-settings-shell) dialog.app-builder .cc-spin-head{stroke:var(--ui-action)!important}
+html body:is(.settings-tabs,.chatify-settings-shell) dialog.app-builder .builder-completion-notice{background:var(--ui-surface)!important;border:1px solid var(--ui-line)!important;color:var(--ui-ink)!important;box-shadow:none!important}
+html body:is(.settings-tabs,.chatify-settings-shell) dialog.app-builder .builder-completion-notice[data-state=ok]{border-color:var(--ui-success)!important;background:var(--ui-success-soft)!important;color:var(--ui-success)!important}
+html body:is(.settings-tabs,.chatify-settings-shell) dialog.app-builder .builder-completion-notice:is([data-state=partial],[data-state=unknown]){border-color:var(--ui-warning)!important;background:var(--ui-warning-soft)!important;color:var(--ui-warning)!important}
+html body:is(.settings-tabs,.chatify-settings-shell) dialog.app-builder .builder-completion-notice:is([data-state=error],[data-state=failed]){border-color:var(--ui-danger)!important;background:var(--ui-danger-soft)!important;color:var(--ui-danger)!important}
+html body:is(.settings-tabs,.chatify-settings-shell) .builder-background{background:var(--ui-surface)!important;color:var(--ui-ink)!important;border-color:var(--ui-line)!important}
+html body:is(.settings-tabs,.chatify-settings-shell) .builder-background[data-state=partial]{color:var(--ui-warning)!important;border-color:var(--ui-warning)!important}
+html body:is(.settings-tabs,.chatify-settings-shell) .builder-job-parts [data-state=error]{background:var(--ui-surface)!important;color:var(--ui-warning)!important;border-color:var(--ui-warning)!important}
 /* Shared confirmation and feedback, distinct crimson errors vs vermilion actions. */
 html body:is(.settings-tabs,.chatify-settings-shell,:is(.chatify-info,:has(.about-nav))) :is(.cc-cdlg,.emoji-dialog,.preset-dialog),html[data-chatify-shell=true] :is(.cc-cdlg,.dialog,.modal-card){background:var(--ui-surface)!important;color:var(--ui-ink)!important;border-color:var(--ui-line)!important}
 html body:is(.settings-tabs,.chatify-settings-shell,:is(.chatify-info,:has(.about-nav))) .cc-cdlg-msg,html[data-chatify-shell=true] .cc-cdlg-msg{color:var(--ui-muted)!important}
@@ -124,94 +124,94 @@ html[data-chatify-shell=true] .playground-title{color:var(--ui-ink)!important;fo
 html[data-chatify-shell=true] :is(.btn-dark,.send){background:var(--ui-action)!important;color:var(--ui-on-action)!important}
 html[data-chatify-shell=true] :is(.btn-out,.badge,.theme-btn){background:var(--ui-surface)!important;color:var(--ui-link)!important;border-color:var(--ui-line)!important}
 html[data-chatify-shell=true] :is(.source-scope-dialog,.reading-dialog,.profile-dialog,.account-dialog){background:var(--ui-surface)!important;color:var(--ui-ink)!important;border-color:var(--ui-line)!important}
-@media(max-width:900px){html body:is(.settings-tabs,.chatify-settings-shell,.chatify-settings-shell) .cfg-studio{grid-template-columns:minmax(0,1fr) 230px;gap:24px}}
-@media(max-width:760px){.gallery-page .wrap{padding:24px 20px}.gallery-page .hero{padding-top:32px}.gallery-page .g-feature{padding:24px}.gallery-page .g-f-actions{justify-items:start;margin-left:0}html body:is(.settings-tabs,.chatify-settings-shell,.chatify-settings-shell)>.card{width:calc(100% - 24px);padding:24px 16px;margin:12px 12px 24px}html body:is(.settings-tabs,.chatify-settings-shell,.chatify-settings-shell) .cfg-studio{grid-template-columns:1fr;gap:24px}html body:is(.settings-tabs,.chatify-settings-shell,.chatify-settings-shell) .cfg-studio .cfg-chat-preview{border-left:0!important;border-top:1px solid var(--ui-line)!important;padding:20px 0 0}html body:is(.settings-tabs,.chatify-settings-shell,.chatify-settings-shell) .cfg-studio .builder-hero-title{font-size:28px!important}html body:is(.settings-tabs,.chatify-settings-shell,.chatify-settings-shell) dialog.app-builder{border-radius:0!important}html body:is(.settings-tabs,.chatify-settings-shell,.chatify-settings-shell) dialog.app-builder .builder-content{padding:16px!important}html body:is(.settings-tabs,.chatify-settings-shell,.chatify-settings-shell) dialog.app-builder .builder-step-guide{grid-template-columns:1fr;gap:4px}html body:is(.chatify-info,:has(.about-nav)) main{padding:32px 20px}html body:is(.chatify-info,:has(.about-nav)) main>h1,html body:is(.chatify-info,:has(.about-nav)) .rl-hero h1{font-size:32px!important}}
+@media(max-width:900px){html body:is(.settings-tabs,.chatify-settings-shell) .cfg-studio{grid-template-columns:minmax(0,1fr) 230px;gap:24px}}
+@media(max-width:760px){.gallery-page .wrap{padding:24px 20px}.gallery-page .hero{padding-top:32px}.gallery-page .g-feature{padding:24px}.gallery-page .g-f-actions{justify-items:start;margin-left:0}html body:is(.settings-tabs,.chatify-settings-shell)>.card{width:calc(100% - 24px);padding:24px 16px;margin:12px 12px 24px}html body:is(.settings-tabs,.chatify-settings-shell) .cfg-studio{grid-template-columns:1fr;gap:24px}html body:is(.settings-tabs,.chatify-settings-shell) .cfg-studio .cfg-chat-preview{border-left:0!important;border-top:1px solid var(--ui-line)!important;padding:20px 0 0}html body:is(.settings-tabs,.chatify-settings-shell) .cfg-studio .builder-hero-title{font-size:28px!important}html body:is(.settings-tabs,.chatify-settings-shell) dialog.app-builder{border-radius:0!important}html body:is(.settings-tabs,.chatify-settings-shell) dialog.app-builder .builder-content{padding:16px!important}html body:is(.settings-tabs,.chatify-settings-shell) dialog.app-builder .builder-step-guide{grid-template-columns:1fr;gap:4px}html body:is(.chatify-info,:has(.about-nav)) main{padding:32px 20px}html body:is(.chatify-info,:has(.about-nav)) main>h1,html body:is(.chatify-info,:has(.about-nav)) .rl-hero h1{font-size:32px!important}}
 @media(forced-colors:active){html body :is(button,a,input,textarea,select):focus-visible{outline-color:Highlight!important}.gallery-page .g-feature{border:1px solid CanvasText}}
 
-html body:is(.settings-tabs,.chatify-settings-shell,.chatify-settings-shell) dialog.app-builder .builder-content,html[data-theme=dark] body:is(.settings-tabs,.chatify-settings-shell,.chatify-settings-shell) dialog.app-builder .builder-content{background:var(--ui-surface)!important;color:var(--ui-ink)!important}
-html body:is(.settings-tabs,.chatify-settings-shell,.chatify-settings-shell) dialog.app-builder .builder-assistant :is(p,small,span),html body:is(.settings-tabs,.chatify-settings-shell,.chatify-settings-shell) dialog.app-builder :is(label,.builder-step-label strong){color:var(--ui-ink)!important}
-html body:is(.settings-tabs,.chatify-settings-shell,.chatify-settings-shell) dialog.app-builder .builder-step-label small{color:var(--ui-muted)!important}
-html body:is(.settings-tabs,.chatify-settings-shell,.chatify-settings-shell) dialog.app-builder .builder-assistant{padding:0!important;background:transparent!important;border:0!important}
-html body:is(.settings-tabs,.chatify-settings-shell,.chatify-settings-shell) dialog.app-builder .builder-assistant>small{display:none}
-html body:is(.settings-tabs,.chatify-settings-shell,.chatify-settings-shell) dialog.app-builder :is(input,textarea)::placeholder{color:var(--ui-muted)!important}
-html body:is(.settings-tabs,.chatify-settings-shell,.chatify-settings-shell) dialog.app-builder::backdrop{background:#251b1766!important}
-html body:is(.settings-tabs,.chatify-settings-shell,.chatify-settings-shell) :is(.common-nav,#settingsNavTop),html[data-theme=dark] body:is(.settings-tabs,.chatify-settings-shell,.chatify-settings-shell) :is(.common-nav,#settingsNavTop){background:var(--ui-surface)!important}
-html[data-theme=dark] body:is(.settings-tabs,.chatify-settings-shell,.chatify-settings-shell) .cfg-studio #cfgIdea{background:var(--ui-surface)!important;color:var(--ui-ink)!important}
-html body:is(.settings-tabs,.chatify-settings-shell,.chatify-settings-shell) .cfg-studio .builder-hero-sub{color:var(--ui-muted)!important}
-html body:is(.settings-tabs,.chatify-settings-shell,.chatify-settings-shell) .cfg-studio .builder-hero-cost{margin:2px 0!important}
-html body:is(.settings-tabs,.chatify-settings-shell,.chatify-settings-shell) .cfg-studio .builder-hero-go{margin-top:0!important}
-html body:is(.settings-tabs,.chatify-settings-shell,.chatify-settings-shell) .builder-draft-library>summary,html body:is(.settings-tabs,.chatify-settings-shell,.chatify-settings-shell) .builder-draft-library a{color:var(--ui-link)!important}
-html body:is(.settings-tabs,.chatify-settings-shell,.chatify-settings-shell) dialog.app-builder .builder-group-track:after{background:var(--ui-action)!important}
+html body:is(.settings-tabs,.chatify-settings-shell) dialog.app-builder .builder-content,html[data-theme=dark] body:is(.settings-tabs,.chatify-settings-shell) dialog.app-builder .builder-content{background:var(--ui-surface)!important;color:var(--ui-ink)!important}
+html body:is(.settings-tabs,.chatify-settings-shell) dialog.app-builder .builder-assistant :is(p,small,span),html body:is(.settings-tabs,.chatify-settings-shell) dialog.app-builder :is(label,.builder-step-label strong){color:var(--ui-ink)!important}
+html body:is(.settings-tabs,.chatify-settings-shell) dialog.app-builder .builder-step-label small{color:var(--ui-muted)!important}
+html body:is(.settings-tabs,.chatify-settings-shell) dialog.app-builder .builder-assistant{padding:0!important;background:transparent!important;border:0!important}
+html body:is(.settings-tabs,.chatify-settings-shell) dialog.app-builder .builder-assistant>small{display:none}
+html body:is(.settings-tabs,.chatify-settings-shell) dialog.app-builder :is(input,textarea)::placeholder{color:var(--ui-muted)!important}
+html body:is(.settings-tabs,.chatify-settings-shell) dialog.app-builder::backdrop{background:#251b1766!important}
+html body:is(.settings-tabs,.chatify-settings-shell) :is(.common-nav,#settingsNavTop),html[data-theme=dark] body:is(.settings-tabs,.chatify-settings-shell) :is(.common-nav,#settingsNavTop){background:var(--ui-surface)!important}
+html[data-theme=dark] body:is(.settings-tabs,.chatify-settings-shell) .cfg-studio #cfgIdea{background:var(--ui-surface)!important;color:var(--ui-ink)!important}
+html body:is(.settings-tabs,.chatify-settings-shell) .cfg-studio .builder-hero-sub{color:var(--ui-muted)!important}
+html body:is(.settings-tabs,.chatify-settings-shell) .cfg-studio .builder-hero-cost{margin:2px 0!important}
+html body:is(.settings-tabs,.chatify-settings-shell) .cfg-studio .builder-hero-go{margin-top:0!important}
+html body:is(.settings-tabs,.chatify-settings-shell) .builder-draft-library>summary,html body:is(.settings-tabs,.chatify-settings-shell) .builder-draft-library a{color:var(--ui-link)!important}
+html body:is(.settings-tabs,.chatify-settings-shell) dialog.app-builder .builder-group-track:after{background:var(--ui-action)!important}
 html[data-chatify-shell=true] .hero.playground h1{font:700 clamp(32px,3vw,44px)/1.12 'DM Sans',sans-serif!important;color:var(--ui-ink)!important;letter-spacing:-.04em}
-html body:is(.settings-tabs,.chatify-settings-shell,.chatify-settings-shell) dialog.app-builder .builder-message.assistant{background:transparent!important;padding:12px 0!important;border:0!important;color:var(--ui-muted)!important}
-html body:is(.settings-tabs,.chatify-settings-shell,.chatify-settings-shell) dialog.app-builder .builder-message.assistant small{color:var(--ui-muted)!important}
-html body:is(.settings-tabs,.chatify-settings-shell,.chatify-settings-shell) dialog.app-builder .builder-message.assistant p{color:var(--ui-muted)!important}
-html body:is(.settings-tabs,.chatify-settings-shell,.chatify-settings-shell) dialog.app-builder #builderBrief:focus{outline:3px solid var(--ui-action)!important;outline-offset:3px!important;box-shadow:none!important}
-html body:is(.settings-tabs,.chatify-settings-shell,.chatify-settings-shell) dialog.app-builder .builder-step-guide{background:transparent!important}
-html body:is(.settings-tabs,.chatify-settings-shell,.chatify-settings-shell) dialog.app-builder .builder-group-mark.is-waiting{color:var(--ui-muted)!important;border-color:var(--ui-muted)!important}
-html body:is(.settings-tabs,.chatify-settings-shell,.chatify-settings-shell) dialog.app-builder .builder-completion-notice p{color:inherit!important}
-html body:is(.settings-tabs,.chatify-settings-shell,.chatify-settings-shell) dialog.app-builder #builderProgress .builder-progress-copy{padding:0!important}
-html body:is(.settings-tabs,.chatify-settings-shell,.chatify-settings-shell) dialog.app-builder #builderProgress{padding:20px!important}
-html body:is(.settings-tabs,.chatify-settings-shell,.chatify-settings-shell) dialog.app-builder #builderProgress .builder-live-counts [data-state=done] :is(b,small){color:var(--ui-success)!important}
-html body:is(.settings-tabs,.chatify-settings-shell,.chatify-settings-shell) dialog.app-builder #builderProgress .builder-live-counts [data-state=running] :is(b,small){color:var(--ui-action)!important}
-html body:is(.settings-tabs,.chatify-settings-shell,.chatify-settings-shell) dialog.app-builder #builderProgress .builder-live-counts [data-state=waiting] :is(b,small){color:var(--ui-muted)!important}
-html body:is(.settings-tabs,.chatify-settings-shell,.chatify-settings-shell) dialog.app-builder #builderProgress .builder-live-counts [data-state=error] :is(b,small){color:var(--ui-warning)!important}
-html body:is(.settings-tabs,.chatify-settings-shell,.chatify-settings-shell) dialog.app-builder #builderProgress .builder-metrics{gap:12px!important;padding-top:12px!important;margin-top:12px!important;border-color:var(--ui-line)!important}
-html body:is(.settings-tabs,.chatify-settings-shell,.chatify-settings-shell) dialog.app-builder #builderProgress .builder-metrics>p{margin:0!important;min-height:0!important;padding:4px 0!important;font-size:13px!important;color:var(--ui-muted)!important}
-html body:is(.settings-tabs,.chatify-settings-shell,.chatify-settings-shell) dialog.app-builder .builder-progress-spin .cc-orbit-head{stroke:var(--ui-action)!important}
-html body:is(.settings-tabs,.chatify-settings-shell,.chatify-settings-shell) dialog.app-builder .builder-completion-notice button,html body:is(.settings-tabs,.chatify-settings-shell,.chatify-settings-shell) dialog.app-builder .builder-completion-notice button:last-child{background:transparent!important;color:inherit!important;border:1px solid currentColor!important;font-family:'DM Sans',sans-serif!important}
-html body:is(.settings-tabs,.chatify-settings-shell,.chatify-settings-shell) dialog.app-builder .builder-completion-heading{font:700 18px/1.3 'DM Sans',sans-serif!important;color:inherit!important}
-html body:is(.settings-tabs,.chatify-settings-shell,.chatify-settings-shell) dialog.app-builder .builder-draft-summary{color:var(--ui-muted)!important}
-html body:is(.settings-tabs,.chatify-settings-shell,.chatify-settings-shell) dialog.app-builder .builder-live-counts{gap:20px!important;margin-top:12px!important}
-html body:is(.settings-tabs,.chatify-settings-shell,.chatify-settings-shell) dialog.app-builder .builder-group-mark.is-done{background:transparent!important;color:var(--ui-success)!important;border-color:var(--ui-success)!important}
-html body:is(.settings-tabs,.chatify-settings-shell,.chatify-settings-shell) dialog.app-builder .builder-group-mark.is-done:after{border-color:var(--ui-success)!important}
-html body:is(.settings-tabs,.chatify-settings-shell,.chatify-settings-shell) dialog.app-builder #builderProgress .builder-progress-copy>strong{block-size:auto!important;max-height:4.5em;overflow:auto;margin:0 0 12px;font:700 24px/1.25 'DM Sans',sans-serif!important}
-html body:is(.settings-tabs,.chatify-settings-shell,.chatify-settings-shell) dialog.app-builder #builderProgress .builder-progress-copy>small{block-size:auto!important;max-height:4.8em;overflow:auto;font-size:13px;line-height:1.6}
-html body:is(.settings-tabs,.chatify-settings-shell,.chatify-settings-shell) dialog.app-builder #builderProgress .builder-remaining-work{block-size:auto!important;max-height:6.4em!important;overflow:auto;min-height:0!important}
-html body:is(.settings-tabs,.chatify-settings-shell,.chatify-settings-shell) dialog.app-builder #builderProgress .builder-progress-spin{margin-top:0!important}
-html body:is(.settings-tabs,.chatify-settings-shell,.chatify-settings-shell) dialog.app-builder .builder-shell-footer .builder-tools{gap:12px!important}
-html body:is(.settings-tabs,.chatify-settings-shell,.chatify-settings-shell) dialog.app-builder #builderProgress .builder-metrics>p:last-child{block-size:auto!important;max-height:4.8em!important}
-html body:is(.settings-tabs,.chatify-settings-shell,.chatify-settings-shell) dialog.app-builder .builder-progress-spin svg .cc-spin-head{stroke:var(--ui-action)!important}
-html body:is(.settings-tabs,.chatify-settings-shell,.chatify-settings-shell) dialog.app-builder .builder-progress-spin svg .cc-spin-track{stroke:var(--ui-line)!important}
-html body:is(.settings-tabs,.chatify-settings-shell,.chatify-settings-shell) dialog.app-builder .builder-group-board article[data-state=done] .builder-group-mark{width:14px;height:14px;border:2px solid var(--ui-success)!important;border-radius:50%;position:relative}
-html body:is(.settings-tabs,.chatify-settings-shell,.chatify-settings-shell) dialog.app-builder .builder-group-board article[data-state=done] .builder-group-mark:after{content:'';display:block;position:absolute;inset:3px;border-radius:50%;background:var(--ui-success)}
-html body:is(.settings-tabs,.chatify-settings-shell,.chatify-settings-shell) dialog.app-builder .builder-completion-notice button{min-height:40px!important}
-html body:is(.settings-tabs,.chatify-settings-shell,.chatify-settings-shell) .savebar{background:var(--ui-surface)!important;border-color:var(--ui-line)!important;box-shadow:none!important}
-html body:is(.settings-tabs,.chatify-settings-shell,.chatify-settings-shell) :is(.source-key-notes,.workspace-row,.settings-help,.help,.keybox){border-color:var(--ui-line)!important}
-html body:is(.settings-tabs,.chatify-settings-shell,.chatify-settings-shell) #col .tile :is(input:not([type=color]):not([type=range]):not([type=checkbox]),textarea,select){background:var(--ui-surface)!important;color:var(--ui-ink)!important;border-color:var(--ui-control)!important}
-html body:is(.settings-tabs,.chatify-settings-shell,.chatify-settings-shell) #col .tile :is(input[type=checkbox],input[type=range]){accent-color:var(--ui-action)}
-html body:is(.settings-tabs,.chatify-settings-shell,.chatify-settings-shell) #col .tile input[type=range]::-webkit-slider-runnable-track{background:var(--ui-soft)}
-html body:is(.settings-tabs,.chatify-settings-shell,.chatify-settings-shell) #col .tile input[type=range]::-webkit-slider-thumb{border-color:var(--ui-action)}
-html body:is(.settings-tabs,.chatify-settings-shell,.chatify-settings-shell) #col .tile .mini{background:transparent!important;color:var(--ui-link)!important;border-color:var(--ui-control)!important}
-html body:is(.settings-tabs,.chatify-settings-shell,.chatify-settings-shell) .emoji-dialog :is(.emoji-tabs button,.emoji-option),html body:is(.settings-tabs,.chatify-settings-shell,.chatify-settings-shell) .info-pop{background:var(--ui-surface)!important;color:var(--ui-ink)!important;border-color:var(--ui-line)!important}
-html body:is(.settings-tabs,.chatify-settings-shell,.chatify-settings-shell) :is(.preset-dialog,.preset-dialog-copy,.preset-dialog-sample){background:var(--ui-surface)!important;color:var(--ui-ink)!important}
-html body:is(.settings-tabs,.chatify-settings-shell,.chatify-settings-shell) [data-feedback=error],html body:is(.settings-tabs,.chatify-settings-shell,.chatify-settings-shell) :is(.testres.bad,.pvm-badge.bad,.review.bad){background:var(--ui-danger-soft)!important;color:var(--ui-danger)!important;border-color:var(--ui-danger)!important}
-html body:is(.settings-tabs,.chatify-settings-shell,.chatify-settings-shell) :is(.testres.ok,.keystate.ok,.pvm-row.ok){color:var(--ui-success)!important}
+html body:is(.settings-tabs,.chatify-settings-shell) dialog.app-builder .builder-message.assistant{background:transparent!important;padding:12px 0!important;border:0!important;color:var(--ui-muted)!important}
+html body:is(.settings-tabs,.chatify-settings-shell) dialog.app-builder .builder-message.assistant small{color:var(--ui-muted)!important}
+html body:is(.settings-tabs,.chatify-settings-shell) dialog.app-builder .builder-message.assistant p{color:var(--ui-muted)!important}
+html body:is(.settings-tabs,.chatify-settings-shell) dialog.app-builder #builderBrief:focus{outline:3px solid var(--ui-action)!important;outline-offset:3px!important;box-shadow:none!important}
+html body:is(.settings-tabs,.chatify-settings-shell) dialog.app-builder .builder-step-guide{background:transparent!important}
+html body:is(.settings-tabs,.chatify-settings-shell) dialog.app-builder .builder-group-mark.is-waiting{color:var(--ui-muted)!important;border-color:var(--ui-muted)!important}
+html body:is(.settings-tabs,.chatify-settings-shell) dialog.app-builder .builder-completion-notice p{color:inherit!important}
+html body:is(.settings-tabs,.chatify-settings-shell) dialog.app-builder #builderProgress .builder-progress-copy{padding:0!important}
+html body:is(.settings-tabs,.chatify-settings-shell) dialog.app-builder #builderProgress{padding:20px!important}
+html body:is(.settings-tabs,.chatify-settings-shell) dialog.app-builder #builderProgress .builder-live-counts [data-state=done] :is(b,small){color:var(--ui-success)!important}
+html body:is(.settings-tabs,.chatify-settings-shell) dialog.app-builder #builderProgress .builder-live-counts [data-state=running] :is(b,small){color:var(--ui-action)!important}
+html body:is(.settings-tabs,.chatify-settings-shell) dialog.app-builder #builderProgress .builder-live-counts [data-state=waiting] :is(b,small){color:var(--ui-muted)!important}
+html body:is(.settings-tabs,.chatify-settings-shell) dialog.app-builder #builderProgress .builder-live-counts [data-state=error] :is(b,small){color:var(--ui-warning)!important}
+html body:is(.settings-tabs,.chatify-settings-shell) dialog.app-builder #builderProgress .builder-metrics{gap:12px!important;padding-top:12px!important;margin-top:12px!important;border-color:var(--ui-line)!important}
+html body:is(.settings-tabs,.chatify-settings-shell) dialog.app-builder #builderProgress .builder-metrics>p{margin:0!important;min-height:0!important;padding:4px 0!important;font-size:13px!important;color:var(--ui-muted)!important}
+html body:is(.settings-tabs,.chatify-settings-shell) dialog.app-builder .builder-progress-spin .cc-orbit-head{stroke:var(--ui-action)!important}
+html body:is(.settings-tabs,.chatify-settings-shell) dialog.app-builder .builder-completion-notice button,html body:is(.settings-tabs,.chatify-settings-shell) dialog.app-builder .builder-completion-notice button:last-child{background:transparent!important;color:inherit!important;border:1px solid currentColor!important;font-family:'DM Sans',sans-serif!important}
+html body:is(.settings-tabs,.chatify-settings-shell) dialog.app-builder .builder-completion-heading{font:700 18px/1.3 'DM Sans',sans-serif!important;color:inherit!important}
+html body:is(.settings-tabs,.chatify-settings-shell) dialog.app-builder .builder-draft-summary{color:var(--ui-muted)!important}
+html body:is(.settings-tabs,.chatify-settings-shell) dialog.app-builder .builder-live-counts{gap:20px!important;margin-top:12px!important}
+html body:is(.settings-tabs,.chatify-settings-shell) dialog.app-builder .builder-group-mark.is-done{background:transparent!important;color:var(--ui-success)!important;border-color:var(--ui-success)!important}
+html body:is(.settings-tabs,.chatify-settings-shell) dialog.app-builder .builder-group-mark.is-done:after{border-color:var(--ui-success)!important}
+html body:is(.settings-tabs,.chatify-settings-shell) dialog.app-builder #builderProgress .builder-progress-copy>strong{block-size:auto!important;max-height:4.5em;overflow:auto;margin:0 0 12px;font:700 24px/1.25 'DM Sans',sans-serif!important}
+html body:is(.settings-tabs,.chatify-settings-shell) dialog.app-builder #builderProgress .builder-progress-copy>small{block-size:auto!important;max-height:4.8em;overflow:auto;font-size:13px;line-height:1.6}
+html body:is(.settings-tabs,.chatify-settings-shell) dialog.app-builder #builderProgress .builder-remaining-work{block-size:auto!important;max-height:6.4em!important;overflow:auto;min-height:0!important}
+html body:is(.settings-tabs,.chatify-settings-shell) dialog.app-builder #builderProgress .builder-progress-spin{margin-top:0!important}
+html body:is(.settings-tabs,.chatify-settings-shell) dialog.app-builder .builder-shell-footer .builder-tools{gap:12px!important}
+html body:is(.settings-tabs,.chatify-settings-shell) dialog.app-builder #builderProgress .builder-metrics>p:last-child{block-size:auto!important;max-height:4.8em!important}
+html body:is(.settings-tabs,.chatify-settings-shell) dialog.app-builder .builder-progress-spin svg .cc-spin-head{stroke:var(--ui-action)!important}
+html body:is(.settings-tabs,.chatify-settings-shell) dialog.app-builder .builder-progress-spin svg .cc-spin-track{stroke:var(--ui-line)!important}
+html body:is(.settings-tabs,.chatify-settings-shell) dialog.app-builder .builder-group-board article[data-state=done] .builder-group-mark{width:14px;height:14px;border:2px solid var(--ui-success)!important;border-radius:50%;position:relative}
+html body:is(.settings-tabs,.chatify-settings-shell) dialog.app-builder .builder-group-board article[data-state=done] .builder-group-mark:after{content:'';display:block;position:absolute;inset:3px;border-radius:50%;background:var(--ui-success)}
+html body:is(.settings-tabs,.chatify-settings-shell) dialog.app-builder .builder-completion-notice button{min-height:40px!important}
+html body:is(.settings-tabs,.chatify-settings-shell) .savebar{background:var(--ui-surface)!important;border-color:var(--ui-line)!important;box-shadow:none!important}
+html body:is(.settings-tabs,.chatify-settings-shell) :is(.source-key-notes,.workspace-row,.settings-help,.help,.keybox){border-color:var(--ui-line)!important}
+html body:is(.settings-tabs,.chatify-settings-shell) #col .tile :is(input:not([type=color]):not([type=range]):not([type=checkbox]),textarea,select){background:var(--ui-surface)!important;color:var(--ui-ink)!important;border-color:var(--ui-control)!important}
+html body:is(.settings-tabs,.chatify-settings-shell) #col .tile :is(input[type=checkbox],input[type=range]){accent-color:var(--ui-action)}
+html body:is(.settings-tabs,.chatify-settings-shell) #col .tile input[type=range]::-webkit-slider-runnable-track{background:var(--ui-soft)}
+html body:is(.settings-tabs,.chatify-settings-shell) #col .tile input[type=range]::-webkit-slider-thumb{border-color:var(--ui-action)}
+html body:is(.settings-tabs,.chatify-settings-shell) #col .tile .mini{background:transparent!important;color:var(--ui-link)!important;border-color:var(--ui-control)!important}
+html body:is(.settings-tabs,.chatify-settings-shell) .emoji-dialog :is(.emoji-tabs button,.emoji-option),html body:is(.settings-tabs,.chatify-settings-shell) .info-pop{background:var(--ui-surface)!important;color:var(--ui-ink)!important;border-color:var(--ui-line)!important}
+html body:is(.settings-tabs,.chatify-settings-shell) :is(.preset-dialog,.preset-dialog-copy,.preset-dialog-sample){background:var(--ui-surface)!important;color:var(--ui-ink)!important}
+html body:is(.settings-tabs,.chatify-settings-shell) [data-feedback=error],html body:is(.settings-tabs,.chatify-settings-shell) :is(.testres.bad,.pvm-badge.bad,.review.bad){background:var(--ui-danger-soft)!important;color:var(--ui-danger)!important;border-color:var(--ui-danger)!important}
+html body:is(.settings-tabs,.chatify-settings-shell) :is(.testres.ok,.keystate.ok,.pvm-row.ok){color:var(--ui-success)!important}
 html body:is(.chatify-info,:has(.about-nav)) :is(a,.feature-note a){color:var(--ui-link)}
 html body:is(.chatify-info,:has(.about-nav)) #featureTabs button.on{background:var(--ui-action)!important;color:var(--ui-on-action)!important;border-color:var(--ui-action)!important}
-html body:is(.settings-tabs,.chatify-settings-shell,.chatify-settings-shell) dialog.app-builder #builderProgress .builder-metrics>p:last-child{font-family:'DM Sans',sans-serif!important;color:var(--ui-muted)!important}
-html body:is(.settings-tabs,.chatify-settings-shell,.chatify-settings-shell) dialog.app-builder .builder-activity-ring{color:var(--ui-action)!important;border-color:var(--ui-action)!important}
-html body:is(.settings-tabs,.chatify-settings-shell,.chatify-settings-shell) dialog.app-builder .builder-retry{background:transparent!important;color:var(--ui-warning)!important;border:1px solid var(--ui-warning)!important;border-radius:8px;min-height:44px;font:600 14px/1.4 'DM Sans',sans-serif!important;padding:10px 16px!important}
-html body:is(.settings-tabs,.chatify-settings-shell,.chatify-settings-shell) dialog.app-builder[data-step='0'].has-build:not(.is-building) .builder-shell-footer .settings-help-actions #builderSend{display:none!important}
+html body:is(.settings-tabs,.chatify-settings-shell) dialog.app-builder #builderProgress .builder-metrics>p:last-child{font-family:'DM Sans',sans-serif!important;color:var(--ui-muted)!important}
+html body:is(.settings-tabs,.chatify-settings-shell) dialog.app-builder .builder-activity-ring{color:var(--ui-action)!important;border-color:var(--ui-action)!important}
+html body:is(.settings-tabs,.chatify-settings-shell) dialog.app-builder .builder-retry{background:transparent!important;color:var(--ui-warning)!important;border:1px solid var(--ui-warning)!important;border-radius:8px;min-height:44px;font:600 14px/1.4 'DM Sans',sans-serif!important;padding:10px 16px!important}
+html body:is(.settings-tabs,.chatify-settings-shell) dialog.app-builder[data-step='0'].has-build:not(.is-building) .builder-shell-footer .settings-help-actions #builderSend{display:none!important}
 html body:is(.settings-tabs,.chatify-settings-shell,:is(.chatify-info,:has(.about-nav)),.gallery-page) :is(.cc-boot,.cc-veil),html[data-chatify-shell=true] :is(.cc-boot,.cc-veil){background:var(--ui-ground)!important}
 html body:is(.settings-tabs,.chatify-settings-shell,:is(.chatify-info,:has(.about-nav)),.gallery-page) :is(.cc-boot-name,.cc-veil-name),html[data-chatify-shell=true] :is(.cc-boot-name,.cc-veil-name){color:var(--ui-ink)!important;font-family:'DM Sans',sans-serif!important}
 html body:is(.settings-tabs,.chatify-settings-shell,:is(.chatify-info,:has(.about-nav)),.gallery-page) :is(.cc-boot-text,.cc-veil-text),html[data-chatify-shell=true] :is(.cc-boot-text,.cc-veil-text){color:var(--ui-muted)!important}
 html body:is(.settings-tabs,.chatify-settings-shell,:is(.chatify-info,:has(.about-nav)),.gallery-page) .cc-orbit-head,html[data-chatify-shell=true] .cc-orbit-head{stroke:var(--ui-action)!important}
-html body:is(.settings-tabs,.chatify-settings-shell,.chatify-settings-shell) dialog.app-builder .builder-progress-spin img{border-radius:8px;box-shadow:none!important}
+html body:is(.settings-tabs,.chatify-settings-shell) dialog.app-builder .builder-progress-spin img{border-radius:8px;box-shadow:none!important}
 html[data-chatify-shell=true] :is(.reading-dialog,.modal){background:var(--ui-surface)!important;color:var(--ui-ink)!important;border-color:var(--ui-line)!important}
 html[data-chatify-shell=true] .reading-dialog :is(h2,label,.scope-option){color:var(--ui-ink)!important}
 html[data-chatify-shell=true] .reading-dialog .reading-head{background:var(--ui-surface)!important;border-color:var(--ui-line)!important}
 html[data-chatify-shell=true] .reading-dialog .reading-done{background:var(--ui-action)!important;color:var(--ui-on-action)!important}
 
 /* Match legacy structural selectors explicitly rather than recoloring custom app content. */
-html body:is(.settings-tabs,.chatify-settings-shell,.chatify-settings-shell) dialog.app-builder:is(.is-building,.has-build) #builderProgress .builder-progress-spin .cc-spin-head{stroke:var(--ui-action)!important}
-html body:is(.settings-tabs,.chatify-settings-shell,.chatify-settings-shell):has(#cfgtop) dialog.app-builder .builder-completion-notice button.go:is(.ghost,:not(.ghost)){background:transparent!important;color:inherit!important;border:1px solid currentColor!important}
-html body:is(.settings-tabs,.chatify-settings-shell,.chatify-settings-shell) dialog.app-builder .builder-group-board article[data-state=done]{background:var(--ui-surface)!important;border-color:var(--ui-line)!important}
-html body:is(.settings-tabs,.chatify-settings-shell,.chatify-settings-shell) dialog.app-builder :is(.builder-part-error,.builder-final-error,.builder-part-chip[data-state=error]){color:var(--ui-danger)!important}
-html body:is(.settings-tabs,.chatify-settings-shell,.chatify-settings-shell) dialog.app-builder .builder-part-row[data-state=error] .builder-part-chip{color:var(--ui-danger)!important;background:var(--ui-danger-soft)!important}
-html body:is(.settings-tabs,.chatify-settings-shell,.chatify-settings-shell):has(#cfgtop) .builder-operation-mark{background:var(--ui-soft)!important;color:var(--ui-link)!important}
-html body:is(.settings-tabs,.chatify-settings-shell,.chatify-settings-shell) dialog.app-builder .builder-completion-notice:is([data-state=done],[data-state=ok]){background:var(--ui-success-soft)!important;color:var(--ui-success)!important;border-color:var(--ui-success)!important}
-html body:is(.settings-tabs,.chatify-settings-shell,.chatify-settings-shell) dialog.app-builder .builder-completion-notice:is([data-state=error],[data-state=failed]){background:var(--ui-danger-soft)!important;color:var(--ui-danger)!important;border-color:var(--ui-danger)!important}
+html body:is(.settings-tabs,.chatify-settings-shell) dialog.app-builder:is(.is-building,.has-build) #builderProgress .builder-progress-spin .cc-spin-head{stroke:var(--ui-action)!important}
+html body:is(.settings-tabs,.chatify-settings-shell):has(#cfgtop) dialog.app-builder .builder-completion-notice button.go:is(.ghost,:not(.ghost)){background:transparent!important;color:inherit!important;border:1px solid currentColor!important}
+html body:is(.settings-tabs,.chatify-settings-shell) dialog.app-builder .builder-group-board article[data-state=done]{background:var(--ui-surface)!important;border-color:var(--ui-line)!important}
+html body:is(.settings-tabs,.chatify-settings-shell) dialog.app-builder :is(.builder-part-error,.builder-final-error,.builder-part-chip[data-state=error]){color:var(--ui-danger)!important}
+html body:is(.settings-tabs,.chatify-settings-shell) dialog.app-builder .builder-part-row[data-state=error] .builder-part-chip{color:var(--ui-danger)!important;background:var(--ui-danger-soft)!important}
+html body:is(.settings-tabs,.chatify-settings-shell):has(#cfgtop) .builder-operation-mark{background:var(--ui-soft)!important;color:var(--ui-link)!important}
+html body:is(.settings-tabs,.chatify-settings-shell) dialog.app-builder .builder-completion-notice:is([data-state=done],[data-state=ok]){background:var(--ui-success-soft)!important;color:var(--ui-success)!important;border-color:var(--ui-success)!important}
+html body:is(.settings-tabs,.chatify-settings-shell) dialog.app-builder .builder-completion-notice:is([data-state=error],[data-state=failed]){background:var(--ui-danger-soft)!important;color:var(--ui-danger)!important;border-color:var(--ui-danger)!important}
 html body.chatify-error{--bg:var(--ui-ground);--ink:var(--ui-ink);--mut:var(--ui-muted);--line:var(--ui-line);--acc:var(--ui-action)}
 html body.chatify-error h1{font-family:'DM Sans',sans-serif}
 html body.chatify-error .act a{color:var(--ui-on-action)}
@@ -219,8 +219,8 @@ html body.chatify-error .act a.q{color:var(--ui-ink)}
 html[data-theme=dark] body:is(.chatify-info,:has(.about-nav)) .about-nav,html[data-theme=light] body:is(.chatify-info,:has(.about-nav)) .about-nav{background:var(--ui-surface)!important;border-color:var(--ui-line)!important}
 html body:is(.chatify-info,:has(.about-nav)) .common-nav{background:transparent!important}
 html body:is(.chatify-info,:has(.about-nav)) .rl-step h3:before,html body:is(.chatify-info,:has(.about-nav)) .rl-step h3 span{color:var(--ui-link)!important}
-html body:is(.settings-tabs,.chatify-settings-shell,.chatify-settings-shell) .builder-draft-library{border-color:var(--ui-line)!important;background:transparent!important;color:var(--ui-ink)!important}
-html body:is(.settings-tabs,.chatify-settings-shell,.chatify-settings-shell) .builder-draft-library>summary{color:var(--ui-link)!important}
+html body:is(.settings-tabs,.chatify-settings-shell) .builder-draft-library{border-color:var(--ui-line)!important;background:transparent!important;color:var(--ui-ink)!important}
+html body:is(.settings-tabs,.chatify-settings-shell) .builder-draft-library>summary{color:var(--ui-link)!important}
 
 html body:is(.chatify-info,:has(.about-nav)) :is(#featureTabs button,#featureMore,.feature-copy>a){background:var(--ui-surface)!important;color:var(--ui-link)!important;border-color:var(--ui-line)!important}
 html body:is(.chatify-info,:has(.about-nav)) #featureTabs button[aria-selected=true]{background:var(--ui-action)!important;color:var(--ui-on-action)!important;border-color:var(--ui-action)!important}
@@ -228,30 +228,30 @@ html body:is(.chatify-info,:has(.about-nav)) .feature-art{background:var(--ui-so
 html body:is(.chatify-info,:has(.about-nav)) .feature-art svg{stroke:var(--ui-link)!important}
 html body:is(.chatify-info,:has(.about-nav)) .feature-art .scene-halo{fill:var(--ui-surface)!important}
 html body:is(.chatify-info,:has(.about-nav)) .feature-art>small{color:var(--ui-muted)!important}
-html body:is(.settings-tabs,.chatify-settings-shell,.chatify-settings-shell):has(#cfgtop) .builder-shell-footer #builderActionBar{color:var(--ui-muted)!important}
-html body:is(.settings-tabs,.chatify-settings-shell,.chatify-settings-shell):has(#cfgtop) .builder-shell-footer #builderActionBar .builder-action-spin{color:var(--ui-action)!important}
-html body:is(.settings-tabs,.chatify-settings-shell,.chatify-settings-shell) #col .tile :is(input,textarea,select)[aria-invalid=true]{border-color:var(--ui-danger)!important;outline-color:var(--ui-danger)!important}
-html body:is(.settings-tabs,.chatify-settings-shell,.chatify-settings-shell) #col .tile input:not([type=color]):not([type=range]):not([type=checkbox])[aria-invalid=true]{border-color:var(--ui-danger)!important;outline-color:var(--ui-danger)!important}
-html body:is(.settings-tabs,.chatify-settings-shell,.chatify-settings-shell) .settings-studio-actions .builder-activity-ring{background:conic-gradient(var(--ui-action) var(--activity-progress,0%),var(--ui-line) 0)!important;color:var(--ui-action)!important}
-html body:is(.settings-tabs,.chatify-settings-shell,.chatify-settings-shell) .settings-studio-actions .builder-activity-ring:after{background:var(--ui-surface)!important}
-html body:is(.settings-tabs,.chatify-settings-shell,.chatify-settings-shell) .builder-background[data-state=done]{background:var(--ui-surface)!important;color:var(--ui-success)!important;border-color:var(--ui-success)!important}
-html body:is(.settings-tabs,.chatify-settings-shell,.chatify-settings-shell) dialog.app-builder .builder-shell-footer>.builder-retry{justify-self:start;margin-bottom:8px!important;color:var(--ui-warning)!important}
-html body:is(.settings-tabs,.chatify-settings-shell,.chatify-settings-shell) dialog.app-builder #builderRetryCost{display:block;color:var(--ui-muted)!important;font-size:12px!important;line-height:1.5;margin:0 0 8px}
-html body:is(.settings-tabs,.chatify-settings-shell,.chatify-settings-shell) dialog.app-builder #builderRetryCost[hidden]{display:none!important}
-html body:is(.settings-tabs,.chatify-settings-shell,.chatify-settings-shell) .settings-studio-actions .builder-background{background:var(--ui-surface)!important;color:var(--ui-ink)!important;border-color:var(--ui-line)!important;box-shadow:none!important}
-html body:is(.settings-tabs,.chatify-settings-shell,.chatify-settings-shell) dialog.app-builder .builder-use-app.btn{background:var(--ui-action)!important;color:var(--ui-on-action)!important;border-color:var(--ui-action)!important}
-html body:is(.settings-tabs,.chatify-settings-shell,.chatify-settings-shell) dialog.app-builder .builder-tools .btn.ghost{background:var(--ui-surface)!important;color:var(--ui-link)!important;border-color:var(--ui-control)!important}
-html body:is(.settings-tabs,.chatify-settings-shell,.chatify-settings-shell) dialog.app-builder .builder-todo-list :is(article,li,div){border-color:var(--ui-line)}
-html body:is(.settings-tabs,.chatify-settings-shell,.chatify-settings-shell) dialog.app-builder .builder-start button{background:transparent!important;color:var(--ui-link)!important;border-color:var(--ui-control)!important}
-html body:is(.settings-tabs,.chatify-settings-shell,.chatify-settings-shell) dialog.app-builder #builderFresh.builder-fresh{background:transparent!important;color:var(--ui-link)!important;border-color:var(--ui-control)!important}
+html body:is(.settings-tabs,.chatify-settings-shell):has(#cfgtop) .builder-shell-footer #builderActionBar{color:var(--ui-muted)!important}
+html body:is(.settings-tabs,.chatify-settings-shell):has(#cfgtop) .builder-shell-footer #builderActionBar .builder-action-spin{color:var(--ui-action)!important}
+html body:is(.settings-tabs,.chatify-settings-shell) #col .tile :is(input,textarea,select)[aria-invalid=true]{border-color:var(--ui-danger)!important;outline-color:var(--ui-danger)!important}
+html body:is(.settings-tabs,.chatify-settings-shell) #col .tile input:not([type=color]):not([type=range]):not([type=checkbox])[aria-invalid=true]{border-color:var(--ui-danger)!important;outline-color:var(--ui-danger)!important}
+html body:is(.settings-tabs,.chatify-settings-shell) .settings-studio-actions .builder-activity-ring{background:conic-gradient(var(--ui-action) var(--activity-progress,0%),var(--ui-line) 0)!important;color:var(--ui-action)!important}
+html body:is(.settings-tabs,.chatify-settings-shell) .settings-studio-actions .builder-activity-ring:after{background:var(--ui-surface)!important}
+html body:is(.settings-tabs,.chatify-settings-shell) .builder-background[data-state=done]{background:var(--ui-surface)!important;color:var(--ui-success)!important;border-color:var(--ui-success)!important}
+html body:is(.settings-tabs,.chatify-settings-shell) dialog.app-builder .builder-shell-footer>.builder-retry{justify-self:start;margin-bottom:8px!important;color:var(--ui-warning)!important}
+html body:is(.settings-tabs,.chatify-settings-shell) dialog.app-builder #builderRetryCost{display:block;color:var(--ui-muted)!important;font-size:12px!important;line-height:1.5;margin:0 0 8px}
+html body:is(.settings-tabs,.chatify-settings-shell) dialog.app-builder #builderRetryCost[hidden]{display:none!important}
+html body:is(.settings-tabs,.chatify-settings-shell) .settings-studio-actions .builder-background{background:var(--ui-surface)!important;color:var(--ui-ink)!important;border-color:var(--ui-line)!important;box-shadow:none!important}
+html body:is(.settings-tabs,.chatify-settings-shell) dialog.app-builder .builder-use-app.btn{background:var(--ui-action)!important;color:var(--ui-on-action)!important;border-color:var(--ui-action)!important}
+html body:is(.settings-tabs,.chatify-settings-shell) dialog.app-builder .builder-tools .btn.ghost{background:var(--ui-surface)!important;color:var(--ui-link)!important;border-color:var(--ui-control)!important}
+html body:is(.settings-tabs,.chatify-settings-shell) dialog.app-builder .builder-todo-list :is(article,li,div){border-color:var(--ui-line)}
+html body:is(.settings-tabs,.chatify-settings-shell) dialog.app-builder .builder-start button{background:transparent!important;color:var(--ui-link)!important;border-color:var(--ui-control)!important}
+html body:is(.settings-tabs,.chatify-settings-shell) dialog.app-builder #builderFresh.builder-fresh{background:transparent!important;color:var(--ui-link)!important;border-color:var(--ui-control)!important}
 /* Recovery keeps one summary, the failure details and the cost caveat. */
-html body:is(.settings-tabs,.chatify-settings-shell,.chatify-settings-shell) dialog.app-builder.has-build:not(.is-building) #builderProgress .builder-metrics>p:first-of-type{visibility:visible}
-html body:is(.settings-tabs,.chatify-settings-shell,.chatify-settings-shell) dialog.app-builder .builder-user-todos .go{background:transparent!important;color:var(--ui-link)!important;border:1px solid var(--ui-control)!important;box-shadow:none!important}
+html body:is(.settings-tabs,.chatify-settings-shell) dialog.app-builder.has-build:not(.is-building) #builderProgress .builder-metrics>p:first-of-type{visibility:visible}
+html body:is(.settings-tabs,.chatify-settings-shell) dialog.app-builder .builder-user-todos .go{background:transparent!important;color:var(--ui-link)!important;border:1px solid var(--ui-control)!important;box-shadow:none!important}
 html body:is(.chatify-info,:has(.about-nav)) .feature-art .scene-scan{stroke:var(--ui-link)!important}
 html body:is(.chatify-info,:has(.about-nav)) .feature-art .scene-scan circle{fill:var(--ui-action)!important;stroke:var(--ui-link)!important}
-html body:is(.settings-tabs,.chatify-settings-shell,.chatify-settings-shell) dialog.app-builder .builder-content .builder-user-todos button.go.ghost{background:transparent!important;color:var(--ui-link)!important;border:1px solid var(--ui-control)!important;box-shadow:none!important}
-html body:is(.settings-tabs,.chatify-settings-shell,.chatify-settings-shell) dialog.app-builder #builderProvider>button.go.ghost{display:block;margin:10px 0 0!important;background:transparent!important;color:var(--ui-link)!important;border:1px solid var(--ui-control)!important}
-html body:is(.settings-tabs,.chatify-settings-shell,.chatify-settings-shell) dialog.app-builder.has-build:not(.is-building) .builder-step-guide{display:none}
+html body:is(.settings-tabs,.chatify-settings-shell) dialog.app-builder .builder-content .builder-user-todos button.go.ghost{background:transparent!important;color:var(--ui-link)!important;border:1px solid var(--ui-control)!important;box-shadow:none!important}
+html body:is(.settings-tabs,.chatify-settings-shell) dialog.app-builder #builderProvider>button.go.ghost{display:block;margin:10px 0 0!important;background:transparent!important;color:var(--ui-link)!important;border:1px solid var(--ui-control)!important}
+html body:is(.settings-tabs,.chatify-settings-shell) dialog.app-builder.has-build:not(.is-building) .builder-step-guide{display:none}
 /* Secondary settings controls keep a neutral surface, including their labels. */
 html body:is(.settings-tabs,.chatify-settings-shell) button.go.ghost{background:transparent!important;color:var(--ui-link)!important;border:1px solid var(--ui-control)!important}
 html body:is(.settings-tabs,.chatify-settings-shell) button.go.ghost small{color:var(--ui-muted)!important}
@@ -345,3 +345,187 @@ html[data-theme] body.settings-tabs .settings-utilities .app-builder-drafts{colo
 html body.settings-tabs .settings-utilities{border-color:var(--ui-line)!important}
 html[data-theme] body.settings-tabs:has(#cfgtop) .cfg-studio .cfg-feature-choice{color:var(--ui-muted)!important}
 html body:is(.settings-tabs,.chatify-settings-shell,:has(.about-nav)) .product-nav-toggle{color:var(--ui-link)!important;border-color:var(--ui-line)!important;background:var(--ui-surface)!important}
+
+/* Conversation workbench: hierarchy comes from surfaces, space and type. */
+:root{--ui-input:var(--ui-surface);--ui-raised:var(--ui-soft);--ui-radius-control:8px;--ui-radius-panel:12px}
+:root[data-theme=dark]{--ui-input:#262421;--ui-raised:#3c3933}
+html body:is(.settings-tabs,.chatify-settings-shell):has(#cfgtop)>.card{width:min(1376px,calc(100% - 64px));max-width:1376px;padding:32px;margin:24px auto 48px;background:transparent!important;border-radius:0;box-shadow:none!important}
+html body:is(.settings-tabs,.chatify-settings-shell):has(#cfgtop) #h{font-size:32px!important;line-height:1.2!important;margin:0 0 8px!important}
+html body:is(.settings-tabs,.chatify-settings-shell):has(#cfgtop) #lead{max-width:75ch;margin:0 0 24px!important}
+html body:is(.settings-tabs,.chatify-settings-shell):has(#cfgtop) #cfgtop.cfg-path-choice{background:transparent!important;border-bottom:1px solid var(--ui-line)!important;border-radius:0!important;padding:0!important;gap:24px!important;width:100%;margin-bottom:24px!important}
+html body:is(.settings-tabs,.chatify-settings-shell):has(#cfgtop) #cfgtop.cfg-path-choice button{border:0!important;border-bottom:2px solid transparent!important;border-radius:0!important;padding:16px 0!important;background:transparent!important;color:var(--ui-muted)!important;min-height:48px;font-size:14px!important}
+html body:is(.settings-tabs,.chatify-settings-shell):has(#cfgtop) #cfgtop.cfg-path-choice button[aria-current=page]{background:transparent!important;color:var(--ui-ink)!important;border-bottom-color:var(--ui-action)!important}
+html body:is(.settings-tabs,.chatify-settings-shell):has(#cfgtop) .cfg-studio{grid-template-columns:minmax(0,1fr) 320px;gap:48px;padding-top:16px}
+html body:is(.settings-tabs,.chatify-settings-shell):has(#cfgtop) .cfg-studio .builder-hero-title{font-size:32px!important;max-width:26ch;margin-bottom:8px!important}
+html body:is(.settings-tabs,.chatify-settings-shell):has(#cfgtop) .cfg-studio .cfg-composer{gap:16px!important;margin-top:24px!important}
+html body:is(.settings-tabs,.chatify-settings-shell):has(#cfgtop) .cfg-studio #cfgIdea{background:var(--ui-input)!important;border-radius:12px!important;min-height:160px!important;padding:24px!important;box-shadow:0 1px 2px #201b1508!important}
+html body:is(.settings-tabs,.chatify-settings-shell):has(#cfgtop) .cfg-studio .cfg-chat-preview{padding-left:32px;border-left:1px solid var(--ui-line)!important}
+html body:is(.settings-tabs,.chatify-settings-shell):has(#cfgtop) .cfg-studio .cfg-chat-preview>h2{font-size:20px!important;margin:0 0 16px!important}
+html body:is(.settings-tabs,.chatify-settings-shell):has(#cfgtop) .cfg-studio .cfg-refine-consent{display:flex!important;align-items:flex-start!important;gap:8px!important;max-width:65ch;line-height:1.6!important;flex-direction:row!important}
+html body:is(.settings-tabs,.chatify-settings-shell):has(#cfgtop) .cfg-studio .cfg-refine-consent input{appearance:auto;width:18px;height:18px;flex:0 0 18px;margin:2px 0 0;accent-color:var(--ui-action);color-scheme:light}
+html[data-theme=dark] body:is(.settings-tabs,.chatify-settings-shell) .cfg-studio .cfg-refine-consent input{color-scheme:dark}
+html body:is(.settings-tabs,.chatify-settings-shell):has(#cfgtop) .cfg-studio .cfg-idea-tools{display:flex;align-items:center;gap:16px!important}
+html body:is(.settings-tabs,.chatify-settings-shell):has(#cfgtop) .cfg-studio .builder-hero-cost{margin:8px 0!important;max-width:70ch}
+html body:is(.settings-tabs,.chatify-settings-shell):has(#cfgtop) .cfg-studio .builder-hero-go{margin-top:8px!important;min-height:48px!important;font-size:14px!important}
+/* One rail, one editing panel, one independent app preview. */
+@media(min-width:1181px){html body:is(.settings-tabs,.chatify-settings-shell):has(#cfgtop) .layout{grid-template-columns:224px minmax(0,1fr) 400px;gap:24px;max-width:none;width:100%;align-items:start}}
+html body:is(.settings-tabs,.chatify-settings-shell):has(#cfgtop) #settingsNavTop{background:transparent!important;margin:16px 0 24px!important}
+html body:is(.settings-tabs,.chatify-settings-shell):has(#cfgtop) #settingsNavTop .category-tabs{gap:8px!important;padding:0 0 16px!important;border-bottom:1px solid var(--ui-line)!important;background:transparent!important}
+html body:is(.settings-tabs,.chatify-settings-shell):has(#cfgtop) #settingsNavTop .category-tabs>button{background:transparent!important;border:1px solid transparent!important;border-radius:8px!important;padding:16px!important;min-height:72px;box-shadow:none!important;color:var(--ui-muted)!important;gap:16px!important;transform:none!important}
+html body:is(.settings-tabs,.chatify-settings-shell):has(#cfgtop) #settingsNavTop .category-tabs>button[aria-selected=true]{background:var(--ui-surface)!important;border-color:var(--ui-line)!important;color:var(--ui-ink)!important;box-shadow:none!important}
+html body:is(.settings-tabs,.chatify-settings-shell):has(#cfgtop) #settingsNavTop .category-tabs .tab-icon{background:transparent!important;color:inherit!important;border:0!important;padding:0!important;width:24px;height:24px}
+html body:is(.settings-tabs,.chatify-settings-shell):has(#cfgtop) #settingsNavTop .category-tabs b{font:600 16px/1.3 'DM Sans',sans-serif!important}
+html body:is(.settings-tabs,.chatify-settings-shell):has(#cfgtop) #settingsNavTop .category-tabs small{font:400 13px/1.5 'DM Sans',sans-serif!important;color:var(--ui-muted)!important;margin-top:4px!important}
+html body:is(.settings-tabs,.chatify-settings-shell):has(#cfgtop) #menu .nav-group{gap:4px!important}
+html body:is(.settings-tabs,.chatify-settings-shell):has(#cfgtop) #menu .nav-group a{display:flex!important;align-items:center!important;background:transparent!important;border:1px solid transparent!important;border-radius:8px!important;min-height:48px!important;padding:16px!important;gap:16px!important;box-shadow:none!important;color:var(--ui-muted)!important}
+html body:is(.settings-tabs,.chatify-settings-shell):has(#cfgtop) #menu .nav-group a.on{background:var(--ui-soft)!important;border-color:transparent!important;color:var(--ui-ink)!important}
+html body:is(.settings-tabs,.chatify-settings-shell):has(#cfgtop) #menu .nav-group a.on :is(b,small){color:var(--ui-ink)!important}
+html body:is(.settings-tabs,.chatify-settings-shell):has(#cfgtop) #menu .section-card-icon{width:20px!important;height:20px!important;flex:0 0 20px;background:transparent!important;color:inherit!important;border-radius:0!important;padding:0!important}
+html body:is(.settings-tabs,.chatify-settings-shell):has(#cfgtop) #menu .section-card-copy b{font:600 14px/1.4 'DM Sans',sans-serif!important}
+html body:is(.settings-tabs,.chatify-settings-shell):has(#cfgtop) #menu .section-card-copy small{font:400 13px/1.4 'DM Sans',sans-serif!important;margin-top:4px!important;color:var(--ui-muted)!important}
+html body:is(.settings-tabs,.chatify-settings-shell):has(#cfgtop) #col .tile{padding:24px!important;border:1px solid var(--ui-line)!important;border-radius:12px!important;background:var(--ui-surface)!important;gap:24px!important}
+html body:is(.settings-tabs,.chatify-settings-shell):has(#cfgtop) #col .tile>.head{padding:0 0 16px!important;border-bottom:1px solid var(--ui-line)!important;margin:0!important}
+html body:is(.settings-tabs,.chatify-settings-shell):has(#cfgtop) #col .tile>.head b{font:600 20px/1.3 'DM Sans',sans-serif!important;letter-spacing:-.01em!important}
+html body:is(.settings-tabs,.chatify-settings-shell):has(#cfgtop) #col .tile>.head small{font:400 14px/1.5 'DM Sans',sans-serif!important;color:var(--ui-muted)!important;margin-top:4px}
+html body:is(.settings-tabs,.chatify-settings-shell):has(#cfgtop) #col .tile .grp{border-color:var(--ui-line)!important;background:transparent!important;padding:16px 0!important;margin:0!important}
+html body:is(.settings-tabs,.chatify-settings-shell):has(#cfgtop) #col .tile .fields{gap:16px!important}
+html body:is(.settings-tabs,.chatify-settings-shell):has(#cfgtop) #col .tile :is(input:not([type=color]):not([type=range]):not([type=checkbox]),textarea,select,.cs-btn){background:var(--ui-input)!important;color:var(--ui-ink)!important;border:1px solid var(--ui-control)!important;border-radius:8px!important;min-height:44px;font:400 14px/1.5 'DM Sans',sans-serif!important}
+html body:is(.settings-tabs,.chatify-settings-shell):has(#cfgtop) #col .tile :is(input,textarea)::placeholder{color:var(--ui-muted)!important;opacity:1}
+html body:is(.settings-tabs,.chatify-settings-shell):has(#cfgtop) #col :is(.sidebar-shortcuts,.chat-width-shortcuts){gap:8px!important}
+html body:is(.settings-tabs,.chatify-settings-shell):has(#cfgtop) #col :is(.sidebar-shortcuts,.chat-width-shortcuts) button{border:1px solid var(--ui-control)!important;background:var(--ui-input)!important;color:var(--ui-ink)!important;border-radius:8px!important;padding:16px!important;box-shadow:none!important;min-height:64px;line-height:1.4!important;gap:8px!important}
+html body:is(.settings-tabs,.chatify-settings-shell):has(#cfgtop) #col :is(.sidebar-shortcuts,.chat-width-shortcuts) button[aria-pressed=true]{border:2px solid var(--ui-action)!important;background:var(--ui-soft)!important;padding:15px!important;outline:0!important;color:var(--ui-ink)!important}
+html body:is(.settings-tabs,.chatify-settings-shell):has(#cfgtop) #col :is(.sidebar-shortcuts,.chat-width-shortcuts) button small{font:400 13px/1.4 'DM Sans',sans-serif!important;color:var(--ui-muted)!important}
+html body:is(.settings-tabs,.chatify-settings-shell):has(#cfgtop) #col .sidebar-diagram{border-color:var(--ui-control)!important;background:var(--ui-surface)!important;box-shadow:none!important;border-radius:4px!important}
+html body:is(.settings-tabs,.chatify-settings-shell):has(#cfgtop) #col .sidebar-diagram :is(i,span){border-color:var(--ui-control)!important;background:var(--ui-soft)!important}
+html body:is(.settings-tabs,.chatify-settings-shell):has(#cfgtop) .preview{min-width:0;padding:0!important;background:transparent!important}
+html body:is(.settings-tabs,.chatify-settings-shell):has(#cfgtop) .pvhead{display:flex;flex-wrap:wrap;gap:8px!important;margin-bottom:16px!important;align-items:center;color:var(--ui-ink)}
+html body:is(.settings-tabs,.chatify-settings-shell):has(#cfgtop) .pvhead>b{font:600 16px/1.4 'DM Sans',sans-serif!important}
+html body:is(.settings-tabs,.chatify-settings-shell):has(#cfgtop) .pvhead .livetag{font-size:13px;color:var(--ui-muted)}
+html body:is(.settings-tabs,.chatify-settings-shell):has(#cfgtop) iframe#pv{border:1px solid var(--ui-line)!important;border-radius:12px!important;box-shadow:none!important}
+html body:is(.settings-tabs,.chatify-settings-shell):has(#cfgtop) :is(#cfgmode,#pvmode){background:var(--ui-soft)!important;border:1px solid var(--ui-control)!important;border-radius:8px!important;padding:4px!important;gap:4px!important;box-shadow:none!important}
+html body:is(.settings-tabs,.chatify-settings-shell):has(#cfgtop) :is(#cfgmode,#pvmode) button{border-radius:4px!important;min-height:32px!important;padding:8px 16px!important;font:600 13px/1.2 'DM Sans',sans-serif!important;color:var(--ui-muted)!important}
+html body:is(.settings-tabs,.chatify-settings-shell):has(#cfgtop) :is(#cfgmode,#pvmode) button[aria-checked=true]{background:var(--ui-surface)!important;color:var(--ui-ink)!important;box-shadow:none!important}
+html body:is(.settings-tabs,.chatify-settings-shell):has(#cfgtop) :is(#cfgmode,#pvmode) .seg-ind{background:var(--ui-surface)!important;border-radius:4px!important;box-shadow:none!important}
+/* Consistent secondary controls; primary actions retain their own role. */
+html body:is(.settings-tabs,.chatify-settings-shell):has(#cfgtop) :is(.go.ghost,.mini,.cs-btn){border-radius:8px!important;box-shadow:none!important}
+html body:is(.settings-tabs,.chatify-settings-shell):has(#cfgtop) :is(.go.ghost,.mini){color:var(--ui-ink)!important;border-color:var(--ui-control)!important}
+html body:is(.settings-tabs,.chatify-settings-shell):has(#cfgtop) dialog.app-builder{border-radius:16px!important}
+html body:is(.settings-tabs,.chatify-settings-shell):has(#cfgtop) dialog.app-builder .settings-help-head{padding:24px 32px!important}
+html body:is(.settings-tabs,.chatify-settings-shell):has(#cfgtop) dialog.app-builder .builder-content{padding:24px 32px!important}
+html body:is(.settings-tabs,.chatify-settings-shell):has(#cfgtop) dialog.app-builder .builder-steps{padding:16px 32px!important;gap:16px!important}
+html body:is(.settings-tabs,.chatify-settings-shell):has(#cfgtop) dialog.app-builder .builder-section{border-radius:12px!important;padding:24px!important}
+html body:is(.settings-tabs,.chatify-settings-shell):has(#cfgtop) dialog.app-builder #builderBrief{background:var(--ui-input)!important;padding:16px!important;min-height:144px!important}
+html body:is(.settings-tabs,.chatify-settings-shell):has(#cfgtop) dialog.app-builder .builder-shell-footer{padding:16px 32px!important}
+html body:is(.settings-tabs,.chatify-settings-shell):has(#cfgtop) dialog.app-builder .builder-group-board article{border-radius:8px!important;padding:16px!important}
+/* Other shared pages use the same hierarchy, without boxed-everything chrome. */
+.gallery-page .grid{gap:24px}.gallery-page .g-card{padding:24px;border-radius:12px}.gallery-page .g-ico{background:transparent!important;color:var(--ui-muted)!important;border-radius:0}.gallery-page .g-tags i{background:transparent!important;border:1px solid var(--ui-line);border-radius:4px;padding:4px 8px}
+.gallery-page .g-feature{background:var(--ui-surface)!important;border:1px solid var(--ui-line)!important;padding:32px;min-height:208px}.gallery-page .g-feature :is(.g-f-name,.g-f-tag,.g-f-note,.g-f-sub){color:var(--ui-ink)!important}.gallery-page .g-feature .g-f-eyebrow{color:var(--ui-muted)!important}.gallery-page .g-feature .g-f-tags i{color:var(--ui-muted)!important;border-color:var(--ui-line)!important}.gallery-page .g-feature .g-f-cta{background:var(--ui-action)!important;color:var(--ui-on-action)!important;border-color:var(--ui-action)!important;min-height:48px}.gallery-page .g-f-svg{color:var(--ui-link)}
+html body:is(.chatify-info,:has(.about-nav)) :is(.rl-step,.people article){padding:24px!important;border-radius:12px!important}
+html body:is(.chatify-info,:has(.about-nav)) :is(.feature-copy p,.lead,.rl-hero p){max-width:70ch;line-height:1.6;color:var(--ui-muted)!important}
+html body:is(.chatify-info,:has(.about-nav)) :is(#featureTabs button,#featureMore){border-radius:8px!important;min-height:44px;padding:8px 16px!important}
+html[data-chatify-shell=true] .playground-question{background:var(--ui-surface)!important;color:var(--ui-ink)!important;border:1px solid var(--ui-line)!important;border-radius:8px!important;box-shadow:none!important}
+html[data-chatify-shell=true] :is(.composer,.input-area,.compose){background:var(--ui-surface)!important;border-color:var(--ui-control)!important;box-shadow:none!important}
+@media(hover:hover) and (pointer:fine){html body:is(.settings-tabs,.chatify-settings-shell):has(#cfgtop) #menu .nav-group a:hover{background:var(--ui-soft)!important;color:var(--ui-ink)!important}.gallery-page .g-card:hover{transform:none;box-shadow:none;border-color:var(--ui-control)}}
+@media(max-width:1180px){html body:is(.settings-tabs,.chatify-settings-shell):has(#cfgtop) .layout{gap:24px}html body:is(.settings-tabs,.chatify-settings-shell):has(#cfgtop) .cfg-studio{grid-template-columns:minmax(0,1fr) 280px;gap:32px}}
+@media(max-width:760px){html body:is(.settings-tabs,.chatify-settings-shell):has(#cfgtop)>.card{width:calc(100% - 32px);margin:16px;padding:16px 0!important}html body:is(.settings-tabs,.chatify-settings-shell):has(#cfgtop) .cfg-studio{grid-template-columns:minmax(0,1fr)}html body:is(.settings-tabs,.chatify-settings-shell):has(#cfgtop) .cfg-studio .cfg-chat-preview{border-left:0!important;padding:24px 0 0;border-top:1px solid var(--ui-line)!important}html body:is(.settings-tabs,.chatify-settings-shell):has(#cfgtop) #settingsNavTop .category-tabs>button{padding:8px!important}html body:is(.settings-tabs,.chatify-settings-shell):has(#cfgtop) dialog.app-builder :is(.builder-content,.settings-help-head,.builder-shell-footer){padding:16px!important}}
+html body.settings-tabs:has(#cfgtop) #cfgtop.cfg-path-choice{display:flex!important;max-width:none!important;width:100%!important}
+html body.settings-tabs:has(#cfgtop) #cfgtop.cfg-path-choice button[aria-current=page] :is(span,b,small){color:var(--ui-ink)!important}
+html body.settings-tabs:has(#cfgtop) #settingsNavTop .category-tabs{background:transparent!important}
+html body.settings-tabs:has(#cfgtop) .cfg-studio .cfg-composer{margin-top:16px!important;gap:8px!important}
+html body.settings-tabs:has(#cfgtop) .cfg-studio .cfg-refine-consent{display:grid!important;grid-template-columns:20px minmax(0,1fr)!important;gap:8px!important}
+html body.settings-tabs:has(#cfgtop) .cfg-studio .cfg-refine-consent>span{padding:0!important;color:var(--ui-muted)!important}
+html body.settings-tabs:has(#cfgtop) #col .sidebar-shortcuts{grid-template-columns:repeat(3,minmax(0,1fr))!important;align-items:stretch}
+html body.settings-tabs:has(#cfgtop) #col .sidebar-shortcuts button{min-height:120px!important;padding:8px!important;display:flex!important;flex-direction:column;justify-content:center;gap:8px!important}
+html body.settings-tabs:has(#cfgtop) #col .sidebar-shortcuts button[aria-pressed=true]{padding:7px!important}
+html body.settings-tabs:has(#cfgtop) #col .sidebar-shortcuts button strong{font-size:14px!important}
+html body.settings-tabs:has(#cfgtop) #cfgmode.slide button[aria-checked=true]{background:var(--ui-surface)!important;color:var(--ui-ink)!important}
+html body.settings-tabs:has(#cfgtop) .cfg-studio .cfg-refine-consent input{appearance:auto!important;-webkit-appearance:checkbox!important;width:18px!important;min-width:18px!important;max-width:18px!important;height:18px!important;min-height:18px!important;max-height:18px!important;margin:0!important;padding:0!important;display:block!important;position:static!important;opacity:1!important;background:transparent!important;border-radius:4px!important;transform:none!important;accent-color:var(--ui-action)!important}
+html body.settings-tabs:has(#cfgtop) .cfg-studio .cfg-refine-consent{align-items:start!important;min-height:24px!important;grid-template-columns:20px minmax(0,1fr)!important}
+html body.settings-tabs:has(#cfgtop) .cfg-studio{border-top:0!important}
+html body.settings-tabs:has(#cfgtop) .cfg-studio .cfg-chat-preview{background:transparent!important}
+html body.settings-tabs:has(#cfgtop) .cfg-studio .cfg-chat-preview h2{margin-top:0!important}
+html body.settings-tabs:has(#cfgtop) .cfg-studio .cfg-idea-guide{max-width:75ch!important}
+/* Static category header cannot cover the active form while navigating sections. */
+html body.settings-tabs:has(#cfgtop) #settingsNavTop{position:static!important;top:auto!important;z-index:auto!important;background:transparent!important}
+html body.settings-tabs:has(#cfgtop) #settingsNavTop .category-tabs{position:static!important;top:auto!important;z-index:auto!important}
+html body.settings-tabs:has(#cfgtop) #col .tile{scroll-margin-top:24px!important}
+html body.settings-tabs:has(#cfgtop) #col .tile .savebar{border-color:var(--ui-line)!important}
+html body.settings-tabs:has(#cfgtop) #col :is(.grp,.cacts,.help){border-color:var(--ui-line)!important}
+html body.settings-tabs:has(#cfgtop) #col .grp>summary{color:var(--ui-ink)!important}
+html body.settings-tabs:has(#cfgtop) .settings-search input{background:var(--ui-input)!important;color:var(--ui-ink)!important;border:1px solid var(--ui-control)!important;border-radius:8px!important;min-height:44px!important;font-size:14px!important}
+html body.settings-tabs:has(#cfgtop) .settings-search input::placeholder{color:var(--ui-muted)!important;opacity:1}
+html[data-chatify-shell=true] :is(.playground-description,.playground-subtitle,.playground-note,.playground-footer,.sidebar-note){color:var(--ui-muted)!important}
+html[data-chatify-shell=true] :is(.tool,.chat-tools button,.top .ico,.top .btn,.top button:not(.send),.playground-tool){color:var(--ui-muted)!important}
+html[data-chatify-shell=true] .playground-question{padding:16px!important;min-height:56px!important;margin:0 0 8px!important}
+html[data-chatify-shell=true] :is(.playground-question span,.playground-question small){color:var(--ui-muted)!important}
+html[data-chatify-shell=true] :is(.tabs button,.tabs a,.tabs .tab){color:var(--ui-muted)!important}
+html body:is(.chatify-info,:has(.about-nav)) #featureTabs button:not([aria-selected=true]){color:var(--ui-muted)!important;background:transparent!important;border-color:transparent!important;box-shadow:none!important}
+html body.settings-tabs:has(#cfgtop) .settings-search input:focus{border-color:var(--ui-action)!important;box-shadow:0 0 0 3px color-mix(in srgb,var(--ui-action) 16%,transparent)!important}
+/* Links keep their role throughout manual setup, including model documentation. */
+html body.settings-tabs:has(#cfgtop) :is(#col,#pvbox,.settings-help) a{color:var(--ui-link)!important;text-underline-offset:3px;overflow-wrap:anywhere}
+html body.settings-tabs:has(#cfgtop) #sec-model #seg{background:transparent!important;border:0!important;padding:0!important;border-radius:0!important;box-shadow:none!important;gap:8px!important}
+html body.settings-tabs:has(#cfgtop) #sec-model #seg>button[role=radio]{background:var(--ui-input)!important;color:var(--ui-ink)!important;border:1px solid var(--ui-control)!important;border-radius:8px!important;box-shadow:none!important;min-height:48px!important;padding:8px 16px!important}
+html body.settings-tabs:has(#cfgtop) #sec-model #seg>button[aria-checked=true]{background:var(--ui-soft)!important;color:var(--ui-ink)!important;border:2px solid var(--ui-action)!important;padding:7px 15px!important}
+html body.settings-tabs:has(#cfgtop) #sec-model #seg>.chipmore{background:transparent!important;color:var(--ui-muted)!important;border:0!important;border-radius:0!important;padding:8px 0!important;box-shadow:none!important;text-align:start;min-height:40px}
+html[data-theme=dark] body.settings-tabs:has(#cfgtop) img.plogo:is([src$='/openai.svg'],[src$='/ollama.svg']){filter:invert(.85)!important}
+html body.settings-tabs:has(#cfgtop) :is(.pvmodel,.pvcloud,.ollamabox){border:1px solid var(--ui-line)!important;background:var(--ui-surface)!important;color:var(--ui-ink)!important;box-shadow:none!important;border-radius:12px!important;padding:24px!important}
+html body.settings-tabs:has(#cfgtop) .preview :is(.seg,.ocard){background:transparent!important;box-shadow:none!important;border-color:var(--ui-line)!important}
+@media(hover:hover) and (pointer:fine){html body.settings-tabs:has(#cfgtop) #menu .nav-group a:not(.on):hover{background:transparent!important;color:var(--ui-ink)!important;text-decoration:underline;text-underline-offset:4px}html body.settings-tabs:has(#cfgtop) #menu .nav-group a.on:hover{background:var(--ui-soft)!important;text-decoration:none}}
+/* Get the working area above the fold without dropping context or safeguards. */
+html body.settings-tabs:has(#cfgtop)>.card{padding:16px 24px!important;margin-top:16px!important}
+html body.settings-tabs:has(#cfgtop) #lead{margin-bottom:16px!important}
+html body.settings-tabs:has(#cfgtop) #cfgtop.cfg-path-choice{margin-bottom:16px!important}
+html body.settings-tabs:has(#cfgtop) #cfgtop.cfg-path-choice button{padding:8px 0!important;min-height:44px!important}
+html body.settings-tabs:has(#cfgtop) .loaded-app{padding:0!important;margin:8px 0!important;min-height:32px}
+html body.settings-tabs:has(#cfgtop) .loaded-app>summary{min-height:32px;display:list-item;line-height:32px}
+html body.settings-tabs:has(#cfgtop) .modebar{padding:0!important;margin:8px 0!important;min-height:40px!important;gap:16px!important}
+html body.settings-tabs:has(#cfgtop) .settings-search{margin:8px 0 0!important;padding:8px 0!important}
+html body.settings-tabs:has(#cfgtop) .settings-search>label{margin-bottom:8px!important;font-size:13px!important}
+html body.settings-tabs:has(#cfgtop) .settings-search-status:empty{display:none!important}
+html body.settings-tabs:has(#cfgtop) #settingsNavTop{margin:16px 0!important}
+html body.settings-tabs:has(#cfgtop) #settingsNavTop .category-tabs{padding:0!important}
+html body.settings-tabs:has(#cfgtop) #settingsNavTop .category-tabs>button{min-height:64px!important;padding:8px 16px!important}
+html body.settings-tabs:has(#cfgtop) #menu .nav-group a{min-height:56px!important;padding:8px 16px!important}
+/* A dialog reads as a short task, not a second landing page. */
+html body.settings-tabs:has(#cfgtop) dialog.app-builder .settings-help-head{padding:16px 24px!important}
+html body.settings-tabs:has(#cfgtop) dialog.app-builder .builder-steps{padding:8px 24px!important;gap:16px!important}
+html body.settings-tabs:has(#cfgtop) dialog.app-builder .builder-steps>button{display:flex!important;flex-direction:row!important;align-items:center;justify-content:flex-start;gap:8px!important;min-height:48px!important;padding:8px!important;border-radius:4px!important}
+html body.settings-tabs:has(#cfgtop) dialog.app-builder .builder-step-label{text-align:start!important}
+html body.settings-tabs:has(#cfgtop) dialog.app-builder .builder-step-label strong{font-size:14px!important;line-height:1.4!important}
+html body.settings-tabs:has(#cfgtop) dialog.app-builder .builder-content{padding:16px 24px!important}
+html body.settings-tabs:has(#cfgtop) dialog.app-builder .builder-content>h3{font-size:25px!important;line-height:1.25!important;margin:0 0 8px!important}
+html body.settings-tabs:has(#cfgtop) dialog.app-builder .builder-step-guide{padding:8px 0!important;margin:8px 0 16px!important;gap:16px!important;background:transparent!important}
+html body.settings-tabs:has(#cfgtop) dialog.app-builder #builderConversation{margin:0 0 16px!important;gap:8px!important;min-height:0!important}
+html body.settings-tabs:has(#cfgtop) dialog.app-builder .builder-message.assistant{padding:8px 0!important;margin:0!important;min-height:0!important}
+html body.settings-tabs:has(#cfgtop) dialog.app-builder .builder-message.assistant small{margin:0 0 4px!important}
+html body.settings-tabs:has(#cfgtop) dialog.app-builder .builder-message.assistant p{margin:0!important;line-height:1.5!important}
+html body.settings-tabs:has(#cfgtop) dialog.app-builder #builderDescribe{gap:16px!important}
+html body.settings-tabs:has(#cfgtop) dialog.app-builder #builderBrief{margin:8px 0!important;min-height:128px!important}
+html body.settings-tabs:has(#cfgtop) dialog.app-builder .settings-help-consent{margin:16px 0 0!important;line-height:1.5!important}
+html body.settings-tabs:has(#cfgtop) dialog.app-builder .builder-shell-footer{padding:16px 24px!important;gap:8px!important}
+@media(max-width:600px){html body.settings-tabs:has(#cfgtop)>.card{padding:16px 0!important}html body.settings-tabs:has(#cfgtop) dialog.app-builder .builder-steps{padding:8px 16px!important;gap:8px!important}html body.settings-tabs:has(#cfgtop) dialog.app-builder .builder-steps>button{padding:4px!important;flex-direction:column!important;justify-content:center;gap:4px!important;min-height:64px!important}html body.settings-tabs:has(#cfgtop) dialog.app-builder .builder-step-label{text-align:center!important}html body.settings-tabs:has(#cfgtop) dialog.app-builder .builder-step-label strong{font-size:12px!important}html body.settings-tabs:has(#cfgtop) dialog.app-builder .builder-step-label small{font-size:11px!important}html body.settings-tabs:has(#cfgtop) dialog.app-builder .builder-content{padding:16px!important}html body.settings-tabs:has(#cfgtop) dialog.app-builder .builder-step-guide{grid-template-columns:1fr!important;gap:8px!important}html body.settings-tabs:has(#cfgtop) dialog.app-builder .builder-shell-footer{padding:8px 16px!important}html body.settings-tabs:has(#cfgtop) dialog.app-builder .builder-shell-footer .settings-help-actions{display:flex!important;flex-direction:row!important;gap:8px!important}html body.settings-tabs:has(#cfgtop) dialog.app-builder .builder-shell-footer .settings-help-actions #builderSend{flex:1 1 auto!important;min-width:0!important;width:auto!important}html body.settings-tabs:has(#cfgtop) dialog.app-builder .builder-shell-footer .settings-help-actions #builderReset{flex:0 0 auto!important;width:auto!important}html body.settings-tabs:has(#cfgtop) dialog.app-builder #builderPrerequisites{font-size:12px!important;line-height:1.5!important}}
+html body.settings-tabs:has(#cfgtop) .settings-utilities{padding:8px 0!important;margin:0 0 8px!important;border-top:0!important}
+html body.settings-tabs:has(#cfgtop) .settings-utilities .settings-search{padding:0!important;margin:0!important}
+html body.settings-tabs:has(#cfgtop) #settingsNavTop{padding-top:0!important;margin:8px 0 16px!important}
+html body.settings-tabs:has(#cfgtop) #settingsNavTop .category-tabs>button{min-height:56px!important}
+html body.settings-tabs:has(#cfgtop) .loaded-app>summary{padding:0!important;min-height:32px!important;height:auto!important;line-height:32px!important}
+html body.settings-tabs:has(#cfgtop) .loaded-app{min-height:32px!important}
+html body.settings-tabs:has(#cfgtop) dialog.app-builder #builderDescribe>label[for=builderBrief],html body.settings-tabs:has(#cfgtop) dialog.app-builder .builder-content label[for=builderBrief]{margin:0!important;padding:0!important;font-size:14px!important;line-height:1.4!important}
+html body.settings-tabs:has(#cfgtop) dialog.app-builder #builderConversation{margin-bottom:8px!important}
+html body.settings-tabs:has(#cfgtop) dialog.app-builder #builderDescribe{gap:8px!important}
+html body.settings-tabs:has(#cfgtop) dialog.app-builder .builder-message.assistant{padding:0!important}
+html body.settings-tabs:has(#cfgtop) dialog.app-builder .builder-content #builderProvider{margin:8px 0!important;font-size:13px!important;line-height:1.5!important}
+@media(min-width:1181px){html body.settings-tabs:has(#cfgtop) #lead{max-width:none!important;width:auto!important}html body.settings-tabs:has(#cfgtop) .settings-utilities{padding:0!important}html body.settings-tabs:has(#cfgtop) .settings-search{margin:0!important}html body.settings-tabs:has(#cfgtop) .modebar{margin:4px 0!important}html body.settings-tabs:has(#cfgtop) #settingsNavTop{margin:8px 0!important}}
+html body.settings-tabs:has(#cfgtop) dialog.app-builder .builder-content>h2.builder-intro,html body.settings-tabs:has(#cfgtop) dialog.app-builder .builder-intro{font-size:25px!important;line-height:1.25!important;margin:0 0 8px!important}
+/* Keep initial task guidance compact without dropping provider or cost information. */
+html body.settings-tabs:has(#cfgtop) dialog.app-builder .builder-step-guide p{margin:0!important;line-height:1.5!important}
+@media(max-width:600px){html body.settings-tabs:has(#cfgtop) dialog.app-builder .builder-step-guide{display:block!important;padding:8px 0!important;margin:8px 0!important}html body.settings-tabs:has(#cfgtop) dialog.app-builder .builder-step-guide strong{display:inline;margin-right:8px}html body.settings-tabs:has(#cfgtop) dialog.app-builder .builder-step-guide p{display:inline}html body.settings-tabs:has(#cfgtop) dialog.app-builder #builderProvider{padding:0!important}html body.settings-tabs:has(#cfgtop) dialog.app-builder #builderProvider>button.go.ghost{margin:8px 0 0!important}html body.settings-tabs:has(#cfgtop) dialog.app-builder .builder-message.assistant p{font-size:13px!important}}
+@media(max-width:600px){html body.settings-tabs:has(#cfgtop) dialog.app-builder .settings-help-head{padding:8px 16px!important}html body.settings-tabs:has(#cfgtop) dialog.app-builder .builder-steps{padding:4px 16px!important}html body.settings-tabs:has(#cfgtop) dialog.app-builder .builder-steps>button{min-height:56px!important}html body.settings-tabs:has(#cfgtop) dialog.app-builder .builder-message.assistant small{display:inline!important;margin:0 8px 0 0!important}html body.settings-tabs:has(#cfgtop) dialog.app-builder .builder-message.assistant p{display:inline!important}}
+@media(max-width:600px){html body.settings-tabs:has(#cfgtop) dialog.app-builder .builder-content{padding:8px 16px!important}}
+/* Palette chips show their real app colors, with a shell-neutral visible boundary. */
+html body.settings-tabs:has(#cfgtop) #sec-colors .colorrow input[type=color]{border:1px solid var(--ui-control)!important;box-shadow:none!important;border-radius:8px!important}
+html body.settings-tabs:has(#cfgtop) #sec-colors .colorrow input[type=color]:hover{border-color:var(--ui-action)!important}
+html body.settings-tabs:has(#cfgtop) #sec-colors .selected-color-summary{background:var(--ui-soft)!important;color:var(--ui-ink)!important;border-color:var(--ui-control)!important;position:static!important;box-shadow:none!important}
+html body.settings-tabs:has(#cfgtop) #sec-colors .selected-color-summary :is(b,span){color:var(--ui-ink)!important}
+html body.settings-tabs:has(#cfgtop) #sec-colors .selected-color-chip{border-color:var(--ui-control)!important;box-shadow:none!important}
+html body.settings-tabs:has(#cfgtop) #sec-colors .fields.colorlist .field{border-color:var(--ui-line)!important}
