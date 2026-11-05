@@ -21,7 +21,7 @@ def _write_gallery(base):
         "  budget: {daily_questions: 300, daily_model_calls: 500}\n"
         "  apps:\n"
         "    - {dir: alpha, slug: alpha, icon: chat, tags: [TagOne, TagTwo]}\n"
-        "    - {dir: beta, slug: beta}\n"
+        "    - {dir: beta, slug: beta, title: Plain Beta, tagline: Portable card copy}\n"
         "    - {slug: ext, url: 'https://example.com/ext', title: External App, tagline: Links out, icon: planet, accent: '#8c4f9e'}\n")
 
 
@@ -30,6 +30,17 @@ class GalleryConfig(unittest.TestCase):
         from chatify import gallery
         self.assertTrue(gallery.is_gallery(os.path.join(ROOT, "apps", "gallery.yaml")))
         self.assertFalse(gallery.is_gallery(os.path.join(ROOT, "apps", "minimal", "app.yaml")))
+
+    def test_card_copy_override_keeps_app_identity(self):
+        from chatify import gallery
+        g = gallery.load(os.path.join(ROOT, "apps", "gallery.yaml"))
+        recipe = next(a for a in g["apps"] if a["slug"] == "recipechat")
+        self.assertEqual(recipe["title"], "RecipeChat")
+        self.assertNotIn("🍳", recipe["title"])
+        self.assertNotIn("🍜", recipe["tagline"])
+        self.assertEqual(recipe["cfg"]["app"]["title"], "RecipeChat 🍳")
+        self.assertIn("🍜", recipe["cfg"]["app"]["tagline"])
+        self.assertEqual(recipe["icon"], "bowl")
 
     def test_guardrails_forced(self):
         from chatify import gallery
@@ -110,7 +121,9 @@ class GalleryServer(unittest.TestCase):
         s, b = self.get("/")
         self.assertEqual(s, 200)
         self.assertEqual(b.count('class="g-card"'), 3)
-        self.assertIn("Alpha App", b); self.assertIn("Beta App", b)
+        self.assertIn("Alpha App", b); self.assertIn("Plain Beta", b)
+        self.assertIn("Portable card copy", b)
+        self.assertNotIn("The Beta App test app", b)
         self.assertIn('href="https://example.com/ext"', b)   # redirect app card links out
         self.assertIn('class="g-ico"', b)                    # card icons render
         self.assertIn("TagOne", b)                           # card tags render

@@ -340,3 +340,8 @@ html body.settings-tabs.settings-tabs :is(#apply,#saveLook,#saveBudget,#sec-fini
 /* Search focus is an action cue; an unselected route is neutral, not success. */
 html body.settings-tabs #settingsFind:focus-visible{border-color:var(--ui-action)!important}
 html body.settings-tabs #cfgtop.cfg-path-choice button:not([aria-current=page]){background:transparent!important;color:var(--ui-muted)!important;border-color:transparent!important}
+/* Shared utility actions and captions use shell tokens, not app-theme greens. */
+html[data-theme] body.settings-tabs .settings-utilities .app-builder-drafts{color:var(--ui-link)!important}
+html body.settings-tabs .settings-utilities{border-color:var(--ui-line)!important}
+html[data-theme] body.settings-tabs:has(#cfgtop) .cfg-studio .cfg-feature-choice{color:var(--ui-muted)!important}
+html body:is(.settings-tabs,.chatify-settings-shell,:has(.about-nav)) .product-nav-toggle{color:var(--ui-link)!important;border-color:var(--ui-line)!important;background:var(--ui-surface)!important}

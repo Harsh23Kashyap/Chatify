@@ -1127,7 +1127,7 @@ def serve_gallery(path, host=None, port=None):
         threading.Thread(target=srv.serve_forever, daemon=True).start()
         children[app["slug"]] = srv.server_port
         a = cfg["app"]
-        cards.append({"slug": app["slug"], "title": a["title"], "tagline": a.get("tagline", ""), "accent": app.get("accent") or a.get("accent", "#173f35"), "icon": app.get("icon") or "spark", "tags": app.get("tags") or [], "featured": bool(app.get("featured"))})
+        cards.append({"slug": app["slug"], "title": app.get("title") or a["title"], "tagline": app.get("tagline") if app.get("tagline") is not None else a.get("tagline", ""), "accent": app.get("accent") or a.get("accent", "#173f35"), "icon": app.get("icon") or "spark", "tags": app.get("tags") or [], "featured": bool(app.get("featured"))})
     secrets.STORE = secrets.SecretStore("/tmp")
     host = host or "127.0.0.1"
     port = port or 8080
