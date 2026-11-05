@@ -268,3 +268,65 @@ html body:is(.settings-tabs,.chatify-settings-shell) :is(.sidebar-shortcuts,.cha
 html body:is(.settings-tabs,.chatify-settings-shell) .sidebar-diagram{background:var(--ui-surface);border-color:var(--ui-control)}
 html body:is(.settings-tabs,.chatify-settings-shell) .sidebar-diagram i{background:var(--ui-line)}
 html body:is(.settings-tabs,.chatify-settings-shell) .sidebar-diagram>span{background:var(--ui-soft)}
+
+/* Configuration section cards belong to the shell, never the app preview. */
+html body.settings-tabs.settings-tabs.settings-tabs #menu a{background:var(--ui-surface)!important;color:var(--ui-muted)!important;border-color:var(--ui-line)!important;box-shadow:none!important}
+html body.settings-tabs.settings-tabs.settings-tabs #menu a:hover{border-color:var(--ui-action)!important}
+html body.settings-tabs.settings-tabs.settings-tabs #menu a.on{background:var(--ui-action)!important;color:var(--ui-on-action)!important;border-color:var(--ui-action)!important;box-shadow:none!important}
+html body.settings-tabs.settings-tabs.settings-tabs #menu .section-card-icon{background:var(--ui-soft)!important;color:var(--ui-link)!important}
+html body.settings-tabs.settings-tabs.settings-tabs #menu a.on .section-card-icon{background:var(--ui-surface)!important;color:var(--ui-link)!important}
+html body.settings-tabs.settings-tabs.settings-tabs #menu .section-card-copy small{color:var(--ui-muted)!important;opacity:1}
+html body.settings-tabs.settings-tabs.settings-tabs #menu a.on .section-card-copy small{color:var(--ui-on-action)!important}
+/* Shared configuration chrome: supporting text and controls are not app colors. */
+html body.settings-tabs .settings-search>label,html body.settings-tabs #settingsNavTop .category-tabs button:not([aria-selected=true]),html body.settings-tabs #settingsNavTop .category-tabs .tab-copy small,html body.settings-tabs .loaded-app :is(summary,small),html body.settings-tabs #col :is(h4,.h,output){color:var(--ui-muted)!important}
+html body.settings-tabs #col :is(.flabel,label.check),html body.settings-tabs #msg{color:var(--ui-ink)!important}
+html body.settings-tabs #col :is(details>summary,.info-tip){color:var(--ui-link)!important}
+html body.settings-tabs.settings-tabs.settings-tabs .settings-utilities .settings-search .settings-help-open{background:var(--ui-surface)!important;color:var(--ui-link)!important;border-color:var(--ui-action)!important;box-shadow:none!important}
+html body.settings-tabs.settings-tabs.settings-tabs .settings-utilities .settings-search .settings-help-open:hover{background:var(--ui-soft)!important;color:var(--ui-link)!important}
+html body.settings-tabs #layprev{background:var(--ui-soft)!important}
+html body.settings-tabs #layprev .lp-s{background:var(--ui-control)!important}
+html body.settings-tabs #layprev .lp-c{background:var(--ui-line)!important}
+html body.settings-tabs #pvmode{background:var(--ui-soft)!important}
+html body.settings-tabs #pvmode .seg-ind{background:var(--ui-action)!important}
+html body.settings-tabs #pvmode button{background:transparent!important;color:var(--ui-muted)!important}
+html body.settings-tabs #pvmode button[aria-checked=true]{color:var(--ui-on-action)!important}
+html body.settings-tabs #productNavigation{border-color:var(--ui-line)!important}
+html body.settings-tabs #col input[type=range]{border-color:var(--ui-control)!important}
+html body.settings-tabs #col input[type=checkbox]:checked{background-color:var(--ui-action)!important}
+html body.settings-tabs #col input[type=checkbox]:focus-visible,html body.settings-tabs #settingsNavTop button:focus-visible,html body.settings-tabs #menu a:focus-visible,html body.settings-tabs .settings-help-open:focus-visible{outline:3px solid var(--ui-action)!important;outline-offset:3px!important;box-shadow:none!important}
+/* Match the legacy ID-weighted focus rule without changing any control behavior. */
+html body.settings-tabs.settings-tabs :is(#apply,#saveLook,#saveBudget,#sec-finish a,button,a,input,textarea,select,summary):focus-visible{outline:3px solid var(--ui-action)!important;outline-offset:3px!important;box-shadow:none!important}
+html body.settings-tabs #col :is(.workspace-field,.workspace-field-name,.label-title,.range-setting-label){color:var(--ui-ink)!important}
+html body.settings-tabs #col label:not(.cs-opt):not(.go){color:var(--ui-ink)!important}
+html body.settings-tabs #col .info-tip{background:radial-gradient(circle,var(--ui-soft) 9px,var(--ui-control) 9px,var(--ui-control) 10px,transparent 10px)!important}
+html body.settings-tabs .info-pop{background:var(--ui-surface)!important;color:var(--ui-ink)!important;border-color:var(--ui-line)!important;box-shadow:var(--ui-shadow)!important}
+html body.settings-tabs #seg button{color:var(--ui-muted)!important;border-color:var(--ui-control)!important;background:var(--ui-surface)!important}
+html body.settings-tabs #seg button.on{color:var(--ui-link)!important;border-color:var(--ui-action)!important;outline-color:var(--ui-action)!important;background:var(--ui-soft)!important}
+html body.settings-tabs #seg :is(.provider-name,.provider-selected){color:inherit!important}
+html body.settings-tabs #col :is(.chipmore,.preset,.editor-choice){color:var(--ui-link)!important;background:var(--ui-surface)!important;border-color:var(--ui-line)!important}
+html body.settings-tabs #col :is(.editor-choice.on,.preset.on){background:var(--ui-soft)!important;border-color:var(--ui-action)!important}
+html body.settings-tabs #col :is(.status-card,.status-stats,.saved,.saved .sub,.row2,.helper-example,.stage.inner,.sbody,.keyrow,.cmhost){background:var(--ui-surface)!important;border-color:var(--ui-line)!important;color:var(--ui-ink)!important}
+html body.settings-tabs #col :is(.status-card b,.status-stats span,.index-count,.saved b){color:var(--ui-ink)!important}
+html body.settings-tabs #col :is(.source-key-badge,.cloud-selection-status){color:var(--ui-muted)!important;background:var(--ui-soft)!important;border-color:var(--ui-line)!important}
+html body.settings-tabs #col :is(.seg,.typeprev){background:var(--ui-soft)!important;border-color:var(--ui-line)!important}
+html body.settings-tabs #col .seg .seg-ind{background:var(--ui-action)!important}
+html body.settings-tabs #col .seg button:not([aria-checked=true]){color:var(--ui-muted)!important;background:transparent!important}
+html body.settings-tabs :is(.workspace-fields,.workspace-first-setup) input[type=checkbox]:checked{background-color:var(--ui-action)!important}
+html body.settings-tabs #col .cloud-selection-status{color:var(--ui-muted)!important}
+html body.settings-tabs #sec-presets :is(#exp,#del).go.ghost{color:var(--ui-link)!important;background:transparent!important;border-color:var(--ui-control)!important}
+html body.settings-tabs #col :is(#load,#sec-finish a.go){color:var(--ui-on-action)!important;background:var(--ui-action)!important;border-color:var(--ui-action)!important}
+html body.settings-tabs #col .workspace-status-row span{color:var(--ui-muted)!important}
+html body.settings-tabs .ohead .seg{background:var(--ui-soft)!important;border-color:var(--ui-line)!important}
+html body.settings-tabs .ohead .seg .seg-ind{background:var(--ui-action)!important}
+html body.settings-tabs .ohead .seg button:not([aria-checked=true]){color:var(--ui-muted)!important;background:transparent!important}
+html body.settings-tabs #codeEditor .selected-editor{background:var(--ui-surface)!important;border-color:var(--ui-line)!important}
+html body.settings-tabs #codeEditor :is(.cm-editor,.cm-scroller){background:var(--ui-surface)!important;color:var(--ui-ink)!important}
+html body.settings-tabs #codeEditor :is(.cm-gutters,.cm-gutter,.cm-gutterElement,.cm-gutterElement span){background:var(--ui-soft)!important;color:var(--ui-muted)!important;border-color:var(--ui-line)!important}
+html body.settings-tabs #col :is(.workspace-toggle,label.check) input[type=checkbox]:not(:checked){background:var(--ui-line)!important;border-color:var(--ui-control)!important;color:var(--ui-muted)!important}
+html body.settings-tabs #col .logobox input[type=range]{border-color:var(--ui-control)!important}
+html body.settings-tabs .cloud-selection-status{color:var(--ui-muted)!important}
+html body.settings-tabs #codeEditor details.selected-editor{background:var(--ui-surface)!important;border-color:var(--ui-line)!important;color:var(--ui-ink)!important}
+
+/* A partial build has one in-dialog recovery action, not a duplicate alert footer. */
+html body.settings-tabs dialog.app-builder[open][data-recovery=true] .builder-shell-footer>.builder-completion-notice[data-state=partial]{display:none!important}
+html body.settings-tabs dialog.app-builder[data-recovery=true] #builderReset{display:none!important}
