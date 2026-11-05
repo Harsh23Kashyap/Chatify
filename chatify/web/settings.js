@@ -1008,6 +1008,16 @@ document.addEventListener("focusin", e => {
     pending=true;
     requestAnimationFrame(()=>requestAnimationFrame(()=>{pending=false;keepCaret()}));
   }
-  document.addEventListener('focusin',e=>{if(e.target.matches?.('#col .cm-content'))queue()});
+  // CodeMirror can resize its nested viewport after focus/selection settles.
+  // Observe that viewport too, so delayed measurement cannot hide the caret.
+  const caretResize=new ResizeObserver(()=>keepCaret());
+  document.addEventListener('focusin',e=>{
+    caretResize.disconnect();
+    if(e.target.matches?.('#col .cm-content')){
+      const scroller=e.target.closest('.cm-scroller');
+      if(scroller)caretResize.observe(scroller);
+      queue();
+    }
+  });
   document.addEventListener('selectionchange',()=>{if(document.activeElement?.matches?.('#col .cm-content'))queue()});
 })();

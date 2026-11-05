@@ -1214,7 +1214,7 @@ body.settings-tabs .editor-choice{transition:background-color 160ms cubic-bezier
 /* Keep the category label readable through the result-set fade. */
 .emoji-dialog .emoji-tabs button{transition:none!important}
 html body.settings-tabs.settings-appearance-active #pvbox iframe#pv{height:900px!important;min-height:900px!important;max-height:none!important}
-@media(max-width:760px){html body.settings-tabs.settings-appearance-active #pvbox iframe#pv{height:1100px!important;min-height:1100px!important}}
+@media(max-width:760px){html body.settings-tabs.settings-appearance-active #pvbox iframe#pv{height:1200px!important;min-height:1200px!important}}
 
 /* Color feedback stays on the swatch and the changed readability row. */
 .crgrid .crs{transition:background-color 160ms ease-out,color 160ms ease-out}

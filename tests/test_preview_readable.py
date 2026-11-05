@@ -4,6 +4,6 @@ class PreviewReadable(unittest.TestCase):
   root=pathlib.Path(__file__).resolve().parents[1]/'chatify/web'
   css=(root/'settings.css').read_text();chat=(root/'style.css').read_text()
   self.assertIn('settings-appearance-active #pvbox iframe#pv{height:900px!important',css)
-  self.assertIn('height:1100px!important;min-height:1100px!important',css)
+  self.assertIn('height:1200px!important;min-height:1200px!important',css)
   self.assertIn('html.preview .bubble .a,html.preview .bubble .a p',chat)
   self.assertIn('grid-template-columns:60px minmax(0,1fr)',chat)

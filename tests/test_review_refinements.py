@@ -11,7 +11,7 @@ class ReviewRefinements(unittest.TestCase):
   self.assertIn('["calm","none"].includes(t.motion)',settings)
   self.assertIn('["calm","none"].includes(theme.motion)',settings)
   self.assertIn('if(trigger?.classList.contains("cite"))',app)
-  self.assertIn('result ? "Reply ready"',app)
+  self.assertIn('result ? (result.model_status === "output_limit" ? "Incomplete answer: output limit reached" : "Reply ready")',app)
  def test_original_palette_and_scoped_modal(self):
   css=(Path(__file__).resolve().parents[1]/'chatify/web/style.css').read_text().split('/* Reviewed hierarchy')[1]
   self.assertNotIn('#d97706',css)
