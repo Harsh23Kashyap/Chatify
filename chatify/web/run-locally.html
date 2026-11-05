@@ -12,7 +12,7 @@
 .rl-step h3::before{counter-increment:s;content:counter(s) ". ";color:#7b9c79}
 .rl-step p{margin:6px 0;color:#3c5548;line-height:1.6}
 .rl-step code{background:#eaf0e6;border-radius:6px;padding:2px 7px;font:600 13px ui-monospace,Menlo,monospace}
-.rl-step pre{max-width:100%;white-space:pre-wrap;word-break:break-word;overflow-wrap:anywhere;background:#173f35;color:#f4f8ee;border-radius:10px;padding:12px 16px;font:500 13px/1.5 ui-monospace,Menlo,monospace}
+.rl-step pre{max-width:100%;white-space:pre;word-break:normal;overflow-wrap:normal;overflow-x:auto;background:#173f35;color:#f4f8ee;border-radius:10px;padding:12px 16px;font:500 13px/1.5 ui-monospace,Menlo,monospace}
 .rl-tips{border-left:4px solid #d7e6a8;background:#f7f9f2;border-radius:0 14px 14px 0;padding:16px 20px;margin:22px 0}
 .rl-tips h3{margin:0 0 8px;font:600 17px Fraunces,Georgia,serif;color:#173f35}
 .rl-tips li{margin:7px 0;color:#3c5548;line-height:1.55}
@@ -47,7 +47,7 @@ html[data-theme=dark] a{color:#a8d4b6}
 </div>
 <div class="rl-steps">
 <section class="rl-step"><h3>Open a command window</h3><p><strong>Mac:</strong> press Cmd+Space, type <code>Terminal</code>, press Return. <strong>Windows:</strong> open Start, type <code>PowerShell</code>, open it. <strong>Linux:</strong> open Terminal from your app menu.</p></section>
-<section class="rl-step"><h3>Install uv once</h3><p>uv is the small installer Chatify uses. You only do this the first time.</p><p><strong>Mac / Linux:</strong></p><pre>curl -LsSf https://astral.sh/uv/install.sh | sh</pre><p><strong>Windows PowerShell:</strong></p><pre>powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"</pre><p>When it finishes, close and reopen the command window, then check it worked:</p><pre>uv --version</pre><p>You should see a version number. If you see "command not found", the window was not reopened yet.</p></section>
+<section class="rl-step"><h3>Install uv once</h3><p>uv is the small installer Chatify uses. You only do this the first time. Each dark box is one command; scroll sideways to read a long line.</p><p><strong>Mac / Linux:</strong></p><pre>curl -LsSf https://astral.sh/uv/install.sh | sh</pre><p><strong>Windows PowerShell:</strong></p><pre>powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"</pre><p>When it finishes, close and reopen the command window, then check it worked:</p><pre>uv --version</pre><p>You should see a version number. If you see "command not found", the window was not reopened yet.</p></section>
 <section class="rl-step"><h3>Run the one command</h3><p>Paste this and press Enter:</p><div class="rl-cmd"><code id="mainCmd">uvx --from chatify-app chatify start</code><button class="rl-copy" data-copy="mainCmd">Copy</button></div><p>The first run downloads Chatify; after that it starts in seconds.</p></section>
 <section class="rl-step"><h3>Check it worked</h3><p>Your browser opens your new app automatically. A short guide appears on first launch: you can skip it at any time, and it never locks the app while it is open. Ask a question in the box at the bottom of the Chat page.</p></section>
 </div>

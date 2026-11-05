@@ -1097,3 +1097,6 @@ html.no-sr #toolsDictate{display:none}
 .main>#pipelineStatus[hidden][data-state=done]{display:block;visibility:hidden}
 /* Streaming owns follow-bottom and reading position; retiring thinking rows must not re-anchor the viewport. */
 .thread:has(#live){overflow-anchor:none}
+
+/* Navigation remains a full touch target without changing fine-pointer layout. */
+@media(pointer:coarse){html body:has(#navToggle) .nav-toggle{width:44px;height:44px;min-width:44px;min-height:44px}}
