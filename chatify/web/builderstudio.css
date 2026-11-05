@@ -6,7 +6,7 @@ dialog.app-builder .settings-help-head small{letter-spacing:.18em;font-size:10px
 dialog.app-builder #builderClose{border-radius:999px;font-size:12px;min-height:38px;padding:6px 14px;box-shadow:none}
 .builder-intro{font:600 clamp(27px,4vw,44px)/1.12 Fraunces,Georgia,serif!important;letter-spacing:-.035em;margin:24px 0 8px!important;max-width:620px;color:var(--studio-ink)}.builder-caption{font-size:13px!important;color:var(--studio-muted);margin:0 0 24px!important}
 .builder-steps{display:flex;gap:0;padding:14px 0;margin:0;border-bottom:1px solid var(--studio-rule)}dialog.app-builder .builder-steps button{border-radius:0;min-height:40px;background:transparent;border:0;border-bottom:2px solid transparent;font-size:12px;text-align:left;color:#5b6d5d;box-shadow:none;padding:8px 12px}dialog.app-builder .builder-steps [aria-current=step]{background:transparent;color:#173f35;border-bottom-color:#173f35;font-weight:700}dialog.app-builder .builder-steps button:disabled{opacity:.5}
-dialog.app-builder #builderProvider{font-size:11px;padding:10px 0;border:0;background:transparent;border-radius:0;color:#627464;margin:10px 0;border-bottom:1px dashed #ced7c9}
+dialog.app-builder #builderProvider{font-size:11px;padding:10px 0;border:0;background:transparent;border-radius:0;color:var(--desk-muted,#627464);margin:10px 0;border-bottom:1px dashed #ced7c9}
 dialog.app-builder .builder-start{position:relative;margin:12px 0}dialog.app-builder .builder-start button{font-size:12px;padding:8px 12px;min-height:38px;border:1px dashed #adbfa5;border-radius:8px;background:transparent;box-shadow:none}
 #builderDescribe>label{font-size:11px!important;text-transform:uppercase;letter-spacing:.09em;color:#4c6654}dialog.app-builder select{margin:8px 0 20px;background:#f1f3e8;border-radius:10px}dialog.app-builder #builderBrief{min-height:140px;background:#fffdf7;border:1px solid #9db397;border-radius:14px;font-size:15px;line-height:1.6;padding:16px;box-shadow:0 4px 0 #e4eadb}dialog.app-builder #builderBrief:focus{outline:2px solid #173f35;outline-offset:3px}
 .builder-message{border:0;border-left:2px solid #94aa83;border-radius:0;background:transparent;padding:6px 16px;margin:18px 0}.builder-message small{font-size:9px;letter-spacing:.13em}.builder-message p{font-size:14px;line-height:1.65}.builder-message.user{background:#edf1e5;border-radius:0 12px 12px 0;border-left-color:#173f35}
@@ -315,16 +315,16 @@ dialog.app-builder .builder-useapp-status[data-state=error]{color:#9a3b2e;font-w
 
 /* Explicit source plan in the existing builder, no automatic activation. */
 .builder-source-plan{margin:12px 0;padding:12px;border:1px solid #cdd9cf;border-radius:10px;min-width:0;font-size:13px;line-height:1.5}
-.builder-source-plan legend{font-weight:700;padding:0 4px;color:#173f35}
+.builder-source-plan legend{font-weight:700;padding:0 4px;color:var(--desk-ink,#173f35)}
 .builder-source-plan p{margin:0 0 10px}
 .builder-source-plan label{display:flex!important;gap:10px;align-items:flex-start;margin:8px 0;font-weight:400;white-space:normal}
 .builder-source-plan input[type=checkbox]{flex:0 0 auto;width:18px;height:18px;margin-top:2px}
 .builder-source-plan span{overflow-wrap:anywhere}
 
 body .cfg-composer .builder-source-options{margin:12px 0;color:#fffdf4}body .cfg-composer .builder-source-options summary{cursor:pointer;font-weight:600;padding:8px 0}
-body .cfg-composer .builder-source-plan,dialog.app-builder .builder-source-plan{background:#f8faf3;color:#173f35!important;grid-column:1/-1;display:block!important}
-body .cfg-composer .builder-source-plan legend,body .cfg-composer .builder-source-plan p{color:#173f35!important;display:block!important;visibility:visible!important;height:auto!important;opacity:1!important}
-body .cfg-composer .builder-source-plan label,dialog.app-builder .builder-source-plan label{display:flex!important;flex-direction:row!important;gap:10px!important;align-items:flex-start!important;font-weight:400!important;color:#173f35!important}
+body .cfg-composer .builder-source-plan,dialog.app-builder .builder-source-plan{background:var(--desk-surface,#f8faf3);color:var(--desk-ink,#173f35)!important;grid-column:1/-1;display:block!important}
+body .cfg-composer .builder-source-plan legend,body .cfg-composer .builder-source-plan p{color:var(--desk-ink,#173f35)!important;display:block!important;visibility:visible!important;height:auto!important;opacity:1!important}
+body .cfg-composer .builder-source-plan label,dialog.app-builder .builder-source-plan label{display:flex!important;flex-direction:row!important;gap:10px!important;align-items:flex-start!important;font-weight:400!important;color:var(--desk-ink,#173f35)!important}
 body .cfg-composer .builder-source-plan input[type=checkbox],dialog.app-builder .builder-source-plan input[type=checkbox]{appearance:auto!important;border-radius:2px!important;flex:0 0 18px;width:18px!important;height:18px!important;margin:2px 0 0!important}
 
 body .cfg-composer .builder-source-plan legend{position:static!important;transform:none!important;clip:auto!important;clip-path:none!important;max-height:none!important;font-size:13px!important;line-height:1.5!important;overflow:visible!important}
@@ -439,7 +439,7 @@ body .cfg-composer .cfg-refine-consent>span{position:static!important;display:bl
 html body dialog.app-builder .builder-step-guide{flex:none}
 .workspace-first-setup{padding:24px;background:#f1f5e9;border:1px solid #ccd7c0;border-radius:12px;margin:24px 0;color:#173f35}.workspace-first-setup h2{font:600 25px/1.2 Fraunces,Georgia,serif;margin:0 0 16px}.workspace-first-setup ol{padding-left:24px;max-width:85ch;font:400 14px/1.6 'DM Sans',sans-serif}.workspace-first-setup li+li{margin-top:8px}.workspace-first-setup>div{display:flex;gap:16px;flex-wrap:wrap}.workspace-first-setup a{display:inline-flex;min-height:44px;align-items:center;color:#173f35;font-weight:600;text-underline-offset:4px}
 /* Build studio: a vivid cobalt/citrus workspace, separate from the chat theme. */
-body:has(#cfgtop){--studio-ink:#112c51;--studio-blue:#124de0;--studio-cyan:#39d7ed;--studio-orange:#ff9c38;--studio-paper:#f4f7ff}
+body:has(#cfgtop){--studio-ink:var(--desk-ink,#112c51);--studio-blue:#124de0;--studio-cyan:#39d7ed;--studio-orange:#ff9c38;--studio-paper:#f4f7ff}
 body:has(#cfgtop) main.card{background:#f7f9ff;border-color:#d4def4;color:var(--studio-ink)}
 body .cfg-composer{background:#1136a0;border-color:#1136a0;color:#fff}
 body .cfg-composer h2,body .cfg-composer label,body .cfg-composer .cfg-idea-guide,body .cfg-composer .cfg-idea-status{color:#fff}

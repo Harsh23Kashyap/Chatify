@@ -470,7 +470,7 @@ html[data-motion=none] .fresh.row:has(.bubble.none),html[data-motion=calm] .fres
  .side .list .item .t{grid-column:1;grid-row:1;min-width:0}
  .side .list .item .acts{position:static;translate:none;opacity:1;visibility:visible;pointer-events:auto;grid-column:2;grid-row:1;align-self:center}
  .side .list .item:has(.tm) .acts{grid-row:1/3}
- .side .list .item .tm,.side .list .item.on .tm,.side .list .item:hover .tm,.side .list .item:focus-within .tm{display:block;position:static;grid-column:1;grid-row:2;margin:0;padding:0;visibility:visible;text-align:left}
+ .side .list .item .tm,.side .list .item.on .tm,.side .list .item.on:has(.tm) .tm,.side .list .item:hover .tm,.side .list .item:focus-within .tm{display:block;position:static;grid-column:1;grid-row:2;margin:0;padding:0;visibility:visible;text-align:left}
  .side .list .item.on .acts{grid-column:1/-1;grid-row:2;justify-content:flex-end;align-self:start}
  .side .list .item.on:has(.tm) .tm{visibility:hidden}
 }
@@ -486,3 +486,28 @@ html[data-motion=none] button:active,html[data-motion=calm] button:active,html[d
 .hero .av{animation:m-tick .5s var(--ease) .35s}
 @media(min-width:861px){html:not([data-sidebar=hidden]) .side{animation:m-up .3s var(--ease) both .04s}}
 html[data-toolbar=hide] .toolbar{animation:none}
+
+/* Narrow history gives titles a full line. Reserve action space before focus,
+   so keyboard/hover never moves another row. Chat-selected colors stay unchanged. */
+.side .list{container-type:inline-size}
+@container(max-width:240px){
+ .side .list .item{display:grid;grid-template-columns:minmax(0,1fr) auto;grid-template-rows:auto minmax(32px,auto);column-gap:4px;row-gap:4px}
+ .side .list .item .t,.side .list .item.on .t,.side .list .item:hover .t,.side .list .item:focus-within .t{grid-column:1/-1;grid-row:1;max-width:100%;width:100%;min-width:0}
+ .side .list .item .acts{position:static;translate:none;grid-column:2;grid-row:2;justify-self:end}
+ .side .list .item .tm,.side .list .item.on .tm,.side .list .item.on:has(.tm) .tm,.side .list .item:hover .tm,.side .list .item:focus-within .tm{grid-column:1;grid-row:2;position:static;margin:0;padding:0;visibility:visible}
+}
+@media(hover:none){
+ .side .list .item,.side .list .item.on,.side .list .item:focus-within{row-gap:4px}
+ .side .list .item .t,.side .list .item.on .t,.side .list .item:hover .t,.side .list .item:focus-within .t{grid-column:1/-1;grid-row:1;max-width:100%;width:100%}
+ .side .list .item .acts,.side .list .item.on .acts,.side .list .item:has(.tm) .acts{grid-column:2;grid-row:2;justify-self:end;justify-content:flex-end;align-self:center}
+ .side .list .item .tm,.side .list .item.on .tm,.side .list .item.on:has(.tm) .tm,.side .list .item:hover .tm,.side .list .item:focus-within .tm{grid-column:1;grid-row:2;visibility:visible}
+}
+@container(max-width:190px){
+ .side .list .item{grid-template-rows:auto minmax(17px,auto) minmax(32px,auto)}
+ .side .list .item:has(.tm) .tm{grid-column:1/-1;grid-row:2;justify-self:start}
+ .side .list .item .acts,.side .list .item.on .acts,.side .list .item:has(.tm) .acts{grid-column:1/-1;grid-row:3;justify-self:end}
+}
+@media(hover:none){@container(max-width:190px){
+ .side .list .item{row-gap:4px;padding-left:2px;padding-right:2px;grid-template-rows:auto minmax(17px,auto) minmax(44px,auto)}
+ .side .list .item .t,.side .list .item .tm{padding-left:8px;box-sizing:border-box}
+}}
