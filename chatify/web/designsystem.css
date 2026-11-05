@@ -245,10 +245,26 @@ html body:is(.settings-tabs,.chatify-settings-shell,.chatify-settings-shell) dia
 html body:is(.settings-tabs,.chatify-settings-shell,.chatify-settings-shell) dialog.app-builder .builder-start button{background:transparent!important;color:var(--ui-link)!important;border-color:var(--ui-control)!important}
 html body:is(.settings-tabs,.chatify-settings-shell,.chatify-settings-shell) dialog.app-builder #builderFresh.builder-fresh{background:transparent!important;color:var(--ui-link)!important;border-color:var(--ui-control)!important}
 /* Recovery keeps one summary, the failure details and the cost caveat. */
-html body:is(.settings-tabs,.chatify-settings-shell,.chatify-settings-shell) dialog.app-builder.has-build:not(.is-building) #builderProgress .builder-metrics>p:first-of-type{display:none}
+html body:is(.settings-tabs,.chatify-settings-shell,.chatify-settings-shell) dialog.app-builder.has-build:not(.is-building) #builderProgress .builder-metrics>p:first-of-type{visibility:visible}
 html body:is(.settings-tabs,.chatify-settings-shell,.chatify-settings-shell) dialog.app-builder .builder-user-todos .go{background:transparent!important;color:var(--ui-link)!important;border:1px solid var(--ui-control)!important;box-shadow:none!important}
 html body:is(.chatify-info,:has(.about-nav)) .feature-art .scene-scan{stroke:var(--ui-link)!important}
 html body:is(.chatify-info,:has(.about-nav)) .feature-art .scene-scan circle{fill:var(--ui-action)!important;stroke:var(--ui-link)!important}
 html body:is(.settings-tabs,.chatify-settings-shell,.chatify-settings-shell) dialog.app-builder .builder-content .builder-user-todos button.go.ghost{background:transparent!important;color:var(--ui-link)!important;border:1px solid var(--ui-control)!important;box-shadow:none!important}
 html body:is(.settings-tabs,.chatify-settings-shell,.chatify-settings-shell) dialog.app-builder #builderProvider>button.go.ghost{display:block;margin:10px 0 0!important;background:transparent!important;color:var(--ui-link)!important;border:1px solid var(--ui-control)!important}
 html body:is(.settings-tabs,.chatify-settings-shell,.chatify-settings-shell) dialog.app-builder.has-build:not(.is-building) .builder-step-guide{display:none}
+/* Secondary settings controls keep a neutral surface, including their labels. */
+html body:is(.settings-tabs,.chatify-settings-shell) button.go.ghost{background:transparent!important;color:var(--ui-link)!important;border:1px solid var(--ui-control)!important}
+html body:is(.settings-tabs,.chatify-settings-shell) button.go.ghost small{color:var(--ui-muted)!important}
+html body:is(.settings-tabs,.chatify-settings-shell) :is(.sidebar-shortcuts,.chat-width-shortcuts) button.go.ghost[aria-pressed=true]{background:var(--ui-soft)!important;color:var(--ui-ink)!important}
+/* Reserve reading space as status text changes. Native scrolling stays available. */
+html body:is(.settings-tabs,.chatify-settings-shell) dialog.app-builder #builderProgress .builder-progress-copy>strong{block-size:2.5em!important}
+html body:is(.settings-tabs,.chatify-settings-shell) dialog.app-builder #builderProgress .builder-progress-copy>small{block-size:1.6em!important}
+html body:is(.settings-tabs,.chatify-settings-shell) dialog.app-builder #builderProgress .builder-remaining-work{block-size:3.2em!important}
+html body:is(.settings-tabs,.chatify-settings-shell) dialog.app-builder #builderProgress .builder-metrics>p:last-child{block-size:3.2em!important}
+html body:is(.settings-tabs,.chatify-settings-shell) .emoji-dialog .emoji-tabs button[aria-pressed=true]{background:var(--ui-action)!important;color:var(--ui-on-action)!important;border-color:var(--ui-action)!important}
+
+html body:is(.settings-tabs,.chatify-settings-shell) :is(.sidebar-shortcuts,.chat-width-shortcuts) button[aria-pressed=true]{outline-color:var(--ui-action)!important}
+html body:is(.settings-tabs,.chatify-settings-shell) :is(.sidebar-shortcuts,.chat-width-shortcuts) button:hover{border-color:var(--ui-action)!important}
+html body:is(.settings-tabs,.chatify-settings-shell) .sidebar-diagram{background:var(--ui-surface);border-color:var(--ui-control)}
+html body:is(.settings-tabs,.chatify-settings-shell) .sidebar-diagram i{background:var(--ui-line)}
+html body:is(.settings-tabs,.chatify-settings-shell) .sidebar-diagram>span{background:var(--ui-soft)}
