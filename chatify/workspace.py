@@ -28,7 +28,7 @@ def validate_archive(data):
   for turn in turns:
    if not isinstance(turn,dict) or set(turn)-{'question','answer','evidence','created','model_status'}:raise ValueError('Invalid turn fields')
    status=turn.get('model_status')
-   if status is not None and status not in ('ok','output_limit','cut','no_key','unreachable'):raise ValueError('Unknown model status')
+   if status is not None and status not in ('ok','output_limit','cut','no_key','unreachable','invalid_answer'):raise ValueError('Unknown model status')
    q,a=turn.get('question'),turn.get('answer')
    if not isinstance(q,str) or not isinstance(a,str) or len(q)>2000 or len(a)>100000:raise ValueError('Invalid question or answer')
    evidence=turn.get('evidence',[])

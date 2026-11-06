@@ -610,3 +610,70 @@ html body:is(.chatify-info,:has(.about-nav)) .feature-art{background:var(--ui-so
 html body:is(.chatify-info,:has(.about-nav)) .feature-art svg{stroke:var(--ui-link)!important}
 html body:is(.chatify-info,:has(.about-nav)) .feature-art .scene-halo{opacity:.35!important}
 html body:is(.chatify-info,:has(.about-nav)) #featureTabs button[aria-selected=true]{background:transparent!important;color:var(--ui-ink)!important;border-bottom:2px solid var(--ui-action)!important;box-shadow:none!important}
+
+/* Preserve editor and validation contracts beneath the shared shell typography. */
+html body.settings-tabs:has(#cfgtop) #col :is(#promptsEditor,#codeEditor,.workspace-fields) textarea{font-family:ui-monospace,SFMono-Regular,Menlo,monospace!important;line-height:1.6!important}
+html body.settings-tabs:has(#cfgtop) #col label.go.ghost.filebtn{background:var(--ui-input)!important;color:var(--ui-ink)!important;border:1px solid var(--ui-control)!important}
+html body.settings-tabs:has(#cfgtop) #loadedApp>summary{min-height:44px!important;box-sizing:border-box;align-content:center}
+@media(max-height:420px){html body.settings-tabs:has(#cfgtop) #col .sidebar-shortcuts button{min-height:64px!important;padding:8px!important;gap:4px!important}html body.settings-tabs:has(#cfgtop) #col .sidebar-shortcuts button .sidebar-diagram{height:24px!important;min-height:24px!important}}
+html body.settings-tabs:has(#cfgtop) #col #sec-colors input.hex[aria-invalid=true]{border-color:var(--ui-danger)!important;outline-color:var(--ui-danger)!important}
+@media(max-width:760px){html body.settings-tabs:has(#cfgtop) #cfgmode button{min-height:44px!important}}
+html body.settings-tabs:has(#cfgtop) #col .pipeline-editor-pane{background:var(--ui-surface)!important;border-color:var(--ui-line)!important;color:var(--ui-ink)!important}
+html body.settings-tabs:has(#cfgtop) .emoji-dialog .emoji-tabs button[aria-pressed=true]{background:var(--ui-action)!important;color:var(--ui-on-action)!important;border-color:var(--ui-action)!important}
+/* Standard settings triggers keep their short hover rhythm; scoped builder choice retains its 180ms reveal. */
+html body.settings-tabs:has(#cfgtop) #col .cs-btn{transition:background-color 140ms var(--ui-ease),border-color 140ms var(--ui-ease)!important}
+@media(prefers-reduced-motion:reduce){html body.settings-tabs:has(#cfgtop) #col .cs-btn{transition:none!important}}
+
+/* Keep cost, privacy and review instructions visible before their actions. */
+html body.settings-tabs:has(#cfgtop) #col .essential-help{display:block!important;font:400 14px/1.6 'DM Sans',sans-serif!important;color:var(--ui-muted)!important;background:var(--ui-soft)!important;border:1px solid var(--ui-line)!important;border-radius:8px;padding:12px 16px!important;margin:12px 0 16px!important;max-width:70ch}
+html body.settings-tabs:has(#cfgtop) #col .testrow{flex-wrap:wrap}
+html body.settings-tabs:has(#cfgtop) #col .testrow .essential-help{flex-basis:100%;max-width:none;margin:0 0 8px!important}
+
+/* Round 2: an editor's desk. The form is the working surface; preview is supporting context. */
+@media(min-width:1181px){
+ html body.settings-tabs:has(#cfgtop)>.card{width:min(1480px,calc(100% - 64px));max-width:1480px}
+ html body.settings-tabs:has(#cfgtop) .preview{padding-top:8px!important}
+}
+html body.settings-tabs:has(#cfgtop) #col .tile{border-radius:16px!important;padding:28px!important;box-shadow:0 2px 4px #30251b04!important}
+html body.settings-tabs:has(#cfgtop) #col .tile>.head{padding-bottom:20px!important;margin-bottom:4px!important}
+html body.settings-tabs:has(#cfgtop) #col .tile>.head b{font-size:22px!important;letter-spacing:-.025em!important}
+html body.settings-tabs:has(#cfgtop) #col .essential-help{background:transparent!important;border:0!important;border-radius:0;padding:0!important;margin:12px 0 20px!important;font-size:14px!important;line-height:1.65!important;max-width:68ch}
+html body.settings-tabs:has(#cfgtop) #col .provider-test-scope{padding:12px 0 12px 16px!important;border-inline-start:2px solid var(--ui-action)!important;margin:0 0 12px!important}
+html body.settings-tabs:has(#cfgtop) #col #sec-budget>p.essential-help{padding:12px 0 12px 16px!important;border-inline-start:2px solid var(--ui-line)!important}
+html body.settings-tabs:has(#cfgtop) #col #sec-budget .budget-section-title{margin-top:24px!important}
+html body.settings-tabs:has(#cfgtop) #col #sec-model>#seg{gap:8px!important;margin-bottom:16px!important}
+html body.settings-tabs:has(#cfgtop) #menu .nav-group a{padding:14px 16px!important;gap:12px!important;border-radius:10px!important}
+html body.settings-tabs:has(#cfgtop) #col .testrow{justify-content:flex-start!important;gap:8px!important;padding:12px 0 20px!important}
+html body.settings-tabs:has(#cfgtop) #col .testrow #testconn{margin:0!important}
+html body.settings-tabs:has(#cfgtop) .preview .frame{border-radius:14px!important;box-shadow:0 10px 32px #30251b0a!important}
+html[data-theme=dark] body.settings-tabs:has(#cfgtop) .preview .frame{box-shadow:0 10px 32px #00000020!important}
+@media(max-width:760px){html body.settings-tabs:has(#cfgtop) #col .tile{padding:20px!important}}
+html body.settings-tabs:has(#cfgtop) #col #sec-model .section-summary{padding:0!important;border:0!important;margin:0 0 8px!important}
+html body.settings-tabs:has(#cfgtop) #col #sec-model>.essential-help{margin-top:0!important}
+html[data-theme=dark] body.settings-tabs:has(#cfgtop) #seg button{background:var(--ui-input)!important;color:var(--ui-ink)!important;border-color:var(--ui-control)!important}
+html[data-theme=dark] body.settings-tabs:has(#cfgtop) #seg button[aria-checked=true]{background:var(--ui-soft)!important;border-color:var(--ui-action)!important}
+html[data-theme=dark] body.settings-tabs:has(#cfgtop) :is(.pv-model-card,.model-recommendations,.model-rec,.provider-recommendations){background:var(--ui-surface)!important;color:var(--ui-ink)!important}
+html body.settings-tabs:has(#cfgtop) #col .range-precise{display:flex!important;align-items:center;justify-content:flex-end;gap:12px;margin:0 0 16px;font:400 13px/1.5 'DM Sans',sans-serif;color:var(--ui-muted)}
+html body.settings-tabs:has(#cfgtop) #col .tile input.range-exact{width:88px!important;min-width:0;min-height:40px!important;text-align:right;box-sizing:border-box;padding:6px 10px!important;font-variant-numeric:tabular-nums}
+html body.settings-tabs:has(#cfgtop) #col .tile input.range-exact[aria-invalid=true]{border-color:var(--ui-danger)!important}
+html body.settings-tabs:has(#cfgtop) #col .range-control-group{min-width:0}
+html body.settings-tabs:has(#cfgtop) #col .range-control-group>label:first-child{margin-bottom:0!important}
+html body.settings-tabs:has(#cfgtop) #col label.range-precise{display:flex!important;flex-direction:row!important;justify-content:flex-end!important;align-items:center!important;gap:12px!important;margin:0 0 20px!important;width:100%;font-size:13px!important;font-weight:400!important;color:var(--ui-muted)!important}
+html body.settings-tabs:has(#cfgtop) #col label.range-precise input{margin:0!important;flex:0 0 88px}
+/* A range has one visible value, in its editable companion, in both themes. */
+html body.settings-tabs:has(#cfgtop) #col .range-control-group output{position:absolute!important;min-width:0!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip-path:inset(50%)!important;white-space:nowrap!important;border:0!important}
+@media(min-width:1181px){html body.settings-tabs:has(#cfgtop):not(.editing-pipeline):not(.prompt-pane-active):not(.settings-preview-hidden):not(.loading-nerd):not(:has(#nerdReview .import-grid)) .layout{grid-template-columns:224px minmax(0,1fr) 384px!important;gap:24px!important}}
+/* Settings utilities precede panel navigation in DOM and visual reading order. */
+@media(max-width:760px){html body.settings-tabs:has(#cfgtop) main.card>:is(.settings-utilities,#loadedApp,.preview-toggle,#lead){order:0!important}html body.settings-tabs:has(#cfgtop) main.card>.preview-toggle{margin:8px 0!important}}
+html body.settings-tabs:has(#cfgtop) #col #sec-model .two{gap:20px!important;margin:20px 0!important}
+html body.settings-tabs:has(#cfgtop) #col #sec-model .range-control-group>label:first-child{row-gap:4px!important}
+html body.settings-tabs:has(#cfgtop) #col #sec-model .range-control-group>label:first-child>input[type=range]{margin:0!important;min-height:32px!important}
+html body.settings-tabs:has(#cfgtop) #col #sec-model .range-control-group h4{margin:8px 0!important}
+html body.settings-tabs:has(#cfgtop) #col .range-control-group label.range-precise{margin:0!important}
+@media(max-width:760px){html body.settings-tabs:has(#cfgtop) #pvcloud .cpick{display:grid!important;grid-template-columns:28px minmax(0,1fr) auto!important;gap:12px!important;align-items:start!important}html body.settings-tabs:has(#cfgtop) #pvcloud .cpick>button{grid-column:3!important;grid-row:1!important;align-self:center;margin:0!important}html body.settings-tabs:has(#cfgtop) #pvcloud .cpt{grid-column:2!important;min-width:0}}
+html body.settings-tabs.simple:has(#cfgtop) #col .range-control-group:has(>label.simple-temperature-hidden){display:none!important}
+
+/* Validation must outrank shared input normalization in both themes. */
+html body.settings-tabs:has(#cfgtop) #col #sec-model input.range-exact[aria-invalid=true],html body.settings-tabs:has(#cfgtop) #col #sec-budget input[aria-invalid=true]{border-color:var(--ui-danger)!important;outline-color:var(--ui-danger)!important}
+/* Status-count pills share shell surfaces, including dark mode. */
+html body.settings-tabs:has(#cfgtop) #col .status-stats span{background:var(--ui-surface)!important;border-color:var(--ui-line)!important;color:var(--ui-ink)!important}

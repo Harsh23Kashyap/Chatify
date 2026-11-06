@@ -431,7 +431,7 @@ class Store:
             for t in (turns or [])[:500]:
                 if not isinstance(t, dict) or not t.get("question") or not t.get("answer"):
                     continue
-                if t.get("model_status") is not None and t["model_status"] not in ("ok", "output_limit", "cut", "no_key", "unreachable"):
+                if t.get("model_status") is not None and t["model_status"] not in ("ok", "output_limit", "cut", "no_key", "unreachable", "invalid_answer"):
                     raise ValueError("Unknown model status")
                 evidence = t.get("evidence")
                 if evidence is not None and (not isinstance(evidence, list) or any(not isinstance(e, dict) for e in evidence)):

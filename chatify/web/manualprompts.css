@@ -1,0 +1,60 @@
+/* Local-only exploration. The earlier manual shell and other sections remain unchanged. */
+html body.settings-tabs:has(#cfgtop) #col #sec-prompts.manual-prompt-candidate{border:0!important;border-radius:0!important;background:transparent!important;padding:16px 24px!important;box-shadow:none!important}
+html body.settings-tabs:has(#cfgtop) #col #sec-prompts.manual-prompt-candidate>.head{margin-bottom:16px!important;padding-bottom:0!important;border:0!important}
+html body.settings-tabs:has(#cfgtop) #col #sec-prompts.manual-prompt-candidate>.help{display:none!important}
+.manual-step-picker{position:relative;margin:0 0 16px;border-bottom:1px solid var(--ui-line,#dacdc5)}
+.manual-step-trigger{display:flex;align-items:center;gap:16px;min-height:48px;cursor:pointer;list-style:none;padding:8px 0;color:var(--ui-ink,#332d29);font-size:16px;font-weight:600}
+.manual-step-trigger::-webkit-details-marker{display:none}.manual-step-trigger svg{width:20px;height:20px;margin-left:auto}.manual-step-picker[open] .manual-step-trigger svg{transform:rotate(180deg)}
+.manual-step-count,.manual-step-number{font:12px/1.5 ui-monospace,SFMono-Regular,Menlo,monospace;color:var(--ui-muted,#746c65);font-variant-numeric:tabular-nums}
+html body.settings-tabs:has(#cfgtop) #col #sec-prompts.manual-prompt-candidate .manual-step-picker:not([open])>.editor-list{display:none!important}
+html body.settings-tabs:has(#cfgtop) #col #sec-prompts.manual-prompt-candidate .manual-step-picker[open]>.editor-list{display:flex!important;flex-direction:column!important;position:absolute;top:100%;left:0;right:0;z-index:15;gap:0!important;padding:8px!important;margin:0!important;background:var(--ui-surface,#fffdfa);border:1px solid var(--ui-line,#dacdc5);border-radius:8px;box-shadow:0 12px 28px #332a2118;max-height:360px;overflow:auto}
+html body.settings-tabs:has(#cfgtop) #col #sec-prompts.manual-prompt-candidate .editor-choice{display:flex!important;align-items:center;gap:16px;min-height:36px!important;padding:8px 12px!important;border:0!important;border-radius:4px!important;box-shadow:none!important;color:var(--ui-ink,#332d29)!important;background:transparent!important;text-align:left}
+html body.settings-tabs:has(#cfgtop) #col #sec-prompts.manual-prompt-candidate .editor-choice[aria-pressed=true]{background:var(--ui-soft,#f1e9e1)!important}
+html body.settings-tabs:has(#cfgtop) #col #sec-prompts.manual-prompt-candidate .editor-choice b{font-size:14px;font-weight:500!important}
+html body.settings-tabs:has(#cfgtop) #col #sec-prompts.manual-prompt-candidate .pipeline-editor-pane{margin-top:0!important}
+html body.settings-tabs:has(#cfgtop) #col #sec-prompts.manual-prompt-candidate .selected-editor{border:0!important;background:none!important;border-radius:0!important;box-shadow:none!important;padding:0!important}
+html body.settings-tabs:has(#cfgtop) #col #sec-prompts.manual-prompt-candidate .selected-editor>summary{display:none!important}
+html body.settings-tabs:has(#cfgtop) #col #sec-prompts.manual-prompt-candidate .sbody{padding:0!important;border:0!important}
+html body.settings-tabs:has(#cfgtop) #col #sec-prompts.manual-prompt-candidate .manual-prompt-actions{display:flex;align-items:center;gap:8px;margin:0 0 16px!important;min-height:40px;flex-wrap:wrap}
+html body.settings-tabs:has(#cfgtop) #col #sec-prompts.manual-prompt-candidate .manual-prompt-actions .testres{margin-left:auto;font-size:12px;color:var(--ui-muted,#746c65)}
+.manual-numbered-editor{display:flex;position:relative;overflow:hidden;border:1px solid var(--ui-line,#dacdc5);border-radius:8px;background:var(--ui-surface,#fffdfa);margin:16px 0}
+html body.settings-tabs:has(#cfgtop) #col #sec-prompts.manual-prompt-candidate .manual-numbered-editor textarea{flex:1!important;min-width:0!important;display:block!important;box-sizing:border-box!important;border:0!important;border-radius:0!important;background:transparent!important;margin:0!important;padding:16px!important;font:14px/24px ui-monospace,SFMono-Regular,Menlo,monospace!important;min-height:240px!important;max-height:400px!important;resize:vertical!important;box-shadow:none!important}
+.manual-line-gutter{width:40px;flex:none;background:var(--ui-soft,#f1e9e1);color:var(--ui-muted,#746c65);overflow:hidden;padding-top:16px;text-align:right;box-sizing:border-box;font:12px/24px ui-monospace,SFMono-Regular,Menlo,monospace;user-select:none}.manual-line-gutter span{display:block;box-sizing:border-box;padding-right:12px}
+.manual-line-measure{position:absolute;left:-99999px;top:0;white-space:pre-wrap;overflow-wrap:break-word;visibility:hidden;padding:0;border:0;box-sizing:content-box}
+.manual-numbered-editor:focus-within{outline:2px solid var(--ui-action,#b63820);outline-offset:2px}
+.manual-step-trigger:focus-visible{outline:2px solid var(--ui-action,#b63820);outline-offset:2px}
+
+html body.settings-tabs:has(#cfgtop) #col #sec-prompts.manual-prompt-candidate .manual-step-trigger::before{content:none!important}
+html body.settings-tabs:has(#cfgtop) #col #sec-prompts.manual-prompt-candidate #promptsEditor{padding:0!important;border:0!important;border-radius:0!important;box-shadow:none!important;background:transparent!important}
+html body.settings-tabs:has(#cfgtop) #col #sec-prompts.manual-prompt-candidate .selected-editor>.sbody{background:transparent!important}
+html body.settings-tabs:has(#cfgtop) #col #sec-prompts.manual-prompt-candidate .manual-prompt-actions{background:transparent!important;border:0!important;box-shadow:none!important}
+html body.settings-tabs:has(#cfgtop) #col #sec-prompts.manual-prompt-candidate .manual-step-trigger{background:transparent!important}
+.manual-numbered-editor{padding-left:40px;box-sizing:border-box}.manual-line-gutter{position:absolute;inset:0 auto 0 0}
+/* Compact only the selected prompt work area. */
+html body.settings-tabs:has(#cfgtop) #col #sec-prompts.manual-prompt-candidate{padding-top:8px!important}
+html body.settings-tabs:has(#cfgtop) #col #sec-prompts.manual-prompt-candidate>.head{margin-bottom:8px!important}
+html body.settings-tabs:has(#cfgtop) #col #sec-prompts.manual-prompt-candidate>.section-summary{margin:0 0 8px!important}
+html body.settings-tabs:has(#cfgtop) #col #sec-prompts.manual-prompt-candidate .manual-step-picker{margin-bottom:8px!important}
+html body.settings-tabs:has(#cfgtop) #col #sec-prompts.manual-prompt-candidate .manual-step-trigger{min-height:40px!important;padding:4px 0!important}
+html body.settings-tabs:has(#cfgtop) #col #sec-prompts.manual-prompt-candidate .manual-prompt-actions{margin-bottom:8px!important}
+html body.settings-tabs:has(#cfgtop) #col #sec-prompts.manual-prompt-candidate .sbody>p.h{margin:8px 0!important;font-weight:400!important}
+html body.settings-tabs:has(#cfgtop) #col #sec-prompts.manual-prompt-candidate .manual-numbered-editor{margin:8px 0!important}
+html body.settings-tabs:has(#cfgtop) #col #sec-prompts.manual-prompt-candidate>.workspace-fields{border:0!important;border-top:1px solid var(--ui-line)!important;background:transparent!important;border-radius:0!important;padding-top:8px!important;margin-top:16px!important}
+html body.settings-tabs:has(#cfgtop) #col #sec-prompts.manual-prompt-candidate>.workspace-fields>summary{background:transparent!important;border:0!important;border-radius:0!important;padding:8px 0!important}
+html body.settings-tabs:has(#cfgtop) #col #sec-prompts.manual-prompt-candidate .manual-step-picker[open]>.editor-list{max-height:min(360px,50vh)!important}
+/* Selected mode follows its checked state, not a separately measured moving indicator. */
+html body.settings-tabs:has(#cfgtop) #cfgmode>.seg-ind{display:none!important}
+html body.settings-tabs:has(#cfgtop) #cfgmode>button[aria-checked=true]{background:var(--ui-surface)!important;box-shadow:inset 0 0 0 1px var(--ui-control)!important;color:var(--ui-ink)!important}
+html body.settings-tabs:has(#cfgtop) #cfgmode>button[aria-checked=false]{background:transparent!important;box-shadow:none!important;color:var(--ui-muted)!important}
+/* One owner of vertical rhythm inside the editor, without doubled flex gaps and margins. */
+html body.settings-tabs:has(#cfgtop) #col #sec-prompts.manual-prompt-candidate .sbody{gap:8px!important}
+html body.settings-tabs:has(#cfgtop) #col #sec-prompts.manual-prompt-candidate .sbody>p.h{margin:0!important}
+html body.settings-tabs:has(#cfgtop) #col #sec-prompts.manual-prompt-candidate .sbody>p.h:empty{display:none!important}
+html body.settings-tabs:has(#cfgtop) #col #sec-prompts.manual-prompt-candidate .manual-numbered-editor{margin:0!important}
+html body.settings-tabs:has(#cfgtop) #col #sec-prompts.manual-prompt-candidate .manual-prompt-actions{margin:0!important}
+html body.settings-tabs:has(#cfgtop) #col #sec-prompts.manual-prompt-candidate>.section-summary{display:none!important}
+html body.settings-tabs:has(#cfgtop) #col #sec-prompts.manual-prompt-candidate .sbody>p.h{margin:0!important}
+/* Preserve the existing short-viewport caret space at desktop browser zoom. */
+@media(max-height:420px){html body.settings-tabs:has(#cfgtop) #col #sec-prompts.manual-prompt-candidate .manual-numbered-editor textarea{min-height:64px!important;max-height:calc(100dvh - 144px)!important;overflow:auto!important}}
+/* Compacted help needs its own row at every viewport height, not only extreme zoom. */
+html body.settings-tabs:has(#cfgtop) #col #sec-prompts.manual-prompt-candidate .sbody>p.h.compact-help:has(>.info-tip){height:44px!important;min-height:44px!important}
