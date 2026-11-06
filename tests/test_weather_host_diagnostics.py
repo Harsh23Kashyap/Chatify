@@ -10,7 +10,7 @@ from chatify.store import Store
 from chatify.management import Management
 class Tests(unittest.TestCase):
  def engine(self):
-  cfg=schema.load(str(ROOT/'apps/weatherchat/app.yaml'));cfg['retrieval'].update(query_rewrite=False,query_expansion=False);cfg['provider']['type']='mock';return Engine(cfg,Store(':memory:'))
+  cfg=schema.load(str(ROOT/'apps/weatherchat/app.yaml'));cfg['sources']=[{'id':'open-meteo-weather','type':'python','label':'Historical Open-Meteo diagnostic fixture','entry':'weather_sources:open_meteo','weight':1.0}];cfg['retrieval'].update(query_rewrite=False,query_expansion=False);cfg['provider']['type']='mock';return Engine(cfg,Store(':memory:'))
  def test_errors_expose_only_fixed_stage_category_and_http_status(self):
   errors=[(urllib.error.HTTPError('https://secret.invalid/?key=PRIVATE',403,'PRIVATE',{},None),'http:403'),(urllib.error.URLError('PRIVATEhttps://secret.invalid'), 'network')]
   for url,stage in [(w.GEOCODE_URL,'geocoding'),(w.FORECAST_URL,'forecast')]:

@@ -73,7 +73,7 @@ class Management:
   if not isinstance(selected,list) or len(selected)>20 or any(s not in self.engine.connectors or not permissions.allowed(self.cfg,owner,s) for s in selected):raise ValueError('Choose configured sources')
   # Weather needs a named place to exercise geocoding and forecast endpoints.
   # Show the actual configured example in the consent review, never a hidden probe.
-  if kind=='preflight' and self.cfg.get('app',{}).get('id')=='weatherchat' and 'open-meteo-weather' in selected:
+  if kind=='preflight' and self.cfg.get('app',{}).get('id')=='weatherchat' and any(s in selected for s in ('open-meteo-weather','weatherapi-weather')):
    questions=[self.cfg['app']['examples'][0]]
   spec={'settings':self.fingerprint(),'sources':selected,'model':data.get('model') is True,'questions':questions}
   if kind=='smoke':spec['model']=True
@@ -105,7 +105,7 @@ class Management:
       result={'item':sid,'ok':not bool(errors),'count':len(rows),**(diagnosis(str(errors)) if errors else {'message':'Request completed. Empty results do not prove a failure.'})}
       # This code is assembled from fixed labels and an integer HTTP status only.
       # Never publish an arbitrary exception string, URL, response body or credential.
-      if sid=='open-meteo-weather':
+      if sid in ('open-meteo-weather','weatherapi-weather'):
        match=re.search(r'\[weather:(geocoding|forecast):(http:\d{3}|network|json)\]',str(errors))
        if match:result['message']+=' Weather source status: '+match.group(0)
       results.append(result)

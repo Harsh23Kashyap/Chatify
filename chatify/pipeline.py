@@ -1060,6 +1060,10 @@ class Engine:
 
     def weather_answer(self, question, evidence):
         from . import weather_contract
+        if evidence and all(e.get('source') == 'weatherapi-weather' for e in evidence):
+            if any(str(e.get('id','')).startswith('weatherapi-clarify-') for e in evidence):
+                return '\n\n'.join(e['text'] + ' [%s]' % e['n'] for e in evidence) + '\n\nWeather data by WeatherAPI.com.', 'ok'
+            from . import weatherapi_contract as weather_contract
         try:
             return weather_contract.synthesize(self.provider, question, evidence, self.stage_prompt("answer", self.cfg["prompt"]["system"])), "ok"
         except providers.ProviderError:
@@ -1620,7 +1624,7 @@ class Engine:
         elif re.search(r"publication dates?", q, re.I) and not any(e.get("year") for e in evidence):
             answer = "Publication dates are not provided in the retrieved source metadata. I cannot verify them from these passages."
             yield "token", answer
-        elif self.cfg.get("app", {}).get("id") == "weatherchat" and all(e.get("source") == "open-meteo-weather" and not str(e.get("id", "")).startswith("open-meteo-clarify-") for e in evidence):
+        elif self.cfg.get("app", {}).get("id") == "weatherchat" and all((e.get("source") == "open-meteo-weather" and not str(e.get("id", "")).startswith("open-meteo-clarify-")) or e.get("source") == "weatherapi-weather" for e in evidence):
             weather_contract_used = True
             answer, model_status = self.weather_answer(standalone, evidence)
             degraded = True  # Already contract-checked; no generic rewrite or second model call.
@@ -1751,7 +1755,7 @@ class Engine:
         elif re.search(r"publication dates?", q, re.I) and not any(e.get("year") for e in evidence):
             answer = "Publication dates are not provided in the retrieved source metadata. I cannot verify them from these passages."
             ledger = []
-        elif self.cfg.get("app", {}).get("id") == "weatherchat" and all(e.get("source") == "open-meteo-weather" and not str(e.get("id", "")).startswith("open-meteo-clarify-") for e in evidence):
+        elif self.cfg.get("app", {}).get("id") == "weatherchat" and all((e.get("source") == "open-meteo-weather" and not str(e.get("id", "")).startswith("open-meteo-clarify-")) or e.get("source") == "weatherapi-weather" for e in evidence):
             weather_contract_used = True
             answer, model_status = self.weather_answer(standalone, evidence)
             degraded = True  # Already contract-checked; no generic rewrite or second model call.

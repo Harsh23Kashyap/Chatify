@@ -1,62 +1,58 @@
 # WeatherChat
 
-Live weather for any place you name, with the source cited. Built on Chatify.
+Current conditions and a 3-day daily forecast for a place named in your question.
+Weather data by [WeatherAPI.com](https://www.weatherapi.com/).
 
-- Ask: "What is the weather in Bangalore right now?", "Will it rain in Mumbai tomorrow?",
-  "How hot is Delhi this week?"
-- When a place resolves, answers cite Open-Meteo data retrieved at ask time (cached
-  up to 15 minutes; each source shows its Retrieved time): current conditions, today
-  and the next hours, tomorrow, and a 7-day forecast, with validity and forecast
-  times and the place's own timezone. Units are metric (degrees C, mm, km/h).
-  Current conditions are Open-Meteo model data valid at the stated time, not station
-  observations; precipitation is reported as the sum over the minutes up to that
-  time. When no place resolves, the app says so instead of citing weather, and when
-  a name matches several places evenly (for example Cambridge), it lists the
-  candidates and fetches no weather for any of them. Answers are model-generated:
-  the app checks citations against the sources and labels answers it cannot
-  confirm, but labels like "Not independently verified" are part of the UI, not a
-  guarantee of correctness.
-- The place comes only from your question. If none is named or found, the app asks
-  you to name one; it never assumes a location. Renamed cities resolve to their
-  current names (Bangalore -> Bengaluru, Bombay -> Mumbai, ...); ambiguous names
-  list the alternatives so you can ask again more specifically.
+- Current fields: temperature, feels-like temperature, relative humidity and wind speed.
+- Daily fields: high/low temperature, rain chance, total precipitation and maximum wind.
+  The 3-day window and "next N days" include today in the named place's timezone.
+  Supported time requests: current/now, today, tomorrow, next 1-3 days or an ISO date
+  within those three days. Weekdays, named months, hours and other time expressions
+  fail closed instead of silently returning current conditions.
+- Every answer binds selected native source fields to the exact place, time, timezone,
+  units and citation. Forecasts are predictions, including a 0% rain chance, not guarantees.
+- Current precipitation is not exposed because its accumulation period was not documented.
+  Hourly answers, sunrise/UV, advice and a full-week forecast are not supported here.
+- A matching location must come from the question, never the server's IP or assumed location.
+  Ambiguous names return candidates without fetching a forecast. Ask one place at a time.
+- Retrieved data can be cached for 15 minutes. Each source shows its retrieval time and
+  the provider's current-data update time or forecast date. A retrieved timestamp is not
+  a guarantee of freshness or accuracy. Do not use this app for safety-critical decisions;
+  consult official governmental weather reports and advisories.
 
-## Data source and its conditions
+## Setup and plan limits
 
-Weather data: [Open-Meteo](https://open-meteo.com/) free API - no key required.
-Location names: GeoNames via Open-Meteo geocoding. Data licence: CC BY 4.0
-(attribution required, which is why the footer and every answer credit
-"Weather data by Open-Meteo.com").
+Set `WEATHERAPI_API_KEY` in the server environment. Keep this key private, never in a
+question, source URL, shared config, screenshot or exported chat. Outbound API URLs
+carry the key only in the server request; public-safe failures omit the URL and body.
+A model is also needed: local Ollama by default, or a configured hosted provider.
+The gallery uses its existing server-side model configuration.
 
-Open-Meteo's free tier is for **non-commercial use only**, capped at
-10,000 calls/day (5,000/hour, 600/minute), with no uptime guarantee; calls are
-rate-limited per IP, so shared hosts may be limited earlier. This app is allowed
-only while its actual use stays non-commercial (personal, educational,
-unpaid open-source demonstration with no ads or subscriptions). If it is ever
-run as or inside a commercial product or promotion, the operator must move to an
-Open-Meteo paid plan first. Terms: https://open-meteo.com/en/terms -
-Licence: https://open-meteo.com/en/license
-
-Forecasts are model predictions, not guarantees; re-ask for the latest conditions.
-
-## Run locally
+WeatherAPI Free supports 100,000 calls/month, current weather and three forecast days.
+Quota exhaustion stops data; this app has no retry, fallback, top-up or upgrade route.
+Signup may begin a no-card, no-obligation Business trial that automatically becomes
+Free. Do not call the trial an active Free plan or depend on trial-only capabilities.
+No card or payment is needed for this configuration. The operator remains responsible
+for the provider's current terms: https://www.weatherapi.com/terms and
+https://www.weatherapi.com/pricing . One key is dedicated to this WeatherChat service.
 
 ```sh
-chatify run apps/weatherchat/app.yaml     # or: python -m chatify run apps/weatherchat/app.yaml
+chatify run apps/weatherchat/app.yaml
+PYTHONPATH=.:apps/weatherchat python -m unittest apps.weatherchat.test_weatherapi_preparation tests.test_weather_answer_contract tests.test_weather_host_diagnostics
 ```
 
-You need a model to answer questions: the default provider is a local Ollama
-model (install Ollama and pull llama3.2), or edit `provider` in app.yaml to use a
-hosted model with its API key. Hosted/gallery runs override it with the host key.
-Only the weather source needs no key or setup.
+The legacy `weather_sources.py` and its offline fixtures remain for historical
+regression evidence only; the active configuration does not call Open-Meteo.
+Do not enable its opt-in live test to retry the previously throttled hosted endpoint.
 
-## Tests
+## Acceptance status
 
-```sh
-cd apps/weatherchat
-PYTHONPATH=../..:. python3 -m unittest test_weatherchat -v
-WEATHERCHAT_LIVE=1 PYTHONPATH=../..:. python3 -m unittest test_weatherchat.LiveTests -v   # hits the real API
-```
+Nov 7 source-only check: exactly one Bangalore search and one three-day forecast
+request returned current plus daily fields. This is not a model-answer or hosted
+acceptance claim. Current changes require independent review and actual hosted
+current/tomorrow answer, attribution and persistence verification before completion.
+
+## Historical verification, not current WeatherAPI acceptance
 
 ## Verified 2026-11-05 (baseline 957ddac)
 

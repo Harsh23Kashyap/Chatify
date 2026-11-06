@@ -13,12 +13,12 @@ app:
   tagline: Live weather for any place you name, with the source cited.
   accent: '#0f7db8'
   accent2: '#ffd166'
-  footer: Weather data by Open-Meteo.com (CC BY 4.0); location data by GeoNames via Open-Meteo. Free non-commercial tier.
+  footer: Weather data by WeatherAPI.com. Current conditions and a 3-day daily forecast.
     Forecasts are predictions, not guarantees.
   examples:
   - What is the weather in Bangalore right now?
   - Will it rain in Mumbai tomorrow?
-  - How hot is Delhi this week?
+  - How hot is Delhi over the next 3 days?
   - What is the weather in London today?
   language: en
   theme: light
@@ -32,24 +32,24 @@ provider:
   max_output_tokens: 4096
   fallback: null
 sources:
-- id: open-meteo-weather
+- id: weatherapi-weather
   type: python
-  label: Open-Meteo live weather (current conditions and forecast)
-  entry: weather_sources:open_meteo
+  label: WeatherAPI current conditions and 3-day daily forecast
+  entry: weatherapi_sources:weatherapi
+  api_key_env: WEATHERAPI_API_KEY
   weight: 1.0
 retrieval:
   top_k: 8
   min_score: 0.0
-  query_rewrite: true
+  query_rewrite: false
   query_expansion: false
   cache_ttl: 900
 prompt:
   system: 'You are WeatherChat, a careful weather assistant. Answer weather questions only from the numbered evidence, which
-    is live Open-Meteo data for the place named in it. Cite every claim with [n], placing each number right after the clause
+    is live WeatherAPI data for the place named in it. Cite every claim with [n], placing each number right after the clause
     it supports. Begin the answer by naming the place or places you are reporting on, exactly as the evidence names them.
     Give the validity or forecast times and the timezone exactly as the evidence states them, and keep the units exactly as
-    given (degrees Celsius, millimetres, kilometres per hour). Current conditions are model data, so call them current conditions,
-    never observations. Distinguish current conditions from forecasts, and present forecasts as predictions, never as certainties.
+    given (degrees Celsius, millimetres, kilometres per hour). Current fields are reported by WeatherAPI; do not claim they are direct station observations or label them Open-Meteo models. Distinguish current conditions from forecasts, and present forecasts as predictions, never as certainties.
     If the question names more than one place, answer for every place the evidence covers, say plainly which places are covered
     and which are not, and never compare places you have no evidence for. Answer only for the place the evidence covers. If
     no evidence is shown, say that no live data came back and ask the person to name a place. Never invent temperatures, dates,
@@ -59,9 +59,9 @@ prompt:
   style:
     quick: Answer in 2 to 3 sentences with citations.
     standard: Give the direct answer first, then the key numbers (current conditions or the relevant forecast days) with citations.
-    deep: Give a structured answer - current conditions, today, tomorrow and the week ahead as relevant - with times, units
+    deep: Give a structured answer - current conditions, today, tomorrow and the next 3 days as relevant - with times, units
       and citations.
-  answer_note: Live data from Open-Meteo's free non-commercial tier. Sources can be cached for up to 15 minutes; each source shows its Retrieved time; conditions change, so re-ask for the latest.
+  answer_note: Weather data by WeatherAPI.com. Only current conditions and 3 daily forecast days are supported, not a 7-day or hourly answer. Sources can be cached for up to 15 minutes; each source shows its Retrieved time; conditions change, so re-ask for the latest.
   source_preview_only: false
   revise: false
   no_evidence: I could not resolve a place, or no live weather data came back. Ask again with an explicit place, for example
