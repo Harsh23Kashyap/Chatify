@@ -12,6 +12,12 @@ import urllib.error
 import urllib.parse
 import urllib.request
 from datetime import datetime, timezone
+from chatify.connectors.open_sources import SetupRequired
+
+
+class WeatherSourceError(SetupRequired, ValueError):
+    """Public-safe failure with fixed service/stage/category; no response content."""
+
 
 GEOCODE_URL = 'https://geocoding-api.open-meteo.com/v1/search'
 FORECAST_URL = 'https://api.open-meteo.com/v1/forecast'
@@ -42,19 +48,20 @@ _GENERIC = {'what', 'whats', 'is', 'the', 'how', 'hows', 'does', 'do', 'will', '
 
 
 def _get(url, params):
+    stage = 'geocoding' if url == GEOCODE_URL else 'forecast'
     full = url + '?' + urllib.parse.urlencode(params)
     req = urllib.request.Request(full, headers={'User-Agent': USER_AGENT, 'Accept': 'application/json'})
     try:
         with urllib.request.urlopen(req, timeout=20) as reply:
             raw = reply.read(4_000_001).decode('utf-8')
     except urllib.error.HTTPError as e:
-        raise ValueError('Open-Meteo weather lookup failed (HTTP ' + str(e.code) + '); try again shortly.') from None
+        raise WeatherSourceError('Open-Meteo ' + stage + ' lookup failed [weather:' + stage + ':http:' + str(int(e.code)) + '].') from None
     except (urllib.error.URLError, TimeoutError, OSError):
-        raise ValueError('Open-Meteo weather service is unreachable; check the connection and try again.') from None
+        raise WeatherSourceError('Open-Meteo ' + stage + ' service is unreachable [weather:' + stage + ':network].') from None
     try:
         return full, json.loads(raw)
     except ValueError:
-        raise ValueError('Open-Meteo returned an unreadable response; try again shortly.') from None
+        raise WeatherSourceError('Open-Meteo ' + stage + ' returned an unreadable response [weather:' + stage + ':json].') from None
 
 
 def _candidates(query):

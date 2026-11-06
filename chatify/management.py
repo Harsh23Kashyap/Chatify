@@ -71,6 +71,10 @@ class Management:
   from . import permissions
   selected=data.get('sources',[])
   if not isinstance(selected,list) or len(selected)>20 or any(s not in self.engine.connectors or not permissions.allowed(self.cfg,owner,s) for s in selected):raise ValueError('Choose configured sources')
+  # Weather needs a named place to exercise geocoding and forecast endpoints.
+  # Show the actual configured example in the consent review, never a hidden probe.
+  if kind=='preflight' and self.cfg.get('app',{}).get('id')=='weatherchat' and 'open-meteo-weather' in selected:
+   questions=[self.cfg['app']['examples'][0]]
   spec={'settings':self.fingerprint(),'sources':selected,'model':data.get('model') is True,'questions':questions}
   if kind=='smoke':spec['model']=True
   if not spec['model'] and not selected:raise ValueError('Choose a model check or source check')
@@ -97,8 +101,14 @@ class Management:
      except Exception as exc:results.append({'item':'Model','ok':False,**diagnosis(exc)})
     for sid in spec['sources']:
      try:
-      rows,errors=runner.retrieve('Chatify connection check',[sid],owner)
-      results.append({'item':sid,'ok':not bool(errors),'count':len(rows),**(diagnosis(str(errors)) if errors else {'message':'Request completed. Empty results do not prove a failure.'})})
+      rows,errors=runner.retrieve(spec['questions'][0],[sid],owner)
+      result={'item':sid,'ok':not bool(errors),'count':len(rows),**(diagnosis(str(errors)) if errors else {'message':'Request completed. Empty results do not prove a failure.'})}
+      # This code is assembled from fixed labels and an integer HTTP status only.
+      # Never publish an arbitrary exception string, URL, response body or credential.
+      if sid=='open-meteo-weather':
+       match=re.search(r'\[weather:(geocoding|forecast):(http:\d{3}|network|json)\]',str(errors))
+       if match:result['message']+=' Weather source status: '+match.group(0)
+      results.append(result)
      except Exception as exc:results.append({'item':sid,'ok':False,**diagnosis(exc)})
     self.store.save_state(owner,'workspace-live',{'at':time.time(),'results':results,'settings':spec['settings']})
    else:
