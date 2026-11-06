@@ -25,4 +25,23 @@ class AgricultureCandidate(unittest.TestCase):
   source=LocalFiles(self.cfg['sources'][0],str(self.path))
   for question,expected in [('soil test report','Minnesota Extension'),('site-specific nutrient management','IRRI'),('fertilizer soil tillage','FAO')]:
    results=source.search(question,k=4);self.assertTrue(results);self.assertTrue(any(expected in x['title'] for x in results))
+ def test_every_retrievable_passage_keeps_original_source_scope(self):
+  source=LocalFiles(self.cfg['sources'][0],str(self.path))
+  self.assertEqual(len(source.docs),7)
+  for doc in source.docs:
+   with self.subTest(document=doc['document'],chunk=doc['id']):
+    self.assertIn('Source: https://',doc['text'])
+    self.assertIn('Fetched: 2026-11-01',doc['text'])
+    self.assertIn('not the full source',doc['text'])
+    expected={'01-fao-principles.md':'General principles, not a field prescription.',
+              '02-irri-rice-scope.md':'Rice-specific, not all crops or countries.',
+              '03-minnesota-soil-tests.md':'Minnesota/North-Central US examples; do not transfer local calibration globally.'}
+    self.assertIn('Scope: '+expected[doc['document']],doc['text'])
+ def test_fetch_date_never_masquerades_as_publication_date(self):
+  source=LocalFiles(self.cfg['sources'][0],str(self.path))
+  for doc in source.docs:
+   self.assertIn('date',doc);self.assertEqual(doc['date'],'')
+   self.assertIn('date_src',doc);self.assertEqual(doc['date_src'],'')
+  for doc in source.search('soil nutrient fertilizer rice laboratory',k=20):
+   self.assertIn('year',doc);self.assertEqual(doc['year'],'')
 if __name__=='__main__':unittest.main()
