@@ -11,6 +11,7 @@ import collections, copy, inspect, math, re, time, json, hashlib, logging, os
 from concurrent.futures import ThreadPoolExecutor
 from . import permissions, stage_contracts, generator_design, rerank as rerankmod
 from . import providers, prompts as promptmod
+from .diagnostics import retrieval_diagnostic
 from .connectors import make_connector
 from .connectors.open_sources import SetupRequired
 
@@ -755,8 +756,11 @@ class Engine:
         ids = [s for s in (list(self.connectors) if source_ids is None else source_ids) if s in self.connectors]
         ids = [sid for sid in ids if permissions.allowed(self.cfg,owner,sid)]
         if scope:
-            if not permissions.allowed(self.cfg,owner,scope["source"],scope.get("document")): return [], {}
+            if not permissions.allowed(self.cfg,owner,scope["source"],scope.get("document")):
+                retrieval_diagnostic("retrieval", "scope_denied")
+                return [], {}
             ids = [scope["source"]] if scope["source"] in ids else []
+        retrieval_diagnostic("retrieval", "selected", source_count=len(ids))
         refresh_errors = {}
         for sid in list(ids):
             conn = self.connectors[sid]
@@ -764,14 +768,17 @@ class Engine:
                 try:
                     if conn.refresh(): self._cache.clear()
                 except OSError as exc:
+                    retrieval_diagnostic("refresh", "os_error")
                     ids.remove(sid); refresh_errors[sid] = ("Source unavailable: %s" % exc)[:160]
                     self._cache.clear()
         extra = self._uploads_evidence(owner, question, k) if source_ids is None and not scope else []
         key = (json.dumps(self.cfg["sources"],sort_keys=True),json.dumps(scope, sort_keys=True), question.lower().strip(), k, tuple(sorted(ids)), owner if extra or permissions.restricted(self.cfg) else None, len(extra),
                tuple((sid, getattr(self.connectors[sid], "revision", "")) for sid in sorted(ids)))
         if key in self._cache and not refresh_errors:
+            retrieval_diagnostic("retrieval", "memory_cache", evidence_count=len(self._cache[key][0]), error_count=len(self._cache[key][1]))
             return copy.deepcopy(self._cache[key])
         found, errors, seen = list(extra), dict(refresh_errors), set()
+        rejected = {"denied_count": 0, "unusable_count": 0, "duplicate_count": 0, "below_score_count": 0}
         weights = {s["id"]: float(s.get("weight", 1.0)) for s in self.cfg["sources"]}
         qs = self.queries(question)
         recent = bool(self._RECENCY.search(question))
@@ -783,6 +790,8 @@ class Engine:
                 try:
                     ck = hashlib.sha1(("%s|%s|%d" % (json.dumps(next((s for s in self.cfg["sources"] if s["id"]==sid),{"id":sid}),sort_keys=True), qq.lower(), k)).encode()).hexdigest()
                     hit = None if scope or permissions.restricted(self.cfg) else self._disk_get(ck, sid)
+                    if hit is not None:
+                        retrieval_diagnostic("connector", "disk_cache", evidence_count=(len(hit) if type(hit) in (list, tuple) else -1))
                     if hit is None:
                         conn=self.connectors[sid]
                         docs=permissions.documents(self.cfg,owner,sid,conn)
@@ -791,6 +800,7 @@ class Engine:
                         if docs is not None: kw["documents"]=docs
                         if recent and _accepts_recent(conn): kw["recent"]=True
                         hit=conn.search(qq,k,**kw)
+                        retrieval_diagnostic("connector", "searched", evidence_count=(len(hit) if type(hit) in (list, tuple) else -1))
                         if not scope and not permissions.restricted(self.cfg): self._disk_put(ck, hit, sid)
                     # Connectors may return shared records. Ranking/numbering and
                     # caller edits must not mutate connector or earlier-query data.
@@ -798,6 +808,7 @@ class Engine:
                 except Exception as exc:
                     # Preserve earlier successful queries, but stop here exactly
                     # as before: a partial result is not complete source coverage.
+                    retrieval_diagnostic("connector", "setup_required" if isinstance(exc, SetupRequired) else "os_error" if isinstance(exc, OSError) else "value_error" if isinstance(exc, ValueError) else "error")
                     error = (str(exc) or type(exc).__name__)[:240] if isinstance(exc, SetupRequired) else type(exc).__name__
                     break
             return out, error
@@ -807,20 +818,30 @@ class Engine:
         for sid, f in futures:
             try:
                 rows, error = f.result(timeout=60)
+                retrieval_diagnostic("connector", "complete", evidence_count=len(rows), error_count=int(bool(error)))
                 if error:
                     errors[sid] = ("Partial search; earlier query results retained: " + error) if rows else error
                 for e in rows:
                     e["score"] *= weights.get(sid, 1.0)
                     sig = ((e["source"] + "|" + e["id"]) if e.get("document") else "") or e["url"] or re.sub(r"\W+", "", e["title"].lower())[:80] or e["id"]
-                    if not permissions.allowed(self.cfg,owner,sid,e.get("document")): continue
+                    if not permissions.allowed(self.cfg,owner,sid,e.get("document")):
+                        rejected["denied_count"] += 1
+                        continue
                     if not Engine.usable(e):
+                        rejected["unusable_count"] += 1
                         continue  # a record with no text or no title cannot be cited
                     if sig not in seen and e["score"] >= self.cfg["retrieval"]["min_score"]:
                         seen.add(sig); found.append(e)
+                    elif sig in seen:
+                        rejected["duplicate_count"] += 1
+                    else:
+                        rejected["below_score_count"] += 1
             except Exception as ex:  # one failing source must not sink the answer
                 # SetupRequired carries an owner-safe message naming the missing step; other
                 # exceptions stay as bare type names so internals never leak into the answer UI.
+                retrieval_diagnostic("connector", "error")
                 errors[sid] = (str(ex) or type(ex).__name__)[:240] if isinstance(ex, SetupRequired) else type(ex).__name__
+        retrieval_diagnostic("retrieval", "collected", evidence_count=len(found), error_count=len(errors), **rejected)
         # Provenance is not relevance: an owner-corpus chunk that shares no topical
         # vocabulary with the question still misleads when displayed as the most
         # relevant passage (local R1 regression 2026-10-25: an upload's
@@ -843,6 +864,7 @@ class Engine:
             found = own_part + pub_part
         else:
             found = relevance_gate(question, found, public_ids=search_ids)
+        retrieval_diagnostic("retrieval", "gated", evidence_count=len(found))
         if (not found and _expandable and not scope and search_ids
                 and not corpus_intent(question) and _gate_stems(question)
                 and self.cfg["provider"]["type"] != "mock"  # the demo provider can neither expand nor judge; rescue stays off
@@ -952,6 +974,7 @@ class Engine:
         for n, e in enumerate(found, 1):
             e["n"] = n
         self._cache[key] = copy.deepcopy((found, errors))
+        retrieval_diagnostic("retrieval", "complete", evidence_count=len(found), error_count=len(errors))
         return found, errors
 
     # persistent evidence cache (remote sources only; local files are already fast)
@@ -1355,20 +1378,26 @@ class Engine:
     def check_question(self, question, history=None):
         """Empty string when the question is fine; otherwise a short reason to show instead of an answer."""
         if not self._llm_on("question_check"):
+            retrieval_diagnostic("question", "disabled")
             return ""
         try:
             out = self.provider.complete([{"role": "system", "content": self.stage_prompt("question_check")}, {"role": "user", "content": json.dumps({"question":question,"recent_questions":[str(t.get("question",""))[:2000] for t in (history or [])[-3:]]}) if history else question}]).strip()
         except providers.ProviderError as exc:
             if str(exc).startswith("No API key yet"):
+                retrieval_diagnostic("question", "no_key")
                 # Without a key this stage can never run; skip it so no-key apps
                 # still answer from source previews instead of dead-ending every turn.
                 return ""
+            retrieval_diagnostic("question", "provider_error")
             return "The question check could not be completed. Please try again."
         if stage_contracts.errors("question_check", out):
+            retrieval_diagnostic("question", "invalid_contract")
             return "The question check returned an invalid result. Please try again."
         if out.startswith("INVALID:"):
+            retrieval_diagnostic("question", "refused")
             why = out.split(":", 1)[1].strip() if ":" in out else ""
             return why[:300] or "That question is outside what this assistant can answer."
+        retrieval_diagnostic("question", "accepted")
         return ""
 
     def filter_relevant(self, question, evidence, force=False, strict=False, snippet=1500):
@@ -1380,22 +1409,29 @@ class Engine:
         for the Gastroenteritis rescue of "tummy bug treatment options" - the
         treatment section sat past the 400-character cut)."""
         if not evidence:
+            retrieval_diagnostic("relevance", "empty_input", input_count=0)
             return [] if strict else evidence
         if self.cfg["provider"]["type"] == "mock":
+            retrieval_diagnostic("relevance", "mock", input_count=len(evidence))
             return None if strict else evidence  # the demo provider cannot judge; recall stays curated
         if not force and not self._llm_on("relevance"):
+            retrieval_diagnostic("relevance", "disabled", input_count=len(evidence))
             return None if strict else evidence
         listing = "\n".join("[%d] %s. %s" % (e["n"], e["title"], evidence_text(e, snippet)) for e in evidence)
         try:
             out = self.provider.complete([{"role": "system", "content": self.stage_prompt("relevance")}, {"role": "user", "content": "Question: %s\n\nPassages:\n%s" % (question, listing)}]).strip()
         except providers.ProviderError:
+            retrieval_diagnostic("relevance", "provider_error", input_count=len(evidence))
             return None if strict else evidence
         if stage_contracts.errors("relevance", out, [e["n"] for e in evidence]):
+            retrieval_diagnostic("relevance", "invalid_contract", input_count=len(evidence))
             return None if strict else evidence
         if out == "NONE":
+            retrieval_diagnostic("relevance", "none", input_count=len(evidence), output_count=0)
             return []
         keep = {int(x) for x in re.findall(r"\d+", out)}
         kept = [e for e in evidence if e["n"] in keep]
+        retrieval_diagnostic("relevance", "selected", input_count=len(evidence), output_count=len(kept))
         return kept or (None if strict else evidence)
 
     def revise(self, answer, evidence, question="", style="standard"):

@@ -2,16 +2,25 @@
 https://earthquake.usgs.gov/earthquakes/feed/v1.0/geojson.php
 """
 import json,time,datetime,urllib.request,threading,math
+from chatify.diagnostics import retrieval_diagnostic
 URL='https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/4.5_day.geojson'
 _LOCK=threading.Lock();_CACHE=None
 
 def parse_feed(data,now=None,k=6):
  now=time.time() if now is None else now
- if not isinstance(data,dict) or not isinstance(data.get('features'),list):raise ValueError('USGS feed format unavailable')
+ if not isinstance(data,dict) or not isinstance(data.get('features'),list):
+  retrieval_diagnostic('feed','format_error')
+  raise ValueError('USGS feed format unavailable')
  generated=(data.get('metadata') or {}).get('generated')
- if type(generated) not in (int,float) or not math.isfinite(generated):raise ValueError('USGS feed lacks a timestamp')
- if generated/1000>now+300:raise ValueError('USGS feed timestamp is in the future')
- if now-generated/1000>3600:raise ValueError('USGS feed is too old for a recent-event answer')
+ if type(generated) not in (int,float) or not math.isfinite(generated):
+  retrieval_diagnostic('feed','timestamp_invalid')
+  raise ValueError('USGS feed lacks a timestamp')
+ if generated/1000>now+300:
+  retrieval_diagnostic('feed','timestamp_future')
+  raise ValueError('USGS feed timestamp is in the future')
+ if now-generated/1000>3600:
+  retrieval_diagnostic('feed','timestamp_stale')
+  raise ValueError('USGS feed is too old for a recent-event answer')
  fetched=datetime.datetime.fromtimestamp(generated/1000,datetime.timezone.utc).isoformat()
  out=[]
  for row in data['features']:
@@ -27,14 +36,32 @@ def parse_feed(data,now=None,k=6):
   if len(coords)>=3 and all(type(x) in (int,float) and math.isfinite(x) for x in coords[:3]) and -180<=coords[0]<=180 and -90<=coords[1]<=90:text+=' Longitude: '+str(coords[0])+', latitude: '+str(coords[1])+', depth km: '+str(coords[2])+'.'
   text+=' Feed generated (UTC): '+fetched+'. Scope: catalog M4.5+ past-day feed, not all earthquakes. Values may be revised. This is not an earthquake prediction, emergency alert, tsunami forecast or safety assessment.'
   out.append({'id':str(row.get('id','')),'title':title,'text':text,'url':url,'authors':['U.S. Geological Survey'],'year':str(datetime.datetime.fromtimestamp(ts/1000,datetime.timezone.utc).year),'venue':'USGS earthquake catalog','source':'usgs-earthquakes','score':1/(len(out)+1)})
- return out[:max(1,min(int(k),10))]
+ result=out[:max(1,min(int(k),10))]
+ retrieval_diagnostic('feed','parsed',feature_count=len(data['features']),output_count=len(result))
+ return result
 
 def quakes(query,k=6):
  global _CACHE
  with _LOCK:
   if not _CACHE or time.monotonic()-_CACHE[0]>60:
    req=urllib.request.Request(URL,headers={'User-Agent':'Chatify-QuakeBrief/0.1'})
-   with urllib.request.urlopen(req,timeout=15) as response:raw=response.read(1000001)
-   if len(raw)>1000000:raise ValueError('USGS feed response is too large')
-   _CACHE=(time.monotonic(),json.loads(raw))
-  return parse_feed(_CACHE[1],k=k)
+   retrieval_diagnostic('feed','fetch_started')
+   try:
+    with urllib.request.urlopen(req,timeout=15) as response:raw=response.read(1000001)
+   except Exception:
+    retrieval_diagnostic('feed','http_error')
+    raise
+   if len(raw)>1000000:
+    retrieval_diagnostic('feed','oversize')
+    raise ValueError('USGS feed response is too large')
+   stamp=time.monotonic()
+   try:decoded=json.loads(raw)
+   except (ValueError,UnicodeError):
+    retrieval_diagnostic('feed','json_error')
+    raise
+   _CACHE=(stamp,decoded)
+  else:retrieval_diagnostic('feed','cached')
+  try:return parse_feed(_CACHE[1],k=k)
+  except Exception:
+   retrieval_diagnostic('feed','parse_error')
+   raise
