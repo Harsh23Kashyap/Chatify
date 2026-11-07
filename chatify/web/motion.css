@@ -516,3 +516,21 @@ html[data-toolbar=hide] .toolbar{animation:none}
 @media(min-width:861px){
  html:not([data-sidebar=hidden]) .side .list{width:calc(var(--side-w,250px) - 33px);flex-shrink:0}
 }
+/* Desktop history: spend row height on a readable title, not an empty action lane.
+   Keep the same row box on hover/focus; touch retains its visible 44px controls. */
+@media(hover:hover) and (pointer:fine){
+ .side .list .item{display:flex;align-items:center;gap:6px;box-sizing:border-box;height:56px;min-height:56px;padding:8px 10px;grid-template-rows:none}
+ .side .list .item .t,.side .list .item.on .t{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;white-space:normal;overflow-wrap:anywhere;line-height:20px;max-height:40px;max-width:100%;width:auto;flex:1;min-width:0}
+ .side .list .item .acts{position:absolute;right:8px;top:50%;translate:0 -50%;grid-column:auto;grid-row:auto;gap:2px;align-items:center}
+ .side .list .item:hover .t,.side .list .item:focus-within .t{max-width:calc(100% - 104px)}
+ .side .list .item .tm,.side .list .item.on .tm{display:none}
+ .side .list .item:has(.tm) .t{max-width:calc(100% - 58px)}
+ .side .list .item:has(.tm):hover .t,.side .list .item:has(.tm):focus-within .t{max-width:calc(100% - 104px)}
+ .side .list .item:has(.tm) .tm{display:block;position:absolute;right:10px;grid-column:auto;grid-row:auto}
+ .side .list .item .pinned{position:absolute;right:10px;top:50%;translate:0 -50%}
+ .side .list .item:has(.pinned) .t{max-width:calc(100% - 26px)}
+ .side .list .item:has(.tm) .pinned{right:68px}
+ .side .list .item:has(.tm):has(.pinned) .t{max-width:calc(100% - 84px)}
+ .side .list .item:hover .tm,.side .list .item:focus-within .tm,.side .list .item:hover .pinned,.side .list .item:focus-within .pinned{visibility:hidden}
+ .side .list .item:has(.pinned):hover .t,.side .list .item:has(.pinned):focus-within .t{max-width:calc(100% - 104px)}
+}
