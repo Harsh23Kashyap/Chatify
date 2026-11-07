@@ -277,6 +277,7 @@ def save_plan(cfg,plan):
  try:
   # Check every destination before changing any file.
   updates={filename:json.dumps(extra[key],indent=2) for key,filename in [('appearance','theme.json'),('pipeline_prompts','prompts.json'),('helper_drafts','code-drafts.json')] if key in plan['selected'] and key in extra}
+  if plan.get('review_note'):updates['review-history.txt']=plan['review_note']
   folder.mkdir(parents=True,exist_ok=True)
   for filename in updates:
    path=folder/filename
@@ -335,6 +336,7 @@ def hosted_save_plan(cfg,owner,ticket,plan):
    os.replace(tmp,path)
   finally:
    if os.path.exists(tmp):os.unlink(tmp)
+ if plan.get('review_note'):put(datadir/'review-history.txt',plan['review_note'])
  appfile=appdir/'app.yaml'
  put(appfile,yaml.safe_dump(editstate.view(clean),sort_keys=False))
  for key,name in [('appearance','theme.json'),('pipeline_prompts','prompts.json'),('helper_drafts','code-drafts.json')]:

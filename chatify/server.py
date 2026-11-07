@@ -405,11 +405,23 @@ def make_handler(cfg, engine):
                 if method=="POST" and (b.get("include_keys") is not True or b.get("confirmed_sensitive_export") is not True):raise ValueError("Confirm sensitive key export explicitly")
                 data, _ = bundle(cfg, themestore.value, engine.prompts._load(),include_keys=method=="POST")
                 return self._send(200, data, "application/zip", {"Content-Disposition": 'attachment; filename="chatify-app.zip"'})
-            if path in ("/api/nerds/review", "/api/nerds/load") and method == "POST":
+            if path in ("/api/nerds/review", "/api/nerds/load", "/api/nerds/recover") and method == "POST":
                 o = self._owner()
                 if not can_edit(self) or self.client_address[0] not in ("127.0.0.1", "::1"): raise PermissionError("Only the local app owner on this computer can load Nerds")
                 if path.endswith("review"):
-                    return self._send(200, loader.review(str(b.get("name", "")), str(b.get("data", ""))))
+                    reviewed=loader.review(str(b.get("name", "")),str(b.get("data", "")))
+                    from . import buildrecovery
+                    try:
+                        with loader.lock:item=loader.pending.get(reviewed['token'])
+                        if not item:raise ValueError('Import review expired; review the ZIP again before recovering.')
+                        recovery=buildrecovery.prepare(*item)
+                        reviewed['recovery_ticket']=management.reviews.put(o,'build-recovery',recovery)
+                    except ValueError as error:reviewed['recovery_unavailable']=str(error)
+                    return self._send(200,reviewed)
+                if path.endswith("recover"):
+                    recovery=management.reviews.take(o,'build-recovery',str(b.get('ticket','')),b.get('confirmed'))
+                    record=draft_store.put(o,recovery['yaml'],recovery['title'],sections=recovery['sections'],review_note=recovery['review_note'])
+                    return self._send(200,{'id':record['id'],'notice':'New recovered draft kept for this visitor, not a resumed AI job. Nothing applied, launched or sent to a model. Hosted copies can disappear; keep the original ZIP outside this demo.'})
                 return self._send(200, loader.load(str(b.get("token", "")), b.get("allow_code") is True, owner=o))
             if path == "/api/settings" and method == "GET":
                 return self._send(200, {"settings": settings_view(), "can_edit": can_edit(self), "providers": sorted(schema.PROVIDERS)})
@@ -512,6 +524,8 @@ def make_handler(cfg, engine):
                     return self._send(200,{'config':{k:clean[k] for k in declared}})
                 if path.endswith('/review'):
                     plan=appbuilder.review(cfg,b.get('yaml'),b.get('sections'))
+                    if b.get('draft_id'):plan['review_note']=draft_store.get(o,b['draft_id']).get('review_note','')
+                    if plan.get('review_note') and len(plan['review_note'].encode('utf-8'))>65536:raise ValueError('Review history exceeds 64 KB')
                     if nerdloadmod._hosted():plan['notice']='Save keeps your own copy of this app build - the shared demo app is not changed. Use this app can start a separate workspace after save. No source, code or new model runs now. Review source paths, URLs, access, storage and server settings before saving.'
                     return self._send(200,{**plan,'ticket':management.reviews.put(o,'app-build',plan)})
                 if path.endswith('/download'):
@@ -546,13 +560,13 @@ def make_handler(cfg, engine):
                             elif launch['revision'] != editstate.revision(cfg):raise ValueError('Saved configuration changed. Review and save again before using it')
                             clean=launch['config']
                             folder=(Path(cfg.get('_dir','.'))/clean['storage']['path']).parent
-                            for key,name in [('appearance','theme.json'),('pipeline_prompts','prompts.json'),('helper_drafts','code-drafts.json')]:
+                            for key,name in [('appearance','theme.json'),('pipeline_prompts','prompts.json'),('helper_drafts','code-drafts.json'),('review_note','review-history.txt')]:
                                 path=folder/name
                                 expected=launch['state'][name]
                                 if path.is_symlink() or (path.read_text() if path.exists() else None)!=expected:raise ValueError('Saved setup changed. Review and save again before using it')
                             from .portable import bundle
                             clean['_dir']=cfg.get('_dir',os.getcwd())
-                            payload,_=bundle(clean,theme_value=clean.get('appearance'),prompt_value=clean.get('pipeline_prompts'),include_keys=True,include_docs=not nerdloadmod._hosted())
+                            payload,_=bundle(clean,theme_value=clean.get('appearance'),prompt_value=clean.get('pipeline_prompts'),include_keys=True,include_docs=not nerdloadmod._hosted(),review_history=({'REVIEW-HISTORY.txt':launch['review_note'].encode('utf-8')} if launch.get('review_note') else None))
                             reviewed=loader.review('built-app.zip',base64.b64encode(payload).decode())
                             launched=loader.load(reviewed['token'],owner=o)
                             launched['setup_url']=launched['url'].rstrip('/')+'/settings.html?setup=1#sec-model'
@@ -574,8 +588,8 @@ def make_handler(cfg, engine):
                         try:rev=appbuilder.hosted_save_plan(cfg,o,str(b.get('ticket','')),plan) if hosted else appbuilder.save_plan(cfg,plan)
                         except appbuilder.SaveRollbackError as e:return self._send(400,{'error':str(e),'saved_state_uncertain':True})
                     folder=(Path(cfg.get('_dir','.'))/plan['config']['storage']['path']).parent
-                    snapshots={name:(folder/name).read_text() if (folder/name).exists() else None for name in ('theme.json','prompts.json','code-drafts.json')}
-                    launch_ticket=management.reviews.put(o,'app-launch',{'config':plan['config'],'revision':rev,'state':snapshots})
+                    snapshots={name:(folder/name).read_text() if (folder/name).exists() else None for name in ('theme.json','prompts.json','code-drafts.json','review-history.txt')}
+                    launch_ticket=management.reviews.put(o,'app-launch',{'config':plan['config'],'revision':rev,'state':snapshots,'review_note':plan.get('review_note','')})
                     if not hosted:
                         try:
                             from . import versions as versions_mod

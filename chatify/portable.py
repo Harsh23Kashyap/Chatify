@@ -47,7 +47,7 @@ def _safe_doc(p, root):
     return not any(x.startswith('.') or x.lower() in PRIVATE for x in parts) and not any(
         re.search(r'(secret|credential|password|token|api[_-]?key)', x, re.I) for x in parts)
 
-def bundle(cfg, theme_value=None, prompt_value=None,include_keys=False, include_docs=True):
+def bundle(cfg, theme_value=None, prompt_value=None,include_keys=False, include_docs=True, review_history=None):
     """Returns ZIP bytes and a manifest; only configured local evidence is copied.
 
     include_docs=False bundles every local_files source as an empty folder: on a
@@ -76,6 +76,15 @@ def bundle(cfg, theme_value=None, prompt_value=None,include_keys=False, include_
     # Carry only the dedicated history sidecars, not arbitrary workspace files.
     # They remain unverified text and cannot clear current runtime checks.
     for name in ('REVIEW-HISTORY.txt','FINAL-REVIEW-CONCERNS.txt'):
+        if review_history is not None:
+            data=review_history.get(name)
+            if data is None:continue
+            if not isinstance(data,bytes) or len(data)>65536:raise ExportError('Review history must be UTF-8 bytes under 64 KB')
+            try:data.decode('utf-8')
+            except UnicodeDecodeError:raise ExportError('Review history must be UTF-8: '+name) from None
+            files[name]=data
+            warnings.append('Unverified historical review included in '+name+'. Not current validation.')
+            continue
         path=base/name
         if path.is_symlink():raise ExportError('Review history must not be a symlink: '+name)
         if not path.exists():continue
