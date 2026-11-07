@@ -169,6 +169,10 @@ class BuildJobs:
    spec['defaults']=copy.deepcopy(job['cfg']['provider'])
    spec['requirements']='These are the language-model connection settings, not a source API. Preserve the supplied provider defaults exactly. Source addresses, source headers and source credential names belong only in sources, never provider. A brief mentioning another API does not authorize changing the working model connection.'
   if key=='config:prompt':spec['requirements']='Fill answer behavior for this domain. answer_note is a reader-facing footer, not a description of this prompt or instruction. Leave answer_note empty unless the app needs a short truthful reader limitation. Never state a temporary setup fact such as the handbook has not been uploaded in a permanent answer footer. Use conditional wording: answers require relevant uploaded documents. Never write This prompt supports or other metadata in reader-facing fields.'
+  if key=='config:actions':
+   from .actions import REGISTRY
+   spec['registered_action_ids']=sorted(REGISTRY)
+   spec['requirements']='allow must be null (default policy), an empty list (no tools), or a list containing only registered_action_ids. These IDs are tools, not capabilities such as search or answer. Never invent tool IDs. writes must be false. If the brief does not explicitly require an available tool, return allow: [] and writes: false. This does not disable answer generation or sources.'
   if key=='config:budget':spec['defaults']=copy.deepcopy(job['cfg'].get('budget',schema.DEFAULTS['budget']));spec['requirements']='Retain the supplied usage limits exactly. App topic words such as budget meals, cost or limit do not authorize new app quotas. Limits can be edited in the reviewed draft.'
   if key.startswith('appearance:'):
    spec['valid_choices']={k:v for k,v in theme.ENUMS.items() if k in spec['defaults']}

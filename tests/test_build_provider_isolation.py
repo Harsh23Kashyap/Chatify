@@ -46,3 +46,20 @@ class HelperContracts(unittest.TestCase):
   m=Model();j={'provider':m,'cfg':copy.deepcopy(schema.DEFAULTS),'brief':'No supplied source','parts':{},'cancel':False,'calls':0,'owner':'test','errors':{}}
   buildjobs.BuildJobs()._draft_part(j,'config:sources',copy.deepcopy(dict(buildjobs.PARTS)['config:sources']))
   self.assertIn('header_env',m.system);self.assertIn('results_path',m.system)
+
+class ActionsContract(unittest.TestCase):
+ def run_actions(self,answer):
+  class Model:
+   def complete(self,messages):self.instruction=messages[0]['content'];return json.dumps(answer)
+  m=Model();j={'provider':m,'cfg':copy.deepcopy(schema.DEFAULTS),'brief':'Garden research assistant. Keep writes disabled.','parts':{},'cancel':False,'calls':0,'owner':'test','errors':{}}
+  buildjobs.BuildJobs()._draft_part(j,'config:actions',copy.deepcopy(dict(buildjobs.PARTS)['config:actions']))
+  return j,m
+ def test_instruction_supplies_real_tool_ids_and_safe_empty_policy(self):
+  from chatify.actions import REGISTRY
+  j,m=self.run_actions({'allow':[],'writes':False})
+  self.assertIn('registered_action_ids',m.instruction)
+  for tool in REGISTRY:self.assertIn(tool,m.instruction)
+  self.assertIn('This does not disable answer generation',m.instruction)
+  self.assertEqual(j['parts']['config:actions'],{'allow':[],'writes':False})
+ def test_unknown_tool_still_rejected(self):
+  with self.assertRaisesRegex(ValueError,'registered tool IDs'):self.run_actions({'allow':['search_web'],'writes':False})
