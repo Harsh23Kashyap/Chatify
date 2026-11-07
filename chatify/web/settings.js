@@ -2,7 +2,7 @@
 "use strict";
 const $ = (s) => document.querySelector(s);
 const NAMES = { mock: "Demo", ollama: "Ollama", openai: "OpenAI", claude: "Claude", gemini: "Gemini", openai_compatible: "Other", minimax: "MiniMax", mimo: "Xiaomi MiMo", deepseek: "DeepSeek", groq: "Groq", openrouter: "OpenRouter", mistral: "Mistral" };
-let autoTimer = 0, testBlocked = false, cur = {}, canEdit = false, theme = null, saved = null, meta = null, editMode = "light";
+let autoTimer = 0, testBlocked = false, cur = {}, settingsReady = false, canEdit = false, theme = null, saved = null, meta = null, editMode = "light";
 const token = localStorage.getItem("cc_token") || "";
 async function api(path, body) {
   const h = { "Content-Type": "application/json" }; if (token) h.Authorization = "Bearer " + token;
@@ -96,7 +96,7 @@ function sliderVisuals(){
   if(d){const n=Math.min(5,Math.max(1,Math.ceil(+$("#topk").value/4)));d.replaceChildren(...Array.from({length:n},(_,i)=>el("i",{style:"--layer:"+i})));}
 }
 function pickChanged() { const v = $("#modelPick").value; const typed = v === OTHER; $("#model").hidden = !typed; if (!typed) { $("#model").value = v; cur.model = v; } }
-const chosenModel = () => ($("#modelPick").value === OTHER ? $("#model").value.trim() : $("#modelPick").value);
+const chosenModel = () => ($("#modelPick").getAttribute("aria-busy")==="true" ? cur.model||"" : $("#modelPick").value === OTHER ? $("#model").value.trim() : $("#modelPick").value);
 const BRAND = { openai: ["#10a37f", "O"], claude: ["#d97757", "C"], gemini: ["#4285f4", "G"], ollama: ["#2b2b2b", "Ol"], deepseek: ["#4d6bfe", "D"], groq: ["#f55036", "Gq"], mistral: ["#fa520f", "M"], minimax: ["#e0245e", "Mx"], mimo: ["#ff6900", "Mi"], openrouter: ["#6467f2", "Or"], mock: ["#8a94a3", "\u2022"], openai_compatible: ["#5b6b7f", "+"] };
 const TOP = ["openai", "claude", "gemini", "deepseek", "ollama"];
 let chipsMore = false, chipList = [];
@@ -754,7 +754,7 @@ async function init() {
   const th = await api("/api/theme"); theme = th.theme; document.documentElement.dataset.motion=["calm","none"].includes(theme.motion)?"none":theme.motion; meta = th.meta; window.CCBuilderEnums={...meta.enums,font:Object.keys(meta.fonts).concat("custom"),heading_font:Object.keys(meta.fonts).concat("custom")}; saved = clone(theme); canEdit = canEdit && th.can_edit !== false;
   const seg = $("#seg");
   buildChips(d.providers);
-  draw(); await states(); buildPresets(); drawLook(); compactHelp();
+  draw(); settingsReady=true; await states(); buildPresets(); drawLook(); compactHelp();
   document.querySelectorAll("#pvmode button").forEach((b) => {
     b.addEventListener("click", () => { setPvMode(b.dataset.m); pushPreview(); });
     b.addEventListener("keydown", (event) => {
@@ -942,7 +942,7 @@ async function pollOllamaSetup(host,id){
 }
 
 init().then(() => { try { const ki = keyInfo[cur.provider] || {}; if (ki.source === "env") { const tr = $("#testres"); if (tr && !tr.textContent) { tr.dataset.assumed = "1"; tr.className = "testres"; tr.title = "Checked locally only: the host has a configured key. Use Test connection to verify it with the provider."; tr.textContent="Key present. Provider connection not tested."; pvFollow(); } } } catch (e) {} if (canEdit) { docsFreshness(false); loadBudget().catch((e) => { $("#budgetStatus").textContent = e.message; }); } updateVis(); setTimeout(updateVis, 500); }).catch((e) => say(e.message, true));
-window.CCSettingsSimple={state:()=>({...read(),canEdit,names:NAMES,key:keyInfo[cur.provider]}),select:provider=>{if(canEdit){switchProvider(provider);draw();pvFollow();}}};
+window.CCSettingsSimple={state:()=>({...read(),ready:settingsReady,canEdit,names:NAMES,key:keyInfo[cur.provider]}),select:provider=>{if(canEdit){switchProvider(provider);draw();pvFollow();}}};
 })();
 
 

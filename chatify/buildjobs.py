@@ -460,7 +460,13 @@ class BuildJobs:
   return self.view(owner,ident)
  def active(self,owner):
   with self.lock:
-   mine=[{'id':j['id'],'phase':j.get('phase',''),'completed':len(j['parts']),'total':len(PARTS),'calls':j.get('calls',0),'started':j.get('created')} for j in self.jobs.values() if j['owner']==owner and j['state']=='running']
+   owned=[j for j in self.jobs.values() if j['owner']==owner]
+   recoverable=[j for j in owned if j['state']=='running']
+   if not recoverable:
+    # The latest unfinished attempt is the continuation, not a new paid build.
+    partial=[j for j in owned if j['state']=='partial']
+    recoverable=sorted(partial,key=lambda j:j['created'],reverse=True)[:1]
+   mine=[{'id':j['id'],'state':j['state'],'phase':j.get('phase',''),'completed':len(j['parts']),'total':len(PARTS),'calls':j.get('calls',0),'started':j.get('created')} for j in recoverable]
    total=sum(1 for j in self.jobs.values() if j['state']=='running')
   return {'active':total>0,'running_total':total,'mine':mine}
  def view(self,owner,ident):
