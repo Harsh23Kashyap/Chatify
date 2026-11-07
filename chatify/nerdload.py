@@ -137,6 +137,15 @@ class NerdLoader:
    if src['type']=='python':src['execution']='bounded'
   cfg['storage']={'path':'data/chatify.db'};cfg['server']['host']='127.0.0.1';cfg['actions']={'allow':[],'writes':False}
   files.pop(appname);files['app.yaml']=yaml.safe_dump(cfg,sort_keys=False).encode()
+  # Companion history is unverified bundle data, never a readiness decision.
+  review_history=[]
+  for name in ('REVIEW-HISTORY.txt','FINAL-REVIEW-CONCERNS.txt'):
+   if name not in files:continue
+   content=files[name]
+   if len(content)>65536:raise ValueError('Review history file exceeds 64 KB: '+name)
+   try:text=content.decode('utf-8')
+   except UnicodeDecodeError:raise ValueError('Review history must be UTF-8: '+name) from None
+   review_history.append({'file':name,'text':text[:16000],'truncated':len(text)>16000})
   code=[n for n in files if n.endswith('.py')]
   if sum(len(files[n]) for n in code)>200000:raise ValueError('Connector code is too large to review here')
   envs=sorted({src.get('api_key_env') for src in cfg['sources'] if src.get('api_key_env')}|({cfg['provider']['api_key_env']} if cfg['provider'].get('api_key_env') else set()))
@@ -152,11 +161,11 @@ class NerdLoader:
   from . import theme
   look=theme.clean(json.loads(files['data/theme.json'])) if 'data/theme.json' in files else theme.clean(cfg.get('appearance',{}))
   preview={'title':look.get('txt_title') or cfg['app']['title'],'tagline':look.get('txt_tagline') or cfg['app']['tagline'],'mode':look.get('mode','light'),'colors':look.get('dark' if look.get('mode')=='dark' else 'light',{}),'examples':cfg['app'].get('examples',[])[:3],'files':sorted(files),'static':True}
-  if _hosted():warnings_hosted='Hosted workspace: it runs on this demo server, only this browser can open it, and it disappears when the demo restarts or redeploys. Add API keys in the new workspace Configuration; nothing is shared with other visitors.'
+  if _hosted():warnings_hosted='Hosted workspace: it runs on this demo server, only this browser can open it, and it can disappear when the demo restarts, redeploys or spins down. Keep the original ZIP outside this demo for recovery; importing does not make hosted storage durable. Add API keys in the new workspace Configuration; nothing is shared with other visitors.'
   from . import bundle_review
   result_warnings=['Python uses a bounded process, NOT a sandbox. Host files/network remain accessible; code review required.','Separate local workspace. Current app is not overwritten.',str(len(imported_keys))+' API key entries will be placed in this workspace private key storage. Values are not shown. Accounts and chat history are not imported.','Imported local apps disable write actions. Review remote sources before asking a question.']
   if _hosted():result_warnings[1]=warnings_hosted
-  return {'hosted':_hosted(),'auto_review':bundle_review.review(cfg,files),'preview':preview,'readiness':readiness,'token':token,'title':cfg['app']['title'],'tagline':cfg['app']['tagline'],'provider':cfg['provider']['type'],'model':cfg['provider']['model'],'sources':[{'id':s['id'],'label':s.get('label',s['id']),'type':s['type']} for s in cfg['sources']],'required_env':envs,'imported_key_count':len(imported_keys),'code':[{'path':n,'text':files[n].decode('utf-8')} for n in code],'warnings':result_warnings}
+  return {'review_history':review_history,'hosted':_hosted(),'auto_review':bundle_review.review(cfg,files),'preview':preview,'readiness':readiness,'token':token,'title':cfg['app']['title'],'tagline':cfg['app']['tagline'],'provider':cfg['provider']['type'],'model':cfg['provider']['model'],'sources':[{'id':s['id'],'label':s.get('label',s['id']),'type':s['type']} for s in cfg['sources']],'required_env':envs,'imported_key_count':len(imported_keys),'code':[{'path':n,'text':files[n].decode('utf-8')} for n in code],'warnings':result_warnings}
  def load(self,token,allow_code=False,owner='local'):
   with self.lock:item=self.pending.get(token)
   if not item:raise ValueError('Review the bundle first')

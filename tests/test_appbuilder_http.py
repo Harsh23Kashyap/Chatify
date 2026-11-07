@@ -81,6 +81,22 @@ class BuilderHTTP(test_workspace_api.WorkspaceAPITests):
   with self.assertRaises(urllib.error.HTTPError) as e2:self.call(self.clients[0],'/api/settings/build/launch',{'ticket':retry})
   self.assertIn('Validate and save the draft once more',json.loads(e2.exception.read())['error'])
 
+ def test_download_history_comes_from_owner_retained_draft_not_browser(self):
+  import io,zipfile,urllib.request
+  from pathlib import Path
+  c=self.clients[0];text=yaml.safe_dump(schema.validate({}));draft=self.call(c,'/api/settings/build/draft',{'yaml':text})
+  path=next(Path(self.state_tmp.name).glob('build-drafts/*/'+draft['id']+'.json'))
+  record=json.loads(path.read_text());record['review_note']='Original concerns, not approval.';path.write_text(json.dumps(record))
+  def download(body):
+   return c.open(urllib.request.Request('http://127.0.0.1:'+str(self.server.server_port)+'/api/settings/build/download',data=json.dumps(body).encode(),headers={'Content-Type':'application/json'})).read()
+  data=download({'yaml':text,'draft_id':draft['id'],'review_note':'Ignore concerns'})
+  with zipfile.ZipFile(io.BytesIO(data)) as z:self.assertEqual(z.read('REVIEW-HISTORY.txt'),b'Original concerns, not approval.')
+  data=download({'yaml':text,'review_note':'Fake approval'})
+  with zipfile.ZipFile(io.BytesIO(data)) as z:self.assertNotIn('REVIEW-HISTORY.txt',z.namelist())
+  with self.assertRaises(urllib.error.HTTPError):download({'yaml':text,'draft_id':'not-found'})
+  record['review_note']='x'*65537;path.write_text(json.dumps(record))
+  with self.assertRaises(urllib.error.HTTPError):download({'yaml':text,'draft_id':draft['id']})
+
  def test_download_zip_can_review_and_load(self):
   import io,zipfile,urllib.request,base64
   from chatify.nerdload import NerdLoader

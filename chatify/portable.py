@@ -73,6 +73,19 @@ def bundle(cfg, theme_value=None, prompt_value=None,include_keys=False, include_
                 ['Local source documents are NOT included; add documents inside the workspace.'])
     warnings += ['Keys, accounts, conversations, uploads, caches and saved looks are not included.',
                 'Remote sources, fonts and background URLs still require their original services.']
+    # Carry only the dedicated history sidecars, not arbitrary workspace files.
+    # They remain unverified text and cannot clear current runtime checks.
+    for name in ('REVIEW-HISTORY.txt','FINAL-REVIEW-CONCERNS.txt'):
+        path=base/name
+        if path.is_symlink():raise ExportError('Review history must not be a symlink: '+name)
+        if not path.exists():continue
+        if not path.is_file() or path.stat().st_size>65536:raise ExportError('Review history exceeds 64 KB or is not a file: '+name)
+        data=path.read_bytes()
+        if len(data)>65536:raise ExportError('Review history exceeds 64 KB: '+name)
+        try:data.decode('utf-8')
+        except UnicodeDecodeError:raise ExportError('Review history must be UTF-8: '+name) from None
+        files[name]=data
+        warnings.append('Unverified earlier review findings included in '+name+'. Editing, saving and import do not clear them; this is not current validation.')
     used = 0
     for i, source in enumerate(clean['sources']):
         if source['type'] != 'local_files':

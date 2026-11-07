@@ -471,7 +471,7 @@ def make_handler(cfg, engine):
                         store.save_state(o,workspace_default.STATE,{})
                     row=workspace_default.current(store,loader,o)
                     return self._send(200,{'default':row,'notice':'Default applies to this app while its workspace is running. Clearing it does not stop the workspace or delete data.'})
-                if path.endswith('/drafts') and method=='GET':return self._send(200,{'drafts':draft_store.list(o)})
+                if path.endswith('/drafts') and method=='GET':return self._send(200,{'drafts':draft_store.list(o),'hosted':nerdloadmod._hosted()})
                 if path.endswith('/draft') and method=='GET':return self._send(200,draft_store.get(o,qs.get('id','')))
                 if path.endswith('/draft') and method=='POST':return self._send(200,draft_store.put(o,b.get('yaml'),b.get('title',''),b.get('id'),b.get('sections')))
                 if path.endswith('/active') and method=='GET':return self._send(200,build_jobs.active(o))
@@ -517,6 +517,12 @@ def make_handler(cfg, engine):
                 if path.endswith('/download'):
                     import io,zipfile,yaml
                     clean=appbuilder.validate(b.get('yaml'))
+                    # Resolve only this owner's retained record. Browser-supplied notes
+                    # are not provenance, and history is not a readiness verdict.
+                    history=''
+                    if b.get('draft_id'):
+                        history=draft_store.get(o,b['draft_id']).get('review_note','')
+                        if not isinstance(history,str) or len(history.encode('utf-8'))>65536:raise ValueError('Review history exceeds 64 KB')
                     payload=yaml.safe_dump(clean,sort_keys=False).encode();buf=io.BytesIO()
                     with zipfile.ZipFile(buf,'w',zipfile.ZIP_DEFLATED) as z:
                         extra={k:clean.pop(k) for k in appbuilder.EXTRAS if k in clean};payload=yaml.safe_dump(clean,sort_keys=False).encode()
@@ -524,7 +530,8 @@ def make_handler(cfg, engine):
                         for key,name in [('appearance','theme.json'),('pipeline_prompts','prompts.json'),('helper_drafts','code-drafts.json')]:
                             if key in extra:z.writestr('data/'+name,json.dumps(extra[key]))
                         if extra.get('api_suggestions'):z.writestr('API-SUGGESTIONS.json',json.dumps(extra['api_suggestions'],indent=2))
-                        z.writestr('README.md','Generated app draft. Review app.yaml before loading. Keys and documents are not included. Import using Chatify Load and share Nerds. Helper drafts, if present, are inert code for review. No code is installed or run by downloading or importing this draft. Review them before any execution.\n')
+                        if history:z.writestr('REVIEW-HISTORY.txt',history.encode('utf-8'))
+                        z.writestr('README.md','Generated app draft. Review app.yaml before loading. Keys and documents are not included. Import using Chatify Load and share Nerds. Helper drafts, if present, are inert code for review. No code is installed or run by downloading or importing this draft. Review them before any execution. Review-history companions, when present, are unverified historical text, not current validation. YAML-only copies omit that history. Keep this ZIP outside the demo: hosted drafts and workspaces can disappear on restart, redeploy or spin-down. A download does not make hosted storage durable.\n')
                     return self._send(200,buf.getvalue(),'application/zip',{'Content-Disposition':'attachment; filename=chatify-draft.zip'})
                 if path.endswith('/launch'):
                     try:launch=management.reviews.take(o,'app-launch',str(b.get('ticket','')),True)
