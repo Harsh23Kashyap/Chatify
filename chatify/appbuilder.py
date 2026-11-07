@@ -114,10 +114,12 @@ def validate_declared(text):
  """Return normalized config and original top-level scope from one checked parse."""
  if not isinstance(text,str) or len(text)>4000000:raise ValueError('Keep YAML under4 MB')
  try:
-  scanned=list(yaml.scan(text))
+  try:scanned=list(yaml.scan(text,Loader=getattr(yaml,'CSafeLoader',yaml.SafeLoader)))
+  except yaml.YAMLError:scanned=list(yaml.scan(text))
   if len(scanned)>20000:raise ValueError('YAML is too complex')
   if any(isinstance(t,(yaml.tokens.AnchorToken,yaml.tokens.AliasToken)) for t in scanned):raise ValueError('YAML anchors and aliases are not supported in generated drafts')
-  raw=yaml.safe_load(text)
+  try:raw=json.loads(text)
+  except (ValueError,RecursionError):raw=yaml.safe_load(text)
  except yaml.YAMLError:raise ValueError('Invalid YAML. Fix it before review.') from None
  if not isinstance(raw,dict):raise ValueError('YAML needs a config mapping')
  declared=set(raw)
@@ -238,9 +240,8 @@ def talk(provider,cfg,data):
   config.update(completed)
  return {'message':message,'yaml':yaml.safe_dump({k:config[k] for k in selected if k in config},sort_keys=False),'changed':False}
 def review(cfg,text,selected):
- selected=sections(selected);draft=validate(text)
- raw=yaml.safe_load(text)
- if set(raw)-set(selected):raise ValueError('YAML contains sections outside your selection')
+ selected=sections(selected);draft,declared=validate_declared(text)
+ if declared-set(selected):raise ValueError('YAML contains sections outside your selection')
  before=editstate.saved_view(cfg);config=copy.deepcopy(before)
  from . import theme,prompts
  folder=Path(cfg.get('_dir','.'))/cfg['storage']['path'];folder=folder.parent
@@ -254,7 +255,7 @@ def review(cfg,text,selected):
  before.setdefault('api_suggestions',[])
  config.update({k:copy.deepcopy(before[k]) for k in EXTRAS if k in selected or before[k]})
  for k in selected:
-  if k not in raw:raise ValueError('Draft is missing selected section: '+k)
+  if k not in declared:raise ValueError('Draft is missing selected section: '+k)
   config[k]=draft[k]
  extra={k:config.pop(k) for k in EXTRAS if k in config};config=schema.validate(config);_check_values(config);config.update(extra)
  changed=[k for k in selected if config[k]!=before[k]]
@@ -263,7 +264,7 @@ def review(cfg,text,selected):
    return [item for key in dict.fromkeys([*old,*new]) for item in differences(old.get(key),new.get(key),path+'.'+key if path else key)]
   return [] if old==new else [{'field':path,'before':old,'after':new}]
  changes=[item for key in changed for item in differences(before[key],config[key],key)]
- return {'selected':selected,'snapshots':snapshots,'changes':changes,'config':config,'sections':changed,'revision':editstate.revision(cfg),'yaml':yaml.safe_dump(config,sort_keys=False),'notice':'Save updates app.yaml and selected appearance, prompts and inert helper drafts. Use this app can start a separate workspace after save. No source, code or new model runs now. Review source paths, URLs, access, storage and server settings before saving.'}
+ return {'selected':selected,'snapshots':snapshots,'changes':changes,'config':config,'sections':changed,'revision':editstate.revision(cfg),'yaml':json.dumps(config,ensure_ascii=False,indent=2),'notice':'Save updates app.yaml and selected appearance, prompts and inert helper drafts. Use this app can start a separate workspace after save. No source, code or new model runs now. Review source paths, URLs, access, storage and server settings before saving.'}
 
 def save_plan(cfg,plan):
  raw=copy.deepcopy(plan['config']);extra={k:raw[k] for k in EXTRAS if k in raw}
