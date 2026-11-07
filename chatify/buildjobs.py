@@ -427,6 +427,37 @@ class BuildJobs:
    self._checkpoint_clear(job['owner'],job['id'])
   except Exception as e:
    with self.lock:job['errors']['final']=str(e)[:400];job['state']='partial' if not job['cancel'] else 'cancelled';job['in_retry']=False
+ def review_saved_provider(self,owner,ident):
+  """Recover only the known optional-address failure, with no model request.
+
+  The remaining ready parts are immutable inputs. This prepares a human-review
+  draft, not a final model review, service test or live configuration change.
+  """
+  with self.lock:
+   job=self._owned(owner,ident)
+   if job['state']!='partial' or set(job['errors'])!={'config:provider'}:raise ValueError('Only the isolated saved-model address failure can use this recovery')
+   if 'Expected text at ' not in job['errors']['config:provider'] or not job['errors']['config:provider'].endswith('provider.base_url'):raise ValueError('This failure needs its own review; saved model recovery is not applicable')
+   expected=set(dict(PARTS))-{'config:provider'}
+   if set(job['parts'])!=expected:raise ValueError('Every other draft area must be ready before saved-model recovery')
+   provider=copy.deepcopy(job['cfg']['provider'])
+   if provider.get('base_url') is None:provider['base_url']=''
+   checked=appbuilder.validate(yaml.safe_dump({'provider':provider}))['provider']
+   if checked!=provider:raise ValueError('Saved model settings need review before recovery')
+   candidate={**job,'cfg':copy.deepcopy(job['cfg']),'parts':copy.deepcopy(job['parts'])}
+   candidate['cfg']['provider']=provider;candidate['parts']['config:provider']=copy.deepcopy(provider)
+   raw=self._merge(candidate)
+   text=yaml.safe_dump(raw,sort_keys=False)
+   # Persist before marking complete, so a storage failure preserves the partial job.
+   recovery_review_note='Final model review was not run. Saved model settings were copied locally; no model request or connection test was made.'
+   if self.drafts:self.drafts.put(owner,text,raw['app']['title'],ident,review_note=recovery_review_note)
+   job['cfg']=candidate['cfg'];job['parts']=candidate['parts'];job['yaml']=text
+   job['errors']={};job['state']='done';job['phase']='Saved model settings kept; draft ready for human review'
+   job['review']={'issues':[],'setup_notes':[],'review_status':'not_run','review_note':recovery_review_note}
+   job['local_review']=['Only an absent optional model address was normalized from null to blank. All 30 ready draft areas were kept unchanged.']
+   job['notice']='Prepared locally with your saved model settings. No new model calls. Review before saving or applying.'
+   job['remaining_work']=[];job['in_retry']=False
+   self._checkpoint_clear(owner,ident)
+  return self.view(owner,ident)
  def active(self,owner):
   with self.lock:
    mine=[{'id':j['id'],'phase':j.get('phase',''),'completed':len(j['parts']),'total':len(PARTS),'calls':j.get('calls',0),'started':j.get('created')} for j in self.jobs.values() if j['owner']==owner and j['state']=='running']

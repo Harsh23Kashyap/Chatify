@@ -478,6 +478,7 @@ def make_handler(cfg, engine):
                 if path.endswith('/job') and method=='GET':return self._send(200,build_jobs.view(o,qs.get('id','')))
                 if path.endswith('/cancel'):return self._send(200,build_jobs.cancel(o,str(b.get('id',''))))
                 if path.endswith('/retry'):return self._send(200,build_jobs.retry(o,str(b.get('id',''))))
+                if path.endswith('/review-saved-provider') and method=='POST':return self._send(200,build_jobs.review_saved_provider(o,str(b.get('id',''))))
                 if path.endswith('/talk') or path.endswith('/deploy') or path.endswith('/start') or path.endswith('/refine'):
                     selected=b.get('selection') or {};kind=selected.get('provider');model=selected.get('model');base=selected.get('base_url','')
                     if kind not in schema.PROVIDERS or not isinstance(model,str) or not model.strip() or len(model)>120 or not isinstance(base,str) or len(base)>300:raise ValueError('Choose a valid provider and model')

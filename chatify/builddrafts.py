@@ -7,7 +7,7 @@ class BuildDrafts:
  def _path(self,owner,ident):
   if not isinstance(ident,str) or len(ident)>64 or not ident.replace('-','').isalnum():raise ValueError('Invalid draft identifier')
   return self._dir(owner)/(ident+'.json')
- def put(self,owner,yaml_text,title='',ident=None,sections=None):
+ def put(self,owner,yaml_text,title='',ident=None,sections=None,review_note=None):
   from .appbuilder import validate_declared
   import yaml
   clean,declared=validate_declared(yaml_text)
@@ -28,6 +28,10 @@ class BuildDrafts:
   if len(text.encode())>8000000:raise ValueError('Draft is too large')
   ident=ident or uuid.uuid4().hex;path=self._path(owner,ident);record={'id':ident,'title':str(title or clean['app']['title'])[:120],'yaml':text,'sections':sections if sections is not None else [key for key in clean if key in selected],'updated':time.time(),'notice':'Saved local draft, not applied. Credential fields excluded; review before use.'}
   with self.lock:
+   if review_note is None and path.is_file():
+    try:review_note=json.loads(path.read_text()).get('review_note')
+    except (ValueError,OSError):pass
+   if isinstance(review_note,str) and review_note.strip():record['review_note']=review_note[:600]
    path.parent.mkdir(parents=True,exist_ok=True);os.chmod(path.parent,0o700)
    fd,tmp=tempfile.mkstemp(dir=path.parent,prefix='.draft-')
    try:

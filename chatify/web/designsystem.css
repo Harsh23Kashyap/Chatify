@@ -677,3 +677,23 @@ html body.settings-tabs.simple:has(#cfgtop) #col .range-control-group:has(>label
 html body.settings-tabs:has(#cfgtop) #col #sec-model input.range-exact[aria-invalid=true],html body.settings-tabs:has(#cfgtop) #col #sec-budget input[aria-invalid=true]{border-color:var(--ui-danger)!important;outline-color:var(--ui-danger)!important}
 /* Status-count pills share shell surfaces, including dark mode. */
 html body.settings-tabs:has(#cfgtop) #col .status-stats span{background:var(--ui-surface)!important;border-color:var(--ui-line)!important;color:var(--ui-ink)!important}
+
+/* Builder progress belongs to the warm shell, not legacy blue/lavender branding. */
+html body.settings-tabs:has(#cfgtop) .builder-completion-notice{background:var(--ui-surface)!important;border:1px solid var(--ui-line)!important;color:var(--ui-ink)!important;box-shadow:0 8px 24px #30251b14!important}
+html body.settings-tabs:has(#cfgtop) .builder-completion-notice :is(.builder-completion-heading,.builder-operation-mark){color:var(--ui-ink)!important}
+html body.settings-tabs:has(#cfgtop) .builder-completion-notice :is(p,.builder-completion-stage,.builder-completion-work,.builder-completion-caveat){color:var(--ui-muted)!important}
+html body.settings-tabs:has(#cfgtop) .builder-completion-notice button.go:not(.ghost){background:var(--ui-action)!important;color:var(--ui-on-action)!important;border-color:var(--ui-action)!important;box-shadow:none!important}
+html body.settings-tabs:has(#cfgtop) .builder-completion-notice button.ghost{background:transparent!important;color:var(--ui-ink)!important;border-color:var(--ui-control)!important}
+html body.settings-tabs:has(#cfgtop) .builder-completion-notice:is([data-state=error],[data-state=failed]){border-inline-start:3px solid var(--ui-danger)!important}
+html body.settings-tabs:has(#cfgtop) .builder-completion-notice:is([data-state=partial],[data-state=unknown]){border-inline-start:3px solid var(--ui-action)!important}
+html body.settings-tabs:has(#cfgtop) .builder-completion-notice button:focus-visible{outline:2px solid var(--ui-action)!important;outline-offset:3px!important}
+html body.settings-tabs:has(#cfgtop) .cfg-refine-note{font:400 13px/1.6 'DM Sans',sans-serif;color:var(--ui-muted);margin:12px 0 8px;max-width:64ch}
+html body.settings-tabs:has(#cfgtop) .cfg-idea-tools button.cfg-idea-undo{background:transparent!important;color:var(--ui-ink)!important;border:1px solid var(--ui-control)!important;box-shadow:none!important}
+html body.settings-tabs:has(#cfgtop) dialog.app-builder .builder-retry-review{background:var(--ui-soft)!important;border:1px solid var(--ui-line)!important;border-radius:10px;padding:16px;margin-top:12px;color:var(--ui-ink)!important}
+html body.settings-tabs:has(#cfgtop) dialog.app-builder .builder-retry-review:focus{outline:2px solid var(--ui-action);outline-offset:3px}
+/* Final source review cards remain readable in the shell's dark theme. */
+html body.settings-tabs:has(#cfgtop) dialog.app-builder .builder-final-api{background:var(--ui-surface)!important;color:var(--ui-ink)!important;border-color:var(--ui-line)!important}
+html body.settings-tabs:has(#cfgtop) dialog.app-builder .builder-final-api :is(strong,h5,p,small){color:var(--ui-ink)!important}
+html body.settings-tabs:has(#cfgtop) dialog.app-builder .builder-final-api :is(a,summary,.builder-api-more){color:var(--ui-link)!important}
+html body.settings-tabs:has(#cfgtop) dialog.app-builder #builderReviewProvenance{display:block!important;border-inline-start:3px solid var(--ui-warning);padding:8px 12px!important;margin-top:12px!important;background:var(--ui-warning-soft)!important;color:var(--ui-ink)!important;font-size:13px!important;line-height:1.6!important}
+html body.settings-tabs:has(#cfgtop) dialog.app-builder #builderReviewProvenance[hidden]{display:none!important}

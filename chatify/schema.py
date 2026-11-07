@@ -150,6 +150,9 @@ def validate(raw):
         if isinstance(value,bool) or not isinstance(value,(int,float)) or not math.isfinite(value) or not low<=value<=high or integer and type(value)!=int:
             raise ConfigError(field+' must be '+str(low)+'-'+str(high)+(' (whole number)' if integer else ''))
     p = cfg["provider"]
+    # Null and blank both mean the provider default at runtime. Keep one
+    # canonical text representation for generated drafts and saved review.
+    if p.get("base_url") is None: p["base_url"] = ""
     if p["type"] not in PROVIDERS:
         raise ConfigError("provider.type must be one of " + ", ".join(sorted(PROVIDERS)))
     if p["type"] in NEEDS_MODEL and not p["model"]:

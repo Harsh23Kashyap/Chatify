@@ -124,6 +124,8 @@ def validate_declared(text):
  extras={k:raw.pop(k) for k in EXTRAS if k in raw}
  extras=validate_extras(extras)
  if re.search(r'sk-[A-Za-z0-9_-]{12,}|-----BEGIN|Bearer\s+[A-Za-z0-9._-]{12,}',text,re.I):raise ValueError('Remove secret-looking values from YAML')
+ # Match runtime/schema semantics for an absent optional connection address.
+ if isinstance(raw.get('provider'),dict) and raw['provider'].get('base_url','') is None:raw['provider']['base_url']=''
  _check_values(raw)
  def check(value,template,path=''):
   if isinstance(template,dict):

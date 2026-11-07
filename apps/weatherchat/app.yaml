@@ -25,7 +25,7 @@ app:
 provider:
   type: ollama
   model: llama3.2
-  base_url: null  # provider default: local Ollama standalone, OpenAI when gallery overrides type
+  base_url: ''  # provider default: local Ollama standalone, OpenAI when gallery overrides type
   api_key_env: UNUSED_LOCAL_KEY
   temperature: 0.2
   timeout: 120
