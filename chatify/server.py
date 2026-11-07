@@ -526,7 +526,8 @@ def make_handler(cfg, engine):
                     plan=appbuilder.review(cfg,b.get('yaml'),b.get('sections'))
                     if b.get('draft_id'):plan['review_note']=draft_store.get(o,b['draft_id']).get('review_note','')
                     if plan.get('review_note') and len(plan['review_note'].encode('utf-8'))>65536:raise ValueError('Review history exceeds 64 KB')
-                    if nerdloadmod._hosted():plan['notice']='Save keeps your own copy of this app build - the shared demo app is not changed. Use this app can start a separate workspace after save. No source, code or new model runs now. Review source paths, URLs, access, storage and server settings before saving.'
+                    plan['hosted']=nerdloadmod._hosted()
+                    if plan['hosted']:plan['notice']='Save keeps your own copy of this app build - the shared demo app is not changed. Use this app can start a separate workspace after save. No source, code or new model runs now. Review source paths, URLs, access, storage and server settings before saving.'
                     return self._send(200,{**plan,'ticket':management.reviews.put(o,'app-build',plan)})
                 if path.endswith('/download'):
                     import io,zipfile,yaml

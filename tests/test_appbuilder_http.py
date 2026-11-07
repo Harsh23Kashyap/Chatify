@@ -28,6 +28,13 @@ class BuilderHTTP(test_workspace_api.WorkspaceAPITests):
  def tearDown(self):
   super().tearDown();self.state_tmp.cleanup()
 
+ def test_review_explicitly_reports_hosted_save_scope(self):
+  for hosted in (False,True):
+   with self.subTest(hosted=hosted),patch('chatify.nerdload._hosted',return_value=hosted):
+    result=self.call(self.clients[0],'/api/settings/build/review',{'yaml':'app: {title: Separate copy}','sections':['app']})
+   self.assertIs(result['hosted'],hosted)
+   if hosted:self.assertIn('shared demo app is not changed',result['notice'])
+
  def test_owner_gate(self):
   with self.assertRaises(urllib.error.HTTPError) as e:self.call(self.clients[1],'/api/settings/build/talk',{'consent':True})
   self.assertIn(e.exception.code,(403,404))

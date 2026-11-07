@@ -1222,9 +1222,41 @@ class Engine:
         tens = {w: int(Engine._WORDS[w]) for w in ("twenty", "thirty", "forty", "fifty", "sixty", "seventy", "eighty", "ninety")}
         units = {w: int(Engine._WORDS[w]) for w in "one two three four five six seven eight nine".split()}
         t = re.sub(r"\b(" + "|".join(tens) + r")[ -](" + "|".join(units) + r")\b", lambda m: str(tens[m.group(1)] + units[m.group(2)]), t)
-        found = set(re.findall(r"\d+(?:\.\d+)?", t))
+        found = {Engine.canonical_number(n) for n in re.findall(r"\d+(?:\.\d+)?", t)}
         found |= {Engine._WORDS[w] for w in re.findall(r"[a-z]+", t) if w in Engine._WORDS}
         return found
+
+    @staticmethod
+    def canonical_number(value):
+        """Exact textual numeric equality, without rounding or inferred unit conversion."""
+        sign = "-" if value.startswith("-") else ""
+        value = value.lstrip("+-")
+        whole, dot, fraction = value.partition(".")
+        whole = whole.lstrip("0") or "0"
+        fraction = fraction.rstrip("0")
+        if whole == "0" and not fraction:
+            sign = ""
+        return sign + whole + ("." + fraction if fraction else "")
+
+    @staticmethod
+    def depth_number_conflicts(claim, cites, evidence):
+        """Check explicit km-depth against explicit source km-depth fields only.
+
+        This catches date/coordinate tokens falsely lending support to a depth.
+        It does not establish semantic support, bind several events to places,
+        convert units, or replace the model support check.
+        """
+        number = r"[-+]?\d+(?:\.\d+)?"
+        unit = r"(?:km|kilomet(?:er|re)s?)"
+        values = set()
+        for e in evidence:
+            if e.get("n") in cites:
+                for n in re.findall(r"\bdepth\s+" + unit + r"\s*:\s*(" + number + r")", e.get("text", ""), re.I):
+                    values.add(Engine.canonical_number(n))
+        if not values:
+            return []  # No explicit source field contract to apply here.
+        stated = re.findall(r"\bdepth(?:\s+(?:at|in)\s+[A-Za-z][A-Za-z ,'-]{0,60}?)?\s*(?:(?:was|is|of|:|=)\s*)?(" + number + r")\s*" + unit + r"\b", claim, re.I)
+        return [n + " (depth km)" for n in stated if Engine.canonical_number(n) not in values]
 
     @staticmethod
     def bad_numbers(claim, cites, evidence, asked=""):
@@ -1233,7 +1265,7 @@ class Engine:
         have = Engine.numbers(text) | Engine.numbers(asked)
         # "One review says" identifies a source, not a quantitative study result.
         numeric_claim = re.sub(r"\bone\s+(?:(?:umbrella|systematic|narrative)\s+)?(?:review|study|article|paper|source|report)\b", "the source", claim, flags=re.I)
-        return sorted(n for n in Engine.numbers(numeric_claim) if n not in have)
+        return sorted(n for n in Engine.numbers(numeric_claim) if n not in have) + Engine.depth_number_conflicts(claim, cites, evidence)
 
     @staticmethod
     def ledger(answer, evidence, asked=""):
