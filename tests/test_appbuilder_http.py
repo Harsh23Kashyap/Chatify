@@ -103,8 +103,9 @@ class BuilderHTTP(test_workspace_api.WorkspaceAPITests):
 
  def test_parse_no_model_no_save_and_scope(self):
   before=json.dumps(self.cfg,sort_keys=True)
-  with patch('chatify.providers._post') as transport:
+  with patch('chatify.providers._post') as transport,patch('yaml.safe_load',wraps=yaml.safe_load) as parse:
    result=self.call(self.clients[0],'/api/settings/build/parse',{'yaml':'app: {title: Editable title}'})
+  self.assertEqual(parse.call_count,1,'the checked parse must also supply original scope')
   self.assertEqual(set(result['config']),{'app'});self.assertEqual(result['config']['app']['title'],'Editable title')
   self.assertEqual(json.dumps(self.cfg,sort_keys=True),before);self.assertFalse(transport.called)
  def test_parse_owner_gate_and_validation(self):

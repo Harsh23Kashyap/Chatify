@@ -508,8 +508,8 @@ def make_handler(cfg, engine):
                     return self._send(200,appbuilder.talk(model_provider,build_cfg,b))
                 if path.endswith('/parse'):
                     import yaml
-                    clean=appbuilder.validate(b.get('yaml'));raw=yaml.safe_load(b.get('yaml'))
-                    return self._send(200,{'config':{k:clean[k] for k in raw}})
+                    clean,declared=appbuilder.validate_declared(b.get('yaml'))
+                    return self._send(200,{'config':{k:clean[k] for k in declared}})
                 if path.endswith('/review'):
                     plan=appbuilder.review(cfg,b.get('yaml'),b.get('sections'))
                     if nerdloadmod._hosted():plan['notice']='Save keeps your own copy of this app build - the shared demo app is not changed. Use this app can start a separate workspace after save. No source, code or new model runs now. Review source paths, URLs, access, storage and server settings before saving.'
