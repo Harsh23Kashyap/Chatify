@@ -40,7 +40,7 @@ class StubProvider:
             if self.fail:
                 raise providers.ProviderError("boom")
             return self.expansion or ""
-        if messages[0]["content"] == pipeline.Engine.stage_prompt(self._eng, "relevance"):
+        if messages[0]["content"].startswith(pipeline.Engine.stage_prompt(self._eng, "relevance") + "\n\nAssessment clock (server UTC): "):
             import re as _re
             return " ".join(_re.findall(r"\[(\d+)\]", messages[1]["content"])) or "NONE"
         return "unused"
@@ -162,7 +162,7 @@ class JudgeProvider(StubProvider):
         if system == pipeline.Engine.stage_prompt(self._eng, "expand"):
             self.expand_calls += 1
             return self.expansion or ""
-        if system == pipeline.Engine.stage_prompt(self._eng, "relevance"):
+        if system.startswith(pipeline.Engine.stage_prompt(self._eng, "relevance") + "\n\nAssessment clock (server UTC): "):
             if self.judge_fail:
                 raise providers.ProviderError("judge down")
             user = messages[1]["content"]
