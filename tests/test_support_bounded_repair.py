@@ -9,7 +9,7 @@ class Repair(unittest.TestCase):
   answer='The mountain has a steep profile and invented ash definitions. [1]'
   fixed='The mountain has a steep profile. [1]';e.provider.complete.return_value=fixed;e.check_support=Mock(return_value='')
   a,v,l,n=e.repair_support(answer,ev,'Describe the mountain','Note: the sources may not fully support this: invented ash definitions')
-  self.assertEqual(a,fixed);self.assertEqual(n,'');self.assertEqual(e.provider.complete.call_count,1);e.check_support.assert_called_once_with(fixed,ev)
+  self.assertEqual(a,fixed);self.assertEqual(n,'');self.assertEqual(e.provider.complete.call_count,1);e.check_support.assert_called_once_with(fixed,ev,context="")
  def test_invalid_or_unavailable_check_does_not_trigger_repair(self):
   e=Engine(schema.validate({}),Store(':memory:'));e.provider=Mock();ev=[{'n':1,'title':'Source','text':'The mountain has a steep profile.'}]
   n='Note: the support check could not be completed; support was not verified.'

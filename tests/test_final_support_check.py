@@ -12,7 +12,7 @@ class FinalSupport(unittest.TestCase):
     def complete(self,m):return 'Original draft claim has enough words. [1]'
     def stream(self,m):yield self.complete(m)
    e.provider=P();seen=[]
-   def support(answer,evidence):seen.append(answer);return 'Note: the support check could not be completed; support was not verified.'
+   def support(answer,evidence,context=""):seen.append(answer);return 'Note: the support check could not be completed; support was not verified.'
    fixed='Corrected supported finding has enough words. [1]'
    with patch.object(e,'retrieve',return_value=(ev,{})),patch.object(e,'filter_relevant',side_effect=lambda q,x:x),patch.object(e,'revise',side_effect=lambda a,x,*rest,style="standard":a),patch.object(e,'_fix',return_value=(fixed,ev,e.ledger(fixed,ev))),patch.object(e,'check_support',side_effect=support),patch.object(e,'followups',return_value=[]):
     r=next(d for k,d in e.ask_stream('u',c,'Question') if k=='done') if stream else e.ask('u',c,'Question')

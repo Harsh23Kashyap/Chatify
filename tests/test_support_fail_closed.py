@@ -25,10 +25,10 @@ class FailClosed(unittest.TestCase):
  def test_recheck_failure_withholds_repaired_candidate(self):
   for verdict in (NOTE,'Note: the support check returned an invalid result; support was not verified.','Note: the support check could not be completed; support was not verified.'):
    e=self.engine();e.provider.complete.return_value=FIX;e.check_support=Mock(return_value=verdict)
-   a,ev,led,n=e.repair_support(BAD,EV,'Study finding?',NOTE);self.assertNotIn(FIX,a);self.assertEqual(led,[]);self.assertEqual(n,WITHHELD);e.check_support.assert_called_once_with(FIX,EV)
+   a,ev,led,n=e.repair_support(BAD,EV,'Study finding?',NOTE);self.assertNotIn(FIX,a);self.assertEqual(led,[]);self.assertEqual(n,WITHHELD);e.check_support.assert_called_once_with(FIX,EV,context="")
  def test_supported_repair_rechecked_once_and_kept(self):
   e=self.engine();e.provider.complete.return_value=FIX;e.check_support=Mock(return_value='')
-  a,ev,led,n=e.repair_support(BAD,EV,'Study finding?',NOTE);self.assertEqual(a,FIX);self.assertFalse(n);self.assertTrue(all(r['supported'] for r in led));e.check_support.assert_called_once_with(FIX,EV)
+  a,ev,led,n=e.repair_support(BAD,EV,'Study finding?',NOTE);self.assertEqual(a,FIX);self.assertFalse(n);self.assertTrue(all(r['supported'] for r in led));e.check_support.assert_called_once_with(FIX,EV,context="")
  def test_sync_stream_and_history_withhold_failed_repair_without_unsafe_tokens(self):
   for streaming in (False,True):
    e=self.engine();chat=e.store.new_chat('u');e.provider.complete.return_value='{"replacements":{}}';e.provider.stream.return_value=iter([BAD[:25],BAD[25:]])
