@@ -1673,10 +1673,17 @@ class Engine:
             # show only the sources the answer cites; a refusal cites nothing, so it shows none
             original_evidence=evidence
             answer, evidence = self.tidy(answer, evidence)
-            if not evidence and len(answer.split())<12 and not re.search(r"cannot|could not|no (?:data|evidence|publication|dates?)|not (?:provided|available|specified)|insufficient|not establish|unavailable",answer,re.I):
-                answer=self.fallback_answer(original_evidence, why="The answer could not be fully checked. Here are the cited source passages instead.", question=standalone);answer,evidence=self.tidy(answer,original_evidence)
-            ledger = self.ledger(answer, evidence, standalone)
-            answer, evidence, ledger = self._fix(answer, evidence, ledger, standalone, full=original_evidence)
+            if not evidence and locals().get("buffered_answer"):
+                model_status = "invalid_answer"
+                answer = ("I could not verify a supported answer from the retrieved sources. "
+                          "No recommendation is provided.\n\n"
+                          "Note: the model answer was withheld because it did not cite any retrieved sources.")
+                ledger = []
+            else:
+                if not evidence and len(answer.split())<12 and not re.search(r"cannot|could not|no (?:data|evidence|publication|dates?)|not (?:provided|available|specified)|insufficient|not establish|unavailable",answer,re.I):
+                    answer=self.fallback_answer(original_evidence, why="The answer could not be fully checked. Here are the cited source passages instead.", question=standalone);answer,evidence=self.tidy(answer,original_evidence)
+                ledger = self.ledger(answer, evidence, standalone)
+                answer, evidence, ledger = self._fix(answer, evidence, ledger, standalone, full=original_evidence)
         preview_only = bool(evidence and not blocked and self.cfg["prompt"].get("source_preview_only"))
         answer = answer if preview_only else self.attribute_news(answer, evidence)
         ledger = self.ledger(answer, evidence, standalone) if evidence else []
@@ -1771,6 +1778,7 @@ class Engine:
         elif self.headline_chart(q,evidence):
             answer=self.headline_chart(q,evidence);ledger=self.ledger(answer,evidence,standalone)
         else:
+            normal_generated_answer = True
             degraded = False
             provider_error = None
             model_status = "ok"
@@ -1802,10 +1810,17 @@ class Engine:
             if self.cfg["provider"]["type"] != "mock" and not degraded:
                 original_evidence=evidence
                 answer, evidence = self.tidy(answer, evidence)
-                if not evidence and len(answer.split())<12 and not re.search(r"cannot|could not|no (?:data|evidence|publication|dates?)|not (?:provided|available|specified)|insufficient|not establish|unavailable",answer,re.I):
-                    answer=self.fallback_answer(original_evidence, why="The answer could not be fully checked. Here are the cited source passages instead.", question=standalone);answer,evidence=self.tidy(answer,original_evidence)
-                ledger = self.ledger(answer, evidence, standalone)
-                answer, evidence, ledger = self._fix(answer, evidence, ledger, standalone, full=original_evidence)
+                if not evidence and locals().get("normal_generated_answer"):
+                    model_status = "invalid_answer"
+                    answer = ("I could not verify a supported answer from the retrieved sources. "
+                              "No recommendation is provided.\n\n"
+                              "Note: the model answer was withheld because it did not cite any retrieved sources.")
+                    ledger = []
+                else:
+                    if not evidence and len(answer.split())<12 and not re.search(r"cannot|could not|no (?:data|evidence|publication|dates?)|not (?:provided|available|specified)|insufficient|not establish|unavailable",answer,re.I):
+                        answer=self.fallback_answer(original_evidence, why="The answer could not be fully checked. Here are the cited source passages instead.", question=standalone);answer,evidence=self.tidy(answer,original_evidence)
+                    ledger = self.ledger(answer, evidence, standalone)
+                    answer, evidence, ledger = self._fix(answer, evidence, ledger, standalone, full=original_evidence)
         preview_only = bool(evidence and not blocked and self.cfg["prompt"].get("source_preview_only"))
         answer = answer if preview_only else self.attribute_news(answer, evidence)
         ledger = self.ledger(answer, evidence, standalone) if evidence else []
