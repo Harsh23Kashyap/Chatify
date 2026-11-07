@@ -426,7 +426,9 @@ class BuildJobs:
    final=appbuilder.validate(yaml.safe_dump(raw,sort_keys=False))
    with self.lock:job['yaml']=yaml.safe_dump(final,sort_keys=False);job['review']=check;job['state']='done';job['phase']='Draft ready for your review';job['remaining_work']=[];job['in_retry']=False
    if self.drafts:
-    try:self.drafts.put(job['owner'],job['yaml'],raw['app']['title'],job['id'])
+    try:
+     from .builddrafts import review_note
+     self.drafts.put(job['owner'],job['yaml'],raw['app']['title'],job['id'],review_note=review_note(check,job['local_review']))
     except Exception as e:job['notice']+=' Draft persistence failed: '+str(e)[:120]
    self._checkpoint_clear(job['owner'],job['id'])
   except Exception as e:

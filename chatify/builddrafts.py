@@ -1,6 +1,17 @@
 """Owner-scoped local draft snapshots. No provider calls or runtime application."""
 import hashlib,json,os,re,tempfile,threading,time,uuid
 from pathlib import Path
+def review_note(review=None,local_review=None):
+ """Retain review findings as a historical note, never a safety verdict."""
+ review=review if isinstance(review,dict) else {}
+ lines=['Final model review: '+str(review.get('review_status') or 'not recorded')+'. Historical findings, not verification of this draft or deployment readiness.']
+ if review.get('review_note'):lines.append(str(review['review_note']))
+ if review.get('issues'):lines.append('Model suggestions, not verification: '+' '.join(str(x) for x in review['issues']))
+ if review.get('setup_notes'):lines.append('Before deployment: '+' '.join(str(x) for x in review['setup_notes']))
+ if local_review:lines.append('Local observations, limited checks: '+' '.join(str(x) for x in local_review))
+ lines.append('These findings are not cleared by editing, validation or saving. A model can miss unsafe prompts or code. No findings does not establish safety.')
+ return '\n'.join(lines)
+
 class BuildDrafts:
  def __init__(self,folder):self.folder=Path(folder)/'build-drafts';self.lock=threading.RLock()
  def _dir(self,owner):return self.folder/hashlib.sha256(str(owner).encode()).hexdigest()
@@ -31,7 +42,7 @@ class BuildDrafts:
    if review_note is None and path.is_file():
     try:review_note=json.loads(path.read_text()).get('review_note')
     except (ValueError,OSError):pass
-   if isinstance(review_note,str) and review_note.strip():record['review_note']=review_note[:600]
+   if isinstance(review_note,str) and review_note.strip():record['review_note']=review_note
    path.parent.mkdir(parents=True,exist_ok=True);os.chmod(path.parent,0o700)
    fd,tmp=tempfile.mkstemp(dir=path.parent,prefix='.draft-')
    try:
