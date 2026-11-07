@@ -15,8 +15,8 @@ class DefensiveRepair(unittest.TestCase):
   return ('The survey studied forest habitat conservation across regions.\n\nThe long term outcomes remain uncertain across all regions.', [{'n':1,'title':'Survey','text':'The survey studied forest habitat conservation across regions. The survey lacked a comparator group.'}])
  def test_all_flags_are_forwarded_without_short_warning_truncation(self):
   e=self.setup_engine('unchanged');a,v=self.sample();e.repair_support(a,v,'Survey','Note: the sources may not fully support this: short warning');self.assertIn('long term outcomes',e.provider.messages[-1]['content'])
- def test_invalid_stage_output_retains_original_and_warning(self):
-  e=self.setup_engine('{"replacements": {}}');a,v=self.sample();out,_,_,note=e.repair_support(a,v,'Survey','Note: the sources may not fully support this: uncited');self.assertEqual(out,a);self.assertTrue(note)
+ def test_invalid_stage_output_withholds_original_and_retains_warning(self):
+  e=self.setup_engine('{"replacements": {}}');a,v=self.sample();out,_,_,note=e.repair_support(a,v,'Survey','Note: the sources may not fully support this: uncited');self.assertNotEqual(out,a);self.assertIn("No recommendation is provided",out);self.assertTrue(note)
  def test_answer_prompt_makes_overview_and_uncertainty_subject_to_evidence(self):
   e=self.setup_engine('{}');system=e.prompt('Explain conservation',[],'standard',[], '')[0]['content']
   self.assertIn('not citation-exempt',system);self.assertIn('Do not invent small sample sizes',system)

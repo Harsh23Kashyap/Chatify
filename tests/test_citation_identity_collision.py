@@ -46,7 +46,7 @@ class CitationIdentityCollision(unittest.TestCase):
         self.assertEqual(answer, 'Other fact. [1] Wings generate downforce. [2]')
         self.assertEqual([(e['n'], e['id']) for e in selected], [(1, 'other'), (2, 'real-study')])
 
-    def test_sync_and_stream_save_unknown_citation_as_invalid(self):
+    def test_sync_and_stream_withhold_unrepaired_unknown_citation(self):
         # Relevance filtering can leave a gap in retrieved citation numbers.
         # The remaining [2] must not give an invented [1] a real source.
         draft = 'Invented claim. [1] Wings generate downforce. [2]'
@@ -65,8 +65,10 @@ class CitationIdentityCollision(unittest.TestCase):
                           if stream else engine.ask('owner', chat, 'Explain wings.'))
                 saved = engine.store.turn('owner', result['id'])
                 for turn in (result, saved):
-                    self.assertEqual(turn['ledger'][0]['invalid'], [1])
-                    self.assertFalse(turn['ledger'][0]['supported'])
+                    self.assertEqual(turn['ledger'], [])
+                    self.assertNotIn('Invented claim.', turn['answer'])
+                    self.assertIn('No recommendation is provided', turn['answer'])
+                    self.assertIn('unsupported answer was withheld', turn['answer'])
                     self.assertEqual(turn['evidence'][0]['id'], 'real-study')
                     self.assertEqual(turn['evidence'][0]['n'], 2)
                 self.assertFalse(result['answer_verified'])
