@@ -1,0 +1,30 @@
+const {chromium}=require(process.env.PLAYWRIGHT_MODULE||'playwright'),assert=require('node:assert/strict');
+(async()=>{
+ const browser=await chromium.launch({executablePath:'/usr/bin/google-chrome',args:['--no-sandbox']});
+ const page=await browser.newPage({viewport:{width:1280,height:1000}});let tests=[],saves=0,answerCalls=0,release,mode='success';
+ await page.addInitScript(()=>{localStorage.setItem('cc_cfg_tour_v1','1');localStorage.setItem('cc_cfg_mode_v2','advanced')});
+ await page.route('https://**',r=>r.abort());
+ await page.route('**/api/prompts',async r=>{const response=await r.fetch();const data=await response.json();data.real_model=true;await r.fulfill({json:data})});
+ await page.route('**/api/prompts/save',r=>{saves++;return r.fulfill({json:{}})});
+ await page.route('**/api/ask*',r=>{answerCalls++;return r.abort()});
+ await page.route('**/api/prompts/test',async r=>{tests.push(r.request().postDataJSON());if(mode==='defer')await new Promise(resolve=>release=resolve);if(mode==='error')return r.fulfill({json:{ok:false,error:'Fixture provider unavailable'}});return r.fulfill({json:{ok:true,output:'VALID'}})});
+ const root=process.env.CHATIFY_TEST_URL;
+ await page.goto(root+'/settings.html#sec-prompts');const editor=page.getByLabel('Question check prompt',{exact:true});await editor.waitFor();
+ const original=await editor.inputValue();const panel=page.locator('#st-question_check .prompt-sample-test');await panel.locator('summary').click();
+ const sample=page.getByLabel('Question check sample question',{exact:true}),passages=page.getByLabel('Question check sample passages',{exact:true}),run=panel.locator('button');
+ assert.equal(tests.length,0,'opening test does not call provider');await run.click();assert.equal(tests.length,0,'empty sample not sent');await panel.getByRole('status').filter({hasText:'Add a prompt'}).waitFor();
+ const system='Exact editor text $50 "quoted"\nNo runtime suffix added.';await editor.fill(system);await sample.fill('Report one earthquake record.');await passages.fill('Fixture passage, not source retrieval');
+ mode='defer';await run.click();await page.waitForFunction(()=>document.querySelector('.prompt-sample-test[aria-busy=true]'));assert.equal(tests.length,1);assert(await run.isDisabled());await run.dispatchEvent('click');assert.equal(tests.length,1,'pending duplicate guarded');
+ await editor.fill(system+' changed while pending');release();await panel.getByRole('status').filter({hasText:'Sample output: VALID'}).waitFor();assert.deepEqual(tests[0],{key:'question_check',text:system,question:'Report one earthquake record.',passages:'Fixture passage, not source retrieval'});await panel.getByText(/Inputs changed since this test/).waitFor();
+ await panel.scrollIntoViewIfNeeded();await page.screenshot({path:'/downloads/chatify-prompt-test-success.png'});
+ mode='error';await run.click();await panel.getByRole('status').filter({hasText:'Sample failed: Fixture provider unavailable'}).waitFor();assert(!(await run.isDisabled()));
+ mode='success';await run.click();await panel.getByRole('status').filter({hasText:'Sample output: VALID'}).waitFor();assert.equal(tests.length,3);await sample.fill('Edited after result');await panel.getByText(/Inputs changed since this test/).waitFor();await sample.fill('Report one earthquake record.');
+ // A pending result stays owned by its original card when another step is selected.
+ mode='defer';await run.click();await page.locator('.manual-step-trigger').click();await page.locator('.editor-choice[data-stage=answer]').click();await page.getByLabel('Answer prompt',{exact:true}).waitFor();release();await page.waitForFunction(()=>!document.querySelector('#sec-prompts')._editorCards.find(c=>c.id==='st-question_check').querySelector('.prompt-sample-test').hasAttribute('aria-busy'));
+ assert.equal(await page.locator('#st-answer .prompt-sample-test [role=status]').textContent(),'');
+ await page.locator('.manual-step-trigger').click();await page.locator('.editor-choice[data-stage=question_check]').click();assert.equal(await sample.inputValue(),'Report one earthquake record.');await panel.getByRole('status').filter({hasText:'Sample output: VALID'}).waitFor();
+ assert.equal(saves,0);assert.equal(answerCalls,0);assert.equal(tests.length,4);await page.reload();await editor.waitFor();assert.equal(await editor.inputValue(),original,'test never saves editor');assert.equal(tests.length,4,'reload no provider call');
+ await panel.locator('summary').click();await panel.scrollIntoViewIfNeeded();await page.screenshot({path:'/downloads/chatify-prompt-test-reloaded.png'});
+ const offline=await browser.newPage({viewport:{width:1280,height:1000}});let offlineRequests=0;await offline.addInitScript(()=>{localStorage.setItem('cc_cfg_tour_v1','1');localStorage.setItem('cc_cfg_mode_v2','advanced')});await offline.route('https://**',r=>r.abort());await offline.route('**/api/prompts/test',r=>{offlineRequests++;return r.abort()});await offline.goto(root+'/settings.html#sec-prompts');const demoPanel=offline.locator('#st-question_check .prompt-sample-test');await demoPanel.locator('summary').click();await offline.getByLabel('Question check sample question',{exact:true}).fill('Does this work offline?');await demoPanel.getByRole('button',{name:'Run on sample'}).click();await demoPanel.getByRole('status').filter({hasText:'Connect a model'}).waitFor();assert.equal(offlineRequests,0);await offline.close();
+ console.log('PASS desktop prompt test: explicit only, empty blocked, exact payload, pending duplicate guard, edited snapshot, error retry, card ownership, no save/answer call, reload unchanged. 4 intercepted fixture requests, zero actual provider calls.');await browser.close();
+})().catch(e=>{console.error(e);process.exit(1)});

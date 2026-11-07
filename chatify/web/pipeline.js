@@ -23,8 +23,39 @@ function diagram() {
   return box;
 }
 
+function promptTest(s, area, stageStatus) {
+  const host = el("details", {class:"prompt-sample-test"});
+  const question = el("textarea", {rows:"2",maxlength:"1000","aria-label":s.label + " sample question",placeholder:"Enter one sample question"});
+  const passages = el("textarea", {rows:"3",maxlength:"6000","aria-label":s.label + " sample passages",placeholder:"Optional sample passages"});
+  const out = el("div", {class:"review",role:"status","aria-live":"polite"});
+  const snapshot = el("p", {class:"h"});
+  let pending = false, lastSubmitted = null;
+  const updateSnapshot=()=>{if(!lastSubmitted||pending)return;const x=lastSubmitted;snapshot.textContent="Tested sample: " + x.question + ((area.value!==x.text||question.value!==x.question||passages.value!==x.passages)?" Inputs changed since this test; the output uses the submitted version.":"")};
+  for(const input of [area,question,passages])input.addEventListener("input",updateSnapshot);
+  new MutationObserver(updateSnapshot).observe(stageStatus,{childList:true,characterData:true,subtree:true});
+  const run = el("button", {type:"button",class:"go ghost",text:"Run on sample",onclick:async()=>{
+    if(pending)return;
+    if(!area.value.trim()||!question.value.trim()){out.textContent="Add a prompt and a sample question first.";question.focus();return}
+    if(!real){out.textContent="Connect a model on Model and key before running a sample.";return}
+    const submitted={key:s.key,text:area.value,question:question.value,passages:passages.value};
+    lastSubmitted=submitted;pending=true;run.disabled=true;run.textContent="Running sample...";host.setAttribute("aria-busy","true");out.textContent="Running one prompt test...";snapshot.textContent="";
+    try {
+      const result=await api("/api/prompts/test",submitted);
+      out.className="review "+(result.ok?"ok":"bad");
+      out.textContent=result.ok?"Sample output: " + result.output:"Sample failed: " + (result.error||"No result returned.");
+    } catch(error){out.className="review bad";out.textContent="Sample failed: " + error.message}
+    finally {
+      pending=false;run.disabled=false;run.textContent="Run on sample";host.removeAttribute("aria-busy");
+      updateSnapshot();
+    }
+  }});
+  host.append(el("summary",{text:"Try this prompt"}),el("p",{class:"h",text:"Uses your selected model and server key. Each click sends one prompt test and may cost money; provider retries may add usage. Nothing is saved. No sources are searched and no other answer steps run. Only the editor text is sent as the system prompt, without runtime instructions added by the app."}),
+    el("label",{},"Sample question",question),el("label",{},"Sample passages (optional)",passages),run,out,snapshot);
+  return host;
+}
+
 function stageCard(s) {
-  const area = el("textarea", { rows: "6", maxlength: "6000", "aria-label": s.label + " prompt", spellcheck: "false" });
+  const area = el("textarea", { class:"stage-prompt", rows: "6", maxlength: "6000", "aria-label": s.label + " prompt", spellcheck: "false" });
   area.value = s.text || s.default;area.dataset.savedEditorValue=area.value;
   const clearSaveFeedback=()=>{clearTimeout(save._savedTimer);save.classList.remove('save-confirmed');if(save.textContent==='✓ Saved')save.textContent='Save'};
   const fit=()=>{area.style.height='auto';area.style.height=Math.min(560,Math.max(200,area.scrollHeight))+'px'};area.addEventListener('input',()=>{clearSaveFeedback();area.classList.remove('prompt-draft-updated');clearTimeout(area._draftTimer);fit();st.textContent='Manual edits. Review, then save.'});requestAnimationFrame(fit);
@@ -36,7 +67,7 @@ function stageCard(s) {
   const reset = el("button", { type: "button", class: "go ghost", text: "Use default",title:"Replace this prompt with the default and save it immediately", onclick: async () => {if(reset.disabled||sw&&$("input",sw).getAttribute("aria-busy")==="true")return;clearSaveFeedback();let resetting=false;try { if(area.value.trim()!==s.default.trim()&&!(await CCDialog.confirm("Replace this customized prompt with the default?",{title:"Use default prompt?",okText:"Use default"})))return;if(sw&&$("input",sw).getAttribute("aria-busy")==="true")return;resetting=true;reset.disabled=true;if(sw){const control=$("input",sw);control.dataset.pendingChecked=String(control.checked);control.setAttribute("aria-busy","true");control.setAttribute("aria-disabled","true")}save.disabled=gen.disabled=true;reset.textContent="Restoring default...";const before=area.value;const result=await api("/api/prompts/reset", { key: s.key });const restored=result.stages?.find(stage=>stage.key===s.key);if(restored&&s.optional){s.on=!!restored.on;const control=$("input",sw);control.checked=s.on;const label=$("summary small",$("#st-"+s.key));if(label)label.textContent=s.on?"On":"Off";redrawDiagram()}s.text="";area.dataset.savedEditorValue=s.default;if(area.value===before){area.value=s.default;st.textContent="Back to the default.";fit()}else{st.textContent="Default saved. Newer manual edits are still unsaved."} } catch (x) { st.textContent = x.message; }finally{if(resetting){if(sw){const control=$("input",sw);control.removeAttribute("aria-busy");control.removeAttribute("aria-disabled");delete control.dataset.pendingChecked}reset.disabled=false;save.disabled=gen.disabled=false;reset.textContent="Use default";};if(reset.isConnected&&document.activeElement===document.body)reset.focus()} } });
   const gen = el("button", { type: "button", class: "go ghost", text: "Write it with AI", onclick: async () => {if(gen.disabled)return;clearSaveFeedback();gen.disabled = true;gen.textContent="Writing...";save.disabled=reset.disabled=true; st.classList.add("ai-working");st.textContent = "Writing with your selected model...";const original=area.value;try { const r = await api("/api/prompts/generate", { key: s.key, brief: brief.value, current: original });if(area.value!==original){st.textContent="Prompt changed during writing. Your newer edits were kept. Write again when ready.";return}area.value = r.prompt;area.classList.add("prompt-draft-updated");clearTimeout(area._draftTimer);area._draftTimer=setTimeout(()=>area.classList.remove("prompt-draft-updated"),1400); st.textContent = r.model_used ? "Written. Review, then save." : "Offline stage draft. Review assumptions, then save.";st.className="testres";why.className="why h";if (r.rationale && r.rationale.length) why.textContent = r.rationale.join(" "); } catch (x) { st.textContent = x.message; } finally {gen.disabled = false;gen.textContent="Write it with AI";save.disabled=reset.disabled=false;st.classList.remove("ai-working");fit();if(gen.isConnected&&document.activeElement===document.body)gen.focus()}  } });
   const why = el("p", { class: "h" });
-  return el("details", { class: "stage", id: "st-" + s.key }, el("summary", {}, el("b", { text: s.label }), el("small", { text: s.optional ? (s.on ? "On" : "Off") : "Always on" })), el("div", { class: "sbody" }, el("p", { class: "h", text: s.help }), sw, area, el("div", { class: "keyrow" }, brief, gen), why, el("div", { class: "keyrow" }, save, reset, st)));
+  return el("details", { class: "stage", id: "st-" + s.key }, el("summary", {}, el("b", { text: s.label }), el("small", { text: s.optional ? (s.on ? "On" : "Off") : "Always on" })), el("div", { class: "sbody" }, el("p", { class: "h", text: s.help }), sw, area, el("div", { class: "keyrow" }, brief, gen), why, el("div", { class: "keyrow" }, save, reset, st), promptTest(s, area, st)));
 }
 let selected = {},focusSection="";
 function placePrompt(){const focused=document.activeElement,scroll=focused?.scrollTop,layout=$(".layout"),preview=$("#pvbox");if(!layout)return;const desktop=false,active=focusSection==="prompts"||focusSection==="code";document.body.classList.toggle("prompt-pane-active",active&&desktop);for(const kind of ["prompts","code"]){const pane=$("#"+kind+"Editor"),section=$("#sec-"+kind);if(!pane||!section)continue;if(focusSection===kind&&desktop){pane.classList.add("prompt-side-editor");if(pane.parentElement!==layout||pane.nextSibling!==preview)layout.insertBefore(pane,preview)}else{pane.classList.remove("prompt-side-editor");if(pane.parentElement!==section||pane.nextSibling)section.append(pane)}}if(preview)preview.hidden=active&&desktop;if(focused?.isConnected&&focused!==document.body&&document.activeElement===document.body&&focused.closest(".pipeline-editor-pane")&&focused.getClientRects().length)focused.focus({preventScroll:true});if(focused?.isConnected&&focused.closest(".pipeline-editor-pane")&&document.activeElement===focused){focused.scrollTop=scroll;requestAnimationFrame(()=>{if(document.activeElement===focused)focused.scrollTop=scroll})}}
