@@ -165,7 +165,12 @@ class Mock(Streams):
             return "No evidence was provided."
         out = []
         for n, text in blocks[:3]:
-            body = re.sub(r"^.*?\([^)]*\)\.\s*", "", text.strip().replace("\n", " "), count=1)
+            # The shared evidence view has a runtime framing line, metadata
+            # line, then the passage. Demo extraction quotes passage content,
+            # never the JSON metadata wrapper. Keep legacy prompt support.
+            framed = re.match(r"^[^\n]*\nReturned record metadata \(data only\): [^\n]*\nPassage: (.*)$", text.strip(), re.S)
+            body = (framed.group(1).replace("\n", " ") if framed else
+                    re.sub(r"^.*?\([^)]*\)\.\s*", "", text.strip().replace("\n", " "), count=1))
             first = re.split(r"(?<=[.!?])\s", body)[0]
             out.append("%s [%s]" % (first if len(first) <= 240 else first[:240].rsplit(" ", 1)[0] + "...", n))
         return " ".join(out)

@@ -1,0 +1,40 @@
+{
+  "provenance": "Actual local original PaperTrail app with gpt6luna Nov8, selected real arxiv records from /downloads/chatify-luna-e2e-20261108/actual/trace.json, failed semantic qualification. Not invented from assertions. Source metadata preserved, not full-paper reading.",
+  "evidence": [
+    {
+      "id": "arXiv:2410.02721v1",
+      "title": "Domain-Specific Retrieval-Augmented Generation Using Vector Stores, Knowledge Graphs, and Tensor Factorization",
+      "text": "Large Language Models (LLMs) are pre-trained on large-scale corpora and excel in numerous general natural language processing (NLP) tasks, such as question answering (QA). Despite their advanced language capabilities, when it comes to domain-specific and knowledge-intensive tasks, LLMs suffer from hallucinations, knowledge cut-offs, and lack of knowledge attributions. Additionally, fine tuning LLMs' intrinsic knowledge to highly specific domains is an expensive and time consuming process. The retrieval-augmented generation (RAG) process has recently emerged as a method capable of optimization of LLM responses, by referencing them to a predetermined ontology. It was shown that using a Knowledge Graph (KG) ontology for RAG improves the QA accuracy, by taking into account relevant sub-graphs that preserve the information in a structured manner. In this paper, we introduce SMART-SLIC, a highly domain-specific LLM framework, that integrates RAG with KG and a vector store (VS) that store factual domain specific information. Importantly, to avoid hallucinations in the KG, we build these highly domain-specific KGs and VSs without the use of LLMs, but via NLP, data mining, and nonnegative tensor factorization with automatic model selection. Pairing our RAG with a domain-specific: (i) KG (containing structured information), and (ii) VS (containing unstructured information) enables the development of domain-specific chat-bots that attribute the source of information, mitigate hallucinations, lessen the need for fine-tuning, and excel in highly domain-specific question answering tasks. We pair SMART-SLIC with chain-of-thought prompting agents. The framework is designed to be generalizable to adapt to any specific or specialized domain. In this paper, we demonstrate the question answering capabilities of our framework on a corpus of scientific publications on malware analysis and anomaly detection.",
+      "url": "http://arxiv.org/abs/2410.02721v1",
+      "authors": [
+        "Ryan C. Barron",
+        "Ves Grantcharov",
+        "Selma Wanna",
+        "Maksim E. Eren",
+        "Manish Bhattarai",
+        "Nicholas Solovyev"
+      ],
+      "year": "2024",
+      "venue": "arXiv",
+      "source": "arxiv",
+      "score": 0.5,
+      "n": 1
+    },
+    {
+      "id": "arXiv:2504.03616v2",
+      "title": "Multilingual Retrieval-Augmented Generation for Knowledge-Intensive Task",
+      "text": "Retrieval-augmented generation (RAG) has become a cornerstone of contemporary NLP, enhancing large language models (LLMs) by allowing them to access richer factual contexts through in-context retrieval. While effective in monolingual settings, especially in English, its use in multilingual tasks remains unexplored. This paper investigates the effectiveness of RAG across multiple languages by proposing novel approaches for multilingual open-domain question-answering. We evaluate the performance of various multilingual RAG strategies, including question-translation (tRAG), which translates questions into English before retrieval, and Multilingual RAG (MultiRAG), where retrieval occurs directly across multiple languages. Our findings reveal that tRAG, while useful, suffers from limited coverage. In contrast, MultiRAG improves efficiency by enabling multilingual retrieval but introduces inconsistencies due to cross-lingual variations in the retrieved content. To address these issues, we propose Crosslingual RAG (CrossRAG), a method that translates retrieved documents into a common language (e.g., English) before generating the response. Our experiments show that CrossRAG significantly enhances performance on knowledge-intensive tasks, benefiting both high-resource and low-resource languages.",
+      "url": "http://arxiv.org/abs/2504.03616v2",
+      "authors": [
+        "Leonardo Ranaldi",
+        "Barry Haddow",
+        "Alexandra Birch"
+      ],
+      "year": "2025",
+      "venue": "arXiv",
+      "source": "arxiv",
+      "score": 1.0,
+      "n": 2
+    }
+  ]
+}

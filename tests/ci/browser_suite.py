@@ -40,12 +40,19 @@ def fixture(kind, folder, env):
     fixed = 8190 if env.get('CI_CASE')=='pickers_browser.cjs' else 8142 if kind=='mounted' else None
     with socket.socket() as probe:
         probe.bind(('127.0.0.1',fixed or 0));port=probe.getsockname()[1]
-    if kind == 'strict':
+    if kind == 'gallery':
+        command = [sys.executable,str(ROOT/'tests/shared_gallery_fixture_server.py')]
+        env.update(CHATIFY_FIXTURE_ROOT=str(app),CHATIFY_FIXTURE_PORT=str(port))
+    elif kind == 'strict':
         command = [sys.executable,str(ROOT/'tests/strict_ui_fixture.py')]
     else:
         source = ROOT/'tests/fixtures/builder-trip.yaml' if kind=='trip' else ROOT/'apps/minimal/app.yaml'
         shutil.copyfile(source,app/'app.yaml')
         shutil.copytree(ROOT/'apps/minimal/docs',app/'docs')
+        if kind == 'parent':
+            import yaml
+            cfg=yaml.safe_load((app/'app.yaml').read_text());cfg['app']['title']='Parent fixture'
+            (app/'app.yaml').write_text(yaml.safe_dump(cfg))
         if kind == 'brand':
             import yaml
             cfg=yaml.safe_load((app/'app.yaml').read_text());cfg['provider']={'type':'mock','model':'fixture'}
@@ -79,7 +86,7 @@ def run_case(name, kind, variant, args, extra, output):
     started=time.monotonic(); status='FAIL'; code=1
     with tempfile.TemporaryDirectory(prefix='chatify-ci-') as tmp:
         folder=pathlib.Path(tmp);env=base_env();env.update(extra)
-        env.update(PYTHONPATH=str(ROOT),CHATIFY_FIXTURE_YAML=str(ROOT/'tests/fixtures/builder-trip.yaml'),CHATIFY_TEST_OUTPUT=str(folder),CI_CASE=name)
+        env.update(PYTHONPATH=str(ROOT),CHATIFY_FIXTURE_YAML=str(ROOT/'tests/fixtures/builder-trip.yaml'),CHATIFY_TEST_OUTPUT=str(folder),CHATIFY_UI_EVIDENCE_DIR=str(folder),CI_CASE=name)
         command=([sys.executable] if name.endswith('.py') else ['node'])+[str(ROOT/'tests'/name)]+args
         if name.startswith('settings_native_browser_zoom_'):command=['xvfb-run','-a']+command
         manager=fixture(kind,folder,env) if kind not in ('node','self') else contextlib.nullcontext()
@@ -95,6 +102,10 @@ def run_case(name, kind, variant, args, extra, output):
             status='PASS' if code==0 else 'FAIL'
         except Exception as exc:
             with logpath.open('a') as log:log.write(f'CI_HARNESS_ERROR {type(exc).__name__}: {exc}\n')
+        # Retain fixture-only visual evidence before temporary workspaces close.
+        # No config, database, provider payload or credentials are copied.
+        images=output/(name+'.'+variant+'.images');images.mkdir(exist_ok=True)
+        for image in folder.glob('*.png'):shutil.copyfile(image,images/image.name)
         print(f'CASE {name} {variant} {status} exit={code} seconds={time.monotonic()-started:.1f}',flush=True)
         # Only offline fixture test output, never server metadata or directory exports.
         print(logpath.read_text(),flush=True)

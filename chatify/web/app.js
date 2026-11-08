@@ -783,12 +783,12 @@ function updateModelBadge() {
   const badge=$("#modelBadge"), demo=S.cfg.provider.type === "mock";
   const noKey = !demo && S.cfg.provider.key_present === false;
   badge.textContent = demo ? "Demo · offline" : (providerNames[S.cfg.provider.type] || S.cfg.provider.type) + (S.cfg.provider.model ? " · " + S.cfg.provider.model : "") + (noKey ? " · no key" : "");
-  badge.title = demo ? "Offline Demo: built-in answers from your documents. No AI model or paid calls. Choose a provider in Configuration to use AI." : noKey ? "Provider configured but no API key saved yet - the model cannot answer until a key is added in Configuration." : "Configured AI provider and model";
+  badge.title = demo ? "Offline Demo: built-in answers from your documents. No AI model or paid calls. Choose a provider in Configuration to use AI." : noKey ? "No API key is available in this session. New requests cannot use this AI provider; saved answers keep their original status." : "Configured AI provider and model";
   badge.classList.toggle("badge-warn", noKey);
   let bar = $("#keyBar");
   if (noKey && !bar) {
     bar = el("div", { id: "keyBar", class: "key-bar", role: "note" },
-      el("span", { text: "This app has no API key yet, so answers come from source previews, not the AI model. " }),
+      el("span", { text: "No API key is available in this session. New requests cannot use this AI provider. Saved answers keep their original status. " }),
       el("a", { href: (window.CC_APP_BASE || "") + "/settings.html#sec-model", text: "Add a key in Configuration" }));
     const main = document.querySelector("main") || document.body;
     main.prepend(bar);
