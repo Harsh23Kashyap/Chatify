@@ -99,6 +99,8 @@ def make_handler(cfg, engine):
         view = dict(cfg["app"])
         view["title"] = themestore.value.get("txt_title") or view.get("title", "")
         view["tagline"] = themestore.value.get("txt_tagline") or view.get("tagline", "")
+        if cfg.get("_shared_gallery_builtin"):
+            view["footer"] = "Public chat is available. Shared configuration and app building are read-only. Run your own copy to build an app."
         return view
     from . import editstate
     from .buildjobs import BuildJobs
@@ -320,6 +322,7 @@ def make_handler(cfg, engine):
             if path == "/api/config":
                 view=schema.public_view(cfg)
                 view['app']=effective_app()
+                view['configuration_readonly']=bool(cfg.get('_shared_gallery_builtin'))
                 _p=cfg['provider']
                 if not cfg.get('_shared_gallery_builtin'):
                     view['provider']['key_present']= _p['type'] in ('mock','ollama') or (_p['type']=='openai_compatible' and not _p.get('api_key_env')) or bool(providers._key(_p.get('api_key_env',''),_p['type'],required=False))

@@ -8,10 +8,9 @@ documents, web pages and APIs into a chat that answers with citations.
 - **Chat right away.** A model is already configured on this site, so you
   can ask a question in the box at the bottom of the Chat page and get a
   cited answer. No setup, no key, no install.
-- **Build your own app with AI.** Open Configuration and choose
-  **Build with AI**. It is the easiest path: describe the app you want in
-  plain words, and AI drafts the full setup for you to review, edit and
-  download. Nothing is saved until you confirm it.
+- **Shared configuration is read-only.** Building, importing and editing apps
+  on this shared gallery are unavailable until a separate owner-only setup
+  is in place. Public chat remains available.
 - **Run it on your own computer.** The Run locally page has the single
   command: `uvx --from chatify-app chatify start`.
 

@@ -61,13 +61,13 @@ html[data-theme=dark] a{color:#a8d4b6}
 </ul></div>
 <div class="rl-tips"><h3>Good to know before you start</h3>
 <ul>
-<li><strong>The easiest setup is Build with AI.</strong> On the Configuration page, choose Build with AI and describe the app you want in plain words. It drafts the whole setup for you to review. Nothing is saved until you confirm.</li>
+<li><strong>The easiest setup is Build with AI.</strong> After starting your own local copy, open its Configuration page and choose Build with AI and describe the app you want in plain words. It drafts the whole setup for you to review. Nothing is saved until you confirm.</li>
 <li><strong>Questions go in the box at the bottom of the Chat page.</strong> Type your question there and press Enter. Answers cite the sources they used.</li>
 <li><strong>Add a public web page as a source:</strong> in Add sources, choose "Add a web page" and paste the address. Chatify stores that page's text and answers over it.</li>
 <li><strong>Files can be up to 8 MB each.</strong> If a file is too large, remove it and choose a smaller one; large PDFs often work once figures are removed.</li>
 <li><strong>Local storage is not the same as offline processing.</strong> App files and saved chats are stored on the machine running Chatify. If you choose a cloud model, requests can include your question, conversation context and source passages. Browser dictation may use an online speech service. Choose a local model and avoid online features when you need offline processing.</li>
 </ul></div>
-<p><a href="/settings.html">Try Build with AI here first ↗</a> &nbsp;·&nbsp; <a href="https://github.com/Harsh23Kashyap/Chatify">Source and docs on GitHub ↗</a></p>
+<p><a href="/settings.html">Check this site's configuration access ↗</a> &nbsp;·&nbsp; <a href="https://github.com/Harsh23Kashyap/Chatify">Source and docs on GitHub ↗</a></p>
 </main>
 <script>
 document.querySelectorAll('.rl-copy').forEach(function(b){b.onclick=function(){var t=document.getElementById(b.dataset.copy).textContent;(navigator.clipboard?navigator.clipboard.writeText(t):Promise.reject()).then(function(){b.textContent='Copied';b.classList.add('done');setTimeout(function(){b.textContent='Copy';b.classList.remove('done')},1600)}).catch(function(){var r=document.createRange();r.selectNodeContents(document.getElementById(b.dataset.copy));var s=getSelection();s.removeAllRanges();s.addRange(r)})}});

@@ -1,6 +1,10 @@
 # Build your own chat app
 
-The short version: open **Configuration**, choose **Build with AI**, and
+This shared gallery currently has read-only configuration. Building,
+importing and editing apps here are unavailable. To build an app, start
+your own local copy first.
+
+In your local copy, open **Configuration**, choose **Build with AI**, and
 describe your app in one sentence. That is the easiest path, and it is the
 one we recommend.
 
@@ -12,8 +16,8 @@ one we recommend.
    assistant over my gardening notes" or "A diet app that cites PubMed
    papers."
 4. Wait while it drafts the setup: the name, the look, the prompts and
-   suggested sources. On this site the model is already configured, so
-   there is nothing to connect first.
+   suggested sources. In your own copy, connect a model and key when needed; offline Demo
+   does not generate AI builds.
 5. **Review the draft.** Read it, change anything, and validate it.
    Nothing is saved until you confirm.
 6. **Download the result** as a YAML file or a config-only ZIP.
@@ -52,7 +56,8 @@ people should start with Build with AI.
 - **File size**: files can be up to 8 MB each. If a file is too large,
   remove it and add a smaller one. Large PDFs often fit once figures are
   removed.
-- **Does my data leave my computer?** When you run locally, no:
-  documents, keys and chats stay on your machine. On this hosted demo the
+- **Does my data leave my computer?** Local files and saved chats stay on your
+  machine, but cloud model requests can include your question, history and
+  source passages. Browser dictation may use an online service. On this hosted demo the
   model is shared and data is temporary, so do not upload anything
   private here.

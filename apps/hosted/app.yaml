@@ -1,16 +1,16 @@
-# Hosted public demo: pre-configured model, anyone can Build with AI.
+# Hosted public chat demo: shared configuration is temporarily read-only.
 # Run: python -m chatify run apps/hosted/app.yaml
 # yaml-language-server: $schema=../../schema/chat-app.schema.json
 app:
   id: hosted
   title: Chatify
-  tagline: Ask questions, or build your own chat app with AI
+  tagline: Ask about Chatify, or learn how to run your own copy
   examples:
     - What is Chatify?
     - How do I build my own chat app?
     - How are answers cited?
     - How do I run Chatify on my own computer?
-  footer: A model is already configured here. Open Configuration and choose Build with AI, the easier path.
+  footer: Public chat is available. Shared configuration and app building are read-only. Run your own copy to build an app.
   theme: light         # settings page has no dark theme support; keep every page light and consistent
 provider:
   type: openai         # key comes from the OPENAI_API_KEY environment variable on the host

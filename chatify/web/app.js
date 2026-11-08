@@ -480,7 +480,7 @@ function gettingStarted() {
     ["3", "How do I choose what to search?", "Limit the next answer to one collection or document.", scopeDialog],
     ["4", "How do I change the reading view?", "Choose your text size and answer width.", () => $("#readingBtn").click()],
   ];
-  if (document.querySelector('.common-nav a[href="/settings.html"]')) cards.push(
+  if (!S.cfg.configuration_readonly && document.querySelector('.common-nav a[href="/settings.html"]')) cards.push(
     ["5", "How do I connect an AI model?", "Demo is offline. Choose a provider and test it in Configuration.", () => { location.href=(window.CC_APP_BASE||"") + "/settings.html#sec-model"; }]);
   cards.push([String(cards.length+1), "How do I try an action?", "Preview a local note action. Nothing is saved until you confirm.", () => $("#actionsBtn").click()]);
   const box = el("section", {class:"getting-started", "aria-label":"Getting started"}, el("h2", {text:"Start here"}),
@@ -1077,7 +1077,7 @@ async function accountGate() {
 function applyWording() {
   const a = S.cfg.app;
   { const b = $("#brand"); b.replaceChildren(el("img",{class:"tb-logo",src:"/icons/chatify.svg",alt:""}),document.createTextNode(TV("txt_title")||a.title));b.title="Workspace: "+(TV("txt_title")||a.title); } document.title = TV("txt_title") || a.title;
-  $("#noteName").textContent = TV("txt_title") || a.title; $("#noteText").textContent = TV("txt_footer") || a.footer; $("#noteName").closest(".note").hidden = PREVIEW;
+  $("#noteName").textContent = TV("txt_title") || a.title; $("#noteText").textContent = S.cfg.configuration_readonly ? a.footer : (TV("txt_footer") || a.footer); $("#noteName").closest(".note").hidden = PREVIEW;
   $("#q").placeholder = TV("txt_placeholder") || "Ask a question"; $("#hint").textContent = TV("txt_hint") || "Answers cite their sources. Check important facts.";
   const d = document.querySelector(".cmeta span:last-child"); if (d) d.textContent = TV("txt_disclaimer") || "Not a substitute for professional advice.";
   $("#sideTitle").textContent = TV("txt_sidebar") || "Chats";

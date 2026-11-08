@@ -7,6 +7,7 @@
   async function show({key,title,steps,replay=false,onClose}) {
     if(!replay){try{const r=await fetch("/api/guide-seen"),d=await r.json();if(d[key])return}catch{}}
     if(document.querySelector('.cc-tour')||(!replay&&stored(key)))return;
+    if(key==='cc_tour'){try{const r=await fetch('/api/config'),cfg=await r.json();if(cfg.configuration_readonly)steps=steps.map(s=>s.title==='Build or configure an app'?{...s,title:'Run your own app',text:'This shared demo offers public chat. Shared configuration, app building and imports are read-only. Run locally explains how to build on your own machine.',target:'a[href="/run-locally.html"]'}:s)}catch{}}
     mark(key);fetch('/api/guide-seen',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({key})}).catch(()=>{});
     const before=document.activeElement,scroll=window.scrollY;
     const originalSettingsMode=key==='cc_cfg_tour_v1'?(document.body.classList.contains('simple')?'simple':'advanced'):null;

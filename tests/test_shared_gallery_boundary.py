@@ -66,7 +66,7 @@ class SharedBoundary(unittest.TestCase):
   self.assertNotEqual(self.call('/api/actions/execute',{'ticket':ticket},cookie='b'*32)[0],200)
   self.assertTrue(json.loads(self.call('/api/actions/execute',{'ticket':ticket})[1])['saved'])
  def test_shared_flag_not_public_or_portable_user_setting(self):
-  view=json.loads(self.call('/api/config')[1]);self.assertNotIn('_shared_gallery_builtin',view);self.assertEqual(view['auth'],'none');self.assertNotIn('key_present',view['provider'])
+  view=json.loads(self.call('/api/config')[1]);self.assertTrue(view['configuration_readonly']);self.assertIn('app building are read-only',view['app']['footer']);self.assertNotIn('_shared_gallery_builtin',view);self.assertEqual(view['auth'],'none');self.assertNotIn('key_present',view['provider'])
  def test_nonshared_standalone_keeps_local_edit_permission(self):
   self.cfg.pop('_shared_gallery_builtin');self.assertEqual(self.call('/api/settings')[0],200);self.assertTrue(json.loads(self.call('/api/settings')[1])['can_edit'])
  def test_default_deny_method_matrix(self):
