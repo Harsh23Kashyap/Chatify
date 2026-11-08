@@ -1,9 +1,27 @@
 """arXiv Atom API (public). block.category narrows the search, e.g. eess.SP for signal processing."""
-import re, time, urllib.error, urllib.parse, urllib.request
+import re, time, threading, urllib.error, urllib.parse, urllib.request
 import xml.etree.ElementTree as ET
 from .base import Evidence
 
 NS = {"a": "http://www.w3.org/2005/Atom"}
+
+
+# One connection and at least three seconds between request starts, shared by
+# all connector instances in this process, including retries and failed calls.
+# Multiple processes/machines must additionally coordinate their combined rate.
+_request_lock = threading.Lock()
+_next_request_at = 0.0
+
+
+def _request(url):
+    global _next_request_at
+    with _request_lock:
+        delay = _next_request_at - time.monotonic()
+        if delay > 0:
+            time.sleep(delay)
+        _next_request_at = time.monotonic() + 3.0
+        with urllib.request.urlopen(url, timeout=25) as response:
+            return ET.fromstring(response.read())
 
 
 class Arxiv:
@@ -27,8 +45,7 @@ class Arxiv:
         url = "https://export.arxiv.org/api/query?search_query=%s&max_results=%d&%s" % (q, k, order)
         for attempt in range(3):
             try:
-                with urllib.request.urlopen(url, timeout=25) as r:
-                    root = ET.fromstring(r.read())
+                root = _request(url)
                 break
             except (TimeoutError, urllib.error.URLError) as error:
                 if isinstance(error, urllib.error.HTTPError) and error.code not in (429, 500, 502, 503, 504):

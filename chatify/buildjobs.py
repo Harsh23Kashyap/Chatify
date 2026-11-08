@@ -26,6 +26,26 @@ def exclusive_brief_sources(brief):
   if re.search(r'\bonly\s+(?:the\s+)?(?:public\s+)?'+name+r'(?:\s+built-in)?\s+(?:source|connector)\b',text,re.I) or re.search(r'\b'+name+r'\s+(?:source|connector)\s+only\b',text,re.I):selected.append(kind)
  return selected if len(selected)==1 else []
 
+def restricted_api_sources(brief):
+ """Recognize a literal only-A-and-B connector list, never infer from topic mentions.
+ Existing checkbox/start/checkpoint semantics are unchanged. This only narrows the
+ recommendation count and membership for an explicit source restriction.
+ """
+ single=exclusive_brief_sources(brief)
+ if single:return single
+ text=str(brief or '')
+ matches=re.findall(r'(?:^|[.!?]\s+)use only (?:the )?(?:supported |public )?([^.;\n]+?) (?:connectors|sources)\b([^.;\n]*)',text,flags=re.I)
+ restrictions=[]
+ for phrase,tail in matches:
+  # A trailing add/also/except directive can contradict the closed source list.
+  # Only consume a descriptive qualifier, never silently drop a further choice.
+  if tail.strip() and not re.fullmatch(r',\s*(?:both |all )?public no-key metadata APIs\s*',tail,re.I):return []
+  names=[x.strip().lower() for x in re.split(r'\s*(?:,|\band\b|&)\s*',phrase) if x.strip()]
+  if len(names)<2 or len(names)!=len(set(names)) or any(n not in ('pubmed','arxiv','crossref','wikipedia','openalex') for n in names):return []
+  restrictions.append(names)
+ if len(restrictions)!=1:return []
+ return restrictions[0]
+
 def parse_draft_json(text):
  # Repair only illegal JSON escapes, retaining the literal code backslash.
  parsed=_extract_json(text)
@@ -197,9 +217,10 @@ class BuildJobs:
    spec['requirements']+=' Use these verified public endpoints and schema, not empty URL placeholders. No secret or endpoint invention is needed for this named source. Keep code inert and uninstalled until reviewed; verified interface does not prove generated code behavior. Never claim a generated helper was live-tested.'
   correction=job.get('retry_corrections',{}).get(key)
   if correction:spec['previous_validation_failure']=correction;spec['requirements']=spec.get('requirements','')+' Correct the previously rejected fields. Do not repeat blank interface wording, invent credentials or remove output contract fields.'
-  if key=='api' and job.get('confirmed_sources'):
-   spec['confirmed_sources']=job['confirmed_sources']
-   spec['requirements']+=' The user has explicitly selected confirmed_sources. This overrides the open-ended three-to-five count: return exactly one recommendation per selected connector, no unrelated services. Preserve each selected connector ID exactly in connector. Local files need an inert document helper, not an unrelated external API.'
+  api_sources=job.get('confirmed_sources') or restricted_api_sources(job['brief'])
+  if key=='api' and api_sources:
+   spec['confirmed_sources']=api_sources
+   spec['requirements']+=' The user has explicitly selected or restricted sources to confirmed_sources. This overrides the open-ended three-to-five count: return exactly one recommendation per selected connector, no unrelated services. Preserve each selected connector ID exactly in connector. Local files need an inert document helper, not an unrelated external API.'
   instruction=json.dumps(spec)
   if key.startswith('prompt:'):
    spec={'area':'pipeline prompt','stage':key[7:],'app_domain_brief':job['brief'],'input_contract':generator_design.DESIGNS[key[7:]]['inputs'],'output_contract':generator_design.DESIGNS[key[7:]]['output'],'stage_rules':generator_design.DESIGNS[key[7:]]['rules'],'required_literal_tokens':{'answer':['[n]'],'question_check':['VALID','INVALID'],'relevance':['NONE'],'faithfulness':['OK','UNSUPPORTED']}.get(key[7:],[]),'domain_reference':generator_design.template(key[7:],job['brief'])}
@@ -255,7 +276,7 @@ class BuildJobs:
    if not ok:raise ValueError('Helper safety contract failed: '+'; '.join(problems))
   elif key=='api':
    appbuilder.validate_extras({'api_suggestions':result})
-   confirmed=job.get('confirmed_sources') or []
+   confirmed=api_sources
    if confirmed:
     if len(result)!=len(confirmed) or sorted(str(x.get('connector','')) for x in result)!=sorted(confirmed):raise ValueError('Recommend exactly the confirmed sources, one per selected connector')
    elif not 3<=len(result)<=5:raise ValueError('Recommend three to five APIs')
