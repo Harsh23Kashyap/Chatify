@@ -93,6 +93,9 @@ class Management:
   results=[]
   try:
    if kind=='preflight':
+    # Connection checks do not authorize model-backed zero-evidence rescue.
+    # Keep this on the copied runner; normal question retrieval is unchanged.
+    runner.cfg['retrieval']['query_expansion']=False
     runner.queries=lambda q:[q]
     if spec['model']:
      try:
