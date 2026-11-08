@@ -131,6 +131,8 @@ def make_handler(cfg, engine):
                 "max_output_tokens":p.get("max_output_tokens",4096), "top_k": r["top_k"], "query_rewrite": bool(r.get("query_rewrite"))}
 
     def can_edit(h):
+        if cfg.get("_shared_gallery_builtin"):
+            return False  # A loopback proxy is not the owner of shared configuration.
         if cfg["auth"]["mode"] == "token":
             return True
         if acc:  # the first account created is the admin
@@ -234,6 +236,20 @@ def make_handler(cfg, engine):
         def _route(self, method):
             u = urlparse(self.path)
             path, qs = u.path, {k: v[0] for k, v in parse_qs(u.query).items()}
+            if cfg.get("_shared_gallery_builtin"):
+                from . import shared_access
+                path = "/" + os.path.normpath(path).lstrip("/")
+                if path in ("/settings.html", "/build.html") and method == "GET":
+                    return self._static("/shared-settings.html")
+                if path in LOCKED_PAGES or path == "/shared-settings.html":
+                    return self._send(403, {"error": "Shared gallery configuration is read-only."})
+                if path.startswith("/api/"):
+                    if not shared_access.allowed(path, method):
+                        return self._send(403, {"error": "Shared gallery configuration is read-only. Public chat remains available."})
+                    if shared_access.needs_visitor(path) and not re.fullmatch(r"[0-9a-f]{32}", self._cookie_named("cc_visitor") or ""):
+                        return self._send(403, {"error": "Open the chat page first to start a private visitor session."})
+                    if path == "/api/guide-seen":
+                        return self._send(200, {})  # Never read or write the shared guide file.
             if path == "/favicon.ico":
                 logo = themestore.value.get("logo", "")
                 if logo:
@@ -305,7 +321,8 @@ def make_handler(cfg, engine):
                 view=schema.public_view(cfg)
                 view['app']=effective_app()
                 _p=cfg['provider']
-                view['provider']['key_present']= _p['type'] in ('mock','ollama') or (_p['type']=='openai_compatible' and not _p.get('api_key_env')) or bool(providers._key(_p.get('api_key_env',''),_p['type'],required=False))
+                if not cfg.get('_shared_gallery_builtin'):
+                    view['provider']['key_present']= _p['type'] in ('mock','ollama') or (_p['type']=='openai_compatible' and not _p.get('api_key_env')) or bool(providers._key(_p.get('api_key_env',''),_p['type'],required=False))
                 principal=acc.user_for(self._cookie()) if acc else None
                 view['sources']=[s for s in view['sources'] if permissions.allowed(cfg,principal['id'] if principal else None,s['id'])]
                 return self._send(200, view)
@@ -1143,6 +1160,7 @@ def serve_gallery(path, host=None, port=None):
             cards.append({"slug": app["slug"], "url": app["url"], "title": app["title"], "tagline": app.get("tagline", ""), "accent": app.get("accent") or "#173f35", "icon": app.get("icon") or "spark", "tags": app.get("tags") or [], "featured": bool(app.get("featured"))})
             continue
         cfg = app["cfg"]
+        cfg["_shared_gallery_builtin"] = True
         store = Store(os.path.join(cfg["_dir"], cfg["storage"]["path"]) if not os.path.isabs(cfg["storage"]["path"]) else cfg["storage"]["path"])
         engine = Engine(cfg, store)
         engine.prompts = promptmod.PromptStore(os.path.dirname(os.path.abspath(store.path)) if store.path != ":memory:" else "", cfg.get("pipeline_prompts"))
@@ -1184,10 +1202,13 @@ def serve_gallery(path, host=None, port=None):
             if featured:
                 f_title = featured.get("title") or featured["cfg"]["app"]["title"]
                 f_tagline = featured.get("tagline") or featured["cfg"]["app"].get("tagline") or ""
-                f_cta = featured.get("url") or ("/" + featured["slug"] + "/settings.html")
-                f_sub = "" if featured.get("url") else '<a class="g-f-sub" href="/%s/">Open the product guide</a>' % _esc(featured["slug"])
-                featured_html = ('<section class="g-feature"><div class="g-f-copy"><span class="g-f-eyebrow">Build your own</span><span class="g-f-name">%s</span><span class="g-f-tag">%s</span><span class="g-f-note">One YAML file plus your sources - every app below was built this way.</span></div><div class="g-f-actions"><a class="g-f-cta" href="%s">Build with AI</a>%s</div></section>'
-                    % (_esc(f_title), _esc(f_tagline), _esc(f_cta), f_sub))
+                f_cta = featured.get("url") or ("/" + featured["slug"] + "/")
+                f_sub = ""
+                f_label = "Build with AI" if featured.get("url") else "Open public chat"
+                f_eyebrow = "Build your own" if featured.get("url") else "Public demo"
+                f_note = "One YAML file plus your sources - every app below was built this way." if featured.get("url") else "Try this shared app. Configuration and app building are read-only here."
+                featured_html = ('<section class="g-feature"><div class="g-f-copy"><span class="g-f-eyebrow">%s</span><span class="g-f-name">%s</span><span class="g-f-tag">%s</span><span class="g-f-note">%s</span></div><div class="g-f-actions"><a class="g-f-cta" href="%s">%s</a>%s</div></section>'
+                    % (_esc(f_eyebrow), _esc(f_title), _esc(f_tagline), _esc(f_note), _esc(f_cta), _esc(f_label), f_sub))
             page = page.replace("{{FEATURED}}", featured_html).replace("{{CARDS}}", cards_html).replace("{{TITLE}}", _esc(g["title"])).replace("{{TAGLINE}}", _esc(g["tagline"])).replace("{{COUNT}}", str(len(others)))
             self._send(200, page.encode(), "text/html; charset=utf-8")
 
@@ -1286,6 +1307,8 @@ def serve_gallery(path, host=None, port=None):
                     if isinstance(target, dict) and target.get("parent") == parent:
                         children.pop(slug, None)
                     return self._send(200, {"ok": True})
+                if slug in children:
+                    return self._send(409, {"error": "Workspace slug already registered"})
                 depth = int(pentry.get("depth") or 1) + 1
                 if depth > 2:
                     return self._send(400, {"error": "Workspaces on this demo server cannot launch further workspaces of their own. Make your changes in the main demo app and use it there."})

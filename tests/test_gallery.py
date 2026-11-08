@@ -179,7 +179,7 @@ class GalleryServer(unittest.TestCase):
     def test_mock_chat_streams_through_the_proxy(self):
         req = urllib.request.Request("http://127.0.0.1:%d/alpha/api/ask" % self.port,
                                      data=json.dumps({"question": "hi", "chat": ""}).encode(),
-                                     headers={"Content-Type": "application/json"})
+                                     headers={"Content-Type": "application/json", "Cookie": "cc_visitor=" + "a" * 32})
         r = urllib.request.urlopen(req, timeout=15)
         self.assertEqual(r.status, 200)
         self.assertIn('"chat"', r.read().decode("utf-8", "replace")[:200])
@@ -237,6 +237,7 @@ class GalleryWorkspaceHandoff(unittest.TestCase):
         except urllib.error.HTTPError as e:
             return e.code, e.read().decode("utf-8", "replace"), dict(e.headers)
 
+    @unittest.skip("Superseded temporary shared-gallery contract: management denied; live replacements in GalleryContainmentContract. Legacy flow retained for future owner-auth repair.")
     def test_full_hosted_handoff_flow(self):
         A, B = "a" * 32, "b" * 32
         # issuance: first HTML visit sets a 128-bit HttpOnly visitor cookie
@@ -314,6 +315,7 @@ class GalleryWorkspaceHandoff(unittest.TestCase):
         s, body, _ = self.req("GET", url + "api/health", cookie=A, accept="application/json")
         self.assertNotEqual(s, 200)
 
+    @unittest.skip("Superseded temporary shared-gallery contract: management denied; live replacements in GalleryContainmentContract. Legacy flow retained for future owner-auth repair.")
     def test_python_connector_stays_off_without_explicit_allow(self):
         A = "c" * 32
         files = {"app.yaml": "app: {id: codeapp, title: Code App}\nprovider: {type: mock}\nsources: [{id: p, type: python, entry: plugin:search}]\n",
@@ -374,6 +376,7 @@ class GalleryBuilderUseThisApp(unittest.TestCase):
         except urllib.error.HTTPError as e:
             return e.code, e.read().decode("utf-8", "replace")
 
+    @unittest.skip("Superseded temporary shared-gallery contract: management denied; live replacements in GalleryContainmentContract. Legacy flow retained for future owner-auth repair.")
     def test_save_then_launch_carries_everything_but_keys(self):
         import yaml
         from chatify import schema
@@ -533,6 +536,7 @@ class GalleryNestedWorkspaceLaunch(unittest.TestCase):
             try: return e.code, json.loads(out)
             except ValueError: return e.code, {"error": out[:200]}
 
+    @unittest.skip("Superseded temporary shared-gallery contract: management denied; live replacements in GalleryContainmentContract. Legacy flow retained for future owner-auth repair.")
     def test_launch_inside_workspace_registers_same_origin(self):
         import base64
         A = "a1b2c3d4" * 4
@@ -650,19 +654,50 @@ class GalleryFeaturedBuildCta(unittest.TestCase):
         except urllib.error.HTTPError as e:
             return e.code, e.read().decode("utf-8", "replace")
 
-    def test_featured_cta_opens_configuration(self):
+    def test_featured_cta_opens_public_chat(self):
         s, b = self.get("/")
         self.assertEqual(s, 200)
-        self.assertIn('class="g-f-cta" href="/alpha/settings.html"', b)
+        self.assertIn('class="g-f-cta" href="/alpha/"', b)
         self.assertNotIn('class="g-f-cta" href="/alpha/build.html"', b)
         status, settings = self.get('/alpha/settings.html')
         self.assertEqual(status, 200)
-        self.assertIn('settingstop.js', settings)
-        # Existing separate wizard remains reachable for saved handoffs; CTA no longer targets it.
-        s, b = self.get("/alpha/build.html")
-        self.assertEqual(s, 200)
-        self.assertIn("Chatify builds it.", b)
-        self.assertIn("buildBrief", b)
-        s, b = self.get("/alpha/build.js")
-        self.assertEqual(s, 200)
-        self.assertIn("launch_ticket", b)
+        self.assertIn('This shared app is read-only', settings)
+        self.assertNotIn('settingstop.js', settings)
+        status, body = self.get('/alpha/build.html')
+        self.assertEqual(status,200);self.assertIn('This shared app is read-only',body)
+        status, body = self.get('/alpha/api/settings')
+        self.assertEqual(status,403)
+
+
+
+class GalleryContainmentContract(GalleryWorkspaceHandoff):
+    """Temporary shared lockdown replaces public build/import entry points, not owner auth."""
+    test_full_hosted_handoff_flow = None
+    test_python_connector_stays_off_without_explicit_allow = None
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+    def assert_denied_unchanged(self, path, body):
+        from pathlib import Path
+        root = Path(self.base)
+        def snapshot():
+            return {str(p.relative_to(root)): p.read_bytes() for p in root.rglob('*') if p.is_file() and p.suffix not in ('.db', '.db-wal', '.db-shm')}
+        before = snapshot()
+        for owner in ('a'*32, 'b'*32):
+            status, text, _ = self.req('POST', '/alpha/api/' + path, cookie=owner, body=body, accept='application/json')
+            self.assertEqual(status,403,text[:300])
+            self.assertIn('read-only',json.loads(text)['error'])
+        self.assertEqual(snapshot(),before)
+    def test_shared_import_handoff_blocked_before_review(self):
+        self.assert_denied_unchanged('nerds/review', {'name':'app.yaml','data':base64.b64encode(GUEST_YAML.encode()).decode()})
+        self.assert_denied_unchanged('nerds/load', {'token':'no-ticket'})
+    def test_shared_python_import_blocked_without_execution(self):
+        self.assert_denied_unchanged('nerds/review', {'name':'codeapp.zip','data':'invalid-is-never-parsed'})
+    def test_shared_build_save_launch_blocked_before_write(self):
+        for path,body in [('settings/build/review',{'yaml':GUEST_YAML}),('settings/build/save',{'ticket':'no-ticket','confirmed':True}),('settings/build/launch',{'ticket':'no-ticket'})]:
+            self.assert_denied_unchanged(path,body)
+    def test_shared_nested_bootstrap_and_management_blocked(self):
+        for path in ('nerds/load','nerds/recover','nerds/stop','nerds/remove'):
+            self.assert_denied_unchanged(path,{'id':'nerd-existing','token':'no-ticket','confirmed':True})
+        status,text,_=self.req('GET','/alpha/settings.html',cookie='a'*32)
+        self.assertEqual(status,200);self.assertIn('This shared app is read-only',text)
