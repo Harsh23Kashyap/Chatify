@@ -345,7 +345,7 @@ function turnView(t, prev) {
     const named = failedSources.map(([id, msg]) => typeof msg === "string" && msg.includes(" ") ? srcName(id) + ": " + msg : null).filter(Boolean);
     const note = named.length
       ? named.join(" ") + (allFailed ? "" : " Answered from the other sources.")
-      : failedSources.map(([id]) => srcName(id)).join(", ") + " could not be reached" + (allFailed ? " for this question." : " - answered from the other sources.");
+      : failedSources.map(([id]) => srcName(id)).join(", ") + " could not return usable results" + (allFailed ? " for this question." : " - answered from the other sources.");
     bub.append(el("div", { class: "src-note", role: "note", text: note }));
   }
   if (!t.evidence.length) {

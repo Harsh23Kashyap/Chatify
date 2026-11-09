@@ -15,9 +15,9 @@ class T(unittest.TestCase):
         self.assertTrue(any(".corrupt-" in f for f in os.listdir(d)))
     def test_fallback_answer_cites_passages(self):
         a = Engine.fallback_answer(EV)
-        self.assertIn("could not be reached", a); self.assertIn("[1]", a); self.assertIn("[2]", a); self.assertLess(len(a), 1200)
+        self.assertIn("did not return an answer", a); self.assertIn("[1]", a); self.assertIn("[2]", a); self.assertLess(len(a), 1200)
     def test_fallback_answer_with_no_evidence(self):
-        self.assertIn("could not be reached", Engine.fallback_answer([]))
+        self.assertIn("did not return an answer", Engine.fallback_answer([]))
     def test_bad_app_file_gives_plain_error(self):
         from chatify import schema
         d = tempfile.mkdtemp(); p = os.path.join(d, "a.yaml"); open(p, "w").write("app: [broken\n  x:")

@@ -86,7 +86,7 @@ class FallbackWording(unittest.TestCase):
     def test_default_is_labeled_source_preview(self):
         a = Engine.fallback_answer([{"n": 1, "text": "A refund passage."}])
         self.assertIn("source preview, not a model answer", a)
-        self.assertIn("could not be reached", a)
+        self.assertIn("did not return an answer", a)
 
     def test_missing_key_wording_points_to_configuration(self):
         a = Engine.fallback_answer([{"n": 1, "text": "A refund passage."}], why=_NO_KEY_WHY)

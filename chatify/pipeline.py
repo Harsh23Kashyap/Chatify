@@ -1765,7 +1765,7 @@ class Engine:
     @staticmethod
     def fallback_answer(evidence, why="", question=""):
         """No model answer: show the best passages as a clearly labeled source preview, never as a model answer."""
-        lines = [why or "The AI model could not be reached, so this is a source preview, not a model answer: the most relevant passages from your sources."]
+        lines = [why or "The AI model did not return an answer, so this is a source preview, not a model answer: the most relevant passages from your sources."]
         demoted = [e for e in (evidence or []) if e.get("_demoted")]
         if demoted:
             # Name the loose matches by their citation markers - never by list

@@ -53,10 +53,22 @@ class Arxiv:
                 if attempt == 2:
                     raise
                 time.sleep(3 * (attempt + 1))
-        out = []
-        for i, e in enumerate(root.findall("a:entry", NS)):
-            link = e.findtext("a:id", "", NS)
-            out.append(Evidence(" ".join((e.findtext("a:title", "", NS) or "").split()),
+        entries = root.findall("a:entry", NS)
+        # arXiv documents API errors as HTTP-successful Atom entries. They are
+        # source failures, never scholarly evidence, even if titled "Error".
+        for entry in entries:
+            identity = (entry.findtext("a:id", "", NS) or "").strip()
+            parsed = urllib.parse.urlsplit(identity)
+            if parsed.hostname in ("arxiv.org", "export.arxiv.org") and parsed.path.rstrip("/") == "/api/errors":
+                raise ValueError("arXiv returned an API error instead of paper records")
+        out, seen = [], set()
+        for i, e in enumerate(entries):
+            link = (e.findtext("a:id", "", NS) or "").strip()
+            title = " ".join((e.findtext("a:title", "", NS) or "").split())
+            if not link or not title or link in seen:
+                continue
+            seen.add(link)
+            out.append(Evidence(title,
                                 " ".join((e.findtext("a:summary", "", NS) or "").split()), link,
                                 [a.findtext("a:name", "", NS) for a in e.findall("a:author", NS)][:6],
                                 (e.findtext("a:published", "", NS) or "")[:4], "arXiv", self.id, 1.0 / (i + 1),

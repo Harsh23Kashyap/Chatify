@@ -52,7 +52,7 @@ def source_note(errors, sources):
     named = ["%s: %s" % (labels.get(sid, sid), str(msg).strip()) for sid, msg in items if isinstance(msg, str) and " " in msg]
     if named:
         return " ".join(named) + ("" if all_failed else " Answered from the other sources.")
-    return ", ".join(labels.get(sid, sid) for sid, _ in items) + " could not be reached" + (" for this question." if all_failed else " - answered from the other sources.")
+    return ", ".join(labels.get(sid, sid) for sid, _ in items) + " could not return usable results" + (" for this question." if all_failed else " - answered from the other sources.")
 
 
 def answer_markdown(app,turn,sources=None):

@@ -148,12 +148,12 @@ class SourceNoteExports(unittest.TestCase):
  def test_all_failed_wording(self):
   from chatify.exports import source_note
   note=source_note({'openalex':'TimeoutError'},[{'id':'openalex','label':'OpenAlex'}])
-  self.assertIn('OpenAlex could not be reached for this question.',note)
+  self.assertIn('OpenAlex could not return usable results for this question.',note)
   self.assertEqual(source_note({},self.SOURCES),'');self.assertEqual(source_note(None,None),'')
  def test_no_note_without_errors(self):
   from chatify.exports import answer_markdown
   t=self.turn();t['source_errors']={}
-  self.assertNotIn('could not be reached',answer_markdown({'title':'Chat'},t,self.SOURCES))
+  self.assertNotIn('could not return usable results',answer_markdown({'title':'Chat'},t,self.SOURCES))
 
 class WheelInstallImport(unittest.TestCase):
  def test_server_imports_and_pdf_fails_clear_without_fpdf(self):
