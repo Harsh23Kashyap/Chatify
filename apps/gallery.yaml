@@ -81,3 +81,11 @@ gallery:
       accent: '#b34329'
       icon: signal
       tags: [USGS, Past-day records]
+    - dir: paper-trail
+      slug: paper-trail
+      model: gpt-6-luna
+      title: Paper Trail - preview
+      tagline: Discover scholarly paper metadata from Crossref and arXiv. Preview only; paid answers are disabled pending a verified spending limit.
+      accent: '#B94735'
+      icon: signal
+      tags: [Research metadata, Preview only]

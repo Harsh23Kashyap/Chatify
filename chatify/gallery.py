@@ -15,6 +15,7 @@ A gallery config is a YAML file with a top-level "gallery" mapping:
       apps:
         - dir: dietchat    # resolved relative to this file; must contain app.yaml
           slug: dietchat   # the endpoint: /<slug>/
+          model: gpt-6-luna # optional model-only override; host key/type retained
 
 Guardrails applied to every member app in gallery mode: the host provider block
 replaces the app's own (so all apps run on the server-side key), per-visitor
@@ -122,6 +123,12 @@ def load(path):
             merged = dict(cfg.get("provider") or {})
             merged.update(provider)
             cfg["provider"] = merged
+        if "model" in entry:
+            model = entry["model"]
+            if not isinstance(model, str) or not model.strip() or len(model) > 200 or any(ord(c) < 32 for c in model):
+                raise ConfigError("gallery app model must be a non-empty model name under 201 characters")
+            # A model-only choice cannot replace the host key, endpoint or type.
+            cfg["provider"]["model"] = model.strip()
         cfg.setdefault("server", {})["public"] = True
         cfg["app"]["theme"] = "light"  # one consistent look across the gallery; settings pages have no dark theme
         caps = dict(cfg.get("budget") or {})

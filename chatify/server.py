@@ -911,6 +911,8 @@ def make_handler(cfg, engine):
                 return self._send(200, chat_markdown(ch["title"], turn_scopes(o,store.turns(o, ch["id"])), cfg["sources"]).encode(), "text/markdown; charset=utf-8",
                                   {"Content-Disposition": 'attachment; filename="chat.md"'})
             if path in ("/api/ask", "/api/ask-stream", "/api/regenerate"):
+                if cfg.get("_shared_gallery_builtin") and budget.value["spend_cap_usd"] is not None and cfg["provider"]["type"] != "mock":
+                    return self._send(429, {"error": "Paid answers are disabled for this public preview until a verified spending limit is in place."})
                 budget.take("question", o)
                 now = time.time(); hits[o] = [t for t in hits[o] if now - t < 60]
                 if len(hits[o]) >= 30:

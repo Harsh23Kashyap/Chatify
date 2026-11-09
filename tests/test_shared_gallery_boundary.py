@@ -67,6 +67,24 @@ class SharedBoundary(unittest.TestCase):
   self.assertTrue(json.loads(self.call('/api/actions/execute',{'ticket':ticket})[1])['saved'])
  def test_shared_flag_not_public_or_portable_user_setting(self):
   view=json.loads(self.call('/api/config')[1]);self.assertTrue(view['configuration_readonly']);self.assertIn('app building are read-only',view['app']['footer']);self.assertNotIn('_shared_gallery_builtin',view);self.assertEqual(view['auth'],'none');self.assertNotIn('key_present',view['provider'])
+ def test_paid_preview_blocks_generation_before_engine_and_quota(self):
+  # A configured dollar guard already fails closed in Budget. Surface that
+  # honestly before the pipeline can mask it as a question-check refusal.
+  self.cfg['provider']['type']='openai'
+  self.cfg['budget']['spend_cap_usd']=0
+  # make_handler owns the budget instance; make a handler with this config.
+  server=ThreadingHTTPServer(('127.0.0.1',0),make_handler(self.cfg,self.engine))
+  threading.Thread(target=server.serve_forever,daemon=True).start()
+  old=self.root;self.root='http://127.0.0.1:'+str(server.server_port)
+  try:
+   before=self.store.export_all('visitor:'+'a'*32)
+   with patch.object(self.engine,'ask',side_effect=AssertionError('no generation')),patch.object(self.engine,'ask_stream',side_effect=AssertionError('no generation')):
+    for path in ['/api/ask','/api/ask-stream','/api/regenerate']:
+     status,body,_=self.call(path,{'question':'Find RAG papers'})
+     self.assertEqual(status,429);self.assertIn('Paid answers are disabled',json.loads(body)['error'])
+   self.assertEqual(self.store.export_all('visitor:'+'a'*32),before)
+  finally:
+   self.root=old;server.shutdown();server.server_close()
  def test_nonshared_standalone_keeps_local_edit_permission(self):
   self.cfg.pop('_shared_gallery_builtin');self.assertEqual(self.call('/api/settings')[0],200);self.assertTrue(json.loads(self.call('/api/settings')[1])['can_edit'])
  def test_default_deny_method_matrix(self):
