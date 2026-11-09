@@ -1870,7 +1870,7 @@ class Engine:
             evidence, errors = (reused,{}) if reused else (([], []) if blocked else (self.retrieve(standalone, sources, owner, scope, style) if use_cache else self._fresh(standalone, sources, owner, scope, style)))
         yield "progress", {"stage": "ranking", "label": "Selecting relevant passages"}
         reuse_relevant=bool(reused) if not temporary else False
-        if not reuse_relevant and not temporary and history and not new_topic and re.search(r"\b(those|these|that|same|above|previous)\b",q,re.I) and not scope and not permissions.restricted(self.cfg):
+        if not blocked and not reuse_relevant and not temporary and history and not new_topic and re.search(r"\b(those|these|that|same|above|previous)\b",q,re.I) and not scope and not permissions.restricted(self.cfg):
             eligible=set(self.store.history_ids(owner,chat,topic))
             previous=[t for t in self.store.turns(owner,chat) if t["id"] in eligible]
             if previous and previous[-1].get("evidence"):
@@ -1887,8 +1887,11 @@ class Engine:
                 if relevant_anchor:evidence=relevant_anchor
         yield "meta", {"standalone": standalone, "evidence": evidence, "source_errors": errors}
         yield "progress", {"stage": "answer", "label": "Writing from sources" if evidence else "No matching evidence; preparing a reply"}
-        if not evidence:
-            answer = blocked or self.cfg["prompt"]["no_evidence"]
+        if blocked:
+            answer = blocked
+            yield "token", answer
+        elif not evidence:
+            answer = self.cfg["prompt"]["no_evidence"]
             yield "token", answer
         elif self.cfg["prompt"].get("source_preview_only"):
             answer = self.source_preview(evidence)
@@ -2013,7 +2016,7 @@ class Engine:
         reused=self.simplification_evidence(owner,chat,topic,q,sources) if history and not new_topic and not blocked else []
         evidence, errors = (reused,{}) if reused else (([], {}) if blocked else (self.retrieve(standalone, sources, owner, style=style) if use_cache else self._fresh(standalone, sources, owner, style=style)))
         reuse_relevant=bool(reused)
-        if not reuse_relevant and history and not new_topic and re.search(r"\b(those|these|that|same|above|previous)\b",q,re.I):
+        if not blocked and not reuse_relevant and history and not new_topic and re.search(r"\b(those|these|that|same|above|previous)\b",q,re.I):
             eligible=set(self.store.history_ids(owner,chat,topic))
             previous=[t for t in self.store.turns(owner,chat) if t["id"] in eligible]
             if previous and previous[-1].get("evidence"):
