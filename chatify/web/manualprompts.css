@@ -61,3 +61,6 @@ html body.settings-tabs:has(#cfgtop) #col #sec-prompts.manual-prompt-candidate .
 
 .prompt-sample-test{margin-top:20px;border-top:1px solid var(--line,#d9cec5);padding-top:14px}.prompt-sample-test summary{cursor:pointer;font-weight:600}.prompt-sample-test label{display:block;margin:12px 0}.prompt-sample-test textarea{display:block;width:100%;box-sizing:border-box;margin-top:6px;min-height:80px;max-height:240px;resize:vertical}.prompt-sample-test .review{white-space:pre-wrap;overflow-wrap:anywhere;margin-top:12px}.prompt-sample-test .h{overflow-wrap:anywhere}
 html body.settings-tabs #col #sec-prompts .stage .prompt-sample-test textarea{min-height:80px!important;height:96px;max-height:240px!important}.prompt-sample-test summary{justify-content:flex-start!important;gap:8px}
+
+/* Picker options must paint above compacted editor-help rows. */
+html body.settings-tabs:has(#cfgtop) #sec-prompts .manual-step-picker{position:relative;z-index:110}
