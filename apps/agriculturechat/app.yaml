@@ -19,6 +19,7 @@ sources:
   label: 'FAO, IRRI and Minnesota Extension: dated guidance with regional limits'
   path: docs
 prompt:
+  safety_hold: agriculture_candidate
   system: 'Answer agricultural questions only from the numbered evidence. Cite each
     factual claim with [n]. This app is global: never assume India or any other country.
     Before any field-specific fertilizer recommendation, ask for the country and locality,

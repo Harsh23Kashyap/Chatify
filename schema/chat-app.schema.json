@@ -186,6 +186,15 @@
           "type": "boolean",
           "default": false,
           "description": "Explicit opt-in unverified retrieved-passage preview, not a synthesized answer."
+        },
+        "safety_hold": {
+          "type": "string",
+          "enum": [
+            "",
+            "agriculture_candidate"
+          ],
+          "default": "",
+          "description": "Explicit unpublished Agriculture candidate hold. Pauses generation and source previews."
         }
       }
     },

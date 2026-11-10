@@ -1845,6 +1845,33 @@ class Engine:
                 lines.append("Freshness: these sources show no dates, so how current they are cannot be confirmed.")
         return "\n\n".join([lines[0], "\n".join(lines[1:])]) if len(lines) > 1 else lines[0]
 
+    def candidate_hold_reply(self, owner, chat, question, style, topic, new_topic, temporary, scope):
+        """Explicit unpublished-candidate hold. No model, retrieval, cache or preview."""
+        from .agriculture_hold import reply
+        answer = reply(question)
+        if temporary:
+            chat = topic = tid = None
+        else:
+            self.store.chat(owner, chat)
+            if topic:
+                self.store.topic(owner, topic)
+            elif not new_topic:
+                topic = self.store.last_topic(chat)
+            if not topic:
+                topic = self.store.new_topic(owner, question[:80])
+            tid = self.store.add_turn(chat, topic, question, question, answer, [], [], style,
+                                      source_errors={}, model_status="safety_hold")
+            if scope:
+                self.store.save_state(owner, "scope-" + tid, scope)
+            if self.store.chat(owner, chat)["title"] == "New chat":
+                self.store.rename_chat(owner, chat, _chat_title(question))
+        return {"seconds": 0, "model_status": "safety_hold", "safety_hold": True,
+                "followups": [], "id": tid, "chat": chat, "topic": topic,
+                "question": question, "standalone": question, "answer": answer,
+                "evidence": [], "ledger": [], "style": style, "source_errors": {},
+                "response_kind": "answer", "answer_verified": False,
+                "temporary": temporary, "scope": scope}
+
     def ask_stream(self, owner, chat, question, sources=None, style="standard", topic=None, new_topic=False, use_cache=True, temporary=False, temp_history=None, use_profile=False, scope=None):
         """Yield ('meta', {...}), ('token', str)..., ('done', result). Same behaviour as ask()."""
         t0 = time.time()
@@ -1852,6 +1879,13 @@ class Engine:
         if not q or len(q) > 2000:
             raise ValueError("Question must be 1-2000 characters")
         scope = self.validate_scope(scope, owner)
+        if self.cfg["prompt"].get("safety_hold") == "agriculture_candidate":
+            result = self.candidate_hold_reply(owner, chat, q, style, topic, new_topic, temporary, scope)
+            yield "progress", {"stage": "safety", "label": "Agriculture candidate safety hold"}
+            yield "meta", {"standalone": q, "evidence": [], "source_errors": {}}
+            yield "token", result["answer"]
+            yield "done", result
+            return
         mem_on = self.cfg["memory"]["enabled"]
         profile = ""
         if temporary:
@@ -2012,7 +2046,7 @@ class Engine:
                        "evidence": evidence, "ledger": ledger, "style": style, "source_errors": errors, "response_kind": "question_refused" if blocked else ("source_preview" if preview_only else "answer"), "answer_verified": False, "temporary": temporary, "scope": scope}
 
     def ask(self, owner, chat, question, sources=None, style="standard", topic=None, new_topic=False, use_cache=True, scope=None):
-        if scope is not None or permissions.restricted(self.cfg):
+        if self.cfg["prompt"].get("safety_hold") == "agriculture_candidate" or scope is not None or permissions.restricted(self.cfg):
             return next(data for kind, data in self.ask_stream(owner, chat, question, sources, style, topic, new_topic, use_cache, scope=scope) if kind == "done")
         q = str(question or "").strip()
         if not q or len(q) > 2000:

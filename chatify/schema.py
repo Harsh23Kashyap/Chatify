@@ -45,6 +45,7 @@ DEFAULTS = {
                   "deep": "Give a detailed, source-backed synthesis with a direct answer, organized sections, and comparison of relevant findings across sources. Explain methods, mechanisms, examples, trade-offs, counterpoints and uncertainties only when the sources support them. Cover distinct relevant findings rather than repeating the same point. Be more thorough than standard mode when evidence permits; do not invent background, caveats or open questions to fill space. Cite each factual claim with [n]."},
         "answer_note": "",
         "source_preview_only": False, # explicit opt-in: retrieved passages, no synthesized answer
+        "safety_hold": "", # explicit candidate restriction; never enables generation
         "revise": False,
         "no_evidence": "I could not find evidence for that in the configured sources.",
     },
@@ -219,6 +220,8 @@ def validate(raw):
         raise ConfigError("retrieval.top_k must be 1-50")
     if type(cfg["prompt"].get("source_preview_only")) is not bool:
         raise ConfigError("prompt.source_preview_only must be true or false")
+    if cfg["prompt"].get("safety_hold") not in ("", "agriculture_candidate"):
+        raise ConfigError("prompt.safety_hold must be empty or agriculture_candidate")
     memory = cfg["memory"]
     if not isinstance(memory, dict) or not isinstance(memory.get("enabled"), bool):
         raise ConfigError("memory.enabled must be true or false")
