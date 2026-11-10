@@ -579,6 +579,8 @@ function dayLabel(ts) {
   if (d.getTime() >= start) return "Today"; if (d.getTime() >= start - day) return "Yesterday"; if (d.getTime() >= start - 7 * day) return "This week"; return "Earlier";
 }
 function historyEmpty(text,search=false){
+  // Custom app themes keep their existing stationary, text-only history states.
+  if(document.documentElement.dataset.chatifyShell!=="true")return el("div",{class:"empty",text});
   const art=el("span",{class:"history-empty-art","aria-hidden":"true"});
   art.innerHTML=search?'<svg viewBox="0 0 88 64" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 12h35v40H17zM25 23h19M25 31h12"/><g><circle cx="55" cy="35" r="13"/><path d="m64 45 10 10"/></g></svg>':'<svg viewBox="0 0 88 64" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M13 12h42v29H31l-10 9v-9h-8z"/><g><path d="M40 29h34v25h-8v7l-9-7H40z" fill="var(--paper)"/><path d="M49 39h16M49 45h10"/></g><path d="M22 23h23M22 29h14"/></svg>';
   return el("div",{class:"empty history-empty"},art,el("span",{text}));
