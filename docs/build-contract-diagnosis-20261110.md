@@ -39,3 +39,13 @@ full restored-version runtime isolation is not newly proven by that test.
 Local reuse is retained and the setup banner explains both paths. setup=1 opens
 Manual settings without requiring a section hash. Local Save copy explicitly
 states parent configuration changes while existing chats and source files stay.
+
+## V4 generation contract candidate, 17:55
+230a9df safely rejected question_check and standalone outputs that copied the
+whole product brief into a pre-retrieval stage. Adding more trailing rules did
+not stop that pattern. V4 separates prompt generation from app-wide PART_SYSTEM
+and omits the generic domain_reference for these two stages. The model receives
+the actual brief as topic data and the exact stage contract, with an explicit
+scope-extraction rule. No validator was loosened. 175 build* tests pass. The
+mock fixture reconstructs its own template solely for harness continuity;
+these tests do not establish actual model quality. Paired worker calls pending.

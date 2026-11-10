@@ -20,3 +20,10 @@ class PromptJSONContract(unittest.TestCase):
   self.assertIn('never answers, refuses, requests uploads',prompt)
  def test_two_root_objects_not_accepted(self):
   self.assertIsNone(buildjobs.parse_draft_json('{"text":"hello"}{"on":true}'))
+ def test_pre_retrieval_generation_does_not_receive_cross_stage_template(self):
+  for stage in ('standalone','question_check'):
+   j=self.job('{"text":"short","on":true}')
+   try:buildjobs.BuildJobs()._draft_part(j,'prompt:'+stage,dict(buildjobs.PARTS)['prompt:'+stage])
+   except ValueError:pass
+   system=j['provider'].messages[0]['content'];self.assertIn(buildjobs.PROMPT_PART_SYSTEM,system);self.assertNotIn('domain_reference',system)
+   self.assertIn('Do not paraphrase the whole brief',system);self.assertNotIn('Every app must have a domain-specific title',system)

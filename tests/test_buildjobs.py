@@ -9,7 +9,7 @@ class Fixture:
   if 'Review this complete merged draft' in system:return json.dumps({'issues':[],'ready':True})
   spec=json.JSONDecoder().raw_decode(system[system.index('{',system.index('This is one isolated')):])[0]
   if self.fail and self.fail==spec.get('stage'):self.fail=None;raise ValueError('fixture part failure')
-  if spec['area']=='pipeline prompt':return json.dumps({'text':spec['domain_reference'],'on':True})
+  if spec['area']=='pipeline prompt':return json.dumps({'text':spec.get('domain_reference') or __import__('chatify.generator_design',fromlist=['template']).template(spec['stage'],spec['app_domain_brief']),'on':True})
   if spec['area']=='inert Python helper':return json.dumps({'brief':'Fixture inert helper','code':generators.code_template(spec['kind'],'')})
   if spec['area']=='API recommendations':return json.dumps([{'service':service,'name':service,'what':'This service provides searchable information from published content and public data.','reason':'This service helps the app find background information for the reader questions.','connector':'openalex','setup':'Review setup','caveat':'Verify limits','helper':{'brief':service+' fixture helper','code':generators.code_template('search','')}} for service in ['OpenAlex','Wikipedia','Crossref']])
   defaults=copy.deepcopy(spec['defaults'])
