@@ -774,3 +774,8 @@ html[data-chatify-shell=true] .composer #q:is(:focus,:focus-visible){outline:0!i
  html[data-chatify-shell=true] .app.src .bar-r>:is(.icon,.cs){flex:none}
 }
 html[data-chatify-shell=true] .sources h3{font:600 20px/28px 'DM Sans',sans-serif;color:var(--ui-ink);letter-spacing:-.015em}
+
+/* Design round 5: empty history has a quiet, contextual illustration. */
+html[data-chatify-shell=true] .side .history-empty{display:grid;gap:16px;padding-top:24px}
+.history-empty-art{display:block;color:var(--mut);width:88px;height:64px;opacity:.8}
+.history-empty-art svg{display:block;width:100%;height:100%}

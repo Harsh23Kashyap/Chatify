@@ -578,6 +578,11 @@ function dayLabel(ts) {
   const d = new Date(ts * 1000), n = new Date(), day = 86400000, start = new Date(n.getFullYear(), n.getMonth(), n.getDate()).getTime();
   if (d.getTime() >= start) return "Today"; if (d.getTime() >= start - day) return "Yesterday"; if (d.getTime() >= start - 7 * day) return "This week"; return "Earlier";
 }
+function historyEmpty(text,search=false){
+  const art=el("span",{class:"history-empty-art","aria-hidden":"true"});
+  art.innerHTML=search?'<svg viewBox="0 0 88 64" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 12h35v40H17zM25 23h19M25 31h12"/><g><circle cx="55" cy="35" r="13"/><path d="m64 45 10 10"/></g></svg>':'<svg viewBox="0 0 88 64" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M13 12h42v29H31l-10 9v-9h-8z"/><g><path d="M40 29h34v25h-8v7l-9-7H40z" fill="var(--paper)"/><path d="M49 39h16M49 45h10"/></g><path d="M22 23h23M22 29h14"/></svg>';
+  return el("div",{class:"empty history-empty"},art,el("span",{text}));
+}
 let historySkeletonTimer=0,historyShimmerTimer=0;
 async function loadList() {
   const seq = (loadList.seq = (loadList.seq || 0) + 1); const list = $("#list"), tab = S.tab, query = $("#search").value.trim();if(list.querySelector(".history-state")?.contains(document.activeElement))$("#search").focus();
@@ -587,7 +592,7 @@ async function loadList() {
   try {
     if (tab === "chats") {
       const rows = await api("/api/chats?q=" + encodeURIComponent($("#search").value)); if (seq !== loadList.seq) return;delete list.dataset.topicsSignature;const signature=JSON.stringify([tab,query,rows]);if(list.dataset.chatsSignature===signature&&list.querySelectorAll(".item").length===rows.length){const items=list.querySelectorAll(".item");rows.forEach((c,i)=>{items[i].classList.toggle("on",c.id===S.chat);if(c.id===S.chat)items[i].setAttribute("aria-current","true");else items[i].removeAttribute("aria-current")});return}list.dataset.chatsSignature=signature;list.replaceChildren();
-      if (!rows.length) list.append(el("div", { class: "empty", text: query ? "No chats match your search. Try another word or clear the search." : "Your conversations will appear here. Ask a question to start." }));
+      if (!rows.length) list.append(historyEmpty(query ? "No chats match your search. Try another word or clear the search." : "Your conversations will appear here. Ask a question to start.",!!query));
       let lastGroup = "";
       const cnt = {}; rows.forEach((c) => { cnt[c.title] = (cnt[c.title] || 0) + 1; });
       rows.forEach((c) => { const g = c.pinned ? "Pinned" : dayLabel(c.created); if (g !== lastGroup) { list.append(el("div", { class: "group", text: g })); lastGroup = g; } list.append(el("div", { class: "item" + (c.id === S.chat ? " on" : ""), title: c.title, "aria-current":c.id===S.chat?"true":"false", role:"button",tabindex:"0","aria-label":"Open chat: "+c.title,onkeydown:e=>activateHistory(e,()=>openChat(c.id)), onclick: () => openChat(c.id) },
@@ -605,7 +610,7 @@ async function loadList() {
           } }, svg("trash"))))); });
     } else {
       const rows = await api("/api/topics"); if (seq !== loadList.seq) return;delete list.dataset.chatsSignature;const signature=JSON.stringify([tab,rows]);if(list.dataset.topicsSignature===signature&&list.querySelectorAll(".item").length===rows.length){const items=list.querySelectorAll(".item");rows.forEach((t,i)=>{items[i].classList.toggle("on",t.id===S.topic);items[i].setAttribute("aria-current",String(t.id===S.topic))});return}list.dataset.topicsSignature=signature;list.replaceChildren();
-      if (!rows.length) list.append(el("div", { class: "empty", text: "Conversations appear after your first question." }));
+      if (!rows.length) list.append(historyEmpty("Conversations appear after your first question."));
       rows.forEach((t) => list.append(el("div", { class: "item" + (t.id === S.topic ? " on" : ""), role:"button",tabindex:"0","aria-current":t.id===S.topic?"true":"false","aria-label":"Open conversation: "+t.title,onkeydown:e=>activateHistory(e,()=>openTopic(t.id)),onclick: () => openTopic(t.id) },
         el("span", { class: "t" }, t.title, el("span", { class: "sub", text: (t.summary ? t.summary.slice(0, 70) : t.turns + " question" + (t.turns === 1 ? "" : "s")) })),
         el("span", { class: "acts" }, el("button", { title: "Rename", "aria-label": "Rename " + t.title, onclick: e => { e.stopPropagation(); renameDialog(t, true); } }, svg("edit"))))));
