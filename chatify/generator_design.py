@@ -78,6 +78,12 @@ def validate_draft(stage,value):
  required={'question_check':('VALID','INVALID'), 'relevance':('NONE',), 'faithfulness':('OK','UNSUPPORTED'), 'answer':('[n]',)}
  missing=[token for token in required.get(stage,()) if token not in text]
  if missing:return ['Preserve output contract tokens: '+', '.join(missing)]
+ # Stage-only checks reject positive cross-stage duties, not mentions in
+ # prohibitions. Generated pre-retrieval stages cannot know upload state.
+ if stage in ('standalone','question_check'):
+  positive_upload=re.search(r'\b(?:you must|you should|must|should|are required to)\s+(?:prompt|ask|request|tell|inform)\b[^.!?\n]{0,110}\b(?:upload|documents?|evidence)\b',text,re.I)
+  answer_duty=re.search(r'\b(?:primary (?:function|role|task)|your (?:function|role|task))\s+is to\s+(?:answer|respond to)\b',text,re.I)
+  if positive_upload or answer_duty:return ['This pre-retrieval stage only '+('rewrites the runtime question' if stage=='standalone' else 'classifies reader intent')+'. Remove answer duties and instructions to request uploads or evidence. Missing sources belong to retrieval/answer stages; never gate on upload state.']
  # Reject obvious instance outputs. This checks reusable instruction structure,
  # not domain quality or whether the instruction will work on a real model.
  structures={

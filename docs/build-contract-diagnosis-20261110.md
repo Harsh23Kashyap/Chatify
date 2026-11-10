@@ -23,3 +23,19 @@ reports character position and safe structural guidance, never response text.
 Retry retains this diagnostic. Three new regressions cover rejection, valid
 reusable instructions, and two-root rejection. This is prompt/test work, not
 an actual model success claim.
+
+## Child acceptance and host keys, 17:49
+The raw generated classifier and rewrite prompts both contain positive upload
+request duties before retrieval, contradicting their stage-only duties. Narrow
+checks now reject those positive duties (while allowing prohibitions). Runtime
+stage I/O was not in the supplied artifact, so the exact runtime refusal stage
+remains unverified. This is not proof of end-answer repair.
+
+Build launch and restored-version preview both called bundle(include_keys=True)
+even when hosted. Both now gate key transport on not hosted, matching the
+existing environment scrub. Sentinel HTTP tests inspect actual reviewed bundle
+imports for hosted/local launch. Restore path also has a structural gate test;
+full restored-version runtime isolation is not newly proven by that test.
+Local reuse is retained and the setup banner explains both paths. setup=1 opens
+Manual settings without requiring a section hash. Local Save copy explicitly
+states parent configuration changes while existing chats and source files stay.
