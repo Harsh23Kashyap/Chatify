@@ -751,3 +751,13 @@ html[data-chatify-shell=true] #tempPill[aria-pressed=true]{background:var(--ui-s
  html[data-chatify-shell=true] .hero .playground-action em{width:24px!important;height:24px!important}
  html[data-chatify-shell=true] .hero .playground-quiet{font-size:12px;line-height:16px}
 }
+
+/* Design round 2: temporary mode explains its boundary before the fold. */
+html[data-chatify-shell=true] .temp-concept{width:min(100%,540px);box-sizing:border-box;padding:16px 12px 24px}
+html[data-chatify-shell=true] .temp-concept .ephemeral-scene{margin:0 auto 16px}
+html[data-chatify-shell=true] .ephemeral-scene svg{display:block;width:100%;height:152px;margin:auto}
+html[data-chatify-shell=true] .temp-concept .scene-caption{font-size:12px;line-height:16px;margin:0}
+html[data-chatify-shell=true] .temp-concept .temp-eyebrow{display:none}
+html[data-chatify-shell=true] .temp-concept h1{font:600 30px/36px 'DM Sans',sans-serif;letter-spacing:-.025em;margin:8px 0}
+html[data-chatify-shell=true] .temp-concept p{font-size:14px;line-height:20px}
+html[data-chatify-shell=true] .temp-concept button{min-height:44px;padding:8px 16px;margin-top:16px;font:600 14px/20px 'DM Sans',sans-serif;border-style:solid;border-radius:8px}
