@@ -799,3 +799,19 @@ html[data-chatify-shell=true] .modal-back{background:color-mix(in srgb,var(--ui-
 html[data-chatify-shell=true] :is(.reading-dialog,.scope-dialog)::backdrop{background:color-mix(in srgb,var(--ui-code) 38%,transparent)}
 html[data-chatify-shell=true] :is(.modal,.reading-dialog,.scope-dialog) h2{font:600 20px/28px 'DM Sans',sans-serif;color:var(--ui-ink);letter-spacing:-.015em}
 html[data-chatify-shell=true] .profile-design .profile-intro{font-size:14px;line-height:20px}
+
+/* Design round 10: SVG state introductions, never idle decoration loops.
+   Purpose: explain documents, temporary scope and empty-state context.
+   All settle within 450ms, and cancel when motion preferences change. */
+@keyframes cc-scene-enter{from{opacity:.25;transform:translateY(6px)}to{opacity:1;transform:none}}
+@keyframes cc-scene-mark{from{opacity:.35;transform:scale(.94)}to{opacity:1;transform:none}}
+@media(prefers-reduced-motion:no-preference){
+ html:not([data-motion=none]):not([data-motion=calm]) .playground .doc-scene{animation:cc-scene-enter .4s cubic-bezier(.22,1,.36,1)}
+ html:not([data-motion=none]):not([data-motion=calm]) .playground .doc-scene .doc-spark{transform-box:fill-box;transform-origin:center;animation:cc-scene-mark .4s cubic-bezier(.22,1,.36,1)!important}
+ html:not([data-motion=none]):not([data-motion=calm]) .ephemeral-scene :is(.bubble-one,.bubble-two,.clock-loop,.paper-drift){animation:cc-scene-enter .45s cubic-bezier(.22,1,.36,1)!important}
+ html:not([data-motion=none]):not([data-motion=calm]) :is(.history-empty-art,.builder-library-art) g{animation:cc-scene-enter .35s cubic-bezier(.22,1,.36,1)}
+}
+@media(prefers-reduced-motion:reduce){
+ .playground .doc-scene,.playground .doc-scene *,.ephemeral-scene *,.history-empty-art g,.builder-library-art g{animation:none!important}
+}
+html:is([data-motion=none],[data-motion=calm]) :is(.playground .doc-scene,.playground .doc-scene *,.ephemeral-scene *,.history-empty-art g,.builder-library-art g){animation:none!important}
