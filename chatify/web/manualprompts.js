@@ -7,7 +7,7 @@ const intro=section.querySelector('.head small');if(intro)intro.textContent='Cho
 const more=section.querySelector(':scope>.workspace-fields'),moreButton=section.querySelector(':scope>.simple-more');if(moreButton)section.append(moreButton);if(more)section.append(more);
 const list=section.querySelector('.editor-list'),buttons=[...list.querySelectorAll('button.editor-choice')],pane=section.querySelector('#promptsEditor');
 const picker=document.createElement('details');picker.className='manual-step-picker';
-const trigger=document.createElement('summary');trigger.className='manual-step-trigger';trigger.setAttribute('aria-label','Choose an answer step');
+const trigger=document.createElement('summary');trigger.className='manual-step-trigger';trigger.setAttribute('aria-label','Choose an answer step');trigger.title='Choose an answer step';
 const count=document.createElement('span');count.className='manual-step-count';
 const title=document.createElement('span');title.className='manual-step-title';
 const caret=document.createElementNS('http://www.w3.org/2000/svg','svg');caret.setAttribute('viewBox','0 0 24 24');caret.setAttribute('aria-hidden','true');caret.innerHTML='<path d="m7 10 5 5 5-5" fill="none" stroke="currentColor" stroke-width="1.5"/>';

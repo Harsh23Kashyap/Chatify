@@ -12,6 +12,10 @@ def load_manifest():
     return manifest
 
 def variants(name):
+    if name in ('builder_checklist_keyboard_motion_browser.cjs','builder_checklist_moved_focus_browser.cjs'):
+        return [(f'{w}-{m}-{r}', [], {'CHATIFY_CHECKLIST_COMBO':f'{w}:{m}:{r}'}) for w,m,r in itertools.product((320,1280),('full','subtle','none','calm'),('no-preference','reduce'))]
+    if name == 'prompt_geometry_audit_browser.cjs':
+        return [(str(w), [], {'CHATIFY_GEOMETRY_WIDTH':str(w)}) for w in (320,390,1280)]
     if name == 'category_motion_audit_browser.cjs':
         return [('default', [], {}), ('delayed-navigation', ['--delayed-navigation'], {})]
     if name == 'settings_native_browser_zoom_tab_order_browser.cjs':

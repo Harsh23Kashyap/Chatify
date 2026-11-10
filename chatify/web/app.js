@@ -585,7 +585,7 @@ async function loadList() {
       let lastGroup = "";
       const cnt = {}; rows.forEach((c) => { cnt[c.title] = (cnt[c.title] || 0) + 1; });
       rows.forEach((c) => { const g = c.pinned ? "Pinned" : dayLabel(c.created); if (g !== lastGroup) { list.append(el("div", { class: "group", text: g })); lastGroup = g; } list.append(el("div", { class: "item" + (c.id === S.chat ? " on" : ""), title: c.title, "aria-current":c.id===S.chat?"true":"false", role:"button",tabindex:"0","aria-label":"Open chat: "+c.title,onkeydown:e=>activateHistory(e,()=>openChat(c.id)), onclick: () => openChat(c.id) },
-        el("span", { class: "t", text: c.title }), cnt[c.title] > 1 ? el("span", { class: "tm", text: new Date(c.created * 1000).toLocaleTimeString([], { hour: "numeric", minute: "2-digit" }) }) : null, c.pinned ? el("span", { class: "pinned", title: "Pinned" }, svg("pin")) : null,
+        el("span", { class: "t", text: c.title }), el("span", { class: "tm", text: new Date(c.created * 1000).toLocaleDateString([], { month: "short", day: "numeric" }) + " · " + new Date(c.created * 1000).toLocaleTimeString([], { hour: "numeric", minute: "2-digit" }) }), c.pinned ? el("span", { class: "pinned", title: "Pinned" }, svg("pin")) : null,
         el("span", { class: "acts" },
           el("button", { class: c.pinned ? "is-pinned" : "", title: c.pinned ? "Unpin" : "Pin", "aria-label": (c.pinned ? "Unpin " : "Pin ") + c.title, "aria-pressed": c.pinned ? "true" : "false", onclick: async (e) => { e.stopPropagation(); await api("/api/pin", { chat: c.id, pinned: !c.pinned }); loadList(); } }, svg("pin")),
           el("button", { title: "Rename", "aria-label": "Rename " + c.title, onclick: e => { e.stopPropagation(); renameDialog(c, false); } }, svg("edit")),
