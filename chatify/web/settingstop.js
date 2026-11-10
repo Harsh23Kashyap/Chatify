@@ -82,6 +82,6 @@
   window.CCSettingsTop={set:set};
   let initial='builder';try{initial=localStorage.getItem(KEY)||'builder'}catch(e){}
   if(location.hash.startsWith('#sec-')||new URLSearchParams(location.search).get('setup')==='1')initial='manual';
-  set(initial,false);
+  set(initial,new URLSearchParams(location.search).get('setup')==='1');
   window.addEventListener('popstate',()=>{if(location.hash.startsWith('#sec-'))set('manual',false)});
 })();
