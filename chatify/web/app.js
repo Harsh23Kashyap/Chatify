@@ -514,7 +514,7 @@ function playgroundLanding(a, exs) {
       el("h1",{text:TV("txt_title")||((a.title==="Chatify")?"Ask the documents, get the receipts.":a.title)}),el("p",{class:"lede",text:TV("txt_tagline")||((a.title==="Chatify")?"Answers grounded in the sources you choose, with the passages shown so you can check them.":a.tagline)})),scene),
     exs.length?el("div",{class:"rise",style:"--rise-order:1"},el("h2",{class:"playground-label",text:"Follow your curiosity"}),
       el("div",{class:"playground-questions"},exs.map((x,i)=>el("button",{class:"playground-question",style:"--question-order:"+i,onclick:()=>{$("#q").value=x;send()}},el("span",{text:x}),el("b",{"aria-hidden":"true",text:"↗"}))))):null,
-    el("div",{class:"rise",style:"--rise-order:2"},el("h2",{class:"playground-label shortcut-label",text:"Chat tools"}),el("div",{class:"playground-actions"},actions.map(([icon,title,detail,action])=>el("button",{class:"playground-action",title:detail,onclick:action},el("em",{"aria-hidden":"true"},svg(icon)),el("b",{text:title}),el("small",{text:detail}))))),
+    el("div",{class:"rise",style:"--rise-order:2"},el("h2",{class:"playground-label shortcut-label",text:"Chat tools"}),el("div",{class:"playground-actions"},actions.map(([icon,title,detail,action])=>el("button",{class:"playground-action",onclick:action},el("em",{"aria-hidden":"true"},svg(icon)),el("b",{text:title}),el("small",{text:detail}))))),
     el("p",{class:"playground-quiet",text:S.cfg.provider.type==="mock"?"Demo uses built-in answers. No model or paid calls.":"Answers use your configured sources and model."}));
 }
 function heroView() {
