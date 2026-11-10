@@ -13,7 +13,7 @@ class StarterContract(unittest.TestCase):
   for q in ('What is Chatify?', 'How do I build my own chat app?', 'How are answers cited?', 'How do I run Chatify on my own computer?'):
    with self.subTest(q=q):
     contract=Engine.direct_output_contract(q)
-    self.assertIn('Do not append a Sources, References, Evidence or bibliography section',contract)
+    self.assertIn('No Sources/References/Evidence appendix unless requested',contract)
     self.assertNotIn('List each bibliographic title',contract)
  def test_requested_metadata_is_preserved(self):
   for q in ('Name the papers and their authors', 'Give the bibliography', 'Give citation details including DOI'):

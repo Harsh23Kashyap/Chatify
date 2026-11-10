@@ -1157,14 +1157,14 @@ class Engine:
         bibliography = " List each bibliographic title, complete returned authors, year and exact Source: URL on its own cited line; passage descriptions go on a separate line with their own sentence citations."
         wants_bibliography = re.search(r"\b(?:titles?|authors?|years?|doi|bibliograph(?:y|ic)|citation details|name (?:the )?papers)\b", question, re.I)
         if question and not wants_bibliography:
-            bibliography = " Return only the requested answer with inline sentence citations. Do not append a Sources, References, Evidence or bibliography section, or copy the supplied evidence records into the answer. The app displays source passages separately. If the reader requests source details, preserve the requested details on their own cited line, separate from its description."
+            bibliography = " No Sources/References/Evidence appendix unless requested; use inline citations. Put requested source details on a separate line."
         if concise_request(question, style) and not wants_bibliography:
             bibliography = " For this short follow-up, identify sources with short labels, their exact links and sentence citations. Keep each source label and link on a separate line from its description. Do not repeat complete author lists or full bibliographic entries unless requested."
         return (
-            " Start directly with supported content, not a conversational preamble, record count or claim about what records support."
-            " Omit optional process/reading/metadata-handling closings; this is not permission to omit requested uncertainty, useful provenance, source absence or material limitations. Retain needed details with precise scope and supporting evidence."
+            " Start with supported content, not a conversational preamble."
+            " Omit optional process closings; this is not permission to omit requested uncertainty, provenance or limitations; retain supporting evidence."
             + bibliography +
-            " Every factual sentence must end with its own supporting [n], including each sentence inside a numbered step. For example: Open the page [1]. Choose the option [1]. A single [1] after both sentences leaves the first sentence uncited. Prefer one cited factual sentence per numbered step. Metadata cannot support results or adjacent prose. Delete optional unsupported lead/closing claims, not append all citations. Preserve the user's question, requested facts and plain-language scope."
+            " Every factual sentence must end with its own supporting [n], including each sentence inside a numbered step. For example: Open the page [1]. Choose the option [1]. A single [1] after both sentences leaves the first sentence uncited. Prefer one cited factual sentence per numbered step. Metadata cannot support adjacent prose. Delete unsupported optional claims; preserve requested facts and scope."
         )
 
     def response_length_constraints(self, question, style="standard"):
