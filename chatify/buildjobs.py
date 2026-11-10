@@ -241,7 +241,9 @@ class BuildJobs:
   if no_external_api_recommendations(job['brief']):
    if job.get('confirmed_sources'):raise ValueError('The description prohibits API recommendations but source checkboxes are selected. Make them agree before building.')
    if key=='api':spec['requirements']='The user explicitly prohibited optional API recommendations. Return exactly an empty JSON list []. Do not recommend external services or invent sources, credentials, endpoints or helpers. This is an intentional opt-out, not a failed recommendation.'
-   elif key=='helper:search':spec['requirements']+=' There are no API recommendations by explicit user choice. Draft a disabled inert search adapter, not a configured document backend or selected service. Keep API_URL empty and return [] before any request while it is empty. Preserve the guarded request skeleton with try/except, timeout, bounded reads and defensive parsing for later owner review. No service selection, real endpoint, key value or fabricated records. The brief must say disabled and not installed; this is NOT document search functionality.'
+   elif key=='helper:search':
+    spec['starter']='def search(query, limit=6):\n    return []\n'
+    spec['requirements']='Optional APIs are explicitly prohibited. Return only an inert permanently disabled helper: def search(query, limit=6): followed by return []. An optional function docstring may explain disabled and not installed. No imports, environment lookups, API_URL, globals, network request skeleton, calls, other functions or activation path. Do not describe this as document search. Enabling any external API later requires a separate owner-reviewed code change, not setting an environment variable.'
   instruction=json.dumps(spec)
   if key.startswith('prompt:'):
    spec={'area':'pipeline prompt','stage':key[7:],'app_domain_brief':job['brief'],'input_contract':generator_design.DESIGNS[key[7:]]['inputs'],'output_contract':generator_design.DESIGNS[key[7:]]['output'],'stage_rules':generator_design.DESIGNS[key[7:]]['rules'],'required_literal_tokens':{'answer':['[n]'],'question_check':['VALID','INVALID'],'relevance':['NONE'],'faithfulness':['OK','UNSUPPORTED']}.get(key[7:],[]),'domain_reference':generator_design.template(key[7:],job['brief'])}
@@ -304,6 +306,7 @@ class BuildJobs:
    result['code']=repair_helper_code(result['code'])
    try:compile(result['code'],'<helper-draft>','exec')
    except (SyntaxError,ValueError,TypeError) as e:raise ValueError('Helper Python compilation failed: '+str(e)) from e
+   if key=='helper:search' and no_external_api_recommendations(job['brief']) and not generators.is_disabled_search(result['code']):raise ValueError('API opt-out helper must be permanently disabled: search(query, limit=6) returning [] only')
    ok,problems=generators.review_code(key[7:],result['code'])
    if not ok:raise ValueError('Helper safety contract failed: '+'; '.join(problems))
   elif key=='api':

@@ -156,7 +156,7 @@ def review_marks(kind, code):
             add(getattr(n, "lineno", 1), "Looks like it contains an API key. Keys must come from environment variables.")
     if not has:
         add(1, "It must define %s." % spec["sig"])
-    if kind == "search" and has:
+    if kind == "search" and has and not is_disabled_search(code):
         search = next(n for n in ast.walk(tree) if isinstance(n, ast.FunctionDef) and n.name == spec['func'])
         for n in ast.walk(search):
             if isinstance(n, ast.Return) and isinstance(n.value, ast.Dict):
@@ -170,6 +170,23 @@ def review_marks(kind, code):
         if "timeout" not in code:
             add(1, "A request has no timeout, so a slow server could hang a question.")
     return sorted(set(problems))
+
+
+def is_disabled_search(code):
+    """Exact no-op draft: no imports, globals, calls, defaults or activation path."""
+    try:
+        tree = ast.parse(code)
+        if len(tree.body) != 1 or not isinstance(tree.body[0], ast.FunctionDef): return False
+        f = tree.body[0]
+        if f.name != 'search' or f.decorator_list or f.returns: return False
+        a = f.args
+        if [x.arg for x in a.args] != ['query', 'limit'] or any(x.annotation for x in a.args): return False
+        if a.posonlyargs or a.kwonlyargs or a.vararg or a.kwarg: return False
+        if len(a.defaults) != 1 or not isinstance(a.defaults[0], ast.Constant) or type(a.defaults[0].value) is not int or a.defaults[0].value != 6: return False
+        body = f.body
+        if body and isinstance(body[0], ast.Expr) and isinstance(body[0].value, ast.Constant) and isinstance(body[0].value.value, str): body = body[1:]
+        return len(body) == 1 and isinstance(body[0], ast.Return) and isinstance(body[0].value, ast.List) and not body[0].value.elts
+    except (SyntaxError, ValueError, TypeError): return False
 
 
 def review_code(kind, code):

@@ -30,6 +30,7 @@ class NoAPIContract(unittest.TestCase):
   class OptOut(Fixture):
    def complete(self,messages):
     if 'Return exactly an empty JSON list []' in messages[0]['content']:return '[]'
+    if 'inert permanently disabled helper' in messages[0]['content']:return json.dumps({'brief':'Disabled and not installed','code':'def search(query, limit=6):\n    return []\n'})
     return super().complete(messages)
   f=OptOut();jobs=buildjobs.BuildJobs()
   with patch('chatify.buildimages.capability',return_value={'available':False,'note':'test only'}):
@@ -52,3 +53,18 @@ class NoAPIContract(unittest.TestCase):
   buildjobs.BuildJobs()._draft_part(j,'api',dict(buildjobs.PARTS)['api'])
   self.assertEqual(len(j['parts']['api']),3)
   self.assertTrue(all(p['selected'] is False for p in j['parts']['api']))
+ def test_optout_helper_has_no_environment_activation_path(self):
+  code='def search(query, limit=6):\n    """Disabled and not installed."""\n    return []\n'
+  j=self.job('Never retrieve external sources. Keep all optional APIs disabled.',{'brief':'Disabled and not installed','code':code})
+  buildjobs.BuildJobs()._draft_part(j,'helper:search',dict(buildjobs.PARTS)['helper:search'])
+  self.assertIn('No imports, environment lookups',j['provider'].messages[0]['content'])
+  from chatify import generators
+  self.assertEqual(generators.review_code('search',code),(True,[]))
+  for bad in [code+'\nAPI_URL = ""\n','import os\n'+code,code.replace('return []','return urlopen(query)'),code.replace('limit=6','limit=go()')]:
+   self.assertFalse(generators.is_disabled_search(bad))
+   j=self.job('Keep all optional APIs disabled.',{'brief':'Disabled','code':bad})
+   with self.assertRaises(ValueError):buildjobs.BuildJobs()._draft_part(j,'helper:search',dict(buildjobs.PARTS)['helper:search'])
+ def test_enabled_search_still_needs_request_safety(self):
+  from chatify import generators
+  ok,problems=generators.review_code('search','def search(query, limit=6):\n    return request(query)\n')
+  self.assertFalse(ok);self.assertTrue(any('timeout' in x for x in problems))
