@@ -20,7 +20,7 @@ class CrossrefTitleProvenance(unittest.TestCase):
    with self.subTest(abstract=abstract):self.assertEqual(self.rows(abstract)[0]['content_kind'],'title_only')
  def test_short_real_abstract_not_misclassified_by_length(self):
   row=self.rows('<jats:p>Soil testing.</jats:p>')[0]
-  self.assertEqual(row['text'],'Soil testing.');self.assertNotIn('content_kind',row)
+  self.assertEqual(row['text'],'Soil testing.');self.assertEqual(row['content_kind'],'abstract')
  def test_prompt_record_has_provenance_without_fabricated_text(self):
   row=self.rows()[0];row['n']=1
   engine=Engine(schema.validate({'sources':[]}),Store(':memory:'))

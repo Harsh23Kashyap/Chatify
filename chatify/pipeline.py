@@ -21,6 +21,8 @@ def evidence_text(record, limit=3000):
     text = record["text"][:limit]
     if record.get("content_kind") == "title_only":
         return "[Title-only metadata; no abstract or article text supplied] " + text
+    if record.get("content_kind") == "abstract":
+        return "[Connector returned abstract text; not full-paper text] " + text
     return text
 
 

@@ -87,8 +87,7 @@ class Crossref:
                 if len(authors) == 6:
                     break
             row = Evidence(title, (text or title)[:1500], it.get("URL") or "", authors, year, venue or "Crossref", self.id, 1.0 / (n + 1), "doi:" + str(it.get("DOI", title[:40])))
-            if not text:
-                row["content_kind"] = "title_only"
+            row["content_kind"] = "abstract" if text else "title_only"
             out.append(row)
         return out
 

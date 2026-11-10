@@ -68,9 +68,12 @@ class Arxiv:
             if not link or not title or link in seen:
                 continue
             seen.add(link)
-            out.append(Evidence(title,
+            row = Evidence(title,
                                 " ".join((e.findtext("a:summary", "", NS) or "").split()), link,
                                 [a.findtext("a:name", "", NS) for a in e.findall("a:author", NS)][:6],
                                 (e.findtext("a:published", "", NS) or "")[:4], "arXiv", self.id, 1.0 / (i + 1),
-                                "arXiv:" + link.rsplit("/", 1)[-1]))
+                                "arXiv:" + link.rsplit("/", 1)[-1])
+            # Atom summary is an abstract, never proof of full-paper access.
+            row["content_kind"] = "abstract" if row["text"] else "title_only"
+            out.append(row)
         return out
