@@ -10,7 +10,20 @@ const {chromium}=require(process.env.PLAYWRIGHT_MODULE||'playwright'),assert=req
  await p.screenshot({path:`/downloads/design-config-held-${fail}.png`});
  release();await p.locator('#cc-boot').waitFor({state:'detached'});
  if(fail){assert.match(await p.locator('#settingsBootError').innerText(),/Configuration unavailable/);const retry=await p.getByRole('button',{name:'Reload configuration',exact:true}).boundingBox();assert(retry.y+retry.height<720);}
- else {await p.waitForFunction(()=>window.CCSettingsSimple?.state()?.ready);assert.equal(await p.locator('body').evaluate(n=>n.classList.contains('settings-tabs')),true);}
+ else {await p.waitForFunction(()=>window.CCSettingsSimple?.state()?.ready);assert.equal(await p.locator('body').evaluate(n=>n.classList.contains('settings-tabs')),true);
+  for(const section of ['background','shape']){
+   await p.locator('#menu a[href="#sec-'+section+'"]').evaluate(n=>n.click());
+   const selected=p.locator('.'+section+'-shortcuts [aria-pressed=true]');
+   assert.equal(await selected.evaluate(n=>{const a=document.createElement('i');a.style.color='var(--ui-action)';document.body.append(a);const same=getComputedStyle(n).outlineColor===getComputedStyle(a).color;a.remove();return same}),true,'selection uses shell action token');
+   await p.screenshot({path:`/downloads/design-shortcut-${section}.png`});
+  }
+ }
  await p.screenshot({path:`/downloads/design-config-ready-${fail}.png`});await p.close();
+}
+for(const theme of ['light','dark']){
+ const p=await browser.newPage({viewport:{width:390,height:844}});await p.addInitScript(t=>{localStorage.setItem('cc_cfg_tour_v1','1');localStorage.setItem('cc_cfg_top_v1','manual');localStorage.setItem('cc_cfg_mode_v2','advanced');localStorage.setItem('cc_mode',t)},theme);
+ await p.goto(process.env.CHATIFY_TEST_URL+'/settings.html#sec-model');await p.locator('#cc-boot').waitFor({state:'detached'});
+ await p.waitForFunction(()=>{const r=document.querySelector('#sec-model')?.getBoundingClientRect();return r&&r.top>=0&&r.top<innerHeight-80});
+ await p.screenshot({path:`/downloads/design-mobile-deeplink-${theme}.png`});await p.close();
 }
 await browser.close();console.log('PASS design pass shell light/dark, 390/1280, normal/reduce, visible starter/tool targets, temporary explanation/return, one focus surface, disclosure adjacency, settled SVGs')})().catch(e=>{console.error(e);process.exit(1)});
