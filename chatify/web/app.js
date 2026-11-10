@@ -333,7 +333,9 @@ function turnView(t, prev) {
   const nodes = [];
   if (prev && prev.chat !== t.chat) nodes.push(el("div", { class: "divider", text: "Earlier chat" }));
   nodes.push(el("div", { class: "row u" }, avatar("you"), el("div", { class: "bubble ub", text: t.question })));
-  const bub = el("div", { class: "bubble bb" + (t.evidence.length ? "" : " none") }, renderAnswer(t.answer, t.evidence, t.question));
+  const safetyHold = t.response_kind === "safety_hold" || t.model_status === "safety_hold";
+  const bub = el("div", { class: "bubble bb" + (t.evidence.length || safetyHold ? "" : " none") }, renderAnswer(t.answer, t.evidence, t.question));
+  if (safetyHold) bub.prepend(el("div", { class: "nf-h", role: "note", text: "Safety notice" }));
   if(t.evidence.length)bub.prepend(el("div",{class:"src-note answer-status-note",role:"note",text:t.model_status === "output_limit" ? "Incomplete answer: configured output limit reached. " + unverifiedAnswerNote : unverifiedAnswerNote}));
   if(/\b(chart|graph|plot)\b/i.test(t.question)){const chart=answerChart(t.answer,t.evidence);if(chart)bub.append(chart);}
   const failedSources = Object.entries(t.source_errors || {});
@@ -348,7 +350,7 @@ function turnView(t, prev) {
       : failedSources.map(([id]) => srcName(id)).join(", ") + " could not return usable results" + (allFailed ? " for this question." : " - answered from the other sources.");
     bub.append(el("div", { class: "src-note", role: "note", text: note }));
   }
-  if (!t.evidence.length) {
+  if (!t.evidence.length && !safetyHold) {
     const ill = document.createElementNS("http://www.w3.org/2000/svg", "svg"); ill.setAttribute("viewBox", "0 0 96 96"); ill.setAttribute("class", "nf-ill"); ill.setAttribute("aria-hidden", "true");
     ill.innerHTML = '<g fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M26 14h30l14 14v50H26z"/><path d="M56 14v15h14"/><path d="M36 42h24M36 52h18" opacity=".5"/><circle cx="58" cy="62" r="13" class="nf-lens"/><path d="m67 71 12 12"/></g>';
     bub.prepend(el("div", { class: "nf-h", text: t.response_kind === "question_refused" ? "Question not answered" : t.model_status === "invalid_answer" ? "Answer withheld" : "No evidence found" }));

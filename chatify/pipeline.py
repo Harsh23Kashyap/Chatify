@@ -1861,6 +1861,7 @@ class Engine:
                 topic = self.store.new_topic(owner, question[:80])
             tid = self.store.add_turn(chat, topic, question, question, answer, [], [], style,
                                       source_errors={}, model_status="safety_hold")
+            self.store.save_state(owner, "reply-kind-" + tid, "safety_hold")
             if scope:
                 self.store.save_state(owner, "scope-" + tid, scope)
             if self.store.chat(owner, chat)["title"] == "New chat":
@@ -1869,7 +1870,7 @@ class Engine:
                 "followups": [], "id": tid, "chat": chat, "topic": topic,
                 "question": question, "standalone": question, "answer": answer,
                 "evidence": [], "ledger": [], "style": style, "source_errors": {},
-                "response_kind": "answer", "answer_verified": False,
+                "response_kind": "safety_hold", "answer_verified": False,
                 "temporary": temporary, "scope": scope}
 
     def ask_stream(self, owner, chat, question, sources=None, style="standard", topic=None, new_topic=False, use_cache=True, temporary=False, temp_history=None, use_profile=False, scope=None):

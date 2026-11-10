@@ -50,9 +50,9 @@ def fixture(kind, folder, env):
     elif kind == 'strict':
         command = [sys.executable,str(ROOT/'tests/strict_ui_fixture.py')]
     else:
-        source = ROOT/'tests/fixtures/builder-trip.yaml' if kind=='trip' else ROOT/'apps/minimal/app.yaml'
+        source = ROOT/'apps/agriculturechat/app.yaml' if kind=='agriculture' else ROOT/'tests/fixtures/builder-trip.yaml' if kind=='trip' else ROOT/'apps/minimal/app.yaml'
         shutil.copyfile(source,app/'app.yaml')
-        shutil.copytree(ROOT/'apps/minimal/docs',app/'docs')
+        shutil.copytree(ROOT/('apps/agriculturechat/docs' if kind=='agriculture' else 'apps/minimal/docs'),app/'docs')
         if kind == 'parent':
             import yaml
             cfg=yaml.safe_load((app/'app.yaml').read_text());cfg['app']['title']='Parent fixture'
