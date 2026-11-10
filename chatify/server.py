@@ -1065,7 +1065,7 @@ def make_handler(cfg, engine):
                 data = handle.read()
             if name == "index.html":
                 a = cfg["app"]
-                data = data.decode().replace("{{THEME_JSON}}", json.dumps(themestore.value).replace("<", "\\u003c")).replace("{{TITLE}}", _esc(a["title"])).replace("{{ACCENT}}", _esc(a["accent"])).replace("{{ACCENT2}}", _esc(a.get("accent2", "#d7ef72"))).replace("{{THEME}}", _esc(a["theme"])).encode()
+                data = data.decode().replace("{{APP_ID}}", _esc(a["id"])).replace("{{THEME_JSON}}", json.dumps(themestore.value).replace("<", "\\u003c")).replace("{{TITLE}}", _esc(a["title"])).replace("{{ACCENT}}", _esc(a["accent"])).replace("{{ACCENT2}}", _esc(a.get("accent2", "#d7ef72"))).replace("{{THEME}}", _esc(a["theme"])).encode()
             if name == "index.html" and LOCKED:
                 data = re.sub(rb'<a[^>]*href="/settings.html"[^>]*>Configuration</a>', b"", data)
                 data = re.sub(rb'<a[^>]*href="/build.html"[^>]*>Build</a>', b"", data)

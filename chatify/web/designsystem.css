@@ -815,3 +815,6 @@ html[data-chatify-shell=true] .profile-design .profile-intro{font-size:14px;line
  .playground .doc-scene,.playground .doc-scene *,.ephemeral-scene *,.history-empty-art g,.builder-library-art g{animation:none!important}
 }
 html:is([data-motion=none],[data-motion=calm]) :is(.playground .doc-scene,.playground .doc-scene *,.ephemeral-scene *,.history-empty-art g,.builder-library-art g){animation:none!important}
+
+/* Recording follow-up: dark library actions must own their surface too. */
+html body.settings-tabs:has(#cfgtop) dialog.app-builder .builder-library-state>button{background:var(--ui-surface)!important;color:var(--ui-link)!important}

@@ -53,6 +53,14 @@ def fixture(kind, folder, env):
         source = ROOT/'tests/fixtures/builder-trip.yaml' if kind=='trip' else ROOT/'apps/minimal/app.yaml'
         shutil.copyfile(source,app/'app.yaml')
         shutil.copytree(ROOT/'apps/minimal/docs',app/'docs')
+        if kind == 'hosted':
+            import yaml
+            cfg=yaml.safe_load((ROOT/'apps/hosted/app.yaml').read_text())
+            cfg['provider']={'type':'mock'}
+            cfg['server']={'public':False}
+            shutil.rmtree(app/'docs')
+            shutil.copytree(ROOT/'apps/hosted/docs',app/'docs')
+            (app/'app.yaml').write_text(yaml.safe_dump(cfg))
         if kind == 'parent':
             import yaml
             cfg=yaml.safe_load((app/'app.yaml').read_text());cfg['app']['title']='Parent fixture'
