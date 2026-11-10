@@ -45,3 +45,14 @@ class DefensiveRepair(unittest.TestCase):
   with patch.object(e,'check_support',return_value='Note: unsupported'):
    out,_,_,note=e.repair_support(a,ev,'What terms?','Note: the sources may not fully support this: closing')
   self.assertIn('withheld',note)
+ def test_negative_answer_leadin_must_be_merged_not_citation_exempt(self):
+  from unittest.mock import patch
+  ev=[{'n':1,'title':'Handbook','text':'Reference atlases cannot be borrowed.'}]
+  draft='No. The handbook states that reference atlases cannot be borrowed. [1]'
+  e=self.setup_engine('No. Reference atlases cannot be borrowed. [1]')
+  out,_,_,note=e.repair_support(draft,ev,'May members borrow reference atlases?','Note: the sources may not fully support this: No.')
+  self.assertIn('withheld',note);self.assertIn('Merge a yes/no lead-in',e.provider.messages[0]['content'])
+  e=self.setup_engine('No, reference atlases cannot be borrowed. [1]')
+  with patch.object(e,'check_support',return_value='') as check:
+   out,_,_,note=e.repair_support(draft,ev,'May members borrow reference atlases?','Note: the sources may not fully support this: No.')
+  self.assertEqual(out,'No, reference atlases cannot be borrowed. [1]');self.assertEqual(note,'');check.assert_called_once()
