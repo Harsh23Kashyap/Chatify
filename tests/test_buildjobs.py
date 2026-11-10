@@ -233,7 +233,7 @@ class SafePatchChecks(unittest.TestCase):
  def test_known_api_wrapper_only(self):
   rows=[{'name':service,'service':service,'what':'This service provides searchable information from published content and public data.','reason':'This service helps the app find background information for the reader questions.','connector':'openalex','setup':'s','caveat':'c','helper':{'brief':'Fixture','code':generators.code_template('search','')}} for service in ['OpenAlex','Wikipedia','Crossref']]
   for name in ['api_recommendations','api_suggestions']:
-   job=self.part_job(json.dumps({name:rows}));buildjobs.BuildJobs()._draft_part(job,'api',dict(buildjobs.PARTS)['api']);self.assertEqual(job['parts']['api'],rows)
+   job=self.part_job(json.dumps({name:rows}));buildjobs.BuildJobs()._draft_part(job,'api',dict(buildjobs.PARTS)['api']);self.assertEqual(job['parts']['api'],[dict(row,selected=False) for row in rows])  # Recommendations do not select themselves.
   job=self.part_job(json.dumps({'unrelated_requests':rows}))
   with self.assertRaises(ValueError):buildjobs.BuildJobs()._draft_part(job,'api',dict(buildjobs.PARTS)['api'])
   self.assertNotIn('api',job['parts'])
