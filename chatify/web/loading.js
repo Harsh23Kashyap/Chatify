@@ -60,7 +60,18 @@
     leave((a.textContent || "").trim());
   });
 
-  if (document.readyState === "loading") {
+  if (document.body.classList.contains("chatify-settings-shell")) {
+    // Configuration builds its final navigation and panels after its initial reads.
+    // Do not expose that intermediate layout underneath the startup veil.
+    let fallback;
+    const settingsReady = () => { clearTimeout(fallback); requestAnimationFrame(() => requestAnimationFrame(ready)); };
+    if (window.CCSettingsBootReady) settingsReady();
+    else {
+      document.addEventListener("cc-settings-boot-ready", settingsReady, { once: true });
+      // A failed/missing script must never leave the page trapped under decoration.
+      fallback = setTimeout(ready, 12000);
+    }
+  } else if (document.readyState === "loading") {
     document.addEventListener("DOMContentLoaded", () => setTimeout(dismissBoot, 120));
   } else {
     dismissBoot();

@@ -942,7 +942,14 @@ async function pollOllamaSetup(host,id){
   }
 }
 
-init().then(() => { try { const ki = keyInfo[cur.provider] || {}; if (ki.source === "env") { const tr = $("#testres"); if (tr && !tr.textContent) { tr.dataset.assumed = "1"; tr.className = "testres"; tr.title = "Checked locally only: the host has a configured key. Use Test connection to verify it with the provider."; tr.textContent="Key present. Provider connection not tested."; pvFollow(); } } } catch (e) {} if (canEdit) { docsFreshness(false); loadBudget().catch((e) => { $("#budgetStatus").textContent = e.message; }); } updateVis(); setTimeout(updateVis, 500); }).catch((e) => say(e.message, true));
+init().then(() => { try { const ki = keyInfo[cur.provider] || {}; if (ki.source === "env") { const tr = $("#testres"); if (tr && !tr.textContent) { tr.dataset.assumed = "1"; tr.className = "testres"; tr.title = "Checked locally only: the host has a configured key. Use Test connection to verify it with the provider."; tr.textContent="Key present. Provider connection not tested."; pvFollow(); } } } catch (e) {} if (canEdit) { docsFreshness(false); loadBudget().catch((e) => { $("#budgetStatus").textContent = e.message; }); } updateVis(); setTimeout(updateVis, 500); }).catch((e) => {
+  say(e.message, true);
+  const error=el("section",{id:"settingsBootError",class:"settings-boot-error",role:"alert"},
+    el("b",{text:"Configuration could not load"}),
+    el("p",{text:e.message+". No changes were made. Reload to try again."}),
+    el("button",{type:"button",class:"go",text:"Reload configuration",onclick:()=>location.reload()}));
+  $("#lead").after(error);
+}).finally(() => { window.CCSettingsBootReady=true; document.dispatchEvent(new CustomEvent("cc-settings-boot-ready")); });
 window.CCSettingsSimple={state:()=>({...read(),ready:settingsReady,canEdit,names:NAMES,key:keyInfo[cur.provider]}),select:provider=>{if(canEdit){switchProvider(provider);draw();pvFollow();}}};
 })();
 

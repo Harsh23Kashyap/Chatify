@@ -818,3 +818,7 @@ html:is([data-motion=none],[data-motion=calm]) :is(.playground .doc-scene,.playg
 
 /* Recording follow-up: dark library actions must own their surface too. */
 html body.settings-tabs:has(#cfgtop) dialog.app-builder .builder-library-state>button{background:var(--ui-surface)!important;color:var(--ui-link)!important}
+
+/* Startup failure belongs above the editable workflow, never below hidden panels. */
+.settings-boot-error{padding:16px;margin:16px 0;border:1px solid var(--ui-control);border-radius:10px;background:var(--ui-soft);color:var(--ui-ink)}
+.settings-boot-error p{margin:8px 0 12px;font-size:14px;line-height:1.5}
