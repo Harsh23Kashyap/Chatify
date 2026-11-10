@@ -177,7 +177,13 @@ class BuildJobs:
   result=job['provider'].complete([{'role':'system','content':system},{'role':'user','content':job['brief']}])
   with self.lock:self._spend_record(len(system)+len(job['brief']),len(result or ''))
   parsed=parse_draft_json(result)
-  if parsed is None:raise ValueError('The model returned an unreadable draft. This area was not accepted. Retry this area; ready drafts are kept.')
+  if parsed is None:
+   detail=''
+   try:json.loads(result or '')
+   except json.JSONDecodeError as exc:
+    detail=' JSON syntax error at character '+str(exc.pos)+'.'
+    if exc.msg=='Extra data':detail+=' Extra content follows a complete JSON value; keep every requested field inside one root object, with no premature closing brace.'
+   raise ValueError('The model returned an unreadable draft.'+detail+' This area was not accepted. Retry this area; ready drafts are kept.')
   return parsed
  def _part(self,job,key,spec):
   with self.lock:job['active'].add(key);job.setdefault('attempts',{})[key]=job.get('attempts',{}).get(key,0)+1
@@ -240,8 +246,8 @@ class BuildJobs:
    spec={'area':'pipeline prompt','stage':key[7:],'app_domain_brief':job['brief'],'input_contract':generator_design.DESIGNS[key[7:]]['inputs'],'output_contract':generator_design.DESIGNS[key[7:]]['output'],'stage_rules':generator_design.DESIGNS[key[7:]]['rules'],'required_literal_tokens':{'answer':['[n]'],'question_check':['VALID','INVALID'],'relevance':['NONE'],'faithfulness':['OK','UNSUPPORTED']}.get(key[7:],[]),'domain_reference':generator_design.template(key[7:],job['brief'])}
    if correction:spec['previous_validation_failure']=correction
    instruction=json.dumps(spec)
-   instruction+=' Write a detailed domain-specific instruction between 300 and 6000 characters. Include only this selected stage inputs, domain-specific rules, missing-data behavior and exact output contract. Repeat every required_literal_token exactly. The domain_reference is design reference, not finished text: identify the actual subject described by app_domain_brief and write specific domain scope, not the generic phrase app idea described below. Exclude unrelated domain examples from the reference. Do not copy a generic built-in prompt or merely add the domain name to it. Never tell the model to mention this prompt, instruction, stage, metadata or output contract in its response. DO NOT echo this metadata or input spec. Return exactly {"text": "full domain-tailored instruction", "on": true or false}. The revise prompt must be filled even when off.'
-   if key=='prompt:standalone':instruction+=' Explicitly instruct rewrite or rephrase the latest runtime question; no worked examples or fixed output.'
+   instruction+=' Write a detailed domain-specific instruction between 300 and 6000 characters. Include only this selected stage inputs, domain-specific rules, missing-data behavior and exact output contract. Repeat every required_literal_token exactly. The domain_reference is design reference, not finished text: identify the actual subject described by app_domain_brief and write specific domain scope, not the generic phrase app idea described below. Exclude unrelated domain examples from the reference. Do not copy a generic built-in prompt or merely add the domain name to it. Never tell the model to mention this prompt, instruction, stage, metadata or output contract in its response. DO NOT echo this metadata or input spec. Return one JSON object with exactly two sibling fields: text (a string) and on (a boolean). Valid JSON shape: {"text":"full domain-tailored instruction","on":true}. Set on to false when appropriate. Do not close the root object before the on field. The revise prompt must be filled even when off.'
+   if key=='prompt:standalone':instruction+=' Explicitly instruct rewrite or rephrase the latest runtime question; no worked examples or fixed output. This stage only rewrites questions, never answers, refuses, requests uploads, recommends sources or describes visual design. Domain scope is context for resolving referents, not an instruction to answer. Retain the history/summary input, unclear-reference unchanged rule, preservation rules and untrusted-history boundary.'
    elif key=='prompt:summary':instruction+=' Explicitly instruct summarize or condense the runtime conversation history, messages and previous_summary; return the updated summary, never summarize the app brief itself. Include no worked example or fixed output.'
    elif key=='prompt:question_check':instruction+=' Classify the reader question against the actual subject of the requested app, not the act of creating a website or the classifier task. Include concrete in-scope subject categories and ordinary educational requests. Requests to explain, summarize or cite domain information are VALID. Missing context or evidence belongs to later stages unless the reader intent itself is ambiguous. Never assert temporary source setup state or require document contents. Do not answer or retrieve.'
    elif key=='prompt:answer':instruction+=' Explain citations using literal [n]. Require a supporting citation immediately after each factual sentence, including every sentence in a multi-sentence bullet. Do not include classifier VALID/INVALID output duties or standalone rewrite instructions in the answer prompt.'
@@ -527,7 +533,7 @@ class BuildJobs:
    if j['state'] not in ('partial',):raise ValueError('Only failed parts can be retried')
    j['retry_corrections']=copy.deepcopy(j['errors'])
    for key,message in j['retry_corrections'].items():
-    if 'unreadable draft' in message:j['retry_corrections'][key]='Return only valid JSON matching this part contract. Encode literal backslashes with a JSON serializer. Retain all requested fields and code logic.'
+    if 'unreadable draft' in message:j['retry_corrections'][key]=message+' Return only valid JSON matching this part contract. Encode literal backslashes with a JSON serializer. Retain all requested fields and code logic.'
    if str(j['errors'].get('final','')).startswith(('App branding','App starter questions','App title','App tagline','App footer')):
     j['parts'].pop('config:app',None);j['retry_corrections']['config:app']=j['errors']['final']
    if str(j['errors'].get('final','')).startswith('Appearance txt_'):

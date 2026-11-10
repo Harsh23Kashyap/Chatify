@@ -12,3 +12,14 @@ The source helper remains an inert disabled adapter when no API is requested, wi
 Missing app fields are now named in error messages. Summary generation explicitly asks for reusable runtime conversation/history instructions instead of a summary of the app idea. Identity shape, reusable prompt, JSON parsing and helper safety validators were not weakened. This does not establish better mini behavior, a Luna comparison or ten successful real builds.
 
 Tests: 96 targeted deterministic checks pass, including full background-job merge with explicit empty API list and no defaulted areas, inactive recommendations, preserved strict prompt checks, provider isolation, retry, helper safety and review provenance. These fixtures are contract coverage, not actual-model qualification. A fresh real canary and CI are required before release.
+
+## Raw standalone canary, 17:43
+Two worker-supplied raw replies have premature root closure before the `on` field.
+Both are invalid JSON (`Extra data`), with finish_reason=stop. Strict rejection
+is correct. No brace repair or validator bypass was added. The prompt now uses
+one concrete valid JSON example, states sibling-field shape, and separates
+rewrite-only duties from answer/design/upload duties. JSON failure feedback
+reports character position and safe structural guidance, never response text.
+Retry retains this diagnostic. Three new regressions cover rejection, valid
+reusable instructions, and two-root rejection. This is prompt/test work, not
+an actual model success claim.
