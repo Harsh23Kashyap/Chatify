@@ -3,7 +3,7 @@ from pathlib import Path
 import unittest
 class SourceErrorWording(unittest.TestCase):
  def test_generic_error_copy_is_about_results_not_connectivity(self):
-  text=(Path(__file__).resolve().parents[1]/'chatify/web/app.js').read_text();section=text[text.index('const failedSources ='):text.index('if (!t.evidence.length)',text.index('const failedSources ='))]
+  text=(Path(__file__).resolve().parents[1]/'chatify/web/app.js').read_text();section=text[text.index('const failedSources ='):text.index('if (!t.evidence.length',text.index('const failedSources ='))]
   self.assertIn('could not return usable results',section);self.assertNotIn('could not be reached',section)
   self.assertIn('msg.includes(" ")',section);self.assertIn('named.join(" ")',section);self.assertIn('answered from the other sources.',section)
  def test_export_generic_and_fallback_wording_without_false_connectivity_claim(self):
