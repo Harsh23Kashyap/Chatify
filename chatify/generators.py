@@ -154,6 +154,15 @@ def review_marks(kind, code):
             add(getattr(n, "lineno", 1), "Dunder attribute access is not allowed in this helper.")
         elif isinstance(n, ast.Constant) and isinstance(n.value, str) and re.search(r"sk-[A-Za-z0-9]{16,}|AIza[0-9A-Za-z_-]{20,}", n.value):
             add(getattr(n, "lineno", 1), "Looks like it contains an API key. Keys must come from environment variables.")
+    if kind == "clean_query":
+        bound = {n.id for n in ast.walk(tree) if isinstance(n, ast.Name) and isinstance(n.ctx, ast.Store)}
+        for n in ast.walk(tree):
+            if isinstance(n, (ast.Import, ast.ImportFrom)):
+                bound.update(a.asname or (a.name.split('.')[0] if isinstance(n, ast.Import) else a.name) for a in n.names)
+            elif isinstance(n, ast.arg): bound.add(n.arg)
+        for n in ast.walk(tree):
+            if isinstance(n, ast.Name) and isinstance(n.ctx, ast.Load) and n.id in {'re', 'string', 'unicodedata'} and n.id not in bound:
+                add(n.lineno, 'Missing import or binding for module ' + n.id + '.')
     if not has:
         add(1, "It must define %s." % spec["sig"])
     if kind == "search" and has and not is_disabled_search(code):

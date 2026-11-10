@@ -22,3 +22,10 @@ class InertHelperBoundary(unittest.TestCase):
   self.assertEqual(namespace['clean_query'](''), '')
   self.assertEqual(namespace['clean_query']('  books  '), 'books')
   self.assertEqual(namespace['clean_query']('\x00\x01'), '\x00\x01')
+
+ def test_cleanup_module_references_require_import(self):
+  for name,call in [('unicodedata','normalize("NFKC", query)'),('re','sub("x", "", query)'),('string','capwords(query)')]:
+   code='def clean_query(query):\n    return '+name+'.'+call+'\n'
+   ok,problems=generators.review_code('clean_query',code)
+   self.assertFalse(ok);self.assertTrue(any('Missing import' in p for p in problems))
+   self.assertEqual(generators.review_code('clean_query','import '+name+'\n'+code),(True,[]))
