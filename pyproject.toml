@@ -21,8 +21,12 @@ customchat-app = "chatify.cli:main"
 include = ["chatify*", "apps*"]
 
 [tool.setuptools.package-data]
-chatify = ["web/*", "web/fonts/*", "web/logos/*.svg", "web/icons/*.svg", "web/media/*.mp4", "web/media/*.jpg", "web/media/*.md", "web/media/stories/*.mp4", "web/media/stories/*.jpg", "web/media/stories/manifest.json", "web/team/*.jpg", "web/emoji/*", "templates/minimal/app.yaml", "templates/minimal/docs/*.md"]
+chatify = ["web/*", "web/fonts/*", "web/logos/*.svg", "web/icons/*.svg", "web/media/*.mp4", "web/media/*.jpg", "web/media/*.md", "web/media/stories/*.jpg", "web/media/stories/manifest.json", "web/team/*.jpg", "web/emoji/*", "templates/minimal/app.yaml", "templates/minimal/docs/*.md"]
 "apps" = ["*.yaml", "**/*.yaml", "**/*.md", "**/*.txt", "**/*.pdf", "**/*.json", "**/*.py", "**/*.example"]
+
+[tool.setuptools.exclude-package-data]
+chatify = ["web/media/stories/*.mp4"]
+"chatify.web.media.stories" = ["*.mp4"]
 
 [project.urls]
 Repository = "https://github.com/Harsh23Kashyap/chatify"

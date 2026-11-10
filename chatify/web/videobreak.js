@@ -23,7 +23,7 @@ function mount(host){
  document.addEventListener('cc-settings-topmode',e=>{if(e.detail!=='builder'){generation++;video.pause()}else start()});
  state('loading','Loading the available stories...');
  fetch(base+'manifest.json').then(r=>{if(!r.ok)throw Error('manifest');return r.json()}).then(data=>{
-  const items=(data.stories||[]).filter(i=>/^[a-z0-9-]+$/.test(i.id)&&i.src===i.id+'.mp4'&&i.poster===i.id+'.jpg');if(!items.length)throw Error('empty');
+  const items=(data.stories||[]).filter(i=>/^[a-z0-9-]+$/.test(i.id)&&(i.src===i.id+'.mp4'||i.src===i.id+'-gain24.mp4')&&i.poster===i.id+'.jpg');if(!items.length)throw Error('empty');
   for(const story of items){const option=document.createElement('option');option.value=story.id;option.textContent=story.label;select.append(option)}select.disabled=false;select.onchange=()=>{item=items.find(story=>story.id===select.value);video.muted=false;choose()};item=items[0];select.value=item.id;choose();
  }).catch(()=>{state('error','Story list is unavailable. Reload this page to try again; your build is unaffected.');retry.hidden=true});
 }
