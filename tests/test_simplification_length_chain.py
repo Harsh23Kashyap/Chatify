@@ -22,7 +22,11 @@ class SimplificationLengthChain(unittest.TestCase):
   e=self.engine()
   for q,style in [(Q+' Give the authors and years.','standard'),(Q+' Give a full answer.','standard'),(Q,'deep'),(Q+' Use exactly 300 words.','standard')]:
    with self.subTest(q=q,style=style):
-    s=e.answer_constraints(q,style);self.assertIn('complete returned authors',s)
+    s=e.answer_constraints(q,style)
+    # A long/deep answer is not a request for an unsolicited bibliography.
+    # Preserve explicit metadata requests independently of answer length.
+    if 'authors and years' in q:self.assertIn('complete returned authors',s)
+    else:self.assertNotIn('complete returned authors',s)
     if '300 words' in q:self.assertIn('exactly 300 words',s)
     if style=='deep' or 'full answer' in q or '300 words' in q:self.assertNotIn('at most 116 words',s)
  def test_custom_policy_unchanged_and_failure_checks_still_apply(self):
