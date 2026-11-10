@@ -24,5 +24,5 @@ class DirectRepairContract(unittest.TestCase):
  def test_faithfulness_rejection_never_overridden(self):
   self.e.check_support.return_value='Note: the sources may not fully support this: invented finding';self.assertIn('withheld',self.repair(self.fixed)[3])
  def test_generation_contract_nonmutating_and_classifier_unchanged(self):
-  before=copy.deepcopy(self.rows);q='Name the papers, preserve requested limitations and explain simply.';system=self.e.prompt(q,self.rows,'standard',[],'')[0]['content'];self.assertIn(Engine.direct_output_contract(),system);self.assertEqual(before,self.rows);self.assertNotIn('not a conversational preamble',self.e.stage_prompt('question_check'));self.assertIn('supporting evidence',system)
+  before=copy.deepcopy(self.rows);q='Name the papers, preserve requested limitations and explain simply.';system=self.e.prompt(q,self.rows,'standard',[],'')[0]['content'];self.assertIn(Engine.direct_output_contract(q),system);self.assertEqual(before,self.rows);self.assertNotIn('not a conversational preamble',self.e.stage_prompt('question_check'));self.assertIn('supporting evidence',system)
 if __name__=='__main__':unittest.main()

@@ -1,7 +1,7 @@
 /* Shared Chatify shell. App-selected themes and preview frames are independent. */
 :root{--ui-ground:#f8f3ed;--ui-surface:#fffdf9;--ui-ink:#342e2b;--ui-muted:#695f59;--ui-line:#d8cbc2;--ui-soft:#f0e8e1;--ui-action:#b34329;--ui-action-hover:#92351f;--ui-on-action:#fff;--ui-link:#9b3821;--ui-highlight:#e6b44c;--ui-success:#246247;--ui-warning:#815000;--ui-danger:#a51d48;--ui-danger-soft:#faedf1;--ui-success-soft:#edf4ee;--ui-warning-soft:#f8f0df;--ui-control:#9b8980;--ui-code:#352b27;--ui-code-ink:#fff5ee;--ui-shadow:0 16px 48px #38281e18;--desk-paper:var(--ui-ground);--desk-surface:var(--ui-surface);--desk-ink:var(--ui-ink);--desk-muted:var(--ui-muted);--desk-action:var(--ui-action);--desk-line:var(--ui-line);--desk-soft:var(--ui-soft);--desk-amber:var(--ui-warning);--desk-success:var(--ui-success);--desk-danger:var(--ui-danger);--desk-on-action:var(--ui-on-action)}
 :root[data-theme=dark]{--ui-ground:#242321;--ui-surface:#2e2c29;--ui-ink:#f3eee7;--ui-muted:#c1b8ad;--ui-line:#524d46;--ui-soft:#393630;--ui-action:#ed9274;--ui-action-hover:#f4aa91;--ui-on-action:#302019;--ui-link:#f1a58b;--ui-highlight:#dfba76;--ui-success:#a2cfb4;--ui-warning:#e5c58c;--ui-danger:#f3a6b6;--ui-danger-soft:#493039;--ui-success-soft:#303e34;--ui-warning-soft:#433b2c;--ui-control:#9a8f81;--ui-code:#201f1d;--ui-code-ink:#f3eee7;--ui-shadow:0 16px 48px #15141155}
-html[data-chatify-shell=true]{--brand:var(--ui-action)!important;--accent:var(--ui-action)!important;--on-brand:var(--ui-on-action)!important;--cream:var(--ui-ground)!important;--paper:var(--ui-surface)!important;--ink:var(--ui-ink)!important;--mut:var(--ui-muted)!important;--line:var(--ui-line)!important;--soft:var(--ui-soft)!important;--side-bg:var(--ui-surface)!important;--bot:var(--ui-surface)!important;--you:var(--ui-soft)!important;--danger:var(--ui-danger)!important;--tool:var(--ui-line)!important;--bg-layer:var(--ui-ground)!important}
+html[data-chatify-shell=true]{--brand:var(--ui-action)!important;--lime:var(--ui-action)!important;--on-lime:var(--ui-on-action)!important;--accent:var(--ui-action)!important;--on-brand:var(--ui-on-action)!important;--cream:var(--ui-ground)!important;--paper:var(--ui-surface)!important;--ink:var(--ui-ink)!important;--mut:var(--ui-muted)!important;--line:var(--ui-line)!important;--soft:var(--ui-soft)!important;--side-bg:var(--ui-surface)!important;--bot:var(--ui-surface)!important;--you:var(--ui-soft)!important;--danger:var(--ui-danger)!important;--tool:var(--ui-line)!important;--bg-layer:var(--ui-ground)!important}
 html body:is(.settings-tabs,.chatify-settings-shell,:is(.chatify-info,:has(.about-nav)),.gallery-page),html[data-chatify-shell=true] body{background:var(--ui-ground)!important;color:var(--ui-ink);font-family:'DM Sans',system-ui,sans-serif}
 html body:is(.settings-tabs,.chatify-settings-shell,:is(.chatify-info,:has(.about-nav))) :is(button,input,select,textarea){font-family:'DM Sans',system-ui,sans-serif!important}
 html body:is(.settings-tabs,.chatify-settings-shell,:is(.chatify-info,:has(.about-nav))) :is(.toolbar,.about-nav),html[data-chatify-shell=true] .toolbar{background:var(--ui-surface)!important;border-color:var(--ui-line)!important;box-shadow:none}
@@ -706,3 +706,28 @@ html body.settings-tabs:has(#cfgtop) #cfgmode button:focus-visible{outline:2px s
 
 /* The supporting preview starts on the selected editor's top edge. */
 @media(min-width:1181px){html body.settings-tabs:has(#cfgtop) .preview{padding-top:0!important}}
+
+/* Quiet source inspection and history. Selection uses a surface, never an accent rail. */
+html[data-chatify-shell=true] :is(.item,.srcs button.s)::before{display:none!important}
+html[data-chatify-shell=true] .sources .src{border:0!important;border-bottom:1px solid var(--ui-line)!important;border-radius:0;padding:18px 0;margin:0;background:transparent;box-shadow:none}
+html[data-chatify-shell=true] .sources .src.hl{background:var(--ui-soft);padding:18px 12px;border-radius:8px;box-shadow:none}
+html[data-chatify-shell=true] .sources .src b{font:600 14px/1.45 'DM Sans',sans-serif;color:var(--ui-ink)}
+html[data-chatify-shell=true] .sources .src small{display:block;font-size:12px;line-height:1.5;margin-top:5px;color:var(--ui-muted)}
+html[data-chatify-shell=true] .sources .src p{font-size:13px;line-height:1.65;margin:12px 0;color:var(--ui-ink)}
+html[data-chatify-shell=true] mark{background:color-mix(in srgb,var(--ui-highlight) 24%,transparent);color:inherit}
+html[data-chatify-shell=true] .srcs button.s{padding-left:12px;background:transparent;box-shadow:none;transform:none}
+html[data-chatify-shell=true] .side .item.on{background:var(--ui-soft);color:var(--ui-ink)}
+/* Recovered custom scenes keep their composition, without idle looping or old palette. */
+html .playground .doc-scene * ,html .ephemeral-scene *{animation:none!important}
+.doc-scene .doc-left{transform:rotate(-10deg)}.doc-scene .doc-right{transform:rotate(9deg)}
+.ephemeral-scene svg{stroke:var(--mut)}.ephemeral-scene ellipse{fill:var(--soft)}
+.ephemeral-scene .ink-line{stroke:var(--mut)}.ephemeral-scene .bubble rect{fill:var(--soft)}
+.ephemeral-scene .clock-loop circle,.ephemeral-scene .paper-drift>path:first-child{fill:var(--paper)}
+.ephemeral-scene .star path,.ephemeral-scene .dots{fill:var(--brand)}
+.temp-concept :is(h1,p,.temp-eyebrow,.scene-caption){color:var(--ink)}
+.temp-concept :is(p,.temp-eyebrow,.scene-caption){color:var(--mut)}
+.temp-concept button{color:var(--brand);border-color:var(--line)}
+html[data-chatify-shell=true] body.temp :is(.bar,.side){background:var(--ui-surface)!important;color:var(--ui-ink)}
+html[data-chatify-shell=true] #tempPill{background:transparent;color:var(--ui-muted);border-color:var(--ui-line)}
+html[data-chatify-shell=true] #tempPill[aria-pressed=true]{background:var(--ui-soft);color:var(--ui-ink);border-color:var(--ui-control)}
+@media(min-width:861px){html[data-chatify-shell=true] .hero .playground-intro:has(.doc-scene){display:grid!important;grid-template-columns:minmax(0,1fr) 180px;gap:24px;align-items:center;min-height:0}html[data-chatify-shell=true] .playground-scene:has(.doc-scene){height:160px}html[data-chatify-shell=true] .playground-scene .doc-scene{width:180px;height:148px}}

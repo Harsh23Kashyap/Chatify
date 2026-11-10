@@ -127,6 +127,9 @@ function excerptVariants(w) {
 const ICON = {
   clip: "M21 11.5l-8.6 8.6a5 5 0 01-7-7l9-9a3.3 3.3 0 014.7 4.7l-9 9a1.7 1.7 0 01-2.4-2.4l8.3-8.3",
   pin: "M12 17v5M9 3h6l-1 7 3 3v2H7v-2l3-3z",
+  search: "M20 20l-5-5M17 10a7 7 0 11-14 0 7 7 0 0114 0",
+  reading: "M4 20l6-16 6 16M6 15h8M18 10h4M20 10v10",
+  connect: "M9 7V3M15 7V3M6 7h12v4a6 6 0 01-12 0V7zM12 17v4",
   trash: "M4 7h16M10 11v6M14 11v6M6 7l1 13h10l1-13M9 7V4h6v3",
   edit: "M4 20h4L19 9l-4-4L4 16z",
   down: "M12 4v12M6 12l6 6 6-6",
@@ -307,7 +310,7 @@ function showSources(evidence, hl, trigger, question) {
   const draw = (only) => {
     list.replaceChildren(...evidence.filter((e) => !only || e.source === only).map((e) => el("div", { class: "src" + (e.n === hl ? " hl" : "") },
       el("b", { text: e.n + ". " + plainText(e.title) }),
-      el("small", { text: [(e.authors || []).slice(0, 3).join(", "), e.year, e.venue, e.document, e.page ? "page " + e.page : e.section, e.version ? "version " + e.version.slice(0, 12) : "", e.ocr ? "OCR text, check original" : "", e.content_kind === "title_only" ? "Title only; no abstract or article text" : ""].filter(Boolean).join(" · ") }),
+      el("small", { text: [(e.authors || []).slice(0, 3).join(", "), e.year, e.venue, e.document, e.page ? "page " + e.page : e.section, e.ocr ? "OCR text, check original" : "", e.content_kind === "title_only" ? "Title only; no abstract or article text" : ""].filter(Boolean).join(" · ") }),
       highlight(el("p", {class:e.text ? "source-text" : "source-unavailable"}), e.text ? excerptWindow(plainText(e.text), basis, 280) : "Source excerpt unavailable. This saved reference has no text to inspect.", terms),
       e.url ? el("a", { href: e.url, target: "_blank", rel: "noopener noreferrer", text: "Open source" }) : null)));
   };
@@ -490,25 +493,28 @@ function gettingStarted() {
   box.append(el("p", {class:"getting-started-note",text:"After an answer: click [1] to check its source. Use the download button to export your chat."}));
   return box;
 }
-function temporaryScene(){return el("div",{class:"temp-concept"},el("h1",{text:"Temporary chat"}),el("p",{text:"This conversation is not saved. Your profile and uploaded sources stay out of it."}),el("button",{type:"button",text:"Back to saved chats",onclick:()=>$("#tempPill").click()}));}
+function temporaryScene(){const n=el("div");n.innerHTML='<div class="temp-concept"><div class="ephemeral-scene" aria-hidden="true"><svg viewBox="0 0 540 230"><defs><linearGradient id="vapour" x2="0" y2="1"><stop stop-color="#eee9f7"/><stop offset="1" stop-color="#f7f4ec"/></linearGradient></defs><ellipse cx="270" cy="190" rx="165" ry="15" fill="#e5dfeb"/><g class="bubble bubble-one"><rect x="100" y="57" width="144" height="73" rx="18" fill="url(#vapour)"/><path d="m126 130-13 15v-26"/><path d="M123 80h88M123 98h65" class="ink-line"/></g><g class="bubble bubble-two"><rect x="285" y="98" width="145" height="65" rx="18" fill="#e7edf0"/><path d="m399 163 12 14v-24"/><path d="M307 119h96M307 136h73" class="ink-line"/></g><g class="clock-loop"><circle cx="278" cy="65" r="29" fill="#fffdf7"/><path d="M278 47v19l12 7"/><path d="M250 63a28 28 0 0 1 47-19m-5-11 5 11-12-1"/></g><g class="paper-drift"><path d="M75 125h29l10 10v44H75zM104 125v10h10" fill="#fffdf7"/><path d="M83 145h23M83 154h18"/></g><g class="star star-one"><path d="m441 40 3 10 11 3-11 3-3 10-3-10-10-3 10-3z" fill="#d6bc78" stroke="none"/></g><g class="star star-two"><path d="m220 169 3 8 8 3-8 3-3 8-3-8-8-3 8-3z" fill="#b1c1b0" stroke="none"/></g><g class="vapour dots"><circle cx="128" cy="79" r="3"/><circle cx="157" cy="64" r="2"/><circle cx="186" cy="43" r="3"/></g></svg><span class="scene-caption">Here for the conversation. Gone from your history.</span></div><span class="temp-eyebrow">A LITTLE LESS PERMANENT</span><h1>Temporary chat</h1><p>This conversation is not saved.<br>Your profile and uploaded sources stay out of it.</p><button type="button">Back to saved chats ↗</button></div>';n.querySelector("button").addEventListener("click",()=>document.querySelector("#tempPill").click());return n.firstChild;}
 function playgroundLanding(a, exs) {
   const scene=el("div",{class:"playground-scene","aria-hidden":"true"});
   const custom=TV("logo"), emoji=TV("emoji_hero")||TV("emoji_bot");
+  if(!custom&&!emoji){
+  scene.innerHTML="<svg class=\"doc-scene\" viewBox=\"0 0 220 180\"><circle cx=\"112\" cy=\"89\" r=\"70\" fill=\"#edf1df\"/><g class=\"doc-left\"><rect x=\"38\" y=\"37\" width=\"90\" height=\"115\" rx=\"13\" fill=\"#fffdf7\" stroke=\"#b9cbb8\"/><text x=\"54\" y=\"65\" fill=\"#173f35\">[1]</text><path d=\"M54 80h57M54 93h49M54 106h35\" stroke=\"#d3dfcc\" stroke-width=\"4\" stroke-linecap=\"round\"/></g><g class=\"doc-right\"><rect x=\"98\" y=\"22\" width=\"90\" height=\"115\" rx=\"13\" fill=\"#fffdf7\" stroke=\"#b9cbb8\"/><text x=\"114\" y=\"50\" fill=\"#173f35\">[2]</text><path d=\"M114 65h57M114 78h49M114 91h35\" stroke=\"#d3dfcc\" stroke-width=\"4\" stroke-linecap=\"round\"/></g><path class=\"doc-trail\" d=\"M64 112Q95 148 148 134\" stroke=\"#91a478\" stroke-width=\"2\" fill=\"none\" stroke-dasharray=\"3 5\"/><g class=\"doc-spark\"><rect x=\"145\" y=\"109\" width=\"50\" height=\"50\" rx=\"15\" fill=\"#d7e6a8\"/><path d=\"M170 120q1 11 12 13-11 2-12 13-2-11-13-13 11-2 13-13\" fill=\"#173f35\"/></g></svg>";
+  }
   if(custom)scene.prepend(el("img",{class:"playground-logo",src:custom,alt:""}));
   else if(emoji)scene.prepend(CCEmoji.node(emoji,TV((TV("emoji_hero")?"emoji_hero":"emoji_bot")+"_animated"),"",["calm","none"].includes(TV("motion"))));
   const actions=[
-    ["↥","Add documents","Upload your files",uploadDialog],
-    ["⌕","Choose sources","Select existing sources",scopeDialog],
-    ["Aa","Reading view","Text size and width",()=>$("#readingBtn").click()]
+    ["up","Add documents","Upload your files",uploadDialog],
+    ["search","Choose sources","Select existing sources",scopeDialog],
+    ["reading","Reading view","Text size and width",()=>$("#readingBtn").click()]
   ];
-  if(document.querySelector('.common-nav a[href="/settings.html"]'))actions.push(["↗","Connect a model","Choose an AI provider",()=>{location.href=(window.CC_APP_BASE||"") + "/settings.html#sec-model"}]);
+  if(document.querySelector('.common-nav a[href="/settings.html"]'))actions.push(["connect","Connect a model","Choose an AI provider",()=>{location.href=(window.CC_APP_BASE||"") + "/settings.html#sec-model"}]);
   return el("section",{class:"hero playground"},
     el("div",{class:"playground-intro"},el("div",{class:"rise"},
       el("div",{class:"kicker","aria-hidden":"true"},document.createTextNode("Grounded in your sources")),
       el("h1",{text:TV("txt_title")||((a.title==="Chatify")?"Ask the documents, get the receipts.":a.title)}),el("p",{class:"lede",text:TV("txt_tagline")||((a.title==="Chatify")?"Answers grounded in the sources you choose, with the passages shown so you can check them.":a.tagline)})),scene),
     exs.length?el("div",{class:"rise",style:"--rise-order:1"},el("h2",{class:"playground-label",text:"Follow your curiosity"}),
       el("div",{class:"playground-questions"},exs.map((x,i)=>el("button",{class:"playground-question",style:"--question-order:"+i,onclick:()=>{$("#q").value=x;send()}},el("span",{text:x}),el("b",{"aria-hidden":"true",text:"↗"}))))):null,
-    el("div",{class:"rise",style:"--rise-order:2"},el("h2",{class:"playground-label shortcut-label",text:"Chat tools"}),el("div",{class:"playground-actions"},actions.map(([icon,title,detail,action])=>el("button",{class:"playground-action",onclick:action},el("em",{"aria-hidden":"true",text:icon}),el("b",{text:title}),el("small",{text:detail}))))),
+    el("div",{class:"rise",style:"--rise-order:2"},el("h2",{class:"playground-label shortcut-label",text:"Chat tools"}),el("div",{class:"playground-actions"},actions.map(([icon,title,detail,action])=>el("button",{class:"playground-action",onclick:action},el("em",{"aria-hidden":"true"},svg(icon)),el("b",{text:title}),el("small",{text:detail}))))),
     el("p",{class:"playground-quiet",text:S.cfg.provider.type==="mock"?"Demo uses built-in answers. No model or paid calls.":"Answers use your configured sources and model."}));
 }
 function heroView() {
