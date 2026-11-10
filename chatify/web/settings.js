@@ -70,7 +70,7 @@ let modelRequest=0;
 async function loadModels(force) {
   const request=++modelRequest,sel=$("#modelPick"),p=cur.provider,base=$("#base").value.trim();
   const m=cur.model||"";let list=[],note="",suggestions=[];sel.setAttribute("aria-busy","true");
-  if(m){if(![...sel.options].some(o=>o.value===m))sel.append(el("option",{value:m,text:m}));sel.value=m;}
+  if(m&&sel.value!==OTHER){if(![...sel.options].some(o=>o.value===m))sel.append(el("option",{value:m,text:m}));sel.value=m;}
   $("#modelh").textContent=p==="mock"?"The demo answers without a model.":"Loading model names…";
   $("#refreshModels").disabled=true;
   try { const r=await api("/api/provider/models",{provider:p,base_url:base});list=r.models||[];note=r.note||"";suggestions=r.suggestions||[]; } catch(e){note=e.message;}
