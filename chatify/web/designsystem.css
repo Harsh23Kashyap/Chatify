@@ -765,3 +765,12 @@ html[data-chatify-shell=true] .temp-concept button{min-height:44px;padding:8px 1
 /* Design round 3: the composer is one focusable input surface, not two boxes. */
 html[data-chatify-shell=true] .composer .box:focus-within{border-color:var(--ui-action);box-shadow:0 0 0 2px color-mix(in srgb,var(--ui-action) 28%,transparent)}
 html[data-chatify-shell=true] .composer #q:is(:focus,:focus-visible){outline:0!important;outline-offset:0!important;box-shadow:none!important}
+
+/* Design round 4: opening evidence cannot erase the conversation title. */
+@media(min-width:861px) and (max-width:1240px){
+ html[data-chatify-shell=true] .app.src .bar{height:auto;min-height:56px;flex-wrap:wrap;gap:8px;padding:8px 16px}
+ html[data-chatify-shell=true] .app.src .bar>.title{flex:1 1 120px;min-width:0;max-width:100%}
+ html[data-chatify-shell=true] .app.src .bar>.bar-r{display:flex;flex:1 1 100%;flex-wrap:wrap;justify-content:flex-start;gap:8px;min-width:0}
+ html[data-chatify-shell=true] .app.src .bar-r>:is(.icon,.cs){flex:none}
+}
+html[data-chatify-shell=true] .sources h3{font:600 20px/28px 'DM Sans',sans-serif;color:var(--ui-ink);letter-spacing:-.015em}
