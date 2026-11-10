@@ -1032,6 +1032,10 @@ def make_handler(cfg, engine):
                 return
             full = os.path.normpath(os.path.join(WEB, name))
             if not full.startswith(WEB + os.sep) or not os.path.isfile(full):
+                from .story_media import missing_story_url
+                stream_url = missing_story_url(name, WEB, self.headers.get("Host", ""))
+                if stream_url:
+                    return self._send(302, b"", "text/plain", extra={"Location": stream_url, "Cache-Control": "no-cache"})
                 return self._error_page(404)
             ctype = mimetypes.guess_type(full)[0] or "application/octet-stream"
             # Media probes and seeking (including Safari) require real byte ranges.
@@ -1341,6 +1345,10 @@ def serve_gallery(path, host=None, port=None):
                 return self._send(200, {"apps": cards})
             name = raw.lstrip("/")
             full = os.path.normpath(os.path.join(WEB, name))
+            from .story_media import missing_story_url
+            stream_url = missing_story_url(name, WEB, self.headers.get("Host", ""))
+            if stream_url:
+                return self._send(302, b"", "text/plain", extra={"Location": stream_url, "Cache-Control": "no-cache"})
             if name and full.startswith(WEB + os.sep) and os.path.isfile(full) and not name.endswith(".html"):
                 ctype = mimetypes.guess_type(full)[0] or "application/octet-stream"
                 # Media probes and seeking (including Safari) require real byte ranges.

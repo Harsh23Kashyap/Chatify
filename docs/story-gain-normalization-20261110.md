@@ -11,3 +11,9 @@ Before and after metrics, original/variant SHA256, duration and video packet str
 All eight pulse stories are excluded from the batch. Three of those are also quiet: elephant-memory, ant-fallback, panda-export. The remaining five are mouse-mic, hedgehog-prompt, llama-local, duck-temporary, chameleon-palette. No compression was applied to hedgehog-prompt's 15.2 LU range. Audition is required before changing these tracks.
 
 Subjective listening remains 0/60. This pass does not qualify narration/music balance, musical taste, composition, pulse intent, fatigue or background-video usefulness. Harsh's priority listening is a separate gate. Original level audit covered the existing public story URLs under https://chatify-demo-779c.onrender.com/chatify/media/stories/ ; asset names and hashes are retained in the JSON.
+
+## Wheel delivery
+
+Baseline wheel measured 115,882,260 bytes before the level pass. Bundling originals plus variants grew it to 150,629,642 bytes; selecting only manifest stories would still be too large. Wheel installs now retain the manifest, all 60 posters and the two walkthrough videos, while story MP4s stream from the canonical existing host. This needs internet for story playback and is not an offline-video claim. Source/Render deployments keep local files and serve them first. Only a missing manifest-selected story video may redirect; unknown paths do not redirect, and the canonical host itself cannot redirect to itself. No model/key/private chat data is sent to the story host.
+
+Actual post-fix wheel inspection: 33,012,597 bytes, 60 manifest entries, 60 posters, zero story MP4s, Paperworks/Signal Desk walkthroughs retained. This is a local artifact check, not a PyPI publication claim. The manifest loader accepts only the original or approved gain24 filename for each story ID. Desktop runtime checks verify all 60 options, gain-variant playback, native controls and audio-policy fallback.
