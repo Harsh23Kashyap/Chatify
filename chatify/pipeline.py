@@ -1704,8 +1704,19 @@ class Engine:
             return withheld("provider_error")
         if stage_contracts.errors("revise", candidate, [e["n"] for e in evidence]):
             return withheld("invalid_contract")
-        if not candidate or len(candidate) < 0.4 * len(answer):
+        if not candidate:
             return withheld("short_candidate")
+        if len(candidate) < 0.4 * len(answer):
+            # A short repair can correctly delete a long unsupported closing.
+            # Allow that only when every locally supported original claim keeps
+            # its content words and citation IDs. Full ledger and model support
+            # checks below still apply; this is not semantic proof.
+            def content_tokens(text):
+                return set(re.findall(r"[a-z0-9]+", text.lower())) - {"the", "a", "an", "provided", "supplied"}
+            retained = content_tokens(candidate)
+            supported = [row for row in original_ledger if row.get("supported") and not row.get("uncited")]
+            if not supported or any(not content_tokens(row["claim"]).issubset(retained) for row in supported):
+                return withheld("short_candidate")
         candidate, selected = self.tidy(candidate, evidence)
         if not selected:
             return withheld("no_selected_evidence")

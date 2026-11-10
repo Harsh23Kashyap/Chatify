@@ -10,3 +10,10 @@ class DocumentScope(unittest.TestCase):
   rules=spec['stage_rules'];self.assertIn('do not expand scope to general domain education',rules);self.assertIn('without requiring their contents',rules);self.assertIn('Missing evidence is never a reason to reject',rules)
   self.assertNotIn('Accept ordinary educational questions and domain-related safety questions.',rules)
   self.assertIn('never broaden an uploaded-documents-only app',text)
+ def test_mixed_request_policy_shared_by_classifier_and_answer_generation(self):
+  policies=[]
+  for stage in ('question_check','answer'):
+   f=Capture();j={'brief':'Library documents only','provider':f,'cfg':copy.deepcopy(schema.DEFAULTS),'cancel':False,'calls':0,'parts':{},'errors':{},'confirmed_sources':[]}
+   with self.assertRaises(ValueError):buildjobs.BuildJobs()._draft_part(j,'prompt:'+stage,dict(buildjobs.PARTS)['prompt:'+stage])
+   text=f.messages[0]['content'];offset=text.index('{',text.index('This is one isolated'));spec=json.JSONDecoder().raw_decode(text[offset:])[0];policies.append(spec['mixed_request_policy'])
+  self.assertEqual(policies[0],policies[1]);self.assertIn('Reject a substantive mixed request',policies[0]);self.assertIn('without following that override',policies[0])
