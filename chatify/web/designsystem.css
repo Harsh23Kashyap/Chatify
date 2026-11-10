@@ -793,3 +793,9 @@ html body.settings-tabs:has(#cfgtop) .cfg-studio .cfg-idea-guide{margin:0!import
 .builder-library-art svg{display:block;width:100%;height:100%}
 html body.settings-tabs:has(#cfgtop) dialog.app-builder .builder-content input[type=checkbox]{accent-color:var(--ui-action)!important}
 html body.settings-tabs:has(#cfgtop) dialog.app-builder .builder-library-state>button{color:var(--ui-link)!important;border-color:var(--ui-control)!important;min-height:44px}
+
+/* Design round 9: one overlay material and heading grammar. */
+html[data-chatify-shell=true] .modal-back{background:color-mix(in srgb,var(--ui-code) 38%,transparent)}
+html[data-chatify-shell=true] :is(.reading-dialog,.scope-dialog)::backdrop{background:color-mix(in srgb,var(--ui-code) 38%,transparent)}
+html[data-chatify-shell=true] :is(.modal,.reading-dialog,.scope-dialog) h2{font:600 20px/28px 'DM Sans',sans-serif;color:var(--ui-ink);letter-spacing:-.015em}
+html[data-chatify-shell=true] .profile-design .profile-intro{font-size:14px;line-height:20px}
