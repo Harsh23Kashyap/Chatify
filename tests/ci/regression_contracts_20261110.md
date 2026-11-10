@@ -32,3 +32,4 @@ Original failure logs and interrupted-run history are preserved outside the repo
 - Seven saved-history lifecycle/export tests now click the title, not the geometric center of the row, which may be an explicit Pin/Rename/Delete control in the new reserved action row. Their original lifecycle/export assertions remain unchanged.
 - The prompt picker paints above compacted help, preventing real pointer interception.
 - Runtime source-panel tests pause opening animations when created, rather than trying to catch a short animation after a browser round trip. Runtime cancellation, retained content, focus restoration and quiet-mode checks remain unchanged.
+- Builder conversation navigation checks the actual open button's visibility before choosing Build with AI. Checking only the hero's own display misses a hidden ancestor after the preceding width's ZIP route. Conversation, selected model, consent, edit, review, save and ZIP assertions are unchanged.
