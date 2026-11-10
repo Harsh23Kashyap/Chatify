@@ -16,7 +16,7 @@
 
    if(!model.querySelector('.evidence-range')){const ends=document.createElement('small');ends.className='range-endpoints evidence-range';ends.textContent='1 passage · 50 passages';model.querySelector('#topk').closest('label').append(ends)}
    for(const node of model.children){node.classList.toggle('simple-model-hidden',!node.matches('.head,#seg,.simple-provider-note,.two,#apply,#keybox,#model,.simple-more,label[for=modelPick],.keyrow:has(#modelPick),.testrow,label.check,label:has(#outputLimit)'))}
-   const key=model.querySelector('#keybox');if(key&&state)key.classList.toggle('simple-key-needed',state.provider!=='mock'&&state.provider!=='ollama'&&!!state.key?.needed&&!state.key?.has);
+   const key=model.querySelector('#keybox');if(key&&state)key.classList.toggle('simple-key-needed',state.provider!=='mock'&&state.provider!=='ollama');
    const head=model.querySelector('.head b');if(head)head.textContent=simple?'Answer settings':'Model';
    const temperature=model.querySelector('#temp')?.closest('label');if(temperature&&state){temperature.classList.toggle('simple-temperature-hidden',state.provider==='mock'||(state.provider==='openai'&&/^(gpt-[56]|o[134])/.test((state.model||'').toLowerCase())));if(!temperature.querySelector('.range-endpoints')){const ends=document.createElement('small');ends.className='range-endpoints';ends.textContent='More precise · More creative';temperature.append(ends)}}
    const temp=model.querySelector('.range-setting-label');if(temp){const t=simple?'Answer style':'Temperature';if(temp.firstChild&&temp.firstChild.nodeType===3)temp.firstChild.nodeValue=t;else temp.prepend(t)}

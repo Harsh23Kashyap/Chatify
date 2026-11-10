@@ -264,7 +264,7 @@ class BuildJobs:
   elif key=='api':instruction+=' Return a list of {name,service,what,reason,connector,setup,caveat,helper:{brief,code}}. Give practical choices, not verified price claims.'
   elif key=='config:sources':instruction+=' Return a JSON list of connector objects, no wrapper. '+('Copy exactly the selected_source_contracts values, one per confirmed_sources entry. These explicit built-in selections override empty defaults; do not return [].' if spec.get('confirmed_sources') else 'Empty list if no actual source supplied.')
   else:instruction+=' Return an object with exactly the keys shown in defaults; no wrapper.'
-  result=self._call(job,instruction,part_system=PROMPT_PART_SYSTEM if key.startswith('prompt:') else None)
+  result=self._call(job,instruction,part_system=PROMPT_PART_SYSTEM) if key.startswith('prompt:') else self._call(job,instruction)
   if isinstance(result,dict):
    wrappers=['config',key.partition(':')[2],spec['area'],'defaults']
    if key=='api':wrappers=['api_suggestions','apis','recommendations','api_recommendations','supported_connectors']
