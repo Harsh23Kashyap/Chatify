@@ -31,7 +31,7 @@ html body.settings-tabs .cfg-video-break video{width:100%;aspect-ratio:16/9;obje
 html body.settings-tabs .cfg-video-copy{padding:16px 20px 0!important;margin:0!important;font-size:14px;line-height:1.7;color:#52665a}
 html body.settings-tabs .cfg-video-controls{padding:12px 20px!important;gap:10px}
 html body.settings-tabs .cfg-video-credit{padding:0 20px 16px!important;margin-top:auto!important;font-size:11px!important;line-height:1.7;color:#52665a}
-html body.settings-tabs .cfg-walkthrough{order:3;padding:clamp(24px,4vw,48px);border:1px solid #d2ddd2;border-left:4px solid #173f35;border-radius:10px;background:#f3f6ed;max-width:850px;margin:0 0 24px}
+html body.settings-tabs .cfg-walkthrough{order:3;padding:clamp(24px,4vw,48px);border:1px solid var(--ui-line);border-radius:10px;background:#f3f6ed;max-width:850px;margin:0 0 24px}
 html body.settings-tabs .cfg-walkthrough h2{font:600 clamp(25px,3vw,36px)/1.2 Fraunces,Georgia,serif;letter-spacing:-.02em;margin:0 0 16px;color:#173f35}
 html body.settings-tabs .cfg-walkthrough p{color:#52665a;line-height:1.8;max-width:58ch;margin:0 0 24px}
 html body.settings-tabs .cfg-walkthrough .go{background:#173f35;color:#fffdf7}
@@ -91,7 +91,7 @@ html[data-theme=dark] body:has(.about-nav){background:#101c17;color:#e8eee6}
 html[data-theme=dark] body:has(.about-nav) .about-nav{background:#101c17!important;border-color:#2b4136}
 /* Audiocn-inspired explicit native-media state, original DOM/CSS implementation. */
 html body.settings-tabs .cfg-media-status{font-size:13px;line-height:1.6;padding:10px 12px;background:#e8eee1;border-radius:6px;margin:16px 0 0;color:#173f35}
-html body.settings-tabs .cfg-media-status[data-state=error]{border-left:3px solid #a43a2c}
+html body.settings-tabs .cfg-media-status[data-state=error]{border:1px solid var(--feedback-line)}
 
 /* Recovery: keep unavailable media out of the visual layout. */
 #cfgWalkthrough video[hidden]{display:none!important}
@@ -106,7 +106,7 @@ html:not(.preview) .sources .sub{font-size:calc(13px*var(--fs,1));margin-bottom:
 html:not(.preview) .sources .filters{display:flex;flex-wrap:wrap;gap:8px;padding-bottom:16px}
 html:not(.preview) .sources .filters button{min-height:40px;padding:8px 12px;border-radius:6px}
 html:not(.preview) .sources .src{border:0;border-bottom:1px solid var(--line);border-radius:0;padding:20px 0;margin:0;background:transparent;box-shadow:none}
-html:not(.preview) .sources .src.hl{border-left:3px solid var(--brand);padding-left:14px;background:var(--soft);padding-right:10px}
+html:not(.preview) .sources .src.hl{border-left:0;padding-left:14px;background:var(--soft);padding-right:10px}
 html:not(.preview) .sources .src b{font-size:calc(14px*var(--fs,1));line-height:1.6}
 html:not(.preview) .sources .src small{display:block;font-size:calc(12px*var(--fs,1));line-height:1.7;margin-top:6px}
 html:not(.preview) .sources .src p{display:block;-webkit-line-clamp:unset;overflow:visible;font-size:calc(13px*var(--fs,1));line-height:1.8;margin:12px 0}

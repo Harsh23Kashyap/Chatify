@@ -1,7 +1,7 @@
 /* Quiet ochre feedback, shared by chat and configuration. Text and symbols carry meaning. */
 :root{--feedback-ink:#654c2d;--feedback-surface:#f7f0e2;--feedback-line:#967444;--feedback-focus:#173f35}
 html[data-theme=dark],html[data-mode=dark],html.dark{--feedback-ink:#f1d4a5;--feedback-surface:#29271f;--feedback-line:#bd9b65;--feedback-focus:#bdd4bb}
-html body [aria-invalid=true]{border-color:var(--feedback-line)!important;background:var(--feedback-surface)!important;box-shadow:inset 3px 0 0 var(--feedback-line)!important}
+html body [aria-invalid=true]{border-color:var(--feedback-line)!important;background:var(--feedback-surface)!important;box-shadow:none!important}
 html body [aria-invalid=true]:focus-visible{outline:2px solid var(--feedback-focus)!important;outline-offset:3px!important}
 html body .builder-section:has([aria-invalid=true]){border-color:var(--feedback-line);background:#fbf8f0}
 html body .builder-field-error{color:var(--feedback-ink);font-size:12px;line-height:1.5;font-weight:500;text-transform:none;letter-spacing:normal;margin-top:6px;display:block}

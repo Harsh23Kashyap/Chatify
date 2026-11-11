@@ -7,7 +7,7 @@ body.settings-tabs.simple #menu .nav-group{display:flex!important;flex-direction
 body.settings-tabs.simple #menu .nav-group[hidden]{display:none!important}
 body.settings-tabs.simple #menu a{display:block!important;padding:12px 14px!important;min-height:44px;font-size:13px;border-radius:8px}
 body.settings-tabs.simple #menu a::after{display:none}
-body.settings-tabs.simple #menu a.on{background:#eaf1e9;border:0;box-shadow:inset 3px 0 #173f35;font-weight:600}
+body.settings-tabs.simple #menu a.on{background:#eaf1e9;border:0;box-shadow:none;font-weight:600}
 body.settings-tabs.simple #sec-model>label[for=modelPick]{display:flex!important;flex-direction:column;margin:14px 0 6px}
 body.settings-tabs.simple #sec-model>.keyrow:has(#modelPick),body.settings-tabs.simple #sec-model>.testrow{display:flex!important;gap:10px;justify-content:flex-start}
 body.settings-tabs.simple #sec-model>.testrow{margin:12px 0 20px!important}
@@ -132,7 +132,7 @@ dialog.settings-help{width:min(580px,calc(100vw - 32px));max-height:calc(100dvh 
 .settings-help-head{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:18px}
 dialog.settings-help h3{font-size:23px;line-height:1.25;margin:0;font-weight:650;letter-spacing:-.02em}
 dialog.settings-help p{margin:0 0 18px;line-height:1.6}
-dialog.settings-help #settingsHelpProvider{padding:2px 0 2px 12px;border:0;border-left:2px solid #c9d6c5;border-radius:0;background:transparent;color:#40584a;font-size:13px}
+dialog.settings-help #settingsHelpProvider{padding:8px 0;border:0;border-radius:0;background:transparent;color:#40584a;font-size:13px}
 dialog.settings-help label[for=settingsHelpQuestion]{display:block;margin:20px 0 8px;font-weight:600}
 dialog.settings-help textarea{min-height:112px;margin:0 0 16px;padding:12px 14px;border-radius:12px;resize:vertical;font-size:14px;line-height:1.5}
 dialog.settings-help button{appearance:none;min-height:44px;padding:10px 16px;border-radius:10px;font-size:13px;font-weight:600;box-shadow:none}
@@ -373,7 +373,7 @@ html body.settings-tabs #settingsNavTop .category-tabs .tab-copy{display:grid;ga
 html body.settings-tabs #settingsNavTop .category-tabs b{font-size:15px}
 html body.settings-tabs #settingsNavTop .category-tabs small{display:block!important;font-size:11px;line-height:1.4;opacity:.85}
 html body.settings-tabs #menu a{border-radius:8px!important;min-height:44px;padding:12px!important;margin:3px 0}
-html body.settings-tabs #menu a.on{background:#e8efdf!important;color:#173f35!important;border:0!important;box-shadow:inset 3px 0 #173f35!important;font-weight:700}
+html body.settings-tabs #menu a.on{background:#e8efdf!important;color:#173f35!important;border:0!important;box-shadow:none!important;font-weight:700}
 @media(max-width:760px){html body.settings-tabs #settingsNavTop .category-tabs{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}html body.settings-tabs #settingsNavTop .category-tabs button{min-height:88px;padding:12px;gap:8px}html body.settings-tabs #settingsNavTop .category-tabs .tab-icon{width:28px;height:28px}html body.settings-tabs #settingsNavTop .category-tabs b{font-size:13px}html body.settings-tabs #settingsNavTop .category-tabs small{font-size:10px}}
 
 /* Section destinations are readable cards, including on narrow screens. */
@@ -410,7 +410,7 @@ html body.settings-tabs .settings-active-panel{animation:settings-panel-enter .2
 html body.settings-tabs #settingsNavTop .category-tabs button{border-radius:24px!important;background:#fffef9!important;box-shadow:0 3px 6px #173f3510,0 1px 2px #173f3517!important}
 html body.settings-tabs #settingsNavTop .category-tabs button[aria-selected=true]{background:#e8efdf!important;color:#173f35!important;border-color:#bccbad!important;box-shadow:inset 0 2px 5px #173f3522,0 2px 0 #d7ef72!important}
 html body.settings-tabs.settings-tabs.settings-tabs #menu a{border-radius:20px!important;box-shadow:0 3px 7px #173f350d!important}
-html body.settings-tabs.settings-tabs.settings-tabs #menu a.on{box-shadow:inset 4px 0 #d7ef72,0 4px 9px #173f3518!important}
+html body.settings-tabs.settings-tabs.settings-tabs #menu a.on{box-shadow:none!important}
 html body.settings-tabs #cfgmode button{transition:background-color .22s ease,color .22s ease,transform .18s ease}
 html body.settings-tabs #cfgmode button:hover{transform:translateY(-1px)}
 html body.settings-tabs #cfgmode button:active{transform:scale(.97)}
