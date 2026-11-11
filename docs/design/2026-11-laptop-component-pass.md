@@ -14,7 +14,7 @@ The requested anti-slop reference was https://github.com/Appllama/appllama-skill
 - Populated chat history and highlighted citations were already rail-free. Rechecked those states with synthetic responses rather than claiming another fix.
 - All 23 About entries now use 22 distinct flat drawings, with the two export entries intentionally sharing one. Added meaningful text, evidence, waveform, setup and connector details. Removed repeated halos and invented slider/progress tracks.
 - Removed decorative sparkles/trails from main chat and sparkles/gradient mist from temporary chat. Kept document/citation and conversation/clock concepts.
-- Laptop component scale: 12px controls, 16px illustration wells, 20px panels. Warm solid surfaces and low neutral shadows distinguish an editing panel from its background.
+- Laptop showcase scale: 12px controls, 16px illustration wells, 20px panels. Dense manual-editing panels keep their existing 16px/no-shadow contract. Warm solid surfaces and low neutral shadows distinguish an editing panel from its background.
 - Feature illustrations respond to hover with a 3px/140ms movement; people cards lift 2px. No idle loops. None/Calm and system reduced-motion suppress movement. Existing action and tab behavior stays intact.
 
 ## Verification
@@ -43,3 +43,7 @@ New contracts registered in the CI manifest:
 The existing manifest-count assertion is updated from495 to497 for these two added scripts; no product assertions are weakened. Earlier About geometry checks also passed across five widths and two motion states. Mobile was not redesigned in this pass.
 
 Release gate: all exact-commit CI workflows green, then deploy the same commit and verify the live public app and read-only lock. Do not infer deployment or live success from these local checks.
+
+## CI follow-up
+
+The first full browser run passed all shards except the existing editing_surface_tokens contract. Restored the dense manual editor panels to their original16px/no-shadow design instead of weakening that regression. Showcase and builder surfaces keep the requested soft depth.

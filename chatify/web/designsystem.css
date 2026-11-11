@@ -859,7 +859,7 @@ html body.chatify-info .feature-copy>small{color:var(--ui-muted)!important}
  html[data-chatify-shell=true] .playground-question:hover{border-color:var(--ui-control)!important;box-shadow:0 3px 10px #30251b0d!important}
  html body.settings-tabs:has(#cfgtop) .cfg-studio .builder-hero{background:var(--ui-surface)!important;border:1px solid var(--ui-line)!important;border-radius:20px!important;padding:24px!important;box-shadow:var(--ui-depth-panel)!important}
  html body.settings-tabs:has(#cfgtop) .cfg-studio .cfg-chat-preview{border-radius:20px!important;box-shadow:var(--ui-depth-panel)!important}
- html body.settings-tabs:has(#cfgtop) #col .tile{border-radius:20px!important;box-shadow:var(--ui-depth-panel)!important}
+ html body.settings-tabs:has(#cfgtop) #col .tile{border-radius:16px!important;box-shadow:none!important}
  html body.settings-tabs:has(#cfgtop) #menu .nav-group a{border-radius:12px!important}
  html body.settings-tabs:has(#cfgtop) #menu .nav-group a:hover{background:var(--ui-soft)!important}
 }
