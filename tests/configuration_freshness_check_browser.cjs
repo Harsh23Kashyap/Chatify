@@ -8,6 +8,7 @@ await p.waitForSelector('#sec-freshness.settings-active-panel');
 assert.equal(await p.locator('#docsFreshness').getAttribute('role'),'status','results are announced politely');
 await p.locator('#checkDocs').click();
 await p.waitForFunction(()=>document.querySelector('#docsFreshness .status-card'),{timeout:20000});
+await p.waitForFunction(()=>{const b=document.querySelector('#checkDocs');return b&&!b.disabled},{timeout:20000});
 assert.ok(await p.locator('#checkDocs').isEnabled(),'button recovers after the check');
 const cards=await p.locator('#docsFreshness .status-card').count();
 assert.ok(cards>=1,'at least one local folder reports');
