@@ -1,0 +1,18 @@
+const {chromium}=require(process.env.PLAYWRIGHT_MODULE||'playwright'),assert=require('node:assert/strict');
+(async()=>{const b=await chromium.launch({executablePath:'/usr/bin/google-chrome',args:['--no-sandbox']});
+const p=await b.newPage({viewport:{width:1280,height:900}});
+await p.addInitScript(()=>localStorage.setItem('cc_cfg_tour_v1','1'));
+await p.goto(process.env.CHATIFY_TEST_URL+'/settings.html#sec-freshness');
+await p.waitForFunction(()=>!!window.CCSettingsSimple?.state()?.names);
+await p.waitForSelector('#sec-freshness.settings-active-panel');
+assert.equal(await p.locator('#docsFreshness').getAttribute('role'),'status','results are announced politely');
+await p.locator('#checkDocs').click();
+await p.waitForFunction(()=>document.querySelector('#docsFreshness .status-card'),{timeout:20000});
+assert.ok(await p.locator('#checkDocs').isEnabled(),'button recovers after the check');
+const cards=await p.locator('#docsFreshness .status-card').count();
+assert.ok(cards>=1,'at least one local folder reports');
+const first=await p.locator('#docsFreshness .status-card').first().innerText();
+assert.match(first,/\d+ documents?/,'document count is reported');
+assert.match(first,/Last checked:/,'a check timestamp is reported');
+assert.match(first,/(Changes indexed|No document changes|Check failed|documents scanned)/,'the outcome of the check is stated');
+await b.close();console.log('PASS freshness: manual check reports document counts, timestamps and the indexing outcome, and the control recovers')})().catch(e=>{console.error(e);process.exit(1)});

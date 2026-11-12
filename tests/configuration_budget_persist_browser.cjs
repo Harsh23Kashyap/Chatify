@@ -1,0 +1,24 @@
+const {chromium}=require(process.env.PLAYWRIGHT_MODULE||'playwright'),assert=require('node:assert/strict');
+(async()=>{const b=await chromium.launch({executablePath:'/usr/bin/google-chrome',args:['--no-sandbox']});
+const p=await b.newPage({viewport:{width:1280,height:900}});
+await p.addInitScript(()=>localStorage.setItem('cc_cfg_tour_v1','1'));
+await p.goto(process.env.CHATIFY_TEST_URL+'/settings.html#sec-budget');
+await p.waitForFunction(()=>!!window.CCSettingsSimple?.state()?.names);
+await p.waitForSelector('#sec-budget.settings-active-panel');
+await p.locator('#budgetQuestions').fill('25');
+await p.locator('#budgetCalls').fill('40');
+await p.locator('#saveBudget').click();
+await p.waitForFunction(()=>/Budget saved/.test(document.querySelector('#budgetStatus')?.textContent||''),{timeout:10000});
+const server=await p.evaluate(async()=>((await (await fetch('/api/budget')).json()).limits));
+assert.equal(server.daily_questions,25,'server stored the question limit');
+assert.equal(server.daily_model_calls,40,'server stored the call limit');
+await p.reload();await p.waitForFunction(()=>!!window.CCSettingsSimple?.state()?.names);
+await p.waitForSelector('#sec-budget.settings-active-panel');
+assert.equal(await p.locator('#budgetQuestions').inputValue(),'25','question limit persists across reload');
+assert.equal(await p.locator('#budgetCalls').inputValue(),'40','call limit persists across reload');
+// restore the fixture defaults
+await p.locator('#budgetQuestions').fill('0');
+await p.locator('#budgetCalls').fill('0');
+await p.locator('#saveBudget').click();
+await p.waitForFunction(()=>/Budget saved/.test(document.querySelector('#budgetStatus')?.textContent||''),{timeout:10000});
+await b.close();console.log('PASS budget persist: valid limits save to the server and survive a reload')})().catch(e=>{console.error(e);process.exit(1)});

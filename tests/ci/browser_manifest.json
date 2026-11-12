@@ -516,7 +516,9 @@
     "configuration_model_refresh_error_browser.cjs": "generic",
     "configuration_mode_switch_browser.cjs": "generic",
     "configuration_export_excludes_keys_browser.cjs": "generic",
-    "configuration_look_transfer_browser.cjs": "generic"
+    "configuration_look_transfer_browser.cjs": "generic",
+    "configuration_freshness_check_browser.cjs": "generic",
+    "configuration_budget_persist_browser.cjs": "generic"
   },
   "excluded": {
     "builder_keep_current_native_event_dispatch_diagnostic.cjs": "Instrumented diagnostic copy, not a regression verdict.",
