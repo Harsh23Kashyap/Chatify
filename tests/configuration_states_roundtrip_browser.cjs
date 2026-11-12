@@ -1,0 +1,48 @@
+const {chromium}=require(process.env.PLAYWRIGHT_MODULE||'playwright'),assert=require('node:assert/strict');
+(async()=>{const b=await chromium.launch({executablePath:'/usr/bin/google-chrome',args:['--no-sandbox']});
+const p=await b.newPage({viewport:{width:1280,height:900}});
+await p.addInitScript(()=>localStorage.setItem('cc_cfg_tour_v1','1'));
+await p.goto(process.env.CHATIFY_TEST_URL+'/settings.html#sec-model');
+await p.waitForFunction(()=>!!window.CCSettingsSimple?.state()?.names);
+await p.evaluate(()=>window.CCSettingsSetMode?.('advanced'));
+const setTopk=async v=>{await p.locator('#topk').evaluate((el,x)=>{el.value=x;el.dispatchEvent(new Event('input',{bubbles:true}));el.dispatchEvent(new Event('change',{bubbles:true}))},v);await p.locator('#apply').click();await p.waitForFunction(()=>/Applied|saved/i.test(document.querySelector('#msg')?.textContent||''),{timeout:10000})};
+const before=await p.locator('#topk').inputValue();
+await setTopk('17');
+// Save the current setup under a name
+await p.evaluate(()=>document.querySelector('a[href="#sec-presets"]').click());
+await p.waitForSelector('#sec-presets.settings-active-panel');
+await p.locator('#sname').fill('ZZZ Probe Setup');
+await p.locator('#save').click();
+await p.waitForFunction(()=>/Saved as/.test(document.querySelector('#msg')?.textContent||''),{timeout:10000});
+// Change the settings, then restore the saved setup
+await p.evaluate(()=>document.querySelector('a[href="#sec-model"]').click());
+await p.waitForSelector('#sec-model.settings-active-panel');
+await setTopk('9');
+await p.evaluate(()=>document.querySelector('a[href="#sec-presets"]').click());
+await p.waitForSelector('#sec-presets.settings-active-panel');
+await p.waitForFunction(()=>[...document.querySelector('#states').options].some(o=>o.value==='ZZZ Probe Setup'),{timeout:10000});
+await p.evaluate(()=>{const s=document.querySelector('#states');s.value='ZZZ Probe Setup';s.dispatchEvent(new Event('change',{bubbles:true}))});
+await p.locator('#load').click();
+const dlg=p.locator('dialog[open]');
+await dlg.waitFor();
+assert.match(await dlg.textContent(),/replaces the current appearance and model settings/,'restore warns what it replaces');
+await dlg.getByRole('button',{name:'Restore'}).click();
+await p.waitForFunction(()=>/Loaded/.test(document.querySelector('#msg')?.textContent||''),{timeout:10000});
+const restored=await p.evaluate(async()=>((await (await fetch('/api/settings')).json()).settings).top_k);
+assert.equal(restored,17,'restoring brings back the saved settings');
+// Delete the probe setup and restore the original slider
+await p.waitForFunction(()=>[...document.querySelector('#states').options].some(o=>o.value==='ZZZ Probe Setup'),{timeout:10000});
+await p.evaluate(()=>{const s=document.querySelector('#states');s.value='ZZZ Probe Setup';s.dispatchEvent(new Event('change',{bubbles:true}))});
+await p.locator('.look-more > summary').click().catch(()=>{});
+await p.evaluate(()=>{const d=document.querySelector('.look-danger');if(d)d.open=true;const m=document.querySelector('.look-more');if(m)m.open=true;});
+await p.evaluate(()=>document.querySelector('#del').click());
+const dlg2=p.locator('dialog[open]');
+await dlg2.waitFor();
+await dlg2.getByRole('button',{name:'Delete'}).click();
+await p.waitForFunction(()=>/Deleted/.test(document.querySelector('#msg')?.textContent||''),{timeout:10000});
+const options=await p.locator('#states option').allInnerTexts();
+assert.ok(!options.includes('ZZZ Probe Setup'),'deleted setup leaves the list');
+await p.evaluate(()=>document.querySelector('a[href="#sec-model"]').click());
+await p.waitForSelector('#sec-model.settings-active-panel');
+await setTopk(before);
+await b.close();console.log('PASS states: save names a setup, restore confirms and brings settings back, delete confirms and removes it')})().catch(e=>{console.error(e);process.exit(1)});
