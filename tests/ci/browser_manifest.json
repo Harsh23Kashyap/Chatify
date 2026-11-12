@@ -519,7 +519,8 @@
     "configuration_look_transfer_browser.cjs": "generic",
     "configuration_freshness_check_browser.cjs": "generic",
     "configuration_budget_persist_browser.cjs": "generic",
-    "configuration_states_roundtrip_browser.cjs": "generic"
+    "configuration_states_roundtrip_browser.cjs": "generic",
+    "configuration_query_rewrite_browser.cjs": "generic"
   },
   "excluded": {
     "builder_keep_current_native_event_dispatch_diagnostic.cjs": "Instrumented diagnostic copy, not a regression verdict.",
