@@ -1,0 +1,26 @@
+const {chromium}=require(process.env.PLAYWRIGHT_MODULE||'playwright'),assert=require('node:assert/strict');
+(async()=>{const b=await chromium.launch({executablePath:'/usr/bin/google-chrome',args:['--no-sandbox']});
+const p=await b.newPage({viewport:{width:1280,height:900}});
+await p.addInitScript(()=>localStorage.setItem('cc_cfg_tour_v1','1'));
+await p.goto(process.env.CHATIFY_TEST_URL+'/settings.html#sec-model');
+await p.waitForFunction(()=>!!window.CCSettingsSimple?.state()?.names);
+await p.locator('.seg button[data-p=openai]').click();
+await p.waitForTimeout(300);
+await p.locator('#apikey').fill('sk-test-PLACEHOLDER-1234567890abcdef');
+await p.locator('#keysave').click();
+await p.waitForFunction(()=>/Key saved privately/.test(document.querySelector('#msg')?.textContent||''),{timeout:10000});
+// A refresh that cannot reach the provider must fail inline, not break the page
+await p.locator('#refreshModels').click();
+await p.waitForFunction(()=>{const h=document.querySelector('#modelh');const b=document.querySelector('#refreshModels');return h&&b&&!b.disabled&&h.textContent&&h.textContent!=='Loading model names…'},{timeout:45000});
+const note=await p.locator('#modelh').innerText();
+assert.ok(note.length>4,'a reason is shown inline when the list cannot load');
+assert.ok(await p.locator('#refreshModels').isEnabled(),'refresh stays usable after a failure');
+const options=await p.locator('#modelPick option').allInnerTexts();
+assert.ok(options.some(t=>/Type a model name|Other/.test(t)),'a typed-name path survives the failure');
+const settings=(await p.evaluate(async()=>await (await fetch('/api/settings')).json())).settings;
+assert.equal(settings.provider,'mock','a failed refresh never writes provider state');
+await p.locator('#keyclear').click();
+await p.waitForFunction(()=>/Key removed/.test(document.querySelector('#msg')?.textContent||''),{timeout:10000});
+const more=p.locator('#seg .chipmore');if(await more.isVisible())await more.click();
+await p.locator('.seg button[data-p=mock]').click();
+await b.close();console.log('PASS model refresh: unreachable provider reports inline, refresh stays usable, typed-name fallback survives, server state untouched')})().catch(e=>{console.error(e);process.exit(1)});

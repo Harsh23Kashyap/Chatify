@@ -512,7 +512,9 @@
     "configuration_reset_look_browser.cjs": "generic",
     "configuration_output_limit_browser.cjs": "generic",
     "configuration_tour_browser.cjs": "generic",
-    "configuration_test_connection_gating_browser.cjs": "generic"
+    "configuration_test_connection_gating_browser.cjs": "generic",
+    "configuration_model_refresh_error_browser.cjs": "generic",
+    "configuration_mode_switch_browser.cjs": "generic"
   },
   "excluded": {
     "builder_keep_current_native_event_dispatch_diagnostic.cjs": "Instrumented diagnostic copy, not a regression verdict.",
