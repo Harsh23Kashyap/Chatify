@@ -510,7 +510,9 @@
     "shared_surfaces_token_regression_browser.cjs": "generic",
     "configuration_api_key_handling_browser.cjs": "generic",
     "configuration_reset_look_browser.cjs": "generic",
-    "configuration_output_limit_browser.cjs": "generic"
+    "configuration_output_limit_browser.cjs": "generic",
+    "configuration_tour_browser.cjs": "generic",
+    "configuration_test_connection_gating_browser.cjs": "generic"
   },
   "excluded": {
     "builder_keep_current_native_event_dispatch_diagnostic.cjs": "Instrumented diagnostic copy, not a regression verdict.",
