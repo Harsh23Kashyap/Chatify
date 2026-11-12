@@ -1,0 +1,33 @@
+const {chromium}=require(process.env.PLAYWRIGHT_MODULE||'playwright'),assert=require('node:assert/strict');
+(async()=>{const b=await chromium.launch({executablePath:'/usr/bin/google-chrome',args:['--no-sandbox']});
+const legacy=['rgb(23, 63, 53)','rgb(215, 239, 114)','rgb(127, 174, 60)','rgb(248, 244, 233)','rgb(255, 253, 247)','rgb(13, 22, 19)','rgb(22, 33, 28)'];
+const rgb=hex=>{let h=hex.trim().replace('#','');if(h.length===3)h=[...h].map(c=>c+c).join('');return `rgb(${parseInt(h.slice(0,2),16)}, ${parseInt(h.slice(2,4),16)}, ${parseInt(h.slice(4,6),16)})`};
+for(const theme of ['light','dark']){
+ const p=await b.newPage({viewport:{width:1280,height:900}});
+ await p.addInitScript(t=>{localStorage.setItem('cc_mode',t)},theme);
+ await p.goto(process.env.CHATIFY_TEST_URL+'/build.html');
+ await p.waitForSelector('.build-screen:not([hidden]) .build-go',{timeout:15000});
+ await p.waitForTimeout(400);
+ const t=await p.evaluate(()=>{const cs=getComputedStyle(document.documentElement);const g=n=>cs.getPropertyValue(n).trim();return {ground:g('--ui-ground'),surface:g('--ui-surface'),ink:g('--ui-ink'),muted:g('--ui-muted'),action:g('--ui-action'),onAction:g('--ui-on-action'),highlight:g('--ui-highlight'),danger:g('--ui-danger')}});
+ assert.equal(await p.evaluate(()=>getComputedStyle(document.body).backgroundColor),rgb(t.ground),theme+': body ground');
+ const go=await p.locator('.build-screen:not([hidden]) .build-go').first().evaluate(n=>({bg:getComputedStyle(n).backgroundColor,color:getComputedStyle(n).color}));
+ assert.equal(go.bg,rgb(t.action),theme+': primary action');
+ assert.equal(go.color,rgb(t.onAction),theme+': primary on-action');
+ assert.equal(await p.locator('.build-screen:not([hidden]) h1').first().evaluate(n=>getComputedStyle(n).color),rgb(t.ink),theme+': headline ink');
+ assert.equal(await p.locator('.build-screen:not([hidden]) .build-eyebrow').first().evaluate(n=>getComputedStyle(n).color),rgb(t.action),theme+': eyebrow action');
+ const sweep=await p.locator('.build-screen:not([hidden]) h1 em').first().evaluate(n=>getComputedStyle(n,'::after').backgroundImage);
+ assert.ok(sweep.includes(rgb(t.highlight)),theme+': headline sweep on shared highlight');
+ const step=await p.locator('.build-step[data-state=current] .build-step-num').first().evaluate(n=>({bg:getComputedStyle(n).backgroundColor,color:getComputedStyle(n).color}));
+ assert.equal(step.bg,rgb(t.action),theme+': current step action');
+ assert.equal(step.color,rgb(t.onAction),theme+': current step on-action');
+ const sample=await p.evaluate(()=>{const out=[];for(const el of document.querySelectorAll('body,.build-go,.build-screen:not([hidden]) h1,.build-eyebrow,.build-chip,.build-ghost,.common-nav a,.build-step-num')){const cs=getComputedStyle(el);out.push(cs.color,cs.backgroundColor,cs.borderTopColor)}return out});
+ for(const v of sample)assert.ok(!legacy.includes(v),theme+': legacy pine/lime leaked: '+v);
+ await p.close();
+}
+const p=await b.newPage({viewport:{width:1280,height:900},reducedMotion:'reduce'});
+await p.goto(process.env.CHATIFY_TEST_URL+'/build.html');
+await p.waitForSelector('.build-screen:not([hidden]) .build-go',{timeout:15000});
+assert.equal(await p.locator('.build-screen:not([hidden])').first().evaluate(n=>getComputedStyle(n).animationName),'none','reduced motion: no entrance rise');
+assert.equal(await p.locator('.build-screen:not([hidden]) h1 em').first().evaluate(n=>getComputedStyle(n,'::after').animationName),'none','reduced motion: no sweep');
+await p.close();
+await b.close();console.log('PASS build page shares the vermilion+sand tokens in light and dark (ground, surface, ink, action, on-action, highlight sweep, stepper), zero pine/lime leaks, reduced motion stays quiet')})().catch(e=>{console.error(e);process.exit(1)});

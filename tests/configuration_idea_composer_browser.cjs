@@ -1,0 +1,35 @@
+const {chromium}=require(process.env.PLAYWRIGHT_MODULE||'playwright'),assert=require('node:assert/strict');
+(async()=>{const b=await chromium.launch({executablePath:'/usr/bin/google-chrome',args:['--no-sandbox']});
+const p=await b.newPage({viewport:{width:1280,height:900}});
+await p.addInitScript(()=>localStorage.setItem('cc_cfg_tour_v1','1'));
+await p.goto(process.env.CHATIFY_TEST_URL+'/settings.html');
+await p.waitForFunction(()=>!!window.CCSettingsSimple?.state()?.names);
+await p.locator('#cfgIdea').waitFor({timeout:15000});
+assert.equal(await p.locator('#cfgIdeaCount').innerText(),'0 / 4,000 characters','counter starts empty');
+assert.equal(await p.locator('#cfgIdeaCount').getAttribute('data-near'),'false','no near-limit flag when empty');
+assert.ok(await p.locator('#cfgImproveIdea').isDisabled(),'Make it better disabled with no idea');
+await p.locator('#cfgIdea').fill('A diet assistant for my family');
+assert.equal(await p.locator('#cfgIdeaCount').innerText(),'30 / 4,000 characters','counter follows typing');
+assert.ok(!(await p.locator('#cfgImproveIdea').isDisabled()),'Make it better enabled with an idea');
+const setIdea=n=>p.locator('#cfgIdea').evaluate((el,n)=>{el.value='x'.repeat(n);el.dispatchEvent(new Event('input',{bubbles:true}))},n);
+await setIdea(3901);
+assert.equal(await p.locator('#cfgIdeaCount').innerText(),'3,901 / 4,000 characters','counter near the limit');
+assert.equal(await p.locator('#cfgIdeaCount').getAttribute('data-near'),'true','near-limit flag set at 99 left');
+await setIdea(4000);
+assert.equal(await p.locator('#cfgIdeaCount').innerText(),'4,000 / 4,000 characters','counter at the limit');
+await p.waitForTimeout(1000);
+assert.equal(await p.locator('.cfg-idea-limit').innerText(),'Character limit reached. Shorten the idea to add more.','limit announcement speaks');
+await setIdea(24);
+await p.waitForTimeout(1000);
+assert.equal(await p.locator('.cfg-idea-limit').innerText(),'','limit announcement clears when back in range');
+// Mock provider: Make it better refuses without touching the idea
+await p.locator('#cfgImproveIdea').click();
+await p.waitForTimeout(300);
+assert.equal(await p.locator('#cfgImproveStatus').innerText(),'Choose a real model and save its key in Manual settings first. Your idea is unchanged.','mock provider refuses politely');
+assert.equal(await p.locator('#cfgIdea').inputValue(),'x'.repeat(24),'idea text unchanged after refusal');
+// Clearing the idea resets the tool state
+await p.locator('#cfgIdea').fill('');
+assert.ok(await p.locator('#cfgImproveIdea').isDisabled(),'Make it better disabled again after clearing');
+assert.equal(await p.locator('#cfgImproveStatus').innerText(),'','refusal note clears with the idea');
+assert.equal(await p.locator('#cfgIdeaCount').innerText(),'0 / 4,000 characters','counter resets');
+await b.close();console.log('PASS idea composer: live 4,000 counter, near/limit announcements, Make it better gated on a real saved model, idea untouched on refusal, clean reset')})().catch(e=>{console.error(e);process.exit(1)});
