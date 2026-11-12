@@ -6,7 +6,7 @@
   --desk-radius: 10px;
   --desk-duration: var(--m-hover,140ms);
   --desk-ease: cubic-bezier(.2,.8,.2,1);
-  --desk-shadow: 0 2px 8px rgb(23 63 53 / .04);
+  --desk-shadow: 0 2px 8px rgba(56,40,30,.05);
 }
 body { -webkit-font-smoothing: antialiased; }
 :is(button,a,input,textarea,select,summary):focus-visible {

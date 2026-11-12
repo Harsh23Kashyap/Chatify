@@ -176,7 +176,7 @@ body.settings-tabs .settings-search .settings-help-open:active{transform:transla
 @media(prefers-reduced-motion:reduce){body.settings-tabs .settings-search .settings-help-open{transition:none!important;transform:none!important}}
 body.settings-tabs .settings-search{display:grid!important;grid-template-columns:minmax(0,1fr) auto auto;gap:8px;align-items:center;padding:0!important;max-width:none;margin:16px 0!important}
 body.settings-tabs .settings-search>label{grid-column:1/-1;display:block!important;margin:0;font-weight:600;font-size:12px}
-body.settings-tabs .settings-search>input{grid-column:1;display:block!important;min-width:0;margin:0;height:46px;background:#fffdf8;border:1px solid #d0dcd3!important;box-shadow:0 2px 6px #173f3508;padding:11px 13px}
+body.settings-tabs .settings-search>input{grid-column:1;display:block!important;min-width:0;margin:0;height:46px;background:#fffdf8;border:1px solid #d0dcd3!important;box-shadow:0 2px 6px rgba(56,40,30,.07);padding:11px 13px}
 body.settings-tabs .settings-search .settings-help-open{position:static!important;float:none!important;margin:0!important;grid-column:3;grid-row:2}
 body.settings-tabs .settings-local-search{grid-column:2;grid-row:2;min-height:44px;padding:10px 16px;border-radius:12px;background:#edf3ee;border:1px solid #cbdacf;color:#173f35;font:600 13px system-ui;cursor:pointer;transition:transform .16s,background .16s}
 body.settings-tabs .settings-local-search:hover{background:#dfece3;transform:translateY(-1px)}

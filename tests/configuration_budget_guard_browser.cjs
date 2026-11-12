@@ -1,0 +1,31 @@
+const {chromium}=require(process.env.PLAYWRIGHT_MODULE||'playwright'),assert=require('node:assert/strict');
+(async()=>{const b=await chromium.launch({executablePath:'/usr/bin/google-chrome',args:['--no-sandbox']});
+const url=process.env.CHATIFY_TEST_URL+'/settings.html#sec-budget';
+const p=await b.newPage({viewport:{width:1280,height:900}});
+await p.addInitScript(()=>localStorage.setItem('cc_cfg_tour_v1','1'));
+await p.goto(url);await p.waitForFunction(()=>!!window.CCSettingsSimple?.state()?.names);
+await p.waitForSelector('#budgetQuestions',{state:'visible'});
+// Invalid daily value is blocked before any save
+await p.locator('#budgetQuestions').fill('-4');
+await p.locator('#saveBudget').click();
+assert.equal(await p.locator('#budgetQuestions').getAttribute('aria-invalid'),'true','negative daily limit flagged');
+assert.ok(!(await p.locator('#budgetQuestionsError').isHidden()),'inline error shown');
+assert.match(await p.locator('#budgetStatus').innerText(),/non-negative/,'status explains the rule');
+// Valid limits save and persist
+await p.locator('#budgetQuestions').fill('25');
+await p.locator('#budgetUser').fill('5');
+await p.locator('#budgetCalls').fill('100');
+await p.locator('#budgetSpend').fill('3.50');
+await p.locator('#saveBudget').click();
+await p.waitForFunction(()=>document.querySelector('#budgetStatus')?.textContent.includes('Budget saved'));
+const limits=await p.evaluate(async()=>(await (await fetch('/api/budget')).json()).limits);
+assert.equal(limits.daily_questions,25,'server stores daily questions');
+assert.equal(limits.user_daily_questions,5,'server stores per-user limit');
+assert.equal(limits.daily_model_calls,100,'server stores daily calls');
+assert.equal(limits.spend_cap_usd,3.5,'server stores dollar cap');
+await p.reload();await p.waitForFunction(()=>!!window.CCSettingsSimple?.state()?.names);
+await p.waitForSelector('#budgetQuestions',{state:'visible'});
+assert.equal(await p.locator('#budgetQuestions').inputValue(),'25','daily questions survive reload');
+assert.equal(await p.locator('#budgetSpend').inputValue(),'3.5','dollar cap survives reload');
+await p.evaluate(async()=>{await fetch('/api/budget',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({budget:{daily_questions:0,user_daily_questions:0,daily_model_calls:0,spend_cap_usd:null}})})});
+await b.close();console.log('PASS budget: invalid values blocked with inline errors, valid limits save to /api/budget and persist across reload')})().catch(e=>{console.error(e);process.exit(1)});

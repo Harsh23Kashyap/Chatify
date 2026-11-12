@@ -1,0 +1,28 @@
+const {chromium}=require(process.env.PLAYWRIGHT_MODULE||'playwright'),assert=require('node:assert/strict');
+(async()=>{const b=await chromium.launch({executablePath:'/usr/bin/google-chrome',args:['--no-sandbox']});
+const url=process.env.CHATIFY_TEST_URL+'/settings.html';
+const p=await b.newPage({viewport:{width:1280,height:900}});
+await p.addInitScript(()=>{localStorage.setItem('cc_cfg_tour_v1','1');localStorage.setItem('cc_cfg_top_v1','manual')});
+await p.goto(url);await p.waitForFunction(()=>!!window.CCSettingsSimple?.state()?.names);
+await p.waitForSelector('#settingsFind',{state:'visible'});
+assert.ok(await p.locator('#settingsFindResults').isHidden(),'results hidden before typing');
+await p.locator('#settingsFind').fill('budget');
+await p.waitForFunction(()=>!document.querySelector('#settingsFindResults').hidden);
+const count=await p.locator('#settingsFindResults button').count();
+assert.ok(count>=1,'matching settings listed');
+assert.match(await p.locator('#settingsFindStatus').innerText(),/suggested settings/,'result count announced');
+await p.locator('#settingsFindResults button').first().click();
+await p.waitForTimeout(400);
+assert.match(await p.locator('#settingsFindStatus').innerText(),/Opened/,'activation announced');
+assert.ok(await p.locator('#settingsFindResults').isHidden(),'results close after opening a match');
+assert.equal(await p.evaluate(()=>location.hash),'#sec-budget','deep link lands on the budget section');
+await p.locator('#settingsFind').fill('budget');
+await p.waitForFunction(()=>!document.querySelector('#settingsFindResults').hidden);
+await p.locator('.settings-find-clear').click();
+assert.equal(await p.locator('#settingsFind').inputValue(),'','clear empties the query');
+assert.ok(await p.locator('#settingsFindResults').isHidden(),'clear hides results');
+// A query with no matches says so instead of failing silently
+await p.locator('#settingsFind').fill('qqqqzzzz');
+await p.waitForFunction(()=>document.querySelector('#settingsFindResults').dataset.resultState==='empty');
+assert.match(await p.locator('#settingsFindStatus').innerText(),/No matching setting/,'empty result announced');
+await b.close();console.log('PASS settings search: ranked matches open their section with announcements, clear resets, empty queries are reported')})().catch(e=>{console.error(e);process.exit(1)});
