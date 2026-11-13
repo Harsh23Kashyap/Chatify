@@ -48,7 +48,13 @@ def main():
                     if 'Timeout (' in server_log:print(server_log,flush=True)
                     assert 'Already running' in prep(['--offline']);counts['active_rerun']+=1
                     req=urllib.request.Request(url+'/api/ask',data=b'{"question":"What is Chatify?"}',headers={'Content-Type':'application/json'})
-                    result=json.load(urllib.request.urlopen(req));assert '[1]' in result['answer'] and len(result['evidence'])==1 and result['evidence'][0]['title']=='What is Chatify'
+                    result=None
+                    for _attempt in range(3):
+                        try:result=json.load(urllib.request.urlopen(req));break
+                        except (ConnectionResetError,urllib.error.URLError):
+                            if _attempt==2:raise
+                            time.sleep(.5)
+                    assert '[1]' in result['answer'] and len(result['evidence'])==1 and result['evidence'][0]['title']=='What is Chatify'
                     try:urllib.request.urlopen(url+'/api/settings');raise AssertionError('lock failed')
                     except urllib.error.HTTPError as e:assert e.code==404
                 finally:
