@@ -14,6 +14,7 @@ assert.equal(server.daily_questions,25,'server stored the question limit');
 assert.equal(server.daily_model_calls,40,'server stored the call limit');
 await p.reload();await p.waitForFunction(()=>!!window.CCSettingsSimple?.state()?.names);
 await p.waitForSelector('#sec-budget.settings-active-panel');
+await p.waitForFunction(()=>document.querySelector('#budgetQuestions')?.value==='25'&&document.querySelector('#budgetCalls')?.value==='40',{timeout:10000});
 assert.equal(await p.locator('#budgetQuestions').inputValue(),'25','question limit persists across reload');
 assert.equal(await p.locator('#budgetCalls').inputValue(),'40','call limit persists across reload');
 // restore the fixture defaults
