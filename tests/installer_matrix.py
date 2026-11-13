@@ -51,9 +51,11 @@ def main():
                     result=None
                     for _attempt in range(3):
                         try:result=json.load(urllib.request.urlopen(req));break
-                        except (ConnectionResetError,urllib.error.URLError):
-                            if _attempt==2:raise
-                            time.sleep(.5)
+                        except (ConnectionResetError,urllib.error.URLError) as _ask_err:
+                            if _attempt==2:
+                                _tail=(state/'server.log').read_text()[-2000:] if (state/'server.log').exists() else 'missing'
+                                raise RuntimeError('ask failed after 3 attempts: %r; server poll=%r; server log tail:\n%s'%(_ask_err,p.poll(),_tail))
+                            time.sleep(1)
                     assert '[1]' in result['answer'] and len(result['evidence'])==1 and result['evidence'][0]['title']=='What is Chatify'
                     try:urllib.request.urlopen(url+'/api/settings');raise AssertionError('lock failed')
                     except urllib.error.HTTPError as e:assert e.code==404
