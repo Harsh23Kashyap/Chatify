@@ -13,6 +13,7 @@ await p.waitForFunction(()=>/Applied|saved/i.test(document.querySelector('#msg')
 const saved=await p.evaluate(async()=>((await (await fetch('/api/settings')).json()).settings).query_rewrite);
 assert.equal(saved,!before,'server stored the toggled value');
 await p.reload();await p.waitForFunction(()=>!!window.CCSettingsSimple?.state()?.names);
+await p.waitForFunction((exp)=>document.querySelector('#rewrite')?.checked===exp,!before,{timeout:10000});
 assert.equal(await p.locator('#rewrite').isChecked(),!before,'toggle persists across reload');
 await p.locator('#rewrite').click();
 await p.locator('#apply').click();

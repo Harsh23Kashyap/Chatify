@@ -14,6 +14,7 @@ await p.waitForFunction(()=>/Applied|saved/i.test(document.querySelector('#msg')
 const saved=await p.evaluate(async()=>((await (await fetch('/api/settings')).json()).settings).max_output_tokens);
 assert.equal(String(saved),target,'server stored the new limit');
 await p.reload();await p.waitForFunction(()=>!!window.CCSettingsSimple?.state()?.names);
+await p.waitForFunction((t)=>document.querySelector('#outputLimit')?.value===t,target,{timeout:10000});
 assert.equal(await p.locator('#outputLimit').inputValue(),target,'limit persists across reload');
 await p.locator('#outputLimit').evaluate((el,v)=>{el.value=v;el.dispatchEvent(new Event('input',{bubbles:true}));el.dispatchEvent(new Event('change',{bubbles:true}))},before);
 await p.locator('#apply').click();

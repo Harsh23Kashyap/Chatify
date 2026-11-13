@@ -15,6 +15,7 @@ assert.match(await p.locator('#answerDirty').innerText(),/Unsaved answer changes
 await p.locator('#apply').click();
 await p.waitForFunction(()=>/Applied|saved/i.test(document.querySelector('#msg')?.textContent||''),{timeout:10000});
 await p.reload();await p.waitForFunction(()=>!!window.CCSettingsSimple?.state()?.names);
+await p.waitForFunction((t)=>document.querySelector('#topk')?.value===t,target,{timeout:10000});
 assert.equal(await p.locator('#topk').inputValue(),target,'slider choice persists across reload');
 // restore the fixture default so reruns stay symmetric
 await p.locator('#topk').evaluate((el,v)=>{el.value=v;el.dispatchEvent(new Event('input',{bubbles:true}));el.dispatchEvent(new Event('change',{bubbles:true}))},before);

@@ -25,6 +25,7 @@ assert.equal(limits.daily_model_calls,100,'server stores daily calls');
 assert.equal(limits.spend_cap_usd,3.5,'server stores dollar cap');
 await p.reload();await p.waitForFunction(()=>!!window.CCSettingsSimple?.state()?.names);
 await p.waitForSelector('#budgetQuestions',{state:'visible'});
+await p.waitForFunction(()=>document.querySelector('#budgetQuestions')?.value==='25'&&document.querySelector('#budgetSpend')?.value==='3.5',{timeout:10000});
 assert.equal(await p.locator('#budgetQuestions').inputValue(),'25','daily questions survive reload');
 assert.equal(await p.locator('#budgetSpend').inputValue(),'3.5','dollar cap survives reload');
 await p.evaluate(async()=>{await fetch('/api/budget',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({budget:{daily_questions:0,user_daily_questions:0,daily_model_calls:0,spend_cap_usd:null}})})});
