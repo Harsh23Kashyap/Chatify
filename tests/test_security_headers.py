@@ -51,6 +51,8 @@ class SecurityHeaders(unittest.TestCase):
         self.assertIn("'unsafe-inline'", csp)
         self.assertIn("https://fonts.googleapis.com", csp)
         self.assertIn("https://fonts.gstatic.com", csp)
+        # local background-picture previews load from blob: object URLs
+        self.assertIn("img-src 'self' data: https: blob:", csp)
 
     def test_permissions_policy_keeps_voice_input(self):
         _, headers, _ = self.request("GET", "/")

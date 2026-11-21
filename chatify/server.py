@@ -17,12 +17,13 @@ BUILD_STARTS = {}  # ip -> [timestamps of build starts]; light abuse limit for s
 
 # Baseline defense-in-depth headers on every response. The CSP keeps the app's
 # inline bootstrap scripts, style attributes, Google Fonts, data:/https: app
-# images, blob: downloads and the same-origin settings preview iframe working
+# images (including blob: local-picture previews), blob: downloads and the same-origin
+# settings preview iframe working
 # while blocking foreign scripts, embeds and framing by other origins.
 SECURITY_HEADERS = {
     "Content-Security-Policy": ("default-src 'self'; script-src 'self' 'unsafe-inline'; "
                                 "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; "
-                                "img-src 'self' data: https:; font-src 'self' https://fonts.gstatic.com; "
+                                "img-src 'self' data: https: blob:; font-src 'self' https://fonts.gstatic.com; "
                                 "media-src 'self' blob:; connect-src 'self'; frame-src 'self'; "
                                 "object-src 'none'; base-uri 'none'; form-action 'self'; frame-ancestors 'self'"),
     "X-Frame-Options": "SAMEORIGIN",
