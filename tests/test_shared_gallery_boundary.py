@@ -24,7 +24,9 @@ class SharedBoundary(unittest.TestCase):
   with patch.object(self.engine.provider,'complete',side_effect=AssertionError('no provider invocation')):
    for family in families:
     for method in ['GET','POST','PUT','PATCH','DELETE','HEAD']:
-     with self.subTest(family=family,method=method):self.assertEqual(self.call('/api/'+family,{} if method!='GET' else None,method=method)[0],403 if method in ('GET','POST') else 501)
+     # HEAD is routed like GET (page headers without a body), so management
+     # families now deny it with the same 403 as GET; PUT/PATCH/DELETE stay 501.
+     with self.subTest(family=family,method=method):self.assertEqual(self.call('/api/'+family,{} if method!='GET' else None,method=method)[0],403 if method in ('GET','POST','HEAD') else 501)
   self.assertEqual(self.engine.prompts._load(),before)
  def test_shared_theme_and_guide_writes_blocked(self):
   for path in ['/api/theme','/api/guide-seen']:

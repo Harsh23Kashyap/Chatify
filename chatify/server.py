@@ -15,6 +15,21 @@ import time, collections
 WEB = os.path.normpath(os.path.join(os.path.dirname(os.path.abspath(__file__)), "web"))
 BUILD_STARTS = {}  # ip -> [timestamps of build starts]; light abuse limit for shared hosted demos
 
+# Baseline defense-in-depth headers on every response. The CSP keeps the app's
+# inline bootstrap scripts, style attributes, Google Fonts, data:/https: app
+# images, blob: downloads and the same-origin settings preview iframe working
+# while blocking foreign scripts, embeds and framing by other origins.
+SECURITY_HEADERS = {
+    "Content-Security-Policy": ("default-src 'self'; script-src 'self' 'unsafe-inline'; "
+                                "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; "
+                                "img-src 'self' data: https:; font-src 'self' https://fonts.gstatic.com; "
+                                "media-src 'self' blob:; connect-src 'self'; frame-src 'self'; "
+                                "object-src 'none'; base-uri 'none'; form-action 'self'; frame-ancestors 'self'"),
+    "X-Frame-Options": "SAMEORIGIN",
+    "Referrer-Policy": "strict-origin-when-cross-origin",
+    "Permissions-Policy": "microphone=(self), camera=(), geolocation=()",
+}
+
 
 
 
@@ -185,10 +200,13 @@ def make_handler(cfg, engine):
             self.send_header("X-Content-Type-Options", "nosniff")
             self.send_header("X-Request-Id", uuid.uuid4().hex[:12])
             self.send_header("Cache-Control", "no-store" if ctype == "application/json" else "no-cache")
+            for k, v in SECURITY_HEADERS.items():
+                self.send_header(k, v)
             for k, v in (extra or {}).items():
                 self.send_header(k, v)
             self.end_headers()
-            self.wfile.write(data)
+            if self.command != "HEAD":
+                self.wfile.write(data)
 
         def _cookie_named(self, name):
             for part in self.headers.get("Cookie", "").split(";"):
@@ -931,6 +949,8 @@ def make_handler(cfg, engine):
                 self.send_header("Content-Type", "application/x-ndjson")
                 self.send_header("Cache-Control", "no-store")
                 self.send_header("X-Content-Type-Options", "nosniff")
+                for k, v in SECURITY_HEADERS.items():
+                    self.send_header(k, v)
                 self.end_headers()
                 def emit(kind, data):
                     self.wfile.write((json.dumps({"type": kind, "data": data}) + "\n").encode()); self.wfile.flush()
@@ -1104,6 +1124,7 @@ def make_handler(cfg, engine):
                 self._send(500, {"error": "Server error"})
 
         def do_GET(self): self._guard("GET")
+        def do_HEAD(self): self._guard("GET")  # GET headers, no body (see _send)
         def do_POST(self): self._guard("POST")
     return H
 
@@ -1193,6 +1214,8 @@ def serve_gallery(path, host=None, port=None):
             self.send_header("Content-Length", str(len(data)))
             self.send_header("X-Content-Type-Options", "nosniff")
             self.send_header("Cache-Control", "no-store" if ctype == "application/json" else "no-cache")
+            for k, v in SECURITY_HEADERS.items():
+                self.send_header(k, v)
             for k, v in (extra or {}).items():
                 self.send_header(k, v)
             self.end_headers()
@@ -1268,6 +1291,8 @@ def serve_gallery(path, host=None, port=None):
             # stream everything else so chat answers still arrive token by token
             self.send_response(resp.status)
             self.send_header("Content-Type", ctype or "application/octet-stream")
+            for k, v in SECURITY_HEADERS.items():
+                self.send_header(k, v)
             for k, v in passthrough.items():
                 self.send_header(k, v)
             loc = resp.getheader("Location")
