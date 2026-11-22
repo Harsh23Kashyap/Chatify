@@ -15,5 +15,7 @@ class ReleasePins(unittest.TestCase):
         self.assertEqual(version, package_version)
         readme=(ROOT/'README.md').read_text()
         self.assertNotIn('/blob/v0.1.',readme)
+        self.assertNotIn('/blob/v0.2.3',readme)
+        self.assertNotIn('Restart to apply',readme)
         self.assertNotIn('`uvx chatify`',readme)
         self.assertNotIn('Not published yet',(ROOT/'docs/RELEASE.md').read_text())

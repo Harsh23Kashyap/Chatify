@@ -154,6 +154,9 @@ class Http(unittest.TestCase):
         self.assertEqual(self.call("/api/bibtex?turn=" + r["id"])[0], 200)
         self.assertEqual(self.call("/api/pdf?turn=" + r["id"])[1][:4], b"%PDF")
         self.assertEqual(self.call("/api/ask", {"question": ""})[0], 400)
+        self.assertEqual(self.call("/api/ask", {"question": 42})[0], 400)
+        self.assertEqual(self.call("/api/ask", {"question": {"a": 1}})[0], 400)
+        self.assertEqual(self.call("/api/ask", {"question": ["x"]})[0], 400)
         self.assertEqual(self.call("/api/turns?chat=nope")[0], 404)
 
     def test_static_traversal_blocked(self):

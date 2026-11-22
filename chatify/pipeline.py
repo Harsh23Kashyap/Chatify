@@ -1868,6 +1868,8 @@ class Engine:
     def ask_stream(self, owner, chat, question, sources=None, style="standard", topic=None, new_topic=False, use_cache=True, temporary=False, temp_history=None, use_profile=False, scope=None):
         """Yield ('meta', {...}), ('token', str)..., ('done', result). Same behaviour as ask()."""
         t0 = time.time()
+        if question is not None and not isinstance(question, str):
+            raise ValueError("Question must be 1-2000 characters")
         q = str(question or "").strip()
         if not q or len(q) > 2000:
             raise ValueError("Question must be 1-2000 characters")
@@ -2035,6 +2037,8 @@ class Engine:
     def ask(self, owner, chat, question, sources=None, style="standard", topic=None, new_topic=False, use_cache=True, scope=None):
         if scope is not None or permissions.restricted(self.cfg):
             return next(data for kind, data in self.ask_stream(owner, chat, question, sources, style, topic, new_topic, use_cache, scope=scope) if kind == "done")
+        if question is not None and not isinstance(question, str):
+            raise ValueError("Question must be 1-2000 characters")
         q = str(question or "").strip()
         if not q or len(q) > 2000:
             raise ValueError("Question must be 1-2000 characters")

@@ -26,7 +26,7 @@ uvx chatify-app start --directory my-chat
 
 The app opens in your browser. Your settings, documents and chats stay in `my-chat`. Press Ctrl+C to stop; run the same command from the same folder to return.
 
-Without uv, use the [one-command installer for macOS, Linux or Windows](https://github.com/Harsh23Kashyap/Chatify/blob/v0.2.3/docs/INSTALL.md). It installs what it needs without changing your system Python. For pip, install `chatify-app` in a virtual environment with Python 3.10 or newer. The package named `chatify` on PyPI is a different project.
+Without uv, use the [one-command installer for macOS, Linux or Windows](https://github.com/Harsh23Kashyap/Chatify/blob/main/docs/INSTALL.md). It installs what it needs without changing your system Python. For pip, install `chatify-app` in a virtual environment with Python 3.10 or newer. The package named `chatify` on PyPI is a different project.
 
 ## Configure
 
@@ -36,13 +36,13 @@ Without uv, use the [one-command installer for macOS, Linux or Windows](https://
 
 For help, type in **Find a setting** or open **Guide**. **Ask AI** asks your selected model about settings and may cost money.
 
-**Build with AI** drafts a setup from your description. Choose a provider and model first, describe the app, then review, validate and save the draft. Restart to apply it. Generated code does not run automatically. Model requests may cost money.
+**Build with AI** drafts a setup from your description. Choose a provider and model first, describe the app, then review, validate and save the draft, then choose Use this app to open it in a separate workspace. No restart is needed. Generated code does not run automatically. Model requests may cost money.
 
 ![Build with AI describe step with an example prompt](https://raw.githubusercontent.com/Harsh23Kashyap/Chatify/main/docs/screenshots/build-with-ai.png)
 
 Keep keys out of YAML and Git. Check sources for important answers; citations are not a guarantee of correctness.
 
-[Install options](https://github.com/Harsh23Kashyap/Chatify/blob/v0.2.3/docs/INSTALL.md) · [Configuration reference](https://github.com/Harsh23Kashyap/Chatify/blob/v0.2.3/docs/DESIGN.md) · [Hosting](https://github.com/Harsh23Kashyap/Chatify/blob/v0.2.3/docs/DEPLOY_OPTIONS.md)
+[Install options](https://github.com/Harsh23Kashyap/Chatify/blob/main/docs/INSTALL.md) · [Configuration reference](https://github.com/Harsh23Kashyap/Chatify/blob/main/docs/DESIGN.md) · [Hosting](https://github.com/Harsh23Kashyap/Chatify/blob/main/docs/DEPLOY_OPTIONS.md)
 
 MIT license. Harsh Kashyap and Shela Wu. Advisor: Dennis Shasha. Related project: [Custom-Nerd](https://github.com/Harsh23Kashyap/Custom-Nerd).
 
